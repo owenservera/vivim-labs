@@ -1,3 +1,7 @@
+# Updated priority notice — November 6, 2026
+
+The latest official release is Vivaldi Android 8.3 (November 5). It documents custom **Load unpacked** Android extension installation, which was previously underweighted. **First Chromium external-browser probe now Vivaldi; second Yandex; third Titanium; fourth Quetta.** GeckoView remains app-owned engine candidate, not a consumer browser comparator. See [BROAD-ANDROID-BROWSER-SURVEY-2026-11-06.md](BROAD-ANDROID-BROWSER-SURVEY-2026-11-06.md). Original older priority table below is historical.
+
 # Mobile browser engine decision — staged evidence, not a selected product runtime
 
 Research 2026-11-06. The problem is method-level equivalence to existing Browser/Page and send-once contracts, not maximal extension store count. No real phone or provider-site execution performed.

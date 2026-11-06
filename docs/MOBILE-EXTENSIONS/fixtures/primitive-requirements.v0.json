@@ -1,0 +1,263 @@
+{
+  "schema": "vivim.lab.mobile-primitive-requirements/0",
+  "status": "research_only_not_runtime_registry",
+  "date": "2026-11-06",
+  "authority": "no_execution_granted",
+  "note": "Hypotheses for device proof; desktop source presence does not establish Android API parity.",
+  "primitives": [
+    {
+      "id": "identity.device",
+      "currentOwner": "android",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "studio/android/src/inc/vivim/app/MainActivity.java",
+      "dependsOn": [],
+      "androidEvidence": "not_device_tested",
+      "blocker": "identity",
+      "proposedAdapters": [
+        "host_controlled"
+      ],
+      "effectAuthority": "none_in_fixture"
+    },
+    {
+      "id": "intent.typed",
+      "currentOwner": "host",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "apps/vivim-host/control/dispatcher.mjs",
+      "dependsOn": [
+        "identity.device"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "vivim-policy",
+      "proposedAdapters": [
+        "host_controlled"
+      ],
+      "effectAuthority": "none_in_fixture"
+    },
+    {
+      "id": "browser.session",
+      "currentOwner": "studio",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "studio/src/chrome/browser-ownership.mjs",
+      "dependsOn": [
+        "identity.device"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "browser-engine",
+      "proposedAdapters": [
+        "geckoview_candidate",
+        "external_extension_candidate",
+        "pc_host_fallback"
+      ],
+      "effectAuthority": "none_in_fixture"
+    },
+    {
+      "id": "browser.dom-observe",
+      "currentOwner": "studio",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "harness/src/core/send.mjs",
+      "dependsOn": [
+        "browser.session"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "browser-engine",
+      "proposedAdapters": [
+        "geckoview_candidate",
+        "external_extension_candidate",
+        "pc_host_fallback"
+      ],
+      "effectAuthority": "none_in_fixture"
+    },
+    {
+      "id": "browser.navigate",
+      "currentOwner": "studio",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "harness/src/core/cdp.mjs",
+      "dependsOn": [
+        "browser.session"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "browser-engine",
+      "proposedAdapters": [
+        "geckoview_candidate",
+        "external_extension_candidate",
+        "pc_host_fallback"
+      ],
+      "effectAuthority": "none_in_fixture"
+    },
+    {
+      "id": "browser.input-focus",
+      "currentOwner": "studio",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "harness/src/core/send.mjs",
+      "dependsOn": [
+        "browser.dom-observe"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "browser-engine",
+      "proposedAdapters": [
+        "geckoview_candidate",
+        "external_extension_candidate",
+        "pc_host_fallback"
+      ],
+      "effectAuthority": "none_in_fixture"
+    },
+    {
+      "id": "browser.input-text",
+      "currentOwner": "studio",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "harness/src/core/cdp.mjs",
+      "dependsOn": [
+        "browser.input-focus"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "browser-engine",
+      "proposedAdapters": [
+        "geckoview_candidate",
+        "external_extension_candidate",
+        "pc_host_fallback"
+      ],
+      "effectAuthority": "none_in_fixture"
+    },
+    {
+      "id": "host.approve",
+      "currentOwner": "host",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "apps/vivim-host/control/dispatcher.mjs",
+      "dependsOn": [
+        "intent.typed"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "vivim-policy",
+      "proposedAdapters": [
+        "host_controlled"
+      ],
+      "effectAuthority": "none_in_fixture"
+    },
+    {
+      "id": "host.journal",
+      "currentOwner": "host",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "apps/vivim-host/control/journal.mjs",
+      "dependsOn": [
+        "host.approve"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "vivim-policy",
+      "proposedAdapters": [
+        "host_controlled"
+      ],
+      "effectAuthority": "none_in_fixture"
+    },
+    {
+      "id": "browser.send-once",
+      "currentOwner": "studio",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "harness/src/core/send.mjs",
+      "dependsOn": [
+        "browser.input-text",
+        "host.journal"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "vivim-policy",
+      "proposedAdapters": [
+        "geckoview_candidate",
+        "external_extension_candidate",
+        "pc_host_fallback"
+      ],
+      "effectAuthority": "pc_host_only"
+    },
+    {
+      "id": "browser.reply-evidence",
+      "currentOwner": "studio",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "studio/src/capture/thread-turn-journal.mjs",
+      "dependsOn": [
+        "browser.send-once"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "browser-engine",
+      "proposedAdapters": [
+        "geckoview_candidate",
+        "external_extension_candidate",
+        "pc_host_fallback"
+      ],
+      "effectAuthority": "none_in_fixture"
+    },
+    {
+      "id": "mobile.local-capture",
+      "currentOwner": "android",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "studio/android/src/inc/vivim/app/PocketHome.java",
+      "dependsOn": [
+        "identity.device"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "android-permission",
+      "proposedAdapters": [
+        "existing_apk_native_candidate"
+      ],
+      "effectAuthority": "none_in_fixture"
+    },
+    {
+      "id": "mobile.background",
+      "currentOwner": "android",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "studio/android/AndroidManifest.xml",
+      "dependsOn": [
+        "identity.device"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "android-lifecycle",
+      "proposedAdapters": [
+        "existing_apk_native_candidate"
+      ],
+      "effectAuthority": "none_in_fixture"
+    },
+    {
+      "id": "host.canonical-world",
+      "currentOwner": "host",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "apps/mobile-relay/generative-ui/phone-surface.mjs",
+      "dependsOn": [
+        "host.journal"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "vivim-policy",
+      "proposedAdapters": [
+        "host_controlled"
+      ],
+      "effectAuthority": "none_in_fixture"
+    },
+    {
+      "id": "mobile.presentation",
+      "currentOwner": "android",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "apps/mobile-relay/generative-ui/phone-surface.mjs",
+      "dependsOn": [
+        "intent.typed",
+        "host.canonical-world"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "mobile-runtime",
+      "proposedAdapters": [
+        "existing_apk_native_candidate"
+      ],
+      "effectAuthority": "none_in_fixture"
+    },
+    {
+      "id": "extension.passive-observe",
+      "currentOwner": "browser",
+      "sourceRepo": "owenservera/vivim-web-harness",
+      "sourcePath": "apps/browser-companion/sensor.mjs",
+      "dependsOn": [
+        "browser.session"
+      ],
+      "androidEvidence": "not_device_tested",
+      "blocker": "browser-engine",
+      "proposedAdapters": [
+        "passive_extension_port_candidate"
+      ],
+      "effectAuthority": "none_in_fixture"
+    }
+  ]
+}

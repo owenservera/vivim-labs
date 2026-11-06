@@ -1,3 +1,7 @@
+# Current browser priority update (2026-11-06)
+
+**Vivaldi Android 8.3 = P0 first Chromium test target.** Vivaldi 8.2 launched Android Chrome extensions in September 2026; Android Developer Mode can Load unpacked and CRX. The existing list below predates the verified release and must NOT be used as the definitive ranking. Yandex also documents custom unpacked extension and USB extension inspection; Titanium's open-source maintainer confirms unpacked install support. See [BROAD-ANDROID-BROWSER-SURVEY-2026-11-06.md](BROAD-ANDROID-BROWSER-SURVEY-2026-11-06.md) and https://help.vivaldi.com/android/android-tools/extensions-on-android/ .
+
 # Research scope note (2026-11-06)
 
 This is the earlier vendor-install shortlist; **not** the final platform ranking. For controlled app-owned capabilities, embedded GeckoView with built-in WebExtensions is now a critical additional candidate. Edge Android stable's curated catalog is not a general custom-VIVIM-extension install route. Prefer [BROWSER-ENGINE-DECISION.md](BROWSER-ENGINE-DECISION.md) for the reconciled architecture decision and official sources. No browser/device parity tests have run yet.

@@ -1,6 +1,6 @@
-# Canonical home: VIVIM Labs / Mobile Extensions
+# Canonical research home: VIVIM Labs
 
-**All Mobile Extensions research, engineering fixtures and test evidence live in `owenservera/vivim-labs`.** Repos HQ and Harness are read-only input authorities, not a research publication destination. No Wave 4 implementation approved.
+All research, fixtures and evidence belong to `owenservera/vivim-labs`; Repos HQ/Harness provide read-only source inputs. No implementation authority is granted.
 
 # VIVIM LAB — Mobile Extensions
 

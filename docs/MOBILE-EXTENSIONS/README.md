@@ -56,3 +56,7 @@ Research order: desktop Host required primitives -> Android native/browser alter
 - [Pure Node structural tests](tests/primitive-graph.test.mjs), execute from repository root with `node --test docs/MOBILE-EXTENSIONS/tests/primitive-graph.test.mjs`
 
 **HOLD:** No TierFlow W4 or Harness/native implementation before published I3 GO and explicit path ownership. No MiniMax delegation. Current evidence is source inspection plus isolated fixture validation, not provider, APK or physical device parity. The dedicated vivim-labs engineering factory may link to this research without cloning its authority.
+
+## Browser research update — November 6, 2026
+
+**Vivaldi Android 8.3 is now P0 first Chromium browser**, with official Android Chrome Web Store, Developer Mode Load unpacked and CRX install support. The original browser matrix is a historical shortlist, NOT the current ranking. See [the broad Android browser survey](BROAD-ANDROID-BROWSER-SURVEY-2026-11-06.md) for Vivaldi, Yandex, Titanium, Quetta, Firefox, GeckoView, Edge, Lemur, Mises, Samsung Internet, Cromite, Chrome/Brave negatives and Kiwi retirement, including cited vendor documentation and exact parity tests. All work stays in vivim-labs; Repos HQ is source-only.

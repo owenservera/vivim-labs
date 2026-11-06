@@ -60,3 +60,11 @@ Research order: desktop Host required primitives -> Android native/browser alter
 ## Browser research update — November 6, 2026
 
 **Vivaldi Android 8.3 is now P0 first Chromium browser**, with official Android Chrome Web Store, Developer Mode Load unpacked and CRX install support. The original browser matrix is a historical shortlist, NOT the current ranking. See [the broad Android browser survey](BROAD-ANDROID-BROWSER-SURVEY-2026-11-06.md) for Vivaldi, Yandex, Titanium, Quetta, Firefox, GeckoView, Edge, Lemur, Mises, Samsung Internet, Cromite, Chrome/Brave negatives and Kiwi retirement, including cited vendor documentation and exact parity tests. All work stays in vivim-labs; Repos HQ is source-only.
+
+## Owner's 30-project external research intake — November 6, 2026
+
+- [All 30 projects, individually source-linked and classified](EXTERNAL-PROJECTS-30-INVENTORY.md). 27 primary project/publisher identities corroborated, 3 remain partial **for the exact claimed variant**; zero third-party repos installed or executed.
+- [Cross-project architecture triage](ARCHITECTURE-TRIAGE-30.md): Android extension + local APK broker, debug-only *existing* WebView/CDP experiment and GeckoView built-in extension comparison; explicit security risks, hard Wave 4 gates and M1–M4 scope.
+- **New P0 prior art:** So7o Android WebView in-app CDP relay (#10), Firefox Android ↔ Termux extension bridge (#13), Firefox Android Claude Code Browser Bridge (#14), Edge/Termux claude-chrome-android (#16). **Vivaldi Android 8.3 remains first Chromium external-browser probe**.
+- Existing APK's debuggable-only WebView setting MUST NOT be relaxed; localhost CDP gives powerful access to other installed apps with network permission. Test only in a sealed debug rig, with synthetic pages, no real provider send, and never as a second Host effect owner.
+- This list changes research prioritization, not permission to implement production W4 code before Integration 3 GO.

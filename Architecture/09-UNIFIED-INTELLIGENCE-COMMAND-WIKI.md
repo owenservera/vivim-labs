@@ -6,7 +6,7 @@ Related: [Integration Philosophy](07-INTEGRATION-PHILOSOPHY.md), [Integration Se
 ## Correction
 Do not describe the first VIVIM integration as *deep code indexing*. That omits its primary design purpose.
 
-**Repos HQ is the combined, continuously updated knowledge, semantic-command and generated-wiki system, spanning several user and agent surfaces.** Deep indexing is the evidence acquisition and discovery layer, not the product itself. The integrated feedback loop is:
+**Repos HQ is the combined, continuously updated knowledge and semantic-command system; the **automatically generated wiki is its integrated product and quality gauge**, spanning user and agent surfaces.** Deep indexing is the evidence acquisition and discovery layer, not the product itself. The integrated feedback loop is:
 
 **Sources and code + KB + operational evidence → extraction/indexing + canonical semantic IDs → knowledge and dependency graph → natural-language/action interpretation and deterministic typed operations → CLI / MCP / programmable wiki / visual controls / agents → approved owner actions or versioned configuration writes → receipts and new evidence → reindex/refresh.**
 
@@ -34,7 +34,7 @@ Every operation should be discoverable and addressable by the same identity in a
 | Semantic registry/aliases | Semantic knowledge + identity | defines, aliases, supersedes, implemented_by |
 | Action registry/router | Operation/capability + language/command engine | provides, interpreted_as, requires_authority |
 | KB and context engine | Knowledge + computation | derived_from, selected_for, supported_by |
-| Generated wiki | Materialization + interface engine | presents, links_to, generated_from |
+| Generated wiki | **Derived materialization and integration-quality measure** (not a peer source registry) | presents, links_to, generated_from, exposes_missing_join |
 | Wiki programmable config | Configuration/controls + visualization | configures, previewed_as, activated_revision |
 | CLI/MCP/NL/UI | Interface nodes to same operation | invokes, renders, proposes |
 | Receipts/evidence | Observation + history | produced_by, verifies, supersedes |
@@ -42,7 +42,7 @@ Every operation should be discoverable and addressable by the same identity in a
 Engine representation should distinguish the stable logical slot from the concrete implementation, generation, and runtime. Native Rust graph computation may execute within Rust; the HQ Bun implementation stays external until an approved adapter or migration exists. The graph can know operations without acquiring privileges to run them.
 
 ## First integration MUST preserve the entire loop
-### First: unify HQ semantic discovery + commands + wiki as one real subsystem
+### First: wire HQ code intelligence (A), semantic knowledge (B) and commands (C); prove their quality through derived wiki (D)
 Inventory actual code-indexed capabilities, semantic IDs, action handlers, CLI/MCP commands, generated wiki pages and programmable wiki operations. Identify consistent IDs, equivalent surfaces, missing links and declaration vs wired/accepted state. Make the combined system observable from one versioned graph projection. Do not construct a separate engine census disconnected from how users issue commands and navigate the wiki.
 
 **Internal DEV variant:** full multi-repo source introspection, unresolved candidates, operator CLI/diagnostics, test intents, action routing traces, generated architecture wiki and visualization, mock action catalogues, no privileged effects.

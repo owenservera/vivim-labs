@@ -10,7 +10,7 @@ Dependencies: ../07-INTEGRATION-PHILOSOPHY.md, ../09-UNIFIED-INTELLIGENCE-COMMAN
 The six Wave 1 lanes must work in parallel on separate owned surfaces, join in one Rust journal, and yield a live-derived **actual vs intended** and **blind spot** report. No plan-only substitution. Any unsupported source or blocked test must be made visible.
 
 ## Mission outcome
-On the local machine, run existing HQ index/KB/command/wiki read models through a versioned, validated data-only adapter into **existing Rust HQKG**. Persist into a dedicated development graph journal and offer working read-only CLI queries. Prove it with a source-backed, non-synthetic vertical slice. Then examine what the running graph does *not* know; write that to a structured ledger used to design Wave 2.
+On the local machine, run existing HQ code intelligence (A), KB/semantic identity (B) and language/command/CLI (C) through a versioned, validated data-only adapter into **existing Rust HQKG**. The generated wiki is the **derived product and quality test** of their convergence, not a fourth independent data source. Persist into a dedicated development graph journal and offer working read-only CLI queries. Prove it with a source-backed, non-synthetic vertical slice. Then examine what the running graph does *not* know; write that to a structured ledger used to design Wave 2.
 
 Target first query answers:
 - WHERE: repo/path/symbol/source SHA, graph node ID, documentation page.
@@ -27,8 +27,8 @@ Target first query answers:
 | **A — Code & Dependency Ingestion** | Narrow HQ index read/export adapter, not HQ core rewrites | Read registered projects, files, symbols, resolved and unresolved imports, @hq annotations, Git head/source hash, source exclusions; produce stable records in graph-ready source format | Coverage by repo/language, 3+ source references, edge confidence marked static; freshness and ignored-source counts | Graph can automatically find the real code, implementations and inter-component imports |
 | **B — KB, Semantic IDs & Authority** | Narrow HQ KB/semantic read adapter | Query docs, accepted/proposed decisions, CANON terms, kernel revision where available, semantic IDs/aliases/evidence; preserve privacy and authority, join to source IDs where verified | 1+ real KB/decision, 1+ semantic ID, provenance and accepted/proposed distinct; no owner auto-promotion | Commands/wiki can resolve against shared knowledge rather than guesses |
 | **C — Commands, NL & CLI Inventory** | Read-only command/action extractor/mapper | Enumerate existing `hq`/Rust CLI help and dispatch, action registry, action router, callable handlers, schemas/effects/actors, declared/wired status; register source-linked operation nodes | 1+ real CLI command with exact syntax and source handler, 1+ action/intent route, NO_MATCH test; effects marked read-only vs source-owned | Subsequent integrations inherit one inspectable control vocabulary |
-| **D — Automatic Wiki & Programs** | Read-only generated wiki export/adapter | Build/check existing wiki without rewriting its canonical renderer; ingest generated pages and links; map wiki-program preview, config versions, comment/wiki bindings and semantic IDs | 1+ real generated wiki page linked to actual source/semantic or command node; stable deterministic rebuild; no activation/effect | The graph is explorable as a documentation and programming workbench |
-| **E — Rust HQKG Live Projection & Runner** | Integration-owned HQKGX1 adapter, Rust importer CLI, dedicated dev journal and query CLI | Implement bounded deterministic **source-owned** projection from lanes A–D (not static research graph), use existing HQKGX1 importer, stable canonical `hqg1` IDs, source-hash, atomic journal save, no-op unchanged, query helpers; no new Rust graph registry | Real Rust executable imports and queries code+KB+command+wiki objects with source links; tests repeat/no-op, corruption, collision, restart | The graph itself becomes the testable substrate for next wave |
+| **D — Wiki as Integration Product & Quality Oracle** | Existing HQ wiki builder plus integration-level validation (no second wiki writer) | Generate wiki views **from the combined A + B + C model**, including source locations, semantic meaning, real CLI/action mappings, call/dependency links and evidence. Measure missing pages, dead links, source-only content, unknown meanings and unwired commands as defects in A/B/C integration. Prepare test harness concurrently, run final quality evaluation after E. | Wiki must regenerate deterministically and reveal where A/B/C are correct or disconnected; verified source→knowledge→command→wiki trace; no standalone fourth-data-stream certification | Turns improvements to A/B/C into immediately visible, testable, usable documentation |
+| **E — Rust HQKG Live Projection & Runner** | Integration-owned HQKGX1 adapter, Rust importer CLI, dedicated dev journal and query CLI | Implement bounded deterministic **source-owned** projection from lanes A+B+C, using the existing HQKGX1 importer, stable canonical `hqg1` IDs, source hash, journal save, no-op unchanged and query helpers; expose unified read model for D's generated wiki; do not import D as a separate authority | Real Rust executable links code, KB, commands and CLI and can drive regenerated wiki output; repeat/no-op, corruption, collision and restart tests | The graph becomes the testable substrate and the wiki's source of integrated relationships |
 | **F — Integration Testing, Actual/Target & Blind Spots** | Labs verification, gap schema and report generator; no cross-lane writes | Independently execute E on local real source, compare planned target entities from Architecture docs and observatory, inspect unknown coverage, missing edges, duplicate owners, CLI/wiki/drift, schema/transport and dataflow holes | Report from actual graph query, raw commands/exit codes/SHAs, ranked gap ledger with evidence and severity; distinguish untested from absent | Wave 2 is designed from real failure modes, not theoretical architecture |
 
 ## Hand-off interfaces (avoid a big upfront contract program)
@@ -47,13 +47,13 @@ Wave 1 only needs DEV fully runnable. PRODUCT gets an explicit buildable target/
 
 ## Execution timeline (event/order, not hours)
 **Phase 0**: record fresh main SHAs, local environment, available CLI/build tools, existing registered repo/index coverage. Run initial HQ/Cargo tests; do not reset.
-**Phase 1**: run lanes A–D in parallel; every lane provides actual read data and records gaps.
-**Phase 2**: E validates, combines and imports real A–D exports; produces journal and runnable query interface.
+**Phase 1**: A, B and C build real source read adapters in parallel; D builds independent wiki acceptance cases and quality checks in parallel but does not certify output until A+B+C+E are connected.
+**Phase 2**: E validates and imports A+B+C into Rust; D generates the wiki from this integrated model and measures missing links/meaning/commands; E and D resolve only their authorized integration defects.
 **Phase 3**: F independently runs end-to-end/negative tests, system inventory and comparison; requests only narrowly owned fixes.
 **Phase 4**: integration owner publishes final evidence bundle and an **observation-driven Wave-2 input dossier**. Wave 2 design begins after results are reviewed.
 
 ## Required final runtime demo
-A short reproducible command recipe from repos-hq root, including steps for existing HQ index/wiki, projection generation, Rust import, and queries. The demonstrated outputs MUST come from real registered source/KB/command/wiki records; if one domain is unavailable, say BLOCKED instead of substituting a synthetic success.
+A short reproducible command recipe from repos-hq root, including steps for existing HQ index/wiki, projection generation, Rust import, and queries. The demonstrated graph inputs MUST come from real registered source/code, KB/semantic, and command/CLI records. The wiki MUST be regenerated as a **derived output** from those inputs, and show at least one verified cross-domain chain. Missing/incorrect wiki content is an A/B/C/E integration quality failure or an explicit unsupported feature, not a missing fourth input domain.
 Proof transcript includes:
 1. `where <capability>`: repo file/symbol/head/KB source.
 2. `what <capability>`: knowledge description, command/engine/writer status.
@@ -69,8 +69,8 @@ These CLI words are the desired user-facing façade, **not existing command name
 ## Integration gate / definition of done
 **PASS** only when:
 - Native Cargo and HQ tests/commands run on the real target environment, with logs and exact exit codes.
-- Actual Rust graph contains nodes for all four requested domains: code, KB, CLI/action/command, wiki, with source-linked edges.
-- One cross-domain traversal (source→command→wiki or source→semantic→wiki) is proven, not merely four disconnected inventories.
+- Actual Rust graph contains linked nodes for the **three foundational domains**: code (A), KB/identity (B), CLI/actions/commands (C); generated wiki output (D) is source- and graph-linked, not accepted as a separate canonical input.
+- At least one source→knowledge/semantic→command chain is traversable in Rust and **accurately expressed in the generated wiki**; a wiki page generated only from files without B/C semantics does not count.
 - Coverage denominator names every registered repo and exclusions. Incomplete scanning = partial, not complete.
 - No second semantic truth, KB writer, journal writer or Host effect authority.
 - Actual-vs-target machine-readable report and human wiki/Markdown report are generated from **the graph**.
@@ -78,7 +78,7 @@ These CLI words are the desired user-facing façade, **not existing command name
 - Dev and product variants are documented separately; end-user profile never requires the DEV crawler.
 - Six HANDOFFs + integration receipt; refresh/no-op, negative-input and restart evidence.
 
-**BLOCKED** if any of four real data domains absent, graph isn't actually run, or end-to-end report isn't machine-generated. **PARTIAL** only for explicitly allowed bounded coverage with clear denominator; no claim entire codebase scanned from a sample.
+**BLOCKED** if any foundational A/B/C real data domain is absent, the Rust graph is not actually run, the wiki does not demonstrate A+B+C wiring, or the end-to-end report is not machine-generated. **PARTIAL** only for explicitly allowed bounded coverage with clear denominator; no claim entire codebase scanned from a sample.
 
 ## Wave 2 MUST be informed by Wave 1
 After acceptance produce `WAVE-2-INPUT-DOSSIER.md` using observed:

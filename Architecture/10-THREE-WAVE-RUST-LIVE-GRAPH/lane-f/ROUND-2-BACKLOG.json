@@ -1,0 +1,173 @@
+{
+  "schema": "vivim.wave1.lane-f.round2-backlog/1",
+  "date": "2026-11-07",
+  "status": "DESIGN_ONLY",
+  "phaseLegend": {
+    "S": "new disjoint Lane F-owned design/tests; safe during active Master only when separately authorized",
+    "C": "existing F baseline file/report change; wait for Master pinned checkpoint",
+    "G": "requires Master final handoff and owner-machine native evidence"
+  },
+  "objectiveCount": 16,
+  "objectives": [
+    {
+      "id": "F2-01",
+      "priority": "P0",
+      "phase": "S",
+      "targets": "lib/evidence-envelope.mjs",
+      "dependsOn": "A-E pins; receipt custody",
+      "test": "forged/synthetic-as-native and stale SHA refusal",
+      "acceptance": "all required evidence fields present or explicitly MISSING",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-02",
+      "priority": "P0",
+      "phase": "S->C",
+      "targets": "lib/native-run-policy.mjs; acceptance.mjs",
+      "dependsOn": "E native read-only recipes; owner safe DEV",
+      "test": "20+ bypass and symlink negatives; protected canary unchanged",
+      "acceptance": "no arbitrary executable argv; no effects",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-03",
+      "priority": "P0",
+      "phase": "S->G",
+      "targets": "lib/hqkgx1-reader.mjs; lib/rust-query-attestor.mjs",
+      "dependsOn": "E JSONL/crosswalk/native query",
+      "test": "digest/order/identity/endpoints/collision; real journal replay",
+      "acceptance": "native source-linked query equivalence",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-04",
+      "priority": "P0",
+      "phase": "S->G",
+      "targets": "lib/crosswalk-audit.mjs; cross-lane-preflight.mjs",
+      "dependsOn": "A/B/C exports E schema",
+      "test": "explicit field-loss/identity/status/authority conflicts",
+      "acceptance": "100% unmappable records recorded unknown/refusal",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-05",
+      "priority": "P1",
+      "phase": "S",
+      "targets": "lib/target-register.mjs; evidence/design-targets.json",
+      "dependsOn": "1234-doc manifest; supersession decisions",
+      "test": "design-vs-runtime provenance/supersession tests",
+      "acceptance": "each assessed target source+kind+question",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-06",
+      "priority": "P0",
+      "phase": "S->G",
+      "targets": "lib/compiler-conformance.mjs; fixtures/comments",
+      "dependsOn": "A comments JS v2 Rust compiler B/C",
+      "test": "60+ vectors plus 1 genuine compiled binding",
+      "acceptance": "native source->semantic->handler or BLOCKED",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-07",
+      "priority": "P0",
+      "phase": "S->G",
+      "targets": "lib/intent-corpus.mjs; fixtures/intent",
+      "dependsOn": "C guard+legacy HQ+archived Harness audit",
+      "test": "100+ labelled cases across 10 categories",
+      "acceptance": "zero unsafe executable negative/quoted/compound cases",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-08",
+      "priority": "P0",
+      "phase": "S->G",
+      "targets": "lib/coverage-ledger.mjs; lib/blindspots.mjs",
+      "dependsOn": "A/B/C/E/D denominators",
+      "test": "missing-vs-unknown and orphan corpus",
+      "acceptance": "all roots accounted; percentage denominators explicit",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-09",
+      "priority": "P0",
+      "phase": "S->G",
+      "targets": "lib/wiki-differential.mjs",
+      "dependsOn": "E query+exchange D oracle HQ wiki output",
+      "test": "semantic link/status/source SHA and broken link negatives",
+      "acceptance": "1 genuine cross-domain chain equal in source+Rust+wiki",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-10",
+      "priority": "P1",
+      "phase": "S->G",
+      "targets": "lib/storage-bench.mjs; lib/placement-matrix.mjs",
+      "dependsOn": "SQLite/FTS/KB, Rust importer",
+      "test": "5 warmups + 30 repeats per workload",
+      "acceptance": "p50/p95, DB/journal size, memory and owner recommendation",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-11",
+      "priority": "P0",
+      "phase": "S->G",
+      "targets": "lib/profile-boundary.mjs",
+      "dependsOn": "Host/TierFlow owners and source scope",
+      "test": "secret/symlink/private KB/release contamination negatives",
+      "acceptance": "no illicit product effect or KB data exposure",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-12",
+      "priority": "P1",
+      "phase": "S",
+      "targets": "test/mutation-metamorphic.test.mjs",
+      "dependsOn": "F snapshots A-E schema",
+      "test": "50+ tamper/semantic-stale/no-op fake mutation cases",
+      "acceptance": "all critical mutations prevented from PASS",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-13",
+      "priority": "P0",
+      "phase": "G",
+      "targets": "evidence/native/scoped-reset-attestation.json",
+      "dependsOn": "A actual old-run backup/reset + N roots",
+      "test": "baseline source hashes, KB survivor counts, root exclusions",
+      "acceptance": "native reset preservation and honest denominators",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-14",
+      "priority": "P0",
+      "phase": "G",
+      "targets": "lib/independent-chain.mjs; evidence/native/vertical-slice",
+      "dependsOn": "Master exchange/journal/compiled+D wiki",
+      "test": "four Rust CLI queries+source/wiki check",
+      "acceptance": "real source->compiler->B->C->Rust->wiki path",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-15",
+      "priority": "P0",
+      "phase": "G",
+      "targets": "evidence/native/lifecycle",
+      "dependsOn": "E journal and approved A revision/KB fixture",
+      "test": "no-op/update/delete/rename/restart/collision/secret",
+      "acceptance": "unchanged journal on refusal; no unrelated state loss",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    },
+    {
+      "id": "F2-16",
+      "priority": "P0",
+      "phase": "G->C",
+      "targets": "lib/report-v2.mjs; ROUND-2-RUNTIME-RESULT.md",
+      "dependsOn": "Master final and F2-01..15",
+      "test": "independent audit/re-run/reconciliation",
+      "acceptance": "PASS/PARTIAL/BLOCKED with exact receipts; no Wave 2 design",
+      "evidence": "Versioned source SHAs, native command exit/output hashes and/or synthetic test logs explicitly typed; unknown native runs BLOCKED"
+    }
+  ]
+}

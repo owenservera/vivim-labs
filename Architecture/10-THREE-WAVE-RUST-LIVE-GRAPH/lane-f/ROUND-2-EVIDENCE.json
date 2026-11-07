@@ -1,0 +1,110 @@
+{
+  "schema": "vivim.wave1.lane-f.round2-design-evidence/1",
+  "date": "2026-11-07",
+  "status": "SOURCE_AUDIT_ONLY_NOT_RUNTIME_PROOF",
+  "basis": {
+    "labsMainAtAudit": "15ded6944434e80926eef95525cfd057f17a6daa",
+    "reposHqMainAtAudit": "34952780cb8dd85db3d48d60d50fed936ed41e2f",
+    "masterIntegrationFinalHandoff": "NOT_INSPECTED_RUNNING_AT_REQUEST"
+  },
+  "charter": {
+    "execution": "c8fe8cd5d6f1da2405c7e486b2e8026f77bd2c3f",
+    "masterGoals": "a559f93648c3d38c95ec2fc27b049f3703ba8faa",
+    "compilerPlacement": "65f2ad8d5e10a5f68d4cc36cfc4a5b4638883e3a",
+    "inventory": "b31b8cbedec1ede99bb517bbdf00629783435303"
+  },
+  "inventory": {
+    "total": 1234,
+    "moved": 137,
+    "retained": 1097,
+    "source": "documentation-consolidation/INVENTORY.json",
+    "interpretation": "document-led target map; not automatic runtime KB"
+  },
+  "sourceBlobs": {
+    "labs/lane-f/acceptance.mjs": "697d50797e66b80a4e65181e64e761331fbdfdb8",
+    "labs/lane-f/cross-lane-preflight.mjs": "2bab5113d15b334ae59fcee52f164fc83bf17e93",
+    "labs/lane-f/LANDED-CONTRACT-REVIEW.md": "ad077685554f9f41f7477c6efae69403b3e4dba9",
+    "repos-hq/hq/lib/live-graph/wave1/lane-a.mjs": "ffc7b311979e1d36d7a6a467da7a4dd027d8f19d",
+    "repos-hq/hq/lib/wave1-kb-read.mjs": "c6bc8a8a961fc49bde0b8da27b3e280cd50bca0a",
+    "repos-hq/hq/live-graph/wave1/lane-c/commands.mjs": "ab875a36268ad8d0b71e35c89ba9cd41ff6acb0f",
+    "repos-hq/research/rust-knowledge-graph/integration/wave1-lane-e/assemble.mjs": "0cdab7d46b73a33012c55def3e86779e0bff0f01",
+    "labs/wave-1/lane-d/wiki-oracle.mjs": "15e8f62fd3c5deb22b7925d09dae1efc203dce14"
+  },
+  "findings": [
+    {
+      "id": "F-R2-001",
+      "severity": "critical",
+      "status": "CONFIRMED_SOURCE",
+      "issue": "A/B/C producer formats do not match E source-records/1 contract; root+identity mismatches beyond schema",
+      "source": "LANDED-CONTRACT-REVIEW.md; E assemble.mjs:67-84"
+    },
+    {
+      "id": "F-R2-002",
+      "severity": "critical",
+      "status": "CONFIRMED_SOURCE",
+      "issue": "F acceptance generic graph JSON and text-ID wiki matching do not attest real E HQKGX1 and Rust query",
+      "source": "acceptance.mjs:45-67"
+    },
+    {
+      "id": "F-R2-003",
+      "severity": "high",
+      "status": "CONFIRMED_SOURCE",
+      "issue": "D needs source_repo/source_sha/link_status/evidence_ref; E emits source_commit/content_sha256/evidence_class/evidence",
+      "source": "D wiki-oracle.mjs:87-113; E assemble.mjs:80-92"
+    },
+    {
+      "id": "F-R2-004",
+      "severity": "critical",
+      "status": "CONFIRMED_SOURCE",
+      "issue": "F allowed node/bun/cargo argument vectors not an isolation boundary; path checks lexical; raw argv/output potentially sensitive",
+      "source": "acceptance.mjs:13-44"
+    },
+    {
+      "id": "F-R2-005",
+      "severity": "high",
+      "status": "CONFIRMED_SOURCE",
+      "issue": "Baseline has 46 missing-evidence ledger entries, no native compiler/intent cases, 9 deferred placement rows",
+      "source": "lane-f/evidence/blocked-reports/*"
+    },
+    {
+      "id": "F-R2-006",
+      "severity": "critical",
+      "status": "CONFIRMED_HANDOFF",
+      "issue": "E importer additive; source record removal may leave graph residue; native deletion/restart unverified",
+      "source": "repos-hq/research/rust-knowledge-graph/integration/wave1-lane-e/HANDOFF.md"
+    },
+    {
+      "id": "F-R2-007",
+      "severity": "critical",
+      "status": "CONFIRMED_HANDOFF",
+      "issue": "Original HQ route disregards negation and compounds, Harness archive records approval-requiring wrong intent",
+      "source": "repos-hq/hq/live-graph/wave1/lane-c/HANDOFF.md; relocated repos-hq/docs/audit-2026-11-04/01-intent-front-end.md"
+    },
+    {
+      "id": "F-R2-008",
+      "severity": "high",
+      "status": "UNVERIFIED_NATIVE",
+      "issue": "No observed final A reset, live SQLite B, genuine compiled source crosswalk, real Rust .hqj or generated wiki in inspected lane handoffs",
+      "source": "A/B/C/D/E/F HANDOFF.md; not statement about other uninspected current local runs"
+    },
+    {
+      "id": "F-R2-009",
+      "severity": "high",
+      "status": "CONFIRMED_SOURCE",
+      "issue": "E compiled binding requires matching current B and wired C semantic_id, whereas C emits semanticId:null",
+      "source": "E assemble.mjs:107-116; C commands.mjs:73"
+    }
+  ],
+  "syntheticTests": {
+    "laneFAcceptance": 6,
+    "laneFContractPreflight": 6,
+    "claimedNativeRustTests": 0,
+    "interpretation": "Counts from two published six-test source files and handoff; no independent native owner-workspace receipts"
+  },
+  "safety": {
+    "destructiveResets": false,
+    "otherLaneEdits": false,
+    "round2Executed": false,
+    "wave2Designed": false
+  }
+}

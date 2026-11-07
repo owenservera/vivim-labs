@@ -1,0 +1,565 @@
+{
+  "schema": "vivim.lane-b-source-inspection/0.1",
+  "inert": true,
+  "chunk": 3,
+  "records": [
+    {
+      "id": "file:095",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "61b52a8fbff260ca9801f76b204c283343519164",
+      "lines": 53,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION Employee 06 — TOOLSMITH — Launch Bootstrap"
+        },
+        {
+          "line": 12,
+          "heading": "Your mission"
+        },
+        {
+          "line": 15,
+          "heading": "First action in your actual chat"
+        },
+        {
+          "line": 23,
+          "heading": "Primary ownership"
+        },
+        {
+          "line": 30,
+          "heading": "Boundaries"
+        },
+        {
+          "line": 39,
+          "heading": "Acceptance"
+        },
+        {
+          "line": 44,
+          "heading": "Canon"
+        },
+        {
+          "line": 51,
+          "heading": "Priority research ownership — AION Role Context V1 (2026-10-16)"
+        }
+      ]
+    },
+    {
+      "id": "file:098",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "a1e7744761991448d6cfc3ca7b82cd0e5652940c",
+      "lines": 31,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "TOOLSMITH Workspace Map"
+        },
+        {
+          "line": 4,
+          "heading": "Files"
+        },
+        {
+          "line": 13,
+          "heading": "Integration footprint"
+        },
+        {
+          "line": 21,
+          "heading": "Initial priority ladder"
+        },
+        {
+          "line": 29,
+          "heading": "Required status report"
+        }
+      ]
+    },
+    {
+      "id": "file:112",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "c7599811049a3d065dbffa1af4efdbe93487046e",
+      "lines": 58,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AGENTS.md — INTAKE 07"
+        },
+        {
+          "line": 7,
+          "heading": "Read order"
+        },
+        {
+          "line": 10,
+          "heading": "Hard scope"
+        },
+        {
+          "line": 14,
+          "heading": "Ingestion invariants"
+        },
+        {
+          "line": 22,
+          "heading": "Scorekeeping invariants"
+        },
+        {
+          "line": 29,
+          "heading": "Permission boundaries"
+        },
+        {
+          "line": 32,
+          "heading": "Output"
+        },
+        {
+          "line": 35,
+          "heading": "v0.2 operating improvement — consumer benefit"
+        },
+        {
+          "line": 39,
+          "heading": "SITREP and agent commons"
+        },
+        {
+          "line": 43,
+          "heading": "Standing intelligence ownership — SITREP"
+        },
+        {
+          "line": 47,
+          "heading": "Persistent agent memory (standing)"
+        },
+        {
+          "line": 51,
+          "heading": "Skills builder / agent capability ownership"
+        },
+        {
+          "line": 55,
+          "heading": "Memory context"
+        }
+      ]
+    },
+    {
+      "id": "file:113",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "8c826e509cc4c4e44b88460a6f1f4c7a8b4dd12d",
+      "lines": 53,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION Employee 07 — INTAKE — Self-Launching Bootstrap"
+        },
+        {
+          "line": 7,
+          "heading": "One-sentence job"
+        },
+        {
+          "line": 12,
+          "heading": "Mandatory self-bootstrap (execute upon first live conversation turn)"
+        },
+        {
+          "line": 21,
+          "heading": "What to do with an incoming multi-variant technical council response"
+        },
+        {
+          "line": 29,
+          "heading": "Local operating rhythm"
+        },
+        {
+          "line": 37,
+          "heading": "Acceptance criteria"
+        },
+        {
+          "line": 42,
+          "heading": "Direct links"
+        },
+        {
+          "line": 47,
+          "heading": "Required first visible response"
+        },
+        {
+          "line": 50,
+          "heading": "Consumer-first upgrade (v0.2, 2026-10-16)"
+        }
+      ]
+    },
+    {
+      "id": "file:116",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "110c5e5844c544d3abb84a0e9bc43479aa5e2279",
+      "lines": 67,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION INTAKE 07 — Workspace & Scope"
+        },
+        {
+          "line": 3,
+          "heading": "What lives here"
+        },
+        {
+          "line": 11,
+          "heading": "What lives in the shared resource (not in this private role folder)"
+        },
+        {
+          "line": 28,
+          "heading": "Workflow, strictly in order"
+        },
+        {
+          "line": 37,
+          "heading": "Team consumers"
+        },
+        {
+          "line": 46,
+          "heading": "Collaboration surface"
+        },
+        {
+          "line": 49,
+          "heading": "Retrieval contract"
+        },
+        {
+          "line": 52,
+          "heading": "Definition of ready"
+        },
+        {
+          "line": 55,
+          "heading": "v0.2 routing and closed-loop information service"
+        }
+      ]
+    },
+    {
+      "id": "file:128",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "e09e83efe8aa568bb3445c418577ffeb08cf19a8",
+      "lines": 51,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AGENTS — Z-FORGE role instructions"
+        },
+        {
+          "line": 8,
+          "heading": "Role separation"
+        },
+        {
+          "line": 19,
+          "heading": "Turn rules"
+        },
+        {
+          "line": 24,
+          "heading": "Provenance"
+        },
+        {
+          "line": 28,
+          "heading": "Security/permissions"
+        },
+        {
+          "line": 33,
+          "heading": "Closeout"
+        },
+        {
+          "line": 36,
+          "heading": "SITREP and agent commons"
+        },
+        {
+          "line": 40,
+          "heading": "Persistent agent memory (standing)"
+        },
+        {
+          "line": 44,
+          "heading": "Skills builder / agent capability ownership"
+        },
+        {
+          "line": 48,
+          "heading": "Memory context"
+        }
+      ]
+    },
+    {
+      "id": "file:129",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "3ed73119c01651f188bdc1d9be82161425dc9072",
+      "lines": 41,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION Employee 08 — Z-FORGE — Self-Bootstrap"
+        },
+        {
+          "line": 7,
+          "heading": "One mission"
+        },
+        {
+          "line": 10,
+          "heading": "What you own"
+        },
+        {
+          "line": 19,
+          "heading": "Self-bootstrap — first actual session"
+        },
+        {
+          "line": 27,
+          "heading": "Hard operating rules"
+        },
+        {
+          "line": 36,
+          "heading": "Activation proof"
+        },
+        {
+          "line": 39,
+          "heading": "Launch response"
+        }
+      ]
+    },
+    {
+      "id": "file:132",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "cc1a7153d2e94d0835ceb34efa6184d5a75370ab",
+      "lines": 31,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Z-FORGE Workspace"
+        },
+        {
+          "line": 4,
+          "heading": "Files"
+        },
+        {
+          "line": 13,
+          "heading": "Lifecycle"
+        },
+        {
+          "line": 16,
+          "heading": "Inputs"
+        },
+        {
+          "line": 19,
+          "heading": "Outputs and recipients"
+        },
+        {
+          "line": 27,
+          "heading": "Priority and role scope"
+        }
+      ]
+    },
+    {
+      "id": "file:147",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "3ab5b2c88073eced8ea77f19b3f2020050072526",
+      "lines": 43,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION RESEARCH — Scoped authority"
+        },
+        {
+          "line": 5,
+          "heading": "Positive mandate"
+        },
+        {
+          "line": 8,
+          "heading": "Boundaries"
+        },
+        {
+          "line": 17,
+          "heading": "Lifecycle evidence"
+        },
+        {
+          "line": 20,
+          "heading": "Working posture"
+        },
+        {
+          "line": 23,
+          "heading": "SITREP and agent commons"
+        },
+        {
+          "line": 28,
+          "heading": "Owned team intelligence"
+        },
+        {
+          "line": 32,
+          "heading": "Persistent agent memory (standing)"
+        },
+        {
+          "line": 36,
+          "heading": "Skills builder / agent capability ownership"
+        },
+        {
+          "line": 40,
+          "heading": "Memory context"
+        }
+      ]
+    },
+    {
+      "id": "file:148",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "88d2eee270d37328dbd00ce4dcb1bf9896035d71",
+      "lines": 28,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION — 09 RESEARCH | Mandatory Global Bootstrap"
+        },
+        {
+          "line": 5,
+          "heading": "Mission and monopoly boundary"
+        },
+        {
+          "line": 10,
+          "heading": "Read order: every fresh session"
+        },
+        {
+          "line": 19,
+          "heading": "Mandatory finding record"
+        },
+        {
+          "line": 22,
+          "heading": "Operating guarantees"
+        }
+      ]
+    },
+    {
+      "id": "file:151",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "301ddbd2ce68a21b029835f562b1856a91f141a1",
+      "lines": 65,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION RESEARCH | One knowledge supply chain"
+        },
+        {
+          "line": 3,
+          "heading": "Architecture"
+        },
+        {
+          "line": 17,
+          "heading": "Data placement: no second database"
+        },
+        {
+          "line": 24,
+          "heading": "Intake classes and auto-routing"
+        },
+        {
+          "line": 33,
+          "heading": "Prioritization, not a manufactured KPI"
+        },
+        {
+          "line": 36,
+          "heading": "Handoffs"
+        },
+        {
+          "line": 39,
+          "heading": "Quality gates"
+        },
+        {
+          "line": 47,
+          "heading": "Proactivity"
+        },
+        {
+          "line": 50,
+          "heading": "Canonical related systems"
+        },
+        {
+          "line": 54,
+          "heading": "Relaunch operating choice — 2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "file:154",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "5f5c2428c0cd3a08e71c4ea0e1902ffcbaad5c3e",
+      "lines": 60,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Provider-native shape contract — Claude WEB (`claude-web-shapes/1`)"
+        },
+        {
+          "line": 7,
+          "heading": "1. Identity grammar"
+        },
+        {
+          "line": 18,
+          "heading": "2. Transports and stream shapes"
+        },
+        {
+          "line": 30,
+          "heading": "3. Content parts observed vs documented"
+        },
+        {
+          "line": 41,
+          "heading": "4. Action surfaces (capability capsule semantics)"
+        },
+        {
+          "line": 50,
+          "heading": "5. Executable contract tests"
+        },
+        {
+          "line": 54,
+          "heading": "6. Gaps (the honest headline)"
+        }
+      ]
+    },
+    {
+      "id": "file:170",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "5928bf18177c8de2761847544b78f7fc513a8827",
+      "lines": 19,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION Semantics — Agent instructions"
+        }
+      ]
+    },
+    {
+      "id": "file:171",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "ad966a574a05f9fc72082c81c79725874a7f2f46",
+      "lines": 12,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Semantics — role bootstrap"
+        }
+      ]
+    },
+    {
+      "id": "file:178",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "0785e48442c7db17f8bd6e15f6c077d96c2b6ab2",
+      "lines": 8,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Webapp-Native Harness — real product work"
+        }
+      ]
+    }
+  ]
+}

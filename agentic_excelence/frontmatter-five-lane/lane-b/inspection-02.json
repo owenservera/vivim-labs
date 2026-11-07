@@ -1,0 +1,537 @@
+{
+  "schema": "vivim.lane-b-source-inspection/0.1",
+  "inert": true,
+  "chunk": 2,
+  "records": [
+    {
+      "id": "file:040",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "4af2147ea14a43128ea12b9321241b085e0995f0",
+      "lines": 18,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 3,
+          "heading": "development — Agent instructions"
+        },
+        {
+          "line": 7,
+          "heading": "Persistent agent memory (standing)"
+        },
+        {
+          "line": 11,
+          "heading": "Skills builder / agent capability ownership"
+        },
+        {
+          "line": 15,
+          "heading": "Memory context"
+        }
+      ]
+    },
+    {
+      "id": "file:048",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "af5db9883e842f2816c0957e420c6b59f132257d",
+      "lines": 28,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION M0.5 — Escape Hatch — New Chat Bootstrap"
+        },
+        {
+          "line": 7,
+          "heading": "Mission"
+        },
+        {
+          "line": 10,
+          "heading": "Responsibility"
+        },
+        {
+          "line": 13,
+          "heading": "Canon / task link"
+        },
+        {
+          "line": 16,
+          "heading": "Immediate startup"
+        },
+        {
+          "line": 23,
+          "heading": "Handoff / communication"
+        },
+        {
+          "line": 26,
+          "heading": "Existing control"
+        }
+      ]
+    },
+    {
+      "id": "file:050",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "04e972b05f605eca70559b239edfcff69f41313f",
+      "lines": 28,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION P0 — Instant Pings — New Chat Bootstrap"
+        },
+        {
+          "line": 7,
+          "heading": "Mission"
+        },
+        {
+          "line": 10,
+          "heading": "Responsibility"
+        },
+        {
+          "line": 13,
+          "heading": "Canon / task link"
+        },
+        {
+          "line": 16,
+          "heading": "Immediate startup"
+        },
+        {
+          "line": 23,
+          "heading": "Handoff / communication"
+        },
+        {
+          "line": 26,
+          "heading": "Existing control"
+        }
+      ]
+    },
+    {
+      "id": "file:052",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "7cf3280cbc56b6db89cbdef15e2081973dfeea93",
+      "lines": 28,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION — Vercel Dashboard — New Chat Bootstrap"
+        },
+        {
+          "line": 7,
+          "heading": "Mission"
+        },
+        {
+          "line": 10,
+          "heading": "Responsibility"
+        },
+        {
+          "line": 13,
+          "heading": "Canon / task link"
+        },
+        {
+          "line": 16,
+          "heading": "Immediate startup"
+        },
+        {
+          "line": 23,
+          "heading": "Handoff / communication"
+        },
+        {
+          "line": 26,
+          "heading": "Existing control"
+        }
+      ]
+    },
+    {
+      "id": "file:054",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "3e0a880aa84cf5324d7fcf02a28720ed2ab6b025",
+      "lines": 19,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "01-dashboard-tracking — Agent instructions"
+        },
+        {
+          "line": 8,
+          "heading": "Persistent agent memory (standing)"
+        },
+        {
+          "line": 12,
+          "heading": "Skills builder / agent capability ownership"
+        },
+        {
+          "line": 16,
+          "heading": "Memory context"
+        }
+      ]
+    },
+    {
+      "id": "file:055",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "967a7b944c6c7a9039ec397c13874da1b18ac453",
+      "lines": 32,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Dashboarding & Tracking — Independent Chat Bootstrap"
+        },
+        {
+          "line": 5,
+          "heading": "Your mission"
+        },
+        {
+          "line": 8,
+          "heading": "Immediate focus"
+        },
+        {
+          "line": 11,
+          "heading": "Operational contract"
+        },
+        {
+          "line": 18,
+          "heading": "Required outcomes"
+        },
+        {
+          "line": 21,
+          "heading": "Related current work"
+        },
+        {
+          "line": 29,
+          "heading": "SITREP and agent commons"
+        }
+      ]
+    },
+    {
+      "id": "file:062",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "e8c51557f4fafe65597b5d49c15086b8743325c3",
+      "lines": 21,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "02-long-term-planning-alignment — Agent instructions"
+        },
+        {
+          "line": 8,
+          "heading": "Persistent agent memory (standing)"
+        },
+        {
+          "line": 12,
+          "heading": "Skills builder / agent capability ownership"
+        },
+        {
+          "line": 18,
+          "heading": "Memory context"
+        }
+      ]
+    },
+    {
+      "id": "file:063",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "808ccc4df95d852e20f2ffdd68b38afa2169f938",
+      "lines": 42,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Long-term Planning & Alignment — Independent Chat Bootstrap"
+        },
+        {
+          "line": 5,
+          "heading": "Your mission"
+        },
+        {
+          "line": 8,
+          "heading": "Immediate focus"
+        },
+        {
+          "line": 11,
+          "heading": "Operational contract"
+        },
+        {
+          "line": 18,
+          "heading": "Lightweight self-continuity"
+        },
+        {
+          "line": 28,
+          "heading": "Required outcomes"
+        },
+        {
+          "line": 31,
+          "heading": "Current sources of truth"
+        },
+        {
+          "line": 39,
+          "heading": "SITREP and agent commons"
+        }
+      ]
+    },
+    {
+      "id": "file:071",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "cbfee94c275a3a3691763e3aec6859ea369fd7aa",
+      "lines": 19,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "03-chief-of-staff-operations — Agent instructions"
+        },
+        {
+          "line": 8,
+          "heading": "Persistent agent memory (standing)"
+        },
+        {
+          "line": 12,
+          "heading": "Skills builder / agent capability ownership"
+        },
+        {
+          "line": 16,
+          "heading": "Memory context"
+        }
+      ]
+    },
+    {
+      "id": "file:072",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "decd0c8e43f846af8f2b1a6a80d75ea830f6d18c",
+      "lines": 32,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Implementation & Operations — Chief of Staff — Independent Chat Bootstrap"
+        },
+        {
+          "line": 5,
+          "heading": "Your mission"
+        },
+        {
+          "line": 8,
+          "heading": "Immediate focus"
+        },
+        {
+          "line": 11,
+          "heading": "Operational contract"
+        },
+        {
+          "line": 18,
+          "heading": "Required outcomes"
+        },
+        {
+          "line": 21,
+          "heading": "Related current work"
+        },
+        {
+          "line": 29,
+          "heading": "SITREP and agent commons"
+        }
+      ]
+    },
+    {
+      "id": "file:078",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "efe8c10012d10fef26adc46c616e4f7bc759ea2f",
+      "lines": 19,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "04-opencode-output-efficiency — Agent instructions"
+        },
+        {
+          "line": 8,
+          "heading": "Persistent agent memory (standing)"
+        },
+        {
+          "line": 12,
+          "heading": "Skills builder / agent capability ownership"
+        },
+        {
+          "line": 16,
+          "heading": "Memory context"
+        }
+      ]
+    },
+    {
+      "id": "file:079",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "e96486736c41c60e938a77bf30662780f7e4453a",
+      "lines": 32,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "OpenCode Output & Team Efficiency — Independent Chat Bootstrap"
+        },
+        {
+          "line": 5,
+          "heading": "Your mission"
+        },
+        {
+          "line": 8,
+          "heading": "Immediate focus"
+        },
+        {
+          "line": 11,
+          "heading": "Operational contract"
+        },
+        {
+          "line": 18,
+          "heading": "Required outcomes"
+        },
+        {
+          "line": 21,
+          "heading": "Related current work"
+        },
+        {
+          "line": 29,
+          "heading": "SITREP and agent commons"
+        }
+      ]
+    },
+    {
+      "id": "file:085",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "bfca23749375d336d33f89303e050f1eda2edd34",
+      "lines": 44,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 3,
+          "heading": "05-chief-of-chiefs — Agent instructions"
+        },
+        {
+          "line": 7,
+          "heading": "Persistent agent memory (standing)"
+        },
+        {
+          "line": 11,
+          "heading": "Operational entrypoint (Chief-specific)"
+        },
+        {
+          "line": 18,
+          "heading": "Chief skill portfolio — first pass"
+        },
+        {
+          "line": 24,
+          "heading": "Skills builder / agent capability ownership"
+        },
+        {
+          "line": 28,
+          "heading": "Memory context"
+        },
+        {
+          "line": 33,
+          "heading": "Native OpenCode entry (2026-10-22; source-wired, Windows unverified)"
+        }
+      ]
+    },
+    {
+      "id": "file:086",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "320a0e4882efefd56c1ed4c5a4f26363ad0cad2f",
+      "lines": 65,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION — Chief of Chiefs — Executive Coordination Bootstrap"
+        },
+        {
+          "line": 3,
+          "heading": "CURRENT EXECUTIVE CONTRACT — 2026-10-21 (supersedes conflicting 2026-10-16 details)"
+        },
+        {
+          "line": 25,
+          "heading": "Historical 2026-10-16 bootstrap (retained for provenance; not today's priority order)"
+        },
+        {
+          "line": 30,
+          "heading": "Mission"
+        },
+        {
+          "line": 33,
+          "heading": "Team"
+        },
+        {
+          "line": 44,
+          "heading": "Operating rules"
+        },
+        {
+          "line": 52,
+          "heading": "Initial priority"
+        },
+        {
+          "line": 55,
+          "heading": "Links"
+        },
+        {
+          "line": 62,
+          "heading": "SITREP and agent commons"
+        }
+      ]
+    },
+    {
+      "id": "file:094",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "034525e809c4cf046dfe96390314e4df251d89e4",
+      "lines": 51,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AGENTS.md — TOOLSMITH role workspace policy"
+        },
+        {
+          "line": 7,
+          "heading": "Read order"
+        },
+        {
+          "line": 10,
+          "heading": "Execution doctrine"
+        },
+        {
+          "line": 22,
+          "heading": "Permissions and safe practice"
+        },
+        {
+          "line": 30,
+          "heading": "Deliverables"
+        },
+        {
+          "line": 34,
+          "heading": "SITREP and agent commons"
+        },
+        {
+          "line": 40,
+          "heading": "Persistent agent memory (standing)"
+        },
+        {
+          "line": 44,
+          "heading": "Skills builder / agent capability ownership"
+        },
+        {
+          "line": 48,
+          "heading": "Memory context"
+        }
+      ]
+    }
+  ]
+}

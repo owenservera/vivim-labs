@@ -1,14 +1,19 @@
-# VIVIM documentation consolidation
+# Documentation consolidation — VIVIM Labs
 
-Central repository for relocated **human-authored documentation**, separated by source repository and original relative path. Working source, agent instructions, executable prompts, schemas, task-state registries, test fixtures, installed wikis and live contracts stay in their owner repositories.
+A **source-preserving archive** of documentation relocated from TierFlow, VIVIM Web Harness and Repos HQ. Original relative paths live below a repository-named directory. The working repository continues to own **agents, operational contracts, executable prompts, structured data, active plans, runtime docs, generated wikis and code**.
 
-## Source layout
+## Verified migration (2026-11-07)
 
-- `tierflow/` — relocated TierFlow historical documents and blueprints.
-- `vivim-web-harness/` — relocated historical/design documents from the VIVIM product repo.
-- `repos-hq/` — relocated research and dated documents from the HQ repo.
-- `INVENTORY.json` — document-by-document source SHA, original path, move/retention decision.
+| Source | Relocated files | Retained documentation-format files |
+| --- | ---: | ---: |
+| [tierflow](./tierflow/) | 10 | 302 |
+| [vivim-web-harness](./vivim-web-harness/) | 96 | 273 |
+| [repos-hq](./repos-hq/) | 31 | 522 |
+| **Total** | **137** | **1097** |
 
-This is **not** an alternative runtime or source of execution authority. Source code and deployed system behavior are unchanged by a document migration. Moved Markdown retains its original content and relative path under its source prefix. Relative links to code in the source repository may need follow-up repair.
+These counts cover extensions like Markdown, TXT and CSV, **not just prose documentation**. Retained files include machine datasets, agent definitions and other working material. This migration is a **safe first consolidation pass, not a claim that every human document is relocated**.
 
-**Safety:** Every deletion requires a successful destination publish and blob SHA verification, then a non-force, expected-head update to source `main`. Never delete `AGENTS.md`, `SKILL.md`, developer agent configs, JSON/CSV datasets, operational instructions, or runtime files.
+- [INVENTORY.json](./INVENTORY.json) — 1234 original paths, blob SHAs, moved/retained status, retention reasons and current source heads.
+- [MIGRATION-REPORT.md](./MIGRATION-REPORT.md) — integrity rule, protections, known limitations, next cleanup checks.
+
+**Important:** Some historical links from source repositories may still point at old paths. The machine-readable inventory is the relocation map. Do not remove a retained document on extension alone. Labs does not become the authority for any runtime, knowledge engine, document index, permission or release gate.

@@ -1,0 +1,175 @@
+{"id":"section:161:001","file_id":"file:161","heading":"repo discovery","line":6,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:162:001","file_id":"file:162","heading":"evidence assessment","line":6,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:163:001","file_id":"file:163","heading":"docs intelligence","line":6,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:164:001","file_id":"file:164","heading":"media intelligence","line":6,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:165:001","file_id":"file:165","heading":"cross project transfer","line":6,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:166:001","file_id":"file:166","heading":"notebooklm","line":6,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:167:001","file_id":"file:167","heading":"delivery loop","line":6,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:168:001","file_id":"file:168","heading":"session sitrep","line":6,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:169:001","file_id":"file:169","heading":"Research evidence packet check","line":6,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:169:002","file_id":"file:169","heading":"Local execution (Node 18+; no dependencies)","line":12,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:169:003","file_id":"file:169","heading":"Small input contract","line":23,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:169:004","file_id":"file:169","heading":"Recovery and evolution","line":31,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:170:001","file_id":"file:170","heading":"AION Semantics — Agent instructions","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:171:001","file_id":"file:171","heading":"Semantics — role bootstrap","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:172:001","file_id":"file:172","heading":"AION Semantics — SITREP","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:173:001","file_id":"file:173","heading":"Semantics CANON — durable, source-grounded","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:174:001","file_id":"file:174","heading":"Personal best practices — actionable only","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:175:001","file_id":"file:175","heading":"Semantics Curated — working style","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:176:001","file_id":"file:176","heading":"Semantics Immediate — active work (consult every interaction)","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:177:001","file_id":"file:177","heading":"Semantic command audit","line":6,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:177:002","file_id":"file:177","heading":"Trigger","line":8,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:177:003","file_id":"file:177","heading":"Read first","line":12,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:177:004","file_id":"file:177","heading":"Procedure","line":19,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:177:005","file_id":"file:177","heading":"Stop / recovery","line":28,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:177:006","file_id":"file:177","heading":"Validation and maintenance","line":32,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:178:001","file_id":"file:178","heading":"Webapp-Native Harness — real product work","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:179:001","file_id":"file:179","heading":"Webapp-Native Harness — Autonomous specialist bootstrap","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:180:001","file_id":"file:180","heading":"Webapp-Native Harness — Initial SITREP","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:180:002","file_id":"file:180","heading":"State","line":5,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:180:003","file_id":"file:180","heading":"Role gap","line":14,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:180:004","file_id":"file:180","heading":"Initial focus","line":17,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:180:005","file_id":"file:180","heading":"Pending proof","line":20,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:181:001","file_id":"file:181","heading":"AION Intelligence Bench — 2026-10-25","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:181:002","file_id":"file:181","heading":"Identity and scope","line":3,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:181:003","file_id":"file:181","heading":"Reproduce on a Node 22 checkout","line":11,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:181:004","file_id":"file:181","heading":"Source-level measurements (actual execution, not full Node suite)","line":20,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:181:005","file_id":"file:181","heading":"Test execution limits","line":29,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:181:006","file_id":"file:181","heading":"Integration and rollback","line":35,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:182:001","file_id":"file:182","heading":"AION C1 — generic webapp harness core runtime bridge","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:182:002","file_id":"file:182","heading":"Provenance and precise source","line":5,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:182:003","file_id":"file:182","heading":"Node 22 entrypoints and schemas","line":15,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:182:004","file_id":"file:182","heading":"Tested commands, actual results","line":36,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:182:005","file_id":"file:182","heading":"Integration into existing Studio: exact destination seams","line":49,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:182:006","file_id":"file:182","heading":"Deltas over Agent 14 Round 6–9 / collision decisions","line":58,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:182:007","file_id":"file:182","heading":"Failure matrix / rollback","line":66,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:183:001","file_id":"file:183","heading":"I1 — Capture Studio self-improving webapp read adapters (2026-10-24)","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:183:002","file_id":"file:183","heading":"Files and entrypoints","line":5,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:183:003","file_id":"file:183","heading":"Proven scope and failure cases","line":13,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:183:004","file_id":"file:183","heading":"Exact Core / Z.ai wiring (do not replace existing systems)","line":21,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:183:005","file_id":"file:183","heading":"Compatibility / outstanding integration","line":29,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:184:001","file_id":"file:184","heading":"AION Capture Studio — Systems S1 independent diagnostic supplier","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:184:002","file_id":"file:184","heading":"Provenance and layout","line":5,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:184:003","file_id":"file:184","heading":"Full-path architecture map (current source versus missing seams)","line":20,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:184:004","file_id":"file:184","heading":"TOP 5 source-specific fixes — priority / owner / measured independent proof","line":24,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:184:005","file_id":"file:184","heading":"Exact proposed wire contracts (all advisory; caller validates server provenance)","line":36,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:184:006","file_id":"file:184","heading":"Z.ai ordered integration sequence (short, collision-aware)","line":46,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:184:007","file_id":"file:184","heading":"Repro receipt and pending real proof","line":59,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:185:001","file_id":"file:185","heading":"AION / U1 universal webapp Chat UI supplier — 24 October 2026","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:185:002","file_id":"file:185","heading":"Files and extraction","line":5,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:185:003","file_id":"file:185","heading":"Integration in canonical existing `/chat`","line":21,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:185:004","file_id":"file:185","heading":"Compatibility, collisions and proof still needed","line":32,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:186:001","file_id":"file:186","heading":"Webapp-Native Harness CANON — durable lessons","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:187:001","file_id":"file:187","heading":"Specialist working best practices","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:188:001","file_id":"file:188","heading":"Webapp-Native Harness Curated — independently useful methods","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:189:001","file_id":"file:189","heading":"Webapp-Native Harness Immediate — active continuation","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:189:002","file_id":"file:189","heading":"2026-10-24 live priority after Z.ai export audit","line":5,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:189:003","file_id":"file:189","heading":"2026-10-24 active delivery and standing implementation technique","line":13,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:189:004","file_id":"file:189","heading":"2026-10-24 new active state (Z.ai TAR 5)","line":19,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:189:005","file_id":"file:189","heading":"2026-10-24 — latest Z.ai Round 8 package and owner-direction continuity","line":25,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:189:006","file_id":"file:189","heading":"Most important next action","line":32,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:189:007","file_id":"file:189","heading":"Known active unknowns","line":35,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:189:008","file_id":"file:189","heading":"The documents to open next","line":43,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:190:001","file_id":"file:190","heading":"Webapp-native shape evidence skill (role 14)","line":6,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:190:002","file_id":"file:190","heading":"When to use","line":10,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:190:003","file_id":"file:190","heading":"Procedure","line":13,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:190:004","file_id":"file:190","heading":"Deliverable template","line":23,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:190:005","file_id":"file:190","heading":"Red lines","line":26,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:191:001","file_id":"file:191","heading":"Autonomous bootstrap contract — Product-to-Market","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:191:002","file_id":"file:191","heading":"Bootstrap state: INITIALIZED, NOT RUNNING CONTINUOUSLY","line":3,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:191:003","file_id":"file:191","heading":"Pass 1 — Verified portfolio discovery","line":6,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:191:004","file_id":"file:191","heading":"Pass 2 — Product packaging","line":12,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:191:005","file_id":"file:191","heading":"Pass 3 — Shipping execution","line":18,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:191:006","file_id":"file:191","heading":"Verification / anti-fiction","line":23,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:192:001","file_id":"file:192","heading":"Architecture Steward — Agent Mandate","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:192:002","file_id":"file:192","heading":"Identity","line":3,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:192:003","file_id":"file:192","heading":"Core question","line":9,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:192:004","file_id":"file:192","heading":"Behavioral rule","line":25,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:192:005","file_id":"file:192","heading":"Authority rule","line":44,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:192:006","file_id":"file:192","heading":"Stewardship loop","line":59,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:192:007","file_id":"file:192","heading":"Deliverable standard","line":65,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:192:008","file_id":"file:192","heading":"Subagent delegation","line":70,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:192:009","file_id":"file:192","heading":"Required prompt contract","line":85,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:192:010","file_id":"file:192","heading":"CFA planning ownership","line":104,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:192:011","file_id":"file:192","heading":"Delegation rule","line":112,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:193:001","file_id":"file:193","heading":"Semantics — role bootstrap","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:194:001","file_id":"file:194","heading":"AION Semantics — SITREP","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:001","file_id":"file:195","heading":"Semantic Continuity Steward","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:002","file_id":"file:195","heading":"Dedicated Architecture Steward Subagent — Role Definition","line":2,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:003","file_id":"file:195","heading":"Ratification","line":12,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:004","file_id":"file:195","heading":"1. Essence","line":18,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:005","file_id":"file:195","heading":"2. Why this is a distinct Steward role","line":62,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:006","file_id":"file:195","heading":"3. Primary mission","line":96,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:007","file_id":"file:195","heading":"4. Core objectives","line":109,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:008","file_id":"file:195","heading":"O1 — Establish semantic continuity","line":111,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:009","file_id":"file:195","heading":"O2 — Establish the canonical vocabulary","line":128,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:010","file_id":"file:195","heading":"O3 — Prevent semantic alias explosion","line":146,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:011","file_id":"file:195","heading":"O4 — Keep grammar pinned","line":156,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:012","file_id":"file:195","heading":"O5 — Make compilation layers explicit","line":164,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:013","file_id":"file:195","heading":"O6 — Make grounding first-class","line":179,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:014","file_id":"file:195","heading":"O7 — Preserve bidirectional semantics","line":187,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:015","file_id":"file:195","heading":"O8 — Model execution as a separate dimension","line":201,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:016","file_id":"file:195","heading":"O9 — Make VIVIM increasingly self-descriptive","line":217,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:017","file_id":"file:195","heading":"5. Primary responsibilities","line":237,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:018","file_id":"file:195","heading":"R1 — Self-Knowledge architecture","line":239,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:019","file_id":"file:195","heading":"R2 — Command semantic architecture","line":242,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:020","file_id":"file:195","heading":"R3 — Compiler architecture","line":255,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:021","file_id":"file:195","heading":"R4 — Grounding architecture","line":258,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:022","file_id":"file:195","heading":"R5 — Representation architecture","line":268,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:023","file_id":"file:195","heading":"R6 — Round-trip and edit semantics","line":271,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:024","file_id":"file:195","heading":"R7 — Execution-state semantics","line":283,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:025","file_id":"file:195","heading":"R8 — CANON taxonomy and dictionary","line":286,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:026","file_id":"file:195","heading":"R9 — Cross-plane identity and provenance","line":291,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:027","file_id":"file:195","heading":"R10 — Falsification","line":294,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:028","file_id":"file:195","heading":"6. Non-responsibilities","line":297,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:029","file_id":"file:195","heading":"7. Relationship to the main Architecture Steward","line":318,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:030","file_id":"file:195","heading":"8. Operating principles","line":341,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:031","file_id":"file:195","heading":"P1 — One meaning, many representations","line":343,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:032","file_id":"file:195","heading":"P2 — Representation is not authority","line":346,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:033","file_id":"file:195","heading":"P3 — Unknown is a valid state","line":349,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:034","file_id":"file:195","heading":"P4 — Names carry architecture","line":352,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:035","file_id":"file:195","heading":"P5 — Fully descriptive before abbreviated","line":355,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:036","file_id":"file:195","heading":"P6 — Historical vocabulary is evidence","line":369,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:037","file_id":"file:195","heading":"P7 — Deterministic core, probabilistic edge","line":372,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:038","file_id":"file:195","heading":"P8 — Execution is reality","line":375,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:039","file_id":"file:195","heading":"P9 — CANON evolves by evidence","line":378,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:040","file_id":"file:195","heading":"P10 — Overhead is a failure mode","line":381,"level":3,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:041","file_id":"file:195","heading":"9. CANON — initial conceptual charter","line":384,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:042","file_id":"file:195","heading":"10. CANON taxonomy questions","line":420,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:043","file_id":"file:195","heading":"11. Standard operating loop","line":439,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:044","file_id":"file:195","heading":"12. Evidence discipline","line":480,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:045","file_id":"file:195","heading":"13. Durable output shape","line":501,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:046","file_id":"file:195","heading":"14. First-stage objective","line":516,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:195:047","file_id":"file:195","heading":"15. Definition of success","line":526,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:208:001","file_id":"file:208","heading":"ChatGPT / AION integration specialist","line":5,"level":1,"merge_action":"replace","evidence":"pinned_census_blob_sha"}
+{"id":"section:208:002","file_id":"file:208","heading":"Scope and ownership","line":9,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:208:003","file_id":"file:208","heading":"Prompt and agent protocol","line":15,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:208:004","file_id":"file:208","heading":"Engineering process","line":23,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:208:005","file_id":"file:208","heading":"Current product map","line":32,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:208:006","file_id":"file:208","heading":"Immediate product proof","line":35,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:209:001","file_id":"file:209","heading":"OpenCode / Windows local execution specialist","line":5,"level":1,"merge_action":"replace","evidence":"pinned_census_blob_sha"}
+{"id":"section:209:002","file_id":"file:209","heading":"Machine authority and tools","line":9,"level":2,"merge_action":"replace","evidence":"pinned_census_blob_sha"}
+{"id":"section:209:003","file_id":"file:209","heading":"Git and repository operating contract","line":15,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:209:004","file_id":"file:209","heading":"Capture Studio runtime and safety","line":22,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:209:005","file_id":"file:209","heading":"Execution sequence for migration cutover","line":30,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:209:006","file_id":"file:209","heading":"Response style and operating habits","line":39,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:210:001","file_id":"file:210","heading":"VIVIM Harness — agent operating contract","line":1,"level":1,"merge_action":"replace","evidence":"pinned_census_blob_sha"}
+{"id":"section:210:002","file_id":"file:210","heading":"Governing decisions (from owner conversations, October 11–25, 2026)","line":9,"level":2,"merge_action":"replace","evidence":"pinned_census_blob_sha"}
+{"id":"section:210:003","file_id":"file:210","heading":"Source and cutover truth","line":19,"level":2,"merge_action":"replace","evidence":"pinned_census_blob_sha"}
+{"id":"section:210:004","file_id":"file:210","heading":"Verification and closeout","line":26,"level":2,"merge_action":"replace","evidence":"pinned_census_blob_sha"}
+{"id":"section:213:001","file_id":"file:213","heading":"Provider-native shape contract — Claude WEB (`claude-web-shapes/1`)","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:213:002","file_id":"file:213","heading":"1. Identity grammar","line":7,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:213:003","file_id":"file:213","heading":"2. Transports and stream shapes","line":18,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:213:004","file_id":"file:213","heading":"3. Content parts observed vs documented","line":30,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:213:005","file_id":"file:213","heading":"4. Action surfaces (capability capsule semantics)","line":41,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:213:006","file_id":"file:213","heading":"5. Executable contract tests","line":50,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:213:007","file_id":"file:213","heading":"6. Gaps (the honest headline)","line":54,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:215:001","file_id":"file:215","heading":"AGENTS.md — working agreements for vivim-omega (owner-maintained)","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:215:002","file_id":"file:215","heading":"Commands","line":7,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:215:003","file_id":"file:215","heading":"Laws that bite (B1–B5 + process)","line":25,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:215:004","file_id":"file:215","heading":"Decision records: checker traps (all bitten live — respect them)","line":50,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:215:005","file_id":"file:215","heading":"Code surfaces with gate teeth","line":69,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:215:006","file_id":"file:215","heading":"Commits, tags, push (conventions that prevent real incidents)","line":89,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:215:007","file_id":"file:215","heading":"Windows facts (proven, not folklore)","line":104,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:215:008","file_id":"file:215","heading":"Do not","line":117,"level":2,"merge_action":"add","evidence":"pinned_census_blob_sha"}
+{"id":"section:217:001","file_id":"file:217","heading":"Agent Instructions — Product Design Folder","line":1,"level":1,"merge_action":"add","evidence":"pinned_census_blob_sha"}

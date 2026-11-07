@@ -1,0 +1,198 @@
+[
+  {
+    "id": "algorithm:normalize_text",
+    "name": "normalize_text",
+    "kind": "deterministic_transform",
+    "status": "design_reuse_candidate",
+    "authority": "HQ read-only proposal; runtime authority remains separate",
+    "placement": "lease-bound edge to target node"
+  },
+  {
+    "id": "algorithm:lex_nlcl",
+    "name": "lex_nlcl",
+    "kind": "deterministic_transform",
+    "status": "design_reuse_candidate",
+    "authority": "HQ read-only proposal; runtime authority remains separate",
+    "placement": "lease-bound edge to target node"
+  },
+  {
+    "id": "algorithm:parse_nlcl",
+    "name": "parse_nlcl",
+    "kind": "deterministic_transform",
+    "status": "design_reuse_candidate",
+    "authority": "HQ read-only proposal; runtime authority remains separate",
+    "placement": "lease-bound edge to target node"
+  },
+  {
+    "id": "algorithm:resolve_alias",
+    "name": "resolve_alias",
+    "kind": "deterministic_transform",
+    "status": "design_reuse_candidate",
+    "authority": "HQ read-only proposal; runtime authority remains separate",
+    "placement": "lease-bound edge to target node"
+  },
+  {
+    "id": "algorithm:ground_entities",
+    "name": "ground_entities",
+    "kind": "deterministic_decision",
+    "status": "design_reuse_candidate",
+    "authority": "HQ read-only proposal; runtime authority remains separate",
+    "placement": "lease-bound edge to target node"
+  },
+  {
+    "id": "algorithm:check_authority",
+    "name": "check_authority",
+    "kind": "deterministic_decision",
+    "status": "design_reuse_candidate",
+    "authority": "HQ read-only proposal; runtime authority remains separate",
+    "placement": "lease-bound edge to target node"
+  },
+  {
+    "id": "algorithm:rank_relevance",
+    "name": "rank_relevance",
+    "kind": "deterministic_decision",
+    "status": "design_reuse_candidate",
+    "authority": "HQ read-only proposal; runtime authority remains separate",
+    "placement": "lease-bound edge to target node"
+  },
+  {
+    "id": "algorithm:deduplicate",
+    "name": "deduplicate",
+    "kind": "deterministic_decision",
+    "status": "design_reuse_candidate",
+    "authority": "HQ read-only proposal; runtime authority remains separate",
+    "placement": "lease-bound edge to target node"
+  },
+  {
+    "id": "algorithm:select_context",
+    "name": "select_context",
+    "kind": "deterministic_decision",
+    "status": "design_reuse_candidate",
+    "authority": "HQ read-only proposal; runtime authority remains separate",
+    "placement": "lease-bound edge to target node"
+  },
+  {
+    "id": "algorithm:route_activation",
+    "name": "route_activation",
+    "kind": "deterministic_decision",
+    "status": "design_reuse_candidate",
+    "authority": "HQ read-only proposal; runtime authority remains separate",
+    "placement": "lease-bound edge to target node"
+  },
+  {
+    "id": "algorithm:validate_plan",
+    "name": "validate_plan",
+    "kind": "deterministic_decision",
+    "status": "design_reuse_candidate",
+    "authority": "HQ read-only proposal; runtime authority remains separate",
+    "placement": "lease-bound edge to target node"
+  },
+  {
+    "id": "algorithm:measure_outcome",
+    "name": "measure_outcome",
+    "kind": "deterministic_decision",
+    "status": "design_reuse_candidate",
+    "authority": "HQ read-only proposal; runtime authority remains separate",
+    "placement": "lease-bound edge to target node"
+  },
+  {
+    "id": "algorithm:A01",
+    "name": "buildAliasIndex",
+    "description": "Unicode NFKC, stable collision preserving index",
+    "status": "implemented_experimental_existing_hq",
+    "source": "hq/lib/semantic-optimizers.mjs",
+    "tests": "hq/test/semantic-optimizers.test.mjs",
+    "authority": "pure read-only; no runtime effect permission",
+    "activation_mode": "proposed_lease_only"
+  },
+  {
+    "id": "algorithm:A02",
+    "name": "resolveAlias",
+    "description": "Exact-first alias resolution with ambiguity preservation",
+    "status": "implemented_experimental_existing_hq",
+    "source": "hq/lib/semantic-optimizers.mjs",
+    "tests": "hq/test/semantic-optimizers.test.mjs",
+    "authority": "pure read-only; no runtime effect permission",
+    "activation_mode": "proposed_lease_only"
+  },
+  {
+    "id": "algorithm:A03",
+    "name": "rankEvidence",
+    "description": "Bounded evidence ranking with redaction and deterministic ties",
+    "status": "implemented_experimental_existing_hq",
+    "source": "hq/lib/semantic-optimizers.mjs",
+    "tests": "hq/test/semantic-optimizers.test.mjs",
+    "authority": "pure read-only; no runtime effect permission",
+    "activation_mode": "proposed_lease_only"
+  },
+  {
+    "id": "algorithm:A04",
+    "name": "packContext",
+    "description": "Budget-aware marginal coverage selection",
+    "status": "implemented_experimental_existing_hq",
+    "source": "hq/lib/semantic-optimizers.mjs",
+    "tests": "hq/test/semantic-optimizers.test.mjs",
+    "authority": "pure read-only; no runtime effect permission",
+    "activation_mode": "proposed_lease_only"
+  },
+  {
+    "id": "algorithm:A05",
+    "name": "reconcileClaims",
+    "description": "Conflict-preserving claim reconciliation",
+    "status": "implemented_experimental_existing_hq",
+    "source": "hq/lib/semantic-optimizers.mjs",
+    "tests": "hq/test/semantic-optimizers.test.mjs",
+    "authority": "pure read-only; no runtime effect permission",
+    "activation_mode": "proposed_lease_only"
+  },
+  {
+    "id": "algorithm:A06",
+    "name": "traceImpact",
+    "description": "Cycle-safe reverse dependency traversal",
+    "status": "implemented_experimental_existing_hq",
+    "source": "hq/lib/semantic-optimizers.mjs",
+    "tests": "hq/test/semantic-optimizers.test.mjs",
+    "authority": "pure read-only; no runtime effect permission",
+    "activation_mode": "proposed_lease_only"
+  },
+  {
+    "id": "algorithm:A07",
+    "name": "orderActionPlan",
+    "description": "Dependency-order preview with missing and cyclic gates",
+    "status": "implemented_experimental_existing_hq",
+    "source": "hq/lib/semantic-optimizers.mjs",
+    "tests": "hq/test/semantic-optimizers.test.mjs",
+    "authority": "pure read-only; no runtime effect permission",
+    "activation_mode": "proposed_lease_only"
+  },
+  {
+    "id": "algorithm:A08",
+    "name": "allocateTasks",
+    "description": "Bounded agent-capacity assignment proposals",
+    "status": "implemented_experimental_existing_hq",
+    "source": "hq/lib/semantic-optimizers.mjs",
+    "tests": "hq/test/semantic-optimizers.test.mjs",
+    "authority": "pure read-only; no runtime effect permission",
+    "activation_mode": "proposed_lease_only"
+  },
+  {
+    "id": "algorithm:A09",
+    "name": "coalesceObservations",
+    "description": "Barrier-aware opt-in observation coalescing",
+    "status": "implemented_experimental_existing_hq",
+    "source": "hq/lib/semantic-optimizers.mjs",
+    "tests": "hq/test/semantic-optimizers.test.mjs",
+    "authority": "pure read-only; no runtime effect permission",
+    "activation_mode": "proposed_lease_only"
+  },
+  {
+    "id": "algorithm:A10",
+    "name": "detectDrift",
+    "description": "Hash/version/existence drift detection",
+    "status": "implemented_experimental_existing_hq",
+    "source": "hq/lib/semantic-optimizers.mjs",
+    "tests": "hq/test/semantic-optimizers.test.mjs",
+    "authority": "pure read-only; no runtime effect permission",
+    "activation_mode": "proposed_lease_only"
+  }
+]

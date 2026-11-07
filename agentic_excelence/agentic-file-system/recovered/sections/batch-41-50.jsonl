@@ -1,0 +1,54 @@
+{"id":"section:041:001","file_id":"file:041","heading":"development — SITREP entry point","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:041:002","file_id":"file:041","heading":"Status report — 2026-10-24 21:56 UTC","start_line":3,"depth":2,"evidence":"observed_heading"}
+{"id":"section:041:003","file_id":"file:041","heading":"Earlier dispatch checkpoint — 21:46 UTC (superseded by result above)","start_line":9,"depth":3,"evidence":"observed_heading"}
+{"id":"section:041:004","file_id":"file:041","heading":"Persistent agent memory (standing)","start_line":23,"depth":2,"evidence":"observed_heading"}
+{"id":"section:041:005","file_id":"file:041","heading":"Skills check on SITREP","start_line":27,"depth":2,"evidence":"observed_heading"}
+{"id":"section:041:006","file_id":"file:041","heading":"Memory on SITREP","start_line":31,"depth":2,"evidence":"observed_heading"}
+{"id":"section:042:001","file_id":"file:042","heading":"CANON — Development's durable operating memory","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:042:002","file_id":"file:042","heading":"Enduring decisions and responsibilities","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:042:003","file_id":"file:042","heading":"Negative patterns found — prevention, not repeated correction requests","start_line":14,"depth":2,"evidence":"observed_heading"}
+{"id":"section:042:004","file_id":"file:042","heading":"Memory placement and promotion","start_line":22,"depth":2,"evidence":"observed_heading"}
+{"id":"section:043:001","file_id":"file:043","heading":"Personal Best Practices — 10-development","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:044:001","file_id":"file:044","heading":"Curated — Development's working style and interaction defaults","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:044:002","file_id":"file:044","heading":"How to work","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:044:003","file_id":"file:044","heading":"Presentation / aesthetics for this role","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:044:004","file_id":"file:044","heading":"Improvement loop","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:045:001","file_id":"file:045","heading":"Immediate — Development's current execution context","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:045:002","file_id":"file:045","heading":"One working outcome","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:045:003","file_id":"file:045","heading":"Owner-Windows update — 2026-10-24","start_line":7,"depth":3,"evidence":"observed_heading"}
+{"id":"section:045:004","file_id":"file:045","heading":"Historical Oct21 context — not the current execution plan","start_line":14,"depth":3,"evidence":"observed_heading"}
+{"id":"section:045:005","file_id":"file:045","heading":"Next executable sequence, conditional on available tools","start_line":23,"depth":2,"evidence":"observed_heading"}
+{"id":"section:045:006","file_id":"file:045","heading":"Who supplies what / avoid unnecessary intervention","start_line":32,"depth":2,"evidence":"observed_heading"}
+{"id":"section:045:007","file_id":"file:045","heading":"Review and expiry behavior","start_line":39,"depth":2,"evidence":"observed_heading"}
+{"id":"section:046:001","file_id":"file:046","heading":"Development — Track B generated-source drift","start_line":6,"depth":1,"evidence":"observed_heading"}
+{"id":"section:046:002","file_id":"file:046","heading":"Trigger","start_line":8,"depth":2,"evidence":"observed_heading"}
+{"id":"section:046:003","file_id":"file:046","heading":"Execute (from AION repository root)","start_line":14,"depth":2,"evidence":"observed_heading"}
+{"id":"section:046:004","file_id":"file:046","heading":"Decide what to do","start_line":30,"depth":2,"evidence":"observed_heading"}
+{"id":"section:046:005","file_id":"file:046","heading":"Verify the skill itself","start_line":37,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:001","file_id":"file:047","heading":"HANDOFF - issue #81 P0: one persistence owner for CAS, lock, rollback and path safety","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:047:002","file_id":"file:047","heading":"1. What changed (single owner: `src/store/versioned.mjs`)","start_line":9,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:003","file_id":"file:047","heading":"2. Files","start_line":23,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:004","file_id":"file:047","heading":"3. Evidence (Windows 11 Pro Insider build 29695, Node v24.22.1, Bun 1.4.2; disposable temp roots; raw logs and `P0_METRICS` JSON kept outside the repo in the approved Temp evidence folder)","start_line":27,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:005","file_id":"file:047","heading":"4. NOT claimed (exact result limits)","start_line":48,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:006","file_id":"file:047","heading":"5. Behaviour changes operators and reviewers must know","start_line":58,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:007","file_id":"file:047","heading":"6. Migration","start_line":67,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:008","file_id":"file:047","heading":"7. Rollback of this change","start_line":73,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:009","file_id":"file:047","heading":"8. Operator-guided stale-lock recovery (never automatic)","start_line":76,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:010","file_id":"file:047","heading":"9. Verdict and review status","start_line":85,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:011","file_id":"file:047","heading":"10. Frozen code blobs (git blob SHA-1; code last modified 2026-10-24T20:39:07Z, documents after that)","start_line":101,"depth":2,"evidence":"observed_heading"}
+{"id":"section:048:001","file_id":"file:048","heading":"AION M0.5 — Escape Hatch — New Chat Bootstrap","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:048:002","file_id":"file:048","heading":"Mission","start_line":7,"depth":2,"evidence":"observed_heading"}
+{"id":"section:048:003","file_id":"file:048","heading":"Responsibility","start_line":10,"depth":2,"evidence":"observed_heading"}
+{"id":"section:048:004","file_id":"file:048","heading":"Canon / task link","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:048:005","file_id":"file:048","heading":"Immediate startup","start_line":16,"depth":2,"evidence":"observed_heading"}
+{"id":"section:048:006","file_id":"file:048","heading":"Handoff / communication","start_line":23,"depth":2,"evidence":"observed_heading"}
+{"id":"section:048:007","file_id":"file:048","heading":"Existing control","start_line":26,"depth":2,"evidence":"observed_heading"}
+{"id":"section:049:001","file_id":"file:049","heading":"Escape Hatch — SITREP","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:049:002","file_id":"file:049","heading":"Session log","start_line":12,"depth":2,"evidence":"observed_heading"}
+{"id":"section:050:001","file_id":"file:050","heading":"AION P0 — Instant Pings — New Chat Bootstrap","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:050:002","file_id":"file:050","heading":"Mission","start_line":7,"depth":2,"evidence":"observed_heading"}
+{"id":"section:050:003","file_id":"file:050","heading":"Responsibility","start_line":10,"depth":2,"evidence":"observed_heading"}
+{"id":"section:050:004","file_id":"file:050","heading":"Canon / task link","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:050:005","file_id":"file:050","heading":"Immediate startup","start_line":16,"depth":2,"evidence":"observed_heading"}
+{"id":"section:050:006","file_id":"file:050","heading":"Handoff / communication","start_line":23,"depth":2,"evidence":"observed_heading"}
+{"id":"section:050:007","file_id":"file:050","heading":"Existing control","start_line":26,"depth":2,"evidence":"observed_heading"}

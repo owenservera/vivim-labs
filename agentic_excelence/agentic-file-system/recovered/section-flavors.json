@@ -1,0 +1,104 @@
+[
+  {
+    "file_kind": "AGENTS.md",
+    "section_type": "best_practices",
+    "flavor": "binding scoped instructions",
+    "required": [
+      "instruction precedence",
+      "bounded do/don't rules",
+      "test commands",
+      "conflict resolution"
+    ],
+    "risk": "rules accidentally propagate to unrelated repos"
+  },
+  {
+    "file_kind": "SKILL.md",
+    "section_type": "best_practices",
+    "flavor": "task-specific repeatable method",
+    "required": [
+      "trigger conditions",
+      "procedure",
+      "fixtures",
+      "failure modes",
+      "references on demand"
+    ],
+    "risk": "loads too broadly or implies capabilities without tools"
+  },
+  {
+    "file_kind": "ARCHITECTURE.md",
+    "section_type": "best_practices",
+    "flavor": "design rationale and architectural constraints",
+    "required": [
+      "invariants",
+      "alternatives",
+      "tradeoffs",
+      "failure domains",
+      "compatibility tests"
+    ],
+    "risk": "design preferences mistaken for executable policy"
+  },
+  {
+    "file_kind": "BOOTSTRAP.md",
+    "section_type": "best_practices",
+    "flavor": "cold-start repeatability",
+    "required": [
+      "prerequisites",
+      "first commands",
+      "readiness gates",
+      "safe restoration"
+    ],
+    "risk": "stale startup instructions"
+  },
+  {
+    "file_kind": "SITREP.md",
+    "section_type": "best_practices",
+    "flavor": "observed lessons from current work",
+    "required": [
+      "time scope",
+      "evidence",
+      "confirmed vs inferred",
+      "blockers",
+      "next checkpoint"
+    ],
+    "risk": "transient observations promoted to permanent authority"
+  },
+  {
+    "file_kind": "HANDOFF.md",
+    "section_type": "best_practices",
+    "flavor": "resumable handover without duplicate actions",
+    "required": [
+      "state IDs",
+      "receipts",
+      "in-flight effects",
+      "no-resend gates",
+      "next owner"
+    ],
+    "risk": "duplicate external effects"
+  },
+  {
+    "file_kind": "schema.sql",
+    "section_type": "best_practices",
+    "flavor": "database consistency and migration discipline",
+    "required": [
+      "FK constraints",
+      "versioned migrations",
+      "idempotence",
+      "backfill",
+      "rollback/read-only checks"
+    ],
+    "risk": "data corruption or schema fork"
+  },
+  {
+    "file_kind": "TAXONOMY.json",
+    "section_type": "best_practices",
+    "flavor": "identifier and semantic authority",
+    "required": [
+      "stable IDs",
+      "parent links",
+      "provenance",
+      "alias collisions",
+      "versioning"
+    ],
+    "risk": "silent semantic drift"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "file:209",
+    "status": "changed",
+    "source_sha": "73f5461032775d795340558590c87ed6d04ab143",
+    "actual_sha": "3495c98a0f1ee29881f97c927eebd2db18df32bb"
+  },
+  {
+    "id": "file:211",
+    "status": "exact",
+    "source_sha": "6c305242052fe53df7600ce3b39cbb361184750b",
+    "actual_sha": "6c305242052fe53df7600ce3b39cbb361184750b"
+  }
+]

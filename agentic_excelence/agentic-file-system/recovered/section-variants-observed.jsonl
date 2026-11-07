@@ -1,0 +1,842 @@
+{"id":"section:001:001","file_id":"file:001","section_type_id":"section_type:context","heading":"Required context","line":12,"level":2}
+{"id":"section:001:002","file_id":"file:001","section_type_id":"section_type:unique","heading":"Do real work","line":15,"level":2}
+{"id":"section:001:003","file_id":"file:001","section_type_id":"section_type:unique","heading":"Reality and authority","line":18,"level":2}
+{"id":"section:001:004","file_id":"file:001","section_type_id":"section_type:unique","heading":"Reply","line":21,"level":2}
+{"id":"section:002:001","file_id":"file:002","section_type_id":"section_type:tools","heading":"AION Master Skills Builder","line":6,"level":1}
+{"id":"section:002:002","file_id":"file:002","section_type_id":"section_type:unique","heading":"When to use","line":10,"level":2}
+{"id":"section:002:003","file_id":"file:002","section_type_id":"section_type:tools","heading":"Skill factory loop","line":13,"level":2}
+{"id":"section:002:004","file_id":"file:002","section_type_id":"section_type:unique","heading":"Native helper (Node, from AION repo root)","line":22,"level":2}
+{"id":"section:002:005","file_id":"file:002","section_type_id":"section_type:unique","heading":"Read only when relevant","line":33,"level":2}
+{"id":"section:002:006","file_id":"file:002","section_type_id":"section_type:unique","heading":"Ownership","line":37,"level":2}
+{"id":"section:003:001","file_id":"file:003","section_type_id":"section_type:unique","heading":"AION — Execute the work","line":1,"level":1}
+{"id":"section:003:002","file_id":"file:003","section_type_id":"section_type:unique","heading":"Working rule","line":5,"level":2}
+{"id":"section:003:003","file_id":"file:003","section_type_id":"section_type:unique","heading":"Current product ownership: VIVIM Harness","line":17,"level":2}
+{"id":"section:003:004","file_id":"file:003","section_type_id":"section_type:unique","heading":"Non-negotiable operational correctness","line":27,"level":2}
+{"id":"section:004:001","file_id":"file:004","section_type_id":"section_type:unique","heading":"AION BFF bootstrap","line":1,"level":1}
+{"id":"section:004:002","file_id":"file:004","section_type_id":"section_type:unique","heading":"Owen's rules","line":6,"level":2}
+{"id":"section:004:003","file_id":"file:004","section_type_id":"section_type:unique","heading":"Open orders (issues #1-#3)","line":15,"level":2}
+{"id":"section:004:004","file_id":"file:004","section_type_id":"section_type:unique","heading":"Restart","line":20,"level":2}
+{"id":"section:005:001","file_id":"file:005","section_type_id":"section_type:unique","heading":"AION — Discovery-to-Read Initiative Agent","line":1,"level":1}
+{"id":"section:005:002","file_id":"file:005","section_type_id":"section_type:unique","heading":"Identity and authority","line":3,"level":2}
+{"id":"section:005:003","file_id":"file:005","section_type_id":"section_type:unique","heading":"On any /sitrep or /bootstrap","line":6,"level":2}
+{"id":"section:005:004","file_id":"file:005","section_type_id":"section_type:unique","heading":"No-duplication boundaries","line":14,"level":2}
+{"id":"section:005:005","file_id":"file:005","section_type_id":"section_type:unique","heading":"Current phase","line":22,"level":2}
+{"id":"section:006:001","file_id":"file:006","section_type_id":"section_type:recovery","heading":"Discovery-to-Read V1 — integration handoff (NOT an integration instruction to run concurrently)","line":1,"level":1}
+{"id":"section:006:002","file_id":"file:006","section_type_id":"section_type:unique","heading":"What exists now","line":3,"level":2}
+{"id":"section:006:003","file_id":"file:006","section_type_id":"section_type:unique","heading":"Required runtime dependencies — deliberate blockers","line":10,"level":2}
+{"id":"section:006:004","file_id":"file:006","section_type_id":"section_type:unique","heading":"Exact offline instructions","line":19,"level":2}
+{"id":"section:006:005","file_id":"file:006","section_type_id":"section_type:unique","heading":"Non-overlap / sequencing","line":25,"level":2}
+{"id":"section:006:006","file_id":"file:006","section_type_id":"section_type:verification","heading":"Acceptance state","line":28,"level":2}
+{"id":"section:006:007","file_id":"file:006","section_type_id":"section_type:recovery","heading":"Second-pass handoff — buildable seams","line":37,"level":2}
+{"id":"section:006:008","file_id":"file:006","section_type_id":"section_type:unique","heading":"Concrete entry points","line":39,"level":3}
+{"id":"section:006:009","file_id":"file:006","section_type_id":"section_type:verification","heading":"Tests","line":45,"level":3}
+{"id":"section:006:010","file_id":"file:006","section_type_id":"section_type:unique","heading":"Non-negotiable production blockers","line":48,"level":3}
+{"id":"section:007:001","file_id":"file:007","section_type_id":"section_type:unique","heading":"AION Bus (conditional)","line":6,"level":1}
+{"id":"section:008:001","file_id":"file:008","section_type_id":"section_type:unique","heading":"AION Status Review","line":6,"level":1}
+{"id":"section:009:001","file_id":"file:009","section_type_id":"section_type:unique","heading":"AION C1 — generic webapp harness core runtime bridge","line":1,"level":1}
+{"id":"section:009:002","file_id":"file:009","section_type_id":"section_type:unique","heading":"Provenance and precise source","line":5,"level":2}
+{"id":"section:009:003","file_id":"file:009","section_type_id":"section_type:unique","heading":"Node 22 entrypoints and schemas","line":15,"level":2}
+{"id":"section:009:004","file_id":"file:009","section_type_id":"section_type:verification","heading":"Tested commands, actual results","line":36,"level":2}
+{"id":"section:009:005","file_id":"file:009","section_type_id":"section_type:unique","heading":"Integration into existing Studio: exact destination seams","line":49,"level":2}
+{"id":"section:009:006","file_id":"file:009","section_type_id":"section_type:unique","heading":"Deltas over Agent 14 Round 6–9 / collision decisions","line":58,"level":2}
+{"id":"section:009:007","file_id":"file:009","section_type_id":"section_type:recovery","heading":"Failure matrix / rollback","line":66,"level":2}
+{"id":"section:010:001","file_id":"file:010","section_type_id":"section_type:context","heading":"Knowledge & Learning — Fresh-session SITREP","line":1,"level":1}
+{"id":"section:010:002","file_id":"file:010","section_type_id":"section_type:unique","heading":"Expanded `+/SITREP` bootstrap checks","line":9,"level":2}
+{"id":"section:010:003","file_id":"file:010","section_type_id":"section_type:unique","heading":"2026-10-22 — Internal rebaseline starting prompt (read-only)","line":20,"level":2}
+{"id":"section:106:001","file_id":"file:106","section_type_id":"section_type:context","heading":"Context7 Canonical Documentation Harvest","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:106:002","file_id":"file:106","section_type_id":"section_type:context","heading":"Standing source rule","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:106:003","file_id":"file:106","section_type_id":"section_type:unique","heading":"Recipe","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:106:004","file_id":"file:106","section_type_id":"section_type:unique","heading":"Contract","start_line":18,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:109:001","file_id":"file:109","section_type_id":"section_type:tools","heading":"Model Capability Routing","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:109:002","file_id":"file:109","section_type_id":"section_type:unique","heading":"Seed routing order","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:109:003","file_id":"file:109","section_type_id":"section_type:workflow","heading":"Procedure","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:109:004","file_id":"file:109","section_type_id":"section_type:unique","heading":"Success","start_line":18,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:111:001","file_id":"file:111","section_type_id":"section_type:verification","heading":"Evidence & Proof Factory","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:111:002","file_id":"file:111","section_type_id":"section_type:unique","heading":"Read first","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:111:003","file_id":"file:111","section_type_id":"section_type:workflow","heading":"Steps","start_line":11,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:111:004","file_id":"file:111","section_type_id":"section_type:lifecycle","heading":"Status semantics","start_line":20,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:123:001","file_id":"file:123","section_type_id":"section_type:unique","heading":"Provenance, Identity and Deduplication","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:123:002","file_id":"file:123","section_type_id":"section_type:workflow","heading":"Steps","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:123:003","file_id":"file:123","section_type_id":"section_type:unique","heading":"Output","start_line":15,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:142:001","file_id":"file:142","section_type_id":"section_type:unique","heading":"Intra-Turn Team Fanout","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:196:001","file_id":"file:196","section_type_id":"section_type:unique","heading":"AGENTS.md — for agent contributors to Global PM","line":1,"level":1}
+{"id":"section:196:002","file_id":"file:196","section_type_id":"section_type:workflow","heading":"Commands an agent may run","line":6,"level":2}
+{"id":"section:196:003","file_id":"file:196","section_type_id":"section_type:unique","heading":"Read-only enforcement details","line":15,"level":2}
+{"id":"section:196:004","file_id":"file:196","section_type_id":"section_type:unique","heading":"How a change gets made","line":25,"level":2}
+{"id":"section:196:005","file_id":"file:196","section_type_id":"section_type:unique","heading":"PM communication and queue summaries","line":35,"level":2}
+{"id":"section:196:006","file_id":"file:196","section_type_id":"section_type:unique","heading":"Cross-project intake routing","line":39,"level":2}
+{"id":"section:196:007","file_id":"file:196","section_type_id":"section_type:unique","heading":"Universal Kanban integration (PM-18)","line":43,"level":2}
+{"id":"section:196:008","file_id":"file:196","section_type_id":"section_type:unique","heading":"Evidence honesty","line":47,"level":2}
+{"id":"section:196:009","file_id":"file:196","section_type_id":"section_type:unique","heading":"Reading order for newcomers","line":54,"level":2}
+{"id":"section:196:010","file_id":"file:196","section_type_id":"section_type:unique","heading":"Dashboard deployment and data safety","line":59,"level":2}
+{"id":"section:196:011","file_id":"file:196","section_type_id":"section_type:context","heading":"Software knowledge requests (KNOW-01)","line":63,"level":2}
+{"id":"section:197:001","file_id":"file:197","section_type_id":"section_type:unique","heading":"SOFTWARE_HQ Agent Operating Contract","line":1,"level":1}
+{"id":"section:197:002","file_id":"file:197","section_type_id":"section_type:context","heading":"Knowledge service & acquisition queue (KNOW-01)","line":26,"level":2}
+{"id":"section:197:003","file_id":"file:197","section_type_id":"section_type:purpose","heading":"Active KNOW-01F scope override (2026-10-15)","line":29,"level":2}
+{"id":"section:197:004","file_id":"file:197","section_type_id":"section_type:context","heading":"Context7 canon (MEMORY CANON — owner directive 2026-10-15)","line":32,"level":2}
+{"id":"section:197:005","file_id":"file:197","section_type_id":"section_type:unique","heading":"Integrations working tree (2026-10-15)","line":46,"level":2}
+{"id":"section:202:001","file_id":"file:202","section_type_id":"section_type:unique","heading":"Practical rules distilled","line":1,"level":1}
+{"id":"section:205:001","file_id":"file:205","section_type_id":"section_type:unique","heading":"Minimal harness bakeoff","line":6,"level":1}
+{"id":"section:208:001","file_id":"file:208","section_type_id":"section_type:unique","heading":"ChatGPT / AION integration specialist","line":5,"level":1}
+{"id":"section:210:001","file_id":"file:210","section_type_id":"section_type:unique","heading":"VIVIM Harness — start here","line":1,"level":1}
+{"id":"section:210:002","file_id":"file:210","section_type_id":"section_type:unique","heading":"Who does what","line":5,"level":2}
+{"id":"section:210:003","file_id":"file:210","section_type_id":"section_type:verification","heading":"Real-world testing and debugging standard","line":13,"level":2}
+{"id":"section:210:004","file_id":"file:210","section_type_id":"section_type:unique","heading":"Active goal","line":23,"level":2}
+{"id":"section:210:005","file_id":"file:210","section_type_id":"section_type:unique","heading":"New code file review (owner rule)","line":28,"level":2}
+{"id":"section:210:006","file_id":"file:210","section_type_id":"section_type:unique","heading":"Working style","line":34,"level":2}
+{"id":"section:198:001","file_id":"file:198","section_type_id":"section_type:unique","heading":"GLOBAL @HARNESS-AGENT — Operating contract","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:198:002","file_id":"file:198","section_type_id":"section_type:unique","heading":"Identity and authority","start_line":4,"depth":2,"evidence":"observed_heading"}
+{"id":"section:198:003","file_id":"file:198","section_type_id":"section_type:unique","heading":"Every interaction","start_line":7,"depth":2,"evidence":"observed_heading"}
+{"id":"section:198:004","file_id":"file:198","section_type_id":"section_type:unique","heading":"Boundaries","start_line":15,"depth":2,"evidence":"observed_heading"}
+{"id":"section:198:005","file_id":"file:198","section_type_id":"section_type:unique","heading":"Proactive output","start_line":25,"depth":2,"evidence":"observed_heading"}
+{"id":"section:199:001","file_id":"file:199","section_type_id":"section_type:unique","heading":"Autonomous bootstrap — `#GLOBAL @HARNESS-AGENT +/SITREP BOOTSTRAP`","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:199:002","file_id":"file:199","section_type_id":"section_type:purpose","heading":"Stage 0 — Scope & custody","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:199:003","file_id":"file:199","section_type_id":"section_type:unique","heading":"Stage 1 — Source-backed baseline","start_line":11,"depth":2,"evidence":"observed_heading"}
+{"id":"section:199:004","file_id":"file:199","section_type_id":"section_type:unique","heading":"Stage 2 — Continuity and research supply chain","start_line":16,"depth":2,"evidence":"observed_heading"}
+{"id":"section:199:005","file_id":"file:199","section_type_id":"section_type:tools","heading":"Stage 3 — Skills and next work","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:199:006","file_id":"file:199","section_type_id":"section_type:unique","heading":"Resumption","start_line":26,"depth":2,"evidence":"observed_heading"}
+{"id":"section:200:001","file_id":"file:200","section_type_id":"section_type:unique","heading":"GLOBAL @HARNESS-AGENT — SITREP / new-session start","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:200:002","file_id":"file:200","section_type_id":"section_type:unique","heading":"Five-minute read order","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:200:003","file_id":"file:200","section_type_id":"section_type:unique","heading":"Baseline SITREP","start_line":12,"depth":2,"evidence":"observed_heading"}
+{"id":"section:200:004","file_id":"file:200","section_type_id":"section_type:unique","heading":"Status response format","start_line":20,"depth":2,"evidence":"observed_heading"}
+{"id":"section:201:001","file_id":"file:201","section_type_id":"section_type:unique","heading":"HARNESS-AGENT · CANON (durable, source-grounded)","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:203:001","file_id":"file:203","section_type_id":"section_type:unique","heading":"HARNESS-AGENT · Curated working preferences","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:204:001","file_id":"file:204","section_type_id":"section_type:unique","heading":"HARNESS-AGENT · Immediate / read on EVERY interaction","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:206:001","file_id":"file:206","section_type_id":"section_type:unique","heading":"Harness frontier reconnaissance","start_line":6,"depth":1,"evidence":"observed_heading"}
+{"id":"section:207:001","file_id":"file:207","section_type_id":"section_type:tools","heading":"INFRA tool index","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:207:002","file_id":"file:207","section_type_id":"section_type:tools","heading":"Machine toolkit — `C:\\Users\\VIVIM.inc\\Tools\\disksteward\\` (on user PATH)","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:207:003","file_id":"file:207","section_type_id":"section_type:tools","heading":"Playbook / machine unit tooling","start_line":26,"depth":2,"evidence":"observed_heading"}
+{"id":"section:207:004","file_id":"file:207","section_type_id":"section_type:unique","heading":"Selection criteria (owner, 2026-10-14)","start_line":39,"depth":2,"evidence":"observed_heading"}
+{"id":"section:209:001","file_id":"file:209","section_type_id":"section_type:unique","heading":"Local OpenCode engineer","start_line":5,"depth":1,"evidence":"observed_heading"}
+{"id":"section:209:002","file_id":"file:209","section_type_id":"section_type:unique","heading":"Real-world failure repair contract","start_line":9,"depth":2,"evidence":"observed_heading"}
+{"id":"section:011:001","file_id":"file:011","section_type_id":"section_type:unique","heading":"I1 — Capture Studio self-improving webapp read adapters (2026-10-24)","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:011:002","file_id":"file:011","section_type_id":"section_type:unique","heading":"Files and entrypoints","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:011:003","file_id":"file:011","section_type_id":"section_type:purpose","heading":"Proven scope and failure cases","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:011:004","file_id":"file:011","section_type_id":"section_type:unique","heading":"Exact Core / Z.ai wiring (do not replace existing systems)","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:011:005","file_id":"file:011","section_type_id":"section_type:unique","heading":"Compatibility / outstanding integration","start_line":29,"depth":2,"evidence":"observed_heading"}
+{"id":"section:012:001","file_id":"file:012","section_type_id":"section_type:unique","heading":"AION Capture Studio — Systems S1 independent diagnostic supplier","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:012:002","file_id":"file:012","section_type_id":"section_type:unique","heading":"Provenance and layout","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:012:003","file_id":"file:012","section_type_id":"section_type:context","heading":"Full-path architecture map (current source versus missing seams)","start_line":20,"depth":2,"evidence":"observed_heading"}
+{"id":"section:012:004","file_id":"file:012","section_type_id":"section_type:verification","heading":"TOP 5 source-specific fixes — priority / owner / measured independent proof","start_line":24,"depth":3,"evidence":"observed_heading"}
+{"id":"section:012:005","file_id":"file:012","section_type_id":"section_type:verification","heading":"Exact proposed wire contracts (all advisory; caller validates server provenance)","start_line":36,"depth":2,"evidence":"observed_heading"}
+{"id":"section:012:006","file_id":"file:012","section_type_id":"section_type:unique","heading":"Z.ai ordered integration sequence (short, collision-aware)","start_line":46,"depth":2,"evidence":"observed_heading"}
+{"id":"section:012:007","file_id":"file:012","section_type_id":"section_type:verification","heading":"Repro receipt and pending real proof","start_line":59,"depth":2,"evidence":"observed_heading"}
+{"id":"section:013:001","file_id":"file:013","section_type_id":"section_type:unique","heading":"AION / U1 universal webapp Chat UI supplier — 24 October 2026","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:013:002","file_id":"file:013","section_type_id":"section_type:unique","heading":"Files and extraction","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:013:003","file_id":"file:013","section_type_id":"section_type:unique","heading":"Integration in canonical existing `/chat`","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:013:004","file_id":"file:013","section_type_id":"section_type:verification","heading":"Compatibility, collisions and proof still needed","start_line":32,"depth":2,"evidence":"observed_heading"}
+{"id":"section:014:001","file_id":"file:014","section_type_id":"section_type:unique","heading":"AION @VALUE-ORACLE — Agent Instructions","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:015:001","file_id":"file:015","section_type_id":"section_type:lifecycle","heading":"@VALUE-ORACLE — Agent Boot / SITREP / Build Contract","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:015:002","file_id":"file:015","section_type_id":"section_type:workflow","heading":"Commands","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:015:003","file_id":"file:015","section_type_id":"section_type:unique","heading":"Startup read order (bounded)","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:015:004","file_id":"file:015","section_type_id":"section_type:unique","heading":"Oracle decision method","start_line":22,"depth":2,"evidence":"observed_heading"}
+{"id":"section:015:005","file_id":"file:015","section_type_id":"section_type:tools","heading":"Acting as an Oracle: all four capabilities are legitimate","start_line":34,"depth":2,"evidence":"observed_heading"}
+{"id":"section:015:006","file_id":"file:015","section_type_id":"section_type:verification","heading":"First proof: don't build a second platform","start_line":41,"depth":2,"evidence":"observed_heading"}
+{"id":"section:015:007","file_id":"file:015","section_type_id":"section_type:lifecycle","heading":"Evidence, delivery and status protocol","start_line":53,"depth":2,"evidence":"observed_heading"}
+{"id":"section:016:001","file_id":"file:016","section_type_id":"section_type:unique","heading":"GitNexus — Code Intelligence","start_line":2,"depth":1,"evidence":"observed_heading"}
+{"id":"section:016:002","file_id":"file:016","section_type_id":"section_type:unique","heading":"Always Do","start_line":8,"depth":2,"evidence":"observed_heading"}
+{"id":"section:016:003","file_id":"file:016","section_type_id":"section_type:unique","heading":"When Debugging","start_line":16,"depth":2,"evidence":"observed_heading"}
+{"id":"section:016:004","file_id":"file:016","section_type_id":"section_type:unique","heading":"When Refactoring","start_line":23,"depth":2,"evidence":"observed_heading"}
+{"id":"section:016:005","file_id":"file:016","section_type_id":"section_type:unique","heading":"Never Do","start_line":29,"depth":2,"evidence":"observed_heading"}
+{"id":"section:016:006","file_id":"file:016","section_type_id":"section_type:tools","heading":"Tools Quick Reference","start_line":36,"depth":2,"evidence":"observed_heading"}
+{"id":"section:016:007","file_id":"file:016","section_type_id":"section_type:unique","heading":"Impact Risk Levels","start_line":47,"depth":2,"evidence":"observed_heading"}
+{"id":"section:016:008","file_id":"file:016","section_type_id":"section_type:context","heading":"Resources","start_line":55,"depth":2,"evidence":"observed_heading"}
+{"id":"section:016:009","file_id":"file:016","section_type_id":"section_type:unique","heading":"Self-Check Before Finishing","start_line":64,"depth":2,"evidence":"observed_heading"}
+{"id":"section:016:010","file_id":"file:016","section_type_id":"section_type:unique","heading":"CLI","start_line":72,"depth":2,"evidence":"observed_heading"}
+{"id":"section:017:001","file_id":"file:017","section_type_id":"section_type:unique","heading":"cdpilot","start_line":5,"depth":1,"evidence":"observed_heading"}
+{"id":"section:017:002","file_id":"file:017","section_type_id":"section_type:unique","heading":"Kimlik","start_line":9,"depth":2,"evidence":"observed_heading"}
+{"id":"section:017:003","file_id":"file:017","section_type_id":"section_type:unique","heading":"Hızlı Başlangıç","start_line":14,"depth":2,"evidence":"observed_heading"}
+{"id":"section:017:004","file_id":"file:017","section_type_id":"section_type:unique","heading":"Dosya Haritası","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:017:005","file_id":"file:017","section_type_id":"section_type:unique","heading":"Dikkat Edilecekler","start_line":28,"depth":2,"evidence":"observed_heading"}
+{"id":"section:017:006","file_id":"file:017","section_type_id":"section_type:unique","heading":"Aktif Çalışma","start_line":37,"depth":2,"evidence":"observed_heading"}
+{"id":"section:017:007","file_id":"file:017","section_type_id":"section_type:unique","heading":"Son Oturum","start_line":52,"depth":2,"evidence":"observed_heading"}
+{"id":"section:017:008","file_id":"file:017","section_type_id":"section_type:unique","heading":"GitNexus — Code Intelligence","start_line":59,"depth":2,"evidence":"observed_heading"}
+{"id":"section:018:001","file_id":"file:018","section_type_id":"section_type:context","heading":"context-mode — MANDATORY routing rules","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:018:002","file_id":"file:018","section_type_id":"section_type:workflow","heading":"BLOCKED commands — do NOT attempt these","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:018:003","file_id":"file:018","section_type_id":"section_type:unique","heading":"curl / wget — BLOCKED","start_line":7,"depth":3,"evidence":"observed_heading"}
+{"id":"section:018:004","file_id":"file:018","section_type_id":"section_type:unique","heading":"Inline HTTP — BLOCKED","start_line":13,"depth":3,"evidence":"observed_heading"}
+{"id":"section:018:005","file_id":"file:018","section_type_id":"section_type:unique","heading":"WebFetch / web browsing — BLOCKED","start_line":18,"depth":3,"evidence":"observed_heading"}
+{"id":"section:018:006","file_id":"file:018","section_type_id":"section_type:tools","heading":"REDIRECTED tools — use sandbox equivalents","start_line":23,"depth":2,"evidence":"observed_heading"}
+{"id":"section:018:007","file_id":"file:018","section_type_id":"section_type:unique","heading":"Shell (>20 lines output)","start_line":25,"depth":3,"evidence":"observed_heading"}
+{"id":"section:018:008","file_id":"file:018","section_type_id":"section_type:unique","heading":"read_file (for analysis)","start_line":31,"depth":3,"evidence":"observed_heading"}
+{"id":"section:018:009","file_id":"file:018","section_type_id":"section_type:unique","heading":"grep / search (large results)","start_line":35,"depth":3,"evidence":"observed_heading"}
+{"id":"section:018:010","file_id":"file:018","section_type_id":"section_type:tools","heading":"Tool selection hierarchy","start_line":38,"depth":2,"evidence":"observed_heading"}
+{"id":"section:018:011","file_id":"file:018","section_type_id":"section_type:unique","heading":"Output constraints","start_line":46,"depth":2,"evidence":"observed_heading"}
+{"id":"section:018:012","file_id":"file:018","section_type_id":"section_type:workflow","heading":"ctx commands","start_line":52,"depth":2,"evidence":"observed_heading"}
+{"id":"section:019:001","file_id":"file:019","section_type_id":"section_type:unique","heading":"cdpilot","start_line":6,"depth":1,"evidence":"observed_heading"}
+{"id":"section:019:002","file_id":"file:019","section_type_id":"section_type:unique","heading":"When to reach for it","start_line":14,"depth":2,"evidence":"observed_heading"}
+{"id":"section:019:003","file_id":"file:019","section_type_id":"section_type:unique","heading":"Before first use","start_line":22,"depth":2,"evidence":"observed_heading"}
+{"id":"section:019:004","file_id":"file:019","section_type_id":"section_type:tools","heading":"Core commands (CLI form; MCP tool names mirror these 1:1)","start_line":36,"depth":2,"evidence":"observed_heading"}
+{"id":"section:019:005","file_id":"file:019","section_type_id":"section_type:workflow","heading":"Do not invent commands","start_line":56,"depth":2,"evidence":"observed_heading"}
+{"id":"section:020:001","file_id":"file:020","section_type_id":"section_type:best_practices","heading":"Repository Guidelines","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:020:002","file_id":"file:020","section_type_id":"section_type:unique","heading":"Dos and Don’ts","start_line":3,"depth":2,"evidence":"observed_heading"}
+{"id":"section:020:003","file_id":"file:020","section_type_id":"section_type:unique","heading":"Project Structure and Module Organization","start_line":12,"depth":2,"evidence":"observed_heading"}
+{"id":"section:020:004","file_id":"file:020","section_type_id":"section_type:verification","heading":"Build, Test, and Development Commands","start_line":27,"depth":2,"evidence":"observed_heading"}
+{"id":"section:020:005","file_id":"file:020","section_type_id":"section_type:best_practices","heading":"Coding Style and Naming Conventions","start_line":38,"depth":2,"evidence":"observed_heading"}
+{"id":"section:020:006","file_id":"file:020","section_type_id":"section_type:best_practices","heading":"Testing Guidelines","start_line":48,"depth":2,"evidence":"observed_heading"}
+{"id":"section:020:007","file_id":"file:020","section_type_id":"section_type:best_practices","heading":"Commit and Pull Request Guidelines","start_line":55,"depth":2,"evidence":"observed_heading"}
+{"id":"section:020:008","file_id":"file:020","section_type_id":"section_type:safety","heading":"Safety and Permissions","start_line":63,"depth":2,"evidence":"observed_heading"}
+{"id":"section:021:001","file_id":"file:021","section_type_id":"section_type:unique","heading":"Agent Instructions","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:021:002","file_id":"file:021","section_type_id":"section_type:unique","heading":"Engineering direction","start_line":7,"depth":2,"evidence":"observed_heading"}
+{"id":"section:021:003","file_id":"file:021","section_type_id":"section_type:unique","heading":"Maintainability and file size","start_line":20,"depth":2,"evidence":"observed_heading"}
+{"id":"section:021:004","file_id":"file:021","section_type_id":"section_type:verification","heading":"Testing direction","start_line":29,"depth":2,"evidence":"observed_heading"}
+{"id":"section:021:005","file_id":"file:021","section_type_id":"section_type:unique","heading":"Bridge invariants","start_line":36,"depth":2,"evidence":"observed_heading"}
+{"id":"section:021:006","file_id":"file:021","section_type_id":"section_type:workflow","heading":"Workflow and apply safety","start_line":50,"depth":2,"evidence":"observed_heading"}
+{"id":"section:021:007","file_id":"file:021","section_type_id":"section_type:unique","heading":"Protocol and release changes","start_line":57,"depth":2,"evidence":"observed_heading"}
+{"id":"section:021:008","file_id":"file:021","section_type_id":"section_type:recovery","heading":"Handoff","start_line":63,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:001","file_id":"file:022","section_type_id":"section_type:context","heading":"Project Context","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:022:002","file_id":"file:022","section_type_id":"section_type:unique","heading":"Current system","start_line":3,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:003","file_id":"file:022","section_type_id":"section_type:unique","heading":"Request and storage failure boundaries","start_line":20,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:004","file_id":"file:022","section_type_id":"section_type:unique","heading":"2.4.3 stable browser-tab identity","start_line":31,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:005","file_id":"file:022","section_type_id":"section_type:unique","heading":"2.4.2 empty-home intelligence picker","start_line":37,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:006","file_id":"file:022","section_type_id":"section_type:responsibilities","heading":"2.4.0 semantic DOM ownership","start_line":43,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:007","file_id":"file:022","section_type_id":"section_type:workflow","heading":"2.3.24 canonical workflow hard cut","start_line":53,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:008","file_id":"file:022","section_type_id":"section_type:unique","heading":"2.3.23 authenticated attachment transport","start_line":61,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:009","file_id":"file:022","section_type_id":"section_type:responsibilities","heading":"2.3.22 response observation and turn ownership","start_line":67,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:010","file_id":"file:022","section_type_id":"section_type:unique","heading":"2.3.19 generated-image diagnostic stability","start_line":74,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:011","file_id":"file:022","section_type_id":"section_type:unique","heading":"2.3.18 historical generated-image parsing","start_line":79,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:012","file_id":"file:022","section_type_id":"section_type:unique","heading":"2.3.17 intelligence picker slider","start_line":85,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:013","file_id":"file:022","section_type_id":"section_type:unique","heading":"Durable generated-image artifacts","start_line":91,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:014","file_id":"file:022","section_type_id":"section_type:purpose","heading":"6.3.13 tab-scoped browser identity and interactive fresh-chat bootstrap","start_line":101,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:015","file_id":"file:022","section_type_id":"section_type:unique","heading":"6.3.12 successful-run mock parity","start_line":109,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:016","file_id":"file:022","section_type_id":"section_type:recovery","heading":"6.3.11 ChatGPT request-error recovery","start_line":117,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:017","file_id":"file:022","section_type_id":"section_type:purpose","heading":"6.3.10 hidden-tab submission and physical release parity","start_line":124,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:018","file_id":"file:022","section_type_id":"section_type:context","heading":"6.3.9 E2E artifact parity and exact source cleanup","start_line":132,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:019","file_id":"file:022","section_type_id":"section_type:unique","heading":"Composition","start_line":138,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:020","file_id":"file:022","section_type_id":"section_type:lifecycle","heading":"Request lifecycle","start_line":166,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:021","file_id":"file:022","section_type_id":"section_type:unique","heading":"Browser runtime","start_line":187,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:022","file_id":"file:022","section_type_id":"section_type:unique","heading":"Stateful module layout","start_line":193,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:023","file_id":"file:022","section_type_id":"section_type:recovery","heading":"Browser recovery","start_line":197,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:024","file_id":"file:022","section_type_id":"section_type:recovery","heading":"Standalone command recovery","start_line":201,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:025","file_id":"file:022","section_type_id":"section_type:recovery","heading":"Request snapshot recovery","start_line":205,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:026","file_id":"file:022","section_type_id":"section_type:unique","heading":"Canonical state and diagnostics","start_line":209,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:027","file_id":"file:022","section_type_id":"section_type:workflow","heading":"Public progress and remote workflow integration","start_line":216,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:028","file_id":"file:022","section_type_id":"section_type:workflow","heading":"Workflows","start_line":222,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:029","file_id":"file:022","section_type_id":"section_type:unique","heading":"Interactive runtime","start_line":228,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:030","file_id":"file:022","section_type_id":"section_type:unique","heading":"E2E and captured DOM evidence","start_line":232,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:031","file_id":"file:022","section_type_id":"section_type:lifecycle","heading":"Structural status","start_line":242,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:032","file_id":"file:022","section_type_id":"section_type:recovery","heading":"Handoff constraints","start_line":246,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:033","file_id":"file:022","section_type_id":"section_type:verification","heading":"Current verification gaps","start_line":254,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:034","file_id":"file:022","section_type_id":"section_type:unique","heading":"Known compatibility limits","start_line":264,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:035","file_id":"file:022","section_type_id":"section_type:unique","heading":"Current reliability changes","start_line":269,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:036","file_id":"file:022","section_type_id":"section_type:verification","heading":"Latest workflow reliability changes","start_line":284,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:037","file_id":"file:022","section_type_id":"section_type:workflow","heading":"Workflow operator model","start_line":293,"depth":2,"evidence":"observed_heading"}
+{"id":"section:023:001","file_id":"file:023","section_type_id":"section_type:unique","heading":"Multi AI Chat 遷移與接手索引","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:023:002","file_id":"file:023","section_type_id":"section_type:unique","heading":"目前程式基準","start_line":9,"depth":2,"evidence":"observed_heading"}
+{"id":"section:023:003","file_id":"file:023","section_type_id":"section_type:unique","heading":"交接資料從哪裡讀","start_line":22,"depth":2,"evidence":"observed_heading"}
+{"id":"section:023:004","file_id":"file:023","section_type_id":"section_type:unique","heading":"Patch 與 worktree 的處理結果","start_line":36,"depth":2,"evidence":"observed_heading"}
+{"id":"section:023:005","file_id":"file:023","section_type_id":"section_type:unique","heading":"Session 備份完整度","start_line":53,"depth":2,"evidence":"observed_heading"}
+{"id":"section:023:006","file_id":"file:023","section_type_id":"section_type:unique","heading":"舊待辦如何解讀","start_line":66,"depth":2,"evidence":"observed_heading"}
+{"id":"section:023:007","file_id":"file:023","section_type_id":"section_type:unique","heading":"驗證與後續工作","start_line":72,"depth":2,"evidence":"observed_heading"}
+{"id":"section:024:001","file_id":"file:024","section_type_id":"section_type:unique","heading":"integration-manager — Agent instructions","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:024:002","file_id":"file:024","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:024:003","file_id":"file:024","section_type_id":"section_type:tools","heading":"Skills builder / agent capability ownership","start_line":9,"depth":2,"evidence":"observed_heading"}
+{"id":"section:024:004","file_id":"file:024","section_type_id":"section_type:context","heading":"Memory context","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:025:001","file_id":"file:025","section_type_id":"section_type:context","heading":"AION Integration Manager — source packaging SITREP","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:025:002","file_id":"file:025","section_type_id":"section_type:unique","heading":"Relaunch checkpoint — 2026-10-21 (current)","start_line":3,"depth":2,"evidence":"observed_heading"}
+{"id":"section:025:003","file_id":"file:025","section_type_id":"section_type:unique","heading":"Actual custody and dispatch order","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:025:004","file_id":"file:025","section_type_id":"section_type:unique","heading":"Delivered code","start_line":33,"depth":2,"evidence":"observed_heading"}
+{"id":"section:025:005","file_id":"file:025","section_type_id":"section_type:unique","heading":"Development must integrate and prove","start_line":39,"depth":2,"evidence":"observed_heading"}
+{"id":"section:025:006","file_id":"file:025","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":49,"depth":2,"evidence":"observed_heading"}
+{"id":"section:025:007","file_id":"file:025","section_type_id":"section_type:tools","heading":"Skills check on SITREP","start_line":53,"depth":2,"evidence":"observed_heading"}
+{"id":"section:025:008","file_id":"file:025","section_type_id":"section_type:context","heading":"Memory on SITREP","start_line":57,"depth":2,"evidence":"observed_heading"}
+{"id":"section:026:001","file_id":"file:026","section_type_id":"section_type:unique","heading":"CANON — Integration Manager (core agent 11)","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:026:002","file_id":"file:026","section_type_id":"section_type:responsibilities","heading":"Enduring responsibilities and boundaries","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:026:003","file_id":"file:026","section_type_id":"section_type:unique","heading":"Recurring failure patterns → better defaults","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:026:004","file_id":"file:026","section_type_id":"section_type:unique","heading":"Provenance, change and retention","start_line":22,"depth":2,"evidence":"observed_heading"}
+{"id":"section:027:001","file_id":"file:027","section_type_id":"section_type:best_practices","heading":"Personal Best Practices — 11-integration-manager","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:028:001","file_id":"file:028","section_type_id":"section_type:responsibilities","heading":"Curated — how this Integration Manager should work with the owner and AION peers","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:028:002","file_id":"file:028","section_type_id":"section_type:unique","heading":"Presentation and interaction defaults","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:028:003","file_id":"file:028","section_type_id":"section_type:unique","heading":"Working tempo and collaboration style","start_line":14,"depth":2,"evidence":"observed_heading"}
+{"id":"section:028:004","file_id":"file:028","section_type_id":"section_type:unique","heading":"How to refine this tier","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:029:001","file_id":"file:029","section_type_id":"section_type:unique","heading":"Immediate — Integration Manager current position","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:029:002","file_id":"file:029","section_type_id":"section_type:unique","heading":"What is real now","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:029:003","file_id":"file:029","section_type_id":"section_type:unique","heading":"Single highest-value next move","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:029:004","file_id":"file:029","section_type_id":"section_type:unique","heading":"Triggers that actually warrant changing this page","start_line":17,"depth":2,"evidence":"observed_heading"}
+{"id":"section:030:001","file_id":"file:030","section_type_id":"section_type:unique","heading":"Integration Seam Preflight","start_line":6,"depth":1,"evidence":"observed_heading"}
+{"id":"section:030:002","file_id":"file:030","section_type_id":"section_type:unique","heading":"Before running","start_line":10,"depth":2,"evidence":"observed_heading"}
+{"id":"section:030:003","file_id":"file:030","section_type_id":"section_type:workflow","heading":"Commands","start_line":16,"depth":2,"evidence":"observed_heading"}
+{"id":"section:030:004","file_id":"file:030","section_type_id":"section_type:recovery","heading":"Product handoff after preflight","start_line":28,"depth":2,"evidence":"observed_heading"}
+{"id":"section:030:005","file_id":"file:030","section_type_id":"section_type:unique","heading":"Boundaries and availability","start_line":32,"depth":2,"evidence":"observed_heading"}
+{"id":"section:031:001","file_id":"file:031","section_type_id":"section_type:unique","heading":"nine-repo — Agent instructions","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:031:002","file_id":"file:031","section_type_id":"section_type:tools","heading":"Owned reusable skills (standing)","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:031:003","file_id":"file:031","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":9,"depth":2,"evidence":"observed_heading"}
+{"id":"section:031:004","file_id":"file:031","section_type_id":"section_type:tools","heading":"Skills builder / agent capability ownership","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:031:005","file_id":"file:031","section_type_id":"section_type:context","heading":"Memory context","start_line":17,"depth":2,"evidence":"observed_heading"}
+{"id":"section:032:001","file_id":"file:032","section_type_id":"section_type:context","heading":"External Nine — Worker Bootstrap & Operating Context","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:032:002","file_id":"file:032","section_type_id":"section_type:responsibilities","heading":"2026-10-21 — core-peer relaunch (provisional until owner scoping interview)","start_line":6,"depth":2,"evidence":"observed_heading"}
+{"id":"section:032:003","file_id":"file:032","section_type_id":"section_type:purpose","heading":"Identity and mission","start_line":25,"depth":2,"evidence":"observed_heading"}
+{"id":"section:032:004","file_id":"file:032","section_type_id":"section_type:unique","heading":"Mandatory reading order","start_line":34,"depth":2,"evidence":"observed_heading"}
+{"id":"section:032:005","file_id":"file:032","section_type_id":"section_type:verification","heading":"Source roster (verified directories)","start_line":47,"depth":2,"evidence":"observed_heading"}
+{"id":"section:032:006","file_id":"file:032","section_type_id":"section_type:unique","heading":"Shared exchange — how to use it","start_line":57,"depth":2,"evidence":"observed_heading"}
+{"id":"section:032:007","file_id":"file:032","section_type_id":"section_type:unique","heading":"Work sequence","start_line":71,"depth":2,"evidence":"observed_heading"}
+{"id":"section:032:008","file_id":"file:032","section_type_id":"section_type:unique","heading":"Evidence and promotion rules","start_line":85,"depth":2,"evidence":"observed_heading"}
+{"id":"section:032:009","file_id":"file:032","section_type_id":"section_type:unique","heading":"Existing research to leverage","start_line":94,"depth":2,"evidence":"observed_heading"}
+{"id":"section:032:010","file_id":"file:032","section_type_id":"section_type:recovery","heading":"Resume / handoff protocol","start_line":101,"depth":2,"evidence":"observed_heading"}
+{"id":"section:032:011","file_id":"file:032","section_type_id":"section_type:lifecycle","heading":"SITREP and agent commons","start_line":109,"depth":2,"evidence":"observed_heading"}
+{"id":"section:033:001","file_id":"file:033","section_type_id":"section_type:verification","heading":"AION External Nine — verified current worker SITREP","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:033:002","file_id":"file:033","section_type_id":"section_type:context","heading":"2026-10-21 — Skills bootstrap: reusable AX source inspection","start_line":3,"depth":2,"evidence":"observed_heading"}
+{"id":"section:033:003","file_id":"file:033","section_type_id":"section_type:context","heading":"2026-10-21 — Three-tier memory first pass (remote source review)","start_line":14,"depth":2,"evidence":"observed_heading"}
+{"id":"section:033:004","file_id":"file:033","section_type_id":"section_type:unique","heading":"2026-10-21 — Core Agent 12 relaunch checkpoint (remote GitHub, provisional)","start_line":19,"depth":2,"evidence":"observed_heading"}
+{"id":"section:033:005","file_id":"file:033","section_type_id":"section_type:unique","heading":"Executive state: nine-repo intelligence has begun delivering to Development","start_line":34,"depth":2,"evidence":"observed_heading"}
+{"id":"section:033:006","file_id":"file:033","section_type_id":"section_type:unique","heading":"Highest value Development action now","start_line":43,"depth":2,"evidence":"observed_heading"}
+{"id":"section:033:007","file_id":"file:033","section_type_id":"section_type:verification","heading":"Source-backed decisions and approach alternatives (NOT architecture acceptance)","start_line":52,"depth":2,"evidence":"observed_heading"}
+{"id":"section:033:008","file_id":"file:033","section_type_id":"section_type:verification","heading":"New hazard discovered — P0-negative-test candidate","start_line":60,"depth":2,"evidence":"observed_heading"}
+{"id":"section:033:009","file_id":"file:033","section_type_id":"section_type:verification","heading":"Verified Git writes and custody","start_line":64,"depth":2,"evidence":"observed_heading"}
+{"id":"section:033:010","file_id":"file:033","section_type_id":"section_type:unique","heading":"Open items / resumption","start_line":73,"depth":2,"evidence":"observed_heading"}
+{"id":"section:033:011","file_id":"file:033","section_type_id":"section_type:unique","heading":"2026-10-20 — New leapfrog discovery delivery (this dispatched session)","start_line":82,"depth":2,"evidence":"observed_heading"}
+{"id":"section:033:012","file_id":"file:033","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":92,"depth":2,"evidence":"observed_heading"}
+{"id":"section:033:013","file_id":"file:033","section_type_id":"section_type:tools","heading":"Skills check on SITREP","start_line":96,"depth":2,"evidence":"observed_heading"}
+{"id":"section:033:014","file_id":"file:033","section_type_id":"section_type:context","heading":"Memory on SITREP","start_line":100,"depth":2,"evidence":"observed_heading"}
+{"id":"section:034:001","file_id":"file:034","section_type_id":"section_type:unique","heading":"CANON — Harvest / Acceleration","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:034:002","file_id":"file:034","section_type_id":"section_type:safety","heading":"Mission and authority that survive session changes","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:034:003","file_id":"file:034","section_type_id":"section_type:unique","heading":"Lessons learned and better defaults","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:034:004","file_id":"file:034","section_type_id":"section_type:unique","heading":"What not to store here","start_line":25,"depth":2,"evidence":"observed_heading"}
+{"id":"section:035:001","file_id":"file:035","section_type_id":"section_type:best_practices","heading":"Personal Best Practices — 12-harvest-acceleration","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:036:001","file_id":"file:036","section_type_id":"section_type:unique","heading":"Curated — Harvest / Acceleration working preferences","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:036:002","file_id":"file:036","section_type_id":"section_type:responsibilities","heading":"How to operate for this owner and role","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:036:003","file_id":"file:036","section_type_id":"section_type:unique","heading":"Practical self-correction","start_line":17,"depth":2,"evidence":"observed_heading"}
+{"id":"section:037:001","file_id":"file:037","section_type_id":"section_type:unique","heading":"Immediate — Harvest / Acceleration","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:037:002","file_id":"file:037","section_type_id":"section_type:unique","heading":"Focus now","start_line":7,"depth":2,"evidence":"observed_heading"}
+{"id":"section:037:003","file_id":"file:037","section_type_id":"section_type:context","heading":"Dependencies and live source pointers","start_line":15,"depth":2,"evidence":"observed_heading"}
+{"id":"section:037:004","file_id":"file:037","section_type_id":"section_type:unique","heading":"Known uncertainties / correction triggers","start_line":26,"depth":2,"evidence":"observed_heading"}
+{"id":"section:038:001","file_id":"file:038","section_type_id":"section_type:unique","heading":"AX reuse inspector — Harvest / Acceleration","start_line":6,"depth":1,"evidence":"observed_heading"}
+{"id":"section:038:002","file_id":"file:038","section_type_id":"section_type:workflow","heading":"Workflow","start_line":10,"depth":2,"evidence":"observed_heading"}
+{"id":"section:038:003","file_id":"file:038","section_type_id":"section_type:safety","heading":"Evidence and permission boundaries","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:038:004","file_id":"file:038","section_type_id":"section_type:verification","heading":"Validation and recovery","start_line":27,"depth":2,"evidence":"observed_heading"}
+{"id":"section:039:001","file_id":"file:039","section_type_id":"section_type:unique","heading":"AION Track B — Agent Optimization Contract","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:039:002","file_id":"file:039","section_type_id":"section_type:responsibilities","heading":"0. Runtime ownership — no GitHub Actions","start_line":4,"depth":2,"evidence":"observed_heading"}
+{"id":"section:039:003","file_id":"file:039","section_type_id":"section_type:unique","heading":"1. The optimization target (one sentence)","start_line":7,"depth":2,"evidence":"observed_heading"}
+{"id":"section:039:004","file_id":"file:039","section_type_id":"section_type:unique","heading":"2. Priority order — apply to EVERY decision","start_line":12,"depth":2,"evidence":"observed_heading"}
+{"id":"section:039:005","file_id":"file:039","section_type_id":"section_type:purpose","heading":"3. Scope filter for each proposed change","start_line":22,"depth":2,"evidence":"observed_heading"}
+{"id":"section:039:006","file_id":"file:039","section_type_id":"section_type:unique","heading":"4. Five working rounds (Q1 design is completed; these rounds write CODE)","start_line":32,"depth":2,"evidence":"observed_heading"}
+{"id":"section:039:007","file_id":"file:039","section_type_id":"section_type:unique","heading":"5. Explicit non-goals and rejection defaults","start_line":43,"depth":2,"evidence":"observed_heading"}
+{"id":"section:039:008","file_id":"file:039","section_type_id":"section_type:unique","heading":"6. Agent decision policy","start_line":50,"depth":2,"evidence":"observed_heading"}
+{"id":"section:039:009","file_id":"file:039","section_type_id":"section_type:unique","heading":"7. Completion scorecard (minimum useful numbers)","start_line":59,"depth":2,"evidence":"observed_heading"}
+{"id":"section:039:010","file_id":"file:039","section_type_id":"section_type:safety","heading":"Round 8 pre-live safety gates (mandatory, not extra project scope)","start_line":66,"depth":2,"evidence":"observed_heading"}
+{"id":"section:039:011","file_id":"file:039","section_type_id":"section_type:context","heading":"Round 9 agents and context — local, bounded, opt-in","start_line":73,"depth":2,"evidence":"observed_heading"}
+{"id":"section:040:001","file_id":"file:040","section_type_id":"section_type:unique","heading":"development — Agent instructions","start_line":3,"depth":1,"evidence":"observed_heading"}
+{"id":"section:040:002","file_id":"file:040","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":7,"depth":2,"evidence":"observed_heading"}
+{"id":"section:040:003","file_id":"file:040","section_type_id":"section_type:tools","heading":"Skills builder / agent capability ownership","start_line":11,"depth":2,"evidence":"observed_heading"}
+{"id":"section:040:004","file_id":"file:040","section_type_id":"section_type:context","heading":"Memory context","start_line":15,"depth":2,"evidence":"observed_heading"}
+{"id":"section:041:001","file_id":"file:041","section_type_id":"section_type:lifecycle","heading":"development — SITREP entry point","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:041:002","file_id":"file:041","section_type_id":"section_type:lifecycle","heading":"Status report — 2026-10-24 21:56 UTC","start_line":3,"depth":2,"evidence":"observed_heading"}
+{"id":"section:041:003","file_id":"file:041","section_type_id":"section_type:unique","heading":"Earlier dispatch checkpoint — 21:46 UTC (superseded by result above)","start_line":9,"depth":3,"evidence":"observed_heading"}
+{"id":"section:041:004","file_id":"file:041","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":23,"depth":2,"evidence":"observed_heading"}
+{"id":"section:041:005","file_id":"file:041","section_type_id":"section_type:tools","heading":"Skills check on SITREP","start_line":27,"depth":2,"evidence":"observed_heading"}
+{"id":"section:041:006","file_id":"file:041","section_type_id":"section_type:context","heading":"Memory on SITREP","start_line":31,"depth":2,"evidence":"observed_heading"}
+{"id":"section:042:001","file_id":"file:042","section_type_id":"section_type:context","heading":"CANON — Development's durable operating memory","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:042:002","file_id":"file:042","section_type_id":"section_type:responsibilities","heading":"Enduring decisions and responsibilities","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:042:003","file_id":"file:042","section_type_id":"section_type:unique","heading":"Negative patterns found — prevention, not repeated correction requests","start_line":14,"depth":2,"evidence":"observed_heading"}
+{"id":"section:042:004","file_id":"file:042","section_type_id":"section_type:context","heading":"Memory placement and promotion","start_line":22,"depth":2,"evidence":"observed_heading"}
+{"id":"section:043:001","file_id":"file:043","section_type_id":"section_type:best_practices","heading":"Personal Best Practices — 10-development","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:044:001","file_id":"file:044","section_type_id":"section_type:unique","heading":"Curated — Development's working style and interaction defaults","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:044:002","file_id":"file:044","section_type_id":"section_type:unique","heading":"How to work","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:044:003","file_id":"file:044","section_type_id":"section_type:unique","heading":"Presentation / aesthetics for this role","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:044:004","file_id":"file:044","section_type_id":"section_type:unique","heading":"Improvement loop","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:045:001","file_id":"file:045","section_type_id":"section_type:context","heading":"Immediate — Development's current execution context","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:045:002","file_id":"file:045","section_type_id":"section_type:unique","heading":"One working outcome","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:045:003","file_id":"file:045","section_type_id":"section_type:responsibilities","heading":"Owner-Windows update — 2026-10-24","start_line":7,"depth":3,"evidence":"observed_heading"}
+{"id":"section:045:004","file_id":"file:045","section_type_id":"section_type:context","heading":"Historical Oct21 context — not the current execution plan","start_line":14,"depth":3,"evidence":"observed_heading"}
+{"id":"section:045:005","file_id":"file:045","section_type_id":"section_type:tools","heading":"Next executable sequence, conditional on available tools","start_line":23,"depth":2,"evidence":"observed_heading"}
+{"id":"section:045:006","file_id":"file:045","section_type_id":"section_type:unique","heading":"Who supplies what / avoid unnecessary intervention","start_line":32,"depth":2,"evidence":"observed_heading"}
+{"id":"section:045:007","file_id":"file:045","section_type_id":"section_type:unique","heading":"Review and expiry behavior","start_line":39,"depth":2,"evidence":"observed_heading"}
+{"id":"section:046:001","file_id":"file:046","section_type_id":"section_type:context","heading":"Development — Track B generated-source drift","start_line":6,"depth":1,"evidence":"observed_heading"}
+{"id":"section:046:002","file_id":"file:046","section_type_id":"section_type:unique","heading":"Trigger","start_line":8,"depth":2,"evidence":"observed_heading"}
+{"id":"section:046:003","file_id":"file:046","section_type_id":"section_type:unique","heading":"Execute (from AION repository root)","start_line":14,"depth":2,"evidence":"observed_heading"}
+{"id":"section:046:004","file_id":"file:046","section_type_id":"section_type:unique","heading":"Decide what to do","start_line":30,"depth":2,"evidence":"observed_heading"}
+{"id":"section:046:005","file_id":"file:046","section_type_id":"section_type:verification","heading":"Verify the skill itself","start_line":37,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:001","file_id":"file:047","section_type_id":"section_type:recovery","heading":"HANDOFF - issue #81 P0: one persistence owner for CAS, lock, rollback and path safety","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:047:002","file_id":"file:047","section_type_id":"section_type:responsibilities","heading":"1. What changed (single owner: `src/store/versioned.mjs`)","start_line":9,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:003","file_id":"file:047","section_type_id":"section_type:unique","heading":"2. Files","start_line":23,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:004","file_id":"file:047","section_type_id":"section_type:unique","heading":"3. Evidence (Windows 11 Pro Insider build 29695, Node v24.22.1, Bun 1.4.2; disposable temp roots; raw logs and `P0_METRICS` JSON kept outside the repo in the approved Temp evidence folder)","start_line":27,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:005","file_id":"file:047","section_type_id":"section_type:unique","heading":"4. NOT claimed (exact result limits)","start_line":48,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:006","file_id":"file:047","section_type_id":"section_type:unique","heading":"5. Behaviour changes operators and reviewers must know","start_line":58,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:007","file_id":"file:047","section_type_id":"section_type:unique","heading":"6. Migration","start_line":67,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:008","file_id":"file:047","section_type_id":"section_type:recovery","heading":"7. Rollback of this change","start_line":73,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:009","file_id":"file:047","section_type_id":"section_type:recovery","heading":"8. Operator-guided stale-lock recovery (never automatic)","start_line":76,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:010","file_id":"file:047","section_type_id":"section_type:lifecycle","heading":"9. Verdict and review status","start_line":85,"depth":2,"evidence":"observed_heading"}
+{"id":"section:047:011","file_id":"file:047","section_type_id":"section_type:unique","heading":"10. Frozen code blobs (git blob SHA-1; code last modified 2026-10-24T20:39:07Z, documents after that)","start_line":101,"depth":2,"evidence":"observed_heading"}
+{"id":"section:048:001","file_id":"file:048","section_type_id":"section_type:unique","heading":"AION M0.5 — Escape Hatch — New Chat Bootstrap","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:048:002","file_id":"file:048","section_type_id":"section_type:purpose","heading":"Mission","start_line":7,"depth":2,"evidence":"observed_heading"}
+{"id":"section:048:003","file_id":"file:048","section_type_id":"section_type:responsibilities","heading":"Responsibility","start_line":10,"depth":2,"evidence":"observed_heading"}
+{"id":"section:048:004","file_id":"file:048","section_type_id":"section_type:unique","heading":"Canon / task link","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:048:005","file_id":"file:048","section_type_id":"section_type:unique","heading":"Immediate startup","start_line":16,"depth":2,"evidence":"observed_heading"}
+{"id":"section:048:006","file_id":"file:048","section_type_id":"section_type:recovery","heading":"Handoff / communication","start_line":23,"depth":2,"evidence":"observed_heading"}
+{"id":"section:048:007","file_id":"file:048","section_type_id":"section_type:unique","heading":"Existing control","start_line":26,"depth":2,"evidence":"observed_heading"}
+{"id":"section:049:001","file_id":"file:049","section_type_id":"section_type:lifecycle","heading":"Escape Hatch — SITREP","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:049:002","file_id":"file:049","section_type_id":"section_type:unique","heading":"Session log","start_line":12,"depth":2,"evidence":"observed_heading"}
+{"id":"section:050:001","file_id":"file:050","section_type_id":"section_type:unique","heading":"AION P0 — Instant Pings — New Chat Bootstrap","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:050:002","file_id":"file:050","section_type_id":"section_type:purpose","heading":"Mission","start_line":7,"depth":2,"evidence":"observed_heading"}
+{"id":"section:050:003","file_id":"file:050","section_type_id":"section_type:responsibilities","heading":"Responsibility","start_line":10,"depth":2,"evidence":"observed_heading"}
+{"id":"section:050:004","file_id":"file:050","section_type_id":"section_type:unique","heading":"Canon / task link","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:050:005","file_id":"file:050","section_type_id":"section_type:unique","heading":"Immediate startup","start_line":16,"depth":2,"evidence":"observed_heading"}
+{"id":"section:050:006","file_id":"file:050","section_type_id":"section_type:recovery","heading":"Handoff / communication","start_line":23,"depth":2,"evidence":"observed_heading"}
+{"id":"section:050:007","file_id":"file:050","section_type_id":"section_type:unique","heading":"Existing control","start_line":26,"depth":2,"evidence":"observed_heading"}
+{"id":"section:051:001","file_id":"file:051","section_type_id":"section_type:lifecycle","heading":"Instant Pings — SITREP","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:051:002","file_id":"file:051","section_type_id":"section_type:unique","heading":"Session log","start_line":12,"depth":2,"evidence":"observed_heading"}
+{"id":"section:052:001","file_id":"file:052","section_type_id":"section_type:unique","heading":"AION — Vercel Dashboard — New Chat Bootstrap","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:052:002","file_id":"file:052","section_type_id":"section_type:purpose","heading":"Mission","start_line":7,"depth":2,"evidence":"observed_heading"}
+{"id":"section:052:003","file_id":"file:052","section_type_id":"section_type:responsibilities","heading":"Responsibility","start_line":10,"depth":2,"evidence":"observed_heading"}
+{"id":"section:052:004","file_id":"file:052","section_type_id":"section_type:unique","heading":"Canon / task link","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:052:005","file_id":"file:052","section_type_id":"section_type:unique","heading":"Immediate startup","start_line":16,"depth":2,"evidence":"observed_heading"}
+{"id":"section:052:006","file_id":"file:052","section_type_id":"section_type:recovery","heading":"Handoff / communication","start_line":23,"depth":2,"evidence":"observed_heading"}
+{"id":"section:052:007","file_id":"file:052","section_type_id":"section_type:unique","heading":"Existing control","start_line":26,"depth":2,"evidence":"observed_heading"}
+{"id":"section:053:001","file_id":"file:053","section_type_id":"section_type:lifecycle","heading":"Vercel Dashboard — SITREP","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:053:002","file_id":"file:053","section_type_id":"section_type:unique","heading":"Session log","start_line":12,"depth":2,"evidence":"observed_heading"}
+{"id":"section:054:001","file_id":"file:054","section_type_id":"section_type:unique","heading":"01-dashboard-tracking — Agent instructions","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:054:002","file_id":"file:054","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":8,"depth":2,"evidence":"observed_heading"}
+{"id":"section:054:003","file_id":"file:054","section_type_id":"section_type:tools","heading":"Skills builder / agent capability ownership","start_line":12,"depth":2,"evidence":"observed_heading"}
+{"id":"section:054:004","file_id":"file:054","section_type_id":"section_type:context","heading":"Memory context","start_line":16,"depth":2,"evidence":"observed_heading"}
+{"id":"section:055:001","file_id":"file:055","section_type_id":"section_type:unique","heading":"Dashboarding & Tracking — Independent Chat Bootstrap","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:055:002","file_id":"file:055","section_type_id":"section_type:purpose","heading":"Your mission","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:055:003","file_id":"file:055","section_type_id":"section_type:unique","heading":"Immediate focus","start_line":8,"depth":2,"evidence":"observed_heading"}
+{"id":"section:055:004","file_id":"file:055","section_type_id":"section_type:workflow","heading":"Operational contract","start_line":11,"depth":2,"evidence":"observed_heading"}
+{"id":"section:055:005","file_id":"file:055","section_type_id":"section_type:unique","heading":"Required outcomes","start_line":18,"depth":2,"evidence":"observed_heading"}
+{"id":"section:055:006","file_id":"file:055","section_type_id":"section_type:unique","heading":"Related current work","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:055:007","file_id":"file:055","section_type_id":"section_type:lifecycle","heading":"SITREP and agent commons","start_line":29,"depth":2,"evidence":"observed_heading"}
+{"id":"section:056:001","file_id":"file:056","section_type_id":"section_type:lifecycle","heading":"Dashboarding & Tracking — SITREP","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:056:002","file_id":"file:056","section_type_id":"section_type:unique","heading":"Dated work / decisions / evidence","start_line":12,"depth":2,"evidence":"observed_heading"}
+{"id":"section:056:003","file_id":"file:056","section_type_id":"section_type:context","heading":"2026-10-21 13:31 UTC — deep bootstrap II, source and live-control inventory","start_line":14,"depth":3,"evidence":"observed_heading"}
+{"id":"section:056:004","file_id":"file:056","section_type_id":"section_type:unique","heading":"2026-10-16 — Chief of Chiefs dispatch","start_line":27,"depth":3,"evidence":"observed_heading"}
+{"id":"section:056:005","file_id":"file:056","section_type_id":"section_type:unique","heading":"Chief of Chiefs — operating-model update (2026-10-16)","start_line":29,"depth":2,"evidence":"observed_heading"}
+{"id":"section:056:006","file_id":"file:056","section_type_id":"section_type:unique","heading":"2026-10-16 — Dashboard role acknowledgment and P0 response","start_line":49,"depth":3,"evidence":"observed_heading"}
+{"id":"section:056:007","file_id":"file:056","section_type_id":"section_type:responsibilities","heading":"Owner standing directive — 2026-10-16: persistent execution / 30-item queue","start_line":57,"depth":2,"evidence":"observed_heading"}
+{"id":"section:056:008","file_id":"file:056","section_type_id":"section_type:unique","heading":"Chief of Chiefs directive — 2026-10-16","start_line":97,"depth":2,"evidence":"observed_heading"}
+{"id":"section:056:009","file_id":"file:056","section_type_id":"section_type:unique","heading":"TTP-001 visibility assignment — 2026-10-16","start_line":100,"depth":2,"evidence":"observed_heading"}
+{"id":"section:056:010","file_id":"file:056","section_type_id":"section_type:unique","heading":"AION Shared Technical Proposal Commons — role-specific participation (2026-10-16)","start_line":103,"depth":2,"evidence":"observed_heading"}
+{"id":"section:056:011","file_id":"file:056","section_type_id":"section_type:unique","heading":"P0 M1 Council Z-FORGE Prep — M1C-01 — 2026-10-16","start_line":107,"depth":2,"evidence":"observed_heading"}
+{"id":"section:056:012","file_id":"file:056","section_type_id":"section_type:unique","heading":"ACPX-001 review assignment — 2026-10-17","start_line":112,"depth":2,"evidence":"observed_heading"}
+{"id":"section:056:013","file_id":"file:056","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":115,"depth":2,"evidence":"observed_heading"}
+{"id":"section:056:014","file_id":"file:056","section_type_id":"section_type:tools","heading":"Skills check on SITREP","start_line":119,"depth":2,"evidence":"observed_heading"}
+{"id":"section:056:015","file_id":"file:056","section_type_id":"section_type:context","heading":"Memory on SITREP","start_line":123,"depth":2,"evidence":"observed_heading"}
+{"id":"section:057:001","file_id":"file:057","section_type_id":"section_type:unique","heading":"CANON — Dashboard & Tracking","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:058:001","file_id":"file:058","section_type_id":"section_type:best_practices","heading":"Personal Best Practices — Dashboard & Tracking","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:059:001","file_id":"file:059","section_type_id":"section_type:unique","heading":"Curated — Dashboard & Tracking","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:060:001","file_id":"file:060","section_type_id":"section_type:unique","heading":"Immediate — Dashboard & Tracking","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:061:001","file_id":"file:061","section_type_id":"section_type:unique","heading":"Dashboard evidence gates","start_line":6,"depth":1,"evidence":"observed_heading"}
+{"id":"section:061:002","file_id":"file:061","section_type_id":"section_type:tools","heading":"Deterministic receipt audit (new second-pass capability)","start_line":19,"depth":2,"evidence":"observed_heading"}
+{"id":"section:062:001","file_id":"file:062","section_type_id":"section_type:unique","heading":"02-long-term-planning-alignment — Agent instructions","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:062:002","file_id":"file:062","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":8,"depth":2,"evidence":"observed_heading"}
+{"id":"section:062:003","file_id":"file:062","section_type_id":"section_type:tools","heading":"Skills builder / agent capability ownership","start_line":12,"depth":2,"evidence":"observed_heading"}
+{"id":"section:062:004","file_id":"file:062","section_type_id":"section_type:context","heading":"Memory context","start_line":18,"depth":2,"evidence":"observed_heading"}
+{"id":"section:063:001","file_id":"file:063","section_type_id":"section_type:unique","heading":"Long-term Planning & Alignment — Independent Chat Bootstrap","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:063:002","file_id":"file:063","section_type_id":"section_type:purpose","heading":"Your mission","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:063:003","file_id":"file:063","section_type_id":"section_type:unique","heading":"Immediate focus","start_line":8,"depth":2,"evidence":"observed_heading"}
+{"id":"section:063:004","file_id":"file:063","section_type_id":"section_type:workflow","heading":"Operational contract","start_line":11,"depth":2,"evidence":"observed_heading"}
+{"id":"section:063:005","file_id":"file:063","section_type_id":"section_type:unique","heading":"Lightweight self-continuity","start_line":18,"depth":2,"evidence":"observed_heading"}
+{"id":"section:063:006","file_id":"file:063","section_type_id":"section_type:unique","heading":"Required outcomes","start_line":28,"depth":2,"evidence":"observed_heading"}
+{"id":"section:063:007","file_id":"file:063","section_type_id":"section_type:context","heading":"Current sources of truth","start_line":31,"depth":2,"evidence":"observed_heading"}
+{"id":"section:063:008","file_id":"file:063","section_type_id":"section_type:lifecycle","heading":"SITREP and agent commons","start_line":39,"depth":2,"evidence":"observed_heading"}
+{"id":"section:064:001","file_id":"file:064","section_type_id":"section_type:lifecycle","heading":"Long-term Planning & Alignment — SITREP","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:064:002","file_id":"file:064","section_type_id":"section_type:lifecycle","heading":"2026-10-21 — research capture-studio SITREP and Planning decision (remote review)","start_line":14,"depth":2,"evidence":"observed_heading"}
+{"id":"section:064:003","file_id":"file:064","section_type_id":"section_type:unique","heading":"2026-10-21 — self-bootstrap and team alignment (role 02)","start_line":24,"depth":2,"evidence":"observed_heading"}
+{"id":"section:064:004","file_id":"file:064","section_type_id":"section_type:responsibilities","heading":"Current owner direction — 2026-10-21 (supersedes conflicting earlier Planning assumptions)","start_line":34,"depth":2,"evidence":"observed_heading"}
+{"id":"section:064:005","file_id":"file:064","section_type_id":"section_type:unique","heading":"North stars — Planning owns their definition, ordering and alignment","start_line":40,"depth":3,"evidence":"observed_heading"}
+{"id":"section:064:006","file_id":"file:064","section_type_id":"section_type:unique","heading":"Harvest integration — Planning owns strategic priority, Development owns adoption","start_line":53,"depth":3,"evidence":"observed_heading"}
+{"id":"section:064:007","file_id":"file:064","section_type_id":"section_type:unique","heading":"Historical dated work / decisions / evidence","start_line":74,"depth":2,"evidence":"observed_heading"}
+{"id":"section:064:008","file_id":"file:064","section_type_id":"section_type:context","heading":"2026-10-16 — Initial strategic context and deliverable set","start_line":77,"depth":3,"evidence":"observed_heading"}
+{"id":"section:064:009","file_id":"file:064","section_type_id":"section_type:unique","heading":"2026-10-16 — Chief of Chiefs dispatch","start_line":90,"depth":3,"evidence":"observed_heading"}
+{"id":"section:064:010","file_id":"file:064","section_type_id":"section_type:unique","heading":"Chief of Chiefs — operating-model update (2026-10-16)","start_line":92,"depth":2,"evidence":"observed_heading"}
+{"id":"section:064:011","file_id":"file:064","section_type_id":"section_type:unique","heading":"2026-10-16 — Role 02 acknowledgment of Chief of Chiefs directive","start_line":112,"depth":3,"evidence":"observed_heading"}
+{"id":"section:064:012","file_id":"file:064","section_type_id":"section_type:verification","heading":"2026-10-16 — LP-06 Build 1 task-to-proof pilot contract and CoS handoff","start_line":131,"depth":3,"evidence":"observed_heading"}
+{"id":"section:064:013","file_id":"file:064","section_type_id":"section_type:unique","heading":"Chief of Chiefs directive — 2026-10-16","start_line":142,"depth":2,"evidence":"observed_heading"}
+{"id":"section:064:014","file_id":"file:064","section_type_id":"section_type:verification","heading":"Chief of Chiefs — Task-to-Proof action assignment (2026-10-16)","start_line":145,"depth":2,"evidence":"observed_heading"}
+{"id":"section:064:015","file_id":"file:064","section_type_id":"section_type:unique","heading":"AION Shared Technical Proposal Commons — role-specific participation (2026-10-16)","start_line":148,"depth":2,"evidence":"observed_heading"}
+{"id":"section:064:016","file_id":"file:064","section_type_id":"section_type:context","heading":"Role context V1 research review — 2026-10-16","start_line":152,"depth":2,"evidence":"observed_heading"}
+{"id":"section:064:017","file_id":"file:064","section_type_id":"section_type:unique","heading":"P0 M1 Council Z-FORGE Prep — M1C-02 — 2026-10-16","start_line":155,"depth":2,"evidence":"observed_heading"}
+{"id":"section:064:018","file_id":"file:064","section_type_id":"section_type:unique","heading":"ACPX-001 review assignment — 2026-10-17","start_line":160,"depth":2,"evidence":"observed_heading"}
+{"id":"section:064:019","file_id":"file:064","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":163,"depth":2,"evidence":"observed_heading"}
+{"id":"section:064:020","file_id":"file:064","section_type_id":"section_type:tools","heading":"Skills check on SITREP","start_line":167,"depth":2,"evidence":"observed_heading"}
+{"id":"section:064:021","file_id":"file:064","section_type_id":"section_type:context","heading":"Memory on SITREP","start_line":171,"depth":2,"evidence":"observed_heading"}
+{"id":"section:065:001","file_id":"file:065","section_type_id":"section_type:unique","heading":"CANON — Planning","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:066:001","file_id":"file:066","section_type_id":"section_type:best_practices","heading":"Best Practices — Planning","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:067:001","file_id":"file:067","section_type_id":"section_type:unique","heading":"Curated — Planning","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:068:001","file_id":"file:068","section_type_id":"section_type:unique","heading":"Immediate — Planning","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:069:001","file_id":"file:069","section_type_id":"section_type:unique","heading":"Planning Critical Path","start_line":6,"depth":1,"evidence":"observed_heading"}
+{"id":"section:069:002","file_id":"file:069","section_type_id":"section_type:responsibilities","heading":"Trigger and boundary","start_line":8,"depth":2,"evidence":"observed_heading"}
+{"id":"section:069:003","file_id":"file:069","section_type_id":"section_type:unique","heading":"Execute (read only)","start_line":11,"depth":2,"evidence":"observed_heading"}
+{"id":"section:069:004","file_id":"file:069","section_type_id":"section_type:verification","heading":"Test and recover","start_line":18,"depth":2,"evidence":"observed_heading"}
+{"id":"section:069:005","file_id":"file:069","section_type_id":"section_type:tools","heading":"Tools and reuse","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:070:001","file_id":"file:070","section_type_id":"section_type:unique","heading":"Planning Leverage Decision","start_line":6,"depth":1,"evidence":"observed_heading"}
+{"id":"section:070:002","file_id":"file:070","section_type_id":"section_type:unique","heading":"Use when","start_line":8,"depth":2,"evidence":"observed_heading"}
+{"id":"section:070:003","file_id":"file:070","section_type_id":"section_type:unique","heading":"Repeatable decision","start_line":11,"depth":2,"evidence":"observed_heading"}
+{"id":"section:070:004","file_id":"file:070","section_type_id":"section_type:unique","heading":"Important current interpretation","start_line":19,"depth":2,"evidence":"observed_heading"}
+{"id":"section:070:005","file_id":"file:070","section_type_id":"section_type:unique","heading":"Boundaries","start_line":22,"depth":2,"evidence":"observed_heading"}
+{"id":"section:071:001","file_id":"file:071","section_type_id":"section_type:workflow","heading":"03-chief-of-staff-operations — Agent instructions","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:071:002","file_id":"file:071","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":8,"depth":2,"evidence":"observed_heading"}
+{"id":"section:071:003","file_id":"file:071","section_type_id":"section_type:tools","heading":"Skills builder / agent capability ownership","start_line":12,"depth":2,"evidence":"observed_heading"}
+{"id":"section:071:004","file_id":"file:071","section_type_id":"section_type:context","heading":"Memory context","start_line":16,"depth":2,"evidence":"observed_heading"}
+{"id":"section:072:001","file_id":"file:072","section_type_id":"section_type:workflow","heading":"Implementation & Operations — Chief of Staff — Independent Chat Bootstrap","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:072:002","file_id":"file:072","section_type_id":"section_type:purpose","heading":"Your mission","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:072:003","file_id":"file:072","section_type_id":"section_type:unique","heading":"Immediate focus","start_line":8,"depth":2,"evidence":"observed_heading"}
+{"id":"section:072:004","file_id":"file:072","section_type_id":"section_type:workflow","heading":"Operational contract","start_line":11,"depth":2,"evidence":"observed_heading"}
+{"id":"section:072:005","file_id":"file:072","section_type_id":"section_type:unique","heading":"Required outcomes","start_line":18,"depth":2,"evidence":"observed_heading"}
+{"id":"section:072:006","file_id":"file:072","section_type_id":"section_type:unique","heading":"Related current work","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:072:007","file_id":"file:072","section_type_id":"section_type:lifecycle","heading":"SITREP and agent commons","start_line":29,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:001","file_id":"file:073","section_type_id":"section_type:workflow","heading":"Implementation & Operations — Chief of Staff — SITREP","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:073:002","file_id":"file:073","section_type_id":"section_type:unique","heading":"Dated work / decisions / evidence","start_line":12,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:003","file_id":"file:073","section_type_id":"section_type:unique","heading":"2026-10-16 — Chief of Chiefs dispatch","start_line":15,"depth":3,"evidence":"observed_heading"}
+{"id":"section:073:004","file_id":"file:073","section_type_id":"section_type:unique","heading":"Chief of Chiefs — operating-model update (2026-10-16)","start_line":17,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:005","file_id":"file:073","section_type_id":"section_type:responsibilities","heading":"Owner standing directive — 2026-10-16: persistent execution / 30-item queue","start_line":37,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:006","file_id":"file:073","section_type_id":"section_type:unique","heading":"Chief of Chiefs directive — 2026-10-16","start_line":77,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:007","file_id":"file:073","section_type_id":"section_type:verification","heading":"Chief of Chiefs — Task-to-Proof action assignment (2026-10-16)","start_line":80,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:008","file_id":"file:073","section_type_id":"section_type:unique","heading":"AION Shared Technical Proposal Commons — role-specific participation (2026-10-16)","start_line":83,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:009","file_id":"file:073","section_type_id":"section_type:recovery","heading":"Proposal Commons operational handoff — 2026-10-16","start_line":87,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:010","file_id":"file:073","section_type_id":"section_type:unique","heading":"Z-FORGE Role 08 coordination — 2026-10-16","start_line":90,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:011","file_id":"file:073","section_type_id":"section_type:unique","heading":"RL-001 keyword role launcher — coordination gate, 2026-10-16","start_line":93,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:012","file_id":"file:073","section_type_id":"section_type:context","heading":"Role Context V1 rollout coordination — 2026-10-16","start_line":96,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:013","file_id":"file:073","section_type_id":"section_type:unique","heading":"P0 M1 Council Z-FORGE Prep — M1C-03 — 2026-10-16","start_line":99,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:014","file_id":"file:073","section_type_id":"section_type:unique","heading":"ACPX-001 review assignment — 2026-10-17","start_line":104,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:015","file_id":"file:073","section_type_id":"section_type:recovery","heading":"P0 M1-002 — actual employee ACK and handoff chase — 2026-10-17","start_line":107,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:016","file_id":"file:073","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":110,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:017","file_id":"file:073","section_type_id":"section_type:tools","heading":"Skills check on SITREP","start_line":114,"depth":2,"evidence":"observed_heading"}
+{"id":"section:073:018","file_id":"file:073","section_type_id":"section_type:context","heading":"Memory on SITREP","start_line":118,"depth":2,"evidence":"observed_heading"}
+{"id":"section:074:001","file_id":"file:074","section_type_id":"section_type:workflow","heading":"CANON — 03-chief-of-staff-operations","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:075:001","file_id":"file:075","section_type_id":"section_type:best_practices","heading":"Personal Best Practices — 03-chief-of-staff-operations","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:076:001","file_id":"file:076","section_type_id":"section_type:workflow","heading":"Curated — 03-chief-of-staff-operations","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:077:001","file_id":"file:077","section_type_id":"section_type:workflow","heading":"Immediate — 03-chief-of-staff-operations","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:078:001","file_id":"file:078","section_type_id":"section_type:unique","heading":"04-opencode-output-efficiency — Agent instructions","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:078:002","file_id":"file:078","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":8,"depth":2,"evidence":"observed_heading"}
+{"id":"section:078:003","file_id":"file:078","section_type_id":"section_type:tools","heading":"Skills builder / agent capability ownership","start_line":12,"depth":2,"evidence":"observed_heading"}
+{"id":"section:078:004","file_id":"file:078","section_type_id":"section_type:context","heading":"Memory context","start_line":16,"depth":2,"evidence":"observed_heading"}
+{"id":"section:079:001","file_id":"file:079","section_type_id":"section_type:unique","heading":"OpenCode Output & Team Efficiency — Independent Chat Bootstrap","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:079:002","file_id":"file:079","section_type_id":"section_type:purpose","heading":"Your mission","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:079:003","file_id":"file:079","section_type_id":"section_type:unique","heading":"Immediate focus","start_line":8,"depth":2,"evidence":"observed_heading"}
+{"id":"section:079:004","file_id":"file:079","section_type_id":"section_type:workflow","heading":"Operational contract","start_line":11,"depth":2,"evidence":"observed_heading"}
+{"id":"section:079:005","file_id":"file:079","section_type_id":"section_type:unique","heading":"Required outcomes","start_line":18,"depth":2,"evidence":"observed_heading"}
+{"id":"section:079:006","file_id":"file:079","section_type_id":"section_type:unique","heading":"Related current work","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:079:007","file_id":"file:079","section_type_id":"section_type:lifecycle","heading":"SITREP and agent commons","start_line":29,"depth":2,"evidence":"observed_heading"}
+{"id":"section:080:001","file_id":"file:080","section_type_id":"section_type:lifecycle","heading":"OpenCode Output & Team Efficiency — SITREP","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:080:002","file_id":"file:080","section_type_id":"section_type:unique","heading":"Dated work / decisions / evidence","start_line":12,"depth":2,"evidence":"observed_heading"}
+{"id":"section:080:003","file_id":"file:080","section_type_id":"section_type:responsibilities","heading":"2026-10-16 — Owner reprioritized first deliverable to continuous OpenCode WPM feed","start_line":15,"depth":3,"evidence":"observed_heading"}
+{"id":"section:080:004","file_id":"file:080","section_type_id":"section_type:unique","heading":"2026-10-16 — Chief of Chiefs dispatch","start_line":23,"depth":3,"evidence":"observed_heading"}
+{"id":"section:080:005","file_id":"file:080","section_type_id":"section_type:unique","heading":"Chief of Chiefs — operating-model update (2026-10-16)","start_line":25,"depth":2,"evidence":"observed_heading"}
+{"id":"section:080:006","file_id":"file:080","section_type_id":"section_type:unique","heading":"2026-10-16 — Role 04 independent-chat readback and P0 receipt","start_line":45,"depth":3,"evidence":"observed_heading"}
+{"id":"section:080:007","file_id":"file:080","section_type_id":"section_type:unique","heading":"Chief of Chiefs dispatch — Grok Bot capacity-to-output efficiency (2026-10-16)","start_line":57,"depth":2,"evidence":"observed_heading"}
+{"id":"section:080:008","file_id":"file:080","section_type_id":"section_type:responsibilities","heading":"Owner standing directive — 2026-10-16: persistent execution / 30-item queue","start_line":73,"depth":2,"evidence":"observed_heading"}
+{"id":"section:080:009","file_id":"file:080","section_type_id":"section_type:unique","heading":"Chief of Chiefs directive — 2026-10-16","start_line":113,"depth":2,"evidence":"observed_heading"}
+{"id":"section:080:010","file_id":"file:080","section_type_id":"section_type:responsibilities","heading":"Grok usage checkpoint — owner screenshot 2026-10-16 05:40 Europe/Madrid","start_line":116,"depth":2,"evidence":"observed_heading"}
+{"id":"section:080:011","file_id":"file:080","section_type_id":"section_type:unique","heading":"2026-10-16 — Three-checkpoint Grok work-product-per-pp scorecard (Role 04)","start_line":120,"depth":3,"evidence":"observed_heading"}
+{"id":"section:080:012","file_id":"file:080","section_type_id":"section_type:unique","heading":"TTP-001 measurement assignment — 2026-10-16","start_line":124,"depth":2,"evidence":"observed_heading"}
+{"id":"section:080:013","file_id":"file:080","section_type_id":"section_type:workflow","heading":"2026-10-16 — Online study: making ChatGPT standing roles nearly always operational","start_line":127,"depth":3,"evidence":"observed_heading"}
+{"id":"section:080:014","file_id":"file:080","section_type_id":"section_type:unique","heading":"AION Shared Technical Proposal Commons — role-specific participation (2026-10-16)","start_line":131,"depth":2,"evidence":"observed_heading"}
+{"id":"section:080:015","file_id":"file:080","section_type_id":"section_type:tools","heading":"Z-FORGE Role 08 measurable productivity interface — 2026-10-16","start_line":135,"depth":2,"evidence":"observed_heading"}
+{"id":"section:080:016","file_id":"file:080","section_type_id":"section_type:unique","heading":"P0 M1 Council Z-FORGE Prep — M1C-04 — 2026-10-16","start_line":138,"depth":2,"evidence":"observed_heading"}
+{"id":"section:080:017","file_id":"file:080","section_type_id":"section_type:unique","heading":"ACPX-001 review assignment — 2026-10-17","start_line":143,"depth":2,"evidence":"observed_heading"}
+{"id":"section:080:018","file_id":"file:080","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":146,"depth":2,"evidence":"observed_heading"}
+{"id":"section:080:019","file_id":"file:080","section_type_id":"section_type:tools","heading":"Skills check on SITREP","start_line":150,"depth":2,"evidence":"observed_heading"}
+{"id":"section:080:020","file_id":"file:080","section_type_id":"section_type:context","heading":"Memory on SITREP","start_line":154,"depth":2,"evidence":"observed_heading"}
+{"id":"section:081:001","file_id":"file:081","section_type_id":"section_type:unique","heading":"CANON — 04-opencode-output-efficiency","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:082:001","file_id":"file:082","section_type_id":"section_type:best_practices","heading":"Personal Best Practices — 04-opencode-output-efficiency","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:083:001","file_id":"file:083","section_type_id":"section_type:unique","heading":"Curated — 04-opencode-output-efficiency","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:084:001","file_id":"file:084","section_type_id":"section_type:unique","heading":"Immediate — 04-opencode-output-efficiency","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:085:001","file_id":"file:085","section_type_id":"section_type:unique","heading":"05-chief-of-chiefs — Agent instructions","start_line":3,"depth":1,"evidence":"observed_heading"}
+{"id":"section:085:002","file_id":"file:085","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":7,"depth":2,"evidence":"observed_heading"}
+{"id":"section:085:003","file_id":"file:085","section_type_id":"section_type:workflow","heading":"Operational entrypoint (Chief-specific)","start_line":11,"depth":2,"evidence":"observed_heading"}
+{"id":"section:085:004","file_id":"file:085","section_type_id":"section_type:tools","heading":"Chief skill portfolio — first pass","start_line":18,"depth":2,"evidence":"observed_heading"}
+{"id":"section:085:005","file_id":"file:085","section_type_id":"section_type:tools","heading":"Skills builder / agent capability ownership","start_line":24,"depth":2,"evidence":"observed_heading"}
+{"id":"section:085:006","file_id":"file:085","section_type_id":"section_type:context","heading":"Memory context","start_line":28,"depth":2,"evidence":"observed_heading"}
+{"id":"section:085:007","file_id":"file:085","section_type_id":"section_type:verification","heading":"Native OpenCode entry (2026-10-22; source-wired, Windows unverified)","start_line":33,"depth":2,"evidence":"observed_heading"}
+{"id":"section:086:001","file_id":"file:086","section_type_id":"section_type:unique","heading":"AION — Chief of Chiefs — Executive Coordination Bootstrap","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:086:002","file_id":"file:086","section_type_id":"section_type:unique","heading":"CURRENT EXECUTIVE CONTRACT — 2026-10-21 (supersedes conflicting 2026-10-16 details)","start_line":3,"depth":2,"evidence":"observed_heading"}
+{"id":"section:086:003","file_id":"file:086","section_type_id":"section_type:unique","heading":"Historical 2026-10-16 bootstrap (retained for provenance; not today's priority order)","start_line":25,"depth":2,"evidence":"observed_heading"}
+{"id":"section:086:004","file_id":"file:086","section_type_id":"section_type:purpose","heading":"Mission","start_line":30,"depth":2,"evidence":"observed_heading"}
+{"id":"section:086:005","file_id":"file:086","section_type_id":"section_type:unique","heading":"Team","start_line":33,"depth":2,"evidence":"observed_heading"}
+{"id":"section:086:006","file_id":"file:086","section_type_id":"section_type:unique","heading":"Operating rules","start_line":44,"depth":2,"evidence":"observed_heading"}
+{"id":"section:086:007","file_id":"file:086","section_type_id":"section_type:unique","heading":"Initial priority","start_line":52,"depth":2,"evidence":"observed_heading"}
+{"id":"section:086:008","file_id":"file:086","section_type_id":"section_type:unique","heading":"Links","start_line":55,"depth":2,"evidence":"observed_heading"}
+{"id":"section:086:009","file_id":"file:086","section_type_id":"section_type:lifecycle","heading":"SITREP and agent commons","start_line":62,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:001","file_id":"file:087","section_type_id":"section_type:lifecycle","heading":"Chief of Chiefs — Executive SITREP","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:087:002","file_id":"file:087","section_type_id":"section_type:context","heading":"CURRENT EXECUTIVE SITREP — 2026-10-22 (expanded GitHub-source review)","start_line":3,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:003","file_id":"file:087","section_type_id":"section_type:context","heading":"CURRENT EXECUTIVE SITREP — 2026-10-21 (GitHub-source review)","start_line":25,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:004","file_id":"file:087","section_type_id":"section_type:lifecycle","heading":"Historical SITREP (retained below as dated evidence, not an active instruction set)","start_line":44,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:005","file_id":"file:087","section_type_id":"section_type:verification","heading":"Decisions, verification, blockers","start_line":55,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:006","file_id":"file:087","section_type_id":"section_type:responsibilities","heading":"Owner standing directive — 2026-10-16: persistent execution / 30-item queue","start_line":58,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:007","file_id":"file:087","section_type_id":"section_type:responsibilities","heading":"Owner directive: keep going, 30-item queue (2026-10-16)","start_line":98,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:008","file_id":"file:087","section_type_id":"section_type:unique","heading":"Regroup decision — 2026-10-16","start_line":101,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:009","file_id":"file:087","section_type_id":"section_type:tools","heading":"Executive staffing decision — 2026-10-16: Role 06 TOOLSMITH","start_line":104,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:010","file_id":"file:087","section_type_id":"section_type:unique","heading":"AION Shared Technical Proposal Commons — role-specific participation (2026-10-16)","start_line":107,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:011","file_id":"file:087","section_type_id":"section_type:unique","heading":"Executive staffing: Employee 07 INTAKE / Proposal Commons — 2026-10-16","start_line":111,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:012","file_id":"file:087","section_type_id":"section_type:unique","heading":"Employee 07 information-flow redesign — 2026-10-16","start_line":114,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:013","file_id":"file:087","section_type_id":"section_type:unique","heading":"Staffing decision — Z-FORGE employee 08, 2026-10-16","start_line":117,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:014","file_id":"file:087","section_type_id":"section_type:unique","heading":"Executive design — keyword Role Launcher RL-001, 2026-10-16","start_line":120,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:015","file_id":"file:087","section_type_id":"section_type:context","heading":"Executive separation — V1 mobile contexts vs V2 Chrome role launcher, 2026-10-16","start_line":123,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:016","file_id":"file:087","section_type_id":"section_type:unique","heading":"M1C-05 delivered / M1 Council fan-out to Z-FORGE — 2026-10-16","start_line":126,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:017","file_id":"file:087","section_type_id":"section_type:unique","heading":"Request to Chief 05: define the AION agent model — 2026-10-18","start_line":129,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:018","file_id":"file:087","section_type_id":"section_type:unique","heading":"ACPX-001 review assignment — 2026-10-17","start_line":162,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:019","file_id":"file:087","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":165,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:020","file_id":"file:087","section_type_id":"section_type:tools","heading":"Skills check on SITREP","start_line":169,"depth":2,"evidence":"observed_heading"}
+{"id":"section:087:021","file_id":"file:087","section_type_id":"section_type:context","heading":"Memory on SITREP","start_line":173,"depth":2,"evidence":"observed_heading"}
+{"id":"section:088:001","file_id":"file:088","section_type_id":"section_type:unique","heading":"CANON — Chief of Chiefs","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:089:001","file_id":"file:089","section_type_id":"section_type:best_practices","heading":"Best Practices — Chief of Chiefs","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:090:001","file_id":"file:090","section_type_id":"section_type:unique","heading":"Curated — Chief of Chiefs","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:091:001","file_id":"file:091","section_type_id":"section_type:unique","heading":"Immediate — Chief of Chiefs","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:092:001","file_id":"file:092","section_type_id":"section_type:lifecycle","heading":"Chief executive SITREP","start_line":6,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:092:002","file_id":"file:092","section_type_id":"section_type:unique","heading":"Trigger","start_line":8,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:092:003","file_id":"file:092","section_type_id":"section_type:unique","heading":"Execute","start_line":11,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:092:004","file_id":"file:092","section_type_id":"section_type:unique","heading":"Reuse and boundaries","start_line":19,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:093:001","file_id":"file:093","section_type_id":"section_type:verification","heading":"Chief proof triage","start_line":6,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:093:002","file_id":"file:093","section_type_id":"section_type:unique","heading":"Trigger","start_line":8,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:093:003","file_id":"file:093","section_type_id":"section_type:unique","heading":"Execute","start_line":11,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:093:004","file_id":"file:093","section_type_id":"section_type:unique","heading":"Minimal JSON input","start_line":18,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:093:005","file_id":"file:093","section_type_id":"section_type:verification","heading":"Test and recovery","start_line":36,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:094:001","file_id":"file:094","section_type_id":"section_type:tools","heading":"AGENTS.md — TOOLSMITH role workspace policy","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:094:002","file_id":"file:094","section_type_id":"section_type:unique","heading":"Read order","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:094:003","file_id":"file:094","section_type_id":"section_type:unique","heading":"Execution doctrine","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:094:004","file_id":"file:094","section_type_id":"section_type:safety","heading":"Permissions and safe practice","start_line":22,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:094:005","file_id":"file:094","section_type_id":"section_type:unique","heading":"Deliverables","start_line":30,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:094:006","file_id":"file:094","section_type_id":"section_type:lifecycle","heading":"SITREP and agent commons","start_line":34,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:094:007","file_id":"file:094","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":40,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:094:008","file_id":"file:094","section_type_id":"section_type:tools","heading":"Skills builder / agent capability ownership","start_line":44,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:094:009","file_id":"file:094","section_type_id":"section_type:context","heading":"Memory context","start_line":48,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:095:001","file_id":"file:095","section_type_id":"section_type:tools","heading":"AION Employee 06 — TOOLSMITH — Launch Bootstrap","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:095:002","file_id":"file:095","section_type_id":"section_type:purpose","heading":"Your mission","start_line":12,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:095:003","file_id":"file:095","section_type_id":"section_type:unique","heading":"First action in your actual chat","start_line":15,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:095:004","file_id":"file:095","section_type_id":"section_type:responsibilities","heading":"Primary ownership","start_line":23,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:095:005","file_id":"file:095","section_type_id":"section_type:unique","heading":"Boundaries","start_line":30,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:095:006","file_id":"file:095","section_type_id":"section_type:verification","heading":"Acceptance","start_line":39,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:095:007","file_id":"file:095","section_type_id":"section_type:unique","heading":"Canon","start_line":44,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:095:008","file_id":"file:095","section_type_id":"section_type:context","heading":"Priority research ownership — AION Role Context V1 (2026-10-16)","start_line":51,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:001","file_id":"file:096","section_type_id":"section_type:tools","heading":"AION Role 06 — TOOLSMITH — SITREP","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:096:002","file_id":"file:096","section_type_id":"section_type:verification","heading":"2026-10-21 skills first pass — verified source, not Windows deployment","start_line":3,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:003","file_id":"file:096","section_type_id":"section_type:context","heading":"2026-10-21 three-tier memory first pass — current continuity","start_line":15,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:004","file_id":"file:096","section_type_id":"section_type:recovery","heading":"Current handoff — 2026-10-21 (dedicated role conversation launched)","start_line":25,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:005","file_id":"file:096","section_type_id":"section_type:lifecycle","heading":"Historical SITREP below (dated 2026-10-16 to 2026-10-19; superseded where it conflicts)","start_line":41,"depth":3,"evidence":"pinned_sha_heading"}
+{"id":"section:096:006","file_id":"file:096","section_type_id":"section_type:unique","heading":"Current assignment","start_line":48,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:007","file_id":"file:096","section_type_id":"section_type:context","heading":"Confirmed sources, not runtime observations","start_line":51,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:008","file_id":"file:096","section_type_id":"section_type:unique","heading":"First three work gates","start_line":56,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:009","file_id":"file:096","section_type_id":"section_type:unique","heading":"Initial blocker","start_line":61,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:010","file_id":"file:096","section_type_id":"section_type:unique","heading":"Workspace publication and activation ticket — 2026-10-16","start_line":64,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:011","file_id":"file:096","section_type_id":"section_type:unique","heading":"AION Shared Technical Proposal Commons — role-specific participation (2026-10-16)","start_line":67,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:012","file_id":"file:096","section_type_id":"section_type:tools","heading":"Z-FORGE Role 08 technical interface — 2026-10-16","start_line":71,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:013","file_id":"file:096","section_type_id":"section_type:unique","heading":"RL-001 Chrome keyword role launcher — technical review, 2026-10-16","start_line":74,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:014","file_id":"file:096","section_type_id":"section_type:unique","heading":"RC-V1 mobile-first role research — 2026-10-16","start_line":77,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:015","file_id":"file:096","section_type_id":"section_type:unique","heading":"P0 M1 Council Z-FORGE Prep — M1C-06 — 2026-10-16","start_line":80,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:016","file_id":"file:096","section_type_id":"section_type:unique","heading":"ACPX-001 review assignment — 2026-10-17","start_line":85,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:017","file_id":"file:096","section_type_id":"section_type:unique","heading":"P0 M1-002 — browser adapter technical lead — 2026-10-17","start_line":88,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:018","file_id":"file:096","section_type_id":"section_type:verification","heading":"Acceleration research, capability tests and ChatGPT plugin study — 2026-10-18","start_line":91,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:019","file_id":"file:096","section_type_id":"section_type:unique","heading":"Bus V1/V2 build (Opus 5.5) — 2026-10-19","start_line":94,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:020","file_id":"file:096","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":97,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:021","file_id":"file:096","section_type_id":"section_type:tools","heading":"Skills check on SITREP","start_line":101,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:096:022","file_id":"file:096","section_type_id":"section_type:context","heading":"Memory on SITREP","start_line":105,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:098:001","file_id":"file:098","section_type_id":"section_type:tools","heading":"TOOLSMITH Workspace Map","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:098:002","file_id":"file:098","section_type_id":"section_type:unique","heading":"Files","start_line":4,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:098:003","file_id":"file:098","section_type_id":"section_type:unique","heading":"Integration footprint","start_line":13,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:098:004","file_id":"file:098","section_type_id":"section_type:unique","heading":"Initial priority ladder","start_line":21,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:098:005","file_id":"file:098","section_type_id":"section_type:lifecycle","heading":"Required status report","start_line":29,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:099:001","file_id":"file:099","section_type_id":"section_type:tools","heading":"CANON — Toolsmith","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:100:001","file_id":"file:100","section_type_id":"section_type:best_practices","heading":"Best Practices — Toolsmith","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:101:001","file_id":"file:101","section_type_id":"section_type:tools","heading":"Curated — Toolsmith","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:102:001","file_id":"file:102","section_type_id":"section_type:tools","heading":"Immediate — Toolsmith","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:103:001","file_id":"file:103","section_type_id":"section_type:unique","heading":"ACP / UAH Integration","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:103:002","file_id":"file:103","section_type_id":"section_type:unique","heading":"Trigger","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:103:003","file_id":"file:103","section_type_id":"section_type:unique","heading":"Execution recipe","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:103:004","file_id":"file:103","section_type_id":"section_type:unique","heading":"Failure/fallback","start_line":20,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:103:005","file_id":"file:103","section_type_id":"section_type:unique","heading":"Completion","start_line":23,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:104:001","file_id":"file:104","section_type_id":"section_type:tools","heading":"ChatGPT General Bus V1/V2 — implementation skill","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:104:002","file_id":"file:104","section_type_id":"section_type:context","heading":"Sources","start_line":9,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:104:003","file_id":"file:104","section_type_id":"section_type:unique","heading":"Recipe","start_line":14,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:105:001","file_id":"file:105","section_type_id":"section_type:tools","heading":"Chrome MV3 / native-host relay — Toolsmith skill","start_line":6,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:105:002","file_id":"file:105","section_type_id":"section_type:unique","heading":"Fast path — current registration failure","start_line":12,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:105:003","file_id":"file:105","section_type_id":"section_type:recovery","heading":"Other transport / recovery use","start_line":31,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:105:004","file_id":"file:105","section_type_id":"section_type:verification","heading":"Verify this skill's executable component","start_line":39,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:107:001","file_id":"file:107","section_type_id":"section_type:prerequisites","heading":"Environment Bootstrap","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:107:002","file_id":"file:107","section_type_id":"section_type:unique","heading":"Trigger","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:107:003","file_id":"file:107","section_type_id":"section_type:workflow","heading":"Procedure","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:107:004","file_id":"file:107","section_type_id":"section_type:unique","heading":"Stop conditions","start_line":20,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:107:005","file_id":"file:107","section_type_id":"section_type:unique","heading":"Completion","start_line":24,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:108:001","file_id":"file:108","section_type_id":"section_type:recovery","heading":"Incident Recovery","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:108:002","file_id":"file:108","section_type_id":"section_type:unique","heading":"Trigger","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:108:003","file_id":"file:108","section_type_id":"section_type:recovery","heading":"Recovery ladder","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:108:004","file_id":"file:108","section_type_id":"section_type:unique","heading":"Hard stops","start_line":19,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:110:001","file_id":"file:110","section_type_id":"section_type:tools","heading":"Tool Discovery & Evidence Qualification","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:110:002","file_id":"file:110","section_type_id":"section_type:unique","heading":"Trigger","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:110:003","file_id":"file:110","section_type_id":"section_type:workflow","heading":"Procedure","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:110:004","file_id":"file:110","section_type_id":"section_type:unique","heading":"Output contract","start_line":19,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:112:001","file_id":"file:112","section_type_id":"section_type:unique","heading":"AGENTS.md — INTAKE 07","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:112:002","file_id":"file:112","section_type_id":"section_type:unique","heading":"Read order","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:112:003","file_id":"file:112","section_type_id":"section_type:purpose","heading":"Hard scope","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:112:004","file_id":"file:112","section_type_id":"section_type:unique","heading":"Ingestion invariants","start_line":14,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:112:005","file_id":"file:112","section_type_id":"section_type:unique","heading":"Scorekeeping invariants","start_line":22,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:112:006","file_id":"file:112","section_type_id":"section_type:safety","heading":"Permission boundaries","start_line":29,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:112:007","file_id":"file:112","section_type_id":"section_type:unique","heading":"Output","start_line":32,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:112:008","file_id":"file:112","section_type_id":"section_type:unique","heading":"v0.2 operating improvement — consumer benefit","start_line":35,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:112:009","file_id":"file:112","section_type_id":"section_type:lifecycle","heading":"SITREP and agent commons","start_line":39,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:112:010","file_id":"file:112","section_type_id":"section_type:responsibilities","heading":"Standing intelligence ownership — SITREP","start_line":43,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:112:011","file_id":"file:112","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":47,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:112:012","file_id":"file:112","section_type_id":"section_type:tools","heading":"Skills builder / agent capability ownership","start_line":51,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:112:013","file_id":"file:112","section_type_id":"section_type:context","heading":"Memory context","start_line":55,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:113:001","file_id":"file:113","section_type_id":"section_type:unique","heading":"AION Employee 07 — INTAKE — Self-Launching Bootstrap","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:113:002","file_id":"file:113","section_type_id":"section_type:unique","heading":"One-sentence job","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:113:003","file_id":"file:113","section_type_id":"section_type:unique","heading":"Mandatory self-bootstrap (execute upon first live conversation turn)","start_line":12,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:113:004","file_id":"file:113","section_type_id":"section_type:unique","heading":"What to do with an incoming multi-variant technical council response","start_line":21,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:113:005","file_id":"file:113","section_type_id":"section_type:unique","heading":"Local operating rhythm","start_line":29,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:113:006","file_id":"file:113","section_type_id":"section_type:verification","heading":"Acceptance criteria","start_line":37,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:113:007","file_id":"file:113","section_type_id":"section_type:unique","heading":"Direct links","start_line":42,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:113:008","file_id":"file:113","section_type_id":"section_type:unique","heading":"Required first visible response","start_line":47,"depth":3,"evidence":"pinned_sha_heading"}
+{"id":"section:113:009","file_id":"file:113","section_type_id":"section_type:unique","heading":"Consumer-first upgrade (v0.2, 2026-10-16)","start_line":50,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:114:001","file_id":"file:114","section_type_id":"section_type:lifecycle","heading":"AION Employee 07 — INTAKE — SITREP","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:114:002","file_id":"file:114","section_type_id":"section_type:verification","heading":"Current verified status — 2026-10-21, after memory first pass","start_line":3,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:114:003","file_id":"file:114","section_type_id":"section_type:context","heading":"Three-tier role memory — consult and improve without file churn","start_line":13,"depth":3,"evidence":"pinned_sha_heading"}
+{"id":"section:114:004","file_id":"file:114","section_type_id":"section_type:verification","heading":"Skill capability first pass — 2026-10-21 (source verified, local harness unverified)","start_line":26,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:114:005","file_id":"file:114","section_type_id":"section_type:unique","heading":"Historical scaffold and assignments (2026-10-16–17; superseded where noted above)","start_line":38,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:114:006","file_id":"file:114","section_type_id":"section_type:unique","heading":"Current objectives","start_line":50,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:114:007","file_id":"file:114","section_type_id":"section_type:unique","heading":"Event log","start_line":57,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:114:008","file_id":"file:114","section_type_id":"section_type:unique","heading":"Publication milestone — 2026-10-16","start_line":60,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:114:009","file_id":"file:114","section_type_id":"section_type:unique","heading":"Publication and independent readback — 2026-10-16","start_line":63,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:114:010","file_id":"file:114","section_type_id":"section_type:unique","heading":"v0.2 architecture upgrade — 2026-10-16","start_line":66,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:114:011","file_id":"file:114","section_type_id":"section_type:responsibilities","heading":"Z-FORGE Role 08 proposal intake boundary — 2026-10-16","start_line":69,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:114:012","file_id":"file:114","section_type_id":"section_type:unique","heading":"P0 M1 Council Z-FORGE Prep — M1C-07 — 2026-10-16","start_line":72,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:114:013","file_id":"file:114","section_type_id":"section_type:unique","heading":"ACPX-001 review assignment — 2026-10-17","start_line":77,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:114:014","file_id":"file:114","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":80,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:114:015","file_id":"file:114","section_type_id":"section_type:tools","heading":"Skills check on SITREP","start_line":84,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:114:016","file_id":"file:114","section_type_id":"section_type:context","heading":"Memory on SITREP","start_line":88,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:116:001","file_id":"file:116","section_type_id":"section_type:purpose","heading":"AION INTAKE 07 — Workspace & Scope","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:116:002","file_id":"file:116","section_type_id":"section_type:unique","heading":"What lives here","start_line":3,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:116:003","file_id":"file:116","section_type_id":"section_type:context","heading":"What lives in the shared resource (not in this private role folder)","start_line":11,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:116:004","file_id":"file:116","section_type_id":"section_type:workflow","heading":"Workflow, strictly in order","start_line":28,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:116:005","file_id":"file:116","section_type_id":"section_type:unique","heading":"Team consumers","start_line":37,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:116:006","file_id":"file:116","section_type_id":"section_type:unique","heading":"Collaboration surface","start_line":46,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:116:007","file_id":"file:116","section_type_id":"section_type:unique","heading":"Retrieval contract","start_line":49,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:116:008","file_id":"file:116","section_type_id":"section_type:unique","heading":"Definition of ready","start_line":52,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:116:009","file_id":"file:116","section_type_id":"section_type:unique","heading":"v0.2 routing and closed-loop information service","start_line":55,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:117:001","file_id":"file:117","section_type_id":"section_type:unique","heading":"CANON — Proposal Intake","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:118:001","file_id":"file:118","section_type_id":"section_type:best_practices","heading":"Best Practices — Proposal Intake","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:119:001","file_id":"file:119","section_type_id":"section_type:unique","heading":"Curated — Proposal Intake","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:120:001","file_id":"file:120","section_type_id":"section_type:unique","heading":"Immediate — Proposal Intake","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:121:001","file_id":"file:121","section_type_id":"section_type:unique","heading":"Discover / Reuse Shared Proposals","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:121:002","file_id":"file:121","section_type_id":"section_type:workflow","heading":"Procedure","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:121:003","file_id":"file:121","section_type_id":"section_type:unique","heading":"Output","start_line":15,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:122:001","file_id":"file:122","section_type_id":"section_type:unique","heading":"Neutral First-Pass Decomposition","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:122:002","file_id":"file:122","section_type_id":"section_type:workflow","heading":"Steps","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:122:003","file_id":"file:122","section_type_id":"section_type:verification","heading":"Acceptance","start_line":17,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:124:001","file_id":"file:124","section_type_id":"section_type:unique","heading":"Publish to Common Pool","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:124:002","file_id":"file:124","section_type_id":"section_type:unique","heading":"Preconditions","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:124:003","file_id":"file:124","section_type_id":"section_type:workflow","heading":"Steps","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:124:004","file_id":"file:124","section_type_id":"section_type:verification","heading":"Acceptance","start_line":19,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:124:005","file_id":"file:124","section_type_id":"section_type:unique","heading":"v0.2 follow-through — publication to consumption","start_line":22,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:124:006","file_id":"file:124","section_type_id":"section_type:unique","heading":"Integrity check at publication","start_line":25,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:125:001","file_id":"file:125","section_type_id":"section_type:context","heading":"RAW Intake — Exact Source Custody","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:125:002","file_id":"file:125","section_type_id":"section_type:unique","heading":"When to run","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:125:003","file_id":"file:125","section_type_id":"section_type:unique","heading":"Inputs","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:125:004","file_id":"file:125","section_type_id":"section_type:workflow","heading":"Steps","start_line":13,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:125:005","file_id":"file:125","section_type_id":"section_type:unique","heading":"Must not","start_line":21,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:125:006","file_id":"file:125","section_type_id":"section_type:verification","heading":"Acceptance","start_line":24,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:125:007","file_id":"file:125","section_type_id":"section_type:unique","heading":"Machine-assisted readback","start_line":27,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:126:001","file_id":"file:126","section_type_id":"section_type:recovery","heading":"Pool Reconciliation / Safe Recovery","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:126:002","file_id":"file:126","section_type_id":"section_type:unique","heading":"Trigger","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:126:003","file_id":"file:126","section_type_id":"section_type:recovery","heading":"Recovery","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:126:004","file_id":"file:126","section_type_id":"section_type:unique","heading":"Completion","start_line":18,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:126:005","file_id":"file:126","section_type_id":"section_type:unique","heading":"Deterministic integrity preflight (Node, read-only)","start_line":21,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:127:001","file_id":"file:127","section_type_id":"section_type:unique","heading":"Evidence-Based Review & Rank","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:127:002","file_id":"file:127","section_type_id":"section_type:unique","heading":"Role limitation","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:127:003","file_id":"file:127","section_type_id":"section_type:workflow","heading":"Steps","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:127:004","file_id":"file:127","section_type_id":"section_type:unique","heading":"Output","start_line":20,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:127:005","file_id":"file:127","section_type_id":"section_type:unique","heading":"v0.2 small reviews, useful decisions","start_line":23,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:128:001","file_id":"file:128","section_type_id":"section_type:unique","heading":"AGENTS — Z-FORGE role instructions","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:128:002","file_id":"file:128","section_type_id":"section_type:unique","heading":"Role separation","start_line":8,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:128:003","file_id":"file:128","section_type_id":"section_type:unique","heading":"Turn rules","start_line":19,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:128:004","file_id":"file:128","section_type_id":"section_type:unique","heading":"Provenance","start_line":24,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:128:005","file_id":"file:128","section_type_id":"section_type:safety","heading":"Security/permissions","start_line":28,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:128:006","file_id":"file:128","section_type_id":"section_type:unique","heading":"Closeout","start_line":33,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:128:007","file_id":"file:128","section_type_id":"section_type:lifecycle","heading":"SITREP and agent commons","start_line":36,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:128:008","file_id":"file:128","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":40,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:128:009","file_id":"file:128","section_type_id":"section_type:tools","heading":"Skills builder / agent capability ownership","start_line":44,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:128:010","file_id":"file:128","section_type_id":"section_type:context","heading":"Memory context","start_line":48,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:129:001","file_id":"file:129","section_type_id":"section_type:unique","heading":"AION Employee 08 — Z-FORGE — Self-Bootstrap","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:129:002","file_id":"file:129","section_type_id":"section_type:purpose","heading":"One mission","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:129:003","file_id":"file:129","section_type_id":"section_type:unique","heading":"What you own","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:129:004","file_id":"file:129","section_type_id":"section_type:unique","heading":"Self-bootstrap — first actual session","start_line":19,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:129:005","file_id":"file:129","section_type_id":"section_type:unique","heading":"Hard operating rules","start_line":27,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:129:006","file_id":"file:129","section_type_id":"section_type:verification","heading":"Activation proof","start_line":36,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:129:007","file_id":"file:129","section_type_id":"section_type:unique","heading":"Launch response","start_line":39,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:130:001","file_id":"file:130","section_type_id":"section_type:lifecycle","heading":"AION Employee 08 — Z-FORGE SITREP","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:130:002","file_id":"file:130","section_type_id":"section_type:purpose","heading":"Mission","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:130:003","file_id":"file:130","section_type_id":"section_type:unique","heading":"Known, qualified","start_line":13,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:130:004","file_id":"file:130","section_type_id":"section_type:unique","heading":"First gates","start_line":18,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:130:005","file_id":"file:130","section_type_id":"section_type:unique","heading":"Policy","start_line":24,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:130:006","file_id":"file:130","section_type_id":"section_type:unique","heading":"Publication and evidence — 2026-10-16","start_line":27,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:130:007","file_id":"file:130","section_type_id":"section_type:unique","heading":"New P0 assignment — M1 pre-live sandbox runs (2026-10-16)","start_line":30,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:130:008","file_id":"file:130","section_type_id":"section_type:unique","heading":"P0 M1 Council Z-FORGE Prep — M1C-08 — 2026-10-16","start_line":33,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:130:009","file_id":"file:130","section_type_id":"section_type:unique","heading":"2026-10-17 — Active Z-FORGE 08 integrator acknowledgment and mock build release","start_line":38,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:130:010","file_id":"file:130","section_type_id":"section_type:unique","heading":"ACPX-001 review assignment — 2026-10-17","start_line":46,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:130:011","file_id":"file:130","section_type_id":"section_type:unique","heading":"P0 M1-002 — Z.ai browser adapter sandbox integration — 2026-10-17","start_line":49,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:130:012","file_id":"file:130","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":52,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:130:013","file_id":"file:130","section_type_id":"section_type:tools","heading":"Skills check on SITREP","start_line":56,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:130:014","file_id":"file:130","section_type_id":"section_type:context","heading":"Memory on SITREP","start_line":60,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:132:001","file_id":"file:132","section_type_id":"section_type:unique","heading":"Z-FORGE Workspace","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:132:002","file_id":"file:132","section_type_id":"section_type:unique","heading":"Files","start_line":4,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:132:003","file_id":"file:132","section_type_id":"section_type:lifecycle","heading":"Lifecycle","start_line":13,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:132:004","file_id":"file:132","section_type_id":"section_type:unique","heading":"Inputs","start_line":16,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:132:005","file_id":"file:132","section_type_id":"section_type:unique","heading":"Outputs and recipients","start_line":19,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:132:006","file_id":"file:132","section_type_id":"section_type:purpose","heading":"Priority and role scope","start_line":27,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:133:001","file_id":"file:133","section_type_id":"section_type:unique","heading":"CANON — 08-zai-sandbox-strategist","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:134:001","file_id":"file:134","section_type_id":"section_type:best_practices","heading":"Personal Best Practices — 08-zai-sandbox-strategist","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:135:001","file_id":"file:135","section_type_id":"section_type:unique","heading":"Curated — 08-zai-sandbox-strategist","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:136:001","file_id":"file:136","section_type_id":"section_type:unique","heading":"Immediate — 08-zai-sandbox-strategist","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:137:001","file_id":"file:137","section_type_id":"section_type:unique","heading":"Results Feed Back into AION","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:138:001","file_id":"file:138","section_type_id":"section_type:unique","heading":"Chrome Extension Lab","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:139:001","file_id":"file:139","section_type_id":"section_type:unique","heading":"Model and Turn Economics","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:140:001","file_id":"file:140","section_type_id":"section_type:recovery","heading":"Repository & Artifact Handoff","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:141:001","file_id":"file:141","section_type_id":"section_type:prerequisites","heading":"Sandbox Environment & Bootstrap","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:143:001","file_id":"file:143","section_type_id":"section_type:verification","heading":"Sandbox Test and Independent Proof","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:144:001","file_id":"file:144","section_type_id":"section_type:purpose","heading":"One-Turn Mission Architecture","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:145:001","file_id":"file:145","section_type_id":"section_type:context","heading":"Turn Recovery & Context Capsule","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:146:001","file_id":"file:146","section_type_id":"section_type:unique","heading":"Z.ai Web Product Recon","start_line":5,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:147:001","file_id":"file:147","section_type_id":"section_type:safety","heading":"AION RESEARCH — Scoped authority","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:147:002","file_id":"file:147","section_type_id":"section_type:unique","heading":"Positive mandate","start_line":5,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:147:003","file_id":"file:147","section_type_id":"section_type:unique","heading":"Boundaries","start_line":8,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:147:004","file_id":"file:147","section_type_id":"section_type:lifecycle","heading":"Lifecycle evidence","start_line":17,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:147:005","file_id":"file:147","section_type_id":"section_type:unique","heading":"Working posture","start_line":20,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:147:006","file_id":"file:147","section_type_id":"section_type:lifecycle","heading":"SITREP and agent commons","start_line":23,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:147:007","file_id":"file:147","section_type_id":"section_type:unique","heading":"Owned team intelligence","start_line":28,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:147:008","file_id":"file:147","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":32,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:147:009","file_id":"file:147","section_type_id":"section_type:tools","heading":"Skills builder / agent capability ownership","start_line":36,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:147:010","file_id":"file:147","section_type_id":"section_type:context","heading":"Memory context","start_line":40,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:148:001","file_id":"file:148","section_type_id":"section_type:unique","heading":"AION — 09 RESEARCH | Mandatory Global Bootstrap","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:148:002","file_id":"file:148","section_type_id":"section_type:purpose","heading":"Mission and monopoly boundary","start_line":5,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:148:003","file_id":"file:148","section_type_id":"section_type:unique","heading":"Read order: every fresh session","start_line":10,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:148:004","file_id":"file:148","section_type_id":"section_type:unique","heading":"Mandatory finding record","start_line":19,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:148:005","file_id":"file:148","section_type_id":"section_type:unique","heading":"Operating guarantees","start_line":22,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:149:001","file_id":"file:149","section_type_id":"section_type:lifecycle","heading":"AION RESEARCH — Fresh-session SITREP","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:149:002","file_id":"file:149","section_type_id":"section_type:unique","heading":"Every new session: replace derived snapshot only after new evidence","start_line":15,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:149:003","file_id":"file:149","section_type_id":"section_type:workflow","heading":"Operational bootstrap continuation — 2026-10-19 16:00 UTC","start_line":33,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:149:004","file_id":"file:149","section_type_id":"section_type:unique","heading":"2026-10-21 — Deep-dive reconciliation: local receipts, Development and Harvest","start_line":42,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:149:005","file_id":"file:149","section_type_id":"section_type:unique","heading":"Actual progress and adoption ladder","start_line":46,"depth":3,"evidence":"pinned_sha_heading"}
+{"id":"section:149:006","file_id":"file:149","section_type_id":"section_type:unique","heading":"Research disposition (one global function, no new queue)","start_line":55,"depth":3,"evidence":"pinned_sha_heading"}
+{"id":"section:149:007","file_id":"file:149","section_type_id":"section_type:unique","heading":"2026-10-21 — Relaunch delta (post-previous deep dive)","start_line":64,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:149:008","file_id":"file:149","section_type_id":"section_type:context","heading":"Persistent agent memory (standing)","start_line":73,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:149:009","file_id":"file:149","section_type_id":"section_type:tools","heading":"Skills check on SITREP","start_line":77,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:149:010","file_id":"file:149","section_type_id":"section_type:context","heading":"Memory on SITREP","start_line":81,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:151:001","file_id":"file:151","section_type_id":"section_type:context","heading":"AION RESEARCH | One knowledge supply chain","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:151:002","file_id":"file:151","section_type_id":"section_type:unique","heading":"Architecture","start_line":3,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:151:003","file_id":"file:151","section_type_id":"section_type:unique","heading":"Data placement: no second database","start_line":17,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:151:004","file_id":"file:151","section_type_id":"section_type:unique","heading":"Intake classes and auto-routing","start_line":24,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:151:005","file_id":"file:151","section_type_id":"section_type:unique","heading":"Prioritization, not a manufactured KPI","start_line":33,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:151:006","file_id":"file:151","section_type_id":"section_type:recovery","heading":"Handoffs","start_line":36,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:151:007","file_id":"file:151","section_type_id":"section_type:unique","heading":"Quality gates","start_line":39,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:151:008","file_id":"file:151","section_type_id":"section_type:unique","heading":"Proactivity","start_line":47,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:151:009","file_id":"file:151","section_type_id":"section_type:unique","heading":"Canonical related systems","start_line":50,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:151:010","file_id":"file:151","section_type_id":"section_type:unique","heading":"Relaunch operating choice — 2026-10-21","start_line":54,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:154:001","file_id":"file:154","section_type_id":"section_type:unique","heading":"Provider-native shape contract — Claude WEB (`claude-web-shapes/1`)","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:154:002","file_id":"file:154","section_type_id":"section_type:unique","heading":"1. Identity grammar","start_line":7,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:154:003","file_id":"file:154","section_type_id":"section_type:unique","heading":"2. Transports and stream shapes","start_line":18,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:154:004","file_id":"file:154","section_type_id":"section_type:unique","heading":"3. Content parts observed vs documented","start_line":30,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:154:005","file_id":"file:154","section_type_id":"section_type:tools","heading":"4. Action surfaces (capability capsule semantics)","start_line":41,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:154:006","file_id":"file:154","section_type_id":"section_type:verification","heading":"5. Executable contract tests","start_line":50,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:154:007","file_id":"file:154","section_type_id":"section_type:unique","heading":"6. Gaps (the honest headline)","start_line":54,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:156:001","file_id":"file:156","section_type_id":"section_type:unique","heading":"AION Research — CANON","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:156:002","file_id":"file:156","section_type_id":"section_type:unique","heading":"Durable operating decisions","start_line":5,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:156:003","file_id":"file:156","section_type_id":"section_type:unique","heading":"Lessons from observed friction and the better defaults","start_line":13,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:157:001","file_id":"file:157","section_type_id":"section_type:best_practices","heading":"Personal Best Practices — 09-global-research","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:158:001","file_id":"file:158","section_type_id":"section_type:unique","heading":"AION Research — Curated Working Style","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:158:002","file_id":"file:158","section_type_id":"section_type:unique","heading":"What a genuinely useful Research response looks like","start_line":5,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:158:003","file_id":"file:158","section_type_id":"section_type:unique","heading":"How to improve this page","start_line":16,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:159:001","file_id":"file:159","section_type_id":"section_type:context","heading":"AION Research — Immediate Context","start_line":1,"depth":1,"evidence":"pinned_sha_heading"}
+{"id":"section:159:002","file_id":"file:159","section_type_id":"section_type:context","heading":"Live context that changes research decisions","start_line":5,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:159:003","file_id":"file:159","section_type_id":"section_type:unique","heading":"Next useful research actions (not Development assignments)","start_line":14,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:159:004","file_id":"file:159","section_type_id":"section_type:tools","heading":"Research skills first pass — 2026-10-21","start_line":20,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:159:005","file_id":"file:159","section_type_id":"section_type:unique","heading":"Raw website-to-Windows response streaming — current top research objective (2026-10-21)","start_line":26,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:159:006","file_id":"file:159","section_type_id":"section_type:unique","heading":"Gaps / things not to assume","start_line":33,"depth":2,"evidence":"pinned_sha_heading"}
+{"id":"section:160:001","file_id":"file:160","section_type_id":"section_type:context","heading":"source intake","start_line":6,"depth":1,"evidence":"pinned_sha_heading"}

@@ -1,0 +1,10 @@
+# Immediate — Planning
+- Current north star: Windows-local exact-thread two-way `aion chat chief`; NS1 introspection in parallel. **Status is a last-known checkpoint, not live telemetry.**
+- Sequence: verify loaded local version → diagnose `REGISTRATION_FAILED` if still reproducible → live I1 watch-only receive → I2 two correlated Send/replies → I3 restart/uncertain-effect recovery.
+- PR [#62](https://github.com/owenservera/aion/pull/62) merged source; independent Windows I1/I2 proof was not established in last reviewed receipts. Recheck before reporting.
+- Consult [TASKS](../../TASKS.md), [MATRIX](../../AGENT-MATRIX.md), [Development desk](../../../../../ops/chrome-relay/workers/development/DELIVERABLES.md) and [Windows STATE](../../../../../STATE.json), not copied counts here.
+- Peer communication proposals are not execution or consent; verify actual reply before treating a pairing as standing.
+- On interaction/SITREP: reconcile current owner request and latest evidence; update only changed priorities/decisions; no automatic status diary.
+
+- **2026-10-21 research delta:** [Website-to-local Capture Studio](https://github.com/owenservera/aion/tree/main/workspace/aion/sessions/roles/09-global-research/labs/website-to-local-streaming) now has committed Node >=22 CDP L1 capture, decoded L2, DOM L3, local recording/replay, shape inference and site profiles. Commit [`cf0187c`](https://github.com/owenservera/aion/commit/cf0187c3d3d10f09ba883cf88233dee453764235) reports 6/6 unit + 4/4 synthetic Chromium 153 E2E; **no real signed-in ChatGPT Windows field receipt**. Missing `capture-studio/bin/studio.mjs` despite `package.json` CLI declaration (reviewed main); this is not yet a verified user-facing CLI. New AION-X08 is **parallel Research 09**, not I1/I2 dependency. Keep two lanes separate; require real scoped capture, privacy/coverage gap behavior and local CLI operation before promotion.
+- **Team delta:** AION now has **13 core agents**; role 13 Semantics owns command/meaning and authorization semantics, not runtime. [MATRIX](../../AGENT-MATRIX.md) updated; do not introduce a parallel parser/Bus.

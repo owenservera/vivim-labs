@@ -1,0 +1,72 @@
+[
+  {
+    "file_id": "file:001",
+    "status": "exact",
+    "expected_sha": "91fbedf6e6f8750a03e1fe97567d29c74feaffb8",
+    "actual_sha": "91fbedf6e6f8750a03e1fe97567d29c74feaffb8",
+    "error": null
+  },
+  {
+    "file_id": "file:002",
+    "status": "exact",
+    "expected_sha": "aa6a9302a93f7fb6a91dd876839f749f7f634418",
+    "actual_sha": "aa6a9302a93f7fb6a91dd876839f749f7f634418",
+    "error": null
+  },
+  {
+    "file_id": "file:003",
+    "status": "exact",
+    "expected_sha": "e1cfc546876a92835ad0b1ff6ec943d3c48111d0",
+    "actual_sha": "e1cfc546876a92835ad0b1ff6ec943d3c48111d0",
+    "error": null
+  },
+  {
+    "file_id": "file:004",
+    "status": "exact",
+    "expected_sha": "58db31c086c8f1944aab509ba053682644421bc1",
+    "actual_sha": "58db31c086c8f1944aab509ba053682644421bc1",
+    "error": null
+  },
+  {
+    "file_id": "file:005",
+    "status": "exact",
+    "expected_sha": "2e93b856821b140e239a584ba0e6fdcdd7b932bf",
+    "actual_sha": "2e93b856821b140e239a584ba0e6fdcdd7b932bf",
+    "error": null
+  },
+  {
+    "file_id": "file:006",
+    "status": "exact",
+    "expected_sha": "79e4050237bd8587d6bc5e178d5f8a5cbbd66cb0",
+    "actual_sha": "79e4050237bd8587d6bc5e178d5f8a5cbbd66cb0",
+    "error": null
+  },
+  {
+    "file_id": "file:007",
+    "status": "exact",
+    "expected_sha": "63d83f03fc3382f9133234fe2b6a98eec079469e",
+    "actual_sha": "63d83f03fc3382f9133234fe2b6a98eec079469e",
+    "error": null
+  },
+  {
+    "file_id": "file:008",
+    "status": "exact",
+    "expected_sha": "e904218e80ccaf56b5c574f29603cb1c0ebc1d57",
+    "actual_sha": "e904218e80ccaf56b5c574f29603cb1c0ebc1d57",
+    "error": null
+  },
+  {
+    "file_id": "file:009",
+    "status": "exact",
+    "expected_sha": "3cc6573b5e5eca70e58b69f53e5405f0f267d65f",
+    "actual_sha": "3cc6573b5e5eca70e58b69f53e5405f0f267d65f",
+    "error": null
+  },
+  {
+    "file_id": "file:010",
+    "status": "exact",
+    "expected_sha": "89362b2367fffc031bf5fdc8cce28a199d79deba",
+    "actual_sha": "89362b2367fffc031bf5fdc8cce28a199d79deba",
+    "error": null
+  }
+]

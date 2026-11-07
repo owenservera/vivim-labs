@@ -1,0 +1,16 @@
+{"id":"section:213:001","file_id":"file:213","heading":"Provider-native shape contract — Claude WEB (`claude-web-shapes/1`)","line":1,"level":1}
+{"id":"section:213:002","file_id":"file:213","heading":"1. Identity grammar","line":7,"level":2}
+{"id":"section:213:003","file_id":"file:213","heading":"2. Transports and stream shapes","line":18,"level":2}
+{"id":"section:213:004","file_id":"file:213","heading":"3. Content parts observed vs documented","line":30,"level":2}
+{"id":"section:213:005","file_id":"file:213","heading":"4. Action surfaces (capability capsule semantics)","line":41,"level":2}
+{"id":"section:213:006","file_id":"file:213","heading":"5. Executable contract tests","line":50,"level":2}
+{"id":"section:213:007","file_id":"file:213","heading":"6. Gaps (the honest headline)","line":54,"level":2}
+{"id":"section:215:001","file_id":"file:215","heading":"AGENTS.md — working agreements for vivim-omega (owner-maintained)","line":1,"level":1}
+{"id":"section:215:002","file_id":"file:215","heading":"Commands","line":7,"level":2}
+{"id":"section:215:003","file_id":"file:215","heading":"Laws that bite (B1–B5 + process)","line":25,"level":2}
+{"id":"section:215:004","file_id":"file:215","heading":"Decision records: checker traps (all bitten live — respect them)","line":50,"level":2}
+{"id":"section:215:005","file_id":"file:215","heading":"Code surfaces with gate teeth","line":69,"level":2}
+{"id":"section:215:006","file_id":"file:215","heading":"Commits, tags, push (conventions that prevent real incidents)","line":89,"level":2}
+{"id":"section:215:007","file_id":"file:215","heading":"Windows facts (proven, not folklore)","line":104,"level":2}
+{"id":"section:215:008","file_id":"file:215","heading":"Do not","line":117,"level":2}
+{"id":"section:217:001","file_id":"file:217","heading":"Agent Instructions — Product Design Folder","line":1,"level":1}

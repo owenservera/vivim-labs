@@ -1,0 +1,67 @@
+{"id":"section:011:001","file_id":"file:011","heading":"I1 — Capture Studio self-improving webapp read adapters (2026-10-24)","start_line":1,"depth":1,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:011:002","file_id":"file:011","heading":"Files and entrypoints","start_line":5,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:011:003","file_id":"file:011","heading":"Proven scope and failure cases","start_line":13,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:011:004","file_id":"file:011","heading":"Exact Core / Z.ai wiring (do not replace existing systems)","start_line":21,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:011:005","file_id":"file:011","heading":"Compatibility / outstanding integration","start_line":29,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:012:001","file_id":"file:012","heading":"AION Capture Studio — Systems S1 independent diagnostic supplier","start_line":1,"depth":1,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:012:002","file_id":"file:012","heading":"Provenance and layout","start_line":5,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:012:003","file_id":"file:012","heading":"Full-path architecture map (current source versus missing seams)","start_line":20,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:012:004","file_id":"file:012","heading":"TOP 5 source-specific fixes — priority / owner / measured independent proof","start_line":24,"depth":3,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:012:005","file_id":"file:012","heading":"Exact proposed wire contracts (all advisory; caller validates server provenance)","start_line":36,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:012:006","file_id":"file:012","heading":"Z.ai ordered integration sequence (short, collision-aware)","start_line":46,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:012:007","file_id":"file:012","heading":"Repro receipt and pending real proof","start_line":59,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:013:001","file_id":"file:013","heading":"AION / U1 universal webapp Chat UI supplier — 24 October 2026","start_line":1,"depth":1,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:013:002","file_id":"file:013","heading":"Files and extraction","start_line":5,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:013:003","file_id":"file:013","heading":"Integration in canonical existing `/chat`","start_line":21,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:013:004","file_id":"file:013","heading":"Compatibility, collisions and proof still needed","start_line":32,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:014:001","file_id":"file:014","heading":"AION @VALUE-ORACLE — Agent Instructions","start_line":1,"depth":1,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:015:001","file_id":"file:015","heading":"@VALUE-ORACLE — Agent Boot / SITREP / Build Contract","start_line":1,"depth":1,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:015:002","file_id":"file:015","heading":"Commands","start_line":5,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:015:003","file_id":"file:015","heading":"Startup read order (bounded)","start_line":13,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:015:004","file_id":"file:015","heading":"Oracle decision method","start_line":22,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:015:005","file_id":"file:015","heading":"Acting as an Oracle: all four capabilities are legitimate","start_line":34,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:015:006","file_id":"file:015","heading":"First proof: don't build a second platform","start_line":41,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:015:007","file_id":"file:015","heading":"Evidence, delivery and status protocol","start_line":53,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:016:001","file_id":"file:016","heading":"GitNexus — Code Intelligence","start_line":2,"depth":1,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:016:002","file_id":"file:016","heading":"Always Do","start_line":8,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:016:003","file_id":"file:016","heading":"When Debugging","start_line":16,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:016:004","file_id":"file:016","heading":"When Refactoring","start_line":23,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:016:005","file_id":"file:016","heading":"Never Do","start_line":29,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:016:006","file_id":"file:016","heading":"Tools Quick Reference","start_line":36,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:016:007","file_id":"file:016","heading":"Impact Risk Levels","start_line":47,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:016:008","file_id":"file:016","heading":"Resources","start_line":55,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:016:009","file_id":"file:016","heading":"Self-Check Before Finishing","start_line":64,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:016:010","file_id":"file:016","heading":"CLI","start_line":72,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:017:001","file_id":"file:017","heading":"cdpilot","start_line":5,"depth":1,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:017:002","file_id":"file:017","heading":"Kimlik","start_line":9,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:017:003","file_id":"file:017","heading":"Hızlı Başlangıç","start_line":14,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:017:004","file_id":"file:017","heading":"Dosya Haritası","start_line":21,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:017:005","file_id":"file:017","heading":"Dikkat Edilecekler","start_line":28,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:017:006","file_id":"file:017","heading":"Aktif Çalışma","start_line":37,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:017:007","file_id":"file:017","heading":"Son Oturum","start_line":52,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:017:008","file_id":"file:017","heading":"GitNexus — Code Intelligence","start_line":59,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:018:001","file_id":"file:018","heading":"context-mode — MANDATORY routing rules","start_line":1,"depth":1,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:018:002","file_id":"file:018","heading":"BLOCKED commands — do NOT attempt these","start_line":5,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:018:003","file_id":"file:018","heading":"curl / wget — BLOCKED","start_line":7,"depth":3,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:018:004","file_id":"file:018","heading":"Inline HTTP — BLOCKED","start_line":13,"depth":3,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:018:005","file_id":"file:018","heading":"WebFetch / web browsing — BLOCKED","start_line":18,"depth":3,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:018:006","file_id":"file:018","heading":"REDIRECTED tools — use sandbox equivalents","start_line":23,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:018:007","file_id":"file:018","heading":"Shell (>20 lines output)","start_line":25,"depth":3,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:018:008","file_id":"file:018","heading":"read_file (for analysis)","start_line":31,"depth":3,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:018:009","file_id":"file:018","heading":"grep / search (large results)","start_line":35,"depth":3,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:018:010","file_id":"file:018","heading":"Tool selection hierarchy","start_line":38,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:018:011","file_id":"file:018","heading":"Output constraints","start_line":46,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:018:012","file_id":"file:018","heading":"ctx commands","start_line":52,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:019:001","file_id":"file:019","heading":"cdpilot","start_line":6,"depth":1,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:019:002","file_id":"file:019","heading":"When to reach for it","start_line":14,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:019:003","file_id":"file:019","heading":"Before first use","start_line":22,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:019:004","file_id":"file:019","heading":"Core commands (CLI form; MCP tool names mirror these 1:1)","start_line":36,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:019:005","file_id":"file:019","heading":"Do not invent commands","start_line":56,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:020:001","file_id":"file:020","heading":"Repository Guidelines","start_line":1,"depth":1,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:020:002","file_id":"file:020","heading":"Dos and Don’ts","start_line":3,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:020:003","file_id":"file:020","heading":"Project Structure and Module Organization","start_line":12,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:020:004","file_id":"file:020","heading":"Build, Test, and Development Commands","start_line":27,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:020:005","file_id":"file:020","heading":"Coding Style and Naming Conventions","start_line":38,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:020:006","file_id":"file:020","heading":"Testing Guidelines","start_line":48,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:020:007","file_id":"file:020","heading":"Commit and Pull Request Guidelines","start_line":55,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}
+{"id":"section:020:008","file_id":"file:020","heading":"Safety and Permissions","start_line":63,"depth":2,"section_type_id":"section_type:unique","evidence":"observed_heading"}

@@ -1,0 +1,107 @@
+# AION Role 06 — TOOLSMITH — SITREP
+
+## 2026-10-21 skills first pass — verified source, not Windows deployment
+
+**Audited:** the existing 9 Role 06 skills, shared [Master Skills Builder](https://github.com/owenservera/aion/blob/main/.opencode/skills/aion-skill-builder/SKILL.md), its Node validation/audit helper and V2/ZCode references, current [root OpenCode V2 sources](https://github.com/owenservera/aion/blob/main/opencode.jsonc) (twelve agent skill roots), and peer skill IDs. Reused existing **chrome-acp-relay**, **tool-discovery**, **incident-recovery** and the shared builder instead of creating a second browser, skill registry, or registration skill.
+
+**Executed here:** built a read-only [registration-triage script](skills/chrome-acp-relay/scripts/registration-triage.mjs) plus [6 Node fixture tests](skills/chrome-acp-relay/scripts/registration-triage.test.mjs); six tests passed on isolated Linux Node 22.16.0 (not the owner Windows host). The script compares candidate host/worker file **snapshots** to source hashes and classifies only fixed codes without account/network/browser side effects; it **cannot** establish which worker Chrome currently loaded or prove a live I1. Updated [Chrome skill](skills/chrome-acp-relay/SKILL.md) and [role skills index](skills/README.md) to use it on actual I1 diagnostics, replacing obsolete fixture-only six-card workflow language.
+
+**Harness status:** GitHub source READY and repo `opencode.jsonc` contains the 12 source roots; **not yet demonstrated** that actual installed Windows OpenCode V2 discovers/invokes this skill from its active working directory, or that ZCode has imported/enabled it. Existing root `skills/README.md` is a V2 flat-Markdown discovery/audit concern, not proof of successful registration. Do not copy directories or install anything on Windows merely because this file was committed. Next local proof: actual Node and source checkout, builder `audit` + `validate` and fixture test, OpenCode `skill` load, then an operator-verified native-host and worker comparison, and only then Development's independent I1 receipt.
+
+**Ongoing SITREP behavior:** compare repeated tool failures and user corrections against existing Role 06 skills, builder, memory/CANON + Immediate, peer capabilities and relevant actual host evidence; improve one existing skill when enough evidence justifies it. No mandatory skill production or no-change edits.
+
+---
+
+## 2026-10-21 three-tier memory first pass — current continuity
+
+**Complete on GitHub:** The role's persistent context is populated at [CANON](memory/CANON/README.md), [Immediate](memory/Immediate/README.md) and [Curated](memory/Curated/README.md). Read Immediate on **every interaction**; on SITREP reconcile all tiers with current `main`, agent communications, Development's actual evidence and [Toolsmith shared intelligence](../../../shared/agent-communications/intelligence/agents/06-tooling-integration-engineer/README.md). Update only for meaningful new truth, promote enduring corrections and prune resolved immediates; no new logging cadence.
+
+**Corrections worth preserving:** This conversation is launched, even though old BOOTSTRAP history says not launched; outdated numeric work quotas and historical Grok/Track A priorities are **not** current operating gates. As of this GitHub review, Development has responded to the Toolsmith pairing **in principle**, while live Windows install/version, account-registration outcome and independently originated I1 are still **unverified beyond the last recorded failed attempt**. The active diagnostic remains installed-code provenance + sanitized fixed-code classification, not a speculative rebuild. GitHub publication is not local runtime execution.
+
+**Role-memory vs team intelligence:** Personal operating lessons and next-context belong in memory. Cross-agent tool capability and failure-path knowledge stay in the existing [shared Role 06 intelligence home](../../../shared/agent-communications/intelligence/agents/06-tooling-integration-engineer/README.md); Development owns product receipts, Planning the priority list.
+
+---
+
+## Current handoff — 2026-10-21 (dedicated role conversation launched)
+
+**Conversation:** This dedicated Toolsmith chat has received the owner's direct launch and is responding. The conversation URL has not been supplied/verified; do not invent one. **Scope:** source-backed GitHub SITREP and role alignment are active here; no Windows access, live test, install or background worker execution was observed in this chat.
+
+**Remote source checkpoint:** `main@a78c4c1bf3a4fc65c8a8d59ffd96224b769ff6bd` at discovery (recheck on next SITREP). Read [root rules](../../../../../AGENTS.md), [repository governance](../../../../../REPOSITORY-GOVERNANCE.md), [Planning TASKS](../02-long-term-planning-alignment/TASKS.md) and [role matrix](../02-long-term-planning-alignment/AGENT-MATRIX.md), the [Living Operating Model](../../../shared/agent-communications/LIVING-OPERATING-MODEL.md) and [core-team relaunch invitation](../../../shared/agent-communications/NINE-ROLE-RELAUNCH.md) (updated after bootstrap to include all **twelve** core agents: nine roles plus Development, Integration Manager and Harvest/Acceleration). Found commons marker `AION-COMMS-FIRST-CONTACT-20261021` **in GitHub**, not by a proactive notification. No prior dedicated Toolsmith peer exchanges existed in that commons at this checkpoint.
+
+**Changed priorities:** Windows-only local prototype; Grok/BFF and Z.ai lanes parked unless newly activated. Development owns executable Chrome/Bus/CLI source and tests; Toolsmith owns *tool readiness, transport/protocol conformance, diagnosis, environment recovery and concise testable advice*, not product implementation, Planning's central tasks or Harvest's source intake. Main now includes merged [PR #62](https://github.com/owenservera/aion/pull/62) (watch-only receive, account registration, local-owner/hardened profile and diagnostic propagation). Old 'uncommitted / no implementation' narratives are historical. Current source on GitHub is **not** proof that the Windows-installed dev extension/native host is refreshed.
+
+**Highest-value active support, source-backed:** Development's [work desk](../../../ops/chrome-relay/workers/development/DELIVERABLES.md) records `node velocity/bin/aion-local.mjs account register chief` → `REGISTRATION_FAILED`, no account email stored, and no live exact-bound I1 receive. Focus on the shortest diagnosis: verify local checkout + actual installed host and dev extension source revision, run explicit registration once, collect only fixed `code` / optional `diagnostic` (never email, cookies or /api/auth/session data), locate failure along CLI → native host → receive router → page registration reader, fix only the observed seam, rerun focused tests, then prove watch-only exact-thread receive. The current source already propagates an allow-listed diagnostic via `velocity/bin/aion-local.mjs`, `velocity/src/native-host/relay.mjs` and `velocity/extension-dev/receive-router.js`; whether installed code carries it is **unknown**. A native IPC ping is not an I1 receipt.
+
+**Operating choice:** Work from existing BOOTSTRAP / AGENTS / this SITREP + relevant current Development desk, not a new status registry. On SITREP diff GitHub changes; read relevant commons notes; pick an observed toolchain blocker; produce a narrow fix, reproducible smoke probe or honest diagnosis with timestamp/revision. Update this file only for meaningful continuity. Do not claim all historical assignments still active. Use the provisional [Development ↔ Toolsmith thread](../../../shared/agent-communications/toolsmith-development/README.md) for the registration/receive seam; Development **accepted collaboration in principle** on 2026-10-21, not a standing runtime connection, a dispatch or I1 proof. Planning and Chief of Staff are consult-on-change relationships, not standing 1:1 folders.
+
+**Next proof needed:** Owner-local agent / Development supplies a redacted `account register chief` fixed-code result against a verified installed build; Toolsmith can identify the failing layer and provide an exact minimal remedy. If no live evidence is available, source-only diagnosis remains labeled as such. Existing [issue #19](https://github.com/owenservera/aion/issues/19) is the activation/task record; no new issue or redundant queue.
+
+---
+
+### Historical SITREP below (dated 2026-10-16 to 2026-10-19; superseded where it conflicts)
+
+Created: 2026-10-16.
+Role conversation URL: NOT YET PROVIDED. Agent runtime acknowledgment: NONE.
+Workspace state: REPO SCAFFOLD; no host setup, skills installation, extension installation or code execution claimed.
+Owner: TOOLSMITH (once launched). Supervisor: Chief of Chiefs. Dispatch: Chief of Staff.
+
+## Current assignment
+Prepare tooling expertise, runbook skills and reproducible acceptance for Chrome ACP Relay issue #18, TTP-001 and UAH/ACP/ZCode/OpenCode interoperability. Keep existing M0.5 Grok priority undisturbed.
+
+## Confirmed sources, not runtime observations
+- AION role patterns and authority rules in existing role bootstraps and OPERATING-RULES.md.
+- Relay design and staged OpenCode fixture-MVP work order are in workspace/aion/ops/chrome-relay/.
+- Toolchain names and host descriptions from existing AION documentation. Actual current versions, connectivity, credentials, runtime states and installation privileges are UNVERIFIED until sampled directly.
+
+## First three work gates
+1. Reconcile TOOL-REGISTRY.json to evidence from authorized Windows/Linux hosts and GitHub, recording date/version/provenance and unknowns.
+2. Verify CR-001 OpenCode code-only build order against current ACP protocol and Chrome MV3 capabilities; bring one runnable negative-test specification.
+3. Support Chief of Staff's authorized executor handshake for CR-001/TTP-001, recording genuine executor session/commit/test evidence or precise blocker.
+
+## Initial blocker
+No independently launched Role 06 ChatGPT conversation, no observed authorization/executor session. Repository publications are not delivery into a live role.
+
+## Workspace publication and activation ticket — 2026-10-16
+Issue #19: https://github.com/owenservera/aion/issues/19 . Created role bootstrap, scoped AGENTS instructions, workspace map, seeded 20-item qualified registry and 8 SKILL.md runbooks. Updated sessions roster, Chief bootstrap and CR-001 documentation; reported assignment in issue #18. Verification: repository readback pending final audit; no independent ChatGPT role chat exists/has acknowledged yet. Status: DOCUMENTED / NOT ACTIVE. Next owner action: launch dedicated ChatGPT chat from BOOTSTRAP, register real chat URL and first ACK. First execution gate: read-only version/capability sample and CR-001 bounded test preparation.
+
+## AION Shared Technical Proposal Commons — role-specific participation (2026-10-16)
+Proposal reviewer: assess tool compatibility/technical feasibility after reading original RAW and decomposed atoms, providing versioned source-backed comments and your own structured score when appropriate. Role 07 may aggregate, not impersonate your assessment. Your own live role activation remains unverified.
+Pool: https://github.com/owenservera/aion/tree/main/workspace/aion/shared/technical-proposals ; intake issue: https://github.com/owenservera/aion/issues/20 ; scoring: https://github.com/owenservera/aion/blob/main/workspace/aion/shared/technical-proposals/REVIEW-PROTOCOL.md . This is a published handoff, not proof your separate ChatGPT session received it.
+
+## Z-FORGE Role 08 technical interface — 2026-10-16
+AION added [Employee 08 Z.ai WEB Full-Stack Agent sandbox strategist](https://github.com/owenservera/aion/issues/21). TOOLSMITH receives only observed runtime/tool/ACP/Chrome extension compatibility facts with source/UTC/model evidence; independent technical review on exported sandbox artifacts. Do not confuse Z.ai web Agent Mode with ZCode desktop product. No automatic authorization for sandbox Git pushes or owner Windows host access; Grok M0.5 remains separate. Published handoff is not independent Role 06 chat acknowledgment.
+
+## RL-001 Chrome keyword role launcher — technical review, 2026-10-16
+[Issue #22](https://github.com/owenservera/aion/issues/22) defines single-gesture Chrome `aion 08` / panel `AION:08` → new ChatGPT role tab → GitHub workspace context bootstrap → desired conversation title. Review [spec and test matrix](https://github.com/owenservera/aion/tree/main/workspace/aion/ops/chrome-relay/role-launcher) for Chrome MV3 omnibox/tabs, minimum permissions, actual Project placement, safe popup/sidepanel, exact alias matching, no browser-API assumption for native chat rename, fragile ChatGPT UI fallback. Optional in-composer exact-keyword Launch action is gated/opt-in. No Playwright/Puppeteer. Do not confuse protocol/registry publication with installed Chrome extension or actual independently created title.
+
+## RC-V1 mobile-first role research — 2026-10-16
+The owner distinguishes immediate mobile-only use cases from future Chrome automation: A strict clean bootstrap, B first-message employee launch/context-link, C in-chat context switch, D employee resume. **You own research and field validation** in [issue #23](https://github.com/owenservera/aion/issues/23), [seed](https://github.com/owenservera/aion/blob/main/workspace/aion/ops/role-context-v1/README.md), with Planning 02 reviewer and Chief 05 acceptance. Research brief identifies Project-only memory as project boundary (not intra-project role separation), Temporary Unpersonalized isolation vs plugin/persistence limits, and behavioral-only switch retaining chat history. Deliver mobile-specific exact UX/trials, 3 fallback bootstrap packets, honest isolation matrix and V1/V2 boundary. V2 remains [Chrome Launcher #22](https://github.com/owenservera/aion/issues/22). Repo publication is not a live acknowledgment by your separate chat.
+
+## P0 M1 Council Z-FORGE Prep — M1C-06 — 2026-10-16
+**State: REQUESTED_IN_GITHUB / AWAITING LIVE ROLE ACK.** Owner requested eight dedicated employee contributions consolidated by Z-FORGE. Read [council integration contract](https://github.com/owenservera/aion/blob/main/workspace/aion/ops/zai-sandbox-lab/m1-council-prep/README.md), [M1 source canon](https://github.com/owenservera/aion/blob/main/workspace/aion/canon/AION-MILESTONE-1-INTROSPECTION.md), and [central reporting issue #24](https://github.com/owenservera/aion/issues/24).
+**Your specific assignment:** Your current work: ACP/UAH/OpenCode/ZCode/Chrome MV3 compatibility and tooling runbooks. Specify minimum OS-neutral envelope and return semantics, Chrome extension vs native browser adapter tradeoff, permissions, simulated ChatGPT-like test page, streaming capture, duplicate composer, disconnect/reconnect/idempotency/fake-proof negatives, and allowed build/test methods. No Playwright or Puppeteer. Real authenticated ChatGPT selectors unverified.
+**Expected component:** `workspace/aion/ops/zai-sandbox-lab/m1-council-prep/components/BROWSER-AND-ACP.md` **ONLY after genuinely authored**; no fake placeholders. Report your actual acknowledgment and source-backed findings as one comment in issue #24 using the `AION_ZFORGE_M1_COMPONENT_V1` format. Z-FORGE 08 owns consolidation; Chief of Staff 03 owns real follow-up. This SITREP update does NOT reach/wake your independent ChatGPT conversation. If unavailable, role 08 labels component pending and uses source-documented fallback.
+
+## ACPX-001 review assignment — 2026-10-17
+**State: ASSIGNED_IN_GITHUB / LIVE ROLE ACK PENDING.** Read [ACPX review issue #25](https://github.com/owenservera/aion/issues/25), the user's ACPX v0.1.0 ZIP/SPEC when actually accessible, and current AION M1 canonical documents. **Your slice:** lead source-level ACP/Chrome MV3/Bun/security adapter review and permitted non-Playwright E2E replacement. Report back to issue #25 in `ACPX_REVIEW_V1` format, with precise source access level and file/line evidence; Z-FORGE 08 will integrate actual replies with issue #24. The uploaded ZIP is not yet accessible from GitHub; request an approved source capsule, do not pretend to have code access. Important: ZIP contains prohibited Playwright in `examples/e2e.mjs`; do not run/copy it or use Puppeteer. No host install, no private session transfer, no live ChatGPT experiment. Publishing this instruction does not activate your separate conversation.
+
+## P0 M1-002 — browser adapter technical lead — 2026-10-17
+**State: ASSIGNED_IN_GITHUB / AWAITING INDEPENDENT ROLE ACK.** Owner authorized follow-on work after M1-001 independently verified MOCK protocol. [Execution issue #26](https://github.com/owenservera/aion/issues/26) is the authoritative assignment. You own implementable browser adapter contract, isolated ChatGPT-like fake page interface, exact origin/permission boundaries, message correlation and ACK-vs-reply-vs-consumption, negative cases, and runnable code/test evidence when actually executed. Read existing relay envelope, canonical M1 and M1-001 independent receipt in issue #24. Publish scoped `m1-002-browser-adapter/TOOLSMITH-ADAPTER-CONTRACT.md` and a real `AION_M1_002_COMPONENT_V1` report to #26. Coordinate with Z-FORGE 08, who packages Z.ai run. **Do not assume you are activated by this SITREP edit**; CoS 03 must obtain a genuine role-chat ACK. No Playwright/Puppeteer, live ChatGPT access, cookies, tokens, production host installs or ACPX scope expansion.
+
+## Acceleration research, capability tests and ChatGPT plugin study — 2026-10-18
+**State: REQUESTED_IN_GITHUB / LIVE ROLE ACK PENDING.** Owner asked that the acceleration research be filed here, that TOOLSMITH run internal capability testing, and that a custom ChatGPT plugin for the web app be studied. Read [the research](./research/ACCELERATION-AND-PLUGIN-2026-10-18.md): findings F1-F8, proposals P1-P6, an `aion-mcp` plugin sketch, and capability tests CAP-01..CAP-10. Reply with `AION_TOOLSMITH_CAPABILITY_V1` as a comment on the request issue. The tests are self-observations inside your own chat; no browser control. Publishing this entry does not wake your conversation; the owner pastes the issue link into your chat.
+
+## Bus V1/V2 build (Opus 5.5) — 2026-10-19
+**State: V1 CODE-COMPLETE + V2 CODE-COMPLETE, OFFLINE_PASS only.** Built from [OPUS-5.5-V1-V2-BUILD-BRIEF](./research/OPUS-5.5-V1-V2-BUILD-BRIEF.md) on main (commits e88166f, d418015, f782389, 2b33ac3, 44bc4c7 and this docs commit). Reference: [bus/README.md](../../../ops/chrome-relay/bus/README.md). Suites at build time: extension 663/663, bridge 126/126, bus runner 9/9, aion-mcp 10/10, demo D1–D3 OFFLINE_PASS. Pilot = chatgpt.com via the existing driver/task store; ACP executor via the real host; OpenCode V2 adapter optional. **Pending:** Windows run of `bus/windows/Install-AionBus.ps1`, extension reload, SYNC-0, owner grant + one live ChatGPT agent + negative tests, one OpenCode prompt, ChatGPT custom-MCP write entitlement. No live send was made; M1 unchanged.
+
+## Persistent agent memory (standing)
+
+Read `memory/CANON/`, `memory/Immediate/`, and `memory/Curated/` at bootstrap and relevant SITREPs. CANON holds verified durable rules, lessons, decisions and recurring failure/negative patterns with better alternatives; Immediate holds active work, current dependencies, risks, next actions and corrections and should be considered **every interaction**; Curated holds useful style, aesthetics, personalization and working preferences without guessing private facts. Own a high-value first pass; do not fill with stale copied chat or speculative facts. On SITREP reconcile these against the repo and agent intelligence index, and update only materially useful changes; promote durable facts out of Immediate, correct/retire stale material. No mandatory log on every turn. Existing owner's rules take priority.
+
+## Skills check on SITREP
+
+During SITREP, check this role's **skills/** alongside memory/Immediate, CANON, relevant repository changes and shared intelligence. Notice missing repetitive procedures, ineffective or outdated skills, opportunities to reuse peer skills, and new verified harness capabilities. Update or create skills only when practically beneficial; validate relevant changes and distinguish repository-defined, discovered and locally executed. Read the [Master Skills Builder](https://github.com/owenservera/aion/blob/main/.opencode/skills/aion-skill-builder/SKILL.md) when skill-building is useful. Ordinary interactions should identify promising recurring patterns without mandatory documentation churn.
+
+## Memory on SITREP
+
+Read all approved global tiers plus the full local `memory/` and `Curated/BEST-PRACTICES.md`; compare current facts, prune stale Immediate, distill repeated corrections into one-line personal practices. Reduce tokens without deleting important signal. Submit globally useful candidates for owner interview; never self-promote or make no-change edits.

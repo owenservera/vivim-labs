@@ -1,0 +1,82 @@
+{"id":"section:021:001","file_id":"file:021","heading":"Agent Instructions","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:021:002","file_id":"file:021","heading":"Engineering direction","start_line":7,"depth":2,"evidence":"observed_heading"}
+{"id":"section:021:003","file_id":"file:021","heading":"Maintainability and file size","start_line":20,"depth":2,"evidence":"observed_heading"}
+{"id":"section:021:004","file_id":"file:021","heading":"Testing direction","start_line":29,"depth":2,"evidence":"observed_heading"}
+{"id":"section:021:005","file_id":"file:021","heading":"Bridge invariants","start_line":36,"depth":2,"evidence":"observed_heading"}
+{"id":"section:021:006","file_id":"file:021","heading":"Workflow and apply safety","start_line":50,"depth":2,"evidence":"observed_heading"}
+{"id":"section:021:007","file_id":"file:021","heading":"Protocol and release changes","start_line":57,"depth":2,"evidence":"observed_heading"}
+{"id":"section:021:008","file_id":"file:021","heading":"Handoff","start_line":63,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:001","file_id":"file:022","heading":"Project Context","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:022:002","file_id":"file:022","heading":"Current system","start_line":3,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:003","file_id":"file:022","heading":"Request and storage failure boundaries","start_line":20,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:004","file_id":"file:022","heading":"2.4.3 stable browser-tab identity","start_line":31,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:005","file_id":"file:022","heading":"2.4.2 empty-home intelligence picker","start_line":37,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:006","file_id":"file:022","heading":"2.4.0 semantic DOM ownership","start_line":43,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:007","file_id":"file:022","heading":"2.3.24 canonical workflow hard cut","start_line":53,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:008","file_id":"file:022","heading":"2.3.23 authenticated attachment transport","start_line":61,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:009","file_id":"file:022","heading":"2.3.22 response observation and turn ownership","start_line":67,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:010","file_id":"file:022","heading":"2.3.19 generated-image diagnostic stability","start_line":74,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:011","file_id":"file:022","heading":"2.3.18 historical generated-image parsing","start_line":79,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:012","file_id":"file:022","heading":"2.3.17 intelligence picker slider","start_line":85,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:013","file_id":"file:022","heading":"Durable generated-image artifacts","start_line":91,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:014","file_id":"file:022","heading":"6.3.13 tab-scoped browser identity and interactive fresh-chat bootstrap","start_line":101,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:015","file_id":"file:022","heading":"6.3.12 successful-run mock parity","start_line":109,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:016","file_id":"file:022","heading":"6.3.11 ChatGPT request-error recovery","start_line":117,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:017","file_id":"file:022","heading":"6.3.10 hidden-tab submission and physical release parity","start_line":124,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:018","file_id":"file:022","heading":"6.3.9 E2E artifact parity and exact source cleanup","start_line":132,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:019","file_id":"file:022","heading":"Composition","start_line":138,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:020","file_id":"file:022","heading":"Request lifecycle","start_line":166,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:021","file_id":"file:022","heading":"Browser runtime","start_line":187,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:022","file_id":"file:022","heading":"Stateful module layout","start_line":193,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:023","file_id":"file:022","heading":"Browser recovery","start_line":197,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:024","file_id":"file:022","heading":"Standalone command recovery","start_line":201,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:025","file_id":"file:022","heading":"Request snapshot recovery","start_line":205,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:026","file_id":"file:022","heading":"Canonical state and diagnostics","start_line":209,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:027","file_id":"file:022","heading":"Public progress and remote workflow integration","start_line":216,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:028","file_id":"file:022","heading":"Workflows","start_line":222,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:029","file_id":"file:022","heading":"Interactive runtime","start_line":228,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:030","file_id":"file:022","heading":"E2E and captured DOM evidence","start_line":232,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:031","file_id":"file:022","heading":"Structural status","start_line":242,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:032","file_id":"file:022","heading":"Handoff constraints","start_line":246,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:033","file_id":"file:022","heading":"Current verification gaps","start_line":254,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:034","file_id":"file:022","heading":"Known compatibility limits","start_line":264,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:035","file_id":"file:022","heading":"Current reliability changes","start_line":269,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:036","file_id":"file:022","heading":"Latest workflow reliability changes","start_line":284,"depth":2,"evidence":"observed_heading"}
+{"id":"section:022:037","file_id":"file:022","heading":"Workflow operator model","start_line":293,"depth":2,"evidence":"observed_heading"}
+{"id":"section:023:001","file_id":"file:023","heading":"Multi AI Chat 遷移與接手索引","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:023:002","file_id":"file:023","heading":"目前程式基準","start_line":9,"depth":2,"evidence":"observed_heading"}
+{"id":"section:023:003","file_id":"file:023","heading":"交接資料從哪裡讀","start_line":22,"depth":2,"evidence":"observed_heading"}
+{"id":"section:023:004","file_id":"file:023","heading":"Patch 與 worktree 的處理結果","start_line":36,"depth":2,"evidence":"observed_heading"}
+{"id":"section:023:005","file_id":"file:023","heading":"Session 備份完整度","start_line":53,"depth":2,"evidence":"observed_heading"}
+{"id":"section:023:006","file_id":"file:023","heading":"舊待辦如何解讀","start_line":66,"depth":2,"evidence":"observed_heading"}
+{"id":"section:023:007","file_id":"file:023","heading":"驗證與後續工作","start_line":72,"depth":2,"evidence":"observed_heading"}
+{"id":"section:024:001","file_id":"file:024","heading":"integration-manager — Agent instructions","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:024:002","file_id":"file:024","heading":"Persistent agent memory (standing)","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:024:003","file_id":"file:024","heading":"Skills builder / agent capability ownership","start_line":9,"depth":2,"evidence":"observed_heading"}
+{"id":"section:024:004","file_id":"file:024","heading":"Memory context","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:025:001","file_id":"file:025","heading":"AION Integration Manager — source packaging SITREP","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:025:002","file_id":"file:025","heading":"Relaunch checkpoint — 2026-10-21 (current)","start_line":3,"depth":2,"evidence":"observed_heading"}
+{"id":"section:025:003","file_id":"file:025","heading":"Actual custody and dispatch order","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:025:004","file_id":"file:025","heading":"Delivered code","start_line":33,"depth":2,"evidence":"observed_heading"}
+{"id":"section:025:005","file_id":"file:025","heading":"Development must integrate and prove","start_line":39,"depth":2,"evidence":"observed_heading"}
+{"id":"section:025:006","file_id":"file:025","heading":"Persistent agent memory (standing)","start_line":49,"depth":2,"evidence":"observed_heading"}
+{"id":"section:025:007","file_id":"file:025","heading":"Skills check on SITREP","start_line":53,"depth":2,"evidence":"observed_heading"}
+{"id":"section:025:008","file_id":"file:025","heading":"Memory on SITREP","start_line":57,"depth":2,"evidence":"observed_heading"}
+{"id":"section:026:001","file_id":"file:026","heading":"CANON — Integration Manager (core agent 11)","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:026:002","file_id":"file:026","heading":"Enduring responsibilities and boundaries","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:026:003","file_id":"file:026","heading":"Recurring failure patterns → better defaults","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:026:004","file_id":"file:026","heading":"Provenance, change and retention","start_line":22,"depth":2,"evidence":"observed_heading"}
+{"id":"section:027:001","file_id":"file:027","heading":"Personal Best Practices — 11-integration-manager","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:028:001","file_id":"file:028","heading":"Curated — how this Integration Manager should work with the owner and AION peers","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:028:002","file_id":"file:028","heading":"Presentation and interaction defaults","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:028:003","file_id":"file:028","heading":"Working tempo and collaboration style","start_line":14,"depth":2,"evidence":"observed_heading"}
+{"id":"section:028:004","file_id":"file:028","heading":"How to refine this tier","start_line":21,"depth":2,"evidence":"observed_heading"}
+{"id":"section:029:001","file_id":"file:029","heading":"Immediate — Integration Manager current position","start_line":1,"depth":1,"evidence":"observed_heading"}
+{"id":"section:029:002","file_id":"file:029","heading":"What is real now","start_line":5,"depth":2,"evidence":"observed_heading"}
+{"id":"section:029:003","file_id":"file:029","heading":"Single highest-value next move","start_line":13,"depth":2,"evidence":"observed_heading"}
+{"id":"section:029:004","file_id":"file:029","heading":"Triggers that actually warrant changing this page","start_line":17,"depth":2,"evidence":"observed_heading"}
+{"id":"section:030:001","file_id":"file:030","heading":"Integration Seam Preflight","start_line":6,"depth":1,"evidence":"observed_heading"}
+{"id":"section:030:002","file_id":"file:030","heading":"Before running","start_line":10,"depth":2,"evidence":"observed_heading"}
+{"id":"section:030:003","file_id":"file:030","heading":"Commands","start_line":16,"depth":2,"evidence":"observed_heading"}
+{"id":"section:030:004","file_id":"file:030","heading":"Product handoff after preflight","start_line":28,"depth":2,"evidence":"observed_heading"}
+{"id":"section:030:005","file_id":"file:030","heading":"Boundaries and availability","start_line":32,"depth":2,"evidence":"observed_heading"}

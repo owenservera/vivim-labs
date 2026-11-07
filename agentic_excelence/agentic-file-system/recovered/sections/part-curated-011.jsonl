@@ -1,0 +1,23 @@
+{"id":"section:106:001","file_id":"file:106","section_type_id":"section_type:context","heading":"Context7 Canonical Documentation Harvest","line":5,"level":1}
+{"id":"section:106:002","file_id":"file:106","section_type_id":"section_type:unique","heading":"Standing source rule","line":7,"level":2}
+{"id":"section:106:003","file_id":"file:106","section_type_id":"section_type:unique","heading":"Recipe","line":10,"level":2}
+{"id":"section:106:004","file_id":"file:106","section_type_id":"section_type:unique","heading":"Contract","line":18,"level":2}
+{"id":"section:109:001","file_id":"file:109","section_type_id":"section_type:tools","heading":"Model Capability Routing","line":5,"level":1}
+{"id":"section:109:002","file_id":"file:109","section_type_id":"section_type:unique","heading":"Seed routing order","line":7,"level":2}
+{"id":"section:109:003","file_id":"file:109","section_type_id":"section_type:unique","heading":"Procedure","line":10,"level":2}
+{"id":"section:109:004","file_id":"file:109","section_type_id":"section_type:unique","heading":"Success","line":18,"level":2}
+{"id":"section:111:001","file_id":"file:111","section_type_id":"section_type:verification","heading":"Evidence & Proof Factory","line":5,"level":1}
+{"id":"section:111:002","file_id":"file:111","section_type_id":"section_type:unique","heading":"Read first","line":7,"level":2}
+{"id":"section:111:003","file_id":"file:111","section_type_id":"section_type:workflow","heading":"Steps","line":11,"level":2}
+{"id":"section:111:004","file_id":"file:111","section_type_id":"section_type:unique","heading":"Status semantics","line":20,"level":2}
+{"id":"section:123:001","file_id":"file:123","section_type_id":"section_type:unique","heading":"Provenance, Identity and Deduplication","line":5,"level":1}
+{"id":"section:123:002","file_id":"file:123","section_type_id":"section_type:workflow","heading":"Steps","line":7,"level":2}
+{"id":"section:123:003","file_id":"file:123","section_type_id":"section_type:unique","heading":"Output","line":15,"level":2}
+{"id":"section:142:001","file_id":"file:142","section_type_id":"section_type:unique","heading":"Intra-Turn Team Fanout","line":5,"level":1}
+{"id":"section:208:001","file_id":"file:208","section_type_id":"section_type:unique","heading":"ChatGPT / AION integration specialist","line":5,"level":1}
+{"id":"section:210:001","file_id":"file:210","section_type_id":"section_type:unique","heading":"VIVIM Harness — start here","line":1,"level":1}
+{"id":"section:210:002","file_id":"file:210","section_type_id":"section_type:unique","heading":"Who does what","line":5,"level":2}
+{"id":"section:210:003","file_id":"file:210","section_type_id":"section_type:verification","heading":"Real-world testing and debugging standard","line":13,"level":2}
+{"id":"section:210:004","file_id":"file:210","section_type_id":"section_type:unique","heading":"Active goal","line":23,"level":2}
+{"id":"section:210:005","file_id":"file:210","section_type_id":"section_type:unique","heading":"New code file review (owner rule)","line":28,"level":2}
+{"id":"section:210:006","file_id":"file:210","section_type_id":"section_type:unique","heading":"Working style","line":34,"level":2}

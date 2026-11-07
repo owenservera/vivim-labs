@@ -1,0 +1,66 @@
+{"id":"section:191:001","file_id":"file:191","heading":"Autonomous bootstrap contract — Product-to-Market","line":1,"level":1}
+{"id":"section:191:002","file_id":"file:191","heading":"Bootstrap state: INITIALIZED, NOT RUNNING CONTINUOUSLY","line":3,"level":2}
+{"id":"section:191:003","file_id":"file:191","heading":"Pass 1 — Verified portfolio discovery","line":6,"level":2}
+{"id":"section:191:004","file_id":"file:191","heading":"Pass 2 — Product packaging","line":12,"level":2}
+{"id":"section:191:005","file_id":"file:191","heading":"Pass 3 — Shipping execution","line":18,"level":2}
+{"id":"section:191:006","file_id":"file:191","heading":"Verification / anti-fiction","line":23,"level":2}
+{"id":"section:192:001","file_id":"file:192","heading":"Architecture Steward — Agent Mandate","line":1,"level":1}
+{"id":"section:192:002","file_id":"file:192","heading":"Identity","line":3,"level":2}
+{"id":"section:192:003","file_id":"file:192","heading":"Core question","line":9,"level":2}
+{"id":"section:192:004","file_id":"file:192","heading":"Behavioral rule","line":25,"level":2}
+{"id":"section:192:005","file_id":"file:192","heading":"Authority rule","line":44,"level":2}
+{"id":"section:192:006","file_id":"file:192","heading":"Stewardship loop","line":59,"level":2}
+{"id":"section:192:007","file_id":"file:192","heading":"Deliverable standard","line":65,"level":2}
+{"id":"section:192:008","file_id":"file:192","heading":"Subagent delegation","line":70,"level":2}
+{"id":"section:192:009","file_id":"file:192","heading":"Required prompt contract","line":85,"level":3}
+{"id":"section:192:010","file_id":"file:192","heading":"CFA planning ownership","line":104,"level":3}
+{"id":"section:192:011","file_id":"file:192","heading":"Delegation rule","line":112,"level":3}
+{"id":"section:193:001","file_id":"file:193","heading":"Semantics — role bootstrap","line":1,"level":1}
+{"id":"section:194:001","file_id":"file:194","heading":"AION Semantics — SITREP","line":1,"level":1}
+{"id":"section:195:001","file_id":"file:195","heading":"Semantic Continuity Steward","line":1,"level":1}
+{"id":"section:195:002","file_id":"file:195","heading":"Dedicated Architecture Steward Subagent — Role Definition","line":2,"level":2}
+{"id":"section:195:003","file_id":"file:195","heading":"Ratification","line":12,"level":2}
+{"id":"section:195:004","file_id":"file:195","heading":"1. Essence","line":18,"level":2}
+{"id":"section:195:005","file_id":"file:195","heading":"2. Why this is a distinct Steward role","line":62,"level":2}
+{"id":"section:195:006","file_id":"file:195","heading":"3. Primary mission","line":96,"level":2}
+{"id":"section:195:007","file_id":"file:195","heading":"4. Core objectives","line":109,"level":2}
+{"id":"section:195:008","file_id":"file:195","heading":"O1 — Establish semantic continuity","line":111,"level":3}
+{"id":"section:195:009","file_id":"file:195","heading":"O2 — Establish the canonical vocabulary","line":128,"level":3}
+{"id":"section:195:010","file_id":"file:195","heading":"O3 — Prevent semantic alias explosion","line":146,"level":3}
+{"id":"section:195:011","file_id":"file:195","heading":"O4 — Keep grammar pinned","line":156,"level":3}
+{"id":"section:195:012","file_id":"file:195","heading":"O5 — Make compilation layers explicit","line":164,"level":3}
+{"id":"section:195:013","file_id":"file:195","heading":"O6 — Make grounding first-class","line":179,"level":3}
+{"id":"section:195:014","file_id":"file:195","heading":"O7 — Preserve bidirectional semantics","line":187,"level":3}
+{"id":"section:195:015","file_id":"file:195","heading":"O8 — Model execution as a separate dimension","line":201,"level":3}
+{"id":"section:195:016","file_id":"file:195","heading":"O9 — Make VIVIM increasingly self-descriptive","line":217,"level":3}
+{"id":"section:195:017","file_id":"file:195","heading":"5. Primary responsibilities","line":237,"level":2}
+{"id":"section:195:018","file_id":"file:195","heading":"R1 — Self-Knowledge architecture","line":239,"level":3}
+{"id":"section:195:019","file_id":"file:195","heading":"R2 — Command semantic architecture","line":242,"level":3}
+{"id":"section:195:020","file_id":"file:195","heading":"R3 — Compiler architecture","line":255,"level":3}
+{"id":"section:195:021","file_id":"file:195","heading":"R4 — Grounding architecture","line":258,"level":3}
+{"id":"section:195:022","file_id":"file:195","heading":"R5 — Representation architecture","line":268,"level":3}
+{"id":"section:195:023","file_id":"file:195","heading":"R6 — Round-trip and edit semantics","line":271,"level":3}
+{"id":"section:195:024","file_id":"file:195","heading":"R7 — Execution-state semantics","line":283,"level":3}
+{"id":"section:195:025","file_id":"file:195","heading":"R8 — CANON taxonomy and dictionary","line":286,"level":3}
+{"id":"section:195:026","file_id":"file:195","heading":"R9 — Cross-plane identity and provenance","line":291,"level":3}
+{"id":"section:195:027","file_id":"file:195","heading":"R10 — Falsification","line":294,"level":3}
+{"id":"section:195:028","file_id":"file:195","heading":"6. Non-responsibilities","line":297,"level":2}
+{"id":"section:195:029","file_id":"file:195","heading":"7. Relationship to the main Architecture Steward","line":318,"level":2}
+{"id":"section:195:030","file_id":"file:195","heading":"8. Operating principles","line":341,"level":2}
+{"id":"section:195:031","file_id":"file:195","heading":"P1 — One meaning, many representations","line":343,"level":3}
+{"id":"section:195:032","file_id":"file:195","heading":"P2 — Representation is not authority","line":346,"level":3}
+{"id":"section:195:033","file_id":"file:195","heading":"P3 — Unknown is a valid state","line":349,"level":3}
+{"id":"section:195:034","file_id":"file:195","heading":"P4 — Names carry architecture","line":352,"level":3}
+{"id":"section:195:035","file_id":"file:195","heading":"P5 — Fully descriptive before abbreviated","line":355,"level":3}
+{"id":"section:195:036","file_id":"file:195","heading":"P6 — Historical vocabulary is evidence","line":369,"level":3}
+{"id":"section:195:037","file_id":"file:195","heading":"P7 — Deterministic core, probabilistic edge","line":372,"level":3}
+{"id":"section:195:038","file_id":"file:195","heading":"P8 — Execution is reality","line":375,"level":3}
+{"id":"section:195:039","file_id":"file:195","heading":"P9 — CANON evolves by evidence","line":378,"level":3}
+{"id":"section:195:040","file_id":"file:195","heading":"P10 — Overhead is a failure mode","line":381,"level":3}
+{"id":"section:195:041","file_id":"file:195","heading":"9. CANON — initial conceptual charter","line":384,"level":2}
+{"id":"section:195:042","file_id":"file:195","heading":"10. CANON taxonomy questions","line":420,"level":2}
+{"id":"section:195:043","file_id":"file:195","heading":"11. Standard operating loop","line":439,"level":2}
+{"id":"section:195:044","file_id":"file:195","heading":"12. Evidence discipline","line":480,"level":2}
+{"id":"section:195:045","file_id":"file:195","heading":"13. Durable output shape","line":501,"level":2}
+{"id":"section:195:046","file_id":"file:195","heading":"14. First-stage objective","line":516,"level":2}
+{"id":"section:195:047","file_id":"file:195","heading":"15. Definition of success","line":526,"level":2}

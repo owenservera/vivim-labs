@@ -1,0 +1,55 @@
+{"id":"section:111:001","file_id":"file:111","heading":"Evidence & Proof Factory","line":5,"level":1}
+{"id":"section:111:002","file_id":"file:111","heading":"Read first","line":7,"level":2}
+{"id":"section:111:003","file_id":"file:111","heading":"Steps","line":11,"level":2}
+{"id":"section:111:004","file_id":"file:111","heading":"Status semantics","line":20,"level":2}
+{"id":"section:112:001","file_id":"file:112","heading":"AGENTS.md — INTAKE 07","line":1,"level":1}
+{"id":"section:112:002","file_id":"file:112","heading":"Read order","line":7,"level":2}
+{"id":"section:112:003","file_id":"file:112","heading":"Hard scope","line":10,"level":2}
+{"id":"section:112:004","file_id":"file:112","heading":"Ingestion invariants","line":14,"level":2}
+{"id":"section:112:005","file_id":"file:112","heading":"Scorekeeping invariants","line":22,"level":2}
+{"id":"section:112:006","file_id":"file:112","heading":"Permission boundaries","line":29,"level":2}
+{"id":"section:112:007","file_id":"file:112","heading":"Output","line":32,"level":2}
+{"id":"section:112:008","file_id":"file:112","heading":"v0.2 operating improvement — consumer benefit","line":35,"level":2}
+{"id":"section:112:009","file_id":"file:112","heading":"SITREP and agent commons","line":39,"level":2}
+{"id":"section:112:010","file_id":"file:112","heading":"Standing intelligence ownership — SITREP","line":43,"level":2}
+{"id":"section:112:011","file_id":"file:112","heading":"Persistent agent memory (standing)","line":47,"level":2}
+{"id":"section:112:012","file_id":"file:112","heading":"Skills builder / agent capability ownership","line":51,"level":2}
+{"id":"section:112:013","file_id":"file:112","heading":"Memory context","line":55,"level":2}
+{"id":"section:113:001","file_id":"file:113","heading":"AION Employee 07 — INTAKE — Self-Launching Bootstrap","line":1,"level":1}
+{"id":"section:113:002","file_id":"file:113","heading":"One-sentence job","line":7,"level":2}
+{"id":"section:113:003","file_id":"file:113","heading":"Mandatory self-bootstrap (execute upon first live conversation turn)","line":12,"level":2}
+{"id":"section:113:004","file_id":"file:113","heading":"What to do with an incoming multi-variant technical council response","line":21,"level":2}
+{"id":"section:113:005","file_id":"file:113","heading":"Local operating rhythm","line":29,"level":2}
+{"id":"section:113:006","file_id":"file:113","heading":"Acceptance criteria","line":37,"level":2}
+{"id":"section:113:007","file_id":"file:113","heading":"Direct links","line":42,"level":2}
+{"id":"section:113:008","file_id":"file:113","heading":"Required first visible response","line":47,"level":3}
+{"id":"section:113:009","file_id":"file:113","heading":"Consumer-first upgrade (v0.2, 2026-10-16)","line":50,"level":2}
+{"id":"section:114:001","file_id":"file:114","heading":"AION Employee 07 — INTAKE — SITREP","line":1,"level":1}
+{"id":"section:114:002","file_id":"file:114","heading":"Current verified status — 2026-10-21, after memory first pass","line":3,"level":2}
+{"id":"section:114:003","file_id":"file:114","heading":"Three-tier role memory — consult and improve without file churn","line":13,"level":3}
+{"id":"section:114:004","file_id":"file:114","heading":"Skill capability first pass — 2026-10-21 (source verified, local harness unverified)","line":26,"level":2}
+{"id":"section:114:005","file_id":"file:114","heading":"Historical scaffold and assignments (2026-10-16–17; superseded where noted above)","line":38,"level":2}
+{"id":"section:114:006","file_id":"file:114","heading":"Current objectives","line":50,"level":2}
+{"id":"section:114:007","file_id":"file:114","heading":"Event log","line":57,"level":2}
+{"id":"section:114:008","file_id":"file:114","heading":"Publication milestone — 2026-10-16","line":60,"level":2}
+{"id":"section:114:009","file_id":"file:114","heading":"Publication and independent readback — 2026-10-16","line":63,"level":2}
+{"id":"section:114:010","file_id":"file:114","heading":"v0.2 architecture upgrade — 2026-10-16","line":66,"level":2}
+{"id":"section:114:011","file_id":"file:114","heading":"Z-FORGE Role 08 proposal intake boundary — 2026-10-16","line":69,"level":2}
+{"id":"section:114:012","file_id":"file:114","heading":"P0 M1 Council Z-FORGE Prep — M1C-07 — 2026-10-16","line":72,"level":2}
+{"id":"section:114:013","file_id":"file:114","heading":"ACPX-001 review assignment — 2026-10-17","line":77,"level":2}
+{"id":"section:114:014","file_id":"file:114","heading":"Persistent agent memory (standing)","line":80,"level":2}
+{"id":"section:114:015","file_id":"file:114","heading":"Skills check on SITREP","line":84,"level":2}
+{"id":"section:114:016","file_id":"file:114","heading":"Memory on SITREP","line":88,"level":2}
+{"id":"section:116:001","file_id":"file:116","heading":"AION INTAKE 07 — Workspace & Scope","line":1,"level":1}
+{"id":"section:116:002","file_id":"file:116","heading":"What lives here","line":3,"level":2}
+{"id":"section:116:003","file_id":"file:116","heading":"What lives in the shared resource (not in this private role folder)","line":11,"level":2}
+{"id":"section:116:004","file_id":"file:116","heading":"Workflow, strictly in order","line":28,"level":2}
+{"id":"section:116:005","file_id":"file:116","heading":"Team consumers","line":37,"level":2}
+{"id":"section:116:006","file_id":"file:116","heading":"Collaboration surface","line":46,"level":2}
+{"id":"section:116:007","file_id":"file:116","heading":"Retrieval contract","line":49,"level":2}
+{"id":"section:116:008","file_id":"file:116","heading":"Definition of ready","line":52,"level":2}
+{"id":"section:116:009","file_id":"file:116","heading":"v0.2 routing and closed-loop information service","line":55,"level":2}
+{"id":"section:117:001","file_id":"file:117","heading":"CANON — Proposal Intake","line":1,"level":1}
+{"id":"section:118:001","file_id":"file:118","heading":"Best Practices — Proposal Intake","line":1,"level":1}
+{"id":"section:119:001","file_id":"file:119","heading":"Curated — Proposal Intake","line":1,"level":1}
+{"id":"section:120:001","file_id":"file:120","heading":"Immediate — Proposal Intake","line":1,"level":1}

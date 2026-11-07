@@ -1,0 +1,35 @@
+{"id":"section:101:001","file_id":"file:101","heading":"Curated — Toolsmith","line":1,"level":1}
+{"id":"section:102:001","file_id":"file:102","heading":"Immediate — Toolsmith","line":1,"level":1}
+{"id":"section:103:001","file_id":"file:103","heading":"ACP / UAH Integration","line":5,"level":1}
+{"id":"section:103:002","file_id":"file:103","heading":"Trigger","line":7,"level":2}
+{"id":"section:103:003","file_id":"file:103","heading":"Execution recipe","line":10,"level":2}
+{"id":"section:103:004","file_id":"file:103","heading":"Failure/fallback","line":20,"level":2}
+{"id":"section:103:005","file_id":"file:103","heading":"Completion","line":23,"level":2}
+{"id":"section:104:001","file_id":"file:104","heading":"ChatGPT General Bus V1/V2 — implementation skill","line":5,"level":1}
+{"id":"section:104:002","file_id":"file:104","heading":"Sources","line":9,"level":2}
+{"id":"section:104:003","file_id":"file:104","heading":"Recipe","line":14,"level":2}
+{"id":"section:105:001","file_id":"file:105","heading":"Chrome MV3 / native-host relay — Toolsmith skill","line":6,"level":1}
+{"id":"section:105:002","file_id":"file:105","heading":"Fast path — current registration failure","line":12,"level":2}
+{"id":"section:105:003","file_id":"file:105","heading":"Other transport / recovery use","line":31,"level":2}
+{"id":"section:105:004","file_id":"file:105","heading":"Verify this skill's executable component","line":39,"level":2}
+{"id":"section:106:001","file_id":"file:106","heading":"Context7 Canonical Documentation Harvest","line":5,"level":1}
+{"id":"section:106:002","file_id":"file:106","heading":"Standing source rule","line":7,"level":2}
+{"id":"section:106:003","file_id":"file:106","heading":"Recipe","line":10,"level":2}
+{"id":"section:106:004","file_id":"file:106","heading":"Contract","line":18,"level":2}
+{"id":"section:107:001","file_id":"file:107","heading":"Environment Bootstrap","line":5,"level":1}
+{"id":"section:107:002","file_id":"file:107","heading":"Trigger","line":7,"level":2}
+{"id":"section:107:003","file_id":"file:107","heading":"Procedure","line":10,"level":2}
+{"id":"section:107:004","file_id":"file:107","heading":"Stop conditions","line":20,"level":2}
+{"id":"section:107:005","file_id":"file:107","heading":"Completion","line":24,"level":2}
+{"id":"section:108:001","file_id":"file:108","heading":"Incident Recovery","line":5,"level":1}
+{"id":"section:108:002","file_id":"file:108","heading":"Trigger","line":7,"level":2}
+{"id":"section:108:003","file_id":"file:108","heading":"Recovery ladder","line":10,"level":2}
+{"id":"section:108:004","file_id":"file:108","heading":"Hard stops","line":19,"level":2}
+{"id":"section:109:001","file_id":"file:109","heading":"Model Capability Routing","line":5,"level":1}
+{"id":"section:109:002","file_id":"file:109","heading":"Seed routing order","line":7,"level":2}
+{"id":"section:109:003","file_id":"file:109","heading":"Procedure","line":10,"level":2}
+{"id":"section:109:004","file_id":"file:109","heading":"Success","line":18,"level":2}
+{"id":"section:110:001","file_id":"file:110","heading":"Tool Discovery & Evidence Qualification","line":5,"level":1}
+{"id":"section:110:002","file_id":"file:110","heading":"Trigger","line":7,"level":2}
+{"id":"section:110:003","file_id":"file:110","heading":"Procedure","line":10,"level":2}
+{"id":"section:110:004","file_id":"file:110","heading":"Output contract","line":19,"level":2}

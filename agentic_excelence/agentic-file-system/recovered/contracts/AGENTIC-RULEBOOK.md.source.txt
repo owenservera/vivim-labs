@@ -1,0 +1,380 @@
+# The Agentic Rule Book
+
+**Version:** 1.0 · **Status:** normative for HQ agents · **Authority:** owner
+**Backbone:** `hq/registry/agentic-file-registry.v1.json`
+
+This is the rule book agents read before acting. It is not a suggestion list.
+Where it conflicts with a stale document, this rule book and the current owner
+instruction win. Where it conflicts with actual source code, the source wins and
+the rule book must be corrected.
+
+---
+
+## 0. The first law
+
+> **A document never grants execution authority.**
+
+A Markdown file can describe a policy, a plan, a decision, or a canonical term.
+It cannot approve a send, open a browser, mutate a database, or authorize an
+external effect. Authority comes from the owner through an explicit, scoped,
+revocable grant. Memory is not authority. Capability is not authorization.
+Evidence is not inference.
+
+HQ itself is a **read-only projection**. It never sends, approves, executes or
+mutates provider state.
+
+---
+
+## 1. The three registers
+
+| Register | What it holds | Promotion rule | Never |
+| --- | --- | --- | --- |
+| **Documents** | Every doc classified into the 21 families with authority, lifecycle and provenance. | Classification is automatic; authority is observed, not granted. | Do not treat a document as law. |
+| **Decisions** | Dated outcomes with rationale, alternatives, consequences, evidence and supersession. | `accepted` requires owner confirmation. | Do not delete a superseded decision. |
+| **CANON** | Bounded terminology with definitions, aliases, explicit non-equivalences and lifecycle. | `current` requires owner confirmation. | Do not silently merge duplicate terms. |
+
+VIVIM **Core Memory** (notes tier `canon`) is a fourth, separate thing: owner-
+confirmed personal facts. It is not the CANON dictionary.
+
+---
+
+## 2. The 217 / 133 backbone
+
+The registry was built from the real 2026-10-25 seven-repository census:
+
+| Metric | Count |
+| --- | ---: |
+| Repositories scanned | 7 |
+| Tracked files | 5,982 |
+| Agentic file records | 217 |
+| Source records | 209 |
+| Donor snapshots | 8 |
+| Catalog patterns (AION) | 133 |
+| Observed types | 19 |
+| Records mapped to a catalog pattern | 143 |
+| Records with no catalog pattern | 74 |
+| Catalog patterns with an observed instance | 12 |
+| Catalog patterns with no observed instance | 121 |
+
+Repositories: `aion` (195), `SOFTWARE_HQ` (10), `vivim-harness` (7),
+`vivim-omega` (2), `001.PROJECTS.PM` (1), `hq` (1), `zcode-pocket` (1).
+
+**Interpretation rules:**
+
+- The 217 are **actual files**, not 217 standards.
+- The 133 are **candidate naming conventions**, not a requirement to create them.
+- `observed_only` types (README.md, BEST-PRACTICES.md, claude.json, …) are real
+  but not in the catalog.
+- `catalog_unobserved` patterns are not missing work; they are unused
+  conventions.
+- Donor snapshots stay `historical`; never promote them to current authority.
+- Never mass-create the catalog in a repository.
+
+The machine-readable registry records, for every type: family, role, source
+class, origin type, authority, lifecycle, observed count, repositories, inline
+tags, auto-exposure surfaces and network edges.
+
+---
+
+## 3. The 21 families
+
+| # | Family | Role | Typical files |
+| --- | --- | --- | --- |
+| 01 | Agent entry & bootstrap | instruction | AGENTS.md, BOOTSTRAP.md, START-HERE.md |
+| 02 | Provider-native rules | instruction | CLAUDE.md, GEMINI.md, Cursor, Copilot, OpenCode |
+| 03 | Roles & identity | identity | ROLE.md, PERSONA.md, GENOME.md, FLEET.md |
+| 04 | Context & retrieval | context | CONTEXT.md, GLOSSARY.md, WORLD.md, APERTURE.md |
+| 05 | Law, policy & guardrails | law | RULES.md, POLICY.md, INVARIANTS.md, AUTHORITY.md |
+| 06 | Goals & product intent | intent | VISION.md, GOALS.md, PRD.md, NORTH-STARS.md |
+| 07 | Architecture & interfaces | architecture | ARCHITECTURE.md, CONTRACT.md, API.md |
+| 08 | Capabilities & discovery | capability | CAPABILITIES.md, TOOLS.md, MCP.md |
+| 09 | Skills & reusable methods | skill | SKILL.md, PLAYBOOK.md, RECIPES.md |
+| 10 | Tool configuration & hooks | config | opencode.json, hooks.json, .mcp.json |
+| 11 | Memory & durable learning | memory | MEMORY.md, NOTES.md, PREFERENCES.md |
+| 12 | State, status & telemetry | state | STATE.md, SITREP.md, HEALTH.md, TIMING.md |
+| 13 | Session boundaries & recovery | continuity | HANDOFF.md, CHECKPOINT.md, RESUME.md |
+| 14 | Work inventory & scheduling | work | TASKS.md, TODO.md, BACKLOG.md |
+| 15 | Planning & decomposition | plan | PLAN.md, ROADMAP.md, WORKSTREAM.md |
+| 16 | Execution & operations | operations | RUNBOOK.md, COMMANDS.md, DEPLOY.md |
+| 17 | Testing & validation | validation | TEST-PLAN.md, VERIFY.md, EVAL.md |
+| 18 | Proof, lineage & audit | evidence | EVIDENCE.md, PROVENANCE.md, RECEIPTS.md |
+| 19 | Collaboration & handoffs | collaboration | HANDOFF.md, INBOX.md, ESCALATION.md |
+| 20 | Decision & governance | decision | DECISIONS.md, ADR.md, CONFLICT-REGISTER.md |
+| 21 | Closeout, release & retirement | closeout | CLOSEOUT.md, RELEASE.md, POSTMORTEM.md |
+
+Family flow is a navigation aid, not an execution order:
+
+```text
+01 -> 04 -> 14 -> 15 -> 16 -> 17 -> 18 -> 19 -> 21
+05 -> 20 -> 21
+09 -> 16
+10 -> 02
+11 -> 04
+12 -> 19
+13 -> 19
+```
+
+---
+
+## 4. Authority and lifecycle
+
+### Authority labels
+
+| Label | Meaning | Weight in context |
+| --- | --- | ---: |
+| `vendor_documented` | Official provider/tool convention. | 1.0 |
+| `project_observed` | Actual repository file. | 0.9 |
+| `local_custom` | Local convention, not verified. | 0.7 |
+| `proposed` | Candidate, not adopted. | 0.5 |
+| `historical` | Archived or donor snapshot. | 0.2 |
+
+### Lifecycle
+
+`current` · `historical` · `generated` · `archived`
+
+Historical stays historical. Generated views are rebuildable and never
+authoritative. Archived is not deleted.
+
+### Promotion
+
+- Document → current authority: **never automatic**.
+- Decision → `accepted`: owner confirmation required.
+- Term → `current`: owner confirmation required.
+- Note → Core Memory: owner confirmation required.
+- Historical → current: explicit owner decision with evidence.
+
+---
+
+## 5. Provider precedence
+
+Provider behavior is not identical. Do not normalize blindly.
+
+| Tool | Recognized instruction surface | Notes |
+| --- | --- | --- |
+| **AGENTS.md** | root and scoped `AGENTS.md` | ordinary Markdown, no fixed schema |
+| **OpenCode 2.2.5** | `AGENTS.md` in global/repo/subdirectories; `opencode.json[c]` `instructions` | V2 does not use `CLAUDE.md` as a fallback |
+| **Claude Code** | `CLAUDE.md`, `.claude/rules/*.md`, `.claude/agents/*.md` | scoped rules |
+| **Gemini CLI** | `GEMINI.md` | configurable file name |
+| **GitHub Copilot** | `.github/copilot-instructions.md`, `.github/instructions/**/*.instructions.md` | surface-dependent |
+| **Cursor** | `.cursor/rules/*.mdc` | `.cursorrules` is legacy |
+| **Agent Skills** | `SKILL.md` with YAML `name` + `description` | lazy activation |
+
+Rules:
+
+- Read the provider-native file only if that provider is the active harness.
+- Never treat a donor `AGENTS.md` as an execution mandate.
+- Never assume `CLAUDE.md` or `GEMINI.md` is a substitute for `AGENTS.md`.
+- Respect nested discovery and precedence; do not flatten it.
+
+---
+
+## 6. Inline comment protocol
+
+Every source file should declare its context. Comments carry meaning, not
+decoration.
+
+### File header
+
+```js
+/**
+ * @hq:context Billing retry policy and idempotency boundary.
+ * @hq:owner payments-team
+ * @hq:task DEC-014
+ */
+```
+
+### Tags
+
+| Tag | Meaning | When |
+| --- | --- | --- |
+| `@hq:context` | What this file/block is for. | File header, complex modules. |
+| `@hq:why` | Why the code exists or why this choice. | Non-obvious logic, tradeoffs. |
+| `@hq:invariant` | A rule that must remain true. | Concurrency, money, auth, data loss. |
+| `@hq:see` | Link to code, docs, decisions, canon. | Cross-references. |
+| `@hq:todo(owner):` | Open work with an owner. | Deferred work. |
+| `@hq:owner(name)` | Ownership. | File header. |
+| `@hq:task(id)` | Task/decision link. | Work in progress. |
+| `@hq:risk` | Known risk or failure mode. | Dangerous paths. |
+| `@hq:deprecated` | Deprecated, with replacement. | Migration. |
+
+### Reference forms
+
+```text
+@hq:see src/billing/retry.mjs:42
+@hq:see doc:AF-020
+@hq:see decision:DEC-014
+@hq:see canon:BillingRetry
+@hq:see rule:D-04
+```
+
+`doc:` resolves through the 217/133 registry. `decision:` resolves through the
+decision register. `canon:` resolves through the CANON register. `rule:`
+resolves through this rule book.
+
+### Rules
+
+- Only explicit `@hq:` tags are annotations. Plain `TODO` is not.
+- Keep annotations truthful and current; stale links are lint findings.
+- Never put secrets, tokens, passwords or personal data in comments.
+- Do not annotate generated or vendored files.
+- Prefer one strong `@hq:why` over ten decorative comments.
+
+---
+
+## 7. Dynamic Context Bundles
+
+DCB auto-generation is normative. Full protocol: [`DCB-PROTOCOL.md`](DCB-PROTOCOL.md).
+
+Summary:
+
+- Triggers: `session.start`, `task.route`, `edit.pre`, `edit.post`, `handoff`,
+  `ask`, `mcp.context`, `schedule`, `manual`.
+- The 217/133 registry routes documents by **family**, **role** and
+  **auto_expose**, not by filename guesswork.
+- Nine candidate families: code, imports, instructions, documents, decisions,
+  CANON, memory, history, sessions.
+- Scoring includes task coverage, symbols, recency, doc authority, import
+  proximity, family weight, authority weight and trigger match.
+- Exact knapsack under the token budget. Omissions are always explained.
+- Every source has ref, lines, sha256, authority and reason.
+- Bundles are deterministic; `generatedAt` is excluded from the digest.
+- `verify` detects drift; `refresh` recomposes.
+- Secret paths and private notes never enter a bundle.
+- A bundle never grants execution authority.
+
+---
+
+## 8. Auto-exposure
+
+The registry decides which document families appear on which surface:
+
+| Surface | Families surfaced |
+| --- | --- |
+| `route` | law, decision, instruction, skill, capability |
+| `context` | context, architecture, identity, memory, state |
+| `brief` | work, plan, state, memory, collaboration |
+| `handoff` | evidence, continuity, work, plan, collaboration, closeout |
+| `verify` | evidence, validation |
+| `wiki` / `docs` | everything, as navigation |
+| `doctor` | config |
+
+Rules:
+
+- Surface match is a bonus, not a bypass of scoring.
+- Historical and generated docs are excluded unless requested.
+- Proposed docs need a task-token match.
+- Observed-only types are included only when present and relevant.
+- Never auto-create a document because its type exists in the registry.
+
+---
+
+## 9. Decisions
+
+- Every decision has an id, title, status, authority, date and source.
+- `accepted` requires owner confirmation.
+- `superseded` keeps both rows; history is never deleted.
+- `@hq:why` is an observed decision, not an accepted one.
+- Evidence is a list of `{ref, sha256}`.
+- Conflicting accepted decisions are a conflict register entry, not a silent
+  winner.
+- A decision is evidence of a choice; it is not permission to execute.
+
+## 10. CANON
+
+- Every term has a definition, status, owner, authority, source and hash.
+- `current` requires owner confirmation.
+- Preserve aliases and explicit non-equivalences.
+- Duplicate terms across sources are a conflict, not a merge.
+- Historical terms remain historical.
+- No parallel vocabulary: a local term that duplicates canon is flagged.
+
+## 11. Documentation Constitution
+
+| ID | Rule |
+| --- | --- |
+| D-01 | Canonical views over document sprawl. |
+| D-02 | Preserve source, normalize view. |
+| D-03 | No parallel semantic hierarchies. |
+| D-04 | Authority is referenced, not created. Documentation cannot promote itself into law. |
+| D-05 | Claims require lineage. |
+| D-06 | Ambiguity is data. |
+| D-07 | Depth is explicit. |
+| D-08 | Dependency is first-class. |
+| D-09 | Views are rebuildable. |
+| D-10 | Drift is repairable. |
+| D-11 | Historical material remains historical. |
+| D-12 | Local quality does not determine global quality. |
+| D-13 | Do not flatten finer distinctions. |
+| D-14 | No false completion. Mapped ≠ implemented ≠ accepted. |
+| D-15 | Every structural change has an impact surface. |
+
+## 12. Explicit non-equivalences
+
+```text
+Self-knowledge      ≠ authority
+Grounding           ≠ authorization
+Confidence          ≠ proof
+Interpretation      ≠ execution
+Intent              ≠ Work
+Representation      ≠ canonical identity
+Visual projection   ≠ execution authority
+Historical name     ≠ current canonical meaning
+Document            ≠ law
+Memory              ≠ authority
+Capability          ≠ authorization
+Evidence            ≠ inference
+```
+
+---
+
+## 13. Commands
+
+```sh
+hq docs [--family 20] [--json]        # document inventory
+hq docs health                         # missing/stale/orphan/duplicate
+hq decisions [query] [--status]        # decision register
+hq decisions confirm <id> --owner-confirmed
+hq decisions supersede <id> --by <new-id> --owner-confirmed
+hq canon [query] [--status]            # CANON register
+hq canon confirm <id> --owner-confirmed
+hq canon deprecate <id> --owner-confirmed
+hq conflicts                           # contradictions
+hq filetypes [--family 01] [--json]    # 217/133 registry
+hq rulebook [--write]                  # this document
+hq route "<task>"                      # mandatory context
+hq context "<task>" --trigger session.start --budget 6000
+hq context --verify bundle.json
+hq context --refresh bundle.json
+hq dcb explain "<task>"
+hq wiki --write
+hq timing optimize
+```
+
+---
+
+## 14. Maintenance
+
+- Rebuild the registry when a new census is taken:
+  `bun scripts/build-agentic-file-registry.mjs`.
+- Re-index documents after doc changes: `hq docs index` (or `hq index`).
+- Re-run the wiki after accepted decisions/terms change.
+- Re-verify pinned bundles after source changes.
+- Log every registry/canon/decision change with date, evidence and owner.
+
+## 15. Never do
+
+- Never mass-create the 217/133 catalog in a repository.
+- Never treat a donor snapshot as current authority.
+- Never let a document authorize an effect.
+- Never auto-accept a decision or promote a term.
+- Never merge duplicate terms silently.
+- Never delete a superseded decision.
+- Never put secrets or personal data in comments, bundles or the wiki.
+- Never claim a mapped feature is implemented or accepted.
+- Never flatten a finer distinction to make a table look neat.
+- Never generate a context bundle that exceeds its budget or hides omissions.
+
+---
+
+*This rule book is generated from the registry, the Documentation Constitution
+and the HQ protocol. It is versioned. Changes require owner review.*

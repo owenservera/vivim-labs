@@ -1,0 +1,45 @@
+{"id":"section:181:001","file_id":"file:181","heading":"AION Intelligence Bench — 2026-10-25","line":1,"level":1}
+{"id":"section:181:002","file_id":"file:181","heading":"Identity and scope","line":3,"level":2}
+{"id":"section:181:003","file_id":"file:181","heading":"Reproduce on a Node 22 checkout","line":11,"level":2}
+{"id":"section:181:004","file_id":"file:181","heading":"Source-level measurements (actual execution, not full Node suite)","line":20,"level":2}
+{"id":"section:181:005","file_id":"file:181","heading":"Test execution limits","line":29,"level":2}
+{"id":"section:181:006","file_id":"file:181","heading":"Integration and rollback","line":35,"level":2}
+{"id":"section:182:001","file_id":"file:182","heading":"AION C1 — generic webapp harness core runtime bridge","line":1,"level":1}
+{"id":"section:182:002","file_id":"file:182","heading":"Provenance and precise source","line":5,"level":2}
+{"id":"section:182:003","file_id":"file:182","heading":"Node 22 entrypoints and schemas","line":15,"level":2}
+{"id":"section:182:004","file_id":"file:182","heading":"Tested commands, actual results","line":36,"level":2}
+{"id":"section:182:005","file_id":"file:182","heading":"Integration into existing Studio: exact destination seams","line":49,"level":2}
+{"id":"section:182:006","file_id":"file:182","heading":"Deltas over Agent 14 Round 6–9 / collision decisions","line":58,"level":2}
+{"id":"section:182:007","file_id":"file:182","heading":"Failure matrix / rollback","line":66,"level":2}
+{"id":"section:183:001","file_id":"file:183","heading":"I1 — Capture Studio self-improving webapp read adapters (2026-10-24)","line":1,"level":1}
+{"id":"section:183:002","file_id":"file:183","heading":"Files and entrypoints","line":5,"level":2}
+{"id":"section:183:003","file_id":"file:183","heading":"Proven scope and failure cases","line":13,"level":2}
+{"id":"section:183:004","file_id":"file:183","heading":"Exact Core / Z.ai wiring (do not replace existing systems)","line":21,"level":2}
+{"id":"section:183:005","file_id":"file:183","heading":"Compatibility / outstanding integration","line":29,"level":2}
+{"id":"section:184:001","file_id":"file:184","heading":"AION Capture Studio — Systems S1 independent diagnostic supplier","line":1,"level":1}
+{"id":"section:184:002","file_id":"file:184","heading":"Provenance and layout","line":5,"level":2}
+{"id":"section:184:003","file_id":"file:184","heading":"Full-path architecture map (current source versus missing seams)","line":20,"level":2}
+{"id":"section:184:004","file_id":"file:184","heading":"TOP 5 source-specific fixes — priority / owner / measured independent proof","line":24,"level":3}
+{"id":"section:184:005","file_id":"file:184","heading":"Exact proposed wire contracts (all advisory; caller validates server provenance)","line":36,"level":2}
+{"id":"section:184:006","file_id":"file:184","heading":"Z.ai ordered integration sequence (short, collision-aware)","line":46,"level":2}
+{"id":"section:184:007","file_id":"file:184","heading":"Repro receipt and pending real proof","line":59,"level":2}
+{"id":"section:185:001","file_id":"file:185","heading":"AION / U1 universal webapp Chat UI supplier — 24 October 2026","line":1,"level":1}
+{"id":"section:185:002","file_id":"file:185","heading":"Files and extraction","line":5,"level":2}
+{"id":"section:185:003","file_id":"file:185","heading":"Integration in canonical existing `/chat`","line":21,"level":2}
+{"id":"section:185:004","file_id":"file:185","heading":"Compatibility, collisions and proof still needed","line":32,"level":2}
+{"id":"section:186:001","file_id":"file:186","heading":"Webapp-Native Harness CANON — durable lessons","line":1,"level":1}
+{"id":"section:187:001","file_id":"file:187","heading":"Specialist working best practices","line":1,"level":1}
+{"id":"section:188:001","file_id":"file:188","heading":"Webapp-Native Harness Curated — independently useful methods","line":1,"level":1}
+{"id":"section:189:001","file_id":"file:189","heading":"Webapp-Native Harness Immediate — active continuation","line":1,"level":1}
+{"id":"section:189:002","file_id":"file:189","heading":"2026-10-24 live priority after Z.ai export audit","line":5,"level":2}
+{"id":"section:189:003","file_id":"file:189","heading":"2026-10-24 active delivery and standing implementation technique","line":13,"level":2}
+{"id":"section:189:004","file_id":"file:189","heading":"2026-10-24 new active state (Z.ai TAR 5)","line":19,"level":2}
+{"id":"section:189:005","file_id":"file:189","heading":"2026-10-24 — latest Z.ai Round 8 package and owner-direction continuity","line":25,"level":2}
+{"id":"section:189:006","file_id":"file:189","heading":"Most important next action","line":32,"level":2}
+{"id":"section:189:007","file_id":"file:189","heading":"Known active unknowns","line":35,"level":2}
+{"id":"section:189:008","file_id":"file:189","heading":"The documents to open next","line":43,"level":2}
+{"id":"section:190:001","file_id":"file:190","heading":"Webapp-native shape evidence skill (role 14)","line":6,"level":1}
+{"id":"section:190:002","file_id":"file:190","heading":"When to use","line":10,"level":2}
+{"id":"section:190:003","file_id":"file:190","heading":"Procedure","line":13,"level":2}
+{"id":"section:190:004","file_id":"file:190","heading":"Deliverable template","line":23,"level":2}
+{"id":"section:190:005","file_id":"file:190","heading":"Red lines","line":26,"level":2}

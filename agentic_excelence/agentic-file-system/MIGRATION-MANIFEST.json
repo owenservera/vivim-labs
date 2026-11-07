@@ -1,0 +1,2368 @@
+{
+  "schema": "vivim.agentic-file-research-migration/1",
+  "mode": "non-destructive public-safe copy; origins retained",
+  "sourceRepo": "owenservera/repos-hq",
+  "sourceCommit": "acad98697575c2f3fe2fcbf847e19a8dcd3670db",
+  "sourceTree": "064d05c847ab145f1713a875a8d409bcd23cdee8",
+  "destinationRepo": "owenservera/vivim-labs",
+  "destinationPrefix": "agentic_excelence/agentic-file-system",
+  "counts": {
+    "sourceResearchBlobs": 292,
+    "sourceAgenticFiles": 217,
+    "publicSourceFilesExact": 205,
+    "privateSourceFilesHeld": 12,
+    "researchCopies": 65,
+    "researchHeld": 10,
+    "statusCounts": {
+      "copied_exact_hash": 259,
+      "copied_sanitized_metadata": 11,
+      "private_source_reference_only": 12,
+      "private_research_pointer_only": 10
+    }
+  },
+  "notes": [
+    "Public-origin original files are inert .source.txt and have exact Git blob SHA matches.",
+    "Private source bodies and headings are not published; their catalog metadata and source hash references remain.",
+    "Private Repos HQ runtime exports, implementation scripts and schema census are referenced but not copied.",
+    "Section variants: 842 observed base + 168 new supplemented rows = 1,010; 48 replacements preserve earlier type when defined.",
+    "Only the owner and real runtime can authorize provider-native instruction activation."
+  ],
+  "files": [
+    {
+      "sourcePath": "research/agentic-knowledge-graph/ALGORITHM-MOBILITY-CONTRACT.md",
+      "sourceBlobSha": "1acdb194dbe31ca552b947d7d86ecc70118f9528",
+      "sizeBytes": 4263,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/ALGORITHM-MOBILITY-CONTRACT.md",
+      "labBlobSha": "1acdb194dbe31ca552b947d7d86ecc70118f9528",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/HQKG-INTEGRATION.md",
+      "sourceBlobSha": "f5f9dd8bd260f45e42366ab30e940c0ebd5562f8",
+      "sizeBytes": 8074,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/HQKG-INTEGRATION.md",
+      "labBlobSha": "f5f9dd8bd260f45e42366ab30e940c0ebd5562f8",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/INTEGRATION-STATUS-2026-11-03.md",
+      "sourceBlobSha": "77633115bc1331eadc5960bc6edcfe28b87d53dd",
+      "sizeBytes": 4089,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/INTEGRATION-STATUS-2026-11-03.md",
+      "labBlobSha": "77633115bc1331eadc5960bc6edcfe28b87d53dd",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/README.md",
+      "sourceBlobSha": "815ccab396b68aecdad9534a46e5345a94b9bad9",
+      "sizeBytes": 4447,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/README.md",
+      "labBlobSha": "815ccab396b68aecdad9534a46e5345a94b9bad9",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/RUST-CORE-MINIMUM-DELTA-2026-11-03.md",
+      "sourceBlobSha": "a6166ced18b9faa99d46c13f0d930aedd82bd943",
+      "sizeBytes": 9516,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/RUST-CORE-MINIMUM-DELTA-2026-11-03.md",
+      "labBlobSha": "a6166ced18b9faa99d46c13f0d930aedd82bd943",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/algorithm-placements.proposed.jsonl",
+      "sourceBlobSha": "e2f90860afb7ef15c3ee04e17f86815cad3ca551",
+      "sizeBytes": 990,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/algorithm-placements.proposed.jsonl",
+      "labBlobSha": "e2f90860afb7ef15c3ee04e17f86815cad3ca551",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/algorithms.json",
+      "sourceBlobSha": "ef6c86bce6d5da8c97d59ed553ec12d341404951",
+      "sizeBytes": 7392,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/algorithms.json",
+      "labBlobSha": "ef6c86bce6d5da8c97d59ed553ec12d341404951",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/best-practices.md",
+      "sourceBlobSha": "c5f4b6775984b0bb16a46958447a45549ebb77ab",
+      "sizeBytes": 1337,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/best-practices.md",
+      "labBlobSha": "c5f4b6775984b0bb16a46958447a45549ebb77ab",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/file-inventory.json",
+      "sourceBlobSha": "d0d731c4c8692d8af0f879b56a1539b873090cf5",
+      "sizeBytes": 115542,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/file-inventory.json",
+      "labBlobSha": "d0d731c4c8692d8af0f879b56a1539b873090cf5",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/graph-edges.jsonl",
+      "sourceBlobSha": "f96423c991ee22707daf30429f4210ec3a86e16a",
+      "sizeBytes": 211187,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/graph-edges.public.jsonl",
+      "labBlobSha": "f3fb6c10f6b9454f6cb35778c0cb519b09ec3079",
+      "status": "copied_sanitized_metadata"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/graph-nodes.jsonl",
+      "sourceBlobSha": "0f87e39e6eb776e7a8b43ab6de940a3902847f29",
+      "sizeBytes": 269604,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/graph-nodes.public.jsonl",
+      "labBlobSha": "f8285406dc35a00d4cd7f1d61c15bef9e3be0669",
+      "status": "copied_sanitized_metadata"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/graph-supplement/section-headings-161-217.jsonl",
+      "sourceBlobSha": "6a6511c03e665d47d9c8e1c610286b5a3e739199",
+      "sizeBytes": 36721,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/graph-supplement/section-headings-161-217.public.jsonl",
+      "labBlobSha": "5d41a53a33cf81c1521482e01218312ad29cf3f2",
+      "status": "copied_sanitized_metadata"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--001.PROJECTS.PM/AGENTS.md.source.txt",
+      "sourceBlobSha": "4b8f183fc4508be2079cf2ea8366de622d2c915d",
+      "sizeBytes": 5325,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_source_reference_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--SOFTWARE_HQ/AGENTS.md.source.txt",
+      "sourceBlobSha": "eb70a0e7f4d47cc0a1509a7e1aa93a5b87b1900f",
+      "sizeBytes": 7734,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_source_reference_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--SOFTWARE_HQ/agents/global-harness-agent/AGENTS.md.source.txt",
+      "sourceBlobSha": "4513aeedc18a283db013b20101caf1253859f027",
+      "sizeBytes": 3786,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_source_reference_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--SOFTWARE_HQ/agents/global-harness-agent/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "4cc9b923247f32ca120512bea6edec54d59dc87c",
+      "sizeBytes": 2305,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_source_reference_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--SOFTWARE_HQ/agents/global-harness-agent/SITREP.md.source.txt",
+      "sourceBlobSha": "3777f5c8365a6c90255e1422497f8a58da48a4c6",
+      "sizeBytes": 2748,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_source_reference_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--SOFTWARE_HQ/agents/global-harness-agent/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "924aa581c38fec6bf7e9a638a7c01f3c2f34e211",
+      "sizeBytes": 1065,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_source_reference_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--SOFTWARE_HQ/agents/global-harness-agent/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "291fcbea74c79f1eecea2cc54f5a0ab31abf9b24",
+      "sizeBytes": 563,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_source_reference_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--SOFTWARE_HQ/agents/global-harness-agent/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "486db6c4c60284b17812af526f54ae2091997152",
+      "sizeBytes": 796,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_source_reference_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--SOFTWARE_HQ/agents/global-harness-agent/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "4455894d7ce7800d40baae762747efbc10a11614",
+      "sizeBytes": 1367,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_source_reference_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--SOFTWARE_HQ/agents/global-harness-agent/skills/harness-bakeoff/SKILL.md.source.txt",
+      "sourceBlobSha": "1fceca126b520d4cf69b36262aa7b1bb33b03e93",
+      "sizeBytes": 1856,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_source_reference_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--SOFTWARE_HQ/agents/global-harness-agent/skills/harness-frontier-recon/SKILL.md.source.txt",
+      "sourceBlobSha": "6341722ddde98a65327a4454750b27cf447a32d9",
+      "sizeBytes": 1750,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_source_reference_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/.opencode/agents/aion-chief.md.source.txt",
+      "sourceBlobSha": "91fbedf6e6f8750a03e1fe97567d29c74feaffb8",
+      "sizeBytes": 2983,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/.opencode/agents/aion-chief.md.source.txt",
+      "labBlobSha": "91fbedf6e6f8750a03e1fe97567d29c74feaffb8",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/.opencode/skills/aion-skill-builder/SKILL.md.source.txt",
+      "sourceBlobSha": "aa6a9302a93f7fb6a91dd876839f749f7f634418",
+      "sizeBytes": 3850,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/.opencode/skills/aion-skill-builder/SKILL.md.source.txt",
+      "labBlobSha": "aa6a9302a93f7fb6a91dd876839f749f7f634418",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/AGENTS.md.source.txt",
+      "sourceBlobSha": "e1cfc546876a92835ad0b1ff6ec943d3c48111d0",
+      "sizeBytes": 5319,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/AGENTS.md.source.txt",
+      "labBlobSha": "e1cfc546876a92835ad0b1ff6ec943d3c48111d0",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/bff/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "58db31c086c8f1944aab509ba053682644421bc1",
+      "sizeBytes": 1175,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/bff/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "58db31c086c8f1944aab509ba053682644421bc1",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/initiatives/discovery-to-read-v1/AGENTS.md.source.txt",
+      "sourceBlobSha": "2e93b856821b140e239a584ba0e6fdcdd7b932bf",
+      "sizeBytes": 1958,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/initiatives/discovery-to-read-v1/AGENTS.md.source.txt",
+      "labBlobSha": "2e93b856821b140e239a584ba0e6fdcdd7b932bf",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/initiatives/discovery-to-read-v1/HANDOFF.md.source.txt",
+      "sourceBlobSha": "79e4050237bd8587d6bc5e178d5f8a5cbbd66cb0",
+      "sizeBytes": 5708,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/initiatives/discovery-to-read-v1/HANDOFF.md.source.txt",
+      "labBlobSha": "79e4050237bd8587d6bc5e178d5f8a5cbbd66cb0",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/aion-mcp/skills/aion-bus/SKILL.md.source.txt",
+      "sourceBlobSha": "63d83f03fc3382f9133234fe2b6a98eec079469e",
+      "sizeBytes": 1451,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/aion-mcp/skills/aion-bus/SKILL.md.source.txt",
+      "labBlobSha": "63d83f03fc3382f9133234fe2b6a98eec079469e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/aion-mcp/skills/aion-status/SKILL.md.source.txt",
+      "sourceBlobSha": "e904218e80ccaf56b5c574f29603cb1c0ebc1d57",
+      "sizeBytes": 1420,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/aion-mcp/skills/aion-status/SKILL.md.source.txt",
+      "labBlobSha": "e904218e80ccaf56b5c574f29603cb1c0ebc1d57",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/capture-studio-core/handoffs/parallel-2026-10-24/HANDOFF.md.source.txt",
+      "sourceBlobSha": "3cc6573b5e5eca70e58b69f53e5405f0f267d65f",
+      "sizeBytes": 11598,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/capture-studio-core/handoffs/parallel-2026-10-24/HANDOFF.md.source.txt",
+      "labBlobSha": "3cc6573b5e5eca70e58b69f53e5405f0f267d65f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/capture-studio-knowledge-learning/SITREP.md.source.txt",
+      "sourceBlobSha": "89362b2367fffc031bf5fdc8cce28a199d79deba",
+      "sizeBytes": 5586,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/capture-studio-knowledge-learning/SITREP.md.source.txt",
+      "labBlobSha": "89362b2367fffc031bf5fdc8cce28a199d79deba",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/capture-studio-knowledge-learning/handoffs/parallel-2026-10-24/HANDOFF.md.source.txt",
+      "sourceBlobSha": "5ce768531cb015c7e8fce5b2d3e70e9806dec289",
+      "sizeBytes": 7893,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/capture-studio-knowledge-learning/handoffs/parallel-2026-10-24/HANDOFF.md.source.txt",
+      "labBlobSha": "5ce768531cb015c7e8fce5b2d3e70e9806dec289",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/capture-studio-systems/handoffs/parallel-2026-10-24/HANDOFF.md.source.txt",
+      "sourceBlobSha": "7507594f766ac7f35add394a74a2c0ca000dcbd0",
+      "sizeBytes": 15605,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/capture-studio-systems/handoffs/parallel-2026-10-24/HANDOFF.md.source.txt",
+      "labBlobSha": "7507594f766ac7f35add394a74a2c0ca000dcbd0",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/capture-studio-ui/handoffs/parallel-2026-10-24/HANDOFF.md.source.txt",
+      "sourceBlobSha": "38526dd091f2a6c268a04a6fcb232518e2592475",
+      "sizeBytes": 7667,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/capture-studio-ui/handoffs/parallel-2026-10-24/HANDOFF.md.source.txt",
+      "labBlobSha": "38526dd091f2a6c268a04a6fcb232518e2592475",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/capture-studio-value-oracle/AGENTS.md.source.txt",
+      "sourceBlobSha": "0b1dd4851958640f311ecc3f16975df4ac84fab1",
+      "sizeBytes": 1843,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/capture-studio-value-oracle/AGENTS.md.source.txt",
+      "labBlobSha": "0b1dd4851958640f311ecc3f16975df4ac84fab1",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/capture-studio-value-oracle/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "abc4dada9a61b1c9129129132288730c17c5bdca",
+      "sizeBytes": 6499,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/capture-studio-value-oracle/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "abc4dada9a61b1c9129129132288730c17c5bdca",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/cdpilot/AGENTS.md.source.txt",
+      "sourceBlobSha": "0de7d39e71cb5d8a5f9b3b965a5ca3abe75037ca",
+      "sizeBytes": 4300,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/cdpilot/AGENTS.md.source.txt",
+      "labBlobSha": "0de7d39e71cb5d8a5f9b3b965a5ca3abe75037ca",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/cdpilot/CLAUDE.md.source.txt",
+      "sourceBlobSha": "443e56aa25587975b66773aaa6d8c9a4331e237c",
+      "sizeBytes": 5036,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/cdpilot/CLAUDE.md.source.txt",
+      "labBlobSha": "443e56aa25587975b66773aaa6d8c9a4331e237c",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/cdpilot/GEMINI.md.source.txt",
+      "sourceBlobSha": "0df443418eeb68b743aadc3b98c3c78947013fdd",
+      "sizeBytes": 3658,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/cdpilot/GEMINI.md.source.txt",
+      "labBlobSha": "0df443418eeb68b743aadc3b98c3c78947013fdd",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/cdpilot/plugins/cdpilot/skills/cdpilot/SKILL.md.source.txt",
+      "sourceBlobSha": "341fd0e7452d80d21c0f841665be6258f83fcede",
+      "sizeBytes": 2972,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/cdpilot/plugins/cdpilot/skills/cdpilot/SKILL.md.source.txt",
+      "labBlobSha": "341fd0e7452d80d21c0f841665be6258f83fcede",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/chatall/AGENTS.md.source.txt",
+      "sourceBlobSha": "dd98acec205008bcb302da7c1d24660d2b5e81df",
+      "sizeBytes": 6251,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/chatall/AGENTS.md.source.txt",
+      "labBlobSha": "dd98acec205008bcb302da7c1d24660d2b5e81df",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/chatgpt-bridge/AGENT.MD.source.txt",
+      "sourceBlobSha": "1b2d5e915fbdfb1cd6a4f03df14adfa21f7cd568",
+      "sizeBytes": 7751,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/chatgpt-bridge/AGENT.MD.source.txt",
+      "labBlobSha": "1b2d5e915fbdfb1cd6a4f03df14adfa21f7cd568",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/chatgpt-bridge/CONTEXT.MD.source.txt",
+      "sourceBlobSha": "ff16eb830e6698335b8e458aecbd0e4430d44093",
+      "sizeBytes": 40321,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/chatgpt-bridge/CONTEXT.MD.source.txt",
+      "labBlobSha": "ff16eb830e6698335b8e458aecbd0e4430d44093",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/multi-ai-chat/HANDOFF.md.source.txt",
+      "sourceBlobSha": "1be5d64712ce63e47539a5e5fcc499f69c641228",
+      "sizeBytes": 7098,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/landing/donors/multi-ai-chat/HANDOFF.md.source.txt",
+      "labBlobSha": "1be5d64712ce63e47539a5e5fcc499f69c641228",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/integration-manager/AGENTS.md.source.txt",
+      "sourceBlobSha": "c71ad7fba17d11301543b3bc93f96c20bf4f19ba",
+      "sizeBytes": 2087,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/integration-manager/AGENTS.md.source.txt",
+      "labBlobSha": "c71ad7fba17d11301543b3bc93f96c20bf4f19ba",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/integration-manager/SITREP.md.source.txt",
+      "sourceBlobSha": "7db146bd4df27567046ee03e72c7fface10b934e",
+      "sizeBytes": 9974,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/integration-manager/SITREP.md.source.txt",
+      "labBlobSha": "7db146bd4df27567046ee03e72c7fface10b934e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/integration-manager/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "25e838e514d1b59e11246955edca17c06067e3b4",
+      "sizeBytes": 5786,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/integration-manager/memory/CANON/README.md.source.txt",
+      "labBlobSha": "25e838e514d1b59e11246955edca17c06067e3b4",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/integration-manager/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "96b18ecf8e31a32435e07d993ce75f719a9964fb",
+      "sizeBytes": 400,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/integration-manager/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "labBlobSha": "96b18ecf8e31a32435e07d993ce75f719a9964fb",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/integration-manager/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "e9419ce647491af8688583cac9f960fccea69d93",
+      "sizeBytes": 4044,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/integration-manager/memory/Curated/README.md.source.txt",
+      "labBlobSha": "e9419ce647491af8688583cac9f960fccea69d93",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/integration-manager/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "9adfedf74d778ecd7411acee7249b422160d8f34",
+      "sizeBytes": 4874,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/integration-manager/memory/Immediate/README.md.source.txt",
+      "labBlobSha": "9adfedf74d778ecd7411acee7249b422160d8f34",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/integration-manager/skills/integration-seam-preflight/SKILL.md.source.txt",
+      "sourceBlobSha": "e3dc6dd871258166e848437fac1f42fc0b664fd0",
+      "sizeBytes": 3858,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/integration-manager/skills/integration-seam-preflight/SKILL.md.source.txt",
+      "labBlobSha": "e3dc6dd871258166e848437fac1f42fc0b664fd0",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/AGENTS.md.source.txt",
+      "sourceBlobSha": "7280c68e461f3b71e014609909e41cd55d49daff",
+      "sizeBytes": 2953,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/AGENTS.md.source.txt",
+      "labBlobSha": "7280c68e461f3b71e014609909e41cd55d49daff",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "d10172aad1f64062b01259b0edef026365767553",
+      "sizeBytes": 12885,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "d10172aad1f64062b01259b0edef026365767553",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/SITREP.md.source.txt",
+      "sourceBlobSha": "326914037422f77d17ff557bc65ba82edbce522b",
+      "sizeBytes": 17507,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/SITREP.md.source.txt",
+      "labBlobSha": "326914037422f77d17ff557bc65ba82edbce522b",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "4ead095da9fe8d99304f7a290a020fcaa04c0c01",
+      "sizeBytes": 6909,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/memory/CANON/README.md.source.txt",
+      "labBlobSha": "4ead095da9fe8d99304f7a290a020fcaa04c0c01",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "e9b9eab91839ccc08e8e1e7e043d4c18206ec2c4",
+      "sizeBytes": 425,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "labBlobSha": "e9b9eab91839ccc08e8e1e7e043d4c18206ec2c4",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "004a7868e2a215de7e95340d745dc94b677f73f1",
+      "sizeBytes": 3711,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/memory/Curated/README.md.source.txt",
+      "labBlobSha": "004a7868e2a215de7e95340d745dc94b677f73f1",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "dd3c3f2c4885c92529d7f323bd00fe476ecfda38",
+      "sizeBytes": 7168,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/memory/Immediate/README.md.source.txt",
+      "labBlobSha": "dd3c3f2c4885c92529d7f323bd00fe476ecfda38",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/skills/ax-reuse-inspector/SKILL.md.source.txt",
+      "sourceBlobSha": "6be109256795f9ff8232d61e8e88d21ed81d9948",
+      "sizeBytes": 4513,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/harvest/external/workers/nine-repo/skills/ax-reuse-inspector/SKILL.md.source.txt",
+      "labBlobSha": "6be109256795f9ff8232d61e8e88d21ed81d9948",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/velocity/AGENTS.md.source.txt",
+      "sourceBlobSha": "69ab1a39459f8b0ab4f31685d1d0e1db1dc244ac",
+      "sizeBytes": 10223,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/velocity/AGENTS.md.source.txt",
+      "labBlobSha": "69ab1a39459f8b0ab4f31685d1d0e1db1dc244ac",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/workers/development/AGENTS.md.source.txt",
+      "sourceBlobSha": "4af2147ea14a43128ea12b9321241b085e0995f0",
+      "sizeBytes": 2391,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/workers/development/AGENTS.md.source.txt",
+      "labBlobSha": "4af2147ea14a43128ea12b9321241b085e0995f0",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/workers/development/SITREP.md.source.txt",
+      "sourceBlobSha": "fc4c8942e4ae3a811dbc070e3c0f7ffdd431ef92",
+      "sizeBytes": 5364,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/workers/development/SITREP.md.source.txt",
+      "labBlobSha": "fc4c8942e4ae3a811dbc070e3c0f7ffdd431ef92",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/workers/development/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "bc5a72fcfbf38d8541e4501dbb2cb7f4d7408de1",
+      "sizeBytes": 6934,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/workers/development/memory/CANON/README.md.source.txt",
+      "labBlobSha": "bc5a72fcfbf38d8541e4501dbb2cb7f4d7408de1",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/workers/development/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "3808a3ab73b4eef548cb1fc3471cee77df36b8ba",
+      "sizeBytes": 414,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/workers/development/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "labBlobSha": "3808a3ab73b4eef548cb1fc3471cee77df36b8ba",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/workers/development/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "ae2319d084f8850f08de202bc148db066aae4c51",
+      "sizeBytes": 5283,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/workers/development/memory/Curated/README.md.source.txt",
+      "labBlobSha": "ae2319d084f8850f08de202bc148db066aae4c51",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/workers/development/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "c392dd16aef5bd1eb34d2a5875f1fcab8c8c2023",
+      "sizeBytes": 7951,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/workers/development/memory/Immediate/README.md.source.txt",
+      "labBlobSha": "c392dd16aef5bd1eb34d2a5875f1fcab8c8c2023",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/chrome-relay/workers/development/skills/aion-dev-build-drift/SKILL.md.source.txt",
+      "sourceBlobSha": "afddd37524be99c0a22acbc56d81cd55fa511af1",
+      "sizeBytes": 4816,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/chrome-relay/workers/development/skills/aion-dev-build-drift/SKILL.md.source.txt",
+      "labBlobSha": "afddd37524be99c0a22acbc56d81cd55fa511af1",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/ops/local-integration/windows-p0-issue81-20261024/HANDOFF.md.source.txt",
+      "sourceBlobSha": "3ae50bf51822c386356520a75f0094ca16143c9b",
+      "sizeBytes": 26778,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/ops/local-integration/windows-p0-issue81-20261024/HANDOFF.md.source.txt",
+      "labBlobSha": "3ae50bf51822c386356520a75f0094ca16143c9b",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/01-escape-hatch/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "af5db9883e842f2816c0957e420c6b59f132257d",
+      "sizeBytes": 2008,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/01-escape-hatch/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "af5db9883e842f2816c0957e420c6b59f132257d",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/01-escape-hatch/SITREP.md.source.txt",
+      "sourceBlobSha": "ca30e193d0089f35a8cd32f47691bc4d2e1df4b7",
+      "sizeBytes": 840,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/01-escape-hatch/SITREP.md.source.txt",
+      "labBlobSha": "ca30e193d0089f35a8cd32f47691bc4d2e1df4b7",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/02-instant-pings/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "04e972b05f605eca70559b239edfcff69f41313f",
+      "sizeBytes": 1946,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/02-instant-pings/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "04e972b05f605eca70559b239edfcff69f41313f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/02-instant-pings/SITREP.md.source.txt",
+      "sourceBlobSha": "c95596d1c73f4a97c32c2a1cfa1e3907f28c51c8",
+      "sizeBytes": 774,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/02-instant-pings/SITREP.md.source.txt",
+      "labBlobSha": "c95596d1c73f4a97c32c2a1cfa1e3907f28c51c8",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/03-vercel-dashboard/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "7cf3280cbc56b6db89cbdef15e2081973dfeea93",
+      "sizeBytes": 1926,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/03-vercel-dashboard/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "7cf3280cbc56b6db89cbdef15e2081973dfeea93",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/03-vercel-dashboard/SITREP.md.source.txt",
+      "sourceBlobSha": "812078892ad880823466670635f17ed02d6a6a3f",
+      "sizeBytes": 799,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/03-vercel-dashboard/SITREP.md.source.txt",
+      "labBlobSha": "812078892ad880823466670635f17ed02d6a6a3f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/AGENTS.md.source.txt",
+      "sourceBlobSha": "3e0a880aa84cf5324d7fcf02a28720ed2ab6b025",
+      "sizeBytes": 2815,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/AGENTS.md.source.txt",
+      "labBlobSha": "3e0a880aa84cf5324d7fcf02a28720ed2ab6b025",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "967a7b944c6c7a9039ec397c13874da1b18ac453",
+      "sizeBytes": 2954,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "967a7b944c6c7a9039ec397c13874da1b18ac453",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/SITREP.md.source.txt",
+      "sourceBlobSha": "2af3050f0dbdda7bf2a549113fd1fef531be2ae4",
+      "sizeBytes": 17684,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/SITREP.md.source.txt",
+      "labBlobSha": "2af3050f0dbdda7bf2a549113fd1fef531be2ae4",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "f3d1b024252c0aa10c2ef0c237a1f3073a4a95e6",
+      "sizeBytes": 872,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/memory/CANON/README.md.source.txt",
+      "labBlobSha": "f3d1b024252c0aa10c2ef0c237a1f3073a4a95e6",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "5f953612aa3a8311debda64f331e626210cc948a",
+      "sizeBytes": 585,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "labBlobSha": "5f953612aa3a8311debda64f331e626210cc948a",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "a672ef43700af2950409d8e26780e2362ed49c5b",
+      "sizeBytes": 550,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/memory/Curated/README.md.source.txt",
+      "labBlobSha": "a672ef43700af2950409d8e26780e2362ed49c5b",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "35061ef632fb06a348bf622e024dc2d9d5031d45",
+      "sizeBytes": 1860,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/memory/Immediate/README.md.source.txt",
+      "labBlobSha": "35061ef632fb06a348bf622e024dc2d9d5031d45",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/skills/dashboard-evidence-gates/SKILL.md.source.txt",
+      "sourceBlobSha": "5c81ed807b42afd60ccf2d2c7d7c90a95c92a653",
+      "sizeBytes": 3371,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/01-dashboard-tracking/skills/dashboard-evidence-gates/SKILL.md.source.txt",
+      "labBlobSha": "5c81ed807b42afd60ccf2d2c7d7c90a95c92a653",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/AGENTS.md.source.txt",
+      "sourceBlobSha": "e8c51557f4fafe65597b5d49c15086b8743325c3",
+      "sizeBytes": 4058,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/AGENTS.md.source.txt",
+      "labBlobSha": "e8c51557f4fafe65597b5d49c15086b8743325c3",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "808ccc4df95d852e20f2ffdd68b38afa2169f938",
+      "sizeBytes": 7346,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "808ccc4df95d852e20f2ffdd68b38afa2169f938",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/SITREP.md.source.txt",
+      "sourceBlobSha": "5dcba870edbfbf4f91be2a4a7579343534717739",
+      "sizeBytes": 34953,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/SITREP.md.source.txt",
+      "labBlobSha": "5dcba870edbfbf4f91be2a4a7579343534717739",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "90d627a6e2b4896e4527762fa35be99a8e6f580d",
+      "sizeBytes": 1000,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/memory/CANON/README.md.source.txt",
+      "labBlobSha": "90d627a6e2b4896e4527762fa35be99a8e6f580d",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "c4ebcfbae48a412568caa5f29ed49b711f221704",
+      "sizeBytes": 419,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "labBlobSha": "c4ebcfbae48a412568caa5f29ed49b711f221704",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "01c0a81fb9962c371d5adf0056cabc6515671c0d",
+      "sizeBytes": 649,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/memory/Curated/README.md.source.txt",
+      "labBlobSha": "01c0a81fb9962c371d5adf0056cabc6515671c0d",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "d0d45becb868aa30af5279cb9ff7a8c12195732c",
+      "sizeBytes": 2137,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/memory/Immediate/README.md.source.txt",
+      "labBlobSha": "d0d45becb868aa30af5279cb9ff7a8c12195732c",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/skills/planning-critical-path/SKILL.md.source.txt",
+      "sourceBlobSha": "a69d3e9269cb125b0337ba4f0bead1624affead9",
+      "sizeBytes": 2817,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/skills/planning-critical-path/SKILL.md.source.txt",
+      "labBlobSha": "a69d3e9269cb125b0337ba4f0bead1624affead9",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/skills/planning-leverage-decision/SKILL.md.source.txt",
+      "sourceBlobSha": "8bec74bc3af82bedc20aa1a8538f136b909b41db",
+      "sizeBytes": 2746,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/02-long-term-planning-alignment/skills/planning-leverage-decision/SKILL.md.source.txt",
+      "labBlobSha": "8bec74bc3af82bedc20aa1a8538f136b909b41db",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/03-chief-of-staff-operations/AGENTS.md.source.txt",
+      "sourceBlobSha": "cbfee94c275a3a3691763e3aec6859ea369fd7aa",
+      "sizeBytes": 2839,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/03-chief-of-staff-operations/AGENTS.md.source.txt",
+      "labBlobSha": "cbfee94c275a3a3691763e3aec6859ea369fd7aa",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/03-chief-of-staff-operations/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "decd0c8e43f846af8f2b1a6a80d75ea830f6d18c",
+      "sizeBytes": 3114,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/03-chief-of-staff-operations/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "decd0c8e43f846af8f2b1a6a80d75ea830f6d18c",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/03-chief-of-staff-operations/SITREP.md.source.txt",
+      "sourceBlobSha": "d78124f8bfe1b7dc63a689d751c593dd8632ddda",
+      "sizeBytes": 18137,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/03-chief-of-staff-operations/SITREP.md.source.txt",
+      "labBlobSha": "d78124f8bfe1b7dc63a689d751c593dd8632ddda",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/03-chief-of-staff-operations/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "8d81d1b0c6f774b53127391a9e12951c2796df1c",
+      "sizeBytes": 507,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/03-chief-of-staff-operations/memory/CANON/README.md.source.txt",
+      "labBlobSha": "8d81d1b0c6f774b53127391a9e12951c2796df1c",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/03-chief-of-staff-operations/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "70fab891b99318711acd683fb2592797ba689d74",
+      "sizeBytes": 120,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/03-chief-of-staff-operations/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "labBlobSha": "70fab891b99318711acd683fb2592797ba689d74",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/03-chief-of-staff-operations/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "b10bd8ab8647090acc8750a3af9e10fa91234a21",
+      "sizeBytes": 535,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/03-chief-of-staff-operations/memory/Curated/README.md.source.txt",
+      "labBlobSha": "b10bd8ab8647090acc8750a3af9e10fa91234a21",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/03-chief-of-staff-operations/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "f642693dd2824d6233a56b9bd4908c547deeec9a",
+      "sizeBytes": 539,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/03-chief-of-staff-operations/memory/Immediate/README.md.source.txt",
+      "labBlobSha": "f642693dd2824d6233a56b9bd4908c547deeec9a",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/04-opencode-output-efficiency/AGENTS.md.source.txt",
+      "sourceBlobSha": "efe8c10012d10fef26adc46c616e4f7bc759ea2f",
+      "sizeBytes": 2840,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/04-opencode-output-efficiency/AGENTS.md.source.txt",
+      "labBlobSha": "efe8c10012d10fef26adc46c616e4f7bc759ea2f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/04-opencode-output-efficiency/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "e96486736c41c60e938a77bf30662780f7e4453a",
+      "sizeBytes": 3069,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/04-opencode-output-efficiency/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "e96486736c41c60e938a77bf30662780f7e4453a",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/04-opencode-output-efficiency/SITREP.md.source.txt",
+      "sourceBlobSha": "0fa068b9aae475823d80c8bf47273e96fae6ed51",
+      "sizeBytes": 24215,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/04-opencode-output-efficiency/SITREP.md.source.txt",
+      "labBlobSha": "0fa068b9aae475823d80c8bf47273e96fae6ed51",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/04-opencode-output-efficiency/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "69de6099b471a5835ad4c8bc2493b4ddb9c29c52",
+      "sizeBytes": 508,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/04-opencode-output-efficiency/memory/CANON/README.md.source.txt",
+      "labBlobSha": "69de6099b471a5835ad4c8bc2493b4ddb9c29c52",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/04-opencode-output-efficiency/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "bc623ab346875f16f24619fcae6845c4d508293b",
+      "sizeBytes": 121,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/04-opencode-output-efficiency/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "labBlobSha": "bc623ab346875f16f24619fcae6845c4d508293b",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/04-opencode-output-efficiency/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "fb72cc5b8a101ae3c5df8aa85c45312cb584f605",
+      "sizeBytes": 536,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/04-opencode-output-efficiency/memory/Curated/README.md.source.txt",
+      "labBlobSha": "fb72cc5b8a101ae3c5df8aa85c45312cb584f605",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/04-opencode-output-efficiency/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "4d2b4f15396cf987ad65898868dd1a603105e19f",
+      "sizeBytes": 540,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/04-opencode-output-efficiency/memory/Immediate/README.md.source.txt",
+      "labBlobSha": "4d2b4f15396cf987ad65898868dd1a603105e19f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/AGENTS.md.source.txt",
+      "sourceBlobSha": "bfca23749375d336d33f89303e050f1eda2edd34",
+      "sizeBytes": 5203,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/AGENTS.md.source.txt",
+      "labBlobSha": "bfca23749375d336d33f89303e050f1eda2edd34",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "320a0e4882efefd56c1ed4c5a4f26363ad0cad2f",
+      "sizeBytes": 8726,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "320a0e4882efefd56c1ed4c5a4f26363ad0cad2f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/SITREP.md.source.txt",
+      "sourceBlobSha": "ae533b7d7021bd5517f3e09be6dbedd6538ab12e",
+      "sizeBytes": 30449,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/SITREP.md.source.txt",
+      "labBlobSha": "ae533b7d7021bd5517f3e09be6dbedd6538ab12e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "267d718fe2073be891dae19bb290e3c6737a42f0",
+      "sizeBytes": 928,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/memory/CANON/README.md.source.txt",
+      "labBlobSha": "267d718fe2073be891dae19bb290e3c6737a42f0",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "9ea707bf9f6ee0d8eb2dadc5f7b83b37b890c16b",
+      "sizeBytes": 410,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "labBlobSha": "9ea707bf9f6ee0d8eb2dadc5f7b83b37b890c16b",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "fc4572ef523b8a5b435a21beda71166869f050dd",
+      "sizeBytes": 575,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/memory/Curated/README.md.source.txt",
+      "labBlobSha": "fc4572ef523b8a5b435a21beda71166869f050dd",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "264fc480875eb96460d60ea148a4a59532b03baa",
+      "sizeBytes": 1577,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/memory/Immediate/README.md.source.txt",
+      "labBlobSha": "264fc480875eb96460d60ea148a4a59532b03baa",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/skills/chief-executive-sitrep/SKILL.md.source.txt",
+      "sourceBlobSha": "d9e305eaf0b55044830deeeef27b8fefe1c79828",
+      "sizeBytes": 2294,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/skills/chief-executive-sitrep/SKILL.md.source.txt",
+      "labBlobSha": "d9e305eaf0b55044830deeeef27b8fefe1c79828",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/skills/chief-proof-triage/SKILL.md.source.txt",
+      "sourceBlobSha": "057da8838172c1373f537d0e243e34deaeeb11bb",
+      "sizeBytes": 3091,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/05-chief-of-chiefs/skills/chief-proof-triage/SKILL.md.source.txt",
+      "labBlobSha": "057da8838172c1373f537d0e243e34deaeeb11bb",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/AGENTS.md.source.txt",
+      "sourceBlobSha": "034525e809c4cf046dfe96390314e4df251d89e4",
+      "sizeBytes": 7341,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/AGENTS.md.source.txt",
+      "labBlobSha": "034525e809c4cf046dfe96390314e4df251d89e4",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "61b52a8fbff260ca9801f76b204c283343519164",
+      "sizeBytes": 6578,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "61b52a8fbff260ca9801f76b204c283343519164",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/SITREP.md.source.txt",
+      "sourceBlobSha": "900f6014510b0a16271ed247fc9bb0242349f842",
+      "sizeBytes": 21035,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/SITREP.md.source.txt",
+      "labBlobSha": "900f6014510b0a16271ed247fc9bb0242349f842",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/TOOL-REGISTRY.json.source.txt",
+      "sourceBlobSha": "0b05a2dd78c70f7e749365f28fc960d14d8bc16b",
+      "sizeBytes": 8301,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/TOOL-REGISTRY.json.source.txt",
+      "labBlobSha": "0b05a2dd78c70f7e749365f28fc960d14d8bc16b",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/WORKSPACE.md.source.txt",
+      "sourceBlobSha": "a1e7744761991448d6cfc3ca7b82cd0e5652940c",
+      "sizeBytes": 2063,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/WORKSPACE.md.source.txt",
+      "labBlobSha": "a1e7744761991448d6cfc3ca7b82cd0e5652940c",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "c9bd2b8ac15f2b2bef3ff5e96d26b2455e6ee78a",
+      "sizeBytes": 834,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/memory/CANON/README.md.source.txt",
+      "labBlobSha": "c9bd2b8ac15f2b2bef3ff5e96d26b2455e6ee78a",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "59230f9cfd31300f729fdb12b9e60314f5368835",
+      "sizeBytes": 391,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "labBlobSha": "59230f9cfd31300f729fdb12b9e60314f5368835",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "bd2dcf5a6f5b671c0ec21e38dcba8e48ced0cb79",
+      "sizeBytes": 500,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/memory/Curated/README.md.source.txt",
+      "labBlobSha": "bd2dcf5a6f5b671c0ec21e38dcba8e48ced0cb79",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "e2f9d61145fd192aa257f389685439d7c360a756",
+      "sizeBytes": 924,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/memory/Immediate/README.md.source.txt",
+      "labBlobSha": "e2f9d61145fd192aa257f389685439d7c360a756",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/acp-interop/SKILL.md.source.txt",
+      "sourceBlobSha": "f2dff40c56da15ea93e287e15b98782305dd7fab",
+      "sizeBytes": 1891,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/acp-interop/SKILL.md.source.txt",
+      "labBlobSha": "f2dff40c56da15ea93e287e15b98782305dd7fab",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/chatgpt-bus-v1-v2/SKILL.md.source.txt",
+      "sourceBlobSha": "147d63fcf9d742a3e892a84410cf7dd153297edf",
+      "sizeBytes": 2072,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/chatgpt-bus-v1-v2/SKILL.md.source.txt",
+      "labBlobSha": "147d63fcf9d742a3e892a84410cf7dd153297edf",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/chrome-acp-relay/SKILL.md.source.txt",
+      "sourceBlobSha": "c90dfbb94b18d052901f645f2e06247aeec993bb",
+      "sizeBytes": 5757,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/chrome-acp-relay/SKILL.md.source.txt",
+      "labBlobSha": "c90dfbb94b18d052901f645f2e06247aeec993bb",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/context7-harvest/SKILL.md.source.txt",
+      "sourceBlobSha": "60f0b06836d684a24e91134793ed2753e82a4fed",
+      "sizeBytes": 1547,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/context7-harvest/SKILL.md.source.txt",
+      "labBlobSha": "60f0b06836d684a24e91134793ed2753e82a4fed",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/environment-bootstrap/SKILL.md.source.txt",
+      "sourceBlobSha": "c01bfe241a103594812f8e60122d182b01bc6e7a",
+      "sizeBytes": 1857,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/environment-bootstrap/SKILL.md.source.txt",
+      "labBlobSha": "c01bfe241a103594812f8e60122d182b01bc6e7a",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/incident-recovery/SKILL.md.source.txt",
+      "sourceBlobSha": "d99d7ff3ab6cd832aa0c384708e0730629970021",
+      "sizeBytes": 1559,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/incident-recovery/SKILL.md.source.txt",
+      "labBlobSha": "d99d7ff3ab6cd832aa0c384708e0730629970021",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/model-capability-routing/SKILL.md.source.txt",
+      "sourceBlobSha": "e7f6557c3d5b8004342ec7be274ba86fc2d445f9",
+      "sizeBytes": 1612,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/model-capability-routing/SKILL.md.source.txt",
+      "labBlobSha": "e7f6557c3d5b8004342ec7be274ba86fc2d445f9",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/tool-discovery/SKILL.md.source.txt",
+      "sourceBlobSha": "c1b67d47280b910fe16d6ee1ff3127b7ee118daa",
+      "sizeBytes": 1460,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/tool-discovery/SKILL.md.source.txt",
+      "labBlobSha": "c1b67d47280b910fe16d6ee1ff3127b7ee118daa",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/verification-proof/SKILL.md.source.txt",
+      "sourceBlobSha": "67f45f0f92d2b3d88a0cdd6ed56e33208cba7c9c",
+      "sizeBytes": 1495,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/06-tooling-integration-engineer/skills/verification-proof/SKILL.md.source.txt",
+      "labBlobSha": "67f45f0f92d2b3d88a0cdd6ed56e33208cba7c9c",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/AGENTS.md.source.txt",
+      "sourceBlobSha": "c7599811049a3d065dbffa1af4efdbe93487046e",
+      "sizeBytes": 7702,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/AGENTS.md.source.txt",
+      "labBlobSha": "c7599811049a3d065dbffa1af4efdbe93487046e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "8c826e509cc4c4e44b88460a6f1f4c7a8b4dd12d",
+      "sizeBytes": 6599,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "8c826e509cc4c4e44b88460a6f1f4c7a8b4dd12d",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/SITREP.md.source.txt",
+      "sourceBlobSha": "189575ad1e57432f796c937e46a5a3670f359966",
+      "sizeBytes": 14476,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/SITREP.md.source.txt",
+      "labBlobSha": "189575ad1e57432f796c937e46a5a3670f359966",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/TOOLS.json.source.txt",
+      "sourceBlobSha": "ade4fa56265ca1c7e7df5c8bc7e9a03751d71afb",
+      "sizeBytes": 3720,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/TOOLS.json.source.txt",
+      "labBlobSha": "ade4fa56265ca1c7e7df5c8bc7e9a03751d71afb",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/WORKSPACE.md.source.txt",
+      "sourceBlobSha": "110c5e5844c544d3abb84a0e9bc43479aa5e2279",
+      "sizeBytes": 5015,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/WORKSPACE.md.source.txt",
+      "labBlobSha": "110c5e5844c544d3abb84a0e9bc43479aa5e2279",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "007862c6d026a9a73cb174cbec1731be2cd9bfaa",
+      "sizeBytes": 907,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/memory/CANON/README.md.source.txt",
+      "labBlobSha": "007862c6d026a9a73cb174cbec1731be2cd9bfaa",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "78cacf175cdf72fc4f0f547c373bb44f746bc528",
+      "sizeBytes": 328,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "labBlobSha": "78cacf175cdf72fc4f0f547c373bb44f746bc528",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "bdf252cbcbb074f24ebc6b3d8b8e740eeb70022a",
+      "sizeBytes": 528,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/memory/Curated/README.md.source.txt",
+      "labBlobSha": "bdf252cbcbb074f24ebc6b3d8b8e740eeb70022a",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "f54b10df68b557d9d34ecdf2ad4c852da0415e56",
+      "sizeBytes": 979,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/memory/Immediate/README.md.source.txt",
+      "labBlobSha": "f54b10df68b557d9d34ecdf2ad4c852da0415e56",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/skills/discovery-reuse/SKILL.md.source.txt",
+      "sourceBlobSha": "232e85009698f94224bb63ff53cc65a7969eb24e",
+      "sizeBytes": 1156,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/skills/discovery-reuse/SKILL.md.source.txt",
+      "labBlobSha": "232e85009698f94224bb63ff53cc65a7969eb24e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/skills/first-pass-decompose/SKILL.md.source.txt",
+      "sourceBlobSha": "1a7f3f9a0768c0da9fb457bacfcde11c0a550278",
+      "sizeBytes": 1585,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/skills/first-pass-decompose/SKILL.md.source.txt",
+      "labBlobSha": "1a7f3f9a0768c0da9fb457bacfcde11c0a550278",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/skills/provenance-dedupe/SKILL.md.source.txt",
+      "sourceBlobSha": "db55ce832fb3d6e46fe02ea7d9be42814b0ed055",
+      "sizeBytes": 1289,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/skills/provenance-dedupe/SKILL.md.source.txt",
+      "labBlobSha": "db55ce832fb3d6e46fe02ea7d9be42814b0ed055",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/skills/publish-commons/SKILL.md.source.txt",
+      "sourceBlobSha": "38aa361c6d1ae1996671be5dd1954c4865ce3951",
+      "sizeBytes": 3175,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/skills/publish-commons/SKILL.md.source.txt",
+      "labBlobSha": "38aa361c6d1ae1996671be5dd1954c4865ce3951",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/skills/raw-capture/SKILL.md.source.txt",
+      "sourceBlobSha": "12476cb61c9aa17b48cc41165c021ce25dd8f166",
+      "sizeBytes": 2546,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/skills/raw-capture/SKILL.md.source.txt",
+      "labBlobSha": "12476cb61c9aa17b48cc41165c021ce25dd8f166",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/skills/reconcile-recover/SKILL.md.source.txt",
+      "sourceBlobSha": "c3d5b4ad635f2feee4f78dccf30e1fb568db8333",
+      "sizeBytes": 3287,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/skills/reconcile-recover/SKILL.md.source.txt",
+      "labBlobSha": "c3d5b4ad635f2feee4f78dccf30e1fb568db8333",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/skills/review-tabulation/SKILL.md.source.txt",
+      "sourceBlobSha": "ab516ccde2ad396cd8cd403e49722b7f7135725c",
+      "sizeBytes": 2392,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/07-proposal-intake-commons/skills/review-tabulation/SKILL.md.source.txt",
+      "labBlobSha": "ab516ccde2ad396cd8cd403e49722b7f7135725c",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/AGENTS.md.source.txt",
+      "sourceBlobSha": "e09e83efe8aa568bb3445c418577ffeb08cf19a8",
+      "sizeBytes": 6201,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/AGENTS.md.source.txt",
+      "labBlobSha": "e09e83efe8aa568bb3445c418577ffeb08cf19a8",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "3ed73119c01651f188bdc1d9be82161425dc9072",
+      "sizeBytes": 5577,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "3ed73119c01651f188bdc1d9be82161425dc9072",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/SITREP.md.source.txt",
+      "sourceBlobSha": "aa0fe3286092ae856ec1ed065d39c0de4962b67a",
+      "sizeBytes": 11948,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/SITREP.md.source.txt",
+      "labBlobSha": "aa0fe3286092ae856ec1ed065d39c0de4962b67a",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/TOOLS.json.source.txt",
+      "sourceBlobSha": "04911e5401374b4abd3d7d084aec668a81291875",
+      "sizeBytes": 2876,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/TOOLS.json.source.txt",
+      "labBlobSha": "04911e5401374b4abd3d7d084aec668a81291875",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/WORKSPACE.md.source.txt",
+      "sourceBlobSha": "cc1a7153d2e94d0835ceb34efa6184d5a75370ab",
+      "sizeBytes": 2471,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/WORKSPACE.md.source.txt",
+      "labBlobSha": "cc1a7153d2e94d0835ceb34efa6184d5a75370ab",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "72251a0cdc360e2ad92f2de4e150bab5b2259231",
+      "sizeBytes": 375,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/memory/CANON/README.md.source.txt",
+      "labBlobSha": "72251a0cdc360e2ad92f2de4e150bab5b2259231",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "693b7b2bf5d4cd913f296fc6115fc838bbaca007",
+      "sizeBytes": 117,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "labBlobSha": "693b7b2bf5d4cd913f296fc6115fc838bbaca007",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "3d58465fae5ac028ce8396476723f788177a8e9e",
+      "sizeBytes": 400,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/memory/Curated/README.md.source.txt",
+      "labBlobSha": "3d58465fae5ac028ce8396476723f788177a8e9e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "7a51a43f0e7359e4b9efad0807552e2e25f3777d",
+      "sizeBytes": 400,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/memory/Immediate/README.md.source.txt",
+      "labBlobSha": "7a51a43f0e7359e4b9efad0807552e2e25f3777d",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/aion-knowledge-transfer/SKILL.md.source.txt",
+      "sourceBlobSha": "9ec1a437d53479662f528b15a5c8739f7074776f",
+      "sizeBytes": 1483,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/aion-knowledge-transfer/SKILL.md.source.txt",
+      "labBlobSha": "9ec1a437d53479662f528b15a5c8739f7074776f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/chrome-extension-fixture/SKILL.md.source.txt",
+      "sourceBlobSha": "63a738ad30f922a00fb1a773b840d11112cb190f",
+      "sizeBytes": 1532,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/chrome-extension-fixture/SKILL.md.source.txt",
+      "labBlobSha": "63a738ad30f922a00fb1a773b840d11112cb190f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/model-and-turn-economics/SKILL.md.source.txt",
+      "sourceBlobSha": "e86e00534d4cac7964e9df727433f9b512fa885e",
+      "sizeBytes": 1350,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/model-and-turn-economics/SKILL.md.source.txt",
+      "labBlobSha": "e86e00534d4cac7964e9df727433f9b512fa885e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/repo-input-output/SKILL.md.source.txt",
+      "sourceBlobSha": "7d2235686ca8a71e6e4df94eeb019cade5259abd",
+      "sizeBytes": 1467,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/repo-input-output/SKILL.md.source.txt",
+      "labBlobSha": "7d2235686ca8a71e6e4df94eeb019cade5259abd",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/sandbox-environment/SKILL.md.source.txt",
+      "sourceBlobSha": "c94c2fec1ea2514e93402ae6d3f2ce4dcf3eff77",
+      "sizeBytes": 1406,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/sandbox-environment/SKILL.md.source.txt",
+      "labBlobSha": "c94c2fec1ea2514e93402ae6d3f2ce4dcf3eff77",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/subagent-orchestration/SKILL.md.source.txt",
+      "sourceBlobSha": "d81cea5c7f5e42428068144eff6aef8b6be20c4f",
+      "sizeBytes": 1280,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/subagent-orchestration/SKILL.md.source.txt",
+      "labBlobSha": "d81cea5c7f5e42428068144eff6aef8b6be20c4f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/test-and-proof/SKILL.md.source.txt",
+      "sourceBlobSha": "93d735c9bcaa0df9275f5f5c515d294334cacdea",
+      "sizeBytes": 1201,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/test-and-proof/SKILL.md.source.txt",
+      "labBlobSha": "93d735c9bcaa0df9275f5f5c515d294334cacdea",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/turn-packet-design/SKILL.md.source.txt",
+      "sourceBlobSha": "9f1a2c356cfe7dbb1854d27d3bb0a91bd424791b",
+      "sizeBytes": 1689,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/turn-packet-design/SKILL.md.source.txt",
+      "labBlobSha": "9f1a2c356cfe7dbb1854d27d3bb0a91bd424791b",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/turn-recovery/SKILL.md.source.txt",
+      "sourceBlobSha": "f0b2c9e549d528852e6d1f088627b4ba1879e84a",
+      "sizeBytes": 1209,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/turn-recovery/SKILL.md.source.txt",
+      "labBlobSha": "f0b2c9e549d528852e6d1f088627b4ba1879e84a",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/zai-product-recon/SKILL.md.source.txt",
+      "sourceBlobSha": "7fedb7844c60c2222d675b63dff027cf4c4b2df7",
+      "sizeBytes": 1376,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/08-zai-sandbox-strategist/skills/zai-product-recon/SKILL.md.source.txt",
+      "labBlobSha": "7fedb7844c60c2222d675b63dff027cf4c4b2df7",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/AGENTS.md.source.txt",
+      "sourceBlobSha": "3ab5b2c88073eced8ea77f19b3f2020050072526",
+      "sizeBytes": 6394,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/AGENTS.md.source.txt",
+      "labBlobSha": "3ab5b2c88073eced8ea77f19b3f2020050072526",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "88d2eee270d37328dbd00ce4dcb1bf9896035d71",
+      "sizeBytes": 4409,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "88d2eee270d37328dbd00ce4dcb1bf9896035d71",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/SITREP.md.source.txt",
+      "sourceBlobSha": "51575c6463314e2ab29c81c118f4d90b79ebef72",
+      "sizeBytes": 14934,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/SITREP.md.source.txt",
+      "labBlobSha": "51575c6463314e2ab29c81c118f4d90b79ebef72",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/TOOLS.json.source.txt",
+      "sourceBlobSha": "d99e713ccd5a1aaae582597cbd6d6dc6adca53d3",
+      "sizeBytes": 4146,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/TOOLS.json.source.txt",
+      "labBlobSha": "d99e713ccd5a1aaae582597cbd6d6dc6adca53d3",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/WORKSPACE.md.source.txt",
+      "sourceBlobSha": "301ddbd2ce68a21b029835f562b1856a91f141a1",
+      "sizeBytes": 7067,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/WORKSPACE.md.source.txt",
+      "labBlobSha": "301ddbd2ce68a21b029835f562b1856a91f141a1",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/labs/website-to-local-streaming/capture-studio/docs/research/probe/claude.json.source.txt",
+      "sourceBlobSha": "6c305242052fe53df7600ce3b39cbb361184750b",
+      "sizeBytes": 5957,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/labs/website-to-local-streaming/capture-studio/docs/research/probe/claude.json.source.txt",
+      "labBlobSha": "6c305242052fe53df7600ce3b39cbb361184750b",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/labs/website-to-local-streaming/capture-studio/docs/research/probe/gemini.json.source.txt",
+      "sourceBlobSha": "9f5158f4564e9a9baf7f360889115f20ed6167c4",
+      "sizeBytes": 76220,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/labs/website-to-local-streaming/capture-studio/docs/research/probe/gemini.json.source.txt",
+      "labBlobSha": "9f5158f4564e9a9baf7f360889115f20ed6167c4",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/labs/website-to-local-streaming/capture-studio/docs/shape-atlas/claude.md.source.txt",
+      "sourceBlobSha": "5f5c2428c0cd3a08e71c4ea0e1902ffcbaad5c3e",
+      "sizeBytes": 5376,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/labs/website-to-local-streaming/capture-studio/docs/shape-atlas/claude.md.source.txt",
+      "labBlobSha": "5f5c2428c0cd3a08e71c4ea0e1902ffcbaad5c3e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/labs/website-to-local-streaming/capture-studio/profiles/claude.json.source.txt",
+      "sourceBlobSha": "0a99b95c80587f21228e3a6fc8bc86126a31bd1d",
+      "sizeBytes": 1014,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/labs/website-to-local-streaming/capture-studio/profiles/claude.json.source.txt",
+      "labBlobSha": "0a99b95c80587f21228e3a6fc8bc86126a31bd1d",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "6b04ecac50d8742d51be8bc6f6d2ea45dc305b9f",
+      "sizeBytes": 5386,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/memory/CANON/README.md.source.txt",
+      "labBlobSha": "6b04ecac50d8742d51be8bc6f6d2ea45dc305b9f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "2630632427f2fda96140545eca06176b49b45e5e",
+      "sizeBytes": 449,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "labBlobSha": "2630632427f2fda96140545eca06176b49b45e5e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "aa737ec1b83fa558cf128a2c61319b2242a4bb16",
+      "sizeBytes": 3655,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/memory/Curated/README.md.source.txt",
+      "labBlobSha": "aa737ec1b83fa558cf128a2c61319b2242a4bb16",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "d97efb133ff06da5e1a24d7a42c082ece8dc699e",
+      "sizeBytes": 8346,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/memory/Immediate/README.md.source.txt",
+      "labBlobSha": "d97efb133ff06da5e1a24d7a42c082ece8dc699e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/01-source-intake/SKILL.md.source.txt",
+      "sourceBlobSha": "e26d2dc1546a00749c67237cf1a9c39022eee7ea",
+      "sizeBytes": 1404,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/01-source-intake/SKILL.md.source.txt",
+      "labBlobSha": "e26d2dc1546a00749c67237cf1a9c39022eee7ea",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/02-repo-discovery/SKILL.md.source.txt",
+      "sourceBlobSha": "ae9fe7cbdde38a0bc33708ad04ff135c70d730ea",
+      "sizeBytes": 1086,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/02-repo-discovery/SKILL.md.source.txt",
+      "labBlobSha": "ae9fe7cbdde38a0bc33708ad04ff135c70d730ea",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/03-evidence-assessment/SKILL.md.source.txt",
+      "sourceBlobSha": "80c581776307692308970581e4468cb7e1f97c3e",
+      "sizeBytes": 1392,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/03-evidence-assessment/SKILL.md.source.txt",
+      "labBlobSha": "80c581776307692308970581e4468cb7e1f97c3e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/04-docs-intelligence/SKILL.md.source.txt",
+      "sourceBlobSha": "9ee8cf9dd300733ec98ab7bc838be52eb00fae01",
+      "sizeBytes": 1052,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/04-docs-intelligence/SKILL.md.source.txt",
+      "labBlobSha": "9ee8cf9dd300733ec98ab7bc838be52eb00fae01",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/05-media-intelligence/SKILL.md.source.txt",
+      "sourceBlobSha": "959b44723e25f39373672ab3280a7fe1f1b5857b",
+      "sizeBytes": 971,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/05-media-intelligence/SKILL.md.source.txt",
+      "labBlobSha": "959b44723e25f39373672ab3280a7fe1f1b5857b",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/06-cross-project-transfer/SKILL.md.source.txt",
+      "sourceBlobSha": "dbd6f3ef378041cca8385a29add9976c87e6fe35",
+      "sizeBytes": 933,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/06-cross-project-transfer/SKILL.md.source.txt",
+      "labBlobSha": "dbd6f3ef378041cca8385a29add9976c87e6fe35",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/07-notebooklm/SKILL.md.source.txt",
+      "sourceBlobSha": "47e814aae6318f992be3ba6369461a6c3034eece",
+      "sizeBytes": 1768,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/07-notebooklm/SKILL.md.source.txt",
+      "labBlobSha": "47e814aae6318f992be3ba6369461a6c3034eece",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/08-delivery-loop/SKILL.md.source.txt",
+      "sourceBlobSha": "cba1d60368f23270f428889e4433ed96581bf79f",
+      "sizeBytes": 1073,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/08-delivery-loop/SKILL.md.source.txt",
+      "labBlobSha": "cba1d60368f23270f428889e4433ed96581bf79f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/09-session-sitrep/SKILL.md.source.txt",
+      "sourceBlobSha": "6e6d6b05ac6c2c264b202aae55a25d8daa9b22d8",
+      "sizeBytes": 1618,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/09-session-sitrep/SKILL.md.source.txt",
+      "labBlobSha": "6e6d6b05ac6c2c264b202aae55a25d8daa9b22d8",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/research-evidence-check/SKILL.md.source.txt",
+      "sourceBlobSha": "b697f2883336ba2ee7f3189f63ee6172c6450a07",
+      "sizeBytes": 3522,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/09-global-research/skills/research-evidence-check/SKILL.md.source.txt",
+      "labBlobSha": "b697f2883336ba2ee7f3189f63ee6172c6450a07",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/AGENTS.md.source.txt",
+      "sourceBlobSha": "5928bf18177c8de2761847544b78f7fc513a8827",
+      "sizeBytes": 3192,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/AGENTS.md.source.txt",
+      "labBlobSha": "5928bf18177c8de2761847544b78f7fc513a8827",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "ad966a574a05f9fc72082c81c79725874a7f2f46",
+      "sizeBytes": 1840,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "ad966a574a05f9fc72082c81c79725874a7f2f46",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/SITREP.md.source.txt",
+      "sourceBlobSha": "30cac024e690b843e6d8a87361050f397f4cef6b",
+      "sizeBytes": 1804,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/SITREP.md.source.txt",
+      "labBlobSha": "30cac024e690b843e6d8a87361050f397f4cef6b",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "bff1fae19858c919635cc9e3d752ca90d4308658",
+      "sizeBytes": 968,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/memory/CANON/README.md.source.txt",
+      "labBlobSha": "bff1fae19858c919635cc9e3d752ca90d4308658",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "d458ba5f3294b49528325bc7d185101dfc17f656",
+      "sizeBytes": 719,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "labBlobSha": "d458ba5f3294b49528325bc7d185101dfc17f656",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "cd452e53f7a9a6195fcc1505a888ec30e00c5da0",
+      "sizeBytes": 696,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/memory/Curated/README.md.source.txt",
+      "labBlobSha": "cd452e53f7a9a6195fcc1505a888ec30e00c5da0",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "23c7b033913e44fe453a3c23943c488e64c3d2be",
+      "sizeBytes": 974,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/memory/Immediate/README.md.source.txt",
+      "labBlobSha": "23c7b033913e44fe453a3c23943c488e64c3d2be",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/skills/semantic-command-audit/SKILL.md.source.txt",
+      "sourceBlobSha": "c109eb73d510a286b3d2fb312b02a0a19fd1d814",
+      "sizeBytes": 3080,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/13-semantic-engine/skills/semantic-command-audit/SKILL.md.source.txt",
+      "labBlobSha": "c109eb73d510a286b3d2fb312b02a0a19fd1d814",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/AGENTS.md.source.txt",
+      "sourceBlobSha": "0785e48442c7db17f8bd6e15f6c077d96c2b6ab2",
+      "sizeBytes": 1112,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/AGENTS.md.source.txt",
+      "labBlobSha": "0785e48442c7db17f8bd6e15f6c077d96c2b6ab2",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "28e3dfc306ae152ef951f1c95d4d00d02f1c7ad1",
+      "sizeBytes": 2273,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "28e3dfc306ae152ef951f1c95d4d00d02f1c7ad1",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/SITREP.md.source.txt",
+      "sourceBlobSha": "b27ca9473548cfc63bf7799cb2857a1e91125504",
+      "sizeBytes": 3169,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/SITREP.md.source.txt",
+      "labBlobSha": "b27ca9473548cfc63bf7799cb2857a1e91125504",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/benchmarks/intelligence-adversarial-2026-10-25/HANDOFF.md.source.txt",
+      "sourceBlobSha": "8b1a7de62fe9d430f17a940c8c8370b9c0ae3f8f",
+      "sizeBytes": 4006,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/benchmarks/intelligence-adversarial-2026-10-25/HANDOFF.md.source.txt",
+      "labBlobSha": "8b1a7de62fe9d430f17a940c8c8370b9c0ae3f8f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/core/HANDOFF.md.source.txt",
+      "sourceBlobSha": "3cc6573b5e5eca70e58b69f53e5405f0f267d65f",
+      "sizeBytes": 11598,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/core/HANDOFF.md.source.txt",
+      "labBlobSha": "3cc6573b5e5eca70e58b69f53e5405f0f267d65f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/intelligence/HANDOFF.md.source.txt",
+      "sourceBlobSha": "5ce768531cb015c7e8fce5b2d3e70e9806dec289",
+      "sizeBytes": 7893,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/intelligence/HANDOFF.md.source.txt",
+      "labBlobSha": "5ce768531cb015c7e8fce5b2d3e70e9806dec289",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/systems/HANDOFF.md.source.txt",
+      "sourceBlobSha": "7507594f766ac7f35add394a74a2c0ca000dcbd0",
+      "sizeBytes": 15605,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/systems/HANDOFF.md.source.txt",
+      "labBlobSha": "7507594f766ac7f35add394a74a2c0ca000dcbd0",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/ui/HANDOFF.md.source.txt",
+      "sourceBlobSha": "38526dd091f2a6c268a04a6fcb232518e2592475",
+      "sizeBytes": 7667,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/ui/HANDOFF.md.source.txt",
+      "labBlobSha": "38526dd091f2a6c268a04a6fcb232518e2592475",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/memory/CANON/README.md.source.txt",
+      "sourceBlobSha": "5194145de3cb1b788c655a974622c2fc27f9b5c7",
+      "sizeBytes": 1447,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/memory/CANON/README.md.source.txt",
+      "labBlobSha": "5194145de3cb1b788c655a974622c2fc27f9b5c7",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "sourceBlobSha": "4b9ccc6cddb009bde20b176268c7e430b6b835c1",
+      "sizeBytes": 968,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/memory/Curated/BEST-PRACTICES.md.source.txt",
+      "labBlobSha": "4b9ccc6cddb009bde20b176268c7e430b6b835c1",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/memory/Curated/README.md.source.txt",
+      "sourceBlobSha": "7eda282fa9c15adbed05f525e01c92e7e1efb155",
+      "sizeBytes": 971,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/memory/Curated/README.md.source.txt",
+      "labBlobSha": "7eda282fa9c15adbed05f525e01c92e7e1efb155",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/memory/Immediate/README.md.source.txt",
+      "sourceBlobSha": "e0cb6ef4430ead0f22840712a87fea3dc52984d9",
+      "sizeBytes": 6310,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/memory/Immediate/README.md.source.txt",
+      "labBlobSha": "e0cb6ef4430ead0f22840712a87fea3dc52984d9",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/skills/webapp-shape-evidence/SKILL.md.source.txt",
+      "sourceBlobSha": "70b8b5f0ef9b3f2a7fc9b704590a2fa7abae9ea2",
+      "sizeBytes": 3027,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/14-webapp-native-harness/skills/webapp-shape-evidence/SKILL.md.source.txt",
+      "labBlobSha": "70b8b5f0ef9b3f2a7fc9b704590a2fa7abae9ea2",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/15-product-to-market/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "d2c33d619a0c4ebe38b46a6282b375a033a45b91",
+      "sizeBytes": 2448,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/15-product-to-market/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "d2c33d619a0c4ebe38b46a6282b375a033a45b91",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/AGENT.md.source.txt",
+      "sourceBlobSha": "acfb4f4b5ddc86cae0f47126c5e0a3b7bf89fe78",
+      "sizeBytes": 5431,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/AGENT.md.source.txt",
+      "labBlobSha": "acfb4f4b5ddc86cae0f47126c5e0a3b7bf89fe78",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/aion/workspace/aion/sessions/roles/13-semantic-engine/BOOTSTRAP.md.source.txt",
+      "sourceBlobSha": "ad966a574a05f9fc72082c81c79725874a7f2f46",
+      "sizeBytes": 1840,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/aion/workspace/aion/sessions/roles/13-semantic-engine/BOOTSTRAP.md.source.txt",
+      "labBlobSha": "ad966a574a05f9fc72082c81c79725874a7f2f46",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/aion/workspace/aion/sessions/roles/13-semantic-engine/SITREP.md.source.txt",
+      "sourceBlobSha": "30cac024e690b843e6d8a87361050f397f4cef6b",
+      "sizeBytes": 1804,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/aion/workspace/aion/sessions/roles/13-semantic-engine/SITREP.md.source.txt",
+      "labBlobSha": "30cac024e690b843e6d8a87361050f397f4cef6b",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--aion/workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md.source.txt",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "sizeBytes": 18854,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--aion/workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md.source.txt",
+      "labBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--hq/research/infra/TOOLS.md.source.txt",
+      "sourceBlobSha": "96e681815fd62ef00df6800e876095739d057048",
+      "sizeBytes": 4186,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_source_reference_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--vivim-harness/.opencode/agents/chatgpt-aion.md.source.txt",
+      "sourceBlobSha": "b5662321f5c79069e35eef627423f0e1a2cd6c9d",
+      "sizeBytes": 4282,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--vivim-harness/.opencode/agents/chatgpt-aion.md.source.txt",
+      "labBlobSha": "b5662321f5c79069e35eef627423f0e1a2cd6c9d",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--vivim-harness/.opencode/agents/local-opencode.md.source.txt",
+      "sourceBlobSha": "73f5461032775d795340558590c87ed6d04ab143",
+      "sizeBytes": 4791,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--vivim-harness/.opencode/agents/local-opencode.md.source.txt",
+      "labBlobSha": "73f5461032775d795340558590c87ed6d04ab143",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--vivim-harness/AGENTS.md.source.txt",
+      "sourceBlobSha": "c946a6271cdca1408471f14812d20fe8fd5a789d",
+      "sizeBytes": 3983,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--vivim-harness/AGENTS.md.source.txt",
+      "labBlobSha": "c946a6271cdca1408471f14812d20fe8fd5a789d",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--vivim-harness/docs/research/probe/claude.json.source.txt",
+      "sourceBlobSha": "6c305242052fe53df7600ce3b39cbb361184750b",
+      "sizeBytes": 5957,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--vivim-harness/docs/research/probe/claude.json.source.txt",
+      "labBlobSha": "6c305242052fe53df7600ce3b39cbb361184750b",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--vivim-harness/docs/research/probe/gemini.json.source.txt",
+      "sourceBlobSha": "9f5158f4564e9a9baf7f360889115f20ed6167c4",
+      "sizeBytes": 76220,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--vivim-harness/docs/research/probe/gemini.json.source.txt",
+      "labBlobSha": "9f5158f4564e9a9baf7f360889115f20ed6167c4",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--vivim-harness/docs/shape-atlas/claude.md.source.txt",
+      "sourceBlobSha": "5f5c2428c0cd3a08e71c4ea0e1902ffcbaad5c3e",
+      "sizeBytes": 5376,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--vivim-harness/docs/shape-atlas/claude.md.source.txt",
+      "labBlobSha": "5f5c2428c0cd3a08e71c4ea0e1902ffcbaad5c3e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--vivim-harness/profiles/claude.json.source.txt",
+      "sourceBlobSha": "0a99b95c80587f21228e3a6fc8bc86126a31bd1d",
+      "sizeBytes": 1014,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--vivim-harness/profiles/claude.json.source.txt",
+      "labBlobSha": "0a99b95c80587f21228e3a6fc8bc86126a31bd1d",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--vivim-omega/AGENTS.md.source.txt",
+      "sourceBlobSha": "ae924693fa5d65a507c91ed38be805429396feb7",
+      "sizeBytes": 8187,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--vivim-omega/AGENTS.md.source.txt",
+      "labBlobSha": "ae924693fa5d65a507c91ed38be805429396feb7",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--vivim-omega/compositions/agent.json.source.txt",
+      "sourceBlobSha": "f44d442cd0f5130f41330f684482181a2a8414d7",
+      "sizeBytes": 1890,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--vivim-omega/compositions/agent.json.source.txt",
+      "labBlobSha": "f44d442cd0f5130f41330f684482181a2a8414d7",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/originals/owenservera--zcode-pocket/product-design/AGENTS.md.source.txt",
+      "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+      "sizeBytes": 1818,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/originals/owenservera--zcode-pocket/product-design/AGENTS.md.source.txt",
+      "labBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/prior-schema-census-main.json",
+      "sourceBlobSha": "f395f78ebdca759451a05bedc65967462caacaef",
+      "sizeBytes": 43466,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_research_pointer_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/prior-schema-sources.json",
+      "sourceBlobSha": "b318fab7b08ab3f01bff5391035661a88c237181",
+      "sizeBytes": 1400,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_research_pointer_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/prior-schema-vivim-final-master.json",
+      "sourceBlobSha": "e28ee8407ff9558cceee79b1cc125c653a0bf7cd",
+      "sizeBytes": 13848,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_research_pointer_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/runtime/hqkg-crosswalk.v1.jsonl",
+      "sourceBlobSha": "37ecb462be89ca4bd9ed5d65193a9f135a9208ba",
+      "sizeBytes": 908335,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_research_pointer_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/runtime/hqkg-import.v1.jsonl",
+      "sourceBlobSha": "e50599efb4285ff9382a735f2f18ecd913ec096e",
+      "sizeBytes": 1236862,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_research_pointer_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/schema.sql",
+      "sourceBlobSha": "2531b22d7a07b4d465d75b7052a47f9348cdbc9f",
+      "sizeBytes": 3898,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/schema.sql",
+      "labBlobSha": "2531b22d7a07b4d465d75b7052a47f9348cdbc9f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/scores-217x10-v0.csv",
+      "sourceBlobSha": "77007b04c9f8c63e4b7f344a7a8e237354e24da8",
+      "sizeBytes": 44088,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/scores-217x10-v0.csv",
+      "labBlobSha": "77007b04c9f8c63e4b7f344a7a8e237354e24da8",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/scripts/build-db.mjs",
+      "sourceBlobSha": "dc50e673d33cd43aa3f8ea9afabf19efbe03b994",
+      "sizeBytes": 7349,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_research_pointer_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/scripts/export-hqkg.mjs",
+      "sourceBlobSha": "150525d02014b831ae4d5b2a16639ce651bce555",
+      "sizeBytes": 5902,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_research_pointer_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/scripts/export-hqkg.test.mjs",
+      "sourceBlobSha": "53f1c1f68c96cce805272fcd57e1a24059b62da3",
+      "sizeBytes": 635,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_research_pointer_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/scripts/graph.test.mjs",
+      "sourceBlobSha": "0126772eebb1f92b199d244c52cd323f0c7fa524",
+      "sizeBytes": 1716,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_research_pointer_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/scripts/recover.mjs",
+      "sourceBlobSha": "868d896cd30052058f07953456f611243ffffcba",
+      "sizeBytes": 6851,
+      "labPath": null,
+      "labBlobSha": null,
+      "status": "private_research_pointer_only"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/section-flavors.json",
+      "sourceBlobSha": "98c1666bd91f4de8ad720d2a8149081848ef3568",
+      "sizeBytes": 2585,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/section-flavors.json",
+      "labBlobSha": "98c1666bd91f4de8ad720d2a8149081848ef3568",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/section-types.json",
+      "sourceBlobSha": "65e02cbe6940c4da02dba5f3ba7d60a02f66c709",
+      "sizeBytes": 1864,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/section-types.json",
+      "labBlobSha": "65e02cbe6940c4da02dba5f3ba7d60a02f66c709",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/section-variants-observed.jsonl",
+      "sourceBlobSha": "090abb73c28628869f3ea5e32f77d90db69d7305",
+      "sizeBytes": 157270,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/section-variants-observed.jsonl",
+      "labBlobSha": "090abb73c28628869f3ea5e32f77d90db69d7305",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-011-020.jsonl",
+      "sourceBlobSha": "b4673ca2ed0565f7e440e846fa0b9aa2c4792a6e",
+      "sizeBytes": 12408,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-011-020.jsonl",
+      "labBlobSha": "b4673ca2ed0565f7e440e846fa0b9aa2c4792a6e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-011-020.receipts.json",
+      "sourceBlobSha": "28ff409389d0afc938f91330e933e33bee192fc6",
+      "sizeBytes": 1133,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-011-020.receipts.json",
+      "labBlobSha": "28ff409389d0afc938f91330e933e33bee192fc6",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-101-110.jsonl",
+      "sourceBlobSha": "b3e21092b23f7702be7a80b5f0a517cf256279b1",
+      "sizeBytes": 3400,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-101-110.jsonl",
+      "labBlobSha": "b3e21092b23f7702be7a80b5f0a517cf256279b1",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-101-110.receipts.json",
+      "sourceBlobSha": "dec86de848e1fc3989f3aebeac7b82ba088d0e4d",
+      "sizeBytes": 1003,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-101-110.receipts.json",
+      "labBlobSha": "dec86de848e1fc3989f3aebeac7b82ba088d0e4d",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-111-120.jsonl",
+      "sourceBlobSha": "d95f276b7169076793e03f34c912fdfe3e1b8f9f",
+      "sizeBytes": 6125,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-111-120.jsonl",
+      "labBlobSha": "d95f276b7169076793e03f34c912fdfe3e1b8f9f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-111-120.receipts.json",
+      "sourceBlobSha": "1b58f09717005a8834f6e27c44ba4738bc5fb731",
+      "sizeBytes": 1003,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-111-120.receipts.json",
+      "labBlobSha": "1b58f09717005a8834f6e27c44ba4738bc5fb731",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-121-130.jsonl",
+      "sourceBlobSha": "e6996727b708be3572377c684b9659564224fb80",
+      "sizeBytes": 6395,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-121-130.jsonl",
+      "labBlobSha": "e6996727b708be3572377c684b9659564224fb80",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-121-130.receipts.json",
+      "sourceBlobSha": "61e9858e012fc8c79e0d6d8e97d9bddb81bfcd65",
+      "sizeBytes": 1003,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-121-130.receipts.json",
+      "labBlobSha": "61e9858e012fc8c79e0d6d8e97d9bddb81bfcd65",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-131-140.jsonl",
+      "sourceBlobSha": "47a8c3553339bc89cc7cb6de3c04fb5ee12892c8",
+      "sizeBytes": 1442,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-131-140.jsonl",
+      "labBlobSha": "47a8c3553339bc89cc7cb6de3c04fb5ee12892c8",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-131-140.receipts.json",
+      "sourceBlobSha": "1aab1fdeda363fee52a6bd426078022c39ea0f57",
+      "sizeBytes": 1003,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-131-140.receipts.json",
+      "labBlobSha": "1aab1fdeda363fee52a6bd426078022c39ea0f57",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-141-150.jsonl",
+      "sourceBlobSha": "061affecd44aba901ac1131c27d6aee5e213db39",
+      "sizeBytes": 3452,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-141-150.jsonl",
+      "labBlobSha": "061affecd44aba901ac1131c27d6aee5e213db39",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-141-150.receipts.json",
+      "sourceBlobSha": "c3d8cddd3ff888e6bc4b0d7038982d711973f276",
+      "sizeBytes": 1003,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-141-150.receipts.json",
+      "labBlobSha": "c3d8cddd3ff888e6bc4b0d7038982d711973f276",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-151-160.jsonl",
+      "sourceBlobSha": "3b465646cbe06d6a835a5fed665eb07c68108ab3",
+      "sizeBytes": 3527,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-151-160.jsonl",
+      "labBlobSha": "3b465646cbe06d6a835a5fed665eb07c68108ab3",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-151-160.receipts.json",
+      "sourceBlobSha": "e0f97f87fbee8bb97b06b6917fd443e6bfda80e2",
+      "sizeBytes": 1003,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-151-160.receipts.json",
+      "labBlobSha": "e0f97f87fbee8bb97b06b6917fd443e6bfda80e2",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-161-170.jsonl",
+      "sourceBlobSha": "eebf5c749fb6258ea8899c19d71345ca3eb3d859",
+      "sizeBytes": 1296,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-161-170.jsonl",
+      "labBlobSha": "eebf5c749fb6258ea8899c19d71345ca3eb3d859",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-161-170.receipts.json",
+      "sourceBlobSha": "2fffde92e33d6380f47e8bcb1da07a129ecea6fb",
+      "sizeBytes": 1003,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-161-170.receipts.json",
+      "labBlobSha": "2fffde92e33d6380f47e8bcb1da07a129ecea6fb",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-171-180.jsonl",
+      "sourceBlobSha": "05458aa92426c51d615048f7051dd2f8a77e02e5",
+      "sizeBytes": 1995,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-171-180.jsonl",
+      "labBlobSha": "05458aa92426c51d615048f7051dd2f8a77e02e5",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-171-180.receipts.json",
+      "sourceBlobSha": "f1e529636b25276fe42a17933421f7dac6083bfd",
+      "sizeBytes": 1003,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-171-180.receipts.json",
+      "labBlobSha": "f1e529636b25276fe42a17933421f7dac6083bfd",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-181-190.jsonl",
+      "sourceBlobSha": "399218d124ec1ca773855ec3b0e08292d6f894dd",
+      "sizeBytes": 5397,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-181-190.jsonl",
+      "labBlobSha": "399218d124ec1ca773855ec3b0e08292d6f894dd",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-181-190.receipts.json",
+      "sourceBlobSha": "7acc1d265a7e44b9a53e38b39945725c2828d609",
+      "sizeBytes": 1003,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-181-190.receipts.json",
+      "labBlobSha": "7acc1d265a7e44b9a53e38b39945725c2828d609",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-191-200.jsonl",
+      "sourceBlobSha": "2c65f7ef184e2ce1045c7f0e098bdf01fb4d2c62",
+      "sizeBytes": 10704,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-191-200.jsonl",
+      "labBlobSha": "16066447a0bf636a5f1828f8fc111dcf3ae42c1b",
+      "status": "copied_sanitized_metadata"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-191-200.receipts.json",
+      "sourceBlobSha": "39c1f04e5ba18698700a4aba0d6514382e753410",
+      "sizeBytes": 1003,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-191-200.receipts.json",
+      "labBlobSha": "ea26577560bc2b11ba33f99cee4479961e6270ef",
+      "status": "copied_sanitized_metadata"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-201-210.jsonl",
+      "sourceBlobSha": "cd11ae716b0acce5579612571b095b0cf5e9cfcc",
+      "sizeBytes": 2949,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-201-210.jsonl",
+      "labBlobSha": "febd1959217bfe6fe22cde1d8b4d4d919bd21ab4",
+      "status": "copied_sanitized_metadata"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-201-210.receipts.json",
+      "sourceBlobSha": "e1400913710088c3d0e6b90cb2be0febdd7bd951",
+      "sizeBytes": 1003,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-201-210.receipts.json",
+      "labBlobSha": "02c31291e6148ee125d0aaa39fecd92e83743db7",
+      "status": "copied_sanitized_metadata"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-21-30.jsonl",
+      "sourceBlobSha": "31da4ef996dc38e531027105a1e77e0a7961723f",
+      "sizeBytes": 11922,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-21-30.jsonl",
+      "labBlobSha": "31da4ef996dc38e531027105a1e77e0a7961723f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-21-30.receipts.json",
+      "sourceBlobSha": "e37ccdd0c8b0dd6024a18c956bf102d3db47accd",
+      "sizeBytes": 1083,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-21-30.receipts.json",
+      "labBlobSha": "e37ccdd0c8b0dd6024a18c956bf102d3db47accd",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-211-217.jsonl",
+      "sourceBlobSha": "c7cfb38c4a76d220f13502cf04a4144e876a528d",
+      "sizeBytes": 1876,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-211-217.jsonl",
+      "labBlobSha": "c7cfb38c4a76d220f13502cf04a4144e876a528d",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-211-217.receipts.json",
+      "sourceBlobSha": "7edd36fcc7ad1a48ba306ea03108a3429fefee19",
+      "sizeBytes": 703,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-211-217.receipts.json",
+      "labBlobSha": "7edd36fcc7ad1a48ba306ea03108a3429fefee19",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-31-40.jsonl",
+      "sourceBlobSha": "f9feb91b976a516800e3f9506f4e2d74eef7a059",
+      "sizeBytes": 9397,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-31-40.jsonl",
+      "labBlobSha": "f9feb91b976a516800e3f9506f4e2d74eef7a059",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-31-40.receipts.json",
+      "sourceBlobSha": "c20eb04f78fc760c02fd3642bcbf2e20f11f5898",
+      "sizeBytes": 1083,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-31-40.receipts.json",
+      "labBlobSha": "c20eb04f78fc760c02fd3642bcbf2e20f11f5898",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-41-50.jsonl",
+      "sourceBlobSha": "a3f5432cb7204b9a18f0e744283ae7a62badbff0",
+      "sizeBytes": 8162,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-41-50.jsonl",
+      "labBlobSha": "a3f5432cb7204b9a18f0e744283ae7a62badbff0",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-41-50.receipts.json",
+      "sourceBlobSha": "557ba4c174a895dca69e528a3e3aa3a222d9b38a",
+      "sizeBytes": 1083,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-41-50.receipts.json",
+      "labBlobSha": "557ba4c174a895dca69e528a3e3aa3a222d9b38a",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-51-60.jsonl",
+      "sourceBlobSha": "c5ff7aca252308022b29bfffe3be6c4a2285e7bd",
+      "sizeBytes": 4595,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-51-60.jsonl",
+      "labBlobSha": "c5ff7aca252308022b29bfffe3be6c4a2285e7bd",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-51-60.receipts.json",
+      "sourceBlobSha": "45c7c6d369ac4d69453a7b1e7a73e40705df7f63",
+      "sizeBytes": 993,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-51-60.receipts.json",
+      "labBlobSha": "45c7c6d369ac4d69453a7b1e7a73e40705df7f63",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-61-70.jsonl",
+      "sourceBlobSha": "7cda5bf458daa3179e384942cfa566fdb19c89c1",
+      "sizeBytes": 5728,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-61-70.jsonl",
+      "labBlobSha": "7cda5bf458daa3179e384942cfa566fdb19c89c1",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-61-70.receipts.json",
+      "sourceBlobSha": "4d06b131dea42ff7e913e97be11344b39c0c5a0a",
+      "sizeBytes": 993,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-61-70.receipts.json",
+      "labBlobSha": "4d06b131dea42ff7e913e97be11344b39c0c5a0a",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-71-80.jsonl",
+      "sourceBlobSha": "1db6d5efb4d12c0fcc6c40a200986432acc9dccc",
+      "sizeBytes": 7866,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-71-80.jsonl",
+      "labBlobSha": "1db6d5efb4d12c0fcc6c40a200986432acc9dccc",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-71-80.receipts.json",
+      "sourceBlobSha": "8c101caac64a796f730a216f5d9be5acf4b4487e",
+      "sizeBytes": 993,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-71-80.receipts.json",
+      "labBlobSha": "8c101caac64a796f730a216f5d9be5acf4b4487e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-81-90.jsonl",
+      "sourceBlobSha": "64eac8726dd64bba44b48b19ff2899010dc2ee14",
+      "sizeBytes": 5471,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-81-90.jsonl",
+      "labBlobSha": "64eac8726dd64bba44b48b19ff2899010dc2ee14",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-81-90.receipts.json",
+      "sourceBlobSha": "67b5d024781eda3b3d952224c740a880f348f00f",
+      "sizeBytes": 993,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-81-90.receipts.json",
+      "labBlobSha": "67b5d024781eda3b3d952224c740a880f348f00f",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-91-100.jsonl",
+      "sourceBlobSha": "8e58b7d07e17de81a3a09a105c83519d07ec832b",
+      "sizeBytes": 6211,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-91-100.jsonl",
+      "labBlobSha": "8e58b7d07e17de81a3a09a105c83519d07ec832b",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/batch-91-100.receipts.json",
+      "sourceBlobSha": "d10800cc3482e937b785aa8a79eeda06f3b790bb",
+      "sizeBytes": 994,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/batch-91-100.receipts.json",
+      "labBlobSha": "d10800cc3482e937b785aa8a79eeda06f3b790bb",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/part-001-010.jsonl",
+      "sourceBlobSha": "775b145b3164ee4cf6264fc54caf56c8612e0a2e",
+      "sizeBytes": 6648,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/part-001-010.jsonl",
+      "labBlobSha": "775b145b3164ee4cf6264fc54caf56c8612e0a2e",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/part-curated-011.jsonl",
+      "sourceBlobSha": "49c71638f3e8c1d4479e2030790b143cce379f5d",
+      "sizeBytes": 5931,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/part-curated-011.jsonl",
+      "labBlobSha": "6f2929cdd49ede0cda39af9f43a13dcfbb492e2b",
+      "status": "copied_sanitized_metadata"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/part-extra-010.jsonl",
+      "sourceBlobSha": "69b86afde53dbed2543638c9996f262519e6ccf3",
+      "sizeBytes": 4695,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/part-extra-010.jsonl",
+      "labBlobSha": "212f6f502ff5b9efef2bca3596a16a01e3191b50",
+      "status": "copied_sanitized_metadata"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/recovery-001-010.json",
+      "sourceBlobSha": "d2065ec6964dd619cdfde6adf1c4c06d945b3dbe",
+      "sizeBytes": 2033,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/recovery-001-010.json",
+      "labBlobSha": "d2065ec6964dd619cdfde6adf1c4c06d945b3dbe",
+      "status": "copied_exact_hash"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/recovery-curated-011.json",
+      "sourceBlobSha": "f6506984d453865f727347754834213725efec81",
+      "sizeBytes": 2240,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/recovery-curated-011.json",
+      "labBlobSha": "81a1eac7182792ca7f6e773fd92d5fa11e4cda22",
+      "status": "copied_sanitized_metadata"
+    },
+    {
+      "sourcePath": "research/agentic-knowledge-graph/sections/recovery-extra-010.json",
+      "sourceBlobSha": "7af9c489303b39f4001cf006d7fb184ef5afc9ab",
+      "sizeBytes": 1775,
+      "labPath": "agentic_excelence/agentic-file-system/recovered/sections/recovery-extra-010.json",
+      "labBlobSha": "ac9ebf088b4f5b6803775886281a77af8259ef18",
+      "status": "copied_sanitized_metadata"
+    }
+  ]
+}

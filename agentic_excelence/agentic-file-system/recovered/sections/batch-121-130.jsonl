@@ -1,0 +1,63 @@
+{"id":"section:121:001","file_id":"file:121","heading":"Discover / Reuse Shared Proposals","line":5,"level":1}
+{"id":"section:121:002","file_id":"file:121","heading":"Procedure","line":7,"level":2}
+{"id":"section:121:003","file_id":"file:121","heading":"Output","line":15,"level":2}
+{"id":"section:122:001","file_id":"file:122","heading":"Neutral First-Pass Decomposition","line":5,"level":1}
+{"id":"section:122:002","file_id":"file:122","heading":"Steps","line":7,"level":2}
+{"id":"section:122:003","file_id":"file:122","heading":"Acceptance","line":17,"level":2}
+{"id":"section:123:001","file_id":"file:123","heading":"Provenance, Identity and Deduplication","line":5,"level":1}
+{"id":"section:123:002","file_id":"file:123","heading":"Steps","line":7,"level":2}
+{"id":"section:123:003","file_id":"file:123","heading":"Output","line":15,"level":2}
+{"id":"section:124:001","file_id":"file:124","heading":"Publish to Common Pool","line":5,"level":1}
+{"id":"section:124:002","file_id":"file:124","heading":"Preconditions","line":7,"level":2}
+{"id":"section:124:003","file_id":"file:124","heading":"Steps","line":10,"level":2}
+{"id":"section:124:004","file_id":"file:124","heading":"Acceptance","line":19,"level":2}
+{"id":"section:124:005","file_id":"file:124","heading":"v0.2 follow-through — publication to consumption","line":22,"level":2}
+{"id":"section:124:006","file_id":"file:124","heading":"Integrity check at publication","line":25,"level":2}
+{"id":"section:125:001","file_id":"file:125","heading":"RAW Intake — Exact Source Custody","line":5,"level":1}
+{"id":"section:125:002","file_id":"file:125","heading":"When to run","line":7,"level":2}
+{"id":"section:125:003","file_id":"file:125","heading":"Inputs","line":10,"level":2}
+{"id":"section:125:004","file_id":"file:125","heading":"Steps","line":13,"level":2}
+{"id":"section:125:005","file_id":"file:125","heading":"Must not","line":21,"level":2}
+{"id":"section:125:006","file_id":"file:125","heading":"Acceptance","line":24,"level":2}
+{"id":"section:125:007","file_id":"file:125","heading":"Machine-assisted readback","line":27,"level":2}
+{"id":"section:126:001","file_id":"file:126","heading":"Pool Reconciliation / Safe Recovery","line":5,"level":1}
+{"id":"section:126:002","file_id":"file:126","heading":"Trigger","line":7,"level":2}
+{"id":"section:126:003","file_id":"file:126","heading":"Recovery","line":10,"level":2}
+{"id":"section:126:004","file_id":"file:126","heading":"Completion","line":18,"level":2}
+{"id":"section:126:005","file_id":"file:126","heading":"Deterministic integrity preflight (Node, read-only)","line":21,"level":2}
+{"id":"section:127:001","file_id":"file:127","heading":"Evidence-Based Review & Rank","line":5,"level":1}
+{"id":"section:127:002","file_id":"file:127","heading":"Role limitation","line":7,"level":2}
+{"id":"section:127:003","file_id":"file:127","heading":"Steps","line":10,"level":2}
+{"id":"section:127:004","file_id":"file:127","heading":"Output","line":20,"level":2}
+{"id":"section:127:005","file_id":"file:127","heading":"v0.2 small reviews, useful decisions","line":23,"level":2}
+{"id":"section:128:001","file_id":"file:128","heading":"AGENTS — Z-FORGE role instructions","line":1,"level":1}
+{"id":"section:128:002","file_id":"file:128","heading":"Role separation","line":8,"level":2}
+{"id":"section:128:003","file_id":"file:128","heading":"Turn rules","line":19,"level":2}
+{"id":"section:128:004","file_id":"file:128","heading":"Provenance","line":24,"level":2}
+{"id":"section:128:005","file_id":"file:128","heading":"Security/permissions","line":28,"level":2}
+{"id":"section:128:006","file_id":"file:128","heading":"Closeout","line":33,"level":2}
+{"id":"section:128:007","file_id":"file:128","heading":"SITREP and agent commons","line":36,"level":2}
+{"id":"section:128:008","file_id":"file:128","heading":"Persistent agent memory (standing)","line":40,"level":2}
+{"id":"section:128:009","file_id":"file:128","heading":"Skills builder / agent capability ownership","line":44,"level":2}
+{"id":"section:128:010","file_id":"file:128","heading":"Memory context","line":48,"level":2}
+{"id":"section:129:001","file_id":"file:129","heading":"AION Employee 08 — Z-FORGE — Self-Bootstrap","line":1,"level":1}
+{"id":"section:129:002","file_id":"file:129","heading":"One mission","line":7,"level":2}
+{"id":"section:129:003","file_id":"file:129","heading":"What you own","line":10,"level":2}
+{"id":"section:129:004","file_id":"file:129","heading":"Self-bootstrap — first actual session","line":19,"level":2}
+{"id":"section:129:005","file_id":"file:129","heading":"Hard operating rules","line":27,"level":2}
+{"id":"section:129:006","file_id":"file:129","heading":"Activation proof","line":36,"level":2}
+{"id":"section:129:007","file_id":"file:129","heading":"Launch response","line":39,"level":2}
+{"id":"section:130:001","file_id":"file:130","heading":"AION Employee 08 — Z-FORGE SITREP","line":1,"level":1}
+{"id":"section:130:002","file_id":"file:130","heading":"Mission","line":10,"level":2}
+{"id":"section:130:003","file_id":"file:130","heading":"Known, qualified","line":13,"level":2}
+{"id":"section:130:004","file_id":"file:130","heading":"First gates","line":18,"level":2}
+{"id":"section:130:005","file_id":"file:130","heading":"Policy","line":24,"level":2}
+{"id":"section:130:006","file_id":"file:130","heading":"Publication and evidence — 2026-10-16","line":27,"level":2}
+{"id":"section:130:007","file_id":"file:130","heading":"New P0 assignment — M1 pre-live sandbox runs (2026-10-16)","line":30,"level":2}
+{"id":"section:130:008","file_id":"file:130","heading":"P0 M1 Council Z-FORGE Prep — M1C-08 — 2026-10-16","line":33,"level":2}
+{"id":"section:130:009","file_id":"file:130","heading":"2026-10-17 — Active Z-FORGE 08 integrator acknowledgment and mock build release","line":38,"level":2}
+{"id":"section:130:010","file_id":"file:130","heading":"ACPX-001 review assignment — 2026-10-17","line":46,"level":2}
+{"id":"section:130:011","file_id":"file:130","heading":"P0 M1-002 — Z.ai browser adapter sandbox integration — 2026-10-17","line":49,"level":2}
+{"id":"section:130:012","file_id":"file:130","heading":"Persistent agent memory (standing)","line":52,"level":2}
+{"id":"section:130:013","file_id":"file:130","heading":"Skills check on SITREP","line":56,"level":2}
+{"id":"section:130:014","file_id":"file:130","heading":"Memory on SITREP","line":60,"level":2}

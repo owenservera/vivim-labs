@@ -1,0 +1,67 @@
+[
+  {
+    "id": "section_type:purpose",
+    "name": "Purpose and scope",
+    "scope": "shared concept with file-specific variations"
+  },
+  {
+    "id": "section_type:prerequisites",
+    "name": "Prerequisites and environment",
+    "scope": "shared concept with file-specific variations"
+  },
+  {
+    "id": "section_type:responsibilities",
+    "name": "Responsibilities and boundaries",
+    "scope": "shared concept with file-specific variations"
+  },
+  {
+    "id": "section_type:workflow",
+    "name": "Execution workflow",
+    "scope": "shared concept with file-specific variations"
+  },
+  {
+    "id": "section_type:best_practices",
+    "name": "Best practices",
+    "scope": "shared concept with file-specific variations"
+  },
+  {
+    "id": "section_type:tools",
+    "name": "Tools and capabilities",
+    "scope": "shared concept with file-specific variations"
+  },
+  {
+    "id": "section_type:context",
+    "name": "Context and memory",
+    "scope": "shared concept with file-specific variations"
+  },
+  {
+    "id": "section_type:safety",
+    "name": "Safety and permissions",
+    "scope": "shared concept with file-specific variations"
+  },
+  {
+    "id": "section_type:verification",
+    "name": "Tests and acceptance",
+    "scope": "shared concept with file-specific variations"
+  },
+  {
+    "id": "section_type:recovery",
+    "name": "Recovery and handoff",
+    "scope": "shared concept with file-specific variations"
+  },
+  {
+    "id": "section_type:lifecycle",
+    "name": "Status and lifecycle",
+    "scope": "shared concept with file-specific variations"
+  },
+  {
+    "id": "section_type:examples",
+    "name": "Examples and templates",
+    "scope": "shared concept with file-specific variations"
+  },
+  {
+    "id": "section_type:unique",
+    "name": "File-specific specialized section",
+    "scope": "shared concept with file-specific variations"
+  }
+]

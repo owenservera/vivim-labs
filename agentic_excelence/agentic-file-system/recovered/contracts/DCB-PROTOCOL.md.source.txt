@@ -1,0 +1,322 @@
+# Dynamic Context Bundle auto-generation protocol (v1)
+
+**Schema:** `hq.dcb-protocol/1`
+**Bundle:** `hq.context-bundle/1`
+**Status:** normative. Read-only, local-only, deterministic.
+**Backbone:** `hq/registry/agentic-file-registry.v1.json` — 217 actual agentic
+file records across 7 repositories, diffed against the 133-pattern AION
+catalog.
+
+A Dynamic Context Bundle (DCB) is the minimum sufficient, provenance-linked
+context for one task, one audience, one budget. It is a projection, never an
+authority. Generating a bundle has no side effects.
+
+---
+
+## 1. Triggers
+
+| Trigger | When | Default budget | Audience |
+| --- | --- | --- | --- |
+| `session.start` | harness opens a session | 4000 | agent |
+| `task.route` | agent asks which instructions apply | 3000 | agent |
+| `edit.pre` | before a file change | 5000 | agent |
+| `edit.post` | after a file change | 4000 | agent |
+| `handoff` | session continuity | 6000 | agent |
+| `ask` | owner asks a question | 4000 | owner |
+| `mcp.context` | MCP tool call | 6000 | agent |
+| `schedule` | watch/hook refresh | 3000 | agent |
+| `manual` | explicit `hq context` | 6000 | caller |
+
+Every bundle records its trigger. A trigger never grants authority.
+
+---
+
+## 2. Inputs
+
+```js
+{
+  task,                 // bounded text, max 10k chars
+  trigger,              // one of the table above
+  project,              // optional space name
+  audience,             // 'agent' | 'owner'
+  budgetTokens,         // 256..24000
+  reservedForOutput,    // default 800
+  maxFiles,             // default 24
+  pinned,               // optional refs to force-include
+  allowPrivate,         // default false; owner-only
+  now,                  // pinned timestamp for determinism
+  registry,             // filetype registry (217/133)
+}
+```
+
+The composer also reads the local index: files, symbols, imports, annotations,
+commits, documents, decisions, canon terms, notes, sessions and wiki pages.
+
+---
+
+## 3. Pipeline
+
+```text
+trigger + task
+   -> resolve scope (project, audience, privacy)
+   -> collect candidates from 9 source families
+   -> classify docs via the 217/133 filetype registry
+   -> score every candidate
+   -> dedupe by ref
+   -> exact knapsack under budget
+   -> render manifest + fragment
+   -> record receipt
+   -> mark freshness
+```
+
+### 3.1 Candidate families
+
+| # | Family | Source | Why it is included |
+| --- | --- | --- | --- |
+| 1 | Code | FTS content, symbols, path matches | the task's likely implementation |
+| 2 | Imports | dependency graph neighbors | signatures and side effects |
+| 3 | Instructions | filetypes families 01, 02, 05, 09 | mandatory rules and skills |
+| 4 | Documents | filetypes family/role + `auto_expose` | context, architecture, state |
+| 5 | Decisions | accepted/superseded decisions | why the system is this way |
+| 6 | CANON | current terms, invariants, non-equivalences | vocabulary and boundaries |
+| 7 | Memory | notes tiers `later`/`canon` (owner-scoped) | durable owner intent |
+| 8 | History | recent commits, handoffs | what changed and why |
+| 9 | Sessions | recent OpenCode transcript evidence | what was already tried |
+
+Each candidate carries `ref`, `project`, `path`, `lines`, `sha256`, `kind`,
+`docFamily`, `docRole`, `authority`, `sourceClass`, `observedAt`.
+
+### 3.2 Filetype routing
+
+The registry is the routing backbone. A document is not included because its
+filename "looks important"; it is included because its **family**, **role**,
+**authority** and **auto_expose** surfaces match the trigger and task.
+
+Role weights:
+
+| Role | Weight | Typical families |
+| --- | ---: | --- |
+| law | 1.0 | 05 |
+| decision | 0.95 | 20 |
+| instruction | 0.9 | 01, 02 |
+| canon | 0.9 | 04, 20 |
+| skill | 0.85 | 09 |
+| context | 0.8 | 04 |
+| architecture | 0.75 | 07 |
+| evidence | 0.75 | 18 |
+| plan | 0.7 | 15 |
+| work | 0.7 | 14 |
+| state | 0.6 | 12 |
+| memory | 0.65 | 11 |
+| continuity | 0.6 | 13 |
+| validation | 0.6 | 17 |
+| capability | 0.55 | 08 |
+| others | 0.5 | — |
+
+Authority multipliers:
+
+| Authority | Multiplier | Rule |
+| --- | ---: | --- |
+| `vendor_documented` | 1.0 | official convention |
+| `project_observed` | 0.9 | actual repository file |
+| `local_custom` | 0.7 | local convention, unverified |
+| `proposed` | 0.5 | candidate, not adopted |
+| `historical` | 0.2 | only when explicitly requested |
+
+Auto-exposure surfaces:
+
+- `route` — mandatory instruction, law, decision, skill, capability.
+- `context` — context, architecture, identity, memory, state.
+- `brief` — work, plan, state, memory, collaboration.
+- `handoff` — evidence, continuity, work, plan, collaboration, closeout.
+- `verify` — evidence, validation.
+- `wiki` / `docs` — everything, as navigation.
+- `doctor` — config.
+
+Rules:
+
+- Historical and generated documents are excluded unless the task explicitly
+  asks for history.
+- `proposed` documents need a task-token match to be included.
+- `observed_only` types (README.md, BEST-PRACTICES.md, claude.json, …) are
+  included only when they exist in the project and score above threshold.
+- A document never grants execution authority.
+
+---
+
+## 4. Scoring
+
+```text
+score = 1
+      + 3.6 * coverage          // task tokens present in the text (cap 2500 chars)
+      + 1.2 * symbolBonus       // symbol hit or signature match
+      + 0.8 * recency           // exp(-ageDays / 90)
+      + 0.6 * docAuthority      // README/AGENTS/docs
+      + 0.5 * importProximity   // imports or is imported by a top hit
+      + 0.9 * familyWeight      // filetype role weight
+      + 0.4 * authorityWeight   // filetype authority multiplier
+      + 0.5 * triggerMatch      // auto_expose includes this trigger
+```
+
+Tie-break: `ref` ascending. Scores are rounded to 3 decimals.
+
+---
+
+## 5. Selection
+
+- Deduplicate by `ref`; duplicate content under different refs is omitted with
+  reason `duplicate_content`.
+- Capacity = `budgetTokens - reservedForOutput - 80`.
+- Exact 0/1 knapsack in 32-token units. Never exceed capacity.
+- `maxFiles` is a second hard cap.
+- Pinned refs are included first if they fit; otherwise omitted with reason
+  `pinned_over_budget`.
+- Secret paths are never candidates: `.env*`, `*.keystore`, `session.json`,
+  `storage-state.json`, `release-profile.json`, `Cookies`, `Login Data`.
+- Private notes require `allowPrivate` and audience `owner`.
+
+---
+
+## 6. Output
+
+```json
+{
+  "schema": "hq.context-bundle/1",
+  "protocol": "hq.dcb-protocol/1",
+  "trigger": "session.start",
+  "task": "add stripe billing",
+  "audience": "agent",
+  "project": "repos-hq",
+  "generatedAt": "2026-11-02T00:00:00.000Z",
+  "status": "fresh",
+  "budget": {
+    "maxTokens": 6000,
+    "reserved": 800,
+    "capacity": 5120,
+    "used": 4310,
+    "estimator": "utf8-bytes/3"
+  },
+  "sources": [
+    {
+      "ref": "repos-hq:AGENTS.md",
+      "project": "repos-hq",
+      "path": "AGENTS.md",
+      "kind": "doc",
+      "lang": "markdown",
+      "sha256": "…",
+      "lines": [1, 80],
+      "estimatedTokens": 620,
+      "score": 14.2,
+      "reason": "instruction|family_01|route",
+      "docFamily": "01",
+      "docRole": "instruction",
+      "authority": "project_observed",
+      "sourceClass": "vendor_documented",
+      "autoExposeReason": "route",
+      "digest": "…"
+    }
+  ],
+  "omissions": [
+    { "ref": "repos-hq:docs/history/x.md", "reason": "historical_not_requested" }
+  ],
+  "symbols": [],
+  "decisions": [],
+  "canon": [],
+  "sessions": [],
+  "labels": { "aperture": "Discover", "evidence": "Activity Record" },
+  "authority": "read_only_projection",
+  "digest": "…"
+}
+```
+
+`fragment` renders each included source with a `SOURCE` header and the selected
+text. `digest` excludes `generatedAt` so identical inputs produce identical
+bundles.
+
+---
+
+## 7. Auto-refresh and staleness
+
+A bundle is a snapshot. It becomes stale when any included source hash changes.
+
+| Status | Meaning | Action |
+| --- | --- | --- |
+| `fresh` | every source hash matches | none |
+| `stale` | one or more sources changed | `hq context --refresh` |
+| `invalid` | source missing or hash mismatch on verify | recompose |
+
+- `hq context --verify <bundle.json>` recomputes hashes and returns changed
+  refs.
+- `hq context --refresh <bundle.json>` recomposes with the same task, trigger
+  and budget.
+- `hq watch` and git hooks mark dependent bundles stale; they never silently
+  rewrite a verified bundle.
+- A receipt records the bundle digest and source refs.
+
+---
+
+## 8. Privacy and authority
+
+- Local-only. No network calls.
+- Secret paths excluded before scoring.
+- Personal notes excluded unless `allowPrivate` and owner audience.
+- Every source carries an authority label.
+- Documents, decisions and CANON terms are evidence, not permission.
+- The bundle is read-only; generating it cannot approve, send, execute or
+  mutate anything.
+- VIVIM invariants apply: memory is not authority; capability is not
+  authorization; evidence is not inference; one effect owner; no silent sends;
+  journal before effect.
+
+---
+
+## 9. Determinism
+
+- Candidate ordering is stable (ref ascending before knapsack).
+- Scores are rounded.
+- `generatedAt` is excluded from the digest.
+- Same task + same index + same registry + same `now` => same digest.
+- The protocol version is part of the bundle.
+
+---
+
+## 10. Commands and MCP
+
+```sh
+hq context "<task>" --trigger session.start --audience agent --budget 6000
+hq context "<task>" --project X --out bundle.json
+hq context --verify bundle.json
+hq context --refresh bundle.json
+hq dcb explain "<task>"        # candidate scores and omission reasons
+hq dcb protocol                # print this protocol
+```
+
+MCP: `hq_context` accepts `task`, `project`, `budgetTokens`, `trigger`,
+`audience`.
+
+---
+
+## 11. Acceptance
+
+1. A bundle is generated for every trigger with the trigger recorded.
+2. Filetype families route documents: AGENTS.md/decisions/canon appear when
+   relevant; historical docs do not.
+3. Budget is never exceeded; `used <= capacity`.
+4. Every source has ref, lines, sha256, authority and a reason.
+5. Omissions are explained.
+6. `verify` detects a changed source; `refresh` restores `fresh`.
+7. Same inputs produce the same digest.
+8. Secret paths and private notes never appear.
+9. A bundle never grants execution authority.
+10. `hq dcb explain` shows why each candidate was included or omitted.
+
+---
+
+## 12. Versioning
+
+- Protocol: `hq.dcb-protocol/1`.
+- Bundle: `hq.context-bundle/1`.
+- Breaking changes bump the protocol and keep the old composer available
+  behind a flag until bundles are migrated.
+- The 217/133 filetype registry is versioned independently
+  (`hq.agentic-file-registry/1`).

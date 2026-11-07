@@ -1,0 +1,62 @@
+# AION Employee 08 — Z-FORGE SITREP
+Created: 2026-10-16 (design/role creation).
+Live Role 08 ChatGPT chat: **NOT YET LAUNCHED/ACKNOWLEDGED**.
+Z.ai account session: **NOT CONNECTED / NOT INSPECTED**.
+Z.ai Agent Mode turn: **NONE SUBMITTED BY THIS WORKER**.
+Code/sandbox installation: **NONE CLAIMED**.
+Repository: owenservera/aion main
+Shared lab: workspace/aion/ops/zai-sandbox-lab/
+
+## Mission
+Research the actual user-facing Z.ai Full-Stack Agent sandbox product and maximize verified reusable engineering output per user-submitted turn, including reproducible sandbox setup, multiagent use, model selection and artifact export.
+
+## Known, qualified
+- USER_REPORTED: user logs into Z.ai web app with Chat and Agent modes; Agent Mode provides a Linux sandbox/full-stack builder team, model choice per spin-up, web/repo capabilities, one heavy-duty user turn at a time.
+- OFFICIAL_ZAI_DOC: Z.ai web agent landing page advertises Full-Stack; separate ZCode desktop docs describe agentic coding, built-in browser use, tools and subagents, but do NOT prove the same features inside web Agent Mode.
+- UNKNOWN: actual web-account plan, model menu, turn duration/limits, available tools, sandbox persistence, export buttons/GitHub privileges, isolated browser/Chrome extension install capability, subagent count/cost.
+
+## First gates
+1. Launch Role 08 chat and verify all workspace + 30 task records.
+2. Collect minimal genuine capability observations (screenshots/menu text or a bounded first sandbox turn) and record unknowns.
+3. Produce first high-value execution prompt from MISSION-TEMPLATE.md with stop/acceptance/export criteria.
+4. Receive real agent output; verify source/tests/evidence; feed into existing AION repo, TOOLSMITH and Efficiency streams.
+
+## Policy
+No Playwright or Puppeteer. No assumption that a published role bootstrap starts another independent agent. Use sandbox as experimental build lane with independent review and local-owner master principle.
+
+## Publication and evidence — 2026-10-16
+Role 08 workspace documents (BOOTSTRAP, AGENTS, WORKSPACE, TOOLS, SITREP, launch prompt), 10 SKILL.md runbooks, and Z.ai Sandbox Lab containing 30 research tasks (JSON + Markdown), capability ledger, structured TURN-FEED, FIRST-MISSION, generic MISSION-TEMPLATE, and result receipt contract were published to AION main. Owner tracking [issue #21](https://github.com/owenservera/aion/issues/21). Team roster/CoS/TOOLSMITH/Efficiency/Intake directives updated as GitHub artifacts only. **No live Role 08 chat and no Z.ai Agent Mode turn were launched here.** Next: verify all file readbacks, validate JSON/task IDs, then owner launches independent specialist chat and submits the first bounded turn when desired. Treat Z.ai web Agent-specific features as OWNER_REPORTED until inspected.
+
+## New P0 assignment — M1 pre-live sandbox runs (2026-10-16)
+The owner requests Z-FORGE to **design optimally scoped Z.ai web Full-Stack Agent sandbox runs that prepare AION's M1 genuine ChatGPT web-app roundtrip**, but Z.ai CANNOT access the owner's authenticated ChatGPT browser/mobile session and must not claim real M1 testing. Canonical assignment: https://github.com/owenservera/aion/blob/main/workspace/aion/ops/zai-sandbox-lab/M1-PRELIVE-RUN-DESIGN.md . Read canonical AION M1 and M0.5 specs; optimize the proposed P0 plan-only gap map, P1 contract fixture, P2 browser-side adapter using disposable fake UI, P3 local transport/recovery dry-run, P4 install/rollback/live-test checklist. Bundle turns when worthwhile. Prepare paste-ready prompts, tests (including negative failures), ZIP/patch/hash receipts and precise auth-session STOP gate. Real session interaction must happen in a separately authorized owner-controlled setting AFTER independent verification. Turn feed now has ZFT-M1-PRELIVE as first item; prepared/assigned does not mean submitted/executed or live role acknowledged. Existing ZFT-20261016-001 extension fixture remains an alternative experiment, not the default M1 priority. NO Playwright/Puppeteer. Next: genuine role read/ACK, first run matrix and copy-ready mission.
+
+## P0 M1 Council Z-FORGE Prep — M1C-08 — 2026-10-16
+**State: REQUESTED_IN_GITHUB / AWAITING LIVE ROLE ACK.** Owner requested eight dedicated employee contributions consolidated by Z-FORGE. Read [council integration contract](https://github.com/owenservera/aion/blob/main/workspace/aion/ops/zai-sandbox-lab/m1-council-prep/README.md), [M1 source canon](https://github.com/owenservera/aion/blob/main/workspace/aion/canon/AION-MILESTONE-1-INTROSPECTION.md), and [central reporting issue #24](https://github.com/owenservera/aion/issues/24).
+**Your specific assignment:** Your current work: heavy-duty Z.ai Agent Mode turn planning, 30 research tasks and pre-live M1 runs. You are INTEGRATOR. Read actual reports in issue #24 and existing canonical source; never invent missing employee replies. Reconcile envelope from 01/02/06, handoff 03, economics 04, executive gates 05, source map 07. Build one cloneable repo directory, optimized copy-ready Z.ai build/test prompts, fake destination app, tests/negative cases, artifact export and STOP before real authenticated ChatGPT testing. Record missing contributions and source-based fallback. No Playwright/Puppeteer.
+**Expected component:** `workspace/aion/ops/zai-sandbox-lab/m1-council-prep/components/PACKAGE-MANIFEST.md` **ONLY after genuinely authored**; no fake placeholders. Report your actual acknowledgment and source-backed findings as one comment in issue #24 using the `AION_ZFORGE_M1_COMPONENT_V1` format. Z-FORGE 08 owns consolidation; Chief of Staff 03 owns real follow-up. This SITREP update does NOT reach/wake your independent ChatGPT conversation. If unavailable, role 08 labels component pending and uses source-documented fallback.
+
+## 2026-10-17 — Active Z-FORGE 08 integrator acknowledgment and mock build release
+
+**AION_ZFORGE_M1_COMPONENT_V1 consumed and answered in this ChatGPT conversation; repository publication does not imply every other role has consumed its assignment.** Reviewed Issue #24 and actual comments; council README, PACKAGE-MANIFEST.json and CLONE-AND-ASSEMBLY; real M1C-05 executive ACCEPTANCE-GATES.md and previously authored M1C-08 PACKAGE-MANIFEST.md; all eight role SITREPs; canonical M1/M0.5; Z.ai M1-PRELIVE-RUN-DESIGN and RESULT-RECEIPT; Chrome relay ENVELOPE-CONTRACT/ARCHITECTURE/FALLBACK; and published prior Z-FORGE design/fixtures/prompts. Six role-specific authored contributions M1C-01/02/03/04/06/07 remain absent from observed issue and component files: treat source-based fallbacks as such, not role consensus.
+
+**New actual deliverable:** [Z-FORGE clone release](../../../ops/zai-sandbox-lab/m1-council-prep/Z-FORGE-RELEASE.md), [source fallback table](../../../ops/zai-sandbox-lab/m1-council-prep/SOURCE-FALLBACKS.md), [copy-ready first turn](../../../ops/zai-sandbox-lab/m1-council-prep/prompts/ZAI-TURN-01.md), [conditional repair turn](../../../ops/zai-sandbox-lab/m1-council-prep/prompts/ZAI-TURN-02-CONDITIONAL.md), and **actual runnable GitHub source** under `sandbox/mock.mjs` + `sandbox/mock.test.mjs`. These were committed to the existing private AION `main` and fetched back. The exact source bytes were checked against locally tested bytes with Git blob hashes. [Detailed local receipt](../../../ops/zai-sandbox-lab/m1-council-prep/receipts/ROLE08-LOCAL-MOCK-TEST.md): clone-facing smoke harness Node 22.16.0 **16/16 tests pass** with real localhost mock send/reply/restart/export; separate 24,072-byte source capsule ZIP **18/18 tests pass**. Real hashes recorded and no false model/account/browser results. This is genuine **LOCAL_MOCK_TESTED**, not `ZAI_SANDBOX_TESTED`, `INDEPENDENTLY_VERIFIED_BY_CHIEF`, `LIVE_READY` or `M1_PASS`.
+
+**Next executable action:** CoS 03/Chief 05 settle staging review and owner-approved Z.ai web Full-Stack Agent submission; owner uses first-turn prompt with the exact **frozen GitHub release SHA from Issue #24 acknowledgment** or explicitly attached ZIP capsule. Z.ai must return real selected model, test logs, exported SHA ZIP/patch and reproducible independent commands; Role 06/05 review it. Actual authenticated ChatGPT send/readback remains a separate owner-controlled live gate. No Playwright/Puppeteer; Grok Bot not assigned.
+
+## ACPX-001 review assignment — 2026-10-17
+**State: ASSIGNED_IN_GITHUB / LIVE ROLE ACK PENDING.** Read [ACPX review issue #25](https://github.com/owenservera/aion/issues/25), the user's ACPX v0.1.0 ZIP/SPEC when actually accessible, and current AION M1 canonical documents. **Your slice:** integrate actual seven reviews and prepare one bounded Z.ai MOCK-only adoption experiment using approved source capsule. Report back to issue #25 in `ACPX_REVIEW_V1` format, with precise source access level and file/line evidence; Z-FORGE 08 will integrate actual replies with issue #24. The uploaded ZIP is not yet accessible from GitHub; request an approved source capsule, do not pretend to have code access. Important: ZIP contains prohibited Playwright in `examples/e2e.mjs`; do not run/copy it or use Puppeteer. No host install, no private session transfer, no live ChatGPT experiment. Publishing this instruction does not activate your separate conversation.
+
+## P0 M1-002 — Z.ai browser adapter sandbox integration — 2026-10-17
+**State: ASSIGNED_IN_GITHUB / AWAITING INDEPENDENT ROLE ACK.** [Execution issue #26](https://github.com/owenservera/aion/issues/26) is the authoritative work order. M1-001 mock protocol was independently rerun; see [issue #24 verification](https://github.com/owenservera/aion/issues/24#issuecomment-6226081655). You own integration of TOOLSMITH 06's real browser adapter contract, disposable ChatGPT-like test page, mock AION return, negative tests, minimal self-contained **ZIP capsule** (private clone failed in previous Z.ai attempt), hashes, copy-ready single-turn Z.ai web Agent Mode prompt, exported receipts and independent rerun instructions. Distinguish 06's genuine report from any source-based fallback. Report `AION_M1_002_COMPONENT_V1` in #26 and cross-link #24. **GitHub publication is not independent chat activation.** No Playwright/Puppeteer, actual chatgpt.com session, cookies, tokens or automatic GitHub push. Real M1 remains G6 owner-authorized.
+
+## Persistent agent memory (standing)
+
+Read `memory/CANON/`, `memory/Immediate/`, and `memory/Curated/` at bootstrap and relevant SITREPs. CANON stores verified durable decisions, rules, lessons and recurring negative patterns with better alternatives; Immediate stores active task context and must be considered **every interaction**; Curated stores useful aesthetics, style, personalization and working preferences. Run a high-value first pass; avoid copying stale conversations, duplicating canonical sources or guessing user details. On SITREP reconcile all three against current repository, peer communications and intelligence; make material corrections and promote/archive as appropriate, without ceremonial edits. Owner instructions remain authoritative.
+
+## Skills check on SITREP
+
+Examine **skills/** together with memory/Immediate, CANON, recent GitHub changes and peer skills. Detect missing recurring capabilities, stale or ineffective skills, duplicate procedures and verified new harness tools. Use the [shared builder](https://github.com/owenservera/aion/blob/main/.opencode/skills/aion-skill-builder/SKILL.md) only when there is practical benefit; improve and test useful skills, and record real evidence level. No-change SITREPs require no file edits.
+
+## Memory on SITREP
+
+Read all approved global tiers plus the full local `memory/` and `Curated/BEST-PRACTICES.md`; compare current facts, prune stale Immediate, distill repeated corrections into one-line personal practices. Reduce tokens without deleting important signal. Submit globally useful candidates for owner interview; never self-promote or make no-change edits.

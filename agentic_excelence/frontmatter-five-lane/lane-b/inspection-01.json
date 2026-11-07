@@ -1,0 +1,568 @@
+{
+  "schema": "vivim.lane-b-source-inspection/0.1",
+  "inert": true,
+  "chunk": 1,
+  "records": [
+    {
+      "id": "file:001",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "91fbedf6e6f8750a03e1fe97567d29c74feaffb8",
+      "lines": 23,
+      "header": "native-yaml-observed",
+      "observedKeys": [
+        "description",
+        "mode"
+      ],
+      "headings": [
+        {
+          "line": 12,
+          "heading": "Required context"
+        },
+        {
+          "line": 15,
+          "heading": "Do real work"
+        },
+        {
+          "line": 18,
+          "heading": "Reality and authority"
+        },
+        {
+          "line": 21,
+          "heading": "Reply"
+        }
+      ]
+    },
+    {
+      "id": "file:003",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "e1cfc546876a92835ad0b1ff6ec943d3c48111d0",
+      "lines": 36,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION — Execute the work"
+        },
+        {
+          "line": 5,
+          "heading": "Working rule"
+        },
+        {
+          "line": 17,
+          "heading": "Current product ownership: VIVIM Harness"
+        },
+        {
+          "line": 27,
+          "heading": "Non-negotiable operational correctness"
+        }
+      ]
+    },
+    {
+      "id": "file:004",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "58db31c086c8f1944aab509ba053682644421bc1",
+      "lines": 22,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION BFF bootstrap"
+        },
+        {
+          "line": 6,
+          "heading": "Owen's rules"
+        },
+        {
+          "line": 15,
+          "heading": "Open orders (issues #1-#3)"
+        },
+        {
+          "line": 20,
+          "heading": "Restart"
+        }
+      ]
+    },
+    {
+      "id": "file:005",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "2e93b856821b140e239a584ba0e6fdcdd7b932bf",
+      "lines": 24,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION — Discovery-to-Read Initiative Agent"
+        },
+        {
+          "line": 3,
+          "heading": "Identity and authority"
+        },
+        {
+          "line": 6,
+          "heading": "On any /sitrep or /bootstrap"
+        },
+        {
+          "line": 14,
+          "heading": "No-duplication boundaries"
+        },
+        {
+          "line": 22,
+          "heading": "Current phase"
+        }
+      ]
+    },
+    {
+      "id": "file:014",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "0b1dd4851958640f311ecc3f16975df4ac84fab1",
+      "lines": 14,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION @VALUE-ORACLE — Agent Instructions"
+        }
+      ]
+    },
+    {
+      "id": "file:015",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "abc4dada9a61b1c9129129132288730c17c5bdca",
+      "lines": 63,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "@VALUE-ORACLE — Agent Boot / SITREP / Build Contract"
+        },
+        {
+          "line": 5,
+          "heading": "Commands"
+        },
+        {
+          "line": 13,
+          "heading": "Startup read order (bounded)"
+        },
+        {
+          "line": 22,
+          "heading": "Oracle decision method"
+        },
+        {
+          "line": 34,
+          "heading": "Acting as an Oracle: all four capabilities are legitimate"
+        },
+        {
+          "line": 41,
+          "heading": "First proof: don't build a second platform"
+        },
+        {
+          "line": 53,
+          "heading": "Evidence, delivery and status protocol"
+        }
+      ]
+    },
+    {
+      "id": "file:016",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "0de7d39e71cb5d8a5f9b3b965a5ca3abe75037ca",
+      "lines": 78,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 2,
+          "heading": "GitNexus — Code Intelligence"
+        },
+        {
+          "line": 8,
+          "heading": "Always Do"
+        },
+        {
+          "line": 16,
+          "heading": "When Debugging"
+        },
+        {
+          "line": 23,
+          "heading": "When Refactoring"
+        },
+        {
+          "line": 29,
+          "heading": "Never Do"
+        },
+        {
+          "line": 36,
+          "heading": "Tools Quick Reference"
+        },
+        {
+          "line": 47,
+          "heading": "Impact Risk Levels"
+        },
+        {
+          "line": 55,
+          "heading": "Resources"
+        },
+        {
+          "line": 64,
+          "heading": "Self-Check Before Finishing"
+        },
+        {
+          "line": 72,
+          "heading": "CLI"
+        }
+      ]
+    },
+    {
+      "id": "file:017",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "443e56aa25587975b66773aaa6d8c9a4331e237c",
+      "lines": 74,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 5,
+          "heading": "cdpilot"
+        },
+        {
+          "line": 9,
+          "heading": "Kimlik"
+        },
+        {
+          "line": 14,
+          "heading": "Hızlı Başlangıç"
+        },
+        {
+          "line": 21,
+          "heading": "Dosya Haritası"
+        },
+        {
+          "line": 28,
+          "heading": "Dikkat Edilecekler"
+        },
+        {
+          "line": 37,
+          "heading": "Aktif Çalışma"
+        },
+        {
+          "line": 52,
+          "heading": "Son Oturum"
+        },
+        {
+          "line": 59,
+          "heading": "GitNexus — Code Intelligence"
+        }
+      ]
+    },
+    {
+      "id": "file:018",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "0df443418eeb68b743aadc3b98c3c78947013fdd",
+      "lines": 59,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "context-mode — MANDATORY routing rules"
+        },
+        {
+          "line": 5,
+          "heading": "BLOCKED commands — do NOT attempt these"
+        },
+        {
+          "line": 7,
+          "heading": "curl / wget — BLOCKED"
+        },
+        {
+          "line": 13,
+          "heading": "Inline HTTP — BLOCKED"
+        },
+        {
+          "line": 18,
+          "heading": "WebFetch / web browsing — BLOCKED"
+        },
+        {
+          "line": 23,
+          "heading": "REDIRECTED tools — use sandbox equivalents"
+        },
+        {
+          "line": 25,
+          "heading": "Shell (>20 lines output)"
+        },
+        {
+          "line": 31,
+          "heading": "read_file (for analysis)"
+        },
+        {
+          "line": 35,
+          "heading": "grep / search (large results)"
+        },
+        {
+          "line": 38,
+          "heading": "Tool selection hierarchy"
+        },
+        {
+          "line": 46,
+          "heading": "Output constraints"
+        },
+        {
+          "line": 52,
+          "heading": "ctx commands"
+        }
+      ]
+    },
+    {
+      "id": "file:020",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "dd98acec205008bcb302da7c1d24660d2b5e81df",
+      "lines": 70,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Repository Guidelines"
+        },
+        {
+          "line": 3,
+          "heading": "Dos and Don’ts"
+        },
+        {
+          "line": 12,
+          "heading": "Project Structure and Module Organization"
+        },
+        {
+          "line": 27,
+          "heading": "Build, Test, and Development Commands"
+        },
+        {
+          "line": 38,
+          "heading": "Coding Style and Naming Conventions"
+        },
+        {
+          "line": 48,
+          "heading": "Testing Guidelines"
+        },
+        {
+          "line": 55,
+          "heading": "Commit and Pull Request Guidelines"
+        },
+        {
+          "line": 63,
+          "heading": "Safety and Permissions"
+        }
+      ]
+    },
+    {
+      "id": "file:021",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "1b2d5e915fbdfb1cd6a4f03df14adfa21f7cd568",
+      "lines": 77,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Agent Instructions"
+        },
+        {
+          "line": 7,
+          "heading": "Engineering direction"
+        },
+        {
+          "line": 20,
+          "heading": "Maintainability and file size"
+        },
+        {
+          "line": 29,
+          "heading": "Testing direction"
+        },
+        {
+          "line": 36,
+          "heading": "Bridge invariants"
+        },
+        {
+          "line": 50,
+          "heading": "Workflow and apply safety"
+        },
+        {
+          "line": 57,
+          "heading": "Protocol and release changes"
+        },
+        {
+          "line": 63,
+          "heading": "Handoff"
+        }
+      ]
+    },
+    {
+      "id": "file:024",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "c71ad7fba17d11301543b3bc93f96c20bf4f19ba",
+      "lines": 16,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "integration-manager — Agent instructions"
+        },
+        {
+          "line": 5,
+          "heading": "Persistent agent memory (standing)"
+        },
+        {
+          "line": 9,
+          "heading": "Skills builder / agent capability ownership"
+        },
+        {
+          "line": 13,
+          "heading": "Memory context"
+        }
+      ]
+    },
+    {
+      "id": "file:031",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "7280c68e461f3b71e014609909e41cd55d49daff",
+      "lines": 20,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "nine-repo — Agent instructions"
+        },
+        {
+          "line": 5,
+          "heading": "Owned reusable skills (standing)"
+        },
+        {
+          "line": 9,
+          "heading": "Persistent agent memory (standing)"
+        },
+        {
+          "line": 13,
+          "heading": "Skills builder / agent capability ownership"
+        },
+        {
+          "line": 17,
+          "heading": "Memory context"
+        }
+      ]
+    },
+    {
+      "id": "file:032",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "d10172aad1f64062b01259b0edef026365767553",
+      "lines": 112,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "External Nine — Worker Bootstrap & Operating Context"
+        },
+        {
+          "line": 6,
+          "heading": "2026-10-21 — core-peer relaunch (provisional until owner scoping interview)"
+        },
+        {
+          "line": 25,
+          "heading": "Identity and mission"
+        },
+        {
+          "line": 34,
+          "heading": "Mandatory reading order"
+        },
+        {
+          "line": 47,
+          "heading": "Source roster (verified directories)"
+        },
+        {
+          "line": 57,
+          "heading": "Shared exchange — how to use it"
+        },
+        {
+          "line": 71,
+          "heading": "Work sequence"
+        },
+        {
+          "line": 85,
+          "heading": "Evidence and promotion rules"
+        },
+        {
+          "line": 94,
+          "heading": "Existing research to leverage"
+        },
+        {
+          "line": 101,
+          "heading": "Resume / handoff protocol"
+        },
+        {
+          "line": 109,
+          "heading": "SITREP and agent commons"
+        }
+      ]
+    },
+    {
+      "id": "file:039",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "69ab1a39459f8b0ab4f31685d1d0e1db1dc244ac",
+      "lines": 77,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AION Track B — Agent Optimization Contract"
+        },
+        {
+          "line": 4,
+          "heading": "0. Runtime ownership — no GitHub Actions"
+        },
+        {
+          "line": 7,
+          "heading": "1. The optimization target (one sentence)"
+        },
+        {
+          "line": 12,
+          "heading": "2. Priority order — apply to EVERY decision"
+        },
+        {
+          "line": 22,
+          "heading": "3. Scope filter for each proposed change"
+        },
+        {
+          "line": 32,
+          "heading": "4. Five working rounds (Q1 design is completed; these rounds write CODE)"
+        },
+        {
+          "line": 43,
+          "heading": "5. Explicit non-goals and rejection defaults"
+        },
+        {
+          "line": 50,
+          "heading": "6. Agent decision policy"
+        },
+        {
+          "line": 59,
+          "heading": "7. Completion scorecard (minimum useful numbers)"
+        },
+        {
+          "line": 66,
+          "heading": "Round 8 pre-live safety gates (mandatory, not extra project scope)"
+        },
+        {
+          "line": 73,
+          "heading": "Round 9 agents and context — local, bounded, opt-in"
+        }
+      ]
+    }
+  ]
+}

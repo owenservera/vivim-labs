@@ -15,11 +15,14 @@ Scope: Repos HQ, Rust HQKG, TierFlow / Visual Runtime, VIVIM Web Harness / Host 
 - [04 — Dataflow and Write Authority](04-DATAFLOWS-AND-WRITES.md): sources, transformations, outputs, persistence, change propagation and writer matrix.
 - [05 — CLI and Integration](05-CLI-AND-INTEGRATION.md): existing command surfaces, integration edges, first vertical slice and acceptance.
 - [06 — Source Evidence](06-SOURCES-AND-OPEN-QUESTIONS.md): original repo paths, evidence boundaries, unresolved questions.
+- [07 — Integration Philosophy](07-INTEGRATION-PHILOSOPHY.md): each step accelerates the next; distinct dev and product configurations.
+- [08 — Integration Sequence](08-INTEGRATION-SEQUENCE.md): proposed staged implementation and tests.
+- [09 — Unified HQ Intelligence, Commands and Wiki](09-UNIFIED-INTELLIGENCE-COMMAND-WIKI.md): correction: indexing is one part of the combined NL/command/programmatic-wiki system.
 
 These are curated discussion notes from the November 7 architecture conversation, not a verbatim transcript or an approved schema. Preserve repository AGENTS.md, contracts, executable configs, tests and local operational docs in their native owners. Nothing here is authority to migrate or delete source files.
 
 ## Summary of the evolution
-1. Reuse the Repos HQ incremental indexer rather than building another crawler.
+1. Reuse the full Repos HQ source intelligence → semantic command/NL routing → generated and programmable wiki → CLI/MCP loop, not only its incremental indexer.
 2. View VIVIM as a network of engines (Rust graph, visual runtime, indexer, KB, Host, TierFlow, Oracle, orchestration).
 3. Discover Rust already provides engine slots, executable generations, database nodes, algorithm adapters, scheduler, journal and control primitives.
 4. Map inputs → transformations → outputs and writes; separate ephemeral index, durable KB, Rust journal and source-native ledgers.

@@ -3,6 +3,11 @@
 **Status:** Wave 1 executable campaign ONLY. Wave 2/3 are UNAPPROVED hypotheses until the Wave 1 runtime has been exercised and an evidence-backed blind-spot dossier reviewed. NOT a claim of an already running graph.
 **Repository:** vivim-labs (campaign authority and evidence hub); code owners: repos-hq, tierflow, vivim-web-harness, and other source owners as explicitly assigned.
 
+## Document-led goals (latest architectural direction)
+[Read the master three-wave goals](MASTER-DOCUMENT-LED-WAVE-GOALS.md) and the [compiler/NL/Rust-vs-SQLite design challenge](COMPILER-LANGUAGE-AND-PLACEMENT-REVIEW.md). They recover the **WHY/WHAT** from both [archived](../../documentation-consolidation/INVENTORY.json) and current design docs. Code/tests then establish actual **HOW and status**. Only Wave 1's six implementation lanes are authorized; do not design Wave 2 implementation before running Wave 1.
+
+**New Wave 1 acceptance:** live Rust graph + first source-comment compiled IR→registered semantic/action chain + generated wiki quality proof + Rust/SQLite native ownership recommendation + NLP safety baseline + data-driven Wave 2 inputs. **Wave 3 north star:** per-input-revision real-time machine-interpreted command visualization and editable intent, using the same typed operation model and existing Visual/Host authorities.
+
 ## Mission
 The long-range intention is to produce over three eventual waves **one live, running Rust HQKG graph** for the eligible VIVIM code, canonical KB, semantic language/action/command system, actual CLI commands, generated/programmable wiki, engine slots/implementations, databases, dataflows, ownership, callers/callees, input/output/write paths and their source evidence. Make it queryable from a short CLI recipe and visible through a continuously refreshed **actual-vs-target** topology/wiki/report.
 
@@ -24,8 +29,8 @@ The long-range intention is to produce over three eventual waves **one live, run
 | Wave | Theme | Key proof | Deliverable |
 |---|---|---|---|
 | **1 · Bootstrap** | Connect live code intelligence (A), KB/semantics (B) and commands/CLI (C) inside Rust; generate the wiki as an integration quality test (D) | Real A+B+C linked and queried from Rust; derived wiki exposes integration completeness and gaps | First runnable graph + measured wiki quality + source-backed blind spots |
-| **2 · Convergence** | Make the graph a unified, navigable command/KB/code/engine model | Actual caller/callee and inputs/outputs/writers connected; same semantic operation across surfaces | System-wide topology + actual/target views |
-| **3 · Live operation** | Continuous refresh, end-to-end UX and robust operation | Change → index → Rust revision → query/wiki/UI → receipt, repeatable and recoverable | Living architecture observatory + launchable dev/product profiles |
+| **2 · Stateful semantics** | Incremental compiler, authoritative KB and semantic command/CLI convergence, deterministic grounded fuzzy interpretation | Versioned typed IR and safe cross-surface action resolution, consistent generated intelligent wiki | Stateful shared semantic intelligence, with actual scope/lanes designed after Wave 1 findings |
+| **3 · Live visual language** | Real-time text/touch/keyboard intent-to-typed-IR-to-visual feedback, correction and approval using existing clients | Input revision → interpreted tokens/targets/alternatives/effects → editable visual preview → authorized receipt; PC/mobile parity | Real-time human↔machine visual language, preserve user ownership and replaceable visual style |
 
 Each wave contains six lanes A–F. Parallel work **within** a wave; wave integration gate only after six handoffs and independent tests. Subsequent wave begins against gated main, not a stale assumption.
 

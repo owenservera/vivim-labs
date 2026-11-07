@@ -4,7 +4,7 @@
 
 ## 1. Recovered outcome: verification of a compiler/graph *system*, not a checklist
 
-Controlling documents: `../EXECUTE-WAVE-1-FIRST.md`, `../MASTER-DOCUMENT-LED-WAVE-GOALS.md`, `../COMPILER-LANGUAGE-AND-PLACEMENT-REVIEW.md`, `../../documentation-consolidation/INVENTORY.json`, plus `../WAVE-1-INDEX-RESET-AND-INTENT.md` and `../../09-UNIFIED-INTELLIGENCE-COMMAND-WIKI.md`.
+Controlling documents: `../EXECUTE-WAVE-1-FIRST.md`, `../MASTER-DOCUMENT-LED-WAVE-GOALS.md`, `../COMPILER-LANGUAGE-AND-PLACEMENT-REVIEW.md`, `../../../documentation-consolidation/INVENTORY.json`, plus `../WAVE-1-INDEX-RESET-AND-INTENT.md` and `../../09-UNIFIED-INTELLIGENCE-COMMAND-WIKI.md`.
 
 The end-to-end target is one **logical VIVIM project over N indexed roots with versioned indexing intent**, source-aware compilation of code/v1/v2/wiki annotations into explicitly typed, source-pinned *inert* declarations, independently verified KB/semantic identities, actual CLI/registered handlers, a **single existing Rust HQKG** source-owned projection/journal and native Rust queries, and a **derived original-HQ-generated wiki** whose meaning and links agree with the source, graph and commands. SQLite retains canonical KB/semantic revision writers and FTS; Rust may compute graph topology but is not a Host/Studio/TierFlow authority.
 

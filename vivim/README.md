@@ -14,7 +14,10 @@ Extension families are *composition*, not new system authorities. The same plugi
 
 ## Start here
 
-- [Extension-point discovery](extension-points/README.md): candidate attachment surfaces across the whole stack, with existing authority and verification status.
+- [Platform inventory — 153 candidate standalone plugin surfaces](extension-points/PLATFORM-SURFACE-INVENTORY.md): ten areas covering Android, mobile relay, desktop, Host, Studio, HQ/Rust, Oracle and TierFlow. Candidate, not implemented hook counts.
+- [Directly inspected implemented hooks](extension-points/VERIFIED-HOOKS.md): source-backed registration, typed action, native projection and Rust engine evidence with explicit gaps.
+- [Unified plugin-system architecture](PLUGIN-SYSTEM-ARCHITECTURE.md): semantic ports, admission, execution adapters, placement, permissions, lifecycle, isolation, versioning and migration.
+- [Early extension-point discovery](extension-points/README.md): initial 20-category hypothesis, superseded in breadth by the full inventory.
 - [Spanish legal practice](families/es-legal-practice/README.md): first research family and multi-entry-point test case.
 - [Manifest and acceptance contracts](CONTRACTS.md): provisional schemas, installation, lifecycle, isolation, risk and promotion gates.
 

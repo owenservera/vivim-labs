@@ -14,6 +14,10 @@ See [discussion record](DISCUSSION-RECORD.md): natural-language command expansio
 
 See [agentic_excelence](agentic_excelence/README.md) for discussion topics about agent tooling, skills, agents, evaluation and operational excellence. The folder name intentionally follows the requested spelling.
 
+## Legacy recovery intake
+
+See [Past orphaned work](past-orphaned-work/README.md): a documentation-only source-linked audit split into [Past Implemented](past-orphaned-work/past-implemented/README.md) and [Past Researched](past-orphaned-work/past-researched/README.md), each organized into ten high-level platform domains. Initial scope covers DCB/context, memory, capability intelligence, parsing, automation, self-healing and optimization. This folder neither executes legacy algorithms nor grants them production authority.
+
 ## Relationship to existing repos
 
 - [tierflow](https://github.com/owenservera/tierflow): the canonical visual/command runtime work.

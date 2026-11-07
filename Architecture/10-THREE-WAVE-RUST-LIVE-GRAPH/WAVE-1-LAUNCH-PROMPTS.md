@@ -5,10 +5,10 @@ Date: 2026-11-07
 
 Launch six independent local sessions concurrently, one per lane, then one integration owner for the combined run. Other wave documents are NOT execution orders. Every lane must inspect real code before editing, stay in assigned paths, and preserve actual test evidence.
 
-## Lane A — Code & Dependency Ingestion
+## Lane A — Scoped Index Reset, Intent & Multi-Root Code Intelligence
 
 ```text
-EXECUTE VIVIM RUST LIVE GRAPH — WAVE 1 / LANE A: CODE & DEPENDENCY INGESTION.
+EXECUTE VIVIM RUST LIVE GRAPH — WAVE 1 / LANE A: SCOPED INDEX RESET, INTENT AND MULTI-ROOT CODE INTELLIGENCE.
 
 READ FIRST:
 https://github.com/owenservera/vivim-labs/blob/main/Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/EXECUTE-WAVE-1-FIRST.md
@@ -18,9 +18,9 @@ https://github.com/owenservera/repos-hq/tree/main/research/rust-knowledge-graph
 https://github.com/owenservera/repos-hq/tree/main/research/graph-kernel-integration
 
 ASSIGNMENT:
-Own the read-only HQ indexed-code export adapter. Use real HQ project registry, file/symbol/import/annotation tables and SHA-linked source evidence; register every eligible local repo and make exclusions explicit. Output stable graph-ready source records plus test and HANDOFF. Never replace the HQ SQLite writer or reset the existing index. Coordinate only data contract with Lane E. Prove exact repo count and inclusion/exclusion; distinguish static imports from runtime communication.
+FIRST execute the owner-authorized **scoped reset** following WAVE-1-INDEX-RESET-AND-INTENT.md on the local environment containing the previous run. Inventory and archive; preserve durable KB/kernel/semantic/receipts; never use blanket `hq reset --yes` without verified safety. RETAIN HQ multi-repo indexing capability. Treat multiple source folders/repositories as ONE logical VIVIM project with explicit versioned INDEXING INTENT: why these roots are indexed, what questions to answer, and what dataflows, commands, dependencies and missing wiring to discover. The HQ registry may retain N source entries, but the graph must express one parent project. Run one clean project-scoped index and export files/symbols/imports/annotations/SHA evidence; distinguish static vs observed links. Deliver before/after reset receipt, intent record, code/tests and HANDOFF.
 
-DELIVER: implementation source + executable tests + real data proof + precise HANDOFF for integration, source SHAs and exact published commit on main. Do not claim completion without executed evidence. No PRs, branches, Actions or force push. Do not reset HQ DB, browser profiles or replace source-native write owners. Coordinate only the narrow shared record interface with Lane E. If real local execution is unavailable, publish a truthful BLOCKED handoff and executable recipe, not fake running proof. Wave 2 is forbidden until this Wave 1 code is actually executed and its blind-spot report reviewed.
+DELIVER: implementation source + executable tests + real data proof + precise HANDOFF for integration, source SHAs and exact published commit on main. Do not claim completion without executed evidence. No PRs, branches, Actions or force push. Only Lane A may perform the **explicitly scoped and backed-up old-run indexing reset**; other lanes must NOT reset HQ DB or browser profiles or replace source-native write owners. Coordinate only the narrow shared record interface with Lane E. If real local execution is unavailable, publish a truthful BLOCKED handoff and executable recipe, not fake running proof. Wave 2 is forbidden until this Wave 1 code is actually executed and its blind-spot report reviewed.
 ```
 
 ## Lane B — Knowledge, Semantic Identity & Authority
@@ -90,7 +90,7 @@ https://github.com/owenservera/repos-hq/tree/main/research/rust-knowledge-graph
 https://github.com/owenservera/repos-hq/tree/main/research/graph-kernel-integration
 
 ASSIGNMENT:
-Own the live HQKGX1 projection and Rust runner/CLI, sole graph journal owner for this wave. Read A+B+C source records, validate identities and scalar metadata, preserve source ownership, use existing Rust import.rs and hqkg-import (not a competing graph DB). Implement thin read-only queries where/what/talks-to/gap with provenance and confidence. Run real Cargo/Bun/Node tests, unchanged no-op, invalid/collision/refusal/restart. Output a real DEV .hqj and reproducible command transcript, tests and HANDOFF; static research exports alone do not pass.
+Own the live HQKGX1 projection and Rust runner/CLI, sole graph journal owner for this wave. Read A+B+C source records PLUS the one-project/multi-root scope and indexing intent, validate identities and scalar metadata, preserve source ownership, use existing Rust import.rs and hqkg-import (not a competing graph DB). Implement thin read-only queries where/what/talks-to/gap with provenance and confidence. Run real Cargo/Bun/Node tests, unchanged no-op, invalid/collision/refusal/restart. Output a real DEV .hqj and reproducible command transcript, tests and HANDOFF; static research exports alone do not pass.
 
 DELIVER: implementation source + executable tests + real data proof + precise HANDOFF for integration, source SHAs and exact published commit on main. Do not claim completion without executed evidence. No PRs, branches, Actions or force push. Do not reset HQ DB, browser profiles or replace source-native write owners. Coordinate only the narrow shared record interface with Lane E. If real local execution is unavailable, publish a truthful BLOCKED handoff and executable recipe, not fake running proof. Wave 2 is forbidden until this Wave 1 code is actually executed and its blind-spot report reviewed.
 ```
@@ -121,5 +121,5 @@ EXECUTE VIVIM RUST LIVE GRAPH — WAVE 1 INTEGRATION.
 AUTHORITATIVE ORDER:
 https://github.com/owenservera/vivim-labs/blob/main/Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/EXECUTE-WAVE-1-FIRST.md
 
-Read the six lane HANDOFFs, fresh source main SHAs and exact tests. Combine only authorized A+B+C source inputs through Lane E's single Rust HQKGX1/journal writer, then regenerate D's wiki as a derived integrated view. Run a real local end-to-end demo with code, KB, CLI/action **linked inside Rust** and the generated wiki faithfully reflecting a cross-domain traversal; run no-op, change/reindex, restart, collision, stale and refusal checks. Independently verify with Lane F's evidence report. Publish exact code SHAs, transcript, coverage denominators, actual-vs-target machine JSON and Markdown, all blind spots, and the Wave 2 input dossier. STOP AFTER REPORTING. Do not design or execute Wave 2 yet. Any missing domain or unrun native test is BLOCKED, not presumed complete.
+Read the six lane HANDOFFs, scoped reset receipt, one-project/multi-root indexing-intent evidence, fresh source main SHAs and exact tests. Combine only authorized A+B+C source inputs through Lane E's single Rust HQKGX1/journal writer, then regenerate D's wiki as a derived integrated view. Run a real local end-to-end demo with code, KB, CLI/action **linked inside Rust** and the generated wiki faithfully reflecting a cross-domain traversal; run no-op, change/reindex, restart, collision, stale and refusal checks. Independently verify with Lane F's evidence report. Publish exact code SHAs, transcript, coverage denominators, actual-vs-target machine JSON and Markdown, all blind spots, and the Wave 2 input dossier. STOP AFTER REPORTING. Do not design or execute Wave 2 yet. Any missing domain or unrun native test is BLOCKED, not presumed complete.
 ```

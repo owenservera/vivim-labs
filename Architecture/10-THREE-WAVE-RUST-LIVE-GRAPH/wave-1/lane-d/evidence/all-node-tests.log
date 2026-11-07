@@ -1,0 +1,658 @@
+TAP version 13
+# Subtest: native A producer is NOT direct E feed
+ok 1 - native A producer is NOT direct E feed
+  ---
+  duration_ms: 1.154842
+  type: 'test'
+  ...
+# Subtest: native B producer is NOT direct E feed
+ok 2 - native B producer is NOT direct E feed
+  ---
+  duration_ms: 0.170897
+  type: 'test'
+  ...
+# Subtest: native C producer is NOT direct E feed
+ok 3 - native C producer is NOT direct E feed
+  ---
+  duration_ms: 0.169957
+  type: 'test'
+  ...
+# Subtest: unknown producer schema refuses
+ok 4 - unknown producer schema refuses
+  ---
+  duration_ms: 0.150066
+  type: 'test'
+  ...
+# Subtest: E source-records requires lane/nodes/edges, but accepted shape is not verified
+ok 5 - E source-records requires lane/nodes/edges, but accepted shape is not verified
+  ---
+  duration_ms: 0.252571
+  type: 'test'
+  ...
+# Subtest: E graph fields accepted without silent Round 1 key substitution
+ok 6 - E graph fields accepted without silent Round 1 key substitution
+  ---
+  duration_ms: 12.627937
+  type: 'test'
+  ...
+# Subtest: E graph source commit must be pinned to declared root
+ok 7 - E graph source commit must be pinned to declared root
+  ---
+  duration_ms: 0.86226
+  type: 'test'
+  ...
+# Subtest: invalid 40-byte and 64-byte provenance not conflated
+ok 8 - invalid 40-byte and 64-byte provenance not conflated
+  ---
+  duration_ms: 0.716561
+  type: 'test'
+  ...
+# Subtest: missing root does not manufacture scope
+ok 9 - missing root does not manufacture scope
+  ---
+  duration_ms: 0.866006
+  type: 'test'
+  ...
+# Subtest: strict source scope rejects traversal, secret and windows paths
+ok 10 - strict source scope rejects traversal, secret and windows paths
+  ---
+  duration_ms: 0.447415
+  type: 'test'
+  ...
+# Subtest: standalone diagnostic remains BLOCKED despite coherent synthetic chain
+ok 11 - standalone diagnostic remains BLOCKED despite coherent synthetic chain
+  ---
+  duration_ms: 12.354615
+  type: 'test'
+  ...
+# Subtest: CLI only reads existing evidence and returns blocked exit 2
+ok 12 - CLI only reads existing evidence and returns blocked exit 2
+  ---
+  duration_ms: 3.005904
+  type: 'test'
+  ...
+# Subtest: CLI missing required args fails closed before running
+ok 13 - CLI missing required args fails closed before running
+  ---
+  duration_ms: 0.317589
+  type: 'test'
+  ...
+# Subtest: E 3-relationship compiler chain recognized, NEVER independent verifier
+ok 14 - E 3-relationship compiler chain recognized, NEVER independent verifier
+  ---
+  duration_ms: 13.949571
+  type: 'test'
+  ...
+# Subtest: different canonical command ID is not joined by name
+ok 15 - different canonical command ID is not joined by name
+  ---
+  duration_ms: 1.082262
+  type: 'test'
+  ...
+# Subtest: orphan KB cannot satisfy trusted knowledge condition
+ok 16 - orphan KB cannot satisfy trusted knowledge condition
+  ---
+  duration_ms: 0.78245
+  type: 'test'
+  ...
+# Subtest: stale code source commit flags root mismatch
+ok 17 - stale code source commit flags root mismatch
+  ---
+  duration_ms: 0.724082
+  type: 'test'
+  ...
+# Subtest: no compiler bridge refuses to produce chain
+ok 18 - no compiler bridge refuses to produce chain
+  ---
+  duration_ms: 0.718804
+  type: 'test'
+  ...
+# Subtest: no status type conflation: current semantic != handler permission
+ok 19 - no status type conflation: current semantic != handler permission
+  ---
+  duration_ms: 1.280902
+  type: 'test'
+  ...
+# Subtest: source pin alone cannot certify original file bytes independently
+ok 20 - source pin alone cannot certify original file bytes independently
+  ---
+  duration_ms: 0.651582
+  type: 'test'
+  ...
+# Subtest: semantic description and wired status have separate owners
+ok 21 - semantic description and wired status have separate owners
+  ---
+  duration_ms: 0.1526
+  type: 'test'
+  ...
+# Subtest: relative and anchored markdown paths resolve without web access
+ok 22 - relative and anchored markdown paths resolve without web access
+  ---
+  duration_ms: 2.757289
+  type: 'test'
+  ...
+# Subtest: broken anchor found even when file exists
+ok 23 - broken anchor found even when file exists
+  ---
+  duration_ms: 0.249656
+  type: 'test'
+  ...
+# Subtest: broken link does not disappear from score
+ok 24 - broken link does not disappear from score
+  ---
+  duration_ms: 0.275886
+  type: 'test'
+  ...
+# Subtest: link traversal beyond wiki root refused
+ok 25 - link traversal beyond wiki root refused
+  ---
+  duration_ms: 0.158549
+  type: 'test'
+  ...
+# Subtest: casefold slug/path collisions produce explicit defect
+ok 26 - casefold slug/path collisions produce explicit defect
+  ---
+  duration_ms: 0.175204
+  type: 'test'
+  ...
+# Subtest: javascript protocol not silently ignored
+ok 27 - javascript protocol not silently ignored
+  ---
+  duration_ms: 0.155435
+  type: 'test'
+  ...
+# Subtest: missing search.json declared unverified not missing Markdown page
+ok 28 - missing search.json declared unverified not missing Markdown page
+  ---
+  duration_ms: 0.201114
+  type: 'test'
+  ...
+# Subtest: malformed percent encoding reports defect
+ok 29 - malformed percent encoding reports defect
+  ---
+  duration_ms: 0.149796
+  type: 'test'
+  ...
+# Subtest: known key and DEV filesystem leak shapes detected (not complete DLP)
+ok 30 - known key and DEV filesystem leak shapes detected (not complete DLP)
+  ---
+  duration_ms: 0.884655
+  type: 'test'
+  ...
+# Subtest: unsafe page-relative traversal hard fails
+ok 31 - unsafe page-relative traversal hard fails
+  ---
+  duration_ms: 0.654948
+  type: 'test'
+  ...
+# Subtest: adversarial fixture identity_mismatch refuses false authority
+ok 32 - adversarial fixture identity_mismatch refuses false authority
+  ---
+  duration_ms: 10.293396
+  type: 'test'
+  ...
+# Subtest: adversarial fixture missing_kb refuses false authority
+ok 33 - adversarial fixture missing_kb refuses false authority
+  ---
+  duration_ms: 0.691663
+  type: 'test'
+  ...
+# Subtest: adversarial fixture no_compiler refuses false authority
+ok 34 - adversarial fixture no_compiler refuses false authority
+  ---
+  duration_ms: 0.685514
+  type: 'test'
+  ...
+# Subtest: adversarial fixture stale_commit refuses false authority
+ok 35 - adversarial fixture stale_commit refuses false authority
+  ---
+  duration_ms: 3.580381
+  type: 'test'
+  ...
+# Subtest: adversarial fixture declared_not_verified refuses false authority
+ok 36 - adversarial fixture declared_not_verified refuses false authority
+  ---
+  duration_ms: 0.459544
+  type: 'test'
+  ...
+# Subtest: adversarial fixture no_device_proof refuses false authority
+ok 37 - adversarial fixture no_device_proof refuses false authority
+  ---
+  duration_ms: 0.34445
+  type: 'test'
+  ...
+# Subtest: adversarial fixture no_host_effect refuses false authority
+ok 38 - adversarial fixture no_host_effect refuses false authority
+  ---
+  duration_ms: 0.41778
+  type: 'test'
+  ...
+# Subtest: adversarial fixture no_implicit_owner refuses false authority
+ok 39 - adversarial fixture no_implicit_owner refuses false authority
+  ---
+  duration_ms: 0.416519
+  type: 'test'
+  ...
+# Subtest: adversarial fixture source_byte_not_independently_verified refuses false authority
+ok 40 - adversarial fixture source_byte_not_independently_verified refuses false authority
+  ---
+  duration_ms: 0.673105
+  type: 'test'
+  ...
+# Subtest: adversarial fixture native_A_mismatch refuses false authority
+ok 41 - adversarial fixture native_A_mismatch refuses false authority
+  ---
+  duration_ms: 0.367074
+  type: 'test'
+  ...
+# Subtest: adversarial fixture native_B_mismatch refuses false authority
+ok 42 - adversarial fixture native_B_mismatch refuses false authority
+  ---
+  duration_ms: 0.13292
+  type: 'test'
+  ...
+# Subtest: adversarial fixture native_C_mismatch refuses false authority
+ok 43 - adversarial fixture native_C_mismatch refuses false authority
+  ---
+  duration_ms: 0.114994
+  type: 'test'
+  ...
+# Subtest: adversarial fixture schema_unsupported refuses false authority
+ok 44 - adversarial fixture schema_unsupported refuses false authority
+  ---
+  duration_ms: 0.073481
+  type: 'test'
+  ...
+# Subtest: adversarial fixture path_parent refuses false authority
+ok 45 - adversarial fixture path_parent refuses false authority
+  ---
+  duration_ms: 0.061703
+  type: 'test'
+  ...
+# Subtest: adversarial fixture path_windows refuses false authority
+ok 46 - adversarial fixture path_windows refuses false authority
+  ---
+  duration_ms: 0.053721
+  type: 'test'
+  ...
+# Subtest: adversarial fixture path_absolute refuses false authority
+ok 47 - adversarial fixture path_absolute refuses false authority
+  ---
+  duration_ms: 0.045128
+  type: 'test'
+  ...
+# Subtest: adversarial fixture path_env refuses false authority
+ok 48 - adversarial fixture path_env refuses false authority
+  ---
+  duration_ms: 0.049635
+  type: 'test'
+  ...
+# Subtest: adversarial fixture path_session_json refuses false authority
+ok 49 - adversarial fixture path_session_json refuses false authority
+  ---
+  duration_ms: 0.050616
+  type: 'test'
+  ...
+# Subtest: adversarial fixture path_keystore refuses false authority
+ok 50 - adversarial fixture path_keystore refuses false authority
+  ---
+  duration_ms: 0.048654
+  type: 'test'
+  ...
+# Subtest: adversarial fixture missing_root refuses false authority
+ok 51 - adversarial fixture missing_root refuses false authority
+  ---
+  duration_ms: 0.473915
+  type: 'test'
+  ...
+# Subtest: adversarial fixture source_scope_escape refuses false authority
+ok 52 - adversarial fixture source_scope_escape refuses false authority
+  ---
+  duration_ms: 0.606385
+  type: 'test'
+  ...
+# Subtest: adversarial fixture wrong_commit_type refuses false authority
+ok 53 - adversarial fixture wrong_commit_type refuses false authority
+  ---
+  duration_ms: 0.39153
+  type: 'test'
+  ...
+# Subtest: adversarial fixture bad_content_type refuses false authority
+ok 54 - adversarial fixture bad_content_type refuses false authority
+  ---
+  duration_ms: 0.355627
+  type: 'test'
+  ...
+# Subtest: adversarial fixture missing_accepted_status refuses false authority
+ok 55 - adversarial fixture missing_accepted_status refuses false authority
+  ---
+  duration_ms: 0.413604
+  type: 'test'
+  ...
+# Subtest: adversarial fixture command_no_handler refuses false authority
+ok 56 - adversarial fixture command_no_handler refuses false authority
+  ---
+  duration_ms: 0.427124
+  type: 'test'
+  ...
+# Subtest: adversarial fixture command_no_syntax refuses false authority
+ok 57 - adversarial fixture command_no_syntax refuses false authority
+  ---
+  duration_ms: 2.168776
+  type: 'test'
+  ...
+# Subtest: adversarial fixture compiled_hash_changed refuses false authority
+ok 58 - adversarial fixture compiled_hash_changed refuses false authority
+  ---
+  duration_ms: 0.350078
+  type: 'test'
+  ...
+# Subtest: adversarial fixture arbitrary_empty_scope refuses false authority
+ok 59 - adversarial fixture arbitrary_empty_scope refuses false authority
+  ---
+  duration_ms: 0.295175
+  type: 'test'
+  ...
+# Subtest: adversarial fixture zero_denominator refuses false authority
+ok 60 - adversarial fixture zero_denominator refuses false authority
+  ---
+  duration_ms: 0.209676
+  type: 'test'
+  ...
+# Subtest: adversarial fixture broken_anchor refuses false authority
+ok 61 - adversarial fixture broken_anchor refuses false authority
+  ---
+  duration_ms: 1.408444
+  type: 'test'
+  ...
+# Subtest: adversarial fixture relative_escape refuses false authority
+ok 62 - adversarial fixture relative_escape refuses false authority
+  ---
+  duration_ms: 0.25212
+  type: 'test'
+  ...
+# Subtest: adversarial fixture javascript_link refuses false authority
+ok 63 - adversarial fixture javascript_link refuses false authority
+  ---
+  duration_ms: 0.105729
+  type: 'test'
+  ...
+# Subtest: adversarial fixture missing_md refuses false authority
+ok 64 - adversarial fixture missing_md refuses false authority
+  ---
+  duration_ms: 0.253132
+  type: 'test'
+  ...
+# Subtest: adversarial fixture private_key_literal refuses false authority
+ok 65 - adversarial fixture private_key_literal refuses false authority
+  ---
+  duration_ms: 0.538111
+  type: 'test'
+  ...
+# Subtest: adversarial fixture private_env_filename refuses false authority
+ok 66 - adversarial fixture private_env_filename refuses false authority
+  ---
+  duration_ms: 0.244839
+  type: 'test'
+  ...
+# Subtest: unsafe NL phrase is never promoted to executable by Lane D: don't delete index file
+ok 67 - unsafe NL phrase is never promoted to executable by Lane D: don't delete index file
+  ---
+  duration_ms: 0.507996
+  type: 'test'
+  ...
+# Subtest: unsafe NL phrase is never promoted to executable by Lane D: never disconnect my PC
+ok 68 - unsafe NL phrase is never promoted to executable by Lane D: never disconnect my PC
+  ---
+  duration_ms: 0.312311
+  type: 'test'
+  ...
+# Subtest: unsafe NL phrase is never promoted to executable by Lane D: "delete index file"
+ok 69 - unsafe NL phrase is never promoted to executable by Lane D: "delete index file"
+  ---
+  duration_ms: 0.255726
+  type: 'test'
+  ...
+# Subtest: unsafe NL phrase is never promoted to executable by Lane D: show index file and delete index file
+ok 70 - unsafe NL phrase is never promoted to executable by Lane D: show index file and delete index file
+  ---
+  duration_ms: 0.276547
+  type: 'test'
+  ...
+# Subtest: unsafe NL phrase is never promoted to executable by Lane D: no borrar el índice
+ok 71 - unsafe NL phrase is never promoted to executable by Lane D: no borrar el índice
+  ---
+  duration_ms: 0.319522
+  type: 'test'
+  ...
+# Subtest: missing writer receipt blocks
+ok 72 - missing writer receipt blocks
+  ---
+  duration_ms: 0.994991
+  type: 'test'
+  ...
+# Subtest: a content-hash-consistent claimed page remains UNVERIFIED
+ok 73 - a content-hash-consistent claimed page remains UNVERIFIED
+  ---
+  duration_ms: 0.456038
+  type: 'test'
+  ...
+# Subtest: stale graph digest refuses
+ok 74 - stale graph digest refuses
+  ---
+  duration_ms: 0.313673
+  type: 'test'
+  ...
+# Subtest: page content tamper refuses
+ok 75 - page content tamper refuses
+  ---
+  duration_ms: 0.32518
+  type: 'test'
+  ...
+# Subtest: manifest wrong graph entity ID refuses
+ok 76 - manifest wrong graph entity ID refuses
+  ---
+  duration_ms: 0.240743
+  type: 'test'
+  ...
+# Subtest: path traversal in page manifest refuses
+ok 77 - path traversal in page manifest refuses
+  ---
+  duration_ms: 0.205871
+  type: 'test'
+  ...
+# Subtest: unknown/dev-only fields are dropped
+ok 78 - unknown/dev-only fields are dropped
+  ---
+  duration_ms: 1.81011
+  type: 'test'
+  ...
+# Subtest: dev path in safeSummary refuses instead of leaking
+ok 79 - dev path in safeSummary refuses instead of leaking
+  ---
+  duration_ms: 0.5564
+  type: 'test'
+  ...
+# Subtest: product projection cannot inherit execution grant from input
+ok 80 - product projection cannot inherit execution grant from input
+  ---
+  duration_ms: 1.384428
+  type: 'test'
+  ...
+# Subtest: secret field values in approved text refuse
+ok 81 - secret field values in approved text refuse
+  ---
+  duration_ms: 0.201904
+  type: 'test'
+  ...
+# Subtest: malformed oversized unknown list refuses
+ok 82 - malformed oversized unknown list refuses
+  ---
+  duration_ms: 0.247233
+  type: 'test'
+  ...
+# Subtest: all high percentages cannot pass without independent witness
+ok 83 - all high percentages cannot pass without independent witness
+  ---
+  duration_ms: 0.951906
+  type: 'test'
+  ...
+# Subtest: no roots is incomplete, not implicitly 100%
+ok 84 - no roots is incomplete, not implicitly 100%
+  ---
+  duration_ms: 0.171819
+  type: 'test'
+  ...
+# Subtest: zero denominator explicitly NOT_MEASURED
+ok 85 - zero denominator explicitly NOT_MEASURED
+  ---
+  duration_ms: 0.156446
+  type: 'test'
+  ...
+# Subtest: unknown denominator explicitly NOT_MEASURED
+ok 86 - unknown denominator explicitly NOT_MEASURED
+  ---
+  duration_ms: 0.114944
+  type: 'test'
+  ...
+# Subtest: overreported numerator hard refuses
+ok 87 - overreported numerator hard refuses
+  ---
+  duration_ms: 0.52395
+  type: 'test'
+  ...
+# Subtest: incomplete root is a critical blocker
+ok 88 - incomplete root is a critical blocker
+  ---
+  duration_ms: 0.195284
+  type: 'test'
+  ...
+# Subtest: fatal source and crosswalk issue overrides all metrics
+ok 89 - fatal source and crosswalk issue overrides all metrics
+  ---
+  duration_ms: 0.123756
+  type: 'test'
+  ...
+# Subtest: HQKGX1 transport: valid manifest and counts
+ok 90 - HQKGX1 transport: valid manifest and counts
+  ---
+  duration_ms: 8.265367
+  type: 'test'
+  ...
+# Subtest: HQKGX1 refuses body tamper and missing final newline
+ok 91 - HQKGX1 refuses body tamper and missing final newline
+  ---
+  duration_ms: 0.562218
+  type: 'test'
+  ...
+# Subtest: HQKGX1 refuses unsupported authority
+ok 92 - HQKGX1 refuses unsupported authority
+  ---
+  duration_ms: 0.182585
+  type: 'test'
+  ...
+# Subtest: HQKGX1 refuses duplicate node and edge identities
+ok 93 - HQKGX1 refuses duplicate node and edge identities
+  ---
+  duration_ms: 1.041791
+  type: 'test'
+  ...
+# Subtest: HQKGX1 refuses missing endpoints
+ok 94 - HQKGX1 refuses missing endpoints
+  ---
+  duration_ms: 0.339091
+  type: 'test'
+  ...
+# Subtest: HQKGX1 refuses unsafe metadata and noncanonical identity
+ok 95 - HQKGX1 refuses unsafe metadata and noncanonical identity
+  ---
+  duration_ms: 0.353704
+  type: 'test'
+  ...
+# Subtest: quality oracle grades a fully linked SYNTHETIC page but does not self-certify runtime
+ok 96 - quality oracle grades a fully linked SYNTHETIC page but does not self-certify runtime
+  ---
+  duration_ms: 1.624069
+  type: 'test'
+  ...
+# Subtest: a claimed runtime receipt can only produce READY_FOR_INDEPENDENT_VERIFICATION
+ok 97 - a claimed runtime receipt can only produce READY_FOR_INDEPENDENT_VERIFICATION
+  ---
+  duration_ms: 0.409348
+  type: 'test'
+  ...
+# Subtest: false semantic description remains a missing meaning defect
+ok 98 - false semantic description remains a missing meaning defect
+  ---
+  duration_ms: 0.628117
+  type: 'test'
+  ...
+# Subtest: declared command is not a wired command
+ok 99 - declared command is not a wired command
+  ---
+  duration_ms: 0.721468
+  type: 'test'
+  ...
+# Subtest: source without commit provenance cannot pass
+ok 100 - source without commit provenance cannot pass
+  ---
+  duration_ms: 0.396278
+  type: 'test'
+  ...
+# Subtest: no false chain from bare code and command presence
+ok 101 - no false chain from bare code and command presence
+  ---
+  duration_ms: 0.214313
+  type: 'test'
+  ...
+# Subtest: unverified edge and index-only wiki do not pass
+ok 102 - unverified edge and index-only wiki do not pass
+  ---
+  duration_ms: 0.40475
+  type: 'test'
+  ...
+# Subtest: broken Markdown links are reported without fetching external URLs
+ok 103 - broken Markdown links are reported without fetching external URLs
+  ---
+  duration_ms: 0.269777
+  type: 'test'
+  ...
+# Subtest: input and page ordering do not change content-derived quality verdict
+ok 104 - input and page ordering do not change content-derived quality verdict
+  ---
+  duration_ms: 0.900338
+  type: 'test'
+  ...
+# Subtest: wiki reader refuses symlinks and ignores secret paths
+ok 105 - wiki reader refuses symlinks and ignores secret paths
+  ---
+  duration_ms: 2.058525
+  type: 'test'
+  ...
+# Subtest: CLI creates a unique JSON report, returns blocked exit code, refuses overwrite
+ok 106 - CLI creates a unique JSON report, returns blocked exit code, refuses overwrite
+  ---
+  duration_ms: 1.827447
+  type: 'test'
+  ...
+# Subtest: quality has auditable five-dimensional denominators
+ok 107 - quality has auditable five-dimensional denominators
+  ---
+  duration_ms: 0.211058
+  type: 'test'
+  ...
+# Subtest: unknown knowledge status and orphaned record are explicit integration defects
+ok 108 - unknown knowledge status and orphaned record are explicit integration defects
+  ---
+  duration_ms: 0.213932
+  type: 'test'
+  ...
+1..108
+# tests 108
+# suites 0
+# pass 108
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 297.607911

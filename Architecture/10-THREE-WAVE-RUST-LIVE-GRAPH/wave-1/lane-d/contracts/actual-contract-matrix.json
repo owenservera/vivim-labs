@@ -1,0 +1,14 @@
+{
+  "schema": "vivim.wave1.lane-d.contract-matrix/1",
+  "snapshot": "2026-11-07",
+  "authority": "descriptive source audit only, not an executable converter",
+  "producers": {
+    "A": {"schema": "vivim.wave1.code-observations/1", "source": "repos-hq/hq/lib/live-graph/wave1/lane-a.mjs", "consumerReady": false},
+    "B": {"schema": "vivim.wave1.kb-semantic/1", "source": "repos-hq/hq/lib/wave1-kb-read.mjs", "consumerReady": false},
+    "C": {"schema": "vivim.wave1.command-candidates/1", "source": "repos-hq/hq/live-graph/wave1/lane-c/commands.mjs", "consumerReady": false}
+  },
+  "assembly": {"schema": "vivim.wave1.source-records/1", "source": "repos-hq/research/rust-knowledge-graph/integration/wave1-lane-e/assemble.mjs", "writer": "Lane E only"},
+  "exchange": {"schema": "repos-hq.hqkg-exchange/1", "metadata": ["source_id", "source_lane", "source_root", "source_path", "source_commit", "content_sha256", "source_line", "evidence_class", "evidence"], "compilerKind": "compiled-wiki-program", "compilerRelations": ["COMPILES_WIKI_PROGRAM", "DECLARES_INTENT_FOR", "HAS_REGISTERED_HANDLER"]},
+  "wiki": {"writer": "repos-hq/hq/lib/wiki.mjs:buildWiki", "integrationReadModel": "NOT_WIRED", "pageManifest": "PROPOSED_NOT_ACTIVE"},
+  "requiredMigrations": ["A/B/C producer envelopes need integration-owned semantic lowering to E source-records/1", "D Round 1 source_sha/source_repo must not be assumed equal to E source_commit/source_root/content_sha256", "D Round 1 link_status/evidence_ref must not be interpreted as E evidence_class/evidence", "D Round 1 two-edge chain cannot recognize E compiled-wiki-program intermediate"]
+}

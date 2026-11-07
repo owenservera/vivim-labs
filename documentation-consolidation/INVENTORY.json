@@ -13,22 +13,25 @@
       "total": 312,
       "moved": 10,
       "retained": 302,
-      "currentMain": "4a4f9c9cf1d61456d4ee4f9f74b47b1eee025aaf",
-      "originalMainAtStart": "baa859c70a4de8fca326f2083d76ab2bd41cc9dc"
+      "currentMain": "24dc3c5904a6d493c3459415d0075778eb5424c2",
+      "originalMainAtStart": "baa859c70a4de8fca326f2083d76ab2bd41cc9dc",
+      "navigationAdjustedMain": "24dc3c5904a6d493c3459415d0075778eb5424c2"
     },
     "vivim-web-harness": {
       "total": 369,
       "moved": 96,
       "retained": 273,
-      "currentMain": "2fb5d1a17331c7a7359b1c9b9c08f7814bdb447e",
-      "originalMainAtStart": "09382c61f74a304f120b05445f6dfa900b58494b"
+      "currentMain": "b32402dd3b2eb8cd151fd5c193a021c681f3c07e",
+      "originalMainAtStart": "09382c61f74a304f120b05445f6dfa900b58494b",
+      "navigationAdjustedMain": "b32402dd3b2eb8cd151fd5c193a021c681f3c07e"
     },
     "repos-hq": {
       "total": 553,
       "moved": 31,
       "retained": 522,
-      "currentMain": "110256d00240218265f5138c159dee7625fdb5bf",
-      "originalMainAtStart": "e46ce10c631cafa913907ccea1dc007de9a8d3fe"
+      "currentMain": "2c9bfb4c515cfabce6f8775473e461cd16418e46",
+      "originalMainAtStart": "e46ce10c631cafa913907ccea1dc007de9a8d3fe",
+      "navigationAdjustedMain": "2c9bfb4c515cfabce6f8775473e461cd16418e46"
     }
   },
   "retentionReasons": {
@@ -269,8 +272,8 @@
     {
       "repository": "repos-hq",
       "path": "BOOTSTRAP.md",
-      "blobSha": "c67c7235dde3bb4b7ffe7a7988840307cecfc806",
-      "bytes": 7422,
+      "blobSha": "e1da2f8483f95d57fae920274252f62b0a6dcf65",
+      "bytes": 7838,
       "status": "retained",
       "reason": "component-entrypoint",
       "location": "BOOTSTRAP.md"
@@ -5264,8 +5267,8 @@
     {
       "repository": "tierflow",
       "path": "README.md",
-      "blobSha": "3a1f38ff9895a518d36a80b1996f069f1749222f",
-      "bytes": 1830,
+      "blobSha": "7d12fa828f3c6c0d1cea6d9497e9adcaa2200adf",
+      "bytes": 2246,
       "status": "retained",
       "reason": "component-entrypoint",
       "location": "README.md"
@@ -9017,8 +9020,8 @@
     {
       "repository": "vivim-web-harness",
       "path": "docs/INDEX.md",
-      "blobSha": "76fe402eea09d5e2cf5b0eae753a844f8d74a51c",
-      "bytes": 17119,
+      "blobSha": "a64cb63528c523cb52ba61de5dfb4c1d0cc6bbdf",
+      "bytes": 18874,
       "status": "retained",
       "reason": "product-authority-or-agent-reference",
       "location": "docs/INDEX.md"
@@ -10007,8 +10010,8 @@
     {
       "repository": "vivim-web-harness",
       "path": "README.md",
-      "blobSha": "347e09b8dc5933dc21e60f68764afda5d3b561e9",
-      "bytes": 2118,
+      "blobSha": "7f9ec3244c7e89e3dd01805818fafc6e57ed1527",
+      "bytes": 2443,
       "status": "retained",
       "reason": "component-entrypoint",
       "location": "README.md"
@@ -11147,5 +11150,14 @@
       "reason": "remaining-doc-review",
       "location": "studio/ui-preview/README.md"
     }
-  ]
+  ],
+  "validation": {
+    "archiveShaMatch": 137,
+    "sourceAbsenceVerified": 137,
+    "rootAgentsPresent": 3,
+    "updatedRetainedHashes": 4,
+    "verifiedOn": "2026-11-07",
+    "documentationIndexRelocationLinksRewritten": 13,
+    "harnessDocumentCatalogRelocations": 96
+  }
 }

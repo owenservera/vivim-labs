@@ -37,3 +37,12 @@ Date: **2026-11-07**. Destination: `documentation-consolidation/` in `owenserver
 ## Follow-through
 
 Use `INVENTORY.json` to reconcile the Harness document catalog, source-relative Markdown links, and any scripts/agents depending on historical paths. After validating those consumers, move `remaining-doc-review` files with the same copy → SHA verify → CAS delete protocol. Never make Labs a second runtime document publisher.
+
+## Post-move navigation and integrity verification
+
+- **137/137** archived documents still match the original SHA in `INVENTORY.json`; none of those paths remain in source `main`.
+- All three root `AGENTS.md` entrypoints remain in their original repositories. Agent skills and working source were not relocated.
+- Harness `docs/INDEX.md` repaired **13** relocated links; `docs/library/document-catalog.json` now carries **96** exact relocation links and Git blob SHAs. Harness `README.md` points to Labs.
+- TierFlow `README.md` and Repos HQ `BOOTSTRAP.md` point to their Labs archives.
+- Current `main` after navigation fixes: TierFlow `24dc3c5904a6d493c3459415d0075778eb5424c2`; Harness `b32402dd3b2eb8cd151fd5c193a021c681f3c07e`; Repos HQ `2c9bfb4c515cfabce6f8775473e461cd16418e46`.
+- All source snapshots and file hashes are reflected in `INVENTORY.json`. This is a static metadata verification, **not** runtime test coverage or an exhaustive Markdown link validation.

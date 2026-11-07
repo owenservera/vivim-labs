@@ -1,10 +1,10 @@
 # VIVIM — Live Rust Architecture Graph: Three Waves × Six Lanes
 **Date:** 2026-11-07 · **Owner intent:** execute, test and converge, not produce only another plan.
-**Status:** launch plan and source-target map; NOT a claim of an already running graph.
+**Status:** Wave 1 executable campaign ONLY. Wave 2/3 are UNAPPROVED hypotheses until the Wave 1 runtime has been exercised and an evidence-backed blind-spot dossier reviewed. NOT a claim of an already running graph.
 **Repository:** vivim-labs (campaign authority and evidence hub); code owners: repos-hq, tierflow, vivim-web-harness, and other source owners as explicitly assigned.
 
 ## Mission
-Within three bounded integration waves produce **one live, running Rust HQKG graph** for the eligible VIVIM code, canonical KB, semantic language/action/command system, actual CLI commands, generated/programmable wiki, engine slots/implementations, databases, dataflows, ownership, callers/callees, input/output/write paths and their source evidence. Make it queryable from a short CLI recipe and visible through a continuously refreshed **actual-vs-target** topology/wiki/report.
+The long-range intention is to produce over three eventual waves **one live, running Rust HQKG graph** for the eligible VIVIM code, canonical KB, semantic language/action/command system, actual CLI commands, generated/programmable wiki, engine slots/implementations, databases, dataflows, ownership, callers/callees, input/output/write paths and their source evidence. Make it queryable from a short CLI recipe and visible through a continuously refreshed **actual-vs-target** topology/wiki/report.
 
 **Live** means: on the real local workspace, while source/KB/command changes occur, the refresh mechanism detects updates, publishes a source-pinned graph revision without a competing writer, invalidates/updates derived views and exposes staleness/refusals. It does not mean only one demo snapshot or a CI-only mock.
 
@@ -29,7 +29,7 @@ Within three bounded integration waves produce **one live, running Rust HQKG gra
 
 Each wave contains six lanes A–F. Parallel work **within** a wave; wave integration gate only after six handoffs and independent tests. Subsequent wave begins against gated main, not a stale assumption.
 
-**Documents:** [Wave 1](WAVE-1-BOOTSTRAP.md), [Wave 2](WAVE-2-CONVERGENCE.md), [Wave 3](WAVE-3-LIVE-OPERATIONS.md), [18 copy-paste lane launch orders](LAUNCH-PROMPTS.md), [gates, profiles and scorecard](ACCEPTANCE-AND-CONFIGS.md).
+**Executable order NOW:** [Wave 1 actual execution charter](EXECUTE-WAVE-1-FIRST.md) and [six copy-paste lane prompts](WAVE-1-LAUNCH-PROMPTS.md). The old [Wave 1 notes](WAVE-1-BOOTSTRAP.md) are background only. [Wave 2 concept](WAVE-2-CONVERGENCE.md) is DRAFT/FROZEN and must be redesigned from Wave 1 measurements; do NOT launch Wave 2 or Wave 3.
 
 ## End-user questions this system must answer
 - Where is a capability? Which repo/path/symbol/commit and semantic ID?

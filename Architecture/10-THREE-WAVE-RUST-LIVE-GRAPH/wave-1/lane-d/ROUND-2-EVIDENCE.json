@@ -1,0 +1,180 @@
+{
+  "schema": "vivim.wave1.lane-d.round2-design-evidence/1",
+  "date": "2026-11-07",
+  "purpose": "proposal-only source audit; no Round 2 implementation and no native integrated execution claimed",
+  "snapshot": {
+    "labsHeadAtAudit": "15ded6944434e80926eef95525cfd057f17a6daa",
+    "reposHqHeadAtAudit": "34952780cb8dd85db3d48d60d50fed936ed41e2f",
+    "publishedRound1DCommit": "04960912685dec0606e8daf1710134027317256f"
+  },
+  "firstRoundD": {
+    "implementation": "wiki-oracle.mjs",
+    "tests": {
+      "kind": "synthetic",
+      "reportedPassed": 19,
+      "reportedFailed": 0,
+      "source": "wave-1/lane-d/TEST-EVIDENCE.json"
+    },
+    "nativeRust": false,
+    "realA_B_C": false,
+    "hqWikiFromCombinedGraph": false,
+    "passingGate": false,
+    "note": "Reported results audited from committed source/evidence; they were not re-executed in this proposal turn."
+  },
+  "documents": {
+    "inventory": "documentation-consolidation/INVENTORY.json",
+    "total": 1234,
+    "moved": 137,
+    "retained": 1097,
+    "role": "design requirements map, not runtime KB input",
+    "recovered": [
+      "documentation-consolidation/repos-hq/docs/research/semantic-language-kernel/ARCHITECTURE.md",
+      "documentation-consolidation/repos-hq/docs/research/semantic-language-kernel/CONTRACT-AND-ROADMAP.md",
+      "documentation-consolidation/repos-hq/docs/audit-2026-11-04/01-intent-front-end.md",
+      "documentation-consolidation/vivim-web-harness/docs/research/GUI02-PRE-PRD-CANVAS-SEMANTIC-LANGUAGE-2026-10-31.md",
+      "documentation-consolidation/tierflow/realtime-stateful-ui-blueprint/07-current-implementation-assessment.md"
+    ]
+  },
+  "actualContracts": [
+    {
+      "component": "A producer",
+      "repo": "owenservera/repos-hq",
+      "path": "hq/lib/live-graph/wave1/lane-a.mjs",
+      "blobSha": "ffc7b311979e1d36d7a6a467da7a4dd027d8f19d",
+      "schema": "vivim.wave1.code-observations/1"
+    },
+    {
+      "component": "B producer",
+      "repo": "owenservera/repos-hq",
+      "path": "hq/lib/wave1-kb-read.mjs",
+      "blobSha": "c6bc8a8a961fc49bde0b8da27b3e280cd50bca0a",
+      "schema": "vivim.wave1.kb-semantic/1"
+    },
+    {
+      "component": "C producer",
+      "repo": "owenservera/repos-hq",
+      "path": "hq/live-graph/wave1/lane-c/commands.mjs",
+      "blobSha": "ab875a36268ad8d0b71e35c89ba9cd41ff6acb0f",
+      "schema": "vivim.wave1.command-candidates/1"
+    },
+    {
+      "component": "E assembler",
+      "repo": "owenservera/repos-hq",
+      "path": "research/rust-knowledge-graph/integration/wave1-lane-e/assemble.mjs",
+      "blobSha": "0cdab7d46b73a33012c55def3e86779e0bff0f01",
+      "schema": "vivim.wave1.source-records/1"
+    },
+    {
+      "component": "HQ wiki builder",
+      "repo": "owenservera/repos-hq",
+      "path": "hq/lib/wiki.mjs",
+      "blobSha": "3efcde513bf5fdf538b413dce209ec9e6bcf0253",
+      "api": "buildWiki"
+    },
+    {
+      "component": "D oracle",
+      "repo": "owenservera/vivim-labs",
+      "path": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/wave-1/lane-d/wiki-oracle.mjs",
+      "blobSha": "15e8f62fd3c5deb22b7925d09dae1efc203dce14",
+      "schema": "vivim.wave1.wiki-quality/1"
+    }
+  ],
+  "findings": [
+    {
+      "id": "D-R2-01",
+      "severity": "critical",
+      "evidence": "Lane F LANDED-CONTRACT-REVIEW.md",
+      "finding": "A/B/C native output schemas do not directly match E feed schema",
+      "status": "source-verified; native conversion unverified"
+    },
+    {
+      "id": "D-R2-02",
+      "severity": "critical",
+      "evidence": "E assemble.mjs and D wiki-oracle.mjs",
+      "finding": "E source_commit/content_sha256/source_root vs D source_sha/source_repo; E evidence_class/evidence vs D link_status/evidence_ref",
+      "status": "source-verified"
+    },
+    {
+      "id": "D-R2-03",
+      "severity": "critical",
+      "evidence": "E assemble.mjs lines 96-116 and D wiki-oracle.mjs lineage traversal",
+      "finding": "D misses E's code→compiled-wiki-program→B semantic→C command relation path; E relations are declared, not runtime verified",
+      "status": "source-verified"
+    },
+    {
+      "id": "D-R2-04",
+      "severity": "critical",
+      "evidence": "HQ hq/lib/wiki.mjs loadModel/buildWiki + D README",
+      "finding": "Existing HQ wiki writer has no demonstrated combined E read model or real A+B+C page rendering",
+      "status": "unsupported in observed integration"
+    },
+    {
+      "id": "D-R2-05",
+      "severity": "high",
+      "evidence": "D test baseline + scorer",
+      "finding": "Orphan B KB sidecar can coexist with synthetic verified chain; score 80/100 remains BLOCKED",
+      "status": "source/test verified"
+    },
+    {
+      "id": "D-R2-06",
+      "severity": "high",
+      "evidence": "D sharePage + wikiLinkGaps implementation",
+      "finding": "Text co-occurrence and regex markdown link checks cannot establish typed lineage, anchor or page-manifest integrity",
+      "status": "source-verified"
+    },
+    {
+      "id": "D-R2-07",
+      "severity": "high",
+      "evidence": "E RUN-STATUS.json",
+      "finding": "No native Rust journal/query/real compiled comment; importer additive deletion/rename remains unresolved",
+      "status": "reported blocked; native not rerun"
+    }
+  ],
+  "integrationReview": {
+    "path": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/lane-f/LANDED-CONTRACT-REVIEW.md",
+    "verdict": "BLOCKED_CONTRACT_CROSSWALK",
+    "nativeVerified": false
+  },
+  "proposedBacklogIds": [
+    "D2-01",
+    "D2-02",
+    "D2-03",
+    "D2-04",
+    "D2-05",
+    "D2-06",
+    "D2-07",
+    "D2-08",
+    "D2-09",
+    "D2-10",
+    "D2-11",
+    "D2-12"
+  ],
+  "independentSafeWhileMaster": [
+    "D2-01",
+    "D2-02",
+    "D2-03",
+    "D2-04",
+    "D2-06",
+    "D2-07",
+    "D2-11/spec-only"
+  ],
+  "integrationGated": [
+    "D2-05",
+    "D2-08",
+    "D2-09",
+    "D2-10",
+    "D2-12",
+    "D2-11/live-tests"
+  ],
+  "baselineInvalidationRisks": [
+    "changing E graph contracts or hqg1 identity",
+    "editing HQ wiki writer",
+    "modifying shared Lane D oracle/exit codes while master consumes it",
+    "deleting/resetting indexed root/DB or regenerating master's wiki output",
+    "mutating Rust journal or F evidence",
+    "promoting semantic ID or executing actions"
+  ],
+  "publicationScope": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/wave-1/lane-d/",
+  "round2Executed": false,
+  "wave2Designed": false
+}

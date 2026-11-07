@@ -124,7 +124,8 @@
         "private-origin-reference",
         "public",
         "private",
-        "unknown"
+        "unknown",
+        "private-source-retained"
       ]
     },
     "sourceClass": {
@@ -727,7 +728,8 @@
           "sourceVisibility": {
             "enum": [
               "private-origin-reference",
-              "private"
+              "private",
+              "private-source-retained"
             ]
           }
         },

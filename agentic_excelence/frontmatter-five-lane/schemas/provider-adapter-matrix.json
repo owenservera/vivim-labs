@@ -1,0 +1,617 @@
+{
+  "schema": "vivim.agentic-provider-adapters/0.1",
+  "status": "DOCUMENTATION_GROUNDED_BUT_RUNTIME_UNVERIFIED",
+  "matrixVersion": "vivim.agentic-frontmatter-work-matrix/0.1",
+  "sourceHeads": {
+    "reposHQ": "acad98697575c2f3fe2fcbf847e19a8dcd3670db"
+  },
+  "rules": [
+    "Use exact observed fileType/path + source hash, never infer native support from .md alone",
+    "Preserve native instruction/config bytes until explicit owner-approved activation",
+    "Universal IR is a descriptive sidecar, always outside JSON body",
+    "Published provider documentation is not proof that local installed provider version accepts the key",
+    "Do not emit native effect keys such as permission,tools,allowed-tools without external owner grant",
+    "Provider native precedence independent from IR; Host owner approval always governs effects",
+    "Unknown provider loader emits sidecar-only / no native changes"
+  ],
+  "verification": {
+    "agentSkillsSpecification": "https://agentskills.io/specification",
+    "openCodeAgentDocs": "https://opencode.ai/docs/agents/",
+    "verificationDate": "2026-11-07",
+    "localOpenCodeVersionEvidence": null,
+    "providerNativeLoadsTested": 0
+  },
+  "coverage": {
+    "uniqueTypes": 19,
+    "records": 217,
+    "nativeYAMLCandidates": 55,
+    "markdownSidecarFirst": 151,
+    "jsonSidecar": 11
+  },
+  "routes": [
+    {
+      "fileType": ".opencode/agents/*.md",
+      "count": 3,
+      "families": [
+        "02"
+      ],
+      "formatAdapter": "opencode-agent-yaml-sidecar",
+      "nativeDocumentedFields": [
+        "description",
+        "mode",
+        "model",
+        "temperature",
+        "permission",
+        "tools"
+      ],
+      "safeEmissionCandidates": [
+        "description",
+        "mode"
+      ],
+      "requireOwnerEffectGrant": [
+        "permission",
+        "tools"
+      ],
+      "nativeDocs": "https://opencode.ai/docs/agents/",
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "native source stays original; optional reviewed non-effectful native keys; universal IR in sidecar",
+      "sourceFileIds": [
+        "file:001",
+        "file:208",
+        "file:209"
+      ]
+    },
+    {
+      "fileType": "AGENT.md",
+      "count": 3,
+      "families": [
+        "01"
+      ],
+      "formatAdapter": "markdown-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "sidecar-first, no invented native header",
+      "sourceFileIds": [
+        "file:021",
+        "file:192",
+        "file:195"
+      ]
+    },
+    {
+      "fileType": "AGENTS.md",
+      "count": 26,
+      "families": [
+        "01"
+      ],
+      "formatAdapter": "markdown-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "sidecar-first, no invented native header",
+      "sourceFileIds": [
+        "file:003",
+        "file:005",
+        "file:014",
+        "file:016",
+        "file:020",
+        "file:024",
+        "file:031",
+        "file:039",
+        "file:040",
+        "file:054",
+        "file:062",
+        "file:071",
+        "file:078",
+        "file:085",
+        "file:094",
+        "file:112",
+        "file:128",
+        "file:147",
+        "file:170",
+        "file:178",
+        "file:196",
+        "file:197",
+        "file:198",
+        "file:210",
+        "file:215",
+        "file:217"
+      ]
+    },
+    {
+      "fileType": "BEST-PRACTICES.md",
+      "count": 15,
+      "families": [
+        "09"
+      ],
+      "formatAdapter": "markdown-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "sidecar-first, no invented native header",
+      "sourceFileIds": [
+        "file:027",
+        "file:035",
+        "file:043",
+        "file:058",
+        "file:066",
+        "file:075",
+        "file:082",
+        "file:089",
+        "file:100",
+        "file:118",
+        "file:134",
+        "file:157",
+        "file:174",
+        "file:187",
+        "file:202"
+      ]
+    },
+    {
+      "fileType": "BOOTSTRAP.md",
+      "count": 20,
+      "families": [
+        "01"
+      ],
+      "formatAdapter": "markdown-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "sidecar-first, no invented native header",
+      "sourceFileIds": [
+        "file:004",
+        "file:015",
+        "file:032",
+        "file:048",
+        "file:050",
+        "file:052",
+        "file:055",
+        "file:063",
+        "file:072",
+        "file:079",
+        "file:086",
+        "file:095",
+        "file:113",
+        "file:129",
+        "file:148",
+        "file:171",
+        "file:179",
+        "file:191",
+        "file:193",
+        "file:199"
+      ]
+    },
+    {
+      "fileType": "CLAUDE.md",
+      "count": 3,
+      "families": [
+        "02"
+      ],
+      "formatAdapter": "markdown-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "sidecar-first, no invented native header",
+      "sourceFileIds": [
+        "file:017",
+        "file:154",
+        "file:213"
+      ]
+    },
+    {
+      "fileType": "CONTEXT.md",
+      "count": 1,
+      "families": [
+        "04"
+      ],
+      "formatAdapter": "markdown-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "sidecar-first, no invented native header",
+      "sourceFileIds": [
+        "file:022"
+      ]
+    },
+    {
+      "fileType": "GEMINI.md",
+      "count": 1,
+      "families": [
+        "02"
+      ],
+      "formatAdapter": "markdown-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "sidecar-first, no invented native header",
+      "sourceFileIds": [
+        "file:018"
+      ]
+    },
+    {
+      "fileType": "HANDOFF.md",
+      "count": 12,
+      "families": [
+        "19"
+      ],
+      "formatAdapter": "markdown-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "sidecar-first, no invented native header",
+      "sourceFileIds": [
+        "file:006",
+        "file:009",
+        "file:011",
+        "file:012",
+        "file:013",
+        "file:023",
+        "file:047",
+        "file:181",
+        "file:182",
+        "file:183",
+        "file:184",
+        "file:185"
+      ]
+    },
+    {
+      "fileType": "README.md",
+      "count": 45,
+      "families": [
+        "04"
+      ],
+      "formatAdapter": "markdown-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "sidecar-first, no invented native header",
+      "sourceFileIds": [
+        "file:026",
+        "file:028",
+        "file:029",
+        "file:034",
+        "file:036",
+        "file:037",
+        "file:042",
+        "file:044",
+        "file:045",
+        "file:057",
+        "file:059",
+        "file:060",
+        "file:065",
+        "file:067",
+        "file:068",
+        "file:074",
+        "file:076",
+        "file:077",
+        "file:081",
+        "file:083",
+        "file:084",
+        "file:088",
+        "file:090",
+        "file:091",
+        "file:099",
+        "file:101",
+        "file:102",
+        "file:117",
+        "file:119",
+        "file:120",
+        "file:133",
+        "file:135",
+        "file:136",
+        "file:156",
+        "file:158",
+        "file:159",
+        "file:173",
+        "file:175",
+        "file:176",
+        "file:186",
+        "file:188",
+        "file:189",
+        "file:201",
+        "file:203",
+        "file:204"
+      ]
+    },
+    {
+      "fileType": "SITREP.md",
+      "count": 20,
+      "families": [
+        "12"
+      ],
+      "formatAdapter": "markdown-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "sidecar-first, no invented native header",
+      "sourceFileIds": [
+        "file:010",
+        "file:025",
+        "file:033",
+        "file:041",
+        "file:049",
+        "file:051",
+        "file:053",
+        "file:056",
+        "file:064",
+        "file:073",
+        "file:080",
+        "file:087",
+        "file:096",
+        "file:114",
+        "file:130",
+        "file:149",
+        "file:172",
+        "file:180",
+        "file:194",
+        "file:200"
+      ]
+    },
+    {
+      "fileType": "SKILL.md",
+      "count": 52,
+      "families": [
+        "09"
+      ],
+      "formatAdapter": "agent-skills-yaml-sidecar",
+      "nativeDocumentedFields": [
+        "name",
+        "description",
+        "license",
+        "compatibility",
+        "metadata",
+        "allowed-tools"
+      ],
+      "safeEmissionCandidates": [
+        "name",
+        "description"
+      ],
+      "requireOwnerEffectGrant": [
+        "allowed-tools"
+      ],
+      "nativeDocs": "https://agentskills.io/specification",
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "native source stays original; optional reviewed non-effectful native keys; universal IR in sidecar",
+      "sourceFileIds": [
+        "file:002",
+        "file:007",
+        "file:008",
+        "file:019",
+        "file:030",
+        "file:038",
+        "file:046",
+        "file:061",
+        "file:069",
+        "file:070",
+        "file:092",
+        "file:093",
+        "file:103",
+        "file:104",
+        "file:105",
+        "file:106",
+        "file:107",
+        "file:108",
+        "file:109",
+        "file:110",
+        "file:111",
+        "file:121",
+        "file:122",
+        "file:123",
+        "file:124",
+        "file:125",
+        "file:126",
+        "file:127",
+        "file:137",
+        "file:138",
+        "file:139",
+        "file:140",
+        "file:141",
+        "file:142",
+        "file:143",
+        "file:144",
+        "file:145",
+        "file:146",
+        "file:160",
+        "file:161",
+        "file:162",
+        "file:163",
+        "file:164",
+        "file:165",
+        "file:166",
+        "file:167",
+        "file:168",
+        "file:169",
+        "file:177",
+        "file:190",
+        "file:205",
+        "file:206"
+      ]
+    },
+    {
+      "fileType": "TOOL-REGISTRY.json",
+      "count": 1,
+      "families": [
+        "08"
+      ],
+      "formatAdapter": "json-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "never prepend YAML to JSON",
+      "sourceFileIds": [
+        "file:097"
+      ]
+    },
+    {
+      "fileType": "TOOLS.json",
+      "count": 3,
+      "families": [
+        "08"
+      ],
+      "formatAdapter": "json-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "never prepend YAML to JSON",
+      "sourceFileIds": [
+        "file:115",
+        "file:131",
+        "file:150"
+      ]
+    },
+    {
+      "fileType": "TOOLS.md",
+      "count": 1,
+      "families": [
+        "08"
+      ],
+      "formatAdapter": "markdown-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "sidecar-first, no invented native header",
+      "sourceFileIds": [
+        "file:207"
+      ]
+    },
+    {
+      "fileType": "WORKSPACE.md",
+      "count": 4,
+      "families": [
+        "01"
+      ],
+      "formatAdapter": "markdown-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "sidecar-first, no invented native header",
+      "sourceFileIds": [
+        "file:098",
+        "file:116",
+        "file:132",
+        "file:151"
+      ]
+    },
+    {
+      "fileType": "agent.json",
+      "count": 1,
+      "families": [
+        "10"
+      ],
+      "formatAdapter": "json-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "never prepend YAML to JSON",
+      "sourceFileIds": [
+        "file:216"
+      ]
+    },
+    {
+      "fileType": "claude.json",
+      "count": 4,
+      "families": [
+        "10"
+      ],
+      "formatAdapter": "json-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "never prepend YAML to JSON",
+      "sourceFileIds": [
+        "file:152",
+        "file:155",
+        "file:211",
+        "file:214"
+      ]
+    },
+    {
+      "fileType": "gemini.json",
+      "count": 2,
+      "families": [
+        "10"
+      ],
+      "formatAdapter": "json-sidecar",
+      "nativeDocumentedFields": [],
+      "safeEmissionCandidates": [],
+      "requireOwnerEffectGrant": [],
+      "nativeDocs": null,
+      "localLoaderVersion": null,
+      "localLoaderVerified": false,
+      "allSourceHeadersInspected": false,
+      "nativePlacement": "never prepend YAML to JSON",
+      "sourceFileIds": [
+        "file:153",
+        "file:212"
+      ]
+    }
+  ]
+}

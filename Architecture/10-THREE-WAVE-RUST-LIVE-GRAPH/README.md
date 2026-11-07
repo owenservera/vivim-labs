@@ -29,7 +29,7 @@ The long-range intention is to produce over three eventual waves **one live, run
 
 Each wave contains six lanes A–F. Parallel work **within** a wave; wave integration gate only after six handoffs and independent tests. Subsequent wave begins against gated main, not a stale assumption.
 
-**Executable order NOW:** [Wave 1 actual execution charter](EXECUTE-WAVE-1-FIRST.md) and [six copy-paste lane prompts](WAVE-1-LAUNCH-PROMPTS.md). The old [Wave 1 notes](WAVE-1-BOOTSTRAP.md) are background only. [Wave 2 concept](WAVE-2-CONVERGENCE.md) is DRAFT/FROZEN and must be redesigned from Wave 1 measurements; do NOT launch Wave 2 or Wave 3.
+**Mandatory preflight:** [Scoped reset + single logical project + indexing intent](WAVE-1-INDEX-RESET-AND-INTENT.md). **Executable order NOW:** [Wave 1 actual execution charter](EXECUTE-WAVE-1-FIRST.md) and [six copy-paste lane prompts](WAVE-1-LAUNCH-PROMPTS.md). The old [Wave 1 notes](WAVE-1-BOOTSTRAP.md) are background only. [Wave 2 concept](WAVE-2-CONVERGENCE.md) is DRAFT/FROZEN and must be redesigned from Wave 1 measurements; do NOT launch Wave 2 or Wave 3.
 
 ## End-user questions this system must answer
 - Where is a capability? Which repo/path/symbol/commit and semantic ID?
@@ -42,7 +42,7 @@ Each wave contains six lanes A–F. Parallel work **within** a wave; wave integr
 - What isn't known? Unindexed repo, ambiguous identity, unsupported adapter, stale data or unverified runtime.
 
 ## Nonnegotiables
-Main only, fresh-head non-force CAS on shared code, no PRs/branches/Actions. Parallel lanes own disjoint files and never silently modify one another's owner paths. Do not reset existing HQ DB/profile or replace a signed-in browser session. No Playwright/Puppeteer, no provider API shortcuts. The Rust graph is a **read and compute kernel**, not a backdoor Host action authority. Single journal writer; no duplicate engine registry; no second curated KB writer. DEV and PRODUCT configurations use **identical semantics** but different installed adapters, source scope, debugging privileges and privacy policy. End product must be independent of lab path fixtures.
+Main only, fresh-head non-force CAS on shared code, no PRs/branches/Actions. Parallel lanes own disjoint files and never silently modify one another's owner paths. Perform the owner-approved **scoped old-run index reset** before the first new baseline, preserving durable KB/semantic rows and multi-repo indexing capability; never blanket-reset the HQ DB/profile or replace a signed-in browser session. No Playwright/Puppeteer, no provider API shortcuts. The Rust graph is a **read and compute kernel**, not a backdoor Host action authority. Single journal writer; no duplicate engine registry; no second curated KB writer. DEV and PRODUCT configurations use **identical semantics** but different installed adapters, source scope, debugging privileges and privacy policy. End product must be independent of lab path fixtures.
 
 ## Wave sequencing law
 Every lane must leave code/tests, an evidence record, and a precise reusable interface consumed by a named lane in the *next* wave. If it produces only a document without an implementation/test improvement, call it incomplete except explicit inventory-only lanes.

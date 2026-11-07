@@ -1,0 +1,4210 @@
+{
+  "schema": "vivim.agentic-shared-section-crosswalk/0.1",
+  "status": "SOURCE_PINNED_HEADINGS_NOT_PROVIDER_POLICY",
+  "source": "agentic_excelence/agentic-file-system/SECTION-ATLAS-217.json",
+  "sourceReposHQSha": "acad98697575c2f3fe2fcbf847e19a8dcd3670db",
+  "census": {
+    "sourceFiles": 217,
+    "observedFamilies": 8,
+    "sharedConceptTypes": 13,
+    "originalSections": 842,
+    "supplementAdded": 168,
+    "replacedAtPinnedIDs": 48,
+    "mergedSections": 1010,
+    "unclassified": 168,
+    "privateSourceBodiesIncluded": 0
+  },
+  "mappingRubric": [
+    "1. Identify original section:NNN:NNN and source repo/path/blob/line; do not invent absent endLine",
+    "2. Read full original source section span and adjacent headings at same SHA; no title-only classification",
+    "3. Compare semantic effect, owner and lifecycle within file family; identical headings can mean distinct things",
+    "4. Propose shared section_type only with source-span evidence; preserve unique file-specific variant and original ID",
+    "5. Record evidence class, verifier, confidence and source span; keep null when uncertain",
+    "6. Check provider-native precedence and owner policy; no source quote becomes a new grant",
+    "7. Never bring private reference bodies into the public lab; verify privately in Repos HQ"
+  ],
+  "sectionTypes": [
+    {
+      "id": "section_type:purpose",
+      "name": "Purpose and scope",
+      "scope": "shared concept with file-specific variations"
+    },
+    {
+      "id": "section_type:prerequisites",
+      "name": "Prerequisites and environment",
+      "scope": "shared concept with file-specific variations"
+    },
+    {
+      "id": "section_type:responsibilities",
+      "name": "Responsibilities and boundaries",
+      "scope": "shared concept with file-specific variations"
+    },
+    {
+      "id": "section_type:workflow",
+      "name": "Execution workflow",
+      "scope": "shared concept with file-specific variations"
+    },
+    {
+      "id": "section_type:best_practices",
+      "name": "Best practices",
+      "scope": "shared concept with file-specific variations"
+    },
+    {
+      "id": "section_type:tools",
+      "name": "Tools and capabilities",
+      "scope": "shared concept with file-specific variations"
+    },
+    {
+      "id": "section_type:context",
+      "name": "Context and memory",
+      "scope": "shared concept with file-specific variations"
+    },
+    {
+      "id": "section_type:safety",
+      "name": "Safety and permissions",
+      "scope": "shared concept with file-specific variations"
+    },
+    {
+      "id": "section_type:verification",
+      "name": "Tests and acceptance",
+      "scope": "shared concept with file-specific variations"
+    },
+    {
+      "id": "section_type:recovery",
+      "name": "Recovery and handoff",
+      "scope": "shared concept with file-specific variations"
+    },
+    {
+      "id": "section_type:lifecycle",
+      "name": "Status and lifecycle",
+      "scope": "shared concept with file-specific variations"
+    },
+    {
+      "id": "section_type:examples",
+      "name": "Examples and templates",
+      "scope": "shared concept with file-specific variations"
+    },
+    {
+      "id": "section_type:unique",
+      "name": "File-specific specialized section",
+      "scope": "shared concept with file-specific variations"
+    }
+  ],
+  "byFamily": [
+    {
+      "family": "01",
+      "name": "Agent, bootstrap and workspace instruction",
+      "sourceFileCount": 53,
+      "sectionMeanings": [
+        {
+          "sectionType": "section_type:purpose",
+          "sharedConcept": "Purpose and scope",
+          "observedCount": 16,
+          "familyVariant": "working-agreement scope",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:032",
+              "sectionId": "section:032:003",
+              "originalHeading": "Identity and mission",
+              "originalLine": 25
+            },
+            {
+              "fileId": "file:039",
+              "sectionId": "section:039:005",
+              "originalHeading": "3. Scope filter for each proposed change",
+              "originalLine": 22
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:prerequisites",
+          "sharedConcept": "Prerequisites and environment",
+          "observedCount": 0,
+          "familyVariant": "Source-specific prerequisites and environment; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:responsibilities",
+          "sharedConcept": "Responsibilities and boundaries",
+          "observedCount": 7,
+          "familyVariant": "Source-specific responsibilities and boundaries; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:032",
+              "sectionId": "section:032:002",
+              "originalHeading": "2026-10-21 — core-peer relaunch (provisional until owner scoping interview)",
+              "originalLine": 6
+            },
+            {
+              "fileId": "file:039",
+              "sectionId": "section:039:002",
+              "originalHeading": "0. Runtime ownership — no GitHub Actions",
+              "originalLine": 4
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:workflow",
+          "sharedConcept": "Execution workflow",
+          "observedCount": 10,
+          "familyVariant": "Source-specific execution workflow; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:015",
+              "sectionId": "section:015:002",
+              "originalHeading": "Commands",
+              "originalLine": 5
+            },
+            {
+              "fileId": "file:021",
+              "sectionId": "section:021:006",
+              "originalHeading": "Workflow and apply safety",
+              "originalLine": 50
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:best_practices",
+          "sharedConcept": "Best practices",
+          "observedCount": 4,
+          "familyVariant": "Source-specific best practices; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:020",
+              "sectionId": "section:020:001",
+              "originalHeading": "Repository Guidelines",
+              "originalLine": 1
+            },
+            {
+              "fileId": "file:020",
+              "sectionId": "section:020:005",
+              "originalHeading": "Coding Style and Naming Conventions",
+              "originalLine": 38
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:tools",
+          "sharedConcept": "Tools and capabilities",
+          "observedCount": 19,
+          "familyVariant": "Source-specific tools and capabilities; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:015",
+              "sectionId": "section:015:005",
+              "originalHeading": "Acting as an Oracle: all four capabilities are legitimate",
+              "originalLine": 34
+            },
+            {
+              "fileId": "file:016",
+              "sectionId": "section:016:006",
+              "originalHeading": "Tools Quick Reference",
+              "originalLine": 36
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:context",
+          "sharedConcept": "Context and memory",
+          "observedCount": 31,
+          "familyVariant": "project constraints",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:016",
+              "sectionId": "section:016:008",
+              "originalHeading": "Resources",
+              "originalLine": 55
+            },
+            {
+              "fileId": "file:024",
+              "sectionId": "section:024:002",
+              "originalHeading": "Persistent agent memory (standing)",
+              "originalLine": 5
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:safety",
+          "sharedConcept": "Safety and permissions",
+          "observedCount": 6,
+          "familyVariant": "owner policy precedence",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:020",
+              "sectionId": "section:020:008",
+              "originalHeading": "Safety and Permissions",
+              "originalLine": 63
+            },
+            {
+              "fileId": "file:039",
+              "sectionId": "section:039:010",
+              "originalHeading": "Round 8 pre-live safety gates (mandatory, not extra project scope)",
+              "originalLine": 66
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:verification",
+          "sharedConcept": "Tests and acceptance",
+          "observedCount": 9,
+          "familyVariant": "project acceptance and command receipts",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:015",
+              "sectionId": "section:015:006",
+              "originalHeading": "First proof: don't build a second platform",
+              "originalLine": 41
+            },
+            {
+              "fileId": "file:020",
+              "sectionId": "section:020:004",
+              "originalHeading": "Build, Test, and Development Commands",
+              "originalLine": 27
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:recovery",
+          "sharedConcept": "Recovery and handoff",
+          "observedCount": 6,
+          "familyVariant": "restore workspace",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:021",
+              "sectionId": "section:021:008",
+              "originalHeading": "Handoff",
+              "originalLine": 63
+            },
+            {
+              "fileId": "file:032",
+              "sectionId": "section:032:010",
+              "originalHeading": "Resume / handoff protocol",
+              "originalLine": 101
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:lifecycle",
+          "sharedConcept": "Status and lifecycle",
+          "observedCount": 15,
+          "familyVariant": "Source-specific status and lifecycle; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:015",
+              "sectionId": "section:015:001",
+              "originalHeading": "@VALUE-ORACLE — Agent Boot / SITREP / Build Contract",
+              "originalLine": 1
+            },
+            {
+              "fileId": "file:015",
+              "sectionId": "section:015:007",
+              "originalHeading": "Evidence, delivery and status protocol",
+              "originalLine": 53
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:examples",
+          "sharedConcept": "Examples and templates",
+          "observedCount": 0,
+          "familyVariant": "Source-specific examples and templates; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:unique",
+          "sharedConcept": "File-specific specialized section",
+          "observedCount": 148,
+          "familyVariant": "Source-specific file-specific specialized section; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:003",
+              "sectionId": "section:003:001",
+              "originalHeading": "AION — Execute the work",
+              "originalLine": 1
+            },
+            {
+              "fileId": "file:003",
+              "sectionId": "section:003:002",
+              "originalHeading": "Working rule",
+              "originalLine": 5
+            }
+          ]
+        }
+      ],
+      "uniqueExamples": [
+        {
+          "fileId": "file:003",
+          "sectionId": "section:003:001",
+          "originalHeading": "AION — Execute the work",
+          "originalLine": 1,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:003",
+          "sectionId": "section:003:002",
+          "originalHeading": "Working rule",
+          "originalLine": 5,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:003",
+          "sectionId": "section:003:003",
+          "originalHeading": "Current product ownership: VIVIM Harness",
+          "originalLine": 17,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:003",
+          "sectionId": "section:003:004",
+          "originalHeading": "Non-negotiable operational correctness",
+          "originalLine": 27,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:004",
+          "sectionId": "section:004:001",
+          "originalHeading": "AION BFF bootstrap",
+          "originalLine": 1,
+          "variant": "file-specific, unresolved shared equivalence"
+        }
+      ]
+    },
+    {
+      "family": "02",
+      "name": "Provider-native agent and rules",
+      "sourceFileCount": 7,
+      "sectionMeanings": [
+        {
+          "sectionType": "section_type:purpose",
+          "sharedConcept": "Purpose and scope",
+          "observedCount": 0,
+          "familyVariant": "role or provider remit",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:prerequisites",
+          "sharedConcept": "Prerequisites and environment",
+          "observedCount": 0,
+          "familyVariant": "Source-specific prerequisites and environment; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:responsibilities",
+          "sharedConcept": "Responsibilities and boundaries",
+          "observedCount": 0,
+          "familyVariant": "Source-specific responsibilities and boundaries; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:workflow",
+          "sharedConcept": "Execution workflow",
+          "observedCount": 2,
+          "familyVariant": "Source-specific execution workflow; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:018",
+              "sectionId": "section:018:002",
+              "originalHeading": "BLOCKED commands — do NOT attempt these",
+              "originalLine": 5
+            },
+            {
+              "fileId": "file:018",
+              "sectionId": "section:018:012",
+              "originalHeading": "ctx commands",
+              "originalLine": 52
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:best_practices",
+          "sharedConcept": "Best practices",
+          "observedCount": 0,
+          "familyVariant": "Source-specific best practices; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:tools",
+          "sharedConcept": "Tools and capabilities",
+          "observedCount": 3,
+          "familyVariant": "Source-specific tools and capabilities; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:018",
+              "sectionId": "section:018:006",
+              "originalHeading": "REDIRECTED tools — use sandbox equivalents",
+              "originalLine": 23
+            },
+            {
+              "fileId": "file:018",
+              "sectionId": "section:018:010",
+              "originalHeading": "Tool selection hierarchy",
+              "originalLine": 38
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:context",
+          "sharedConcept": "Context and memory",
+          "observedCount": 2,
+          "familyVariant": "agent-required context",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:001",
+              "sectionId": "section:001:001",
+              "originalHeading": "Required context",
+              "originalLine": 12
+            },
+            {
+              "fileId": "file:018",
+              "sectionId": "section:018:001",
+              "originalHeading": "context-mode — MANDATORY routing rules",
+              "originalLine": 1
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:safety",
+          "sharedConcept": "Safety and permissions",
+          "observedCount": 0,
+          "familyVariant": "tool boundary without self-grant",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:verification",
+          "sharedConcept": "Tests and acceptance",
+          "observedCount": 1,
+          "familyVariant": "provider loader behavior",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:154",
+              "sectionId": "section:154:006",
+              "originalHeading": "5. Executable contract tests",
+              "originalLine": 50
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:recovery",
+          "sharedConcept": "Recovery and handoff",
+          "observedCount": 0,
+          "familyVariant": "escalate or resume role",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:lifecycle",
+          "sharedConcept": "Status and lifecycle",
+          "observedCount": 0,
+          "familyVariant": "Source-specific status and lifecycle; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:examples",
+          "sharedConcept": "Examples and templates",
+          "observedCount": 0,
+          "familyVariant": "Source-specific examples and templates; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:unique",
+          "sharedConcept": "File-specific specialized section",
+          "observedCount": 26,
+          "familyVariant": "Source-specific file-specific specialized section; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:001",
+              "sectionId": "section:001:002",
+              "originalHeading": "Do real work",
+              "originalLine": 15
+            },
+            {
+              "fileId": "file:001",
+              "sectionId": "section:001:003",
+              "originalHeading": "Reality and authority",
+              "originalLine": 18
+            }
+          ]
+        }
+      ],
+      "uniqueExamples": [
+        {
+          "fileId": "file:001",
+          "sectionId": "section:001:002",
+          "originalHeading": "Do real work",
+          "originalLine": 15,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:001",
+          "sectionId": "section:001:003",
+          "originalHeading": "Reality and authority",
+          "originalLine": 18,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:001",
+          "sectionId": "section:001:004",
+          "originalHeading": "Reply",
+          "originalLine": 21,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:017",
+          "sectionId": "section:017:001",
+          "originalHeading": "cdpilot",
+          "originalLine": 5,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:017",
+          "sectionId": "section:017:002",
+          "originalHeading": "Kimlik",
+          "originalLine": 9,
+          "variant": "file-specific, unresolved shared equivalence"
+        }
+      ]
+    },
+    {
+      "family": "04",
+      "name": "Context and navigation",
+      "sourceFileCount": 46,
+      "sectionMeanings": [
+        {
+          "sectionType": "section_type:purpose",
+          "sharedConcept": "Purpose and scope",
+          "observedCount": 2,
+          "familyVariant": "domain and navigation",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:014",
+              "originalHeading": "6.3.13 tab-scoped browser identity and interactive fresh-chat bootstrap",
+              "originalLine": 101
+            },
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:017",
+              "originalHeading": "6.3.10 hidden-tab submission and physical release parity",
+              "originalLine": 124
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:prerequisites",
+          "sharedConcept": "Prerequisites and environment",
+          "observedCount": 0,
+          "familyVariant": "Source-specific prerequisites and environment; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:responsibilities",
+          "sharedConcept": "Responsibilities and boundaries",
+          "observedCount": 7,
+          "familyVariant": "Source-specific responsibilities and boundaries; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:006",
+              "originalHeading": "2.4.0 semantic DOM ownership",
+              "originalLine": 43
+            },
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:009",
+              "originalHeading": "2.3.22 response observation and turn ownership",
+              "originalLine": 67
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:workflow",
+          "sharedConcept": "Execution workflow",
+          "observedCount": 7,
+          "familyVariant": "Source-specific execution workflow; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:007",
+              "originalHeading": "2.3.24 canonical workflow hard cut",
+              "originalLine": 53
+            },
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:027",
+              "originalHeading": "Public progress and remote workflow integration",
+              "originalLine": 216
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:best_practices",
+          "sharedConcept": "Best practices",
+          "observedCount": 0,
+          "familyVariant": "Source-specific best practices; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:tools",
+          "sharedConcept": "Tools and capabilities",
+          "observedCount": 5,
+          "familyVariant": "Source-specific tools and capabilities; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:045",
+              "sectionId": "section:045:005",
+              "originalHeading": "Next executable sequence, conditional on available tools",
+              "originalLine": 23
+            },
+            {
+              "fileId": "file:099",
+              "sectionId": "section:099:001",
+              "originalHeading": "CANON — Toolsmith",
+              "originalLine": 1
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:context",
+          "sharedConcept": "Context and memory",
+          "observedCount": 9,
+          "familyVariant": "folder discoverability, not owner policy",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:001",
+              "originalHeading": "Project Context",
+              "originalLine": 1
+            },
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:018",
+              "originalHeading": "6.3.9 E2E artifact parity and exact source cleanup",
+              "originalLine": 132
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:safety",
+          "sharedConcept": "Safety and permissions",
+          "observedCount": 1,
+          "familyVariant": "disclosure boundaries",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:034",
+              "sectionId": "section:034:002",
+              "originalHeading": "Mission and authority that survive session changes",
+              "originalLine": 5
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:verification",
+          "sharedConcept": "Tests and acceptance",
+          "observedCount": 2,
+          "familyVariant": "link provenance",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:033",
+              "originalHeading": "Current verification gaps",
+              "originalLine": 254
+            },
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:036",
+              "originalHeading": "Latest workflow reliability changes",
+              "originalLine": 284
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:recovery",
+          "sharedConcept": "Recovery and handoff",
+          "observedCount": 5,
+          "familyVariant": "navigation alternatives",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:016",
+              "originalHeading": "6.3.11 ChatGPT request-error recovery",
+              "originalLine": 117
+            },
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:023",
+              "originalHeading": "Browser recovery",
+              "originalLine": 197
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:lifecycle",
+          "sharedConcept": "Status and lifecycle",
+          "observedCount": 2,
+          "familyVariant": "Source-specific status and lifecycle; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:020",
+              "originalHeading": "Request lifecycle",
+              "originalLine": 166
+            },
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:031",
+              "originalHeading": "Structural status",
+              "originalLine": 242
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:examples",
+          "sharedConcept": "Examples and templates",
+          "observedCount": 0,
+          "familyVariant": "Source-specific examples and templates; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:unique",
+          "sharedConcept": "File-specific specialized section",
+          "observedCount": 71,
+          "familyVariant": "Source-specific file-specific specialized section; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:002",
+              "originalHeading": "Current system",
+              "originalLine": 3
+            },
+            {
+              "fileId": "file:022",
+              "sectionId": "section:022:003",
+              "originalHeading": "Request and storage failure boundaries",
+              "originalLine": 20
+            }
+          ]
+        }
+      ],
+      "uniqueExamples": [
+        {
+          "fileId": "file:022",
+          "sectionId": "section:022:002",
+          "originalHeading": "Current system",
+          "originalLine": 3,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:022",
+          "sectionId": "section:022:003",
+          "originalHeading": "Request and storage failure boundaries",
+          "originalLine": 20,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:022",
+          "sectionId": "section:022:004",
+          "originalHeading": "2.4.3 stable browser-tab identity",
+          "originalLine": 31,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:022",
+          "sectionId": "section:022:005",
+          "originalHeading": "2.4.2 empty-home intelligence picker",
+          "originalLine": 37,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:022",
+          "sectionId": "section:022:008",
+          "originalHeading": "2.3.23 authenticated attachment transport",
+          "originalLine": 61,
+          "variant": "file-specific, unresolved shared equivalence"
+        }
+      ]
+    },
+    {
+      "family": "08",
+      "name": "Tools and capability registry",
+      "sourceFileCount": 5,
+      "sectionMeanings": [
+        {
+          "sectionType": "section_type:purpose",
+          "sharedConcept": "Purpose and scope",
+          "observedCount": 0,
+          "familyVariant": "tool catalog intent",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:prerequisites",
+          "sharedConcept": "Prerequisites and environment",
+          "observedCount": 0,
+          "familyVariant": "Source-specific prerequisites and environment; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:responsibilities",
+          "sharedConcept": "Responsibilities and boundaries",
+          "observedCount": 0,
+          "familyVariant": "Source-specific responsibilities and boundaries; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:workflow",
+          "sharedConcept": "Execution workflow",
+          "observedCount": 0,
+          "familyVariant": "Source-specific execution workflow; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:best_practices",
+          "sharedConcept": "Best practices",
+          "observedCount": 0,
+          "familyVariant": "Source-specific best practices; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:tools",
+          "sharedConcept": "Tools and capabilities",
+          "observedCount": 0,
+          "familyVariant": "registered handler references (not proof live)",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:context",
+          "sharedConcept": "Context and memory",
+          "observedCount": 0,
+          "familyVariant": "Source-specific context and memory; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:safety",
+          "sharedConcept": "Safety and permissions",
+          "observedCount": 0,
+          "familyVariant": "effect + authentication boundary",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:verification",
+          "sharedConcept": "Tests and acceptance",
+          "observedCount": 0,
+          "familyVariant": "handler receipts",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:recovery",
+          "sharedConcept": "Recovery and handoff",
+          "observedCount": 0,
+          "familyVariant": "tool unavailable",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:lifecycle",
+          "sharedConcept": "Status and lifecycle",
+          "observedCount": 0,
+          "familyVariant": "Source-specific status and lifecycle; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:examples",
+          "sharedConcept": "Examples and templates",
+          "observedCount": 0,
+          "familyVariant": "Source-specific examples and templates; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:unique",
+          "sharedConcept": "File-specific specialized section",
+          "observedCount": 0,
+          "familyVariant": "Source-specific file-specific specialized section; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        }
+      ],
+      "uniqueExamples": []
+    },
+    {
+      "family": "09",
+      "name": "Skills and practices",
+      "sourceFileCount": 67,
+      "sectionMeanings": [
+        {
+          "sectionType": "section_type:purpose",
+          "sharedConcept": "Purpose and scope",
+          "observedCount": 1,
+          "familyVariant": "skill task trigger",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:144",
+              "sectionId": "section:144:001",
+              "originalHeading": "One-Turn Mission Architecture",
+              "originalLine": 5
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:prerequisites",
+          "sharedConcept": "Prerequisites and environment",
+          "observedCount": 2,
+          "familyVariant": "Source-specific prerequisites and environment; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:107",
+              "sectionId": "section:107:001",
+              "originalHeading": "Environment Bootstrap",
+              "originalLine": 5
+            },
+            {
+              "fileId": "file:141",
+              "sectionId": "section:141:001",
+              "originalHeading": "Sandbox Environment & Bootstrap",
+              "originalLine": 5
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:responsibilities",
+          "sharedConcept": "Responsibilities and boundaries",
+          "observedCount": 1,
+          "familyVariant": "Source-specific responsibilities and boundaries; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:069",
+              "sectionId": "section:069:002",
+              "originalHeading": "Trigger and boundary",
+              "originalLine": 8
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:workflow",
+          "sharedConcept": "Execution workflow",
+          "observedCount": 13,
+          "familyVariant": "repeatable skill recipe",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:019",
+              "sectionId": "section:019:005",
+              "originalHeading": "Do not invent commands",
+              "originalLine": 56
+            },
+            {
+              "fileId": "file:030",
+              "sectionId": "section:030:003",
+              "originalHeading": "Commands",
+              "originalLine": 16
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:best_practices",
+          "sharedConcept": "Best practices",
+          "observedCount": 12,
+          "familyVariant": "Source-specific best practices; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:027",
+              "sectionId": "section:027:001",
+              "originalHeading": "Personal Best Practices — 11-integration-manager",
+              "originalLine": 1
+            },
+            {
+              "fileId": "file:035",
+              "sectionId": "section:035:001",
+              "originalHeading": "Personal Best Practices — 12-harvest-acceleration",
+              "originalLine": 1
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:tools",
+          "sharedConcept": "Tools and capabilities",
+          "observedCount": 9,
+          "familyVariant": "verified prerequisites only",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:002",
+              "sectionId": "section:002:001",
+              "originalHeading": "AION Master Skills Builder",
+              "originalLine": 6
+            },
+            {
+              "fileId": "file:002",
+              "sectionId": "section:002:003",
+              "originalHeading": "Skill factory loop",
+              "originalLine": 13
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:context",
+          "sharedConcept": "Context and memory",
+          "observedCount": 7,
+          "familyVariant": "Source-specific context and memory; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:046",
+              "sectionId": "section:046:001",
+              "originalHeading": "Development — Track B generated-source drift",
+              "originalLine": 6
+            },
+            {
+              "fileId": "file:104",
+              "sectionId": "section:104:002",
+              "originalHeading": "Sources",
+              "originalLine": 9
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:safety",
+          "sharedConcept": "Safety and permissions",
+          "observedCount": 1,
+          "familyVariant": "stop and refusal conditions",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:038",
+              "sectionId": "section:038:003",
+              "originalHeading": "Evidence and permission boundaries",
+              "originalLine": 21
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:verification",
+          "sharedConcept": "Tests and acceptance",
+          "observedCount": 11,
+          "familyVariant": "skill fixtures",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:038",
+              "sectionId": "section:038:004",
+              "originalHeading": "Validation and recovery",
+              "originalLine": 27
+            },
+            {
+              "fileId": "file:046",
+              "sectionId": "section:046:005",
+              "originalHeading": "Verify the skill itself",
+              "originalLine": 37
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:recovery",
+          "sharedConcept": "Recovery and handoff",
+          "observedCount": 7,
+          "familyVariant": "method fallback",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:030",
+              "sectionId": "section:030:004",
+              "originalHeading": "Product handoff after preflight",
+              "originalLine": 28
+            },
+            {
+              "fileId": "file:105",
+              "sectionId": "section:105:003",
+              "originalHeading": "Other transport / recovery use",
+              "originalLine": 31
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:lifecycle",
+          "sharedConcept": "Status and lifecycle",
+          "observedCount": 2,
+          "familyVariant": "Source-specific status and lifecycle; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:092",
+              "sectionId": "section:092:001",
+              "originalHeading": "Chief executive SITREP",
+              "originalLine": 6
+            },
+            {
+              "fileId": "file:111",
+              "sectionId": "section:111:004",
+              "originalHeading": "Status semantics",
+              "originalLine": 20
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:examples",
+          "sharedConcept": "Examples and templates",
+          "observedCount": 0,
+          "familyVariant": "Source-specific examples and templates; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:unique",
+          "sharedConcept": "File-specific specialized section",
+          "observedCount": 74,
+          "familyVariant": "Source-specific file-specific specialized section; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:002",
+              "sectionId": "section:002:002",
+              "originalHeading": "When to use",
+              "originalLine": 10
+            },
+            {
+              "fileId": "file:002",
+              "sectionId": "section:002:004",
+              "originalHeading": "Native helper (Node, from AION repo root)",
+              "originalLine": 22
+            }
+          ]
+        }
+      ],
+      "uniqueExamples": [
+        {
+          "fileId": "file:002",
+          "sectionId": "section:002:002",
+          "originalHeading": "When to use",
+          "originalLine": 10,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:002",
+          "sectionId": "section:002:004",
+          "originalHeading": "Native helper (Node, from AION repo root)",
+          "originalLine": 22,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:002",
+          "sectionId": "section:002:005",
+          "originalHeading": "Read only when relevant",
+          "originalLine": 33,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:002",
+          "sectionId": "section:002:006",
+          "originalHeading": "Ownership",
+          "originalLine": 37,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:007",
+          "sectionId": "section:007:001",
+          "originalHeading": "AION Bus (conditional)",
+          "originalLine": 6,
+          "variant": "file-specific, unresolved shared equivalence"
+        }
+      ]
+    },
+    {
+      "family": "10",
+      "name": "JSON configuration",
+      "sourceFileCount": 7,
+      "sectionMeanings": [
+        {
+          "sectionType": "section_type:purpose",
+          "sharedConcept": "Purpose and scope",
+          "observedCount": 0,
+          "familyVariant": "JSON schema/config intent",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:prerequisites",
+          "sharedConcept": "Prerequisites and environment",
+          "observedCount": 0,
+          "familyVariant": "Source-specific prerequisites and environment; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:responsibilities",
+          "sharedConcept": "Responsibilities and boundaries",
+          "observedCount": 0,
+          "familyVariant": "Source-specific responsibilities and boundaries; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:workflow",
+          "sharedConcept": "Execution workflow",
+          "observedCount": 0,
+          "familyVariant": "schema-constrained load",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:best_practices",
+          "sharedConcept": "Best practices",
+          "observedCount": 0,
+          "familyVariant": "Source-specific best practices; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:tools",
+          "sharedConcept": "Tools and capabilities",
+          "observedCount": 0,
+          "familyVariant": "references, not action rights",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:context",
+          "sharedConcept": "Context and memory",
+          "observedCount": 0,
+          "familyVariant": "Source-specific context and memory; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:safety",
+          "sharedConcept": "Safety and permissions",
+          "observedCount": 0,
+          "familyVariant": "config security",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:verification",
+          "sharedConcept": "Tests and acceptance",
+          "observedCount": 0,
+          "familyVariant": "JSON parser validity",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:recovery",
+          "sharedConcept": "Recovery and handoff",
+          "observedCount": 0,
+          "familyVariant": "reject invalid config",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:lifecycle",
+          "sharedConcept": "Status and lifecycle",
+          "observedCount": 0,
+          "familyVariant": "Source-specific status and lifecycle; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:examples",
+          "sharedConcept": "Examples and templates",
+          "observedCount": 0,
+          "familyVariant": "Source-specific examples and templates; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:unique",
+          "sharedConcept": "File-specific specialized section",
+          "observedCount": 0,
+          "familyVariant": "Source-specific file-specific specialized section; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        }
+      ],
+      "uniqueExamples": []
+    },
+    {
+      "family": "12",
+      "name": "Status/SITREP",
+      "sourceFileCount": 20,
+      "sectionMeanings": [
+        {
+          "sectionType": "section_type:purpose",
+          "sharedConcept": "Purpose and scope",
+          "observedCount": 1,
+          "familyVariant": "time-bound observed status",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:130",
+              "sectionId": "section:130:002",
+              "originalHeading": "Mission",
+              "originalLine": 10
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:prerequisites",
+          "sharedConcept": "Prerequisites and environment",
+          "observedCount": 0,
+          "familyVariant": "Source-specific prerequisites and environment; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:responsibilities",
+          "sharedConcept": "Responsibilities and boundaries",
+          "observedCount": 9,
+          "familyVariant": "Source-specific responsibilities and boundaries; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:056",
+              "sectionId": "section:056:007",
+              "originalHeading": "Owner standing directive — 2026-10-16: persistent execution / 30-item queue",
+              "originalLine": 57
+            },
+            {
+              "fileId": "file:064",
+              "sectionId": "section:064:004",
+              "originalHeading": "Current owner direction — 2026-10-21 (supersedes conflicting earlier Planning assumptions)",
+              "originalLine": 34
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:workflow",
+          "sharedConcept": "Execution workflow",
+          "observedCount": 3,
+          "familyVariant": "Source-specific execution workflow; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:073",
+              "sectionId": "section:073:001",
+              "originalHeading": "Implementation & Operations — Chief of Staff — SITREP",
+              "originalLine": 1
+            },
+            {
+              "fileId": "file:080",
+              "sectionId": "section:080:013",
+              "originalHeading": "2026-10-16 — Online study: making ChatGPT standing roles nearly always operational",
+              "originalLine": 127
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:best_practices",
+          "sharedConcept": "Best practices",
+          "observedCount": 0,
+          "familyVariant": "Source-specific best practices; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:tools",
+          "sharedConcept": "Tools and capabilities",
+          "observedCount": 16,
+          "familyVariant": "Source-specific tools and capabilities; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:025",
+              "sectionId": "section:025:007",
+              "originalHeading": "Skills check on SITREP",
+              "originalLine": 53
+            },
+            {
+              "fileId": "file:033",
+              "sectionId": "section:033:013",
+              "originalHeading": "Skills check on SITREP",
+              "originalLine": 96
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:context",
+          "sharedConcept": "Context and memory",
+          "observedCount": 38,
+          "familyVariant": "evidence at timestamp",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:010",
+              "sectionId": "section:010:001",
+              "originalHeading": "Knowledge & Learning — Fresh-session SITREP",
+              "originalLine": 1
+            },
+            {
+              "fileId": "file:025",
+              "sectionId": "section:025:001",
+              "originalHeading": "AION Integration Manager — source packaging SITREP",
+              "originalLine": 1
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:safety",
+          "sharedConcept": "Safety and permissions",
+          "observedCount": 0,
+          "familyVariant": "not standing instructions",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:verification",
+          "sharedConcept": "Tests and acceptance",
+          "observedCount": 12,
+          "familyVariant": "HEAD and test receipts",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:033",
+              "sectionId": "section:033:001",
+              "originalHeading": "AION External Nine — verified current worker SITREP",
+              "originalLine": 1
+            },
+            {
+              "fileId": "file:033",
+              "sectionId": "section:033:007",
+              "originalHeading": "Source-backed decisions and approach alternatives (NOT architecture acceptance)",
+              "originalLine": 52
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:recovery",
+          "sharedConcept": "Recovery and handoff",
+          "observedCount": 3,
+          "familyVariant": "blockers and next handoff",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:073",
+              "sectionId": "section:073:009",
+              "originalHeading": "Proposal Commons operational handoff — 2026-10-16",
+              "originalLine": 87
+            },
+            {
+              "fileId": "file:073",
+              "sectionId": "section:073:015",
+              "originalHeading": "P0 M1-002 — actual employee ACK and handoff chase — 2026-10-17",
+              "originalLine": 107
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:lifecycle",
+          "sharedConcept": "Status and lifecycle",
+          "observedCount": 15,
+          "familyVariant": "Source-specific status and lifecycle; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:041",
+              "sectionId": "section:041:001",
+              "originalHeading": "development — SITREP entry point",
+              "originalLine": 1
+            },
+            {
+              "fileId": "file:041",
+              "sectionId": "section:041:002",
+              "originalHeading": "Status report — 2026-10-24 21:56 UTC",
+              "originalLine": 3
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:examples",
+          "sharedConcept": "Examples and templates",
+          "observedCount": 0,
+          "familyVariant": "Source-specific examples and templates; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:unique",
+          "sharedConcept": "File-specific specialized section",
+          "observedCount": 97,
+          "familyVariant": "Source-specific file-specific specialized section; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:010",
+              "sectionId": "section:010:002",
+              "originalHeading": "Expanded `+/SITREP` bootstrap checks",
+              "originalLine": 9
+            },
+            {
+              "fileId": "file:010",
+              "sectionId": "section:010:003",
+              "originalHeading": "2026-10-22 — Internal rebaseline starting prompt (read-only)",
+              "originalLine": 20
+            }
+          ]
+        }
+      ],
+      "uniqueExamples": [
+        {
+          "fileId": "file:010",
+          "sectionId": "section:010:002",
+          "originalHeading": "Expanded `+/SITREP` bootstrap checks",
+          "originalLine": 9,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:010",
+          "sectionId": "section:010:003",
+          "originalHeading": "2026-10-22 — Internal rebaseline starting prompt (read-only)",
+          "originalLine": 20,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:025",
+          "sectionId": "section:025:002",
+          "originalHeading": "Relaunch checkpoint — 2026-10-21 (current)",
+          "originalLine": 3,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:025",
+          "sectionId": "section:025:003",
+          "originalHeading": "Actual custody and dispatch order",
+          "originalLine": 21,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:025",
+          "sectionId": "section:025:004",
+          "originalHeading": "Delivered code",
+          "originalLine": 33,
+          "variant": "file-specific, unresolved shared equivalence"
+        }
+      ]
+    },
+    {
+      "family": "19",
+      "name": "Handoff and continuity",
+      "sourceFileCount": 12,
+      "sectionMeanings": [
+        {
+          "sectionType": "section_type:purpose",
+          "sharedConcept": "Purpose and scope",
+          "observedCount": 1,
+          "familyVariant": "task continuation",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:011",
+              "sectionId": "section:011:003",
+              "originalHeading": "Proven scope and failure cases",
+              "originalLine": 13
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:prerequisites",
+          "sharedConcept": "Prerequisites and environment",
+          "observedCount": 0,
+          "familyVariant": "Source-specific prerequisites and environment; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:responsibilities",
+          "sharedConcept": "Responsibilities and boundaries",
+          "observedCount": 1,
+          "familyVariant": "Source-specific responsibilities and boundaries; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:047",
+              "sectionId": "section:047:002",
+              "originalHeading": "1. What changed (single owner: `src/store/versioned.mjs`)",
+              "originalLine": 9
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:workflow",
+          "sharedConcept": "Execution workflow",
+          "observedCount": 0,
+          "familyVariant": "Source-specific execution workflow; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:best_practices",
+          "sharedConcept": "Best practices",
+          "observedCount": 0,
+          "familyVariant": "Source-specific best practices; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:tools",
+          "sharedConcept": "Tools and capabilities",
+          "observedCount": 0,
+          "familyVariant": "Source-specific tools and capabilities; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:context",
+          "sharedConcept": "Context and memory",
+          "observedCount": 1,
+          "familyVariant": "resumable snapshot",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:012",
+              "sectionId": "section:012:003",
+              "originalHeading": "Full-path architecture map (current source versus missing seams)",
+              "originalLine": 20
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:safety",
+          "sharedConcept": "Safety and permissions",
+          "observedCount": 0,
+          "familyVariant": "no duplicate effects",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:verification",
+          "sharedConcept": "Tests and acceptance",
+          "observedCount": 7,
+          "familyVariant": "handoff digest and acknowledgement",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:006",
+              "sectionId": "section:006:006",
+              "originalHeading": "Acceptance state",
+              "originalLine": 28
+            },
+            {
+              "fileId": "file:006",
+              "sectionId": "section:006:009",
+              "originalHeading": "Tests",
+              "originalLine": 45
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:recovery",
+          "sharedConcept": "Recovery and handoff",
+          "observedCount": 6,
+          "familyVariant": "exact restart / no-resend",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:006",
+              "sectionId": "section:006:001",
+              "originalHeading": "Discovery-to-Read V1 — integration handoff (NOT an integration instruction to run concurrently)",
+              "originalLine": 1
+            },
+            {
+              "fileId": "file:006",
+              "sectionId": "section:006:007",
+              "originalHeading": "Second-pass handoff — buildable seams",
+              "originalLine": 37
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:lifecycle",
+          "sharedConcept": "Status and lifecycle",
+          "observedCount": 1,
+          "familyVariant": "Source-specific status and lifecycle; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:047",
+              "sectionId": "section:047:010",
+              "originalHeading": "9. Verdict and review status",
+              "originalLine": 85
+            }
+          ]
+        },
+        {
+          "sectionType": "section_type:examples",
+          "sharedConcept": "Examples and templates",
+          "observedCount": 0,
+          "familyVariant": "Source-specific examples and templates; not interchangeable across families",
+          "meaningEvidence": "not-observed-in-family",
+          "exampleSourceSections": []
+        },
+        {
+          "sectionType": "section_type:unique",
+          "sharedConcept": "File-specific specialized section",
+          "observedCount": 34,
+          "familyVariant": "Source-specific file-specific specialized section; not interchangeable across families",
+          "meaningEvidence": "observed-heading-only / family-level interpretation",
+          "exampleSourceSections": [
+            {
+              "fileId": "file:006",
+              "sectionId": "section:006:002",
+              "originalHeading": "What exists now",
+              "originalLine": 3
+            },
+            {
+              "fileId": "file:006",
+              "sectionId": "section:006:003",
+              "originalHeading": "Required runtime dependencies — deliberate blockers",
+              "originalLine": 10
+            }
+          ]
+        }
+      ],
+      "uniqueExamples": [
+        {
+          "fileId": "file:006",
+          "sectionId": "section:006:002",
+          "originalHeading": "What exists now",
+          "originalLine": 3,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:006",
+          "sectionId": "section:006:003",
+          "originalHeading": "Required runtime dependencies — deliberate blockers",
+          "originalLine": 10,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:006",
+          "sectionId": "section:006:004",
+          "originalHeading": "Exact offline instructions",
+          "originalLine": 19,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:006",
+          "sectionId": "section:006:005",
+          "originalHeading": "Non-overlap / sequencing",
+          "originalLine": 25,
+          "variant": "file-specific, unresolved shared equivalence"
+        },
+        {
+          "fileId": "file:006",
+          "sectionId": "section:006:008",
+          "originalHeading": "Concrete entry points",
+          "originalLine": 39,
+          "variant": "file-specific, unresolved shared equivalence"
+        }
+      ]
+    }
+  ],
+  "unclassifiedReviewQueue": [
+    {
+      "fileId": "file:161",
+      "sectionId": "section:161:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/09-global-research/skills/02-repo-discovery/SKILL.md",
+      "sourceBlobSha": "ae9fe7cbdde38a0bc33708ad04ff135c70d730ea",
+      "lineStart": 6,
+      "originalHeading": "repo discovery",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:162",
+      "sectionId": "section:162:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/09-global-research/skills/03-evidence-assessment/SKILL.md",
+      "sourceBlobSha": "80c581776307692308970581e4468cb7e1f97c3e",
+      "lineStart": 6,
+      "originalHeading": "evidence assessment",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:163",
+      "sectionId": "section:163:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/09-global-research/skills/04-docs-intelligence/SKILL.md",
+      "sourceBlobSha": "9ee8cf9dd300733ec98ab7bc838be52eb00fae01",
+      "lineStart": 6,
+      "originalHeading": "docs intelligence",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:164",
+      "sectionId": "section:164:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/09-global-research/skills/05-media-intelligence/SKILL.md",
+      "sourceBlobSha": "959b44723e25f39373672ab3280a7fe1f1b5857b",
+      "lineStart": 6,
+      "originalHeading": "media intelligence",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:165",
+      "sectionId": "section:165:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/09-global-research/skills/06-cross-project-transfer/SKILL.md",
+      "sourceBlobSha": "dbd6f3ef378041cca8385a29add9976c87e6fe35",
+      "lineStart": 6,
+      "originalHeading": "cross project transfer",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:166",
+      "sectionId": "section:166:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/09-global-research/skills/07-notebooklm/SKILL.md",
+      "sourceBlobSha": "47e814aae6318f992be3ba6369461a6c3034eece",
+      "lineStart": 6,
+      "originalHeading": "notebooklm",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:167",
+      "sectionId": "section:167:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/09-global-research/skills/08-delivery-loop/SKILL.md",
+      "sourceBlobSha": "cba1d60368f23270f428889e4433ed96581bf79f",
+      "lineStart": 6,
+      "originalHeading": "delivery loop",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:168",
+      "sectionId": "section:168:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/09-global-research/skills/09-session-sitrep/SKILL.md",
+      "sourceBlobSha": "6e6d6b05ac6c2c264b202aae55a25d8daa9b22d8",
+      "lineStart": 6,
+      "originalHeading": "session sitrep",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:169",
+      "sectionId": "section:169:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/09-global-research/skills/research-evidence-check/SKILL.md",
+      "sourceBlobSha": "b697f2883336ba2ee7f3189f63ee6172c6450a07",
+      "lineStart": 6,
+      "originalHeading": "Research evidence packet check",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:169",
+      "sectionId": "section:169:002",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/09-global-research/skills/research-evidence-check/SKILL.md",
+      "sourceBlobSha": "b697f2883336ba2ee7f3189f63ee6172c6450a07",
+      "lineStart": 12,
+      "originalHeading": "Local execution (Node 18+; no dependencies)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:169",
+      "sectionId": "section:169:003",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/09-global-research/skills/research-evidence-check/SKILL.md",
+      "sourceBlobSha": "b697f2883336ba2ee7f3189f63ee6172c6450a07",
+      "lineStart": 23,
+      "originalHeading": "Small input contract",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:169",
+      "sectionId": "section:169:004",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/09-global-research/skills/research-evidence-check/SKILL.md",
+      "sourceBlobSha": "b697f2883336ba2ee7f3189f63ee6172c6450a07",
+      "lineStart": 31,
+      "originalHeading": "Recovery and evolution",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:170",
+      "sectionId": "section:170:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/13-semantic-engine/AGENTS.md",
+      "sourceBlobSha": "5928bf18177c8de2761847544b78f7fc513a8827",
+      "lineStart": 1,
+      "originalHeading": "AION Semantics — Agent instructions",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:171",
+      "sectionId": "section:171:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/13-semantic-engine/BOOTSTRAP.md",
+      "sourceBlobSha": "ad966a574a05f9fc72082c81c79725874a7f2f46",
+      "lineStart": 1,
+      "originalHeading": "Semantics — role bootstrap",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:172",
+      "sectionId": "section:172:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/13-semantic-engine/SITREP.md",
+      "sourceBlobSha": "30cac024e690b843e6d8a87361050f397f4cef6b",
+      "lineStart": 1,
+      "originalHeading": "AION Semantics — SITREP",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:173",
+      "sectionId": "section:173:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/13-semantic-engine/memory/CANON/README.md",
+      "sourceBlobSha": "bff1fae19858c919635cc9e3d752ca90d4308658",
+      "lineStart": 1,
+      "originalHeading": "Semantics CANON — durable, source-grounded",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:174",
+      "sectionId": "section:174:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/13-semantic-engine/memory/Curated/BEST-PRACTICES.md",
+      "sourceBlobSha": "d458ba5f3294b49528325bc7d185101dfc17f656",
+      "lineStart": 1,
+      "originalHeading": "Personal best practices — actionable only",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:175",
+      "sectionId": "section:175:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/13-semantic-engine/memory/Curated/README.md",
+      "sourceBlobSha": "cd452e53f7a9a6195fcc1505a888ec30e00c5da0",
+      "lineStart": 1,
+      "originalHeading": "Semantics Curated — working style",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:176",
+      "sectionId": "section:176:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/13-semantic-engine/memory/Immediate/README.md",
+      "sourceBlobSha": "23c7b033913e44fe453a3c23943c488e64c3d2be",
+      "lineStart": 1,
+      "originalHeading": "Semantics Immediate — active work (consult every interaction)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:177",
+      "sectionId": "section:177:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/13-semantic-engine/skills/semantic-command-audit/SKILL.md",
+      "sourceBlobSha": "c109eb73d510a286b3d2fb312b02a0a19fd1d814",
+      "lineStart": 6,
+      "originalHeading": "Semantic command audit",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:177",
+      "sectionId": "section:177:002",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/13-semantic-engine/skills/semantic-command-audit/SKILL.md",
+      "sourceBlobSha": "c109eb73d510a286b3d2fb312b02a0a19fd1d814",
+      "lineStart": 8,
+      "originalHeading": "Trigger",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:177",
+      "sectionId": "section:177:003",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/13-semantic-engine/skills/semantic-command-audit/SKILL.md",
+      "sourceBlobSha": "c109eb73d510a286b3d2fb312b02a0a19fd1d814",
+      "lineStart": 12,
+      "originalHeading": "Read first",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:177",
+      "sectionId": "section:177:004",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/13-semantic-engine/skills/semantic-command-audit/SKILL.md",
+      "sourceBlobSha": "c109eb73d510a286b3d2fb312b02a0a19fd1d814",
+      "lineStart": 19,
+      "originalHeading": "Procedure",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:177",
+      "sectionId": "section:177:005",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/13-semantic-engine/skills/semantic-command-audit/SKILL.md",
+      "sourceBlobSha": "c109eb73d510a286b3d2fb312b02a0a19fd1d814",
+      "lineStart": 28,
+      "originalHeading": "Stop / recovery",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:177",
+      "sectionId": "section:177:006",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/13-semantic-engine/skills/semantic-command-audit/SKILL.md",
+      "sourceBlobSha": "c109eb73d510a286b3d2fb312b02a0a19fd1d814",
+      "lineStart": 32,
+      "originalHeading": "Validation and maintenance",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:178",
+      "sectionId": "section:178:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/AGENTS.md",
+      "sourceBlobSha": "0785e48442c7db17f8bd6e15f6c077d96c2b6ab2",
+      "lineStart": 1,
+      "originalHeading": "Webapp-Native Harness — real product work",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:179",
+      "sectionId": "section:179:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/BOOTSTRAP.md",
+      "sourceBlobSha": "28e3dfc306ae152ef951f1c95d4d00d02f1c7ad1",
+      "lineStart": 1,
+      "originalHeading": "Webapp-Native Harness — Autonomous specialist bootstrap",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:180",
+      "sectionId": "section:180:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/SITREP.md",
+      "sourceBlobSha": "b27ca9473548cfc63bf7799cb2857a1e91125504",
+      "lineStart": 1,
+      "originalHeading": "Webapp-Native Harness — Initial SITREP",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:180",
+      "sectionId": "section:180:002",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/SITREP.md",
+      "sourceBlobSha": "b27ca9473548cfc63bf7799cb2857a1e91125504",
+      "lineStart": 5,
+      "originalHeading": "State",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:180",
+      "sectionId": "section:180:003",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/SITREP.md",
+      "sourceBlobSha": "b27ca9473548cfc63bf7799cb2857a1e91125504",
+      "lineStart": 14,
+      "originalHeading": "Role gap",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:180",
+      "sectionId": "section:180:004",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/SITREP.md",
+      "sourceBlobSha": "b27ca9473548cfc63bf7799cb2857a1e91125504",
+      "lineStart": 17,
+      "originalHeading": "Initial focus",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:180",
+      "sectionId": "section:180:005",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/SITREP.md",
+      "sourceBlobSha": "b27ca9473548cfc63bf7799cb2857a1e91125504",
+      "lineStart": 20,
+      "originalHeading": "Pending proof",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:181",
+      "sectionId": "section:181:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/benchmarks/intelligence-adversarial-2026-10-25/HANDOFF.md",
+      "sourceBlobSha": "8b1a7de62fe9d430f17a940c8c8370b9c0ae3f8f",
+      "lineStart": 1,
+      "originalHeading": "AION Intelligence Bench — 2026-10-25",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:181",
+      "sectionId": "section:181:002",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/benchmarks/intelligence-adversarial-2026-10-25/HANDOFF.md",
+      "sourceBlobSha": "8b1a7de62fe9d430f17a940c8c8370b9c0ae3f8f",
+      "lineStart": 3,
+      "originalHeading": "Identity and scope",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:181",
+      "sectionId": "section:181:003",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/benchmarks/intelligence-adversarial-2026-10-25/HANDOFF.md",
+      "sourceBlobSha": "8b1a7de62fe9d430f17a940c8c8370b9c0ae3f8f",
+      "lineStart": 11,
+      "originalHeading": "Reproduce on a Node 22 checkout",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:181",
+      "sectionId": "section:181:004",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/benchmarks/intelligence-adversarial-2026-10-25/HANDOFF.md",
+      "sourceBlobSha": "8b1a7de62fe9d430f17a940c8c8370b9c0ae3f8f",
+      "lineStart": 20,
+      "originalHeading": "Source-level measurements (actual execution, not full Node suite)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:181",
+      "sectionId": "section:181:005",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/benchmarks/intelligence-adversarial-2026-10-25/HANDOFF.md",
+      "sourceBlobSha": "8b1a7de62fe9d430f17a940c8c8370b9c0ae3f8f",
+      "lineStart": 29,
+      "originalHeading": "Test execution limits",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:181",
+      "sectionId": "section:181:006",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/benchmarks/intelligence-adversarial-2026-10-25/HANDOFF.md",
+      "sourceBlobSha": "8b1a7de62fe9d430f17a940c8c8370b9c0ae3f8f",
+      "lineStart": 35,
+      "originalHeading": "Integration and rollback",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:182",
+      "sectionId": "section:182:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/core/HANDOFF.md",
+      "sourceBlobSha": "3cc6573b5e5eca70e58b69f53e5405f0f267d65f",
+      "lineStart": 1,
+      "originalHeading": "AION C1 — generic webapp harness core runtime bridge",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:182",
+      "sectionId": "section:182:002",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/core/HANDOFF.md",
+      "sourceBlobSha": "3cc6573b5e5eca70e58b69f53e5405f0f267d65f",
+      "lineStart": 5,
+      "originalHeading": "Provenance and precise source",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:182",
+      "sectionId": "section:182:003",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/core/HANDOFF.md",
+      "sourceBlobSha": "3cc6573b5e5eca70e58b69f53e5405f0f267d65f",
+      "lineStart": 15,
+      "originalHeading": "Node 22 entrypoints and schemas",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:182",
+      "sectionId": "section:182:004",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/core/HANDOFF.md",
+      "sourceBlobSha": "3cc6573b5e5eca70e58b69f53e5405f0f267d65f",
+      "lineStart": 36,
+      "originalHeading": "Tested commands, actual results",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:182",
+      "sectionId": "section:182:005",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/core/HANDOFF.md",
+      "sourceBlobSha": "3cc6573b5e5eca70e58b69f53e5405f0f267d65f",
+      "lineStart": 49,
+      "originalHeading": "Integration into existing Studio: exact destination seams",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:182",
+      "sectionId": "section:182:006",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/core/HANDOFF.md",
+      "sourceBlobSha": "3cc6573b5e5eca70e58b69f53e5405f0f267d65f",
+      "lineStart": 58,
+      "originalHeading": "Deltas over Agent 14 Round 6–9 / collision decisions",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:182",
+      "sectionId": "section:182:007",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/core/HANDOFF.md",
+      "sourceBlobSha": "3cc6573b5e5eca70e58b69f53e5405f0f267d65f",
+      "lineStart": 66,
+      "originalHeading": "Failure matrix / rollback",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:183",
+      "sectionId": "section:183:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/intelligence/HANDOFF.md",
+      "sourceBlobSha": "5ce768531cb015c7e8fce5b2d3e70e9806dec289",
+      "lineStart": 1,
+      "originalHeading": "I1 — Capture Studio self-improving webapp read adapters (2026-10-24)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:183",
+      "sectionId": "section:183:002",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/intelligence/HANDOFF.md",
+      "sourceBlobSha": "5ce768531cb015c7e8fce5b2d3e70e9806dec289",
+      "lineStart": 5,
+      "originalHeading": "Files and entrypoints",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:183",
+      "sectionId": "section:183:003",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/intelligence/HANDOFF.md",
+      "sourceBlobSha": "5ce768531cb015c7e8fce5b2d3e70e9806dec289",
+      "lineStart": 13,
+      "originalHeading": "Proven scope and failure cases",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:183",
+      "sectionId": "section:183:004",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/intelligence/HANDOFF.md",
+      "sourceBlobSha": "5ce768531cb015c7e8fce5b2d3e70e9806dec289",
+      "lineStart": 21,
+      "originalHeading": "Exact Core / Z.ai wiring (do not replace existing systems)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:183",
+      "sectionId": "section:183:005",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/intelligence/HANDOFF.md",
+      "sourceBlobSha": "5ce768531cb015c7e8fce5b2d3e70e9806dec289",
+      "lineStart": 29,
+      "originalHeading": "Compatibility / outstanding integration",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:184",
+      "sectionId": "section:184:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/systems/HANDOFF.md",
+      "sourceBlobSha": "7507594f766ac7f35add394a74a2c0ca000dcbd0",
+      "lineStart": 1,
+      "originalHeading": "AION Capture Studio — Systems S1 independent diagnostic supplier",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:184",
+      "sectionId": "section:184:002",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/systems/HANDOFF.md",
+      "sourceBlobSha": "7507594f766ac7f35add394a74a2c0ca000dcbd0",
+      "lineStart": 5,
+      "originalHeading": "Provenance and layout",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:184",
+      "sectionId": "section:184:003",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/systems/HANDOFF.md",
+      "sourceBlobSha": "7507594f766ac7f35add394a74a2c0ca000dcbd0",
+      "lineStart": 20,
+      "originalHeading": "Full-path architecture map (current source versus missing seams)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:184",
+      "sectionId": "section:184:004",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/systems/HANDOFF.md",
+      "sourceBlobSha": "7507594f766ac7f35add394a74a2c0ca000dcbd0",
+      "lineStart": 24,
+      "originalHeading": "TOP 5 source-specific fixes — priority / owner / measured independent proof",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:184",
+      "sectionId": "section:184:005",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/systems/HANDOFF.md",
+      "sourceBlobSha": "7507594f766ac7f35add394a74a2c0ca000dcbd0",
+      "lineStart": 36,
+      "originalHeading": "Exact proposed wire contracts (all advisory; caller validates server provenance)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:184",
+      "sectionId": "section:184:006",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/systems/HANDOFF.md",
+      "sourceBlobSha": "7507594f766ac7f35add394a74a2c0ca000dcbd0",
+      "lineStart": 46,
+      "originalHeading": "Z.ai ordered integration sequence (short, collision-aware)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:184",
+      "sectionId": "section:184:007",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/systems/HANDOFF.md",
+      "sourceBlobSha": "7507594f766ac7f35add394a74a2c0ca000dcbd0",
+      "lineStart": 59,
+      "originalHeading": "Repro receipt and pending real proof",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:185",
+      "sectionId": "section:185:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/ui/HANDOFF.md",
+      "sourceBlobSha": "38526dd091f2a6c268a04a6fcb232518e2592475",
+      "lineStart": 1,
+      "originalHeading": "AION / U1 universal webapp Chat UI supplier — 24 October 2026",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:185",
+      "sectionId": "section:185:002",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/ui/HANDOFF.md",
+      "sourceBlobSha": "38526dd091f2a6c268a04a6fcb232518e2592475",
+      "lineStart": 5,
+      "originalHeading": "Files and extraction",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:185",
+      "sectionId": "section:185:003",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/ui/HANDOFF.md",
+      "sourceBlobSha": "38526dd091f2a6c268a04a6fcb232518e2592475",
+      "lineStart": 21,
+      "originalHeading": "Integration in canonical existing `/chat`",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:185",
+      "sectionId": "section:185:004",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/integration-campaigns/parallel-four-lane-2026-10-24/CONSOLIDATED/lanes/ui/HANDOFF.md",
+      "sourceBlobSha": "38526dd091f2a6c268a04a6fcb232518e2592475",
+      "lineStart": 32,
+      "originalHeading": "Compatibility, collisions and proof still needed",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:186",
+      "sectionId": "section:186:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/memory/CANON/README.md",
+      "sourceBlobSha": "5194145de3cb1b788c655a974622c2fc27f9b5c7",
+      "lineStart": 1,
+      "originalHeading": "Webapp-Native Harness CANON — durable lessons",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:187",
+      "sectionId": "section:187:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/memory/Curated/BEST-PRACTICES.md",
+      "sourceBlobSha": "4b9ccc6cddb009bde20b176268c7e430b6b835c1",
+      "lineStart": 1,
+      "originalHeading": "Specialist working best practices",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:188",
+      "sectionId": "section:188:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/memory/Curated/README.md",
+      "sourceBlobSha": "7eda282fa9c15adbed05f525e01c92e7e1efb155",
+      "lineStart": 1,
+      "originalHeading": "Webapp-Native Harness Curated — independently useful methods",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:189",
+      "sectionId": "section:189:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/memory/Immediate/README.md",
+      "sourceBlobSha": "e0cb6ef4430ead0f22840712a87fea3dc52984d9",
+      "lineStart": 1,
+      "originalHeading": "Webapp-Native Harness Immediate — active continuation",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:189",
+      "sectionId": "section:189:002",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/memory/Immediate/README.md",
+      "sourceBlobSha": "e0cb6ef4430ead0f22840712a87fea3dc52984d9",
+      "lineStart": 5,
+      "originalHeading": "2026-10-24 live priority after Z.ai export audit",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:189",
+      "sectionId": "section:189:003",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/memory/Immediate/README.md",
+      "sourceBlobSha": "e0cb6ef4430ead0f22840712a87fea3dc52984d9",
+      "lineStart": 13,
+      "originalHeading": "2026-10-24 active delivery and standing implementation technique",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:189",
+      "sectionId": "section:189:004",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/memory/Immediate/README.md",
+      "sourceBlobSha": "e0cb6ef4430ead0f22840712a87fea3dc52984d9",
+      "lineStart": 19,
+      "originalHeading": "2026-10-24 new active state (Z.ai TAR 5)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:189",
+      "sectionId": "section:189:005",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/memory/Immediate/README.md",
+      "sourceBlobSha": "e0cb6ef4430ead0f22840712a87fea3dc52984d9",
+      "lineStart": 25,
+      "originalHeading": "2026-10-24 — latest Z.ai Round 8 package and owner-direction continuity",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:189",
+      "sectionId": "section:189:006",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/memory/Immediate/README.md",
+      "sourceBlobSha": "e0cb6ef4430ead0f22840712a87fea3dc52984d9",
+      "lineStart": 32,
+      "originalHeading": "Most important next action",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:189",
+      "sectionId": "section:189:007",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/memory/Immediate/README.md",
+      "sourceBlobSha": "e0cb6ef4430ead0f22840712a87fea3dc52984d9",
+      "lineStart": 35,
+      "originalHeading": "Known active unknowns",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:189",
+      "sectionId": "section:189:008",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/memory/Immediate/README.md",
+      "sourceBlobSha": "e0cb6ef4430ead0f22840712a87fea3dc52984d9",
+      "lineStart": 43,
+      "originalHeading": "The documents to open next",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:190",
+      "sectionId": "section:190:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/skills/webapp-shape-evidence/SKILL.md",
+      "sourceBlobSha": "70b8b5f0ef9b3f2a7fc9b704590a2fa7abae9ea2",
+      "lineStart": 6,
+      "originalHeading": "Webapp-native shape evidence skill (role 14)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:190",
+      "sectionId": "section:190:002",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/skills/webapp-shape-evidence/SKILL.md",
+      "sourceBlobSha": "70b8b5f0ef9b3f2a7fc9b704590a2fa7abae9ea2",
+      "lineStart": 10,
+      "originalHeading": "When to use",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:190",
+      "sectionId": "section:190:003",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/skills/webapp-shape-evidence/SKILL.md",
+      "sourceBlobSha": "70b8b5f0ef9b3f2a7fc9b704590a2fa7abae9ea2",
+      "lineStart": 13,
+      "originalHeading": "Procedure",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:190",
+      "sectionId": "section:190:004",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/skills/webapp-shape-evidence/SKILL.md",
+      "sourceBlobSha": "70b8b5f0ef9b3f2a7fc9b704590a2fa7abae9ea2",
+      "lineStart": 23,
+      "originalHeading": "Deliverable template",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:190",
+      "sectionId": "section:190:005",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/14-webapp-native-harness/skills/webapp-shape-evidence/SKILL.md",
+      "sourceBlobSha": "70b8b5f0ef9b3f2a7fc9b704590a2fa7abae9ea2",
+      "lineStart": 26,
+      "originalHeading": "Red lines",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:191",
+      "sectionId": "section:191:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/BOOTSTRAP.md",
+      "sourceBlobSha": "d2c33d619a0c4ebe38b46a6282b375a033a45b91",
+      "lineStart": 1,
+      "originalHeading": "Autonomous bootstrap contract — Product-to-Market",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:191",
+      "sectionId": "section:191:002",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/BOOTSTRAP.md",
+      "sourceBlobSha": "d2c33d619a0c4ebe38b46a6282b375a033a45b91",
+      "lineStart": 3,
+      "originalHeading": "Bootstrap state: INITIALIZED, NOT RUNNING CONTINUOUSLY",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:191",
+      "sectionId": "section:191:003",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/BOOTSTRAP.md",
+      "sourceBlobSha": "d2c33d619a0c4ebe38b46a6282b375a033a45b91",
+      "lineStart": 6,
+      "originalHeading": "Pass 1 — Verified portfolio discovery",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:191",
+      "sectionId": "section:191:004",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/BOOTSTRAP.md",
+      "sourceBlobSha": "d2c33d619a0c4ebe38b46a6282b375a033a45b91",
+      "lineStart": 12,
+      "originalHeading": "Pass 2 — Product packaging",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:191",
+      "sectionId": "section:191:005",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/BOOTSTRAP.md",
+      "sourceBlobSha": "d2c33d619a0c4ebe38b46a6282b375a033a45b91",
+      "lineStart": 18,
+      "originalHeading": "Pass 3 — Shipping execution",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:191",
+      "sectionId": "section:191:006",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/BOOTSTRAP.md",
+      "sourceBlobSha": "d2c33d619a0c4ebe38b46a6282b375a033a45b91",
+      "lineStart": 23,
+      "originalHeading": "Verification / anti-fiction",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:192",
+      "sectionId": "section:192:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/AGENT.md",
+      "sourceBlobSha": "acfb4f4b5ddc86cae0f47126c5e0a3b7bf89fe78",
+      "lineStart": 1,
+      "originalHeading": "Architecture Steward — Agent Mandate",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:192",
+      "sectionId": "section:192:002",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/AGENT.md",
+      "sourceBlobSha": "acfb4f4b5ddc86cae0f47126c5e0a3b7bf89fe78",
+      "lineStart": 3,
+      "originalHeading": "Identity",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:192",
+      "sectionId": "section:192:003",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/AGENT.md",
+      "sourceBlobSha": "acfb4f4b5ddc86cae0f47126c5e0a3b7bf89fe78",
+      "lineStart": 9,
+      "originalHeading": "Core question",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:192",
+      "sectionId": "section:192:004",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/AGENT.md",
+      "sourceBlobSha": "acfb4f4b5ddc86cae0f47126c5e0a3b7bf89fe78",
+      "lineStart": 25,
+      "originalHeading": "Behavioral rule",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:192",
+      "sectionId": "section:192:005",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/AGENT.md",
+      "sourceBlobSha": "acfb4f4b5ddc86cae0f47126c5e0a3b7bf89fe78",
+      "lineStart": 44,
+      "originalHeading": "Authority rule",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:192",
+      "sectionId": "section:192:006",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/AGENT.md",
+      "sourceBlobSha": "acfb4f4b5ddc86cae0f47126c5e0a3b7bf89fe78",
+      "lineStart": 59,
+      "originalHeading": "Stewardship loop",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:192",
+      "sectionId": "section:192:007",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/AGENT.md",
+      "sourceBlobSha": "acfb4f4b5ddc86cae0f47126c5e0a3b7bf89fe78",
+      "lineStart": 65,
+      "originalHeading": "Deliverable standard",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:192",
+      "sectionId": "section:192:008",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/AGENT.md",
+      "sourceBlobSha": "acfb4f4b5ddc86cae0f47126c5e0a3b7bf89fe78",
+      "lineStart": 70,
+      "originalHeading": "Subagent delegation",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:192",
+      "sectionId": "section:192:009",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/AGENT.md",
+      "sourceBlobSha": "acfb4f4b5ddc86cae0f47126c5e0a3b7bf89fe78",
+      "lineStart": 85,
+      "originalHeading": "Required prompt contract",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:192",
+      "sectionId": "section:192:010",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/AGENT.md",
+      "sourceBlobSha": "acfb4f4b5ddc86cae0f47126c5e0a3b7bf89fe78",
+      "lineStart": 104,
+      "originalHeading": "CFA planning ownership",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:192",
+      "sectionId": "section:192:011",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/AGENT.md",
+      "sourceBlobSha": "acfb4f4b5ddc86cae0f47126c5e0a3b7bf89fe78",
+      "lineStart": 112,
+      "originalHeading": "Delegation rule",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:193",
+      "sectionId": "section:193:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/aion/workspace/aion/sessions/roles/13-semantic-engine/BOOTSTRAP.md",
+      "sourceBlobSha": "ad966a574a05f9fc72082c81c79725874a7f2f46",
+      "lineStart": 1,
+      "originalHeading": "Semantics — role bootstrap",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:194",
+      "sectionId": "section:194:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/agentic/aion/workspace/aion/sessions/roles/13-semantic-engine/SITREP.md",
+      "sourceBlobSha": "30cac024e690b843e6d8a87361050f397f4cef6b",
+      "lineStart": 1,
+      "originalHeading": "AION Semantics — SITREP",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:001",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 1,
+      "originalHeading": "Semantic Continuity Steward",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:002",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 2,
+      "originalHeading": "Dedicated Architecture Steward Subagent — Role Definition",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:003",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 12,
+      "originalHeading": "Ratification",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:004",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 18,
+      "originalHeading": "1. Essence",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:005",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 62,
+      "originalHeading": "2. Why this is a distinct Steward role",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:006",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 96,
+      "originalHeading": "3. Primary mission",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:007",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 109,
+      "originalHeading": "4. Core objectives",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:008",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 111,
+      "originalHeading": "O1 — Establish semantic continuity",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:009",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 128,
+      "originalHeading": "O2 — Establish the canonical vocabulary",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:010",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 146,
+      "originalHeading": "O3 — Prevent semantic alias explosion",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:011",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 156,
+      "originalHeading": "O4 — Keep grammar pinned",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:012",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 164,
+      "originalHeading": "O5 — Make compilation layers explicit",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:013",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 179,
+      "originalHeading": "O6 — Make grounding first-class",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:014",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 187,
+      "originalHeading": "O7 — Preserve bidirectional semantics",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:015",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 201,
+      "originalHeading": "O8 — Model execution as a separate dimension",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:016",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 217,
+      "originalHeading": "O9 — Make VIVIM increasingly self-descriptive",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:017",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 237,
+      "originalHeading": "5. Primary responsibilities",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:018",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 239,
+      "originalHeading": "R1 — Self-Knowledge architecture",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:019",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 242,
+      "originalHeading": "R2 — Command semantic architecture",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:020",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 255,
+      "originalHeading": "R3 — Compiler architecture",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:021",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 258,
+      "originalHeading": "R4 — Grounding architecture",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:022",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 268,
+      "originalHeading": "R5 — Representation architecture",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:023",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 271,
+      "originalHeading": "R6 — Round-trip and edit semantics",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:024",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 283,
+      "originalHeading": "R7 — Execution-state semantics",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:025",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 286,
+      "originalHeading": "R8 — CANON taxonomy and dictionary",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:026",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 291,
+      "originalHeading": "R9 — Cross-plane identity and provenance",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:027",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 294,
+      "originalHeading": "R10 — Falsification",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:028",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 297,
+      "originalHeading": "6. Non-responsibilities",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:029",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 318,
+      "originalHeading": "7. Relationship to the main Architecture Steward",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:030",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 341,
+      "originalHeading": "8. Operating principles",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:031",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 343,
+      "originalHeading": "P1 — One meaning, many representations",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:032",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 346,
+      "originalHeading": "P2 — Representation is not authority",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:033",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 349,
+      "originalHeading": "P3 — Unknown is a valid state",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:034",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 352,
+      "originalHeading": "P4 — Names carry architecture",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:035",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 355,
+      "originalHeading": "P5 — Fully descriptive before abbreviated",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:036",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 369,
+      "originalHeading": "P6 — Historical vocabulary is evidence",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:037",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 372,
+      "originalHeading": "P7 — Deterministic core, probabilistic edge",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:038",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 375,
+      "originalHeading": "P8 — Execution is reality",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:039",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 378,
+      "originalHeading": "P9 — CANON evolves by evidence",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:040",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 381,
+      "originalHeading": "P10 — Overhead is a failure mode",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:041",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 384,
+      "originalHeading": "9. CANON — initial conceptual charter",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:042",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 420,
+      "originalHeading": "10. CANON taxonomy questions",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:043",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 439,
+      "originalHeading": "11. Standard operating loop",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:044",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 480,
+      "originalHeading": "12. Evidence discipline",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:045",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 501,
+      "originalHeading": "13. Durable output shape",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:046",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 516,
+      "originalHeading": "14. First-stage objective",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:195",
+      "sectionId": "section:195:047",
+      "sourceRepository": "owenservera/aion",
+      "sourcePath": "workspace/aion/sessions/roles/15-product-to-market/core-library/source-archive/command/BCP-dev/AGENTS_CONTEXT/ARCHITECTURE_STEWARD/SUBAGENTS/SELF-KNOWLEDGE-COMMAND-COMPILER/AGENT.md",
+      "sourceBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lineStart": 526,
+      "originalHeading": "15. Definition of success",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:208",
+      "sectionId": "section:208:002",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": ".opencode/agents/chatgpt-aion.md",
+      "sourceBlobSha": "b5662321f5c79069e35eef627423f0e1a2cd6c9d",
+      "lineStart": 9,
+      "originalHeading": "Scope and ownership",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:208",
+      "sectionId": "section:208:003",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": ".opencode/agents/chatgpt-aion.md",
+      "sourceBlobSha": "b5662321f5c79069e35eef627423f0e1a2cd6c9d",
+      "lineStart": 15,
+      "originalHeading": "Prompt and agent protocol",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:208",
+      "sectionId": "section:208:004",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": ".opencode/agents/chatgpt-aion.md",
+      "sourceBlobSha": "b5662321f5c79069e35eef627423f0e1a2cd6c9d",
+      "lineStart": 23,
+      "originalHeading": "Engineering process",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:208",
+      "sectionId": "section:208:005",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": ".opencode/agents/chatgpt-aion.md",
+      "sourceBlobSha": "b5662321f5c79069e35eef627423f0e1a2cd6c9d",
+      "lineStart": 32,
+      "originalHeading": "Current product map",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:208",
+      "sectionId": "section:208:006",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": ".opencode/agents/chatgpt-aion.md",
+      "sourceBlobSha": "b5662321f5c79069e35eef627423f0e1a2cd6c9d",
+      "lineStart": 35,
+      "originalHeading": "Immediate product proof",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:209",
+      "sectionId": "section:209:003",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": ".opencode/agents/local-opencode.md",
+      "sourceBlobSha": "73f5461032775d795340558590c87ed6d04ab143",
+      "lineStart": 15,
+      "originalHeading": "Git and repository operating contract",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:209",
+      "sectionId": "section:209:004",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": ".opencode/agents/local-opencode.md",
+      "sourceBlobSha": "73f5461032775d795340558590c87ed6d04ab143",
+      "lineStart": 22,
+      "originalHeading": "Capture Studio runtime and safety",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:209",
+      "sectionId": "section:209:005",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": ".opencode/agents/local-opencode.md",
+      "sourceBlobSha": "73f5461032775d795340558590c87ed6d04ab143",
+      "lineStart": 30,
+      "originalHeading": "Execution sequence for migration cutover",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:209",
+      "sectionId": "section:209:006",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": ".opencode/agents/local-opencode.md",
+      "sourceBlobSha": "73f5461032775d795340558590c87ed6d04ab143",
+      "lineStart": 39,
+      "originalHeading": "Response style and operating habits",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:213",
+      "sectionId": "section:213:001",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": "docs/shape-atlas/claude.md",
+      "sourceBlobSha": "5f5c2428c0cd3a08e71c4ea0e1902ffcbaad5c3e",
+      "lineStart": 1,
+      "originalHeading": "Provider-native shape contract — Claude WEB (`claude-web-shapes/1`)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:213",
+      "sectionId": "section:213:002",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": "docs/shape-atlas/claude.md",
+      "sourceBlobSha": "5f5c2428c0cd3a08e71c4ea0e1902ffcbaad5c3e",
+      "lineStart": 7,
+      "originalHeading": "1. Identity grammar",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:213",
+      "sectionId": "section:213:003",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": "docs/shape-atlas/claude.md",
+      "sourceBlobSha": "5f5c2428c0cd3a08e71c4ea0e1902ffcbaad5c3e",
+      "lineStart": 18,
+      "originalHeading": "2. Transports and stream shapes",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:213",
+      "sectionId": "section:213:004",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": "docs/shape-atlas/claude.md",
+      "sourceBlobSha": "5f5c2428c0cd3a08e71c4ea0e1902ffcbaad5c3e",
+      "lineStart": 30,
+      "originalHeading": "3. Content parts observed vs documented",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:213",
+      "sectionId": "section:213:005",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": "docs/shape-atlas/claude.md",
+      "sourceBlobSha": "5f5c2428c0cd3a08e71c4ea0e1902ffcbaad5c3e",
+      "lineStart": 41,
+      "originalHeading": "4. Action surfaces (capability capsule semantics)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:213",
+      "sectionId": "section:213:006",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": "docs/shape-atlas/claude.md",
+      "sourceBlobSha": "5f5c2428c0cd3a08e71c4ea0e1902ffcbaad5c3e",
+      "lineStart": 50,
+      "originalHeading": "5. Executable contract tests",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:213",
+      "sectionId": "section:213:007",
+      "sourceRepository": "owenservera/vivim-harness",
+      "sourcePath": "docs/shape-atlas/claude.md",
+      "sourceBlobSha": "5f5c2428c0cd3a08e71c4ea0e1902ffcbaad5c3e",
+      "lineStart": 54,
+      "originalHeading": "6. Gaps (the honest headline)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:215",
+      "sectionId": "section:215:001",
+      "sourceRepository": "owenservera/vivim-omega",
+      "sourcePath": "AGENTS.md",
+      "sourceBlobSha": "ae924693fa5d65a507c91ed38be805429396feb7",
+      "lineStart": 1,
+      "originalHeading": "AGENTS.md — working agreements for vivim-omega (owner-maintained)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:215",
+      "sectionId": "section:215:002",
+      "sourceRepository": "owenservera/vivim-omega",
+      "sourcePath": "AGENTS.md",
+      "sourceBlobSha": "ae924693fa5d65a507c91ed38be805429396feb7",
+      "lineStart": 7,
+      "originalHeading": "Commands",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:215",
+      "sectionId": "section:215:003",
+      "sourceRepository": "owenservera/vivim-omega",
+      "sourcePath": "AGENTS.md",
+      "sourceBlobSha": "ae924693fa5d65a507c91ed38be805429396feb7",
+      "lineStart": 25,
+      "originalHeading": "Laws that bite (B1–B5 + process)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:215",
+      "sectionId": "section:215:004",
+      "sourceRepository": "owenservera/vivim-omega",
+      "sourcePath": "AGENTS.md",
+      "sourceBlobSha": "ae924693fa5d65a507c91ed38be805429396feb7",
+      "lineStart": 50,
+      "originalHeading": "Decision records: checker traps (all bitten live — respect them)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:215",
+      "sectionId": "section:215:005",
+      "sourceRepository": "owenservera/vivim-omega",
+      "sourcePath": "AGENTS.md",
+      "sourceBlobSha": "ae924693fa5d65a507c91ed38be805429396feb7",
+      "lineStart": 69,
+      "originalHeading": "Code surfaces with gate teeth",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:215",
+      "sectionId": "section:215:006",
+      "sourceRepository": "owenservera/vivim-omega",
+      "sourcePath": "AGENTS.md",
+      "sourceBlobSha": "ae924693fa5d65a507c91ed38be805429396feb7",
+      "lineStart": 89,
+      "originalHeading": "Commits, tags, push (conventions that prevent real incidents)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:215",
+      "sectionId": "section:215:007",
+      "sourceRepository": "owenservera/vivim-omega",
+      "sourcePath": "AGENTS.md",
+      "sourceBlobSha": "ae924693fa5d65a507c91ed38be805429396feb7",
+      "lineStart": 104,
+      "originalHeading": "Windows facts (proven, not folklore)",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:215",
+      "sectionId": "section:215:008",
+      "sourceRepository": "owenservera/vivim-omega",
+      "sourcePath": "AGENTS.md",
+      "sourceBlobSha": "ae924693fa5d65a507c91ed38be805429396feb7",
+      "lineStart": 117,
+      "originalHeading": "Do not",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    },
+    {
+      "fileId": "file:217",
+      "sectionId": "section:217:001",
+      "sourceRepository": "owenservera/zcode-pocket",
+      "sourcePath": "product-design/AGENTS.md",
+      "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+      "lineStart": 1,
+      "originalHeading": "Agent Instructions — Product Design Folder",
+      "originalClassification": null,
+      "proposedSectionType": null,
+      "confidence": null,
+      "evidenceClass": "observed-heading-only",
+      "status": "AWAITING_FULL_SOURCE_SPAN_REVIEW"
+    }
+  ],
+  "evidenceClasses": {
+    "observedHeadingOnly": "title and line at original blob; no semantic proof",
+    "sourceSpanReviewed": "verified exact section content and nearest scope",
+    "ownerPolicy": "external current owner authority only",
+    "vendorFormat": "published syntax docs do not prove local loader version"
+  },
+  "privacy": "12 private-origin source bodies remain in private Repos HQ; public Labs contains no body or secret export."
+}

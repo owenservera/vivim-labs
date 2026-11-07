@@ -1,0 +1,124 @@
+TAP version 13
+# Subtest: HQKGX1 transport: valid manifest and counts
+ok 1 - HQKGX1 transport: valid manifest and counts
+  ---
+  duration_ms: 9.799936
+  type: 'test'
+  ...
+# Subtest: HQKGX1 refuses body tamper and missing final newline
+ok 2 - HQKGX1 refuses body tamper and missing final newline
+  ---
+  duration_ms: 1.037525
+  type: 'test'
+  ...
+# Subtest: HQKGX1 refuses unsupported authority
+ok 3 - HQKGX1 refuses unsupported authority
+  ---
+  duration_ms: 0.180032
+  type: 'test'
+  ...
+# Subtest: HQKGX1 refuses duplicate node and edge identities
+ok 4 - HQKGX1 refuses duplicate node and edge identities
+  ---
+  duration_ms: 1.097736
+  type: 'test'
+  ...
+# Subtest: HQKGX1 refuses missing endpoints
+ok 5 - HQKGX1 refuses missing endpoints
+  ---
+  duration_ms: 0.358902
+  type: 'test'
+  ...
+# Subtest: HQKGX1 refuses unsafe metadata and noncanonical identity
+ok 6 - HQKGX1 refuses unsafe metadata and noncanonical identity
+  ---
+  duration_ms: 0.275215
+  type: 'test'
+  ...
+# Subtest: quality oracle grades a fully linked SYNTHETIC page but does not self-certify runtime
+ok 7 - quality oracle grades a fully linked SYNTHETIC page but does not self-certify runtime
+  ---
+  duration_ms: 2.036603
+  type: 'test'
+  ...
+# Subtest: a claimed runtime receipt can only produce READY_FOR_INDEPENDENT_VERIFICATION
+ok 8 - a claimed runtime receipt can only produce READY_FOR_INDEPENDENT_VERIFICATION
+  ---
+  duration_ms: 0.424811
+  type: 'test'
+  ...
+# Subtest: false semantic description remains a missing meaning defect
+ok 9 - false semantic description remains a missing meaning defect
+  ---
+  duration_ms: 0.796702
+  type: 'test'
+  ...
+# Subtest: declared command is not a wired command
+ok 10 - declared command is not a wired command
+  ---
+  duration_ms: 1.039097
+  type: 'test'
+  ...
+# Subtest: source without commit provenance cannot pass
+ok 11 - source without commit provenance cannot pass
+  ---
+  duration_ms: 0.33188
+  type: 'test'
+  ...
+# Subtest: no false chain from bare code and command presence
+ok 12 - no false chain from bare code and command presence
+  ---
+  duration_ms: 0.217007
+  type: 'test'
+  ...
+# Subtest: unverified edge and index-only wiki do not pass
+ok 13 - unverified edge and index-only wiki do not pass
+  ---
+  duration_ms: 0.415327
+  type: 'test'
+  ...
+# Subtest: broken Markdown links are reported without fetching external URLs
+ok 14 - broken Markdown links are reported without fetching external URLs
+  ---
+  duration_ms: 0.336157
+  type: 'test'
+  ...
+# Subtest: input and page ordering do not change content-derived quality verdict
+ok 15 - input and page ordering do not change content-derived quality verdict
+  ---
+  duration_ms: 0.906007
+  type: 'test'
+  ...
+# Subtest: wiki reader refuses symlinks and ignores secret paths
+ok 16 - wiki reader refuses symlinks and ignores secret paths
+  ---
+  duration_ms: 3.340831
+  type: 'test'
+  ...
+# Subtest: CLI creates a unique JSON report, returns blocked exit code, refuses overwrite
+ok 17 - CLI creates a unique JSON report, returns blocked exit code, refuses overwrite
+  ---
+  duration_ms: 2.254982
+  type: 'test'
+  ...
+# Subtest: quality has auditable five-dimensional denominators
+ok 18 - quality has auditable five-dimensional denominators
+  ---
+  duration_ms: 0.214995
+  type: 'test'
+  ...
+# Subtest: unknown knowledge status and orphaned record are explicit integration defects
+ok 19 - unknown knowledge status and orphaned record are explicit integration defects
+  ---
+  duration_ms: 0.216266
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 100.05773

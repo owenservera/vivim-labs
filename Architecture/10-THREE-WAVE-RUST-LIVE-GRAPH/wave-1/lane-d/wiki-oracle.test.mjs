@@ -105,3 +105,15 @@ test('CLI creates a unique JSON report, returns blocked exit code, refuses overw
    assert.throws(()=>main(['--exchange',input,'--wiki-dir',wiki,'--report',out]),/report_exists_refuse_overwrite/);
  } finally {rmSync(dir,{recursive:true,force:true});}
 });
+
+test('quality has auditable five-dimensional denominators',()=>{
+ const v=quality();assert.equal(v.quality.dimensions.length,5);
+ assert.equal(v.quality.score,80);assert.equal(v.quality.dimensions[4].name,'linked_knowledge_records');
+ assert.equal(v.quality.dimensions[4].numerator,0);
+});
+test('unknown knowledge status and orphaned record are explicit integration defects',()=>{
+ const b=baseline();b[1].metadata.status='mystery';
+ const v=quality(b);
+ assert(v.defects.some(x=>x.code==='unknown_knowledge_status'));
+ assert(v.defects.some(x=>x.code==='orphan_knowledge_record'));
+});

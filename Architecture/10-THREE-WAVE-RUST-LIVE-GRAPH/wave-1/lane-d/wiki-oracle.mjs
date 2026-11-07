@@ -181,10 +181,25 @@ export function assessWiki({ exchange, pages, rustRuntimeEvidence = null } = {})
   const brokenLinks = wikiLinkGaps(pages);
   for(const link of brokenLinks) defect('broken_wiki_link',link.page,link.href);
   const totals = { graphNodes: exchange.nodes.length, graphEdges: exchange.edges.length, wikiPages: pages.size, potentialChains: chains.length, verifiedWikiChains: chains.filter(c=>c.verified).length, defects: defects.length, domains:classes };
+  // This is a *sample quality* score, not a claim that all source roots were scanned.
+  // Every dimension exports its numerator and denominator; absent domains score zero.
+  const d = (name, numerator, denominator) => ({name,numerator,denominator,percent:denominator ? Math.round(numerator*100/denominator) : 0});
+  const codeNodes = exchange.nodes.filter(n=>classify(n)==='code');
+  const meaningNodes = exchange.nodes.filter(n=>['semantic','knowledge'].includes(classify(n)));
+  const commands = exchange.nodes.filter(n=>classify(n)==='command');
+  const kbNodes = exchange.nodes.filter(n=>classify(n)==='knowledge');
+  const dimensions = [
+    d('code_source_provenance',codeNodes.filter(sourceSafe).length,codeNodes.length),
+    d('semantic_meaning',meaningNodes.filter(n=>Boolean(datum(n,'description'))).length,meaningNodes.length),
+    d('wired_registered_commands',commands.filter(n=>datum(n,'status')==='wired'&&datum(n,'handler')&&datum(n,'syntax')).length,commands.length),
+    d('graph_to_wiki_trace',totals.verifiedWikiChains,chains.length),
+    d('linked_knowledge_records',kbNodes.filter(n=>linkedIds.has(n.id)).length,kbNodes.length),
+  ];
+  const quality = {score:Math.round(dimensions.reduce((a,x)=>a+x.percent,0)/dimensions.length),dimensions,scope:'observed graph sample only; NOT source-root coverage'};
   const hasRuntime = rustRuntimeEvidence?.observed === true && rustRuntimeEvidence?.exchangeDigest === exchange.manifest.graph_sha256 && typeof rustRuntimeEvidence?.journalSha === 'string' && SHA.test(rustRuntimeEvidence.journalSha);
   // Runtime receipts supplied to this tool are *claims*. Independent F/integration rerun still required.
   const verdict = totals.verifiedWikiChains > 0 && hasRuntime ? 'READY_FOR_INDEPENDENT_VERIFICATION' : 'BLOCKED';
-  return { schema:REPORT_SCHEMA, verdict, source:exchange.manifest.source, exchangeDigest:exchange.manifest.graph_sha256, rustEvidenceSupplied:hasRuntime, rustEvidenceIndependentlyVerified:false, totals, chains:chains.sort((a,b)=>cmp(a.code,b.code)||cmp(a.semantic,b.semantic)), defects:defects.sort((a,b)=>cmp(a.code,b.code)||cmp(a.id,b.id)) };
+  return { schema:REPORT_SCHEMA, verdict, source:exchange.manifest.source, exchangeDigest:exchange.manifest.graph_sha256, rustEvidenceSupplied:hasRuntime, rustEvidenceIndependentlyVerified:false, totals, quality, chains:chains.sort((a,b)=>cmp(a.code,b.code)||cmp(a.semantic,b.semantic)), defects:defects.sort((a,b)=>cmp(a.code,b.code)||cmp(a.id,b.id)) };
 }
 
 function parseArgs(argv) {

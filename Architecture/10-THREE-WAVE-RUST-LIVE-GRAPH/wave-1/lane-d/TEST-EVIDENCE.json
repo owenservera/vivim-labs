@@ -5,7 +5,7 @@
   "environment": {"node": "v22.16.0", "bun": "not installed", "nativeReposHqCheckout": false},
   "testCommand": "node --test wiki-oracle.test.mjs",
   "exitCode": 0,
-  "tests": {"total": 17, "passed": 17, "failed": 0, "data": "SYNTHETIC"},
+  "tests": {"total": 19, "passed": 19, "failed": 0, "data": "SYNTHETIC"},
   "syntaxCheck": {"command": "node --check wiki-oracle.mjs", "exitCode": 0},
   "nativeWikiGenerated": false,
   "rustJournalExecuted": false,

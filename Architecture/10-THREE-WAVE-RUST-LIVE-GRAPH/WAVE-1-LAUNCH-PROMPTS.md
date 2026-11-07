@@ -59,10 +59,10 @@ Own the action/CLI/intent read inventory. Inspect HQ command dispatcher, Rust CL
 DELIVER: implementation source + executable tests + real data proof + precise HANDOFF for integration, source SHAs and exact published commit on main. Do not claim completion without executed evidence. No PRs, branches, Actions or force push. Do not reset HQ DB, browser profiles or replace source-native write owners. Coordinate only the narrow shared record interface with Lane E. If real local execution is unavailable, publish a truthful BLOCKED handoff and executable recipe, not fake running proof. Wave 2 is forbidden until this Wave 1 code is actually executed and its blind-spot report reviewed.
 ```
 
-## Lane D — Generated Wiki and Programmable Views
+## Lane D — Wiki Quality Oracle for A+B+C
 
 ```text
-EXECUTE VIVIM RUST LIVE GRAPH — WAVE 1 / LANE D: GENERATED WIKI AND PROGRAMMABLE VIEWS.
+EXECUTE VIVIM RUST LIVE GRAPH — WAVE 1 / LANE D: WIKI QUALITY ORACLE FOR A+B+C.
 
 READ FIRST:
 https://github.com/owenservera/vivim-labs/blob/main/Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/EXECUTE-WAVE-1-FIRST.md
@@ -72,7 +72,7 @@ https://github.com/owenservera/repos-hq/tree/main/research/rust-knowledge-graph
 https://github.com/owenservera/repos-hq/tree/main/research/graph-kernel-integration
 
 ASSIGNMENT:
-Own the read-only wiki export adapter. Reuse existing deterministic HQ wiki generation, pages and source links; map wiki-program config/preview/version/rollback descriptors and comment-wiki bindings to graph semantics. No new wiki renderer or configuration writer, no activate/grant/provider effects. Produce genuine generated wiki page identity with linked source/semantic/command evidence, determinism test and HANDOFF.
+Own the generated wiki as an **integration output and acceptance oracle**, NOT as a fourth independent source feed. Reuse the existing deterministic HQ wiki builder. Create tests that demonstrate whether Lane A code discovery and dependency edges, Lane B knowledge/semantic meanings, and Lane C real commands/CLI and NL routes are joined correctly in Lane E's Rust graph. Generate source-linked pages from the combined A+B+C+E view; measure missing descriptions, missing source links, unwired actions, broken crosslinks and wrong/unknown status as **A/B/C integration quality defects**. Preserve existing wiki-program owner, validate determinism and source→semantic→command→wiki trace. Build harness in parallel; grade final output only after A+B+C+E runs. No separate wiki input authority, new renderer, configuration activation, grants or effects. Deliver executable tests, scored diagnostics and HANDOFF.
 
 DELIVER: implementation source + executable tests + real data proof + precise HANDOFF for integration, source SHAs and exact published commit on main. Do not claim completion without executed evidence. No PRs, branches, Actions or force push. Do not reset HQ DB, browser profiles or replace source-native write owners. Coordinate only the narrow shared record interface with Lane E. If real local execution is unavailable, publish a truthful BLOCKED handoff and executable recipe, not fake running proof. Wave 2 is forbidden until this Wave 1 code is actually executed and its blind-spot report reviewed.
 ```
@@ -90,7 +90,7 @@ https://github.com/owenservera/repos-hq/tree/main/research/rust-knowledge-graph
 https://github.com/owenservera/repos-hq/tree/main/research/graph-kernel-integration
 
 ASSIGNMENT:
-Own the live HQKGX1 projection and Rust runner/CLI, sole graph journal owner for this wave. Read A–D source records, validate identities and scalar metadata, preserve source ownership, use existing Rust import.rs and hqkg-import (not a competing graph DB). Implement thin read-only queries where/what/talks-to/gap with provenance and confidence. Run real Cargo/Bun/Node tests, unchanged no-op, invalid/collision/refusal/restart. Output a real DEV .hqj and reproducible command transcript, tests and HANDOFF; static research exports alone do not pass.
+Own the live HQKGX1 projection and Rust runner/CLI, sole graph journal owner for this wave. Read A+B+C source records, validate identities and scalar metadata, preserve source ownership, use existing Rust import.rs and hqkg-import (not a competing graph DB). Implement thin read-only queries where/what/talks-to/gap with provenance and confidence. Run real Cargo/Bun/Node tests, unchanged no-op, invalid/collision/refusal/restart. Output a real DEV .hqj and reproducible command transcript, tests and HANDOFF; static research exports alone do not pass.
 
 DELIVER: implementation source + executable tests + real data proof + precise HANDOFF for integration, source SHAs and exact published commit on main. Do not claim completion without executed evidence. No PRs, branches, Actions or force push. Do not reset HQ DB, browser profiles or replace source-native write owners. Coordinate only the narrow shared record interface with Lane E. If real local execution is unavailable, publish a truthful BLOCKED handoff and executable recipe, not fake running proof. Wave 2 is forbidden until this Wave 1 code is actually executed and its blind-spot report reviewed.
 ```
@@ -108,7 +108,7 @@ https://github.com/owenservera/repos-hq/tree/main/research/rust-knowledge-graph
 https://github.com/owenservera/repos-hq/tree/main/research/graph-kernel-integration
 
 ASSIGNMENT:
-Own independent acceptance runner, coverage and gap evidence in Labs; do not author/alter Rust or HQ canonical writers. Execute Lane E on actual local source after A–D handoffs and inspect same information via Rust query, generated wiki and source. Generate actual-vs-intended JSON/Markdown and an evidence-linked blind-spot register; show unknowns, incomplete sources, orphaned and declared-but-unwired commands, missing communication/IO/write edges, drift and dev-product contamination. Preserve raw commands, exit codes, source SHAs and performance. Declare PASS/BLOCKED/partial precisely. Produce Wave 2 INPUT DOSSIER, but DO NOT design Wave 2 until this run is reviewed.
+Own independent acceptance runner, coverage and gap evidence in Labs; do not author/alter Rust or HQ canonical writers. Execute Lane E on actual local A+B+C records, then assess D's generated wiki as the quality test of those links and inspect same information via Rust query, generated wiki and source. Generate actual-vs-intended JSON/Markdown and an evidence-linked blind-spot register; show unknowns, incomplete sources, orphaned and declared-but-unwired commands, missing communication/IO/write edges, drift and dev-product contamination. Preserve raw commands, exit codes, source SHAs and performance. Declare PASS/BLOCKED/partial precisely. Produce Wave 2 INPUT DOSSIER, but DO NOT design Wave 2 until this run is reviewed.
 
 DELIVER: implementation source + executable tests + real data proof + precise HANDOFF for integration, source SHAs and exact published commit on main. Do not claim completion without executed evidence. No PRs, branches, Actions or force push. Do not reset HQ DB, browser profiles or replace source-native write owners. Coordinate only the narrow shared record interface with Lane E. If real local execution is unavailable, publish a truthful BLOCKED handoff and executable recipe, not fake running proof. Wave 2 is forbidden until this Wave 1 code is actually executed and its blind-spot report reviewed.
 ```
@@ -121,5 +121,5 @@ EXECUTE VIVIM RUST LIVE GRAPH — WAVE 1 INTEGRATION.
 AUTHORITATIVE ORDER:
 https://github.com/owenservera/vivim-labs/blob/main/Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/EXECUTE-WAVE-1-FIRST.md
 
-Read the six lane HANDOFFs, fresh source main SHAs and exact tests. Combine only the authorized real A–D outputs through Lane E's single Rust HQKGX1/journal writer. Run a real local end-to-end demo with code, KB, CLI/action and generated wiki represented in Rust, and at least one cross-domain traversal; run no-op, change/reindex, restart, collision, stale and refusal checks. Independently verify with Lane F's evidence report. Publish exact code SHAs, transcript, coverage denominators, actual-vs-target machine JSON and Markdown, all blind spots, and the Wave 2 input dossier. STOP AFTER REPORTING. Do not design or execute Wave 2 yet. Any missing domain or unrun native test is BLOCKED, not presumed complete.
+Read the six lane HANDOFFs, fresh source main SHAs and exact tests. Combine only authorized A+B+C source inputs through Lane E's single Rust HQKGX1/journal writer, then regenerate D's wiki as a derived integrated view. Run a real local end-to-end demo with code, KB, CLI/action **linked inside Rust** and the generated wiki faithfully reflecting a cross-domain traversal; run no-op, change/reindex, restart, collision, stale and refusal checks. Independently verify with Lane F's evidence report. Publish exact code SHAs, transcript, coverage denominators, actual-vs-target machine JSON and Markdown, all blind spots, and the Wave 2 input dossier. STOP AFTER REPORTING. Do not design or execute Wave 2 yet. Any missing domain or unrun native test is BLOCKED, not presumed complete.
 ```

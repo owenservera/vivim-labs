@@ -1,0 +1,7 @@
+{
+  "gate5": "BLOCKED",
+  "gate6": "BLOCKED",
+  "fixture_lanes": 8,
+  "source_sha": "cb16d2a85314879409a5304dc97267bf36d52b71",
+  "evidence_ref": "tierflow:VIVIM-VISUAL-RUNTIME/FINAL-WAVE/MASTER-INTEGRATION-RESULT.md"
+}

@@ -1,0 +1,8 @@
+Command: node --test capability-observatory/lane-d/tests/observatory.test.mjs
+Environment: isolated local Node ESM test harness (not live Harness/HQ/Android)
+Tests: 7
+Passed: 7
+Failed: 0
+Scope: missing source, crosswalk/findings, privacy, tombstones, schema rejection, ageing/replay, production receipt certification
+Native-device/Host acceptance: UNRUN
+HQ export contract acceptance: UNRUN (Lane C artifact missing)

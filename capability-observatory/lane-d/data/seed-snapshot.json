@@ -1,0 +1,382 @@
+{
+  "schema": "vivim.labs.observatory-snapshot/1",
+  "observed_at": "2026-11-07T00:00:00Z",
+  "hq_revision": null,
+  "labs_seed_revision": "80319c441be4ffbd8ca0bd9b2cb5af2224a92910",
+  "summary": {
+    "seed_capabilities": 10,
+    "dev_rows": 10,
+    "certified_production": 0,
+    "uncertified_production": 0,
+    "hq_export": "missing",
+    "hq_entities_public": 0,
+    "hq_entities_restricted": 0,
+    "unmapped_hq_public": null,
+    "duplicate_clusters": null,
+    "orphan_findings": null,
+    "conflict_findings": null,
+    "invalid_hq_links": null,
+    "unlocated_sources": 1,
+    "measured_source_rows": 0,
+    "unmeasured_sources": 5
+  },
+  "gates": {
+    "gate5": "BLOCKED",
+    "gate6": "BLOCKED",
+    "fixture_lanes": 8,
+    "source_sha": "cb16d2a85314879409a5304dc97267bf36d52b71",
+    "evidence_ref": "tierflow:VIVIM-VISUAL-RUNTIME/FINAL-WAVE/MASTER-INTEGRATION-RESULT.md",
+    "device_acceptance": "UNVERIFIED",
+    "host_acceptance": "UNVERIFIED"
+  },
+  "capabilities": [
+    {
+      "id": "cap:ui-canonical",
+      "label": "Canonical UI document and renderer",
+      "domain": "ui",
+      "kind": "seed",
+      "owner": "tierflow",
+      "surfaces": [
+        "desktop",
+        "android",
+        "studio"
+      ],
+      "wave_lanes": [
+        "B",
+        "F",
+        "G",
+        "H"
+      ],
+      "baseline": "integrated_test",
+      "maturity": "integrated",
+      "dev_status": "passed",
+      "risk": "unknown",
+      "target": "See original seed record for full end-state description",
+      "live": false,
+      "provenance": [
+        "vivim-labs:capability-observatory/data/capabilities.json"
+      ],
+      "source_sha": null,
+      "blockers": [
+        "No production evidence"
+      ],
+      "hq_links": []
+    },
+    {
+      "id": "cap:phone-projection",
+      "label": "APK phone UI projection",
+      "domain": "device",
+      "kind": "seed",
+      "owner": "tierflow",
+      "surfaces": [
+        "android"
+      ],
+      "wave_lanes": [
+        "F",
+        "H"
+      ],
+      "baseline": "integrated_test",
+      "maturity": "integrated",
+      "dev_status": "blocked",
+      "risk": "blocked",
+      "target": "See original seed record for full end-state description",
+      "live": false,
+      "provenance": [
+        "vivim-labs:capability-observatory/data/capabilities.json"
+      ],
+      "source_sha": null,
+      "blockers": [
+        "No production evidence"
+      ],
+      "hq_links": []
+    },
+    {
+      "id": "cap:typed-commands",
+      "label": "Typed command candidate and Host boundary",
+      "domain": "commands",
+      "kind": "seed",
+      "owner": "tierflow",
+      "surfaces": [
+        "desktop",
+        "android",
+        "oracle"
+      ],
+      "wave_lanes": [
+        "A",
+        "E",
+        "H"
+      ],
+      "baseline": "integrated_test",
+      "maturity": "integrated",
+      "dev_status": "passed",
+      "risk": "unknown",
+      "target": "See original seed record for full end-state description",
+      "live": false,
+      "provenance": [
+        "vivim-labs:capability-observatory/data/capabilities.json"
+      ],
+      "source_sha": null,
+      "blockers": [
+        "No production evidence"
+      ],
+      "hq_links": []
+    },
+    {
+      "id": "cap:studio-editing",
+      "label": "Existing Studio canonical document editing",
+      "domain": "editing",
+      "kind": "seed",
+      "owner": "vivim-web-harness",
+      "surfaces": [
+        "studio",
+        "desktop",
+        "android"
+      ],
+      "wave_lanes": [
+        "B",
+        "H"
+      ],
+      "baseline": "design_only",
+      "maturity": "designed",
+      "dev_status": "unverified",
+      "risk": "unknown",
+      "target": "See original seed record for full end-state description",
+      "live": false,
+      "provenance": [
+        "vivim-labs:capability-observatory/data/capabilities.json"
+      ],
+      "source_sha": null,
+      "blockers": [
+        "No production evidence"
+      ],
+      "hq_links": []
+    },
+    {
+      "id": "cap:templates",
+      "label": "Portable template metadata",
+      "domain": "components",
+      "kind": "seed",
+      "owner": "tierflow",
+      "surfaces": [
+        "studio",
+        "desktop",
+        "android"
+      ],
+      "wave_lanes": [
+        "C"
+      ],
+      "baseline": "design_only",
+      "maturity": "designed",
+      "dev_status": "unverified",
+      "risk": "unknown",
+      "target": "See original seed record for full end-state description",
+      "live": false,
+      "provenance": [
+        "vivim-labs:capability-observatory/data/capabilities.json"
+      ],
+      "source_sha": null,
+      "blockers": [
+        "No production evidence"
+      ],
+      "hq_links": []
+    },
+    {
+      "id": "cap:oracle-intent",
+      "label": "Oracle language UI authoring",
+      "domain": "oracle",
+      "kind": "seed",
+      "owner": "repos-hq",
+      "surfaces": [
+        "oracle",
+        "desktop",
+        "android"
+      ],
+      "wave_lanes": [
+        "A"
+      ],
+      "baseline": "design_only",
+      "maturity": "designed",
+      "dev_status": "unverified",
+      "risk": "unknown",
+      "target": "See original seed record for full end-state description",
+      "live": false,
+      "provenance": [
+        "vivim-labs:capability-observatory/data/capabilities.json"
+      ],
+      "source_sha": null,
+      "blockers": [
+        "No production evidence"
+      ],
+      "hq_links": []
+    },
+    {
+      "id": "cap:knowledge-snapshots",
+      "label": "Scoped knowledge device snapshots",
+      "domain": "knowledge",
+      "kind": "seed",
+      "owner": "tierflow",
+      "surfaces": [
+        "desktop",
+        "android",
+        "kb"
+      ],
+      "wave_lanes": [
+        "D",
+        "F"
+      ],
+      "baseline": "integrated_test",
+      "maturity": "integrated",
+      "dev_status": "passed",
+      "risk": "unknown",
+      "target": "See original seed record for full end-state description",
+      "live": false,
+      "provenance": [
+        "vivim-labs:capability-observatory/data/capabilities.json"
+      ],
+      "source_sha": null,
+      "blockers": [
+        "No production evidence"
+      ],
+      "hq_links": []
+    },
+    {
+      "id": "cap:host-status",
+      "label": "Host permission and receipt status",
+      "domain": "host-security",
+      "kind": "seed",
+      "owner": "tierflow",
+      "surfaces": [
+        "desktop",
+        "android"
+      ],
+      "wave_lanes": [
+        "E",
+        "H"
+      ],
+      "baseline": "integrated_test",
+      "maturity": "integrated",
+      "dev_status": "passed",
+      "risk": "unknown",
+      "target": "See original seed record for full end-state description",
+      "live": false,
+      "provenance": [
+        "vivim-labs:capability-observatory/data/capabilities.json"
+      ],
+      "source_sha": null,
+      "blockers": [
+        "No production evidence"
+      ],
+      "hq_links": []
+    },
+    {
+      "id": "cap:onboarding",
+      "label": "Founder Workspace onboarding and recovery",
+      "domain": "experience",
+      "kind": "seed",
+      "owner": "tierflow",
+      "surfaces": [
+        "desktop",
+        "android"
+      ],
+      "wave_lanes": [
+        "C",
+        "F"
+      ],
+      "baseline": "integrated_test",
+      "maturity": "integrated",
+      "dev_status": "passed",
+      "risk": "unknown",
+      "target": "See original seed record for full end-state description",
+      "live": false,
+      "provenance": [
+        "vivim-labs:capability-observatory/data/capabilities.json"
+      ],
+      "source_sha": null,
+      "blockers": [
+        "No production evidence"
+      ],
+      "hq_links": []
+    },
+    {
+      "id": "cap:publisher-migration",
+      "label": "Single UI writer migration and rollback",
+      "domain": "release",
+      "kind": "seed",
+      "owner": "tierflow",
+      "surfaces": [
+        "desktop",
+        "android",
+        "studio"
+      ],
+      "wave_lanes": [
+        "G",
+        "H"
+      ],
+      "baseline": "design_only",
+      "maturity": "designed",
+      "dev_status": "unverified",
+      "risk": "unknown",
+      "target": "See original seed record for full end-state description",
+      "live": false,
+      "provenance": [
+        "vivim-labs:capability-observatory/data/capabilities.json"
+      ],
+      "source_sha": null,
+      "blockers": [
+        "No production evidence"
+      ],
+      "hq_links": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "tierflow",
+      "repository": "owenservera/tierflow",
+      "path": "(seed discovery roots)",
+      "revision": null,
+      "status": "unknown",
+      "measured_rows": null,
+      "age_days": null
+    },
+    {
+      "id": "harness",
+      "repository": "owenservera/vivim-web-harness",
+      "path": "(seed discovery roots)",
+      "revision": null,
+      "status": "unknown",
+      "measured_rows": null,
+      "age_days": null
+    },
+    {
+      "id": "hq",
+      "repository": "owenservera/repos-hq",
+      "path": "(seed discovery roots)",
+      "revision": null,
+      "status": "unknown",
+      "measured_rows": null,
+      "age_days": null
+    },
+    {
+      "id": "labs",
+      "repository": "owenservera/vivim-labs",
+      "path": "(seed discovery roots)",
+      "revision": null,
+      "status": "unknown",
+      "measured_rows": null,
+      "age_days": null
+    },
+    {
+      "id": "large-trackers-unlocated",
+      "repository": "",
+      "path": "(seed discovery roots)",
+      "revision": null,
+      "status": "unlocated",
+      "measured_rows": null,
+      "age_days": null
+    }
+  ],
+  "findings": [],
+  "conflicts": [],
+  "deleted_entities": null,
+  "snapshot_id": "sha256:a7eb80b8dace663a6c2ae05f41559636b0267cbc7ed625dba9ba64ade0ba2f2c"
+}

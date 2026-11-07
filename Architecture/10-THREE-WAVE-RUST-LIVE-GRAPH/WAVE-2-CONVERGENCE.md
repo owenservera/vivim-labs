@@ -1,3 +1,5 @@
+> **FROZEN DRAFT — NOT APPROVED FOR LAUNCH.** This was an early conceptual Wave 2 hypothesis written before Wave 1 execution. Redesign Wave 2 only after the Wave 1 live Rust graph is run and the runtime-generated actual/target, blind-spot and performance reports have been reviewed. No six-lane Wave 2 assignment in this draft is authoritative.
+
 # Wave 2 — CONVERGENCE: Make the graph explain the whole system
 
 **Input:** Accepted Wave 1 live Rust journal, source-pinned adapters, ID crosswalk and actual/target baseline. Preserve one logical graph, one native Rust EngineRegistry and one journal writer.

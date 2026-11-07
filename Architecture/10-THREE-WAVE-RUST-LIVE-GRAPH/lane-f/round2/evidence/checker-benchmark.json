@@ -1,0 +1,16 @@
+{
+  "schema": "vivim.wave1.lane-f.benchmark/1",
+  "status": "SYNTHETIC_CHECKER_ONLY",
+  "nodeCount": 512,
+  "edgeCount": 0,
+  "bytes": 145959,
+  "warmups": 5,
+  "samples": 50,
+  "p50Ms": 1.115844999999993,
+  "p95Ms": 2.0278830000000028,
+  "rssBytes": 41783296,
+  "compiler": "NOT_MEASURED",
+  "rust": "NOT_MEASURED",
+  "sqlite": "NOT_MEASURED",
+  "placementAuthorized": false
+}

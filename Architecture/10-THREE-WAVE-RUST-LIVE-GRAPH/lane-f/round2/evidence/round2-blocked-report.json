@@ -1,0 +1,267 @@
+{
+  "schema": "vivim.wave1.lane-f.round2-report/1",
+  "status": "BLOCKED",
+  "sourceHeads": {
+    "vivim-labs": "302ba15e7be9d25abb46d2981c51923ef87b952e",
+    "repos-hq": "04c84b1f8cc59d8aa516541b952e2a97f4ccc600"
+  },
+  "sections": {
+    "evidence": {
+      "status": "BLOCKED",
+      "findings": [
+        {
+          "id": "cargo",
+          "kind": "MISSING_NATIVE_PROOF"
+        },
+        {
+          "id": "real-a-index",
+          "kind": "MISSING_NATIVE_PROOF"
+        },
+        {
+          "id": "real-b-sqlite",
+          "kind": "MISSING_NATIVE_PROOF"
+        },
+        {
+          "id": "real-c-cli",
+          "kind": "MISSING_NATIVE_PROOF"
+        },
+        {
+          "id": "rust-import",
+          "kind": "MISSING_NATIVE_PROOF"
+        },
+        {
+          "id": "rust-query",
+          "kind": "MISSING_NATIVE_PROOF"
+        },
+        {
+          "id": "real-wiki",
+          "kind": "MISSING_NATIVE_PROOF"
+        },
+        {
+          "id": "compiler",
+          "kind": "MISSING_NATIVE_PROOF"
+        },
+        {
+          "id": "rust-restart",
+          "kind": "MISSING_NATIVE_PROOF"
+        },
+        {
+          "id": "rust-invalid",
+          "kind": "MISSING_NATIVE_PROOF"
+        },
+        {
+          "id": "rust-noop",
+          "kind": "MISSING_NATIVE_PROOF"
+        },
+        {
+          "id": "scoped-reset",
+          "kind": "MISSING_NATIVE_PROOF"
+        }
+      ]
+    },
+    "crosswalk": {
+      "status": "BLOCKED",
+      "findings": [
+        {
+          "lane": "A",
+          "code": "SOURCE_SCHEMA",
+          "detail": "Missing or stale schema"
+        },
+        {
+          "lane": "B",
+          "code": "SOURCE_SCHEMA",
+          "detail": "Missing or stale schema"
+        },
+        {
+          "lane": "C",
+          "code": "SOURCE_SCHEMA",
+          "detail": "Missing or stale schema"
+        },
+        {
+          "lane": "E",
+          "code": "SCOPE_MISSING",
+          "detail": "One project / N root scope not established"
+        },
+        {
+          "lane": "E",
+          "code": "FEED_MISSING",
+          "detail": "A"
+        },
+        {
+          "lane": "E",
+          "code": "FEED_MISSING",
+          "detail": "B"
+        },
+        {
+          "lane": "E",
+          "code": "FEED_MISSING",
+          "detail": "C"
+        },
+        {
+          "lane": "E",
+          "code": "REAL_COMPILER_BINDING_UNVERIFIED",
+          "detail": "Compiler subgate cannot pass"
+        }
+      ],
+      "counts": {
+        "aFiles": 0,
+        "bRecords": 0,
+        "cRecords": 0,
+        "feeds": 0
+      }
+    },
+    "intent": {
+      "status": "BLOCKED",
+      "counts": {
+        "exact": {
+          "total": 0,
+          "observed": 0,
+          "unsafe": 0
+        },
+        "negation": {
+          "total": 0,
+          "observed": 0,
+          "unsafe": 0
+        },
+        "quotation": {
+          "total": 0,
+          "observed": 0,
+          "unsafe": 0
+        },
+        "conjunction": {
+          "total": 0,
+          "observed": 0,
+          "unsafe": 0
+        },
+        "ambiguity": {
+          "total": 0,
+          "observed": 0,
+          "unsafe": 0
+        },
+        "typo": {
+          "total": 0,
+          "observed": 0,
+          "unsafe": 0
+        },
+        "missing-slot": {
+          "total": 0,
+          "observed": 0,
+          "unsafe": 0
+        },
+        "unsupported": {
+          "total": 0,
+          "observed": 0,
+          "unsafe": 0
+        },
+        "wrong-target": {
+          "total": 0,
+          "observed": 0,
+          "unsafe": 0
+        },
+        "span-revision": {
+          "total": 0,
+          "observed": 0,
+          "unsafe": 0
+        }
+      },
+      "findings": [
+        {
+          "code": "INSUFFICIENT_CORPUS",
+          "expected": 100,
+          "actual": 0
+        },
+        {
+          "code": "CATEGORY_UNCOVERED",
+          "category": "exact"
+        },
+        {
+          "code": "CATEGORY_UNCOVERED",
+          "category": "negation"
+        },
+        {
+          "code": "CATEGORY_UNCOVERED",
+          "category": "quotation"
+        },
+        {
+          "code": "CATEGORY_UNCOVERED",
+          "category": "conjunction"
+        },
+        {
+          "code": "CATEGORY_UNCOVERED",
+          "category": "ambiguity"
+        },
+        {
+          "code": "CATEGORY_UNCOVERED",
+          "category": "typo"
+        },
+        {
+          "code": "CATEGORY_UNCOVERED",
+          "category": "missing-slot"
+        },
+        {
+          "code": "CATEGORY_UNCOVERED",
+          "category": "unsupported"
+        },
+        {
+          "code": "CATEGORY_UNCOVERED",
+          "category": "wrong-target"
+        },
+        {
+          "code": "CATEGORY_UNCOVERED",
+          "category": "span-revision"
+        }
+      ]
+    },
+    "coverage": {
+      "status": "BLOCKED",
+      "coverage": [],
+      "metrics": {},
+      "issues": [
+        {
+          "kind": "NO_SOURCE_ROOTS",
+          "id": "wave1"
+        }
+      ],
+      "blindSpots": []
+    },
+    "placement": {
+      "status": "BLOCKED",
+      "rows": [],
+      "issues": [
+        {
+          "code": "NO_COMPONENTS"
+        }
+      ]
+    }
+  },
+  "failures": [
+    {
+      "code": "LIVE_HQKGX1_MISSING",
+      "detail": null
+    },
+    {
+      "code": "SECTION_BLOCKED",
+      "detail": "evidence"
+    },
+    {
+      "code": "SECTION_BLOCKED",
+      "detail": "crosswalk"
+    },
+    {
+      "code": "SECTION_BLOCKED",
+      "detail": "intent"
+    },
+    {
+      "code": "SECTION_BLOCKED",
+      "detail": "coverage"
+    },
+    {
+      "code": "SECTION_BLOCKED",
+      "detail": "placement"
+    },
+    {
+      "code": "INDEPENDENT_NATIVE_REPLAY_MISSING",
+      "detail": null
+    }
+  ]
+}

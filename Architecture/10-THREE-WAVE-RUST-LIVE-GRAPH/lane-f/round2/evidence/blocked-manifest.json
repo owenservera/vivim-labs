@@ -1,0 +1,10 @@
+{
+  "schema":"vivim.wave1.lane-f.round2-run/1",
+  "sourceHeads":{
+    "vivim-labs":"302ba15e7be9d25abb46d2981c51923ef87b952e",
+    "repos-hq":"04c84b1f8cc59d8aa516541b952e2a97f4ccc600"
+  },
+  "requiredNative":["cargo","real-a-index","real-b-sqlite","real-c-cli","rust-import","rust-query","real-wiki","compiler","rust-restart","rust-invalid","rust-noop","scoped-reset"],
+  "independentNativeReplayVerified":false,
+  "files":{}
+}

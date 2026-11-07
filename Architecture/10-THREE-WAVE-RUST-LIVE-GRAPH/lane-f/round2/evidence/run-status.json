@@ -1,0 +1,11 @@
+{
+  "schema":"vivim.wave1.lane-f.round2-execution-evidence/1",
+  "date":"2026-11-07",
+  "status":"PREPARATORY_IMPLEMENTATION_PASSED_NATIVE_GATE_BLOCKED",
+  "sourceHeadsObserved":{"vivim-labs":"302ba15e7be9d25abb46d2981c51923ef87b952e","repos-hq":"04c84b1f8cc59d8aa516541b952e2a97f4ccc600"},
+  "actualEnvironment":{"node":"v22.16.0","cargo":"NOT_INSTALLED","ownerWindowsHQ":"NOT_AVAILABLE","sqlitePrivateKB":"NOT_AVAILABLE","realRustJournal":"NOT_AVAILABLE","masterFinalHandoff":"NOT_INSPECTED"},
+  "tests":{"command":"node --test test/round2.test.mjs [plus 2 existing Lane F suites]","newRound2Passed":140,"round1RegressionPassed":12,"totalPassed":152,"failed":0,"kind":"SYNTHETIC_OR_LOCAL_SOURCE_VERIFIER_ONLY","nativeRustTests":0},
+  "blockedBaseline":{"command":"node round2/verify.mjs --manifest round2/evidence/blocked-manifest.json --out round2-blocked-report.json","exitCode":2,"status":"BLOCKED","missingFoundationalSections":true,"reportsWereSynthetic":false},
+  "nativePlacement":{"rust":"NOT_MEASURED","sqlite":"NOT_MEASURED","migrationDecision":"DEFER_MEASUREMENT"},
+  "ownership":{"changedOriginalLaneF":false,"crossLaneWrites":false,"effectsRun":false,"graphJournalWrite":false,"resetRun":false,"newBranch":false,"forcePush":false,"wave2Designed":false}
+}

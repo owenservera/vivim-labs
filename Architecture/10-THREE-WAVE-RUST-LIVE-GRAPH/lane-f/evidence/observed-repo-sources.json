@@ -1,0 +1,21 @@
+{
+  "status": "SOURCE_INSPECTION_ONLY_NOT_RUNTIME",
+  "observedAtDate": "2026-11-07",
+  "heads": {
+    "owenservera/vivim-labs": "1e5edaa6b8310f000f3eed23b6e448cb4c0f268f",
+    "owenservera/repos-hq": "2c9bfb4c515cfabce6f8775473e461cd16418e46",
+    "owenservera/tierflow": "24dc3c5904a6d493c3459415d0075778eb5424c2"
+  },
+  "sourceInspection": [
+    {"path":"repos-hq/research/rust-knowledge-graph/src/bin/hqkg-import.rs","blobSha":"34c855908712123e7ef12e09618923e2b3520245","finding":"CLI usage hqkg-import <journal> <exchange.jsonl> [--dry-run]; print stats/epoch; write on changed import only"},
+    {"path":"repos-hq/research/rust-knowledge-graph/src/import.rs","blobSha":"c9983e0d9085ae78409d01b173a18c7142edef0b","finding":"data-only HQKGX1 manifest, source owner and strict scalar metadata validation"},
+    {"path":"repos-hq/hq/lib/action-router.mjs","blobSha":"f7911158a18d73029850013a76fc91207b69ab51","finding":"router ranks actions without executing; source alone does not prove clause and negation safety"},
+    {"path":"repos-hq/hq/lib/annotation-v2.mjs","blobSha":"7e94dfbd4fbca8ef0fdb9e0610053364ce2c38c8","finding":"comment-only v2 typed tags, not a command registration"},
+    {"path":"repos-hq/hq/lib/wiki.mjs","blobSha":"3efcde513bf5fdf538b413dce209ec9e6bcf0253","finding":"existing deterministic generated wiki implementation"}
+  ],
+  "localWindowsIndexAccess": false,
+  "nativeCargoAccess": false,
+  "rustLiveGraphExecuted": false,
+  "derivedWikiRegenerated": false,
+  "scopedResetVerified": false
+}

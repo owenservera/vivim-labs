@@ -4,13 +4,13 @@ Status: proposed execution map, not implementation authorization
 Philosophy: [07-INTEGRATION-PHILOSOPHY](07-INTEGRATION-PHILOSOPHY.md)
 
 ## Selection logic
-Start by connecting the facilities that let the system inspect its own architecture and validate future work: existing HQ indexer, stable semantic identities, Rust graph projection, Rust CLI/doctor, and a read-only visual/observatory. Integrate Host/TierFlow effect paths only after write authorities are visible and test evidence exists. Avoid a new registry or a dev-only runtime becoming a product dependency.
+Start by connecting the **full existing HQ knowledge/command/wiki loop**, not only a code index: deep code and KB intelligence, stable semantic identities, action and natural-language routing, CLI/MCP commands, auto-generated/programmable wiki, Rust graph projection, and a read-only visual/observatory. Integrate Host/TierFlow effect paths only after write authorities are visible and test evidence exists. Avoid a new registry or a dev-only runtime becoming a product dependency.
 
 ## Sequence and compounding benefit
 | Stage | First integration | Immediate verified deliverable sought | How it accelerates successors | Internal DEV-only pieces | End-user PRODUCT shape |
 |---|---|---|---|---|---|
 | 0 | Baseline/census | Fresh SHAs, source paths, active CLI commands, engines, data stores, writer inventory and gaps | Enables exact dependency ordering, prevents duplicate work | Repo-wide crawls, source explorer, detailed debug logs | Lightweight registered capability and health discovery |
-| 1 | HQ Index → graph architecture inventory | Real source-backed EngineSlot, Database, Dataset, Transformation and Command candidates with identity/evidence | The next connector knows where source code and schemas live, and which writers are owners | Broad code indexing, unresolved candidate crosswalk, rich diagnostics, sample corpus | Curated capability/resource descriptions; no unrelated repo source leakage |
+| 1 | **HQ unified intelligence + language/command + generated/programmable wiki** → architecture graph inventory | Real source-backed nodes AND stable semantic operations, NL/action routing, CLI/MCP bindings and generated wiki pages | The next integration gets discoverability, human/agent commands and an automatically refreshed documentation/control surface | Broad code indexing, route traces, mock action catalogues, rich wiki diagnostics | Curated capabilities, user-scoped NL/CLI/UI actions and generated user-relevant wiki |
 | 2 | HQ semantic/kernel → Rust HQKGX1 projection | One durable entity and links imported through existing Rust importer, source-pinned and replayable | Supplies a trusted graph model for CLI, UI, KB and dataflow integration; exposes source-consistency problems early | Full import fixtures, diff inspectors, deterministic replay scripts | Bounded versioned graph synchronization plus minimal validated adapters |
 | 3 | Rust query/control ↔ HQ CLI | Commands querying same entity, revision and relationships, with doctor and typed receipt | Makes later engine/adapter integrations testable via reusable CLI recipes; improves agent usability | Raw operator CLI, verbose trace, synthetic failure tests, read-only inspector | Stable typed operation IDs via limited CLI/UI/NL routing; Host owns effects |
 | 4 | Graph → read-only Visual UI / Labs observatory | Real graph-derived engine/dataflow map with provenance, stale markers and revision | Shows missing edges and change propagation for every later integration; enables rapid developer feedback | Full system graph, dependency overlays, experimental debug panels | Scoped graph views/visual documents; no dev instrumentation by default |
@@ -22,20 +22,20 @@ Stages 1–4 are the first compounding integration campaign, but stage 0 is nece
 
 ## Very first two useful integrations, in detail
 
-### Stage 1 — HQ indexed source → Rust graph architecture inventory
-**Inputs:** Repos HQ project registry, file/symbol/import index, confirmed Rust node kinds, C4 identity crosswalk, source-registered schemas/capability records.
-**Transform:** extract engine/data/CLI candidates; attach implementation location and source SHA; classify as observed, implemented, research-only or unknown; map owner/read/write behavior; refuse invented canonical IDs and automatic duplicate merges.
-**Output:** a bounded, deterministic graph candidate inventory and side-by-side completeness report. Initially it may be generated as a projection for inspection; only validated owners may write canonical knowledge.
-**Why first:** every later integration gains component discovery, dependency paths, machine-verifiable implementation evidence and a list of unsafe or missing seams.
-**DEV:** scan every relevant local repo and expose implementation detail, failure modes and unresolved duplicates.
-**PRODUCT:** register only validated capability/resource descriptions relevant to the user's installation; no blanket code crawler or lab context.
-**Gate:** every mapped candidate links to a source, no new canonical registry, unknowns flagged, no unauthorized writes, repeat run yields stable results.
+### Stage 1 — HQ unified intelligence/command/wiki → graph architecture inventory
+**Inputs:** Repos HQ project registry, file/symbol/import index, KB/context, semantic registry, action registry/router, real CLI and MCP routes, generated wiki, programmable wiki preview/rollback, confirmed Rust node kinds, C4 identity crosswalk, schemas/capability records.
+**Transform:** discover engine/data/CLI candidates; bind each to implementation/source SHA, typed semantic operation, action-routing status, generated wiki entry and UI/NL candidates where real; classify implemented/wired/declared/research-only/unknown; map owner/read/write behavior; refuse invented canonical IDs and automatic duplicate merges.
+**Output:** a bounded deterministic graph candidate inventory, shared command/action map, generated wiki projection and completeness/drift report. Initially it may be generated as a projection for inspection; only validated owners may write canonical knowledge.
+**Why first:** every later integration gains discovery, dependency paths, a common human/agent command surface, automatically generated documentation, implementation evidence and an unsafe/missing seam report.
+**DEV:** scan relevant local repos; show implementation detail, route traces, synthetic intent cases, programmable wiki tests, failure modes and unresolved duplicates.
+**PRODUCT:** register only validated capabilities and user-relevant KB/wiki views; expose same typed operations through scoped NL, CLI and UI; no blanket repo crawler, traces or lab context.
+**Gate:** mapped candidate points to source and operation/wiki identity; one real NL/command candidate resolves deterministically and is visible in generated wiki; declared/unwired is flagged; unknowns fail closed; no unauthorized writes; repeat run stable.
 
-### Stage 2 — HQ canonical KB identity → Rust graph persistence
-**Inputs:** one curated, versioned semantic object and its source/evidence, plus existing HQKGX1 export schema/manifest.
+### Stage 2 — HQ canonical KB, command and wiki identities → Rust graph persistence
+**Inputs:** a curated versioned semantic object, an associated command/action identity and generated wiki projection with source/evidence, plus HQKGX1 exchange schema/manifest.
 **Transform:** export, verify digest and stable IDs, stage atomically in importer, fail on collisions/invalid refs, persist journal under one writer.
 **Output:** Rust graph journal containing that object and relationships, with replay/no-op/diagnostic evidence and query result traceable to HQ revision.
-**Why second:** all subsequent UI, CLI, dataflow and observability features share one real, provenance-bearing graph example rather than hand-made sample graphs.
+**Why second:** subsequent UI, CLI, agent, wiki, dataflow and observability integrations all share a real source- and operation-linked graph rather than hand-made sample graphs.
 **DEV:** golden fixtures, invalid manifests, rollback/recovery tests, replay and compare tooling.
 **PRODUCT:** bounded versioned sync/adapter, trust and minimal resources; no dev fixture dependency.
 **Gate:** fresh native Rust/Bun tests, exact source identity match, no-op unchanged import, rejected collision, recover after restart, no second KB writer.
@@ -69,3 +69,6 @@ Score (1) verified capability delivered, (2) number of successor integrations un
 
 ## Work authorization
 This is a planning artifact. No production runtime, Rust core or source repository outside Labs is changed by this map. Only approved, proven integration slices may advance to product activation.
+
+
+For the corrected, integrated scope and source evidence, see [09 — Unified HQ Intelligence, Commands and Wiki](09-UNIFIED-INTELLIGENCE-COMMAND-WIKI.md).

@@ -1,0 +1,411 @@
+{
+  "schema": "vivim.lane-b-source-inspection/0.1",
+  "inert": true,
+  "chunk": 4,
+  "records": [
+    {
+      "id": "file:179",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "28e3dfc306ae152ef951f1c95d4d00d02f1c7ad1",
+      "lines": 15,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Webapp-Native Harness — Autonomous specialist bootstrap"
+        }
+      ]
+    },
+    {
+      "id": "file:191",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "d2c33d619a0c4ebe38b46a6282b375a033a45b91",
+      "lines": 26,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Autonomous bootstrap contract — Product-to-Market"
+        },
+        {
+          "line": 3,
+          "heading": "Bootstrap state: INITIALIZED, NOT RUNNING CONTINUOUSLY"
+        },
+        {
+          "line": 6,
+          "heading": "Pass 1 — Verified portfolio discovery"
+        },
+        {
+          "line": 12,
+          "heading": "Pass 2 — Product packaging"
+        },
+        {
+          "line": 18,
+          "heading": "Pass 3 — Shipping execution"
+        },
+        {
+          "line": 23,
+          "heading": "Verification / anti-fiction"
+        }
+      ]
+    },
+    {
+      "id": "file:192",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "acfb4f4b5ddc86cae0f47126c5e0a3b7bf89fe78",
+      "lines": 122,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Architecture Steward — Agent Mandate"
+        },
+        {
+          "line": 3,
+          "heading": "Identity"
+        },
+        {
+          "line": 9,
+          "heading": "Core question"
+        },
+        {
+          "line": 25,
+          "heading": "Behavioral rule"
+        },
+        {
+          "line": 44,
+          "heading": "Authority rule"
+        },
+        {
+          "line": 59,
+          "heading": "Stewardship loop"
+        },
+        {
+          "line": 65,
+          "heading": "Deliverable standard"
+        },
+        {
+          "line": 70,
+          "heading": "Subagent delegation"
+        },
+        {
+          "line": 85,
+          "heading": "Required prompt contract"
+        },
+        {
+          "line": 104,
+          "heading": "CFA planning ownership"
+        },
+        {
+          "line": 112,
+          "heading": "Delegation rule"
+        }
+      ]
+    },
+    {
+      "id": "file:193",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "ad966a574a05f9fc72082c81c79725874a7f2f46",
+      "lines": 12,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Semantics — role bootstrap"
+        }
+      ]
+    },
+    {
+      "id": "file:195",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "73d00b2d8c1c8f117c31bae3722b843fa0e9cb05",
+      "lines": 548,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Semantic Continuity Steward"
+        },
+        {
+          "line": 2,
+          "heading": "Dedicated Architecture Steward Subagent — Role Definition"
+        },
+        {
+          "line": 12,
+          "heading": "Ratification"
+        },
+        {
+          "line": 18,
+          "heading": "1. Essence"
+        },
+        {
+          "line": 62,
+          "heading": "2. Why this is a distinct Steward role"
+        },
+        {
+          "line": 96,
+          "heading": "3. Primary mission"
+        },
+        {
+          "line": 109,
+          "heading": "4. Core objectives"
+        },
+        {
+          "line": 111,
+          "heading": "O1 — Establish semantic continuity"
+        },
+        {
+          "line": 128,
+          "heading": "O2 — Establish the canonical vocabulary"
+        },
+        {
+          "line": 146,
+          "heading": "O3 — Prevent semantic alias explosion"
+        },
+        {
+          "line": 156,
+          "heading": "O4 — Keep grammar pinned"
+        },
+        {
+          "line": 164,
+          "heading": "O5 — Make compilation layers explicit"
+        },
+        {
+          "line": 179,
+          "heading": "O6 — Make grounding first-class"
+        },
+        {
+          "line": 187,
+          "heading": "O7 — Preserve bidirectional semantics"
+        },
+        {
+          "line": 201,
+          "heading": "O8 — Model execution as a separate dimension"
+        }
+      ]
+    },
+    {
+      "id": "file:196",
+      "status": "PRIVATE_UNAVAILABLE",
+      "header": "unknown",
+      "reason": "private source absent from public Labs corpus"
+    },
+    {
+      "id": "file:197",
+      "status": "PRIVATE_UNAVAILABLE",
+      "header": "unknown",
+      "reason": "private source absent from public Labs corpus"
+    },
+    {
+      "id": "file:198",
+      "status": "PRIVATE_UNAVAILABLE",
+      "header": "unknown",
+      "reason": "private source absent from public Labs corpus"
+    },
+    {
+      "id": "file:199",
+      "status": "PRIVATE_UNAVAILABLE",
+      "header": "unknown",
+      "reason": "private source absent from public Labs corpus"
+    },
+    {
+      "id": "file:208",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "b5662321f5c79069e35eef627423f0e1a2cd6c9d",
+      "lines": 37,
+      "header": "native-yaml-observed",
+      "observedKeys": [
+        "description",
+        "mode"
+      ],
+      "headings": [
+        {
+          "line": 5,
+          "heading": "ChatGPT / AION integration specialist"
+        },
+        {
+          "line": 9,
+          "heading": "Scope and ownership"
+        },
+        {
+          "line": 15,
+          "heading": "Prompt and agent protocol"
+        },
+        {
+          "line": 23,
+          "heading": "Engineering process"
+        },
+        {
+          "line": 32,
+          "heading": "Current product map"
+        },
+        {
+          "line": 35,
+          "heading": "Immediate product proof"
+        }
+      ]
+    },
+    {
+      "id": "file:209",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "73f5461032775d795340558590c87ed6d04ab143",
+      "lines": 41,
+      "header": "native-yaml-observed",
+      "observedKeys": [
+        "description",
+        "mode"
+      ],
+      "headings": [
+        {
+          "line": 5,
+          "heading": "OpenCode / Windows local execution specialist"
+        },
+        {
+          "line": 9,
+          "heading": "Machine authority and tools"
+        },
+        {
+          "line": 15,
+          "heading": "Git and repository operating contract"
+        },
+        {
+          "line": 22,
+          "heading": "Capture Studio runtime and safety"
+        },
+        {
+          "line": 30,
+          "heading": "Execution sequence for migration cutover"
+        },
+        {
+          "line": 39,
+          "heading": "Response style and operating habits"
+        }
+      ]
+    },
+    {
+      "id": "file:210",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "c946a6271cdca1408471f14812d20fe8fd5a789d",
+      "lines": 31,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "VIVIM Harness — agent operating contract"
+        },
+        {
+          "line": 9,
+          "heading": "Governing decisions (from owner conversations, October 11–25, 2026)"
+        },
+        {
+          "line": 19,
+          "heading": "Source and cutover truth"
+        },
+        {
+          "line": 26,
+          "heading": "Verification and closeout"
+        }
+      ]
+    },
+    {
+      "id": "file:213",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "5f5c2428c0cd3a08e71c4ea0e1902ffcbaad5c3e",
+      "lines": 60,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Provider-native shape contract — Claude WEB (`claude-web-shapes/1`)"
+        },
+        {
+          "line": 7,
+          "heading": "1. Identity grammar"
+        },
+        {
+          "line": 18,
+          "heading": "2. Transports and stream shapes"
+        },
+        {
+          "line": 30,
+          "heading": "3. Content parts observed vs documented"
+        },
+        {
+          "line": 41,
+          "heading": "4. Action surfaces (capability capsule semantics)"
+        },
+        {
+          "line": 50,
+          "heading": "5. Executable contract tests"
+        },
+        {
+          "line": 54,
+          "heading": "6. Gaps (the honest headline)"
+        }
+      ]
+    },
+    {
+      "id": "file:215",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "ae924693fa5d65a507c91ed38be805429396feb7",
+      "lines": 126,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "AGENTS.md — working agreements for vivim-omega (owner-maintained)"
+        },
+        {
+          "line": 7,
+          "heading": "Commands"
+        },
+        {
+          "line": 25,
+          "heading": "Laws that bite (B1–B5 + process)"
+        },
+        {
+          "line": 50,
+          "heading": "Decision records: checker traps (all bitten live — respect them)"
+        },
+        {
+          "line": 69,
+          "heading": "Code surfaces with gate teeth"
+        },
+        {
+          "line": 89,
+          "heading": "Commits, tags, push (conventions that prevent real incidents)"
+        },
+        {
+          "line": 104,
+          "heading": "Windows facts (proven, not folklore)"
+        },
+        {
+          "line": 117,
+          "heading": "Do not"
+        }
+      ]
+    },
+    {
+      "id": "file:217",
+      "status": "SOURCE_COPY_INSPECTED",
+      "copyBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+      "lines": 15,
+      "header": "plain-markdown-observed",
+      "observedKeys": [],
+      "headings": [
+        {
+          "line": 1,
+          "heading": "Agent Instructions — Product Design Folder"
+        }
+      ]
+    }
+  ]
+}

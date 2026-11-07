@@ -1,0 +1,232 @@
+[
+  {
+    "capability_id": "cap:ui-canonical",
+    "name": "Canonical UI document and renderer",
+    "domain": "ui",
+    "kind": "system",
+    "owner_repo": "tierflow",
+    "surfaces": [
+      "desktop",
+      "android",
+      "studio"
+    ],
+    "authority": "TierFlow document/revisions",
+    "wave_lanes": [
+      "B",
+      "F",
+      "G",
+      "H"
+    ],
+    "baseline_evidence": "integrated_test",
+    "target": "One canonical UI state and device parity",
+    "source_refs": [
+      "tierflow:src/visual-runtime",
+      "tierflow:VIVIM-VISUAL-RUNTIME/WAVE-4/INTEGRATION-4-RESULT.md"
+    ],
+    "task_refs": []
+  },
+  {
+    "capability_id": "cap:phone-projection",
+    "name": "APK phone UI projection",
+    "domain": "device",
+    "kind": "integration",
+    "owner_repo": "tierflow",
+    "surfaces": [
+      "android"
+    ],
+    "authority": "TierFlow inert projection; Harness APK shell",
+    "wave_lanes": [
+      "F",
+      "H"
+    ],
+    "baseline_evidence": "integrated_test",
+    "target": "Real render, fixed guard, physical-device acceptance",
+    "source_refs": [
+      "tierflow:src/visual-runtime/device/wave4-phone-adapter.ts",
+      "tierflow:VIVIM-VISUAL-RUNTIME/WAVE-4/INTEGRATION-4-RESULT.md"
+    ],
+    "task_refs": []
+  },
+  {
+    "capability_id": "cap:typed-commands",
+    "name": "Typed command candidate and Host boundary",
+    "domain": "commands",
+    "kind": "system",
+    "owner_repo": "tierflow",
+    "surfaces": [
+      "desktop",
+      "android",
+      "oracle"
+    ],
+    "authority": "TierFlow candidate, Harness Host effects",
+    "wave_lanes": [
+      "A",
+      "E",
+      "H"
+    ],
+    "baseline_evidence": "integrated_test",
+    "target": "One deterministic typed command path, no bypass",
+    "source_refs": [
+      "tierflow:src/visual-runtime/command/wave4-typed-transport-adapter.ts"
+    ],
+    "task_refs": []
+  },
+  {
+    "capability_id": "cap:studio-editing",
+    "name": "Existing Studio canonical document editing",
+    "domain": "editing",
+    "kind": "feature",
+    "owner_repo": "vivim-web-harness",
+    "surfaces": [
+      "studio",
+      "desktop",
+      "android"
+    ],
+    "authority": "Existing Studio + TierFlow CAS",
+    "wave_lanes": [
+      "B",
+      "H"
+    ],
+    "baseline_evidence": "design_only",
+    "target": "One guarded edit/preview/publish/history",
+    "source_refs": [
+      "tierflow:VIVIM-VISUAL-RUNTIME/WAVE-5/ADVANCE-5B-STUDIO-EDITING.md",
+      "vivim-web-harness:studio"
+    ],
+    "task_refs": []
+  },
+  {
+    "capability_id": "cap:templates",
+    "name": "Portable template metadata",
+    "domain": "components",
+    "kind": "feature",
+    "owner_repo": "tierflow",
+    "surfaces": [
+      "studio",
+      "desktop",
+      "android"
+    ],
+    "authority": "TierFlow component registry",
+    "wave_lanes": [
+      "C"
+    ],
+    "baseline_evidence": "design_only",
+    "target": "Versioned inert templates and accessible layout",
+    "source_refs": [
+      "tierflow:VIVIM-VISUAL-RUNTIME/WAVE-5/LANE-C.md"
+    ],
+    "task_refs": []
+  },
+  {
+    "capability_id": "cap:oracle-intent",
+    "name": "Oracle language UI authoring",
+    "domain": "oracle",
+    "kind": "algorithm",
+    "owner_repo": "repos-hq",
+    "surfaces": [
+      "oracle",
+      "desktop",
+      "android"
+    ],
+    "authority": "HQ semantics; TierFlow IR; Host approval",
+    "wave_lanes": [
+      "A"
+    ],
+    "baseline_evidence": "design_only",
+    "target": "Bounded language interpretation into reviewed IR",
+    "source_refs": [
+      "tierflow:VIVIM-VISUAL-RUNTIME/WAVE-5/LANE-A.md"
+    ],
+    "task_refs": []
+  },
+  {
+    "capability_id": "cap:knowledge-snapshots",
+    "name": "Scoped knowledge device snapshots",
+    "domain": "knowledge",
+    "kind": "integration",
+    "owner_repo": "tierflow",
+    "surfaces": [
+      "desktop",
+      "android",
+      "kb"
+    ],
+    "authority": "Repos HQ KB via trusted broker",
+    "wave_lanes": [
+      "D",
+      "F"
+    ],
+    "baseline_evidence": "integrated_test",
+    "target": "Provenance, revocation, deletion parity, no private leak",
+    "source_refs": [
+      "tierflow:src/visual-runtime/knowledge/wave4-device-snapshot-adapter.ts"
+    ],
+    "task_refs": []
+  },
+  {
+    "capability_id": "cap:host-status",
+    "name": "Host permission and receipt status",
+    "domain": "host-security",
+    "kind": "integration",
+    "owner_repo": "tierflow",
+    "surfaces": [
+      "desktop",
+      "android"
+    ],
+    "authority": "Existing Harness Host",
+    "wave_lanes": [
+      "E",
+      "H"
+    ],
+    "baseline_evidence": "integrated_test",
+    "target": "Only Host-authoritative grant and receipt truth",
+    "source_refs": [
+      "tierflow:src/visual-runtime/host/wave4-h-host-status-contract.ts"
+    ],
+    "task_refs": []
+  },
+  {
+    "capability_id": "cap:onboarding",
+    "name": "Founder Workspace onboarding and recovery",
+    "domain": "experience",
+    "kind": "experience",
+    "owner_repo": "tierflow",
+    "surfaces": [
+      "desktop",
+      "android"
+    ],
+    "authority": "Existing shells + TierFlow projections",
+    "wave_lanes": [
+      "C",
+      "F"
+    ],
+    "baseline_evidence": "integrated_test",
+    "target": "Accessible first-value editing and recovery",
+    "source_refs": [
+      "tierflow:src/visual-runtime/experience/wave4-onboarding-resume.ts"
+    ],
+    "task_refs": []
+  },
+  {
+    "capability_id": "cap:publisher-migration",
+    "name": "Single UI writer migration and rollback",
+    "domain": "release",
+    "kind": "system",
+    "owner_repo": "tierflow",
+    "surfaces": [
+      "desktop",
+      "android",
+      "studio"
+    ],
+    "authority": "Harness live publisher until approved handoff",
+    "wave_lanes": [
+      "G",
+      "H"
+    ],
+    "baseline_evidence": "design_only",
+    "target": "One live writer after approved reversible transition",
+    "source_refs": [
+      "tierflow:VIVIM-VISUAL-RUNTIME/WAVE-6/ADVANCE-6A-PUBLISHER-CUTOVER.md"
+    ],
+    "task_refs": []
+  }
+]

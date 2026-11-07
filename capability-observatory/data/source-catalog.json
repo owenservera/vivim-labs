@@ -1,0 +1,68 @@
+[
+  {
+    "id": "tierflow",
+    "repository": "owenservera/tierflow",
+    "seed_sha": "2f2d4d623ea83c901b7666f1601162f9da975401",
+    "paths": [
+      "VIVIM-VISUAL-RUNTIME/WAVE-4/INTEGRATION-4-RESULT.md",
+      "VIVIM-VISUAL-RUNTIME/FINAL-WAVE",
+      "src/visual-runtime",
+      "tests/visual-runtime"
+    ],
+    "role": "canonical UI/revision/IR",
+    "intake_state": "seeded_paths_only",
+    "measured_items": null
+  },
+  {
+    "id": "harness",
+    "repository": "owenservera/vivim-web-harness",
+    "seed_sha": "09382c61f74a304f120b05445f6dfa900b58494b",
+    "paths": [
+      "apps",
+      "studio",
+      "catalog",
+      "docs"
+    ],
+    "role": "Host/native app/Studio/effect ownership",
+    "intake_state": "seeded_paths_only",
+    "measured_items": null
+  },
+  {
+    "id": "hq",
+    "repository": "owenservera/repos-hq",
+    "seed_sha": "6679752362a5ef58aa66e2af5463f9d81077001c",
+    "paths": [
+      "KB-REUNIFICATION",
+      "contracts",
+      "research",
+      "agents",
+      "vivim-core"
+    ],
+    "role": "canonical knowledge/provenance/semantics",
+    "intake_state": "seeded_paths_only",
+    "measured_items": null
+  },
+  {
+    "id": "labs",
+    "repository": "owenservera/vivim-labs",
+    "seed_sha": "39c96addce68e9c0664b1e623d60b2296f3d9da2",
+    "paths": [
+      "past-orphaned-work",
+      "intelligence",
+      "vivim",
+      "agentic_excelence"
+    ],
+    "role": "experiment/legacy discovery and tracker intake",
+    "intake_state": "seeded_paths_only",
+    "measured_items": null
+  },
+  {
+    "id": "large-trackers-unlocated",
+    "repository": null,
+    "seed_sha": null,
+    "paths": [],
+    "role": "600+ and other user-referenced lists; discover actual path/format/record count",
+    "intake_state": "unlocated",
+    "measured_items": null
+  }
+]

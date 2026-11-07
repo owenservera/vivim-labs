@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VIVIM dev preprod tracker",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "capability_id",
+      "stage",
+      "evidence_class",
+      "status",
+      "source_sha",
+      "blockers"
+    ],
+    "properties": {
+      "capability_id": {
+        "type": "string"
+      },
+      "stage": {
+        "enum": [
+          "research",
+          "designed",
+          "implemented",
+          "tested",
+          "integrated",
+          "release_candidate"
+        ]
+      },
+      "evidence_class": {
+        "enum": [
+          "unverified",
+          "design_only",
+          "code_present",
+          "tested_fixture",
+          "integrated_test",
+          "hardware_verified"
+        ]
+      },
+      "status": {
+        "enum": [
+          "unverified",
+          "in_progress",
+          "passed",
+          "blocked",
+          "unrun"
+        ]
+      },
+      "source_sha": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "evidence_refs": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "blockers": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "expected_end_state": {
+        "type": "string"
+      }
+    },
+    "additionalProperties": false
+  }
+}

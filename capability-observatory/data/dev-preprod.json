@@ -1,0 +1,146 @@
+[
+  {
+    "capability_id": "cap:ui-canonical",
+    "stage": "integrated",
+    "evidence_class": "integrated_test",
+    "status": "passed",
+    "source_sha": "2f2d4d623ea83c901b7666f1601162f9da975401",
+    "evidence_refs": [
+      "tierflow:src/visual-runtime",
+      "tierflow:VIVIM-VISUAL-RUNTIME/WAVE-4/INTEGRATION-4-RESULT.md"
+    ],
+    "blockers": [
+      "Physical/live acceptance UNRUN; synthetic or integrated code evidence only"
+    ],
+    "expected_end_state": "One canonical UI state and device parity"
+  },
+  {
+    "capability_id": "cap:phone-projection",
+    "stage": "integrated",
+    "evidence_class": "integrated_test",
+    "status": "blocked",
+    "source_sha": "2f2d4d623ea83c901b7666f1601162f9da975401",
+    "evidence_refs": [
+      "tierflow:src/visual-runtime/device/wave4-phone-adapter.ts",
+      "tierflow:VIVIM-VISUAL-RUNTIME/WAVE-4/INTEGRATION-4-RESULT.md"
+    ],
+    "blockers": [
+      "Wave 4 Integration 4 real-render UNSAFE_RENDER; Lane B source fix not verified as merged",
+      "Physical Android hardware acceptance UNRUN"
+    ],
+    "expected_end_state": "Real render, fixed guard, physical-device acceptance"
+  },
+  {
+    "capability_id": "cap:typed-commands",
+    "stage": "integrated",
+    "evidence_class": "integrated_test",
+    "status": "passed",
+    "source_sha": "2f2d4d623ea83c901b7666f1601162f9da975401",
+    "evidence_refs": [
+      "tierflow:src/visual-runtime/command/wave4-typed-transport-adapter.ts"
+    ],
+    "blockers": [
+      "Physical/live acceptance UNRUN; synthetic or integrated code evidence only"
+    ],
+    "expected_end_state": "One deterministic typed command path, no bypass"
+  },
+  {
+    "capability_id": "cap:studio-editing",
+    "stage": "designed",
+    "evidence_class": "design_only",
+    "status": "unverified",
+    "source_sha": "09382c61f74a304f120b05445f6dfa900b58494b",
+    "evidence_refs": [
+      "tierflow:VIVIM-VISUAL-RUNTIME/WAVE-5/ADVANCE-5B-STUDIO-EDITING.md",
+      "vivim-web-harness:studio"
+    ],
+    "blockers": [
+      "Not yet verified as implemented"
+    ],
+    "expected_end_state": "One guarded edit/preview/publish/history"
+  },
+  {
+    "capability_id": "cap:templates",
+    "stage": "designed",
+    "evidence_class": "design_only",
+    "status": "unverified",
+    "source_sha": "2f2d4d623ea83c901b7666f1601162f9da975401",
+    "evidence_refs": [
+      "tierflow:VIVIM-VISUAL-RUNTIME/WAVE-5/LANE-C.md"
+    ],
+    "blockers": [
+      "Not yet verified as implemented"
+    ],
+    "expected_end_state": "Versioned inert templates and accessible layout"
+  },
+  {
+    "capability_id": "cap:oracle-intent",
+    "stage": "designed",
+    "evidence_class": "design_only",
+    "status": "unverified",
+    "source_sha": "6679752362a5ef58aa66e2af5463f9d81077001c",
+    "evidence_refs": [
+      "tierflow:VIVIM-VISUAL-RUNTIME/WAVE-5/LANE-A.md"
+    ],
+    "blockers": [
+      "Not yet verified as implemented"
+    ],
+    "expected_end_state": "Bounded language interpretation into reviewed IR"
+  },
+  {
+    "capability_id": "cap:knowledge-snapshots",
+    "stage": "integrated",
+    "evidence_class": "integrated_test",
+    "status": "passed",
+    "source_sha": "2f2d4d623ea83c901b7666f1601162f9da975401",
+    "evidence_refs": [
+      "tierflow:src/visual-runtime/knowledge/wave4-device-snapshot-adapter.ts"
+    ],
+    "blockers": [
+      "Physical/live acceptance UNRUN; synthetic or integrated code evidence only"
+    ],
+    "expected_end_state": "Provenance, revocation, deletion parity, no private leak"
+  },
+  {
+    "capability_id": "cap:host-status",
+    "stage": "integrated",
+    "evidence_class": "integrated_test",
+    "status": "passed",
+    "source_sha": "2f2d4d623ea83c901b7666f1601162f9da975401",
+    "evidence_refs": [
+      "tierflow:src/visual-runtime/host/wave4-h-host-status-contract.ts"
+    ],
+    "blockers": [
+      "Physical/live acceptance UNRUN; synthetic or integrated code evidence only"
+    ],
+    "expected_end_state": "Only Host-authoritative grant and receipt truth"
+  },
+  {
+    "capability_id": "cap:onboarding",
+    "stage": "integrated",
+    "evidence_class": "integrated_test",
+    "status": "passed",
+    "source_sha": "2f2d4d623ea83c901b7666f1601162f9da975401",
+    "evidence_refs": [
+      "tierflow:src/visual-runtime/experience/wave4-onboarding-resume.ts"
+    ],
+    "blockers": [
+      "Physical/live acceptance UNRUN; synthetic or integrated code evidence only"
+    ],
+    "expected_end_state": "Accessible first-value editing and recovery"
+  },
+  {
+    "capability_id": "cap:publisher-migration",
+    "stage": "designed",
+    "evidence_class": "design_only",
+    "status": "unverified",
+    "source_sha": "2f2d4d623ea83c901b7666f1601162f9da975401",
+    "evidence_refs": [
+      "tierflow:VIVIM-VISUAL-RUNTIME/WAVE-6/ADVANCE-6A-PUBLISHER-CUTOVER.md"
+    ],
+    "blockers": [
+      "Not yet verified as implemented"
+    ],
+    "expected_end_state": "One live writer after approved reversible transition"
+  }
+]

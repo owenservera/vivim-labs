@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VIVIM capability identity index",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "capability_id",
+      "name",
+      "domain",
+      "kind",
+      "owner_repo",
+      "surfaces",
+      "authority",
+      "wave_lanes",
+      "baseline_evidence",
+      "target",
+      "source_refs"
+    ],
+    "properties": {
+      "capability_id": {
+        "type": "string",
+        "pattern": "^cap:[a-z0-9-]+$"
+      },
+      "name": {
+        "type": "string"
+      },
+      "domain": {
+        "type": "string"
+      },
+      "kind": {
+        "enum": [
+          "feature",
+          "tool",
+          "algorithm",
+          "system",
+          "integration",
+          "experience"
+        ]
+      },
+      "owner_repo": {
+        "enum": [
+          "tierflow",
+          "vivim-web-harness",
+          "repos-hq"
+        ]
+      },
+      "surfaces": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "authority": {
+        "type": "string"
+      },
+      "wave_lanes": {
+        "type": "array",
+        "items": {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H"
+          ]
+        }
+      },
+      "baseline_evidence": {
+        "enum": [
+          "unverified",
+          "design_only",
+          "code_present",
+          "tested_fixture",
+          "integrated_test",
+          "hardware_verified",
+          "production_verified"
+        ]
+      },
+      "target": {
+        "type": "string"
+      },
+      "source_refs": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "task_refs": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "additionalProperties": false
+  }
+}

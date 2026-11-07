@@ -1,0 +1,18 @@
+{
+  "schema": "vivim.wave1.lane-d-test-evidence/1",
+  "lane": "D",
+  "status": "BLOCKED_INTEGRATED_RUNTIME",
+  "environment": {"node": "v22.16.0", "bun": "not installed", "nativeReposHqCheckout": false},
+  "testCommand": "node --test wiki-oracle.test.mjs",
+  "exitCode": 0,
+  "tests": {"total": 17, "passed": 17, "failed": 0, "data": "SYNTHETIC"},
+  "syntaxCheck": {"command": "node --check wiki-oracle.mjs", "exitCode": 0},
+  "nativeWikiGenerated": false,
+  "rustJournalExecuted": false,
+  "sourceARead": false,
+  "sourceBRead": false,
+  "sourceCRead": false,
+  "actualEExchangeAvailable": false,
+  "upstreamBaseline": {"repository": "owenservera/repos-hq", "main": "2c9bfb4c515cfabce6f8775473e461cd16418e46"},
+  "limitations": ["No safe proof of source-index reset", "Native HQ wiki builder not run", "Rust graph and journal not run", "No real A+B+C input feed", "Final wiki cross-domain quality unscored"]
+}

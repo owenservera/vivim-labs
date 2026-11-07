@@ -14,7 +14,7 @@ The long-range intention is to produce over three eventual waves **one live, run
 - HQ code index + graph + FTS: `repos-hq/hq/lib/indexer.mjs`, `schema.mjs`, `graph.mjs`, `extract.mjs`, `hq/bin/hq.mjs`.
 - KB/context and durable kernel: `hq/lib/kb.mjs`, `kb-intake.mjs`, `context.mjs`, `kernel/store.mjs`.
 - Semantic IDs/action registry/NL routing: `semantic-registry.mjs`, `semantic-optimizers.mjs`, `action-registry.mjs`, `action-router.mjs`, `comment-wiki-bridge.mjs`.
-- Automatic wiki and programmable view: `wiki.mjs`, `wiki-program.mjs`.
+- Automatic wiki and programmable view: `wiki.mjs`, `wiki-program.mjs`. **Wiki is downstream evidence of correct A+B+C integration, not a peer data source whose mere import establishes success.**
 - Rust HQKG Graph/EngineSlot/ComputeEngine/Database/Scheduler/Journal: `research/rust-knowledge-graph/src`.
 - Already existing HQKGX1 data-only exporter/importer: `research/agentic-knowledge-graph/scripts/export-hqkg.mjs`, `research/graph-kernel-integration/scripts/export-unified-hqkg.mjs`, `research/rust-knowledge-graph/src/import.rs`, `src/bin/hqkg-import.rs`.
 - Existing research exporter does **not** yet export live HQ indexing/KB/actions/wiki: extend via a separately source-owned live projection, do not mislabel historical research export as live.
@@ -23,7 +23,7 @@ The long-range intention is to produce over three eventual waves **one live, run
 ## Wave structure
 | Wave | Theme | Key proof | Deliverable |
 |---|---|---|---|
-| **1 · Bootstrap** | Connect living HQ knowledge/commands/wiki to the real Rust graph | Real workspace data imported and queried from Rust, with source evidence | First runnable graph + stable crosswalk + baseline/gaps |
+| **1 · Bootstrap** | Connect live code intelligence (A), KB/semantics (B) and commands/CLI (C) inside Rust; generate the wiki as an integration quality test (D) | Real A+B+C linked and queried from Rust; derived wiki exposes integration completeness and gaps | First runnable graph + measured wiki quality + source-backed blind spots |
 | **2 · Convergence** | Make the graph a unified, navigable command/KB/code/engine model | Actual caller/callee and inputs/outputs/writers connected; same semantic operation across surfaces | System-wide topology + actual/target views |
 | **3 · Live operation** | Continuous refresh, end-to-end UX and robust operation | Change → index → Rust revision → query/wiki/UI → receipt, repeatable and recoverable | Living architecture observatory + launchable dev/product profiles |
 

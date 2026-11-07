@@ -93,6 +93,6 @@ Each integration should leave:
 - Duplicate canonical writers/registries introduced: target zero.
 
 ## 10. Immediate implementation posture
-Start with graph-observable engine/data/CLI inventory from existing Repos HQ index, then stable source identity/KB → Rust projection, then native graph query + CLI evidence, then read-only Visual/Labs observability, then Host/TierFlow and authorized execution. Each step provides verified data, fixtures, change detection and reusable routes for the next step.
+Start by validating the **full HQ intelligence-command-wiki loop**: deep source index + KB/context + stable semantic IDs + action router + actual CLI/MCP operations + automatically generated wiki + programmable wiki preview/activation. Integrate that coherent system as a graph-observable workbench, not just a code crawler. Next connect its source/operation/wiki identities into Rust graph, then shared CLI and Visual UI, then Host/TierFlow evidence and approved effects. See [09 — Unified HQ Intelligence, Commands and Wiki](09-UNIFIED-INTELLIGENCE-COMMAND-WIKI.md). Each step provides verified data, fixtures, change detection and reusable routes for the next step.
 
 This document is the integration philosophy. Specific sequence and scope belong to a separately reviewed integration map. No live core migration or production activation is approved here.

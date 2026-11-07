@@ -1,0 +1,796 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:vivim:agentic-frontmatter:0.1",
+  "title": "VIVIM semantic frontmatter read-only IR",
+  "description": "Metadata never authorizes execution, provider delivery, or policy changes; source-pinned revisions and Host owner permissions are separately enforced.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schemaVersion",
+    "fileId",
+    "fileType",
+    "family",
+    "role",
+    "sourceRepository",
+    "sourcePath",
+    "sourceBlobSha",
+    "targetId",
+    "sourceClass",
+    "lifecycle",
+    "purpose",
+    "scope",
+    "ownerRef",
+    "authorityClass",
+    "sensitivity",
+    "consumerSurfaces",
+    "provenanceRefs",
+    "dependencyRefs",
+    "sharedSectionTypes",
+    "uniqueSectionIds",
+    "unclassifiedSectionIds",
+    "generatedState",
+    "formatAdapter",
+    "nonAuthorizing",
+    "exportRestrictions",
+    "policyBoundary",
+    "evidenceAuthority"
+  ],
+  "properties": {
+    "schema": {
+      "const": "vivim.agentic-frontmatter/0.1"
+    },
+    "schemaVersion": {
+      "const": "0.1"
+    },
+    "fileId": {
+      "type": "string",
+      "pattern": "^file:[0-9]{3}$"
+    },
+    "fileType": {
+      "enum": [
+        ".opencode/agents/*.md",
+        "AGENT.md",
+        "AGENTS.md",
+        "BEST-PRACTICES.md",
+        "BOOTSTRAP.md",
+        "CLAUDE.md",
+        "CONTEXT.md",
+        "GEMINI.md",
+        "HANDOFF.md",
+        "README.md",
+        "SITREP.md",
+        "SKILL.md",
+        "TOOL-REGISTRY.json",
+        "TOOLS.json",
+        "TOOLS.md",
+        "WORKSPACE.md",
+        "agent.json",
+        "claude.json",
+        "gemini.json"
+      ]
+    },
+    "family": {
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21"
+      ]
+    },
+    "role": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceRepository": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+$"
+    },
+    "sourcePath": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "pattern": "^(?:/|[a-zA-Z]:[\\\\/])"
+      }
+    },
+    "sourceBlobSha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "targetId": {
+      "type": "string",
+      "pattern": "^(sidecar|candidate|projection):[a-zA-Z0-9._:/-]+$"
+    },
+    "sourceVisibility": {
+      "enum": [
+        "public-origin-migrated",
+        "private-origin-reference",
+        "public",
+        "private",
+        "unknown"
+      ]
+    },
+    "sourceClass": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "lifecycle": {
+      "enum": [
+        "historical-research-copy",
+        "observed-source",
+        "current-verified",
+        "stale",
+        "retired",
+        "unknown"
+      ]
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "projectRef",
+        "roleRef",
+        "taskRef",
+        "principalRef",
+        "destinationRef"
+      ],
+      "properties": {
+        "projectRef": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "roleRef": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "taskRef": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "principalRef": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "destinationRef": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "ownerRef": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "authorityClass": {
+      "enum": [
+        "observed-source-not-policy",
+        "vendor-spec-reference",
+        "owner-policy-reference",
+        "verified-runtime-evidence",
+        "unknown"
+      ]
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "private",
+        "restricted",
+        "unknown"
+      ]
+    },
+    "consumerSurfaces": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "lab-search",
+          "context-dcb",
+          "graph-index",
+          "provider-native-preview",
+          "independent-verification"
+        ]
+      }
+    },
+    "provenanceRefs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "dependencyRefs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "sharedSectionTypes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "section_type:purpose",
+          "section_type:prerequisites",
+          "section_type:responsibilities",
+          "section_type:workflow",
+          "section_type:best_practices",
+          "section_type:tools",
+          "section_type:context",
+          "section_type:safety",
+          "section_type:verification",
+          "section_type:recovery",
+          "section_type:lifecycle",
+          "section_type:examples"
+        ]
+      }
+    },
+    "uniqueSectionIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^section:[0-9]{3}:[0-9]{3}$"
+      },
+      "uniqueItems": true
+    },
+    "unclassifiedSectionIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^section:[0-9]{3}:[0-9]{3}$"
+      },
+      "uniqueItems": true
+    },
+    "generatedState": {
+      "enum": [
+        "metadata-proposal",
+        "designed",
+        "parser-validated",
+        "live-observed"
+      ]
+    },
+    "formatAdapter": {
+      "enum": [
+        "agent-skills-yaml-sidecar",
+        "opencode-agent-yaml-sidecar",
+        "markdown-sidecar",
+        "json-sidecar"
+      ]
+    },
+    "nonAuthorizing": {
+      "const": true
+    },
+    "exportRestrictions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "no-export",
+          "owner-grant-required",
+          "private-body-denied",
+          "provider-delivery-denied",
+          "unknown"
+        ]
+      }
+    },
+    "policyBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policyOwnerRef",
+        "grantReceiptRef",
+        "principalRef",
+        "destinationRef",
+        "effectsNeverAuthorizedByMetadata"
+      ],
+      "properties": {
+        "policyOwnerRef": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "grantReceiptRef": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "principalRef": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "destinationRef": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "effectsNeverAuthorizedByMetadata": {
+          "const": true
+        }
+      }
+    },
+    "evidenceAuthority": {
+      "enum": [
+        "source-observation",
+        "vendor-documentation",
+        "owner-signed-grant",
+        "runtime-receipt",
+        "unverified"
+      ]
+    },
+    "retrieval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semanticPurpose",
+        "taskAffinity",
+        "triggers",
+        "symbolRefs",
+        "capabilityRefs",
+        "autoExposeRoles",
+        "tokenBudgetHint",
+        "freshness"
+      ],
+      "properties": {
+        "semanticPurpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "taskAffinity": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "triggers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "symbolRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "capabilityRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "autoExposeRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "tokenBudgetHint": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "freshness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sourceRevisionRef",
+            "observedAt",
+            "expiresAt"
+          ],
+          "properties": {
+            "sourceRevisionRef": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "minLength": 1
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "observedAt": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "minLength": 1
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "expiresAt": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "minLength": 1
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "sectionLinks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sectionId",
+          "sectionType",
+          "variant",
+          "evidenceClass",
+          "line",
+          "confidence"
+        ],
+        "properties": {
+          "sectionId": {
+            "type": "string",
+            "pattern": "^section:[0-9]{3}:[0-9]{3}$"
+          },
+          "sectionType": {
+            "oneOf": [
+              {
+                "enum": [
+                  "section_type:purpose",
+                  "section_type:prerequisites",
+                  "section_type:responsibilities",
+                  "section_type:workflow",
+                  "section_type:best_practices",
+                  "section_type:tools",
+                  "section_type:context",
+                  "section_type:safety",
+                  "section_type:verification",
+                  "section_type:recovery",
+                  "section_type:lifecycle",
+                  "section_type:examples",
+                  "section_type:unique"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "variant": {
+            "oneOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "evidenceClass": {
+            "enum": [
+              "source-span-reviewed",
+              "observed-heading-only",
+              "vendor-spec",
+              "owner-policy",
+              "unreviewed"
+            ]
+          },
+          "line": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "confidence": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "changeControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pinnedSourceBlobSha",
+        "pinnedSchemaVersion",
+        "adapterRevision",
+        "policyRevision",
+        "graphEpoch",
+        "normalizedDigest",
+        "invalidatesOn"
+      ],
+      "properties": {
+        "pinnedSourceBlobSha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "pinnedSchemaVersion": {
+          "const": "0.1"
+        },
+        "adapterRevision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "policyRevision": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "graphEpoch": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "normalizedDigest": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "invalidatesOn": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "source-sha-change",
+              "schema-revision",
+              "adapter-revision",
+              "policy-revocation",
+              "scope-change",
+              "principal-change",
+              "graph-epoch",
+              "evidence-expiry"
+            ]
+          }
+        }
+      }
+    },
+    "approvalReceipts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "testReceipts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "formatAdapter": {
+            "const": "json-sidecar"
+          }
+        },
+        "required": [
+          "formatAdapter"
+        ]
+      },
+      "then": {
+        "properties": {
+          "fileType": {
+            "enum": [
+              "TOOL-REGISTRY.json",
+              "TOOLS.json",
+              "agent.json",
+              "claude.json",
+              "gemini.json"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "sourceVisibility": {
+            "enum": [
+              "private-origin-reference",
+              "private"
+            ]
+          }
+        },
+        "required": [
+          "sourceVisibility"
+        ]
+      },
+      "then": {
+        "properties": {
+          "consumerSurfaces": {
+            "not": {
+              "contains": {
+                "const": "provider-native-preview"
+              }
+            }
+          },
+          "sensitivity": {
+            "enum": [
+              "private",
+              "restricted"
+            ]
+          },
+          "exportRestrictions": {
+            "contains": {
+              "const": "private-body-denied"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "generatedState": {
+            "const": "live-observed"
+          }
+        },
+        "required": [
+          "generatedState"
+        ]
+      },
+      "then": {
+        "required": [
+          "approvalReceipts",
+          "testReceipts"
+        ],
+        "properties": {
+          "approvalReceipts": {
+            "minItems": 1
+          },
+          "testReceipts": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ],
+  "x-vivim-semantic-checks": [
+    "pinnedSourceBlobSha must equal sourceBlobSha and fetch-valid SHA",
+    "no unclassified heading can be promoted without source span evidence",
+    "sidecar does not grant native permissions",
+    "validate scope/ACL before retrieval and every LRU cache hit",
+    "verify loader version before native YAML write",
+    "source and schema changes invalidate projections"
+  ]
+}

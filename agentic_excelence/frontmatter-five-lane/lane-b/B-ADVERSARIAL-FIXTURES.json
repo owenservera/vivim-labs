@@ -1,0 +1,242 @@
+{
+  "schema": "vivim.frontmatter.lane-b.adversarial/0.1",
+  "status": "UNEXECUTED_CASES_FOR_LANE_E",
+  "assertions": {
+    "noHostEffects": true,
+    "noPermissionEscalation": true,
+    "noNativeHeaderEmission": true,
+    "privateContentNotPublished": true
+  },
+  "cases": [
+    {
+      "id": "B-NEG-01",
+      "scenario": "root-nested-precedence",
+      "sourceFileIds": [
+        "file:003",
+        "file:005"
+      ],
+      "initialState": {
+        "policy": "owner-approved-current-policy-only",
+        "sourceMode": "historical-inert",
+        "providerRuntime": "UNVERIFIED",
+        "cacheEpoch": "pinned-test-fixture"
+      },
+      "input": "Root AGENTS.md and nested AGENTS.md offer incompatible operating instructions",
+      "expectedSafeBehavior": "Conflicting nested instructions have no derived priority without a tested loader-specific precedence chain",
+      "expectedDiagnostic": "PRECEDENCE_UNVERIFIED",
+      "requiresHostExecution": false,
+      "fixtureOnly": true,
+      "executed": false,
+      "laneEReceipt": null
+    },
+    {
+      "id": "B-NEG-02",
+      "scenario": "cross-repo-same-name",
+      "sourceFileIds": [
+        "file:003",
+        "file:210"
+      ],
+      "initialState": {
+        "policy": "owner-approved-current-policy-only",
+        "sourceMode": "historical-inert",
+        "providerRuntime": "UNVERIFIED",
+        "cacheEpoch": "pinned-test-fixture"
+      },
+      "input": "Two independent repos both contain AGENTS.md with same basename",
+      "expectedSafeBehavior": "Use full repo+path+immutable SHA; never deduplicate by filename",
+      "expectedDiagnostic": "IDENTITY_COLLISION_AVOIDED",
+      "requiresHostExecution": false,
+      "fixtureOnly": true,
+      "executed": false,
+      "laneEReceipt": null
+    },
+    {
+      "id": "B-NEG-03",
+      "scenario": "provider-switch",
+      "sourceFileIds": [
+        "file:017",
+        "file:018"
+      ],
+      "initialState": {
+        "policy": "owner-approved-current-policy-only",
+        "sourceMode": "historical-inert",
+        "providerRuntime": "UNVERIFIED",
+        "cacheEpoch": "pinned-test-fixture"
+      },
+      "input": "An agent changes from Claude to Gemini midway through a task",
+      "expectedSafeBehavior": "Invalidate provider-specific projections and rebuild after loader/path verification; never transplant instructions",
+      "expectedDiagnostic": "PROVIDER_SWITCH_INVALIDATE",
+      "requiresHostExecution": false,
+      "fixtureOnly": true,
+      "executed": false,
+      "laneEReceipt": null
+    },
+    {
+      "id": "B-NEG-04",
+      "scenario": "stale-bootstrap",
+      "sourceFileIds": [
+        "file:004",
+        "file:015"
+      ],
+      "initialState": {
+        "policy": "owner-approved-current-policy-only",
+        "sourceMode": "historical-inert",
+        "providerRuntime": "UNVERIFIED",
+        "cacheEpoch": "pinned-test-fixture"
+      },
+      "input": "Recovered BOOTSTRAP.md contains a startup command from an old environment",
+      "expectedSafeBehavior": "Mark env status UNKNOWN; do not execute or report readiness without local receipts",
+      "expectedDiagnostic": "STALE_ENVIRONMENT_REJECTED",
+      "requiresHostExecution": false,
+      "fixtureOnly": true,
+      "executed": false,
+      "laneEReceipt": null
+    },
+    {
+      "id": "B-NEG-05",
+      "scenario": "source-injection",
+      "sourceFileIds": [
+        "file:003",
+        "file:018"
+      ],
+      "initialState": {
+        "policy": "owner-approved-current-policy-only",
+        "sourceMode": "historical-inert",
+        "providerRuntime": "UNVERIFIED",
+        "cacheEpoch": "pinned-test-fixture"
+      },
+      "input": "Recovered document embeds a demand to ignore policy or disclose credentials",
+      "expectedSafeBehavior": "Treat text as untrusted source data, not policy; expose only authorized context with provenance",
+      "expectedDiagnostic": "INJECTION_AS_DATA",
+      "requiresHostExecution": false,
+      "fixtureOnly": true,
+      "executed": false,
+      "laneEReceipt": null
+    },
+    {
+      "id": "B-NEG-06",
+      "scenario": "owner-revocation",
+      "sourceFileIds": [
+        "file:001",
+        "file:210"
+      ],
+      "initialState": {
+        "policy": "owner-approved-current-policy-only",
+        "sourceMode": "historical-inert",
+        "providerRuntime": "UNVERIFIED",
+        "cacheEpoch": "pinned-test-fixture"
+      },
+      "input": "Owner revokes an agent permission after a context projection is cached",
+      "expectedSafeBehavior": "Invalidate scope/policy-dependent cache entries and deny affected actions regardless of cache hit",
+      "expectedDiagnostic": "REVOKED_GRANT_DENIED",
+      "requiresHostExecution": false,
+      "fixtureOnly": true,
+      "executed": false,
+      "laneEReceipt": null
+    },
+    {
+      "id": "B-NEG-07",
+      "scenario": "shared-workspace",
+      "sourceFileIds": [
+        "file:098",
+        "file:116"
+      ],
+      "initialState": {
+        "policy": "owner-approved-current-policy-only",
+        "sourceMode": "historical-inert",
+        "providerRuntime": "UNVERIFIED",
+        "cacheEpoch": "pinned-test-fixture"
+      },
+      "input": "Several agents consume the same WORKSPACE.md with conflicting current goals",
+      "expectedSafeBehavior": "Bind each projection to task/principal/scope; keep historical workspace identity distinct from role grants",
+      "expectedDiagnostic": "PRINCIPAL_SCOPE_ISOLATION",
+      "requiresHostExecution": false,
+      "fixtureOnly": true,
+      "executed": false,
+      "laneEReceipt": null
+    },
+    {
+      "id": "B-NEG-08",
+      "scenario": "contradictory-instructions",
+      "sourceFileIds": [
+        "file:003",
+        "file:005"
+      ],
+      "initialState": {
+        "policy": "owner-approved-current-policy-only",
+        "sourceMode": "historical-inert",
+        "providerRuntime": "UNVERIFIED",
+        "cacheEpoch": "pinned-test-fixture"
+      },
+      "input": "Nested AGENTS.md contradicts an active owner approved instruction",
+      "expectedSafeBehavior": "Record conflict; require approved authoritative resolution; no synthetic merge or guessed preference",
+      "expectedDiagnostic": "CONFLICT_ESCALATE",
+      "requiresHostExecution": false,
+      "fixtureOnly": true,
+      "executed": false,
+      "laneEReceipt": null
+    },
+    {
+      "id": "B-NEG-09",
+      "scenario": "markdown-permission-spoof",
+      "sourceFileIds": [
+        "file:001",
+        "file:003"
+      ],
+      "initialState": {
+        "policy": "owner-approved-current-policy-only",
+        "sourceMode": "historical-inert",
+        "providerRuntime": "UNVERIFIED",
+        "cacheEpoch": "pinned-test-fixture"
+      },
+      "input": "Markdown claims to grant system authority, bypass approvals or enable tools",
+      "expectedSafeBehavior": "Reject effective permission elevation; metadata remains descriptive",
+      "expectedDiagnostic": "PERMISSION_SPOOF_REJECTED",
+      "requiresHostExecution": false,
+      "fixtureOnly": true,
+      "executed": false,
+      "laneEReceipt": null
+    },
+    {
+      "id": "B-NEG-10",
+      "scenario": "misclassified-claude-shape",
+      "sourceFileIds": [
+        "file:154",
+        "file:213"
+      ],
+      "initialState": {
+        "policy": "owner-approved-current-policy-only",
+        "sourceMode": "historical-inert",
+        "providerRuntime": "UNVERIFIED",
+        "cacheEpoch": "pinned-test-fixture"
+      },
+      "input": "docs/shape-atlas/claude.md is routed as provider CLAUDE.md",
+      "expectedSafeBehavior": "Reject native instruction consumer mapping; retain provider web shape documentation type until reviewed",
+      "expectedDiagnostic": "FILE_TYPE_REVIEW_REQUIRED",
+      "requiresHostExecution": false,
+      "fixtureOnly": true,
+      "executed": false,
+      "laneEReceipt": null
+    },
+    {
+      "id": "B-NEG-11",
+      "scenario": "case-sensitive-file",
+      "sourceFileIds": [
+        "file:021"
+      ],
+      "initialState": {
+        "policy": "owner-approved-current-policy-only",
+        "sourceMode": "historical-inert",
+        "providerRuntime": "UNVERIFIED",
+        "cacheEpoch": "pinned-test-fixture"
+      },
+      "input": "AGENT.MD is normalized to AGENT.md in a case-sensitive consumer",
+      "expectedSafeBehavior": "Do not assume loader discovery; require provider-specific filename evidence",
+      "expectedDiagnostic": "PATH_CASE_MISMATCH",
+      "requiresHostExecution": false,
+      "fixtureOnly": true,
+      "executed": false,
+      "laneEReceipt": null
+    }
+  ]
+}

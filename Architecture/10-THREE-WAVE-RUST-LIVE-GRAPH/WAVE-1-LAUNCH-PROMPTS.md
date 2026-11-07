@@ -3,6 +3,13 @@ Date: 2026-11-07
 
 **Authoritative order:** https://github.com/owenservera/vivim-labs/blob/main/Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/EXECUTE-WAVE-1-FIRST.md
 
+**MUST READ FOR EVERY LANE BEFORE CODE:**
+- https://github.com/owenservera/vivim-labs/blob/main/Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/MASTER-DOCUMENT-LED-WAVE-GOALS.md
+- https://github.com/owenservera/vivim-labs/blob/main/Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/COMPILER-LANGUAGE-AND-PLACEMENT-REVIEW.md
+- https://github.com/owenservera/vivim-labs/blob/main/documentation-consolidation/INVENTORY.json
+
+**Correct scope:** Documents define the three wave goals; code/tests measure current reality. Wave 1 adds real inline comment→typed semantic crosswalk, NL safety baseline and evidence-based Rust/SQLite placement. D's wiki proves A+B+C+E, not a fourth registry. Wave 3 real-time visual input/intent is a preserved future goal, **not a new Wave 1 UI implementation**.
+
 Launch six independent local sessions concurrently, one per lane, then one integration owner for the combined run. Other wave documents are NOT execution orders. Every lane must inspect real code before editing, stay in assigned paths, and preserve actual test evidence.
 
 ## Lane A — Scoped Index Reset, Intent & Multi-Root Code Intelligence
@@ -121,5 +128,5 @@ EXECUTE VIVIM RUST LIVE GRAPH — WAVE 1 INTEGRATION.
 AUTHORITATIVE ORDER:
 https://github.com/owenservera/vivim-labs/blob/main/Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/EXECUTE-WAVE-1-FIRST.md
 
-Read the six lane HANDOFFs, scoped reset receipt, one-project/multi-root indexing-intent evidence, fresh source main SHAs and exact tests. Combine only authorized A+B+C source inputs through Lane E's single Rust HQKGX1/journal writer, then regenerate D's wiki as a derived integrated view. Run a real local end-to-end demo with code, KB, CLI/action **linked inside Rust** and the generated wiki faithfully reflecting a cross-domain traversal; run no-op, change/reindex, restart, collision, stale and refusal checks. Independently verify with Lane F's evidence report. Publish exact code SHAs, transcript, coverage denominators, actual-vs-target machine JSON and Markdown, all blind spots, and the Wave 2 input dossier. STOP AFTER REPORTING. Do not design or execute Wave 2 yet. Any missing domain or unrun native test is BLOCKED, not presumed complete.
+Read the six lane HANDOFFs, compiled semantic IR and compiler conformance, NLP safety baseline, Rust-vs-SQLite placement report, scoped reset receipt, one-project/multi-root indexing-intent evidence, fresh source main SHAs and exact tests. Combine only authorized A+B+C source inputs through Lane E's single Rust HQKGX1/journal writer, then regenerate D's wiki as a derived integrated view. Run a real local end-to-end demo with code, KB, CLI/action **linked inside Rust** and the generated wiki faithfully reflecting a cross-domain traversal; run no-op, change/reindex, restart, collision, stale and refusal checks. Independently verify with Lane F's evidence report. Publish exact code SHAs, transcript, coverage denominators, actual-vs-target machine JSON and Markdown, all blind spots, explicit runtime/DB ownership and tests, and the Wave 2 input dossier. STOP AFTER REPORTING. Do not design or execute Wave 2 yet. Any missing domain or unrun native test is BLOCKED, not presumed complete.
 ```

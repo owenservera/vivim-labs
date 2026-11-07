@@ -17,7 +17,9 @@
     "actualSidecarsWritten": 0,
     "liveAgentActivations": 0,
     "laneEAccepted": 0,
-    "unclassifiedSections": 94
+    "unclassifiedSections": 94,
+    "providerInstructionTypeConflicts": 2,
+    "pathCaseAnomalies": 1
   },
   "warning": "Records represent metadata design, not actual active instructions or trusted grants. UNKNOWN fields must not be inferred.",
   "records": [
@@ -2030,7 +2032,8 @@
         "observedNativeKeys": [],
         "sourceLineCount": 77,
         "sourceInspectionMethod": "automated-recovered-snapshot-inspection",
-        "sourceBodyManualReview": false
+        "sourceBodyManualReview": false,
+        "pathCasingIssue": "AGENT.MD (uppercase suffix), do not assume AGENT.md native consumer recognizes it"
       },
       "semanticProposal": {
         "schema": "vivim.agentic-frontmatter/0.1",
@@ -2202,7 +2205,8 @@
         "missingEvidence": [
           "actual role registration",
           "typed input and output contracts",
-          "tool grants and handoff implementation"
+          "tool grants and handoff implementation",
+          "provider path and case sensitivity for AGENT.MD"
         ],
         "sourceSnapshotValidatedBySha": true,
         "manualSemanticReview": false,
@@ -8337,7 +8341,7 @@
       "family": "02",
       "fileType": "CLAUDE.md",
       "role": "instruction",
-      "stage": "DESIGN_DRAFT_SOURCE_INSPECTED",
+      "stage": "DESIGN_DRAFT_TYPE_REVIEW_REQUIRED",
       "immutableSource": {
         "repository": "owenservera/aion",
         "path": "workspace/aion/sessions/roles/09-global-research/labs/website-to-local-streaming/capture-studio/docs/shape-atlas/claude.md",
@@ -8353,7 +8357,9 @@
         "observedNativeKeys": [],
         "sourceLineCount": 60,
         "sourceInspectionMethod": "automated-recovered-snapshot-inspection",
-        "sourceBodyManualReview": false
+        "sourceBodyManualReview": false,
+        "semanticKindCandidate": "Claude web transport/shape reference, not active CLAUDE.md agent instruction",
+        "typeMismatch": "Matrix labels CLAUDE.md but basename is lowercase claude.md under docs/shape-atlas"
       },
       "semanticProposal": {
         "schema": "vivim.agentic-frontmatter/0.1",
@@ -8491,7 +8497,8 @@
         "providerLoaderVerified": false,
         "emittedNativeKeys": [],
         "modifiesOriginal": false,
-        "activatesAgent": false
+        "activatesAgent": false,
+        "providerInstructionFileLikely": false
       },
       "authority": {
         "sourceInstructionsAreHistoricalData": true,
@@ -8516,7 +8523,8 @@
         "missingEvidence": [
           "real Claude loader/version/path conventions",
           "global versus nested scope",
-          "current authorized policy"
+          "current authorized policy",
+          "classification correction by source taxonomy owner before any native provider routing"
         ],
         "sourceSnapshotValidatedBySha": true,
         "manualSemanticReview": false,
@@ -11468,7 +11476,7 @@
       "family": "02",
       "fileType": "CLAUDE.md",
       "role": "instruction",
-      "stage": "DESIGN_DRAFT_SOURCE_INSPECTED",
+      "stage": "DESIGN_DRAFT_TYPE_REVIEW_REQUIRED",
       "immutableSource": {
         "repository": "owenservera/vivim-harness",
         "path": "docs/shape-atlas/claude.md",
@@ -11484,7 +11492,9 @@
         "observedNativeKeys": [],
         "sourceLineCount": 60,
         "sourceInspectionMethod": "automated-recovered-snapshot-inspection",
-        "sourceBodyManualReview": false
+        "sourceBodyManualReview": false,
+        "semanticKindCandidate": "Claude web transport/shape reference, not active CLAUDE.md agent instruction",
+        "typeMismatch": "Matrix labels CLAUDE.md but basename is lowercase claude.md under docs/shape-atlas"
       },
       "semanticProposal": {
         "schema": "vivim.agentic-frontmatter/0.1",
@@ -11620,7 +11630,8 @@
         "providerLoaderVerified": false,
         "emittedNativeKeys": [],
         "modifiesOriginal": false,
-        "activatesAgent": false
+        "activatesAgent": false,
+        "providerInstructionFileLikely": false
       },
       "authority": {
         "sourceInstructionsAreHistoricalData": true,
@@ -11645,7 +11656,8 @@
         "missingEvidence": [
           "real Claude loader/version/path conventions",
           "global versus nested scope",
-          "current authorized policy"
+          "current authorized policy",
+          "classification correction by source taxonomy owner before any native provider routing"
         ],
         "sourceSnapshotValidatedBySha": true,
         "manualSemanticReview": false,

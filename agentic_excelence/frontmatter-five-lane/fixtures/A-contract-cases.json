@@ -1,0 +1,1323 @@
+{
+  "schema": "vivim.agentic-frontmatter-test-fixtures/0.1",
+  "format": "INERT_NONEXECUTABLE",
+  "tested": false,
+  "expected": {
+    "pass": 3,
+    "fail": 12
+  },
+  "externalPolicyTestContext": {
+    "case": "A-015-current-policy-cache-invalidated",
+    "activePolicyRevision": "policy:revoked",
+    "activeGraphEpoch": "graph:new"
+  },
+  "cases": [
+    {
+      "id": "A-001-valid-markdown-sidecar",
+      "expected": "PASS",
+      "expectedErrorCode": null,
+      "phase": "READ_ONLY_VALIDATION",
+      "description": "source-pinned read-only AGENTS sidecar",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileId": "file:217",
+        "fileType": "AGENTS.md",
+        "family": "01",
+        "role": "instruction",
+        "sourceRepository": "owenservera/zcode-pocket",
+        "sourcePath": "product-design/AGENTS.md",
+        "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+        "sourceVisibility": "public-origin-migrated",
+        "targetId": "sidecar:file-217-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "observed-source-not-policy",
+        "sensitivity": "unknown",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [
+          "section:217:001"
+        ],
+        "generatedState": "metadata-proposal",
+        "formatAdapter": "markdown-sidecar",
+        "nonAuthorizing": true,
+        "exportRestrictions": [
+          "owner-grant-required"
+        ],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [
+          {
+            "sectionId": "section:217:001",
+            "sectionType": null,
+            "variant": null,
+            "evidenceClass": "observed-heading-only",
+            "line": 1,
+            "confidence": null
+          }
+        ],
+        "changeControl": {
+          "pinnedSourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": null,
+          "graphEpoch": null,
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A-002-valid-skill-sidecar",
+      "expected": "PASS",
+      "expectedErrorCode": null,
+      "phase": "READ_ONLY_VALIDATION",
+      "description": "documented Agent Skills candidate, never native loader proof",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileId": "file:002",
+        "fileType": "SKILL.md",
+        "family": "09",
+        "role": "skill",
+        "sourceRepository": "owenservera/aion",
+        "sourcePath": ".opencode/skills/aion-skill-builder/SKILL.md",
+        "sourceBlobSha": "aa6a9302a93f7fb6a91dd876839f749f7f634418",
+        "sourceVisibility": "public-origin-migrated",
+        "targetId": "sidecar:file-002-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "observed-source-not-policy",
+        "sensitivity": "unknown",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [],
+        "generatedState": "metadata-proposal",
+        "formatAdapter": "agent-skills-yaml-sidecar",
+        "nonAuthorizing": true,
+        "exportRestrictions": [
+          "owner-grant-required"
+        ],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [],
+        "changeControl": {
+          "pinnedSourceBlobSha": "aa6a9302a93f7fb6a91dd876839f749f7f634418",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": null,
+          "graphEpoch": null,
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A-003-valid-json-sidecar",
+      "expected": "PASS",
+      "expectedErrorCode": null,
+      "phase": "READ_ONLY_VALIDATION",
+      "description": "JSON remains JSON; metadata is separate",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileId": "file:216",
+        "fileType": "agent.json",
+        "family": "10",
+        "role": "configuration",
+        "sourceRepository": "owenservera/vivim-omega",
+        "sourcePath": "compositions/agent.json",
+        "sourceBlobSha": "f44d442cd0f5130f41330f684482181a2a8414d7",
+        "sourceVisibility": "public-origin-migrated",
+        "targetId": "sidecar:file-216-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "observed-source-not-policy",
+        "sensitivity": "unknown",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [],
+        "generatedState": "metadata-proposal",
+        "formatAdapter": "json-sidecar",
+        "nonAuthorizing": true,
+        "exportRestrictions": [
+          "owner-grant-required"
+        ],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [],
+        "changeControl": {
+          "pinnedSourceBlobSha": "f44d442cd0f5130f41330f684482181a2a8414d7",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": null,
+          "graphEpoch": null,
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A-004-stale-hash",
+      "expected": "FAIL",
+      "expectedErrorCode": "E_SOURCE_SHA_MISMATCH",
+      "phase": "SEMANTIC",
+      "description": "source hash mismatch",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileId": "file:217",
+        "fileType": "AGENTS.md",
+        "family": "01",
+        "role": "instruction",
+        "sourceRepository": "owenservera/zcode-pocket",
+        "sourcePath": "product-design/AGENTS.md",
+        "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+        "sourceVisibility": "public-origin-migrated",
+        "targetId": "sidecar:file-217-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "observed-source-not-policy",
+        "sensitivity": "unknown",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [
+          "section:217:001"
+        ],
+        "generatedState": "metadata-proposal",
+        "formatAdapter": "markdown-sidecar",
+        "nonAuthorizing": true,
+        "exportRestrictions": [
+          "owner-grant-required"
+        ],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [
+          {
+            "sectionId": "section:217:001",
+            "sectionType": null,
+            "variant": null,
+            "evidenceClass": "observed-heading-only",
+            "line": 1,
+            "confidence": null
+          }
+        ],
+        "changeControl": {
+          "pinnedSourceBlobSha": "0000000000000000000000000000000000000000",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": null,
+          "graphEpoch": null,
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A-005-owner-policy-conflict",
+      "expected": "FAIL",
+      "expectedErrorCode": "E_OWNER_AUTHORITY_CONFLICT",
+      "phase": "SEMANTIC",
+      "description": "owner authority cannot be invented",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileId": "file:217",
+        "fileType": "AGENTS.md",
+        "family": "01",
+        "role": "instruction",
+        "sourceRepository": "owenservera/zcode-pocket",
+        "sourcePath": "product-design/AGENTS.md",
+        "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+        "sourceVisibility": "public-origin-migrated",
+        "targetId": "sidecar:file-217-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "owner-policy-reference",
+        "sensitivity": "unknown",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [
+          "section:217:001"
+        ],
+        "generatedState": "metadata-proposal",
+        "formatAdapter": "markdown-sidecar",
+        "nonAuthorizing": true,
+        "exportRestrictions": [
+          "owner-grant-required"
+        ],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [
+          {
+            "sectionId": "section:217:001",
+            "sectionType": null,
+            "variant": null,
+            "evidenceClass": "observed-heading-only",
+            "line": 1,
+            "confidence": null
+          }
+        ],
+        "changeControl": {
+          "pinnedSourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": null,
+          "graphEpoch": null,
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A-006-private-provider-export",
+      "expected": "FAIL",
+      "expectedErrorCode": "E_PRIVATE_SCOPE_DENIED",
+      "phase": "SCHEMA_AND_POLICY",
+      "description": "private material denied on every cache path",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileId": "file:217",
+        "fileType": "AGENTS.md",
+        "family": "01",
+        "role": "instruction",
+        "sourceRepository": "owenservera/zcode-pocket",
+        "sourcePath": "product-design/AGENTS.md",
+        "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+        "sourceVisibility": "private-origin-reference",
+        "targetId": "sidecar:file-217-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "observed-source-not-policy",
+        "sensitivity": "private",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification",
+          "provider-native-preview"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [
+          "section:217:001"
+        ],
+        "generatedState": "metadata-proposal",
+        "formatAdapter": "markdown-sidecar",
+        "nonAuthorizing": true,
+        "exportRestrictions": [],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [
+          {
+            "sectionId": "section:217:001",
+            "sectionType": null,
+            "variant": null,
+            "evidenceClass": "observed-heading-only",
+            "line": 1,
+            "confidence": null
+          }
+        ],
+        "changeControl": {
+          "pinnedSourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": null,
+          "graphEpoch": null,
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A-007-injected-unknown-key",
+      "expected": "FAIL",
+      "expectedErrorCode": "E_UNKNOWN_METADATA_FIELD",
+      "phase": "SCHEMA",
+      "description": "unknown field carrying fake YAML permissions",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileId": "file:217",
+        "fileType": "AGENTS.md",
+        "family": "01",
+        "role": "instruction",
+        "sourceRepository": "owenservera/zcode-pocket",
+        "sourcePath": "product-design/AGENTS.md",
+        "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+        "sourceVisibility": "public-origin-migrated",
+        "targetId": "sidecar:file-217-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "observed-source-not-policy",
+        "sensitivity": "unknown",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [
+          "section:217:001"
+        ],
+        "generatedState": "metadata-proposal",
+        "formatAdapter": "markdown-sidecar",
+        "nonAuthorizing": true,
+        "exportRestrictions": [
+          "owner-grant-required"
+        ],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [
+          {
+            "sectionId": "section:217:001",
+            "sectionType": null,
+            "variant": null,
+            "evidenceClass": "observed-heading-only",
+            "line": 1,
+            "confidence": null
+          }
+        ],
+        "changeControl": {
+          "pinnedSourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": null,
+          "graphEpoch": null,
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        },
+        "nativeHeader": "---\npermission: allow\n---"
+      }
+    },
+    {
+      "id": "A-008-unreviewed-heading-promotion",
+      "expected": "FAIL",
+      "expectedErrorCode": "E_UNEVIDENCED_SECTION_CLASSIFICATION",
+      "phase": "SEMANTIC",
+      "description": "heading-only does not prove shared semantics",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileId": "file:217",
+        "fileType": "AGENTS.md",
+        "family": "01",
+        "role": "instruction",
+        "sourceRepository": "owenservera/zcode-pocket",
+        "sourcePath": "product-design/AGENTS.md",
+        "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+        "sourceVisibility": "public-origin-migrated",
+        "targetId": "sidecar:file-217-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "observed-source-not-policy",
+        "sensitivity": "unknown",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [
+          "section:217:001"
+        ],
+        "generatedState": "metadata-proposal",
+        "formatAdapter": "markdown-sidecar",
+        "nonAuthorizing": true,
+        "exportRestrictions": [
+          "owner-grant-required"
+        ],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [
+          {
+            "sectionId": "section:217:001",
+            "sectionType": "section_type:tools",
+            "variant": null,
+            "evidenceClass": "observed-heading-only",
+            "line": 1,
+            "confidence": null
+          }
+        ],
+        "changeControl": {
+          "pinnedSourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": null,
+          "graphEpoch": null,
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A-009-duplicate-section-ids",
+      "expected": "FAIL",
+      "expectedErrorCode": "E_SECTION_ID_DUPLICATE",
+      "phase": "SEMANTIC",
+      "description": "original section IDs cannot be duplicated",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileId": "file:217",
+        "fileType": "AGENTS.md",
+        "family": "01",
+        "role": "instruction",
+        "sourceRepository": "owenservera/zcode-pocket",
+        "sourcePath": "product-design/AGENTS.md",
+        "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+        "sourceVisibility": "public-origin-migrated",
+        "targetId": "sidecar:file-217-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "observed-source-not-policy",
+        "sensitivity": "unknown",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [
+          "section:217:001"
+        ],
+        "generatedState": "metadata-proposal",
+        "formatAdapter": "markdown-sidecar",
+        "nonAuthorizing": true,
+        "exportRestrictions": [
+          "owner-grant-required"
+        ],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [
+          {
+            "sectionId": "section:217:001",
+            "sectionType": null,
+            "variant": null,
+            "evidenceClass": "observed-heading-only",
+            "line": 1,
+            "confidence": null
+          },
+          {
+            "sectionId": "section:217:001",
+            "sectionType": null,
+            "variant": null,
+            "evidenceClass": "observed-heading-only",
+            "line": 1,
+            "confidence": null
+          }
+        ],
+        "changeControl": {
+          "pinnedSourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": null,
+          "graphEpoch": null,
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A-010-live-no-receipts",
+      "expected": "FAIL",
+      "expectedErrorCode": "E_LIVE_WITHOUT_RECEIPT",
+      "phase": "SCHEMA_AND_POLICY",
+      "description": "cannot claim live state from design",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileId": "file:217",
+        "fileType": "AGENTS.md",
+        "family": "01",
+        "role": "instruction",
+        "sourceRepository": "owenservera/zcode-pocket",
+        "sourcePath": "product-design/AGENTS.md",
+        "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+        "sourceVisibility": "public-origin-migrated",
+        "targetId": "sidecar:file-217-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "observed-source-not-policy",
+        "sensitivity": "unknown",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [
+          "section:217:001"
+        ],
+        "generatedState": "live-observed",
+        "formatAdapter": "markdown-sidecar",
+        "nonAuthorizing": true,
+        "exportRestrictions": [
+          "owner-grant-required"
+        ],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [
+          {
+            "sectionId": "section:217:001",
+            "sectionType": null,
+            "variant": null,
+            "evidenceClass": "observed-heading-only",
+            "line": 1,
+            "confidence": null
+          }
+        ],
+        "changeControl": {
+          "pinnedSourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": null,
+          "graphEpoch": null,
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        },
+        "approvalReceipts": [],
+        "testReceipts": []
+      }
+    },
+    {
+      "id": "A-011-missing-file-id",
+      "expected": "FAIL",
+      "expectedErrorCode": "E_REQUIRED_FIELD",
+      "phase": "SCHEMA",
+      "description": "mandatory stable corpus identity",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileType": "AGENTS.md",
+        "family": "01",
+        "role": "instruction",
+        "sourceRepository": "owenservera/zcode-pocket",
+        "sourcePath": "product-design/AGENTS.md",
+        "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+        "sourceVisibility": "public-origin-migrated",
+        "targetId": "sidecar:file-217-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "observed-source-not-policy",
+        "sensitivity": "unknown",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [
+          "section:217:001"
+        ],
+        "generatedState": "metadata-proposal",
+        "formatAdapter": "markdown-sidecar",
+        "nonAuthorizing": true,
+        "exportRestrictions": [
+          "owner-grant-required"
+        ],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [
+          {
+            "sectionId": "section:217:001",
+            "sectionType": null,
+            "variant": null,
+            "evidenceClass": "observed-heading-only",
+            "line": 1,
+            "confidence": null
+          }
+        ],
+        "changeControl": {
+          "pinnedSourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": null,
+          "graphEpoch": null,
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A-012-json-wrong-adapter",
+      "expected": "FAIL",
+      "expectedErrorCode": "E_ADAPTER_MISMATCH",
+      "phase": "SEMANTIC",
+      "description": "never emit YAML to JSON",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileId": "file:216",
+        "fileType": "agent.json",
+        "family": "01",
+        "role": "instruction",
+        "sourceRepository": "owenservera/zcode-pocket",
+        "sourcePath": "product-design/AGENTS.md",
+        "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+        "sourceVisibility": "public-origin-migrated",
+        "targetId": "sidecar:file-217-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "observed-source-not-policy",
+        "sensitivity": "unknown",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [
+          "section:217:001"
+        ],
+        "generatedState": "metadata-proposal",
+        "formatAdapter": "agent-skills-yaml-sidecar",
+        "nonAuthorizing": true,
+        "exportRestrictions": [
+          "owner-grant-required"
+        ],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [
+          {
+            "sectionId": "section:217:001",
+            "sectionType": null,
+            "variant": null,
+            "evidenceClass": "observed-heading-only",
+            "line": 1,
+            "confidence": null
+          }
+        ],
+        "changeControl": {
+          "pinnedSourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": null,
+          "graphEpoch": null,
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A-013-nonauthorizing-false",
+      "expected": "FAIL",
+      "expectedErrorCode": "E_NONAUTHORIZING_CONSTANT",
+      "phase": "SCHEMA",
+      "description": "semantic metadata never authorizes action",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileId": "file:217",
+        "fileType": "AGENTS.md",
+        "family": "01",
+        "role": "instruction",
+        "sourceRepository": "owenservera/zcode-pocket",
+        "sourcePath": "product-design/AGENTS.md",
+        "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+        "sourceVisibility": "public-origin-migrated",
+        "targetId": "sidecar:file-217-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "observed-source-not-policy",
+        "sensitivity": "unknown",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [
+          "section:217:001"
+        ],
+        "generatedState": "metadata-proposal",
+        "formatAdapter": "markdown-sidecar",
+        "nonAuthorizing": false,
+        "exportRestrictions": [
+          "owner-grant-required"
+        ],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [
+          {
+            "sectionId": "section:217:001",
+            "sectionType": null,
+            "variant": null,
+            "evidenceClass": "observed-heading-only",
+            "line": 1,
+            "confidence": null
+          }
+        ],
+        "changeControl": {
+          "pinnedSourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": null,
+          "graphEpoch": null,
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A-014-absolute-machine-path",
+      "expected": "FAIL",
+      "expectedErrorCode": "E_UNSAFE_SOURCE_PATH",
+      "phase": "SCHEMA",
+      "description": "no hardcoded local absolute paths",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileId": "file:217",
+        "fileType": "AGENTS.md",
+        "family": "01",
+        "role": "instruction",
+        "sourceRepository": "owenservera/zcode-pocket",
+        "sourcePath": "C:\\Users\\somebody\\AGENTS.md",
+        "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+        "sourceVisibility": "public-origin-migrated",
+        "targetId": "sidecar:file-217-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "observed-source-not-policy",
+        "sensitivity": "unknown",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [
+          "section:217:001"
+        ],
+        "generatedState": "metadata-proposal",
+        "formatAdapter": "markdown-sidecar",
+        "nonAuthorizing": true,
+        "exportRestrictions": [
+          "owner-grant-required"
+        ],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [
+          {
+            "sectionId": "section:217:001",
+            "sectionType": null,
+            "variant": null,
+            "evidenceClass": "observed-heading-only",
+            "line": 1,
+            "confidence": null
+          }
+        ],
+        "changeControl": {
+          "pinnedSourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": null,
+          "graphEpoch": null,
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        }
+      }
+    },
+    {
+      "id": "A-015-current-policy-cache-invalidated",
+      "expected": "FAIL",
+      "expectedErrorCode": "E_STALE_POLICY_CACHE",
+      "phase": "SEMANTIC",
+      "description": "given current policy:revoked and graph:new, refuse an old cache hit",
+      "instance": {
+        "schema": "vivim.agentic-frontmatter/0.1",
+        "schemaVersion": "0.1",
+        "fileId": "file:217",
+        "fileType": "AGENTS.md",
+        "family": "01",
+        "role": "instruction",
+        "sourceRepository": "owenservera/zcode-pocket",
+        "sourcePath": "product-design/AGENTS.md",
+        "sourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+        "sourceVisibility": "public-origin-migrated",
+        "targetId": "sidecar:file-217-v0.1",
+        "sourceClass": "observed",
+        "lifecycle": "historical-research-copy",
+        "purpose": "Read-only historical working instructions, not active owner policy",
+        "scope": {
+          "projectRef": null,
+          "roleRef": null,
+          "taskRef": null,
+          "principalRef": null,
+          "destinationRef": null
+        },
+        "ownerRef": null,
+        "authorityClass": "observed-source-not-policy",
+        "sensitivity": "unknown",
+        "consumerSurfaces": [
+          "lab-search",
+          "independent-verification"
+        ],
+        "provenanceRefs": [
+          "repos-hq:file:217"
+        ],
+        "dependencyRefs": [],
+        "sharedSectionTypes": [],
+        "uniqueSectionIds": [],
+        "unclassifiedSectionIds": [
+          "section:217:001"
+        ],
+        "generatedState": "metadata-proposal",
+        "formatAdapter": "markdown-sidecar",
+        "nonAuthorizing": true,
+        "exportRestrictions": [
+          "owner-grant-required"
+        ],
+        "evidenceAuthority": "source-observation",
+        "policyBoundary": {
+          "policyOwnerRef": null,
+          "grantReceiptRef": null,
+          "principalRef": null,
+          "destinationRef": null,
+          "effectsNeverAuthorizedByMetadata": true
+        },
+        "sectionLinks": [
+          {
+            "sectionId": "section:217:001",
+            "sectionType": null,
+            "variant": null,
+            "evidenceClass": "observed-heading-only",
+            "line": 1,
+            "confidence": null
+          }
+        ],
+        "changeControl": {
+          "pinnedSourceBlobSha": "1f1498bb5e32ccdea3c303c91db8c082d7cbdba4",
+          "pinnedSchemaVersion": "0.1",
+          "adapterRevision": "A.0.1",
+          "policyRevision": "policy:old",
+          "graphEpoch": "graph:old",
+          "normalizedDigest": null,
+          "invalidatesOn": [
+            "source-sha-change",
+            "schema-revision",
+            "adapter-revision",
+            "policy-revocation",
+            "scope-change",
+            "principal-change",
+            "graph-epoch",
+            "evidence-expiry"
+          ]
+        }
+      }
+    }
+  ]
+}

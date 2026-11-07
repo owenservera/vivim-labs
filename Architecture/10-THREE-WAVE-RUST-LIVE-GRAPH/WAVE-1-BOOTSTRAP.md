@@ -1,3 +1,5 @@
+> **SUPERSEDED AS AN EXECUTION ORDER.** Use [EXECUTE-WAVE-1-FIRST.md](EXECUTE-WAVE-1-FIRST.md) and [WAVE-1-LAUNCH-PROMPTS.md](WAVE-1-LAUNCH-PROMPTS.md). Wave 1 must be run and analyzed before the Wave 2 design. This document is retained as earlier conceptual context.
+
 # Wave 1 — BOOTSTRAP: Make Rust read real HQ data immediately
 
 **Objective:** A running Rust graph containing *live-origin* HQ indexed code plus KB, semantic-command and wiki source records, not only the historical agentic research graph. Close with a real first-query demo and source-linked actual/target baseline.

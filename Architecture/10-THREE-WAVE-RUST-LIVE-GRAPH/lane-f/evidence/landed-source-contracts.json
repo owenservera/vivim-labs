@@ -1,0 +1,23 @@
+{
+  "schema":"vivim.wave1.lane-f.source-contract/1",
+  "scope":"GitHub main source declarations, not native A+B+C export or Rust execution",
+  "reposHqObservedHead":"34952780cb8dd85db3d48d60d50fed936ed41e2f",
+  "sources":[
+    {"lane":"A","path":"hq/lib/live-graph/wave1/lane-a.mjs","gitBlobSha":"ffc7b311979e1d36d7a6a467da7a4dd027d8f19d","schema":"vivim.wave1.code-observations/1"},
+    {"lane":"B","path":"hq/lib/wave1-kb-read.mjs","gitBlobSha":"c6bc8a8a961fc49bde0b8da27b3e280cd50bca0a","schema":"vivim.wave1.kb-semantic/1"},
+    {"lane":"C","path":"hq/live-graph/wave1/lane-c/commands.mjs","gitBlobSha":"ab875a36268ad8d0b71e35c89ba9cd41ff6acb0f","schema":"vivim.wave1.command-candidates/1"},
+    {"lane":"E","path":"research/rust-knowledge-graph/integration/wave1-lane-e/assemble.mjs","gitBlobSha":"0cdab7d46b73a33012c55def3e86779e0bff0f01","schema":"vivim.wave1.source-records/1"}
+  ],
+  "verdict":"BLOCKED_CONTRACT_CROSSWALK",
+  "findings":[
+    {"id":"F-SCHEMA-A","severity":"critical","detail":"Lane A emits project/roots/files/symbols/imports/annotations, not E feed nodes/edges/provenance; needs scoped source-pinned lowering"},
+    {"id":"F-SCHEMA-B","severity":"critical","detail":"Lane B emits project with numeric HQ project id plus records/links/unknowns; E requires one string projectId, nodes/edges and fully qualified source provenance; must preserve unknown links"},
+    {"id":"F-SCHEMA-C","severity":"critical","detail":"Lane C emits operations/CLI with semanticId:null and handler source statuses; E requires source-owned nodes and explicitly linked semantic_id; never assume wired means runtime verified"},
+    {"id":"F-GRAPH-FORMAT","severity":"high","detail":"Original F acceptance graph-file parser expects JSON nodes/edges, while E persists HQKGX1 JSONL plus .hqj and read-only query results; adapt F to E actual exchange/query shape before real assessment"},
+    {"id":"F-RUNTIME","severity":"critical","detail":"Published upstream HANDOFFs explicitly lack owner-machine A index/reset receipts, B real SQLite rows, E running Rust .hqj and D generated wiki on A+B+C data"}
+  ],
+  "nativeRustExecuted":false,
+  "localNodePreflightTests":{"count":6,"passed":6,"failed":0,"kind":"isolated synthetic source-contract behavior tests"},
+  "effectPermissions":false,
+  "wave2Designed":false
+}

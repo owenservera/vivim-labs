@@ -4,6 +4,30 @@ Status: launch-authoritative Wave 1 execution charter (planned; no implementatio
 Campaign: one logical Rust graph for VIVIM code, KB, semantic commands, CLI and generated wiki.
 Dependencies: ../07-INTEGRATION-PHILOSOPHY.md, ../09-UNIFIED-INTELLIGENCE-COMMAND-WIKI.md, README.md
 
+## DOCUMENT-LED TARGET — controlling addendum (2026-11-07)
+Before code inspection, read:
+- [Master three-wave goals recovered from preserved designs](MASTER-DOCUMENT-LED-WAVE-GOALS.md).
+- [Inline-comment compiler, deterministic NL and Rust/SQLite placement challenge](COMPILER-LANGUAGE-AND-PLACEMENT-REVIEW.md).
+- [Scoped reset and multi-root indexing intent](WAVE-1-INDEX-RESET-AND-INTENT.md).
+- [Labs documentation inventory](../../documentation-consolidation/INVENTORY.json) and [migration report](../../documentation-consolidation/MIGRATION-REPORT.md), including documents no longer under original source paths.
+
+**Requirements come from recovered active/archived design documentation, NOT just current code.** Current code/test/evidence determines implementation status. The documentation sweep is a wave-goal design input, not an instruction to feed all archived text into the runtime KB.
+
+The central compiler goal is in force: **HQ indexing evolves into source-aware semantic compilation** of code declarations + KB/identity + commands/CLI. The Rust core runs a graph projection; SQLite retains independently justified canonical/FTS transactions. The generated wiki is a quality measure of A+B+C+E integration. Wave 1 MUST produce a measured native Rust-vs-SQLite placement recommendation.
+
+**Wave 3 dependency**: preserve the original real-time text-to-intent-to-visual-language requirements today (tokens, source spans, partial interpretations, ambiguity, corrections, negative-intent warnings, effect previews and revision pins). Do not implement a competing interpreter or second UI writer in Wave 1.
+
+### Six-lane scope additions (not new lanes)
+- **A** also measures supported comment grammar coverage and source anchors; detect v1/v2, wiki comment declarations, missing tags, annotation/source drift, and one-project indexing intent.
+- **B** also maps semantic identity/version/status to source and command, classifies canonical SQLite writer vs Rust read projection; no registered action from comment alone.
+- **C** also tests actual NL/CLI safety with negation, quotation, conjunction, ambiguity, typo and unsupported inputs; uses historical audit as regression hypotheses; one typed operation mapping with real handler status.
+- **D** must generate the wiki from integrated A+B+C+Rust data and *grade missing or incorrect meaning/links/commands*, not count wiki ingestion as success.
+- **E** must exercise real Rust comment compiler `research/comment-program-rust` and existing HQ `annotation-v2.mjs`/bridge where compatible; produce at least one source-pinned compiled declaration/command crosswalk in the Rust graph. Preserve separate source grammar and user NL grammar.
+- **F** must independently produce `rust-sqlite-placement.json/md`, `intent-safety-baseline.json`, `compile-conformance.json`, and the graph/wiki gap ledger, including performance, evidence gaps and what would need migration.
+
+### Expanded integration-1 gate
+A passing graph import alone is insufficient. There must be (1) a source-linked real compiled comment/typed semantic identity → actual command chain; (2) wiki correctness against that chain; (3) native Rust-vs-SQLite ownership/performance findings with unknowns; (4) negative-intent/clause/quote safety baseline; (5) Wave 3 visual-language data requirements captured in the Wave 2 dossier. Existing Rust wiki compiler is NOT assumed to compile all command behavior. If the minimum real comment→semantic→command proof cannot run, mark the compiler subgate BLOCKED and do not report full GO.
+
 ## Owner decision
 **Do NOT author a final Wave 2 plan until Wave 1 has built and run executable code on actual local source and produced independent integration evidence.** Older Wave 2 drafts in this campaign are hypotheses and explicitly non-authoritative; replace them only after Wave 1 has run.
 

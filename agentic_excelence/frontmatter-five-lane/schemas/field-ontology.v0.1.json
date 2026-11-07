@@ -1,0 +1,284 @@
+{
+  "schema": "vivim.agentic-field-ontology/0.1",
+  "sourceHeads": {
+    "reposHQ": "acad98697575c2f3fe2fcbf847e19a8dcd3670db"
+  },
+  "semanticSchema": "vivim.agentic-frontmatter/0.1",
+  "fields": [
+    {
+      "name": "schema",
+      "meaning": "semantic contract",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "schemaVersion",
+      "meaning": "contract revision",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "fileId",
+      "meaning": "217 source registry",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "fileType",
+      "meaning": "19 exact observed patterns",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "family",
+      "meaning": "21 families, eight observed",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "role",
+      "meaning": "intrinsic purpose, not execution role",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "sourceRepository",
+      "meaning": "origin repository",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "sourcePath",
+      "meaning": "repository-relative source path",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "sourceBlobSha",
+      "meaning": "original pinned Git blob",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "targetId",
+      "meaning": "generated IR identity, never mutable title",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "sourceVisibility",
+      "meaning": "visibility of original body",
+      "required": false,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "sourceClass",
+      "meaning": "source class in registry or null",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "lifecycle",
+      "meaning": "dated source lifecycle, not execution status",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "purpose",
+      "meaning": "source-grounded descriptive aim",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "scope",
+      "meaning": "project/task/role/principal/destination",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "ownerRef",
+      "meaning": "external owner evidence reference or null",
+      "required": true,
+      "sourceAuthority": "current external owner/Host",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "authorityClass",
+      "meaning": "observed claim vs verified authority",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "sensitivity",
+      "meaning": "private disclosure filter",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "consumerSurfaces",
+      "meaning": "allowed metadata-only consumers",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "provenanceRefs",
+      "meaning": "evidence references",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "dependencyRefs",
+      "meaning": "observed dependencies",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "sharedSectionTypes",
+      "meaning": "reviewed 13-category concept except unique",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "uniqueSectionIds",
+      "meaning": "file-specific source section IDs",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "unclassifiedSectionIds",
+      "meaning": "null-mapped supplemental headings",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "generatedState",
+      "meaning": "proposal/validation/live with separate proof",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "formatAdapter",
+      "meaning": "exact file-pattern routing",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "nonAuthorizing",
+      "meaning": "always true",
+      "required": true,
+      "sourceAuthority": "contract",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "exportRestrictions",
+      "meaning": "hard redactions/denial",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "policyBoundary",
+      "meaning": "owner+Host scopes and non-authorization",
+      "required": true,
+      "sourceAuthority": "current external owner/Host",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "evidenceAuthority",
+      "meaning": "source/vendor/owner/receipt qualification",
+      "required": true,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "retrieval",
+      "meaning": "task relevance, triggers, freshness and token budget hints",
+      "required": false,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "sectionLinks",
+      "meaning": "section type+variant+original line+confidence+evidence",
+      "required": false,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "changeControl",
+      "meaning": "source/schema/policy/adapter revisions and digest",
+      "required": false,
+      "sourceAuthority": "source-pinned or explicitly null",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "approvalReceipts",
+      "meaning": "owner activation evidence references",
+      "required": false,
+      "sourceAuthority": "independent verified receipt",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    },
+    {
+      "name": "testReceipts",
+      "meaning": "independent verification evidence",
+      "required": false,
+      "sourceAuthority": "independent verified receipt",
+      "nativeProjection": "NOT a provider-native key unless adapter documentation and local runtime receipt prove an explicit mapping"
+    }
+  ],
+  "canonicalization": {
+    "encoding": "UTF-8",
+    "keyOrder": "stable schema order first, any additional allowed nested object properties lexicographically",
+    "arrays": "retain order where semantic; deduplicate set-typed lists",
+    "digest": "sha256 of deterministic compact normalized JSON excluding changeControl.normalizedDigest",
+    "sourcePath": "portable, repository-relative POSIX; no local machine paths",
+    "unknown": "explicit null/unknown/[]; do not synthesize"
+  },
+  "errors": {
+    "E_REQUIRED_FIELD": "missing mandatory field",
+    "E_UNKNOWN_METADATA_FIELD": "unrecognized universal sidecar key",
+    "E_SOURCE_SHA_MISMATCH": "pinned original hash differs",
+    "E_OWNER_AUTHORITY_CONFLICT": "source metadata claims owner approval without independently checked grant",
+    "E_UNEVIDENCED_SECTION_CLASSIFICATION": "heading promotion without source span proof",
+    "E_PRIVATE_SCOPE_DENIED": "current principal/destination/ACL denies exposure",
+    "E_NATIVE_KEY_UNSUPPORTED": "provider loader has not verified key",
+    "E_ADAPTER_MISMATCH": "wrong native/sidecar route",
+    "E_SECTION_ID_DUPLICATE": "section ID repeated",
+    "E_LIVE_WITHOUT_RECEIPT": "no independent runtime and owner grant",
+    "E_STALE_POLICY_CACHE": "source, policy or graph revision differs",
+    "E_NONAUTHORIZING_CONSTANT": "metadata attempting effect authority"
+  },
+  "boundaries": [
+    "A source's mention of tools does not verify registration or permissions",
+    "Vendor spec keys are NOT proof of local OpenCode/Skills loader version",
+    "Owner policy is checked outside the IR and cannot be granted by text",
+    "Private-source body remains private in Repos HQ; redaction precedes retrieval rank",
+    "Sidecars are non-operational input to read-only graph and DCB",
+    "Every cache hit rechecks scope, principal, destination, policy and source freshness"
+  ]
+}

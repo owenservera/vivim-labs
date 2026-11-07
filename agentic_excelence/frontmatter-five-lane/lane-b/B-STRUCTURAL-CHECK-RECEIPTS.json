@@ -1,0 +1,75 @@
+{
+  "schema": "vivim.lane-b-local-checks/0.1",
+  "checkKind": "STRUCTURAL_SELF_CHECK_NOT_LANE_E",
+  "status": "PASS_WITH_UNVERIFIED_RUNTIME",
+  "sourceHeads": {
+    "reposHQ": "acad98697575c2f3fe2fcbf847e19a8dcd3670db"
+  },
+  "matrixSchema": "vivim.agentic-frontmatter-work-matrix/0.1",
+  "sourceShaNote": "56/56 publicly recovered blob SHAs match; 4 private source bodies unavailable",
+  "attempted": 60,
+  "designedDrafts": 60,
+  "sourceSnapshotVerified": 56,
+  "blockedPrivateSource": 4,
+  "semanticallyValidatedByIndependentLaneE": 0,
+  "liveRuntimeVerified": 0,
+  "checks": [
+    {
+      "id": "B-OWNERSHIP-60",
+      "status": "PASS",
+      "detail": "Exact B lane partition and unique IDs"
+    },
+    {
+      "id": "B-SOURCE-SHAs",
+      "status": "PASS",
+      "detail": "56 migrated source snapshots match pinned source blob hashes"
+    },
+    {
+      "id": "B-PRIVATE-BLOCK",
+      "status": "PASS",
+      "detail": "Four restricted bodies are not included"
+    },
+    {
+      "id": "B-SECTIONS-ATLAS",
+      "status": "PASS",
+      "detail": "All available section links exactly match pinned atlas, private sources have no published spans"
+    },
+    {
+      "id": "B-NATIVE-EMIT-ZERO",
+      "status": "PASS",
+      "detail": "Zero source rewrites, loaded configs or native emits"
+    },
+    {
+      "id": "B-SCOPE-NON-GRANT",
+      "status": "PASS",
+      "detail": "Null owner/current task scope; historical source not authoritative"
+    },
+    {
+      "id": "B-TYPE-ANOMALIES",
+      "status": "PASS",
+      "detail": "Two shape docs explicitly held for taxonomy review"
+    },
+    {
+      "id": "B-CASE-ANOMALY",
+      "status": "PASS",
+      "detail": "AGENT.MD casing preserved"
+    },
+    {
+      "id": "B-ADVERSARIAL-11",
+      "status": "PASS",
+      "detail": "11 inert adversarial cases reference existing B IDs"
+    },
+    {
+      "id": "B-MATRIX-VERSION",
+      "status": "PASS",
+      "detail": "Pinned matrix version and Repos HQ source SHA"
+    }
+  ],
+  "blockers": [
+    "Four private source bodies require separate authorized private review",
+    "Two misclassified Claude web shape documents require taxonomy reassignment or explicit waiver",
+    "AGENT.MD case-sensitive loader behavior unverified",
+    "OpenCode/Claude/Gemini native loader versions and precedence unverified",
+    "Lane A final schema/adapter contract and Lane E independent acceptance not yet demonstrated"
+  ]
+}

@@ -1,5 +1,5 @@
 import test from 'node:test'; import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs'; import {createHash} from 'node:crypto';
+import {readFileSync} from 'node:fs'; import {spawnSync} from 'node:child_process'; import {createHash} from 'node:crypto';
 import {checkCapture,checkTranscript,baselineProposals,checkProposals,interpretDuePhrase,prepareOwnerReview} from './core.mjs';
 import {evaluate} from './evaluate.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
@@ -63,4 +63,11 @@ test('D/E: synthetic evaluation exposes false positives; never claims WER',()=>{
  const r=evaluate(batch);assert.equal(r.classification,'SYNTHETIC_TRANSCRIPT_ONLY');
  assert.equal(r.cases.length,fixture.length);assert.ok(r.totals.f1>=0&&r.totals.f1<=1);
  assert.equal('wer' in r.totals,false);assert.equal(r.cases.some(c=>!c.passed),false);
+});
+
+test('E: standalone CLI consumes committed compact fixtures with zero external deps',()=>{
+ const run=spawnSync(process.execPath,[new URL('./evaluate.mjs',import.meta.url).pathname,new URL('./fixtures.json',import.meta.url).pathname],{encoding:'utf8',timeout:5000});
+ assert.equal(run.status,0,run.stderr); const report=JSON.parse(run.stdout);
+ assert.equal(report.classification,'SYNTHETIC_TRANSCRIPT_ONLY'); assert.equal(report.cases.length,fixture.length);
+ assert.equal(report.cases.every(c=>c.passed),true);
 });

@@ -1,0 +1,26 @@
+{
+  "name": "vivim-labs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "VIVIM Labs — local Git/test operations, experiment and corpus creation, integration verification, evidence collection and reproducibility. Not a KB, UI publisher, Host effect authority, command registry or product runtime.",
+  "engines": {
+    "node": ">=24",
+    "bun": ">=1.4"
+  },
+  "packageManager": "bun@1.4.2",
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "tsc -p tsconfig.json",
+    "labs:plan": "bun labs/cli.mjs plan",
+    "labs:validate": "bun labs/cli.mjs validate",
+    "labs:status": "bun labs/cli.mjs status",
+    "labs:evidence": "bun labs/cli.mjs evidence",
+    "labs:capacity": "bun labs/cli.mjs capacity",
+    "labs:report": "bun labs/cli.mjs report",
+    "labs:verify": "bun labs/cli.mjs verify"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}

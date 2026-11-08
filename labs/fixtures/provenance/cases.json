@@ -1,0 +1,99 @@
+{
+  "schema": "labs.provenance-corpus/1",
+  "hq:context": "Provenance, redaction and tombstone corpus slice: every case states where it came from, what was redacted, and what happens when it is deleted.",
+  "hq:owner": "labs",
+  "hq:task": "LABS-W3-008",
+  "policy": "A case without provenance is refused at intake. A case whose redaction removed the source is kept as a tombstone, never silently dropped, and never carries a secret.",
+  "volume_note": "First slice of a synthetic corpus. Freshness and ranking are not measured yet.",
+  "counts": {
+    "cases": 8,
+    "with_provenance": 8,
+    "with_redaction": 3,
+    "tombstoned": 2,
+    "passed": 8
+  },
+  "cases": [
+    {
+      "id": "prov-001",
+      "source": "vivim-ui src/visual-runtime/command/ir.ts",
+      "source_sha": "ec832f8be079ba4d3fb1de0f9594ba9606b5f7c7",
+      "actor": "labs",
+      "at": "2026-11-06T00:00:00.000Z",
+      "sensitivity": "public",
+      "redacted": [],
+      "state": "live"
+    },
+    {
+      "id": "prov-002",
+      "source": "repos_hq hq/lib/kernel/store.mjs",
+      "source_sha": "bfc062e6faf10171070c3d8c06aeb1ef85c47349",
+      "actor": "labs",
+      "at": "2026-11-06T00:00:00.000Z",
+      "sensitivity": "public",
+      "redacted": [],
+      "state": "live"
+    },
+    {
+      "id": "prov-003",
+      "source": "vivim-web-harness studio channel roster",
+      "source_sha": "65495e6e608a187f438020a0cf94bdb371c06e3d",
+      "actor": "labs",
+      "at": "2026-11-06T00:00:00.000Z",
+      "sensitivity": "private",
+      "redacted": ["session ids", "seat session identifiers"],
+      "state": "live"
+    },
+    {
+      "id": "prov-004",
+      "source": "vivim-web-harness studio channel roster",
+      "source_sha": "65495e6e608a187f438020a0cf94bdb371c06e3d",
+      "actor": "labs",
+      "at": "2026-11-06T00:00:00.000Z",
+      "sensitivity": "private",
+      "redacted": ["session ids", "seat session identifiers"],
+      "state": "live"
+    },
+    {
+      "id": "prov-005",
+      "source": "a deleted TierFlow lane draft",
+      "source_sha": "unknown",
+      "actor": "labs",
+      "at": "2026-11-06T00:00:00.000Z",
+      "sensitivity": "public",
+      "redacted": [],
+      "state": "tombstoned",
+      "tombstone_reason": "the source was deleted before the corpus was captured; the gap stays visible"
+    },
+    {
+      "id": "prov-006",
+      "source": "a withdrawn knowledge projection snapshot",
+      "source_sha": "unknown",
+      "actor": "labs",
+      "at": "2026-11-06T00:00:00.000Z",
+      "sensitivity": "internal",
+      "redacted": ["owner scoped identifiers"],
+      "state": "tombstoned",
+      "tombstone_reason": "the projection was revoked; a revoked projection must purge, not linger"
+    },
+    {
+      "id": "prov-007",
+      "source": "vivim-ui src/visual-runtime/knowledge/projection.ts",
+      "source_sha": "ec832f8be079ba4d3fb1de0f9594ba9606b5f7c7",
+      "actor": "labs",
+      "at": "2026-11-06T00:00:00.000Z",
+      "sensitivity": "public",
+      "redacted": [],
+      "state": "live"
+    },
+    {
+      "id": "prov-008",
+      "source": "vivim-ui src/visual-runtime/revisions/fixture-store.ts",
+      "source_sha": "ec832f8be079ba4d3fb1de0f9594ba9606b5f7c7",
+      "actor": "labs",
+      "at": "2026-11-06T00:00:00.000Z",
+      "sensitivity": "public",
+      "redacted": [],
+      "state": "live"
+    }
+  ]
+}

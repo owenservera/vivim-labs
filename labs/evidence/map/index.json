@@ -1,0 +1,83 @@
+{
+  "schema": "labs.capability-evidence-map/1",
+  "hq:context": "The initial capability to evidence linking map: capability, implementation, contract, consumer, test, evidence, platform.",
+  "hq:owner": "labs",
+  "hq:task": "LABS-W3-011",
+  "policy": "This map links. The contract, consumer and platform columns name the owner that holds the authority; the implementation and test columns are the Labs artefacts. No row copies an owner's content, and no row is a permission.",
+  "relation": "Capability -> Implementation -> Contract -> Consumer -> Test -> Evidence -> Platform",
+  "canonical_graph": {
+    "repo": "repos_hq",
+    "path": "hq/lib/graph.mjs",
+    "role": "the canonical import and dependency graph this map links to instead of duplicating"
+  },
+  "counts": {
+    "rows": 6,
+    "authority_held_inside_labs": 0
+  },
+  "rows": [
+    {
+      "id": "evmap-001",
+      "capability": "natural language to typed command conformance",
+      "implementation": "/labs/fixtures/nl/typed-ir/cases.json",
+      "contract": { "repo": "vivim-ui", "path": "src/visual-runtime/command/ir.ts", "owner": "tierflow" },
+      "consumer": { "repo": "vivim-ui", "path": "src/visual-runtime/command/compile.ts", "owner": "tierflow" },
+      "test": "/labs/tests/nl-typed-ir.test.mjs",
+      "evidence": { "task_id": "LABS-W3-001", "level": "specified" },
+      "platform": { "repo": "vivim-ui", "owner": "tierflow", "note": "the visual runtime runtime" }
+    },
+    {
+      "id": "evmap-002",
+      "capability": "ambiguity, clarification and safe refusal",
+      "implementation": "/labs/fixtures/nl/ambiguity/cases.json",
+      "contract": { "repo": "vivim-ui", "path": "src/visual-runtime/command/ir.ts", "owner": "tierflow" },
+      "consumer": { "repo": "vivim-ui", "path": "src/visual-runtime/experience/help.ts", "owner": "tierflow" },
+      "test": "/labs/tests/nl-ambiguity.test.mjs",
+      "evidence": { "task_id": "LABS-W3-002", "level": "specified" },
+      "platform": { "repo": "vivim-ui", "owner": "tierflow", "note": "the visual runtime runtime" }
+    },
+    {
+      "id": "evmap-003",
+      "capability": "federated catalogue intake",
+      "implementation": "/labs/catalogue/candidates.json",
+      "contract": { "repo": "repos_hq", "path": "hq/lib/canon.mjs", "owner": "hq-agent" },
+      "consumer": { "repo": "repos_hq", "path": "hq/lib/context.mjs", "owner": "hq-agent" },
+      "test": "/labs/tests/catalogue-intake.test.mjs",
+      "evidence": { "task_id": "LABS-W3-003", "level": "specified" },
+      "platform": { "repo": "repos_hq", "owner": "hq-agent", "note": "knowledge and semantics authority" }
+    },
+    {
+      "id": "evmap-004",
+      "capability": "adversarial denial evidence",
+      "implementation": "/labs/adversarial/cases.json",
+      "contract": { "repo": "repos_hq", "path": "hq/lib/approvals.mjs", "owner": "hq-agent" },
+      "consumer": { "repo": "vivim-web-harness", "path": "apps/vivim-host", "owner": "vivim-host" },
+      "test": "/labs/tests/adversarial-cases.test.mjs",
+      "evidence": { "task_id": "LABS-W3-005", "level": "specified" },
+      "platform": { "repo": "vivim-web-harness", "owner": "vivim-host", "note": "the Host owns grants and effects" }
+    },
+    {
+      "id": "evmap-005",
+      "capability": "provenance, redaction and tombstone corpus",
+      "implementation": "/labs/fixtures/provenance/cases.json",
+      "contract": { "repo": "repos_hq", "path": "hq/lib/kernel/store.mjs", "owner": "hq-agent" },
+      "consumer": { "repo": "vivim-ui", "path": "src/visual-runtime/knowledge/projection.ts", "owner": "tierflow" },
+      "test": "/labs/tests/provenance-corpus.test.mjs",
+      "evidence": { "task_id": "LABS-W3-008", "level": "specified" },
+      "platform": { "repo": "repos_hq", "owner": "hq-agent", "note": "the kernel store contract owner" }
+    },
+    {
+      "id": "evmap-006",
+      "capability": "state and failure simulation",
+      "implementation": "/labs/faults/matrix.json",
+      "contract": { "repo": "vivim-ui", "path": "src/visual-runtime/revisions/fixture-store.ts", "owner": "tierflow" },
+      "consumer": { "repo": "vivim-ui", "path": "src/visual-runtime/integration-2/compose.ts", "owner": "tierflow" },
+      "test": "/labs/tests/fault-matrix.test.mjs",
+      "evidence": { "task_id": "LABS-W3-009", "level": "specified" },
+      "platform": { "repo": "vivim-ui", "owner": "tierflow", "note": "the revision authority runtime" }
+    }
+  ],
+  "known_gaps": [
+    "No row is above 'specified': nothing in this map has been executed against a real device or a release.",
+    "The map covers six capabilities of the twelve factories; the rest have no Labs artefact yet."
+  ]
+}

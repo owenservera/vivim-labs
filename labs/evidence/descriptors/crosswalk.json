@@ -1,0 +1,74 @@
+{
+  "schema": "labs.descriptor-crosswalk/1",
+  "hq:context": "Descriptor crosswalk between the two canonical surfaces a G/H lane must agree on: HQ owns the meaning, TierFlow owns the runtime.",
+  "hq:owner": "labs",
+  "hq:task": "LABS-W3-007",
+  "policy": "The crosswalk links the two owners. It copies neither one's descriptor table, and it decides nothing about either one's contract.",
+  "read_only_inspection": [
+    "git -C C:/0-BlackBoxProject-0/repos_hq rev-parse HEAD",
+    "git -C C:/0-BlackBoxProject-0/vivim-ui rev-parse HEAD"
+  ],
+  "meaning_authority": {
+    "repo": "repos_hq",
+    "path": "hq/lib/context.mjs",
+    "owner": "hq-agent",
+    "role": "canonical semantics, context composition and the DCB bundle"
+  },
+  "runtime_authority": {
+    "repo": "vivim-ui",
+    "path": "src/visual-runtime/command/compile.ts",
+    "owner": "tierflow",
+    "role": "typed command compilation, risk, args and hash"
+  },
+  "rows": [
+    {
+      "id": "xw-001",
+      "surface": "typed command identity",
+      "meaning_ref": "repos_hq:hq/lib/context.mjs",
+      "runtime_ref": "vivim-ui:src/visual-runtime/command/ir.ts",
+      "contract_version": "tierflow.visual-runtime/2",
+      "labs_evidence": "LABS-W3-001",
+      "mismatch": "none recorded"
+    },
+    {
+      "id": "xw-002",
+      "surface": "command risk and arguments",
+      "meaning_ref": "repos_hq:hq/lib/context.mjs",
+      "runtime_ref": "vivim-ui:src/visual-runtime/command/compile.ts",
+      "contract_version": "tierflow.visual-runtime/2",
+      "labs_evidence": "LABS-W3-007",
+      "mismatch": "the Host v6 risk and args table is not in the repository yet; the G lane owns it"
+    },
+    {
+      "id": "xw-003",
+      "surface": "document version mapping",
+      "meaning_ref": "repos_hq:hq/lib/canon.mjs",
+      "runtime_ref": "vivim-ui:src/visual-runtime/document/validate.ts",
+      "contract_version": "tierflow.visual-runtime/2",
+      "labs_evidence": "LABS-W3-006",
+      "mismatch": "none recorded"
+    },
+    {
+      "id": "xw-004",
+      "surface": "knowledge scope and tombstone semantics",
+      "meaning_ref": "repos_hq:hq/lib/kernel/store.mjs",
+      "runtime_ref": "vivim-ui:src/visual-runtime/knowledge/projection.ts",
+      "contract_version": "hq.kernel-store/1",
+      "labs_evidence": "LABS-W3-008",
+      "mismatch": "KB identity and deletion policy remain with the HQ owner"
+    },
+    {
+      "id": "xw-005",
+      "surface": "host capability and refusal semantics",
+      "meaning_ref": "repos_hq:hq/lib/approvals.mjs",
+      "runtime_ref": "vivim-ui:src/visual-runtime/host/port.ts",
+      "contract_version": "tierflow.visual-runtime/2",
+      "labs_evidence": "LABS-W3-005",
+      "mismatch": "grant authority lives with the Harness and Host owners, not with either of these files"
+    }
+  ],
+  "known_gaps": [
+    "No tri-modal parity run has been executed; the crosswalk is a link table, not a proof.",
+    "The G lane descriptor proof file does not exist yet, so the runtime side of row xw-002 is a claim, not an observation."
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "labs.differential-baseline/1",
+  "hq:context": "Read-only A/B/D differential baseline: what TierFlow looks like at one pinned commit, and which Wave 3 lanes are still unclaimed.",
+  "hq:owner": "labs",
+  "hq:task": "LABS-W3-006",
+  "source_repo": "vivim-ui",
+  "source_path": "C:/0-BlackBoxProject-0/vivim-ui",
+  "source_sha": "ec832f8be079ba4d3fb1de0f9594ba9606b5f7c7",
+  "read_only_inspection": "git -C C:/0-BlackBoxProject-0/vivim-ui rev-parse HEAD",
+  "policy": "Labs reads TierFlow. It never writes it, never runs its test suite against it, and never edits a reserved lane path. The pinned sha is the state this baseline describes.",
+  "ownership_source": "vivim-ui VIVIM-VISUAL-RUNTIME/WAVE-2/WAVE-3-OWNERSHIP.md",
+  "reserved_lane_paths": [
+    { "lane": "A", "path": "/src/visual-runtime/document/wave3-action-semantics.ts", "present_at_capture": false },
+    { "lane": "A", "path": "/tests/visual-runtime/wave3-a-schema.test.ts", "present_at_capture": false },
+    { "lane": "B", "path": "/src/visual-runtime/components/wave3-canonical-map.ts", "present_at_capture": false },
+    { "lane": "B", "path": "/tests/visual-runtime/wave3-b-components.test.ts", "present_at_capture": false },
+    { "lane": "C", "path": "/src/visual-runtime/revisions/wave3-atomic-replay.ts", "present_at_capture": false },
+    { "lane": "C", "path": "/tests/visual-runtime/wave3-c-replay.test.ts", "present_at_capture": false },
+    { "lane": "D", "path": "/src/visual-runtime/render/wave3-semantics.ts", "present_at_capture": false },
+    { "lane": "D", "path": "/tests/visual-runtime/wave3-d-render.test.ts", "present_at_capture": false },
+    { "lane": "E", "path": "/src/visual-runtime/experience/wave3-journey-fixture.ts", "present_at_capture": false },
+    { "lane": "E", "path": "/tests/visual-runtime/wave3-e-experience.test.ts", "present_at_capture": false },
+    { "lane": "F", "path": "/src/visual-runtime/knowledge/wave3-feed-projection.ts", "present_at_capture": false },
+    { "lane": "F", "path": "/tests/visual-runtime/wave3-f-knowledge.test.ts", "present_at_capture": false },
+    { "lane": "G", "path": "/src/visual-runtime/command/wave3-descriptor-proof.ts", "present_at_capture": false },
+    { "lane": "G", "path": "/tests/visual-runtime/wave3-g-command.test.ts", "present_at_capture": false },
+    { "lane": "H", "path": "/src/visual-runtime/host/wave3-read-gateway-fixture.ts", "present_at_capture": false },
+    { "lane": "H", "path": "/tests/visual-runtime/wave3-h-host.test.ts", "present_at_capture": false }
+  ],
+  "canonical_surfaces": [
+    "/src/visual-runtime/command/ir.ts",
+    "/src/visual-runtime/command/compile.ts",
+    "/src/visual-runtime/document/schema.ts",
+    "/src/visual-runtime/document/validate.ts",
+    "/src/visual-runtime/components/catalog.ts",
+    "/src/visual-runtime/render/dom.ts",
+    "/src/visual-runtime/knowledge/projection.ts",
+    "/src/visual-runtime/revisions/fixture-store.ts",
+    "/src/visual-runtime/host/port.ts",
+    "/src/visual-runtime/integration-2/compose.ts"
+  ],
+  "observations": [
+    "The eight Wave 3 lane source pairs and their test pairs were absent at the pinned commit, so no lane had claimed source in this baseline.",
+    "The A/B/D chain exists as real modules under src/visual-runtime, so a differential comparison has real surfaces to compare.",
+    "No differential result was produced by running TierFlow's suite from Labs; a comparison needs its own harness and its own owner sign-off."
+  ],
+  "known_gaps": [
+    "No Harness UI versus TierFlow behavioural comparison has been executed yet; the differential corpus is empty.",
+    "The pinned sha is a baseline, not a proof of equivalence."
+  ]
+}

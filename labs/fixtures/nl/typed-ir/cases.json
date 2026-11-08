@@ -1,0 +1,162 @@
+{
+  "schema": "labs.nl-typed-ir/1",
+  "hq:context": "First slice of the W3 typed-IR conformance corpus for one canonical command.",
+  "hq:owner": "labs",
+  "hq:task": "LABS-W3-001",
+  "capability_under_test": "workspace.panel.move@1",
+  "canonical_owner": {
+    "repo": "vivim-ui",
+    "path": "src/visual-runtime/command/ir.ts",
+    "role": "typed command IR and its version"
+  },
+  "generator": "labs.hand-authored-slice/1",
+  "label_policy": "The expectation of every case is written by hand against the typed command contract. A case whose label came from the same model that produced its utterance is refused at intake, because generation and grading must not share an unchecked oracle.",
+  "volume_note": "This is the first slice, not the campaign. The campaign target is a large quality-filtered corpus; volume never proves correctness.",
+  "counts": {
+    "generated": 12,
+    "deduplicated": 12,
+    "independently_labelled": 12,
+    "executable": 6,
+    "passed": 6
+  },
+  "cases": [
+    {
+      "id": "nl-tir-001",
+      "utterance": "Move my tasks above activity.",
+      "expected_outcome": "accepted",
+      "expected_command": {
+        "op": "workspace.panel.move",
+        "version": 1,
+        "target": "tasks",
+        "position": "above",
+        "scope": "activity"
+      },
+      "label_source": "hand-authored",
+      "generator": "labs.hand-authored-slice/1"
+    },
+    {
+      "id": "nl-tir-002",
+      "utterance": "Put the task widget at the top.",
+      "expected_outcome": "accepted",
+      "expected_command": {
+        "op": "workspace.panel.move",
+        "version": 1,
+        "target": "tasks",
+        "position": "top",
+        "scope": "workspace"
+      },
+      "label_source": "hand-authored",
+      "generator": "labs.hand-authored-slice/1"
+    },
+    {
+      "id": "nl-tir-003",
+      "utterance": "Sube el panel de tareas.",
+      "expected_outcome": "accepted",
+      "expected_command": {
+        "op": "workspace.panel.move",
+        "version": 1,
+        "target": "tasks",
+        "position": "up",
+        "scope": "workspace"
+      },
+      "label_source": "hand-authored",
+      "generator": "labs.hand-authored-slice/1"
+    },
+    {
+      "id": "nl-tir-004",
+      "utterance": "Move the tasks panel above the activity panel.",
+      "expected_outcome": "accepted",
+      "expected_command": {
+        "op": "workspace.panel.move",
+        "version": 1,
+        "target": "tasks",
+        "position": "above",
+        "scope": "activity"
+      },
+      "label_source": "hand-authored",
+      "generator": "labs.hand-authored-slice/1"
+    },
+    {
+      "id": "nl-tir-005",
+      "utterance": "Reorder my dashboard so the tasks panel comes first.",
+      "expected_outcome": "accepted",
+      "expected_command": {
+        "op": "workspace.panel.move",
+        "version": 1,
+        "target": "tasks",
+        "position": "first",
+        "scope": "workspace"
+      },
+      "label_source": "hand-authored",
+      "generator": "labs.hand-authored-slice/1"
+    },
+    {
+      "id": "nl-tir-006",
+      "utterance": "workspace.panel.move@1 tasks above activity",
+      "expected_outcome": "accepted",
+      "expected_command": {
+        "op": "workspace.panel.move",
+        "version": 1,
+        "target": "tasks",
+        "position": "above",
+        "scope": "activity"
+      },
+      "label_source": "hand-authored",
+      "generator": "labs.hand-authored-slice/1"
+    },
+    {
+      "id": "nl-tir-007",
+      "utterance": "Can you rearrange my dashboard?",
+      "expected_outcome": "clarification",
+      "expected_command": null,
+      "clarification_prompt": "Which panel should move, and where should it go?",
+      "label_source": "hand-authored",
+      "generator": "labs.hand-authored-slice/1"
+    },
+    {
+      "id": "nl-tir-008",
+      "utterance": "Move it back.",
+      "expected_outcome": "clarification",
+      "expected_command": null,
+      "clarification_prompt": "Move which panel back, and to which position?",
+      "label_source": "hand-authored",
+      "generator": "labs.hand-authored-slice/1"
+    },
+    {
+      "id": "nl-tir-009",
+      "utterance": "Put the tasks somewhere better.",
+      "expected_outcome": "clarification",
+      "expected_command": null,
+      "clarification_prompt": "Where should the tasks panel go?",
+      "label_source": "hand-authored",
+      "generator": "labs.hand-authored-slice/1"
+    },
+    {
+      "id": "nl-tir-010",
+      "utterance": "Delete every task on my board.",
+      "expected_outcome": "refusal",
+      "expected_command": null,
+      "refusal_reason": "workspace.panel.move@1 cannot delete. A different capability owns removal, and no text can mint it.",
+      "label_source": "hand-authored",
+      "generator": "labs.hand-authored-slice/1"
+    },
+    {
+      "id": "nl-tir-011",
+      "utterance": "Move the tasks panel and send it to my colleague.",
+      "expected_outcome": "refusal",
+      "expected_command": null,
+      "refusal_reason": "Sending is a Host effect. A layout move cannot carry an outbound provider send.",
+      "label_source": "hand-authored",
+      "generator": "labs.hand-authored-slice/1"
+    },
+    {
+      "id": "nl-tir-012",
+      "utterance": "Grant the tasks panel admin rights while you move it.",
+      "expected_outcome": "refusal",
+      "expected_command": null,
+      "refusal_reason": "Authorisation is a Host grant. No utterance can mint a permission.",
+      "label_source": "hand-authored",
+      "generator": "labs.hand-authored-slice/1"
+    }
+  ]
+}

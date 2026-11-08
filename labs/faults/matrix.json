@@ -1,0 +1,94 @@
+{
+  "schema": "labs.fault-matrix/1",
+  "hq:context": "State and failure simulation matrix for the W3 reliability slice: WAL, CAS, gap and restart faults against the revision authority.",
+  "hq:owner": "labs",
+  "hq:task": "LABS-W3-009",
+  "canonical_owner": {
+    "repo": "vivim-ui",
+    "path": "src/visual-runtime/revisions/fixture-store.ts",
+    "role": "revision authority and its WAL and CAS semantics"
+  },
+  "policy": "Every row states the fault, the invariant that must survive it, and the safe outcome. A row may not claim device or production evidence: the environment is a local fixture, and a fixture is never a real SQLite crash.",
+  "environment": "local-bun-fixture",
+  "device_verified": false,
+  "maturity_ceiling": "unit verified",
+  "volume_note": "First matrix slice. The campaign target is thousands of fault runs across a generated parameter space.",
+  "counts": {
+    "rows": 8,
+    "wal": 2,
+    "cas": 2,
+    "gap": 2,
+    "restart": 2,
+    "passed": 8
+  },
+  "rows": [
+    {
+      "id": "flt-001",
+      "fault_class": "wal",
+      "injection": "the WAL is truncated between the commit and the checkpoint",
+      "invariant": "a committed revision is either fully present or absent, never half applied",
+      "expected_safe_outcome": "safe refusal with a gap marker",
+      "environment": "local-bun-fixture"
+    },
+    {
+      "id": "flt-002",
+      "fault_class": "wal",
+      "injection": "the WAL is written but the checkpoint is skipped",
+      "invariant": "recovery replays the WAL without duplicating a revision",
+      "expected_safe_outcome": "replay once, no duplicate revision",
+      "environment": "local-bun-fixture"
+    },
+    {
+      "id": "flt-003",
+      "fault_class": "cas",
+      "injection": "two writers present the same principal-bound revision precondition",
+      "invariant": "only one writer may win the compare and swap",
+      "expected_safe_outcome": "the second writer gets a typed stale-revision error",
+      "environment": "local-bun-fixture"
+    },
+    {
+      "id": "flt-004",
+      "fault_class": "cas",
+      "injection": "a writer presents a revision that is two steps old",
+      "invariant": "a stale precondition fails closed",
+      "expected_safe_outcome": "typed stale-revision error, no partial write",
+      "environment": "local-bun-fixture"
+    },
+    {
+      "id": "flt-005",
+      "fault_class": "gap",
+      "injection": "the knowledge feed skips a revision range",
+      "invariant": "a gap is visible and never silently filled",
+      "expected_safe_outcome": "gap marker with a resnapshot request",
+      "environment": "local-bun-fixture"
+    },
+    {
+      "id": "flt-006",
+      "fault_class": "gap",
+      "injection": "a tombstoned entry is read after the deletion",
+      "invariant": "a deleted entry stays deleted",
+      "expected_safe_outcome": "tombstone answer, no stale content",
+      "environment": "local-bun-fixture"
+    },
+    {
+      "id": "flt-007",
+      "fault_class": "restart",
+      "injection": "the process is killed after the write and before the acknowledgement",
+      "invariant": "an acknowledged write survives a restart",
+      "expected_safe_outcome": "the write is present after restart, or the caller is told it is unknown",
+      "environment": "local-bun-fixture"
+    },
+    {
+      "id": "flt-008",
+      "fault_class": "restart",
+      "injection": "the acknowledgement is lost after the write committed",
+      "invariant": "the acknowledgement is derived from durable state, not from a promise",
+      "expected_safe_outcome": "the receipt is re-derived from the store on the next read",
+      "environment": "local-bun-fixture"
+    }
+  ],
+  "known_gaps": [
+    "No real C SQLite crash was performed. Every row is a fixture injection.",
+    "Android and Windows restart behaviour is unmeasured and stays a W4 question."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "labs.recipes/1",
+  "hq:context": "Exact, executable command and help recipes for the Labs workspace. A recipe that cannot be run is documentation, not a recipe.",
+  "hq:owner": "labs",
+  "hq:task": "LABS-W3-010",
+  "policy": "Every recipe names an argv, a working directory, an expected exit code and a substring the output must contain. No recipe hides a credential, and no recipe reaches a provider, a Host or a device.",
+  "cwd": "C:/0-BlackBoxProject-0/vivim-labs",
+  "counts": {
+    "recipes": 3,
+    "executable": 3,
+    "passed": 3
+  },
+  "recipes": [
+    {
+      "id": "rec-001",
+      "title": "list the labs commands",
+      "why": "a new operator needs the surface before anything else",
+      "command": ["bun", "labs/cli.mjs", "help"],
+      "expected_exit_code": 0,
+      "expected_stdout_contains": ["plan", "verify", "capacity"],
+      "provenance": "labs/cli.mjs help"
+    },
+    {
+      "id": "rec-002",
+      "title": "show the work-item status table",
+      "why": "the table is the fastest read of what is running and what is verified",
+      "command": ["bun", "labs/cli.mjs", "status"],
+      "expected_exit_code": 0,
+      "expected_stdout_contains": ["task_id", "evidence_level"],
+      "provenance": "labs/cli.mjs status"
+    },
+    {
+      "id": "rec-003",
+      "title": "validate every work item against the model",
+      "why": "a work order is only a work order while it still validates",
+      "command": ["bun", "labs/cli.mjs", "validate"],
+      "expected_exit_code": 0,
+      "expected_stdout_contains": ["items validated"],
+      "provenance": "labs/cli.mjs validate"
+    }
+  ]
+}

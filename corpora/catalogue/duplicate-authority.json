@@ -1,0 +1,221 @@
+{
+  "generated": "2026-11-06T21:10:21Z",
+  "generated_by": "VIVIM Labs read-only discovery (factory 02 — the highest-value output)",
+  "spec": "C:/0-BlackBoxProject-0/vivim-labs/docs/ENGINEERING-EVIDENCE-FACTORY.md",
+  "status": "CANDIDATE. Each entry records where a concept appears more than once, which owner should win, and why. Nothing here changes any repo; each recommendation needs the named owner's approval.",
+  "principle": "The catalogue must point at ONE owner per concept. Duplicates are pointed AT, never copied. A Labs catalogue row that restates a duplicate list becomes a third authority.",
+  "duplicates": [
+    {
+      "id": "D1",
+      "concept": "UI component / node type vocabulary (the closed list of renderable node types)",
+      "locations": [
+        {
+          "repo": "vivim-web-harness",
+          "path": "apps/mobile-relay/generative-ui/catalog.mjs",
+          "line": 7,
+          "detail": "export const TYPES = Object.freeze(['stack','grid','text','card','button','collection','profile-card','project-card','timeline','chart']) — 10 types"
+        },
+        {
+          "repo": "vivim-ui",
+          "path": "src/visual-runtime/document/schema.ts",
+          "line": 12,
+          "detail": "export const UI_DOCUMENT_NODE_TYPES = ['stack','grid','text','card','button','collection','profile-card','project-card','timeline','chart'] — the SAME 10 types, same order"
+        }
+      ],
+      "should_win": "vivim-ui :: src/visual-runtime/document/schema.ts:12",
+      "reason": "TierFlow owns the UI schema and command runtime after cutover (ENGINEERING-EVIDENCE-FACTORY.md:52; vivim-workstation/knowledge/architecture/cross-repo-authority.md 'Who owns what'). The harness list is a byte-identical copy living in a DIFFERENT repo, so any change to one silently forks the other. The harness must import or reference the TierFlow list, not restate it. Cross-repo-authority.md already flags this exact divergence as 'Schema divergence: Harness vivim.ui-surface/1 (10 2D component types) vs TierFlow spatial schema. Lane C owns reconciliation.'",
+      "severity": "high",
+      "evidence": "Both lists compared this session; identical elements and order.",
+      "labs_action": "Link to TierFlow's list. Record the harness list as a DEPRECATED POINTER with a link, never as a second row set."
+    },
+    {
+      "id": "D2",
+      "concept": "Component vocabulary WITHIN TierFlow — a third and fourth copy of a component list in the same repo",
+      "locations": [
+        {
+          "repo": "vivim-ui",
+          "path": "src/visual-runtime/components/catalog.ts",
+          "line": 8,
+          "detail": "export const COMPONENT_TYPES = ['stack','grid','card','text','heading','button','status','field','divider'] — 9 types"
+        },
+        {
+          "repo": "vivim-ui",
+          "path": "src/visual-runtime/components/accessibility.ts",
+          "line": 2,
+          "detail": "export type ComponentType = \"stack\" | \"grid\" | \"card\" | \"text\" | \"heading\" | \"button\" | \"status\" | \"field\" | \"divider\" — the SAME 9 types as a TS union"
+        },
+        {
+          "repo": "vivim-ui",
+          "path": "src/visual-runtime/document/schema.ts",
+          "line": 12,
+          "detail": "UI_DOCUMENT_NODE_TYPES — 10 types, overlapping but NOT identical (adds collection/profile-card/project-card/timeline/chart; drops heading/status/field/divider)"
+        }
+      ],
+      "should_win": "vivim-ui :: src/visual-runtime/document/schema.ts:12 for the DOCUMENT grammar, and src/visual-runtime/components/catalog.ts:8 for the FIXTURE-NODE contract (two different contracts, one owner each)",
+      "reason": "Three lists describe 'a component' inside one repo and they disagree. A catalogue cannot know which one a row belongs to without reading the file. The honest resolution is to declare two named contracts (document node type vs fixture node type) rather than one 'Components' vocabulary, and to have accessibility.ts import the type from catalog.ts instead of re-declaring the union.",
+      "severity": "medium",
+      "evidence": "Three source constants compared this session; the union at accessibility.ts:2 is a hand-copy of the array at catalog.ts:8.",
+      "labs_action": "Catalogue rows must carry the contract name, not just a type name."
+    },
+    {
+      "id": "D3",
+      "concept": "UI document schema identity and its size limits",
+      "locations": [
+        {
+          "repo": "vivim-ui",
+          "path": "src/visual-runtime/document/schema.ts",
+          "line": 6,
+          "detail": "UI_DOCUMENT_SCHEMA = 'vivim.ui-document/1'; UI_DOCUMENT_LIMITS = { bytes: 32768, nodes: 64, depth: 7, children: 24, bindings: 128, views: 8, text: 240, items: 16, actionRefs: 8 }"
+        },
+        {
+          "repo": "vivim-web-harness",
+          "path": "apps/mobile-relay/generative-ui/catalog.mjs",
+          "line": 3,
+          "detail": "SURFACE_SCHEMA = 'vivim.ui-surface/1'; MAX = { bytes: 32768, nodes: 64, depth: 7, operations: 20, children: 24, string: 240, items: 16 } — the SAME limit numbers under a DIFFERENT schema id"
+        }
+      ],
+      "should_win": "vivim-ui :: 'vivim.ui-document/1' (src/visual-runtime/document/schema.ts:6)",
+      "reason": "Two different schema ids ('vivim.ui-document/1' and 'vivim.ui-surface/1') carry byte-identical bounds (32768 / 64 / 7 / 24 / 240 / 16). Two names for one shape guarantee that a version bump lands in one repo only. A catalogue that lists 'the UI document schema' must point at exactly one id; the other must be declared as a projection of it, not a sibling schema.",
+      "severity": "high",
+      "evidence": "Limit values compared this session; six of six shared values are identical.",
+      "labs_action": "One row for 'vivim.ui-document/1'; record 'vivim.ui-surface/1' as a downstream projection of it with an explicit relationship."
+    },
+    {
+      "id": "D4",
+      "concept": "Provider vocabulary — the list of signed-in web providers",
+      "locations": [
+        {
+          "repo": "vivim-web-harness",
+          "path": "harness/src/providers/index.mjs",
+          "line": 18,
+          "detail": "const providers = [chatgpt, claude, deepseek, grok, qwen, zai, gemini, kimi] — 8 profiles, each carrying status='measured'|'seeded-unverified'. Comment: 'This array is the ONLY list of reachable providers'."
+        },
+        {
+          "repo": "vivim-web-harness",
+          "path": "scripts/capability-catalog.mjs",
+          "line": 33,
+          "detail": "export const PROVIDERS = ['chatgpt','claude','gemini','qwen','deepseek','kimi','zai','grok'] — the same 8 names, hard-coded, PLUS a separate SEVEN_PROVIDERS list on line 34 that omits grok"
+        },
+        {
+          "repo": "vivim-web-harness",
+          "path": "studio/profiles/",
+          "line": 1,
+          "detail": "chatgpt.json, claude.json, generic.json — 3 site profiles that overlap the same concept with a different, narrower vocabulary"
+        }
+      ],
+      "should_win": "vivim-web-harness :: harness/src/providers/index.mjs:18",
+      "reason": "The provider profile array is the only list that is actually reachable at runtime and the only one that carries an evidence flag (measured vs seeded-unverified). The capability-catalog list is a copy used for validation and it has already drifted — SEVEN_PROVIDERS (line 34) is a hard-coded subset that omits grok even though grok is a first-class profile. Studio's 3 profiles are a UI-specific narrowing and should be recorded as a projection with a relationship, not as another provider registry.",
+      "severity": "medium",
+      "evidence": "Provider lists compared this session; the catalog validator's PROVIDERS/SEVEN_PROVIDERS constants are literal copies (scripts/capability-catalog.mjs:33-34).",
+      "labs_action": "Link to the provider profile array. The catalogue must NOT maintain its own provider list — it would be a fourth copy of a list that has already drifted once."
+    },
+    {
+      "id": "D5",
+      "concept": "Capability identifier namespace — two different registries both mint `CAP-` ids",
+      "locations": [
+        {
+          "repo": "vivim-web-harness",
+          "path": "catalog/harness-capabilities.json",
+          "line": 2,
+          "detail": "vwh.harness-capabilities/1 — 246 rows id CAP-001..CAP-246, one per harness behaviour"
+        },
+        {
+          "repo": "vivim-web-harness",
+          "path": "docs/capabilities/atomic-registry.json",
+          "line": 2,
+          "detail": "vivim.atomic-capabilities/1 — 354 items id CAP-01..CAP-354, one per declared atomic capability"
+        }
+      ],
+      "should_win": "vivim-web-harness :: docs/capabilities/atomic-registry.json (CAP-01..CAP-354) as the declared capability inventory",
+      "reason": "Both registries use the same `CAP-` prefix with different padding (3 digits vs 2) and different semantics, so `CAP-01` and `CAP-001` are trivially confusable and a fuzzy cross-reference will silently join the wrong row. The atomic registry carries spec, acceptance, priority, decision state and source links, so it is the inventory of record; the harness capability CSV is a behaviour-level catalogue that should be namespaced (for example `HARNESS-CAP-001`) or explicitly aliased. Until that happens, any crosswalk keyed on `CAP-` is unsafe.",
+      "severity": "high",
+      "evidence": "Both registries enumerated this session; id prefixes and ranges confirmed. The duplication scan already flags heavy cross-claiming inside the atomic registry (vivim-web-harness/docs/library/DUPLICATION-SCAN-2026-10-31.md: 'Source files shared by >1 capability: 44 files').",
+      "labs_action": "Record the namespace difference in every row (source registry + id) so a catalogue key is never ambiguous. Never mint a third `CAP-` namespace."
+    },
+    {
+      "id": "D6",
+      "concept": "Receipt format — two incompatible evidence-receipt schemas",
+      "locations": [
+        {
+          "repo": "repos_hq",
+          "path": "hq/lib/receipts.mjs",
+          "line": 26,
+          "detail": "function receiptId(kind, task, digest) -> 'rcpt_' + sha256(...).slice(0,24); rows in the SQLite `receipts` table with kind/task/project/sources/digest/bytes/created_at"
+        },
+        {
+          "repo": "vivim-web-harness",
+          "path": "scripts/capability-catalog.mjs",
+          "line": 23,
+          "detail": "export const RECEIPT_SCHEMA = 'vwh.capability-receipt/1'; field contract in catalog/receipts/README.md — schema, kind (source-inspection|offline|live|phone), subject[], revision, command, time, result, limitations"
+        }
+      ],
+      "should_win": "BOTH — they are different domains and must NOT be merged",
+      "reason": "HQ's receipt is an INDEX-READ ledger ('Every context bundle, ask or brief that reads the local index records what it read and the digest of what it produced', hq/lib/receipts.mjs:3). The harness receipt is a CAPABILITY-VERIFICATION artifact whose whole purpose is to be the only way a capability's verification state moves beyond 'not-tested' (catalog/receipts/README.md:3). Collapsing them would either dilute the capability verdict or corrupt the index ledger. The right answer is a LINK: a Labs row may cite both, with the id namespaced by schema ('rcpt_...' vs a subject-keyed harness receipt). The live HQ `receipts` table currently holds 0 rows, so nothing would be lost by adding the link, and everything would be lost by merging the formats.",
+      "severity": "medium",
+      "evidence": "Both formats read this session; the harness README explicitly forbids using one kind of receipt as another ('Do not record an offline run as live evidence', catalog/receipts/README.md:38).",
+      "labs_action": "Two receipt references per row, never one merged receipt type."
+    },
+    {
+      "id": "D7",
+      "concept": "UI component registry — a design document and an implementation both claim the name",
+      "locations": [
+        {
+          "repo": "repos_hq",
+          "path": "docs/COMPONENT-REGISTRY.md",
+          "line": 1,
+          "detail": "'Component registry — reusable actions at 10,000 scale'; Status: design + phased implementation. Defines hq.component/1 with id/version/kind/inputSchema/effects/authority/idempotency."
+        },
+        {
+          "repo": "repos_hq",
+          "path": "hq/lib/components.mjs",
+          "line": 12,
+          "detail": "const COMPONENT_SCHEMA = 'hq.component/1' — the IMPLEMENTATION of the same schema, with PIPELINE_SCHEMA 'hq.pipeline/1', activation, fork/diff/replay"
+        }
+      ],
+      "should_win": "repos_hq :: hq/lib/components.mjs:12 (implementation)",
+      "reason": "The document says of itself: 'design + phased implementation'. The module is the executable artefact and is guarded by hq/test/components.test.mjs. A catalogue row must point at the module, not the prose. Note also that neither is populated: the live index.db has no `component` or `pipeline` tables and hq/lib/schema.mjs contains no component/pipeline DDL, so the registry has a schema but zero stored rows.",
+      "severity": "low",
+      "evidence": "Both artefacts read this session; index.db table list confirmed to contain no component/pipeline table.",
+      "labs_action": "Point at the module; record the document as the design-of-record relationship, not as a registry."
+    },
+    {
+      "id": "D8",
+      "concept": "Workflow / task status — three repos each keep a plan of what to build",
+      "locations": [
+        {
+          "repo": "repos_hq",
+          "path": "hq/work/orders.json",
+          "line": 1,
+          "detail": "45 authored work orders, schema hq.work-order/1 — each names the ONE file it may write and the command that proves it"
+        },
+        {
+          "repo": "vivim-web-harness",
+          "path": "docs/roadmap.json",
+          "line": 1,
+          "detail": "176 roadmap items; 'roadmap.json owns task status' per the atomic-registry policy field"
+        },
+        {
+          "repo": "vivim-workstation",
+          "path": "ops/runbooks/",
+          "line": 1,
+          "detail": "4 operator runbooks (EVIDENCE-RECORDING, OWNER-HANDOFF, RECOVERY, SAFE-GIT)"
+        }
+      ],
+      "should_win": "Split ownership, explicitly recorded — hq/work/orders.json for dispatchable work orders (repos_hq), docs/roadmap.json for product task status (vivim-web-harness), ops/runbooks/ for operator procedure (vivim-workstation). No single winner.",
+      "reason": "These are three different artefacts with three different consumers, so a catalogue that lists one 'Workflows' registry will mislead. The correct catalogue row set is one per owner, cross-linked by topic. The risk is a Labs catalogue that silently treats roadmap status as delivery evidence — atomic-registry.json already warns 'File exists != implemented. Symbol exists != live verified.'",
+      "severity": "medium",
+      "evidence": "All three read this session; counts 45 / 176 / 4 confirmed.",
+      "labs_action": "Three separate owner-scoped rows with explicit relationships, not one merged Workflows list."
+    }
+  ],
+  "summary": {
+    "duplicates_found": 8,
+    "high_severity": 3,
+    "medium_severity": 4,
+    "low_severity": 1,
+    "cross_repo": ["D1", "D3", "D5", "D6"],
+    "intra_repo": ["D2", "D7", "D8"],
+    "most_valuable_for_factory_02": "D1 + D3 (the UI schema triple) — one shape, three vocabularies and two schema ids across two repos, already acknowledged as unresolved by the campaign's own authority map.",
+    "note": "These are candidate findings for the owning teams to accept or reject. Labs must not resolve them unilaterally and must not publish a competing list."
+  }
+}

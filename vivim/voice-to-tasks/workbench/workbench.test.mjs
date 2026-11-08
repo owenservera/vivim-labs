@@ -71,3 +71,22 @@ test('E: standalone CLI consumes committed compact fixtures with zero external d
  assert.equal(report.classification,'SYNTHETIC_TRANSCRIPT_ONLY'); assert.equal(report.cases.length,fixture.length);
  assert.equal(report.cases.every(c=>c.passed),true);
 });
+import {verifyObservedTrace} from './trace-check.mjs';
+test('D: phone-to-Host-to-desktop trace requires review and Host receipt',()=>{
+ const prefix={noteId:'note-12345678',ownerId:'owner-test',revision:1};
+ const history=[
+ {source:'android',action:'captured_local'},
+ {source:'android',action:'queued'},
+ {source:'host',action:'transcribed'},
+ {source:'host',action:'proposed'},
+ {source:'android',action:'reviewed',approvedProposalIds:['vp-1234567890abcdef12345678']},
+ {source:'host',action:'committed',receiptId:'receipt:trusted-host-fixture'},
+ {source:'desktop',action:'reopened'}].map(x=>({...prefix,...x}));
+ const verified=verifyObservedTrace(history);assert.equal(verified.passed,true);
+ assert.equal(verified.approvedCount,1);
+ assert.throws(()=>verifyObservedTrace(history.filter(x=>x.action!=='reviewed')),{code:'TRACE_UNAUTHORIZED_TRANSITION'});
+ assert.throws(()=>verifyObservedTrace(history.map(x=>x.action==='committed'?{...x,source:'android'}:x)),{code:'TRACE_HOST_COMMIT_REQUIRED'});
+ assert.throws(()=>verifyObservedTrace(history.map(x=>x.action==='reopened'?{...x,ownerId:'different'}:x)),{code:'TRACE_EVENT_INVALID'});
+ assert.throws(()=>verifyObservedTrace(history.map(x=>x.action==='committed'?{...x,receiptId:null}:x)),{code:'TRACE_UNVERIFIED_COMMIT'});
+ const partial=verifyObservedTrace(history.slice(0,2));assert.equal(partial.finalAction,'queued');assert.equal(partial.passed,false);
+});

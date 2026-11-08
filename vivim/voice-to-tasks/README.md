@@ -17,6 +17,10 @@ One owner-initiated spoken note on either phone or desktop yields **zero, one or
 
 **Critical mic/API distinction:** Android's `SpeechRecognizer` normally captures its own microphone stream; the existing `PocketRecorder` writes M4A. Simultaneous recording/recognition must NOT be assumed. API 33 `RecognizerIntent.EXTRA_AUDIO_SOURCE` offers an optional external PCM stream but recognizers can ignore it. A saved file-to-text pathway must have an independently proven file-decoding ASR adapter. The safe initial path is recorded M4A → authorized Host → local ASR → reviewed task proposals.
 
+## Executed ChatGPT build work (isolated from local product lanes)
+- [Five-lane implementation/evidence ledger](MULTILANE-EXECUTION.md) — source seams, actual 10/10 offline subtests, independently reproducible commands, red/green CLI repair, blockers and next hardware gates.
+- [Executable zero-dependency evaluation workbench](workbench/) — metadata/consent checks, grounded draft task proposals, conservative en/es/ca dates, inert review intents, synthetic transcript evaluator and observed-trace assertions. **Reference only; not Host integration, STT, UI or device acceptance.**
+
 ## Navigation
 - [Deep comparative architecture research](ARCHITECTURE-RESEARCH.md) — candidate runtimes, languages, licenses, quantified source claims, cost/footprint, authority and decision.
 - [Benchmark, experiment and release-gate plan](BENCHMARK-AND-ACCEPTANCE.md) — independent tests, explicit budgets (targets, **not measured facts**), real-device gates and stop conditions.

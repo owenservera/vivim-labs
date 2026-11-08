@@ -64,3 +64,12 @@ Node.js 22+ recommended; no `npm install`.
 
 ## Release status
 This work **reduces design/contract uncertainty and produces tested reusable pure functions**, not an end-to-end shipped feature. Personal task authority, full ASR, authenticated phone path, real Android and full release are **BLOCKED/UNRUN**. Continue production closeout exactly as planned, with no duplicate Host or browser writer.
+
+## Local implementation round (2026-11-08, branch `voice-workbench-impl`)
+
+Executed by the local ZCode seat (zcode-main) under owner goal "full implementation"; supplements, does not replace, the ChatGPT rounds above. Scope held to ONE code file plus this ledger; `core.mjs`, `fixtures.json`, `evaluate.mjs`, `trace-check.mjs` untouched.
+
+1. **Windows portability fix** in `workbench.test.mjs`: `spawnSync` paths now built with `fileURLToPath(new URL(...))` (was `URL.pathname`, which yields `C:\C:\...` on win32). Suite on win32 node v24.22.1: was 10 tests / 9 pass / 1 fail / exit 1 — now **14 tests / 14 pass / 0 fail / exit 0**.
+2. **Round-2-shaped hard-negative test group added (4 tests):** false-positive traps drawn from this ledger's own omissions list (quoted speech, past regret, questions, indirect forms, conditionals, third-person schedules, cross-locale verbs), explicit negation refusals including the documented conservative `don't forget X` false-negative — pinned so any future widening of the verb/negation logic is a conscious change, never an accident — plus locale-mismatch refusal, span grounding and idempotency determinism on a mixed transcript.
+3. **Acceptance on this branch:** `node --test vivim/voice-to-tasks/workbench/workbench.test.mjs` → exit 0 (14/14); `node vivim/voice-to-tasks/workbench/evaluate.mjs vivim/voice-to-tasks/workbench/fixtures.json` → exit 0, tp=12 fp=0 fn=0 f1=1 (unchanged from the published baseline).
+4. **Still BLOCKED/UNRUN, unchanged and owner/hardware-gated:** model-backed ASR samples, real 100+ utterance multilingual benchmark, authenticated Host task authority (no task-creation action exists in `action-catalog.v1.json` — verified locally), Android APK + device tests, phone↔desktop transport, p95/RSS/battery.

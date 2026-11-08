@@ -1,5 +1,5 @@
 import test from 'node:test'; import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs'; import {spawnSync} from 'node:child_process'; import {createHash} from 'node:crypto';
+import {readFileSync} from 'node:fs'; import {spawnSync} from 'node:child_process'; import {createHash} from 'node:crypto'; import {fileURLToPath} from 'node:url';
 import {checkCapture,checkTranscript,baselineProposals,checkProposals,interpretDuePhrase,prepareOwnerReview} from './core.mjs';
 import {evaluate} from './evaluate.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
@@ -66,7 +66,7 @@ test('D/E: synthetic evaluation exposes false positives; never claims WER',()=>{
 });
 
 test('E: standalone CLI consumes committed compact fixtures with zero external deps',()=>{
- const run=spawnSync(process.execPath,[new URL('./evaluate.mjs',import.meta.url).pathname,new URL('./fixtures.json',import.meta.url).pathname],{encoding:'utf8',timeout:5000});
+ const run=spawnSync(process.execPath,[fileURLToPath(new URL('./evaluate.mjs',import.meta.url)),fileURLToPath(new URL('./fixtures.json',import.meta.url))],{encoding:'utf8',timeout:5000});
  assert.equal(run.status,0,run.stderr); const report=JSON.parse(run.stdout);
  assert.equal(report.classification,'SYNTHETIC_TRANSCRIPT_ONLY'); assert.equal(report.cases.length,fixture.length);
  assert.equal(report.cases.every(c=>c.passed),true);
@@ -89,4 +89,53 @@ test('D: phone-to-Host-to-desktop trace requires review and Host receipt',()=>{
  assert.throws(()=>verifyObservedTrace(history.map(x=>x.action==='reopened'?{...x,ownerId:'different'}:x)),{code:'TRACE_EVENT_INVALID'});
  assert.throws(()=>verifyObservedTrace(history.map(x=>x.action==='committed'?{...x,receiptId:null}:x)),{code:'TRACE_UNVERIFIED_COMMIT'});
  const partial=verifyObservedTrace(history.slice(0,2));assert.equal(partial.finalAction,'queued');assert.equal(partial.passed,false);
+});
+
+// --- Round-2 hard negatives (local implementation round 2026-11-08, branch voice-workbench-impl) ---
+// Pins the documented refusal contract against false-positive regressions: segments that
+// tempt an extractor but must yield zero proposals (ledger omissions list: quoted speech,
+// indirect forms, questions, conditionals, negations). True-positive anchors keep the
+// refusal honest in both directions. core.mjs, fixtures.json, evaluate.mjs untouched.
+function mk(text,locale='en-US',noteId='note-12345678') {
+ const capture={schema:'vivim.lab-audio-capture/1',noteId,ownerId:'owner-test',deviceId:'android-test',sha256:sha(text),mime:'audio/mp4',bytes:2048,
+  capturedAt:'2026-11-08T15:00:00+01:00',locale,timeZone:'Europe/Madrid',consentToHostTransfer:false};
+ const transcript={schema:'vivim.lab-transcript/1',noteId,audioSha256:capture.sha256,text,engineDigest:sha('fixture-engine'),status:'draft'};
+ return {capture,transcript};
+}
+test('R2: hard negatives yield zero proposals',()=>{
+ const traps=[
+  'She said "please pay the invoice tomorrow" and left',
+  'I forgot to buy milk today',
+  'Should we buy milk today?',
+  'We need to buy milk',
+  'If you call the bank tomorrow, ask about the fee',
+  'The review is scheduled for Friday',
+  'Remember the check is due'];
+ for(const t of traps){const {capture,transcript}=mk(t);
+  assert.equal(baselineProposals(transcript,capture).length,0,t);}
+});
+test('R2: negated segments are refused, not guessed',()=>{
+ for(const [t,loc] of [["Don't schedule the meeting",'en-US'],['never call that number again','en-US'],['No enviar el paquete hoy','es-ES']]){
+  const {capture,transcript}=mk(t,loc);
+  assert.equal(baselineProposals(transcript,capture).length,0,t);}
+ // Documented conservative false-negative (ledger omission 2): 'don't forget X' stays
+ // excluded until a later round revisits negation with the owner; pinned so a widening
+ // of the verb/negation logic is a conscious change, never an accident.
+ const dn="Don't forget to buy milk tomorrow"; const {capture,transcript}=mk(dn);
+ assert.equal(baselineProposals(transcript,capture).length,0,dn);
+});
+test('R2: locale mismatch refuses cross-language verbs',()=>{
+ const t='compra leche mañana';
+ const en=mk(t,'en-US'); assert.equal(baselineProposals(en.transcript,en.capture).length,0,t);
+ const es=mk(t,'es-ES'); const p=baselineProposals(es.transcript,es.capture);
+ assert.equal(p.length,1,t); assert.equal(p[0].dueIntent.dueDate,'2026-11-09');
+});
+test('R2: mixed transcript grounds spans and stays deterministic',()=>{
+ const {capture,transcript}=mk('Call mom tomorrow. Yesterday I called the bank.');
+ const p=baselineProposals(transcript,capture);
+ assert.equal(p.length,1); assert.equal(p[0].evidence,transcript.text.slice(...p[0].sourceSpan));
+ assert.equal(p[0].dueIntent.dueDate,'2026-11-09');
+ assert.equal(p[0].proposalId,baselineProposals(transcript,capture)[0].proposalId);
+ const other=mk('Call mom tomorrow. Yesterday I called the bank.','en-US','note-abcdefgh');
+ assert.notEqual(baselineProposals(other.transcript,other.capture)[0].proposalId,p[0].proposalId);
 });

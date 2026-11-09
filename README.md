@@ -1,5 +1,7 @@
 # vivim-labs
 
+**Product roadmap precedence (2026-11-09):** [one canonical VIVIM product roadmap](https://github.com/owenservera/vivim-web-harness/blob/main/docs/ROADMAP.md) governs release priorities and current source-cleanup scope. Labs is **public and non-authoritative for production**: retain research and public-safe historical documentation, never copy secrets, owner accounts, local Windows logs or private repo source here without explicit public-release clearance. Historical planning documents in Labs are archive/provenance, never an alternate active roadmap. Current phase adds no new functionality.
+
 Working record for the VIVIM Labs initiative. **This repository is intended for the local ZCode team to design and operate.** The initial documentation captures our discussion; it does **not** establish a finalized architecture, source layout, orchestration workflow, operating policy or implementation.
 
 ## Intent discussed

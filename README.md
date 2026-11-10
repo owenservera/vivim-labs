@@ -1,33 +1,34 @@
-# vivim-labs
+# VIVIM Labs — public-safe research, evaluation and campaign evidence
 
-**Product roadmap precedence (2026-11-09):** [one canonical VIVIM product roadmap](https://github.com/owenservera/vivim-web-harness/blob/main/docs/ROADMAP.md) governs release priorities and current source-cleanup scope. Labs is **public and non-authoritative for production**: retain research and public-safe historical documentation, never copy secrets, owner accounts, local Windows logs or private repo source here without explicit public-release clearance. Historical planning documents in Labs are archive/provenance, never an alternate active roadmap. Current phase adds no new functionality.
+Labs is VIVIM's **research/evidence repository**, not a fifth primary development authority. It holds source-linked experiments, tests, historical documentation archives and the Z.ai convergence campaign record. It **does not** own the product roadmap, Host effects, visual runtime or central development index.
 
-Working record for the VIVIM Labs initiative. **This repository is intended for the local ZCode team to design and operate.** The initial documentation captures our discussion; it does **not** establish a finalized architecture, source layout, orchestration workflow, operating policy or implementation.
+## Start here
 
-## Intent discussed
+- [Z.ai Fullstack four-repository convergence workspace](zai/README.md) — conceptual deduplication, best-of-breed decisions, open items, per-repo work lanes, round manifests, bundle protocol and stretch goals.
+- [Z.ai campaign charter](zai/CAMPAIGN-CHARTER.md) — maximal single-version roadmap as an HQ-generated view, preserving every valuable unique component.
+- [Documentation consolidation archive](documentation-consolidation/INVENTORY.json) — historical copy/original reconciliation and provenance; **not** a second live document authority.
+- [Capability observatory](capability-observatory/) — research observations and evidence, not a canonical product capability registry.
+- [Past orphaned work](past-orphaned-work/README.md), [agentic excellence](agentic_excelence/README.md), [research intake](research-intake/) — public-safe historical and experimental work.
 
-Labs is a high-volume engineering, testing, evaluation, tooling and **process-oriented** work area supporting VIVIM. Its role is to help expand both **breadth** (what we have explored, specified or can attempt) and **depth** (what we have actually executed and verified), without multiplying competing production authorities.
+## Four VIVIM repositories
 
-The user has already run at least three parallel local ZCode threads with eight workers each (24+ demonstrated concurrent workers). The local PC has access to configured OpenRouter and NVIDIA free-tier models. ZCode is intended to centrally manage fleets/swarms. Actual effective throughput, provider/model limits and hardware constraints are for local measurement.
+| Repository | Source-owned responsibility |
+|---|---|
+| [repos-hq](https://github.com/owenservera/repos-hq) | Existing SQLite/Rust graph, semantic indexing, context, orchestration and generated shared documentation |
+| [vivim-web-harness](https://github.com/owenservera/vivim-web-harness) | Product Host, signed-in web effects, approvals/receipts, one Android app, **current** roadmap |
+| [tierflow](https://github.com/owenservera/tierflow) | Domain-neutral visual/interaction runtime; owner's local folder is `vivim-ui` |
+| [vivim-labs](https://github.com/owenservera/vivim-labs) | Public-safe research, archives and evidence |
 
-## What Labs may cover
+The owner's `vivim-ui` directory is a local alias for `tierflow`, not a fifth repository. `SOFTWARE_HQ` is an entirely separate private PC-management/quarantine repository and **must not be cloned, indexed, copied or published here**.
 
-See [discussion record](DISCUSSION-RECORD.md): natural-language command expansion and tests; a catalogue of catalogues; reusable assets; integration research; security, compatibility, performance and failure testing; production-environment scaffolding; documentation and process work; and evidence of what truly works.
+## What belongs here
 
-See [agentic_excelence](agentic_excelence/README.md) for discussion topics about agent tooling, skills, agents, evaluation and operational excellence. The folder name intentionally follows the requested spelling.
+Public-safe research artifacts, reproducible test fixtures, provenance-linked observations and non-authoritative campaign decision history. For each claimed result, record repository:path, full source SHA, actual command/result when available and whether it is source-inspected, tested, cloud verified or device verified.
 
-## Legacy recovery intake
+**Do not** put secrets, personal corpora, owner transcripts, signed-in sessions, confidential recovered originals, raw private logs, unsanitized Git bundles or private archives into this public repository. Existing public provenance must still be reviewed; publication does not prove data is safe.
 
-See [Past orphaned work](past-orphaned-work/README.md): a documentation-only source-linked audit split into [Past Implemented](past-orphaned-work/past-implemented/README.md) and [Past Researched](past-orphaned-work/past-researched/README.md), each organized into ten high-level platform domains. Initial scope covers DCB/context, memory, capability intelligence, parsing, automation, self-healing and optimization. This folder neither executes legacy algorithms nor grants them production authority.
+## Development and convergence
 
-## Relationship to existing repos
+The single product roadmap stays with [Harness](https://github.com/owenservera/vivim-web-harness/blob/main/docs/ROADMAP.md) until its owner approves a tested migration. HQ generates derived project/architecture/capability/roadmap views. This Labs workspace may track **why** a conceptual best-of-breed choice was proposed and what remains undecided, but must link to authoritative work orders rather than recreate their status.
 
-- [tierflow](https://github.com/owenservera/tierflow): the canonical visual/command runtime work.
-- [repos-hq](https://github.com/owenservera/repos-hq): knowledge, semantics and related intelligence work.
-- [vivim-web-harness](https://github.com/owenservera/vivim-web-harness): existing VIVIM application, Host and device work.
-
-Labs is **not** being designated another KB, UI publisher, Host effect authority, command registry or product runtime. The exact promotion, integration, evidence and source-ownership workflows remain for the local team to design and validate.
-
-## Status and next work
-
-**Notes only.** Local ZCode workers should review these records, inspect the real existing tools and repositories, propose the lab's structure and workflows, then substantiate proposals through tests and operational evidence. No new workflow or executable system is implied by this seed.
+Read [AGENTS.md](AGENTS.md) for contributor and agent guardrails. Preserve research provenance, justify all archive retirement and never promote exploratory work to production status from a file or historical report alone.

@@ -11,8 +11,9 @@ This is a **cross-round triage record** of unresolved questions, not another pro
 | ZAIQ-005 | TierFlow/HQ | Verify generated wiki and .hq-tool installer/rebuild/consumers before retirement | OPEN | Preflight | Mission H/D |
 | ZAIQ-006 | Harness/HQ | Connect distinct atomic requirements, imported capabilities, journeys, product ledger, semantic vocabulary without ID collision | OPEN | Preflight | Mission A/B |
 | ZAIQ-007 | Labs | Review publicly recovered originals and provider probes for privacy and provenance; do not expose sensitive excerpts | BLOCKED | Preflight | Mission J/E |
-| ZAIQ-008 | All | Establish conceptual overlap + unique-component mapping for every implementation and maximal convergence roadmap in HQ | OPEN | Preflight | Z.ai Round 0–2 |
+| ZAIQ-008 | All | Incrementally establish conceptual overlap + unique-component mapping and maximal convergence roadmap through HQ while implementing; no separate discovery-only round | OPEN | Preflight | Z.ai R1 onward |
 | ZAIQ-009 | Harness | Keep product roadmap authority until explicit compatible migration is approved; expose HQ read view now | OPEN | Preflight | Mission I/B |
+| ZAIQ-010 | HQ | Prove progressively increasing HQ query/context/graph coverage per round; by R4 complete representative cross-repo engineering discovery with bounded HQ output and minimal broad source exploration | OPEN | Preflight | Z.ai campaign charter |
 
 ## New item template
 

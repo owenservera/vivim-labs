@@ -8,7 +8,7 @@ Labs is VIVIM's **research/evidence repository**, not a fifth primary developmen
 - [Z.ai campaign charter](zai/CAMPAIGN-CHARTER.md) — maximal single-version roadmap as an HQ-generated view, preserving every valuable unique component.
 - [Documentation consolidation archive](documentation-consolidation/INVENTORY.json) — historical copy/original reconciliation and provenance; **not** a second live document authority.
 - [Capability observatory](capability-observatory/) — research observations and evidence, not a canonical product capability registry.
-- [Past orphaned work](past-orphaned-work/README.md), [agentic excellence](agentic_excelence/README.md), [research intake](research-intake/) — public-safe historical and experimental work.
+- [Past orphaned work](past-orphaned-work/README.md), [agentic excellence](agentic_excelence/agentic-file-system/README.md), [research intake](research-intake/) — public-safe historical and experimental work.
 
 ## Four VIVIM repositories
 

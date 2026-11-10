@@ -3,7 +3,7 @@
   "roundId": "R02",
   "roundTitle": "Semantic convergence",
   "generatedAt": "2026-11-10T08:45:00Z",
-  "finalizedAt": "PHASE2:completed-by-F2-receipt-commit",
+  "finalizedAt": "2026-11-10T08:52:00Z",
   "localTimezone": "Europe/Paris",
   "environment": {
     "os": "Linux (container)",
@@ -121,8 +121,8 @@
       "githubUrl": "https://github.com/owenservera/vivim-labs",
       "localPath": "repos/vivim-labs (workspace-relative)",
       "baseSha": "316fa5f816d87f29ce44c9b2f2a40c7e9d8a3d84",
-      "endSha": "PHASE2:filled-by-F2-receipt-commit",
-      "endShaNote": "F1 of the F1/F2 finalization pattern (R01-REPORT §7): F1 = this records commit (R02-REPORT, R02-MANIFEST, DECISIONS ZAID-007..018, OPEN-ITEMS R2 delta). The bundle head and manifest endSha are F1; the F2 receipt commit completes this row (endSha, bundle bytes/sha256/verify/restore, manifest checksum) and lies beyond the bundled head by design — it records the bundle, it is not bundled.",
+      "endSha": "5b9ceb886bd7b5d49db77d4a0eaa566c55af44f1",
+      "endShaNote": "F1 of the F1/F2 finalization pattern (R01-REPORT §7): F1 = 5b9ceb886bd7b5d49db77d4a0eaa566c55af44f1, author Z.ai <zai@vivim.invalid>, 2026-11-10T08:47Z, on base 316fa5f816d87f29ce44c9b2f2a40c7e9d8a3d84 (R01 F2 receipt head = R2 base). Records: DECISIONS ZAID-007..018, OPEN-ITEMS R2 delta (ZAIQ-004 PROPOSED; 011/012/014 RESOLVED_WITH_EVIDENCE; 016..020 new), R02-REPORT, R02-MANIFEST. The bundle head and manifest endSha are F1; the F2 receipt commit completes this row and lies beyond the bundled head by design — it records the bundle, it is not bundled.",
       "includedRefs": [
         "HEAD",
         "refs/heads/main"
@@ -133,10 +133,10 @@
         "artifact": "R02-vivim-labs.bundle",
         "mode": "FULL",
         "dependencyBaseShas": [],
-        "byteLength": "PHASE2:filled-by-F2",
-        "sha256": "PHASE2:filled-by-F2",
-        "gitBundleVerify": "PHASE2:filled-by-F2",
-        "cloneRestoreTest": "PHASE2:filled-by-F2",
+        "byteLength": 2324984,
+        "sha256": "893cda3180a409c7673880cd2e97c9ce514548ef2d35b8772f98224a5fe1dd64",
+        "gitBundleVerify": "exit 0 — R02-vivim-labs.bundle is okay (refs: HEAD + refs/heads/main at 5b9ceb886b…; The bundle records a complete history; hash algorithm sha1)",
+        "cloneRestoreTest": "PASS — git clone from the bundle: HEAD = 5b9ceb886bd7b5d49db77d4a0eaa566c55af44f1 (equals endSha = F1), clean checkout",
         "commands": [
           "git -C repos/vivim-labs bundle create <staging>/R02-vivim-labs.bundle HEAD --branches --tags (at F1)",
           "git -C repos/vivim-labs bundle verify <staging>/R02-vivim-labs.bundle",
@@ -156,7 +156,7 @@
     "Four identities resolve in repos-hq projects.json at 1a115ac: repos-hq ('.'), vivim-labs, vivim-ui -> tierflow (local alias), vivim-web-harness; SOFTWARE_HQ never cloned (unchanged from R1).",
     "HQ index covers all four spaces at their R2 heads (L10b close receipt: 4 spaces / 4,591 files / 72,352 symbols / 1,362 commits; hq check --strict PASS; 0 index drift at rest; vivim-web-harness watcher-covered for the first time this round).",
     "hq doctor exit 0 (8/8 ok + Automation: watcher alive pid 13714 since 06:40:00Z, hooks 3/3 x 4 spaces); hq wiki --check PASS at close.",
-    "Restored-bundle HEADs equal the three code-repo manifest end SHAs — verified by clone/restore tests (repos-hq -> 1a115ac3b0…, vivim-web-harness -> 9d7a27e253…, tierflow -> c00ee5c7f7…); vivim-labs completed by the F2 receipt commit per the R01 §7 pattern. Gate check 4 PASS.",
+    "Restored-bundle HEADs equal the four manifest end SHAs — verified by clone/restore tests for all four: repos-hq -> 1a115ac3b0…, vivim-web-harness -> 9d7a27e253…, tierflow -> c00ee5c7f7…, vivim-labs -> 5b9ceb886b… (= F1, the bundle head; the F2 receipt commit records this and lies beyond the bundled head by design). Gate check 4 PASS.",
     "All R01-*.bundle artifacts byte-identical before/after the R02 build (sha256sum -c /tmp/r01-bundles-before.sha256 OK); bundles-manifest.json entries keyed by artifact name so R01 and R02 entries coexist."
   ],
   "decisionDelta": {

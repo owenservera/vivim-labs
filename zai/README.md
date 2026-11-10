@@ -23,13 +23,21 @@ The user's local directory `vivim-ui` corresponds to GitHub `tierflow`: one proj
 - [Round template](./rounds/ROUND-TEMPLATE.md) — required per-round reporting fields.
 - [Bundle protocol](./rounds/BUNDLE-PROTOCOL.md) — four checkpoint bundles plus one manifest.
 
+## Operating model — HQ first, productive from the first round
+
+**`repos-hq` is Z.ai's actual operating tool, not merely another code repository to audit.** Use the existing HQ CLI, SQLite index, source adapters, Rust graph, context assembler and wiki generator to discover, route, implement, verify and hand off work. Fix and extend these tools when missing capabilities block engineering. Do not build parallel notebooks, status stores, indexes or generators in Labs.
+
+**No discovery-only Round 0.** The first round must deliver tested code improvements. Inspect only what the bounded task requires; leverage Mission A–K evidence and previously generated HQ outputs. Start with working four-repo HQ project/path resolution, source freshness and useful read views.
+
 ## Round lifecycle
 
-1. Clone exactly four approved repositories at fixed full SHAs; verify public-release clearance before downloading any public-sensitive history.
-2. Discover conceptual overlaps, unique components, orphans and competing authorities across **all four**, including distinct code and vocabulary.
-3. Choose best of breed or compositional target with explicit evidence and risk gates; log strategic decisions as **proposals** until owner-approved.
-4. Implement only the authorized bounded round, preserve unique functionality, verify consumers and rollback.
-5. Produce four bundle checkpoints, tests, manifest and decision/open-item deltas. Even unchanged repositories must appear in the manifest.
-6. Record remaining risks and the next executable integration queue. HQ index/roadmap generation is the target, never a new independent status store in Labs.
+1. Clone exactly four approved repositories at pinned full SHAs; establish a minimal safety/command baseline only as needed to begin implementation.
+2. **Ask HQ first** for source ownership, dependencies, candidate implementations, relevant context and verification. When HQ is wrong, stale or missing data, repair the existing HQ machinery and test its improved answers as part of the round.
+3. Implement bounded high-value source integration or cleanup; discover conceptual overlaps and unique functionality **while working**, not in a separate exhaustive audit phase.
+4. Choose evidence-backed canonical/composite solutions, preserve unique components and record decisions as proposals until owner-approved.
+5. Re-index changed source, regenerate affected HQ documentation/read views, measure freshness and record what **the next round can now answer without repo-wide exploration**.
+6. Deliver actual code/test improvements plus four bundle checkpoints, a manifest, decision/open-item deltas and a short next-action queue. Unchanged repos remain pinned without filler commits.
+
+**Compounding requirement:** each round must improve both VIVIM and the efficiency of the next round's HQ-assisted work. By Round 4, agents should normally navigate by HQ queries and scoped context, drilling into raw files only to confirm source, correct HQ gaps or perform edits. HQ-derived answers always carry source SHA and verification status. Never blindly trust a stale index.
 
 **Public safety:** Do not put secrets, owner sessions, raw private logs, credentials, browser profiles or confidential archive content in these files, example fixtures, bundles, reports or paths. PRIVATE archives belong exclusively in an owner-approved private destination and must not be mirrored here.

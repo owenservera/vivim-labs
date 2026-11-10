@@ -22,6 +22,8 @@ These are **optional excellence goals**, never justification to break release/se
 | S16 | Architecture contradiction radar | Flag conflicting owners, dual writers, inconsistent roadmaps, stale agent instructions and unreachable claimed routes | Human approval before fixes with effect changes |
 | S17 | Continuous clean-clone bootstrap | One scripted, reproducible, four-repo smoke gate with dependency pin, index check, link check and required test classes | Do not require local Windows/device to claim cloud-only pass |
 | S18 | Evidence-weighted V1 closure queue | Rank verified source integration edges by unlocked user utility, dependencies, risk, and expected implementation effort; show uncertainty | Derived read view, not separate canonical plan |
+| S19 | HQ compounding usefulness | Track successful task-scoped HQ discovery, stale/missing source edges, raw files opened and repeated searches per round; establish increasing coverage and fewer unnecessary explorations by R4 | Never reduce verification to improve metrics |
+| S20 | HQ-assisted autonomous engineering rehearsal | From one bounded owner-authorized task, HQ resolves source owners, competing implementations, related tests, context and next action using pinned facts; run a non-effect fixture through query→edit→test→reindex→verify | Source authority, human approval and effect boundaries remain enforced |
 
 ## Per-round stretch reporting
 

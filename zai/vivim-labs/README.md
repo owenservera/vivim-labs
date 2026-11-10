@@ -18,4 +18,4 @@ Exact source and archive blob references, provenance clearance, evidence level, 
 
 ## Guardrails
 
-Never copy sensitive SOURCE_HQ/SOFTWARE_HQ quarantine artifacts, owner transcripts, credentials, private logs or browser profiles into public Labs. Public does not mean publication-cleared.
+Never copy sensitive SOFTWARE_HQ quarantine artifacts, owner transcripts, credentials, private logs or browser profiles into public Labs. Public does not mean publication-cleared.

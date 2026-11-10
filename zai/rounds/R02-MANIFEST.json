@@ -1,0 +1,184 @@
+{
+  "schema": "vivim.zai-round-manifest/1",
+  "roundId": "R02",
+  "roundTitle": "Semantic convergence",
+  "generatedAt": "2026-11-10T08:45:00Z",
+  "finalizedAt": "PHASE2:completed-by-F2-receipt-commit",
+  "localTimezone": "Europe/Paris",
+  "environment": {
+    "os": "Linux (container)",
+    "node": "v24.22.2",
+    "bun": "1.4.4 (node:sqlite); >=1.4 + lockfile-format guard now ENFORCED at tool entry (ZAID-011, repos-hq 2d274c7)",
+    "git": "2.47.3",
+    "notes": "bun >=1.4 required (ZAIQ-014 incident closed); bun.lock v2; pristine-clone installs reproduce (264 packages)."
+  },
+  "campaignPolicyRevision": "zai/CAMPAIGN-CHARTER.md and zai/governance/* as of vivim-labs 316fa5f816d87f29ce44c9b2f2a40c7e9d8a3d84 (R1 records final head; R2 policy base; owner policies ZAI-BASE-001..005)",
+  "repos": {
+    "repos-hq": {
+      "githubUrl": "https://github.com/owenservera/repos-hq",
+      "localPath": "repos/repos-hq (workspace-relative; absolute path omitted for public safety)",
+      "baseSha": "bdfe2644576071a595c0f3fd9a52e76118ccfcb9",
+      "endSha": "1a115ac3b042c9bad21eafdd5b9a33166c63d9fc",
+      "endShaNote": "Final R2 head. Seven Z.ai R2 commits on the R1 head: 74c1f31 (test-workspace isolation, ZAID-008), 2d274c7 (toolchain guard, ZAID-011), 0a7b2ff (semantic convergence, ZAID-007), 0d58260 (pre-existing-failure triage, ZAID-009), dc0784c (context/search ranking, ZAID-010), 3d5eee6 (watch-backend self-healing, ZAID-018), 1a115ac (wiki hash-cache integrity, ZAID-018), all author Z.ai <zai@vivim.invalid>.",
+      "includedRefs": [
+        "HEAD",
+        "refs/heads/main"
+      ],
+      "dirtyTree": false,
+      "changeClass": "HQ operating-tool + test-safety + automation-resilience improvements (ZAID-007..011, 018); no product-authority change",
+      "bundle": {
+        "artifact": "R02-repos-hq.bundle",
+        "mode": "FULL",
+        "dependencyBaseShas": [],
+        "byteLength": 9474251,
+        "sha256": "9e8c2e0b296fea12685043f15aaafcef1f8755c2e2feb620deef266c840a2c42",
+        "gitBundleVerify": "exit 0 — R02-repos-hq.bundle is okay (refs: HEAD + refs/heads/main at 1a115ac3b0…; The bundle records a complete history; hash algorithm sha1)",
+        "cloneRestoreTest": "PASS — git clone from the bundle: HEAD = 1a115ac3b042c9bad21eafdd5b9a33166c63d9fc (equals endSha), clean checkout",
+        "commands": [
+          "git -C repos/repos-hq bundle create <staging>/R02-repos-hq.bundle HEAD --branches --tags",
+          "git -C repos/repos-hq bundle verify <staging>/R02-repos-hq.bundle",
+          "git -C repos/repos-hq bundle list-heads <staging>/R02-repos-hq.bundle",
+          "git clone <staging>/R02-repos-hq.bundle <tmp> && git -C <tmp> rev-parse HEAD (restore test)"
+        ]
+      },
+      "tests": {
+        "command": "bun test (clean clone at 1a115ac, toolchain guard + test fence active)",
+        "exitCode": "non-zero solely from 5 dispositioned pre-existing failures",
+        "result": "1995 tests / 167 files / 41.04s — 1977 pass / 5 fail / 12 skip / 1 todo; all 5 dispositioned (1 flaky + 4 environment-dependent; ZAIQ-012 RESOLVED_WITH_EVIDENCE)",
+        "receipt": "/tmp/r2-suite-final.txt (clone /tmp/r2-verify-clone)"
+      }
+    },
+    "vivim-web-harness": {
+      "githubUrl": "https://github.com/owenservera/vivim-web-harness",
+      "localPath": "repos/vivim-web-harness (workspace-relative)",
+      "baseSha": "73723103dc31b55d4c7347a8470774b27b6f18af",
+      "endSha": "9d7a27e2539cc4273ec0ce419c10341101ac300f",
+      "endShaNote": "One Z.ai R2 commit (L7): root product test suites discovered and their drifted contracts repaired (scheduler bounded-grant claim; tab-lifecycle Q24 contract; selftest guard).",
+      "includedRefs": [
+        "HEAD",
+        "refs/heads/main"
+      ],
+      "dirtyTree": false,
+      "changeClass": "Test-suite repair (documentation-convergence: three gates cited by RULES-AND-GATES-INVENTORY now execute); no product behavior change",
+      "bundle": {
+        "artifact": "R02-vivim-web-harness.bundle",
+        "mode": "FULL",
+        "dependencyBaseShas": [],
+        "byteLength": 10506162,
+        "sha256": "e5466845161cdb667fe7e9a473887a25f6a6a528619e400575646e9c9e66cc22",
+        "gitBundleVerify": "exit 0 — R02-vivim-web-harness.bundle is okay (refs: HEAD + refs/heads/main at 9d7a27e253…; complete history; sha1)",
+        "cloneRestoreTest": "PASS — git clone from the bundle: HEAD = 9d7a27e2539cc4273ec0ce419c10341101ac300f (equals endSha), clean checkout",
+        "commands": [
+          "git -C repos/vivim-web-harness bundle create <staging>/R02-vivim-web-harness.bundle HEAD --branches --tags",
+          "git -C repos/vivim-web-harness bundle verify <staging>/R02-vivim-web-harness.bundle",
+          "git -C repos/vivim-web-harness bundle list-heads <staging>/R02-vivim-web-harness.bundle",
+          "git clone <staging>/R02-vivim-web-harness.bundle <tmp> && git -C <tmp> rev-parse HEAD (restore test)"
+        ]
+      },
+      "tests": {
+        "command": "bun test/run.mjs (full suite, receipt in commit 9d7a27e)",
+        "exitCode": "non-zero solely from 21 pre-existing apps/studio environment-dependent failures",
+        "result": "before 380 ran / 359 pass / 21 fail -> after 392 ran / 371 pass / 21 fail — identical pre-existing set, zero new failures, +12 suite files green; selftest 6/6",
+        "receipt": "vivim-web-harness commit 9d7a27e message"
+      }
+    },
+    "tierflow": {
+      "githubUrl": "https://github.com/owenservera/tierflow",
+      "localPath": "repos/tierflow (workspace-relative)",
+      "localAlias": "vivim-ui (identity name in repos-hq projects.json)",
+      "baseSha": "5c44d14bc46a8c5532635ef1fb8776cca4ddf354",
+      "endSha": "c00ee5c7f76b8e7d0778d06fe9369bc74fef6fe6",
+      "endShaNote": "One Z.ai R2 commit (L8): vendored .hq-tool lintProtocol positional-args fix so hq lint/verify run (the bundle's documented definition-of-done gates); BUNDLE.json byte counts kept truthful.",
+      "includedRefs": [
+        "HEAD",
+        "refs/heads/main"
+      ],
+      "dirtyTree": false,
+      "changeClass": "Vendored-tool repair only (.hq-tool/); no product behavior change; direct ZAIQ-005 evidence (install/rebuild reproduced: 611 pages, 140 commits)",
+      "bundle": {
+        "artifact": "R02-tierflow.bundle",
+        "mode": "FULL",
+        "dependencyBaseShas": [],
+        "byteLength": 3058651,
+        "sha256": "6c7e7906a0dd488807104088840ad882607c42e2c7006229efd8701fe9022168",
+        "gitBundleVerify": "exit 0 — R02-tierflow.bundle is okay (refs: HEAD + refs/heads/main at c00ee5c7f7…; complete history; sha1)",
+        "cloneRestoreTest": "PASS — git clone from the bundle: HEAD = c00ee5c7f76b8e7d0778d06fe9369bc74fef6fe6 (equals endSha), clean checkout",
+        "commands": [
+          "git -C repos/tierflow bundle create <staging>/R02-tierflow.bundle HEAD --branches --tags",
+          "git -C repos/tierflow bundle verify <staging>/R02-tierflow.bundle",
+          "git -C repos/tierflow bundle list-heads <staging>/R02-tierflow.bundle",
+          "git clone <staging>/R02-tierflow.bundle <tmp> && git -C <tmp> rev-parse HEAD (restore test)"
+        ]
+      },
+      "tests": {
+        "command": "bun test tests/ (lane clone, bun 1.4.4; receipt in commit c00ee5c)",
+        "exitCode": "non-zero solely from 2 pre-existing Rust-sidecar e2e failures",
+        "result": "1051 pass / 2 fail — identical to pristine HEAD 5c44d14; hq lint exit 0 (was: throw, exit 1); hq verify 'Stale files: 0' (was: throw, exit 1)",
+        "receipt": "tierflow commit c00ee5c message; /tmp/r2-lane-08-report.md"
+      }
+    },
+    "vivim-labs": {
+      "githubUrl": "https://github.com/owenservera/vivim-labs",
+      "localPath": "repos/vivim-labs (workspace-relative)",
+      "baseSha": "316fa5f816d87f29ce44c9b2f2a40c7e9d8a3d84",
+      "endSha": "PHASE2:filled-by-F2-receipt-commit",
+      "endShaNote": "F1 of the F1/F2 finalization pattern (R01-REPORT §7): F1 = this records commit (R02-REPORT, R02-MANIFEST, DECISIONS ZAID-007..018, OPEN-ITEMS R2 delta). The bundle head and manifest endSha are F1; the F2 receipt commit completes this row (endSha, bundle bytes/sha256/verify/restore, manifest checksum) and lies beyond the bundled head by design — it records the bundle, it is not bundled.",
+      "includedRefs": [
+        "HEAD",
+        "refs/heads/main"
+      ],
+      "dirtyTree": false,
+      "changeClass": "Docs-only governance records under zai/ (R2 round records; no code)",
+      "bundle": {
+        "artifact": "R02-vivim-labs.bundle",
+        "mode": "FULL",
+        "dependencyBaseShas": [],
+        "byteLength": "PHASE2:filled-by-F2",
+        "sha256": "PHASE2:filled-by-F2",
+        "gitBundleVerify": "PHASE2:filled-by-F2",
+        "cloneRestoreTest": "PHASE2:filled-by-F2",
+        "commands": [
+          "git -C repos/vivim-labs bundle create <staging>/R02-vivim-labs.bundle HEAD --branches --tags (at F1)",
+          "git -C repos/vivim-labs bundle verify <staging>/R02-vivim-labs.bundle",
+          "git -C repos/vivim-labs bundle list-heads <staging>/R02-vivim-labs.bundle",
+          "git clone <staging>/R02-vivim-labs.bundle <tmp> && git -C <tmp> rev-parse HEAD (restore test)"
+        ]
+      },
+      "tests": {
+        "command": "UNRUN",
+        "exitCode": "UNRUN",
+        "result": "UNRUN — documentation-only round for this repo (records-lane constraint)",
+        "receipt": "none"
+      }
+    }
+  },
+  "crossRepoConsistencyChecks": [
+    "Four identities resolve in repos-hq projects.json at 1a115ac: repos-hq ('.'), vivim-labs, vivim-ui -> tierflow (local alias), vivim-web-harness; SOFTWARE_HQ never cloned (unchanged from R1).",
+    "HQ index covers all four spaces at their R2 heads (L10b close receipt: 4 spaces / 4,591 files / 72,352 symbols / 1,362 commits; hq check --strict PASS; 0 index drift at rest; vivim-web-harness watcher-covered for the first time this round).",
+    "hq doctor exit 0 (8/8 ok + Automation: watcher alive pid 13714 since 06:40:00Z, hooks 3/3 x 4 spaces); hq wiki --check PASS at close.",
+    "Restored-bundle HEADs equal the three code-repo manifest end SHAs — verified by clone/restore tests (repos-hq -> 1a115ac3b0…, vivim-web-harness -> 9d7a27e253…, tierflow -> c00ee5c7f7…); vivim-labs completed by the F2 receipt commit per the R01 §7 pattern. Gate check 4 PASS.",
+    "All R01-*.bundle artifacts byte-identical before/after the R02 build (sha256sum -c /tmp/r01-bundles-before.sha256 OK); bundles-manifest.json entries keyed by artifact name so R01 and R02 entries coexist."
+  ],
+  "decisionDelta": {
+    "decisionsNew": "ZAID-007..ZAID-018 (zai/governance/DECISIONS.md): 007 semantic convergence, 008 test-workspace isolation, 009 pre-existing-failure triage, 010 context ranking, 011 toolchain guard, 012 UI publisher/revision stores (L5, PROPOSED), 013 one wiki generator (L5, PROPOSED), 014 graph authority (L5, PROPOSED), 015 channel transports independent (L5, PROPOSED), 016 session/ledger domain separation (L5, PROPOSED), 017 per-repo tooling independence (L5, PROPOSED), 018 watch self-healing + wiki hash-cache integrity. Numbering note: L5's lane-internal draft numbers renumbered to 012-017 on paste (mapping in DECISIONS.md).",
+    "openItemsNew": "ZAIQ-016..ZAIQ-020 (zai/governance/OPEN-ITEMS.md): context packing/budget policy (D1/D2), hq file path scheme (D3), FTS tokenization (D4), doctor node display (D5), Paris timestamp -1h (D6)",
+    "openItemsProgressed": "ZAIQ-004 (DECISION_REQUIRED -> PROPOSED, ZAID-012), ZAIQ-005 (L8 proof chain nearly complete), ZAIQ-006 (ZAID-007 core edges landed), ZAIQ-008 (concepts A-F cataloged + six proposals), ZAIQ-010 (baseline + end-of-round measured), ZAIQ-013 (bench improved; boundary recorded), ZAIQ-015 (D7 fixed-as-measured, D8 improved)",
+    "openItemsResolved": "ZAIQ-011 (guard + 7/7 regression fixtures, repos-hq 74c1f31), ZAIQ-012 (per-entry disposition: 9 fixed / 1 flaky / 3 environment-dependent + DEC-MOBILE-001; final suite 1977 pass / 5 dispositioned fails), ZAIQ-014 (enforced guard 13/13, installs reproduce, repos-hq 2d274c7)",
+    "report": "zai/rounds/R02-REPORT.md"
+  },
+  "publicationSecurity": {
+    "restrictions": "Public-safe sanitized metadata only in this manifest. Do not publish bundled Git history into Labs by default; keep manifests and sanitized receipts here; distribute sensitive bundles only through approved private transfer destinations (BUNDLE-PROTOCOL). Never commit raw private bundles to public Labs unless separately security cleared. No secrets, owner sessions, private logs or SOFTWARE_HQ content in these records.",
+    "exposureScan": {
+      "method": "R01 method replicated (pattern scan for AWS AKIA…, -----BEGIN … PRIVATE KEY----- blocks, github_pat_/ghp_/gh[oar]_ tokens, Slack xox[baprs]-, Google AIza…, sk-… >=30 chars, npm_ tokens via git grep at the three code-repo round heads; tracked secret-like filename check via git ls-tree; full-history git log --all -G) PLUS a new R2-diff scan (git diff base..end grepped on full diff and added lines) and a [REDACTED:-marker compensating control for the discovered git display-filter behavior (matching runs on raw blob content; documented in the scan log ADDENDUM). Receipts: /tmp/r2-exposure-scan.log, /tmp/r2-exposure-scan-summary.md, script /tmp/r2-exposure-scan.sh.",
+      "findings": "Identical to R01: repos-hq — benign fixtures in hq/test/ PLUS the real pre-campaign exposure (owner-pasted sk-api-/sk-cp-/sk-or-v1- class strings in .work/blockers/ transcripts, digest.md:535,538 + records.jsonl + qualitative.md:28 lesson B21; last touched pre-campaign at d8e4f75, 2026-11-05; untouched by all 7 R2 commits; present at the round head and in full bundled history). tierflow — 1 private-key-shaped negative-test fixture (tests/visual-runtime/command-negative.test.ts:53). vivim-web-harness — 5 fixture matches across 4 scanner/hardening test files. No tracked .env/secrets files anywhere; no GitHub/Slack/Google/npm token matches. R2-DIFF VERDICT: CLEAN — no new credential material introduced by any R2 commit (0 direct pattern matches in the repos-hq 3,512-line, tierflow 44-line and harness 216-line diffs; 0 [REDACTED: markers). Credential values intentionally not reproduced.",
+      "verdict": "The repos-hq bundle (with its full history) still contains real credential material. NOT distributed — staging only; owner private transfer pending; owner-side rotation of the exposed keys is recommended before any wider distribution. Unchanged from R1; advances ZAIQ-003 evidence; the publication-security verdict and historical-exposure clearance remain owner-side.",
+      "receipt": "/tmp/r2-exposure-scan.log"
+    }
+  },
+  "reviewer": {
+    "recordsIntegrator": "Z.ai (vivim-labs F1 records commit + F2 receipt commit)",
+    "campaignIntegrator": "Z.ai — four-repository checkpoint confirmed at 2026-11-10 ~09:30+01:00 (Europe/Paris; R02-REPORT §9 sign-off)",
+    "ownerReview": "PENDING (ZAID register approvals incl. the six L5 proposals ZAID-012..017; publication-security verdict incl. owner-side key rotation; private bundle transfer; machine-restart supervision sign-off ZAIQ-015)"
+  },
+  "admissionOutcome": "GO_WITH_LIMITS confirmed (zai/rounds/R02-REPORT.md §9): all four repos changed with tested evidence; R1 admission conditions met (ZAIQ-011 guard landed first; ZAIQ-012 triaged; ZAIQ-013 measured); limits carried into R3 — ZAIQ-016 context packing policy top work order, ZAIQ-017/018 read-surface defects, repos-hq bundle staging-only until owner key rotation (ZAIQ-003), tierflow wiki/ retirement is owner-decision territory, no TierFlow UiStore cutover work (ZAID-012 proof set unmet)."
+}

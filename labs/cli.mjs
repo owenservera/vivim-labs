@@ -36,10 +36,19 @@ import { REPO_ROOT, find, load, update } from "./workitems.mjs";
 /** The W3 booster plan. @type {string} */
 export const BOOST_PLAN_PATH = join(REPO_ROOT, "work", "boost-plan.json");
 
-/** Repositories the capacity probe reads (read-only). */
-const HQ_ROOT = "C:/0-BlackBoxProject-0/repos_hq";
-const TIERFLOW_ROOT = "C:/0-BlackBoxProject-0/vivim-ui";
-const SEATS_PATH = "C:/VIVIM/channel/seats.json";
+/** Resolve read-only capacity probe paths, retaining the original Windows fallbacks. */
+function firstExisting(candidates) {
+  for (const candidate of candidates) {
+    if (candidate && existsSync(candidate)) return candidate;
+  }
+  return null;
+}
+const SIBLING_DIR = join(REPO_ROOT, "..");
+const HQ_ROOT = firstExisting([join(SIBLING_DIR, "repos-hq"), join(SIBLING_DIR, "repos_hq"), "C:/0-BlackBoxProject-0/repos_hq"]) || "C:/0-BlackBoxProject-0/repos_hq";
+const TIERFLOW_ROOT = firstExisting([join(SIBLING_DIR, "vivim-ui"), join(SIBLING_DIR, "tierflow"), "C:/0-BlackBoxProject-0/vivim-ui"]) || "C:/0-BlackBoxProject-0/vivim-ui";
+const SEATS_PATH = firstExisting([join(SIBLING_DIR, "channel", "seats.json"), "C:/VIVIM/channel/seats.json"]) || "C:/VIVIM/channel/seats.json";
+/** Measure the system disk on Windows and the actual repo volume elsewhere. */
+const DISK_VOLUME = osPlatform() === "win32" ? "C:\\" : REPO_ROOT;
 
 /** How many lines of command output a receipt keeps. @type {number} */
 const OUTPUT_TAIL_LINES = 40;
@@ -499,19 +508,19 @@ function cmdCapacity() {
   const total = totalmem();
   const free = freemem();
 
-  let disk = { path: "C:", total_bytes: null, free_bytes: null, source: "node:fs statfsSync" };
+  let disk = { path: DISK_VOLUME, total_bytes: null, free_bytes: null, source: "node:fs statfsSync" };
   try {
     // statfsSync is a real measurement of the volume, not a guess.
-    const stats = statfsSync("C:\\");
+    const stats = statfsSync(DISK_VOLUME);
     disk = {
-      path: "C:",
+      path: DISK_VOLUME,
       total_bytes: stats.blocks * stats.bsize,
       free_bytes: stats.bavail * stats.bsize,
       source: "node:fs statfsSync",
     };
   } catch (error) {
     disk = {
-      path: "C:",
+      path: DISK_VOLUME,
       total_bytes: null,
       free_bytes: null,
       source: "unavailable",
@@ -593,7 +602,7 @@ function cmdCapacity() {
     source_revisions: {
       tierflow_head:
         typeof tierflowHead.stdout === "string" ? tierflowHead.stdout.trim() : null,
-      tierflow_command: "git -C C:/0-BlackBoxProject-0/vivim-ui rev-parse HEAD",
+      tierflow_command: `git -C ${TIERFLOW_ROOT} rev-parse HEAD`,
     },
   };
   console.log(JSON.stringify(profile, null, 2));

@@ -1,0 +1,26 @@
+{
+  "schema": "vivim.chronos.source-checksums/1",
+  "sha256": {
+    "README.md": "0ae35372ff8028c0b5f0eccfb967ee9073c266f07b50717c5ac88aa38dcdf767",
+    "EVIDENCE.md": "baeb677374b4b4d6e321bc9557aa6bc2ba4b59305130344b83ac8b11f5ca69b4",
+    "INTEGRATE-ALL.mjs": "83b50d9c13ef91e584b14fa8d589c78b071a198e00c29a708342eedc28f5de16",
+    "LOCAL-AGENT-WORK-ORDER.md": "53bf805b8b7bd922f98fbe9ef5fece86ea2ae9104298ee4ce29e0606f9142f78",
+    "changes/replacements.json": "7e6bc4bab6a34337e03a50a45cf3eb8549a2c5f90b10bd4dd42023ba526560c5",
+    "vivim-web-harness/studio/src/studio/chronos-conversation-projection.mjs": "e1851d22faf560b5e8662b49b3bcd1f77b740ca8b6fc1955b1b3f7fe27ee24b9",
+    "vivim-web-harness/studio/test/unit/chronos-conversation-projection.test.mjs": "147b20ccda3c4662ff082e271eecefc008407499761e7c705995c667738777bd",
+    "vivim-web-harness/studio/test/unit/chronos-conversation-route.test.mjs": "e260e3f92d3745fc7cfb461afc80b8f13443aa453532b62a46caa5fd67f7c607",
+    "SOFTWARE_HQ/scripts/chronos-verify.mjs": "a3e7261c4831c6bb7607d771e876edf91d7ebcd8797df79ca1326a1542fde471",
+    "SOFTWARE_HQ/scripts/chronos-parity.test.mjs": "587ef7a10c2980918e3b979e8494bcb62ef85880b943e1addf747a86a5d51fd7",
+    "tierflow/src/visual-runtime/host/chronos-read-projection.ts": "80fd038577db47839f678e86c0c98dcc213ed370303cd5bb72630c84fed69636",
+    "tierflow/tests/visual-runtime/chronos-read-projection.test.ts": "e28d1aab2a37ebc1b70b33358be246e74931c0dc3604a47db984163ef7ec264e",
+    "vivim-labs/capability-observatory/docs/CHRONOS-ECOSYSTEM-COVERAGE.md": "081fb1e98d937648b51781cd4295148fc54d99de67891c3c2fb5ee3119da0bfb",
+    "repos-hq/hq/test/chronos-supervisor.test.mjs": "9809bd83eaee265f1f939d74915cfe8eb5d23342c362bf535a4c84fd983d5174",
+    "repos-hq/hq/bin/chronos-inspect.mjs": "ec48b836610869c07ee70964112dc4039da1873ba8c85114648e09fd34e11335",
+    "repos-hq/hq/lib/chronos/supervisor-timeline.mjs": "c86c4b872aed8628750cde22fa6db0db627fe37a92c53754c20f2804b1cb71ba",
+    "repos-hq/research/rust-knowledge-graph/tests/chronos.rs": "379d2d76e2e33d2802f5fa96dcddfc1fae73b2016e57273788f70fd094da0356",
+    "repos-hq/research/rust-knowledge-graph/src/chronos.rs": "5ad4d67eb67b410c45b1efafd8d3fab9ab78942b2b4a2826d3c8053e524d9484",
+    "repos-hq/research/rust-knowledge-graph/src/bin/hqkg-time.rs": "9a8618ba4d751e526a27446462ea8ee3227b5749f71ac7ee351e7a63e31e4b02",
+    "repos-hq/docs/architecture/CHRONOS-RUST-CORE-TEMPORAL-TOOLKIT.md": "39e37a8531db71b2180277477920e2cba79fe5563960aca5e8ff5d1db717c14a",
+    "repos-hq/contracts/chronos/contract.v1.json": "9f7d830e03144461559bc80f0c1753006b12cc773186b64dbb2dfab7ce4f2011"
+  }
+}

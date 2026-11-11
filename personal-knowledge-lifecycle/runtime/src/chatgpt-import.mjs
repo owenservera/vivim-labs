@@ -4,7 +4,7 @@
 // results are inspected, NEVER blindly replayed.
 import { createHash } from 'node:crypto';
 import path from 'node:path';
-import { openZipArchive, fingerprintFile } from './zip-reader.mjs';
+import { openZipArchive } from './zip-reader.mjs';
 import { parseJsonObjectArray } from './json-array-stream.mjs';
 import { normalizeChatGptConversations, batchMetadata } from './chatgpt-normalize.mjs';
 export const ARCHIVE_JOB_SCHEMA='vivim.chatgpt-archive-job/1';
@@ -25,7 +25,7 @@ const clone=s=>structuredClone(s);
 export async function importChatGptExport(options={}) {
   const {archivePath,worldId,accountId,store,authorize,sink,afterCommitted,
     batchSize=8,maxBatchBytes=32*1024*1024,maxObjects=1_000_000,
-    maxObjectBytes=32*1024*1024,onProgress=()=>{},zipLimits={}}=options;
+    maxObjectBytes=32*1024*1024,onProgress=()=>{},zipLimits={},signal=null}=options;
   if (!path.isAbsolute(archivePath??'')||!valid(worldId)||!valid(accountId))throw fail('IMPORT_IDENTITY_REQUIRED');
   if (!store?.read||!store?.transact||typeof authorize!=='function'||!sink?.inspectBatch||!sink?.commitBatch)throw fail('IMPORT_PORTS_REQUIRED');
   if (!Number.isSafeInteger(batchSize)||batchSize<1||batchSize>128||!Number.isSafeInteger(maxBatchBytes)||maxBatchBytes<1024)throw fail('IMPORT_BOUNDS');
@@ -34,6 +34,8 @@ export async function importChatGptExport(options={}) {
     if (!grant||grant.allowed!==true||!valid(grant.grantId))throw fail('IMPORT_GRANT_REQUIRED');
     return grant;
   };
+  const checkPause=()=>{if(signal?.aborted)throw fail('IMPORT_PAUSED');};
+  checkPause();
   await permit('chatgpt-export:pending', 'pending');
   const zip=await openZipArchive(archivePath,zipLimits);
   try {
@@ -41,7 +43,7 @@ export async function importChatGptExport(options={}) {
     if (candidates.length!==1)throw fail(candidates.length?'IMPORT_AMBIGUOUS_CONVERSATIONS':'IMPORT_CONVERSATIONS_MISSING');
     const entry=candidates[0];
     if(!entry.size)throw fail('IMPORT_EMPTY_CONVERSATIONS');
-    const archiveDigest=await fingerprintFile(archivePath);
+    const archiveDigest=await zip.fingerprint();
     const sourceId='chatgpt-export:'+hash(accountId+'\0'+archiveDigest);
     const key='chatgpt-import.'+hash(worldId+'\0'+accountId+'\0'+sourceId);
     await permit(sourceId,archiveDigest);
@@ -69,6 +71,7 @@ export async function importChatGptExport(options={}) {
       const batchKey='chatzip-'+hash(sourceId+'\0'+firstIndex+'\0'+lastIndex+'\0'+digest);
       if(current.cursor>=lastIndex){buffer=[];bytes=0;return;}
       if(current.cursor!==firstIndex-1)throw fail('IMPORT_CURSOR_GAP');
+      checkPause();
       await permit(sourceId,archiveDigest);
       modify(s=>{
         if(s.pending){if(s.pending.key!==batchKey||s.pending.digest!==digest)throw fail('IMPORT_PENDING_CONFLICT');}
@@ -81,6 +84,7 @@ export async function importChatGptExport(options={}) {
       if(observed.status==='uncertain')throw fail('IMPORT_COMMIT_UNCERTAIN');
       let receipt=observed.receipt;
       if(observed.status==='absent'){
+        checkPause();
         await permit(sourceId,archiveDigest);
         receipt=await sink.commitBatch({key:batchKey,digest,sourceId,worldId,accountId,
           archiveDigest,range:{first:firstIndex,last:lastIndex},conversations:ordered});
@@ -98,6 +102,7 @@ export async function importChatGptExport(options={}) {
     }
     const stream=await zip.entryStream(entry);
     for await(const raw of parseJsonObjectArray(stream,{maxObjects,maxObjectBytes})){
+      checkPause();
       index++;
       if(index<=state().cursor)continue;
       const [normalized]=normalizeChatGptConversations([raw],{accountId,limit:1,maxTextBytes:maxObjectBytes});

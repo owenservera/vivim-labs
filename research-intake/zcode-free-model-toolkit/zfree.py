@@ -189,8 +189,8 @@ class Handler(BaseHTTPRequestHandler):
         nim_tool = [v.strip() for v in os.getenv("ZFREE_NIM_TOOL_MODELS", "").split(",") if v.strip()]
         nim_vision = [v.strip() for v in os.getenv("ZFREE_NIM_VISION_MODELS", "").split(",") if v.strip()]
         candidates = select(eligible(), body, nim_tool_ids=nim_tool, nim_vision_ids=nim_vision)
-        key = session_key(body, self.headers.get("X-ZFree-Session"))
-        pinned = STICKY.get(key) if body.get("model", "free-auto") == "free-auto" else None
+        session_id = session_key(body, self.headers.get("X-ZFree-Session"))
+        pinned = STICKY.get(session_id) if body.get("model", "free-auto") == "free-auto" else None
         if pinned:
             # Never silently swap models mid-session; thinking/tool histories may
             # be incompatible. New session/request identity can choose anew.
@@ -206,7 +206,7 @@ class Handler(BaseHTTPRequestHandler):
             max_attempts = 4
         quota_wait = 0
         for m in candidates[:max_attempts]:
-            key = os.getenv("OPENROUTER_API_KEY") if m["provider"] == "openrouter" else os.getenv("NVIDIA_API_KEY")
+            provider_key = os.getenv("OPENROUTER_API_KEY") if m["provider"] == "openrouter" else os.getenv("NVIDIA_API_KEY")
             if m["provider"] == "openrouter":
                 allowed, wait_seconds = QUOTA.take()
                 if not allowed:
@@ -215,7 +215,7 @@ class Handler(BaseHTTPRequestHandler):
                     continue
             data = prepare(body, m)
             response_started = False
-            headers = {"Authorization": "Bearer " + key, "Content-Type": "application/json"}
+            headers = {"Authorization": "Bearer " + provider_key, "Content-Type": "application/json"}
             if m["provider"] == "openrouter":
                 headers["HTTP-Referer"] = "http://127.0.0.1"
                 headers["X-Title"] = "ZCode Free Gateway"
@@ -223,7 +223,7 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 with urllib.request.urlopen(req, timeout=90) as upstream:
                     if body.get("model", "free-auto") == "free-auto":
-                        STICKY.put(key, m["id"])
+                        STICKY.put(session_id, m["id"])
                     response_started = True
                     self.send_response(upstream.status)
                     self.send_header("Content-Type", upstream.headers.get("Content-Type", "application/json"))

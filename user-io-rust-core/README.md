@@ -2,7 +2,10 @@
 
 Status: Architecture / integration workstream. Created 2026-11-12. NOT a production deployment, merged cutover, or evidence of device acceptance.
 
-## Decision
+## Decision — revised 2026-11-12: no semantic router
+
+**One authenticated ingress is not one decision-making router.** Incoming immutable draft and committed events are published once into a native **parallel event fabric**. Independent graph, language, command, personal-context, privacy and projection reactors observe matching input/derived revisions concurrently. Deterministic subscriptions and typed graph dependencies perform the effective routing. No central semantic classifier chooses the one handler. Effects remain exclusively Host-authorized. See [Parallel Event Fabric Architecture](PARALLEL-EVENT-FABRIC-ARCHITECTURE.md), which controls over any earlier sequential interpretation below.
+
 This is an independent Labs folder, a **sibling** of the existing visual-command composer lab, not a new repository, Rust graph implementation, service, authority, or product identity.
 
 **Product invariant:** Every committed human interaction reaches a single Rust-owned application interaction contract before interpretation, mission coordination, or effect planning. Every user-facing output is derived from the same revisioned interaction and domain-owned authoritative state. Unavoidable platform transport and local view rendering are not considered competing orchestration hops.

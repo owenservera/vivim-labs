@@ -27,6 +27,13 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(select([dict(FREE, provider="nvidia-nim")], b), [])
         self.assertEqual(select([dict(FREE, provider="nvidia-nim")], b, nim_tool_ids=[FREE["id"]])[0]["id"], FREE["id"])
 
+    def test_tool_result_requires_tool_capable_model(self):
+        b = {"messages": [
+            {"role": "user", "content": "run"},
+            {"role": "tool", "tool_call_id": "id", "content": "{}"}]}
+        self.assertEqual(select([dict(FREE, supported_parameters=[])], b), [])
+        self.assertEqual(select([FREE], b), [FREE])
+
     def test_images(self):
         b={"messages":[{"role":"user","content":[{"type":"image_url","image_url":{"url":"x"}}]}]}
         self.assertEqual(select([FREE], b), [])

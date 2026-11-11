@@ -4,6 +4,14 @@
 
 **Verified baseline:** [ZCode v3.17.2 release](https://github.com/zai-org/ZCode/releases/tag/v3.17.2), tagged [custom provider schema](https://github.com/zai-org/ZCode/blob/v3.17.2/packages/provider/src/config/provider-data-schema.ts), tagged [tool stream boundary](https://github.com/zai-org/ZCode/blob/v3.17.2/docs/model-tool-call-stream-commit-boundary.md), and Context7 `/zai-org/zcode`. ZCode supports custom `openai-chat-completions` providers; the gateway exposes **only** that protocol. **Not** OpenAI Responses or Anthropic Messages.
 
+## November 11 extension — Kilo Gateway and Free Model Explorer
+
+- Kilo public catalog query: `python kilo_gateway.py --query <term>` or `python kilo_gateway.py --json`. Includes only verified `:free` zero-priced entries and the documented live `kilo-auto/free` special tier. `--all` only inspects paid models; it never unlocks paid routing.
+- Native desktop GUI: `python model_explorer.py` or `./launch-model-explorer.ps1` on Windows. Search/filter, details, copy upstream vs ZCode route IDs, export JSON/CSV, refresh OpenRouter/Kilo/NIM and optional local OpenCode (read-only).
+- Kilo uses a distinct **ZCode** ID prefix `kilo/` to avoid model-name collisions. Example: upstream `vendor/name:free` routes as `kilo/vendor/name:free` *only if currently eligible*. Copy the ZCode route ID from the GUI.
+- Optional Kilo key is stored under user-bound DPAPI by updated `setup-windows.ps1`; anonymous free endpoint works without it, subject to per-IP limits. Kilo Auto Free may use data-logging upstreams; do not submit confidential information.
+- See [KILO-AND-GUI.md](KILO-AND-GUI.md) for implementation, source links, runnable commands, tests and explicit real-device acceptance gaps. No VIVIM product-provider API or Host authority is modified.
+
 ## Era 1 — Windows setup (one time)
 
 Clone/download this toolkit locally. In a Windows PowerShell window opened **in this directory**, run:

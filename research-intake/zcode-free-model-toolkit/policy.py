@@ -58,7 +58,7 @@ def demand(body):
         raise ValueError("model must be a nonempty string")
     if body.get("stream") is not None and not isinstance(body["stream"], bool):
         raise ValueError("stream must be boolean")
-    return {"tools": bool(tools), "image": contains_image(messages),
+    return {"tools": bool(tools) or has_tool_history(body), "image": contains_image(messages),
             "strict_format": isinstance(body.get("response_format"), dict),
             "choice": body.get("tool_choice"), "model": model}
 

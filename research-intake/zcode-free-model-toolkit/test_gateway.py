@@ -61,6 +61,7 @@ class HttpTests(unittest.TestCase):
             "input_modalities": ["text"], "supported_efforts": ["high"]}])
         zfree.QUOTA = Quota(os.path.join(self.temp.name, "quota.json"), rpm=20, daily=50)
         zfree.STICKY = StickyRoutes()
+        zfree.COOLDOWNS.clear()
         self.server, self.thread = start(zfree.Handler)
         self.url = f"http://127.0.0.1:{self.server.server_port}/v1/chat/completions"
 

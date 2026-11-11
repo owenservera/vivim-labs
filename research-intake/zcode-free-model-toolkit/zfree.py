@@ -3,7 +3,7 @@
 Python 3.11+ standard library only. No secrets stored in this repository.
 """
 from __future__ import annotations
-import argparse, json, os, pathlib, threading, time, urllib.request, urllib.error
+import argparse, json, os, pathlib, threading, time, urllib.request, urllib.error, math, secrets
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 BASE = pathlib.Path(os.environ.get("ZFREE_HOME", str(pathlib.Path.home() / ".zfree")))
@@ -24,10 +24,37 @@ def request_json(url, key=None, timeout=20):
         return json.load(r)
 
 def is_zero(v):
+    # A missing, invalid, negative, or non-finite price is not trusted.
     try:
-        return float(v) == 0.0
+        n = float(v)
+        return math.isfinite(n) and n == 0.0
     except (TypeError, ValueError, OverflowError):
         return False
+
+def openrouter_eligible(m):
+    mid = m.get("id")
+    pricing = m.get("pricing") or {}
+    return (isinstance(mid, str) and mid.endswith(":free")
+            and isinstance(pricing, dict)
+            and all(is_zero(pricing.get(k)) for k in ("prompt", "completion"))
+            and (m.get("architecture") or {}).get("output_modalities", ["text"]) is not None)
+
+def normalized_request(body):
+    """ZCode has shipped conflicting reasoning parameters for custom providers.
+    Prefer a single broadly supported field; omit provider-specific aliases."""
+    data = dict(body)
+    data.pop("thinking", None)
+    data.pop("enable_thinking", None)
+    effort = data.get("reasoning_effort")
+    if not isinstance(effort, str) and isinstance(data.get("reasoning"), dict):
+        effort = data["reasoning"].get("effort")
+    data.pop("reasoning", None)
+    if isinstance(effort, str) and effort in ("low", "medium", "high", "xhigh"):
+        data["reasoning_effort"] = effort
+    else:
+        data.pop("reasoning_effort", None)
+    # Upstream is addressed with the selected actual model ID below.
+    return data
 
 def discover():
     """Never infer free from model name alone; classify by explicit billing evidence."""
@@ -37,12 +64,14 @@ def discover():
         for m in payload.get("data", []):
             mid = m.get("id", "")
             pricing = m.get("pricing") or {}
-            if not isinstance(mid, str) or not mid.endswith(":free"):
+            if not openrouter_eligible(m):
                 continue
-            if not all(is_zero(pricing.get(k)) for k in ("prompt", "completion")):
-                continue
+            params = m.get("supported_parameters") or []
+            modality = (m.get("architecture") or {}).get("modality", "")
             result.append({"provider": "openrouter", "id": mid, "name": m.get("name", mid),
                            "context_length": m.get("context_length", 0),
+                           "supported_parameters": params if isinstance(params, list) else [],
+                           "modality": modality,
                            "endpoint": OR_CHAT, "evidence": "live-catalog-zero-price"})
     except Exception as e:
         errors.append("openrouter catalog: " + type(e).__name__ + ": " + str(e)[:160])
@@ -141,14 +170,31 @@ class Handler(BaseHTTPRequestHandler):
             return self.respond(400, {"error": {"message": "Invalid JSON"}})
         candidates = eligible()
         wanted = body.get("model", "free-auto")
+        if not isinstance(wanted, str):
+            return self.respond(400, {"error": {"message": "model must be a string"}})
         if wanted != "free-auto":
             candidates = [m for m in candidates if m["id"] == wanted]
+        # ZCode's agent relies on function/tool calls. Never silently route
+        # a tool-using turn to a catalog entry without tool support.
+        if body.get("tools"):
+            candidates = [m for m in candidates if m["provider"] == "nvidia-nim"
+                          or "tools" in m.get("supported_parameters", [])]
         if not candidates:
             return self.respond(503, {"error": {"message": "No currently eligible free model; refusing paid fallback"}})
         errors = []
-        for m in candidates[:max(1, int(os.getenv("ZFREE_MAX_ATTEMPTS", "4")))]:
+        try:
+            max_attempts = min(10, max(1, int(os.getenv("ZFREE_MAX_ATTEMPTS", "4"))))
+        except ValueError:
+            max_attempts = 4
+        for m in candidates[:max_attempts]:
             key = os.getenv("OPENROUTER_API_KEY") if m["provider"] == "openrouter" else os.getenv("NVIDIA_API_KEY")
-            data = dict(body, model=m["id"])
+            data = normalized_request(body)
+            data["model"] = m["id"]
+            if m["provider"] == "openrouter" and "reasoning_effort" in data and (
+                    "reasoning_effort" not in m.get("supported_parameters", [])):
+                data.pop("reasoning_effort", None)
+            # Do not invent a provider-specific parameter from unverified metadata.
+            response_started = False
             headers = {"Authorization": "Bearer " + key, "Content-Type": "application/json"}
             if m["provider"] == "openrouter":
                 headers["HTTP-Referer"] = "http://127.0.0.1"
@@ -156,6 +202,7 @@ class Handler(BaseHTTPRequestHandler):
             req = urllib.request.Request(m["endpoint"], data=json.dumps(data).encode(), headers=headers)
             try:
                 with urllib.request.urlopen(req, timeout=90) as upstream:
+                    response_started = True
                     self.send_response(upstream.status)
                     self.send_header("Content-Type", upstream.headers.get("Content-Type", "application/json"))
                     self.send_header("Cache-Control", "no-cache")
@@ -173,11 +220,18 @@ class Handler(BaseHTTPRequestHandler):
                     self.close_connection = True
                     return
             except urllib.error.HTTPError as e:
+                if response_started:
+                    self.close_connection = True
+                    return
                 errors.append({"model": m["id"], "status": e.code})
                 # Retry only non-billing failures. Never switch to paid models.
                 if e.code not in (408, 429, 500, 502, 503, 504):
                     break
             except (urllib.error.URLError, TimeoutError, OSError) as e:
+                if response_started:
+                    # Headers or data already sent: never append a second HTTP response.
+                    self.close_connection = True
+                    return
                 errors.append({"model": m["id"], "error": type(e).__name__})
         return self.respond(503, {"error": {"message": "All eligible free routes failed; no paid fallback",
                                             "attempts": errors}})

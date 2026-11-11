@@ -44,6 +44,30 @@ class DiscoveryTests(unittest.TestCase):
             zfree.STATE["models"] = [{"provider": "openrouter", "id": "model:free", "context_length": 100}]
             self.assertEqual(zfree.eligible(), [])
 
+    def test_auxiliary_request_price_is_not_free(self):
+        model = {"id": "trap:free", "pricing":
+                 {"prompt": "0", "completion": "0", "request": "0.02"}}
+        self.assertFalse(zfree.openrouter_eligible(model))
+
+    def test_requires_text_output(self):
+        model = {"id": "image:free", "pricing": {"prompt": "0", "completion": "0"},
+                 "architecture": {"output_modalities": ["image"]}}
+        self.assertFalse(zfree.openrouter_eligible(model))
+
+    def test_reasoning_collision_normalized(self):
+        payload = {"model": "free-auto", "messages": [{"role": "user", "content": "hi"}],
+                   "thinking": {"type": "enabled"}, "enable_thinking": True,
+                   "reasoning": {"effort": "high"}, "reasoning_effort": "medium"}
+        cleaned = zfree.normalized_request(payload)
+        self.assertEqual(cleaned["reasoning_effort"], "medium")
+        self.assertNotIn("reasoning", cleaned)
+        self.assertNotIn("thinking", cleaned)
+        self.assertNotIn("enable_thinking", cleaned)
+
+    def test_invalid_reasoning_omitted(self):
+        self.assertNotIn("reasoning_effort", zfree.normalized_request(
+            {"reasoning": {"effort": "provider-custom-unsupported"}}))
+
     def test_paid_model_never_eligible_even_if_preferred(self):
         with mock.patch.object(zfree, "refresh", return_value=None), \
              mock.patch.dict(os.environ, {"OPENROUTER_API_KEY": "dummy", "ZFREE_PREFER": "paid"}, clear=True):

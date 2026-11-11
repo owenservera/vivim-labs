@@ -163,3 +163,46 @@ class Quota:
                 self.times.pop()
                 return False, 60
             return True, 0
+
+
+def session_key(body, explicit=None):
+    """Ephemeral best-effort identity. No prompts saved to disk or logs."""
+    import hashlib
+    if explicit and isinstance(explicit, str) and len(explicit) <= 256:
+        basis = explicit
+    else:
+        head = []
+        for item in body.get("messages", []):
+            if item.get("role") in ("system", "developer", "user"):
+                head.append([item.get("role"), str(item.get("content", ""))[:1024]])
+            if len(head) >= 3:
+                break
+        basis = json.dumps(head, sort_keys=True)
+    return hashlib.sha256(basis.encode("utf-8", errors="replace")).hexdigest()
+
+def has_tool_history(body):
+    return any(x.get("role") == "tool" or bool(x.get("tool_calls")) for x in body.get("messages", []))
+
+class StickyRoutes:
+    def __init__(self, ttl=21600, clock=time.time):
+        self.lock = threading.Lock()
+        self.ttl = ttl
+        self.clock = clock
+        self.rows = {}
+
+    def get(self, key):
+        with self.lock:
+            entry = self.rows.get(key)
+            if not entry:
+                return None
+            if entry[1] <= self.clock():
+                self.rows.pop(key, None)
+                return None
+            return entry[0]
+
+    def put(self, key, model_id):
+        with self.lock:
+            self.rows[key] = (model_id, self.clock() + self.ttl)
+            if len(self.rows) > 4096:
+                now = self.clock()
+                self.rows = {k:v for k,v in self.rows.items() if v[1] > now}

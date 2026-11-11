@@ -83,11 +83,17 @@ export function createT0Coordinator({store,worldId,accountId,now=Date.now}={}) {
     if(outcome==='confirmed'&&(!receipt||typeof receipt!=='object'||receipt.actionId!==actionId||receipt.verified!==true||typeof receipt.effectRef!=='string'||!receipt.effectRef))throw fail('VERIFIED_RECEIPT_REQUIRED');
     mutate(s=>{
       const a=s.actions[actionId];if(!a)throw fail('ACTION_NOT_FOUND');
-      if(a.status!=='pending'){if(a.status==='complete'&&outcome==='confirmed'&&a.receipt?.effectRef===receipt?.effectRef)return s;throw fail('RECONCILIATION_REQUIRED');}
-      if(outcome==='confirmed')assertGrant(s,a.operation);
-      a.status=outcome==='confirmed'?'complete':outcome==='uncertain'?'uncertain':'action_required';
-      a.receipt=outcome==='confirmed'?{actionId,effectRef:receipt.effectRef,verified:true,observedAt:timestamp()}:null;
-      s.lanes[a.lane].status=a.status;s.lanes[a.lane].receipt=a.receipt;return s;
+      if(a.status==='complete'){if(outcome==='confirmed'&&a.receipt?.effectRef===receipt?.effectRef)return s;throw fail('RECONCILIATION_REQUIRED');}
+      if(a.status!=='pending'&&a.status!=='uncertain')throw fail('RECONCILIATION_REQUIRED');
+      // A Host-verified receipt records independently observed historical effect
+      // truth for pending/uncertain actions even when the grant is revoked; it
+      // never re-authorizes new effects (prepare/recordBatch still assertGrant).
+      const resolved=outcome==='confirmed';
+      a.status=resolved?'complete':outcome==='uncertain'?'uncertain':'action_required';
+      a.receipt=resolved?{actionId,effectRef:receipt.effectRef,verified:true,observedAt:timestamp()}:null;
+      // A revoked lane keeps its permission state; the completed action is history.
+      if(s.lanes[a.lane].status!=='revoked')s.lanes[a.lane].status=a.status;
+      s.lanes[a.lane].receipt=a.receipt;return s;
     });return status().actions[actionId];
   }
   // Evidence intake is separate from browser effects; an actual Host evidence writer

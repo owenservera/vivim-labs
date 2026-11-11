@@ -1,0 +1,527 @@
+warning: unused import: `NextStep`
+ --> src\observability\recovery.rs:2:68
+  |
+2 | use super::{safe_id, Condition, DiagnosticFinding, EvidenceStatus, NextStep};
+  |                                                                    ^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+   Compiling hq-knowledge-graph v0.1.0 (C:\0-BlackBoxProject-0\repos_hq\research\rust-knowledge-graph)
+warning: `hq-knowledge-graph` (lib) generated 1 warning (run `cargo fix --lib -p hq-knowledge-graph` to apply 1 suggestion)
+warning: unused import: `std::collections::BTreeSet`
+ --> tests\typed_dag.rs:7:5
+  |
+7 | use std::collections::BTreeSet;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `rollback_id`
+   --> tests\pilot_vertical.rs:335:17
+    |
+335 |             let rollback_id = json_str(&case, "rollbackChangeSetId");
+    |                 ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_rollback_id`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `IO_retry_is_opt_in_bounded_and_pure_only` should have a snake case name
+   --> tests\typed_dag.rs:271:4
+    |
+271 | fn IO_retry_is_opt_in_bounded_and_pure_only() {
+    |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case (notice the capitalization): `io_retry_is_opt_in_bounded_and_pure_only`
+    |
+    = note: `#[warn(non_snake_case)]` (part of `#[warn(nonstandard_style)]`) on by default
+
+warning: `hq-knowledge-graph` (test "typed_dag") generated 2 warnings (run `cargo fix --test "typed_dag" -p hq-knowledge-graph` to apply 1 suggestion)
+warning: `hq-knowledge-graph` (test "pilot_vertical") generated 1 warning (run `cargo fix --test "pilot_vertical" -p hq-knowledge-graph` to apply 1 suggestion)
+warning: unused import: `ComputeEngine`
+ --> tests\research_adapter.rs:2:12
+  |
+2 | use hqkg::{ComputeEngine, EngineRegistry, EngineRequest, Graph, Node, NodeKind};
+  |            ^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `hq-knowledge-graph` (test "research_adapter") generated 1 warning
+warning: unused variable: `initial`
+   --> tests\import.rs:163:9
+    |
+163 |     let initial = parse(&sample(false)).unwrap();
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_initial`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `hq-knowledge-graph` (test "import") generated 1 warning (run `cargo fix --test "import" -p hq-knowledge-graph` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 24.51s
+     Running unittests src\lib.rs (target\debug\deps\hqkg-03b768100fe9611b.exe)
+
+running 58 tests
+test observability::admission::tests::incomplete_ack_remains_unknown_under_policy ... ok
+test observability::admission::tests::authorized_host_ack_can_establish_delivery_stage ... ok
+test observability::admission::tests::unregistered_source_is_rejected ... ok
+test observability::correlation::tests::missing_graph_identity_is_explicit_error ... ok
+test observability::admission::tests::rejects_epoch_and_scope_confusion ... ok
+test observability::admission::tests::phone_hints_cannot_promote_themselves_to_source_verified ... ok
+test observability::admission::tests::raw_journal_cannot_claim_phone_display ... ok
+test observability::correlation::tests::healthy_dependency_is_counterevidence ... ok
+test observability::correlation::tests::rank_is_stable_regardless_of_symptom_order ... ok
+test observability::correlation::tests::shared_dependency_ranks_as_hypothesis_not_causality ... ok
+test observability::drift::tests::abstains_for_mixed_instrument_or_lost_evidence ... ok
+test observability::drift::tests::detects_lower_is_worse_and_handles_large_values ... ok
+test observability::drift::tests::detects_sustained_shift_but_not_single_spike ... ok
+test observability::drift::tests::no_confident_claim_from_tiny_windows ... ok
+test observability::effects::tests::hint_cannot_certify_the_second_effect ... ok
+test observability::effects::tests::nothing_observed_does_not_mean_no_effect ... ok
+test observability::effects::tests::same_effect_multiple_acks_are_idempotent ... ok
+test observability::effects::tests::two_distinct_verified_effects_are_confirmed_violation ... ok
+test observability::forecast::tests::flat_readings_do_not_predict ... ok
+test observability::forecast::tests::no_prediction_on_inadequate_samples ... ok
+test observability::forecast::tests::predicts_steady_capacity_deterioration_as_suspicion_only ... ok
+test observability::forecast::tests::shuffled_time_series_abstains ... ok
+test observability::incidents::tests::confirmed_failure_opens_immediately ... ok
+test observability::incidents::tests::suspected_spike_does_not_alert ... ok
+test observability::incidents::tests::three_sustained_suspicions_open_one_incident ... ok
+test observability::incidents::tests::unknown_never_closes_and_two_good_readings_resolve ... ok
+test observability::journey::tests::all_five_verified_stages_certify_journey ... ok
+test observability::journey::tests::isolated_phone_ack_is_not_complete_chain ... ok
+test observability::observer::tests::corrupted_evidence_never_turns_green ... ok
+test observability::journey::tests::missing_send_receipt_is_not_e2e_success ... ok
+test observability::observer::tests::explicitly_expected_offline_is_not_error ... ok
+test observability::observer::tests::freshness_is_bounded_by_real_cadence ... ok
+test observability::quality::tests::accuracy_regression_uses_canonical_comparison ... ok
+test observability::quality::tests::alias_learning_cannot_hide_safety_regression ... ok
+test observability::observer::tests::missing_and_dropped_evidence_abstain ... ok
+test observability::quality::tests::cohort_change_is_rejected ... ok
+test observability::quality::tests::increased_abstention_detected_separately_from_accuracy ... ok
+test observability::recovery::tests::a_self_reported_recovery_is_not_verified ... ok
+test observability::quality::tests::sparse_labels_do_not_claim_quality ... ok
+test observability::recovery::tests::unknown_command_outcome_never_recommends_resend ... ok
+test observability::synthesis::tests::confirmed_failure_is_visible_even_if_other_evidence_missing ... ok
+test observability::recovery::tests::diagnostic_advice_does_not_grant_any_execution_capability ... ok
+test observability::recovery::tests::revision_drift_proposes_host_owned_resolution_only ... ok
+test observability::synthesis::tests::missing_required_browser_observation_prevents_green_host ... ok
+test observability::synthesis::tests::healthy_requires_explicit_complete_required_inventory ... ok
+test observability::synthesis::tests::no_required_components_cannot_be_green ... ok
+test observability::synthesis::tests::suspected_green_does_not_count_as_healthy ... ok
+test observability::tests::causal_regression_invalid_discriminator_id_is_rejected ... ok
+test observability::tests::causal_regression_untrusted_observation_is_not_discriminating_evidence ... ok
+test observability::tests::competing_causal_links_remain_unresolved ... ok
+test observability::tests::discriminator_present_under_only_one_hypothesis_is_reported ... ok
+test observability::tests::discriminator_rejects_duplicate_future_sequence_and_vocabulary_errors ... ok
+test observability::tests::explicit_failure_yields_confirmed_root_cause_with_evidence_ids ... ok
+test observability::tests::healthy_and_conflicting_diagnostics_never_construct_root_cause ... ok
+test observability::tests::no_confirmed_failure_returns_unresolved_hypotheses ... ok
+test observability::tests::observation_under_both_hypotheses_is_not_a_discriminator ... ok
+test observability::tests::stale_weak_wrong_revision_or_incomplete_link_never_confirms ... ok
+test observability::tests::causal_regression_discriminator_budget_is_enforced ... ok
+
+test result: ok. 58 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running unittests src\main.rs (target\debug\deps\hqkg-ebe9e374f5c2149c.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src\bin\hqkg-control.rs (target\debug\deps\hqkg_control-022520de729a6b0c.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src\bin\hqkg-deps.rs (target\debug\deps\hqkg_deps-91216e32a0788833.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src\bin\hqkg-import.rs (target\debug\deps\hqkg_import-1a8f53da0c9cd7aa.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src\bin\hqkg-research.rs (target\debug\deps\hqkg_research-045ac352dbd929fc.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src\bin\hqkg-wave1-query.rs (target\debug\deps\hqkg_wave1_query-cbe4e2d8d9d1f321.exe)
+
+running 3 tests
+test tests::unknown_ids_refuse_and_missing_targets_remain_unknown ... ok
+test tests::calls_are_static_not_observed ... ok
+test tests::where_and_what_resolve_provenance ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src\bin\hqkg-web-feed.rs (target\debug\deps\hqkg_web_feed-f145cd69cecac0de.exe)
+
+running 1 test
+test tests::query_flags_fail_closed ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\algorithm_adapter.rs (target\debug\deps\algorithm_adapter-496da492e2e18d7e.exe)
+
+running 4 tests
+test custom_algorithms_have_the_same_extension_contract ... ok
+test missing_nodes_or_incompatible_drivers_are_rejected ... ok
+test adapter_uses_existing_runtime_and_generational_pins ... ok
+test catalog_seeds_thirty_inert_nodes_idempotently ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests\apply_ledger.rs (target\debug\deps\apply_ledger-d2218c019e0b5841.exe)
+
+running 6 tests
+test failed_apply_does_not_record_and_stays_reappliable ... ok
+test apply_durable_is_idempotent_across_reopen ... ok
+test record_survives_drop_and_reopen ... ok
+test duplicate_record_returns_false_and_does_not_grow_file ... ok
+test empty_and_missing_files_open_clean ... ok
+test torn_tail_is_discarded_on_open_and_complete_records_survive ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests\apply_ledger_locking.rs (target\debug\deps\apply_ledger_locking-e0b9e771695d8a6e.exe)
+
+running 7 tests
+test foreign_fresh_lock_is_locked_naming_that_pid ... ok
+test stale_ttl_lock_is_stealable_and_rewritten ... ok
+test second_open_while_held_is_locked_naming_holder ... ok
+test first_open_acquires_lock_file_naming_holder_pid ... ok
+test data_written_before_a_crash_is_readable_after_reopen ... ok
+test release_via_drop_and_close_allows_reopen_and_removes_lock_file ... ok
+test ttl_constructor_param_steals_fresh_lock_once_expired ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+     Running tests\bench_vertical.rs (target\debug\deps\bench_vertical-291b507f61ec8e6f.exe)
+
+running 8 tests
+test bench_all ... ignored, benchmark; run with: cargo test --test bench_vertical -- --ignored --nocapture
+test bench_bulk_put ... ignored, benchmark; run with: cargo test --test bench_vertical -- --ignored --nocapture
+test bench_cache_roundtrip ... ignored, benchmark; run with: cargo test --test bench_vertical -- --ignored --nocapture
+test bench_changeset_apply ... ignored, benchmark; run with: cargo test --test bench_vertical -- --ignored --nocapture
+test bench_durable_apply ... ignored, benchmark; run with: cargo test --test bench_vertical -- --ignored --nocapture
+test bench_journal_save ... ignored, benchmark; run with: cargo test --test bench_vertical -- --ignored --nocapture
+test bench_journal_save_scaling ... ignored, benchmark; run with: cargo test --test bench_vertical -- --ignored --nocapture
+test bench_retrieve ... ignored, benchmark; run with: cargo test --test bench_vertical -- --ignored --nocapture
+
+test result: ok. 0 passed; 0 failed; 8 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\benchmark_typed_dag.rs (target\debug\deps\benchmark_typed_dag-eb6bdb4274be97e1.exe)
+
+running 2 tests
+test benchmark_10k ... ignored, manual benchmark, run with --ignored --nocapture in a measured toolchain
+test benchmark_1k ... ignored, manual benchmark, run with --ignored --nocapture in a measured toolchain
+
+test result: ok. 0 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\builtins.rs (target\debug\deps\builtins-69d5697248e29abb.exe)
+
+running 2 tests
+test database_compute_is_an_engine_node_with_query_catalog_and_health ... ok
+test graph_compute_is_a_schedulable_engine ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\context_retrieval.rs (target\debug\deps\context_retrieval-79785b836596a212.exe)
+
+running 15 tests
+test empty_seeds_fail_closed ... ok
+test bfs_is_depth_bounded ... ok
+test exclusion_prunes_subtree ... ok
+test excluded_node_is_never_an_edge_endpoint ... ok
+test provenance_populated_from_sources_and_version ... ok
+test exact_fit_is_not_budget_exhausted ... ok
+test rank_order_is_depth_then_version_desc_then_id ... ok
+test multi_seed_depth_is_nearest_seed ... ok
+test minimum_token_estimate_is_one ... ok
+test retrieval_is_deterministic_across_calls ... ok
+test seed_also_excluded_fails_closed ... ok
+test token_budget_is_a_hard_prefix_bound ... ok
+test unknown_seed_fails_closed ... ok
+test watermark_staleness_records_both_versions ... ok
+test zero_budget_fails_closed ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests\control.rs (target\debug\deps\control-33db31b2583c309a.exe)
+
+running 5 tests
+test reject_missing_and_unpinned_data_in_production ... ok
+test semantic_versions_ranges_and_cycles ... ok
+test cas_configuration_and_immutable_history ... ok
+test supervisor_tracks_runtime_pins_health_and_mode ... ok
+test telemetry_ring_percentiles_and_quarantine ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\control_persistence.rs (target\debug\deps\control_persistence-00a5d8a97ab1c501.exe)
+
+running 3 tests
+test config_snapshot_tampering_is_rejected ... ok
+test graph_versioned_config_round_trip ... ok
+test journal_status_and_guarded_tail_repair ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests\control_recovery.rs (target\debug\deps\control_recovery-ee831b8db16df0e2.exe)
+
+running 2 tests
+test auto_heal_scope_and_attempt_budget_fail_closed ... ok
+test trusted_cache_self_heal_does_not_replay_original_op ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\core.rs (target\debug\deps\core-c580e018ce4e350f.exe)
+
+running 5 tests
+test bounded_scheduler_and_database_metadata ... ok
+test public_writers_cannot_mint_reserved_properties ... ok
+test hot_swap_preserves_inflight_lease ... ok
+test graph_path_cycle_rank_and_deletion ... ok
+test journal_round_trip_and_torn_tail ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests\dependency_manifest.rs (target\debug\deps\dependency_manifest-317e16121c324405.exe)
+
+running 3 tests
+test untrusted_ready_flag_does_not_grant_authority ... ok
+test inert_example_parses_without_granting_production_authority ... ok
+test unknown_schema_and_cycle_fail ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\durable_dag.rs (target\debug\deps\durable_dag-c234769ddc45b1a5.exe)
+
+running 7 tests
+test forged_effect_authorization_and_unsafe_metadata_refused ... ok
+test preexisting_unscoped_graph_must_be_migrated_explicitly ... ok
+test failed_run_preserves_status_not_error_text ... ok
+test committed_descriptors_survive_restart_without_payloads ... ok
+test cross_domain_write_and_replay_are_refused ... ok
+test torn_delta_requires_explicit_repair ... ok
+test snapshot_compaction_preserves_replay_and_rejects_stale_cas ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests\graph_change_set.rs (target\debug\deps\graph_change_set-3d5271745673b9d7.exe)
+
+running 13 tests
+test change_ops_are_constructible_directly ... ok
+test failed_op_returns_err_and_is_not_recorded_in_ledger ... ok
+test put_ops_apply_with_invalidation_set ... ok
+test merge_rejects_missing_or_identical_nodes ... ok
+test merge_moves_duplicate_edges_onto_canonical_then_tombstones ... ok
+test lineage_cycle_rejected ... ok
+test lineage_chain_walks_parents_and_rejects_cycles ... ok
+test remove_edge_tombstone ... ok
+test remove_node_of_missing_entity_skips_but_still_records_tombstone ... ok
+test remove_node_tombstone_is_a_record_not_an_erase_only ... ok
+test same_change_set_id_applied_twice_is_a_no_op_duplicate ... ok
+test split_creates_new_node_and_rewires_stated_edge_subset ... ok
+test split_rejects_unknown_edges_and_existing_target ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\graph_indexes.rs (target\debug\deps\graph_indexes-5ffc6925dbe4cf4a.exe)
+
+running 2 tests
+test incoming_outgoing_relation_filters_and_duplicate_parallel_links ... ok
+test indexes_survive_edge_replacement_node_delete_and_snapshot_replay ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\import.rs (target\debug\deps\import-fee0e9b03e195d9e.exe)
+
+running 18 tests
+test legacy_manifest_without_tombstone_count_still_parses ... ok
+test legacy_manifest_defaults_remain_zero_tombstones_and_no_reconcile ... ok
+test detect_checksum_mismatch_and_source_collision ... ok
+test legacy_manifest_without_reconcile_flag_keeps_stale_edge ... ok
+test reconcile_removes_stale_owned_edge_while_both_endpoints_remain ... ok
+test reconcile_replay_is_idempotent_and_does_not_advance_epoch ... ok
+test import_is_idempotent_provenance_safe_and_incremental ... ok
+test rejects_duplicate_records_and_bad_manifest ... ok
+test reconciliation_never_touches_another_producers_edge ... ok
+test rejects_tombstone_before_redeclared_node ... ok
+test rejects_edge_after_tombstone_record ... ok
+test tombstone_conflicts_with_node_declared_in_same_exchange ... ok
+test tombstone_count_mismatch_and_duplicates_rejected ... ok
+test tombstone_never_destroys_another_producers_node ... ok
+test tombstone_replay_is_idempotent_and_does_not_advance_epoch ... ok
+test journal_is_saved_once_for_staged_graph ... ok
+test reserved_properties_are_importer_only_and_survive_journal_round_trip ... ok
+test tombstone_deletes_owned_node_cascades_edges_and_persists_in_journal ... ok
+
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests\invalidate.rs (target\debug\deps\invalidate-693240b40ff9f5e9.exe)
+
+running 12 tests
+test hit_on_unchanged_epoch_and_versions ... ok
+test fingerprint_is_order_independent ... ok
+test any_single_touched_version_bump_misses_and_drops ... ok
+test invalidate_epoch_drops_everything_below_new_epoch ... ok
+test epoch_bump_without_node_version_change_misses ... ok
+test entity_invalidation_drops_only_affected_entries ... ok
+test lru_eviction_order_per_level_exact ... ok
+test hit_refreshes_lru_recency ... ok
+test seed_level_contribution_reused_across_different_full_requests ... ok
+test lru_eviction_seed_level ... ok
+test stale_watermark_mismatch_is_miss_with_entry_dropped ... ok
+test watermark_must_cover_every_touched_node ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\observability.rs (target\debug\deps\observability-6112af86288d9c98.exe)
+
+running 20 tests
+test a_later_offline_notice_does_not_hide_verified_command_failure ... ok
+test conflicting_terminal_evidence_is_not_arbitrarily_green ... ok
+test duplicate_or_reordered_producer_sequences_are_rejected ... ok
+test a_phone_hint_cannot_certify_display ... ok
+test explicit_verified_failure_does_not_imply_resend_permission ... ok
+test explicitly_offline_device_is_not_broken ... ok
+test equal_source_verified_revisions_pass ... ok
+test inappropriate_identifiers_are_rejected_without_exporting_private_data ... ok
+test missing_delivery_is_not_a_confirmed_failure ... ok
+test missing_sequence_yields_unknown_even_if_later_event_claims_success ... ok
+test newer_observer_loss_revokes_older_health_claim ... ok
+test producer_epoch_change_requires_explicit_reconciliation ... ok
+test quality_regression_is_detected_only_on_same_labeled_cohort ... ok
+test revision_mismatch_is_suspected_not_proven_root_cause ... ok
+test source_verified_delivery_certifies_only_the_expected_stage ... ok
+test stage_regression_is_conflicting_evidence ... ok
+test stale_green_evidence_cannot_claim_current_health ... ok
+test stale_pair_of_watermarks_cannot_establish_parity ... ok
+test telemetry_reuses_existing_bounded_core_collector ... ok
+test unobserved_health_is_unknown_not_default_ready ... ok
+
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\observability_extended.rs (target\debug\deps\observability_extended-adb353a9defa8f6e.exe)
+
+running 11 tests
+test a_fake_ack_from_the_journal_role_is_rejected ... ok
+test aggregate_report_refuses_green_when_critical_component_is_unknown ... ok
+test a_reply_without_phone_display_is_not_delivered ... ok
+test confirmed_duplicate_effect_advises_investigation_not_auto_execution ... ok
+test causal_hypothesis_not_allowed_to_execute_repair ... ok
+test command_quality_safety_regression_remains_visible_despite_accuracy_gain ... ok
+test drift_then_repeated_incidents_then_recovery_is_all_advisory ... ok
+test cursor_before_overwritten_ring_is_not_green ... ok
+test full_command_progress_to_verified_display ... ok
+test independent_ack_and_journal_same_time_do_not_look_like_stage_regression ... ok
+test real_consistent_recent_metric_window_survives_ring_retention ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\pilot_vertical.rs (target\debug\deps\pilot_vertical-dbc36ba09d5f9046.exe)
+
+running 1 test
+test pilot_vertical_cases ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\reconcile.rs (target\debug\deps\reconcile-c02a7a7294f904fb.exe)
+
+running 7 tests
+test find_orphans_zero_incident_edges_with_allowlist ... ok
+test find_duplicates_cites_identical_property_key_sets ... ok
+test find_duplicates_flags_same_normalized_title ... ok
+test plan_skips_stale_candidates_and_empty_plan_is_valid ... ok
+test find_duplicates_shared_neighbor_signal_with_threshold ... ok
+test plan_winner_rule_highest_version_then_lowest_id ... ok
+test plan_composes_and_applies_cleanly_end_to_end ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\research_adapter.rs (target\debug\deps\research_adapter-33d4ffb2630268a2.exe)
+
+running 1 test
+test research_adapter_queries_catalog_without_activating_algorithms ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\scoped_graph.rs (target\debug\deps\scoped_graph-f32883e4da5476aa.exe)
+
+running 4 tests
+test provenance_requires_revision_digest_and_source ... ok
+test foreign_domains_and_unscoped_graph_are_refused ... ok
+test invalid_mutation_cannot_partially_modify_existing_graph ... ok
+test scoped_records_and_changes_are_atomic_and_invalidate ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\telemetry_export.rs (target\debug\deps\telemetry_export-4c361dc9155f2c86.exe)
+
+running 2 tests
+test bounded_telemetry_exports_only_structured_labels_and_no_payload ... ok
+test preflight_dependency_rejection_is_recorded_without_execution ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\typed_dag.rs (target\debug\deps\typed_dag-a7246789d09cde5c.exe)
+
+running 11 tests
+test bounded_tasks_refuse_before_dispatch ... ok
+test cancellation_never_commits_partial_cache ... ok
+test graph_revision_and_cross_namespace_sources_refused ... ok
+test IO_retry_is_opt_in_bounded_and_pure_only ... ok
+test missing_cycle_and_duplicate_steps_are_rejected ... ok
+test cache_retention_is_bounded_without_failing_valid_computation ... ok
+test generation_swap_invalidates_cached_engine_output ... ok
+test dependency_order_cache_hits_and_namespace_separation ... ok
+test only_modified_source_and_dependents_recompute ... ok
+test partial_failure_is_explicit_and_does_not_commit_cache ... ok
+test real_graph_change_set_invalidates_only_matching_namespace ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\utility_adapter.rs (target\debug\deps\utility_adapter-c121c5a736f4dfed.exe)
+
+running 5 tests
+test echo_upper_sum_work_without_optional_dependencies ... ok
+test scripted_transformations_are_bounded_and_stateless ... ok
+test utility_adapter_can_join_existing_scheduler ... ok
+test utility_engine_reuses_the_native_registry ... ok
+test resource_limits_and_bad_requests_fail_closed ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\web_feed_process.rs (target\debug\deps\web_feed_process-23c0d5ddea512688.exe)
+
+running 2 tests
+test real_binary_rejects_a_conflicting_replay_without_growing ... ok
+test real_binary_accepts_one_batch_and_reads_it_back ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+     Running tests\web_memory.rs (target\debug\deps\web_memory-41654ddb2bad2ad3.exe)
+
+running 10 tests
+test synthetic_event_stress ... ignored, synthetic stress; run with cargo test --features importer --test web_memory -- --ignored --nocapture
+test same_id_conflict_inside_one_batch_commits_nothing ... ok
+test replay_rejects_conflicts_and_never_grows_on_duplicates ... ok
+test malformed_batch_is_atomic_and_private_urls_are_refused ... ok
+test unsafe_legacy_location_is_not_disclosed_in_query ... ok
+test legacy_snapshot_cannot_erase_unrepaired_web_tail ... ok
+test first_frame_crash_is_quarantined_until_operator_repair ... ok
+test torn_delta_tail_requires_explicit_repair_without_false_ack ... ok
+test mixed_legacy_snapshot_and_deltas_survive_restart ... ok
+test arbitrary_batch_replay_and_bounded_filtered_query ... ok
+
+test result: ok. 9 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.17s
+
+   Doc-tests hqkg
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

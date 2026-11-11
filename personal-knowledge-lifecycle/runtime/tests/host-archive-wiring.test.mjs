@@ -1,4 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {mkdtemp,writeFile,rm} from 'node:fs/promises';import {tmpdir} from 'node:os';import path from 'node:path';
 import {makeZip,conversationJson} from './fixtures.mjs';
 import {createHostArchiveIngestion} from '../src/host-archive-wiring.mjs';
@@ -16,7 +17,9 @@ test('injected Host + ledger + Rust graph proposals form a receipt-linked full p
    async commitEvidenceAndGraph(packet){
      assert.equal(packet.graphProposal.targetRust,'hqkg.scoped-record/1');
      assert.equal(packet.graphProposal.expected.graphEpoch,revision);
-     assert.ok(packet.graphProposal.changes.ops.every(op=>(op.node??op.edge).id.startsWith('personal:5:world/')));
+     const owner='pk-'+createHash('sha256').update(JSON.stringify(['world','account','chatgpt'])).digest('hex');
+     assert.equal(packet.graphProposal.namespace.owner,owner);
+     assert.ok(packet.graphProposal.changes.ops.every(op=>(op.node??op.edge).id.startsWith(`personal:${Buffer.byteLength(owner)}:${owner}/`)));
      revision++;
      const receipt={key:packet.key,digest:packet.digest,verified:true,status:'committed'};
      written.set(packet.key,receipt);return receipt;

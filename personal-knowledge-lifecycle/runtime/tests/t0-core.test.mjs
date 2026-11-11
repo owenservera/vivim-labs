@@ -27,11 +27,23 @@ test('account scoped, durable reload and duplicate-safe batches',()=>{
   assert.equal(createT0Coordinator({...args,accountId:'account-B'}).status(),null);
   assert.throws(()=>c.recordBatch({...input,items:[{...input.items[0],nativeId:'thread-2'}]}),{code:'BATCH_CONFLICT'});
 });
-test('revocation blocks new batch and prevents confirmed effect',()=>{
+test('revocation denies new effects while verified historical truth resolves uncertainty',()=>{
   const c=createLabsFixture();c.start();c.grant({operation:'read_profile',approvedByOwner:true});
   c.prepare({lane:'profile',actionId:'p1',payloadDigest:digest});c.revoke('read_profile');
-  assert.throws(()=>c.reconcile({actionId:'p1',outcome:'confirmed',receipt:receipt('p1')}),{code:'RECONCILIATION_REQUIRED'});
+  assert.equal(c.status().actions.p1.status,'uncertain');
+  assert.equal(c.status().lanes.profile.status,'revoked');
+  // Frozen contract (PREPARATION.md:56): a Host-verified receipt records historical
+  // effect truth for uncertain actions even when the grant is revoked; the revoked
+  // lane keeps its permission state and no new effect is authorized by resolution.
+  const resolved=c.reconcile({actionId:'p1',outcome:'confirmed',receipt:receipt('p1')});
+  assert.equal(resolved.status,'complete');
+  assert.equal(resolved.receipt.effectRef,receipt('p1').effectRef);
+  assert.equal(c.status().lanes.profile.status,'revoked');
+  assert.throws(()=>c.prepare({lane:'profile',actionId:'p2',payloadDigest:digest}),{code:'GRANT_REQUIRED'});
   assert.throws(()=>c.recordBatch({lane:'profile',sourceId:'x',batchId:'1',sourceRevision:'1',acceptedByHost:true,items:[]}),{code:'GRANT_REQUIRED'});
+  // Idempotent replay of the same complete action and effectRef stays accepted.
+  assert.equal(c.reconcile({actionId:'p1',outcome:'confirmed',receipt:receipt('p1')}).status,'complete');
+  assert.throws(()=>c.reconcile({actionId:'p1',outcome:'confirmed',receipt:{actionId:'p1',verified:true,effectRef:'different-ref'}}),{code:'RECONCILIATION_REQUIRED'});
 });
 test('source acceptance and bounds enforced',()=>{
   const c=createLabsFixture();c.start();c.grant({operation:'import_archive',approvedByOwner:true});

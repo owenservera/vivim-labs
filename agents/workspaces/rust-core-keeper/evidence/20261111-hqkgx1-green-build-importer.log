@@ -1,0 +1,10 @@
+warning: unused import: `NextStep`
+ --> src\observability\recovery.rs:2:68
+  |
+2 | use super::{safe_id, Condition, DiagnosticFinding, EvidenceStatus, NextStep};
+  |                                                                    ^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `hq-knowledge-graph` (lib) generated 1 warning (run `cargo fix --lib -p hq-knowledge-graph` to apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.27s

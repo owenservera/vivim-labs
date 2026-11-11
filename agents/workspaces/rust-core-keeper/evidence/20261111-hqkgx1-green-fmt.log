@@ -1,0 +1,33 @@
+Diff in \\?\C:\0-BlackBoxProject-0\repos_hq\research\rust-knowledge-graph\src\import.rs:278:
+             }
+             "edge" => {
+                 if phase == Phase::Tombstones {
+[31m-                    return Err(Error::Invalid(
+[0m[31m-                        "edges must precede tombstones".into(),
+[0m[31m-                    ));
+[0m[32m+                    return Err(Error::Invalid("edges must precede tombstones".into()));
+[0m                 }
+                 phase = Phase::Edges;
+                 if edges.len() >= MAX_EDGES {
+Diff in \\?\C:\0-BlackBoxProject-0\repos_hq\research\rust-knowledge-graph\tests\import.rs:265:
+          {{\"from\":\"{id1}\",\"id\":\"{edge}\",\"metadata\":{{}},\"relation\":\"HAS_SECTION\",\"to\":\"{id2}\",\"type\":\"edge\",\"weight\":1}}\n"
+     );
+     let payload = valid_exchange(&body, 2, 1, Some(1), None);
+[31m-    let err = parse(&payload).expect_err("an edge record after a tombstone record must be rejected");
+[0m[32m+    let err =
+[0m[32m+        parse(&payload).expect_err("an edge record after a tombstone record must be rejected");
+[0m     assert!(
+         matches!(err, Error::Conflict(_) | Error::Invalid(_)),
+         "edge-after-tombstone must be refused as a conflict/invalid, got {err:?}"
+Diff in \\?\C:\0-BlackBoxProject-0\repos_hq\research\rust-knowledge-graph\tests\import.rs:288:
+     assert!(exchange.tombstones.is_empty());
+     // With the default tombstone_count of 0, a tombstone row is still a
+     // count mismatch and stays rejected.
+[31m-    let body_with_tomb = format!(
+[0m[31m-        "{node_row}{{\"id\":\"{id2}\",\"reason\":\"deleted\",\"type\":\"tombstone\"}}\n"
+[0m[31m-    );
+[0m[32m+    let body_with_tomb =
+[0m[32m+        format!("{node_row}{{\"id\":\"{id2}\",\"reason\":\"deleted\",\"type\":\"tombstone\"}}\n");
+[0m     let payload2 = valid_exchange(&body_with_tomb, 1, 0, None, None);
+     assert!(
+         parse(&payload2).is_err(),

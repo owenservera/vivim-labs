@@ -1,0 +1,92 @@
+warning: unused import: `NextStep`
+ --> src\observability\recovery.rs:2:68
+  |
+2 | use super::{safe_id, Condition, DiagnosticFinding, EvidenceStatus, NextStep};
+  |                                                                    ^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `hq-knowledge-graph` (lib) generated 1 warning (run `cargo fix --lib -p hq-knowledge-graph` to apply 1 suggestion)
+   Compiling hq-knowledge-graph v0.1.0 (C:\0-BlackBoxProject-0\repos_hq\research\rust-knowledge-graph)
+warning: unused variable: `initial`
+   --> tests\import.rs:163:9
+    |
+163 |     let initial = parse(&sample(false)).unwrap();
+    |         ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_initial`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `hq-knowledge-graph` (test "import") generated 1 warning (run `cargo fix --test "import" -p hq-knowledge-graph` to apply 1 suggestion)
+warning: unused import: `std::collections::BTreeSet`
+ --> tests\typed_dag.rs:7:5
+  |
+7 | use std::collections::BTreeSet;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `IO_retry_is_opt_in_bounded_and_pure_only` should have a snake case name
+   --> tests\typed_dag.rs:271:4
+    |
+271 | fn IO_retry_is_opt_in_bounded_and_pure_only() {
+    |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: convert the identifier to snake case (notice the capitalization): `io_retry_is_opt_in_bounded_and_pure_only`
+    |
+    = note: `#[warn(non_snake_case)]` (part of `#[warn(nonstandard_style)]`) on by default
+
+warning: unused variable: `rollback_id`
+   --> tests\pilot_vertical.rs:335:17
+    |
+335 |             let rollback_id = json_str(&case, "rollbackChangeSetId");
+    |                 ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_rollback_id`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `ComputeEngine`
+ --> tests\research_adapter.rs:2:12
+  |
+2 | use hqkg::{ComputeEngine, EngineRegistry, EngineRequest, Graph, Node, NodeKind};
+  |            ^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `hq-knowledge-graph` (test "typed_dag") generated 2 warnings (run `cargo fix --test "typed_dag" -p hq-knowledge-graph` to apply 1 suggestion)
+warning: `hq-knowledge-graph` (test "pilot_vertical") generated 1 warning (run `cargo fix --test "pilot_vertical" -p hq-knowledge-graph` to apply 1 suggestion)
+warning: `hq-knowledge-graph` (test "research_adapter") generated 1 warning
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.51s
+     Running unittests src\lib.rs (target\debug\deps\hqkg-03b768100fe9611b.exe)
+     Running unittests src\main.rs (target\debug\deps\hqkg-ebe9e374f5c2149c.exe)
+     Running unittests src\bin\hqkg-control.rs (target\debug\deps\hqkg_control-022520de729a6b0c.exe)
+     Running unittests src\bin\hqkg-deps.rs (target\debug\deps\hqkg_deps-91216e32a0788833.exe)
+     Running unittests src\bin\hqkg-import.rs (target\debug\deps\hqkg_import-1a8f53da0c9cd7aa.exe)
+     Running unittests src\bin\hqkg-research.rs (target\debug\deps\hqkg_research-045ac352dbd929fc.exe)
+     Running unittests src\bin\hqkg-wave1-query.rs (target\debug\deps\hqkg_wave1_query-cbe4e2d8d9d1f321.exe)
+     Running unittests src\bin\hqkg-web-feed.rs (target\debug\deps\hqkg_web_feed-f145cd69cecac0de.exe)
+     Running tests\algorithm_adapter.rs (target\debug\deps\algorithm_adapter-496da492e2e18d7e.exe)
+     Running tests\apply_ledger.rs (target\debug\deps\apply_ledger-d2218c019e0b5841.exe)
+     Running tests\apply_ledger_locking.rs (target\debug\deps\apply_ledger_locking-e0b9e771695d8a6e.exe)
+     Running tests\bench_vertical.rs (target\debug\deps\bench_vertical-291b507f61ec8e6f.exe)
+     Running tests\benchmark_typed_dag.rs (target\debug\deps\benchmark_typed_dag-eb6bdb4274be97e1.exe)
+     Running tests\builtins.rs (target\debug\deps\builtins-69d5697248e29abb.exe)
+     Running tests\context_retrieval.rs (target\debug\deps\context_retrieval-79785b836596a212.exe)
+     Running tests\control.rs (target\debug\deps\control-33db31b2583c309a.exe)
+     Running tests\control_persistence.rs (target\debug\deps\control_persistence-00a5d8a97ab1c501.exe)
+     Running tests\control_recovery.rs (target\debug\deps\control_recovery-ee831b8db16df0e2.exe)
+     Running tests\core.rs (target\debug\deps\core-c580e018ce4e350f.exe)
+     Running tests\dependency_manifest.rs (target\debug\deps\dependency_manifest-317e16121c324405.exe)
+     Running tests\durable_dag.rs (target\debug\deps\durable_dag-c234769ddc45b1a5.exe)
+     Running tests\graph_change_set.rs (target\debug\deps\graph_change_set-3d5271745673b9d7.exe)
+     Running tests\graph_indexes.rs (target\debug\deps\graph_indexes-5ffc6925dbe4cf4a.exe)
+     Running tests\import.rs (target\debug\deps\import-fee0e9b03e195d9e.exe)
+     Running tests\invalidate.rs (target\debug\deps\invalidate-693240b40ff9f5e9.exe)
+     Running tests\observability.rs (target\debug\deps\observability-6112af86288d9c98.exe)
+     Running tests\observability_extended.rs (target\debug\deps\observability_extended-adb353a9defa8f6e.exe)
+     Running tests\pilot_vertical.rs (target\debug\deps\pilot_vertical-dbc36ba09d5f9046.exe)
+     Running tests\reconcile.rs (target\debug\deps\reconcile-c02a7a7294f904fb.exe)
+     Running tests\research_adapter.rs (target\debug\deps\research_adapter-33d4ffb2630268a2.exe)
+     Running tests\scoped_graph.rs (target\debug\deps\scoped_graph-f32883e4da5476aa.exe)
+     Running tests\telemetry_export.rs (target\debug\deps\telemetry_export-4c361dc9155f2c86.exe)
+     Running tests\typed_dag.rs (target\debug\deps\typed_dag-a7246789d09cde5c.exe)
+     Running tests\utility_adapter.rs (target\debug\deps\utility_adapter-c121c5a736f4dfed.exe)
+     Running tests\web_feed_process.rs (target\debug\deps\web_feed_process-23c0d5ddea512688.exe)
+     Running tests\web_memory.rs (target\debug\deps\web_memory-41654ddb2bad2ad3.exe)
+   Doc-tests hqkg

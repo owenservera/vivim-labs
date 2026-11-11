@@ -135,8 +135,9 @@ export async function openZipArchive(filePath, limits = {}) {
       off = end;
     }
     if (off !== dir.length) throw fail('ZIP_CENTRAL_TRAILING');
-    async function entryStream(entry) {
+    async function entryStream(entry, {signal} = {}) {
       if (!entries.includes(entry)) throw fail('ZIP_ENTRY_UNKNOWN');
+      if (signal?.aborted) throw fail('IMPORT_PAUSED');
       const local = Buffer.alloc(30);
       await readExact(local, entry.localOffset);
       if (!signature(local, 0, 0x04034b50) || u16(local, 8) !== entry.method || u16(local, 6) !== entry.flags) throw fail('ZIP_LOCAL_MISMATCH');
@@ -151,7 +152,7 @@ export async function openZipArchive(filePath, limits = {}) {
         if (entry.size) throw fail('ZIP_INVALID_SIZE');
         return Readable.from([]);
       }
-      const input = handle.createReadStream({ start, end: end - 1, autoClose: false });
+      const input = handle.createReadStream({ start, end: end - 1, autoClose: false, ...(signal ? {signal} : {}) });
       const inflate = entry.method === 8 ? createInflateRaw() : new PassThrough();
       let bytes = 0, runningCrc = 0xffffffff;
       const verify = new Transform({
@@ -172,9 +173,16 @@ export async function openZipArchive(filePath, limits = {}) {
       input.pipe(inflate).pipe(verify);
       return verify;
     }
-    async function fingerprint() {
+    async function fingerprint({signal} = {}) {
       const digest = createHash('sha256');
-      for await (const chunk of handle.createReadStream({start:0,end:info.size-1,autoClose:false})) digest.update(chunk);
+      let count = 0;
+      for await (const chunk of handle.createReadStream({start:0,end:info.size-1,autoClose:false,...(signal ? {signal} : {})})) {
+        count += chunk.length;
+        digest.update(chunk);
+      }
+      if (count !== info.size) throw fail('ZIP_FILE_CHANGED');
+      const after = await handle.stat();
+      if (after.dev !== info.dev || after.ino !== info.ino || after.size !== info.size || after.mtimeMs !== info.mtimeMs || after.ctimeMs !== info.ctimeMs) throw fail('ZIP_FILE_CHANGED');
       return digest.digest('hex');
     }
     return Object.freeze({ entries, entryStream, fingerprint, size: info.size, directoryDigest: createHash('sha256').update(dir).digest('hex'), async close() { await handle.close(); } });

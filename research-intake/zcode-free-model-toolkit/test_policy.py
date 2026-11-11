@@ -34,6 +34,17 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(select([dict(FREE, supported_parameters=[])], b), [])
         self.assertEqual(select([FREE], b), [FREE])
 
+    def test_max_token_field_mapping(self):
+        req = {"messages": [{"role": "user", "content": "x"}], "max_completion_tokens": 8000}
+        legacy = dict(FREE, supported_parameters=["tools", "max_tokens"])
+        sent = prepare(req, legacy)
+        self.assertEqual(sent["max_tokens"], 2048)
+        self.assertNotIn("max_completion_tokens", sent)
+        modern = dict(FREE, supported_parameters=["max_completion_tokens"])
+        sent = prepare(req, modern)
+        self.assertEqual(sent["max_completion_tokens"], 2048)
+        self.assertNotIn("max_tokens", sent)
+
     def test_images(self):
         b={"messages":[{"role":"user","content":[{"type":"image_url","image_url":{"url":"x"}}]}]}
         self.assertEqual(select([FREE], b), [])
@@ -51,7 +62,7 @@ class PolicyTests(unittest.TestCase):
         self.assertNotIn("reasoning_effort",a)
         self.assertNotIn("thinking",a)
         self.assertEqual(a["messages"],b["messages"])
-        self.assertEqual(a["max_completion_tokens"],2048)
+        self.assertEqual(a["max_tokens"],2048)
 
     def test_daily_quota_survives_restart(self):
         with tempfile.TemporaryDirectory() as d:

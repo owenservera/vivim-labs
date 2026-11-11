@@ -151,7 +151,8 @@ def eligible():
     # Prefer live documented $0 price over a trial quota. Custom preference
     # ordered by exact model IDs, never arbitrary user-supplied endpoint URLs.
     preferred = [v.strip() for v in os.getenv("ZFREE_PREFER", "").split(",") if v.strip()]
-    return sorted(items, key=lambda m: (0 if m["id"] in preferred else 1,
+    return sorted(items, key=lambda m: (0 if m.get("route_id", m["id"]) in preferred or m["id"] in preferred else 1,
+                                         preferred.index(m.get("route_id", m["id"])) if m.get("route_id", m["id"]) in preferred else
                                          preferred.index(m["id"]) if m["id"] in preferred else 0,
                                          {"openrouter": 0, "kilo-gateway": 1, "nvidia-nim": 2}.get(m["provider"], 3),
                                          -int(m.get("context_length") or 0), m["id"]))

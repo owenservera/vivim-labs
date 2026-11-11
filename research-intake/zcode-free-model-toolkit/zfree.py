@@ -7,6 +7,7 @@ import argparse, json, os, pathlib, threading, time, urllib.request, urllib.erro
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from policy import strict_zero_price, nim_chat_candidate, demand, select, prepare, Quota, session_key, StickyRoutes, classify_upstream_error
 import hmac
+from kilo_gateway import discover as discover_kilo
 
 BASE = pathlib.Path(os.environ.get("ZFREE_HOME", str(pathlib.Path.home() / ".zfree")))
 OR_CATALOG = "https://openrouter.ai/api/v1/models"
@@ -21,6 +22,7 @@ LOCK = threading.Lock()
 # allowance with no purchase history; owners may explicitly raise it to 1000.
 QUOTA = Quota(BASE / "openrouter-quota.json", rpm=int(os.getenv("ZFREE_OR_RPM", "20")),
               daily=int(os.getenv("ZFREE_OR_DAILY_LIMIT", "50")))
+KILO_QUOTA = Quota(BASE / "kilo-quota.json", rpm=int(os.getenv("ZFREE_KILO_RPM", "20")), daily=int(os.getenv("ZFREE_KILO_DAILY_LIMIT", "200")))
 STICKY = StickyRoutes(ttl=21600)
 COOLDOWN_LOCK = threading.Lock()
 COOLDOWNS = {}
@@ -115,6 +117,12 @@ def discover():
             errors.append("nvidia catalog: " + type(e).__name__ + ": " + str(e)[:160])
     # OpenCode free chat models are explicitly OpenCode-client-only.
     # Do not route ZCode requests through OpenCode Console and pretend it is free.
+    # Kilo Gateway is a separate upstream; never treat its catalogue as OpenRouter billing truth.
+    if os.getenv("ZFREE_ALLOW_KILO", "1") == "1":
+        try:
+            result.extend(discover_kilo())
+        except Exception as e:
+            errors.append("kilo catalog: " + type(e).__name__ + ": " + str(e)[:160])
     result.sort(key=lambda x: (x["provider"], -int(x.get("context_length") or 0), x["id"]))
     return result, errors
 
@@ -138,13 +146,14 @@ def eligible():
     allow_trial = os.getenv("ZFREE_ALLOW_NIM_TRIAL", "0") == "1"
     items = [m for m in st["models"] if
              (m["provider"] == "openrouter" and bool(os.getenv("OPENROUTER_API_KEY"))) or
-             (m["provider"] == "nvidia-nim" and allow_trial and bool(os.getenv("NVIDIA_API_KEY")))]
+             (m["provider"] == "nvidia-nim" and allow_trial and bool(os.getenv("NVIDIA_API_KEY"))) or
+             (m["provider"] == "kilo-gateway" and m.get("routable") is True and os.getenv("ZFREE_ALLOW_KILO", "1") == "1")]
     # Prefer live documented $0 price over a trial quota. Custom preference
     # ordered by exact model IDs, never arbitrary user-supplied endpoint URLs.
     preferred = [v.strip() for v in os.getenv("ZFREE_PREFER", "").split(",") if v.strip()]
     return sorted(items, key=lambda m: (0 if m["id"] in preferred else 1,
                                          preferred.index(m["id"]) if m["id"] in preferred else 0,
-                                         0 if m["provider"] == "openrouter" else 1,
+                                         {"openrouter": 0, "kilo-gateway": 1, "nvidia-nim": 2}.get(m["provider"], 3),
                                          -int(m.get("context_length") or 0), m["id"]))
 
 class Handler(BaseHTTPRequestHandler):
@@ -176,7 +185,7 @@ class Handler(BaseHTTPRequestHandler):
         if self.path in ("/v1/models", "/models"):
             return self.respond(200, {"object": "list", "data": [
                 {"id": "free-auto", "object": "model", "owned_by": "zfree"},
-                *[{"id": m["id"], "object": "model", "owned_by": m["provider"]}
+                *[{"id": m.get("route_id", m["id"]), "object": "model", "owned_by": m["provider"]}
                   for m in eligible()]]})
         return self.respond(404, {"error": {"message": "Unknown endpoint"}})
 
@@ -209,7 +218,7 @@ class Handler(BaseHTTPRequestHandler):
         if pinned:
             # Never silently swap models mid-session; thinking/tool histories may
             # be incompatible. New session/request identity can choose anew.
-            candidates = [m for m in candidates if m["id"] == pinned]
+            candidates = [m for m in candidates if m.get("route_id", m["id"]) == pinned]
             if not candidates:
                 return self.respond(409, {"error": {"message": "Pinned free model unavailable or lacks required capabilities; start a new session"}})
         if not candidates:
@@ -221,16 +230,26 @@ class Handler(BaseHTTPRequestHandler):
             max_attempts = 4
         quota_wait = 0
         for m in candidates[:max_attempts]:
-            provider_key = os.getenv("OPENROUTER_API_KEY") if m["provider"] == "openrouter" else os.getenv("NVIDIA_API_KEY")
+            provider_key = (os.getenv("OPENROUTER_API_KEY") if m["provider"] == "openrouter" else
+                            os.getenv("KILO_API_KEY") if m["provider"] == "kilo-gateway" else
+                            os.getenv("NVIDIA_API_KEY"))
             if m["provider"] == "openrouter":
                 allowed, wait_seconds = QUOTA.take()
                 if not allowed:
                     quota_wait = max(quota_wait, wait_seconds)
                     errors.append({"provider": "openrouter", "reason": "local_rate_limit"})
                     continue
+            if m["provider"] == "kilo-gateway":
+                allowed, wait_seconds = KILO_QUOTA.take()
+                if not allowed:
+                    quota_wait = max(quota_wait, wait_seconds)
+                    errors.append({"provider": "kilo-gateway", "reason": "local_rate_limit"})
+                    continue
             data = prepare(body, m)
             response_started = False
-            headers = {"Authorization": "Bearer " + provider_key, "Content-Type": "application/json"}
+            headers = {"Content-Type": "application/json"}
+            if provider_key:
+                headers["Authorization"] = "Bearer " + provider_key
             if m["provider"] == "openrouter":
                 headers["HTTP-Referer"] = "http://127.0.0.1"
                 headers["X-Title"] = "ZCode Free Gateway"
@@ -238,7 +257,7 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 with urllib.request.urlopen(req, timeout=90) as upstream:
                     if body.get("model", "free-auto") == "free-auto":
-                        STICKY.put(session_id, m["id"])
+                        STICKY.put(session_id, m.get("route_id", m["id"]))
                     response_started = True
                     self.send_response(upstream.status)
                     self.send_header("Content-Type", upstream.headers.get("Content-Type", "application/json"))
@@ -288,7 +307,8 @@ def main():
         print(json.dumps({"model_count": len(st["models"]), "eligible_count": len(eligible()),
                           "providers": sorted(set(m["provider"] for m in st["models"])),
                           "errors": st["errors"], "cache": str(BASE / "catalog.json"),
-                          "opencode": "OpenCode free chat models not available to third-party ZCode"},
+                          "opencode": "OpenCode free chat models not available to third-party ZCode",
+                          "kilo": "Only catalog-verified :free or documented kilo-auto/free; anonymous access may be rate limited"},
                          indent=2))
         if args.command == "doctor":
             print("ZCode custom OpenAI Chat Completions provider: http://127.0.0.1:%d/v1 ; model: free-auto" % args.port)

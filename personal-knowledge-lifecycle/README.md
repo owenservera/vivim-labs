@@ -30,6 +30,12 @@ The user must get value quickly, without waiting for all historical ingestion. I
 - [KB consolidation](https://github.com/owenservera/vivim-labs/tree/main/KB-consolidation): discovery scaffold; coordinate rather than fork.
 - [TierFlow decisions](https://github.com/owenservera/tierflow/blob/main/VIVIM-VISUAL-RUNTIME/DECISIONS.md): KB authority elsewhere, TierFlow projection only.
 
+## Labs implementation update — 2026-11-11
+
+The original lifecycle files in this directory remain the design authority, but [runtime/](runtime/) now contains a **real Labs-stage implementation**: T=0 profile candidate intake, safe ZIP32/ZIP64 streaming, JSON normalization, resumable Host-journal batch processing, scoped Rust graph proposals, synthetic tests and a read-only archive inspector. The recent sprint passed **28 synthetic Node.js tests locally**.
+
+This does **not** mean Host/Studio/Rust/TierFlow product wiring has been accepted. The runtime's [ARCHITECTURE.md](runtime/ARCHITECTURE.md) records required adapter contracts, proof boundaries and remaining device/real-account gates.
+
 ## Scope boundary and handoff
 This folder maps the **personal** knowledge lifecycle; it does not override the broader KB consolidation effort. Before implementation, pin exact main SHAs and identify current Host producer/consumer paths, schema versions, Rust linkage, actual grants and integration receipts. Record outcomes as IMPLEMENTED, WIRED, TESTED, DEVICE-VERIFIED, DESIGN-ONLY, or UNKNOWN separately.
 

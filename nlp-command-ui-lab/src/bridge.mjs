@@ -31,7 +31,7 @@ export async function collectInventory() {
         id:a.id,namespace:'host', title:a.title||a.id,category:a.category||'other',
         readiness:a.readiness||'unknown',risk:a.risk||'unknown',
         examples:Array.isArray(a.examples)?a.examples:[],args:a.args||{},
-        language:a.language||null,sourceFile:hostFile, canonical:true,liveVerified:a.readiness==='verified',
+        language:a.language||null,sourceFile:hostFile, canonical:true,liveVerified:false,declaredVerified:a.readiness==='verified',
         evidence:'Host catalog source record; not a runtime receipt'
       });
       out.sources[0].digest=hash(raw);

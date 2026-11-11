@@ -1,5 +1,6 @@
 /** Visual compiler only. Canonical command meaning comes from Host; this module adds UI annotations. */
 import { getContacts } from './bridge.mjs';
+import { affordanceFor } from './affordances.mjs';
 const TOKENS=/"[^"]*"|'[^']*'|[\p{L}\p{N}_@#./+%-]+|→|[^\s]/gu;
 const ICONS=Object.freeze({email:'✉',mail:'✉',contact:'♙',contacts:'♙',system:'◈',devices:'▣',control:'⌘',browser:'◎',ui:'▧',file:'▤',chat:'☷',message:'▤',search:'⌕',status:'◉',automation:'⏱',other:'⌘'});
 const escapeRegExp=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
@@ -82,7 +83,7 @@ export function visualCompile(text, inventory, hostResult=null, options={}) {
     if(!hostResult)result.outcome='discovery_only';
     result.canonical='⌘ '+a.id;
     result.reading=a.language?.reading||a.title;
-    result.symbols=[{icon:ICONS[a.category]||ICONS.other,kind:'action',label:a.title,registered:true}];
+    result.symbols=[{icon:a.visual?.icon||affordanceFor(a).icon,kind:'action',label:a.title,registered:true}];
     result.slots=Object.entries(a.args||{}).map(([key,definition])=>({key,label:key.replaceAll('_',' '),state:'not_resolved',type:definition.type,icon:'@'}));
     if(!a.liveVerified)result.gaps.push({code:'NOT_LIVE_VERIFIED',message:'Host catalog source is not a runtime availability or permission receipt.'});
   } else if(!hostResult) {

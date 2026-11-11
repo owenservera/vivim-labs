@@ -1,5 +1,5 @@
 // Bounded, read-only ZIP reader for explicitly selected local archives.
-// Supports stored/deflated single-disk ZIP32; rejects ZIP64, encryption,
+// Supports stored/deflated single-disk ZIP32 and bounded ZIP64; rejects encryption,
 // unsafe paths, symlinks, ambiguous names, bad CRC and decompression bombs.
 import { open, lstat } from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
@@ -16,6 +16,12 @@ const fail = (code, cause) => Object.assign(new Error(code), { code, cause });
 const signature = (b, i, s) => i >= 0 && i + 4 <= b.length && b.readUInt32LE(i) === s;
 const u16 = (b, i) => b.readUInt16LE(i);
 const u32 = (b, i) => b.readUInt32LE(i);
+const safeU64 = (b, i) => {
+  if (i + 8 > b.length) throw fail('ZIP64_TRUNCATED');
+  const n = b.readBigUInt64LE(i);
+  if (n > BigInt(Number.MAX_SAFE_INTEGER)) throw fail('ZIP64_RANGE');
+  return Number(n);
+};
 const decoder = new TextDecoder('utf-8', { fatal: true });
 function decodeName(buffer) {
   try { return decoder.decode(buffer); }
@@ -63,8 +69,22 @@ export async function openZipArchive(filePath, limits = {}) {
     }
     if (pos < 0) throw fail('ZIP_END_MISSING');
     if (u16(tail, pos + 4) || u16(tail, pos + 6) || u16(tail, pos + 8) !== u16(tail, pos + 10)) throw fail('ZIP_MULTIDISK_UNSUPPORTED');
-    const count = u16(tail, pos + 10), dirSize = u32(tail, pos + 12), dirOffset = u32(tail, pos + 16);
-    if (count === 65535 || dirSize === 0xffffffff || dirOffset === 0xffffffff) throw fail('ZIP64_UNSUPPORTED');
+    let count = u16(tail, pos + 10), dirSize = u32(tail, pos + 12), dirOffset = u32(tail, pos + 16);
+    if (count === 65535 || dirSize === 0xffffffff || dirOffset === 0xffffffff) {
+      const loc = pos - 20;
+      if (!signature(tail, loc, 0x07064b50)) throw fail('ZIP64_LOCATOR_MISSING');
+      if (u32(tail, loc + 4) !== 0 || u32(tail, loc + 16) !== 1) throw fail('ZIP_MULTIDISK_UNSUPPORTED');
+      const eocd64Offset = safeU64(tail, loc + 8);
+      const eocd64 = Buffer.alloc(56);
+      await readExact(eocd64, eocd64Offset);
+      if (!signature(eocd64, 0, 0x06064b50) || safeU64(eocd64, 4) < 44 ||
+        u32(eocd64, 16) !== 0 || u32(eocd64, 20) !== 0 ||
+        safeU64(eocd64, 24) !== safeU64(eocd64, 32)) throw fail('ZIP64_END_INVALID');
+      count = safeU64(eocd64, 32);
+      dirSize = safeU64(eocd64, 40);
+      dirOffset = safeU64(eocd64, 48);
+      if (dirOffset + dirSize > eocd64Offset) throw fail('ZIP64_END_INVALID');
+    }
     if (count > cfg.maxEntries || dirSize > cfg.maxDirectoryBytes || dirOffset + dirSize > info.size - tailLength + pos) throw fail('ZIP_DIRECTORY_LIMIT');
     const dir = Buffer.alloc(dirSize);
     await readExact(dir, dirOffset);
@@ -74,14 +94,33 @@ export async function openZipArchive(filePath, limits = {}) {
     for (let index = 0; index < count; index++) {
       if (!signature(dir, off, 0x02014b50) || off + 46 > dir.length) throw fail('ZIP_CENTRAL_INVALID');
       const flags = u16(dir, off + 8), method = u16(dir, off + 10);
-      const crc = u32(dir, off + 16), compressedSize = u32(dir, off + 20), size = u32(dir, off + 24);
+      const crc = u32(dir, off + 16);
+      let compressedSize = u32(dir, off + 20), size = u32(dir, off + 24);
       const nameLen = u16(dir, off + 28), extraLen = u16(dir, off + 30), commentLen = u16(dir, off + 32);
-      const localOffset = u32(dir, off + 42), hostOS = dir[off + 5];
+      let localOffset = u32(dir, off + 42);const hostOS = dir[off + 5];
       const end = off + 46 + nameLen + extraLen + commentLen;
       if (end > dir.length) throw fail('ZIP_CENTRAL_INVALID');
       if (flags & 1 || flags & 0x40) throw fail('ZIP_ENCRYPTED_UNSUPPORTED');
       if (method !== 0 && method !== 8) throw fail('ZIP_COMPRESSION_UNSUPPORTED');
-      if (size === 0xffffffff || compressedSize === 0xffffffff || localOffset === 0xffffffff) throw fail('ZIP64_UNSUPPORTED');
+      if (size === 0xffffffff || compressedSize === 0xffffffff || localOffset === 0xffffffff) {
+        let cursor = off + 46 + nameLen, found = false;
+        const limit = cursor + extraLen;
+        while (cursor < limit) {
+          if (cursor + 4 > limit) throw fail('ZIP_EXTRA_INVALID');
+          const code = u16(dir, cursor), length = u16(dir, cursor + 2), begin = cursor + 4;
+          if (begin + length > limit) throw fail('ZIP_EXTRA_INVALID');
+          if (code === 0x0001) {
+            let p = begin;
+            const take = () => { if (p + 8 > begin + length) throw fail('ZIP64_EXTRA_INVALID'); const n = safeU64(dir, p); p += 8; return n; };
+            if (size === 0xffffffff) size = take();
+            if (compressedSize === 0xffffffff) compressedSize = take();
+            if (localOffset === 0xffffffff) localOffset = take();
+            found = true;break;
+          }
+          cursor = begin + length;
+        }
+        if (!found) throw fail('ZIP64_EXTRA_MISSING');
+      }
       const name = safeName(decodeName(dir.subarray(off + 46, off + 46 + nameLen)));
       const folded = name.toLowerCase();
       if (names.has(folded)) throw fail('ZIP_DUPLICATE_NAME');

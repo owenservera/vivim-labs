@@ -5,6 +5,8 @@ Python 3.11+ standard library only. No secrets stored in this repository.
 from __future__ import annotations
 import argparse, json, os, pathlib, threading, time, urllib.request, urllib.error, math
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from policy import strict_zero_price, nim_chat_candidate, demand, select, prepare, Quota
+import hmac
 
 BASE = pathlib.Path(os.environ.get("ZFREE_HOME", str(pathlib.Path.home() / ".zfree")))
 OR_CATALOG = "https://openrouter.ai/api/v1/models"
@@ -15,6 +17,10 @@ CACHE_SECONDS = max(300, int(os.getenv("ZFREE_REFRESH_SECONDS", "3600")))
 MAX_BODY = 8 * 1024 * 1024
 STATE = {"at": 0.0, "models": [], "errors": []}
 LOCK = threading.Lock()
+# These limits are intentionally conservative. 50/day is the default OpenRouter
+# allowance with no purchase history; owners may explicitly raise it to 1000.
+QUOTA = Quota(BASE / "openrouter-quota.json", rpm=int(os.getenv("ZFREE_OR_RPM", "20")),
+              daily=int(os.getenv("ZFREE_OR_DAILY_LIMIT", "50")))
 
 def request_json(url, key=None, timeout=20):
     headers = {"Accept": "application/json", "User-Agent": "zcode-free-model-toolkit/0.1"}
@@ -37,11 +43,7 @@ def openrouter_eligible(m):
     architecture = m.get("architecture") or {}
     output = architecture.get("output_modalities", ["text"])
     return (isinstance(mid, str) and mid.endswith(":free")
-            and isinstance(pricing, dict)
-            and all(is_zero(pricing.get(k)) for k in ("prompt", "completion"))
-            # Some models publish additional per-request/per-image charges;
-            # any positive or unknown published charge fails the free guarantee.
-            and all(is_zero(v) for v in pricing.values())
+            and strict_zero_price(pricing)
             and isinstance(output, list) and "text" in output)
 
 def normalized_request(body):
@@ -72,9 +74,13 @@ def discover():
             if not openrouter_eligible(m):
                 continue
             params = m.get("supported_parameters") or []
-            modality = (m.get("architecture") or {}).get("modality", "")
+            architecture = m.get("architecture") or {}
+            modality = architecture.get("modality", "")
+            top_provider = m.get("top_provider") or {}
             result.append({"provider": "openrouter", "id": mid, "name": m.get("name", mid),
                            "context_length": m.get("context_length", 0),
+                           "max_completion_tokens": top_provider.get("max_completion_tokens"),
+                           "input_modalities": architecture.get("input_modalities", ["text"]),
                            "supported_parameters": params if isinstance(params, list) else [],
                            "supported_efforts": (m.get("reasoning") or {}).get("supported_efforts"),
                            "modality": modality,
@@ -88,7 +94,7 @@ def discover():
             payload = request_json(NIM_CATALOG, os.getenv("NVIDIA_API_KEY"))
             for m in payload.get("data", []):
                 mid = m.get("id", "")
-                if isinstance(mid, str) and mid:
+                if isinstance(mid, str) and nim_chat_candidate(mid):
                     result.append({"provider": "nvidia-nim", "id": mid, "name": mid,
                                    "endpoint": NIM_CHAT,
                                    "evidence": "developer-trial-only-not-unconditionally-free"})
@@ -143,8 +149,9 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(raw)
 
     def authorized(self):
-        key = os.getenv("ZFREE_LOCAL_TOKEN")
-        return not key or self.headers.get("Authorization") == "Bearer " + key
+        key = os.getenv("ZFREE_LOCAL_TOKEN", "")
+        supplied = self.headers.get("Authorization", "")
+        return bool(key) and hmac.compare_digest(supplied, "Bearer " + key)
 
     def do_GET(self):
         if not self.authorized():
@@ -174,45 +181,30 @@ class Handler(BaseHTTPRequestHandler):
                 return self.respond(400, {"error": {"message": "Expected object"}})
         except (ValueError, json.JSONDecodeError):
             return self.respond(400, {"error": {"message": "Invalid JSON"}})
-        candidates = eligible()
-        wanted = body.get("model", "free-auto")
-        if not isinstance(wanted, str):
-            return self.respond(400, {"error": {"message": "model must be a string"}})
-        if wanted != "free-auto":
-            candidates = [m for m in candidates if m["id"] == wanted]
-        # ZCode's agent relies on function/tool calls. Never silently route
-        # a tool-using turn to a catalog entry without tool support.
-        if body.get("tools"):
-            candidates = [m for m in candidates if m["provider"] == "nvidia-nim"
-                          or "tools" in m.get("supported_parameters", [])]
+        try:
+            demand(body)
+        except ValueError as e:
+            return self.respond(400, {"error": {"message": str(e)}})
+        nim_tool = [v.strip() for v in os.getenv("ZFREE_NIM_TOOL_MODELS", "").split(",") if v.strip()]
+        nim_vision = [v.strip() for v in os.getenv("ZFREE_NIM_VISION_MODELS", "").split(",") if v.strip()]
+        candidates = select(eligible(), body, nim_tool_ids=nim_tool, nim_vision_ids=nim_vision)
         if not candidates:
             return self.respond(503, {"error": {"message": "No currently eligible free model; refusing paid fallback"}})
         errors = []
         try:
-            max_attempts = min(10, max(1, int(os.getenv("ZFREE_MAX_ATTEMPTS", "4"))))
+            max_attempts = min(4, max(1, int(os.getenv("ZFREE_MAX_ATTEMPTS", "2"))))
         except ValueError:
             max_attempts = 4
+        quota_wait = 0
         for m in candidates[:max_attempts]:
             key = os.getenv("OPENROUTER_API_KEY") if m["provider"] == "openrouter" else os.getenv("NVIDIA_API_KEY")
-            data = normalized_request(body)
-            data["model"] = m["id"]
             if m["provider"] == "openrouter":
-                effort = data.pop("reasoning_effort", None)
-                supported = m.get("supported_parameters", [])
-                levels = m.get("supported_efforts")
-                if (effort and "reasoning" in supported
-                        and (levels is None or effort in levels)):
-                    # OpenRouter's canonical Chat Completions field is reasoning.effort.
-                    data["reasoning"] = {"effort": effort}
-                elif not effort:
-                    data.pop("reasoning", None)
-                # Avoid unsupported tool options in models that accept tools but
-                # don't advertise tool_choice or parallel_tool_calls.
-                if "tool_choice" not in supported:
-                    data.pop("tool_choice", None)
-                if "parallel_tool_calls" not in supported:
-                    data.pop("parallel_tool_calls", None)
-            # Do not invent a provider-specific parameter from unverified metadata.
+                allowed, wait_seconds = QUOTA.take()
+                if not allowed:
+                    quota_wait = max(quota_wait, wait_seconds)
+                    errors.append({"provider": "openrouter", "reason": "local_rate_limit"})
+                    continue
+            data = prepare(body, m)
             response_started = False
             headers = {"Authorization": "Bearer " + key, "Content-Type": "application/json"}
             if m["provider"] == "openrouter":
@@ -252,6 +244,9 @@ class Handler(BaseHTTPRequestHandler):
                     self.close_connection = True
                     return
                 errors.append({"model": m["id"], "error": type(e).__name__})
+        if quota_wait and all(e.get("reason") == "local_rate_limit" for e in errors):
+            return self.respond(429, {"error": {"message": "Local free-tier quota exceeded",
+                                               "retry_after_seconds": quota_wait}})
         return self.respond(503, {"error": {"message": "All eligible free routes failed; no paid fallback",
                                             "attempts": errors}})
 
@@ -270,6 +265,8 @@ def main():
         if args.command == "doctor":
             print("ZCode custom OpenAI Chat Completions provider: http://127.0.0.1:%d/v1 ; model: free-auto" % args.port)
         return
+    if not os.getenv("ZFREE_LOCAL_TOKEN"):
+        ap.error("Set ZFREE_LOCAL_TOKEN before serving; unauthenticated local proxies are unsafe")
     refresh(True)
     server = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
     print("ZFree listening on http://127.0.0.1:%d/v1" % args.port, flush=True)

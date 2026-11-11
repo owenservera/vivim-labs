@@ -162,8 +162,10 @@ class Handler(BaseHTTPRequestHandler):
                     self.send_header("Connection", "close")
                     self.end_headers()
                     # Raw streaming, including SSE; do not retry after bytes transmitted.
+                    is_sse = "text/event-stream" in upstream.headers.get("Content-Type", "")
                     while True:
-                        chunk = upstream.read(8192)
+                        # Line-wise SSE avoids waiting for a full 8 KiB before first token.
+                        chunk = upstream.readline() if is_sse else upstream.read(8192)
                         if not chunk:
                             break
                         self.wfile.write(chunk)

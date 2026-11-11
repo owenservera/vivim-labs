@@ -80,6 +80,15 @@ class PolicyTests(unittest.TestCase):
             self.assertTrue(q.take()[0])
             self.assertFalse(q.take()[0])
 
+    def test_upstream_error_classification(self):
+        from policy import classify_upstream_error
+        self.assertEqual(classify_upstream_error(403, "unavailable in your region"), (True, 3600))
+        self.assertEqual(classify_upstream_error(403, "invalid API key"), (False, 0))
+        self.assertEqual(classify_upstream_error(429, "per-model capacity"), (True, 60))
+        self.assertEqual(classify_upstream_error(429, "daily limit exceeded"), (False, 3600))
+        self.assertEqual(classify_upstream_error(404, "no endpoints supporting tool use"), (True, 1800))
+        self.assertEqual(classify_upstream_error(400, "bad payload"), (False, 0))
+
     def test_stickiness(self):
         q={"messages":[{"role":"system","content":"sys"},{"role":"user","content":"hello"}]}
         k=session_key(q)

@@ -2,6 +2,8 @@
 
 Status: DESIGN. Maps existing code observed through connected GitHub on 2026-11-12; not a live end-to-end verification.
 
+> **2026-11-12 architectural correction:** No sequential Rust command router. One authenticated ingress publishes immutable input revisions to a **parallel native event fabric**, where independently subscribed computational reactors publish derived evidence into a versioned graph. Output projections converge by revision; only effect admission is serialized by Host authority. [Detailed fan-out/convergence design](PARALLEL-EVENT-FABRIC-ARCHITECTURE.md) supersedes any sequential interpretation of this migration sketch.
+
 ## A. User-facing I/O is a bidirectional native protocol
 
 **Input event** (authenticated transport supplies actor; actor is NOT accepted as a client assertion):

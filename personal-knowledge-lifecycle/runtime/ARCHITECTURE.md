@@ -28,6 +28,7 @@ Owners:
 | `src/host-ledger-port.mjs` | maps existing SQLite ledger interface to checkpoint transactions | tested against mock ledger; real Host ledger not integration-tested here |
 | `src/scoped-graph-proposal.mjs` | source-backed scoped node and edge proposals based on current Rust contract | tested synthetic; not Rust-executed |
 | `src/host-archive-wiring.mjs` | injection glue Host ledger/grants/evidence/journal/Rust proposals/T0 accounting | tested synthetic; production port methods remain to be wired |
+| `src/fastlane-snapshot.mjs` | approved custom instructions, memory, project instructions, verified F02/F01 -> candidate evidence via same Host ledger and journal | tested synthetic, real Studio UI adapters unrun |
 | `bin/inspect-chatgpt-export.mjs` | user-invoked archive counts, no raw content output | code committed; real export test unrun |
 | `bin/bench-synthetic.mjs` | self-contained synthetic-only throughput measurement | exercised locally |
 
@@ -53,6 +54,17 @@ The proposed graph uses `personal:<UTF8 owner byte length>:<owner>/` namespace, 
 
 The proposal's graph epoch and source revision must come from the real Host/Rust bridge; the current repository cannot prove such a bridge is already active.
 
+## Immediate T=0 fast lane
+
+`createHostFastLaneIntake({ledger,host,coordinator,worldId,accountId}).ingest({kind,text,capture})`
+accepts scoped, source-backed snapshots from explicitly approved Host/UI activity. Kinds:
+- `custom_instructions`: owner-authored preference evidence (still reviewable as candidate).
+- `memory_summary`: model-summarized history, NOT an independent verified fact.
+- `project_instructions`: project-scoped, NOT automatically global identity.
+- `bootstrap_f02` and `bootstrap_f01`: only after existing Studio send/response receipt is verified, never from arbitrary pasted model text.
+
+The fast lane shares the existing Host ledger port, a Host-provided `authorizeSource` check, and an authoritative `inspectEvidenceBatch` journal. It calls `commitEvidenceCandidates` on Host, not a Labs database or separate writer. This path prepares candidates only; it does not auto-accept claims or provide a new AI provider API.
+
 ## User-facing T=0 workflow
 
 - T=0: qualified ChatGPT sign-in, permission review; offer an official export request once, without blocking the app.
@@ -73,7 +85,7 @@ The inspector emits only counts and size metrics; no message bodies. The benchma
 
 ## Verified in this sprint
 
-- 20 synthetic Node.js tests passed locally (Node v22.16.0), including ZIP32/ZIP64, path traversal, CRC, decompression limits, JSON chunking and UTF-8, archive import, crash-after-commit reconciliation, duplicate re-import, uncertain receipts, revocation, pause/resume and scoped graph proposals.
+- 28 synthetic Node.js tests passed locally (Node v22.16.0), including ZIP32/ZIP64, path traversal, CRC, decompression limits, 50 deterministic JSON chunk fuzz variants and invalid UTF-8, archive import, crash-after-commit reconciliation, duplicate re-import, uncertain receipts, revocation, pause/resume, scoped graph proposals and T=0 profile snapshot intake.
 - One synthetic 3,000-conversation, 1.03 MB uncompressed benchmark measured roughly 7,800 conversations/s and about 10 MB heap on the sandbox host. This says **nothing** about production-sized conversations, disk, full-text indexing or Rust execution.
 - All new code is committed under Labs only; Host, Studio, Rust and TierFlow repos are **unchanged** by this sprint.
 

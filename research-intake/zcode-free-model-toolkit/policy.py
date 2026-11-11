@@ -71,6 +71,9 @@ def select(models, body, nim_tool_ids=(), nim_vision_ids=()):
         if req["model"] != "free-auto" and m.get("route_id", m.get("id")) != req["model"]:
             continue
         provider = m.get("provider")
+        # Kilo auto/free can switch underlying models: refuse stateful tool/image/JSON agent use.
+        if provider == "kilo-gateway" and m.get("id") == "kilo-auto/free" and (req["tools"] or req["image"] or req["strict_format"]):
+            continue
         params = set(m.get("supported_parameters") or ())
         inputs = m.get("input_modalities") or (["text"] if provider == "openrouter" else [])
         if req["tools"] and not ("tools" in params if provider in ("openrouter", "kilo-gateway") else m.get("id") in approved_tools):

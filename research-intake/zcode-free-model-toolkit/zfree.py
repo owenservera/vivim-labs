@@ -3,7 +3,7 @@
 Python 3.11+ standard library only. No secrets stored in this repository.
 """
 from __future__ import annotations
-import argparse, json, os, pathlib, threading, time, urllib.request, urllib.error, math, secrets
+import argparse, json, os, pathlib, threading, time, urllib.request, urllib.error, math
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 BASE = pathlib.Path(os.environ.get("ZFREE_HOME", str(pathlib.Path.home() / ".zfree")))
@@ -39,6 +39,9 @@ def openrouter_eligible(m):
     return (isinstance(mid, str) and mid.endswith(":free")
             and isinstance(pricing, dict)
             and all(is_zero(pricing.get(k)) for k in ("prompt", "completion"))
+            # Some models publish additional per-request/per-image charges;
+            # any positive or unknown published charge fails the free guarantee.
+            and all(is_zero(v) for v in pricing.values())
             and isinstance(output, list) and "text" in output)
 
 def normalized_request(body):

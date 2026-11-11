@@ -55,3 +55,9 @@ Read [Living Composer vision](docs/LIVING-COMPOSER-VISION.md) and [source census
 See [Architecture](docs/ARCHITECTURE.md), [Recovered history](docs/RECOVERY.md), [HQ gaps](docs/HQ-GAPS.md), and [Feedback experiments](docs/EXPERIMENTS.md). No private corpora, sessions, API keys or real contact records belong here.
 
 **Authority invariant:** HQ owns semantic discovery and source provenance; Host owns actual action ID, permission, effect, runtime receipt; TierFlow owns production rendering; Labs owns the experiments and their evidence. Matching names do not transfer authority.
+
+## R005 progressive sprint — in-composer semantic density (2026-11-12)
+
+The v0.3 prototype adds a keyboard-first **semantic spine inside the composer**, slash command discovery from source registries, generated per-command sigils, quiet/assisted/X-ray density, source/permission truth separation, meaningful change hints, conservative negation, Host refusal precedence and reversible Tab selections. Menus rank choices selected *in this browser session only*; no private preference storage is created.
+
+Run `node --test tests/*.test.mjs` and `node scripts/semantic-bench.mjs` for synthetic acceptance. See [`docs/R005-PROGRESSIVE-SPRINT.md`](docs/R005-PROGRESSIVE-SPRINT.md) for the recorded results and remaining local production gates; see [`docs/100-SIGNAL-DENSE-COMPOSER-INNOVATIONS-R004.md`](docs/100-SIGNAL-DENSE-COMPOSER-INNOVATIONS-R004.md) on the research branch for the 100 design ideas. **No execution or authorization flow has been added.**

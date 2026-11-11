@@ -215,3 +215,21 @@ class StickyRoutes:
             if len(self.rows) > 4096:
                 now = self.clock()
                 self.rows = {k:v for k,v in self.rows.items() if v[1] > now}
+
+
+def classify_upstream_error(status, details=""):
+    """Returns (may_try_another_free_model, cooldown_seconds).
+    Never retry authentication, billing, or unknown schema failures blindly.
+    """
+    details = str(details).lower()[:2048]
+    if status == 429:
+        if any(term in details for term in ("daily quota", "daily limit", "account limit")):
+            return False, 3600
+        return True, 60
+    if status in (408, 500, 502, 503, 504):
+        return True, 30
+    if status == 403 and any(term in details for term in ("region", "country", "geograph", "geo-restrict")):
+        return True, 3600
+    if status == 404 and any(term in details for term in ("no endpoints", "tool use", "tools not supported")):
+        return True, 1800
+    return False, 0

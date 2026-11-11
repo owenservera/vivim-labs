@@ -25,3 +25,14 @@
 - `tierflow/src/ui` — real UI revision/publisher contracts.
 
 **Important:** any zero count when a repository is not mounted is UNKNOWN, not zero available commands.
+
+## Round 2 additions — living knowledge lens
+
+| Gap | Why it matters | Proposed existing owner |
+|---|---|---|
+| G11 — contextual wiki query SLA | HQ `kbQuery` loads a unified model; keystroke-driven queries require bounded budget, debounce, cancellation and instrumentation | HQ search/KB read owner + Lab benchmarks |
+| G12 — development vs personal isolation | Live UI needs both project code truth and consented private conversation history, but HQ development SQLite is not the personal store | Host private read port + shared Rust graph compute |
+| G13 — genuine wiki page provenance | Lab composes an ephemeral page, not a generated authoritative wiki document; card source/recency and links need exact revision evidence | HQ wiki/KB export and Host personal evidence |
+| G14 — ambient source subscriptions | Source snapshot may go stale as a repository indexes or owner revokes a provider; no event stream yet | HQ revision/delta reader + Host revocation truth |
+| G15 — compositor openness | Presentation hints (font, icon, border, color, spatial layout) are view metadata, not new command semantics or permissions | TierFlow renderer contract, Labs visual experiments |
+| G16 — model-facing disclosure | Showing a personal snippet locally is not permission to send it to ChatGPT/Claude/Gemini | Host explicit per-destination context disclosure decision |

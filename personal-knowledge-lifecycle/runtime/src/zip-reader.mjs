@@ -172,7 +172,12 @@ export async function openZipArchive(filePath, limits = {}) {
       input.pipe(inflate).pipe(verify);
       return verify;
     }
-    return Object.freeze({ entries, entryStream, size: info.size, directoryDigest: createHash('sha256').update(dir).digest('hex'), async close() { await handle.close(); } });
+    async function fingerprint() {
+      const digest = createHash('sha256');
+      for await (const chunk of handle.createReadStream({start:0,end:info.size-1,autoClose:false})) digest.update(chunk);
+      return digest.digest('hex');
+    }
+    return Object.freeze({ entries, entryStream, fingerprint, size: info.size, directoryDigest: createHash('sha256').update(dir).digest('hex'), async close() { await handle.close(); } });
   } catch (err) { await handle.close(); throw err; }
 }
 export async function fingerprintFile(filePath) {

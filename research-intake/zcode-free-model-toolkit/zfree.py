@@ -5,7 +5,7 @@ Python 3.11+ standard library only. No secrets stored in this repository.
 from __future__ import annotations
 import argparse, json, os, pathlib, threading, time, urllib.request, urllib.error, math
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from policy import strict_zero_price, nim_chat_candidate, demand, select, prepare, Quota
+from policy import strict_zero_price, nim_chat_candidate, demand, select, prepare, Quota, session_key, StickyRoutes
 import hmac
 
 BASE = pathlib.Path(os.environ.get("ZFREE_HOME", str(pathlib.Path.home() / ".zfree")))
@@ -21,6 +21,7 @@ LOCK = threading.Lock()
 # allowance with no purchase history; owners may explicitly raise it to 1000.
 QUOTA = Quota(BASE / "openrouter-quota.json", rpm=int(os.getenv("ZFREE_OR_RPM", "20")),
               daily=int(os.getenv("ZFREE_OR_DAILY_LIMIT", "50")))
+STICKY = StickyRoutes(ttl=21600)
 
 def request_json(url, key=None, timeout=20):
     headers = {"Accept": "application/json", "User-Agent": "zcode-free-model-toolkit/0.1"}
@@ -188,6 +189,14 @@ class Handler(BaseHTTPRequestHandler):
         nim_tool = [v.strip() for v in os.getenv("ZFREE_NIM_TOOL_MODELS", "").split(",") if v.strip()]
         nim_vision = [v.strip() for v in os.getenv("ZFREE_NIM_VISION_MODELS", "").split(",") if v.strip()]
         candidates = select(eligible(), body, nim_tool_ids=nim_tool, nim_vision_ids=nim_vision)
+        key = session_key(body, self.headers.get("X-ZFree-Session"))
+        pinned = STICKY.get(key) if body.get("model", "free-auto") == "free-auto" else None
+        if pinned:
+            # Never silently swap models mid-session; thinking/tool histories may
+            # be incompatible. New session/request identity can choose anew.
+            candidates = [m for m in candidates if m["id"] == pinned]
+            if not candidates:
+                return self.respond(409, {"error": {"message": "Pinned free model unavailable or lacks required capabilities; start a new session"}})
         if not candidates:
             return self.respond(503, {"error": {"message": "No currently eligible free model; refusing paid fallback"}})
         errors = []
@@ -213,6 +222,8 @@ class Handler(BaseHTTPRequestHandler):
             req = urllib.request.Request(m["endpoint"], data=json.dumps(data).encode(), headers=headers)
             try:
                 with urllib.request.urlopen(req, timeout=90) as upstream:
+                    if body.get("model", "free-auto") == "free-auto":
+                        STICKY.put(key, m["id"])
                     response_started = True
                     self.send_response(upstream.status)
                     self.send_header("Content-Type", upstream.headers.get("Content-Type", "application/json"))

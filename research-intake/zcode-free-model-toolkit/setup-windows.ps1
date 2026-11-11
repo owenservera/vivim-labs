@@ -40,6 +40,10 @@ if ($nimChoice -match '^(y|yes)$') {
     Save-ZFreeSecret 'nvidia' $secret
     [IO.File]::WriteAllText((Join-Path $root 'nim-trial-opt-in.flag'), 'explicit-user-opt-in')
 }
+else {
+    # A later explicit No disables the NIM prototype route.
+    Remove-Item -LiteralPath (Join-Path $root 'nim-trial-opt-in.flag') -ErrorAction SilentlyContinue
+}
 Write-Host ''
 Write-Host 'ZCode custom provider: OpenAI Chat Completions'
 Write-Host 'Base URL: http://127.0.0.1:8765/v1'

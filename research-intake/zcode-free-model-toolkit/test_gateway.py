@@ -109,7 +109,7 @@ class HttpTests(unittest.TestCase):
         self.assertEqual(FakeProvider.last_body["model"], "test/tools:free")
         self.assertEqual(FakeProvider.last_body["reasoning"], {"effort": "high"})
         self.assertNotIn("thinking", FakeProvider.last_body)
-        self.assertEqual(FakeProvider.last_body["max_completion_tokens"], 1024)
+        self.assertEqual(FakeProvider.last_body["max_tokens"], 1024)
         self.assertEqual(FakeProvider.last_body["messages"], payload["messages"])
 
     def test_sse_passthrough(self):

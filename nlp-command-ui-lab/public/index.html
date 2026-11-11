@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VIVIM · Command Language Studio</title><link rel="stylesheet" href="/app.css"></head>
+<body><div class="app">
+  <aside class="rail">
+    <div class="brand"><span class="brandmark">◈</span><div><b>VIVIM</b><small>EXPERIMENTAL / LABS</small></div></div>
+    <div class="rail-label">STUDIO</div>
+    <button class="nav active" data-view="compose"><span>⌘</span> Live compiler</button>
+    <button class="nav" data-view="inventory"><span>▤</span> Command atlas <em id="nav-count">—</em></button>
+    <button class="nav" data-view="gaps"><span>△</span> Wiring gaps <em id="nav-gaps">—</em></button>
+    <div class="rail-label" style="margin-top:30px">FEEDBACK EXPERIMENTS</div>
+    <button class="nav experiment active" data-fb="symbols"><span>◈</span> Symbol chips</button>
+    <button class="nav experiment active" data-fb="reading"><span>≡</span> Longform English</button>
+    <button class="nav experiment active" data-fb="tokens"><span>⌁</span> Token anatomy</button>
+    <button class="nav experiment active" data-fb="effects"><span>◌</span> Effect preview</button>
+    <div class="rail-bottom"><div class="status-line"><span class="dot" id="dot-host"></span><span id="host-status">Checking Host…</span></div><div class="status-line"><span class="dot" id="dot-hq"></span><span id="hq-status">Checking HQ…</span></div><small>Preview-only · no external effects</small></div>
+  </aside>
+  <main class="main">
+    <header class="top"><div class="breadcrumbs">Labs <span>/</span> Intelligence interfaces <span>/</span> <b>Command language</b></div><div class="top-actions"><span class="tiny" id="rev">Registry —</span><button id="refresh" class="ghost" title="Read the current source registries">↻ Refresh sources</button></div></header>
+    <section class="view visible" id="compose-view">
+      <div class="intro"><div class="eyebrow"><span class="pulse">●</span> LIVE LANGUAGE WORKBENCH · V0.1</div><h1>Thought to command.<br><span>Meaning, made visible.</span></h1><p>Explore what VIVIM understands as you type. The input below is connected to the real Host interpreter when the local repositories are present. Nothing here executes.</p></div>
+      <div class="workbench">
+        <div class="workbench-head"><div><span class="mini-orbit">◎</span> <strong>Command center</strong> <span class="kbd">LAB / NO EXECUTION</span></div><span id="compile-status" class="compiler-status">Waiting for input</span></div>
+        <div id="transcript" class="transcript"><div class="system-message"><span>◈</span><div><b>Start with a thought.</b><p>Try “email Peter”, “show status”, or “what can I say?” Your command is visualized, not sent.</p></div></div></div>
+        <div class="composer-area"><div class="composer"><div class="composer-top"><span class="mode-chip">⌘ <b>Natural language</b></span><span class="mode-caption">Tab to choose · ↑↓ to navigate</span></div><div class="entry-row"><textarea id="prompt" rows="2" maxlength="1000" placeholder="What would you like VIVIM to do?" spellcheck="false" autocomplete="off" aria-label="Natural language command"></textarea><button id="compile" class="send" title="Compile the command without executing" aria-label="Compile command">↗</button></div><div class="composer-footer"><span><span class="key">↵</span> Compile only</span><span><span class="key">⇧ ↵</span> New line</span><span id="chars">0 / 1000</span></div></div>
+          <div id="menu" class="menu hidden" role="listbox" aria-label="Contextual command suggestions"></div>
+          <div class="under-composer" id="under-composer"><div class="feedback-label"><span class="living-dot"></span> WHAT VIVIM THINKS YOU MEAN <span class="muted">· Developer / power-user reading</span></div><p id="longform">Type a command to see its full interpretation in plain English.</p></div>
+        </div>
+      </div>
+      <div class="two-cols"><div class="panel"><div class="panel-title"><span>◈ Symbolic compilation</span><small>Human → machine</small></div><div id="symbols" class="symbols empty">Action and entity symbols will appear here.</div><div class="divider"></div><div class="panel-title"><span>⌁ Token anatomy</span><small>Live semantic roles</small></div><div id="tokens" class="tokens empty">Waiting for source text.</div></div><div class="panel"><div class="panel-title"><span>◎ Meaning and consequences</span><small>Effect-free preview</small></div><div id="outcome" class="outcome"><span class="pill neutral">No interpretation yet</span></div><div id="slots" class="slot-grid"></div><div id="details" class="details">Registered actions appear with source and readiness. Interpreting a command never grants permission.</div></div></div>
+      <div class="example-list"><span>QUICK PROBES</span><button class="example" data-example="email ">✉ Compose email <small>Contacts menu →</small></button><button class="example" data-example="show status">◉ Show status</button><button class="example" data-example="what can I say?">⌘ Discover commands</button><button class="example" data-example="don't send that email">△ Negation safety</button></div>
+    </section>
+    <section class="view" id="inventory-view"><div class="inner-head"><div class="eyebrow">SOURCE-BACKED / READ-ONLY</div><h1>Command atlas</h1><p>Browse the actual typed Host catalog and HQ source inventory. Same-looking action IDs are never silently merged.</p></div><div class="filterbar"><input id="search" placeholder="Find command, category or purpose" aria-label="Search command atlas"><select id="namespace"><option value="all">All registries</option><option value="host">Host actions</option><option value="hq">HQ action records</option><option value="hq-cli">HQ CLI roots</option></select><span id="list-count">0 results</span></div><div class="catalog" id="catalog"><div class="placeholder">Connect local repositories to populate the atlas.</div></div></section>
+    <section class="view" id="gaps-view"><div class="inner-head"><div class="eyebrow">EVIDENCE OVER ASSUMPTION</div><h1>HQ wiring gaps</h1><p>The lab reports missing identity joins, source truth, permissions, runtime receipts and contact grounding instead of inventing a complete picture.</p></div><div id="source-list" class="sources"></div><div id="gap-list" class="gap-list"></div></section>
+    <footer>VIVIM Labs · Visual semantics experiment · No production authority · <span id="footer-source">Source registry not yet loaded</span></footer>
+  </main>
+</div><script type="module" src="/app.js"></script></body></html>

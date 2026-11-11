@@ -184,7 +184,9 @@ class Explorer(tk.Tk):
         if self.provider.get() not in providers:
             self.provider.set('All providers')
         self.visible = filtered(self.models, self.search.get(), self.provider.get())
-        self.tree.delete(*self.tree.get_children())
+        children = self.tree.get_children()
+        if children:
+            self.tree.delete(*children)
         focus = None
         for index, model in enumerate(self.visible):
             iid = str(index)
@@ -204,7 +206,9 @@ class Explorer(tk.Tk):
         # Stable sort within visible results; no hidden paid models are introduced.
         self.visible.sort(key=lambda m: as_text(m.get('route_id' if col == 'route' else
                                                    'context_length' if col == 'context' else col)).casefold())
-        self.tree.delete(*self.tree.get_children())
+        children = self.tree.get_children()
+        if children:
+            self.tree.delete(*children)
         for i, m in enumerate(self.visible):
             self.tree.insert('', 'end', iid=str(i), values=(m.get('provider', ''), m.get('name', ''), m['id'],
                 f"{m.get('context_length') or 0:,}" if m.get('context_length') else '—',

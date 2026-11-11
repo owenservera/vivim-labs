@@ -91,3 +91,16 @@ test('Host ledger adapter reuses transaction and meta API with rollback',()=>{
  store.transact('a',s=>({...s,count:s.count+1}));
  assert.equal(store.read('a').count,2);
 });
+test('AbortSignal pauses before next Host commit, preserving committed batches',async()=>{
+ await fixture(4,async archivePath=>{
+  const store=createStore(),sink=createSink(),control=new AbortController();
+  let observed=0;
+  const opts={...config(archivePath,store,sink),signal:control.signal,
+    onProgress(){if(++observed===1)control.abort();}};
+  await assert.rejects(importChatGptExport(opts),{code:'IMPORT_PAUSED'});
+  assert.equal(sink.writes,1);
+  const done=await importChatGptExport({...opts,signal:null,onProgress:()=>{}});
+  assert.equal(done.processed,4);
+  assert.equal(sink.writes,2);
+ });
+});

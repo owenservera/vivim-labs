@@ -112,6 +112,15 @@ def prepare(body, model):
         for k in OPTIONAL_PARAMS:
             if k in data and k not in params:
                 data.pop(k, None)
+    # Some free models advertise only max_tokens. Never send both aliases.
+    if provider == "openrouter":
+        limit = data.pop("max_completion_tokens", None)
+        legacy = data.pop("max_tokens", None)
+        if limit is None:
+            limit = legacy
+        if isinstance(limit, int) and not isinstance(limit, bool) and limit > 0:
+            field = "max_completion_tokens" if "max_completion_tokens" in params else "max_tokens"
+            data[field] = limit
     # NIM models vary. No speculative reasoning parameter translation.
     data["model"] = model["id"]
     max_allowed = model.get("max_completion_tokens")

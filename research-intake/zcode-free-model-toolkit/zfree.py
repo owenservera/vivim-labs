@@ -5,7 +5,7 @@ Python 3.11+ standard library only. No secrets stored in this repository.
 from __future__ import annotations
 import argparse, json, os, pathlib, threading, time, urllib.request, urllib.error, math
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from policy import strict_zero_price, nim_chat_candidate, demand, select, prepare, Quota, session_key, StickyRoutes
+from policy import strict_zero_price, nim_chat_candidate, demand, select, prepare, Quota, session_key, StickyRoutes, classify_upstream_error
 import hmac
 
 BASE = pathlib.Path(os.environ.get("ZFREE_HOME", str(pathlib.Path.home() / ".zfree")))
@@ -22,6 +22,18 @@ LOCK = threading.Lock()
 QUOTA = Quota(BASE / "openrouter-quota.json", rpm=int(os.getenv("ZFREE_OR_RPM", "20")),
               daily=int(os.getenv("ZFREE_OR_DAILY_LIMIT", "50")))
 STICKY = StickyRoutes(ttl=21600)
+COOLDOWN_LOCK = threading.Lock()
+COOLDOWNS = {}
+
+def cooling(model):
+    with COOLDOWN_LOCK:
+        return COOLDOWNS.get((model["provider"], model["id"]), 0) > time.time()
+
+def pause_model(model, seconds):
+    if seconds <= 0:
+        return
+    with COOLDOWN_LOCK:
+        COOLDOWNS[(model["provider"], model["id"])] = time.time() + seconds
 
 def request_json(url, key=None, timeout=20):
     headers = {"Accept": "application/json", "User-Agent": "zcode-free-model-toolkit/0.1"}
@@ -188,7 +200,10 @@ class Handler(BaseHTTPRequestHandler):
             return self.respond(400, {"error": {"message": str(e)}})
         nim_tool = [v.strip() for v in os.getenv("ZFREE_NIM_TOOL_MODELS", "").split(",") if v.strip()]
         nim_vision = [v.strip() for v in os.getenv("ZFREE_NIM_VISION_MODELS", "").split(",") if v.strip()]
-        candidates = select(eligible(), body, nim_tool_ids=nim_tool, nim_vision_ids=nim_vision)
+        candidate_pool = select(eligible(), body, nim_tool_ids=nim_tool, nim_vision_ids=nim_vision)
+        candidates = [m for m in candidate_pool if not cooling(m)]
+        if candidate_pool and not candidates:
+            return self.respond(429, {"error": {"message": "All compatible free models temporarily cooling down; retry later"}})
         session_id = session_key(body, self.headers.get("X-ZFree-Session"))
         pinned = STICKY.get(session_id) if body.get("model", "free-auto") == "free-auto" else None
         if pinned:
@@ -246,8 +261,10 @@ class Handler(BaseHTTPRequestHandler):
                     self.close_connection = True
                     return
                 errors.append({"model": m["id"], "status": e.code})
-                # Retry only non-billing failures. Never switch to paid models.
-                if e.code not in (408, 429, 500, 502, 503, 504):
+                detail = e.read(2048).decode("utf-8", errors="replace")
+                retry, seconds = classify_upstream_error(e.code, detail)
+                pause_model(m, seconds)
+                if not retry:
                     break
             except (urllib.error.URLError, TimeoutError, OSError) as e:
                 if response_started:

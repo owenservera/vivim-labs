@@ -4,12 +4,14 @@ import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import { decorateActions } from './affordances.mjs';
 const LAB_ROOT = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const DEFAULT_PARENT = resolve(LAB_ROOT, '../..');
 const repoPath = (env, folder) => resolve(process.env[env] || join(process.env.VIVIM_ROOT || DEFAULT_PARENT, folder));
 export const paths = Object.freeze({
   host: repoPath('VIVIM_HARNESS', 'vivim-web-harness'),
   hq: repoPath('VIVIM_HQ', 'repos-hq'),
+  tierflow: repoPath('VIVIM_TIERFLOW', 'tierflow'),
 });
 const source = (path) => ({ path, present: existsSync(path) });
 const hash = text => createHash('sha256').update(text).digest('hex');
@@ -59,13 +61,32 @@ export async function collectInventory() {
       if(snapshot.summary.orphanHandlerKeys?.length) out.gaps.push(failure('HQ_ORPHAN_HANDLER_KEYS',`${snapshot.summary.orphanHandlerKeys.length} handler keys lack action identity`,hqAdapter));
     }catch(e){out.gaps.push(failure('HQ_ADAPTER_FAILURE',String(e.message),hqAdapter));}
   } else out.gaps.push(failure('HQ_MISSING','HQ inventory adapter missing: set VIVIM_HQ',hqAdapter));
+  // TierFlow UI commands belong to its existing typed world protocol, never to Host effects.
+  const uiTypes=join(paths.tierflow,'src/ui/types.ts');
+  out.sources.push({...source(uiTypes),authority:'tierflow',role:'UI-core typed command vocabulary'});
+  if(existsSync(uiTypes)) {
+    try {
+      const raw=readFileSync(uiTypes,'utf8');
+      const block=raw.match(/export\s+type\s+UiCommandKind\s*=([\s\S]*?);/);
+      if(!block)throw Error('UiCommandKind type not found');
+      const ids=[...new Set([...block[1].matchAll(/["'](ui\.[a-z.]+)["']/g)].map(m=>m[1]))];
+      if(ids.length<1||ids.length>60)throw Error('Unexpected UI command vocabulary size');
+      out.sources[out.sources.length-1].digest=hash(raw);
+      for(const id of ids)out.actions.push({id,namespace:'tierflow-ui',title:id.replace(/^ui\./,'UI · ').replaceAll('.',' / '),
+        category:'ui',readiness:'source_declared',risk:'unknown',examples:[],args:{},language:null,
+        sourceFile:uiTypes,canonical:true,liveVerified:false,evidence:'TierFlow UI type union only; no authenticated Host/TierFlow execution proof'});
+    }catch(e){out.gaps.push(failure('TIERFLOW_UI_PARSE',String(e.message),uiTypes));}
+  }else out.gaps.push(failure('TIERFLOW_MISSING','TierFlow typed UI source not mounted; set VIVIM_TIERFLOW',uiTypes));
+
   if(out.actions.length===0) out.gaps.push(failure('NO_LIVE_REGISTRIES','No local canonical inventories connected; prototype interactions remain exploratory',LAB_ROOT));
   if(out.hostVersion!==null && !out.actions.some(a=>a.category==='email'&&a.namespace==='host'))
     out.gaps.push(failure('EMAIL_VISUAL_GAP','No registered Host email action detected. Email menu is a visual prototype only.',hostFile));
   out.gaps.push(failure('HQ_CROSSWALK_GAP','HQ and Host identifiers are shown side-by-side; no approved equivalent-ID crosswalk was supplied.',hqAdapter));
   out.gaps.push(failure('AVAILABILITY_EVIDENCE_GAP','Source registrations do not prove actor grants, device availability or runtime receipts. Live readiness needs Host evidence.',hostFile));
+  out.gaps.push(failure('PLATFORM_COMMAND_COVERAGE','Host catalog + HQ action/CLI inventory + TierFlow typed UI commands are source-observed only. MCP, skills, Studio, pack commands, legacy families and per-actor availability require a reviewed completeness crosswalk.',LAB_ROOT));
   out.gaps.push(failure('CONTACT_BINDING_GAP','Contacts require a scoped read-only Host contact discovery port; demo fixture never authorizes a send.',LAB_ROOT));
-  out.counts={all:out.actions.length,host:out.actions.filter(x=>x.namespace==='host').length,hq:out.actions.filter(x=>x.namespace==='hq').length,cli:out.actions.filter(x=>x.namespace==='hq-cli').length,liveVerified:out.actions.filter(x=>x.liveVerified).length};
+  out.actions=decorateActions(out.actions);
+  out.counts={all:out.actions.length,host:out.actions.filter(x=>x.namespace==='host').length,hq:out.actions.filter(x=>x.namespace==='hq').length,cli:out.actions.filter(x=>x.namespace==='hq-cli').length,tierflow:out.actions.filter(x=>x.namespace==='tierflow-ui').length,liveVerified:out.actions.filter(x=>x.liveVerified).length};
   const sorted=out.actions.map(x=>[x.namespace,x.id,x.readiness]).sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b)));
   out.revision=hash(JSON.stringify([out.sources.map(x=>x.digest||x.present),out.hqSummary?.digest,sorted]));
   return out;

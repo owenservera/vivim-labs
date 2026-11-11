@@ -34,10 +34,12 @@ def is_zero(v):
 def openrouter_eligible(m):
     mid = m.get("id")
     pricing = m.get("pricing") or {}
+    architecture = m.get("architecture") or {}
+    output = architecture.get("output_modalities", ["text"])
     return (isinstance(mid, str) and mid.endswith(":free")
             and isinstance(pricing, dict)
             and all(is_zero(pricing.get(k)) for k in ("prompt", "completion"))
-            and (m.get("architecture") or {}).get("output_modalities", ["text"]) is not None)
+            and isinstance(output, list) and "text" in output)
 
 def normalized_request(body):
     """ZCode has shipped conflicting reasoning parameters for custom providers.
@@ -49,7 +51,7 @@ def normalized_request(body):
     if not isinstance(effort, str) and isinstance(data.get("reasoning"), dict):
         effort = data["reasoning"].get("effort")
     data.pop("reasoning", None)
-    if isinstance(effort, str) and effort in ("low", "medium", "high", "xhigh"):
+    if isinstance(effort, str) and effort in ("minimal", "low", "medium", "high", "xhigh", "max"):
         data["reasoning_effort"] = effort
     else:
         data.pop("reasoning_effort", None)
@@ -71,6 +73,7 @@ def discover():
             result.append({"provider": "openrouter", "id": mid, "name": m.get("name", mid),
                            "context_length": m.get("context_length", 0),
                            "supported_parameters": params if isinstance(params, list) else [],
+                           "supported_efforts": (m.get("reasoning") or {}).get("supported_efforts"),
                            "modality": modality,
                            "endpoint": OR_CHAT, "evidence": "live-catalog-zero-price"})
     except Exception as e:
@@ -190,9 +193,22 @@ class Handler(BaseHTTPRequestHandler):
             key = os.getenv("OPENROUTER_API_KEY") if m["provider"] == "openrouter" else os.getenv("NVIDIA_API_KEY")
             data = normalized_request(body)
             data["model"] = m["id"]
-            if m["provider"] == "openrouter" and "reasoning_effort" in data and (
-                    "reasoning_effort" not in m.get("supported_parameters", [])):
-                data.pop("reasoning_effort", None)
+            if m["provider"] == "openrouter":
+                effort = data.pop("reasoning_effort", None)
+                supported = m.get("supported_parameters", [])
+                levels = m.get("supported_efforts")
+                if (effort and "reasoning" in supported
+                        and (levels is None or effort in levels)):
+                    # OpenRouter's canonical Chat Completions field is reasoning.effort.
+                    data["reasoning"] = {"effort": effort}
+                elif not effort:
+                    data.pop("reasoning", None)
+                # Avoid unsupported tool options in models that accept tools but
+                # don't advertise tool_choice or parallel_tool_calls.
+                if "tool_choice" not in supported:
+                    data.pop("tool_choice", None)
+                if "parallel_tool_calls" not in supported:
+                    data.pop("parallel_tool_calls", None)
             # Do not invent a provider-specific parameter from unverified metadata.
             response_started = False
             headers = {"Authorization": "Bearer " + key, "Content-Type": "application/json"}

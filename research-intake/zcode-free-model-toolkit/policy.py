@@ -68,21 +68,24 @@ def select(models, body, nim_tool_ids=(), nim_vision_ids=()):
     approved_vision = set(nim_vision_ids)
     selected = []
     for m in models:
-        if req["model"] != "free-auto" and m.get("id") != req["model"]:
+        if req["model"] != "free-auto" and m.get("route_id", m.get("id")) != req["model"]:
             continue
         provider = m.get("provider")
+        # Kilo auto/free can switch underlying models: refuse stateful tool/image/JSON agent use.
+        if provider == "kilo-gateway" and m.get("id") == "kilo-auto/free" and (req["tools"] or req["image"] or req["strict_format"]):
+            continue
         params = set(m.get("supported_parameters") or ())
         inputs = m.get("input_modalities") or (["text"] if provider == "openrouter" else [])
-        if req["tools"] and not ("tools" in params if provider == "openrouter" else m.get("id") in approved_tools):
+        if req["tools"] and not ("tools" in params if provider in ("openrouter", "kilo-gateway") else m.get("id") in approved_tools):
             continue
-        if req["image"] and not ("image" in inputs if provider == "openrouter" else m.get("id") in approved_vision):
+        if req["image"] and not ("image" in inputs if provider in ("openrouter", "kilo-gateway") else m.get("id") in approved_vision):
             continue
-        if req["strict_format"] and provider == "openrouter" and not ({"response_format", "structured_outputs"} & params):
+        if req["strict_format"] and provider in ("openrouter", "kilo-gateway") and not ({"response_format", "structured_outputs"} & params):
             continue
-        if req["strict_format"] and provider != "openrouter":
+        if req["strict_format"] and provider not in ("openrouter", "kilo-gateway"):
             continue
         choice = req["choice"]
-        if choice not in (None, "auto", "none") and provider == "openrouter" and "tool_choice" not in params:
+        if choice not in (None, "auto", "none") and provider in ("openrouter", "kilo-gateway") and "tool_choice" not in params:
             continue
         selected.append(m)
     return selected
@@ -112,6 +115,21 @@ def prepare(body, model):
         for k in OPTIONAL_PARAMS:
             if k in data and k not in params:
                 data.pop(k, None)
+    if provider == "kilo-gateway":
+        # Only pass model-advertised options; no speculative reasoning translation.
+        if "tool_choice" not in params and data.get("tool_choice") in ("auto", "none"):
+            data.pop("tool_choice", None)
+        if "parallel_tool_calls" not in params:
+            data.pop("parallel_tool_calls", None)
+        for k in OPTIONAL_PARAMS:
+            if k in data and k not in params:
+                data.pop(k, None)
+        requested_limit = data.pop("max_completion_tokens", data.pop("max_tokens", None))
+        if isinstance(requested_limit, int) and not isinstance(requested_limit, bool) and requested_limit > 0:
+            field = ("max_completion_tokens" if "max_completion_tokens" in params else
+                     "max_tokens" if "max_tokens" in params else None)
+            if field:
+                data[field] = requested_limit
     # Some free models advertise only max_tokens. Never send both aliases.
     if provider == "openrouter":
         limit = data.pop("max_completion_tokens", None)

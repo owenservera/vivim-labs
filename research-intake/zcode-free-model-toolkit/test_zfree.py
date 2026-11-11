@@ -8,6 +8,10 @@ import zfree
 class DiscoveryTests(unittest.TestCase):
     def setUp(self):
         zfree.STATE.update(at=0, models=[], errors=[])
+        # Live Kilo discovery is independent of mocked OpenRouter/NIM catalogs.
+        patcher = mock.patch.object(zfree, "discover_kilo", return_value=[])
+        patcher.start()
+        self.addCleanup(patcher.stop)
     def test_openrouter_requires_free_suffix_and_both_zero_prices(self):
         fake = {"data": [
             {"id": "good:free", "pricing": {"prompt": "0", "completion": "0"}, "context_length": 8192},

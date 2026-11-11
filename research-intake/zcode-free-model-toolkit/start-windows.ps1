@@ -13,6 +13,8 @@ function Read-ZFreeSecret([string]$name) {
 $env:ZFREE_LOCAL_TOKEN = Read-ZFreeSecret 'local-token'
 $env:OPENROUTER_API_KEY = Read-ZFreeSecret 'openrouter'
 $env:NVIDIA_API_KEY = Read-ZFreeSecret 'nvidia'
+$env:KILO_API_KEY = Read-ZFreeSecret 'kilo'
+$env:ZFREE_ALLOW_KILO = '1'
 $env:ZFREE_ALLOW_NIM_TRIAL = if (Test-Path -LiteralPath (Join-Path $root 'nim-trial-opt-in.flag')) { '1' } else { '0' }
 $env:ZFREE_HOME = Join-Path $root 'state'
 if (-not $env:ZFREE_LOCAL_TOKEN) { throw 'Run setup-windows.ps1 first' }

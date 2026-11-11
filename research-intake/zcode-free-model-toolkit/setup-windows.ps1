@@ -33,6 +33,12 @@ if (-not (Test-Path -LiteralPath $orFile)) {
     $secret = Read-Host -Prompt 'OpenRouter API key (input hidden)' -AsSecureString
     if ($secret.Length -gt 0) { Save-ZFreeSecret 'openrouter' $secret }
 }
+$kiloFile = Join-Path $root 'kilo.dpapi'
+if (-not (Test-Path -LiteralPath $kiloFile)) {
+    Write-Host 'Kilo Gateway free models support anonymous requests; optional API key is not required.'
+    $kiloSecret = Read-Host -Prompt 'Kilo Gateway API key (optional, input hidden)' -AsSecureString
+    if ($kiloSecret.Length -gt 0) { Save-ZFreeSecret 'kilo' $kiloSecret }
+}
 $nimChoice = Read-Host -Prompt 'Enable NVIDIA developer prototyping (NOT verified permanently free)? [y/N]'
 if ($nimChoice -match '^(y|yes)$') {
     $secret = Read-Host -Prompt 'NVIDIA API key (input hidden)' -AsSecureString

@@ -12,15 +12,26 @@ Place `nlp-command-ui-lab` in the Labs checkout. Configure the locations of the 
 $env:VIVIM_HARNESS = 'C:\0-BlackBoxProject-0\vivim-web-harness'
 $env:VIVIM_HQ = 'C:\0-BlackBoxProject-0\repos-hq'
 cd C:\0-BlackBoxProject-0\vivim-labs\nlp-command-ui-lab
-node src/server.mjs
+bun run start
 # Open http://127.0.0.1:4387
 ```
 
-Without locally accessible Host/HQ checkouts, the GUI **still starts** but shows those connections as unavailable and uses a strictly labelled fictional contact fixture for the email menu. No account contact lookup or email send is silently simulated as a real provider action. `LAB_CONTACTS_PATH` may point to a **local, explicitly curated, noncommitting read-only JSON projection**, structured like `fixtures/demo-contacts.json`. Never commit private contacts to this public Labs repository.
+Without locally accessible Host/HQ checkouts, the GUI **still starts** but shows those connections as unavailable and uses a strictly labelled fictional contact fixture for the email menu. No account contact lookup or email send is silently simulated as a real provider action. `VIVIM_TIERFLOW` may locate a non-sibling TierFlow checkout. `LAB_CONTACTS_PATH` may point to a **local, explicitly curated, noncommitting read-only JSON projection**, structured like `fixtures/demo-contacts.json`. Never commit private contacts to this public Labs repository.
 
 ```powershell
-npm test
+bun run test
 ```
+
+### Round 2 — Living Composer and HQ knowledge lens
+
+- **Independent full-stack UI lab:** the composer, symbol/slot preview, styling controls and source-connected wiki dock run in one loopback-only app. Four palette options, three type styles and four outline modes make the entire interaction language inspectable.
+- **Read-only contextual knowledge:** `POST /api/context` calls the existing HQ `kbQuery()` and `searchContent()` directly against the actual local `.hq/index.db`, opened using the existing HQ `dbPath()` with SQLite **readOnly**. It builds an **ephemeral, evidence-linked working page**, not another wiki writer.
+- **As-you-type updates:** topic extraction and project focus; ~260ms debounce, AbortController and stale response suppression. Shows source kind, project, excerpt, index file revision and known public GitHub file links. A missing HQ DB returns a labelled unavailable state.
+- **Personal sessions and notes are opt-in:** disabled until the user checks the toggle. This is only a developmental HQ read-model experiment; the production personal corpus must come via a Host-authorized personal evidence read interface and cannot be dumped into HQ's development database.
+- **Expanded command atlas:** HQ action/CLI, current Host typed actions, and TierFlow `UiCommandKind` source declarations remain visibly distinct. The visual affordance mapping adds role icons, evidence outline hints and accessible labels **without introducing a new command registry**.
+- **Read-only whole-space census:** `bun run census` summarizes source counts/coverage/gaps; `bun run census:full` prints every discovered source descriptor. It cannot certify that unindexed provider/Studio/MCP/skills commands exist or are executable.
+
+Read [Living Composer vision](docs/LIVING-COMPOSER-VISION.md) and [source census](docs/PLATFORM-COMMAND-CENSUS-ROUND2.md). All reported counts are scoped to observed source registries; do not interpret zero when the local repos are absent.
 
 ### What works now
 

@@ -23,6 +23,10 @@ Out of scope: moving every paint, caret motion, animation, microphone decoder, k
 
 Personalized **anticipatory computation** is a reactor and graph-driven scheduling capability within this native I/O workstream—not a central semantic router or a new service. Accepted patterns, source-grounded entity references, and current context allow the composer to offer reversible multi-slot completions such as `full → Tab → Tab`. Prediction can prewarm pure computations but never provider sends, approvals, authoritative writes or any other effects. See [Predictive Interaction Fast Path](PREDICTIVE-INTERACTION-FAST-PATH.md) and [Parallel Event Fabric](PARALLEL-EVENT-FABRIC-ARCHITECTURE.md).
 
+## Round 1 PRDs and actual native code (2026-11-12)
+
+The [R001 PRD suite](rounds/README.md) is now published in this workstream, covering the native event fabric, predictive completion, Rust↔UI contract, acceptance and the verified Host-catalog gap for `full update`. The first source implementation is on [Harness branch `work/native-user-io-r001-20261112`](https://github.com/owenservera/vivim-web-harness/tree/work/native-user-io-r001-20261112), extending the existing product `core/programmability` Rust crate with parallel read-only reactors, Tab CAS, an inert Tauri command, synthetic example and unit tests. This is **source-implemented but not compiled, source-grounded or E2E-accepted**. UI remains the higher-level presentation owner.
+
 ## Locations and ownership
 - **Labs:** this folder owns research, integration specifications, evidence, mapping matrices and test plans. It owns NO product runtime and no canonical registry.
 - **Harness native core:** production implementation lives in the existing Rust foundation in owenservera/vivim-web-harness. Extend/converge its existing core, rather than create a duplicate sidecar kernel.

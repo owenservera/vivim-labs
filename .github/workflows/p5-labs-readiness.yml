@@ -1,0 +1,89 @@
+name: ARBOR Proposal 5 - Labs readiness first pass
+on:
+  push:
+    branches:
+      - work/p5-phase2-readiness-*
+    paths:
+      - readiness/**
+      - .github/workflows/p5-labs-readiness.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout audited Labs
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Fetch pinned research commits
+        run: |
+          git fetch --no-tags origin \
+            +refs/heads/main:refs/remotes/origin/main \
+            +refs/heads/lab/user-io-rust-core-20261112:refs/remotes/origin/lab/user-io-rust-core-20261112 \
+            +refs/heads/lab/nlp-visual-command-ui-20261111:refs/remotes/origin/lab/nlp-visual-command-ui-20261111 \
+            +refs/heads/work/chronos-toolkit-2026-11-08:refs/remotes/origin/work/chronos-toolkit-2026-11-08
+      - name: Run source scanner and isolated Labs Node suites
+        shell: bash
+        run: |
+          mkdir -p .readiness-output
+          : > .readiness-output/suite-results.tsv
+          run_suite() {
+            local name="$1"; shift
+            set +e
+            "$@" > ".readiness-output/$name.log" 2>&1
+            local code="$?"
+            set -e
+            printf "%s\t%s\n" "$name" "$code" >> .readiness-output/suite-results.tsv
+            echo "$name exit=$code"
+            tail -n 15 ".readiness-output/$name.log" || true
+          }
+          set -e
+          run_suite scanner-tests node --test readiness/tests/run-first-pass.test.mjs
+          run_suite source-first-pass node readiness/run-first-pass.mjs --out .readiness-output/scan.json --md .readiness-output/scan.md --strict
+          run_suite personal-knowledge node --test personal-knowledge-lifecycle/runtime/tests/*.test.mjs
+          run_suite capability-observatory node --test capability-observatory/lane-d/tests/observatory.test.mjs
+          run_suite capability-seed node capability-observatory/scripts/validate.mjs
+          run_suite voice-workbench node --test vivim/voice-to-tasks/workbench/workbench.test.mjs
+          run_suite chronos-js node --test chronos-toolkit/wave2/vivim-web-harness/studio/test/unit/chronos-conversation-projection.test.mjs
+          git worktree add --detach "$RUNNER_TEMP/vivim-ui-lab" 56bb145ea1eb479e4d8ec629163a84322797367a
+          run_suite ui-composer bash -c 'cd "$1/nlp-command-ui-lab" && node --test tests/*.test.mjs' -- "$RUNNER_TEMP/vivim-ui-lab"
+          run_suite ui-synthetic-bench bash -c 'cd "$1/nlp-command-ui-lab" && node scripts/semantic-bench.mjs' -- "$RUNNER_TEMP/vivim-ui-lab"
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const rows=fs.readFileSync(".readiness-output/suite-results.tsv","utf8").trim().split("\n").map(s=>{
+              const [suite,raw]=s.split("\t");return {suite,exit_code:Number(raw),status:Number(raw)===0?"PASS":"FAIL"};
+            });
+            fs.writeFileSync(".readiness-output/ci-execution.json",JSON.stringify({
+              schema:"vivim.labs.ci-readiness/1",head:process.env.GITHUB_SHA,
+              source:"github-actions",suites:rows,
+              device_tests:"UNRUN",host_integration:"UNRUN",windows_build:"UNRUN",cargo_build:"UNRUN",
+              provider_login:"UNRUN"
+            },null,2)+"\n");
+            console.log(rows);
+          '
+      - name: Upload execution evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: labs-readiness-evidence
+          path: .readiness-output/
+          if-no-files-found: warn
+      - name: Enforce test truth
+        if: always()
+        shell: bash
+        run: |
+          test -f .readiness-output/suite-results.tsv || exit 1
+          if awk -F '\t' '$2 != "0" {failed=1; print "FAIL:",$1,"exit=",$2} END{exit failed?1:0}' .readiness-output/suite-results.tsv; then
+            echo 'All executed Node suites passed. This is NOT product/Windows/device acceptance.'
+          else
+            echo 'Some isolated Labs suites failed; preserve precise evidence.' >&2
+            exit 1
+          fi

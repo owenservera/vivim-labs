@@ -68,6 +68,13 @@ Source: [HQ interpretation surface audit](https://github.com/owenservera/repos-h
 - Tracks source-owned memory, DCB, authority, knowledge, suppressions, not-run/denied producer accounting.
 **Conclusion:** Reuse that source census as an **audit input** to a runtime producer manifest, not as a false claim of full active coverage.
 
+### 8. Local Host startup accepts loopback HTTP health before sending owner token
+Source: [Harness \`src-tauri/src/main.rs\`](https://github.com/owenservera/vivim-web-harness/blob/main/src-tauri/src/main.rs).
+- \`HostProcess::wait_healthy\` uses HTTP GET of \`http://127.0.0.1:43187/api/host/status\` and checks for success; it does not visibly authenticate the service identity or bind the HTTP listener to the launched child process.
+- \`desktop_launch_url\` retrieves a long-lived \`VIVIM_BOOTSTRAP_TOKEN\` or local owner-token file and posts it with bearer authentication to \`http://127.0.0.1:43187/api/host/control/ui-session\`.
+- \`HostProcess::start\` spawns Node Host separately. If a competing local process already owns the expected port, the current health check could test that process rather than the intended child.
+**Risk conclusion:** credible local listener impersonation / credential disclosure scenario. Exploitability, process permissions and a runnable incident are *not demonstrated*. Before connecting personal Rust data, require authenticated process identity or native session minting and a safe synthetic-token port-collision test.
+
 ## Security research with confirmed upstream reference
 
 ### Advisory A — Origin confusion

@@ -74,6 +74,7 @@ Turn Node 0 Prime into one reliable first user-input-to-last verified-output nat
 4. Emit truthful UI status: received / planning / approval needed / running / blocked / partial / uncertain / failed / observed / independently verified; never render "Done" because a model generated a plausible answer.
 5. Recover after every crash boundary: before commit, after durable intent, after admission, after claim, after attempted browser send, after receipt but before UI delivery.
 6. Correlate original source expression, derived evidence graph, approved plan, actual effect receipt and final delivered artifact.
+7. **Gated long-term native cutover:** migrate the Host admission checks, exclusive claim fencing and durable control journal into the resident Rust Host only after verified JS/Rust behavioral parity, read-only shadow comparison, exact Windows crash/fault tests, format compatibility, rollback and source-owner acceptance. One writer only. Node/Studio stays the signed-in-browser adapter.
 **Proof:** fault-injection matrices, repeated/duplicate clicks, reconnect, revoked access, stale graph, crash recovery and no double effect. A user can always understand what happened.
 
 ### Gate PRIME-6 — User experience and operational proof (P1)

@@ -19,6 +19,10 @@ OUTPUT: text and streaming responses; semantic tokens; inline contextual menus; 
 
 Out of scope: moving every paint, caret motion, animation, microphone decoder, keyboard driver, browser API, or network transport into Rust. UI remains responsive locally; the Rust core computes semantic meaning, state and effect candidates. Unsubmitted drafts never perform an effect and must not leak to provider AIs.
 
+## Predictive interaction capability
+
+Personalized **anticipatory computation** is a reactor and graph-driven scheduling capability within this native I/O workstream—not a central semantic router or a new service. Accepted patterns, source-grounded entity references, and current context allow the composer to offer reversible multi-slot completions such as `full → Tab → Tab`. Prediction can prewarm pure computations but never provider sends, approvals, authoritative writes or any other effects. See [Predictive Interaction Fast Path](PREDICTIVE-INTERACTION-FAST-PATH.md) and [Parallel Event Fabric](PARALLEL-EVENT-FABRIC-ARCHITECTURE.md).
+
 ## Locations and ownership
 - **Labs:** this folder owns research, integration specifications, evidence, mapping matrices and test plans. It owns NO product runtime and no canonical registry.
 - **Harness native core:** production implementation lives in the existing Rust foundation in owenservera/vivim-web-harness. Extend/converge its existing core, rather than create a duplicate sidecar kernel.

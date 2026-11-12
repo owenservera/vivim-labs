@@ -204,6 +204,11 @@ The UX depends on the exact identity of every character. Define:
 **Change:** eliminate mandatory \`Tauri → localhost page → JS Host planner → other JS modules → Rust\` for native semantic processing. Prefer \`UI → authenticated Tauri native Rust\` directly. Migrate provider-agnostic pure semantics into native in parity-verified slices. Keep Node/Studio signed-in-browser execution as domain adapter.
 **Reason:** fewer inconsistent truth owners, less state duplication and simpler crash/latency profile. This is NOT an instruction to rewrite all Node tools before product release.
 
+### ADR-003B — Host effect ownership vs implementation language: MIGRATE TO RUST EVENTUALLY
+**Keep:** Host as the *domain owner* of effects and exact approvals. Its existing JS control journal and claim fences remain authoritative until differential and Windows crash tests establish a durable migration.
+**Change:** with enough engineering budget, migrate the Host admission state machine, approval checks and journal durability into the *same native Rust Host process* as the interaction state, using one compatible source-owned transaction/receipt format. Node/Studio remains a **narrow browser adapter** and may never become a parallel journal writer. No dual-write cutover: one writer at a time, read-only shadow comparator, strict owner-controlled migration and rollback. This reduces the final cross-language trust boundary for irreversible effects without changing domain ownership.
+**Reason:** the ideal end state has one native operational authority for input-to-commit-to-claim, while separately isolating unreliable signed-in web app automation. Rewriting JS blindly without proving durability would be worse than keeping it.
+
 ### ADR-004 — Tauri desktop shell: KEEP, HARDEN
 **Change:** upgrade coherent Tauri pinned version family to currently patched supported 2.x; remove wildcard loopback remote capabilities in production; decide between bundled UI assets + native IPC vs exact loopback origin with explicit ACL. Audit global Tauri exposure, capabilities, request origin, CSP, packaging and native commands.
 **Reason:** Tauri remains suitable Rust native shell. The present pinned version is a serious dependency-health problem, not evidence that Electron or a custom shell would help.

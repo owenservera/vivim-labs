@@ -1,0 +1,2172 @@
+{
+  "schema": "vivim.labs.readiness-first-pass/1",
+  "run_date": "2026-11-12",
+  "run_method": "GITHUB_API_GIT_TREE_INSPECTION",
+  "verification": "ACTUALLY_INSPECTED_TRACKED_TREES_NOT_EXECUTED_TESTS",
+  "source_baselines": {
+    "main": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+    "lab/user-io-rust-core-20261112": "61d9fc15c55144c4f0b79afa248981c2b0ca9bd6",
+    "lab/nlp-visual-command-ui-20261111": "56bb145ea1eb479e4d8ec629163a84322797367a",
+    "work/chronos-toolkit-2026-11-08": "b87ea71c653c3833451bd0af19d9ef1c4327728e"
+  },
+  "source_tree_counts": {
+    "main": 885,
+    "lab/user-io-rust-core-20261112": 902,
+    "lab/nlp-visual-command-ui-20261111": 888,
+    "work/chronos-toolkit-2026-11-08": 739
+  },
+  "category_counts": {
+    "easy": 8,
+    "core": 10,
+    "high_value": 9,
+    "hold": 17
+  },
+  "source_status_counts": {
+    "SOURCE_TREE_PRESENT": 44
+  },
+  "latest_test_execution": "UNRUN",
+  "product_integration": "NOT_TESTED",
+  "device_acceptance": "UNRUN",
+  "source_groups": [
+    {
+      "group": "agentic_excelence",
+      "tracked_file_count": 305,
+      "review_mapped": true
+    },
+    {
+      "group": "documentation-consolidation",
+      "tracked_file_count": 140,
+      "review_mapped": true
+    },
+    {
+      "group": "Architecture",
+      "tracked_file_count": 106,
+      "review_mapped": true
+    },
+    {
+      "group": "agents",
+      "tracked_file_count": 62,
+      "review_mapped": true
+    },
+    {
+      "group": "personal-knowledge-lifecycle",
+      "tracked_file_count": 36,
+      "review_mapped": true
+    },
+    {
+      "group": "labs",
+      "tracked_file_count": 29,
+      "review_mapped": true
+    },
+    {
+      "group": "past-orphaned-work",
+      "tracked_file_count": 23,
+      "review_mapped": true
+    },
+    {
+      "group": "capability-observatory",
+      "tracked_file_count": 22,
+      "review_mapped": true
+    },
+    {
+      "group": "chronos-toolkit",
+      "tracked_file_count": 22,
+      "review_mapped": true
+    },
+    {
+      "group": "docs",
+      "tracked_file_count": 20,
+      "review_mapped": true
+    },
+    {
+      "group": "research-intake",
+      "tracked_file_count": 17,
+      "review_mapped": true
+    },
+    {
+      "group": "vivim",
+      "tracked_file_count": 16,
+      "review_mapped": true
+    },
+    {
+      "group": "zai",
+      "tracked_file_count": 16,
+      "review_mapped": true
+    },
+    {
+      "group": "corpora",
+      "tracked_file_count": 15,
+      "review_mapped": true
+    },
+    {
+      "group": "automation-queen",
+      "tracked_file_count": 14,
+      "review_mapped": true
+    },
+    {
+      "group": "intelligence",
+      "tracked_file_count": 8,
+      "review_mapped": true
+    },
+    {
+      "group": "KB-consolidation",
+      "tracked_file_count": 6,
+      "review_mapped": true
+    },
+    {
+      "group": "performance",
+      "tracked_file_count": 4,
+      "review_mapped": true
+    },
+    {
+      "group": "tests",
+      "tracked_file_count": 4,
+      "review_mapped": true
+    },
+    {
+      "group": "evidence",
+      "tracked_file_count": 3,
+      "review_mapped": true
+    },
+    {
+      "group": "personalization",
+      "tracked_file_count": 3,
+      "review_mapped": true
+    },
+    {
+      "group": "context",
+      "tracked_file_count": 2,
+      "review_mapped": true
+    },
+    {
+      "group": "memory",
+      "tracked_file_count": 2,
+      "review_mapped": true
+    },
+    {
+      "group": "work",
+      "tracked_file_count": 2,
+      "review_mapped": true
+    },
+    {
+      "group": ".gitignore",
+      "tracked_file_count": 1,
+      "review_mapped": false
+    },
+    {
+      "group": "AGENTS.md",
+      "tracked_file_count": 1,
+      "review_mapped": false
+    },
+    {
+      "group": "DISCUSSION-RECORD.md",
+      "tracked_file_count": 1,
+      "review_mapped": false
+    },
+    {
+      "group": "README.md",
+      "tracked_file_count": 1,
+      "review_mapped": false
+    },
+    {
+      "group": "bun.lock",
+      "tracked_file_count": 1,
+      "review_mapped": false
+    },
+    {
+      "group": "learning",
+      "tracked_file_count": 1,
+      "review_mapped": true
+    },
+    {
+      "group": "package.json",
+      "tracked_file_count": 1,
+      "review_mapped": false
+    },
+    {
+      "group": "tsconfig.json",
+      "tracked_file_count": 1,
+      "review_mapped": false
+    }
+  ],
+  "components": [
+    {
+      "id": "E01",
+      "name": "Capability Observatory seed and schema",
+      "category": "easy",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "capability-observatory/data/",
+      "arbor_target": "integration/capability-evidence/",
+      "owner": "F",
+      "reported_evidence": "REPORTED_SYNTHETIC_TESTS",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "PROMOTE_TESTS",
+      "note": "Seeded catalog; 0 certified production entries; never a second action catalog.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 4,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 0,
+        "matched_examples": [
+          {
+            "path": "capability-observatory/data/capabilities.json",
+            "blob_sha": "4c5876bd40d727b6e7464f71dbe23679f5558f8a"
+          },
+          {
+            "path": "capability-observatory/data/dev-preprod.json",
+            "blob_sha": "aee1f2aebddc3e5873d17c94ee70d1b85197d28f"
+          },
+          {
+            "path": "capability-observatory/data/production.json",
+            "blob_sha": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+          },
+          {
+            "path": "capability-observatory/data/source-catalog.json",
+            "blob_sha": "af78152af01dc3ddd824723f8dbd3861e17c5e59"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "E02",
+      "name": "Capability Observatory lane D observer",
+      "category": "easy",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "capability-observatory/lane-d/",
+      "arbor_target": "tools/integration/observatory/",
+      "owner": "F",
+      "reported_evidence": "REPORTED_SYNTHETIC_TESTS",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "PROMOTE_TOOL",
+      "note": "Read-only snapshots/redaction/tests; HQ input adapter provisional, not runtime availability.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 11,
+        "code_count": 4,
+        "test_or_fixture_count": 1,
+        "documentation_count": 2,
+        "matched_examples": [
+          {
+            "path": "capability-observatory/lane-d/.gitignore",
+            "blob_sha": "52a1a2832ca46e8495e53e39713dd957107b2be9"
+          },
+          {
+            "path": "capability-observatory/lane-d/HANDOFF.md",
+            "blob_sha": "cf890b8402cdeaa5a0921ccad906d5c17cd22a0e"
+          },
+          {
+            "path": "capability-observatory/lane-d/README.md",
+            "blob_sha": "faef5f1c7796fe48772f91a31867a8b2d2a34fca"
+          },
+          {
+            "path": "capability-observatory/lane-d/dashboard.html",
+            "blob_sha": "a586b8dc9abaf3279b0fcd9c4bf0ecf3cc30602b"
+          },
+          {
+            "path": "capability-observatory/lane-d/data/release-gates.json",
+            "blob_sha": "f0a8f5d3d6438884fd2c53cc28568e7c6da3f689"
+          },
+          {
+            "path": "capability-observatory/lane-d/data/seed-snapshot.json",
+            "blob_sha": "0a28e90bb2bf2c05f5ba0584af2d4e152c0ce98c"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "E03",
+      "name": "Verified extension hook research",
+      "category": "easy",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "vivim/extension-points/",
+      "arbor_target": "capability-spaces/extensions/",
+      "owner": "F",
+      "reported_evidence": "SOURCE_RESEARCH",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "PROMOTE_CONTRACT",
+      "note": "Only inspected actual Host/Studio/TierFlow/HQ seams; not a plugin installer.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 3,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 3,
+        "matched_examples": [
+          {
+            "path": "vivim/extension-points/PLATFORM-SURFACE-INVENTORY.md",
+            "blob_sha": "2a474a04482360ed22000bd8e660f1d979d647a6"
+          },
+          {
+            "path": "vivim/extension-points/README.md",
+            "blob_sha": "8beffccf4893a2eb155fa0060af27644ad7c8de7"
+          },
+          {
+            "path": "vivim/extension-points/VERIFIED-HOOKS.md",
+            "blob_sha": "bb5a2e18485752871cc5ef8b509a92989c82757c"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "E04",
+      "name": "Voice-to-tasks pure workbench",
+      "category": "easy",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "vivim/voice-to-tasks/workbench/",
+      "arbor_target": "tests/voice-to-tasks/",
+      "owner": "F",
+      "reported_evidence": "SOURCE_TESTS_RECORDED",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "PROMOTE_TESTS",
+      "note": "Pure offline capture/transcript/task-proposal fixtures; no working microphone/transcription/task write implied.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 5,
+        "code_count": 4,
+        "test_or_fixture_count": 1,
+        "documentation_count": 0,
+        "matched_examples": [
+          {
+            "path": "vivim/voice-to-tasks/workbench/core.mjs",
+            "blob_sha": "24120e5214833e4365ef9ad76ec7fe40f6339ef2"
+          },
+          {
+            "path": "vivim/voice-to-tasks/workbench/evaluate.mjs",
+            "blob_sha": "c9b965a2f2a8d0d71bb6c54d61502a1cfa8483b5"
+          },
+          {
+            "path": "vivim/voice-to-tasks/workbench/fixtures.json",
+            "blob_sha": "49c0a1fab872353aa24c5861f5dccf71bbefe32d"
+          },
+          {
+            "path": "vivim/voice-to-tasks/workbench/trace-check.mjs",
+            "blob_sha": "af25ab69cae6169c27246414b7ab52c60d2b5c78"
+          },
+          {
+            "path": "vivim/voice-to-tasks/workbench/workbench.test.mjs",
+            "blob_sha": "f36284e31f10dce0f47c0f955202a7780ffae185"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "E05",
+      "name": "Chronos staged contract",
+      "category": "easy",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "chronos-toolkit/wave2/repos-hq/contracts/chronos/",
+      "arbor_target": "contracts/chronos/",
+      "owner": "F",
+      "reported_evidence": "STAGED_PARTIAL_TESTS",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "PROMOTE_CONTRACT",
+      "note": "Pure time schema only; no independent scheduler or effect admission.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 1,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 0,
+        "matched_examples": [
+          {
+            "path": "chronos-toolkit/wave2/repos-hq/contracts/chronos/contract.v1.json",
+            "blob_sha": "a74a612458e1854a95bc8331e6ed14747fec2742"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "E06",
+      "name": "UI R005 pure semantic fixtures",
+      "category": "easy",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "lab/nlp-visual-command-ui-20261111",
+      "source_path_prefix": "nlp-command-ui-lab/tests/",
+      "arbor_target": "tests/interaction/",
+      "owner": "E+F",
+      "reported_evidence": "REPORTED_SYNTHETIC_TESTS",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "PROMOTE_TESTS",
+      "note": "Reported 28/28 tests and 100/100 synthetic probes; actual real-HOST/browser tests UNRUN.",
+      "source_revision": "56bb145ea1eb479e4d8ec629163a84322797367a",
+      "files": {
+        "file_count": 6,
+        "code_count": 6,
+        "test_or_fixture_count": 6,
+        "documentation_count": 0,
+        "matched_examples": [
+          {
+            "path": "nlp-command-ui-lab/tests/bridge.test.mjs",
+            "blob_sha": "2ceaecaf60be806c70697fcfc640053d73da2a1f"
+          },
+          {
+            "path": "nlp-command-ui-lab/tests/compiler.test.mjs",
+            "blob_sha": "c0ecab741fb8f4569a785306928219668407a841"
+          },
+          {
+            "path": "nlp-command-ui-lab/tests/context.test.mjs",
+            "blob_sha": "a7e80537662971b76746005fb0ea8d1538e0eb0d"
+          },
+          {
+            "path": "nlp-command-ui-lab/tests/inventory-live.test.mjs",
+            "blob_sha": "f00cd798e9505a1ea106cee9b61fd78eb234f93f"
+          },
+          {
+            "path": "nlp-command-ui-lab/tests/semantic-lens.test.mjs",
+            "blob_sha": "0b25d1f18f7fa5c1147ae9ac497f38815f1183fa"
+          },
+          {
+            "path": "nlp-command-ui-lab/tests/server.test.mjs",
+            "blob_sha": "b7ebce674075ebd413de6bcc1c2d7ba5aece1353"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "E07",
+      "name": "HQ wiki/provenance research fixtures",
+      "category": "easy",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/wave-1/lane-d/wiki-oracle",
+      "arbor_target": "tests/hq-provenance/",
+      "owner": "D+F",
+      "reported_evidence": "SOURCE_RESEARCH",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "REVIEW_FIXTURES",
+      "note": "Wiki oracle implementation/test only. Source-prefix constrained to 2 files, not the whole Architecture archive.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 2,
+        "code_count": 2,
+        "test_or_fixture_count": 1,
+        "documentation_count": 0,
+        "matched_examples": [
+          {
+            "path": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/wave-1/lane-d/wiki-oracle.mjs",
+            "blob_sha": "15e8f62fd3c5deb22b7925d09dae1efc203dce14"
+          },
+          {
+            "path": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/wave-1/lane-d/wiki-oracle.test.mjs",
+            "blob_sha": "f1c9330d16407dca6a997688abfb1130c2659cab"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "E08",
+      "name": "Development source and capability taxonomy",
+      "category": "easy",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "Architecture/",
+      "arbor_target": "integration/source-evidence/",
+      "owner": "F",
+      "reported_evidence": "RESEARCH_MIXED",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "REFERENCE_ONLY",
+      "note": "Large architecture corpus; selected accepted tests/ADRs, not blind production copy.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 106,
+        "code_count": 40,
+        "test_or_fixture_count": 14,
+        "documentation_count": 41,
+        "matched_examples": [
+          {
+            "path": "Architecture/01-VISION-AND-CORE-DECISIONS.md",
+            "blob_sha": "8aa9de3fd78c2f9d3a3ca26e24d8e75e2858e0c0"
+          },
+          {
+            "path": "Architecture/02-RUST-CORE-ANATOMY.md",
+            "blob_sha": "69d5806a69e4457beb77fde0bc50817fa2843c40"
+          },
+          {
+            "path": "Architecture/03-COMPONENT-MAPPING.md",
+            "blob_sha": "c08b08edf67e1020e8352b658dc9772469562e72"
+          },
+          {
+            "path": "Architecture/04-DATAFLOWS-AND-WRITES.md",
+            "blob_sha": "6872986c58f2268a96d03134a0f367591abc73f7"
+          },
+          {
+            "path": "Architecture/05-CLI-AND-INTEGRATION.md",
+            "blob_sha": "57e091eb9d152557b20179d2617dfa763fd93830"
+          },
+          {
+            "path": "Architecture/06-SOURCES-AND-OPEN-QUESTIONS.md",
+            "blob_sha": "bcce7f19f860d7d59d566e06c32a2d00472ca7af"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "C01",
+      "name": "T=0 personal knowledge ZIP/runtime",
+      "category": "core",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "personal-knowledge-lifecycle/runtime/",
+      "arbor_target": "apps/vivim-host/onboarding/personal-knowledge/",
+      "owner": "B+A",
+      "reported_evidence": "REPORTED_SYNTHETIC_TESTS",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "INTEGRATE_AFTER_W2",
+      "note": "ZIP32/64 streaming+checkpoint present; real Host evidence writer/Rust graph bridge unverified.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 28,
+        "code_count": 25,
+        "test_or_fixture_count": 13,
+        "documentation_count": 2,
+        "matched_examples": [
+          {
+            "path": "personal-knowledge-lifecycle/runtime/ARCHITECTURE.md",
+            "blob_sha": "9d2f9171150455e16aad1bbba161ac6839604aa8"
+          },
+          {
+            "path": "personal-knowledge-lifecycle/runtime/README.md",
+            "blob_sha": "4b3ceaaba90ab383fc0130c067ac261da2d1456e"
+          },
+          {
+            "path": "personal-knowledge-lifecycle/runtime/bin/bench-synthetic.mjs",
+            "blob_sha": "05ef6ddc7f6e4148f88d716575f38cd45496c013"
+          },
+          {
+            "path": "personal-knowledge-lifecycle/runtime/bin/inspect-chatgpt-export.mjs",
+            "blob_sha": "ec42ea09db01adb631427bd1cecfc633233a080a"
+          },
+          {
+            "path": "personal-knowledge-lifecycle/runtime/package.json",
+            "blob_sha": "c8f2762cf0f8ea191ac1a2b6eebd0633fdecbdde"
+          },
+          {
+            "path": "personal-knowledge-lifecycle/runtime/src/chatgpt-import.mjs",
+            "blob_sha": "9bfbcd40749774a3405a8d4f3456211fe4920253"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "C02",
+      "name": "Personal knowledge lifecycle contracts",
+      "category": "core",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "personal-knowledge-lifecycle/PIPELINE-CONTRACTS.md",
+      "arbor_target": "contracts/personal-knowledge/",
+      "owner": "B+F",
+      "reported_evidence": "DESIGN_CONTRACT",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "PREPARE_ADAPTER",
+      "note": "Consent/source ownership/archival lifecycle; bind to existing Host interfaces.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 1,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 1,
+        "matched_examples": [
+          {
+            "path": "personal-knowledge-lifecycle/PIPELINE-CONTRACTS.md",
+            "blob_sha": "12c402c54d411ac94caf6ba6d2843f2054f5adcd"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "C03",
+      "name": "Node 0 Prime native I/O architecture",
+      "category": "core",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "lab/user-io-rust-core-20261112",
+      "source_path_prefix": "user-io-rust-core/",
+      "arbor_target": "native/node0/",
+      "owner": "A+F",
+      "reported_evidence": "DESIGN_AND_DRAFT",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "PREPARE_NATIVE",
+      "note": "User/event graph architecture; R001 Harness spike source only, not built/e2e.",
+      "source_revision": "61d9fc15c55144c4f0b79afa248981c2b0ca9bd6",
+      "files": {
+        "file_count": 17,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 17,
+        "matched_examples": [
+          {
+            "path": "user-io-rust-core/ACCEPTANCE-GATES.md",
+            "blob_sha": "73794212fd47d43e9de9aa9b60cb087421e25025"
+          },
+          {
+            "path": "user-io-rust-core/PARALLEL-EVENT-FABRIC-ARCHITECTURE.md",
+            "blob_sha": "54d942eca63cd339adb8d7a959d3badf32afd0c1"
+          },
+          {
+            "path": "user-io-rust-core/PREDICTIVE-INTERACTION-FAST-PATH.md",
+            "blob_sha": "358e6898fe8dbdf5732bd9778a8ce8071e1e91ee"
+          },
+          {
+            "path": "user-io-rust-core/README.md",
+            "blob_sha": "80e7e53ec9686f000c63784ff6fb5bccd5e7c306"
+          },
+          {
+            "path": "user-io-rust-core/USER-IO-CONTRACT-AND-MIGRATION.md",
+            "blob_sha": "3928de100a6a98183c1c6e0e8cf9c002497c5bd4"
+          },
+          {
+            "path": "user-io-rust-core/node-0-prime/N0P-01-CATASTROPHIC-FAILURE-REGISTER.md",
+            "blob_sha": "053e8a9d5e64900f04b21082afd29fde3ef91ade"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "C04",
+      "name": "Chronos HQKG Rust staging",
+      "category": "core",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "chronos-toolkit/wave2/repos-hq/research/rust-knowledge-graph/",
+      "arbor_target": "native/hqkg/",
+      "owner": "A",
+      "reported_evidence": "STAGED_PARTIAL_TESTS",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "INTEGRATE_AFTER_HQKG",
+      "note": "Rust staged source; Cargo tests UNRUN in documented stage.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 3,
+        "code_count": 3,
+        "test_or_fixture_count": 1,
+        "documentation_count": 0,
+        "matched_examples": [
+          {
+            "path": "chronos-toolkit/wave2/repos-hq/research/rust-knowledge-graph/src/bin/hqkg-time.rs",
+            "blob_sha": "785a7766236fda9efaac43b6e690fdce143fdaf5"
+          },
+          {
+            "path": "chronos-toolkit/wave2/repos-hq/research/rust-knowledge-graph/src/chronos.rs",
+            "blob_sha": "ee5cca417b20fde0740691fb501cf7c8b8b1eb14"
+          },
+          {
+            "path": "chronos-toolkit/wave2/repos-hq/research/rust-knowledge-graph/tests/chronos.rs",
+            "blob_sha": "dbad550d7da8a5428a171e2636dd23f06f903a8a"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "C05",
+      "name": "Chronos internal HQ JavaScript lens",
+      "category": "core",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "chronos-toolkit/wave2/repos-hq/hq/",
+      "arbor_target": "hq/",
+      "owner": "D",
+      "reported_evidence": "STAGED_PARTIAL_TESTS",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "PREPARE_ADAPTER",
+      "note": "HQ supervisor read lens and CLI, not a separate clock service.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 3,
+        "code_count": 3,
+        "test_or_fixture_count": 1,
+        "documentation_count": 0,
+        "matched_examples": [
+          {
+            "path": "chronos-toolkit/wave2/repos-hq/hq/bin/chronos-inspect.mjs",
+            "blob_sha": "c4a8ffd736d78d00a14344982092d4aa289d74d6"
+          },
+          {
+            "path": "chronos-toolkit/wave2/repos-hq/hq/lib/chronos/supervisor-timeline.mjs",
+            "blob_sha": "d24b645939467a0d00e0dff088da87890f5310c2"
+          },
+          {
+            "path": "chronos-toolkit/wave2/repos-hq/hq/test/chronos-supervisor.test.mjs",
+            "blob_sha": "099372f45679d452d7f76330a04b44839fc81eb2"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "C06",
+      "name": "Chronos Studio read projection",
+      "category": "core",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "chronos-toolkit/wave2/vivim-web-harness/",
+      "arbor_target": "studio/",
+      "owner": "C",
+      "reported_evidence": "REPORTED_SYNTHETIC_TESTS",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "PREPARE_ADAPTER",
+      "note": "Read-only source projection, staged Host route integration.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 3,
+        "code_count": 3,
+        "test_or_fixture_count": 2,
+        "documentation_count": 0,
+        "matched_examples": [
+          {
+            "path": "chronos-toolkit/wave2/vivim-web-harness/studio/src/studio/chronos-conversation-projection.mjs",
+            "blob_sha": "94d43ae2a3c20dcc054d6c16f3b44ec664862d42"
+          },
+          {
+            "path": "chronos-toolkit/wave2/vivim-web-harness/studio/test/unit/chronos-conversation-projection.test.mjs",
+            "blob_sha": "3ededf344b1c2c358f2edd00d227f80a3ec0586d"
+          },
+          {
+            "path": "chronos-toolkit/wave2/vivim-web-harness/studio/test/unit/chronos-conversation-route.test.mjs",
+            "blob_sha": "ece99536d73c0a5bef7e369830c273181ae09b61"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "C07",
+      "name": "Chronos TierFlow read projection",
+      "category": "core",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "chronos-toolkit/wave2/tierflow/",
+      "arbor_target": "packages/tierflow/",
+      "owner": "E",
+      "reported_evidence": "REPORTED_SYNTHETIC_TESTS",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "PROMOTE_AFTER_W2",
+      "note": "Inert visual read model only; revision agreement needed.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 2,
+        "code_count": 2,
+        "test_or_fixture_count": 1,
+        "documentation_count": 0,
+        "matched_examples": [
+          {
+            "path": "chronos-toolkit/wave2/tierflow/src/visual-runtime/host/chronos-read-projection.ts",
+            "blob_sha": "c276ef0b2549e75664677b36b606b76e73838138"
+          },
+          {
+            "path": "chronos-toolkit/wave2/tierflow/tests/visual-runtime/chronos-read-projection.test.ts",
+            "blob_sha": "590af0f6cb55a4d7e925f14823974dad2cbf3ec7"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "C08",
+      "name": "Voice-to-tasks product path",
+      "category": "core",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "vivim/voice-to-tasks/",
+      "arbor_target": "capability-spaces/voice-to-tasks/",
+      "owner": "B+E",
+      "reported_evidence": "DESIGN_PLUS_PURE_WORKBENCH",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "BLOCKED_LIVE_PIPELINE",
+      "note": "Device capture and real ASR→Host receipt have not been verified in Labs.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 9,
+        "code_count": 4,
+        "test_or_fixture_count": 1,
+        "documentation_count": 4,
+        "matched_examples": [
+          {
+            "path": "vivim/voice-to-tasks/ARCHITECTURE-RESEARCH.md",
+            "blob_sha": "2e2357f524716a5e1ad81c58a1638a6d075560f0"
+          },
+          {
+            "path": "vivim/voice-to-tasks/BENCHMARK-AND-ACCEPTANCE.md",
+            "blob_sha": "21bc1454f480d3f42780bdc1db3d7184f75a3ac7"
+          },
+          {
+            "path": "vivim/voice-to-tasks/MULTILANE-EXECUTION.md",
+            "blob_sha": "e159cde186c8684e61b1ea06008797162f9f646f"
+          },
+          {
+            "path": "vivim/voice-to-tasks/README.md",
+            "blob_sha": "4cb2df93a369b3e45631d0c21934d34743422a08"
+          },
+          {
+            "path": "vivim/voice-to-tasks/workbench/core.mjs",
+            "blob_sha": "24120e5214833e4365ef9ad76ec7fe40f6339ef2"
+          },
+          {
+            "path": "vivim/voice-to-tasks/workbench/evaluate.mjs",
+            "blob_sha": "c9b965a2f2a8d0d71bb6c54d61502a1cfa8483b5"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "C09",
+      "name": "Native graph/convergence architecture",
+      "category": "core",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/wave-1/lane-d/",
+      "arbor_target": "native/hqkg/",
+      "owner": "A+D",
+      "reported_evidence": "RESEARCH_MIXED",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "SELECTIVE_REUSE",
+      "note": "Graph/wiki research and pure modules in this exact subtree; production kernel must come from HQKG.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 40,
+        "code_count": 21,
+        "test_or_fixture_count": 11,
+        "documentation_count": 12,
+        "matched_examples": [
+          {
+            "path": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/wave-1/lane-d/HANDOFF.md",
+            "blob_sha": "4b3a07cac70a9c32dbee7b69d873e7075d22e1a6"
+          },
+          {
+            "path": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/wave-1/lane-d/README-ROUND-2.md",
+            "blob_sha": "198922ef8424f9de8c122ef6a195cadc0e9e14f5"
+          },
+          {
+            "path": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/wave-1/lane-d/README.md",
+            "blob_sha": "f5a13348d84815f6cc491f1b7b97b804967d1063"
+          },
+          {
+            "path": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/wave-1/lane-d/ROUND-2-BACKLOG.md",
+            "blob_sha": "25932c4558f732c40dafcc7feeeecc54af0ab525"
+          },
+          {
+            "path": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/wave-1/lane-d/ROUND-2-DESIGN.md",
+            "blob_sha": "3c37d2fcd55956107c2a129c785c2c20f54bb7f3"
+          },
+          {
+            "path": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/wave-1/lane-d/ROUND-2-EVIDENCE.json",
+            "blob_sha": "0dfbf3c51ab6c0c61ea65e3c829fc09b50fa31f7"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "C10",
+      "name": "Configuration and personal graph research",
+      "category": "core",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "personalization/",
+      "arbor_target": "capability-spaces/personalization/",
+      "owner": "B+F",
+      "reported_evidence": "DESIGN_ONLY",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "DEFER_ADAPTER",
+      "note": "Versioned preferences/provenance concepts; actual owner config and ports need audit.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 3,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 2,
+        "matched_examples": [
+          {
+            "path": "personalization/.gitkeep",
+            "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+          },
+          {
+            "path": "personalization/README.md",
+            "blob_sha": "1685b30345955d07a366975c817db41ae6b0ecae"
+          },
+          {
+            "path": "personalization/TOP-5-AGENTIC-PERSONALIZATION-ALGORITHMS-2026.md",
+            "blob_sha": "590ebdd0cfa17019e2aebdf96ee86e9ddb58b950"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "H01",
+      "name": "R006 predictive composer 100 ideas",
+      "category": "high_value",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "lab/nlp-visual-command-ui-20261111",
+      "source_path_prefix": "nlp-command-ui-lab/docs/R006-",
+      "arbor_target": "capability-spaces/interaction/",
+      "owner": "A+E",
+      "reported_evidence": "DESIGN_ONLY",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "POST_BETA",
+      "note": "No live predictive production engine or provider prewarm proof.",
+      "source_revision": "56bb145ea1eb479e4d8ec629163a84322797367a",
+      "files": {
+        "file_count": 1,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 1,
+        "matched_examples": [
+          {
+            "path": "nlp-command-ui-lab/docs/R006-100-PREDICTIVE-REALTIME-COMPOSER-CAPABILITIES.md",
+            "blob_sha": "a8300777bc4676f83eef789fe07984e3302e49f6"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "H02",
+      "name": "R007 VIEW ALL full interpretation",
+      "category": "high_value",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "lab/nlp-visual-command-ui-20261111",
+      "source_path_prefix": "nlp-command-ui-lab/docs/R007-",
+      "arbor_target": "packages/tierflow/",
+      "owner": "E",
+      "reported_evidence": "DESIGN_ONLY",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "POST_BETA",
+      "note": "43 facets census/31 producers conceptual source audit; not a runnable product.",
+      "source_revision": "56bb145ea1eb479e4d8ec629163a84322797367a",
+      "files": {
+        "file_count": 1,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 1,
+        "matched_examples": [
+          {
+            "path": "nlp-command-ui-lab/docs/R007-TOTAL-INTERPRETATION-VIEW-ALL-AND-HQ-HANDOFF.md",
+            "blob_sha": "cba4d05b853ae4de0cc69a0caee6fb7692fe867e"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "H03",
+      "name": "R008 per-screen AutoWiki",
+      "category": "high_value",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "lab/nlp-visual-command-ui-20261111",
+      "source_path_prefix": "nlp-command-ui-lab/docs/R008-",
+      "arbor_target": "capability-spaces/knowledge/",
+      "owner": "D+E",
+      "reported_evidence": "DESIGN_ONLY",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "POST_BETA",
+      "note": "Needs authorized personal World source, source freshness and view projection.",
+      "source_revision": "56bb145ea1eb479e4d8ec629163a84322797367a",
+      "files": {
+        "file_count": 1,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 1,
+        "matched_examples": [
+          {
+            "path": "nlp-command-ui-lab/docs/R008-AUTOWIKI-SCREEN-STATE-MIRROR-VISION.md",
+            "blob_sha": "a819245e0c13b4cf7838129340ca5e04c34f5853"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "H04",
+      "name": "R009 Rock Core storage budget",
+      "category": "high_value",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "lab/nlp-visual-command-ui-20261111",
+      "source_path_prefix": "nlp-command-ui-lab/docs/R009-",
+      "arbor_target": "config/storage/",
+      "owner": "B+D",
+      "reported_evidence": "DESIGN_ONLY",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "POST_BETA",
+      "note": "Storage budget policy research; safe quota and protected-store baseline is beta critical.",
+      "source_revision": "56bb145ea1eb479e4d8ec629163a84322797367a",
+      "files": {
+        "file_count": 1,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 1,
+        "matched_examples": [
+          {
+            "path": "nlp-command-ui-lab/docs/R009-ROCK-CORE-STORAGE-BOUNDED-INTELLIGENCE.md",
+            "blob_sha": "1c82e411503967364bfdaf25bd702733bf6f2cdc"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "H05",
+      "name": "General app builder",
+      "category": "high_value",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "KB-consolidation/docs/UI-PROGRAMMABILITY.md",
+      "arbor_target": "capability-spaces/app-builder/",
+      "owner": "B+E",
+      "reported_evidence": "RELATED_DESIGN_REFERENCE_ONLY",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "POST_BETA",
+      "note": "NO standalone user app-builder implementation located in inspected Labs trees; related UI programmability document is not proof of a builder.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 1,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 1,
+        "matched_examples": [
+          {
+            "path": "KB-consolidation/docs/UI-PROGRAMMABILITY.md",
+            "blob_sha": "29a5f4d1987c605a5ae4bbdd4d446dd5ac8917fa"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "H06",
+      "name": "Automation Queen",
+      "category": "high_value",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "automation-queen/",
+      "arbor_target": "capability-spaces/automation/",
+      "owner": "B+F",
+      "reported_evidence": "DISCOVERY_ONLY",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "POST_BETA",
+      "note": "Public provenance scans and blueprint, no executor/runtime verified.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 14,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 12,
+        "matched_examples": [
+          {
+            "path": "automation-queen/.gitignore",
+            "blob_sha": "ef4d7e6c150e3d708e9a3fbac53cc239759ea92b"
+          },
+          {
+            "path": "automation-queen/01-discovery/A-SOURCE-COVERAGE-PUBLIC.md",
+            "blob_sha": "22baee0ddfa8f7c1423274f5d92f0b48e9af832e"
+          },
+          {
+            "path": "automation-queen/01-discovery/B-LIVE-INVENTORY-PUBLIC.md",
+            "blob_sha": "f1eff4831adf607f21a92607ccf7f8ec4dd1bd7e"
+          },
+          {
+            "path": "automation-queen/01-discovery/COVERAGE-ROLLUP-PUBLIC.md",
+            "blob_sha": "ff94337f1fddb83afe64375de2686ce44bd53233"
+          },
+          {
+            "path": "automation-queen/01-discovery/D-COPY-SUMMARY-PUBLIC.md",
+            "blob_sha": "76817627a2ed8cde2d1b70fdf07c4c0b45a7f9b8"
+          },
+          {
+            "path": "automation-queen/02-taxonomy/TAXONOMY-CROSSWALK-PUBLIC.md",
+            "blob_sha": "76d9e21b3c414e43923f2127477ab20c384de01d"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "H07",
+      "name": "Intelligence algorithm families",
+      "category": "high_value",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "intelligence/",
+      "arbor_target": "native/hqkg/ or hq/",
+      "owner": "A+D",
+      "reported_evidence": "DESIGN_ONLY",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "POST_BETA",
+      "note": "Ranking/semantics/context/reconciliation/certainty notes need bench evidence.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 8,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 8,
+        "matched_examples": [
+          {
+            "path": "intelligence/README.md",
+            "blob_sha": "323c05395c1f1961deb912203e467bca1021e27f"
+          },
+          {
+            "path": "intelligence/algorithms/01-priority-ranking/README.md",
+            "blob_sha": "6858bdef4616ff6249d845cb725dcd612056fd48"
+          },
+          {
+            "path": "intelligence/algorithms/02-semantic-resolution/README.md",
+            "blob_sha": "e7a3f2ec1e8988a0b77fdd27a2eb4c3a5336dc11"
+          },
+          {
+            "path": "intelligence/algorithms/03-context-selection/README.md",
+            "blob_sha": "39fea72d8afa4e8d87a9a8fe7554a903fc9633e9"
+          },
+          {
+            "path": "intelligence/algorithms/04-incremental-reconciliation/README.md",
+            "blob_sha": "94867c6679e43e8c46bbef284414dbee6d4040e6"
+          },
+          {
+            "path": "intelligence/algorithms/05-outcome-certainty/README.md",
+            "blob_sha": "8238a9b391a99e4a9b7b79a839101557695e09d9"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "H08",
+      "name": "Context/learning/memory research",
+      "category": "high_value",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "context/",
+      "arbor_target": "capability-spaces/context-dcb/",
+      "owner": "B+D",
+      "reported_evidence": "DESIGN_ONLY",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "POST_BETA",
+      "note": "Source-bound personal context and DCB extensions; no independent personal store.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 2,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 1,
+        "matched_examples": [
+          {
+            "path": "context/.gitkeep",
+            "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+          },
+          {
+            "path": "context/TOP-5-AGENTIC-CONTEXT-ALGORITHMS-2026.md",
+            "blob_sha": "664066a43aed8a2c0b3885c78d7146c695867214"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "H09",
+      "name": "Experimental voice ASR and media improvements",
+      "category": "high_value",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "vivim/voice-to-tasks/ARCHITECTURE-RESEARCH.md",
+      "arbor_target": "capability-spaces/voice-to-tasks/",
+      "owner": "B+E",
+      "reported_evidence": "DESIGN_ONLY",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "POST_BETA",
+      "note": "Model evaluation plan does not equal live local ASR.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 1,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 1,
+        "matched_examples": [
+          {
+            "path": "vivim/voice-to-tasks/ARCHITECTURE-RESEARCH.md",
+            "blob_sha": "2e2357f524716a5e1ad81c58a1638a6d075560f0"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X01",
+      "name": "Labs developer orchestration scaffold",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "labs/",
+      "arbor_target": "none (Labs internal)",
+      "owner": "LABS",
+      "reported_evidence": "NON_PRODUCT_TOOL",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "RETAIN_LABS",
+      "note": "Keep independent; no second ARBOR orchestration runtime.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 29,
+        "code_count": 17,
+        "test_or_fixture_count": 15,
+        "documentation_count": 1,
+        "matched_examples": [
+          {
+            "path": "labs/README.md",
+            "blob_sha": "49b0e3add73dedeb758b613856099884503bd1ad"
+          },
+          {
+            "path": "labs/adversarial/cases.json",
+            "blob_sha": "d3f82e8239d81e573e453e46738c22295f8e0546"
+          },
+          {
+            "path": "labs/assets/matrix.json",
+            "blob_sha": "35cbf26a44dd9e5e5778e27bc6801961b49c6451"
+          },
+          {
+            "path": "labs/catalogue/candidates.json",
+            "blob_sha": "a98f309ae674552e37eb30de890da12622ba5ffa"
+          },
+          {
+            "path": "labs/cli.mjs",
+            "blob_sha": "8e5604dc95b16396092a6d8864dff9ec8fcea901"
+          },
+          {
+            "path": "labs/env.d.ts",
+            "blob_sha": "5436a75b1008c23230ecf946097885ec499557fb"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X02",
+      "name": "Agentic excellence archaeology",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "agentic_excelence/",
+      "arbor_target": "none (research/archive)",
+      "owner": "LABS",
+      "reported_evidence": "ARCHIVE",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "RETAIN_LABS",
+      "note": "Source taxonomy/documentation; inspect only selected public-safe fixtures.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 305,
+        "code_count": 0,
+        "test_or_fixture_count": 1,
+        "documentation_count": 22,
+        "matched_examples": [
+          {
+            "path": "agentic_excelence/agentic-file-system/MIGRATION-MANIFEST.json",
+            "blob_sha": "ea4386ba4ca79029845fd3820b342729d84b61d3"
+          },
+          {
+            "path": "agentic_excelence/agentic-file-system/README.md",
+            "blob_sha": "20538d3fabb018443812e36fe5462c4bc15e1cb3"
+          },
+          {
+            "path": "agentic_excelence/agentic-file-system/SECTION-ATLAS-217.json",
+            "blob_sha": "6854bd509e9bd1d805aec2b0b2d66ba51c834463"
+          },
+          {
+            "path": "agentic_excelence/agentic-file-system/SHARED-UNIQUE-SECTION-ATLAS.md",
+            "blob_sha": "8153d75afd2e7f78c84905d8a57f75fbcc03842d"
+          },
+          {
+            "path": "agentic_excelence/agentic-file-system/recovered/ALGORITHM-MOBILITY-CONTRACT.md",
+            "blob_sha": "1acdb194dbe31ca552b947d7d86ecc70118f9528"
+          },
+          {
+            "path": "agentic_excelence/agentic-file-system/recovered/HQKG-INTEGRATION.md",
+            "blob_sha": "f5f9dd8bd260f45e42366ab30e940c0ebd5562f8"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X03",
+      "name": "Documentation consolidation archive",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "documentation-consolidation/",
+      "arbor_target": "none (archive)",
+      "owner": "LABS",
+      "reported_evidence": "ARCHIVE",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "RETAIN_LABS",
+      "note": "Do not dump historical docs or duplicate generated Wiki into product.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 140,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 139,
+        "matched_examples": [
+          {
+            "path": "documentation-consolidation/INVENTORY.json",
+            "blob_sha": "b31b8cbedec1ede99bb517bbdf00629783435303"
+          },
+          {
+            "path": "documentation-consolidation/MIGRATION-REPORT.md",
+            "blob_sha": "3f56c95b08e5a77b276bcf6e3d26cae4a364057f"
+          },
+          {
+            "path": "documentation-consolidation/README.md",
+            "blob_sha": "d98f3aff2e82e7dda7e278af3eec2ecfc1271273"
+          },
+          {
+            "path": "documentation-consolidation/repos-hq/FINDINGS-01-BUS-USAGE.md",
+            "blob_sha": "a88edc33ff52a824b83b8ee44170044489c54b3f"
+          },
+          {
+            "path": "documentation-consolidation/repos-hq/FINDINGS-02-DEAD-SESSION-RECOVERY.md",
+            "blob_sha": "b61a3b207454182940acf397010c8229c104b73b"
+          },
+          {
+            "path": "documentation-consolidation/repos-hq/FINDINGS-03-LAST4HOURS-SCAN.md",
+            "blob_sha": "77580b4743c4a5c1ae9aa20ce3f54f9c29e3cf0c"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X04",
+      "name": "Legacy agents/automation files",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "agents/",
+      "arbor_target": "none (archive or review)",
+      "owner": "LABS",
+      "reported_evidence": "RESEARCH_MIXED",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "REVIEW_PRIVACY",
+      "note": "Development-agent workflows not product authority.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 62,
+        "code_count": 1,
+        "test_or_fixture_count": 0,
+        "documentation_count": 38,
+        "matched_examples": [
+          {
+            "path": "agents/workspaces/README.md",
+            "blob_sha": "24741d6d5fef8b4d6bb28a41c451131a4cbfe589"
+          },
+          {
+            "path": "agents/workspaces/android-shell-keeper/BRIEF.md",
+            "blob_sha": "5d7cdfea68b301795b28ad8c98321f738f763a9e"
+          },
+          {
+            "path": "agents/workspaces/android-shell-keeper/LOG.md",
+            "blob_sha": "4123eae03099da626f633b8a1131b24c4f2b7383"
+          },
+          {
+            "path": "agents/workspaces/android-shell-keeper/STATUS.md",
+            "blob_sha": "8f338aa95455c2ce3565b6e4865ba53072e0e1c3"
+          },
+          {
+            "path": "agents/workspaces/auto-cmd-wiki-keeper/BRIEF.md",
+            "blob_sha": "89060a2552a7867e4721be7f86618f144e44b062"
+          },
+          {
+            "path": "agents/workspaces/auto-cmd-wiki-keeper/LOG.md",
+            "blob_sha": "f574e1b774c082f7059a487387aa9d3909f20cc8"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X05",
+      "name": "Corpora and research history",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "corpora/",
+      "arbor_target": "none (restricted source review)",
+      "owner": "LABS",
+      "reported_evidence": "RESEARCH_MIXED",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "REVIEW_PRIVACY",
+      "note": "Never bulk import user data or unreviewed historical text.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 15,
+        "code_count": 10,
+        "test_or_fixture_count": 2,
+        "documentation_count": 2,
+        "matched_examples": [
+          {
+            "path": "corpora/catalogue/asset-inventory.json",
+            "blob_sha": "52f777272ba0523f2b3f5448ccc5d553176ab2b0"
+          },
+          {
+            "path": "corpora/catalogue/catalogue-index.json",
+            "blob_sha": "b4315c02075a343ff05832eb4538277f022a656b"
+          },
+          {
+            "path": "corpora/catalogue/duplicate-authority.json",
+            "blob_sha": "bec87ed6e39a7624eb5795b28db0596f37579564"
+          },
+          {
+            "path": "corpora/differential/README.md",
+            "blob_sha": "fab924c0b284f0aed37e4d1abfe1dc8c60a54c57"
+          },
+          {
+            "path": "corpora/differential/differential.test.mjs",
+            "blob_sha": "1d6ba32bb4f60b412bded68b4d62f9c44807a8bf"
+          },
+          {
+            "path": "corpora/differential/seams.mjs",
+            "blob_sha": "63c99354bb3639e7c210fba02acadb519f517f43"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X06",
+      "name": "Z.ai round work products",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "zai/",
+      "arbor_target": "integration/source-provenance/",
+      "owner": "G",
+      "reported_evidence": "RESEARCH_MIXED",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "RECONCILE_SHA",
+      "note": "Only exact integrated/tested patches graduate, not assumed merges.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 16,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 14,
+        "matched_examples": [
+          {
+            "path": "zai/CAMPAIGN-CHARTER.md",
+            "blob_sha": "c18c4ca3f6f9e05cb83f5efbc7b1764605f8cf13"
+          },
+          {
+            "path": "zai/README.md",
+            "blob_sha": "22d03ed99f75b47f6e8f5b31d5252c63c18f7bd6"
+          },
+          {
+            "path": "zai/STRETCH-GOALS.md",
+            "blob_sha": "d2bcdb766e0e7a7918a326b0882130e0f869485e"
+          },
+          {
+            "path": "zai/governance/DECISION-PROTOCOL.md",
+            "blob_sha": "0233de7bacffe353cfd32b5e90b59c78e1c69779"
+          },
+          {
+            "path": "zai/governance/DECISIONS.md",
+            "blob_sha": "a8264c161d7e9ad409035657cc6b2d1aba365d45"
+          },
+          {
+            "path": "zai/governance/OPEN-ITEMS.md",
+            "blob_sha": "c4a9367b61a6d95f42b7d7a7cfe95aaa64717e36"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X07",
+      "name": "Local coding model/router toolkit",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "research-intake/",
+      "arbor_target": "none (PC tooling)",
+      "owner": "LABS",
+      "reported_evidence": "NON_PRODUCT_TOOL",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "RETAIN_LABS",
+      "note": "Kilo/ZCode/FreeLLMAPI toolkit is not canonical ARBOR product runtime.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 17,
+        "code_count": 10,
+        "test_or_fixture_count": 0,
+        "documentation_count": 6,
+        "matched_examples": [
+          {
+            "path": "research-intake/2026-11-09-omarsar0-x-2119473781689421855.md",
+            "blob_sha": "eca4595370e1b790274d6f43b343ac0b2d9468ed"
+          },
+          {
+            "path": "research-intake/freellmapi-zcode-integration/ACCEPTANCE.md",
+            "blob_sha": "fd35c9fdd2566a814c64087df64fca7b91279480"
+          },
+          {
+            "path": "research-intake/freellmapi-zcode-integration/README.md",
+            "blob_sha": "55fcd2bf62db3317e0d442833f08788c83d70060"
+          },
+          {
+            "path": "research-intake/freellmapi-zcode-integration/doctor.ps1",
+            "blob_sha": "42875b73c4d481faccba4f261a1eefa908994714"
+          },
+          {
+            "path": "research-intake/zcode-free-model-toolkit/.gitignore",
+            "blob_sha": "10446110c7f0bdef74dc509e1abe734b83f45f8b"
+          },
+          {
+            "path": "research-intake/zcode-free-model-toolkit/AUDIT-2026-11-11.md",
+            "blob_sha": "752a8d9976bd39b0daa9b34dd66d54e9083dda12"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X08",
+      "name": "Past orphaned work",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "past-orphaned-work/",
+      "arbor_target": "none until source audit",
+      "owner": "LABS",
+      "reported_evidence": "ARCHIVE",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "RETAIN_LABS",
+      "note": "No blind importing obsolete implementations.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 23,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 23,
+        "matched_examples": [
+          {
+            "path": "past-orphaned-work/README.md",
+            "blob_sha": "fca5971de06a13a56f32fd110d219b9ec5799a7f"
+          },
+          {
+            "path": "past-orphaned-work/past-implemented/01-context-and-dcb/README.md",
+            "blob_sha": "26aceb616dc8599bf0dd8af72adc890b8cfe32a7"
+          },
+          {
+            "path": "past-orphaned-work/past-implemented/02-memory-and-personal-intelligence/README.md",
+            "blob_sha": "22a65942638c8714d93b3e2e97af89b0ebb84807"
+          },
+          {
+            "path": "past-orphaned-work/past-implemented/03-knowledge-graph-and-retrieval/README.md",
+            "blob_sha": "899d8bb5ab0bd1b560844849f067b5d3da72d252"
+          },
+          {
+            "path": "past-orphaned-work/past-implemented/04-capability-intelligence/README.md",
+            "blob_sha": "d7a01f916856db262049b777b22a7ffd7a60f1db"
+          },
+          {
+            "path": "past-orphaned-work/past-implemented/05-parsing-and-protocols/README.md",
+            "blob_sha": "7b0f8f888b351fcc704071e9be76cefe2856d9c6"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X09",
+      "name": "Performance research",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "performance/",
+      "arbor_target": "tests/performance/",
+      "owner": "F",
+      "reported_evidence": "RESEARCH_MIXED",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "PROMOTE_BENCHMARK_IDEAS",
+      "note": "Only synthetic benchmark fixtures with proven repeatability.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 4,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 4,
+        "matched_examples": [
+          {
+            "path": "performance/EVIDENCE-LOG.md",
+            "blob_sha": "81045e40b7853cf6e10db02692ec45ec505aef57"
+          },
+          {
+            "path": "performance/README.md",
+            "blob_sha": "efcb4c3f11cfd075db40d31df0628136ce3502be"
+          },
+          {
+            "path": "performance/RESEARCH-ROADMAP.md",
+            "blob_sha": "0742e1903af366c22d2f192aa8d6726b0b232df6"
+          },
+          {
+            "path": "performance/TECH-STACK-ONE-PAGER.md",
+            "blob_sha": "52d236ea6e10412be6780ab7908e69b23143814e"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X10",
+      "name": "KB and docs consolidation notes",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "KB-consolidation/",
+      "arbor_target": "none (archive)",
+      "owner": "LABS",
+      "reported_evidence": "ARCHIVE",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "RETAIN_LABS",
+      "note": "Avoid duplicate wiki truth.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 6,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 4,
+        "matched_examples": [
+          {
+            "path": "KB-consolidation/README.md",
+            "blob_sha": "d0199d64fcbddd25e361e1af7eb0835b64a3d645"
+          },
+          {
+            "path": "KB-consolidation/SCOUTS.md",
+            "blob_sha": "b5dc492e84dc1bb27ebb5e49ebfd185e218110cf"
+          },
+          {
+            "path": "KB-consolidation/data/source-roots.json",
+            "blob_sha": "a01790614827c24bd971c2ef0e1b0e2e09736458"
+          },
+          {
+            "path": "KB-consolidation/docs/TAXONOMY.md",
+            "blob_sha": "75d1850b6739253d23267b398da7773577b64d2d"
+          },
+          {
+            "path": "KB-consolidation/docs/UI-PROGRAMMABILITY.md",
+            "blob_sha": "29a5f4d1987c605a5ae4bbdd4d446dd5ac8917fa"
+          },
+          {
+            "path": "KB-consolidation/schemas/discovery-record.schema.json",
+            "blob_sha": "c374f759c492474feeb5f31f1215cedac97d6280"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X11",
+      "name": "Labs main documentation + policies",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "docs/",
+      "arbor_target": "none (Labs internal)",
+      "owner": "LABS",
+      "reported_evidence": "RESEARCH_MIXED",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "RETAIN_LABS",
+      "note": "Useful norms, but not installed runtime.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 20,
+        "code_count": 1,
+        "test_or_fixture_count": 2,
+        "documentation_count": 18,
+        "matched_examples": [
+          {
+            "path": "docs/ENGINEERING-EVIDENCE-FACTORY.md",
+            "blob_sha": "1d0e3a848c8bf18b66571fa11b897331c025972c"
+          },
+          {
+            "path": "docs/MOBILE-EXTENSIONS/ANDROID-NATIVE-RESEARCH.md",
+            "blob_sha": "ef54e95b9d76355efa9173409b65f9ce521c6120"
+          },
+          {
+            "path": "docs/MOBILE-EXTENSIONS/ARCHITECTURE-TRIAGE-30.md",
+            "blob_sha": "c9cedb19bcc2d3abace5857090751d538bf9777c"
+          },
+          {
+            "path": "docs/MOBILE-EXTENSIONS/BROAD-ANDROID-BROWSER-SURVEY-2026-11-06.md",
+            "blob_sha": "53712dbb5edea3ee02583de5cd1f3245cc663613"
+          },
+          {
+            "path": "docs/MOBILE-EXTENSIONS/BROWSER-ENGINE-DECISION.md",
+            "blob_sha": "6ebed08d5de5d34343aadfc571569bef1cf246ef"
+          },
+          {
+            "path": "docs/MOBILE-EXTENSIONS/BROWSER-MATRIX.md",
+            "blob_sha": "83e9fe47c86e9a62abaa1c7ce56175e1d7e134b9"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X12",
+      "name": "Old handoff evidence folders",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "evidence/",
+      "arbor_target": "integration/source-evidence/",
+      "owner": "F",
+      "reported_evidence": "RESEARCH_MIXED",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "SELECT_REDACTED",
+      "note": "Select verified metadata only; no raw private evidence.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 3,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 3,
+        "matched_examples": [
+          {
+            "path": "evidence/adversarial/adversarial-suite-results.md",
+            "blob_sha": "ca2e42a242ad2fbde0d688cc5ee12727323ec562"
+          },
+          {
+            "path": "evidence/catalogue/federated-catalogue-findings.md",
+            "blob_sha": "65ed17c7fe07599ff1fef0c5a52c107402c45537"
+          },
+          {
+            "path": "evidence/repro/clean-build-reproducibility.md",
+            "blob_sha": "bd9478b14856c49a99ebb9da51efcba5efa9c5ad"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X13",
+      "name": "Personal knowledge research docs",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "personal-knowledge-lifecycle/",
+      "arbor_target": "docs/architecture/personal-knowledge/",
+      "owner": "B+F",
+      "reported_evidence": "DESIGN_MIXED",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "SELECT_ACCEPTED",
+      "note": "Runtime source is separately classified as C01; no bulk documentation copy.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 36,
+        "code_count": 25,
+        "test_or_fixture_count": 13,
+        "documentation_count": 10,
+        "matched_examples": [
+          {
+            "path": "personal-knowledge-lifecycle/CHATGPT-FIRST-BOOTSTRAP-INVESTIGATION.md",
+            "blob_sha": "0d2cbd72459b1562974fb1d7097f447a7914bfe4"
+          },
+          {
+            "path": "personal-knowledge-lifecycle/CHATGPT-FIRST-USER-WORKFLOW.md",
+            "blob_sha": "fe9d8780fd8d3fa7e31621e144d037b2fc4f00e6"
+          },
+          {
+            "path": "personal-knowledge-lifecycle/CHATGPT-T0-ACQUISITION-STRATEGY.md",
+            "blob_sha": "e186547d11fa4e55a6aebfd45777ee9ff01cc79a"
+          },
+          {
+            "path": "personal-knowledge-lifecycle/IMPLEMENTATION-ROADMAP.md",
+            "blob_sha": "ccbfaa459a167e9710904d309481a4aa83122f05"
+          },
+          {
+            "path": "personal-knowledge-lifecycle/LIFECYCLE.md",
+            "blob_sha": "942b2e131425e633bbcc033e22116a922a42f879"
+          },
+          {
+            "path": "personal-knowledge-lifecycle/PIPELINE-CONTRACTS.md",
+            "blob_sha": "12c402c54d411ac94caf6ba6d2843f2054f5adcd"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X14",
+      "name": "Memory research",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "memory/",
+      "arbor_target": "capability-spaces/personal-world/",
+      "owner": "B",
+      "reported_evidence": "DESIGN_ONLY",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "POST_BETA",
+      "note": "Owner-scoped memory research; never auto-import personal corpus.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 2,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 1,
+        "matched_examples": [
+          {
+            "path": "memory/.gitkeep",
+            "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+          },
+          {
+            "path": "memory/TOP-5-AGENTIC-MEMORY-ALGORITHMS-2026.md",
+            "blob_sha": "3c2b83d4fc26e14aef933817b4ff3ec955cf33c8"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X15",
+      "name": "Learning research",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "learning",
+      "arbor_target": "capability-spaces/personalization/",
+      "owner": "B",
+      "reported_evidence": "DESIGN_ONLY",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "POST_BETA",
+      "note": "Learning research file on main, not a directory. No production adaptation evidence.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 1,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 0,
+        "matched_examples": [
+          {
+            "path": "learning/.gitkeep",
+            "blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X16",
+      "name": "Labs misc work docs",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "work/",
+      "arbor_target": "none (internal work)",
+      "owner": "LABS",
+      "reported_evidence": "RESEARCH_MIXED",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "REVIEW_ONLY",
+      "note": "Do not promote as product without evidence.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 2,
+        "code_count": 0,
+        "test_or_fixture_count": 0,
+        "documentation_count": 0,
+        "matched_examples": [
+          {
+            "path": "work/boost-plan.json",
+            "blob_sha": "2c3a4674836a037f808fd07c050a039941d4cf0b"
+          },
+          {
+            "path": "work/work-items.json",
+            "blob_sha": "43436a1a3d356dfe61931e8fffbd4761bb89286e"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    },
+    {
+      "id": "X17",
+      "name": "Labs root acceptance tests",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "tests/",
+      "arbor_target": "tests/ only after source-specific review",
+      "owner": "F",
+      "reported_evidence": "LABS_LOCAL_TESTS",
+      "first_pass_static": "SOURCE_TREE_PRESENT",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "RETAIN_LABS",
+      "note": "Root Labs scaffold tests not automatically ARBOR product regression tests.",
+      "source_revision": "022608f5797e7b4a14ccc4c393bd3c5a4704a4be",
+      "files": {
+        "file_count": 4,
+        "code_count": 4,
+        "test_or_fixture_count": 4,
+        "documentation_count": 0,
+        "matched_examples": [
+          {
+            "path": "tests/cli.test.mjs",
+            "blob_sha": "98d97be8db6d96ce5eb1c01222682d593a216adb"
+          },
+          {
+            "path": "tests/schema.test.mjs",
+            "blob_sha": "35a809d223d9bd1296a35cdc1ac19ec22e5a4012"
+          },
+          {
+            "path": "tests/scopes.test.mjs",
+            "blob_sha": "bdf74198ef5a861c2d2f7ad3a87d8996cadbc0da"
+          },
+          {
+            "path": "tests/workitems.test.mjs",
+            "blob_sha": "e617520891b48e2cb64d8aedf31563133f457972"
+          }
+        ]
+      },
+      "fresh_test_execution": "UNRUN",
+      "product_build": "UNRUN",
+      "product_wiring": "NOT_VERIFIED",
+      "real_device_acceptance": "UNRUN"
+    }
+  ],
+  "truth_rules": [
+    "Git tracked files confirm source presence only, not executed tests or production integration.",
+    "Source-authored historical test claims remain REPORTED and are not fresh PASS.",
+    "Source path prefix may contain docs rather than runnable code; reported evidence and exact sample paths distinguish.",
+    "No donor runtime wiring permitted in ARBOR beta; Host is exclusive effect writer."
+  ]
+}

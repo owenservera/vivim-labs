@@ -1,0 +1,10 @@
+{
+  "schema": "vivim.labs.demo-contacts/1",
+  "notice": "Fictional demonstration contacts. Not user data, not a contact provider connection.",
+  "contacts": [
+    {"id":"demo:peter-miller","name":"Peter Miller","email":"peter@example.invalid"},
+    {"id":"demo:petra-ruiz","name":"Petra Ruiz","email":"petra@example.invalid"},
+    {"id":"demo:alex-morgan","name":"Alex Morgan","email":"alex@example.invalid"},
+    {"id":"demo:ada-lovelace","name":"Ada Lovelace","email":"ada@example.invalid"}
+  ]
+}

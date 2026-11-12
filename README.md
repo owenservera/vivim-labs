@@ -4,6 +4,7 @@ Labs is VIVIM's **research/evidence repository**, not a fifth primary developmen
 
 ## Start here
 
+- [ARBOR tech stack observatory](tech-stack/README.md) — source-pinned technology inventory, architecture/dependency map, per-selection research, release radar and adoption horizon; ARBOR `main` is the stack source of truth.
 - [Z.ai Fullstack four-repository convergence workspace](zai/README.md) — conceptual deduplication, best-of-breed decisions, open items, per-repo work lanes, round manifests, bundle protocol and stretch goals.
 - [Z.ai campaign charter](zai/CAMPAIGN-CHARTER.md) — maximal single-version roadmap as an HQ-generated view, preserving every valuable unique component.
 - [Documentation consolidation archive](documentation-consolidation/INVENTORY.json) — historical copy/original reconciliation and provenance; **not** a second live document authority.
@@ -11,6 +12,8 @@ Labs is VIVIM's **research/evidence repository**, not a fifth primary developmen
 - [Past orphaned work](past-orphaned-work/README.md), [agentic excellence](agentic_excelence/agentic-file-system/README.md), [research intake](research-intake/) — public-safe historical and experimental work.
 
 ## Four VIVIM repositories
+
+**Current migration context (2026-11-12):** ARBOR is the centralized source-of-truth repository for the new tech-stack inventory. The four-repository table below documents the original division of responsibility; it is historical context rather than a competing inventory of the centralized ARBOR tree.
 
 | Repository | Source-owned responsibility |
 |---|---|

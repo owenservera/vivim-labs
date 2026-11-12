@@ -16,7 +16,7 @@ Date: 2026-11-12
 6. [R001-05 Source Truth Delta](R001-05-SOURCE-TRUTH-DELTA.md) — real Host catalog coverage and missing canonical full-update capability.
 
 ## Source artifacts
-[Product Rust source branch](https://github.com/owenservera/vivim-web-harness/tree/work/native-user-io-r001-20261112) has \`core/programmability/src/user_io.rs\`, \`examples/user_io_r001.rs\`, Tauri \`user_io_event\` and \`USER-IO-R001.md\`.
+[Draft Harness PR #55](https://github.com/owenservera/vivim-web-harness/pull/55) and [product Rust source branch](https://github.com/owenservera/vivim-web-harness/tree/work/native-user-io-r001-20261112) has \`core/programmability/src/user_io.rs\`, \`examples/user_io_r001.rs\`, Tauri \`user_io_event\` and \`USER-IO-R001.md\`.
 
 ## Proof status
 Code committed, source locations verified. Native compile/test execution, Windows Tauri invocation, actual Host catalog grounding, UI adapter, physical phone and end-to-end authority checks **NOT RUN**. No production GO.

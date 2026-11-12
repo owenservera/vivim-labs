@@ -117,7 +117,7 @@
       "category": "easy",
       "source_repo": "owenservera/vivim-labs",
       "source_branch": "main",
-      "source_path_prefix": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/",
+      "source_path_prefix": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/wave-1/lane-d/wiki-oracle",
       "arbor_target": "tests/hq-provenance/",
       "owner": "D+F",
       "reported_evidence": "SOURCE_RESEARCH",
@@ -125,7 +125,7 @@
       "runtime_verification": "UNRUN",
       "device_acceptance": "UNRUN",
       "disposition": "REVIEW_FIXTURES",
-      "note": "Selected source-safe fixtures only, not parallel wiki generator."
+      "note": "Wiki oracle implementation/test only. Source-prefix constrained to 2 files, not the whole Architecture archive."
     },
     {
       "id": "E08",
@@ -277,7 +277,7 @@
       "category": "core",
       "source_repo": "owenservera/vivim-labs",
       "source_branch": "main",
-      "source_path_prefix": "Architecture/",
+      "source_path_prefix": "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH/wave-1/lane-d/",
       "arbor_target": "native/hqkg/",
       "owner": "A+D",
       "reported_evidence": "RESEARCH_MIXED",
@@ -285,7 +285,7 @@
       "runtime_verification": "UNRUN",
       "device_acceptance": "UNRUN",
       "disposition": "SELECTIVE_REUSE",
-      "note": "Use source-backed verified graph code from HQ as owner; docs only supplemental."
+      "note": "Graph/wiki research and pure modules in this exact subtree; production kernel must come from HQKG."
     },
     {
       "id": "C10",
@@ -373,15 +373,15 @@
       "category": "high_value",
       "source_repo": "owenservera/vivim-labs",
       "source_branch": "main",
-      "source_path_prefix": "vivim/",
+      "source_path_prefix": "KB-consolidation/docs/UI-PROGRAMMABILITY.md",
       "arbor_target": "capability-spaces/app-builder/",
       "owner": "B+E",
-      "reported_evidence": "RESEARCH_MIXED",
+      "reported_evidence": "RELATED_DESIGN_REFERENCE_ONLY",
       "first_pass_static": "PENDING_SCAN",
       "runtime_verification": "UNRUN",
       "device_acceptance": "UNRUN",
       "disposition": "POST_BETA",
-      "note": "Must compile trusted typed ports, not arbitrary privileged code."
+      "note": "NO standalone user app-builder implementation located in inspected Labs trees; related UI programmability document is not proof of a builder."
     },
     {
       "id": "H06",
@@ -677,7 +677,7 @@
       "category": "hold",
       "source_repo": "owenservera/vivim-labs",
       "source_branch": "main",
-      "source_path_prefix": "learning/",
+      "source_path_prefix": "learning",
       "arbor_target": "capability-spaces/personalization/",
       "owner": "B",
       "reported_evidence": "DESIGN_ONLY",
@@ -685,7 +685,7 @@
       "runtime_verification": "UNRUN",
       "device_acceptance": "UNRUN",
       "disposition": "POST_BETA",
-      "note": "Prediction/feedback only with approved signals."
+      "note": "Learning research file on main, not a directory. No production adaptation evidence."
     },
     {
       "id": "X16",
@@ -702,6 +702,22 @@
       "device_acceptance": "UNRUN",
       "disposition": "REVIEW_ONLY",
       "note": "Do not promote as product without evidence."
+    },
+    {
+      "id": "X17",
+      "name": "Labs root acceptance tests",
+      "category": "hold",
+      "source_repo": "owenservera/vivim-labs",
+      "source_branch": "main",
+      "source_path_prefix": "tests/",
+      "arbor_target": "tests/ only after source-specific review",
+      "owner": "F",
+      "reported_evidence": "LABS_LOCAL_TESTS",
+      "first_pass_static": "PENDING_SCAN",
+      "runtime_verification": "UNRUN",
+      "device_acceptance": "UNRUN",
+      "disposition": "RETAIN_LABS",
+      "note": "Root Labs scaffold tests not automatically ARBOR product regression tests."
     }
   ]
 }

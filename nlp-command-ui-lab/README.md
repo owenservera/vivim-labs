@@ -70,3 +70,8 @@ The AutoWiki design makes every eligible VIVIM screen a reversible, source-linke
 ## R009 — Rock Core, adaptive bounded intelligence
 
 Storage capacity becomes a first-class VIVIM user experience: a per-owner protected **Rock Core** plus byte-capped reconstructible HQ index, graph, generated wiki and transient AutoWiki caches. Auto/Survival/Lean/Balanced/Full/Custom modes protect a physical disk reserve; the original personal corpus and authoritative journals are never automatically deleted. Read [R009 vision](docs/R009-ROCK-CORE-STORAGE-BOUNDED-INTELLIGENCE.md) and the canonical research [HQ Rock Core PRD + pure policy/membership prototype](https://github.com/owenservera/repos-hq/tree/research/rock-core-storage-bounds-20261112/research/rock-core-storage). No production storage writer has been enabled by these drafts.
+
+
+## R010 — Semantic Wiki Compiler and deterministic capability language
+
+R010 extends Living Composer + VIEW ALL + AutoWiki + Rock Core into a source-backed **compiled semantic service**: HQ code comments and versioned registry IDs describe meaning; deterministic typed language frames and Rust graph compute produce intent previews; Host remains the only authority for its actions, approval and receipts; TierFlow renders the exact source-linked trace. Read [R010 vision](docs/R010-SEMANTIC-WIKI-COMPILER-VISION.md) and the detailed [HQ architecture/PRD and pure research compiler](https://github.com/owenservera/repos-hq/tree/research/semantic-wiki-compiler-20261112/research/semantic-wiki-compiler). The 90% of supported frequent requests goal is a **benchmark hypothesis**, not achieved coverage. HQ compilation is inert; no new execution authority or ARBOR migration changes.

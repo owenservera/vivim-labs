@@ -65,3 +65,8 @@ Run `node --test tests/*.test.mjs` and `node scripts/semantic-bench.mjs` for syn
 ## R008 — AutoWiki screen-state mirror research
 
 The AutoWiki design makes every eligible VIVIM screen a reversible, source-linked conceptual wiki view, with current work and recent verified source evidence prioritized. Read [R008 vision](docs/R008-AUTOWIKI-SCREEN-STATE-MIRROR-VISION.md). The source-backed HQ audit, full PRD, architecture, draft JSON contracts and 48 integration work orders live in the [HQ AutoWiki research branch](https://github.com/owenservera/repos-hq/tree/research/autowiki-screen-mirror-20261112/research/autowiki-screen-mirror). **Research only: no product integration or private history ingestion is claimed.**
+
+
+## R009 — Rock Core, adaptive bounded intelligence
+
+Storage capacity becomes a first-class VIVIM user experience: a per-owner protected **Rock Core** plus byte-capped reconstructible HQ index, graph, generated wiki and transient AutoWiki caches. Auto/Survival/Lean/Balanced/Full/Custom modes protect a physical disk reserve; the original personal corpus and authoritative journals are never automatically deleted. Read [R009 vision](docs/R009-ROCK-CORE-STORAGE-BOUNDED-INTELLIGENCE.md) and the canonical research [HQ Rock Core PRD + pure policy/membership prototype](https://github.com/owenservera/repos-hq/tree/research/rock-core-storage-bounds-20261112/research/rock-core-storage). No production storage writer has been enabled by these drafts.

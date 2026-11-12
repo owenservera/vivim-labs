@@ -34,6 +34,9 @@ Local caret/IME/selection operates without Rust round trip. Semantic hints progr
 ## Gate 10 — Packaging and recoverability
 Product installer and bundled Rust library build on target Windows environment. Stable host startup, version negotiation, offline PWA handling, watchdog/health, lifecycle close and restart; effect journal and World rehydrate; no unobserved replay. Test actual artifact, not just cargo unit tests.
 
+## Gate 11 — Predictive interaction and two-Tab completion
+In an authenticated focused workspace, type `full`. Independent Rust prefix/template, project-grounding and personalization reactors deliver revisioned prediction candidates. The first Tab accepts the exact template+project; second Tab accepts a predicted output section such as `Next steps`, yielding fully specified but **not executed** intent. Verify stale/ambiguous scope refusal, source/capability freshness, read-only speculation, local-only learning and screen reader behavior. Submitting requires a distinct explicit action and rechecks actual Host grants. No central semantic router may own this workflow. Detailed tests: [Predictive Interaction Fast Path](PREDICTIVE-INTERACTION-FAST-PATH.md).
+
 ## Required acceptance artifacts
 - Verified entrypoint graph, SHA-pinned and classified.
 - Golden event/projection fixtures, with old/new differential results.

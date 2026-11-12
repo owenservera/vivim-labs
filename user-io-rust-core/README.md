@@ -23,6 +23,10 @@ Out of scope: moving every paint, caret motion, animation, microphone decoder, k
 
 Personalized **anticipatory computation** is a reactor and graph-driven scheduling capability within this native I/O workstream—not a central semantic router or a new service. Accepted patterns, source-grounded entity references, and current context allow the composer to offer reversible multi-slot completions such as `full → Tab → Tab`. Prediction can prewarm pure computations but never provider sends, approvals, authoritative writes or any other effects. See [Predictive Interaction Fast Path](PREDICTIVE-INTERACTION-FAST-PATH.md) and [Parallel Event Fabric](PARALLEL-EVENT-FABRIC-ARCHITECTURE.md).
 
+## NODE 0 PRIME — Architectural reset (2026-11-12)
+
+**The strategic architecture now takes priority over the initial R001 native experiment.** [Read the complete Node 0 Prime package](node-0-prime/README.md): 30 failure modes, a language/runtime architecture decision set, security findings, exact boundaries and seven gates. R001 draft [Harness PR #55](https://github.com/owenservera/vivim-web-harness/pull/55) remains a source-only experimental spike; it must not be merged as the production user I/O runtime until native security, concurrency, actor/source binding, semantic parity, compatibility and real Windows/PWA tests pass.
+
 ## Round 1 PRDs and actual native code (2026-11-12)
 
 The [R001 PRD suite](rounds/README.md) is now published in this workstream, covering the native event fabric, predictive completion, Rust↔UI contract, acceptance and the verified Host-catalog gap for `full update`. The first source implementation is on [Harness branch `work/native-user-io-r001-20261112`](https://github.com/owenservera/vivim-web-harness/tree/work/native-user-io-r001-20261112), extending the existing product `core/programmability` Rust crate with parallel read-only reactors, Tab CAS, an inert Tauri command, synthetic example and unit tests. This is **source-implemented but not compiled, source-grounded or E2E-accepted**. UI remains the higher-level presentation owner.

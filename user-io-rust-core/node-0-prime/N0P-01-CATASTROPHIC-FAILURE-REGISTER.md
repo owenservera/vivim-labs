@@ -152,6 +152,11 @@ Date: 2026-11-12. **Threat model, not a list of proven production incidents.** E
 **Failure:** each agent creates its own parser, scheduler, event bus, graph store, memory subsystem, command catalog or PWA identity; integration never converges.
 **Intervention:** freeze the Node 0 Prime boundaries and executable golden contracts. Require each workstream to identify canonical producer/consumer and give a retirement map for replaced code. One product-native kernel, one Host effect authority, one source-owned graph family, one primary mobile app. Large code budget should remove duplicate paths rather than create more layers.
 
+### N0-31 — Local loopback Host impersonation / owner-token transfer (P0, source-observed trust gap; exploit unproven)
+**Evidence:** In \`src-tauri/src/main.rs\`, \`HostProcess::wait_healthy\` accepts any successful response from \`GET http://127.0.0.1:43187/api/host/status\`. \`desktop_launch_url\` subsequently reads a persistent owner bootstrap token from environment/local storage and sends it as bearer authorization to \`POST http://127.0.0.1:43187/api/host/control/ui-session\`. The source code shown does not bind that listener to the child process instance or check a nonce proof of service identity before token transfer.
+**Failure condition:** if another process already binds the expected localhost port, Node Host startup could fail while health still appears successful; the desktop could disclose a bearer token to the wrong local listener. This is a conditional **local threat scenario**, not evidence of an actual exploit or incident.
+**Intervention:** don't send durable owner secrets to an unverified localhost listener. Move desktop session minting into the native Rust trust boundary, or use a process-bound challenge/response over an ACL-protected Windows named pipe / inherited authenticated channel, prebound socket handoff and short-lived capability. Check child exit/port collision and verify service instance; rotate bootstrap secret after suspected exposure. Reproduce safely on a test workstation with a harmless competing mock listener and synthetic token only.
+
 ## The single most important engineering principle
 
 **Fan-out is a computation strategy, not a privacy permission and not an excuse to eliminate sequencing.**

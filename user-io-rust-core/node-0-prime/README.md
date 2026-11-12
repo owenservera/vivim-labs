@@ -19,7 +19,7 @@ We should treat it as **three independent service-level promises** rather than "
 
 ## Executive verdict
 
-**RED for Node 0 Prime production cutover. YELLOW for promising existing source components.** No current source audit proves a complete, native, high-frequency, actor-authenticated, cross-surface I/O pipeline. Do not merge the R001 native prototype or port real personal context through its Tauri command until security, runtime scheduling and contract gates are satisfied.
+**RED for Node 0 Prime production cutover. YELLOW for promising existing source components.** No current source audit proves a complete, native, high-frequency, actor-authenticated, cross-surface I/O pipeline. Do not merge the R001 native prototype or port real personal context through its Tauri command until security (including child-process/loopback identity), runtime scheduling and contract gates are satisfied.
 
 The present R001 Rust spike is a useful disposable proof of interface shape, **not the production runtime architecture**. The UI R007 Total Interpretation / VIEW ALL work correctly widens the scope: a user input may produce overlapping interpretations, DCB, memory and effect proposals, and should carry *producer coverage* and epistemic status. It is not enough to show one winning command.
 

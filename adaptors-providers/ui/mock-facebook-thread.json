@@ -1,0 +1,39 @@
+{
+  "schema": "vivim.labs.synthetic-thread/0.1",
+  "classification": "FABRICATED_NO_REAL_USER_DATA",
+  "providerId": "messenger",
+  "threads": [
+    {
+      "id": "synthetic-thread-a",
+      "label": "Avery (demo)",
+      "messages": [
+        {
+          "author": "other",
+          "text": "Hey! Are we still on for Saturday?"
+        },
+        {
+          "author": "mine",
+          "text": "Yes — how about 11?"
+        },
+        {
+          "author": "other",
+          "text": "Perfect, see you then!"
+        }
+      ]
+    },
+    {
+      "id": "synthetic-thread-b",
+      "label": "Studio test group",
+      "messages": [
+        {
+          "author": "other",
+          "text": "The design mockup is ready."
+        },
+        {
+          "author": "mine",
+          "text": "I'll review the draft tonight."
+        }
+      ]
+    }
+  ]
+}

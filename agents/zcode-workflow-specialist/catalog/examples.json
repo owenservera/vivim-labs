@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "observedDate": "2026-11-13",
+  "sourceUrl": "https://github.com/zai-org/zcode/blob/main/apps/zcode-cli/packages/bundled-skills/skills/dynamic-workflows/examples.md",
+  "verification": "SOURCE_VERIFIED_DOCS__NOT_RUNTIME_TESTED",
+  "count": 7,
+  "examples": [
+    {
+      "index": 1,
+      "id": "adversarial-implement-verify",
+      "name": "Adversarial implement ↔ verify loop",
+      "format": "whole-script",
+      "requiresSkill": "dynamic-workflows",
+      "runtimeExecutedHere": false
+    },
+    {
+      "index": 2,
+      "id": "flaky-test-triage",
+      "name": "Flaky test triage",
+      "format": "whole-script",
+      "requiresSkill": "dynamic-workflows",
+      "runtimeExecutedHere": false
+    },
+    {
+      "index": 3,
+      "id": "call-site-migration",
+      "name": "Call-site migration",
+      "format": "whole-script",
+      "requiresSkill": "dynamic-workflows",
+      "runtimeExecutedHere": false
+    },
+    {
+      "index": 4,
+      "id": "prover-loop",
+      "name": "Prover loop gated by real checker",
+      "format": "whole-script",
+      "requiresSkill": "dynamic-workflows",
+      "runtimeExecutedHere": false
+    },
+    {
+      "index": 5,
+      "id": "changed-file-review",
+      "name": "Changed-file review with incremental confirmation",
+      "format": "whole-script",
+      "requiresSkill": "dynamic-workflows",
+      "runtimeExecutedHere": false
+    },
+    {
+      "index": 6,
+      "id": "fact-finding",
+      "name": "Fact-finding pipeline with fresh verifier per fact",
+      "format": "whole-script",
+      "requiresSkill": "dynamic-workflows",
+      "runtimeExecutedHere": false
+    },
+    {
+      "index": 7,
+      "id": "repository-guide",
+      "name": "Repository guide grown via tail holes",
+      "format": "whole-script",
+      "requiresSkill": "dynamic-workflows",
+      "runtimeExecutedHere": false
+    }
+  ]
+}

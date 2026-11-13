@@ -1,0 +1,891 @@
+{
+  "schema": "vivim.labs.provider-catalog/0.1",
+  "role": "RESEARCH_ONLY",
+  "verifiedAdapters": 0,
+  "declaredDefaultStatus": "CANDIDATE_NOT_WIRED",
+  "lastReviewed": "2026-11-13",
+  "notes": "Access modes are research candidates, not confirmations of support, permission, compliance or working integrations.",
+  "providers": [
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "family": "social",
+      "priority": "P0",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "profile",
+        "posts",
+        "comments",
+        "reactions",
+        "friends",
+        "groups",
+        "events",
+        "photos",
+        "videos",
+        "pages",
+        "notifications"
+      ],
+      "modes": [
+        "official-export",
+        "approved-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "VIEW_IMPORT_RESEARCH",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "messenger",
+      "label": "Facebook Messenger",
+      "family": "messaging",
+      "priority": "P0",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "threads",
+        "messages",
+        "attachments",
+        "reactions",
+        "read-state",
+        "participants"
+      ],
+      "modes": [
+        "approved-browser-read",
+        "host-browser-action",
+        "official-export"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance",
+        "unified-inbox",
+        "thread-list",
+        "thread-detail",
+        "draft-composer",
+        "review-confirmation",
+        "send-receipt"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS",
+      "webSurface": {
+        "origin": "https://www.facebook.com",
+        "entry": "https://www.facebook.com/messages",
+        "note": "2026 desktop messaging route; exact account/region/DOM capability requires live verification"
+      }
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "family": "social",
+      "priority": "P0",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "posts",
+        "stories",
+        "reels",
+        "comments",
+        "likes",
+        "followers",
+        "direct-messages",
+        "media"
+      ],
+      "modes": [
+        "official-export",
+        "approved-browser-read",
+        "host-browser-action-candidate"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "whatsapp",
+      "label": "WhatsApp",
+      "family": "messaging",
+      "priority": "P0",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "threads",
+        "messages",
+        "attachments",
+        "reactions",
+        "contacts",
+        "groups"
+      ],
+      "modes": [
+        "user-export",
+        "approved-linked-web",
+        "host-browser-action-candidate"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "x",
+      "label": "X",
+      "family": "social",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "posts",
+        "replies",
+        "likes",
+        "bookmarks",
+        "followers",
+        "direct-messages"
+      ],
+      "modes": [
+        "official-export",
+        "approved-browser-read",
+        "host-browser-action-candidate"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "youtube",
+      "label": "YouTube",
+      "family": "media",
+      "priority": "P0",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "videos",
+        "watch-history",
+        "subscriptions",
+        "playlists",
+        "comments",
+        "likes"
+      ],
+      "modes": [
+        "official-export",
+        "approved-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "VIEW_IMPORT_RESEARCH",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "reddit",
+      "label": "Reddit",
+      "family": "social",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "posts",
+        "comments",
+        "saved",
+        "upvotes",
+        "inbox",
+        "messages"
+      ],
+      "modes": [
+        "official-export-if-available",
+        "approved-browser-read",
+        "host-browser-action-candidate"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "linkedin",
+      "label": "LinkedIn",
+      "family": "social",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "posts",
+        "connections",
+        "jobs",
+        "comments",
+        "messages",
+        "profile"
+      ],
+      "modes": [
+        "official-export",
+        "approved-browser-read",
+        "host-browser-action-candidate"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "threads",
+      "label": "Threads",
+      "family": "social",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "posts",
+        "replies",
+        "likes",
+        "follows"
+      ],
+      "modes": [
+        "official-export-if-available",
+        "approved-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "VIEW_IMPORT_RESEARCH",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "bluesky",
+      "label": "Bluesky",
+      "family": "social",
+      "priority": "P2",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "posts",
+        "replies",
+        "likes",
+        "follows",
+        "direct-messages"
+      ],
+      "modes": [
+        "approved-browser-read",
+        "manual-export"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "mastodon",
+      "label": "Mastodon",
+      "family": "social",
+      "priority": "P2",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "posts",
+        "replies",
+        "favourites",
+        "followers",
+        "messages"
+      ],
+      "modes": [
+        "official-export-if-available",
+        "approved-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "telegram",
+      "label": "Telegram",
+      "family": "messaging",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "chats",
+        "messages",
+        "media",
+        "contacts",
+        "channels"
+      ],
+      "modes": [
+        "user-export",
+        "approved-web-read",
+        "host-browser-action-candidate"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "signal",
+      "label": "Signal",
+      "family": "messaging",
+      "priority": "P2",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "chats",
+        "messages",
+        "media"
+      ],
+      "modes": [
+        "user-selected-export-if-supported",
+        "manual-import"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "discord",
+      "label": "Discord",
+      "family": "collaboration",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "servers",
+        "channels",
+        "messages",
+        "threads",
+        "direct-messages"
+      ],
+      "modes": [
+        "official-export-if-available",
+        "approved-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "family": "collaboration",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "workspaces",
+        "channels",
+        "messages",
+        "threads",
+        "files",
+        "direct-messages"
+      ],
+      "modes": [
+        "workspace-approved-export",
+        "approved-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "teams",
+      "label": "Microsoft Teams",
+      "family": "collaboration",
+      "priority": "P2",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "chats",
+        "channels",
+        "calls",
+        "files",
+        "meetings"
+      ],
+      "modes": [
+        "workspace-approved-export",
+        "approved-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "gmail",
+      "label": "Gmail",
+      "family": "email",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "threads",
+        "messages",
+        "labels",
+        "attachments",
+        "drafts"
+      ],
+      "modes": [
+        "official-export",
+        "approved-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "outlook",
+      "label": "Outlook",
+      "family": "email",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "threads",
+        "messages",
+        "folders",
+        "attachments",
+        "calendar"
+      ],
+      "modes": [
+        "local-export",
+        "approved-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "google-drive",
+      "label": "Google Drive",
+      "family": "files",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "files",
+        "folders",
+        "versions",
+        "shares",
+        "comments"
+      ],
+      "modes": [
+        "local-sync",
+        "official-export",
+        "approved-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "VIEW_IMPORT_RESEARCH",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "onedrive",
+      "label": "OneDrive",
+      "family": "files",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "files",
+        "folders",
+        "versions",
+        "shares"
+      ],
+      "modes": [
+        "local-sync",
+        "official-export"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "VIEW_IMPORT_RESEARCH",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "google-photos",
+      "label": "Google Photos",
+      "family": "media",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "photos",
+        "albums",
+        "videos",
+        "metadata"
+      ],
+      "modes": [
+        "official-export",
+        "user-selected-files"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "VIEW_IMPORT_RESEARCH",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "spotify",
+      "label": "Spotify",
+      "family": "media",
+      "priority": "P2",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "listening-history",
+        "playlists",
+        "saved-tracks",
+        "library"
+      ],
+      "modes": [
+        "user-export",
+        "manual-import"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "VIEW_IMPORT_RESEARCH",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "tiktok",
+      "label": "TikTok",
+      "family": "social",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "videos",
+        "likes",
+        "comments",
+        "follows",
+        "messages"
+      ],
+      "modes": [
+        "official-export-if-available",
+        "approved-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "pinterest",
+      "label": "Pinterest",
+      "family": "social",
+      "priority": "P2",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "pins",
+        "boards",
+        "saves",
+        "messages"
+      ],
+      "modes": [
+        "official-export-if-available",
+        "approved-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "github",
+      "label": "GitHub",
+      "family": "developer",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "repositories",
+        "issues",
+        "pull-requests",
+        "commits",
+        "discussions"
+      ],
+      "modes": [
+        "local-repository",
+        "approved-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "VIEW_IMPORT_RESEARCH",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "notion",
+      "label": "Notion",
+      "family": "knowledge",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "pages",
+        "databases",
+        "comments",
+        "tasks"
+      ],
+      "modes": [
+        "workspace-export",
+        "approved-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "VIEW_IMPORT_RESEARCH",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "obsidian",
+      "label": "Obsidian",
+      "family": "knowledge",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "notes",
+        "attachments",
+        "links",
+        "vault"
+      ],
+      "modes": [
+        "user-selected-local-folder"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "VIEW_IMPORT_RESEARCH",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "chatgpt",
+      "label": "ChatGPT",
+      "family": "ai",
+      "priority": "P0",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "threads",
+        "messages",
+        "projects",
+        "custom-instructions",
+        "memory-summary"
+      ],
+      "modes": [
+        "official-export",
+        "existing-studio-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "claude",
+      "label": "Claude",
+      "family": "ai",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "threads",
+        "messages",
+        "projects"
+      ],
+      "modes": [
+        "official-export",
+        "existing-studio-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "gemini",
+      "label": "Gemini",
+      "family": "ai",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "threads",
+        "messages",
+        "activity"
+      ],
+      "modes": [
+        "official-export",
+        "existing-studio-browser-read"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "RESEARCH_ONLY_NO_SEND",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "calendars",
+      "label": "Calendars (ICS)",
+      "family": "calendar",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "events",
+        "attendees",
+        "reminders"
+      ],
+      "modes": [
+        "user-selected-ics",
+        "approved-feed"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "VIEW_IMPORT_RESEARCH",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    },
+    {
+      "id": "phone-files",
+      "label": "Android files & shares",
+      "family": "device",
+      "priority": "P1",
+      "status": "CANDIDATE_NOT_WIRED",
+      "streams": [
+        "files",
+        "photos",
+        "documents",
+        "share-intents"
+      ],
+      "modes": [
+        "user-selected-local-files"
+      ],
+      "ui": [
+        "source-tile",
+        "stream-selector",
+        "permission-sheet",
+        "progress",
+        "provenance"
+      ],
+      "interaction": "VIEW_IMPORT_RESEARCH",
+      "sourceEvidence": "UNVERIFIED_ACCOUNT_AND_TERMS"
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VIVIM Labs Provider Stream Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "providerId",
+    "productId",
+    "accountRef",
+    "streamId",
+    "unitId",
+    "unitKind",
+    "observation",
+    "provenance",
+    "permission",
+    "status"
+  ],
+  "properties": {
+    "schema": {
+      "const": "vivim.labs.stream-envelope/0.1"
+    },
+    "providerId": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "productId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "accountRef": {
+      "type": "string",
+      "description": "Opaque Host-owned identifier; no handle, email, cookie or credential"
+    },
+    "streamId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unitId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parentUnitId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "unitKind": {
+      "enum": [
+        "thread",
+        "message",
+        "post",
+        "comment",
+        "reaction",
+        "friend",
+        "contact",
+        "group",
+        "event",
+        "photo",
+        "video",
+        "attachment",
+        "story",
+        "playlist",
+        "mail",
+        "file",
+        "document",
+        "task",
+        "activity",
+        "other"
+      ]
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observedAt",
+        "visibility"
+      ],
+      "properties": {
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "occurredAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "nativeRevision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cursor": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Opaque non-secret provider-source cursor; do not leak live session tokens"
+        },
+        "visibility": {
+          "enum": [
+            "observed",
+            "missing",
+            "partial",
+            "stale",
+            "unavailable",
+            "denied",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceMode",
+        "evidenceRef",
+        "contentDigest"
+      ],
+      "properties": {
+        "sourceMode": {
+          "enum": [
+            "official-export",
+            "user-file",
+            "user-export",
+            "approved-browser-read",
+            "approved-linked-web",
+            "manual-import",
+            "synthetic"
+          ]
+        },
+        "evidenceRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contentDigest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "sourceLocator": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Opaque/local; never URL with session credentials"
+        },
+        "anchor": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "permission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "grantRef",
+        "operations"
+      ],
+      "properties": {
+        "grantRef": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "operations": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "discover",
+              "read-metadata",
+              "read-content",
+              "import",
+              "search",
+              "prepare-outbound"
+            ]
+          }
+        },
+        "revoked": {
+          "type": "boolean"
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "candidate",
+        "observed",
+        "staged",
+        "accepted",
+        "disputed",
+        "revoked",
+        "rejected"
+      ]
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "personal",
+        "confidential",
+        "restricted",
+        "unknown"
+      ]
+    },
+    "payloadRef": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Host-owned private evidence pointer, not inline text or binary"
+    }
+  }
+}

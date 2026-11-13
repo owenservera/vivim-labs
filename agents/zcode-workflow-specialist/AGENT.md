@@ -50,3 +50,8 @@ After completion publish outputs and include verification. Only save as reusable
 
 ## Source primacy
 Read `REFERENCE.md`, `PLAYBOOK.md` and `SOURCES.md` in this folder; compare against the current `zai-org/zcode` docs and the actual installed tool declarations. Never reproduce documentation with invented exact APIs.
+
+## Parent/subagent authority clarification — Round 2
+This document may be used as a knowledge prompt, but the **installable ZCode custom agent** is `install/project/.zcode/agents/zcode-workflow-specialist.md`. That file has native YAML frontmatter and is deliberately a **read/search architecture and verification subagent**. It cannot invoke nested `CreateWorkflow`, and loading a skill there does not fulfill the main session's skill gate. See `MAIN-SESSION.md` for the parent workflow controller and `API-REFERENCE.md` for the actual signatures.
+
+A parent/main session must directly load built-in `dynamic-workflows` and perform Create/Amend/Save/Resume/Fill actions. These agent instructions never grant the subagent permission to perform them. Work in a scratch workspace for the acceptance tests; prompt-only read-only language does not guarantee tool-level read-only behavior.

@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "observedDate": "2026-11-13",
+  "context7LibraryId": "/zai-org/zcode",
+  "sourceUrl": "https://github.com/zai-org/zcode/blob/main/apps/zcode-cli/packages/bundled-skills/skills/dynamic-workflows/patterns.md",
+  "verification": "SOURCE_VERIFIED_DOCS__NOT_RUNTIME_TESTED",
+  "count": 16,
+  "patterns": [
+    {
+      "index": 1,
+      "id": "fan-out-fan-in",
+      "name": "Fan-out / fan-in over a glob",
+      "trigger": "Many independent per-file judgments",
+      "shape": "unique agents per path; join before aggregate",
+      "risk": "Independent runs; cap and confirm consequential findings",
+      "upstreamAnchor": "#1"
+    },
+    {
+      "index": 2,
+      "id": "changed-file-review",
+      "name": "Changed-file review sweep",
+      "trigger": "Review working tree against baseline",
+      "shape": "git.changedFiles(base), scoped diff, reviewer+confirmer",
+      "risk": "Git unavailable and broad fallback require explicit handling",
+      "upstreamAnchor": "#2"
+    },
+    {
+      "index": 3,
+      "id": "planner-reviewer",
+      "name": "Planner ↔ reviewer loop",
+      "trigger": "Iterate until plan review accepts",
+      "shape": "persistent planner/reviewer plus fresh final reader",
+      "risk": "bounded iterations; prevent reviewer anchoring",
+      "upstreamAnchor": "#3"
+    },
+    {
+      "index": 4,
+      "id": "judge-panel",
+      "name": "Judge panel",
+      "trigger": "Gather genuinely distinct independent perspectives",
+      "shape": "fresh named judges, deliberate aggregation",
+      "risk": "No multi-agent theater or duplicated prompt",
+      "upstreamAnchor": "#4"
+    },
+    {
+      "index": 5,
+      "id": "bounded-approval-loop",
+      "name": "Loop until approved",
+      "trigger": "Cycle through implement/fix/verdict",
+      "shape": "typed verdict and hard max rounds",
+      "risk": "Stop with unresolved status; do not assume approval",
+      "upstreamAnchor": "#5"
+    },
+    {
+      "index": 6,
+      "id": "staged-handoff",
+      "name": "Staged handoff",
+      "trigger": "Send typed output to next role",
+      "shape": "phase then next actor ask",
+      "risk": "Explicit dependent schemas",
+      "upstreamAnchor": "#6"
+    },
+    {
+      "index": 7,
+      "id": "bounded-discovery",
+      "name": "Bounded discovery",
+      "trigger": "Explore unknown search space",
+      "shape": "bounded pages/items/rounds",
+      "risk": "Cap glob/grep and search",
+      "upstreamAnchor": "#7"
+    },
+    {
+      "index": 8,
+      "id": "salvage-by-report",
+      "name": "Salvage by report",
+      "trigger": "Protect partial work from terminal failure",
+      "shape": "report confirmed findings as each arrives",
+      "risk": "Keep unconfirmed label",
+      "upstreamAnchor": "#8"
+    },
+    {
+      "index": 9,
+      "id": "gated-verifier-loop",
+      "name": "Gated verifier loop (world.run)",
+      "trigger": "Check property with deterministic command",
+      "shape": "inspect exitCode; bounded corrections",
+      "risk": "world.run can mutate; requires approval",
+      "upstreamAnchor": "#9"
+    },
+    {
+      "index": 10,
+      "id": "per-item-pipeline",
+      "name": "Per-item pipeline",
+      "trigger": "Downstream step starts per item as soon as ready",
+      "shape": "map async with local stages, one eventual join",
+      "risk": "Do not impose global stage barriers",
+      "upstreamAnchor": "#10"
+    },
+    {
+      "index": 11,
+      "id": "streaming-channel",
+      "name": "Streaming pipeline with channels",
+      "trigger": "Producer/consumer streaming",
+      "shape": "channel<T>(), for await, close()",
+      "risk": "Closing channel prevents deadlock",
+      "upstreamAnchor": "#11"
+    },
+    {
+      "index": 12,
+      "id": "feedback-channel",
+      "name": "Feedback loop with a counted close",
+      "trigger": "Continuous refinement with backpressure",
+      "shape": "channel, count and close",
+      "risk": "Bounded stop condition",
+      "upstreamAnchor": "#12"
+    },
+    {
+      "index": 13,
+      "id": "model-routing",
+      "name": "Model routing",
+      "trigger": "Choose different model by typed branch",
+      "shape": "model() table, resolver",
+      "risk": "Never silently switch providers or cost",
+      "upstreamAnchor": "#13"
+    },
+    {
+      "index": 14,
+      "id": "tail-hole",
+      "name": "Growth by tail holes",
+      "trigger": "Later steps depend on discovery",
+      "shape": "hole<T>(), FillWorkflowHole",
+      "risk": "Wait for exact hole ID and approval",
+      "upstreamAnchor": "#14"
+    },
+    {
+      "index": 15,
+      "id": "discovery-shaped-stage",
+      "name": "A stage shaped by discovery",
+      "trigger": "Unknown branch structure before scan",
+      "shape": "early discovery then fill hole",
+      "risk": "No speculative topology",
+      "upstreamAnchor": "#15"
+    },
+    {
+      "index": 16,
+      "id": "remedy-hole",
+      "name": "Remedy the plan could not enumerate",
+      "trigger": "Repair requires evidence only known mid-run",
+      "shape": "hole<T>(), verified remediation",
+      "risk": "No autonomous escalation beyond user scope",
+      "upstreamAnchor": "#16"
+    }
+  ]
+}

@@ -80,3 +80,8 @@ Capture run ID; don't conflate `backgrounded` with completion. Observe notificat
 
 ## Installation integration
 This folder is library-side intelligence. Install/use via ZCode's **actual documented custom-agent loading mechanism** once verified on the target build; do not assume that copying `AGENT.md` into a generic directory auto-registers it. On VIVIM use the specialist as a prompt/agent profile, with Host and Rust remaining authoritative.
+
+## Round 2 implementation corrections
+The sample `report({...})` calls are valid against official §16.2 `report(item, artifactId?)`. Async content artifact publication must be `await artifact.markdown(id, content, options)` or `await artifact.file(...)`. This file contains teaching patterns; the source-reviewed full example is in `examples/read-only-audit.ts`, and the official bundled skill and examples are the compiler contract. `EvalWorkflowSnippet` cannot be used to validate `agent`, `phase`, `report` or `artifact`: only its supported subset.
+
+Crucially, a project `.zcode/agents/*.md` custom specialist is a *subagent*. Have it return a workflow to the parent for submission, never direct it to call nested `CreateWorkflow`. Standalone CLI mode is disabled by default and must be activated in the correct client. In a live workspace, read-only prompts are not a security boundary.

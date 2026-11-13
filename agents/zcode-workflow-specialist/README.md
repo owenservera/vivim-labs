@@ -23,3 +23,18 @@ Labs owns research. The VIVIM Host and Rust core own product authority and runti
 
 ## Evidence level
 Official docs label dynamic workflow “implemented,” but a separate desktop workflow-debugger document states its adapter is currently stubbed and workflow controls unsupported in that branch. Therefore distinguish **documented implementation** from **proven installed functionality**. No local ZCode runtime was exercised in this research.
+
+## Round 2 — native installation and runtime contract (2026-11-13)
+**This repository folder is not auto-discovered by ZCode.** To install the project subagent, copy [`install/project/.zcode/agents/zcode-workflow-specialist.md`](install/project/.zcode/agents/zcode-workflow-specialist.md) into the chosen ZCode workspace's root `.zcode/agents/` directory. See [`INSTALL-AND-VERIFY.md`](INSTALL-AND-VERIFY.md) for a Windows PowerShell command and safe smoke tests.
+
+**The installed custom agent is a design/review subagent, not a nested workflow launcher.** The root/main ZCode session must load the bundled `dynamic-workflows` Skill and call `CreateWorkflow` or `AmendWorkflow`. See [`MAIN-SESSION.md`](MAIN-SESSION.md).
+
+New reference material:
+- [`API-REFERENCE.md`](API-REFERENCE.md): source-checked modern DWF facade and tool signatures.
+- [`examples/read-only-audit.ts`](examples/read-only-audit.ts): complete illustrative TypeScript script, source-reviewed but runtime UNRUN.
+- [`tests/ACCEPTANCE.md`](tests/ACCEPTANCE.md): machine-verifiable acceptance targets and evidence template.
+- [`ROUND-2.md`](ROUND-2.md): discoveries, corrections, outstanding gaps.
+- [`catalog/patterns.json`](catalog/patterns.json): machine-readable routing catalog for 16 documented patterns.
+- [`catalog/examples.json`](catalog/examples.json): indexed seven official example scripts.
+
+ZCode standalone CLI defaults its modern workflow tools to disabled. `--workflow-mode onDemand` and `--workflow-mode alwaysOn` are documented for TUI/headless; Host desktop has a separate Settings/config mode. The skill gate belongs to the **parent session**, not the specialist subagent.

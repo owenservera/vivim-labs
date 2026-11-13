@@ -1,0 +1,12 @@
+# Multi-agent ChatGPT GitHub rules and ownership
+
+1. Each worker runs in a separate ChatGPT thread with connected GitHub. It reads the specific lane prompt, ARBOR current AGENTS.md/Proposal 5, exact latest main and accepted wave gate before doing anything. No assumption that connected GitHub executes tests; report honest UNRUN where no runtime.
+2. Six parallel workers use disjoint write paths from WAVE-MANIFEST.json. One worker branch per lane, named work/provider-hub-WN-L-r001; W0 report-only. Each writes its exact worker report under docs/provider-hub/worker-reports/WN-L.md.
+3. G is serial. It reads all six branch heads and reports, reconciles schemas and all collisions, tests actual code, records docs/provider-hub/gates/WN-G.md and moves the shared integrate/provider-hub-r001 branch only by safe fast-forward/merge. Do not force push or clobber unrelated main edits.
+4. Goal is one ARBOR main, not dozens of permanent branches. Temporary worker branches can be cleaned up after their commits are safely integrated. Promotion to main obeys repository policy and real test gates; no premature release.
+5. Every report states start SHA, changed paths, commit SHA, actual commands with exits, missing tests as UNRUN, source-wired vs mock, unchanged owner authority and blockers. A commit with tests not run is source prepared, not end-to-end verified.
+6. If W0 discovers a real source callsite in another path, G updates a scope before workers edit it. No worker opportunistically changes root manifests, shared action catalog, World store or another lane files.
+7. Synthetics only: no personal exports, messages, cookies, browser profiles, contact lists, attachments, tokens, source secret logs or remote provider web call. A fake Host may emit only unmistakable MOCK_RECEIPT.
+8. No provider APIs, Playwright/Puppeteer, new alternative browser actor, second World, secondary TierFlow publisher, alternate graph store or new phone app. No real sends or automatic uncertain-action retry.
+9. If current project policy requires PRs or disallows pushing certain branches, follow it and report the constraint. Do not bypass protection. Master orchestration cannot guarantee concurrency or background work inside ChatGPT.
+10. Workers should produce implementation and tests in ARBOR, not only more planning documents. W0 and W6-F are deliberately evidence-heavy; all other lanes should deliver runnable source or decisive source-based blocker.

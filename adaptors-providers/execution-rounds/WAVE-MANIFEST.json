@@ -1,0 +1,409 @@
+{
+  "schema": "vivim.labs.provider-hub-execution/0.1",
+  "repo": "owenservera/ARBOR",
+  "program": "unified-provider-hub-r002",
+  "status": "NOT_STARTED",
+  "parallelPerWave": 6,
+  "integratorsPerWave": 1,
+  "waves": [
+    {
+      "wave": "W0",
+      "name": "SOURCE TRUTH AND LOCKED SEAMS",
+      "lanes": [
+        {
+          "id": "A",
+          "name": "Host/World identity and authority",
+          "writeScope": "docs/provider-hub/reports/W0-A.md",
+          "objective": "Trace ARBOR Host World state, actual durable writer, permissions, control catalog, plan/journal/receipt functions and missing World migration seams.",
+          "prompt": "prompts/W0/A.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "B",
+          "name": "Studio/Chrome provider seam",
+          "writeScope": "docs/provider-hub/reports/W0-B.md",
+          "objective": "Trace Studio Chrome owner, accepted read sessions, learned read-only adapter factory, hand-written sender, registered AI profiles and exact thread binding.",
+          "prompt": "prompts/W0/B.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "C",
+          "name": "Rust personal graph seam",
+          "writeScope": "docs/provider-hub/reports/W0-C.md",
+          "objective": "Trace native/hqkg scoped_graph, typed_dag and existing Rust/Host bridge; distinguish structural graph validation from Host authentication.",
+          "prompt": "prompts/W0/C.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "D",
+          "name": "PWA/TierFlow seam",
+          "writeScope": "docs/provider-hub/reports/W0-D.md",
+          "objective": "Trace existing PWA single entrypoint, phone Host transport, TierFlow UI publisher/revision guards and Studio screen extension points.",
+          "prompt": "prompts/W0/D.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "E",
+          "name": "Top-ten feasibility atlas",
+          "writeScope": "docs/provider-hub/reports/W0-E.md",
+          "objective": "Study ten named services, separate export/read/write, account and platform restrictions, evidence and provider terms. No assertions of live support.",
+          "prompt": "prompts/W0/E.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "F",
+          "name": "Negative acceptance and duplication",
+          "writeScope": "docs/provider-hub/reports/W0-F.md",
+          "objective": "Compare Labs R001 schema to ARBOR actual types; propose narrow reusable ports, negative tests and no-second-World/dispatcher rules.",
+          "prompt": "prompts/W0/F.md",
+          "state": "NOT_STARTED"
+        }
+      ],
+      "integrator": "prompts/W0/G.md",
+      "launcher": "prompts/W0/LAUNCH.md",
+      "state": "NOT_STARTED"
+    },
+    {
+      "wave": "W1",
+      "name": "CANONICAL BACKEND SPINE",
+      "lanes": [
+        {
+          "id": "A",
+          "name": "Schemas and validators",
+          "writeScope": "contracts/provider-hub/v1/**",
+          "objective": "Create versioned descriptor/account/stream/content/action/receipt projection schemas, runtime validators, sample golden fixtures and strict unknown-value refusals.",
+          "prompt": "prompts/W1/A.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "B",
+          "name": "Hub registry and service",
+          "writeScope": "apps/vivim-host/provider-hub/core/**",
+          "objective": "Build one injected-port ProviderHub supporting list providers/streams/read thread/search/propose action/status, capability gating and bounded paging.",
+          "prompt": "prompts/W1/B.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "C",
+          "name": "Fake future World port",
+          "writeScope": "apps/vivim-host/provider-hub/ports/world/**",
+          "objective": "Implement typed fake World grants/evidence/commit receipts and an interface ready for later existing Host World; never create durable competing World.",
+          "prompt": "prompts/W1/C.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "D",
+          "name": "Fake Host action boundary",
+          "writeScope": "apps/vivim-host/provider-hub/ports/actions/**",
+          "objective": "Implement inert action-plan/readback/approval and mock receipt adapter. No direct send; later live actions must use existing Host dispatcher.",
+          "prompt": "prompts/W1/D.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "E",
+          "name": "Mock Rust graph interface",
+          "writeScope": "apps/vivim-host/provider-hub/ports/graph/**",
+          "objective": "Build source/ref graph proposal adapter and deterministic fake that obeys personal namespace, CAS revisions, provenance; no graph store.",
+          "prompt": "prompts/W1/E.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "F",
+          "name": "Seeded source simulators",
+          "writeScope": "apps/vivim-host/provider-hub/mock/**",
+          "objective": "Create deterministic fake StudioSourcePort and seeded 10-provider-safe synthetic data, fault scripts, clock, receipt markers and no live network.",
+          "prompt": "prompts/W1/F.md",
+          "state": "NOT_STARTED"
+        }
+      ],
+      "integrator": "prompts/W1/G.md",
+      "launcher": "prompts/W1/LAUNCH.md",
+      "state": "NOT_STARTED"
+    },
+    {
+      "wave": "W2",
+      "name": "STREAMS, IDENTITY AND UI",
+      "lanes": [
+        {
+          "id": "A",
+          "name": "Identity and source binding",
+          "writeScope": "apps/vivim-host/provider-hub/identity/**",
+          "objective": "Implement provider/product/account/session/thread/recipient identity model, freshness/epoch and account-swap invalidation; URL does not establish identity.",
+          "prompt": "prompts/W2/A.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "B",
+          "name": "Normalized stream processing",
+          "writeScope": "apps/vivim-host/provider-hub/streams/**",
+          "objective": "Implement source-qualified units, dedup, bounded cursors, deltas, partial/stale/denied states, resumable import against fake World receipts.",
+          "prompt": "prompts/W2/B.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "C",
+          "name": "Inbox/feed/media read models",
+          "writeScope": "apps/vivim-host/provider-hub/projections/**",
+          "objective": "Create source-backed inbox, timeline, media and search models with provenance/freshness and missing-data states, no unapproved model inferred content.",
+          "prompt": "prompts/W2/C.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "D",
+          "name": "Studio UI",
+          "writeScope": "studio/src/studio/provider-hub-ui/**",
+          "objective": "Add source explorer/consent plan/read-model panels to existing Studio through mock Host route; do not create new Studio app.",
+          "prompt": "prompts/W2/D.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "E",
+          "name": "Existing PWA UI",
+          "writeScope": "apps/mobile-relay/provider-hub/**",
+          "objective": "Add provider tabs, inbox/feeds/thread viewer and local draft preview to existing PWA; no direct provider effect and no second phone app.",
+          "prompt": "prompts/W2/E.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "F",
+          "name": "Observability and job state",
+          "writeScope": "apps/vivim-host/provider-hub/jobs/**",
+          "objective": "Build bounded mock source sync/import/pause/revoke/repair status and sanitized metrics through existing Host concept, no new durable ledger.",
+          "prompt": "prompts/W2/F.md",
+          "state": "NOT_STARTED"
+        }
+      ],
+      "integrator": "prompts/W2/G.md",
+      "launcher": "prompts/W2/LAUNCH.md",
+      "state": "NOT_STARTED"
+    },
+    {
+      "wave": "W3",
+      "name": "META COHORT",
+      "lanes": [
+        {
+          "id": "A",
+          "name": "Facebook pack",
+          "writeScope": "apps/vivim-host/provider-hub/packs/facebook/**",
+          "objective": "Mock Facebook posts/comments/reactions/groups/media, official export and scoped read routes, denied/partial cases; messages live in Messenger pack.",
+          "prompt": "prompts/W3/A.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "B",
+          "name": "Messenger pack",
+          "writeScope": "apps/vivim-host/provider-hub/packs/messenger/**",
+          "objective": "Mock facebook.com/messages thread list/read, participants, attachments, exact target/draft, E2EE gaps, send-once approval and uncertain receipts.",
+          "prompt": "prompts/W3/B.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "C",
+          "name": "Instagram pack",
+          "writeScope": "apps/vivim-host/provider-hub/packs/instagram/**",
+          "objective": "Mock feed/stories/reels/media/comments/DMs with account distinctions, ephemeral states and read/write capability refusals.",
+          "prompt": "prompts/W3/C.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "D",
+          "name": "WhatsApp pack",
+          "writeScope": "apps/vivim-host/provider-hub/packs/whatsapp/**",
+          "objective": "Mock linked device session, groups/messages/media/export and offline/E2EE/unlinked states; no covert pairing, API or cookie transfer.",
+          "prompt": "prompts/W3/D.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "E",
+          "name": "Cross-Meta UI journeys",
+          "writeScope": "apps/mobile-relay/provider-hub/meta/**",
+          "objective": "Compose Facebook→Messenger→Instagram→WhatsApp navigation with provider-specific consent, provenance, read and composer review mock.",
+          "prompt": "prompts/W3/E.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "F",
+          "name": "Meta adversarial suite",
+          "writeScope": "tests/provider-hub/meta/**",
+          "objective": "Test wrong account/thread, revoked consent, blocked recipient, E2EE gaps, changed draft, duplicate action and uncertain send in all Meta flows.",
+          "prompt": "prompts/W3/F.md",
+          "state": "NOT_STARTED"
+        }
+      ],
+      "integrator": "prompts/W3/G.md",
+      "launcher": "prompts/W3/LAUNCH.md",
+      "state": "NOT_STARTED"
+    },
+    {
+      "wave": "W4",
+      "name": "SIX REMAINING PACKS",
+      "lanes": [
+        {
+          "id": "A",
+          "name": "X pack",
+          "writeScope": "apps/vivim-host/provider-hub/packs/x/**",
+          "objective": "Mock X feed/replies/bookmarks/DMs, restrictions and stale/locked account states.",
+          "prompt": "prompts/W4/A.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "B",
+          "name": "YouTube pack",
+          "writeScope": "apps/vivim-host/provider-hub/packs/youtube/**",
+          "objective": "Mock YouTube watch history/subscriptions/playlists/channels/comments, unavailable media and pagination.",
+          "prompt": "prompts/W4/B.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "C",
+          "name": "Reddit pack",
+          "writeScope": "apps/vivim-host/provider-hub/packs/reddit/**",
+          "objective": "Mock Reddit posts/subreddits/replies/saves/inbox and read-only/reply-proposal statuses.",
+          "prompt": "prompts/W4/C.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "D",
+          "name": "LinkedIn pack",
+          "writeScope": "apps/vivim-host/provider-hub/packs/linkedin/**",
+          "objective": "Mock LinkedIn feed/connections/messages/comments and strict unsupported automation states.",
+          "prompt": "prompts/W4/D.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "E",
+          "name": "Telegram pack",
+          "writeScope": "apps/vivim-host/provider-hub/packs/telegram/**",
+          "objective": "Mock Telegram chats/channels/groups/media, linked web and secret/unavailable conversation limits.",
+          "prompt": "prompts/W4/E.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "F",
+          "name": "Gmail pack",
+          "writeScope": "apps/vivim-host/provider-hub/packs/gmail/**",
+          "objective": "Mock Gmail threads/messages/labels/drafts/attachments, separate account permissions and provider-specific submission uncertainty.",
+          "prompt": "prompts/W4/F.md",
+          "state": "NOT_STARTED"
+        }
+      ],
+      "integrator": "prompts/W4/G.md",
+      "launcher": "prompts/W4/LAUNCH.md",
+      "state": "NOT_STARTED"
+    },
+    {
+      "wave": "W5",
+      "name": "UNIFIED JOURNEYS",
+      "lanes": [
+        {
+          "id": "A",
+          "name": "Unified inbox",
+          "writeScope": "apps/vivim-host/provider-hub/experiences/inbox/**",
+          "objective": "Cross-provider inbox and search filters, thread detail and native identity separation; one read projection, no provider auto-send.",
+          "prompt": "prompts/W5/A.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "B",
+          "name": "Unified feed and media",
+          "writeScope": "apps/vivim-host/provider-hub/experiences/feed/**",
+          "objective": "Cross-provider feed, media, source anchors, save/search and explicit capability-driven provider-specific actions.",
+          "prompt": "prompts/W5/B.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "C",
+          "name": "Composer and approval",
+          "writeScope": "apps/vivim-host/provider-hub/experiences/composer/**",
+          "objective": "Unify local draft/recipient/attachment confirmation, approval intent, mock Host claim and verified-or-uncertain receipt; block unsupported actions.",
+          "prompt": "prompts/W5/C.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "D",
+          "name": "Natural language intents",
+          "writeScope": "apps/vivim-host/provider-hub/experiences/commands/**",
+          "objective": "Parse 'message Alex on Messenger', 'show my Reddit saves' into typed read or inert Host plan, no model-granted permissions.",
+          "prompt": "prompts/W5/D.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "E",
+          "name": "Phone parity",
+          "writeScope": "apps/mobile-relay/provider-hub/integration/**",
+          "objective": "Compose full PWA provider experience; offline draft and reconnect without replay; access revocation and responsive UI.",
+          "prompt": "prompts/W5/E.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "F",
+          "name": "Personal graph/knowledge",
+          "writeScope": "apps/vivim-host/provider-hub/experiences/knowledge/**",
+          "objective": "Synthetic source evidence→existing personal-scoped Rust graph proposal port→source-backed search and DCB preview, cross-owner refusal.",
+          "prompt": "prompts/W5/F.md",
+          "state": "NOT_STARTED"
+        }
+      ],
+      "integrator": "prompts/W5/G.md",
+      "launcher": "prompts/W5/LAUNCH.md",
+      "state": "NOT_STARTED"
+    },
+    {
+      "wave": "W6",
+      "name": "HARDEN AND HAND OFF",
+      "lanes": [
+        {
+          "id": "A",
+          "name": "Recovery and replay",
+          "writeScope": "tests/provider-hub/recovery/**",
+          "objective": "Crash/restart, exact event replay, import idempotency, journal uncertainty and never-retry-send proof.",
+          "prompt": "prompts/W6/A.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "B",
+          "name": "Security and privacy",
+          "writeScope": "tests/provider-hub/security/**",
+          "objective": "Wrong principal/account/recipient, malicious source text, grant revocation, unknown provider origin, cross-owner graph and data leakage.",
+          "prompt": "prompts/W6/B.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "C",
+          "name": "Ten-provider parity",
+          "writeScope": "tests/provider-hub/coverage/**",
+          "objective": "10/10 pack contract tests, 20+ scenarios, unsupported feature truth, schema golden-compatibility and consumer coverage.",
+          "prompt": "prompts/W6/C.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "D",
+          "name": "Performance",
+          "writeScope": "tests/provider-hub/performance/**",
+          "objective": "Synthetic 10k thread/100k unit budgets, pagination/backpressure/memory low-disk faults; report actual hardware and measurements.",
+          "prompt": "prompts/W6/D.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "E",
+          "name": "ARBOR package closure",
+          "writeScope": "tests/provider-hub/build/**",
+          "objective": "Self-contained Bun/Cargo/Host/PWA mock setup and tests without donor repo/runtime or live account credentials.",
+          "prompt": "prompts/W6/E.md",
+          "state": "NOT_STARTED"
+        },
+        {
+          "id": "F",
+          "name": "Independent audit",
+          "writeScope": "docs/provider-hub/acceptance/**",
+          "objective": "Inspect every lane, source/fixture proof, status ledger, runtime gaps, Windows/phone/live account UNRUN and minimum safe later live handoff.",
+          "prompt": "prompts/W6/F.md",
+          "state": "NOT_STARTED"
+        }
+      ],
+      "integrator": "prompts/W6/G.md",
+      "launcher": "prompts/W6/LAUNCH.md",
+      "state": "NOT_STARTED"
+    }
+  ]
+}

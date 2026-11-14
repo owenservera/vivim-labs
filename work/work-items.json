@@ -1,6 +1,6 @@
 {
   "schema": "labs.work-items/1",
-  "updated": "2026-11-06T21:17:46.327Z",
+  "updated": "2026-11-13T22:36:38.735Z",
   "items": [
     {
       "task_id": "LABS-W3-001",
@@ -565,8 +565,8 @@
       ],
       "test_command": "bun test labs/tests/recipes.test.mjs",
       "evidence_level": "specified",
-      "result": "pending",
-      "artifact_hash": "pending",
+      "result": "fail (exit 1)",
+      "artifact_hash": "4abad9636f434e609611d955c87829935a75574314b5f690496ddd14e01a4470",
       "reviewer": "",
       "source_sha": "074fd48fd86d690c6133df9ddb4bc3fe288155cd",
       "booster_guidance": {
@@ -595,7 +595,23 @@
           "path": "hq/CONTRACT.md",
           "owner": "hq-agent"
         }
-      }
+      },
+      "last_result": "fail",
+      "results": [
+        {
+          "at": "2026-11-13T22:36:38.722Z",
+          "command": "bun test labs/tests/recipes.test.mjs",
+          "cwd": "C:\\0-BlackBoxProject-0\\vivim-labs",
+          "exit_code": 1,
+          "duration_ms": 8582,
+          "stdout_tail": "bun test v1.4.2 (744846f84)",
+          "stderr_tail": "\nlabs\\tests\\recipes.test.mjs:\nkilled 1 dangling process\n22 |       encoding: \"utf8\",\n23 |       timeout: 120_000,\n24 |       windowsHide: true,\n25 |     });\n26 |     const stdout = typeof run.stdout === \"string\" ? run.stdout : \"\";\n27 |     expect(run.status).toBe(recipe.expected_exit_code);\n                            ^\nerror: expect(received).toBe(expected)\n\nExpected: 0\nReceived: null\n\n      at <anonymous> (C:\\0-BlackBoxProject-0\\vivim-labs\\labs\\tests\\recipes.test.mjs:27:24)\n(fail) every recipe runs and returns the exit code it promised [5239.95ms]\n  ^ this test timed out after 5000ms.\n(pass) the recipe file describes itself honestly [1.08ms]\n\n 1 pass\n 1 fail\n 21 expect() calls\nRan 2 tests across 1 file. [6.46s]",
+          "artifact_hash": "4abad9636f434e609611d955c87829935a75574314b5f690496ddd14e01a4470",
+          "justified_stage": "specified",
+          "status": "fail"
+        }
+      ],
+      "updated": "2026-11-13T22:36:38.722Z"
     },
     {
       "task_id": "LABS-W3-011",

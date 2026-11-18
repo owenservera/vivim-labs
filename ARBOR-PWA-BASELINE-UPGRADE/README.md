@@ -25,3 +25,6 @@
 | [B09](lanes/B09-product-convergence.txt) | Actual integrated acceptance and fixes |
 
 This folder is planning and implementation input only. It does not modify ARBOR, certify implementations, or authorize new effects. Existing VLANG upgrade remains separate; consume its actual outputs where present.
+
+## R002 — source advance (7c1b01630a80)
+Read [R002-SOURCE-ADVANCE.md](R002-SOURCE-ADVANCE.md) before launch. Visual approval parity is B08's immediate priority; current Wiki exact approvals and receipt-derived private learning are delivered code. All lanes are being advanced against the new baseline. Catalog counts unchanged.

@@ -1,5 +1,6 @@
 # Pinned source reality
-ARBOR current main at preparation: [c6a2edd4ba6411d404fb7552abd8e103b7888ffc](https://github.com/owenservera/ARBOR/commit/c6a2edd4ba6411d404fb7552abd8e103b7888ffc).
+ARBOR current main for R002: [7c1b01630a806c0ac701bdc21e3f4968fec91097](https://github.com/owenservera/ARBOR/commit/7c1b01630a806c0ac701bdc21e3f4968fec91097).
+Original preparation baseline: [c6a2edd4ba6411d404fb7552abd8e103b7888ffc](https://github.com/owenservera/ARBOR/commit/c6a2edd4ba6411d404fb7552abd8e103b7888ffc).
 Planning source review: [4c95251a709e17811e08fdebd4348fcc1828187d](https://github.com/owenservera/ARBOR/commit/4c95251a709e17811e08fdebd4348fcc1828187d). Comparison showed one intervening commit affecting desktop chat and HQ context/test modules, not reviewed PWA visual sources. Recheck HEAD before edits. No ARBOR checkout/browser/Host tests run in this planning session.
 
 ## Executable source anchors
@@ -26,3 +27,6 @@ A1 live Wiki, A2 typed Wiki edit, A3 real Build, VLANG upgrade (semantic indexin
 ## Source links
 [ARBOR pinned source tree](https://github.com/owenservera/ARBOR/tree/c6a2edd4ba6411d404fb7552abd8e103b7888ffc) · [VLANG package](https://github.com/owenservera/vivim-labs/tree/main/ARBOR-VLANG-UPGRADE)
 Catalog snapshot is generated from declared source types/IDs only; no owner data, private credentials or executable ARBOR source copied into Labs.
+
+## R002 — source advance (7c1b01630a80)
+See [R002-SOURCE-ADVANCE.md](R002-SOURCE-ADVANCE.md): ten changed paths over two commits; new Wiki exact approval, receipt-derived desktop template and corresponding UI/tests. Visual runtime/catalog unchanged; live UI tap and bootstrap receipt gaps remain. Original preparation and previous planning review are historical evidence; current pinned head 7c1b01630a806c0ac701bdc21e3f4968fec91097. Runtime tests UNRUN.

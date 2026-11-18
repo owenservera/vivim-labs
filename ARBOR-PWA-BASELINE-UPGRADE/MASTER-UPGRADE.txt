@@ -2,7 +2,7 @@ ARBOR — BASELINE PWA / COMPLETE MINIMAL VISUAL SYSTEM
 HIGH-EFFORT PRODUCT IMPLEMENTATION ROUND
 REPOSITORY: owenservera/ARBOR
 TARGET: main (no branch, no PR)
-REVIEWED SOURCE BASELINE: c6a2edd4ba6411d404fb7552abd8e103b7888ffc
+REVIEWED SOURCE BASELINE: 7c1b01630a806c0ac701bdc21e3f4968fec91097
 PACKAGE: owenservera/vivim-labs/ARBOR-PWA-BASELINE-UPGRADE
 
 MANDATORY START
@@ -23,3 +23,6 @@ B01 registration + B03 visual tokens + B04 rendering + B08 persistence foundatio
 
 FINISH
 Do not stop at an atlas, helper test, screenshots made from fixtures, or candidate JSON. Demonstrate first launch, live command/visual edit, exact preview, no pre-approval mutation, accepted Host effect, full validated readback rendered on intended component, restart and restoration, desktop/phone consistency. Do not implement uninstalled capabilities via misleading placeholders. All current visible instances must be discoverable; every new advertised edit must be proven. Report actual changes, real tests, current main and UNRUN cases in final chat; no report files.
+
+## R002 — source advance (7c1b01630a80)
+R002 PRIORITY — read R002-SOURCE-ADVANCE.md. B08 first closes exact Host-owned visual approval, because live phone-surface onIntent currently queues a proposal directly and worker loses service preview/projection digests/changeId. B06/B07 cannot ship new mutation entry points bypassing exact approval; selection is inert. Extend incumbent Host approval/claim and UI revision publisher, not Wiki-specific fake targets or another authority. B01/B02 register and preserve real Host-bound meaning and desktop-only teach/revoke controls. Shared navigation resolver exists. B04/B05 still need real render/engine binding. B09 tests actual visual proof and existing Wiki/learning regressions. No generalized visual learning.

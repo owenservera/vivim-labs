@@ -1,0 +1,25 @@
+B01 — CANONICAL PWA COMPONENT REGISTRATION
+HIGH-EFFORT PRODUCT CODING TASK
+REPOSITORY: owenservera/ARBOR
+TARGET: main (no branch, no PR)
+REVIEWED SOURCE BASELINE: c6a2edd4ba6411d404fb7552abd8e103b7888ffc
+PACKAGE: owenservera/vivim-labs/ARBOR-PWA-BASELINE-UPGRADE
+
+MANDATORY START
+Read MASTER-UPGRADE.txt, BASELINE-DESIGN.md, INTEGRATION-CONTRACT.md, CURRENT-BASELINE.md and PRODUCT-ACCEPTANCE.md. Inspect current main HEAD and relevant executable code/tests; local agents also inspect working tree. This baseline is evidence, not permission to overwrite newer implementation. Resolve overlap with actual source; if already implemented, test and improve the remaining product gap. Work directly on main; preserve concurrent edits, use small non-overlapping commits, no force push. No new architecture, runtime, compiler, dispatcher, database, journal, workflow, report, orchestration framework, synthetic product data, provider API, Playwright or Puppeteer. Bun preferred; real Node/Cargo checks where existing modules require them. Keep customer runtime independent of Git. 
+Use existing authenticated Host authority, strict validators, stable identity, exact previews, explicit approval, claim-once effects and persisted readback. Do not expose private content or invent evidence. On unavailable connection, stale or ambiguous result, fail closed; no blind retry. Tests may use fixtures for unit and adversarial checks, never as product sources. No claim of running browser/device/Windows acceptance if unavailable.
+
+OUTCOME
+Every existing visible UI instance is discoverable by semantic identity, including hardcoded shell, composer, Talk, Wiki, World, Me, Control, Pocket, settings and dialogs. This is actual runtime registration, not a catalog-only inventory.
+INSPECT / OWN
+apps/mobile-relay/vec/ui-taxonomy/registry.mjs and catalog.mjs, apps/mobile-relay/index.html, app.js mount sites, ux/model.mjs, ux/render.mjs, control-chat.mjs, control-phone.mjs, local-notes-ui.mjs, voice-capture.mjs, launcher-ui.mjs. Inspect renderer and TierFlow identity mapping; B04 owns computation. B02 owns shell rearrangement; coordinate bounded registration anchors only.
+IMPLEMENT
+1. Enumerate real DOM-owned mount/component factories and existing callbacks; distinguish static defined, mounted, dynamic repeated and unavailable. Build smallest source-derived instance registration on incumbent taxonomy/visual metadata. Map native controls and source-closed types to existing canonical IDs; never label inspector-only definitions as installed.
+2. Stable instance IDs independent of label, position, rerender and theme. Domain-derived opaque stable identifiers for repeated authorized Wiki pages, messages, media, cards. Preserve parent/view relationships, current typed properties and actual source reference. Never use private text/secret as ID or expose private graph globally.
+3. Register existing actual controls (not replicas) and action/data refs, immutable semantics and protected roles; no registry effect execution. Mark unsupported controls and unavailable data accurately. Handle mount/unmount/remount and identity conflicts without stale references.
+4. Provide bounded read/selection interface to B02/B05/B06/B07 via existing registry extension. Inspect current VLANG source registry before defining extra fields; reuse existing identity types where compatible. No global DOM scraping or new state store.
+5. Expose installed capability status only via B05 real adapter bindings. Maintain distinction between existing product widgets, generative instances and described library items.
+VERIFY
+Walk actual first-launch, all seven tabs, shared composer, dynamic messages/Wiki/media, settings/pairing/capture. No duplicate IDs; same source across reload; no private text leakage; registration does not change handler behavior; selection points to actual DOM. Test absent/unmounted component, unauthorized device, dynamic removal, ambiguity. Use existing taxonomy/tests and targeted actual PWA DOM checks. Deliver stable registration code and real integration callers.
+DELIVER
+Committed product code directly on main, exact changed source, observed behavior, real tests and honest unrun limitations. No new reports or workflow files.

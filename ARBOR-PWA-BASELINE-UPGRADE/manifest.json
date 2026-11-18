@@ -1,0 +1,36 @@
+{
+  "schema": "vivim.labs.upgrade-package/1",
+  "name": "ARBOR-PWA-BASELINE-UPGRADE",
+  "targetRepository": "owenservera/ARBOR",
+  "targetBranch": "main",
+  "sourceBaseline": "c6a2edd4ba6411d404fb7552abd8e103b7888ffc",
+  "planningReview": "4c95251a709e17811e08fdebd4348fcc1828187d",
+  "designOnly": true,
+  "implementationLanes": 9,
+  "counts": {
+    "componentDomains": 9,
+    "componentFamilies": 34,
+    "components": 417,
+    "engineFamilies": 37,
+    "engineCapabilities": 461
+  },
+  "files": [
+    "BASELINE-DESIGN.md",
+    "CURRENT-BASELINE.md",
+    "INTEGRATION-CONTRACT.md",
+    "MASTER-UPGRADE.txt",
+    "PRODUCT-ACCEPTANCE.md",
+    "README.md",
+    "catalog-inventory.json",
+    "lanes/B01-component-registration.txt",
+    "lanes/B02-minimal-pwa-shell.txt",
+    "lanes/B03-unified-appearance.txt",
+    "lanes/B04-tierflow-rendering.txt",
+    "lanes/B05-engine-bindings.txt",
+    "lanes/B06-universal-programming.txt",
+    "lanes/B07-view-all-inspector.txt",
+    "lanes/B08-persistence-revisions.txt",
+    "lanes/B09-product-convergence.txt",
+    "manifest.json"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "ok": true,
+  "item": "CHAT-BOX-BASELINE",
+  "checks": [
+    {
+      "name": "proposal-artifacts",
+      "pass": true,
+      "detail": "chat.html.draft + state.mjs.draft present"
+    },
+    {
+      "name": "chat-route-pattern",
+      "pass": true,
+      "detail": "ASSETS map present; asset serve present; /chat registered: true (demo lane patch pending)"
+    },
+    {
+      "name": "state-model-draft",
+      "pass": true,
+      "detail": "loadState/saveState/loadWiki/saveWiki (draft:11-28)"
+    },
+    {
+      "name": "nlcl-engine-modules",
+      "pass": true,
+      "detail": "intent-planner.mjs + command-intent.mjs importable"
+    },
+    {
+      "name": "getCapabilities-enumeration",
+      "pass": true,
+      "detail": "describe() schema=vivim.control-discovery/1 coverage.total=32 actions=32"
+    },
+    {
+      "name": "capability-deterministic-records",
+      "pass": true,
+      "detail": "32 records, executable 17, unavailable 15, executionPerformed=false"
+    },
+    {
+      "name": "twelve-capability-coverage",
+      "pass": true,
+      "detail": "coverage.total=32 target=12 gap=20 — gap reported per §CONVERGENCE Q5 (workflow:83); baseline sendMessage/readState/executeIntent/readJournal/getCapabilities mapped to describe()/planTyped/state+journal endpoints"
+    },
+    {
+      "name": "get-chat-200",
+      "pass": true,
+      "detail": "status=200 type=text/html; charset=utf-8 bodyLen=6497"
+    },
+    {
+      "name": "state-endpoint-typed-json",
+      "pass": true,
+      "detail": "status=200 chatLen=0 wikiRevision=0"
+    },
+    {
+      "name": "write-endpoint-parity",
+      "pass": true,
+      "detail": "human status=200 ai status=200 parityDigest=2e986b354a4b50a318d06a22ac6321d01dc03809e84ffb723e5e2f7a42642154 stateUnchanged=true"
+    }
+  ],
+  "digest": "ea613d0ab8aa86edcf7a6e23dcc1cf6a6f897b930d1a768c4819cf37c76b0e10"
+}

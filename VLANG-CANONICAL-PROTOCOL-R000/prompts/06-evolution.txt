@@ -1,0 +1,19 @@
+VLANG R000 — SEMANTIC CHANGE AND VERSION INTELLIGENCE
+STATUS: READY_NOT_RUN
+READ: MASTER-R000.txt, BASELINE.md, ACCEPTANCE.md.
+PIN: bd516b9d1ecc0794b5af39bfda919371a488b019; recheck current main.
+
+OWNED QUESTION
+Define added/removed/modified/moved/stale/unknown semantic delta, compatibility and dependency impact. Distinguish structural similarity from verified behavioral equivalence; reuse HVI snapshots and anchor changes.
+
+EXISTING TARGETS
+hq/lib/semantic-registry.mjs; hq/lib/semantic-optimizers.mjs; hq/lib/indexer.mjs; hq/version-intelligence/
+Inspect actual definitions, tests and consumers.
+
+DELIVER
+Pinned source evidence; confirmed behavior and gaps; options for unresolved questions; decisions conforming to contracts/decision.schema.json; proposed compatible interfaces; minimal changes to existing modules; dependencies and unresolved choices; concrete conformance vectors. Save results/06-evolution.md and results/06-evolution.json.
+
+REQUIRED NEGATIVE/POSITIVE CASES
+Move without change, breaking contract with small diff, duplicate implementation, removed capability, ambiguous mapping.
+
+Do not modify ARBOR during this design round. No fabricated test results, new competing engine or generic architecture report.

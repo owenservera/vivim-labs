@@ -1,0 +1,16 @@
+VLANG R000 — MASTER DEEPENING SESSION
+TARGET: owenservera/vivim-labs/main/VLANG-CANONICAL-PROTOCOL-R000
+PRODUCT TARGET: owenservera/ARBOR/main
+PIN: bd516b9d1ecc0794b5af39bfda919371a488b019
+
+MISSION
+Make VLANG a canonical AI-native coding protocol for existing and new first-party source. Resolve genuine design inconsistencies before widespread adoption. Thin executable definition and conformance requirements, not another architecture rewrite.
+
+1. Recheck ARBOR HEAD, executable source and tests. Reuse prior SCF/VLANG research and ARBOR-VLANG-UPGRADE. Separate implemented, proposed, missing and unverified.
+2. Run eight parallel design lanes; each produces decision records conforming to contracts/decision.schema.json, pinned source evidence, compatible interface changes and concrete conformance vectors.
+3. Compare alternatives only for genuine unresolved choices. Identify smallest viable integration, failure modes, exact module ownership and dependencies.
+4. Run serial convergence. Produce canonical specification, machine-readable contracts, source ownership map, conformance vectors, minimal agent quickstart and ordered R001 code changes.
+5. R001 implements on ARBOR main, preserves concurrent changes, uses existing CLI and HQ storage, runs available tests, marks unavailable checks UNRUN. No branches, PRs or new orchestration.
+
+INVARIANTS
+Source is authoritative for executable behavior. Inline declarations express intent, not proof. Observation, test, inference and owner authority remain separate. Host sole product effect authority. Local-first lean runtime; no provider dependency or new Git dependency for product users. Existing source adoption incremental; new/touched source minimal. No silently changed user state, competing database, indexer, interpreter or registry. Keep rationale in Labs, not operational ARBOR.

@@ -1,0 +1,19 @@
+VLANG R000 — INLINE LANGUAGE AND SOURCE BINDING
+STATUS: READY_NOT_RUN
+READ: MASTER-R000.txt, BASELINE.md, ACCEPTANCE.md.
+PIN: bd516b9d1ecc0794b5af39bfda919371a488b019; recheck current main.
+
+OWNED QUESTION
+Reconcile v1 guidance and typed v2 tags; specify minimal file and public boundary declarations, scope, symbol binding, duplicate tags, inheritance and language adapters. Distinguish declarations from derived facts. Rust, JSX and TSX gaps require explicit treatment.
+
+EXISTING TARGETS
+hq/lib/protocol.mjs; hq/lib/annotation-v2.mjs; hq/lib/indexer.mjs; hq/test/annotation-v2.test.mjs
+Inspect actual definitions, tests and consumers.
+
+DELIVER
+Pinned source evidence; confirmed behavior and gaps; options for unresolved questions; decisions conforming to contracts/decision.schema.json; proposed compatible interfaces; minimal changes to existing modules; dependencies and unresolved choices; concrete conformance vectors. Save results/02-grammar.md and results/02-grammar.json.
+
+REQUIRED NEGATIVE/POSITIVE CASES
+Comment-looking strings, Rust raw strings, JSX comments, multi-symbol files, generated/vendor sources, unknown/stale tags.
+
+Do not modify ARBOR during this design round. No fabricated test results, new competing engine or generic architecture report.

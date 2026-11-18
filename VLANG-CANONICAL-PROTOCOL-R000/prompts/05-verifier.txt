@@ -1,0 +1,19 @@
+VLANG R000 — EVIDENCE AND SEMANTIC TRUTH
+STATUS: READY_NOT_RUN
+READ: MASTER-R000.txt, BASELINE.md, ACCEPTANCE.md.
+PIN: bd516b9d1ecc0794b5af39bfda919371a488b019; recheck current main.
+
+OWNED QUESTION
+Define declared, observed, tested, inferred and owner-authorized as distinct evidence classes. Specify independent checks, source revisions, proof obligations, counterexamples, test command/exit provenance, invalidation and UNRUN. No implicit execution authority.
+
+EXISTING TARGETS
+hq/lib/annotation-v2.mjs; hq/lib/semantic-registry.mjs; hq/lib/context.mjs; hq/lib/protocol.mjs; hq/test/semantic-registry.test.mjs
+Inspect actual definitions, tests and consumers.
+
+DELIVER
+Pinned source evidence; confirmed behavior and gaps; options for unresolved questions; decisions conforming to contracts/decision.schema.json; proposed compatible interfaces; minimal changes to existing modules; dependencies and unresolved choices; concrete conformance vectors. Save results/05-verifier.md and results/05-verifier.json.
+
+REQUIRED NEGATIVE/POSITIVE CASES
+Invented test path, test-exit mismatch, stale receipt, contradictory code, unauthorized promotion.
+
+Do not modify ARBOR during this design round. No fabricated test results, new competing engine or generic architecture report.

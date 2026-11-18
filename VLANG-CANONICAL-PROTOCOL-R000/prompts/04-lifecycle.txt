@@ -1,0 +1,19 @@
+VLANG R000 — AGENT LIFECYCLE AND COMMON INTERFACE
+STATUS: READY_NOT_RUN
+READ: MASTER-R000.txt, BASELINE.md, ACCEPTANCE.md.
+PIN: bd516b9d1ecc0794b5af39bfda919371a488b019; recheck current main.
+
+OWNED QUESTION
+Map actual commands for discovery, inspection, edit, compile, verify and publication. Define adapter-neutral task/result contracts, minimal CLI, concurrency, resume and direct-main compatibility. No agent orchestration service or compulsory PRs.
+
+EXISTING TARGETS
+hq/lib/protocol.mjs; hq/bin/hq.mjs; hq/bin/arbor-hq.mjs; hq/package.json
+Inspect actual definitions, tests and consumers.
+
+DELIVER
+Pinned source evidence; confirmed behavior and gaps; options for unresolved questions; decisions conforming to contracts/decision.schema.json; proposed compatible interfaces; minimal changes to existing modules; dependencies and unresolved choices; concrete conformance vectors. Save results/04-lifecycle.md and results/04-lifecycle.json.
+
+REQUIRED NEGATIVE/POSITIVE CASES
+Same task via two clients, stale baseline, interrupted edit, no-op, incomplete verification.
+
+Do not modify ARBOR during this design round. No fabricated test results, new competing engine or generic architecture report.

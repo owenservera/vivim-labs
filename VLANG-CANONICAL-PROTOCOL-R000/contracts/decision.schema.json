@@ -1,0 +1,132 @@
+{
+  "title": "R000 research decision record — scaffold only, not runtime ABI",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "lane",
+    "question",
+    "status",
+    "sourceEvidence",
+    "decision",
+    "compatibility",
+    "conformance",
+    "implementationTargets"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "lane": {
+      "enum": [
+        "01-identity",
+        "02-grammar",
+        "03-context",
+        "04-lifecycle",
+        "05-verifier",
+        "06-evolution",
+        "07-convergence",
+        "08-learning-adoption"
+      ]
+    },
+    "question": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "proposed",
+        "resolved",
+        "unresolved",
+        "superseded"
+      ]
+    },
+    "sourceEvidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "repository",
+          "revision",
+          "path",
+          "finding"
+        ],
+        "properties": {
+          "repository": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "lines": {
+            "type": "string"
+          },
+          "finding": {
+            "type": "string"
+          },
+          "execution": {
+            "enum": [
+              "UNRUN",
+              "PASS",
+              "FAIL",
+              "NOT_APPLICABLE"
+            ]
+          }
+        }
+      }
+    },
+    "decision": {
+      "type": "string"
+    },
+    "alternatives": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "compatibility": {
+      "type": "string"
+    },
+    "conformance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "scenario",
+          "expected"
+        ],
+        "properties": {
+          "scenario": {
+            "type": "string"
+          },
+          "expected": {
+            "type": "string"
+          },
+          "testTarget": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "implementationTargets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unresolved": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

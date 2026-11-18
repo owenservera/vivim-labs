@@ -1,0 +1,19 @@
+VLANG R000 — AUTOMATIC BOUNDED AGENT CONTEXT
+STATUS: READY_NOT_RUN
+READ: MASTER-R000.txt, BASELINE.md, ACCEPTANCE.md.
+PIN: bd516b9d1ecc0794b5af39bfda919371a488b019; recheck current main.
+
+OWNED QUESTION
+Reuse sourceSemanticIds and packet manifests. Define task-to-context requests, dependency traversal, precise excerpts, invariants, freshness, budgets, missing evidence, authorization and redaction. Invalidate selectively.
+
+EXISTING TARGETS
+hq/lib/context.mjs; hq/lib/search.mjs; hq/lib/arbor-service.mjs; hq/bin/arbor-hq.mjs; hq/test/semantic-packet.test.mjs
+Inspect actual definitions, tests and consumers.
+
+DELIVER
+Pinned source evidence; confirmed behavior and gaps; options for unresolved questions; decisions conforming to contracts/decision.schema.json; proposed compatible interfaces; minimal changes to existing modules; dependencies and unresolved choices; concrete conformance vectors. Save results/03-context.md and results/03-context.json.
+
+REQUIRED NEGATIVE/POSITIVE CASES
+Missing required ID, stale hash, unauthorized source, insufficient budget, duplicate implementations, stale dependency.
+
+Do not modify ARBOR during this design round. No fabricated test results, new competing engine or generic architecture report.

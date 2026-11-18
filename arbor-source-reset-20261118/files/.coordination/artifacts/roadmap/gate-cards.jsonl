@@ -1,0 +1,4 @@
+{"at":"2026-11-16T12:18:28.420Z","kind":"item-gate","itemId":"A00","status":"gated","route":"(verify)","checks":22,"emittedBy":"dwfrun-fa42e97a-3401-47ed-afac-71f64d21fbc9"}
+{"at":"2026-11-16T12:19:28.693Z","kind":"item-gate","itemId":"A01","status":"gated","route":"(verify)","checks":16,"emittedBy":"dwfrun-fa42e97a-3401-47ed-afac-71f64d21fbc9"}
+{"at":"2026-11-16T12:20:15.019Z","kind":"item-gate","itemId":"A02","status":"gated","route":"(verify)","checks":27,"emittedBy":"dwfrun-fa42e97a-3401-47ed-afac-71f64d21fbc9"}
+{"at":"2026-11-16T14:16:23.000Z","kind":"owner-gate","itemId":"A05","status":"blocked","route":"(verify)","reason":"A01/A02/A03 verification UNRUN — readyFrontier throws Invalid roadmap; A05 not selectable until dependencies independently accepted","checks":0,"emittedBy":"a05-partition-4"}

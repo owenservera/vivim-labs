@@ -1,0 +1,3 @@
+# HVI normative v1 contracts
+
+JSON Schema draft 2020-12 under `schemas/v1/`. Contract changes require explicit versioned adapters for legacy `vivim.catalogue-export/1` and `hq.semantic-registry/1`. `requestedRef` is provenance only; comparison keys are immutable commit/tree pins. Coverage never implies source completeness. Similar names cannot establish equivalence; only confirmed owner receipts can. Source-only evidence cannot imply Host/device runtime acceptance. HVI is read-only and never grants authority. Examples are source-only fixtures, not production receipts. See `tests/hq-version-intelligence` for independent conformance and G1 deferred checks.

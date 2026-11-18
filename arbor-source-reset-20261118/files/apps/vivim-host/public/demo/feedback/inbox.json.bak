@@ -1,0 +1,215 @@
+[
+  {
+    "round": "serve-checker-3-slice1",
+    "approveAll": true,
+    "verdicts": [
+      {
+        "id": "v1",
+        "verdict": "approve"
+      }
+    ],
+    "receivedAt": "2026-11-14T01:24:57.072Z"
+  },
+  {
+    "round": 0,
+    "approveAll": false,
+    "verdicts": [],
+    "receivedAt": "2026-11-14T01:41:26.194Z"
+  },
+  {
+    "round": "1794620704166",
+    "approveAll": true,
+    "verdicts": [
+      {
+        "itemId": "tab-today",
+        "screen": "Today",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-talk",
+        "screen": "Talk",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-build",
+        "screen": "Build",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-world",
+        "screen": "World",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-me",
+        "screen": "Me",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-control",
+        "screen": "Control",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      }
+    ],
+    "receivedAt": "2026-11-14T01:45:04.172Z"
+  },
+  {
+    "round": "1794620707717",
+    "approveAll": false,
+    "verdicts": [
+      {
+        "itemId": "tab-today",
+        "screen": "Today",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-talk",
+        "screen": "Talk",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-build",
+        "screen": "Build",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-world",
+        "screen": "World",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-me",
+        "screen": "Me",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-control",
+        "screen": "Control",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      }
+    ],
+    "receivedAt": "2026-11-14T01:45:07.721Z"
+  },
+  {
+    "round": "1794620722335",
+    "approveAll": true,
+    "verdicts": [
+      {
+        "itemId": "tab-today",
+        "screen": "Today",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-talk",
+        "screen": "Talk",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-build",
+        "screen": "Build",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-world",
+        "screen": "World",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-me",
+        "screen": "Me",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-control",
+        "screen": "Control",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      }
+    ],
+    "receivedAt": "2026-11-14T01:45:22.344Z"
+  },
+  {
+    "round": "1794620725174",
+    "approveAll": false,
+    "verdicts": [
+      {
+        "itemId": "tab-today",
+        "screen": "Today",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-talk",
+        "screen": "Talk",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-build",
+        "screen": "Build",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-world",
+        "screen": "World",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-me",
+        "screen": "Me",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      },
+      {
+        "itemId": "tab-control",
+        "screen": "Control",
+        "decision": "approve",
+        "notes": "",
+        "tags": []
+      }
+    ],
+    "receivedAt": "2026-11-14T01:45:25.176Z"
+  }
+]

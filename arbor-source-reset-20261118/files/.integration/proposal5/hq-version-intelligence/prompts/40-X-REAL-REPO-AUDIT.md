@@ -1,0 +1,23 @@
+# ARBOR Proposal 5 — HVI X: Real five-repository migration audit
+
+> **2026-11-12 SCOPE CORRECTION — NATIVE TOOLING ONLY.** Read [10-NATIVE-TOOLING-ONLY-SCOPE.md](../10-NATIVE-TOOLING-ONLY-SCOPE.md) when this is a prompts/ file; for root docs see [10-NATIVE-TOOLING-ONLY-SCOPE.md](10-NATIVE-TOOLING-ONLY-SCOPE.md). This correction governs any conflicting original instructions below.
+
+## UPDATED DECISION: DEFER — DO NOT LAUNCH IN CURRENT WAVE
+This is an intentionally retained **future user-triggered investigation** prompt. The user explicitly does NOT want a real comparison of any VIVIM repositories now. Do not inspect the five donor repos for new semantic findings, run the comparator on real corpus, classify all 361, generate a fresh migration atlas, or produce an unported capability shortlist. No agent should execute this order as a dependency of Z2/G2/R.
+The existing S0/D reference counts remain historical fixtures only. Once the user expressly requests an actual comparison or audit, this prompt can be re-scoped to their chosen repo pins then. **Current wave required parallel lanes: H and U only.** No X branch, X proof or X GO required.
+
+
+---
+
+**Status:** NEW EXECUTION WORK ORDER, not proof that it ran. **Destination:** `owenservera/ARBOR`. **Branch:** `work/p5-hvi-w2-x-source-audit-r001`.
+**First read every normative file:** `.integration/proposal5/hq-version-intelligence/README.md`, `01-SOURCE-PINS.json`, `02-SOURCE-CROSSWALK.md`, `03-NWAY-CONTRACT.md`, `04-OWNERSHIP-AND-WAVE-GATES.md`, `05-ACCEPTANCE-TEST-MATRIX.md`, `06-INTEGRATION-AND-ROLLBACK.md`, `08-RISK-AND-DECISIONS.md`, `wave-manifest.json`; read the original ARBOR `integration/source-lock.json`, `integration/beta-gates.json`.
+**Connected GitHub:** source and commit work here; do not pretend local Node, Bun, Cargo, Windows, Android or Chrome tests ran just because code can be inspected. **Allowed writes:** `.integration/proposal5/hq-version-intelligence/proofs/X/**`. No other worker paths, no root locks, no main, no provider-browser effects or personal data. **Finish:** commit all work, report exact HEAD/source pins/tests vs UNRUN/blockers and `PREPARED_NOT_PROMOTED` unless this order is an integrator gate.
+**Prerequisite:** accepted G1 main and `GO_FOR_W2`. Fork exact G1 main SHA. This lane writes NO product code, only proofs/X.
+## Dogfood entire VIVIM-to-ARBOR corpus
+Use the **actual** G1 HVI sources, not merely prior Markdown counts. Inspect fixed commit/tree SHAs for all five main repos in `01-SOURCE-PINS.json`, relevant research branches, and branch-specific ARBOR Phase2 prep. Run real scanner/comparator if runtime executable; if not available use GitHub tree/blob source audit and mark execution UNRUN.
+
+Write a complete machine-readable per-file and per-capability migration atlas, especially **exactly 361 original HQ missing-path rows** with disposition `PORTED_DIFFERENT_PATH_CONFIRMED | ADAPTED_CONFIRMED | INTENTIONALLY_EXCLUDED_EVIDENCED | RESEARCH_ONLY | TEST_MISSING | POTENTIAL_GAP | UNKNOWN_UNINSPECTED`. Do not auto-fill unknowns. Compare Harness apps/studio/harness/core/Tauri/tools/schemas, TierFlow src/tests/web/runtime/visual runtime and Labs main plus SWC, AutoWiki, Rock, X-ray, R005/IO branches. For each produce source SHA+path+blob, target SHA/path, source-equivalence evidence, runtime status and owner/next merge step.
+
+Emit `proofs/X/FULL-MIGRATION-ATLAS.json`, `HQ-361-DECISIONS.json`, `CAPABILITY-MATRIX.json`, `UNPORTED-SHORTLIST.md`, `DUPLICATES-AND-OWNERS.md`, `LABS-RESEARCH-STATUS.md`, `RUN-LEDGER.json`. Include complete coverage numerator/denominator, exact unknown counts, and TOP-5 owner merge recommendations. No code promotion, private data intake or mass port. PREPARED_NOT_PROMOTED.
+## Evidence, security and stop conditions
+Read **actual implementation source**, not handoff summaries alone; cite exact GitHub SHAs and path/blob identities. Reuse the already ported HQ source and Rust HQKG, not a new graph, scheduler, source catalog, effect writer, authority store, Chrome sender or TierFlow publisher. Labs design documents and preparation branches never count as product installations. No AI provider APIs, Playwright or Puppeteer. Inspect source for secrets, credential/session paths and storage overlap; omit content rather than leaking it. Test where executable tools exist, report command/OS/exit; otherwise commit runnable tests and label UNRUN. Every change must be in permitted paths. A blocked dependency should generate a precise owner handoff; do not silently assume a different lane's code is merged. Do not promote beta/device/Host security gates from source-only evidence.

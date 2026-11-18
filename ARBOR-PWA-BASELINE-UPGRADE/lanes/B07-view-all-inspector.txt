@@ -2,11 +2,11 @@ B07 — VIEW ALL / LIVE COMPONENT AND ENGINE INSPECTION
 HIGH-EFFORT PRODUCT CODING TASK
 REPOSITORY: owenservera/ARBOR
 TARGET: main (no branch, no PR)
-REVIEWED SOURCE BASELINE: c6a2edd4ba6411d404fb7552abd8e103b7888ffc
+REVIEWED SOURCE BASELINE: 7c1b01630a806c0ac701bdc21e3f4968fec91097
 PACKAGE: owenservera/vivim-labs/ARBOR-PWA-BASELINE-UPGRADE
 
 MANDATORY START
-Read MASTER-UPGRADE.txt, BASELINE-DESIGN.md, INTEGRATION-CONTRACT.md, CURRENT-BASELINE.md and PRODUCT-ACCEPTANCE.md. Inspect current main HEAD and relevant executable code/tests; local agents also inspect working tree. This baseline is evidence, not permission to overwrite newer implementation. Resolve overlap with actual source; if already implemented, test and improve the remaining product gap. Work directly on main; preserve concurrent edits, use small non-overlapping commits, no force push. No new architecture, runtime, compiler, dispatcher, database, journal, workflow, report, orchestration framework, synthetic product data, provider API, Playwright or Puppeteer. Bun preferred; real Node/Cargo checks where existing modules require them. Keep customer runtime independent of Git. 
+Read MASTER-UPGRADE.txt, BASELINE-DESIGN.md, INTEGRATION-CONTRACT.md, CURRENT-BASELINE.md and PRODUCT-ACCEPTANCE.md and R002-SOURCE-ADVANCE.md. Inspect current main HEAD and relevant executable code/tests; local agents also inspect working tree. This baseline is evidence, not permission to overwrite newer implementation. Resolve overlap with actual source; if already implemented, test and improve the remaining product gap. Work directly on main; preserve concurrent edits, use small non-overlapping commits, no force push. No new architecture, runtime, compiler, dispatcher, database, journal, workflow, report, orchestration framework, synthetic product data, provider API, Playwright or Puppeteer. Bun preferred; real Node/Cargo checks where existing modules require them. Keep customer runtime independent of Git. 
 Use existing authenticated Host authority, strict validators, stable identity, exact previews, explicit approval, claim-once effects and persisted readback. Do not expose private content or invent evidence. On unavailable connection, stale or ambiguous result, fail closed; no blind retry. Tests may use fixtures for unit and adversarial checks, never as product sources. No claim of running browser/device/Windows acceptance if unavailable.
 
 OUTCOME
@@ -23,3 +23,6 @@ VERIFY
 Select real composer, nav, Wiki section, existing cards/media, dynamic messages. Verify correct ID and capability availability, search/filter no fabricated success, same direct and NL preview, no click effect in inspection mode, no private data leakage, disconnected/revoked grants, stale selection after rerender and real readback. Existing launcher, taxonomy, docs/renderer tests plus actual browser interaction.
 DELIVER
 Committed product code directly on main, exact changed source, observed behavior, real tests and honest unrun limitations. No new reports or workflow files.
+
+R002 SOURCE ADVANCE — MANDATORY CURRENT IMPLEMENTATION DELTA
+Selecting a component must not fire live phone-surface onIntent mutation or raw sendProposal. Coordinate B06/B08 to route actual mutations to exact preview/approval. Inspect actual new approval UI and metadata, never infer authority from a digest. Private desktop receipt teaching/rule scope not exposed to phone; do not reimplement teaching. Library remains truthful about installed status and stable identity.

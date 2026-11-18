@@ -1,6 +1,6 @@
 {
   "schema": "vivim.labs.baseline-ui-inventory/1",
-  "sourceCommit": "c6a2edd4ba6411d404fb7552abd8e103b7888ffc",
+  "sourceCommit": "7c1b01630a806c0ac701bdc21e3f4968fec91097",
   "sourceFiles": [
     {
       "path": "apps/mobile-relay/vec/ui-taxonomy/catalog.mjs",
@@ -6041,5 +6041,7 @@
         }
       ]
     }
-  ]
+  ],
+  "previousSourceCommit": "c6a2edd4ba6411d404fb7552abd8e103b7888ffc",
+  "verification": "Both catalog blob SHAs unchanged at R002 source baseline; counts and declared mappings retained."
 }

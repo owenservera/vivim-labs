@@ -2,11 +2,11 @@ B06 — UNIVERSAL NATURAL-LANGUAGE AND DIRECT UI PROGRAMMING
 HIGH-EFFORT PRODUCT CODING TASK
 REPOSITORY: owenservera/ARBOR
 TARGET: main (no branch, no PR)
-REVIEWED SOURCE BASELINE: c6a2edd4ba6411d404fb7552abd8e103b7888ffc
+REVIEWED SOURCE BASELINE: 7c1b01630a806c0ac701bdc21e3f4968fec91097
 PACKAGE: owenservera/vivim-labs/ARBOR-PWA-BASELINE-UPGRADE
 
 MANDATORY START
-Read MASTER-UPGRADE.txt, BASELINE-DESIGN.md, INTEGRATION-CONTRACT.md, CURRENT-BASELINE.md and PRODUCT-ACCEPTANCE.md. Inspect current main HEAD and relevant executable code/tests; local agents also inspect working tree. This baseline is evidence, not permission to overwrite newer implementation. Resolve overlap with actual source; if already implemented, test and improve the remaining product gap. Work directly on main; preserve concurrent edits, use small non-overlapping commits, no force push. No new architecture, runtime, compiler, dispatcher, database, journal, workflow, report, orchestration framework, synthetic product data, provider API, Playwright or Puppeteer. Bun preferred; real Node/Cargo checks where existing modules require them. Keep customer runtime independent of Git. 
+Read MASTER-UPGRADE.txt, BASELINE-DESIGN.md, INTEGRATION-CONTRACT.md, CURRENT-BASELINE.md and PRODUCT-ACCEPTANCE.md and R002-SOURCE-ADVANCE.md. Inspect current main HEAD and relevant executable code/tests; local agents also inspect working tree. This baseline is evidence, not permission to overwrite newer implementation. Resolve overlap with actual source; if already implemented, test and improve the remaining product gap. Work directly on main; preserve concurrent edits, use small non-overlapping commits, no force push. No new architecture, runtime, compiler, dispatcher, database, journal, workflow, report, orchestration framework, synthetic product data, provider API, Playwright or Puppeteer. Bun preferred; real Node/Cargo checks where existing modules require them. Keep customer runtime independent of Git. 
 Use existing authenticated Host authority, strict validators, stable identity, exact previews, explicit approval, claim-once effects and persisted readback. Do not expose private content or invent evidence. On unavailable connection, stale or ambiguous result, fail closed; no blind retry. Tests may use fixtures for unit and adversarial checks, never as product sources. No claim of running browser/device/Windows acceptance if unavailable.
 
 OUTCOME
@@ -23,3 +23,6 @@ VERIFY
 Actual NL/direct equivalent candidate for background color, real card styling, supported navigation reorder, actual mic position, add Research, Wiki navigation/edit. Test unknown or ambiguous target, unsupported capability, invalid value, stale revision, wrong scope, no approval, double activation, lost result, permission revocation. Existing NLCL/VEC, live composer and real Host/PWA integration tests. Do not claim unsupported example commands pass.
 DELIVER
 Committed product code directly on main, exact changed source, observed behavior, real tests and honest unrun limitations. No new reports or workflow files.
+
+R002 SOURCE ADVANCE — MANDATORY CURRENT IMPLEMENTATION DELTA
+control-language.mjs already owns resolveLocalDestination, resolveDesktopDestination and resolveProductRoute; buildRequestRoute delegates. Preserve local navigation -> current Host meaning/clarification/refusal -> bounded VEC UI -> provider choice, reuse composer-assist. Wiki approvalMeaning now supplies exact resolved args, optional deterministic sentence and semanticDigest; retain consumption. Never claim visual round-trip verified without actual compiler equality. Coordinate B08 on exact approved visual proposal and digests; all NL/direct/typed edits require preview/Activate, selection inert. No generalized visual learning; receipt template remains desktop-only Wiki creation, canonical NLCL/refusal wins.

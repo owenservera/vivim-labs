@@ -3,7 +3,7 @@
   "name": "ARBOR-PWA-BASELINE-UPGRADE",
   "targetRepository": "owenservera/ARBOR",
   "targetBranch": "main",
-  "sourceBaseline": "c6a2edd4ba6411d404fb7552abd8e103b7888ffc",
+  "sourceBaseline": "7c1b01630a806c0ac701bdc21e3f4968fec91097",
   "planningReview": "4c95251a709e17811e08fdebd4348fcc1828187d",
   "designOnly": true,
   "implementationLanes": 9,
@@ -20,6 +20,7 @@
     "INTEGRATION-CONTRACT.md",
     "MASTER-UPGRADE.txt",
     "PRODUCT-ACCEPTANCE.md",
+    "R002-SOURCE-ADVANCE.md",
     "README.md",
     "catalog-inventory.json",
     "lanes/B01-component-registration.txt",
@@ -32,5 +33,13 @@
     "lanes/B08-persistence-revisions.txt",
     "lanes/B09-product-convergence.txt",
     "manifest.json"
-  ]
+  ],
+  "previousSourceBaseline": "c6a2edd4ba6411d404fb7552abd8e103b7888ffc",
+  "packageRevision": "R002",
+  "sourceAdvance": {
+    "commits": 2,
+    "filesChanged": 10,
+    "sourceTests": "UNRUN",
+    "findings": "R002-SOURCE-ADVANCE.md"
+  }
 }

@@ -1,0 +1,12 @@
+# SCF E — Coding-agent SDK protocol and HQ service
+**Repository:** owenservera/ARBOR. **Reserved worker branch:** `work/p5-scf-e-agent-surface-r001`. **Exclusive writes:** `hq/lib/protocol.mjs`, `hq/bin/arbor-hq.mjs`, `hq/lib/arbor-service.mjs`, `hq/lib/semantic-capability/agent-context.mjs`, `.integration/proposal5/semantic-capability-fabric/proofs/E/**`.
+## Shared invariant and required reading
+Before work inspect the current exact SHA and full source of ARBOR `main`, the SCF draft PR #13 branch, accepted HVI source branches, and the **governing HVI policy** `.integration/proposal5/hq-version-intelligence/10-NATIVE-TOOLING-ONLY-SCOPE.md`. Read **every** SCF `implementation-ready/` root document, all `recipes/`, `contracts/`, `fixtures/`, `tests/`, `work-orders.json`, parent `semantic-capability-fabric/README.md` and SV-R012 `verifier/README.md` plus original `verifier/contracts/*.v0.schema.json`.
+HVI is **native-tooling-only** in this wave. Real VIVIM/ARBOR/Labs migration comparisons are forbidden during installation or tests; use only synthetic invented Git-source fixtures and normal production source-module imports for build/compatibility. No provider APIs, Playwright, Puppeteer, personal corpora, browser sends, direct source effects or new canonical graph/wiki/registry.
+Pin source exact SHA; do not silently use moving HEAD, do not force-push or merge without G gate. Report source pin/branch/changed files/test commands+exits vs UNRUN, actual blockers and gate status. A source-only import is not runtime verification.
+
+## Prerequisite
+Read A/B/C planned types, current `arbor-service.mjs`, `protocol.mjs`, `arbor-hq.mjs` and `recipes/07-AGENT-CLI-HQ-SERVICE.md`. If HVI native compare API unaccepted, keep SCF-HVI feature disabled and record blocker.
+## Do exactly this
+Implement opt-in touched-file agent metadata policy preserving old protocol; local-only `arbor-hq scf-check/scf-compile/scf-passport/scf-delta` and explicit `--allow` source roots; bounded ContextPack. Add read-only SCF service methods through existing Host-mode `permit/withDatabase` actor, session and grants checks. Never let a durable registered source or cached passport grant access. No new Host app route or command dispatcher here.
+Use source-only synthetic test adapters, record Node24 CLI exit codes, Host-denied/revoked tests if actual available. No real repo migration analysis. Commit E paths only; PREPARED_NOT_INTEGRATED.

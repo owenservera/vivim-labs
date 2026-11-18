@@ -1,0 +1,1169 @@
+### USER
+Split this out into multiple turns Design e2e the following ### ERA 1 — What it is
+
+VLANG is an AI-native semantic programming protocol that makes existing software continuously understandable, context-aware, and programmable by both humans and AI.
+
+### ERA 2 — How it works
+
+Rather than replacing languages like Rust or TypeScript, VLANG introduces a lightweight semantic layer through structured inline comments, annotations, and declarations embedded directly alongside real source code. An incremental compiler scans and indexes the codebase, resolves symbols, functions, dependencies, data structures, capabilities, contracts, and relationships, and combines this information with developer annotations and verified runtime evidence into a version-aware semantic model. As code changes, the compiler updates only the affected relationships, automatically generating precise, task-specific context for AI agents, natural-language commands, documentation, and interface generation. AI can enrich this model by proposing inferred meanings and relationships, but those interpretations remain distinguishable from verified facts.
+
+### ERA 3 — How it becomes an OS
+
+AutoWiki continuously projects this semantic model into a navigable, self-evolving knowledge environment, while the natural-language command system uses the same indexed capabilities to translate user intentions into typed, validated, reusable programs. VEC executes suitable deterministic computations, visual interfaces are generated from the same semantic definitions, and the Host authorizes real-world effects. The result is software that progressively learns how to describe, navigate, modify, and operate itself—without repeatedly paying an LLM to rediscover what the system already knows.
+
+
+### ASSISTANT
+# VLANG — End-to-End Design Series
+
+Here's how I'll split the full design. Each turn is self-contained, builds on the last, and ends with the concrete artifacts the next turn consumes. Say **"next"** to advance, or jump to any turn.
+
+| Turn | Era | Deliverable |
+|---|---|---|
+| **1** | Era 1 | Foundations: thesis, design laws, system blueprint, the two loops, locked defaults |
+| **2** | Era 2 | VLANG semantic layer spec: annotation grammar, declarations, embedding rules, degradation |
+| **3** | Era 2 | VSC: the incremental semantic compiler — pipeline, invalidation engine, VSM storage & versioning |
+| **4** | Era 2 | Truth system: provenance tiers, runtime evidence, quarantined AI enrichment, context packets |
+| **5** | Era 3 | AutoWiki: the projection engine, living pages, staleness propagation, wiki→code proposals |
+| **6** | Era 3 | NL command system: intent → typed, validated, reusable programs ("Verbs") |
+| **7** | Era 3 | VEC executor + generated interfaces: determinism boundary, sandbox, UI-as-projection |
+| **8** | Era 3 | Host: capability authorization, effect ledger, the OS flywheel, MVP roadmap & evaluation |
+
+---
+
+# TURN 1 — Foundations & System Blueprint (ERA 1)
+
+## 1. The thesis, sharpened
+
+> **VLANG turns a codebase from text that must be re-read into a versioned semantic asset that can be queried, projected, and safely operated.**
+
+The economic claim underneath it: today, every AI interaction with software pays a **rediscovery tax** — tokens spent re-deriving what symbols mean, what calls what, what's safe to touch. VLANG pays that cost **once, incrementally, at compile time**, and amortizes it across every agent, every wiki page, every command, forever. LLMs get pushed to the *ambiguity frontier* (intent, inference, novelty) and evicted from the *knowledge interior* (structure, contracts, capabilities).
+
+**What VLANG is not:**
+- Not a new language — Rust/TS remain the source of truth; VLANG is a protocol *over* them.
+- Not a docs generator — docs are one projection of the model, not the product.
+- Not RAG-over-repo — embeddings retrieve *similar text*; VSM answers *verified structural questions* ("what can touch the payments table, and under which contract?").
+- Not an agent framework — it's the substrate agents should have had. (Prior art it stands on: LSP/tree-sitter for symbols, salsa-style incremental computation, capability security à la WASI. What none of them have: meaning + provenance + effects in one version-aware model.)
+
+## 2. The seven design laws
+
+These are invariants — every later turn is checked against them.
+
+1. **Code is the only source of truth.** Annotations live in-repo beside real code. The VSM is *derived state*: cacheable, rebuildable, never a fork of reality. Delete the index, recompile, lose nothing.
+2. **Every claim carries provenance.** No statement in the model exists without a tier (verified / declared / inferred / stale), an evidence pointer, and a version anchor. AI interpretation can never masquerade as fact.
+3. **Incremental or it doesn't ship.** Every derived artifact has a dependency fingerprint. An edit invalidates exactly its affected closure — in the graph, the wiki, the UI, and the saved programs.
+4. **Capabilities are the only door to effects.** Nothing touches the world except through Host-granted, attenuable, auditable handles. No ambient authority, ever.
+5. **Determinism first.** LLMs *propose*, the compiler *validates*, VEC *executes*, the Host *authorizes*. An LLM is never in the execution path of a validated program.
+6. **One model, many projections.** AutoWiki, generated UI, agent context, and docs are all views of the VSM. Nothing is authored twice; nothing can drift.
+7. **Graceful degradation.** Zero annotations still yields a full structural graph. Richness is progressive, adoption is per-file. Value on day one, magic by month three.
+
+## 3. System blueprint
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  HOST — authority plane                effects to the world │
+│  identity · capability grants · consent · audit ledger      │
+└──────────────▲──────────────────────────────┬───────────────┘
+               │ authorized capability calls  │ outcomes = evidence
+┌──────────────┴───────────────┐              │
+│  VEC — execution plane       │              │
+│  deterministic typed programs│              │
+└──────────────▲───────────────┘              │
+               │ Verbs (validated, typed)     │
+┌──────────────┴──────────────────────────────┼───────────────┐
+│  PROJECTION & INTENT PLANE                  │               │
+│  AutoWiki (read) · NL→Verb compiler (act) · UI gen (touch)  │
+└──────────────▲──────────────────────────────┼───────────────┘
+               │ queries / context packets    │
+┌──────────────┴──────────────────────────────▼───────────────┐
+│  VSM — the semantic kernel                                  │
+│  version-aware graph: symbols · types · deps · contracts ·  │
+│  capabilities · relationships · evidence · provenance       │
+└──────▲──────────────────────────────▲───────────────────────┘
+       │ incremental compile          │ labeled enrichment
+┌──────┴───────────┐        ┌─────────┴────────────┐
+│  VSC — compiler  │        │  AI Enricher         │
+└──────▲───────────┘        └─────────▲────────────┘
+       │ parse · resolve · index      │ traces · tests · runtime
+┌──────┴──────────────────────────────┴───────────────────────┐
+│  SOURCE OF TRUTH: real code (TS/Rust/…) + VLANG annotations │
+└─────────────────────────────────────────────────────────────┘
+```
+
+| Component | Role | One-line responsibility | Turn |
+|---|---|---|---|
+| **VLANG layer** | Protocol | Structured comments/declarations that add meaning code can't express | 2 |
+| **VSC** | Compiler | Scans, resolves, indexes; updates only the affected closure | 3 |
+| **VSM** | Kernel state | The version-aware semantic graph; every edge has provenance | 3–4 |
+| **Evidence system** | Truth intake | Tests, traces, type facts promote claims to *verified* | 4 |
+| **AI Enricher** | Hypothesis engine | Proposes meanings/links; quarantined until promoted | 4 |
+| **Context packets** | Agent API | Task-specific, budgeted, verified context — the anti-RAG | 4 |
+| **AutoWiki** | Read projection | Navigable, self-evolving knowledge environment | 5 |
+| **NL→Verb compiler** | Intent plane | Natural language → typed, validated, reusable programs | 6 |
+| **VEC** | Execution plane | Runs deterministic computations; refuses everything else | 7 |
+| **Generated UI** | Touch projection | Forms/panels/actions derived from entities & capabilities | 7 |
+| **Host** | Authority plane | Grants, attenuates, logs every real-world effect | 8 |
+
+New vocabulary I'm introducing (used consistently from here on): **VSC** (semantic compiler), **VSM** (semantic model), **Verb** (a validated, reusable program born from an NL command), **context packet** (budgeted task context), **capability descriptor** (the typed, effect-bearing unit the Host gates).
+
+## 4. The two loops — this is what makes it an OS
+
+**Loop A — the compile loop (Era 2, runs on every edit):**
+`edit → parse → resolve → invalidate closure → update VSM → re-project wiki/UI/context → flag stale Verbs`
+Latency target: sub-second on a large repo. This loop makes software *continuously understandable*.
+
+**Loop B — the operation flywheel (Era 3, runs on every intent):**
+`intent → NL compiler reads VSM → typed Verb → validate → dry-run → Host consent → VEC executes → outcomes become evidence → evidence enriches VSM → Verb registered as a new indexed capability`
+
+The last step is the punchline of your Era 3: **the system's operational vocabulary grows with use.** Every executed command becomes a reusable, discoverable capability that the next command can compose from. "Software that learns to operate itself" is not weight updates — it's the monotonic accumulation of *verified facts + validated Verbs*, owned locally by the user, exportable, never trapped in a model's context window.
+
+## 5. Provenance tiers (preview — full spec in Turn 4)
+
+| Tier | Written by | Can drive execution? |
+|---|---|---|
+| **VERIFIED** | Compiler proofs, passing tests, observed traces | ✅ Yes |
+| **DECLARED** | Human annotation (authoritative intent, unproven) | ✅ After validation |
+| **INFERRED** | AI enrichment | ❌ Never — navigation & proposals only |
+| **STALE** | Anything anchored to a superseded version | ❌ Blocked, revalidation queued |
+
+Promotion paths: inferred → declared (human confirms) or inferred → verified (evidence arrives). Demotion is automatic on invalidation. This single table is what lets AI enrich the model *without ever poisoning it*.
+
+## 6. Locked defaults (override any of these now, or I proceed with them)
+
+- **First languages:** TypeScript + Rust (your examples), Python third. Parser: tree-sitter; resolution via each ecosystem's native tooling where possible.
+- **Storage:** local-first embedded store (SQLite + content-addressed nodes), git-anchored versions. The semantic model is user-owned and portable — consistent with your sovereign-AI direction.
+- **Distribution / adoption wedge:** CLI + watch daemon + an **MCP endpoint** so existing agents (Claude, Cursor, etc.) consume context packets *before* AutoWiki or VEC exist. VLANG is useful on day one as "the context layer for every agent."
+- **Naming flag:** "VLANG" collides with the V language (vlang.io). Keeping your name for this series; recommend a distinct public brand later (the protocol can be "V/" internally).
+
+## 7. North-star demo & metrics
+
+**The 60-second demo that proves all three eras:**
+1. Edit a function's signature in VS Code → its wiki page, contract checks, and generated form update in <1s; two saved Verbs are flagged stale with the exact broken edge highlighted. *(Loop A)*
+2. Ask an agent "add retry logic to the payment webhook" → it receives a 2KB context packet containing exactly the function, its contract, callers, and capability scope — not 400KB of repo. *(Context engine)*
+3. Say "refund all failed orders from yesterday" → typed plan, dry-run diff, one consent prompt, executed via granted capabilities, logged in the effect ledger, saved as the Verb `refund-failed-orders(date)`. *(Loop B)*
+
+| Metric | Target |
+|---|---|
+| Incremental consistency (edit → all projections) | p95 < 1s @ 1M LOC |
+| Context packet size / recall | ≤ ~2–4K tokens, ≥ 95% of needed symbols |
+| Rediscovery tax | LLM tokens per task → flat as coverage grows |
+| Truth integrity | **Zero** inferred/stale claims ever executed (hard invariant, continuously tested) |
+| Day-one value | Full structural graph at zero annotations |
+
+---
+
+**Next — Turn 2: the VLANG semantic layer spec.** The actual annotation grammar (`@cap`, `@contract`, `@entity`, `@flow`, `@intent`…), how it embeds in TS/Rust comments without touching toolchains, what the compiler extracts *without* any annotations, and the schema-versioning rules. Say **next**, or adjust the plan/defaults first.
+
+### USER
+first integrate # VLANG — End-to-End System Design
+
+**From semantic protocol → semantic kernel → operating system.** One model, many projections, minimum LLM surface, zero unauthorized effects.
+
+This design turns your three eras into a buildable spec: wire formats, schemas, algorithms, gates, and a phased plan. It hard-codes the invariants you've already established (progressive semantic compilation, resolver ladder, provenance-first graph, round-trip-verified command sentences, wiki-as-view-of-source, dual feedback).
+
+---
+
+## 0. Design Laws (non-negotiable invariants)
+
+| # | Law | Enforcement point |
+|---|-----|-------------------|
+| L1 | **Code is canonical.** Semantics rides in comments/annotations. Strip every `@v` and you have valid, unchanged software. | VSL grammar; zero runtime dependency |
+| L2 | **One model, many projections.** Wiki, UI, docs, tool schemas, context packs are pure functions of the semantic graph. Edits to projections compile *back into source*. | Projection engine + writeback codemods |
+| L3 | **Facts ≠ beliefs.** Every assertion carries origin + epistemic state. Planners may only treat `verified` as fact. | Assertion schema + query-level trust filters |
+| L4 | **LLM ∈ resolvers, never the interpreter.** Cheapest resolver that clears the confidence threshold wins. | Resolver ladder L0–L9 |
+| L5 | **No effect without a capability; no execution without a bound sentence.** Execution is bound to the hash of the round-trip-verified plain-language sentence shown to the user. | Intent compiler + Host |
+| L6 | **Determinism by default.** Pure computation runs on VEC; effects are explicit, metered, audited, compensable. | VEC has no ambient authority |
+| L7 | **Every interaction yields two outputs:** the task result *and* a persistent system improvement (rule, binding, evidence, program). | Dual feedback compiler |
+
+---
+
+## 1. System Map
+
+```
+                        HUMANS  ·  AI AGENTS  ·  OTHER SYSTEMS (MCP/A2A)
+                                        │
+ ┌──────────────────────────────────────┼──────────────────────────────────────┐
+ │ SURFACES          AutoWiki      Generated UI      Command Palette / API     │
+ │ (pure projections, edit = writeback to source)                              │
+ ├──────────────────────────────────────┼──────────────────────────────────────┤
+ │ INTENT COMPILER   utterance → resolver ladder → VIR program → gates         │
+ │                   → canonical sentence (round-trip, hash-bound) → approval  │
+ ├──────────────────────────────────────┼──────────────────────────────────────┤
+ │ EXECUTION         VEC (deterministic VM)  │  HOST (capability kernel)       │
+ │                   contracts, dry-runs,    │  grants, policy, adapters,      │
+ │                   pure transforms         │  audit, sagas, secrets          │
+ ├──────────────────────────────────────┼──────────────────────────────────────┤
+ │ SEMANTIC KERNEL   VSG: version-aware typed graph + provenance ledger        │
+ │                   vlc: incremental compiler   ·   context engine            │
+ │                   evidence engine   ·   SQLite control plane (one file)     │
+ ├──────────────────────────────────────┼──────────────────────────────────────┤
+ │ SUBSTRATE         Real code (Rust, TS, …) + VSL annotations                 │
+ │                   builds · tests · traces · git history                     │
+ └─────────────────────────────────────────────────────────────────────────────┘
+        ▲                                                        │
+        └────────────── runtime evidence flows back ─────────────┘
+```
+
+Seven organs: **VSL** (protocol), **vlc** (compiler), **VSG** (model/store), **Context Engine**, **AutoWiki**, **Intent Compiler + VEC + Host** (execution triad), **Evidence Engine** (the loop-closer).
+
+---
+
+## 2. ERA 1 — The Protocol: VSL (VLANG Semantic Layer)
+
+### 2.1 What it is
+
+A host-language-agnostic, line-oriented directive grammar embedded in ordinary comments. Machine-readable first, human-readable second. Any toolchain compiles the code unchanged; VLANG-aware tooling reads the extra dimension.
+
+### 2.2 Directive set
+
+```
+@v.id        stable handle (optional; vid is auto-assigned)
+@v.is        kind: function | entity | service | event | capability | workflow | resource
+@v.means     one-line intent (the unit of semantic search)
+@v.why       rationale / decision link
+@v.contract  pre: | post: | inv:   — predicates in VEC's total expression language
+@v.cap       capability requirement, e.g. money:refund(max=order.remaining)
+@v.flow      taint labels: pii | secret | money | regulated
+@v.rel       explicit relation: implements | mirrors | supersedes | owns | emits …
+@v.example   in: {…} out: {…}        — becomes an executable test → evidence
+@v.agent     expose: "tool_name" risk: pure | read | write | irreversible
+@v.ui        label | widget | confirm | group   — hints; defaults derive from types
+@v.status    stable | experimental | deprecated   @v.since / @v.until
+```
+
+### 2.3 Example (TypeScript)
+
+```ts
+//@v.module billing "Order lifecycle: capture, refund, reconciliation"
+//@v.cap db:rw(orders, refunds) net:https(psp.example) money:refund
+
+/**
+ * @v.means  Refund a captured payment, fully or partially.
+ * @v.contract pre:  order.status == "captured" && amount <= order.remaining
+ * @v.contract post: order.remaining' == order.remaining - amount
+ * @v.contract inv:  sum(order.refunds) <= order.total
+ * @v.cap    money:refund(max=order.remaining) db:write(refunds)
+ * @v.flow   money
+ * @v.example in: {orderId:"o_1", amount:4200} out: {status:"succeeded"}
+ * @v.agent  expose: "refund_order" risk: irreversible
+ * @v.ui     label: "Refund" confirm: true
+ */
+export async function refundOrder(orderId: OrderId, amount: Cents): Promise<Refund> { … }
+```
+
+Rust identical via `/// @v.…`; Python via `# @v.…`. Workspace config lives in `vlang.toml` (capability policy defaults, evidence sources, adapter selection, trust rules for dependencies).
+
+### 2.4 Protocol rules
+
+- **Degradation:** removing all directives loses *understanding*, never *function*.
+- **Identity:** every symbol gets `vid = blake3(canonical_shape)` plus a human handle. Renames don't break identity (shape fingerprint + anchor history) — wiki links, commands, and evidence survive refactors.
+- **Contracts are executable:** the predicate language is the same total language VEC runs, so every contract is checkable, not decorative.
+- **Untrusted annotations:** directives from third-party deps enter as `proposed`, never `verified`. Tool schemas are built from *extracted types*, never from annotation prose (prompt-injection firewall).
+
+---
+
+## 3. ERA 2 — The Semantic Kernel
+
+### 3.1 VSG: the version-aware semantic graph
+
+**Nodes:** Module, Symbol, DataType, Field, Capability, Contract, Effect, Event, Resource, Program, Command, Test, Evidence, Rule, Policy, UIComponent, Agent.
+
+**Edges:** defines, calls, reads, writes, accepts, returns, implements, requires-cap, grants-cap, satisfies, emits, consumes, depends-on, supersedes, mirrors, tainted-by, documents.
+
+Everything is stored as **assertions**, never bare facts:
+
+```json
+{
+  "subject": "vid:9f2a…", "predicate": "requires-cap", "object": "money:refund",
+  "origin": "declared",            // extracted | declared | observed | derived | inferred
+  "state":  "verified",            // proposed | attested | verified | contradicted | stale
+  "confidence": 1.0,
+  "evidence": ["ev:test:7c1…", "ev:trace:b83…"],
+  "valid": ["v1.4.0", null),       // code-version interval (valid time)
+  "asserted_at": "2026-11-19T…",   // when learned (assertion time)
+  "signer": "human:owen | vlc@0.3 | agent:claude#run41"
+}
+```
+
+**Fusion precedence** when sources conflict:
+- Factual matters (types, calls, effects): `extracted > observed > declared > derived > inferred`
+- Meaning/intent: `declared > inferred` (parsers can't produce meaning)
+- Conflicts never silently overwrite → `contradicted` + dispute queue.
+
+**Promotion pipeline (how AI enriches safely):**
+
+```
+inferred/proposed ──► auto-check (type/contract/test) ──► verified
+                 └──► runtime evidence match          ──► verified
+                 └──► human review (signed)           ──► verified
+verified ──(symbol fingerprint changes)──► stale ──(re-verify)──► verified
+```
+
+**Store:** one self-referential SQLite control plane — `nodes, edges, assertions, evidence, programs, commands, rules, events, packs` — append-only, hash-chained assertion log. Bitemporal queries: `as_of(commit)` and `as_known_at(t)`. Export = signed VSG packs; symbol IDs interoperable with SCIP.
+
+### 3.2 vlc: the incremental compiler
+
+A demand-driven query graph (Salsa-style), not a batch pipeline. Each stage is memoized on content hashes:
+
+```
+f0 collect(file)        → hash, comment spans            [tree-sitter]
+f1 parse_vsl(spans)     → declared assertions
+f2 structure(file)      → AST skeleton, imports/exports  [tree-sitter]
+f3 resolve(workspace)   → symbol table, cross-file edges [extracted]
+f4 types(symbol)        → signatures, shapes             [adapter: tsc / rust-analyzer / pyright / SCIP]
+f5 effects(symbol)      → capability set: static ∩ declared; remainder = proposed
+f6 contracts(symbol)    → normalized predicates, linked tests, consistency check
+f7 evidence(traces)     → observed assertions
+f8 fuse()               → precedence + conflict rules → graph delta
+f9 derive()             → Datalog closures: transitive deps, taint propagation,
+                          capability reachability, impact sets
+```
+
+**Incrementality rule:** re-run a query iff an input fingerprint changed; **stop propagation when the output fingerprint is unchanged** (red-green). A comment typo invalidates nothing downstream; a signature change invalidates exactly its dependents' contracts, context packs, UI schemas, and command bindings — *relationships*, not files.
+
+**Targets:** warm edit → reindex < 100 ms; cold index 1M LOC in minutes (f0–f2 embarrassingly parallel). Delivered as CLI + LSP server + file watcher + CI mode (CI emits signed evidence packs).
+
+**Do not rebuild type checkers.** f4 is an adapter layer over each language's real compiler — precision for free.
+
+### 3.3 Evidence engine (verified runtime truth)
+
+Host and VEC emit structured spans tagged with `vid`: calls, arg/return *hashes* (raw values redacted per taint policy), effects performed, contract check results. Ingestion maps them to `observed` assertions: "example E passed at v1.4.2", "cap C actually exercised", "edge X→Y taken". Taint-labeled data never leaves the Host boundary raw — the graph stores schemas and hashes, never secrets or PII. Evidence decays: change the symbol → its evidence goes `stale` until re-observed.
+
+### 3.4 Context engine (the anti-token-burn machine)
+
+`getContext(task | symbol | diff | error)` — **zero LLM tokens to build**:
+
+1. **Seed:** exact symbol resolution first; embedding match over `@v.means` lines only if needed.
+2. **Expand:** bounded, ranked graph walk (personalized PageRank seeded by task; hops over calls/contracts/caps/types), token-budgeted.
+3. **Render:** deterministic template — signatures, contracts + live status, capability requirements, invariants, minimal examples, known pitfalls from evidence, code bodies *only when necessary*, trust labels on every line.
+4. **Cache:** pack is content-addressed (`pack_id`); agents subscribe to deltas. Budget tiers: 2k / 8k / 32k.
+
+Also emitted from the same graph: **MCP tool schemas + A2A capability descriptors** for every `@v.agent`-exposed symbol — one declaration, three audiences (human docs, agent tools, inter-agent contracts).
+
+---
+
+## 4. ERA 3 — The OS
+
+### 4.1 AutoWiki: the knowledge projection
+
+Every VSG node materializes a page: meaning, signature, contracts with **live verification badges**, interactive relation graph, capability chips, evidence timeline, version history, executable examples (run on VEC in-page), and an ask/act bar scoped to that node.
+
+- **Continuously self-evolving:** pages are materialized views regenerated from graph deltas — never crawled, never re-summarized by an LLM.
+- **Editable views of source (L2):** editing a wiki page compiles to a codemod PR against the code/annotations. The wiki *cannot drift* because wiki edits *are* code edits.
+- **Inferred content is visually distinct:** dashed border, `proposed` chip, one-click **Verify** → generates a test or routes to review.
+- **Global views:** architecture map · capability atlas (everything that can touch money/PII/network, transitively) · contract health dashboard · change-impact explorer · **coverage queue** (unexplained code, ranked by centrality — the enrichment worklist).
+
+### 4.2 Intent Compiler: NL → typed, validated, reusable programs
+
+Your progressive semantic compiler, made concrete:
+
+```
+utterance
+ → L0 exact/command-cache match          (0 tokens)
+ → L1 ontology/dictionary resolution     (0 tokens)
+ → L2 grammar parse (controlled language)(0 tokens)
+ → L3 entity resolution against VSG + session state
+ → L4 constraint/preference resolution (user Rules)
+ → L5–L7 embeddings / small model        (only if uncertainty remains)
+ → L8 LLM plan proposal                  (last resort, cache-miss only)
+ → L9 human clarification                (progressive-disclosure UI)
+ → VIR program (typed dataflow DAG of capability invocations)
+ → GATES: type-check · capability closure ⊆ grants · contract preconditions
+          · taint/policy · cost estimate            [deterministic, no LLM]
+ → CANONICAL SENTENCE:
+      s = G(program, bindings, session)   // grammar-generated plain language
+      require parse(s) == program         // round-trip
+      require unique(s) in registry       // no two programs share a sentence
+      bind execution to H(s)              // what you read is what runs
+ → VEC dry-run on mocks → predicted-effect report
+ → Host approval (manifest) → execution → trace
+ → REIFICATION: save as named Command (VIR + param schema + intent aliases)
+ → DUAL FEEDBACK: corrections become scoped Rules ("archive ⇒ compress")
+```
+
+ML may only *rephrase input into the controlled language* — it never produces the sentence or bypasses a gate. LLM output is a **proposal in VIR**, constrained against extracted tool schemas; the gates are pure code.
+
+**VIR sketch:**
+
+```
+program refund_last_order(customer: Email) -> Refund {
+  o := orders.latest_where(customer = $customer, status = "captured")  [db:read]
+  require o != null : "no captured order for this customer"
+  r := billing.refundOrder(o.id, o.remaining)              [money:refund, db:write]
+  n := mail.send($customer, template("refund", r))         [net:smtp]
+  return r
+}
+```
+
+**Intent cache key:** `H(intent_template, param_schema, capability_set_version, policy_version)` → program id. Invalidated precisely on capability/contract/policy version bumps — not TTL guessing. Repeated intents drop to **L0: zero LLM, instant, deterministic**. The system learns *programs*, not tokens.
+
+### 4.3 VEC: deterministic execution core
+
+A fuel-metered VM (WASM-based) for VIR and the contract language:
+
+- **No ambient authority** — no syscalls; all I/O is an imported capability the Host must bind. A VEC program *cannot* touch the world unilaterally.
+- **Deterministic:** canonical decimals (no float in money paths); clock/random arrive only as injected capabilities, so they surface as declared effects.
+- **Replayable:** input log → identical output; snapshot/rollback of internal state.
+- Runs: contract checks, dry-runs, data transforms, wiki computations, UI logic, pure host-language functions wrapped as WASM components, agent tool sandboxing.
+
+### 4.4 Host: the capability kernel
+
+Object-capability security. Every real-world effect requires an unforgeable handle minted by the policy engine:
+
+```
+Caps_effective(sym, user) = Caps_declared(sym) ∩ Caps_granted(user) ∩ Caps_verified(sym)
+```
+
+(`Caps_verified` = declared for low-risk classes; evidence-confirmed for money, PII egress, deletion.)
+
+**Capability nodes are semantic, not API-shaped** — meaning, pre/postconditions, authority, cost, risk, **reversibility**, verification method, and *alternative bindings*: the same `send_message` capability can bind to a REST adapter, a browser-automation adapter, or a human fallback. Implementations are replaceable; programs don't change.
+
+Host duties: sandboxed adapters (HTTP/DB/FS/mail/payments/shell/browser) · effect-manifest approval UX (irreversible always prompts unless explicit standing grant) · budgets/rate limits/taint rules · secrets vault (handles only — values never enter VSG or LLM context) · **append-only hash-chained audit log that doubles as the evidence source** · saga registry with compensation actions for multi-effect commands.
+
+**Decision genealogy:** every gate decision, candidate elimination, approval, execution, and verification is an event with backward-traversable links — "why did the system believe/allow/do X" is a query, not a reconstruction.
+
+### 4.5 Generated UI
+
+Types + refinements + `@v.ui` hints → schema → renderer. Forms validate from contract predicates; tables from entity schemas; buttons bind to Commands with capability badges and confirm flows derived from risk class. While intent is being typed, the UI renders **semantic slots** (perceived intent → micro-corrections → refined intent) — the interface is a compiler front-end, maximizing information gain per unit of user effort. Change a type → every affected UI updates. **Human/agent parity:** anything clickable is callable, under the same Host policy.
+
+### 4.6 Self-modification (closing "describe, navigate, modify, operate")
+
+Agent proposes a code diff → vlc computes the **semantic impact set** *before* merge (affected contracts, capabilities, commands, UIs) → contracts generate regression tests → CI evidence gate → human review → merge → reindex → all projections update. The system modifies itself through the same verified pipeline it uses for everything else.
+
+---
+
+## 5. End-to-End Walkthrough
+
+**"Refund Acme's last order."**
+
+1. L0 miss (first time) → L2 grammar parse: `INTENT=refund, ENTITY=order, MODIFIER=last, OWNER=Acme` → L3 resolves Acme → `customer:vid` and order → `o_819` via VSG + session. No LLM yet.
+2. VIR program assembled from verified capabilities `orders.latest_where`, `billing.refundOrder`, `mail.send`.
+3. Gates pass: types ✓, caps ⊆ Owen's grants ✓, precondition `status=="captured"` provable from observed state ✓, taint ✓.
+4. Canonical sentence rendered and round-trip-verified: **"Refund $42.00 from order #819 to Acme Corp's original payment method, and email their billing contact."** Execution bound to `H(sentence)`.
+5. VEC dry-run: 1 refund row, 1 email, $42.00, compensation available (`void_refund` within 24h).
+6. Host manifest → Owen approves (irreversible class) → adapters execute → trace recorded.
+7. Evidence engine: `refundOrder` contract re-verified at this version; example promoted.
+8. Reified as Command `refund-last-order(customer)` — appears in palette, wiki, generated UI, MCP registry.
+9. **Next time: L0 hit. Zero LLM tokens, one confirmation, deterministic.** Genealogy event chain links utterance → resolution → gates → sentence hash → approval → effects → evidence.
+
+---
+
+## 6. Economics & Metrics
+
+| Operation | LLM tokens |
+|---|---|
+| Reindex, wiki, docs, UI, context packs, tool schemas | **0** |
+| Repeated command (cache hit) | **0** |
+| Contract check, dry-run, execution | **0** |
+| Novel intent planning (cache miss) | bounded, metered |
+| Enrichment proposals (coverage queue) | batched, off critical path |
+
+Track: semantic coverage % · verified-assertion ratio · intent-cache hit rate · tokens/task (must trend ↓) · edit→context latency · contract freshness · **unauthorized effects = 0** (hard invariant). Two flywheels: coverage ↑ and LLM dependence ↓ — the system gets *cheaper and smarter* with use, the inverse of chatbot economics.
+
+---
+
+## 7. Build Plan
+
+| Phase | Ship | Wedge / exit criterion |
+|---|---|---|
+| **P0** (4–6 wks) | VSL grammar, tree-sitter extraction, SQLite VSG, `vlc index/query/context`, TS adapter | "Stop paying an LLM to re-read your repo" — context packs beat naive RAG on a real repo, <100ms warm updates |
+| **P1** | AutoWiki (read-only + badges), watcher/LSP, test-report evidence, coverage queue | Wiki stays correct across 100 commits with zero regeneration cost |
+| **P2** | VIR + VEC (WASM), contract runtime checks, Host with 3 adapters (HTTP/FS/Postgres), policy + audit + genealogy | A pure program and an effectful program run end-to-end with manifest approval |
+| **P3** | Intent compiler (L0–L4 + L8), canonical sentence + hash binding, command reification, generated UI, dual-feedback rules, MCP/A2A emission | 10 real intents; second invocation of each costs 0 tokens |
+| **P4** | Rust adapter, AI enrichment + verification queue, signed VSG packs, workspace federation, browser-automation capability bindings | Cross-repo capability atlas; third-party pack verified and consumed |
+
+**Top risks → mitigations:** annotation drift (extracted always wins + drift detector) · resolver precision per language (adapter over real compilers, never DIY) · cold-start coverage (coverage queue + batched proposals) · evidence privacy (hashes/schemas only) · injection via annotations (deps enter as `proposed`; schemas from types) · graph scale (per-package sharding, query budgets).
+
+**What VLANG is not:** not a new language, not a type-checker replacement, not an autonomous agent with ambient authority, not a chatbot. It is the missing system layer between code and intelligence — **the substrate where software permanently remembers what it is, and intent permanently compiles into programs.**
+
+Want me to go one level deeper on any organ next — e.g., the full VSL EBNF + VIR type system, the SQLite schema DDL, or the P0 repo skeleton?
+
+### ASSISTANT
+Integrated. Your document is adopted as the **canonical baseline (v0.3)** — it's strictly more concrete than my Turn 1 on every axis that matters (two-axis provenance, resolver ladder, sentence-hash binding, dual feedback). Turn 1's surviving contributions are merged in below; everything else is retired with a mapping so nothing drifts. From here on, every turn compiles against this baseline.
+
+---
+
+# VLANG Master Spec v0.3 — Integration Pass
+
+## 1. Terminology reconciliation (canonical ← retired)
+
+| Canonical | Retired (Turn 1) | Note |
+|---|---|---|
+| **VSL** | "semantic layer / annotation grammar" | Protocol name; `@v.*` directives |
+| **vlc** | VSC | Incremental compiler, f0–f9 query graph |
+| **VSG** | VSM | Graph + assertion ledger + SQLite control plane |
+| **VIR** | — | Typed dataflow IR; the unit of validation and execution |
+| **Command** | Verb | Reified VIR + param schema + intent aliases |
+| **context pack** | context packet | Content-addressed, 2k/8k/32k tiers |
+| Host · VEC · AutoWiki · Evidence Engine · Context Engine | unchanged | — |
+
+## 2. Unified design laws (L1–L8)
+
+Your L1–L7 stand verbatim, with two merges from Turn 1:
+
+| # | Law | Enforcement point |
+|---|---|---|
+| L1 | **Code is canonical.** Strip every `@v` → valid, unchanged software. **VSG is rebuildable derived state** — delete the index, recompile, lose nothing. | VSL grammar; zero runtime deps; cold-rebuild CI check |
+| L2 | **One model, many projections.** Projection edits compile back into source. | Projection engine + writeback codemods (lens laws, D6) |
+| L3 | **Facts ≠ beliefs.** Origin × state on every assertion; planners treat only `verified` as fact. | Assertion schema + query trust filters |
+| L4 | **LLM ∈ resolvers, never the interpreter.** Cheapest resolver above threshold wins. | Ladder L0–L9; gates are pure code |
+| L5 | **No effect without a capability; no execution without a hash-bound, round-trip-verified sentence.** | Intent compiler + Host |
+| L6 | **Determinism by default.** VEC has no ambient authority. | WASM imports only; fuel; replay |
+| L7 | **Every interaction yields two outputs:** result + persistent improvement. | Dual feedback compiler |
+| **L8** | **Incremental or it doesn't ship.** Fingerprint-closure invalidation across graph, wiki, UI, packs, *and Commands* — not just the compiler. | Red-green query graph + delta subscriptions |
+
+(L8 promoted from Turn 1: it's load-bearing for L2 and the intent cache, so it belongs at law level. Turn 1's "graceful degradation" folds into L1; "capabilities as the only door" and "determinism first" fold into L5/L6/L4.)
+
+## 3. Trust model: two axes replace four tiers
+
+Your `origin × state` model supersedes my VERIFIED/DECLARED/INFERRED/STALE tiers. Mapping: VERIFIED→`state:verified`, DECLARED→`origin:declared, state:attested`, INFERRED→`origin:inferred, state:proposed`, STALE→`state:stale`. The operational contract, made explicit:
+
+| Assertion class | Wiki/docs | Context packs | Gates & execution |
+|---|---|---|---|
+| `extracted · verified` | ✅ | ✅ labeled | ✅ structural facts |
+| `declared · attested` | ✅ | ✅ | ✅ **low-risk caps only**, after gates |
+| `observed/derived · verified` | ✅ | ✅ | ✅ incl. money / PII egress / deletion |
+| `inferred · proposed` | ✅ dashed + chip | ⚠️ quarantined section, labeled; **never in tool schemas** | ❌ never |
+| `contradicted` | dispute queue | ❌ | ❌ |
+| `stale` | ✅ stale badge | ⚠️ flagged, excluded from planning | ❌ blocked, revalidation queued |
+
+This is the single table that makes "AI enriches without poisoning" testable: **zero inferred/stale/contradicted assertions in any execution path**, continuously asserted in CI alongside `unauthorized effects = 0`.
+
+## 4. The three loops (unified loop model)
+
+Turn 1 had two loops; your L7 and §4.6 make the third explicit. Canonical:
+
+- **Loop A — Understand** (every edit, Era 2): `edit → f0–f9 red-green → VSG delta → projections refresh → stale Commands flagged`. SLO: <100 ms warm reindex, <1 s full projection consistency.
+- **Loop B — Operate** (every intent, Era 3): `utterance → L0–L9 → VIR → gates → H(s)-bound sentence → dry-run → Host → VEC/adapters → trace → evidence → Command reification → next time L0`.
+- **Loop C — Improve** (every interaction, L7): corrections → scoped Rules · gaps → coverage queue → batched proposals → verification · agent diffs → impact set → generated tests → CI evidence gate → review → merge. Loop C is the "modify" in *describe, navigate, modify, operate* — self-modification through the same verified pipeline, never a side channel.
+
+The flywheel claim now has three compounding assets: **verified assertions ↑, Commands ↑, Rules ↑** — all local, signed, exportable. Cheaper *and* smarter with use.
+
+## 5. The spine: organs × spec turns × build phases
+
+Re-scoped series (spec order ≠ build order — Host is *built* in P2 but *specified* in T8 because VIR's type system must exist first):
+
+| Turn | Organ | Concrete artifacts | Phase |
+|---|---|---|---|
+| T1 ✅ | Foundations | This integrated baseline | — |
+| **T2** | **VSL protocol** | Full EBNF; per-directive semantics; identity algorithm (D1); `vlang.toml` schema; degradation + injection rules | P0 |
+| **T3** | **VSG kernel** | SQLite DDL; hash-chained assertion ledger; fusion algorithm; bitemporal queries; signed packs + SCIP interop | P0 |
+| **T4** | **vlc** | f0–f9 fingerprint specs; red-green propagation; adapter contracts (tsc/rust-analyzer/pyright); Datalog closures; watcher/CI modes | P0 |
+| **T5** | **Evidence + Context engines** | Span schema; attestation & promotion rules (D4); taint redaction; pack construction + budgets + delta subscriptions; MCP/A2A emission | P0/P1 |
+| **T6** | **Projections: AutoWiki + generated UI** | Page grammar; live badges; writeback codemods + lens laws (D6); type→schema→renderer pipeline; semantic slots | P1/P3 |
+| **T7** | **Intent compiler** | L0–L9 arbitration + thresholds (D8); VIR type system (D7); gates; sentence generator G + round-trip + uniqueness registry (D3); Command reification; Rules | P3 |
+| **T8** | **VEC + Host** | WASM VM spec (fuel, determinism, replay); capability minting/attenuation; adapters; manifest UX; sagas/compensation; genealogy + audit ledger | P2 |
+| **T9** | **Self-mod & operations** | Impact-set pipeline; CI evidence gate; federation trust roots; threat model; eval harness; **P0 repo skeleton + solo build plan** | P4 |
+
+Your closing offer (VSL EBNF, VIR type system, DDL, P0 skeleton) is exactly what T2/T7/T3/T9 now deliver systematically.
+
+## 6. Build-plan deltas (three changes to P0–P4)
+
+1. **MCP wedge moves to P0.** Exit criteria gain: `vlc serve --mcp` exposing `getContext` + `query` as read-only tools. Zero LLM cost, and every existing agent (Claude, Cursor, …) becomes a distribution channel *before* AutoWiki exists. Full `@v.agent` tool-schema emission stays in P3 where the Host can gate it.
+2. **P0 thin slice for a solo builder.** 4–6 weeks is achievable only descope-ordered: TS-only, single package, CLI + watch (LSP deferred to P1), pack v0 = typed 1–2-hop expansion (personalized PageRank deferred), five core tables (`nodes, edges, assertions, evidence, packs`). Everything else in P0's exit criteria stands.
+3. **P1 exit hardened:** "wiki correct across 100 commits" gets a mechanical check — cold-rebuild diff == incremental state (L1 + L8 as a test, not a promise).
+
+## 7. Merged SLOs & economics
+
+Your token table stands as-is (0 tokens for reindex/wiki/UI/packs/repeated commands; metered LLM only at L8 and batched enrichment). Merged latency/quality targets:
+
+| Metric | Target |
+|---|---|
+| Warm edit → vlc reindex | < 100 ms |
+| Edit → all projections consistent | p95 < 1 s @ 1M LOC |
+| Cold index 1M LOC | minutes (f0–f2 parallel) |
+| Pack recall of needed symbols | ≥ 95% within tier budget |
+| Repeated intent | L0 hit, 0 tokens, one confirmation |
+| Unauthorized effects · inferred/stale in execution path | **0 / 0** (hard invariants, CI-tested) |
+| Trends | coverage ↑ · verified ratio ↑ · cache hit ↑ · tokens/task ↓ |
+
+Canonical E2E trace: your **"Refund Acme's last order"** walkthrough (§5), steps 1–9. Turn 1's demo survives only as the 3-beat script: edit→projections (A), 2KB pack (context), NL→refund→L0 (B+C).
+
+## 8. Open-problems ledger (the hard unspecified bits, assigned)
+
+These are real tensions in the baseline, each with a proposed resolution to be ratified in its turn:
+
+| # | Problem | Proposed resolution | Turn |
+|---|---|---|---|
+| **D1** | `vid = blake3(canonical_shape)` breaks identity on signature change — orphans evidence instead of marking it stale, contradicting §3.3. | **Split identity from fingerprint:** `vid` = stable (explicit `@v.id` > anchored qualified name + history); `shape_hash` = blake3(canonical_shape), drives staleness. Signature change keeps vid, flips evidence → stale. | T2/T3 |
+| **D2** | Fusion `extracted > observed` is wrong for dynamic dispatch/reflection — static extraction can't see edges runtime takes. | Extracted wins *contradictions about static structure*; observed may **add** dynamic edges with provenance, never silently overwrite. | T4 |
+| **D3** | `parse(s) == program` + sentence uniqueness require G injective modulo bindings; collisions and locale unspecified. | Uniqueness registry per workspace; collision → append disambiguating bindings → else L9; canonical locale pinned per workspace. | T7 |
+| **D4** | Hash-only traces prove *occurrence*, not *semantics* — "contract verified" needs the predicate actually evaluated. | Contract checks execute in-trace on VEC, signed by CI/Host key; define attested→verified promotion + freshness/replay rules. | T5 |
+| **D5** | Injection firewall covers tool schemas but `@v.means` prose flows into packs. | Dep-origin prose quarantined + labeled in packs too; render-time provenance tags mandatory. | T5 |
+| **D6** | Wiki writeback needs formal round-trip guarantees or L2 drifts. | Lens laws (put-get / get-put) as property tests per projection; conflict UX for moved anchors. | T6 |
+| **D7** | VIR type system unspecified: effects, taint, totality, fuel, capability-closure decision procedure. | Effect rows + taint types + total expression language; closure check = graph reachability ⊆ grants. | T7/T8 |
+| **D8** | Ladder thresholds, cost metering, session-state schema, L9 disclosure UX uncalibrated. | Per-rung confidence thresholds tuned on the 10-intent P3 corpus; every rung emits genealogy events. | T7 |
+| **D9** | Datalog closure cost at scale; federation trust roots; SCIP mapping. | Per-package sharding + query budgets; signed packs with explicit trust roots; vid↔SCIP symbol bridge. | T3/T9 |
+
+D1 is the only one I'd call a **spec correction** rather than an open detail — the identity/fingerprint split should be treated as decided unless you object.
+
+---
+
+**Baseline locked.** Say **next** → **Turn 2: VSL protocol spec** — full EBNF, per-directive semantics, the D1 identity algorithm, `vlang.toml`, and the degradation/injection rules. Or ratify/amend any ledger item first.
+
+### USER
+next high effort deep and comprehensive
+
+
+### ASSISTANT
+# TURN 2 — VSL: The VLANG Semantic Layer
+**Protocol Specification v0.3 · Build phase P0 · Ratifies D1, resolves D5 (protocol side)**
+
+VSL is the wire format everything else compiles against. This turn specifies it completely enough to implement `f0`/`f1` and emit assertions into T3's schema: carriers and attachment, full EBNF, per-directive semantics and assertion emission, the identity/fingerprint system, overlays, `vlang.toml`, degradation conformance, the injection firewall, diagnostics, and a worked end-to-end example.
+
+---
+
+## 1. Scope and deliberate exclusions
+
+**In scope:** a line-oriented directive grammar embedded in ordinary comments; deterministic attachment to host-language declarations; a total predicate language for contracts; a capability expression language shared by VSL, VIR, and the Host; stable identity under refactoring; trust rules at the protocol boundary.
+
+**Deliberately excluded (and why):**
+
+| Excluded | Reason |
+|---|---|
+| New syntax, macros, decorators, proc-macros, runtime libraries | L1: zero runtime dependency; TS decorators and Rust proc-macros are *code*, not comments |
+| Type syntax | f4 adapters over real compilers already own types; VSL references them, never redefines them |
+| Effect execution semantics | VSL *declares* requirements; only the Host grants authority (L5) |
+| Remote intra-file targeting (`@v.on`) | Overlays (§6) cover un-annotatable code; keeps attachment context-free |
+| Regex, recursion, user-defined functions in predicates | Predicates must be **total** and fuel-bounded (§4.4); regex invites ReDoS in a security surface |
+| Idempotency/cost/SLA directives | Candidate extensions driven by T8 saga design; not silently added to core |
+
+---
+
+## 2. Embedding model
+
+### 2.1 Carriers per language
+
+| Language | Symbol carrier | Module carrier | Normalization (f0) |
+|---|---|---|---|
+| TypeScript/JS | `/** … */` JSDoc, `//` lines | file-leading block containing `@v.module` | strip `//`, `/**`, `*/`, leading `*` per line |
+| Rust | `///` outer doc lines | `//!` inner doc lines | strip `///`, `//!` |
+| Python | `#` lines | leading `#` block before first statement | strip `#` |
+| Any future language | line or block comments only | same pattern | carrier table is the only per-language plugin |
+
+**Two traps, closed by spec:**
+- **Python docstrings are forbidden carriers.** A docstring is a string literal; stripping directives from it changes `__doc__` — observable runtime behavior, violating L1. `#` comments only.
+- **Rust `#[doc = …]` attributes are forbidden carriers.** They are tokens in the item stream, not comments. `///`/`//!` only (their content affects rustdoc output, which §8 defines as a documentation surface, not software behavior).
+
+### 2.2 Blocks and attachment (deterministic, CST-based)
+
+- A **normalized line** is a comment line whose trimmed, carrier-stripped text begins with `@v.`.
+- A **directive block** is a maximal run of normalized lines within one comment token (blank normalized lines allowed inside), or across *directly adjacent* comment tokens (next line, same indentation, nothing between).
+- A block attaches to the **next declaration sibling** in the CST, skipping modifiers (`export`, `pub`), attributes, and Python decorators. Targets: function/method, class/struct/enum, interface/type alias/trait, const-with-function-initializer, field/member, impl block.
+- A block containing `@v.module` must be file-leading (before the first declaration; Rust: any `//!` run). It attaches to the Module node.
+- Only the **immediately preceding** comment region attaches. Directive lines in a detached comment are orphans → `VSL010`, assertions held `proposed`, never silently dropped.
+- Two adjacent blocks before one declaration merge; conflicting single-valued directives → `VSL011`.
+
+### 2.3 The f0 output contract
+
+```
+f0 collect(file) → {
+  file_uri, language, content_hash,
+  comments: [{ span: (byte_start, byte_end), carrier, normalized_lines: [{text, span}] }],
+  attachments: [{ block_id, target_cst_node, target_span }]
+}
+```
+
+**Byte spans are preserved end-to-end.** T6's wiki writeback codemods edit directives *in place* — L2's "projection edits compile back to source" is only implementable if f0 never discards positions.
+
+---
+
+## 3. Grammar (EBNF)
+
+ISO-style: `,` concatenation · `|` alternation · `{ }` zero-or-more · `[ ]` optional · `"…"` terminals. Parsed from normalized lines; `ws` = spaces/tabs; one directive per line (no continuations — repetition replaces multi-line forms, §4.1).
+
+```ebnf
+block       = directive , { newline , [ directive ] } ;
+directive   = "@v." , ( id | is | means | why | contract | cap | flow | rel
+                      | example | agent | ui | status | since | until
+                      | module | target | pin | extension ) ;
+extension   = "x." , ident , [ ws , text_line ] ;        (* §12: never gates *)
+
+id          = "id"      , ws , handle ;
+is          = "is"      , ws , kind ;
+means       = "means"   , ws , text_line ;               (* ≤ 200 chars, semantic check *)
+why         = "why"     , ws , text_line ;               (* may end with adr:<id> or URL *)
+contract    = "contract", ws , clause , ":" , ws , predicate ;
+cap         = "cap"     , ws , cap_expr , { ws , cap_expr } ;
+flow        = "flow"    , ws , taint , { ws , taint } ;
+rel         = "rel"     , ws , relation , ws , anchor , { "," , [ws] , anchor } ;
+example     = "example" , ws , [ "name:" , ws , string , ws ] ,
+              "in:" , ws , literal , ws , outcome ,
+              [ ws , "effects:" , ws , "[" , cap_expr , { "," , cap_expr } , "]" ] ,
+              [ ws , "match:" , ws , ( "subset" | "exact" ) ] ;
+outcome     = ( "out:" , ws , literal ) | ( "throws:" , ws , string ) ;
+agent       = "agent"   , ws , "expose:" , ws , string , { ws , "risk:" , ws , risk } ;
+ui          = "ui"      , ws , ui_kv , { ws , ui_kv } ;
+ui_kv       = ( "label:" | "group:" ) , ws , string
+            | "widget:"  , ws , ident
+            | ( "confirm:" | "hidden:" ) , ws , boolean
+            | "order:"   , ws , integer ;
+status      = "status"  , ws , lifecycle , [ ws , "use:" , ws , anchor ] ;
+since       = "since"   , ws , version_ref ;
+until       = "until"   , ws , version_ref ;
+module      = "module"  , ws , handle , [ ws , text_line ] ;
+target      = "target"  , ws , anchor ;                  (* overlay files only, §6 *)
+pin         = "pin"     , ws , "iface:" , hash ;         (* overlay files only, §6 *)
+
+kind        = "function" | "entity" | "service" | "event" | "capability"
+            | "workflow" | "resource" | "module" ;
+clause      = "pre" | "post" | "inv" ;
+risk        = "pure" | "read" | "write" | "irreversible" ;
+lifecycle   = "stable" | "experimental" | "deprecated" ;
+relation    = "implements" | "mirrors" | "supersedes" | "owns"
+            | "emits" | "consumes" | "documents" ;
+taint       = label , [ "(" , position , { "," , position } , ")" ] ;
+label       = "pii" | "secret" | "money" | "regulated" | ident ;   (* custom via toml *)
+position    = path ;                                     (* param, result, or field path *)
+anchor      = handle | qualified | "scip:" , scip_symbol ;
+handle      = ident , { "." , ident } ;
+qualified   = ident , { "." , ident } ;                  (* workspace-first resolution *)
+version_ref = semver | "git:" , commit_ish ;
+hash        = "blake3:" , hex ;
+
+cap_expr    = ns , ":" , action , [ "(" , cap_arg , { "," , cap_arg } , ")" ] ;
+cap_arg     = constraint | scope ;
+constraint  = ident , "=" , predicate ;                  (* named args = constraints *)
+scope       = resource_pat | "*" ;                       (* positional args = scope *)
+resource_pat= segment , { sep , segment } , [ sep , glob ] ;
+sep         = "." | "/" ;  glob = "*" | "**" ;  segment = ident | integer ;
+ns          = "db" | "net" | "fs" | "money" | "mail" | "shell" | "browser"
+            | "clock" | "rand" | "secret" | "queue" | "human" | ident ;
+action      = ident | "*" ;
+
+predicate   = or ;
+or          = and , { "||" , and } ;
+and         = unary , { "&&" , unary } ;
+unary       = "!" , unary | comparison ;
+comparison  = sum , [ ( "==" | "!=" | "<" | "<=" | ">" | ">=" | "in" ) , sum ] ;
+sum         = product , { ( "+" | "-" ) , product } ;
+product     = postfix , { ( "*" | "/" | "%" ) , postfix } ;
+postfix     = primary , [ "'" ] ;                        (* post-state prime; post only *)
+primary     = literal | quantifier | builtin | path
+            | "(" , predicate , ")" | "-" , primary ;
+quantifier  = ( "forall" | "exists" ) , ident , "in" , sum , ":" , predicate ;
+builtin     = ( "sum" | "count" | "min" | "max" | "len" | "abs" | "old" ) ,
+              "(" , predicate , ")" ;
+path        = ident , { "." , ident } ;                  (* incl. keyword `result` *)
+literal     = number | string | boolean | "null" | array | object ;
+array       = "[" , [ literal , { "," , literal } ] , "]" ;
+object      = "{" , [ entry , { "," , entry } ] , "}" ;
+entry       = ( ident | string ) , ":" , literal ;       (* bare keys allowed *)
+
+ident       = ( letter | "_" ) , { letter | digit | "_" } ;
+number      = integer , [ "." , digit , { digit } ] ;    (* canonical decimal, never float *)
+string      = '"' , { json_char | json_escape } , '"' ;
+text_line   = sanitized_utf8_to_eol ;                    (* no C0/C1 controls, no bidi overrides *)
+```
+
+**Lexical rules:** directive names are ASCII-lowercase; prose payloads are UTF-8 sanitized at f1 (control characters and bidi overrides stripped → `VSL081` warning — homoglyph/spoofing defense). Numbers are canonical decimals; float arithmetic is unreachable in money paths because VEC has no floats (T8). Strings use JSON escaping.
+
+---
+
+## 4. Directive reference
+
+### 4.1 Multiplicity and merge semantics
+
+| Directive | Per target | Repeat semantics |
+|---|---|---|
+| `id`, `is`, `means`, `status`, `agent` | **single** | duplicate → `VSL011` error |
+| `why` | repeatable | concatenated as paragraphs (ordered) |
+| `contract` | repeatable | same-clause lines **AND-conjoin**; this replaces multi-line continuation |
+| `cap` | repeatable | **union** of capability sets |
+| `flow` | repeatable | union of labels/positions |
+| `rel` | repeatable | union of edges |
+| `example` | repeatable | each becomes a distinct Test node (auto-named `ex1…exN` if unnamed) |
+| `ui` | repeatable | key-merge; duplicate key → last wins + `VSL013` warning |
+| `since`/`until` | single each | — |
+
+### 4.2 Assertion emission contract (the T3 interface)
+
+Every directive emits assertions in T3's schema — never bare facts. **Lifecycle rule: all declared assertions are born `proposed` at f1; vlc's static validation (f4–f6) promotes them to `attested`; only evidence or signed human review reaches `verified`. Dep-origin assertions are capped at `proposed` (§9).**
+
+| Directive | Predicate emitted | Object | Static validation → `attested` when… | Ceiling without evidence |
+|---|---|---|---|---|
+| `@v.id` | *(identity registry, not an assertion)* | handle → vid | handle unique in workspace | — |
+| `@v.is` | `kind` | kind enum | compatible with syntactic category (below) | attested |
+| `@v.means` | `means` | text | ≤200 chars, sanitized | attested¹ |
+| `@v.why` | `rationale` | text + optional ref | ref resolves (adr/file/URL syntactic) | attested¹ |
+| `@v.contract` | `has-contract` | Contract node (clause, normalized predicate AST) | parses; paths resolve against f4 signature; clause scoping legal; type-checks | **verified only via D4 evidence** |
+| `@v.cap` | `requires-cap` | Capability node (ns, action, scope, constraints) | parses; ns/action in registry; constraints reference params | attested; high-risk classes need evidence (§7) |
+| `@v.flow` | `tainted-by` | label + positions | label in registry; positions resolve | attested; f9 adds `derived` propagation |
+| `@v.rel` | the relation itself | target vid | target resolves; kind-pair legal (e.g., `emits` → Event) | attested |
+| `@v.example` | `has-example` | Test node (in/out/throws/effects/match) | `in` type-checks against params; `out` against return | verified/contradicted **only by execution** |
+| `@v.agent` | `exposed-as` | tool name + risk | name unique; risk ≥ computed floor (§4.6) | attested |
+| `@v.ui` | `ui-hint` | key/value | widget in registry; keys valid | attested |
+| `@v.status` | `lifecycle` | state + migration anchor | `use:` resolves | attested |
+| `@v.since/until` | `valid-from/valid-until` | version interval | resolves to commit/tag | attested |
+| `@v.module` | Module node + `means` | handle + text | file-leading position | attested¹ |
+
+¹ **Meaning-class assertions (`means`, `why`, `kind`, prose) never feed gates.** Fusion for meaning is `declared > inferred` regardless of state; gates consume only structural, capability, and contract assertions. This is the operational reading of L3.
+
+**`@v.is` compatibility matrix** (extraction constrains meaning, never invents it): `function` requires a callable; `entity` requires a data type (class/struct/interface/type with fields); `event` requires a type or emitter symbol; `service`/`workflow`/`resource`/`capability` require a module, class, or function. Incompatible → `contradicted` + dispute, not silent override.
+
+### 4.3 `@v.means` — the semantic search unit
+
+One line, ≤200 chars, present tense, verb-first recommended. The **only** text embedded for intent resolution L5 (baseline: embeddings over means lines only). Everything else is retrieved structurally. Consequence: means quality directly bounds L5 recall; the coverage queue (T6) ranks missing means by graph centrality.
+
+### 4.4 `@v.contract` — executable, total, clause-scoped
+
+**Scoping rules (validated at f6, `VSL021–023`):**
+
+| Clause | May reference | Prime `'` / `old()` | `result` | Evaluated |
+|---|---|---|---|---|
+| `pre` | params, reachable state via paths | ❌ | ❌ | call entry, before any effect |
+| `post` | params, primed paths, `old(expr)`, `result` | ✅ | ✅ | normal return, before commit |
+| `inv` | entity fields (single state) | ❌ | ❌ | entity load + every commit boundary |
+
+- `x'` denotes post-state of path `x`; `old(expr)` is the general form for arbitrary expressions. `order.remaining' == order.remaining - amount` is sugar for `order.remaining' == old(order.remaining) - amount`.
+- **Totality:** no recursion, no user calls, quantifiers iterate only finite in-memory collections, every builtin is O(n) bounded, evaluation is fuel-metered by VEC. A contract can fail or exhaust fuel (→ `inconclusive`, never `verified`), but can never hang or effect.
+- **Where checks run:** pure symbols → VEC inline; effectful symbols → Host wrapper around the adapter call (pre before, post after, inv at commit). Check outcomes are signed spans → D4 evidence (T5).
+- **Static consistency (f6):** contracts referencing nonexistent paths, type-mismatched comparisons, or unsatisfiable conjunctions detectable by the normalization pass → diagnostic + `proposed`, never `attested`.
+- Contracts are **versioned objects**: normalization produces a canonical AST hash that participates in `iface_hash` (§5) — reordering two `pre:` lines is a no-op; changing a bound stales evidence.
+
+### 4.5 `@v.cap` — requirements, never grants
+
+`ns:action(scope…, constraint=value…)`. Positional args are **scope** (resource patterns: tables, hosts, path globs); named args are **constraints** (predicates over params). `money:refund(max=order.remaining)` reads: *requires the refund capability, attenuated to at most the order's remaining balance.*
+
+**Core namespace registry (frozen per spec minor version):**
+
+| ns | actions | default risk floor |
+|---|---|---|
+| `db` | read, write, rw, migrate | write (read → read) |
+| `net` | https, grpc, ws | write |
+| `fs` | read, write, delete | write; delete → irreversible |
+| `money` | charge, refund, void | **irreversible** |
+| `mail` | send | write |
+| `shell` | exec | **irreversible** |
+| `browser` | navigate, click, extract | write |
+| `clock` / `rand` | now / bytes | read (declared effects — determinism surfaces them) |
+| `secret` | use | write; value never enters VSG |
+| `queue` | publish, consume | write |
+| `human` | ask, approve | read (the human-fallback binding, T8) |
+
+**Attenuation lattice (shared with Host, T8):** `A ⊑ B` iff same ns, A's action ∈ B's actions (`*` subsumes), A's scope matches ⊆ B's patterns, and B's constraints are implied by A's (syntactic implication first; decidable predicate cases via VEC; otherwise conservatively **not** ⊑ → clarification, never silent widening).
+
+**The f5 intersection, both directions:**
+
+```
+declared  = union of @v.cap on the symbol (+ module-level caps as defaults)
+extracted = capability set derived from the body's adapter call graph (f4/f9)
+
+verified-set candidates = declared ∩ extracted      → attested (evidence for high-risk)
+declared − extracted                                → proposed + VSL031 (drift: over-declaration)
+extracted − declared                                → proposed + VSL032 (coverage gap: undeclared effect)
+```
+
+Neither difference ever executes: effective caps at runtime are `declared ∩ granted ∩ verified` (Host, T8). An undeclared extracted effect is a **blocker for exposure**, not a silent permission.
+
+### 4.6 `@v.agent` — exposure with a risk floor
+
+`risk` is a lattice: `pure < read < write < irreversible`. vlc computes the **floor** from the effective capability set (max of ns risk floors, §4.5). Declaring below floor → `VSL070` error, assertion rejected. Declaring above floor is allowed (conservative). `expose:` names are workspace-unique (`VSL071`). Tool schemas are built from **f4 extracted types only** (§9). One declaration, three audiences: human docs, MCP tools, A2A capability descriptors — all projections (L2).
+
+### 4.7 `@v.example` — annotations that become evidence
+
+- `in:` is an object keyed by **parameter name**; each value type-checks against the extracted param type (`VSL060`). Branded/nominal types (e.g., `Cents`) check structurally where the adapter exposes refinement; otherwise deferred to execution.
+- `out:` matching: `subset` (default) — every specified key must match, unspecified keys ignored; `exact` — deep equality. `throws:` asserts an error whose message contains the string.
+- `effects:` (optional) asserts the **dry-run effect manifest**: the exact capability multiset the call should produce. This is how effectful functions get examples without touching the world.
+- **Execution modes:** pure symbol → VEC directly. Effectful symbol → VEC dry-run with Host **mock adapters** (deterministic fixtures; policy in `vlang.toml`). A pass emits `observed` evidence promoting the example and any contracts exercised; a fail → `contradicted` + dispute queue (`VSL061`).
+- Examples are the cheapest verified-truth factory: one annotation line becomes a permanent regression test that re-runs on every `body_hash` change (§5).
+
+### 4.8 Lifecycle and relations
+
+`@v.status deprecated use: billing.refundV2` → wiki banner, planner penalty (T7 ranks deprecated candidates last), Command migration hints on stale bindings. `@v.since/until` resolve to VSG version intervals feeding T3's bitemporal `valid` field. `@v.rel supersedes` additionally creates wiki redirects and evidence-migration *candidates* (never automatic promotion — new implementation, new evidence).
+
+---
+
+## 5. Identity and fingerprints — D1 ratified
+
+**The correction from T1 stands: identity and shape are different hashes with different jobs.** `vid = blake3(shape)` is rejected — it orphans evidence on every signature change instead of staling it.
+
+### 5.1 The two-layer scheme
+
+```
+anchor(sym) = (workspace, package, module_path, qualified_name, syntactic_kind)
+
+vid assignment ladder (deterministic, no ML — L4 applies to identity too):
+  1. explicit @v.id      → handle registry lookup; live collision → VSL002 dispute
+  2. exact anchor match  → reuse vid from anchor_history
+  3. move/rename resolution (§5.3)
+  4. mint: vid = blake3("vlang/vid/0.3" ‖ canonical(anchor) ‖ first_seen_commit)
+
+iface_hash = blake3("vlang/iface/0.3" ‖ canonical(
+    kind, structural_param_types, structural_return_type,
+    normalized_contract_set, declared_cap_set, taint_labels, agent_exposure))
+
+body_hash  = blake3("vlang/body/0.3" ‖ canonical_body_ast)   (* comments stripped,
+                                                              local binders α-normalized *)
+doc_hash   = blake3("vlang/doc/0.3" ‖ means ‖ why ‖ ui ‖ status)
+```
+
+- **Names are excluded from `iface_hash`** — a rename must not stale behavioral evidence. Types are **structurally canonicalized** via f4 (alias renames are no-ops; nominal types hash by their vid; recursive types hash their SCC once).
+- **α-normalization of local binders** makes internal variable renames green — cosmetic refactors invalidate nothing (salsa-style red-green, L8).
+- Domain separation prefixes prevent cross-purpose hash collisions.
+
+### 5.2 Three invalidation lanes and the staleness matrix
+
+| Edit | doc | iface | body | Staled / invalidated |
+|---|:-:|:-:|:-:|---|
+| Non-`@v` comment typo | – | – | – | **nothing** |
+| `@v.means`/`why`/`ui`/`status` edit | ✓ | – | – | wiki/pack re-render only; zero evidence impact |
+| Rename/move (any distance) | – | – | – | anchor rebind only (§5.3); evidence stays verified |
+| Local-variable rename in body | – | – | – | nothing (α-normalized) |
+| Body edit, same interface | – | – | ✓ | traces + examples → `stale`; extracted caps recomputed; **Commands stay bound** but high-risk caps (money, PII egress, deletion) suspend until re-verified — `Caps_verified` requires fresh evidence |
+| Signature / contract / cap / taint / exposure edit | – | ✓ | ✓ | contracts, examples, traces → `stale`; dependent closure (f9); Commands → `stale`; UI schemas + packs regenerate |
+
+This matrix *is* the L8 implementation contract: each lane propagates independently and **stops when its output fingerprint is unchanged**. It also resolves the tension in baseline §3.3 ("change the symbol → evidence stale") with precision: *which* change stales *which* evidence class.
+
+### 5.3 Rename/move resolution
+
+On each commit, vlc diffs anchor sets: `disappeared` × `appeared`.
+
+1. **Exact `iface_hash` + `body_hash` match, unique candidate** → auto-relink; emit `derived` assertion `moved-from(old_anchor)`, signer `vlc@0.3`.
+2. **`iface_hash` match + git rename/similarity detection corroborates, unique** → auto-relink, same assertion.
+3. **Ambiguous (≥2 candidates) or iface changed AND moved** → mint *provisional* vid, enqueue dispute with both candidates; one-click human resolution writes an `anchor_history` entry (signed). Provisional vids never inherit evidence.
+4. Explicit `@v.id` always wins and makes all of this moot — the recommended practice for anything exposed via `@v.agent` or bound by Commands.
+
+`anchor_history` is append-only: identity is auditable genealogy, not a mutable pointer.
+
+### 5.4 SCIP bridge
+
+Anchors carry a canonical SCIP symbol string for interop (T3 stores it; T9 federates on it). SCIP's symbol grammar is `<scheme> ' ' <manager> ' ' <package-name> ' ' <version> ' ' (<descriptor>)+`, with descriptor suffixes `/` namespace, `#` type, `.` term, `name().` method, `[T]` type-parameter, `(p)` parameter, spaces escaped by doubling and `.` as the empty placeholder . Example overlay target:
+
+```
+scip:scip-typescript npm psp-sdk 3.2.1 PspClient#refund().
+```
+
+Rule: **SCIP strings are anchors, never vids.** SCIP identity is name-shaped (breaks on rename); VSL identity is history-shaped. The bridge maps, it does not replace.
+
+---
+
+## 6. Overlays — annotating code you don't own
+
+Problem: `node_modules` and crates.io code can't carry your annotations, and dep-shipped annotations are untrusted (§9). Solution: **workspace-local sidecar files**, `.vsl/overlays/*.vsl`:
+
+```
+//@v.target scip:scip-typescript npm psp-sdk 3.2.1 PspClient#refund().
+//@v.pin iface:blake3:7c1f9a…
+//@v.means Refund via PSP REST API; idempotent by merchant-supplied key.
+//@v.cap money:refund net:https(api.psp.example)
+//@v.flow money
+//@v.rel mirrors billing.refundOrder
+```
+
+| Rule | Spec |
+|---|---|
+| Target | must resolve to an indexed symbol (`VSL091` if not) |
+| Pin | **required**: `iface_hash` at authoring time; mismatch after dep upgrade → all overlay assertions `stale` + `VSL090` drift diagnostic |
+| Trust | **trust follows the asserter, not the subject**: a local overlay is *your* signed declaration → `declared/attested` ceiling; the dep's own shipped `@v` lines stay `proposed` forever until human review |
+| Execution | unchanged — high-risk caps still require evidence; an overlay never grants authority |
+| Multiplicity | one block per target per workspace; overlay + dep-shipped directives on the same symbol → fusion precedence applies, conflicts → dispute |
+
+Overlays are the cold-start weapon: day-one coverage of your dependency surface without waiting for upstream adoption.
+
+---
+
+## 7. `vlang.toml` — workspace policy
+
+```toml
+[vlang]
+spec      = "0.3"                  # VSL grammar version
+workspace = "acme-shop"
+locale    = "en-US"                # D3: canonical-sentence locale, pinned per workspace
+
+[languages]
+typescript = { adapter = "tsc", tsconfig = "./tsconfig.json" }
+rust       = { adapter = "rust-analyzer", manifest = "./Cargo.toml" }
+
+[index]
+include  = ["src/**", "crates/**"]
+exclude  = ["**/node_modules/**", "**/target/**", "**/*.generated.ts"]
+overlays = ".vsl/overlays"
+
+[trust]
+deps               = "proposed"    # only legal value for unsigned deps in 0.3
+trusted_publishers = ["acme:ed25519:AB12…"]   # signed VSG packs → attested ceiling
+signer             = "git"         # assertion signer from commit signature, fallback git-author
+
+[capabilities]                     # risk floors + verification requirements (never grants)
+money      = { risk = "irreversible", verify = "evidence" }
+pii_egress = { risk = "write",        verify = "evidence" }
+db         = { risk = "write",        verify = "declared" }
+net        = { risk = "write",        verify = "declared" }
+fs         = { risk = "write",        verify = "declared" }
+clock      = { risk = "read",         verify = "declared" }
+
+[evidence]
+tests        = ["junit:reports/*.xml", "nextest:target/nextest/*/junit.xml"]
+ci_keys      = ["ci:ed25519:9F3E…"]  # signatures whose packs can promote → verified
+decay        = "fingerprint"         # staleness per §5.2 matrix
+mock_adapters = ".vsl/mocks"         # deterministic fixtures for effectful @v.example
+
+[taint]
+labels       = ["pii", "secret", "money", "regulated"]   # extend: "phi", …
+redact       = "hash"                # outside Host: schemas + hashes only, never values
+egress_sinks = ["net:*", "mail:*", "fs:/public/**"]
+
+[enrichment]
+mode                  = "batch"      # never on the critical path (L4 economics)
+budget_tokens_per_day = 200_000
+queue                 = "centrality"
+
+[context]
+tiers        = [2048, 8192, 32768]
+default_tier = 8192
+```
+
+**Critical separation:** `vlang.toml` sets *floors and defaults*, never grants. Grants live only in the Host (T8). And one cross-turn hook, locked now:
+
+```
+policy_version = blake3(canonical([capabilities] ‖ [trust] ‖ [taint]))
+```
+
+This feeds the baseline intent-cache key `H(intent_template, param_schema, capability_set_version, policy_version)` — tightening a risk floor **precisely invalidates exactly the cached Commands it affects**, not by TTL guessing. Policy edits are Loop-A events like code edits.
+
+---
+
+## 8. Degradation and L1 conformance
+
+**L1, stated precisely:** stripping every `@v` line preserves (a) parse validity, (b) type-check results, (c) runtime behavior, (d) all toolchain outputs **except documentation surfaces** (rustdoc/JSDoc renderers legitimately lose the annotation text). Byte-identical build artifacts are *not* required — e.g., `tsc` with default `removeComments: false` emits comments into JS, so stripped output differs byte-wise while behavior is identical.
+
+**The stripper (per language):** remove normalized `@v.` lines including their carrier prefix (`*` in JSDoc); leave all other comment content; collapse a comment shell left empty. Never touch code tokens — the forbidden-carrier rules (§2.1) guarantee code tokens never contain directives.
+
+**L1 conformance suite (CI, corpus repos):**
+
+```
+strip(repo) → parse ✓ → typecheck ✓ → test-suite ✓ → AST-equivalence modulo comments ✓
+```
+
+**L8/L1 joint check (also P1 exit criterion):** `cold_rebuild(repo) ≡ incremental_state(repo after N commits)` — graph-state equality, not vibes. Delete the SQLite file, reindex, diff. This is the mechanical proof that VSG is derived state and incrementality is sound.
+
+**Zero-annotation floor:** a repo with no VSL at all still yields the full extracted graph (symbols, types, calls, extracted caps) — degraded in *meaning*, never in *function* or *structure*.
+
+---
+
+## 9. Trust and the injection firewall (D5, protocol side)
+
+Five rules, all enforced at f1/f5/f6 and pack render time:
+
+1. **Payloads are data, never instructions.** No directive content is ever templated into an LLM prompt as instruction text. Prose renders in packs as labeled, quoted blocks with origin chips (`declared·workspace`, `proposed·dep`). T5 specifies rendering; the protocol guarantees the labels exist.
+2. **Dep-origin prose is quarantined everywhere** — wiki (dashed + chip), packs (quarantined section), and **tool descriptions**. Amendment to the baseline, resolving D5: schema *structure* comes from f4 types only; the description field may use `means` **only if workspace-authored or workspace-reviewed** (`attested` with a human signer). Dep-shipped means never reaches a tool description.
+3. **Capability declarations never grant.** A dep declaring `@v.cap shell:exec` records a *requirement*; effective caps intersect with grants, which are Host-side and empty by default. Annotation ≠ authority.
+4. **Dep contracts are sandboxed checks.** Total language + fuel + no capability imports means a malicious contract can at worst fail or exhaust fuel → dispute queue, never execution, never DoS of the indexer.
+5. **Signer attribution at birth.** Workspace directives: signer from git commit signature (fallback `human:<git-author>`, marked weak). Overlays: overlay author. Dep directives: `dep:<package>@<version>`. vlc-derived: `vlc@0.3`. T3's hash-chained ledger preserves this forever — "who claimed this, when, at which version" is a query.
+
+Unicode/bidi sanitization (§3) closes the visual-spoofing channel: what a human reviews in a dispute queue is what the machine parsed.
+
+---
+
+## 10. Diagnostics catalog
+
+| Code | Severity | Trigger | Assertion consequence |
+|---|---|---|---|
+| VSL001 | error | duplicate `@v.id` on two targets | second binding rejected → dispute |
+| VSL002 | error | handle collision with live anchor | dispute; provisional vid |
+| VSL010 | error | orphan directive block | held `proposed`, never dropped |
+| VSL011 | error | duplicate single-valued directive | later directive rejected |
+| VSL012 | warn | directive in non-adjacent comment | treated as orphan (010) |
+| VSL013 | warn | duplicate `ui` key | last wins |
+| VSL020 | error | contract parse failure | `proposed` |
+| VSL021 | error | prime/`old`/`result` in illegal clause | `proposed` |
+| VSL022 | error | predicate path unresolvable | `proposed` |
+| VSL023 | error | predicate type mismatch | `proposed` |
+| VSL024 | warn | `means` > 200 chars | truncated for embedding, full text kept |
+| VSL030 | error | cap parse / unknown ns-action | `proposed` |
+| VSL031 | warn | declared cap not extracted (drift) | remainder `proposed` |
+| VSL032 | warn | extracted cap undeclared (coverage gap) | **exposure blocked** until resolved |
+| VSL040 | error | unknown taint label | `proposed` |
+| VSL050 | warn | `rel` target unresolved | dangling edge `proposed` |
+| VSL051 | error | `rel` kind-pair illegal | rejected |
+| VSL060 | error | example payload type mismatch | Test node `proposed` |
+| VSL061 | dispute | example executed and failed | `contradicted` |
+| VSL070 | error | agent risk below computed floor | rejected |
+| VSL071 | error | expose-name collision | rejected |
+| VSL080 | warn | unknown directive | passthrough `proposed` (§12) |
+| VSL081 | warn | sanitized control/bidi characters | sanitized text stored |
+| VSL090 | warn | overlay pin mismatch after upgrade | overlay assertions `stale` |
+| VSL091 | error | overlay target unresolved | overlay inert |
+
+All diagnostics carry byte spans (f0), surface in LSP/CLI/CI, and are themselves ledger events — drift is observable history, not log spam.
+
+---
+
+## 11. Worked example: `billing.ts` end-to-end
+
+```ts
+//@v.module billing "Order lifecycle: capture, refund, reconciliation"
+//@v.cap db:rw(orders, refunds) net:https(api.psp.example)
+
+/**
+ * @v.id billing.order
+ * @v.is entity
+ * @v.means A customer order with captured funds and remaining refundable balance.
+ * @v.contract inv: sum(refunds.amount) <= total && remaining == total - sum(refunds.amount)
+ * @v.flow money
+ */
+export interface Order { id: OrderId; total: Cents; remaining: Cents; refunds: Refund[]; status: OrderStatus }
+
+/**
+ * @v.id billing.refund
+ * @v.means Refund a captured payment, fully or partially.
+ * @v.why Partial refunds must never exceed remaining balance. adr:0012
+ * @v.contract pre:  order.status == "captured" && amount > 0 && amount <= order.remaining
+ * @v.contract post: order.remaining' == order.remaining - amount
+ * @v.contract post: result.status == "succeeded" || result.status == "failed"
+ * @v.cap money:refund(max=order.remaining) db:write(refunds)
+ * @v.flow money
+ * @v.example name: "partial" in: {orderId:"o_1", amount:4200} out: {status:"succeeded"}
+ *            effects: [money:refund, db:write(refunds)]
+ * @v.example name: "overdraw" in: {orderId:"o_1", amount:999999} throws: "exceeds remaining"
+ * @v.agent expose: "refund_order" risk: irreversible
+ * @v.ui label: "Refund" confirm: true
+ * @v.status stable @v.since 1.2.0
+ */
+export async function refundOrder(orderId: OrderId, amount: Cents): Promise<Refund> { … }
+```
+
+*(Note: `effects:` and `match:` continue on the next normalized line as a repeated `@v.example`? No — one directive per line; the example above must be written on single lines in real files. Shown wrapped here for readability only; the formatter `vlc fmt` handles line-length by suggesting predicate decomposition via AND-conjoin.)*
+
+**Overlay** `.vsl/overlays/psp-sdk.vsl` as in §6. **Emitted assertions (sample, T3 wire format):**
+
+```json
+{ "subject": "vid:9f2a…", "predicate": "requires-cap", "object": "money:refund(max=order.remaining)",
+  "origin": "declared", "state": "attested", "confidence": 1.0,
+  "evidence": [], "valid": ["v1.4.0", null), "signer": "human:owen",
+  "source": { "file": "src/billing.ts", "span": [412, 468] } }
+
+{ "subject": "vid:9f2a…", "predicate": "has-example", "object": "test:partial",
+  "origin": "declared", "state": "verified",
+  "evidence": ["ev:vec:7c1…"], "valid": ["v1.4.2", null) }
+
+{ "subject": "vid:9f2a…", "predicate": "mirrors", "object": "vid:psp-refund…",
+  "origin": "declared", "state": "attested", "source": { "file": ".vsl/overlays/psp-sdk.vsl" } }
+```
+
+**f5 walkthrough:** extracted from body = `{money:refund, db:write(refunds), db:read(orders)}` (the PSP adapter call + row reads). Declared = `{money:refund(max=…), db:write(refunds)}` ∪ module defaults `{db:rw(orders,refunds), net:https(api.psp.example)}`. Intersection covers everything; `net:https` remains declared-only at this symbol (it's realized inside the PSP adapter, one hop down) → attributed transitively via f9, no VSL031. If a later edit adds `mail.send(receipt)` to the body: extracted gains `mail:send` → **VSL032**, `refund_order` tool exposure suspends, wiki shows the coverage gap, and the fix is one line: `@v.cap mail:send`.
+
+**Staleness demo:** change `amount: Cents` → `amount: Money` ⇒ `iface_hash` changes ⇒ both examples and all trace evidence → `stale`, dependent Commands flagged with the exact broken edge, UI form regenerates. Fix a typo in `@v.means` ⇒ `doc_hash` only ⇒ wiki/pack re-render, evidence untouched, sub-100ms.
+
+---
+
+## 12. Versioning, extensions, handoff
+
+- **Spec semver:** minor versions may add directives/namespaces/builtins; existing semantics frozen. Unknown directives → `VSL080` warn + `proposed` passthrough (forward compat: old indexers degrade, never break).
+- **`@v.x.*` extension namespace:** anyone may declare; origin `declared`, ceiling `proposed`, **never consumed by gates, planners, or schemas** — projections may render them. Extensions graduate into core only via spec minor version.
+- **Registry governance:** core ns/action/risk tables (§4.5), builtins (§3), and widget names are part of the spec artifact, hashed into `spec_version` — packs and Commands pin it.
+
+**Ratified this turn:** D1 (identity/fingerprint split + three-lane staleness). D5 protocol side (provenance-at-birth, prose quarantine, types-only schemas). Policy-version hook into the intent cache.
+**Deferred with owners:** predicate implication procedure → T7/T8 (D7); evidence promotion mechanics → T5 (D4); fusion + ledger DDL → T3 (D2).
+
+**T3 consumes from this turn:** the emission contract (§4.2), lifecycle rule (proposed→attested→verified), identity tables (`handles`, `anchors`, `anchor_history`, three fingerprints), overlay trust ceilings, and the diagnostics-as-events requirement.
+
+---
+
+**Next — Turn 3: VSG kernel.** SQLite DDL for the one-file control plane, the hash-chained assertion ledger, the fusion algorithm (including D2's dynamic-dispatch resolution), bitemporal `as_of` / `as_known_at` queries, and signed pack format. Say **next**.
+
+### USER
+next high effort deep and comprehensive
+
+
+### ASSISTANT

@@ -3,7 +3,7 @@
   "name": "ARBOR-PWA-BASELINE-UPGRADE",
   "targetRepository": "owenservera/ARBOR",
   "targetBranch": "main",
-  "sourceBaseline": "7c1b01630a806c0ac701bdc21e3f4968fec91097",
+  "sourceBaseline": "7031105ce179151adc9be3fe482b7f4cbb68d55c",
   "planningReview": "4c95251a709e17811e08fdebd4348fcc1828187d",
   "designOnly": true,
   "implementationLanes": 9,
@@ -32,14 +32,32 @@
     "lanes/B07-view-all-inspector.txt",
     "lanes/B08-persistence-revisions.txt",
     "lanes/B09-product-convergence.txt",
-    "manifest.json"
+    "manifest.json",
+    "R003-U7-CONVERGENCE.md"
   ],
-  "previousSourceBaseline": "c6a2edd4ba6411d404fb7552abd8e103b7888ffc",
-  "packageRevision": "R002",
+  "previousSourceBaseline": "7c1b01630a806c0ac701bdc21e3f4968fec91097",
+  "packageRevision": "R003",
   "sourceAdvance": {
-    "commits": 2,
-    "filesChanged": 10,
+    "commits": 1,
+    "filesChanged": 13,
     "sourceTests": "UNRUN",
-    "findings": "R002-SOURCE-ADVANCE.md"
+    "findings": "R003-U7-CONVERGENCE.md"
+  },
+  "mergedLane": {
+    "U7": [
+      "B01",
+      "B02",
+      "B03",
+      "B04",
+      "B05",
+      "B06",
+      "B07",
+      "B08",
+      "B09"
+    ],
+    "soleComposerOwner": "B06",
+    "soleInspectorOwner": "B07",
+    "soleVisualAuthorityOwner": "B08",
+    "standaloneLaunch": false
   }
 }

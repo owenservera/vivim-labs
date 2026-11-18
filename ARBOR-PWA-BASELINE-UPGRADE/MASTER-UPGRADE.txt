@@ -2,7 +2,7 @@ ARBOR — BASELINE PWA / COMPLETE MINIMAL VISUAL SYSTEM
 HIGH-EFFORT PRODUCT IMPLEMENTATION ROUND
 REPOSITORY: owenservera/ARBOR
 TARGET: main (no branch, no PR)
-REVIEWED SOURCE BASELINE: 7c1b01630a806c0ac701bdc21e3f4968fec91097
+REVIEWED SOURCE BASELINE: 7031105ce179151adc9be3fe482b7f4cbb68d55c
 PACKAGE: owenservera/vivim-labs/ARBOR-PWA-BASELINE-UPGRADE
 
 MANDATORY START
@@ -26,3 +26,7 @@ Do not stop at an atlas, helper test, screenshots made from fixtures, or candida
 
 ## R002 — source advance (7c1b01630a80)
 R002 PRIORITY — read R002-SOURCE-ADVANCE.md. B08 first closes exact Host-owned visual approval, because live phone-surface onIntent currently queues a proposal directly and worker loses service preview/projection digests/changeId. B06/B07 cannot ship new mutation entry points bypassing exact approval; selection is inert. Extend incumbent Host approval/claim and UI revision publisher, not Wiki-specific fake targets or another authority. B01/B02 register and preserve real Host-bound meaning and desktop-only teach/revoke controls. Shared navigation resolver exists. B04/B05 still need real render/engine binding. B09 tests actual visual proof and existing Wiki/learning regressions. No generalized visual learning.
+
+
+R003 — UNIFIED SEMANTIC VISUAL PWA (supersedes standalone U7 and earlier conflicting launch instructions)
+U1–U6 committed on ARBOR main at 7031105ce179151adc9be3fe482b7f4cbb68d55c. U7 absorbed by B06 (sole shared composer/draft owner), B07 (sole VIEW ALL owner), B01/B02/B03/B04/B05 (identity, shell, appearance, rendering, installed engine metadata), B08 (sole visual effect authority/persistence), B09 (product proof). Do not launch L7 independently. Read R003-U7-CONVERGENCE.md: mandatory detailed deltas for ALL nine lanes. B01/B03/B04/B08 start independently; B06 starts inert draft work now, B07 inert inspection; B02/B05 consume real interfaces; B09 converges. B08 closes exact visual approval before new mutation entry points ship. Extend existing composer-assist.mjs including two-TAB and latest-input-wins; no second composer. Work on main; no new engine, database, interpreter, dispatcher, or architecture round.

@@ -7,3 +7,6 @@ Standalone launch package. Start with [MASTER-UPGRADE.txt](MASTER-UPGRADE.txt), 
 - Main-only execution; no additional orchestration or architecture projects.
 - Latest observed ARBOR commit includes approved exact command learning; master baseline supersedes older U5 assumptions.
 - Raw research contains conversation metadata. Keep this package inside private vivim-labs.
+
+
+R003 EXECUTION OVERRIDE — U7 is merged into ARBOR-PWA-BASELINE-UPGRADE, R003. Do not launch standalone L7; use ../ARBOR-PWA-BASELINE-UPGRADE/MASTER-UPGRADE.txt and R003-U7-CONVERGENCE.md from Labs root. B06 owns shared live slots, B07 VIEW ALL, B08 visual approval. U1–U6 committed at 7031105ce179151adc9be3fe482b7f4cbb68d55c. Original research and prior lane requirements retained as reference, not an independent launch plan.

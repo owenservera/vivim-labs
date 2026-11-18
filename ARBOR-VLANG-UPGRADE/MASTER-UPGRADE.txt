@@ -30,3 +30,6 @@ Use PRODUCT-ACCEPTANCE.md. Final integration is actual coding/testing on main: t
 
 DEFINITION OF DONE
 Real user-visible capability through existing Talk/Wiki/Build/desktop surfaces as applicable, actual versioned persisted readback, stable security semantics, source-grounded context and reusable behavior. No architecture restart. If material ambiguity or unsupported execution remains, expose it and retain the existing safe behavior. No claim that all future commands or languages are supported. Deliver committed product source, not another plan.
+
+
+R003 EXECUTION OVERRIDE — U7 is merged into ARBOR-PWA-BASELINE-UPGRADE, R003. Do not launch standalone L7; use ../ARBOR-PWA-BASELINE-UPGRADE/MASTER-UPGRADE.txt and R003-U7-CONVERGENCE.md from Labs root. B06 owns shared live slots, B07 VIEW ALL, B08 visual approval. U1–U6 committed at 7031105ce179151adc9be3fe482b7f4cbb68d55c. Original research and prior lane requirements retained as reference, not an independent launch plan.

@@ -2,7 +2,7 @@ B08 — PERSISTENT PROGRAMMABLE PWA AND REVISIONS
 HIGH-EFFORT PRODUCT CODING TASK
 REPOSITORY: owenservera/ARBOR
 TARGET: main (no branch, no PR)
-REVIEWED SOURCE BASELINE: 7c1b01630a806c0ac701bdc21e3f4968fec91097
+REVIEWED SOURCE BASELINE: 7031105ce179151adc9be3fe482b7f4cbb68d55c
 PACKAGE: owenservera/vivim-labs/ARBOR-PWA-BASELINE-UPGRADE
 
 MANDATORY START
@@ -26,3 +26,6 @@ Committed product code directly on main, exact changed source, observed behavior
 
 R002 SOURCE ADVANCE — MANDATORY CURRENT IMPLEMENTATION DELTA
 IMMEDIATE HIGHEST-PRIORITY PRODUCT WORK: Current Wiki approvalBinding/checkApprovalBinding in existing control dispatcher binds resolved args/target, catalog/world/compiler/contract/effect digests, expiry and device/channel replay. Reuse common incumbent primitives only; Wiki-specific functions stay Wiki-specific. UI bootstrap differs: live phone-surface onIntent directly queues replace-props via sendProposal; worker claims then calls runtime.applyUiProposal, grant/CAS; service already computes previewDigest/projectionDigest/changeId but worker response discards them. Build checks local preview and later full content, not Host-bound approval. Close this real gap BEFORE expanded whole-app writes. Use existing Host plan/approval/claim and UI revision publisher with current device/actor/grant, exact typed proposal, normalized preview/projection, actual adapter binding contract, base revision and fresh policy. No new approval engine/store, fake Wiki target or direct mutation from tap/inspector. Inspect authenticated callers and legacy preset/undo paths; preserve safe compatibility without bypass. Propagate actual service digests/changeId, require exact candidate and canonical readback, distinguish definitive pre-effect rejection from uncertain post-effect lost result; read-only reconciliation, no retry. Preserve A3 blank-draft and compensating undo. Wiki receipt-derived desktop template remains independent; no personal rule store for UI configuration. Real HTTP test: unapproved/tampered request, wrong device, revoked/changed scope, stale contract/revision must not write. Run existing new Wiki approval/learning regressions.
+
+
+R003 — highest-priority authority lane remains. U7 slots are advisory, never effect authority. Fresh authoritative submit revalidates resolved target/args, actor/device/scope, current catalog/world/compiler/installed adapter/target/base revision, exact preview/effect/projection digests and policy. Close direct phone-surface onIntent bypass and worker proof-field loss before expanded writes; reuse incumbent approval/claim and UI publisher. Return actual service digests/changeId and canonical readback; uncertain outcome reconciles read-only, never retry. Preserve U4/U5 and owner-only U6. See R003-U7-CONVERGENCE.md.

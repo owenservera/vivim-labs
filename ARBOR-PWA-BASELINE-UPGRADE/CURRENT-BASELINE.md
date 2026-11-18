@@ -30,3 +30,6 @@ Catalog snapshot is generated from declared source types/IDs only; no owner data
 
 ## R002 — source advance (7c1b01630a80)
 See [R002-SOURCE-ADVANCE.md](R002-SOURCE-ADVANCE.md): ten changed paths over two commits; new Wiki exact approval, receipt-derived desktop template and corresponding UI/tests. Visual runtime/catalog unchanged; live UI tap and bootstrap receipt gaps remain. Original preparation and previous planning review are historical evidence; current pinned head 7c1b01630a806c0ac701bdc21e3f4968fec91097. Runtime tests UNRUN.
+
+
+R003 — Current inspected ARBOR main: 7031105ce179151adc9be3fe482b7f4cbb68d55c. U1–U6 committed. U6 live source-card renderer and exact anchor retrieval integrated into both owner surfaces. Existing composer-assist already provides two-TAB and scoped/latest-input draft assistance. See R003-U7-CONVERGENCE.md for source reality and runtime limitations. Earlier pins historical; tests UNRUN.

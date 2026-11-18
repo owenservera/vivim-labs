@@ -2,7 +2,7 @@ B07 — VIEW ALL / LIVE COMPONENT AND ENGINE INSPECTION
 HIGH-EFFORT PRODUCT CODING TASK
 REPOSITORY: owenservera/ARBOR
 TARGET: main (no branch, no PR)
-REVIEWED SOURCE BASELINE: 7c1b01630a806c0ac701bdc21e3f4968fec91097
+REVIEWED SOURCE BASELINE: 7031105ce179151adc9be3fe482b7f4cbb68d55c
 PACKAGE: owenservera/vivim-labs/ARBOR-PWA-BASELINE-UPGRADE
 
 MANDATORY START
@@ -26,3 +26,6 @@ Committed product code directly on main, exact changed source, observed behavior
 
 R002 SOURCE ADVANCE — MANDATORY CURRENT IMPLEMENTATION DELTA
 Selecting a component must not fire live phone-surface onIntent mutation or raw sendProposal. Coordinate B06/B08 to route actual mutations to exact preview/approval. Inspect actual new approval UI and metadata, never infer authority from a digest. Private desktop receipt teaching/rule scope not exposed to phone; do not reimplement teaching. Library remains truthful about installed status and stable identity.
+
+
+R003 — sole VIEW ALL owner for UI plus authorized semantic capabilities. Search current catalog, actual mounted instances, installed adapter schemas and authorized relevant knowledge. Distinguish declared/applicable/installed/authorized/unavailable. Select live composer/component inertly and hand stable target and typed values to B06 existing draft path. No effects merely from selection; no duplicate interpreter, catalog or inspector. Preserve U6 owner-only source cards, U5 desktop-only rule controls. See R003-U7-CONVERGENCE.md.

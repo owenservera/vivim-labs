@@ -2,7 +2,7 @@ B06 — UNIVERSAL NATURAL-LANGUAGE AND DIRECT UI PROGRAMMING
 HIGH-EFFORT PRODUCT CODING TASK
 REPOSITORY: owenservera/ARBOR
 TARGET: main (no branch, no PR)
-REVIEWED SOURCE BASELINE: 7c1b01630a806c0ac701bdc21e3f4968fec91097
+REVIEWED SOURCE BASELINE: 7031105ce179151adc9be3fe482b7f4cbb68d55c
 PACKAGE: owenservera/vivim-labs/ARBOR-PWA-BASELINE-UPGRADE
 
 MANDATORY START
@@ -26,3 +26,6 @@ Committed product code directly on main, exact changed source, observed behavior
 
 R002 SOURCE ADVANCE — MANDATORY CURRENT IMPLEMENTATION DELTA
 control-language.mjs already owns resolveLocalDestination, resolveDesktopDestination and resolveProductRoute; buildRequestRoute delegates. Preserve local navigation -> current Host meaning/clarification/refusal -> bounded VEC UI -> provider choice, reuse composer-assist. Wiki approvalMeaning now supplies exact resolved args, optional deterministic sentence and semanticDigest; retain consumption. Never claim visual round-trip verified without actual compiler equality. Coordinate B08 on exact approved visual proposal and digests; all NL/direct/typed edits require preview/Activate, selection inert. No generalized visual learning; receipt template remains desktop-only Wiki creation, canonical NLCL/refusal wins.
+
+
+R003 — ABSORBS U7. Sole shared semantic composer owner. Extend composer-assist.mjs composeDraftHints/composerResponse/describeDraft/draftSuggestions/mountComposerAssist and actual Host interpretation callers. Preserve two-TAB, inert suggestions, debounce/latest-input-wins, expiry, scope reset, Escape, Enter and IME. Add typed action, stable target/parameter slots, literal spans where incumbent parser supports, missing/ambiguous/refused statuses, provenance and current revisions. Derive choices from authorized actual Wiki/instance/catalog and installed engine schemas, not invented entities. Selective corrections preserve other text and literal values, recompile and invalidate stale results. Use U3 context and U5 desktop-private Wiki-create learning only through existing authorized interfaces. No generalized visual learning. B07 passes selection inertly; B02 mounts same behavior across Talk/Build/Wiki/desktop. Submit obtains fresh Host meaning and exact preview; B08 alone binds approval and persistence. See R003-U7-CONVERGENCE.md for tests.

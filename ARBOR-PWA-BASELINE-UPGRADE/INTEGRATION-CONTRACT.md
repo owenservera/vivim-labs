@@ -19,3 +19,6 @@ Source/test ownership is guidance, not an instruction to modify unchanged files.
 
 ## R002 — source advance (7c1b01630a80)
 Approval parity: reuse common incumbent Host approval primitives, not Wiki-specific target logic. Visual approval binds exact proposal, normalized preview digest, expected projection, active revision, owner/device/source scope, installed capability contract and fresh policy/grant. Revalidate before claim and effect; propagate existing service previewDigest/projectionDigest/changeId via worker and match actual readback. Distinguish post-effect uncertainty, reconcile read-only, no resend. All tap/direct/typed/preset entry points preserve exact policy. Existing Wiki approval and desktop-only template independent, fresh approval per reuse. B08 owns boundary, B06/B07 authoring, B01/B02 source-owned surfaces.
+
+
+R003 — superseding ownership: B06 alone owns shared composer and U7 slot/correction behavior; B07 alone owns VIEW ALL and delegates inert selection; B08 alone owns visual approval/persistence. B01–B05 provide real scoped mounted identities, shell, tokens, render and installed schemas. B09 integrates. Mandatory details in R003-U7-CONVERGENCE.md.

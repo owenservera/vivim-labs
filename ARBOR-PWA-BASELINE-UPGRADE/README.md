@@ -24,7 +24,10 @@
 | [B08](lanes/B08-persistence-revisions.txt) | Durable configurable baseline, restore, parity |
 | [B09](lanes/B09-product-convergence.txt) | Actual integrated acceptance and fixes |
 
-This folder is planning and implementation input only. It does not modify ARBOR, certify implementations, or authorize new effects. Existing VLANG upgrade remains separate; consume its actual outputs where present.
+This folder is planning and implementation input only. It does not modify ARBOR, certify implementations, or authorize new effects. VLANG U1–U6 remain implemented foundations; U7 execution is merged into this package.
 
 ## R002 — source advance (7c1b01630a80)
 Read [R002-SOURCE-ADVANCE.md](R002-SOURCE-ADVANCE.md) before launch. Visual approval parity is B08's immediate priority; current Wiki exact approvals and receipt-derived private learning are delivered code. All lanes are being advanced against the new baseline. Catalog counts unchanged.
+
+
+R003 — this is the sole launch package for U7 plus B01–B09. [R003-U7-CONVERGENCE.md](R003-U7-CONVERGENCE.md) contains mandatory lane-specific deltas and acceptance. U1–U6 committed; B06 owns live slots, B07 owns VIEW ALL, B08 owns visual approval. No standalone U7 session. Catalog inventory unchanged; preparation only.

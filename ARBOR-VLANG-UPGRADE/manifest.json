@@ -2,7 +2,7 @@
   "schema": "vivim.labs.upgrade-package/1",
   "target": "owenservera/ARBOR",
   "branch": "main",
-  "observedArborHead": "2570b32b47de7efe22e73a38ea4820b83bf29015",
+  "observedArborHead": "7031105ce179151adc9be3fe482b7f4cbb68d55c",
   "originalPackageCommit": "b970bef178682e04bd81ee3a0b2b539d6d32c13d",
   "originalFiles": [
     {
@@ -73,5 +73,15 @@
     "U5",
     "U6",
     "U7"
-  ]
+  ],
+  "executionOverride": {
+    "U1toU6": "committed",
+    "U7": "merged_into_ARBOR_PWA_R003",
+    "standaloneLaunch": false,
+    "package": "ARBOR-PWA-BASELINE-UPGRADE",
+    "master": "ARBOR-PWA-BASELINE-UPGRADE/MASTER-UPGRADE.txt",
+    "composerOwner": "B06",
+    "inspectorOwner": "B07",
+    "visualAuthorityOwner": "B08"
+  }
 }

@@ -1,0 +1,15 @@
+warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
+package:   C:\0-BlackBoxProject-0\ARBOR\.worktrees\arbor-r004-d\native\hqkg\Cargo.toml
+workspace: C:\0-BlackBoxProject-0\ARBOR\.worktrees\arbor-r004-d\Cargo.toml
+error: failed to select a version for `webkit2gtk`.
+    ... required by package `tauri-runtime-wry v2.0.0`
+    ... which satisfies dependency `tauri-runtime-wry = "=2.0.0"` of package `vivim-host v0.1.0 (C:\0-BlackBoxProject-0\ARBOR\.worktrees\arbor-r004-d\src-tauri)`
+versions that meet the requirements `=2.0` are: 2.0.2
+
+all possible versions conflict with previously selected packages
+
+  previously selected package `webkit2gtk v2.0.1`
+    ... which satisfies dependency `webkit2gtk = "=2.0.1"` of package `tauri v2.0.0`
+    ... which satisfies dependency `tauri = "=2.0.0"` of package `vivim-host v0.1.0 (C:\0-BlackBoxProject-0\ARBOR\.worktrees\arbor-r004-d\src-tauri)`
+
+failed to select a version for `webkit2gtk` which could resolve this conflict

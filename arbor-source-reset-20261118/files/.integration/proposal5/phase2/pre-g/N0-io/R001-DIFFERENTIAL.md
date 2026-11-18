@@ -1,0 +1,26 @@
+# R001 DIFFERENTIAL — keep the value, reject the runtime shortcuts
+
+Status: PREPARED_NOT_PROMOTED. Direct source: Harness branch fa6dea9576c83496d95562b98b7a815fda4aec88. Source Git blobs user_io.rs d8a53bb2a9216721323790ca96b9517af6528bec, lib.rs 39a5142908956a1149a7a81a45b9f460e96222db, Tauri main.rs fe7b3ff7c0b5451f336c873cc71a11c7966a4bbd, USER-IO-R001.md ee703b54b314c040a5ce831153bd2252b84db24a.
+
+| Actual R001 module/function | Reuse decision | Why / required correction |
+|---|---|---|
+| InputEvent::{Draft,Tab,Submit} and apply_json strict schema | ADAPT_TYPES | Pin immutable eventId + input and interaction revision + separate Submit idempotency/digest; wider event types; no caller-owned Actor |
+| TrustedSources, Template, ProjectRef, AcceptedPattern and valid() | KEEP_AS_PATTERN_ONLY | Source adapter is *claimed trusted*, but not backed by actual Host permissions; default native Tauri sources empty. Bind real B read ports before use |
+| Fabric subscriber table with language, command, entity, prediction reactors | REUSE_CONCEPT, NOT SCHEDULER | Four independent pure computations are correct. Keep declarative subscriptions; no central semantic classification, no new registry of executable actions |
+| Evidence/Derived, Projection typed and deterministic reorder | ADAPT_INTO_HQKG | Add source/graph epoch, engine version, audience, TTL, causal references, uncertainty and partial output stream. Do not let a suggestion count as permission |
+| InputEvent sequence monotonic and Tab expected_revision CAS | REUSE_GUARD | Also require surface-specific sequence, input revision, Host-provided policy/source versions, dedup, cancellation and cross-device reconciliation |
+| Negation and composing suppression | REUSE_CONSERVATIVE_RULES | Real multiline/Unicode/IME text spans, false-positive analysis and accessibility acceptance required; local editor remains authoritative for text |
+| Tab accept learning with ephemeral Feedback BTreeMap | STAGING_ONLY | No persistent preference, permission or personal index; consent and reset contract belong to B, local ephemeral quota to A |
+| UserIoCore::apply() | DO_NOT_COPY_INTO_PER_EDIT_PATH | Mutates session then synchronously runs all reactors and waits for completion. No partial streaming or worker isolation |
+| Fabric::react() uses std::thread::scope / thread::spawn for all four subscribers on each event | UNSAFE_PER_EDIT_SCHEDULING | Each draft produces thread creation/join; slowest worker delays projection and potentially the next edit. No shared queue cap/TTL/readiness scheduling. Use existing A HQKG EngineRegistry/Scheduler/typed_dag, then add bounded parallelism only inside that owned engine after proof |
+| Tauri NativeUserIo(Mutex<UserIoCore>) and user_io_event locks through apply_json | UNSAFE_LOCK_SCOPE | Global mutex serializes UI requests while reactor threads run and join; latency can span text edits. Separate tiny revision state CAS from off-lock pure work; use cancellation and bound queues |
+| R001 synthetic example fixture.full.update / fixture.readonly.project_update | TEST_ONLY | Not in canonical 19-action Host catalog. Do not expose as production capability |
+| R001 Submit switches submitted_inert, executionPerformed:false | KEEP_SAFE_DENIAL | Real committed Submit identity and Host admission need A/B sign-off; no direct action executor in native reducer |
+
+**Source reality:** A work/p5-w01-a-native has core/programmability/src/lib.rs blob fe42cb6bf535c91d3ba05911977999a9d8f8c254, not the experimental R001 lib.rs; its src/ listing has no user_io.rs. A's src-tauri/src/main.rs blob 4b68350ac90cf87968dba6876036d0a74658d58b also lacks the R001 user_io_event command. This pre-G branch has not installed R001 as product code.
+
+**Existing better host**: native/hqkg/src/engine.rs blob fbb1100999fd229fb5a4352a78bbb0d77b643988 already has EngineRegistry, EngineLease, Budget, CancellationToken, Scheduler and run_cancellable. Its Scheduler is synchronous, and a blocking engine execution cannot be preempted; do not call it production-parallel without new bounded engine tests. native/hqkg/src/typed_dag.rs blob 24d4ef22ab76f1c8832f5c426b29860c74fac2a5 already has typed graph namespace, revision tokens, source binding, bounded incremental cache and DAG state. native/hqkg/src/invalidate.rs blob 271b86b48bb79aa8895d712e4335bdf442cd5bfb rejects stale cache hits on missing watermarks.
+
+**R001 versus N0-IO staging:** the staged IO-CONTRACT.json uses a different *proposed* schema (arbor.n0-io/1) because R001's vivim.native-user-io/1 is too small to represent source permissions, Host-specific actor binding, partial output, cancellation and committed identity. This is an explicit version proposal for F review, not a new deployed registry, broker or live schema. The pure fixture tests contract logic only; it does not execute Rust threads.
+
+**Critical security review:** A's frozen handoff says Tauri remote IPC wildcard, pinned Tauri 2.0.0 dependencies and unauthenticated loopback attachment remain P0. B's PREG-B describes authoritative Host grant, session and journal and needs A/B host-launch/1 attestation. An event text field with an alleged owner is never evidence of owner authentication.

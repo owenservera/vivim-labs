@@ -1,0 +1,5 @@
+node integration/scripts/r004-local-gate.mjs --focused
+exit=0
+source=87c35576f142978a11071737b5815911308901a2
+decision=LOCAL_TESTS_PASS_ACCEPTANCE_PENDING
+receipt=evidence/r004/lane-d/R004-LOCAL-GATE.json

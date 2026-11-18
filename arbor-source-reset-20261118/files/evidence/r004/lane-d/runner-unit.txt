@@ -1,0 +1,2 @@
+node --test .worktrees/arbor-r004-d/integration/scripts/r004-local-gate.test.mjs
+exit=0; tests=14 pass=13 fail=0 skipped=1 (symlink privilege unavailable)

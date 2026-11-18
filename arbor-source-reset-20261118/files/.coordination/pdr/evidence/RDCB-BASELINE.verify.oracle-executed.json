@@ -1,0 +1,67 @@
+{
+  "ok": true,
+  "item": "RDCB-BASELINE",
+  "checks": [
+    {
+      "name": "generator-present",
+      "pass": true,
+      "detail": "apps/vivim-host/control/rdcb-gen.mjs exists=true"
+    },
+    {
+      "name": "surface-registry-present",
+      "pass": true,
+      "detail": "file-surface.v1.json exists=true"
+    },
+    {
+      "name": "catalog-resolvable",
+      "pass": true,
+      "detail": "action-catalog.v1.json action ids=32"
+    },
+    {
+      "name": "seeded-bundles",
+      "pass": true,
+      "detail": "existing bundles=3"
+    },
+    {
+      "name": "generator-runs",
+      "pass": true,
+      "detail": "run1 exit=0 run2 exit=0 stderr="
+    },
+    {
+      "name": "bundles-emitted",
+      "pass": true,
+      "detail": "bundles after runs=3"
+    },
+    {
+      "name": "schema-valid",
+      "pass": true,
+      "detail": "bundles=3 all schema=vivim.rdcb/1 + inherits + 64-hex digest=true"
+    },
+    {
+      "name": "digest-stable-shape",
+      "pass": true,
+      "detail": "all digests 64-hex=true set=[3 unique of 3]"
+    },
+    {
+      "name": "digest-stable-across-runs",
+      "pass": true,
+      "detail": "run-1 stdout carried digests; bundle digests deterministic (generatedAt pinned constant by generator)"
+    },
+    {
+      "name": "references-resolve",
+      "pass": true,
+      "detail": "fileSurfaceRegistry.ref + nlclCatalog.ref + sources[].path all exist on disk=true"
+    },
+    {
+      "name": "nlcl-refs-in-catalog",
+      "pass": true,
+      "detail": "bundle nlclCatalog.actionIds (when present) all in action-catalog.v1.json=true"
+    },
+    {
+      "name": "no-execution-claims",
+      "pass": true,
+      "detail": "vlangExecution=false + status=fresh on all bundles (format + generator only; L1-VLANG-VEC owns execution)"
+    }
+  ],
+  "digest": "7e7c66317064a88a4085ca36d1f19409cedc8998f483d204a0c1314c05daa779"
+}

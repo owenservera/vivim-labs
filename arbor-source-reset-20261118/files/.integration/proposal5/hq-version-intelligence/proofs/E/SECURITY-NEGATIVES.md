@@ -1,0 +1,5 @@
+# Lane E privacy / non-effect negative checks
+
+Executed **isolated** Node v22.16.0 synthetic tests on Linux: unknown `VersionComparison` schema rejected; unknown target pin rejected; invalid SHA `main` rejected; duplicate ID rejected; conflicting manifest digest rejected; >16 pins and >20k rows rejected; source partiality normalized to `UNOBSERVABLE`; missing evidence remains incomplete; attacker path `.env.production` and `../private/credentials.pem` redacted; injected raw Markdown description never copied; CSV formulas inert; reported `RUNTIME_VERIFIED` remains unverified claim, `runtimeAcceptance` stays NOT_DETERMINED_BY_SOURCE_REPORT; replacement `REPLACED_CONFIRMED` without a complete typed `owner_decision` is downgraded to unverified.
+
+Not tested: actual malicious symlink/Git LFS blob traversal, Host live grant revoke, personal World denial, native listener attestation, real A/C pin acquisition, browser, TierFlow UI, Windows/Android or integrated Node24. Those require A/H/F/G1 and later owner/device execution. This module never opens paths or networks; source-content scanning and consent authority are upstream obligations.

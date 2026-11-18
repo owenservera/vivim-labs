@@ -1,0 +1,33 @@
+{
+  "receipt": "arbor.item-receipt/1",
+  "topic": "nlcl-binding",
+  "stage": "exit-walker STAGE 7 (round 2)",
+  "walkedAt": "2026-11-14T05:40:09.067Z",
+  "host": "http://127.0.0.1:43187",
+  "hostProcess": "bun apps/vivim-host/server.mjs (fresh start this walk)",
+  "claim": "The D1 NLCL binding is LIVE on the production Host: a natural-language chat-send POSTed to /api/mutate was interpreted in-process by controlFor().interpret and the intent IR (vivim.control-language/1, nlclVersion 0.1.0) rode on the stored journal entry.",
+  "rulesRef": ".coordination/pdr/input-roadmap.md:21-37 — section 2 (arbor.item-receipt/1); (b) at :27 names the REAL NLCL engine apps/vivim-host/control/command-intent.mjs + intent-planner.mjs (mobile parity apps/mobile-relay/nlcl/); WIKI-BASELINE (b) journal-records at :31",
+  "codeRef": [
+    "apps/vivim-host/server.mjs:377 — D1 binding comment: 'chat-send reaches the SAME Host control runtime'",
+    "apps/vivim-host/server.mjs:378-382 — in-process, never an HTTP self-call, never a demo-side interpreter; interpret is pure (plans no journal record, executes nothing); intent IR rides on the stored entry",
+    "apps/vivim-host/server.mjs:383-393 — chat-send branch: entry.intent = controlFor().interpret(payload.text); 400 on missing/overlong text; CONTROL_INVALID mapped to controlErrorStatus",
+    "apps/vivim-host/control/intent-planner.mjs:180 — interpretText(text, {source, worldSnapshot})",
+    "apps/vivim-host/control/intent-planner.mjs:236 — interpretCommand(text, {source, audience})"
+  ],
+  "walkCommandsAndOutcomes": [
+    {
+      "command": "curl -s -X POST -H \"Content-Type: application/json\" -d '{\"schemaVersion\":1,\"actor\":\"loop-agent\",\"kind\":\"chat-send\",\"text\":\"open the wiki\"}' http://127.0.0.1:43187/api/mutate -w \"%{http_code}\"",
+      "outcome": "HTTP 200. Returned entry.intent verbatim: schema=vivim.control-language/1; input=\"open the wiki\"; feedback.status=partial, confidence=0.37, canonical=\"/read 'wiki'\", reading=\"Read wiki page wiki section (section)\", nlclVersion=0.1.0, worldV=40820841925; tokens: open=verb, the=filler, wiki=word; suggestions=[{kind:symbol, text:\"/read 'wiki'\"}]; gaps=[slot \"section\" unresolved, hint after \"section\"]; outcome=incomplete; candidate.actionId=wiki.section.read; missing=[page(min1,max80), section(min1,max80)]; question=\"Please give the page.\"; receivedAt=2026-11-14T05:40:09.067Z"
+    },
+    {
+      "command": "curl -s http://127.0.0.1:43187/demo/journal.jsonl (tail)",
+      "outcome": "HTTP 200; the appended journal line carries the SAME entry.intent IR — binding persisted to the journal, not just echoed in the response"
+    }
+  ],
+  "bindingEvidence": "Natural language \"open the wiki\" bound to candidate actionId wiki.section.read with honest incomplete outcome (missing page+section slots) and a symbolic suggestion \"/read 'wiki'\" — the NLCL engine interpreted, did NOT execute (server.mjs:380-381: interpret plans no journal record and executes nothing), and the IR persisted on the journal entry.",
+  "notRunThisWalk_honestGaps": [
+    "the 12-capability deterministic-execution sweep (input-roadmap.md:27 rule (b)) — NOT run; this receipt covers the interpret binding only",
+    "mobile parity (apps/mobile-relay/nlcl/) — NOT exercised this walk",
+    "execution path of wiki.section.read (plan/execute owner-authenticated routes) — NOT run; outcome was incomplete by design"
+  ]
+}

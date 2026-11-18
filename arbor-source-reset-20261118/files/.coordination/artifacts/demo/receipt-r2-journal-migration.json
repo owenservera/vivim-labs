@@ -1,0 +1,39 @@
+{
+  "receipt": "arbor.item-receipt/1",
+  "topic": "journal-migration",
+  "stage": "exit-walker STAGE 7 (round 2)",
+  "walkedAt": "2026-11-14T05:40:09Z+",
+  "host": "http://127.0.0.1:43187",
+  "hostProcess": "bun apps/vivim-host/server.mjs (fresh start this walk; port 43187 was FREE at walk start — no prior bun server was running, curl exit 7 confirmed, nothing to kill)",
+  "claim": "The demo journal migrated to the live append-only journal.jsonl read through ONE typed product endpoint (POST /api/mutate ≡ /demo/mutate ≡ /demo/feedback, same handler), appended by this walk's chat-send, visible at the tail of GET /demo/journal.jsonl.",
+  "rulesRef": ".coordination/pdr/input-roadmap.md:21-37 (section 2, gate-evidence rules riding arbor.item-receipt/1)",
+  "codeRef": [
+    "apps/vivim-host/server.mjs:359 — POST /demo/feedback | /demo/mutate | /api/mutate route to the SAME handler (product-route name comment :357)",
+    "apps/vivim-host/server.mjs:373 — envelope kinds: chat-send | wiki-edit | gate-decision",
+    "apps/vivim-host/server.mjs:402-409 — mkdirSync + appendFile(journalPath, JSON.stringify(entry)+'\\n'), 200 + entry echo",
+    "apps/vivim-host/server.mjs:446-460 — GET /api/journal per-line JSONL parse (skips blank/corrupt lines, honest empty array)",
+    "apps/vivim-host/server.mjs:72 — MIME 'application/jsonl; charset=utf-8' for /demo/journal.jsonl",
+    "apps/vivim-host/server.mjs:102 — ASSETS exact-string entry '/demo/journal.jsonl': 'demo/journal.jsonl'",
+    "apps/vivim-host/control/intent-planner.mjs:180 — interpretText (the journal-entry intent IR producer, via server.mjs:388)"
+  ],
+  "walkCommandsAndOutcomes": [
+    {
+      "command": "curl -s -X POST -H \"Content-Type: application/json\" -d '{\"schemaVersion\":1,\"actor\":\"loop-agent\",\"kind\":\"chat-send\",\"text\":\"open the wiki\"}' http://127.0.0.1:43187/api/mutate -w \"%{http_code}\"",
+      "outcome": "HTTP 200; response echoes the entry plus entry.intent (see receipt-r2-nlcl-binding.json); receivedAt=2026-11-14T05:40:09.067Z"
+    },
+    {
+      "command": "curl -s http://127.0.0.1:43187/demo/journal.jsonl (tail shown, -w '%{http_code}')",
+      "outcome": "HTTP 200, content-type application/jsonl; charset=utf-8, 3558 bytes; LAST line is the appended chat-send entry, receivedAt 2026-11-14T05:40:09.067Z — exact match with the POST response; preceding tail line is a feedback verdicts entry receivedAt 2026-11-14T01:45:25.176Z"
+    },
+    {
+      "command": "curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:43187/api/journal",
+      "outcome": "HTTP 200, application/json, 3559 bytes (JSON array view of the same single source)"
+    }
+  ],
+  "migrationEvidence": "journal.jsonl is the live append target of POST /api/mutate (server.mjs:421 comment: 'journal.jsonl is what /api/mutate appends to'; :446-459 read-through, never a copy), and the walk's append landed and is served — migration is live on the production Host.",
+  "notRunThisWalk_honestGaps": [
+    "crash-torn-line recovery behavior (code reads per-line with skip, server.mjs:447-455, but no torn line was produced/tested)",
+    "gate-decision kind appended later in the same walk (stage step 4): POST /api/mutate envelope {schemaVersion:1,actor:\"loop-agent\",kind:\"gate-decision\",round:\"owner-gate-batch1\",itemIds:[\"CHAT-BOX-BASELINE\",\"WIKI-BASELINE\",\"RDCB-V1\"],decision:\"pending-owner\"} → HTTP 200, echoed with receivedAt=2026-11-14T05:43:08.791Z; GET /demo/journal.jsonl → HTTP 200 with that line as the exact tail — envelope kinds chat-send AND gate-decision both verified live this walk; wiki-edit kind still not appended (no wiki-edit made this walk)",
+    "journal retention/rotation untested"
+  ]
+}

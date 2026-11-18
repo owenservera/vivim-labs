@@ -1,0 +1,76 @@
+{
+  "schema": "arbor.acceleration.source-evidence/1",
+  "date": "2026-11-14",
+  "sourceBaseline": "58b8894f96495618932ab1207a5ff0a320231ee5",
+  "observedSourceHeadBeforeReceipt": "0dae3107d317ea9430a1b25e6d5972d72f97d7b3",
+  "lanes": [
+    "A00",
+    "A01",
+    "A02"
+  ],
+  "executionState": "SOURCE_LANDED_TESTS_UNRUN",
+  "checks": {
+    "githubFilesInspected": 17,
+    "staticV8SyntaxAndJsonChecks": {
+      "passed": 17,
+      "total": 17,
+      "result": "SOURCE_ONLY",
+      "note": "Node imports stripped for V8 parser checks; not actual Node module loading"
+    },
+    "productJournalV8Logic": {
+      "passed": 7,
+      "total": 7,
+      "result": "ISOLATED_V8_SIMULATION",
+      "scenarios": [
+        "initial projection",
+        "chat append",
+        "Wiki acknowledgment",
+        "stale revision refused",
+        "restart replay",
+        "seed unchanged",
+        "chat replay"
+      ],
+      "note": "Filesystem mocked in V8; Node and HTTP process tests UNRUN"
+    },
+    "releaseTruthV8Projection": {
+      "passed": 5,
+      "total": 5,
+      "result": "SOURCE_PROJECTION_V8",
+      "observed": "promoted=UNBLOCKED, proposal=PROPOSED_UNRUN, release=BLOCKED_NOT_BUILT; 14 unrun gate claims detected",
+      "note": "No independent release acceptance"
+    },
+    "testManifest": {
+      "registeredPaths": [
+        "scripts/roadmap/acceleration-queue.test.mjs",
+        "scripts/roadmap/evidence-truth.test.mjs",
+        "apps/vivim-host/test/product-journal.test.mjs",
+        "apps/vivim-host/test/chat-box-baseline.test.mjs",
+        "apps/vivim-host/test/product-routes.test.mjs",
+        "scripts/acceleration/live-host-check.test.mjs"
+      ],
+      "testProcesses": "UNRUN"
+    }
+  },
+  "runtime": {
+    "Node24": "UNRUN",
+    "Bun": "UNRUN",
+    "WindowsHost": "UNRUN",
+    "RealBrowserRendering": "UNRUN",
+    "PairedAndroidPwa": "UNRUN",
+    "IndependentKeeperRerun": "UNRUN"
+  },
+  "knownResiduals": [
+    "Wiki edit workbench currently has loopback Origin + custom-header CSRF fence, not a full owner-grant-controlled Host capability write; remains unaccepted.",
+    "Single-writer revision serialization is within one Host process; cross-process lease/admission and crash/recovery acceptance remain untested.",
+    "Live generated visual compiler A04 and downstream automation remain dependency-blocked.",
+    "Historical beta status conflict is projected read-only; no release permission established."
+  ],
+  "recommendedLocalCommands": [
+    "node scripts/roadmap/acceleration-queue.mjs --check",
+    "node scripts/roadmap/evidence-truth.mjs --check",
+    "node --test apps/vivim-host/test/product-journal.test.mjs apps/vivim-host/test/product-routes.test.mjs apps/vivim-host/test/chat-box-baseline.test.mjs",
+    "node --test scripts/roadmap/acceleration-queue.test.mjs scripts/roadmap/evidence-truth.test.mjs scripts/acceleration/live-host-check.test.mjs"
+  ],
+  "promoteOnlyAfter": "independent, observed process exits, exact source SHA, Host authorization review and product/browser rewalk",
+  "authoritativeRoadmap": "docs/product/roadmap/roadmap.v1.json"
+}

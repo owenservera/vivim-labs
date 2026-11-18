@@ -1,0 +1,14 @@
+R004_PARTIAL_INTEGRATION_READY
+main=6f3fb8509ce6b5814b44de36e687b838462f677f
+D=87c35576f142978a11071737b5815911308901a2
+G=c323e8cfd9a692c73dbeacef7712453fdf6c4d4f
+focusedD=0 (6/6 tasks)
+keeperMatrix=0 (Host16/16, Wiki51/51, live37, tests5/5)
+fullBunGate=0
+cargoLocked=0
+Cargo.lock GENERATED_IN_WORKTREE (126K)
+bun.lock GENERATED_IN_WORKTREE (16K)
+HVI=3/3 after real scoped Bun install
+LaneDUnit=13 pass/0 fail/1 skip symlink privilege
+GitHub=startup_failure jobs=0
+A/B/C/E=blocked by provider/model infrastructure ECONNREFUSED 127.0.0.1:31415

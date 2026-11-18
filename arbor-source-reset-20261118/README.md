@@ -1,6 +1,6 @@
 # ARBOR source-first reset — one-time staging
 
-**State: reconnaissance and scaffold only. No ARBOR files have been copied, removed, renamed or modified.**
+**State: remote archival complete. All 671 initial ARCHIVE candidates were copied into this VIVIM Labs folder and verified against their original Git blob SHAs. No ARBOR files were removed, renamed or modified.**
 
 Snapshot: [ARBOR main @ 516a429599418f629b1bb343e47828a6bf22a532](https://github.com/owenservera/ARBOR/commit/516a429599418f629b1bb343e47828a6bf22a532), 2510 Git-tracked blobs. This inventory does **not** cover untracked, ignored, unstaged, or Windows-local-only files.
 
@@ -18,11 +18,11 @@ This is a one-time **copy-before-removal** reset. The eventual clean ARBOR tree 
 - **REVIEW (285)** — ambiguous files, especially `.integration/` code/schemas, `integration/` scripts, `docs/` JSON machine state (including the live roadmap), `scripts/` and CI configuration. Assess consumers before later removing from ARBOR.
 - **KEEP (1554)** — presumptive source, tests, contracts, build configurations and runtime assets. This is a **default**, not proof that every file belongs in the slimmed product.
 
-The classifications are a *copy triage*, **not deletion authorization**. Some `.md` or `docs/` artifacts may have live readers; test those before eventual removal. Likewise, some program files may be obsolete.
+**Remote copy verification:** 671 source files matched 671 destination files by path and Git blob SHA; zero missing, mismatched or extra. The 285 REVIEW files have not yet been archived. The classifications are a *copy triage*, **not deletion authorization**. Some `.md` or `docs/` artifacts may have live readers; test those before eventual removal. Likewise, some program files may be obsolete.
 
-## Next round: local copy (not executed)
+## Optional local reconciliation (not executed)
 
-From your Windows PowerShell 7 machine after pulling **vivim-labs**:
+The remote archive has already been pushed to VIVIM Labs. On your Windows PowerShell 7 machine, these optional commands can reconcile the remote archive against your local ARBOR working tree after pulling **vivim-labs**:
 
 ```powershell
 Set-Location 'C:\0-BlackBoxProject-0\vivim-labs'
@@ -31,7 +31,7 @@ pwsh -File '.\arbor-source-reset-20261118\copy-archive.ps1'
 pwsh -File '.\arbor-source-reset-20261118\copy-archive.ps1' -Apply
 ```
 
-The script copies selected tracked files from `C:\0-BlackBoxProject-0\ARBOR` to this folder's `files/<original-path>`, checks the pinned Git blob and compares copied bytes; it never removes files, stages files or commits. It refuses changed or conflicting files.
+The script compares already archived files, and if any are missing locally, copies selected tracked files from `C:\0-BlackBoxProject-0\ARBOR` to this folder's `files/<original-path>`, checks the pinned Git blob and compares copied bytes; it never removes files, stages files or commits. It refuses changed or conflicting files.
 
 Before running, inspect local-only material with:
 

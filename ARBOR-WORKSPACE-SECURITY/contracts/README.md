@@ -1,0 +1,2 @@
+# Proposed contracts
+security-context.schema.json is a design artifact, not deployed ABI. Context is minted by the authority after authenticating the caller, not trusted from request JSON. Never accept caller-supplied class, principal or grant as proof. Use canonical existing grant and effect contracts where possible; integrate schema only after checking overlap. Validation alone grants nothing. All authorization is evaluated at the effect boundary. No tokens or private data in this contract.

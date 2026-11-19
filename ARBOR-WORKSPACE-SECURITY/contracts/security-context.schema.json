@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Proposed VIVIM security context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "workspaceId",
+    "principalId",
+    "deviceId",
+    "sessionId",
+    "programDigest",
+    "policyRevision",
+    "revocationEpoch",
+    "resourceId",
+    "operation",
+    "dataClass",
+    "destination",
+    "expiresAt"
+  ],
+  "properties": {
+    "schema": {
+      "const": "vivim.security-context/1"
+    },
+    "workspaceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "principalId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "deviceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sessionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "programDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "policyRevision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "revocationEpoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "resourceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dataClass": {
+      "enum": [
+        "PUBLIC",
+        "WORKSPACE",
+        "PRIVATE",
+        "SENSITIVE",
+        "SECRET",
+        "UNRESOLVED"
+      ]
+    },
+    "destination": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "expiresAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expectedRevision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "grantId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "effectDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

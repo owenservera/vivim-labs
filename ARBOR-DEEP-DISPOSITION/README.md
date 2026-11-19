@@ -43,6 +43,9 @@ C-F01: 380 file rows merged by stable ID (59 earlier proposals and 321 continuat
 
 Post-C-F01 CSV SHA-256: `13693e38fcb9fa10447e3e11c20b813b2b1803961e5ef0ea0a1fd039c85d2e33`. Post-C-F01 compressed Git blob: `8e57be49ce20bedcfae8306ae16acc0b5e882e8f`. Previous compressed Git blob: `46a896fb419861ade4d6eda804a33a3277e72555`. Uncompressed bytes: 13503303; compressed bytes: 1055424. CSV/gzip round-trip verified.
 
+
+Recompression-only follow-up: identical CSV SHA-256 and row values; compressed Git blob `bdde887f6463da8264c7f596158fee372c692d30`, 880621 bytes, below 1 MiB Contents API limit. Supersedes compressed container `8e57be49ce20bedcfae8306ae16acc0b5e882e8f`; no dispositions changed.
+
 ## 2. Parallel assignments — filter the ledger, do not clone it
 
 | Lane | Exclusive responsibility | Files | Symbols | Total | Pending initial | Verification revisit | Prior decision revalidation |

@@ -1,12 +1,6 @@
 name: ARBOR canonical ledger maintenance
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/arbor-ledger-reconcile.yml'
-      - 'ARBOR-DEEP-DISPOSITION/ledger-maintenance.py'
-      - 'ARBOR-DEEP-DISPOSITION/.incoming/*.json'
 permissions:
   contents: write
 concurrency:

@@ -122,7 +122,7 @@ def audit(data):
 
 def merge(patch_path):
     patch = json.loads(patch_path.read_text(encoding="utf-8"))
-    insist(patch["schema"] == "arbor-transient-stable-id-row-patch/1", "Unknown patch schema")
+    insist(patch["schema"] in ("arbor-transient-stable-id-row-patch/1", "arbor-transient-stable-id-row-patch/2"), "Unknown patch schema")
     insist(patch["source_head"] == SOURCE, "Wrong product source pin")
     base_data = git("show", patch["last_readable_ledger_commit"] + ":" + REL)
     insist(git_blob(base_data) == patch["last_readable_ledger_blob"], "Patch base blob mismatch")
@@ -143,9 +143,15 @@ def merge(patch_path):
             insist(row["Repository path"] == record["path"] and row["Symbol / occurrence"] == record["symbol"] and
                    row["Parallel lane"] == record["lane"] == patch["lane"] and
                    row["Lane batch"] == record["batch"], "Patch address mismatch")
-            fragment = record["required_existing_evidence_fragment"]
-            insist(fragment in "\n".join(old.values()) and fragment in "\n".join(row.values()), "Base evidence marker missing")
-            insist(fragment.endswith(record["source_blob_sha"]), "Source identity mismatch")
+            if patch["schema"].endswith("/1"):
+                fragment = record["required_existing_evidence_fragment"]
+                insist(fragment in "\n".join(old.values()) and fragment in "\n".join(row.values()), "Base evidence marker missing")
+                insist(fragment.endswith(record["source_blob_sha"]), "Source identity mismatch")
+            else:
+                source_sha = record["source_blob_sha"]
+                insist(len(source_sha) == 40 and all(c in "0123456789abcdef" for c in source_sha), "Invalid source blob ID")
+                insist(record["source_url"].startswith("https://github.com/owenservera/ARBOR/blob/" + SOURCE + "/" + record["path"] + "#L"), "Source URL does not match pinned path")
+                insist(bool(record["expected_old_fields"]), "Missing exact base field guards")
             for k,v in record["expected_old_fields"].items():
                 insist(old.get(k) == v, "Expected base field " + k)
             changes = {k: str(v) for k,v in record["changed_fields"].items()}

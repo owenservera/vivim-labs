@@ -1,0 +1,44 @@
+name: ARBOR canonical ledger maintenance
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/arbor-ledger-reconcile.yml'
+      - 'ARBOR-DEEP-DISPOSITION/ledger-maintenance.py'
+      - 'ARBOR-DEEP-DISPOSITION/.incoming/*.json'
+permissions:
+  contents: write
+concurrency:
+  group: arbor-canonical-ledger-maintenance
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Check canonical inventory and merge recovered patches
+        shell: bash
+        run: |
+          set -euo pipefail
+          p=ARBOR-DEEP-DISPOSITION
+          python3 -m py_compile "$p/ledger-maintenance.py"
+          python3 "$p/ledger-maintenance.py" audit
+          shopt -s nullglob
+          patches=("$p"/.incoming/*.json)
+          if (( ${#patches[@]} == 0 )); then exit 0; fi
+          for patch in "${patches[@]}"; do
+            python3 "$p/ledger-maintenance.py" merge "$patch"
+          done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$p/ARBOR-MASTER-INTEGRATION-TRACKER.csv.gz"
+          git rm -- "${patches[@]}"
+          # Every merge is part of one commit. Never force or overwrite a newer main.
+          git commit -m "Reconcile recovered ARBOR evidence into canonical master"
+          git push origin HEAD:main
+          python3 "$p/ledger-maintenance.py" audit

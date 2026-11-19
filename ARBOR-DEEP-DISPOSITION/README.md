@@ -13,6 +13,12 @@ python -c "import gzip,pathlib; p=pathlib.Path('ARBOR-MASTER-INTEGRATION-TRACKER
 
 Baseline CSV SHA-256: `e18a5ebc55dcd4c90c9cff5b1b953708a01197f80b3ebfad63aa2a4be397800a`. Uncompressed Git blob: `3f64dbe3e4c091e4d7f3f4cb8a79a6a1ec58d2fb`. Compressed Git blob: `92074ea249d0c30741790cf11bb1a49d17c97796`. The original 75 fields were preserved and eight fields added. Baseline: 4,741 unique rows, 2,558 file records (complete pinned tree), 2,183 symbol records, 83 columns. Every symbol is linked to its parent file. Prior DR01–03 and FB01–02 are retained: 2,500 rows triaged or assessed, not 2,500 fully verified; 2,241 pending initial disposition. Of all rows, 303 currently carry NEXT; these are candidate rows, not distinct work orders. Runtime tests remain UNRUN unless new execution evidence is attached.
 
+### Merge log — 2026-11-19 / A-F01
+
+A-F01: 459 stable-ID row updates applied, 49 prior proposals included unchanged, 410 continuation proposals included. Status: FULL_ROW_COVERAGE_STATIC_PROVISIONAL. Action counts: REUSE 24; RETAIN 190; CHANGE 6; VERIFY 233; DEFER 6. Lane A-F01 NEXT: 26 rows, six existing implementation units. Global NEXT: 306 rows (distinct nonempty implementation-unit keys: 15; other unkeyed rows not counted as distinct units). All 4,741 identities and 84 columns retained; 4,282 non-target rows unchanged field-for-field; runtime tests UNRUN. Source pin: `e07e61385a53f30890b4a7f7441fe25d22a79b1c`. Prior overwritten fields and all appended evidence retained in per-row tagged history. No product source edited, and no exhaustive caller or runtime certification asserted.
+
+Current CSV SHA-256: `4c768c3d0828eb15e2c2b26a91208488b62222ca2103458e24af5fbf9beedac0`. Current uncompressed Git blob: `49fbf95c069865bf2707f926b20cb1809abd8f6f`. Current compressed Git blob: `011bb8d6af37f0127e3133ccd8a2106164114f90`. Previous compressed Git blob: `76ec801d4b6ca4733433dd89ff61dcccacddbe1d`.
+
 ## 2. Parallel assignments — filter the ledger, do not clone it
 
 | Lane | Exclusive responsibility | Files | Symbols | Total | Pending initial | Verification revisit | Prior decision revalidation |

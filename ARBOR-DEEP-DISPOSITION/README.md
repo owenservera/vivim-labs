@@ -37,6 +37,12 @@ Post-D-S01 part 1 CSV SHA-256: `4c1fa28dd817f84a0b8db9f8716a8ca35fcded25138c86c6
 
 Current CSV SHA-256: `54ee9ed46c56ad0bcf5fba4498cf66b18dee9c6ea7373fc60f94f70589175335`. Current uncompressed Git blob: `34ebd7056523df3672b9e0b4283f568b6a1d3c3a`. Current compressed Git blob: `46a896fb419861ade4d6eda804a33a3277e72555`. Previous compressed Git blob: `7af50feba00714126b230d7727f5284d8597c295`. Uncompressed bytes: 12243917; compressed bytes: 800770. CSV and gzip roundtrip verified.
 
+### Merge log — 2026-11-19 / C-F01
+
+C-F01: 380 file rows merged by stable ID (59 earlier proposals and 321 continuation proposals); 809 C symbol rows remain outside this batch. Status: FULL_ROW_COVERAGE_STATIC_PROVISIONAL; no exhaustive caller/runtime verification. Action counts: {"REUSE":80,"RETAIN":208,"CHANGE":15,"VERIFY":76,"DEFER":1}. Phase counts: {"NEXT":30,"LATER":66,"RETAIN":208,"VERIFY":76}. Global NEXT: 318; distinct nonempty implementation-unit keys: 22. All 4,741 IDs and 84 columns retained; 4,361 non-target rows unchanged field-for-field; exact touched-cell base comparisons and supplied original row digests checked. Superseded fields and source anchors retained in tagged C-F01 history in the existing evidence column. Runtime tests UNRUN. No product source edited.
+
+Post-C-F01 CSV SHA-256: `13693e38fcb9fa10447e3e11c20b813b2b1803961e5ef0ea0a1fd039c85d2e33`. Post-C-F01 compressed Git blob: `8e57be49ce20bedcfae8306ae16acc0b5e882e8f`. Previous compressed Git blob: `46a896fb419861ade4d6eda804a33a3277e72555`. Uncompressed bytes: 13503303; compressed bytes: 1055424. CSV/gzip round-trip verified.
+
 ## 2. Parallel assignments — filter the ledger, do not clone it
 
 | Lane | Exclusive responsibility | Files | Symbols | Total | Pending initial | Verification revisit | Prior decision revalidation |

@@ -1,14 +1,32 @@
 {
   "name": "@vivim/vlang-sdk-research",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "type": "module",
-  "description": "Research-only read-only adapter SDK for ARBOR HQ semantic protocol",
+  "description": "Read-only ARBOR HQ agentic MCP and LSP research SDK",
+  "engines": {
+    "node": ">=22"
+  },
   "exports": {
-    ".": "./src/index.mjs"
+    ".": "./src/index.mjs",
+    "./arbor-hq": "./adapters/arbor-hq.mjs",
+    "./mcp": "./servers/mcp.mjs",
+    "./lsp": "./servers/lsp.mjs"
+  },
+  "bin": {
+    "vlang-mcp": "./bin/vlang-mcp.mjs",
+    "vlang-lsp": "./bin/vlang-lsp.mjs"
   },
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "check": "node --check src/index.mjs"
+    "check": "node --check src/index.mjs && node --check adapters/arbor-hq.mjs && node --check servers/mcp.mjs && node --check servers/lsp.mjs && node --check bin/vlang-mcp.mjs && node --check bin/vlang-lsp.mjs",
+    "mcp": "node bin/vlang-mcp.mjs",
+    "lsp": "node bin/vlang-lsp.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.4.0",
+    "zod": "^4.0.0",
+    "vscode-languageserver": "^9.0.1",
+    "vscode-languageserver-textdocument": "^1.0.12"
   }
 }

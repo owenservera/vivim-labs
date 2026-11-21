@@ -44,3 +44,9 @@ If model/provider unavailable, do not silently swap to a billable model. If requ
 - When asked for next work, read `R003-TEST-MISSIONS.md` and execute the highest-value available safe gate rather than repeating research.
 
 - R002 addition: for a minimal live streaming smoke test, run `node scripts/probe-v4-subscribe.ts`; it creates and closes its own read-only ZCode app-server child. An initial sessions-index snapshot subscription has PASSED. Do not claim deltas, reconnection or cross-thread messaging are proven.
+
+## Specialized ChatGPT roles (shared tracker; no duplicated backlogs)
+- [Oracle context guardian](ORACLE/AGENTS.md) — audits cross-session evidence, freshness and ownership; [Oracle SITREP](ORACLE/SITREP.md).
+- [ChatGPT Dev](CHATGPT-DEV/AGENTS.md) — primary cloud/GitHub source coder; [Dev SITREP](CHATGPT-DEV/SITREP.md).
+- [DevOps / Planning](DEVOPS-PLANNING/AGENTS.md) — OW-scoped ready-to-code bundles and deployment planning; [Planning SITREP](DEVOPS-PLANNING/SITREP.md).
+All three use existing `OWNER-WORK/REQUESTS.jsonl` + `OWNER-WORK/UPDATES.jsonl` and `NOW.md`; never maintain independent task registers. Each session must explicitly refresh its own shared files; sessions do not automatically sync.

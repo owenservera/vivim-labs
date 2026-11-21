@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vivim.live/schemas/application-surface-atlas/0.1",
+  "title": "VIVIM development-only application surface atlas (inert read model)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "target", "source", "evidence", "observations", "controls", "unknownIds", "authority", "caveats"],
+  "properties": {
+    "schema": {"const": "vivim.application-surface-atlas/0.1"},
+    "target": {
+      "type": "object", "additionalProperties": false,
+      "required": ["siteId", "origin", "ownedTarget"],
+      "properties": {
+        "siteId": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,79}$"},
+        "origin": {"type": "string", "minLength": 8, "maxLength": 512},
+        "ownedTarget": {"type": "boolean"}
+      }
+    },
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["producer", "format", "version", "bundleDigest", "verifiedRecords", "scopedBrowserRecords"],
+      "properties": {
+        "producer": {"const": "craft-anything"},
+        "format": {"const": "craft-anything-evidence-bundle"},
+        "version": {"const": 1},
+        "bundleDigest": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "verifiedRecords": {"type": "integer", "minimum": 0},
+        "scopedBrowserRecords": {"type": "integer", "minimum": 0}
+      }
+    },
+    "evidence": {
+      "type": "array", "maxItems": 2500,
+      "items": {"type": "object", "additionalProperties": false,
+        "required": ["evidenceId", "operation", "confidence", "authority", "coverage", "limitationCodes", "engine", "cleanRoom", "carriesTargetContent"],
+        "properties": {
+          "evidenceId": {"type": "string", "pattern": "^ev_[0-9a-f]{64}$"},
+          "operation": {"type": "string"},
+          "confidence": {"enum": ["observed", "derived", "inferred"]},
+          "authority": {"type": "string"},
+          "coverage": {"enum": ["complete", "partial", "unknown"]},
+          "limitationCodes": {"type": "array", "items": {"type": "string"}},
+          "engine": {"type": ["string", "null"]},
+          "cleanRoom": {"type": "boolean"},
+          "carriesTargetContent": {"type": "boolean"}
+        }
+      }
+    },
+    "observations": {"type": "array", "maxItems": 10000, "items": {
+      "type": "object", "required": ["kind", "evidenceId", "effectAuthorized"],
+      "properties": {
+        "kind": {"enum": ["website-capture", "capture-artifact", "state-capture", "interaction-state", "state-artifact", "walkthrough", "walkthrough-step"]},
+        "evidenceId": {"type": "string", "pattern": "^ev_[0-9a-f]{64}$"},
+        "effectAuthorized": {"const": false}
+      },
+      "additionalProperties": true
+    }},
+    "controls": {"type": "array", "maxItems": 5000, "items": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "sourceEvidenceId", "position", "role", "label", "confidence", "effectAuthorized", "locatorVerified"],
+      "properties": {
+        "kind": {"const": "control-observation"},
+        "sourceEvidenceId": {"type": "string", "pattern": "^ev_[0-9a-f]{64}$"},
+        "position": {"type": "integer", "minimum": 0},
+        "role": {"type": "string"},
+        "label": {"type": ["string", "null"]},
+        "confidence": {"const": "observed"},
+        "effectAuthorized": {"const": false},
+        "locatorVerified": {"const": false}
+      }
+    }},
+    "unknownIds": {"type": "array", "maxItems": 2500, "items": {"type": "string"}},
+    "authority": {"type": "object", "additionalProperties": false,
+      "required": ["executionAuthorized", "activationPermitted", "sendPermission"],
+      "properties": {"executionAuthorized": {"const": false}, "activationPermitted": {"const": false}, "sendPermission": {"const": false}}
+    },
+    "caveats": {"type": "array", "items": {"type": "string"}}
+  }
+}

@@ -1,0 +1,11 @@
+# Developer-only investigation source files may include private target content.
+captures/
+reports/
+private/
+*.har
+*.pcap
+*.png
+*.raw.json
+.env
+.env.*
+node_modules/

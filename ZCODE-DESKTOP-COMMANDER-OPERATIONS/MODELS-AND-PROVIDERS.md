@@ -29,3 +29,15 @@ Policy is advisory. No live connectivity tests of all four providers have been p
 ## Probe strategy
 P0: read config projection only, exact IDs. P1: native provider list/catalog, no model invocation. P2: one-token/short prompt per approved provider with explicitly chosen model, gather latency and request/receipt ID; stop on billing/quota/permission error. P3: paired coding microbenchmarks, deterministic test evaluation and context limits. P4: failure routing with no silent paid fallback.
 Do not use raw API keys, provider configuration dumps, authorization headers or logs containing tokens.
+
+## R004 operator-selected priority providers (2026-11-21)
+User confirmed the four primary routes from this existing assessment. This is **operator routing preference**, not a modification to ZCode's installed provider settings and not proof of model connectivity.
+
+| Order | Provider label | Recorded provider ID | Desired model(s) | Evidence status |
+|---|---|---|---|---|
+| 1 | Z.ai Start Plan | `account:zai-start-plan` | GLM-5.3 Flash (`glm-5.3-flash`, alias `GLM-5.3-Flash`) | Registered; live auth/quota unverified |
+| 2 | OpenRouter 2 | `openrouter-2` | ERNIE, Mistral | Route listed, enabled state and exact current Mistral alias unverified; ERNIE `baidu/ernie-5.5-flash-preview:free` returned upstream HTTP 429 in R003 |
+| 3 | MiniMax M Plan International | `minimax-m-plan` | MiniMax-M3 or `MiniMax-M3.1-Flash` | `MiniMax-M3.1-Flash` explicit rule, MiniMax-M3 ordered-name entry; auth/quota unverified |
+| 4 | NVIDIA NIM | `new-provider` (display name NVIDIA NIM) | Nemotron 3.5 Super VL | NIM provider enabled; exact Super VL model ID and auth/quota require live source/catalog verification |
+
+Priority order is an initial operator selection, not an unconditional automated fallback sequence: require a grounded exact provider ID and model ID, available grant, budget/cost check, and failure receipt before launching a task. Keep provider settings and credentials intact; do not silently use alternate/billable routes. Read `evidence/R003-OBSERVED.md` for the 429 behavior. Operator specifically asked for all future learnings to be logged here and in `TEST-LEDGER.md` as execution proceeds.

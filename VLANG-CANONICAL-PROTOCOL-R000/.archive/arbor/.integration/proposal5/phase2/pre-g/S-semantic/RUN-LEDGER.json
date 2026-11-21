@@ -1,0 +1,206 @@
+{
+  "schema": "arbor.p5.pre-g.semantic-run-ledger/1",
+  "verdict": "PREPARED_NOT_PROMOTED",
+  "branch": "work/p5-preg-semantic-wiki-r001",
+  "baseCommit": "8b23c73bf450738a76b256bf0fa17ecbf86db591",
+  "scopePrefix": ".integration/proposal5/phase2/pre-g/S-semantic/",
+  "inspectedSources": {
+    "hqResearchCommit": "7cb2fadd88c5a08c0ec7e084410e150a5b6e0f3d",
+    "labsCommit": "67e76c5b730dcc2cd3ab3919c3ba273a6c260db8",
+    "arborDCommit": "ad55fe28c2c331841675f308f9199ee4c2add86a",
+    "arborBCommit": "78a5105a9c1f1880d658f350e130b1e2632d3532",
+    "arborFCommit": "be458f3c4cdb7eb38d47b1de2a00d441b7cdc704",
+    "arborECommit": "1a5cf26ce14ebce4e31d9a4373060ace61852645",
+    "portableBlobs": {
+      "annotationV2": "7e94dfbd4fbca8ef0fdb9e0610053364ce2c38c8",
+      "swcCompiler": "83c2eab7921c84dd55f0503518e7fc7e4a466657",
+      "swcResearchTest": "d92f10a21b12a0a5c145e4e20497edaa1fdb2c3f",
+      "semanticIrSchema": "a05a98cb354f73f78ddb1906590503e759ab699b",
+      "nodeAdapter": "778fcd186d0517ada4399b3d637c1e35b8b0e233",
+      "nodeAdapterTest": "4dbc0f7a1f6086eabed2a5e3021515bf8fdb66ce",
+      "sampleIR": "acbb3fc37bc79bb13fdd87fedba03c0741e029d5",
+      "hostCatalog": "c423d5933c28ca9f534028aeaffd7929f767c269"
+    },
+    "hostCatalogVersion": 6,
+    "hostCatalogSha256": "57a665e245fe40ffa6701f6986414dbc0359ea8435fb234005c5fe22f7be5398",
+    "syntheticSourceSha256": "ce90150e9707159be8ffb559e943ca69da20141a620ac6e18378a5b8abd9227e"
+  },
+  "executions": [
+    {
+      "id": "node-negative-boundary",
+      "environment": "local Node.js v22.16.0 (real node:test via container; no GitHub checkout required)",
+      "command": "node --test inert-adapter.test.mjs",
+      "status": "PASS",
+      "passed": 16,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "evidence": "Node TAP observed 1..16, # pass 16, # fail 0; local git hash-object verified identical to committed adapter and test blobs",
+      "caveat": "Only the adapter/test pair was materialized locally, not the portable HQ parser/compiler; digest consistency is not source authenticity."
+    },
+    {
+      "id": "v8-source-in-memory-negative-smoke",
+      "environment": "connected GitHub source content evaluated as pure JS in isolated V8; ESM declarations adapted in memory, NOT Node imports",
+      "command": "in-memory 12 assertions against observed HQ annotation-v2 + SWC",
+      "status": "PASS",
+      "passed": 12,
+      "failed": 0,
+      "evidence": "Exact committed semantic-ir.json matched recompiled result; 5 nodes, 4 edges, 1 inert action; unknown, malformed, string, duplicate, absent/wrong owner and untrusted-tag cases",
+      "caveat": "Does NOT assert real Node module loading, source Git authenticity, Cargo, Windows, Host effect gating or device integration."
+    },
+    {
+      "id": "github-blob-identity",
+      "environment": "connected GitHub content/blob API",
+      "status": "PASS",
+      "evidence": "Portable annotation parser, SWC, schema and original test Git blob identities exactly match source HQ research commit; adapter/test blobs match locally Node-tested files.",
+      "caveat": "Git object equality only; not runtime/import closure acceptance."
+    },
+    {
+      "id": "portable-original-node-test",
+      "environment": "real Node available, connector source bodies not materialized in local Node filesystem",
+      "command": "node --test research/semantic-wiki-compiler/test/semantic-wiki-compiler.test.mjs",
+      "status": "UNRUN",
+      "reason": "Original test source copied to GitHub isolated branch; no local full source checkout and no checked-out execution of its real ESM imports.",
+      "planned": "Execute from S-semantic directory in post-G merged Node checkout."
+    },
+    {
+      "id": "full-combined-node",
+      "command": "node --test inert-adapter.test.mjs research/semantic-wiki-compiler/test/semantic-wiki-compiler.test.mjs",
+      "status": "UNRUN",
+      "reason": "Requires local source-portability checkout for both modules and full test suite."
+    },
+    {
+      "id": "json-schema-validator",
+      "status": "UNRUN",
+      "reason": "Original JSON Schema copied unchanged; no real JSON Schema 2020-12 validator was run against committed sample."
+    },
+    {
+      "id": "cargo-rust-parity",
+      "command": "cargo test",
+      "status": "UNRUN",
+      "reason": "No Rust runtime or Cargo test execution as part of isolated source-only S work."
+    },
+    {
+      "id": "host-journal-approval-receipt",
+      "status": "UNRUN",
+      "reason": "No Host session, permission, journal, claim, receipt, original-text admission or effect call was executed."
+    },
+    {
+      "id": "windows-installer-tauri",
+      "status": "UNRUN",
+      "reason": "No Windows native build/security acceptance."
+    },
+    {
+      "id": "mobile-pwa-device",
+      "status": "UNRUN",
+      "reason": "No paired phone or actual browser/device acceptance."
+    }
+  ],
+  "negativeCoverage": [
+    {
+      "case": "invalid comments / unknown ref",
+      "location": "copied research Node suite + 12-assert V8 source smoke",
+      "observed": "V8_PASS",
+      "nodeFull": "UNRUN"
+    },
+    {
+      "case": "strings mistaken for tags",
+      "location": "copied research Node suite + V8 source smoke",
+      "observed": "V8_PASS",
+      "nodeFull": "UNRUN"
+    },
+    {
+      "case": "unsupported v3 tags",
+      "location": "inert-adapter.test.mjs",
+      "observed": "NODE_PASS",
+      "limitation": "Conservative whole-text refusal; v3 is not lexically implemented"
+    },
+    {
+      "case": "missing action",
+      "location": "inert-adapter.test.mjs and research Node suite + V8 smoke",
+      "observed": "NODE_PASS_AND_V8_PASS"
+    },
+    {
+      "case": "duplicate binding",
+      "location": "inert-adapter.test.mjs and research Node suite + V8 smoke",
+      "observed": "NODE_PASS_AND_V8_PASS"
+    },
+    {
+      "case": "stale catalog",
+      "location": "inert-adapter.test.mjs",
+      "observed": "NODE_PASS",
+      "limitation": "Synthetic snapshot/version/digest comparison; trusted full-catalog attestation UNRUN"
+    },
+    {
+      "case": "source digest mismatch",
+      "location": "inert-adapter.test.mjs",
+      "observed": "NODE_PASS",
+      "limitation": "Only caller sourceText and caller hash consistency, not independent origin proof"
+    },
+    {
+      "case": "untrusted annotation",
+      "location": "copied research Node suite + V8 source smoke",
+      "observed": "V8_PASS",
+      "nodeFull": "UNRUN",
+      "limitation": "Extra executor-like tag ignored in v2; true source trust and D source scope unverified"
+    },
+    {
+      "case": "conflicting aliases",
+      "location": "inert-adapter.test.mjs",
+      "observed": "NODE_PASS"
+    },
+    {
+      "case": "negation and quoted commands",
+      "location": "inert-adapter.test.mjs",
+      "observed": "NODE_PASS",
+      "limitation": "Negative-only text boundary, not a command interpreter"
+    },
+    {
+      "case": "ambiguous meaning",
+      "location": "inert-adapter.test.mjs",
+      "observed": "NODE_PASS"
+    },
+    {
+      "case": "Host refusal/clarification",
+      "location": "inert-adapter.test.mjs",
+      "observed": "NODE_PASS",
+      "limitation": "Synthetic Host outcome precedence, not live Host admission"
+    }
+  ],
+  "purePortability": {
+    "schema": "vivim.semantic-wiki-ir/0.1",
+    "originalRuntimeImports": [
+      "../../hq/lib/annotation-v2.mjs"
+    ],
+    "copiedUnmodified": true,
+    "liveModulesModified": false,
+    "newExecutor": false,
+    "newRegistry": false,
+    "newWikiWriter": false,
+    "sourceAuthenticityVerified": false,
+    "runtimeVerified": false,
+    "deviceVerified": false,
+    "effectsPerformed": false,
+    "sample": {
+      "sourceId": "synthetic.status",
+      "sourceLineStart": 2,
+      "sourceLineEnd": 6,
+      "description": "five single-line annotations; multi-line spans/columns unsupported in v0",
+      "hostActionId": "vivim.status.show",
+      "risk": "R0",
+      "readiness": "source_wired",
+      "authority": "none",
+      "executable": false,
+      "executionPerformed": false
+    }
+  },
+  "blockers": [
+    "Trusted HQ source walker+current owner semantic ID lookup",
+    "Complete catalog source attestation and stale revision handshake",
+    "Rust Node0 zero-effect ABI and native parity tests",
+    "Host original-text reinterpretation / admission / actual journal receipt",
+    "Schema 2020-12 and Windows/PWA/device acceptance",
+    "Owner-reviewed v3 comment grammar (DESIGN_ONLY)"
+  ],
+  "finalState": "PREPARED_NOT_PROMOTED"
+}

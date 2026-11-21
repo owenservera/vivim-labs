@@ -1,0 +1,147 @@
+{
+  "schema": "vivim.semantic-wiki-ir/0.1",
+  "version": 1,
+  "origin": "hq_annotation_v2_owner_crosswalk",
+  "catalog": {
+    "version": 6,
+    "digest": "57a665e245fe40ffa6701f6986414dbc0359ea8435fb234005c5fe22f7be5398"
+  },
+  "sources": [
+    {
+      "sourceId": "synthetic.status",
+      "repoRef": "arbor",
+      "path": ".integration/proposal5/phase2/pre-g/S-semantic/fixtures/status.example.mjs",
+      "contentHash": "ce90150e9707159be8ffb559e943ca69da20141a620ac6e18378a5b8abd9227e",
+      "symbolId": "showstatus",
+      "status": "parsed",
+      "annotationCount": 5
+    }
+  ],
+  "nodes": [
+    {
+      "id": "synthetic.status:2:action",
+      "kind": "action",
+      "ref": "vivim.status.show@1",
+      "source": {
+        "repoRef": "arbor",
+        "path": ".integration/proposal5/phase2/pre-g/S-semantic/fixtures/status.example.mjs",
+        "line": 2,
+        "contentHash": "ce90150e9707159be8ffb559e943ca69da20141a620ac6e18378a5b8abd9227e",
+        "symbolId": "showstatus"
+      }
+    },
+    {
+      "id": "synthetic.status:3:capability",
+      "kind": "capability",
+      "ref": "vivim.status.read@1",
+      "source": {
+        "repoRef": "arbor",
+        "path": ".integration/proposal5/phase2/pre-g/S-semantic/fixtures/status.example.mjs",
+        "line": 3,
+        "contentHash": "ce90150e9707159be8ffb559e943ca69da20141a620ac6e18378a5b8abd9227e",
+        "symbolId": "showstatus"
+      }
+    },
+    {
+      "id": "synthetic.status:4:contract",
+      "kind": "contract",
+      "ref": "vivim.status.request@1",
+      "source": {
+        "repoRef": "arbor",
+        "path": ".integration/proposal5/phase2/pre-g/S-semantic/fixtures/status.example.mjs",
+        "line": 4,
+        "contentHash": "ce90150e9707159be8ffb559e943ca69da20141a620ac6e18378a5b8abd9227e",
+        "symbolId": "showstatus"
+      }
+    },
+    {
+      "id": "synthetic.status:5:effect",
+      "kind": "effect",
+      "ref": "host:read-only",
+      "source": {
+        "repoRef": "arbor",
+        "path": ".integration/proposal5/phase2/pre-g/S-semantic/fixtures/status.example.mjs",
+        "line": 5,
+        "contentHash": "ce90150e9707159be8ffb559e943ca69da20141a620ac6e18378a5b8abd9227e",
+        "symbolId": "showstatus"
+      }
+    },
+    {
+      "id": "synthetic.status:6:evidence",
+      "kind": "evidence",
+      "ref": "test:tests/status.test.mjs",
+      "source": {
+        "repoRef": "arbor",
+        "path": ".integration/proposal5/phase2/pre-g/S-semantic/fixtures/status.example.mjs",
+        "line": 6,
+        "contentHash": "ce90150e9707159be8ffb559e943ca69da20141a620ac6e18378a5b8abd9227e",
+        "symbolId": "showstatus"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "synthetic.status:2:action>synthetic.status:3:capability",
+      "from": "synthetic.status:2:action",
+      "to": "synthetic.status:3:capability",
+      "kind": "supports_capability"
+    },
+    {
+      "id": "synthetic.status:2:action>synthetic.status:4:contract",
+      "from": "synthetic.status:2:action",
+      "to": "synthetic.status:4:contract",
+      "kind": "subject_to_contract"
+    },
+    {
+      "id": "synthetic.status:2:action>synthetic.status:5:effect",
+      "from": "synthetic.status:2:action",
+      "to": "synthetic.status:5:effect",
+      "kind": "declares_effect"
+    },
+    {
+      "id": "synthetic.status:2:action>synthetic.status:6:evidence",
+      "from": "synthetic.status:2:action",
+      "to": "synthetic.status:6:evidence",
+      "kind": "has_source_evidence"
+    }
+  ],
+  "actions": [
+    {
+      "semanticAction": "vivim.status.show@1",
+      "hostActionId": "vivim.status.show",
+      "catalogVersion": 6,
+      "catalogDigest": "57a665e245fe40ffa6701f6986414dbc0359ea8435fb234005c5fe22f7be5398",
+      "title": "Show VIVIM status",
+      "readiness": "source_wired",
+      "risk": "R0",
+      "parameterNames": [],
+      "sourceNodeId": "synthetic.status:2:action",
+      "sourceRefs": [
+        "synthetic.status:2:action",
+        "synthetic.status:3:capability",
+        "synthetic.status:4:contract",
+        "synthetic.status:5:effect",
+        "synthetic.status:6:evidence"
+      ],
+      "status": "source_crosswalk_only",
+      "authority": "none",
+      "sourceDigestVerified": false,
+      "runtimeVerified": false,
+      "executable": false,
+      "executionPerformed": false
+    }
+  ],
+  "diagnostics": [],
+  "rejections": [],
+  "coverage": {
+    "inputs": 1,
+    "parsedSources": 1,
+    "rejectedSources": 0,
+    "actionCrosswalks": 1,
+    "missingOrInvalidBindings": 0,
+    "interpreterScope": "source_comment_only",
+    "runtimeAcceptance": "not_evaluated"
+  },
+  "outputRole": "read_only_semantic_wiki_projection",
+  "effectPerformed": false
+}

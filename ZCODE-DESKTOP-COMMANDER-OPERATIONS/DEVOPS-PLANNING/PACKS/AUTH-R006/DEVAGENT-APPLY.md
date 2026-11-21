@@ -21,6 +21,8 @@ pub mod autowiki_grant_coverage;
 
 Do not add a new dependency, database, graph or permissions engine. The existing feature `native-program` already depends on `vivim-programmability-core`; the new module uses incumbent HQKG `Graph`, incumbent scoped retrieval and existing Rust query admission. TypeScript/Host may only bind the real actor grant at the trusted boundary, never perform another graph BFS.
 
+**Blocking verified finding:** [Host grant source audit](HOST-GRANT-SOURCE-AUDIT.md) finds owner-session auth, HVI repository grant and phone control:read in different existing systems, but no proven actor-specific complete HQKG entity/source-ref grant. Do NOT wire this interface using any of those as a blanket authority. Until a real source-owner adapter exists, return unavailable/deny.
+
 ## 2. Use the actual owner-grant authority
 
 Implement `CurrentHostGrantSource` only through the existing Host Control owner/session permission authority. Before returning `CurrentHostGrant`, verify:

@@ -130,7 +130,7 @@ export function buildAtlas({ bundle, siteId, origin, captureDir = null, statesDi
         const capture = readJsonCapped(resolve(folder, 'capture.json'), 8*1024*1024);
         checkArtifactOrigin(capture.content, origin);
         controls.push(...sanitizeOutline(capture.content.outline, r.id, includeLabels));
-        observations.push({kind:'capture-artifact', evidenceId:r.id, sha256:capture.sha256, observedControls:controls.length, artifactAttestedByCraftEvidence:false});
+        observations.push({kind:'capture-artifact', evidenceId:r.id, sha256:capture.sha256, observedControls:controls.length, artifactAttestedByCraftEvidence:false, effectAuthorized:false});
         usedCapture = true;
       }
     }
@@ -148,7 +148,7 @@ export function buildAtlas({ bundle, siteId, origin, captureDir = null, statesDi
         const folder = captureMatch(r, statesDir, 'folder');
         const artifact = readJsonCapped(resolve(folder, 'states.json'), 8*1024*1024);
         if (!obj(artifact.content) || normalizedOrigin(artifact.content.url)!==origin || !Array.isArray(artifact.content.states)) fail('STATES_ARTIFACT_INVALID');
-        observations.push({kind:'state-artifact',evidenceId:r.id,sha256:artifact.sha256, artifactAttestedByCraftEvidence:false});
+        observations.push({kind:'state-artifact',evidenceId:r.id,sha256:artifact.sha256, artifactAttestedByCraftEvidence:false,effectAuthorized:false});
         usedStates = true;
       }
     }

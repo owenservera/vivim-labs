@@ -1,4 +1,0 @@
-# Exit criteria
-R000: one vocabulary, version, source-binding rule, identity model and lifecycle; pinned source evidence for each decision or explicit gap; explicit unknown/unsupported behavior; no mass annotation; authority and evidence classes separate; source ownership and compatibility mapped; negative conformance vectors and executable test targets; minimal R001 work order.
-
-R001 proof: agent discovers actual code, retrieves verified bounded context, edits one existing unit and creates one new first-party unit, incrementally indexes, validates declarations, executes real tests, emits evidence-aware semantic delta, retrieves fresh context and projects facts. Repeat through another client. Include Rust/TSX supported or honest unsupported case, stale-context rejection, invalid claim and interrupted execution. Record exact revision and observed outcomes; mark unrun checks UNRUN.

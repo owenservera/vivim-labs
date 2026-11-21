@@ -1,7 +1,0 @@
-__pycache__/
-*.pyc
-.env
-.env.*
-*.dpapi
-catalog.json
-openrouter-quota.json

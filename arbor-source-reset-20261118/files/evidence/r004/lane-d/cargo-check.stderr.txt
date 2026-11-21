@@ -1,6 +1,0 @@
-warning: profiles for the non root package will be ignored, specify profiles at the workspace root:
-package:   C:\0-BlackBoxProject-0\ARBOR\.worktrees\arbor-r004-d\native\hqkg\Cargo.toml
-workspace: C:\0-BlackBoxProject-0\ARBOR\.worktrees\arbor-r004-d\Cargo.toml
-    Updating crates.io index
-error: cannot create the lock file C:\0-BlackBoxProject-0\ARBOR\.worktrees\arbor-r004-d\Cargo.lock because --locked was passed to prevent this
-help: to generate the lock file without accessing the network, remove the --locked flag and use --offline instead.

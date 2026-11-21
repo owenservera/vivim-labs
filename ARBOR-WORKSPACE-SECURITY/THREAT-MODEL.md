@@ -1,5 +1,0 @@
-# Threat model
-
-Assets: owner credentials, signed-in browser sessions, private Wiki/graph/context, personal documents, installed runtime, program definitions, journals and backups. Adversaries: malicious web content or model output, malicious imported programs, compromised renderer, stolen paired device, untrusted local process, supply-chain tampering, accidental destructive operation. Distinguish same-user untrusted workers from OS administrators and kernel compromise. No security guarantee against fully compromised OS or active authorized process reading its legitimately decrypted data.
-
-Mitigation: OS-enforced isolation, authenticated principal and scoped resource access, typed effect authorization, data labels and destination enforcement, replay-safe execution, trusted approval UI, revocation, bounded resources, authenticated provenance, verifiable packages and recovery. Threats must be mapped to executable entry points, tested fail-closed and paired with positive product tests. Avoid collecting secrets in diagnostics.

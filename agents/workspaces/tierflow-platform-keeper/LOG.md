@@ -1,2 +1,0 @@
-# LOG — tierflow-platform-keeper
-

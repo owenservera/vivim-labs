@@ -1,6 +1,0 @@
-# Worker topology — conventions, not work orders
-Match observed Proposal 5 patterns: S0 source pin; A native Rust/HQKG; B Host/security; C Studio; D HQ compiler/wiki; E TierFlow/PWA/UX; F independently owned schemas, checker/oracles and negative tests; Z independent convergence; G serial integration/lockfiles/root coordination; R final independent readiness. Deep prep must decide whether F splits further to avoid self-review.
-
-One worker per exclusive source write scope and exact accepted immutable workerBaseSha. D owns compiler/registry, F checker/independent evidence; B owns Host effect authority/receipt writer, C Studio, E UI publisher, A native; HVI code modifications only through accepted HVI owner and G arbitration. Z/R proof-only. Cross-owner changes go through an exact source-pin interface handoff, never opportunistic edits.
-
-Prompts must be *self-contained* with full scope/paths/source pins/prerequisite gate/branch name, required tests with actual commands, negative/refusal suites, output ABI/receipt, status/blocker vocabulary, and forbidden actions. G alone handles integration and root locks and may merge only with explicit accepted gate. Preserve main and active HVI worker branches. No force-push, no speculative acceptance and no source-only BETA_GO.

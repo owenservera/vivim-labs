@@ -49,3 +49,7 @@ Never use `sourceSha256(sourceText)` as proof that the text is current on disk. 
 4. Only then consider a separate Rust implementation of the pure contract types, reusing the existing core/HQKG runtime.
 
 Research source: `../.archive/` is historical and immutable; decisions: `../results/ROUND-1-SDK-ARCHITECTURE.md`.
+
+## Agentic coding integrations (R0)
+
+MCP and LSP source scaffolds are available in [`AGENTIC-MCP-LSP.md`](./AGENTIC-MCP-LSP.md), with official protocol libraries, read-only ARBOR HQ adapter, Bun commands, agent configuration and explicit UNRUN handshake evidence. They do not replace the Rust/TypeScript language servers or create Host authority.

@@ -4,6 +4,7 @@ pub mod context_lens;
 pub mod bundle_projection;
 pub mod narrative;
 pub mod quality_feedback;
+pub mod owned_context;
 use std::collections::{BTreeMap, BTreeSet};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

@@ -1,0 +1,176 @@
+{
+  "schema": "arbor.p5.vec.system-opportunities/1",
+  "asOf": "2026-11-12",
+  "count": 21,
+  "measurement": "UNBENCHMARKED",
+  "items": [
+    {
+      "id": "VECX-001",
+      "priority": "P0",
+      "title": "SDK descriptor crosswalk and runtime manifest",
+      "cadence": "USER_DEFINED_HIGH",
+      "method": "HQ→Host reviewed build-time metadata, not personal HQ data",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-002",
+      "priority": "P0",
+      "title": "Deterministic Build route",
+      "cadence": "USER_DEFINED_HIGH",
+      "method": "NLCL→typed VEC proposal before optional LLM path",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-003",
+      "priority": "P0",
+      "title": "Host action DAG→Product Rust IR compatibility",
+      "cadence": "FREQUENT",
+      "method": "Preserve risks, source classes, typed IDs and revisions, no effect grant",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-004",
+      "priority": "P0",
+      "title": "Three UI schema bridge",
+      "cadence": "USER_DEFINED_HIGH",
+      "method": "World/1→Visual/1→Phone Surface/1; report loss and unsafe types",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-005",
+      "priority": "P0",
+      "title": "Host-owned personal program install and undo",
+      "cadence": "USER_DEFINED_MED",
+      "method": "One program writer, current policy, journal, receipts and restoration",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-006",
+      "priority": "P0",
+      "title": "Independent verifier and artifact trust roots",
+      "cadence": "DEV_ADMIN_HIGH",
+      "method": "Reviewed oracles, false counterexample and source-to-artifact checks",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-007",
+      "priority": "P1",
+      "title": "Reactive knowledge-bound TierFlow components",
+      "cadence": "USER_DEFINED_HIGH",
+      "method": "Authorized Host data, source revisions and refusal states",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-008",
+      "priority": "P1",
+      "title": "Touch/voice/text semantic parity",
+      "cadence": "USER_DEFINED_HIGH",
+      "method": "Identical intent and revision across surfaces",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-009",
+      "priority": "P1",
+      "title": "Deterministic user recipe packs",
+      "cadence": "USER_DEFINED_MED",
+      "method": "Store accepted local templates, never repeat reasoning for known behavior",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-010",
+      "priority": "P1",
+      "title": "Rust incremental source/context graph reuse",
+      "cadence": "FREQUENT",
+      "method": "Measure cache hit and invalidation correctness before migration",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-011",
+      "priority": "P1",
+      "title": "Opt-in Rust comment capsule pipeline",
+      "cadence": "DEV_ADMIN_MED",
+      "method": "Isolated pinned compile; no execute from comment text",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-012",
+      "priority": "P1",
+      "title": "VEC program inspector in TierFlow",
+      "cadence": "USER_DEFINED_MED",
+      "method": "Why, sources, triggers, grants, receipts and effect state",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-013",
+      "priority": "P1",
+      "title": "Single publisher cutover and recovery",
+      "cadence": "DEV_ADMIN_HIGH",
+      "method": "No duplicate live writer; rollback and stale head proof",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-014",
+      "priority": "P2",
+      "title": "Rust generational pure engine reuse",
+      "cadence": "FREQUENT",
+      "method": "Trusted native compute; separate sandbox for untrusted capsules",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-015",
+      "priority": "P2",
+      "title": "Scoped graph delta/tombstone reuse",
+      "cadence": "FREQUENT",
+      "method": "No automatic personal entity merging from developer graph",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-016",
+      "priority": "P2",
+      "title": "One event-driven PWA update channel",
+      "cadence": "ALWAYS_ON",
+      "method": "No aggressive polling; Host revocation-aware snapshot projection",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-017",
+      "priority": "P2",
+      "title": "Versioned visual time machine",
+      "cadence": "USER_DEFINED_LOW",
+      "method": "Separate UI revision undo from external effect undo",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-018",
+      "priority": "P2",
+      "title": "Runtime cache/installer disk optimization",
+      "cadence": "DEV_ADMIN_MED",
+      "method": "Build once, precompile capsules, avoid gigabyte build churn",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-019",
+      "priority": "P2",
+      "title": "Rust observability as bounded recommendations",
+      "cadence": "FREQUENT",
+      "method": "No graph-driven unattended Host effects",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-020",
+      "priority": "P3",
+      "title": "Spatial personal-programming canvas",
+      "cadence": "USER_DEFINED_LOW",
+      "method": "Typed visual graph edges with action/permission preview",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    },
+    {
+      "id": "VECX-021",
+      "priority": "P3",
+      "title": "Source-editing advanced VEC mode",
+      "cadence": "DEV_ADMIN_LOW",
+      "method": "Isolated branch/lease, independent verifier and PR review",
+      "status": "DESIGN_ONLY_UNBENCHMARKED"
+    }
+  ]
+}

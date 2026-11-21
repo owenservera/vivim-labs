@@ -1,0 +1,79 @@
+{
+  "schema": "arbor.p5.vec.system-gates/1",
+  "asOf": "2026-11-12",
+  "decision": "RESEARCH_COMPLETE_FOR_DESIGN_ONLY",
+  "implementationGO": false,
+  "testsExecuted": false,
+  "items": [
+    {
+      "id": "G-00",
+      "name": "S0 source and authority lock",
+      "status": "OPEN",
+      "requires": "Exact main/source pins, per-path worker ownership, existing ABI and receipts",
+      "testsExecuted": false
+    },
+    {
+      "id": "G-01",
+      "name": "Runtime SDK install descriptor",
+      "status": "NOT_IMPLEMENTED",
+      "requires": "Reviewed manifest, stable IDs and current Host catalog compatibility",
+      "testsExecuted": false
+    },
+    {
+      "id": "G-02",
+      "name": "VEC NL demo",
+      "status": "NOT_IMPLEMENTED",
+      "requires": "3 synthetic intents correctly compile or refuse without LLM",
+      "testsExecuted": false
+    },
+    {
+      "id": "G-03",
+      "name": "Native Rust ABI parity",
+      "status": "UNRUN",
+      "requires": "JS Host DAG vs Rust Program IR differential tests and policy/denial",
+      "testsExecuted": false
+    },
+    {
+      "id": "G-04",
+      "name": "Three-schema UI fidelity",
+      "status": "PARTIAL",
+      "requires": "Static safe bridge exists; dynamic and edit support unaccepted",
+      "testsExecuted": false
+    },
+    {
+      "id": "G-05",
+      "name": "Independent SV trust roots",
+      "status": "OPEN",
+      "requires": "Reviewed oracle, false-case counterexample, spec-weakening denial",
+      "testsExecuted": false
+    },
+    {
+      "id": "G-06",
+      "name": "Capsule sandbox",
+      "status": "NOT_IMPLEMENTED",
+      "requires": "Isolated build, verified artifact, no ambient I/O and bounded runtime",
+      "testsExecuted": false
+    },
+    {
+      "id": "G-07",
+      "name": "One Host publisher",
+      "status": "UNRUN",
+      "requires": "Cutover fence and rollback with lost ACK/epoch conflict",
+      "testsExecuted": false
+    },
+    {
+      "id": "G-08",
+      "name": "Revocation and device security",
+      "status": "UNRUN",
+      "requires": "Windows and physical PWA replay/grant/stale refusal",
+      "testsExecuted": false
+    },
+    {
+      "id": "G-09",
+      "name": "Performance/low disk",
+      "status": "UNRUN",
+      "requires": "Synthetic p50/p95 CPU RSS FFI latency, disk/energy and JS fallback",
+      "testsExecuted": false
+    }
+  ]
+}

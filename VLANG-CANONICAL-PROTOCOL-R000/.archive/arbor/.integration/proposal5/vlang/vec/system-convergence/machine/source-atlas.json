@@ -1,0 +1,591 @@
+{
+  "schema": "arbor.p5.vec.system-source/1",
+  "asOf": "2026-11-12",
+  "mainSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+  "count": 64,
+  "domains": {
+    "HQ": 15,
+    "HQKG Rust": 20,
+    "Product Rust": 4,
+    "TierFlow": 16,
+    "Host/phone": 9
+  },
+  "items": [
+    {
+      "id": "SRC-001",
+      "domain": "HQ",
+      "path": "hq/lib/arbor-service.mjs",
+      "state": "SOURCE_PRESENT_UNVERIFIED_HOST",
+      "finding": "Host-approved development roots, per-read authorization; no personal World",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-002",
+      "domain": "HQ",
+      "path": "hq/lib/indexer.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "Incremental dev code index/imports/symbols/FTS",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-003",
+      "domain": "HQ",
+      "path": "hq/lib/schema.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "Rebuildable local development SQLite",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-004",
+      "domain": "HQ",
+      "path": "hq/lib/semantic-registry.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "Reviewed stable typed IDs, no permission grants",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-005",
+      "domain": "HQ",
+      "path": "hq/lib/annotation-v2.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "Source-comment v2 parser; no VEC Rust execution",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-006",
+      "domain": "HQ",
+      "path": "hq/lib/protocol.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "Original descriptive source annotations",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-007",
+      "domain": "HQ",
+      "path": "hq/lib/context.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "Budgeted deterministic source context with source evidence",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-008",
+      "domain": "HQ",
+      "path": "hq/lib/graph.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "SQL-index derived graph and impact queries",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-009",
+      "domain": "HQ",
+      "path": "hq/lib/capabilities.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "Static manifest/capability discovery without running packages",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-010",
+      "domain": "HQ",
+      "path": "hq/lib/semantic-optimizers.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "Deterministic alias and evidence ranking",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-011",
+      "domain": "HQ",
+      "path": "hq/lib/wiki.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "Deterministic generated development Wiki",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-012",
+      "domain": "HQ",
+      "path": "hq/lib/comment-wiki-bridge.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "Comment-to-Wiki configuration; no compiled Rust capsule",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-013",
+      "domain": "HQ",
+      "path": "hq/lib/wiki-runtime/rust-comment-adapter.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "Trusted source-byte/comment provenance check",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-014",
+      "domain": "HQ",
+      "path": "hq/lib/kernel/store.mjs",
+      "state": "SOURCE_PRESENT_SEPARATE_STORE",
+      "finding": "Durable HQ JS kernel store, not personal Host World",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-015",
+      "domain": "HQ",
+      "path": "hq/MIGRATION-REPORT.md",
+      "state": "SOURCE_REPORT",
+      "finding": "Imported source is not runtime acceptance",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-016",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/lib.rs",
+      "state": "SOURCE_PRESENT_NATIVE_UNACCEPTED",
+      "finding": "Graph, std-first algorithms and durable journal",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-017",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/engine.rs",
+      "state": "SOURCE_PRESENT_NATIVE_UNACCEPTED",
+      "finding": "ComputeEngine registry, generation leases, scheduler/budgets",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-018",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/typed_dag.rs",
+      "state": "SOURCE_PRESENT_NATIVE_UNACCEPTED",
+      "finding": "Pure typed DAG, namespaces and cache; not a security sandbox",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-019",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/scoped_graph.rs",
+      "state": "SOURCE_PRESENT_NATIVE_UNACCEPTED",
+      "finding": "Development/Personal namespace; provenance not authenticated",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-020",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/durable_dag.rs",
+      "state": "SOURCE_PRESENT_NATIVE_UNACCEPTED",
+      "finding": "Redacted durable run descriptions, not cached results",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-021",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/context_retrieval.rs",
+      "state": "SOURCE_PRESENT_NATIVE_UNACCEPTED",
+      "finding": "Bounded deterministic BFS and context ranking",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-022",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/invalidate.rs",
+      "state": "SOURCE_PRESENT_NATIVE_UNACCEPTED",
+      "finding": "Watermark+epoch cache invalidation",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-023",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/import.rs",
+      "state": "SOURCE_PRESENT_OPTIONAL_FEATURE",
+      "finding": "HQKGX1 bounded JSONL source exchange",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-024",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/graph_change_set.rs",
+      "state": "SOURCE_PRESENT_NATIVE_UNACCEPTED",
+      "finding": "Source graph deltas/tombstones/merge lineage",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-025",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/apply_ledger.rs",
+      "state": "SOURCE_PRESENT_NATIVE_UNACCEPTED",
+      "finding": "Durable replay idempotency, torn-tail/lock behavior",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-026",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/reconcile.rs",
+      "state": "SOURCE_PRESENT_NATIVE_UNACCEPTED",
+      "finding": "Read-only exact duplicate/orphan candidate plans",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-027",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/control.rs",
+      "state": "SOURCE_PRESENT_NATIVE_UNACCEPTED",
+      "finding": "Dependencies, diagnostic engine control and bounded recovery",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-028",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/observability.rs",
+      "state": "SOURCE_PRESENT_NATIVE_UNACCEPTED",
+      "finding": "Evidence-grade diagnostics, not a live Host observer",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-029",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/web_memory.rs",
+      "state": "SOURCE_PRESENT_OPTIONAL_FEATURE",
+      "finding": "Scoped web observation journal and revocation",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-030",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/algorithm_adapter.rs",
+      "state": "SOURCE_PRESENT_RESEARCH",
+      "finding": "30 algorithm descriptor entries, not 30 active engines",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-031",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/src/database.rs",
+      "state": "SOURCE_PRESENT_OPTIONAL_FEATURE",
+      "finding": "DB node references + optional read-only drivers",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-032",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/Cargo.toml",
+      "state": "SOURCE_PRESENT",
+      "finding": "std-only default, optional features, disk-conscious dev profile",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-033",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/tests/typed_dag.rs",
+      "state": "TEST_SOURCE_UNRUN",
+      "finding": "Synthetic Rust namespace/cache tests authored but not run in this review",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-034",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/tests/import.rs",
+      "state": "TEST_SOURCE_UNRUN",
+      "finding": "Importer/tombstone tests authored",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-035",
+      "domain": "HQKG Rust",
+      "path": "native/hqkg/tests/keeper_recovery_matrix.rs",
+      "state": "TEST_SOURCE_UNRUN",
+      "finding": "Durable recovery characterization tests authored",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-036",
+      "domain": "Product Rust",
+      "path": "core/programmability/src/lib.rs",
+      "state": "SOURCE_PRESENT_PURE_UNACCEPTED",
+      "finding": "vivim.native-program/1 validation, risk/data classes, no effects",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-037",
+      "domain": "Product Rust",
+      "path": "core/programmability/src/wire.rs",
+      "state": "SOURCE_PRESENT_PURE_UNACCEPTED",
+      "finding": "Strict JSON adapter; supplied policy not authenticated",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-038",
+      "domain": "Product Rust",
+      "path": "core/programmability/src/lineage.rs",
+      "state": "SOURCE_PRESENT_PURE_UNACCEPTED",
+      "finding": "Opaque metadata-only DAG lineage",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-039",
+      "domain": "Product Rust",
+      "path": "core/programmability/GRAPH-INTEGRATION.md",
+      "state": "SOURCE_REPORT",
+      "finding": "Tauri source path yes, Node Host/Android accepted execution no",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-040",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/ui/types.ts",
+      "state": "SOURCE_PRESENT",
+      "finding": "World/1 objects, layers, relationships and dataflows",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-041",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/ui/world.ts",
+      "state": "SOURCE_PRESENT_PURE",
+      "finding": "Pure World transformations and closed transform catalog",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-042",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/ui/store.ts",
+      "state": "SOURCE_PRESENT_UNACCEPTED_PUBLISHER",
+      "finding": "Bun SQLite draft/revision history; not a second active product store",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-043",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/visual-runtime/document/schema.ts",
+      "state": "SOURCE_PRESENT_INERT",
+      "finding": "Visual/1 bounded 2D-first tree, a11y and binding refs",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-044",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/visual-runtime/document/validate.ts",
+      "state": "SOURCE_PRESENT_INERT",
+      "finding": "Closed fail-safe document validator",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-045",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/visual-runtime/render/dom.ts",
+      "state": "SOURCE_PRESENT_INERT",
+      "finding": "Semantic DOM render plan, not product mount",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-046",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/visual-runtime/command/compile.ts",
+      "state": "SOURCE_PRESENT_INERT",
+      "finding": "Slash-only exact semantic command compiler",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-047",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/visual-runtime/final-wave/lane-a/normalize.ts",
+      "state": "SOURCE_PRESENT_INERT",
+      "finding": "UI authoring candidates via trusted HQ/NLCL projections",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-048",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/visual-runtime/final-wave/lane-b/studio-editing.ts",
+      "state": "SOURCE_PRESENT_BRIDGE_INCOMPLETE",
+      "finding": "Review/CAS integration; visual2d not fully bridged",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-049",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/visual-runtime/final-wave/lane-c/templates.ts",
+      "state": "SOURCE_PRESENT_INERT",
+      "finding": "Metadata-only UI templates",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-050",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/visual-runtime/final-wave/integration/world-visual-bridge.ts",
+      "state": "SOURCE_PRESENT_SAFE_SUBSET",
+      "finding": "Static text/card projection and reverse move proposal; no dynamic bindings",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-051",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/visual-runtime/final-wave/integration/schema-boundary.ts",
+      "state": "SOURCE_PRESENT_BRIDGE_INCOMPLETE",
+      "finding": "Persisted World/1 != canonical Visual/1",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-052",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/visual-runtime/final-wave/integration/master.ts",
+      "state": "SOURCE_PRESENT_SYNTHETIC_ONLY",
+      "finding": "Final-wave composition, no native/device GO",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-053",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/visual-runtime/final-wave/lane-g/cutover-dry-run.ts",
+      "state": "SOURCE_PRESENT_INERT",
+      "finding": "Single publisher fence dry-run only",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-054",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/src/visual-runtime/final-wave/lane-h/verification.ts",
+      "state": "SOURCE_PRESENT_GATE_UNRUN",
+      "finding": "Real Windows/Android/Host evidence gates",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-055",
+      "domain": "TierFlow",
+      "path": "packages/tierflow/package.json",
+      "state": "SOURCE_PRESENT",
+      "finding": "Internal TierFlow package, no product server launcher",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-056",
+      "domain": "Host/phone",
+      "path": "apps/mobile-relay/control-language.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "Deterministic NLCL typed intent resolver",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-057",
+      "domain": "Host/phone",
+      "path": "apps/mobile-relay/build-composer.mjs",
+      "state": "SOURCE_PRESENT_LLM_FIRST",
+      "finding": "Current Build drafts UI via provider design prompt",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-058",
+      "domain": "Host/phone",
+      "path": "apps/mobile-relay/generative-ui/catalog.mjs",
+      "state": "SOURCE_PRESENT_THIRD_UI_SCHEMA",
+      "finding": "Phone ui-surface/1 is separate schema",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-059",
+      "domain": "Host/phone",
+      "path": "apps/mobile-relay/generative-ui/host-revision-guard.mjs",
+      "state": "SOURCE_PRESENT_DEVICE_UNRUN",
+      "finding": "Committed Host visual revision read guard",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-060",
+      "domain": "Host/phone",
+      "path": "apps/vivim-host/control/command-program.mjs",
+      "state": "SOURCE_PRESENT_INERT",
+      "finding": "Existing Host action DAG compiler",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-061",
+      "domain": "Host/phone",
+      "path": "apps/vivim-host/control/dispatcher.mjs",
+      "state": "SOURCE_PRESENT_AUTHORITY",
+      "finding": "Current effect approvals, dispatch, journal and receipts",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-062",
+      "domain": "Host/phone",
+      "path": "apps/vivim-host/control/personal-rule-store.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "Owner-reviewed local personal semantic rules",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-063",
+      "domain": "Host/phone",
+      "path": "src-tauri/src/main.rs",
+      "state": "SOURCE_PRESENT_NATIVE_UNRUN",
+      "finding": "Native Windows shell and Tauri Rust validation adapter",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    },
+    {
+      "id": "SRC-064",
+      "domain": "Host/phone",
+      "path": "apps/mobile-relay/ux/model.mjs",
+      "state": "SOURCE_PRESENT",
+      "finding": "Host-grounded six-tab mobile model",
+      "sourceSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+      "testExecuted": false
+    }
+  ]
+}

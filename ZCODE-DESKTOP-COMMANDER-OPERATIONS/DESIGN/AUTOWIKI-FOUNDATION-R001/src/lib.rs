@@ -10,6 +10,7 @@ pub mod readback_guard;
 pub mod query_admission;
 pub mod semantic_evidence;
 pub mod page_assembly;
+pub mod read_pipeline;
 use std::collections::{BTreeMap, BTreeSet};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

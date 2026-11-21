@@ -1,0 +1,8 @@
+[package]
+name = "zcode-native-observer"
+version = "0.1.0"
+edition = "2021"
+description = "Read-only source-verified ZCode native NDJSON/V4 protocol observer for ARBOR R003"
+
+[dependencies]
+serde_json = "1"

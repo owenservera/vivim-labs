@@ -7,7 +7,7 @@
 - **ARBOR `main` observed:** `7ae24ff78a797581b510fe7a78105bbe301c0de4` (21 Nov 2026); re-fetch immediately before product edits because Dev continues modifying the PWA.
 - **Labs:** these packets live in `vivim-labs/main`; inspect current `TASK-CLAIMS.md` before integration. Planning checkout `AW-R003-PRECODE-R004` owns Labs prep, not ARBOR runtime files.
 - **Current collisions:** Dev checkout `PWA-FIRST-WIKI-MOUNT-R002` owns `apps/mobile-relay/app.js` and relevant tests; separate Dev UTF-8 regression claim concerns PWA adapter/test. Do not modify those paths from this package.
-- **Existing R003 baseline:** 37 authored Rust tests. Added R004 modules contain 18 more tests, totaling **55 statically counted staging tests**, plus **2 proposed native HQKG integration tests**. Neither count means tests passed.
+- **Existing R003 baseline:** 37 authored Rust tests. Added R004 modules contain 18 more tests, totaling **57 statically counted staging tests**, plus **2 proposed native HQKG integration tests**. Neither count means tests passed.
 
 ## Three implementation-ready packets
 
@@ -33,7 +33,7 @@ Read [DEVAGENT-APPLY.md](DEVAGENT-APPLY.md) in order, then [TEST-RECIPES.md](TES
 
 ## Test classification
 
-**Static evidence:** GitHub source-read and export checks performed on eight Rust module declarations and 55 `#[test]` markers. **Rust `cargo test`, `cargo fmt`, `cargo clippy`, module-level ARBOR build, Host integration, PWA browser, GPUI Windows, Android and deployment are UNRUN.** Current ChatGPT cloud container has Node 22 but no Cargo or rustc. Source code, unit tests and proposed native integration tests are not a passing release.
+**Static evidence:** GitHub source-read and export checks performed on eight Rust module declarations and 57 `#[test]` markers. **Rust `cargo test`, `cargo fmt`, `cargo clippy`, module-level ARBOR build, Host integration, PWA browser, GPUI Windows, Android and deployment are UNRUN.** Current ChatGPT cloud container has Node 22 but no Cargo or rustc. Source code, unit tests and proposed native integration tests are not a passing release.
 
 ## Completion criteria for this Planning handoff
 

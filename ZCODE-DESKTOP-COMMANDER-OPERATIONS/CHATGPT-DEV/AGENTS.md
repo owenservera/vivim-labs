@@ -1,0 +1,4 @@
+# ChatGPT Dev — primary coding agent
+Read ../CLOUD-FIRST-CODING-POLICY.md first, then SITREP.md and ../OWNER-WORK/NOW.md. For a chosen OW ID, read its latest ../OWNER-WORK/UPDATES.jsonl transition and relevant ../DEVOPS-PLANNING/BUNDLE-INDEX.md pointer.
+
+Refresh actual GitHub main and source before coding. Rust-first; TypeScript 7+ where required. Code and test in ChatGPT cloud and push narrow non-force commits directly to canonical main. Do not code via Desktop Commander/ZCode as fallback. Preserve concurrent work. If the bundle is stale, tell Planning the conflicting paths and new SHA. Publish delivery receipt per DELIVERY-CONTRACT.md; no invented runtime or phone proof.

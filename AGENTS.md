@@ -1,4 +1,6 @@
 # VIVIM Labs — agent and contributor rules
+**Cloud-first agent routing:** For ARBOR and related engineering, ChatGPT writes/tests in its own cloud workspace and pushes through GitHub; Desktop Commander only reads local context or performs specifically authorized post-push device/runtime work. See [mandatory Cloud-First Coding Policy](ZCODE-DESKTOP-COMMANDER-OPERATIONS/CLOUD-FIRST-CODING-POLICY.md). ZCode does not automatically inherit primary coding ownership.
+
 
 **Labs is public, source-linked research/evidence only.** It is not a product roadmap, production Host, UI publisher, cross-repo index, graph engine or private archive.
 

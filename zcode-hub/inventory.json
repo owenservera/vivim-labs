@@ -1,0 +1,479 @@
+{
+  "agents": [
+    {
+      "name": "active-task-scanner",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/active-task-scanner.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "agent-platform-ceo",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/agent-platform-ceo.md",
+      "model": "new-provider-3/auto:decision"
+    },
+    {
+      "name": "android-shell-keeper",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/android-shell-keeper.md",
+      "model": "new-provider-3/auto:smart"
+    },
+    {
+      "name": "arbor-demo-operator",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/arbor-demo-operator.md",
+      "model": "openrouter-2/baidu/ernie-5.5-flash-preview:free"
+    },
+    {
+      "name": "arbor-devops-coordinator",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/arbor-devops-coordinator.md",
+      "model": "openrouter-2/baidu/ernie-5.5-flash-preview:free"
+    },
+    {
+      "name": "arbor-evidence-scout",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/arbor-evidence-scout.md",
+      "model": "openrouter-2/baidu/ernie-5.5-flash-preview:free"
+    },
+    {
+      "name": "arbor-fleet-rewriter",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/arbor-fleet-rewriter.md",
+      "model": "openrouter-2/baidu/ernie-5.5-flash-preview:free"
+    },
+    {
+      "name": "arbor-roadmap-operator",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/arbor-roadmap-operator.md",
+      "model": "openrouter-2/baidu/ernie-5.5-flash-preview:free"
+    },
+    {
+      "name": "atlas",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/atlas.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "auto-cmd-wiki-keeper",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/auto-cmd-wiki-keeper.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "beacon",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/beacon.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "bot-auditor",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/bot-auditor.md",
+      "model": "new-provider-3/auto:reliable"
+    },
+    {
+      "name": "bot-chief",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/bot-chief.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "bot-librarian",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/bot-librarian.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "bot-quartermaster",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/bot-quartermaster.md",
+      "model": "new-provider-3/auto:reliable"
+    },
+    {
+      "name": "cavecrew-builder",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/cavecrew-builder.md",
+      "model": "openrouter-2/nvidia/nemotron-3.5-super-vl:free$enabled"
+    },
+    {
+      "name": "cavecrew-investigator",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/cavecrew-investigator.md",
+      "model": "openrouter-2/nvidia/nemotron-3.5-super-vl:free"
+    },
+    {
+      "name": "cavecrew-reviewer",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/cavecrew-reviewer.md",
+      "model": "account:zai-start-plan/GLM-5.3-Flash"
+    },
+    {
+      "name": "cfo",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/cfo.md",
+      "model": "new-provider-3/auto:decision"
+    },
+    {
+      "name": "channel-manager",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/channel-manager.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "chatgpt-keeper",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/chatgpt-keeper.md",
+      "model": "openrouter-2/baidu/ernie-5.5-flash-preview:free"
+    },
+    {
+      "name": "chief-team-motivator",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/chief-team-motivator.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "cio",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/cio.md",
+      "model": "new-provider-3/auto:decision"
+    },
+    {
+      "name": "community-analyst",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/community-analyst.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "coo",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/coo.md",
+      "model": "new-provider-3/auto:decision"
+    },
+    {
+      "name": "council",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/council.md",
+      "model": "new-provider-3/auto:decision"
+    },
+    {
+      "name": "cto",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/cto.md",
+      "model": "new-provider-3/auto:decision"
+    },
+    {
+      "name": "dcb-context-keeper",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/dcb-context-keeper.md",
+      "model": "new-provider-3/auto:smart"
+    },
+    {
+      "name": "docs-analyst",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/docs-analyst.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "explorer",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/explorer.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "fin-policy",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/fin-policy.md",
+      "model": "new-provider-3/auto:reliable"
+    },
+    {
+      "name": "fin-quota",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/fin-quota.md",
+      "model": "new-provider-3/auto:reliable"
+    },
+    {
+      "name": "fin-spend",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/fin-spend.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "fixer",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/fixer.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "forge-nim",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/forge-nim.md",
+      "model": "new-provider/nvidia/nemotron-3.5-super-vl-120b-a12b$enabled"
+    },
+    {
+      "name": "forge",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/forge.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "glm-probe-a",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/glm-probe-a.md",
+      "model": "account:zai-start-plan/GLM-5.3-Flash"
+    },
+    {
+      "name": "glm-probe-b",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/glm-probe-b.md",
+      "model": "account:zai-start-plan/GLM-5.3-Flash"
+    },
+    {
+      "name": "glm-probe-c",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/glm-probe-c.md",
+      "model": "account:zai-start-plan/GLM-5.3-Flash"
+    },
+    {
+      "name": "glm-probe-d",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/glm-probe-d.md",
+      "model": "account:zai-start-plan/GLM-5.3-Flash"
+    },
+    {
+      "name": "glm-probe-e",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/glm-probe-e.md",
+      "model": "account:zai-start-plan/GLM-5.3-Flash"
+    },
+    {
+      "name": "glm-probe-f",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/glm-probe-f.md",
+      "model": "account:zai-start-plan/GLM-5.3-Flash"
+    },
+    {
+      "name": "glm-probe-g",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/glm-probe-g.md",
+      "model": "account:zai-start-plan/GLM-5.3-Flash"
+    },
+    {
+      "name": "glm-probe-h",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/glm-probe-h.md",
+      "model": "account:zai-start-plan/GLM-5.3-Flash"
+    },
+    {
+      "name": "glm-probe-i",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/glm-probe-i.md",
+      "model": "account:zai-start-plan/GLM-5.3-Flash"
+    },
+    {
+      "name": "glm-probe-j",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/glm-probe-j.md",
+      "model": "account:zai-start-plan/GLM-5.3-Flash"
+    },
+    {
+      "name": "glm-probe-thigh",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/glm-probe-thigh.md",
+      "model": "account:zai-start-plan/GLM-5.3-Flash"
+    },
+    {
+      "name": "glm-probe-tmax",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/glm-probe-tmax.md",
+      "model": "account:zai-start-plan/GLM-5.3-Flash"
+    },
+    {
+      "name": "host-control-keeper",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/host-control-keeper.md",
+      "model": "new-provider-3/auto:smart"
+    },
+    {
+      "name": "hq-data-keeper",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/hq-data-keeper.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "hr",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/hr.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "info-context",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/info-context.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "info-graph",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/info-graph.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "info-transcripts",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/info-transcripts.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "infra",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/infra.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "install-analyst",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/install-analyst.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "keeper",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/keeper.md",
+      "model": "new-provider-3/auto:reliable"
+    },
+    {
+      "name": "lens",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/lens.md",
+      "model": "new-provider-3/auto:reliable"
+    },
+    {
+      "name": "link-keeper",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/link-keeper.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "minimax-probe-b",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/minimax-probe-b.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "momentum-pulse",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/momentum-pulse.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "momentum-wins",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/momentum-wins.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "nlp-commands-keeper",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/nlp-commands-keeper.md",
+      "model": "new-provider-3/auto:smart"
+    },
+    {
+      "name": "nvidia-probe",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/nvidia-probe.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "operations-manager",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/operations-manager.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "ops-board",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/ops-board.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "ops-lane-dispatch",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/ops-lane-dispatch.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "ops-task-queue",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/ops-task-queue.md",
+      "model": "new-provider-3/auto:fast"
+    },
+    {
+      "name": "oracle-chat",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/oracle-chat.md",
+      "model": "openrouter-2/baidu/ernie-5.5-flash-preview:free"
+    },
+    {
+      "name": "oracle",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/oracle.md",
+      "model": "openrouter-2/baidu/ernie-5.5-flash-preview:free"
+    },
+    {
+      "name": "orchestrator",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/orchestrator.md",
+      "model": "new-provider-3/auto:smart"
+    },
+    {
+      "name": "platform-security-auditor",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/platform-security-auditor.md",
+      "model": "new-provider-3/auto:smart"
+    },
+    {
+      "name": "pocket-console",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/pocket-console.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "researcher",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/researcher.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "rust-core-keeper",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/rust-core-keeper.md",
+      "model": "new-provider-3/auto:smart"
+    },
+    {
+      "name": "scout",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/scout.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "synthesizer",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/synthesizer.md",
+      "model": "new-provider-3/auto:smart"
+    },
+    {
+      "name": "tech-agent-grants",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/tech-agent-grants.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "tech-model-router",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/tech-model-router.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "tech-providers",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/tech-providers.md",
+      "model": "new-provider-3/auto:balanced"
+    },
+    {
+      "name": "tierflow-platform-keeper",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/tierflow-platform-keeper.md",
+      "model": "new-provider-3/auto:smart"
+    },
+    {
+      "name": "tierflow-visual-keeper",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/tierflow-visual-keeper.md",
+      "model": "new-provider-3/auto:smart"
+    },
+    {
+      "name": "verifier",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/verifier.md",
+      "model": "new-provider-3/auto:reliable"
+    },
+    {
+      "name": "weaver",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/weaver.md",
+      "model": "new-provider-3/auto:smart"
+    },
+    {
+      "name": "workflow-keeper",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/workflow-keeper.md",
+      "model": "new-provider-3/auto:smart"
+    },
+    {
+      "name": "zcode-doctor",
+      "file": "C:/Users/VIVIM.inc/.zcode/agents/zcode-doctor.md",
+      "model": "new-provider-3/auto:smart"
+    }
+  ],
+  "counts": {
+    "agents": 86,
+    "skills": 402,
+    "userSkills": 97,
+    "pluginDirs": 7
+  },
+  "tools": [
+    {
+      "name": "repos_hq sync.mjs (bus check/sync)",
+      "path": "C:/0-BlackBoxProject-0/repos_hq/scripts/sync.mjs",
+      "exists": true
+    },
+    {
+      "name": "repos_hq hq.mjs (comms view)",
+      "path": "C:/0-BlackBoxProject-0/repos_hq/hq/bin/hq.mjs",
+      "exists": true
+    },
+    {
+      "name": "vivim-web-harness studio.mjs (Capture Studio CLI)",
+      "path": "C:/0-BlackBoxProject-0/vivim-web-harness/studio/bin/studio.mjs",
+      "exists": true
+    },
+    {
+      "name": "ZCode bundled-skills dir",
+      "path": "C:/Program Files/ZCode/resources/glm/packages/bundled-skills/skills",
+      "exists": true
+    }
+  ],
+  "existingRefs": [
+    {
+      "name": "vivim-labs/agents",
+      "path": "C:/0-BlackBoxProject-0/vivim-labs/agents",
+      "note": "Existing central agent dir: workspaces/ with 11 keeper workspaces (BRIEF.md/LOG.md/STATUS.md each: android-shell-keeper, auto-cmd-wiki-keeper, dcb-context-keeper, host-control-keeper, hq-data-keeper, nlp-commands-keeper, platform-security-auditor, rust-core-keeper, tierflow-platform-keeper, tierflow-visual-keeper, workflow-keeper) plus zcode-workflow-specialist/ (AGENT.md, PLAYBOOK.md, REFERENCE.md, API-REFERENCE.md, INSTALL-AND-VERIFY.md, MAIN-SESSION.md, ROUND-2.md, SOURCES.md, catalog/, examples/, install/, tests/)"
+    },
+    {
+      "name": "vivim-labs/agentic_excelence",
+      "path": "C:/0-BlackBoxProject-0/vivim-labs/agentic_excelence",
+      "note": "3 subdirs: agentic-file-system/ (MIGRATION-MANIFEST.json, SECTION-ATLAS-217.json, recovered/), context-corpus-wave-1-5/ (CORPUS-217-DRAFT-PLANS.json, ALGORITHMIC-DESIGN.md, DYNAMIC-CONTEXT-LRU.md), frontmatter-five-lane/ (LANE-A..E docs, FRONTMATTER-217-WORK-MATRIX.json, schemas/, fixtures/, lane-b/)"
+    },
+    {
+      "name": "vivim-labs/zcode-hub (skeleton)",
+      "path": "C:/0-BlackBoxProject-0/vivim-labs/zcode-hub",
+      "note": "Hub skeleton already exists (created 2026-11-17 23:15-23:16 by sibling subagents): .dispatch/, agents/, plugins/, skills/, tools/, user-skills/ - this inventory.json is placed here by S1"
+    }
+  ]
+}

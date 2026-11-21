@@ -1,0 +1,472 @@
+{
+  "providerId": "openrouter-2",
+  "label": "OpenRouter 2",
+  "capturedAt": "2026-11-20T18:15:41.624Z",
+  "probes": [
+    {
+      "name": "GET /api/v1/key",
+      "httpStatus": 200,
+      "body": "{\"data\":{\"label\":\"[REDACTED len=12]...7e6\",\"is_management_key\":false,\"is_provisioning_key\":false,\"limit\":null,\"limit_reset\":null,\"limit_remaining\":null,\"include_byok_in_limit\":false,\"budgets\":[],\"effective_budget\":null,\"usage\":0,\"usage_daily\":0,\"usage_weekly\":0,\"usage_monthly\":0,\"byok_usage\":0,\"byok_usage_daily\":0,\"byok_usage_weekly\":0,\"byok_usage_monthly\":0,\"is_free_tier\":false,\"expires_at\":null,\"creator_user_id\":\"user_2q9wsN2WyCCWzRwKCyChhrMDtvc\",\"organization_id\":null,\"workspace_id\":\"29f8c9e9-645c-52c1-b6b4-5c05dba59ddb\",\"allowed_data_regions\":[\"global\"],\"free_model_daily_requests\":{\"used\":1012,\"limit\":1000,\"remaining\":0},\"rate_limit\":{\"requests\":-1,\"interval\":\"10s\",\"note\":\"This field is deprecated and safe to ignore.\"}}}",
+      "bodyFullLength": 729
+    },
+    {
+      "name": "GET /api/v1/credits",
+      "httpStatus": 200,
+      "body": "{\"data\":{\"total_credits\":26,\"total_usage\":26.191011441}}",
+      "bodyFullLength": 56
+    },
+    {
+      "name": "GET /api/v1/models",
+      "httpStatus": 200,
+      "modelTotal": 442,
+      "configuredModelEntriesVerbatim": [
+        {
+          "id": "inclusionai/ling-3.2-flash:free",
+          "canonical_slug": "inclusionai/ling-3.2-flash-20261113",
+          "hugging_face_id": "inclusionAI/Ling-3.2-flash",
+          "name": "inclusionAI: Ling 3.2 Flash (free)",
+          "created": 1794591958,
+          "description": "Ling 3.2 Flash is a hybrid reasoning model from inclusionAI that accepts text and image input, with a 1M-token context window and up to 200 images per request. Thinking can...",
+          "context_length": 1048576,
+          "architecture": {
+            "modality": "text+image->text",
+            "input_modalities": [
+              "text",
+              "image"
+            ],
+            "output_modalities": [
+              "text"
+            ],
+            "tokenizer": "Other",
+            "instruct_type": null
+          },
+          "pricing": {
+            "prompt": "0",
+            "completion": "0"
+          },
+          "top_provider": {
+            "context_length": 1048576,
+            "max_completion_tokens": 262144,
+            "is_moderated": false
+          },
+          "per_request_limits": null,
+          "supported_parameters": [
+            "frequency_penalty",
+            "include_reasoning",
+            "max_tokens",
+            "presence_penalty",
+            "reasoning",
+            "response_format",
+            "seed",
+            "stop",
+            "structured_outputs",
+            "temperature",
+            "tool_choice",
+            "tools",
+            "top_k",
+            "top_p"
+          ],
+          "default_parameters": {},
+          "supported_voices": null,
+          "knowledge_cutoff": null,
+          "expiration_date": null,
+          "links": {
+            "details": "/api/v1/models/inclusionai/ling-3.2-flash-20261113/endpoints"
+          },
+          "endpoints": [
+            "/api/v1/chat/completions",
+            "/api/v1/completions",
+            "/api/v1/messages",
+            "/api/v1/responses"
+          ],
+          "reasoning": {
+            "mandatory": false,
+            "default_enabled": true
+          }
+        },
+        {
+          "id": "baidu/ernie-5.5-flash-preview:free",
+          "canonical_slug": "baidu/ernie-5.5-flash-preview-20261110",
+          "hugging_face_id": "baidu/ERNIE-5.5-Flash-Preview",
+          "name": "Baidu: ERNIE-5.5-Flash-Preview (free)",
+          "created": 1794333533,
+          "description": "ERNIE 5.5 Flash Preview is the latest foundation model in the ERNIE family, with comprehensive improvements in coding, agentic capabilities, knowledge work, and deep research. It has 280 billion total...",
+          "context_length": 1024000,
+          "architecture": {
+            "modality": "text->text",
+            "input_modalities": [
+              "text"
+            ],
+            "output_modalities": [
+              "text"
+            ],
+            "tokenizer": "Other",
+            "instruct_type": null
+          },
+          "pricing": {
+            "prompt": "0",
+            "completion": "0"
+          },
+          "top_provider": {
+            "context_length": 1024000,
+            "max_completion_tokens": 921600,
+            "is_moderated": false
+          },
+          "per_request_limits": null,
+          "supported_parameters": [
+            "include_reasoning",
+            "max_tokens",
+            "reasoning",
+            "reasoning_effort",
+            "response_format",
+            "structured_outputs",
+            "temperature",
+            "tool_choice",
+            "tools",
+            "top_p"
+          ],
+          "default_parameters": {},
+          "supported_voices": null,
+          "knowledge_cutoff": null,
+          "expiration_date": null,
+          "links": {
+            "details": "/api/v1/models/baidu/ernie-5.5-flash-preview-20261110/endpoints"
+          },
+          "endpoints": [
+            "/api/v1/chat/completions",
+            "/api/v1/completions",
+            "/api/v1/messages",
+            "/api/v1/responses"
+          ],
+          "reasoning": {
+            "mandatory": true,
+            "default_enabled": true,
+            "supported_efforts": [
+              "high"
+            ],
+            "default_effort": "high"
+          }
+        },
+        {
+          "id": "nvidia/nemotron-3.5-super-vl:free",
+          "canonical_slug": "nvidia/nemotron-3.5-super-vl-20261015",
+          "hugging_face_id": "nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16",
+          "name": "NVIDIA: Nemotron 3.5 Super VL (free)",
+          "created": 1792076662,
+          "description": "NVIDIA Nemotron 3.5 Super VL is an open multimodal mixture-of-experts model from NVIDIA, with 12B active parameters out of 120B total. It takes text, images, documents, GUI screenshots, and video...",
+          "context_length": 1000000,
+          "architecture": {
+            "modality": "text+image+video->text",
+            "input_modalities": [
+              "text",
+              "image",
+              "video"
+            ],
+            "output_modalities": [
+              "text"
+            ],
+            "tokenizer": "Other",
+            "instruct_type": null
+          },
+          "pricing": {
+            "prompt": "0",
+            "completion": "0"
+          },
+          "top_provider": {
+            "context_length": 1000000,
+            "max_completion_tokens": 131072,
+            "is_moderated": false
+          },
+          "per_request_limits": null,
+          "supported_parameters": [
+            "include_reasoning",
+            "max_tokens",
+            "reasoning",
+            "response_format",
+            "seed",
+            "structured_outputs",
+            "temperature",
+            "tool_choice",
+            "tools",
+            "top_p"
+          ],
+          "default_parameters": {},
+          "supported_voices": null,
+          "knowledge_cutoff": null,
+          "expiration_date": null,
+          "links": {
+            "details": "/api/v1/models/nvidia/nemotron-3.5-super-vl-20261015/endpoints"
+          },
+          "endpoints": [
+            "/api/v1/chat/completions",
+            "/api/v1/completions",
+            "/api/v1/messages",
+            "/api/v1/responses"
+          ],
+          "benchmarks": {
+            "design_arena": [
+              {
+                "arena": "agents",
+                "category": "pdf",
+                "elo": 1018,
+                "win_rate": 29.3,
+                "rank": 43
+              },
+              {
+                "arena": "models",
+                "category": "3d",
+                "elo": 1105,
+                "win_rate": 29.8,
+                "rank": 89
+              },
+              {
+                "arena": "models",
+                "category": "codecategories",
+                "elo": 1132,
+                "win_rate": 32.1,
+                "rank": 97
+              },
+              {
+                "arena": "models",
+                "category": "dataviz",
+                "elo": 1083,
+                "win_rate": 26.2,
+                "rank": 111
+              },
+              {
+                "arena": "models",
+                "category": "gamedev",
+                "elo": 1074,
+                "win_rate": 27.5,
+                "rank": 107
+              },
+              {
+                "arena": "models",
+                "category": "uicomponent",
+                "elo": 1145,
+                "win_rate": 31.9,
+                "rank": 87
+              },
+              {
+                "arena": "models",
+                "category": "website",
+                "elo": 1152,
+                "win_rate": 34.4,
+                "rank": 95
+              }
+            ],
+            "artificial_analysis": {
+              "intelligence_index": 13.6,
+              "coding_index": null,
+              "agentic_index": null,
+              "finance_and_accounting_index": 26.7,
+              "strategy_and_ops_index": 21.8,
+              "legal_index": 25.3,
+              "healthcare_and_medical_index": 21,
+              "engineering_index": 23.5,
+              "economics_index": 26.1,
+              "cyber_index": null,
+              "openness_index": 83.3,
+              "multilingual_index": null,
+              "decision_index": null
+            }
+          },
+          "reasoning": {
+            "mandatory": false
+          }
+        },
+        {
+          "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+          "canonical_slug": "nvidia/nemotron-3-ultra-550b-a55b-20260604",
+          "hugging_face_id": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+          "name": "NVIDIA: Nemotron 3 Ultra (free)",
+          "created": 1780551208,
+          "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
+          "context_length": 1000000,
+          "architecture": {
+            "modality": "text->text",
+            "input_modalities": [
+              "text"
+            ],
+            "output_modalities": [
+              "text"
+            ],
+            "tokenizer": "Other",
+            "instruct_type": null
+          },
+          "pricing": {
+            "prompt": "0",
+            "completion": "0"
+          },
+          "top_provider": {
+            "context_length": 1000000,
+            "max_completion_tokens": 65536,
+            "is_moderated": false
+          },
+          "per_request_limits": null,
+          "supported_parameters": [
+            "include_reasoning",
+            "max_tokens",
+            "reasoning",
+            "reasoning_effort",
+            "seed",
+            "temperature",
+            "tool_choice",
+            "tools",
+            "top_p"
+          ],
+          "default_parameters": {
+            "temperature": 1,
+            "top_p": 0.95,
+            "top_k": null,
+            "frequency_penalty": null,
+            "presence_penalty": null,
+            "repetition_penalty": null
+          },
+          "supported_voices": null,
+          "knowledge_cutoff": null,
+          "expiration_date": null,
+          "links": {
+            "details": "/api/v1/models/nvidia/nemotron-3-ultra-550b-a55b-20260604/endpoints"
+          },
+          "endpoints": [
+            "/api/v1/chat/completions",
+            "/api/v1/completions",
+            "/api/v1/messages",
+            "/api/v1/responses"
+          ],
+          "benchmarks": {
+            "design_arena": [
+              {
+                "arena": "agents",
+                "category": "pdf",
+                "elo": 1116,
+                "win_rate": 36.4,
+                "rank": 39
+              },
+              {
+                "arena": "models",
+                "category": "3d",
+                "elo": 1097,
+                "win_rate": 37.9,
+                "rank": 91
+              },
+              {
+                "arena": "models",
+                "category": "asciiart",
+                "elo": 1080,
+                "win_rate": 36.3,
+                "rank": 69
+              },
+              {
+                "arena": "models",
+                "category": "codecategories",
+                "elo": 1125,
+                "win_rate": 35.3,
+                "rank": 101
+              },
+              {
+                "arena": "models",
+                "category": "dataviz",
+                "elo": 1135,
+                "win_rate": 37.1,
+                "rank": 90
+              },
+              {
+                "arena": "models",
+                "category": "gamedev",
+                "elo": 1116,
+                "win_rate": 35.3,
+                "rank": 91
+              },
+              {
+                "arena": "models",
+                "category": "svg",
+                "elo": 1055,
+                "win_rate": 31.9,
+                "rank": 81
+              },
+              {
+                "arena": "models",
+                "category": "uicomponent",
+                "elo": 1120,
+                "win_rate": 35.1,
+                "rank": 98
+              },
+              {
+                "arena": "models",
+                "category": "website",
+                "elo": 1125,
+                "win_rate": 34.3,
+                "rank": 106
+              }
+            ],
+            "artificial_analysis": {
+              "intelligence_index": 11.8,
+              "coding_index": null,
+              "agentic_index": null,
+              "finance_and_accounting_index": 24.2,
+              "strategy_and_ops_index": 15.3,
+              "legal_index": 22.6,
+              "healthcare_and_medical_index": 18,
+              "engineering_index": 22.8,
+              "economics_index": 24.1,
+              "cyber_index": 13.1,
+              "openness_index": 83.3,
+              "multilingual_index": null,
+              "decision_index": null
+            }
+          },
+          "reasoning": {
+            "mandatory": false,
+            "default_enabled": true,
+            "supports_max_tokens": true,
+            "supported_efforts": [
+              "high",
+              "medium",
+              "none"
+            ],
+            "default_effort": "high"
+          }
+        }
+      ],
+      "note": "full 854KB models body omitted; matched entries stored verbatim",
+      "body": "undefined"
+    }
+  ],
+  "modelsConfigured": [
+    "baidu/ernie-5.5-flash-preview:free",
+    "nvidia/nemotron-3.5-super-vl:free",
+    "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "inclusionai/ling-3.2-flash:free"
+  ],
+  "budgetSignals": {
+    "credits": {
+      "total_credits": 26,
+      "total_usage": 26.191011441
+    },
+    "key": {
+      "label": "masked-v1-074...7e6",
+      "limit": null,
+      "limit_reset": null,
+      "limit_remaining": null,
+      "effective_budget": null,
+      "usage": 0,
+      "usage_daily": 0,
+      "usage_weekly": 0,
+      "usage_monthly": 0,
+      "is_free_tier": false,
+      "free_model_daily_requests": {
+        "used": 1012,
+        "limit": 1000,
+        "remaining": 0
+      },
+      "rate_limit": {
+        "requests": -1,
+        "interval": "10s",
+        "note": "This field is deprecated and safe to ignore."
+      },
+      "expires_at": null
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "providerId": "account:zai-start-plan",
+  "label": "Zai Start Plan",
+  "capturedAt": "2026-11-20T18:15:57.177Z",
+  "probes": [
+    {
+      "name": "paas-models",
+      "httpStatus": null,
+      "transportError": "empty response"
+    },
+    {
+      "name": "coding-paas-models",
+      "httpStatus": 500,
+      "body": "{\"error\":{\"code\":\"500\",\"message\":\"404 NOT_FOUND\"}}",
+      "bodyFullLength": 50
+    },
+    {
+      "name": "chat-completions-post-1token",
+      "httpStatus": 401,
+      "body": "{\"error\":{\"code\":\"401\",\"message\":\"token expired or incorrect\"}}",
+      "bodyFullLength": 63
+    },
+    {
+      "name": "paas-models-apikey-retry",
+      "httpStatus": null,
+      "body": "",
+      "bodyFullLength": 0,
+      "transportError": "empty response"
+    },
+    {
+      "name": "coding-paas-models-oauth-token",
+      "httpStatus": 500,
+      "body": "{\"error\":{\"code\":\"500\",\"message\":\"404 NOT_FOUND\"}}",
+      "bodyFullLength": 50
+    },
+    {
+      "name": "paas-models-oauth-token",
+      "httpStatus": 401,
+      "body": "{\"error\":{\"code\":\"401\",\"message\":\"token expired or incorrect\"}}",
+      "bodyFullLength": 63
+    },
+    {
+      "name": "zcode-plan-models-oauth-token",
+      "url": "https://zcode.z.ai/api/v1/zcode-plan/anthropic/v1/models",
+      "httpStatus": null,
+      "body": "",
+      "bodyFullLength": 0,
+      "transportError": "empty response"
+    },
+    {
+      "name": "zcode-plan-models-apikey",
+      "url": "https://zcode.z.ai/api/v1/zcode-plan/anthropic/v1/models",
+      "httpStatus": 404,
+      "body": "404 page not found",
+      "bodyFullLength": 18
+    }
+  ],
+  "modelsConfigured": [
+    "GLM-5.3-Flash",
+    "glm-5.3-flash",
+    "GLM-5.3"
+  ],
+  "authKind": "oauth-derived coding-plan api-key from credentials.json",
+  "liveOK": false,
+  "budgetSignals": {
+    "postError": {
+      "code": "401",
+      "message": "token expired or incorrect"
+    },
+    "coding-paas-models-oauth-tokenError": {
+      "code": "500",
+      "message": "404 NOT_FOUND"
+    },
+    "paas-models-oauth-tokenError": {
+      "code": "401",
+      "message": "token expired or incorrect"
+    }
+  }
+}

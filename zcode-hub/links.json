@@ -1,0 +1,51 @@
+[
+  {
+    "item": "agents",
+    "hubPath": "C:\\0-BlackBoxProject-0\\vivim-labs\\zcode-hub\\agents",
+    "sourcePath": "C:\\Users\\VIVIM.inc\\.zcode\\agents",
+    "link": "junction",
+    "verified": true
+  },
+  {
+    "item": "skills",
+    "hubPath": "C:\\0-BlackBoxProject-0\\vivim-labs\\zcode-hub\\skills",
+    "sourcePath": "C:\\Users\\VIVIM.inc\\.zcode\\skills",
+    "link": "junction",
+    "verified": true
+  },
+  {
+    "item": "user-skills",
+    "hubPath": "C:\\0-BlackBoxProject-0\\vivim-labs\\zcode-hub\\user-skills",
+    "sourcePath": "C:\\Users\\VIVIM.inc\\.agents\\skills",
+    "link": "junction",
+    "verified": true
+  },
+  {
+    "item": "plugins",
+    "hubPath": "C:\\0-BlackBoxProject-0\\vivim-labs\\zcode-hub\\plugins",
+    "sourcePath": "C:\\Users\\VIVIM.inc\\.zcode\\cli\\plugins\\cache",
+    "link": "junction",
+    "verified": true
+  },
+  {
+    "item": "tools/repos_hq",
+    "hubPath": "C:\\0-BlackBoxProject-0\\vivim-labs\\zcode-hub\\tools\\repos_hq",
+    "sourcePath": "C:\\0-BlackBoxProject-0\\repos_hq",
+    "link": "junction",
+    "verified": true
+  },
+  {
+    "item": "tools/vivim-web-harness",
+    "hubPath": "C:\\0-BlackBoxProject-0\\vivim-labs\\zcode-hub\\tools\\vivim-web-harness",
+    "sourcePath": "C:\\0-BlackBoxProject-0\\vivim-web-harness",
+    "link": "junction",
+    "verified": true
+  },
+  {
+    "item": "tools/bundled-skills",
+    "hubPath": "C:\\0-BlackBoxProject-0\\vivim-labs\\zcode-hub\\tools\\bundled-skills",
+    "sourcePath": "C:\\Program Files\\ZCode\\resources\\glm\\packages\\bundled-skills\\skills",
+    "link": "junction",
+    "verified": true
+  }
+]

@@ -1,0 +1,56 @@
+{
+  "providerId": "minimax-m-plan",
+  "label": "MiniMax M Plan International",
+  "capturedAt": "2026-11-20T18:15:50.055Z",
+  "probes": [
+    {
+      "name": "anthropic-models",
+      "httpStatus": 200,
+      "transportError": "empty response",
+      "body": "{\"data\":[{\"id\":\"MiniMax-M3.1-Flash\",\"type\":\"model\",\"display_name\":\"MiniMax-M3.1-Flash\",\"created_at\":\"2026-09-16T10:55:18Z\"},{\"id\":\"MiniMax-M3\",\"type\":\"model\",\"display_name\":\"MiniMax-M3\",\"created_at\":\"2026-06-01T00:00:00Z\"},{\"id\":\"MiniMax-M2.7\",\"type\":\"model\",\"display_name\":\"MiniMax-M2.7\",\"created_at\":\"2026-03-18T02:00:00Z\"},{\"id\":\"MiniMax-M2.7-highspeed\",\"type\":\"model\",\"display_name\":\"MiniMax-M2.7-Highspeed\",\"created_at\":\"2026-03-18T02:00:00Z\"},{\"id\":\"MiniMax-M2.5\",\"type\":\"model\",\"display_name\":\"MiniMax-M2.5\",\"created_at\":\"2026-02-13T02:00:00Z\"},{\"id\":\"MiniMax-M2.5-highspeed\",\"type\":\"model\",\"display_name\":\"MiniMax-M2.5-Highspeed\",\"created_at\":\"2026-02-13T02:00:00Z\"},{\"id\":\"MiniMax-M2.1\",\"type\":\"model\",\"display_name\":\"MiniMax-M2.1\",\"created_at\":\"2025-12-23T02:00:00Z\"},{\"id\":\"MiniMax-M2.1-highspeed\",\"type\":\"model\",\"display_name\":\"MiniMax-M2.1-Highspeed\",\"created_at\":\"2025-12-23T02:00:00Z\"},{\"id\":\"MiniMax-M2\",\"type\":\"model\",\"display_name\":\"MiniMax-M2\",\"created_at\":\"2025-10-27T02:00:00Z\"}],\"first_id\":\"MiniMax-M3.1-Flash\",\"last_id\":\"MiniMax-M2\",\"has_more\":false}",
+      "bodyFullLength": 1073
+    },
+    {
+      "name": "anthropic-messages-post-1token",
+      "httpStatus": 429,
+      "body": "{\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"Token Plan usage limit reached: Upgrade your Token Plan or purchase Credits for more usage. (2056)\"},\"request_id\":\"074fc1536b496ff1935bf6a966e73853\"}",
+      "bodyFullLength": 211
+    },
+    {
+      "name": "openai-chatcompletion-v2-post-1token",
+      "httpStatus": 200,
+      "body": "{\"id\":\"074fc154cc8682a87444061da77a8cee\",\"choices\":null,\"created\":1795198548,\"model\":\"MiniMax-M3.1-Flash\",\"object\":\"chat.completion\",\"usage\":{\"total_tokens\":0,\"total_characters\":0},\"input_sensitive\":false,\"output_sensitive\":false,\"input_sensitive_type\":0,\"output_sensitive_type\":0,\"output_sensitive_int\":0,\"base_resp\":{\"status_code\":2056,\"status_msg\":\"Token Plan usage limit reached: Upgrade your Token Plan or purchase Credits for more usage.\"}}\n",
+      "bodyFullLength": 447
+    },
+    {
+      "name": "usage",
+      "httpStatus": 404,
+      "body": "404 page not found",
+      "bodyFullLength": 18
+    }
+  ],
+  "modelsConfigured": [
+    "MiniMax-M3",
+    "MiniMax-M3.1-Flash"
+  ],
+  "baseUrl": "https://api.minimax.io/anthropic",
+  "apiType": "anthropic-messages",
+  "liveOK": false,
+  "budgetSignals": {
+    "openaiPostError": {
+      "status_code": 2056,
+      "status_msg": "Token Plan usage limit reached: Upgrade your Token Plan or purchase Credits for more usage."
+    },
+    "anthropicModels": [
+      "MiniMax-M3.1-Flash",
+      "MiniMax-M3",
+      "MiniMax-M2.7",
+      "MiniMax-M2.7-highspeed",
+      "MiniMax-M2.5",
+      "MiniMax-M2.5-highspeed",
+      "MiniMax-M2.1",
+      "MiniMax-M2.1-highspeed",
+      "MiniMax-M2"
+    ]
+  }
+}

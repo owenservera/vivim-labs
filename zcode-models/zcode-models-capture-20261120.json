@@ -1,0 +1,864 @@
+{
+ "schema": "vivim.labs.zcode-models-capture/1.0",
+ "capturedAt": "2026-11-20T18:20:24.541Z",
+ "purpose": "Provider status + budget assessment for the four ZCode providers, saved in ZCode providerRules shape for direct reuse (model pinning, routing, quota-aware scheduling).",
+ "howToLeverage": [
+  "providers[].config mirrors ~/.zcode/v2/provider_config.json providerRules (keys redacted) — paste-ready for re-wiring",
+  "providers[].models[].zcodeModelId pastes verbatim into CreateSession.model or workflow subagent_model",
+  "budget.signals + budget.pricing carry per-model $/M with sourceUrl + fetchedAt provenance (provider-depot canon: a price without a source is not a price)",
+  "status.liveProbe carries the HTTP-verified state of each provider at capture time"
+ ],
+ "zcodeAuthority": "SOFTWARE_HQ/central-models/providers/catalog.v1.json",
+ "depotRefreshedAt": "2026-11-20T18:06:02.998Z",
+ "staleDataWarnings": [
+  "~/.zcode/v2/coding-plan-cache.json says builtin:zai-start-plan unavailable/coding_plan_not_entitled — its updatedAt is ~2026-06-22 (≈5 months stale); runtime proves the plan is LIVE (this session runs on account:zai-start-plan/GLM-5.3-Flash). Do not trust that cache.",
+  "~/.zcode/v2/bots-model-cache.v2.json builtin:zai-start-plan entry says enabled:false / coding_plan_not_authenticated — same stale vintage. Recorded for provenance only."
+ ],
+ "providers": [
+  {
+   "providerId": "minimax-m-plan",
+   "providerName": "MiniMax M Plan (International)",
+   "templateId": "minimax",
+   "enabled": true,
+   "config": {
+    "group": "standard-personal",
+    "access": {
+     "type": "api-key",
+     "apiKey": "[REDACTED len=125]"
+    },
+    "api": {
+     "type": "anthropic-messages",
+     "baseUrl": "https://api.minimax.io/anthropic"
+    },
+    "personalModelIds": [],
+    "modelOrder": [
+     "MiniMax-M3",
+     "MiniMax-M2.7",
+     "MiniMax-M2.7-highspeed",
+     "MiniMax-M2.5",
+     "MiniMax-M2.5-highspeed",
+     "MiniMax-M3.1-Flash"
+    ]
+   },
+   "catalogOrderCount": 6,
+   "models": [
+    {
+     "id": "MiniMax-M3",
+     "zcodeModelId": "minimax-m-plan/MiniMax-M3",
+     "personal": true,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": "enabled",
+     "inModelOrder": true,
+     "contextLength": 1048576,
+     "priceInPerM": 0.23,
+     "priceOutPerM": 0.96,
+     "inputModalities": "text+image",
+     "outputModalities": "text",
+     "free": false,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "servedOnLiveMiniMaxCatalog": true,
+     "priceSource": "provider-depot source 'hf-router' fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "MiniMax-M2.7",
+     "zcodeModelId": "minimax-m-plan/MiniMax-M2.7",
+     "personal": false,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": null,
+     "inModelOrder": true,
+     "contextLength": 204800,
+     "priceInPerM": 0.25,
+     "priceOutPerM": 1,
+     "inputModalities": "text",
+     "outputModalities": "text",
+     "free": false,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "servedOnLiveMiniMaxCatalog": true,
+     "priceSource": "provider-depot source 'hf-router' fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "MiniMax-M2.7-highspeed",
+     "zcodeModelId": "minimax-m-plan/MiniMax-M2.7-highspeed",
+     "personal": false,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": null,
+     "inModelOrder": true,
+     "contextLength": 204800,
+     "priceInPerM": 0.25,
+     "priceOutPerM": 1,
+     "inputModalities": "text",
+     "outputModalities": "text",
+     "free": false,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "servedOnLiveMiniMaxCatalog": true,
+     "priceSource": "provider-depot source 'hf-router' fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "MiniMax-M2.5",
+     "zcodeModelId": "minimax-m-plan/MiniMax-M2.5",
+     "personal": false,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": null,
+     "inModelOrder": true,
+     "contextLength": 204800,
+     "priceInPerM": 0.27,
+     "priceOutPerM": 0.95,
+     "inputModalities": "text",
+     "outputModalities": "text",
+     "free": false,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "servedOnLiveMiniMaxCatalog": true,
+     "priceSource": "provider-depot source 'hf-router' fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "MiniMax-M2.5-highspeed",
+     "zcodeModelId": "minimax-m-plan/MiniMax-M2.5-highspeed",
+     "personal": false,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": null,
+     "inModelOrder": true,
+     "contextLength": 204800,
+     "priceInPerM": 0.27,
+     "priceOutPerM": 0.95,
+     "inputModalities": "text",
+     "outputModalities": "text",
+     "free": false,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "servedOnLiveMiniMaxCatalog": true,
+     "priceSource": "provider-depot source 'hf-router' fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "MiniMax-M3.1-Flash",
+     "zcodeModelId": "minimax-m-plan/MiniMax-M3.1-Flash",
+     "personal": true,
+     "reasoningLevels": [
+      "low",
+      "medium",
+      "high",
+      "xhigh",
+      "max"
+     ],
+     "reasoningDefault": "max",
+     "inModelOrder": true,
+     "contextLength": 1048576,
+     "priceInPerM": 0.135,
+     "priceOutPerM": 0.5,
+     "inputModalities": "text+image",
+     "outputModalities": "text",
+     "free": false,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "servedOnLiveMiniMaxCatalog": true,
+     "priceSource": "provider-depot source 'hf-router' fetchedAt 2026-11-20T18:06:02.998Z"
+    }
+   ],
+   "status": {
+    "status": "FAIL",
+    "http": 200,
+    "detail": "endpoints answer and auth is accepted, but serving is blocked by plan quota: 1-token POST /v1/text/chatcompletion_v2 returned HTTP 200 with in-band base_resp.status_code=2056 Token Plan usage limit reached; anthropic /v1/messages POST returned 429"
+   },
+   "budget": {
+    "planQuota": "EXHAUSTED - base_resp.status_code=2056 status_msg=Token Plan usage limit reached: Upgrade your Token Plan or purchase Credits for more usage.",
+    "anthropicModelsListed": [
+     "MiniMax-M3.1-Flash",
+     "MiniMax-M3",
+     "MiniMax-M2.7",
+     "MiniMax-M2.7-highspeed",
+     "MiniMax-M2.5",
+     "MiniMax-M2.5-highspeed",
+     "MiniMax-M2.1",
+     "MiniMax-M2.1-highspeed",
+     "MiniMax-M2"
+    ],
+    "usageEndpoint": "GET /v1/usage -> 404",
+    "anthropicPost": "429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"Token Plan usage limit reached: Upgrade your Token Plan or"
+   },
+   "statusNotes": "anthropic-compatible base https://api.minimax.io/anthropic is the rule baseUrl; anthropic /v1/models 200 lists 9 MiniMax models incl MiniMax-M3 and MiniMax-M3.1-Flash; no usage/quota endpoint answered -> quota state captured via in-band error."
+  },
+  {
+   "providerId": "new-provider",
+   "providerName": "NVIDIA NIM",
+   "templateId": null,
+   "enabled": true,
+   "config": {
+    "group": "standard-personal",
+    "access": {
+     "type": "api-key",
+     "apiKey": "[REDACTED len=70]"
+    },
+    "api": {
+     "type": "openai-chat-completions",
+     "baseUrl": "https://integrate.api.nvidia.com/v1"
+    },
+    "personalModelIds": [
+     "meta/muse-glimmer-30b",
+     "mistralai/mistral-large-4-1t-a52b",
+     "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+     "nvidia/nemotron-3-ultra-550b-a55b",
+     "nvidia/nemotron-3.5-bolt-e4b",
+     "nvidia/nemotron-3.5-lightning-30b-a3b",
+     "nvidia/nemotron-3.5-super-vl-120b-a12b",
+     "nvidia/riva-translate-4b-instruct-v2",
+     "poolside/laguna-xs-2.1"
+    ],
+    "modelOrder": [
+     "meta/muse-glimmer-30b",
+     "mistralai/mistral-large-4-1t-a52b",
+     "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+     "nvidia/nemotron-3-ultra-550b-a55b",
+     "nvidia/nemotron-3.5-bolt-e4b",
+     "nvidia/nemotron-3.5-lightning-30b-a3b",
+     "nvidia/nemotron-3.5-super-vl-120b-a12b",
+     "nvidia/riva-translate-4b-instruct-v2",
+     "poolside/laguna-xs-2.1"
+    ]
+   },
+   "catalogOrderCount": 9,
+   "models": [
+    {
+     "id": "meta/muse-glimmer-30b",
+     "zcodeModelId": "new-provider/meta/muse-glimmer-30b",
+     "personal": true,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": "enabled",
+     "inModelOrder": true,
+     "contextLength": 131072,
+     "priceInPerM": 0.3,
+     "priceOutPerM": 1.2,
+     "inputModalities": "text+image+pdf",
+     "outputModalities": "text",
+     "free": false,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "servedOnLiveNimCatalog": true,
+     "priceSource": "provider-depot source 'models-dev' fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "mistralai/mistral-large-4-1t-a52b",
+     "zcodeModelId": "new-provider/mistralai/mistral-large-4-1t-a52b",
+     "personal": true,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": "enabled",
+     "inModelOrder": true,
+     "contextLength": 1048576,
+     "priceInPerM": 0.7,
+     "priceOutPerM": 2.1,
+     "inputModalities": "text+image",
+     "outputModalities": "text",
+     "free": false,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "servedOnLiveNimCatalog": true,
+     "priceSource": "provider-depot source 'hf-router' fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+     "zcodeModelId": "new-provider/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+     "personal": true,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": "enabled",
+     "inModelOrder": true,
+     "contextLength": 256000,
+     "priceInPerM": 0,
+     "priceOutPerM": 0,
+     "inputModalities": "text+image+video+audio",
+     "outputModalities": "text",
+     "free": true,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "servedOnLiveNimCatalog": true,
+     "priceSource": "provider-depot source 'models-dev' fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "nvidia/nemotron-3-ultra-550b-a55b",
+     "zcodeModelId": "new-provider/nvidia/nemotron-3-ultra-550b-a55b",
+     "personal": true,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": "enabled",
+     "inModelOrder": true,
+     "contextLength": 1000000,
+     "priceInPerM": 0,
+     "priceOutPerM": 0,
+     "inputModalities": "text",
+     "outputModalities": "text",
+     "free": true,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "servedOnLiveNimCatalog": true,
+     "priceSource": "provider-depot source 'models-dev' fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "nvidia/nemotron-3.5-bolt-e4b",
+     "zcodeModelId": "new-provider/nvidia/nemotron-3.5-bolt-e4b",
+     "personal": true,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": "enabled",
+     "inModelOrder": true,
+     "servedOnLiveNimCatalog": true,
+     "priceSource": "unmatched in depot catalog (no priced variant found)"
+    },
+    {
+     "id": "nvidia/nemotron-3.5-lightning-30b-a3b",
+     "zcodeModelId": "new-provider/nvidia/nemotron-3.5-lightning-30b-a3b",
+     "personal": true,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": "enabled",
+     "inModelOrder": true,
+     "contextLength": 262144,
+     "priceInPerM": 0,
+     "priceOutPerM": 0,
+     "inputModalities": "text",
+     "outputModalities": "text",
+     "free": true,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "servedOnLiveNimCatalog": true,
+     "priceSource": "provider-depot source 'models-dev' fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+     "zcodeModelId": "new-provider/nvidia/nemotron-3.5-super-vl-120b-a12b",
+     "personal": true,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": "enabled",
+     "inModelOrder": true,
+     "contextLength": 1048576,
+     "priceInPerM": 0,
+     "priceOutPerM": 0,
+     "inputModalities": "text+image+video",
+     "outputModalities": "text",
+     "free": true,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "servedOnLiveNimCatalog": true,
+     "priceSource": "provider-depot source 'models-dev' fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "nvidia/riva-translate-4b-instruct-v2",
+     "zcodeModelId": "new-provider/nvidia/riva-translate-4b-instruct-v2",
+     "personal": true,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": "enabled",
+     "inModelOrder": true,
+     "servedOnLiveNimCatalog": true,
+     "priceSource": "unmatched in depot catalog (no priced variant found)"
+    },
+    {
+     "id": "poolside/laguna-xs-2.1",
+     "zcodeModelId": "new-provider/poolside/laguna-xs-2.1",
+     "personal": true,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": "enabled",
+     "inModelOrder": true,
+     "contextLength": 262144,
+     "priceInPerM": 0,
+     "priceOutPerM": 0,
+     "inputModalities": "text",
+     "outputModalities": "text",
+     "free": true,
+     "capabilities": [
+      "tools"
+     ],
+     "servedOnLiveNimCatalog": true,
+     "priceSource": "provider-depot source 'models-dev' fetchedAt 2026-11-20T18:06:02.998Z"
+    }
+   ],
+   "status": {
+    "status": "OK",
+    "http": 200,
+    "url": "https://integrate.api.nvidia.com/v1/models",
+    "modelCount": 33
+   },
+   "budget": {
+    "modelCount": 33,
+    "rateLimitHeaders": {},
+    "configuredModelsServed": "9/9",
+    "allConfiguredServed": true
+   },
+   "statusNotes": "GET /v1/models 200; all 9 configured model ids present in served list; no X-RateLimit-* headers returned."
+  },
+  {
+   "providerId": "account:zai-start-plan",
+   "providerName": "Zai Start Plan (coding plan gateway)",
+   "templateId": null,
+   "enabled": "unset",
+   "config": {
+    "personalModelIds": [
+     "glm-5.3-flash",
+     "GLM-5.3"
+    ],
+    "modelOrder": [
+     "GLM-5.3-Flash",
+     "glm-5.3-flash",
+     "GLM-5.3"
+    ]
+   },
+   "catalogOrderCount": 3,
+   "models": [
+    {
+     "id": "GLM-5.3-Flash",
+     "zcodeModelId": "account:zai-start-plan/GLM-5.3-Flash",
+     "personal": false,
+     "reasoningLevels": [
+      "low",
+      "high",
+      "max"
+     ],
+     "reasoningDefault": "max",
+     "inModelOrder": true,
+     "contextLength": 1048576,
+     "priceInPerM": 0.0399,
+     "priceOutPerM": 0.0784,
+     "inputModalities": "text+image",
+     "outputModalities": "text",
+     "free": false,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "priceSource": "provider-depot source 'hf-router' fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "glm-5.3-flash",
+     "zcodeModelId": "account:zai-start-plan/glm-5.3-flash",
+     "personal": true,
+     "reasoningLevels": [
+      "low",
+      "high",
+      "max"
+     ],
+     "reasoningDefault": "max",
+     "inModelOrder": true,
+     "contextLength": 1048576,
+     "priceInPerM": 0.0399,
+     "priceOutPerM": 0.0784,
+     "inputModalities": "text+image",
+     "outputModalities": "text",
+     "free": false,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "priceSource": "provider-depot source 'hf-router' fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "GLM-5.3",
+     "zcodeModelId": "account:zai-start-plan/GLM-5.3",
+     "personal": true,
+     "reasoningLevels": [
+      "low",
+      "high",
+      "max"
+     ],
+     "reasoningDefault": "max",
+     "inModelOrder": true,
+     "contextLength": 1048576,
+     "priceInPerM": 0.0699,
+     "priceOutPerM": 1.4,
+     "inputModalities": "text",
+     "outputModalities": "text",
+     "free": false,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "priceSource": "provider-depot source 'hf-router' fetchedAt 2026-11-20T18:06:02.998Z"
+    }
+   ],
+   "status": {
+    "status": "UNVERIFIED",
+    "http": 401,
+    "detail": "stored coding-plan api-key rejected: chat/completions 401 token expired or incorrect; /api/paas/v4/models 401 with oauth access token and transport-null with api-key; /api/coding-paas/v4/models 500 both auths; zcode.z.ai/api/v1/zcode-plan/anthropic/v1/models 404 with api-key, transport-null with oauth token"
+   },
+   "budget": {
+    "unverified": true,
+    "errors": {
+     "postError": {
+      "code": "401",
+      "message": "token expired or incorrect"
+     },
+     "coding-paas-models-oauth-tokenError": {
+      "code": "500",
+      "message": "404 NOT_FOUND"
+     },
+     "paas-models-oauth-tokenError": {
+      "code": "401",
+      "message": "token expired or incorrect"
+     }
+    }
+   },
+   "statusNotes": "config rule has no baseUrl/access block (OAuth-managed); file raw/account_zai-start-plan.status.json (colon sanitized to underscore for Windows); live session on this provider works via harness internal path but no REST quota endpoint answered."
+  },
+  {
+   "providerId": "openrouter-2",
+   "providerName": "OpenRouter 2",
+   "templateId": "openrouter",
+   "enabled": "unset",
+   "config": {
+    "group": "standard-personal",
+    "access": {
+     "type": "api-key",
+     "apiKey": "[REDACTED len=73]"
+    },
+    "personalModelIds": [
+     "baidu/ernie-5.5-flash-preview:free",
+     "nvidia/nemotron-3.5-super-vl:free",
+     "nvidia/nemotron-3-ultra-550b-a55b:free",
+     "inclusionai/ling-3.2-flash:free"
+    ],
+    "modelOrder": [
+     "minimax/minimax-m3.1-flash",
+     "moonshotai/kimi-k3.1-pro",
+     "anthropic/claude-fable-5.1",
+     "openai/gpt-6-astra",
+     "deepseek/deepseek-v4-pro",
+     "moonshotai/kimi-k3",
+     "z-ai/glm-5.3",
+     "qwen/qwen3.8-max",
+     "minimax/minimax-m3",
+     "openai/gpt-6.1-sol",
+     "openai/gpt-6-luna",
+     "anthropic/claude-opus-5.5",
+     "anthropic/claude-sonnet-5.5",
+     "anthropic/claude-haiku-5.5",
+     "x-ai/grok-4.7",
+     "z-ai/glm-5.3-flashx",
+     "xiaomi/mimo-v2.6-pro",
+     "xiaomi/mimo-v2.6-flash",
+     "openai/gpt-5.6-sol",
+     "anthropic/claude-opus-5",
+     "xiaomi/mimo-v2.5-pro",
+     "x-ai/grok-4.6",
+     "deepseek/deepseek-v4.1-flash",
+     "qwen/qwen3.8-max-0902",
+     "openai/gpt-5.6-terra",
+     "openai/gpt-5.6-luna",
+     "openai/gpt-5.6",
+     "openai/gpt-5.4",
+     "openai/gpt-5.4-pro",
+     "openai/gpt-5.4-mini",
+     "openai/gpt-5.4-nano",
+     "openai/gpt-5.3-codex",
+     "anthropic/claude-sonnet-5",
+     "anthropic/claude-haiku-4.5",
+     "anthropic/claude-opus-4.8",
+     "anthropic/claude-opus-4.7",
+     "anthropic/claude-opus-4.6",
+     "anthropic/claude-opus-4.5",
+     "anthropic/claude-sonnet-4.6",
+     "anthropic/claude-sonnet-4.5",
+     "deepseek/deepseek-v4-flash",
+     "moonshotai/kimi-k2.7-code",
+     "moonshotai/kimi-k2.6",
+     "moonshotai/kimi-k2.5",
+     "z-ai/glm-5.3-flash",
+     "z-ai/glm-5.2",
+     "z-ai/glm-5.1",
+     "z-ai/glm-5v-turbo",
+     "z-ai/glm-5",
+     "z-ai/glm-5-turbo",
+     "z-ai/glm-4.7",
+     "z-ai/glm-4.7-flash",
+     "z-ai/glm-4.6",
+     "z-ai/glm-4.6v",
+     "z-ai/glm-4.5-air",
+     "z-ai/glm-4.5",
+     "qwen/qwen3.8-flash",
+     "qwen/qwen3.7-max",
+     "qwen/qwen3.7-plus",
+     "qwen/qwen3.7-flash",
+     "qwen/qwen3.6-plus",
+     "qwen/qwen3.6-flash",
+     "qwen/qwen3.5-plus-20260420",
+     "qwen/qwen3-vl-plus",
+     "qwen/qwen3-vl-flash",
+     "minimax/minimax-m2.7",
+     "minimax/minimax-m2.5",
+     "xiaomi/mimo-v2.5",
+     "x-ai/grok-build-0.1",
+     "x-ai/grok-4.3",
+     "baidu/ernie-5.5-flash-preview:free",
+     "nvidia/nemotron-3.5-super-vl:free",
+     "nvidia/nemotron-3-ultra-550b-a55b:free",
+     "inclusionai/ling-3.2-flash:free"
+    ]
+   },
+   "catalogOrderCount": 74,
+   "catalogOrderModels": [
+    "minimax/minimax-m3.1-flash",
+    "moonshotai/kimi-k3.1-pro",
+    "anthropic/claude-fable-5.1",
+    "openai/gpt-6-astra",
+    "deepseek/deepseek-v4-pro",
+    "moonshotai/kimi-k3",
+    "z-ai/glm-5.3",
+    "qwen/qwen3.8-max",
+    "minimax/minimax-m3",
+    "openai/gpt-6.1-sol",
+    "openai/gpt-6-luna",
+    "anthropic/claude-opus-5.5",
+    "anthropic/claude-sonnet-5.5",
+    "anthropic/claude-haiku-5.5",
+    "x-ai/grok-4.7",
+    "z-ai/glm-5.3-flashx",
+    "xiaomi/mimo-v2.6-pro",
+    "xiaomi/mimo-v2.6-flash",
+    "openai/gpt-5.6-sol",
+    "anthropic/claude-opus-5",
+    "xiaomi/mimo-v2.5-pro",
+    "x-ai/grok-4.6",
+    "deepseek/deepseek-v4.1-flash",
+    "qwen/qwen3.8-max-0902",
+    "openai/gpt-5.6-terra",
+    "openai/gpt-5.6-luna",
+    "openai/gpt-5.6",
+    "openai/gpt-5.4",
+    "openai/gpt-5.4-pro",
+    "openai/gpt-5.4-mini",
+    "openai/gpt-5.4-nano",
+    "openai/gpt-5.3-codex",
+    "anthropic/claude-sonnet-5",
+    "anthropic/claude-haiku-4.5",
+    "anthropic/claude-opus-4.8",
+    "anthropic/claude-opus-4.7",
+    "anthropic/claude-opus-4.6",
+    "anthropic/claude-opus-4.5",
+    "anthropic/claude-sonnet-4.6",
+    "anthropic/claude-sonnet-4.5",
+    "deepseek/deepseek-v4-flash",
+    "moonshotai/kimi-k2.7-code",
+    "moonshotai/kimi-k2.6",
+    "moonshotai/kimi-k2.5",
+    "z-ai/glm-5.3-flash",
+    "z-ai/glm-5.2",
+    "z-ai/glm-5.1",
+    "z-ai/glm-5v-turbo",
+    "z-ai/glm-5",
+    "z-ai/glm-5-turbo",
+    "z-ai/glm-4.7",
+    "z-ai/glm-4.7-flash",
+    "z-ai/glm-4.6",
+    "z-ai/glm-4.6v",
+    "z-ai/glm-4.5-air",
+    "z-ai/glm-4.5",
+    "qwen/qwen3.8-flash",
+    "qwen/qwen3.7-max",
+    "qwen/qwen3.7-plus",
+    "qwen/qwen3.7-flash",
+    "qwen/qwen3.6-plus",
+    "qwen/qwen3.6-flash",
+    "qwen/qwen3.5-plus-20260420",
+    "qwen/qwen3-vl-plus",
+    "qwen/qwen3-vl-flash",
+    "minimax/minimax-m2.7",
+    "minimax/minimax-m2.5",
+    "xiaomi/mimo-v2.5",
+    "x-ai/grok-build-0.1",
+    "x-ai/grok-4.3",
+    "baidu/ernie-5.5-flash-preview:free",
+    "nvidia/nemotron-3.5-super-vl:free",
+    "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "inclusionai/ling-3.2-flash:free"
+   ],
+   "models": [
+    {
+     "id": "baidu/ernie-5.5-flash-preview:free",
+     "zcodeModelId": "openrouter-2/baidu/ernie-5.5-flash-preview:free",
+     "personal": true,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": "enabled",
+     "inModelOrder": true,
+     "contextLength": 1024000,
+     "priceInPerM": 0,
+     "priceOutPerM": 0,
+     "inputModalities": "text",
+     "outputModalities": "text",
+     "free": true,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "priceSource": "provider-depot source 'openrouter' (undefined) fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "nvidia/nemotron-3.5-super-vl:free",
+     "zcodeModelId": "openrouter-2/nvidia/nemotron-3.5-super-vl:free",
+     "personal": true,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": "enabled",
+     "inModelOrder": true,
+     "contextLength": 1000000,
+     "priceInPerM": 0,
+     "priceOutPerM": 0,
+     "inputModalities": "text+image+video",
+     "outputModalities": "text",
+     "free": true,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "priceSource": "provider-depot source 'openrouter' (undefined) fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+     "zcodeModelId": "openrouter-2/nvidia/nemotron-3-ultra-550b-a55b:free",
+     "personal": true,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": "enabled",
+     "inModelOrder": true,
+     "contextLength": 1000000,
+     "priceInPerM": 0,
+     "priceOutPerM": 0,
+     "inputModalities": "text",
+     "outputModalities": "text",
+     "free": true,
+     "capabilities": [
+      "tools"
+     ],
+     "priceSource": "provider-depot source 'openrouter' (undefined) fetchedAt 2026-11-20T18:06:02.998Z"
+    },
+    {
+     "id": "inclusionai/ling-3.2-flash:free",
+     "zcodeModelId": "openrouter-2/inclusionai/ling-3.2-flash:free",
+     "personal": true,
+     "reasoningLevels": [
+      "disabled",
+      "enabled"
+     ],
+     "reasoningDefault": "enabled",
+     "inModelOrder": true,
+     "contextLength": 1048576,
+     "priceInPerM": 0,
+     "priceOutPerM": 0,
+     "inputModalities": "text+image",
+     "outputModalities": "text",
+     "free": true,
+     "capabilities": [
+      "tools",
+      "structured"
+     ],
+     "priceSource": "provider-depot source 'openrouter' (undefined) fetchedAt 2026-11-20T18:06:02.998Z"
+    }
+   ],
+   "status": {
+    "status": "OK",
+    "http": 200,
+    "probes": {
+     "key": 200,
+     "credits": 200,
+     "models": 200
+    }
+   },
+   "budget": {
+    "credits": {
+     "total_credits": 26,
+     "total_usage": 26.191011441
+    },
+    "key": {
+     "label": "masked-v1-074...7e6",
+     "limit": null,
+     "limit_reset": null,
+     "limit_remaining": null,
+     "effective_budget": null,
+     "usage": 0,
+     "usage_daily": 0,
+     "usage_weekly": 0,
+     "usage_monthly": 0,
+     "is_free_tier": false,
+     "free_model_daily_requests": {
+      "used": 1012,
+      "limit": 1000,
+      "remaining": 0
+     },
+     "rate_limit": {
+      "requests": -1,
+      "interval": "10s",
+      "note": "This field is deprecated and safe to ignore."
+     },
+     "expires_at": null
+    }
+   },
+   "statusNotes": "all 4 configured :free ids matched in 442-model catalog (entries stored verbatim); free_model_daily_requests exhausted (used 1012/1000); key has no credit limit (limit=null) so usage bills against credits balance."
+  }
+ ]
+}

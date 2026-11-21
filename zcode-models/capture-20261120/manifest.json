@@ -1,0 +1,157 @@
+{
+  "capturedAt": "2026-11-20T18:18:36.248Z",
+  "source": "C:/Users/VIVIM.inc/.zcode/v2/provider_config.json ($.config.providerConfigRules.providerRules) + C:/Users/VIVIM.inc/.zcode/v2/credentials.json (zai oauth)",
+  "providers": [
+    {
+      "id": "new-provider",
+      "label": "NVIDIA NIM",
+      "baseUrl": "https://integrate.api.nvidia.com/v1/models",
+      "enabled": true,
+      "authKind": "api-key",
+      "liveStatus": {
+        "status": "OK",
+        "http": 200,
+        "url": "https://integrate.api.nvidia.com/v1/models",
+        "modelCount": 33
+      },
+      "modelsConfigured": [
+        "meta/muse-glimmer-30b",
+        "mistralai/mistral-large-4-1t-a52b",
+        "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+        "nvidia/nemotron-3-ultra-550b-a55b",
+        "nvidia/nemotron-3.5-bolt-e4b",
+        "nvidia/nemotron-3.5-lightning-30b-a3b",
+        "nvidia/nemotron-3.5-super-vl-120b-a12b",
+        "nvidia/riva-translate-4b-instruct-v2",
+        "poolside/laguna-xs-2.1"
+      ],
+      "budgetSignals": {
+        "modelCount": 33,
+        "rateLimitHeaders": {},
+        "configuredModelsServed": "9/9",
+        "allConfiguredServed": true
+      },
+      "notes": "GET /v1/models 200; all 9 configured model ids present in served list; no X-RateLimit-* headers returned."
+    },
+    {
+      "id": "openrouter-2",
+      "label": "OpenRouter 2",
+      "baseUrl": "https://openrouter.ai/api/v1",
+      "enabled": null,
+      "authKind": "api-key",
+      "liveStatus": {
+        "status": "OK",
+        "http": 200,
+        "probes": {
+          "key": 200,
+          "credits": 200,
+          "models": 200
+        }
+      },
+      "modelsConfigured": [
+        "baidu/ernie-5.5-flash-preview:free",
+        "nvidia/nemotron-3.5-super-vl:free",
+        "nvidia/nemotron-3-ultra-550b-a55b:free",
+        "inclusionai/ling-3.2-flash:free"
+      ],
+      "budgetSignals": {
+        "credits": {
+          "total_credits": 26,
+          "total_usage": 26.191011441
+        },
+        "key": {
+          "label": "masked-v1-074...7e6",
+          "limit": null,
+          "limit_reset": null,
+          "limit_remaining": null,
+          "effective_budget": null,
+          "usage": 0,
+          "usage_daily": 0,
+          "usage_weekly": 0,
+          "usage_monthly": 0,
+          "is_free_tier": false,
+          "free_model_daily_requests": {
+            "used": 1012,
+            "limit": 1000,
+            "remaining": 0
+          },
+          "rate_limit": {
+            "requests": -1,
+            "interval": "10s",
+            "note": "This field is deprecated and safe to ignore."
+          },
+          "expires_at": null
+        }
+      },
+      "notes": "all 4 configured :free ids matched in 442-model catalog (entries stored verbatim); free_model_daily_requests exhausted (used 1012/1000); key has no credit limit (limit=null) so usage bills against credits balance."
+    },
+    {
+      "id": "minimax-m-plan",
+      "label": "MiniMax M Plan International",
+      "baseUrl": "https://api.minimax.io/anthropic",
+      "enabled": true,
+      "authKind": "api-key (subscription token)",
+      "liveStatus": {
+        "status": "FAIL",
+        "http": 200,
+        "detail": "endpoints answer and auth is accepted, but serving is blocked by plan quota: 1-token POST /v1/text/chatcompletion_v2 returned HTTP 200 with in-band base_resp.status_code=2056 Token Plan usage limit reached; anthropic /v1/messages POST returned 429"
+      },
+      "modelsConfigured": [
+        "MiniMax-M3",
+        "MiniMax-M3.1-Flash"
+      ],
+      "budgetSignals": {
+        "planQuota": "EXHAUSTED - base_resp.status_code=2056 status_msg=Token Plan usage limit reached: Upgrade your Token Plan or purchase Credits for more usage.",
+        "anthropicModelsListed": [
+          "MiniMax-M3.1-Flash",
+          "MiniMax-M3",
+          "MiniMax-M2.7",
+          "MiniMax-M2.7-highspeed",
+          "MiniMax-M2.5",
+          "MiniMax-M2.5-highspeed",
+          "MiniMax-M2.1",
+          "MiniMax-M2.1-highspeed",
+          "MiniMax-M2"
+        ],
+        "usageEndpoint": "GET /v1/usage -> 404",
+        "anthropicPost": "429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"Token Plan usage limit reached: Upgrade your Token Plan or"
+      },
+      "notes": "anthropic-compatible base https://api.minimax.io/anthropic is the rule baseUrl; anthropic /v1/models 200 lists 9 MiniMax models incl MiniMax-M3 and MiniMax-M3.1-Flash; no usage/quota endpoint answered -> quota state captured via in-band error."
+    },
+    {
+      "id": "account:zai-start-plan",
+      "label": "Zai Start Plan",
+      "baseUrl": null,
+      "enabled": null,
+      "authKind": "oauth (coding-plan api-key in credentials.json; api-key expired per probe)",
+      "liveStatus": {
+        "status": "UNVERIFIED",
+        "http": 401,
+        "detail": "stored coding-plan api-key rejected: chat/completions 401 token expired or incorrect; /api/paas/v4/models 401 with oauth access token and transport-null with api-key; /api/coding-paas/v4/models 500 both auths; zcode.z.ai/api/v1/zcode-plan/anthropic/v1/models 404 with api-key, transport-null with oauth token"
+      },
+      "modelsConfigured": [
+        "GLM-5.3-Flash",
+        "glm-5.3-flash",
+        "GLM-5.3"
+      ],
+      "budgetSignals": {
+        "unverified": true,
+        "errors": {
+          "postError": {
+            "code": "401",
+            "message": "token expired or incorrect"
+          },
+          "coding-paas-models-oauth-tokenError": {
+            "code": "500",
+            "message": "404 NOT_FOUND"
+          },
+          "paas-models-oauth-tokenError": {
+            "code": "401",
+            "message": "token expired or incorrect"
+          }
+        }
+      },
+      "notes": "config rule has no baseUrl/access block (OAuth-managed); file raw/account_zai-start-plan.status.json (colon sanitized to underscore for Windows); live session on this provider works via harness internal path but no REST quota endpoint answered."
+    }
+  ]
+}

@@ -1,5 +1,10 @@
 # DevOps / Planning SITREP — 2026-11-21 (GitHub bootstrap R004)
 
+## Gestures R002 / PV-15 (new owner request, 2026-11-21)
+- **PLANNING PREPARED; PRODUCT UNRUN.** [Source-pinned gesture packet](../DESIGN/gestures/README.md) reuses First Contact AutoWiki, TierFlow wave4 (gesture currently unsupported), VEC pure previews, Rust LiveSurface/Activity Fabric and existing Host permission authority. [12-item manifest](../DESIGN/gestures/manifest.v1.json) passes static uniqueness/dependency/no-auto-launch checks, G0–G9 acceptance specified, no ARBOR implementation or device gesture tests performed.
+- Existing [PWA-visible review tracker](PWA-VISIBLE-TRACKER-R001.md) now has **PV-15, C40–C44**; [TASK-CLAIMS](../TASK-CLAIMS.md) records Planning sender-owned handoff awaiting explicit Dev ACK. Do not treat a prepared packet as a Dev checkout or restart the customer UI. Source pin ARBOR cf2e5c8; refresh before Dev implementation.
+
+
 **Role state:** planning/pre-integration only; no background agent, live task router, active session bridge or automatic cross-thread synchronization. See [AGENTS](AGENTS.md) -> [PROFILE](PROFILE.md) -> [BUNDLE-INDEX](BUNDLE-INDEX.md); [conversation lessons](CONVERSATION-LESSONS.md) are selective reading.
 
 ## R005 semantic and R006 complete graph grant coverage — 2026-11-21

@@ -1,6 +1,6 @@
 # R003/R004 test matrix for DevAgent
 
-All commands below are **proposed**; none were executed in the current Planning session. GitHub file read and static counting verified **55 authored standalone Rust `#[test]` markers** (previously 37 + 18 R004), plus **2** authored but uncompiled native HQKG integration tests.
+All commands below are **proposed**; none were executed in the current Planning session. GitHub file read and static counting verified **57 authored standalone Rust `#[test]` markers** (previously 37 + 20 R004), plus **2** authored but uncompiled native HQKG integration tests.
 
 ## Standalone Labs code — pre-integration
 
@@ -35,8 +35,9 @@ Only run after copying the exact modules and registering core/HQKG feature, and 
 | AUTH-01 | Prefix contains private neighbor, complete exclusion set attested | HQKG never traverses/returns excluded node; one read | Native integration test authored, UNRUN |
 | AUTH-02 | No complete exclusions for current graph epoch | Refuse; never treat prefix as grant | Six staged query admission tests plus native test, UNRUN |
 | AUTH-03 | Cross-user, revoked scope or untrusted source reference | Entire projection refuses, no partial private metadata | Existing R003 tests, UNRUN |
-| RACE-01 | Human edit after slow agent proposal | Old input sequence never paints newer Wiki | Six authored readback tests, UNRUN |
+| RACE-01 | Human edit after slow agent proposal | Old input sequence never paints newer Wiki | Eight authored readback tests, UNRUN |
 | RACE-02 | Graph/Wiki epoch changed midread | Refuse stale, discard result and re-read source | Staged guard plus independent Host revision required, UNRUN |
+| RACE-02B | Same Wiki revision, changed SHA-256 digest | Reject conflict before any repaint | Staged digest guard test, UNRUN |
 | RACE-03 | Changed selection/pin/depth or source grant | Discard superseded/unauthorized context | Staged, UNRUN |
 | PROSE-01 | Indexed occurrence misclassified as verified behavior | No factual English until SCF verifier evidence | Existing narrative tests, UNRUN |
 | UI-01 | Same source projected into Dev-owned human and agent typing | Same latest source Wiki lens; no Submit/Search/Send effect | Dev integration required, UNRUN |

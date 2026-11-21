@@ -1,0 +1,227 @@
+{
+  "schema": "vivim.planning.gestures/1",
+  "revision": "R002",
+  "createdDate": "2026-11-21",
+  "canonicalRepo": "owenservera/ARBOR",
+  "pinnedArborSha": "cf2e5c8da0d5f46f17a5de0cc24ab838778e60c0",
+  "labsRepo": "owenservera/vivim-labs",
+  "localOwnerRequest": "OW-20261121-018",
+  "reviewOutcome": "PV-15",
+  "reviewDependencies": [
+    "PV-01",
+    "PV-04",
+    "PV-05",
+    "PV-06",
+    "PV-08",
+    "PV-10"
+  ],
+  "legacyEngineWorkOrder": "A039",
+  "authority": "Existing Host Control only",
+  "status": "PREPARED_NOT_INTEGRATED",
+  "runtimeImplementation": "UNRUN",
+  "physicalPwaVerification": "UNRUN",
+  "autoLaunch": false,
+  "autoClaim": false,
+  "ownerScope": "Planning pre-integration; Dev source after explicit accepted claim",
+  "tasks": [
+    {
+      "id": "GEST-01",
+      "description": "Source atlas and ownership/collision reconciliation",
+      "dependsOn": [],
+      "gates": [
+        "G0"
+      ],
+      "status": "PREPARED",
+      "executor": "UNASSIGNED",
+      "workClass": "PWA_VISIBLE_DEPENDENCY",
+      "productOutcome": "PV-15"
+    },
+    {
+      "id": "GEST-02",
+      "description": "Stable source-backed Wiki target identity",
+      "dependsOn": [
+        "GEST-01"
+      ],
+      "gates": [
+        "G0",
+        "G4"
+      ],
+      "status": "UNCLAIMED",
+      "executor": "UNASSIGNED",
+      "workClass": "PWA_VISIBLE_DEPENDENCY",
+      "productOutcome": "PV-15"
+    },
+    {
+      "id": "GEST-03",
+      "description": "Browser pointer hold/scroll/cancel adapter",
+      "dependsOn": [
+        "GEST-02"
+      ],
+      "gates": [
+        "G1",
+        "G2",
+        "G3"
+      ],
+      "status": "UNCLAIMED",
+      "executor": "UNASSIGNED",
+      "workClass": "PWA_VISIBLE_DEPENDENCY",
+      "productOutcome": "PV-15"
+    },
+    {
+      "id": "GEST-04",
+      "description": "Rust pure bounded gesture session reducer",
+      "dependsOn": [
+        "GEST-02"
+      ],
+      "gates": [
+        "G2",
+        "G3",
+        "G4"
+      ],
+      "status": "UNCLAIMED",
+      "executor": "UNASSIGNED",
+      "workClass": "PWA_VISIBLE_DEPENDENCY",
+      "productOutcome": "PV-15"
+    },
+    {
+      "id": "GEST-05",
+      "description": "TierFlow trusted gesture-phase normalizer",
+      "dependsOn": [
+        "GEST-04"
+      ],
+      "gates": [
+        "G1",
+        "G3"
+      ],
+      "status": "UNCLAIMED",
+      "executor": "UNASSIGNED",
+      "workClass": "PWA_VISIBLE_DEPENDENCY",
+      "productOutcome": "PV-15"
+    },
+    {
+      "id": "GEST-06",
+      "description": "VEC/TierFlow inert semantic preview",
+      "dependsOn": [
+        "GEST-02",
+        "GEST-04",
+        "GEST-05"
+      ],
+      "gates": [
+        "G2",
+        "G4"
+      ],
+      "status": "UNCLAIMED",
+      "executor": "UNASSIGNED",
+      "workClass": "PWA_VISIBLE_DEPENDENCY",
+      "productOutcome": "PV-15"
+    },
+    {
+      "id": "GEST-07",
+      "description": "Stale/grant/revision cancellation and fallback",
+      "dependsOn": [
+        "GEST-03",
+        "GEST-04",
+        "GEST-06"
+      ],
+      "gates": [
+        "G3",
+        "G4"
+      ],
+      "status": "UNCLAIMED",
+      "executor": "UNASSIGNED",
+      "workClass": "PWA_VISIBLE_DEPENDENCY",
+      "productOutcome": "PV-15"
+    },
+    {
+      "id": "GEST-08",
+      "description": "First Contact preview surface and accessible alternatives",
+      "dependsOn": [
+        "GEST-06",
+        "GEST-07"
+      ],
+      "gates": [
+        "G1",
+        "G2",
+        "G7"
+      ],
+      "status": "UNCLAIMED",
+      "executor": "UNASSIGNED",
+      "workClass": "PWA_VISIBLE_DEPENDENCY",
+      "productOutcome": "PV-15"
+    },
+    {
+      "id": "GEST-09",
+      "description": "Explicit Apply through existing Host/grants/receipt",
+      "dependsOn": [
+        "GEST-07",
+        "GEST-08"
+      ],
+      "gates": [
+        "G5",
+        "G6"
+      ],
+      "status": "UNCLAIMED",
+      "executor": "UNASSIGNED",
+      "workClass": "PWA_VISIBLE_DEPENDENCY",
+      "productOutcome": "PV-15"
+    },
+    {
+      "id": "GEST-10",
+      "description": "Consented semantic episode/activity observation",
+      "dependsOn": [
+        "GEST-07",
+        "GEST-08"
+      ],
+      "gates": [
+        "G9"
+      ],
+      "status": "UNCLAIMED",
+      "executor": "UNASSIGNED",
+      "workClass": "PWA_VISIBLE_DEPENDENCY",
+      "productOutcome": "PV-15"
+    },
+    {
+      "id": "GEST-11",
+      "description": "Independent Rust/browser/Host negative acceptance",
+      "dependsOn": [
+        "GEST-03",
+        "GEST-04",
+        "GEST-05",
+        "GEST-06",
+        "GEST-07",
+        "GEST-08"
+      ],
+      "gates": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G7"
+      ],
+      "status": "UNCLAIMED",
+      "executor": "UNASSIGNED",
+      "workClass": "PWA_VISIBLE_DEPENDENCY",
+      "productOutcome": "PV-15"
+    },
+    {
+      "id": "GEST-12",
+      "description": "Stable-link PWA release and independent device proof",
+      "dependsOn": [
+        "GEST-08",
+        "GEST-11"
+      ],
+      "gates": [
+        "G0",
+        "G1",
+        "G2",
+        "G3",
+        "G7",
+        "G8"
+      ],
+      "status": "UNCLAIMED",
+      "executor": "UNASSIGNED",
+      "workClass": "PWA_VISIBLE_DEPENDENCY",
+      "productOutcome": "PV-15"
+    }
+  ]
+}

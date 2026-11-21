@@ -35,6 +35,8 @@ Status of every row: `REVIEW` (not production acceptance). PWA tests describe pr
 | **PV-13** | P2 | Private sharing, revoke and access feedback | From PWA share one authorized knowledge item privately, inspect access, revoke it and visibly confirm denial after revocation. | R20 | Review |
 | **PV-14** | P1 | Request a product change from the PWA and see progress | Explicitly submit a build/change request, get one durable request ID, see planned/accepted/coded/tested/released/blocked status and any MANUAL bridge; cancel/retry safely. | D01,D02,D11 | Oracle-aligned candidate; no automatic agent dispatch claimed |
 
+| **PV-15** | P1 | Interactive Wiki gesture: hold -> live semantic options -> adjust preview -> cancel, with optional explicitly approved Apply | On unchanged First Contact PWA, type a Wiki query, hold a real result; see options while finger is down, move to change inert preview, cancel with zero effects; only separate Apply can invoke Host grant/receipt. | New owner gesture directive, 21 Nov 2026 (outside original 79 items) | REVIEW / UNCLAIMED; Dev owns eventual ARBOR integration; [R002 pack](../DESIGN/gestures/README.md) |
+
 ### Candidate sequence, not a second queue
 
 - **First finish line:** PV-01 -> PV-02. These are Dev-owned, currently NOT accepted as live PWA DONE.
@@ -89,6 +91,12 @@ Status of every row: `REVIEW` (not production acceptance). PWA tests describe pr
 | C38 | PV-04,PV-08 | Only integration convergence that unblocks a live Wiki or PWA visual change | D17 |
 | C39 | PV-14 | Minimum continuity/handoff docs needed to resume a user-submitted PWA request | D25 |
 
+| C40 | PV-15 | First Contact browser pointer/hold/move/cancel adapter with scroll/text-selection arbitration; stable Wiki row target | New gesture directive |
+| C41 | PV-15 | Pure Rust revision-fenced gesture reducer reusing LiveSurface/Activity; no new authority | New gesture directive |
+| C42 | PV-15,PV-08 | TierFlow A039 semantics + VEC inert contextual preview on the actual Wiki mount | New gesture directive |
+| C43 | PV-15,PV-06 | Separate explicit Apply to existing Host plan/grant/approval/receipt/readback, only if safe command exists | New gesture directive |
+| C44 | PV-15,PV-10 | Accessible alternatives, privacy/consent, actual same-link PWA proof, independent regressions | New gesture directive |
+
 ## 3. Parked from the active PWA-first queue
 
 These are retained for **traceability only** and must not be independently scheduled. They require a future, specific PWA-visible parent and fresh owner review.
@@ -119,3 +127,7 @@ Do not assign or mark work DONE from this review document. Planning may amend th
 ## 6. Coverage audit
 
 **79/79 original conversation items accounted for:** P01–P24, R01–R30 and D01–D25 either directly as PWA outcomes, as bounded components with named PWA parents, or in the nonactive parking lot. Some references repeat intentionally (a deliverable also contains its implementation dependency). No original item was silently dropped.
+
+## R002 extension from 21 Nov owner directive — Gestures
+
+PV-15 and C40–C44 are a **new proposed outcome and bounded dependencies**, not part of the original 79 conversation items/coverage audit, not a current checkout, and not proof of PWA gesture support. [Source atlas, state contract, machine task manifest, acceptance and Dev handoff](../DESIGN/gestures/README.md). Keep Dev's existing First Contact claim and stable-link URL. Promotion only through the existing owner/keeper/claim workflow.

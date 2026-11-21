@@ -49,3 +49,8 @@ Earlier planning docs referenced `../OWNER-WORK/NOW.md`, `../OWNER-WORK/UPDATES.
 2. Check Dev and Oracle ownership, then make a narrowly scoped Labs package following [BUNDLE-TEMPLATE.md](BUNDLE-TEMPLATE.md).
 3. Execute cloud tests when available, record exact PASS/FAIL/UNRUN, commit directly to Labs main, and fetch back the committed result.
 4. Add exactly one pointer here, with dependency, code ownership and evidence class. **A pushed bundle is not an adopted Dev handoff.**
+
+## GESTURES-R002 — bidirectional Wiki hold/preview/cancel (2026-11-21)
+
+- [Prepared gesture design/Dev handoff](../DESIGN/gestures/README.md) — 12 source-pinned bounded work packages, [machine manifest](../DESIGN/gestures/manifest.v1.json), G0–G9 physical PWA proof matrix; ARBOR source pin cf2e5c8.
+- Proposed PWA-visible review outcome **PV-15**, supports existing PV-01/04/05/06/08/10 and reuses TierFlow A039, VEC, Rust LiveSurface, Activity Fabric, First Contact Wiki and Host permissions. **PREPARED / no ARBOR source changes / tests UNRUN / Dev ACK not observed.**

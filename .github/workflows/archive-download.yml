@@ -1,0 +1,25 @@
+name: Export VLANG Archive ZIP
+on:
+  push:
+    branches:
+      - download-vlang-archive-20261121
+  workflow_dispatch:
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package only the archived folder
+        run: |
+          test -d .archive
+          find .archive -type f | wc -l
+          zip -q -r VLANG-CANONICAL-PROTOCOL-R000.archive.zip .archive
+          unzip -tq VLANG-CANONICAL-PROTOCOL-R000.archive.zip | tail -1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vlang-protocol-archive-20261121
+          path: VLANG-CANONICAL-PROTOCOL-R000.archive.zip
+          retention-days: 7
+          if-no-files-found: error

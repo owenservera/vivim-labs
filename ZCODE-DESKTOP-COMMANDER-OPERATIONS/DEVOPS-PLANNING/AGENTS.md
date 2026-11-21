@@ -20,4 +20,6 @@
 ## Best first artifact
 [AutoWiki R003 Rust integration handoff](../DESIGN/AUTOWIKI-FOUNDATION-R001/R003-EXECUTION-HANDOFF.md), with actual [staged Rust code](../DESIGN/AUTOWIKI-FOUNDATION-R001/src/lib.rs) and [OW-017 source disposition](../DESIGN/SOURCE-DISPOSITION/OW-20261121-017.md). The 37 Rust tests were *authored and statically counted*, not executed in the prep round. Confirm the current toolchain before claiming compilation.
 
-See [BUNDLE-TEMPLATE.md](BUNDLE-TEMPLATE.md) before authoring the next narrow handoff. Preserve other agents' active source ownership; if Dev's ARBOR code changes, repin/revalidate instead of force-writing.
+See [BUNDLE-TEMPLATE.md](BUNDLE-TEMPLATE.md) before authoring the next narrow handoff.
+
+**New Dev handoff rule (2026-11-21):** when the bundle touches PWA typing, agent composer, Rust native product packaging, Host HTTP routes or device deployment, cite the [ChatGPT Dev source-to-live playbook](../CHATGPT-DEV/RELEASE-AND-INTEGRATION-PLAYBOOK.md) in its acceptance section. Explicitly split SOURCE / TEST / PACKAGE / SERVE / AUTH-ACK / HTTPS / PHONE; check native binary resolver and required Origin headers; preserve dirty checkouts and never mistake a mock phone test for actual Android verification. Do not copy dated PID, port status or historical PASS counts into current deployment claims. Preserve other agents' active source ownership; if Dev's ARBOR code changes, repin/revalidate instead of force-writing.

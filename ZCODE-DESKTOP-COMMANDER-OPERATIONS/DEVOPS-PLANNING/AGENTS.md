@@ -29,3 +29,7 @@ Oracle's [North Star](../ORACLE/STEERING.md) is **explicit PWA speech/text -> au
 
 ## Mandatory check-in/out and Planning-only tracker
 Read [shared task claims](../TASK-CLAIMS.md) before allocating or reporting tasks. Planning checks out only its own analysis/pre-integration packages, not Dev's live PWA/ARBOR implementation. A Dev-owned item goes in a compact **External dependencies (waiting on Dev)** section, never the Planning **Next 10**. Last 5 means the latest five actual timestamped check-ins, not the five newest IDs. A handoff remains sender-owned until a recorded receiver ACCEPTED event. Claims overlay ownership; do not fabricate the unavailable OWNER-WORK task history. Include executor, status, evidence, next action, blocker and time in every SITREP row.
+
+## PWA-first task gate (owner directive 2026-11-21)
+
+Read [PWA-visible outcome tracker R001](PWA-VISIBLE-TRACKER-R001.md) when constructing or revising the queue. **No active standalone task without a PWA-visible, user-actionable and testable outcome.** An internal code/CI/Rust/architecture task must be a narrow dependency of a named PWA outcome with an inherited visible acceptance test; otherwise park it. The tracker is a review-only reorganization of 79 conversation items, **not** an autonomous task registry, assignment, or replacement for canonical OWNER-WORK / [shared claims](../TASK-CLAIMS.md). Preserve Dev's current PWA AutoWiki ownership. GPUI-native-only and APK work are not PWA deliverables. Do not promote candidate priority into completed or checked-out status.

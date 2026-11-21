@@ -1,0 +1,36 @@
+{
+  "schema": "vivim.kb-consolidation.sources/1",
+  "status": "seed-not-complete",
+  "roots": [
+    {
+      "repo": "owenservera/repos-hq",
+      "paths": [
+        "hq",
+        "research"
+      ]
+    },
+    {
+      "repo": "owenservera/vivim-web-harness",
+      "paths": [
+        "apps",
+        "studio",
+        "harness"
+      ]
+    },
+    {
+      "repo": "owenservera/tierflow",
+      "paths": [
+        "src/ui",
+        "src/visual-runtime",
+        "VIVIM-VISUAL-RUNTIME"
+      ]
+    },
+    {
+      "repo": "owenservera/vivim-labs",
+      "paths": [
+        "capability-observatory"
+      ]
+    }
+  ],
+  "note": "Hints only; scouts expand scope, record missing roots, pin SHAs."
+}

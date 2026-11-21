@@ -109,7 +109,7 @@ pub fn assemble_human_page(
     }
     let status=if narrative.sentences.is_empty() {
         ExplanationState::Unavailable
-    } else if narrative.complete {
+    } else if narrative.complete && !context.truncated {
         ExplanationState::Verified
     } else {
         ExplanationState::Partial
@@ -135,7 +135,8 @@ pub fn assemble_human_page(
         }).collect();
     let navigation=HUBS.iter().map(|alias|HubEntry {
         alias: *alias,title:title(alias).unwrap_or("Unavailable"),
-        committed_canonical_id:if allowed_hubs.contains(*alias) {
+        committed_canonical_id:if allowed_hubs.contains(*alias) &&
+            ids.committed_name_for_hub.contains_key(*alias) {
             ids.canonical_for_hub.get(*alias).cloned()
         } else {None},
     }).collect();
@@ -237,6 +238,12 @@ mod tests {
             &sources(),Depth::Overview,false).unwrap();
         assert_eq!(x.status,ExplanationState::Unavailable);
         assert!(x.intro.contains("No current, verified explanation"));
+    }
+    #[test] fn truncated_graph_does_not_claim_complete_verification() {
+        let mut c=context();c.truncated=true;
+        let x=assemble_human_page(&c,&narrative(),&ids(),&allowed(),
+            &sources(),Depth::Overview,false).unwrap();
+        assert_eq!(x.status,ExplanationState::Partial);
     }
     #[test] fn trace_depth_requires_independent_host_permission() {
         assert_eq!(assemble_human_page(&context(),&narrative(),&ids(),&allowed(),

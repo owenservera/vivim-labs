@@ -18,7 +18,7 @@
     },
     "source": {
       "type": "object", "additionalProperties": false,
-      "required": ["producer", "format", "version", "bundleDigest", "verifiedRecords", "scopedBrowserRecords", "nativeVerified"],
+      "required": ["producer", "format", "version", "bundleDigest", "verifiedRecords", "scopedBrowserRecords", "nativeVerified", "captureArtifacts", "stateArtifacts"],
       "properties": {
         "producer": {"const": "craft-anything"},
         "format": {"const": "craft-anything-evidence-bundle"},
@@ -26,7 +26,9 @@
         "bundleDigest": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
         "verifiedRecords": {"type": "integer", "minimum": 0},
         "scopedBrowserRecords": {"type": "integer", "minimum": 0},
-        "nativeVerified": {"type": "boolean"}
+        "nativeVerified": {"type": "boolean"},
+        "captureArtifacts": {"type": "integer", "minimum": 0},
+        "stateArtifacts": {"type": "integer", "minimum": 0}
       }
     },
     "evidence": {

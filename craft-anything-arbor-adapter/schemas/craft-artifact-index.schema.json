@@ -1,0 +1,16 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://vivim.live/schemas/craft-artifact-index/1",
+  "type":"object","additionalProperties":false,
+  "required":["schema","captures","states"],
+  "properties":{
+    "schema":{"const":"vivim.craft-artifact-index/1"},
+    "captures":{"$ref":"#/$defs/entries"},
+    "states":{"$ref":"#/$defs/entries"}
+  },
+  "$defs":{
+    "entries":{"type":"array","maxItems":100,"items":{"type":"object","additionalProperties":false,"required":["evidenceId","directory"],
+      "properties":{"evidenceId":{"type":"string","pattern":"^ev_[0-9a-f]{64}$"},"directory":{"type":"string","minLength":1,"maxLength":1000}}
+    }}
+  }
+}

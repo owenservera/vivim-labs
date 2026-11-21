@@ -1,7 +1,7 @@
 // VIVIM Labs research bridge. This module has no browser, account, Host or execution access.
 import { createHash } from 'node:crypto';
 import { readFileSync, realpathSync, statSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { resolve, isAbsolute } from 'node:path';
 
 export const BUNDLE_FORMAT = 'craft-anything-evidence-bundle';
 export const ATLAS_SCHEMA = 'vivim.application-surface-atlas/0.1';
@@ -94,6 +94,32 @@ function captureMatch(record, dir, field) {
 }
 // Craft's blueprint uses HTML tags (a/input/textarea/select), not only ARIA roles.
 // Never turn a captured node into a selector or a runnable action.
+export const ARTIFACT_INDEX_SCHEMA = 'vivim.craft-artifact-index/1';
+export function validateArtifactIndex(index, browserRecords) {
+  if (index === null || index === undefined) return null;
+  if (!obj(index) || index.schema !== ARTIFACT_INDEX_SCHEMA ||
+      !Array.isArray(index.captures) || !Array.isArray(index.states) ||
+      index.captures.length>100 || index.states.length>100) fail('ARTIFACT_INDEX_INVALID');
+  const records = new Map(browserRecords.map(r=>[r.id,r]));
+  const captures = new Map(), states = new Map();
+  for(const [name,operation,map] of [
+    ['captures','web_site_capture',captures],['states','web_page_states_capture',states]
+  ]) {
+    for(const entry of index[name]) {
+      if(!obj(entry) || !ID_RE.test(entry.evidenceId??'') || typeof entry.directory!=='string' ||
+         !isAbsolute(entry.directory) || entry.directory.length>1000 || map.has(entry.evidenceId) ||
+         records.get(entry.evidenceId)?.operation!==operation) fail('ARTIFACT_INDEX_ENTRY_INVALID');
+      map.set(entry.evidenceId,entry.directory);
+    }
+  }
+  return {captures,states};
+}
+function routeRef(url) {
+  try {
+    const u = new URL(url);
+    return 'route_' + digest(u.origin + '\0' + u.pathname).slice(0,24);
+  } catch { return null; }
+}
 function sanitizeOutline(items, sourceId, labels) {
   if (!Array.isArray(items)) return [];
   return items.slice(0, 900).flatMap((item, index) => {
@@ -172,14 +198,17 @@ function constrainRecord(record, origin) {
     carriesTargetContent:record.carries_target_content === true,
   };
 }
-export function buildAtlas({ bundle, siteId, origin, captureDir = null, statesDir = null, includeLabels = false, ownedTarget = false, bundleDigest = null, nativeVerifiedIds = null } = {}) {
+export function buildAtlas({ bundle, siteId, origin, captureDir = null, statesDir = null, includeLabels = false, ownedTarget = false, bundleDigest = null, nativeVerifiedIds = null, artifactIndex = null } = {}) {
   if (!/^[a-z0-9][a-z0-9-]{0,79}$/.test(siteId ?? '') || normalizedOrigin(origin) !== origin) fail('INVALID_TARGET_SCOPE');
   if (includeLabels && !ownedTarget) fail('LABELS_REQUIRE_OWNED_TARGET');
   const records = validateBundle(bundle, {nativeVerifiedIds});
   const browser = records.filter(r => OPS.has(r.operation) && scopedUrl(r) === origin && obj(r.result));
   const foreign = records.filter(r=>OPS.has(r.operation) && scopedUrl(r) !== null && scopedUrl(r) !== origin);
   if (foreign.length) fail('MIXED_TARGET_ORIGINS', foreign.length + ' foreign browser record(s)');
+  if (artifactIndex && (captureDir || statesDir)) fail('AMBIGUOUS_ARTIFACT_SOURCE');
+  const artifacts = validateArtifactIndex(artifactIndex,browser);
   const observations = [], controls = [], knownEvidence = [];
+  let captureArtifacts=0, stateArtifacts=0;
   let usedCapture = false, usedStates = false;
   for (const r of browser) {
     const e = constrainRecord(r, origin);
@@ -188,10 +217,11 @@ export function buildAtlas({ bundle, siteId, origin, captureDir = null, statesDi
       const counts = {};
       for (const name of ['outline','headings','links','forms','images']) counts[name] = limitedCount(r.result.counts?.[name]);
       const widths = Array.isArray(r.params?.widths) ? r.params.widths.filter(x=>Number.isSafeInteger(x) && x >= 320 && x <= 3840).slice(0,4) : [];
-      observations.push({kind:'website-capture', evidenceId:r.id, counts, widths, status:r.result.sign_in_page?'auth-wall-observed':'captured', coverage:r.coverage.status, effectAuthorized:false});
-      if (captureDir) {
-        if (usedCapture) fail('MULTIPLE_CAPTURE_REFERENCES');
-        const folder = captureMatch(r, captureDir, 'output_directory');
+      observations.push({kind:'website-capture', evidenceId:r.id, pageRef:routeRef(r.result.url), counts, widths, status:r.result.sign_in_page?'auth-wall-observed':'captured', coverage:r.coverage.status, effectAuthorized:false});
+      const selectedCaptureDir=artifacts ? (artifacts.captures.get(r.id)??null) : captureDir;
+      if (selectedCaptureDir) {
+        if (!artifacts && usedCapture) fail('MULTIPLE_CAPTURE_REFERENCES');
+        const folder = captureMatch(r, selectedCaptureDir, 'output_directory');
         const capture = readJsonCapped(resolve(folder, 'capture.json'), 8*1024*1024);
         checkArtifactOrigin(capture.content, origin);
         verifyCaptureSummary(capture.content, r);
@@ -201,28 +231,29 @@ export function buildAtlas({ bundle, siteId, origin, captureDir = null, statesDi
         observations.push({kind:'capture-artifact', evidenceId:r.id, sha256:capture.sha256, observedControls:controls.length - first, verifiedScreenshots, artifactAttestedByCraftEvidence:false, effectAuthorized:false});
         const a11y = a11ySummary(capture.content,r.id);
         if (a11y) observations.push(a11y);
-        usedCapture = true;
+        usedCapture = true;captureArtifacts++;
       }
     }
     if (r.operation === 'web_page_states_capture') {
       const states = Array.isArray(r.result.states) ? r.result.states : [];
-      observations.push({kind:'state-capture', evidenceId:r.id, discovered:limitedCount(r.result.found), captured:states.length, coverage:r.coverage.status, effectAuthorized:false});
+      observations.push({kind:'state-capture', evidenceId:r.id, pageRef:routeRef(r.result.url), discovered:limitedCount(r.result.found), captured:states.length, coverage:r.coverage.status, effectAuthorized:false});
       for (const [index,state] of states.slice(0,200).entries()) {
         if (!obj(state)) continue;
         const type = typeof state.kind==='string' && /^[a-z-]{1,32}$/.test(state.kind) ? state.kind : 'unknown';
         const changes = Array.isArray(state.changed) ? state.changed.filter(x=>['expanded','dialog appeared','tab selected','address changed','opened','closed','selection changed'].includes(x)) : [];
         observations.push({kind:'interaction-state',evidenceId:r.id,index,type,changes,label:safeLabel(state.label,includeLabels),effectAuthorized:false});
       }
-      if (statesDir) {
-        if (usedStates) fail('MULTIPLE_STATE_REFERENCES');
-        const folder = captureMatch(r, statesDir, 'folder');
+      const selectedStatesDir=artifacts ? (artifacts.states.get(r.id)??null) : statesDir;
+      if (selectedStatesDir) {
+        if (!artifacts && usedStates) fail('MULTIPLE_STATE_REFERENCES');
+        const folder = captureMatch(r, selectedStatesDir, 'folder');
         const artifact = readJsonCapped(resolve(folder, 'states.json'), 8*1024*1024);
         if (!obj(artifact.content) || artifact.content.url !== r.result.url || !Array.isArray(artifact.content.states) ||
             canonicalJson(artifact.content.states) !== canonicalJson(states) ||
             (r.params?.width != null && artifact.content.width !== r.params.width)) fail('STATES_ARTIFACT_INVALID');
         const verifiedScreenshots = verifyScreenshots(folder, states);
         observations.push({kind:'state-artifact',evidenceId:r.id,sha256:artifact.sha256,verifiedScreenshots, artifactAttestedByCraftEvidence:false,effectAuthorized:false});
-        usedStates = true;
+        usedStates = true;stateArtifacts++;
       }
     }
     if (r.operation === 'web_walkthrough_record') {
@@ -237,11 +268,12 @@ export function buildAtlas({ bundle, siteId, origin, captureDir = null, statesDi
   }
   if (captureDir && !usedCapture) fail('CAPTURE_NOT_ANCHORED');
   if (statesDir && !usedStates) fail('STATES_NOT_ANCHORED');
+  if (observations.length>10000 || controls.length>5000) fail('ATLAS_ITEM_LIMIT_EXCEEDED');
   const unknownIds = [...new Set(bundle.unknowns.map(x => x.id))].sort();
   return {
     schema:ATLAS_SCHEMA,
     target:{siteId,origin,ownedTarget},
-    source:{producer:'craft-anything',format:BUNDLE_FORMAT,version:1,bundleDigest:bundleDigest&&DIGEST_RE.test(bundleDigest)?bundleDigest:null,verifiedRecords:records.length,scopedBrowserRecords:browser.length,nativeVerified:nativeVerifiedIds instanceof Set},
+    source:{producer:'craft-anything',format:BUNDLE_FORMAT,version:1,bundleDigest:bundleDigest&&DIGEST_RE.test(bundleDigest)?bundleDigest:null,verifiedRecords:records.length,scopedBrowserRecords:browser.length,nativeVerified:nativeVerifiedIds instanceof Set,captureArtifacts,stateArtifacts},
     evidence:knownEvidence,
     observations,
     controls,
@@ -253,7 +285,8 @@ export function buildAtlas({ bundle, siteId, origin, captureDir = null, statesDi
 export function coverageMarkdown(atlas) {
   const n=atlas.observations.filter(o=>o.kind==='website-capture').length;
   const states=atlas.observations.filter(o=>o.kind==='state-capture').reduce((sum,o)=>sum+o.captured,0);
-  const lines=[`# Application surface coverage — ${atlas.target.siteId}`, '',`Origin: ${atlas.target.origin}`,`Craft evidence verified: ${atlas.source.verifiedRecords}`,`Scoped browser records: ${atlas.source.scopedBrowserRecords}`,`Captured page snapshots: ${n}`,`Captured state entries: ${states}`,`Structural controls observed: ${atlas.controls.length}`,`Unknowns (IDs only): ${atlas.unknownIds.length}`,'','## Investigated operations'];
+  const pages=new Set(atlas.observations.filter(o=>o.kind==='website-capture').map(o=>o.pageRef).filter(Boolean)).size;
+  const lines=[`# Application surface coverage — ${atlas.target.siteId}`, '',`Origin: ${atlas.target.origin}`,`Craft evidence verified: ${atlas.source.verifiedRecords}`,`Native IDs verified: ${atlas.source.nativeVerified}`,`Scoped browser records: ${atlas.source.scopedBrowserRecords}`,`Distinct captured route fingerprints: ${pages}`,`Captured page snapshots: ${n}`,`Imported capture artifacts: ${atlas.source.captureArtifacts}`,`Imported state artifacts: ${atlas.source.stateArtifacts}`, `Captured state entries: ${states}`,`Structural controls observed: ${atlas.controls.length}`,`Unknowns (IDs only): ${atlas.unknownIds.length}`,'','## Investigated operations'];
   for(const e of atlas.evidence) lines.push(`- ${e.operation} — ${e.evidenceId} (${e.coverage}; ${e.confidence})`);
   lines.push('','## Implementation status','- Import / integrity: recorded above','- Studio reconciliation: UNRUN (requires current ARBOR checkout)','- Native Rust/Host interaction validation: UNRUN','- Provider UI coverage completeness: UNKNOWN','- Capability activation: NOT AUTHORIZED','','This is a read-only developer report, not a feature certification.');
   return lines.join('\n')+'\n';

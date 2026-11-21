@@ -8,7 +8,7 @@ import { diffAtlases, diffMarkdown } from './diff.mjs';
 import { runNativeVerification } from './native-verifier.mjs';
 
 const FLAGS=Object.freeze({
-  import:new Set(['--bundle','--site','--origin','--out','--capture-dir','--states-dir','--owned-target','--include-labels','--native-bin']),
+  import:new Set(['--bundle','--site','--origin','--out','--capture-dir','--states-dir','--owned-target','--include-labels','--native-bin','--artifact-index']),
   reconcile:new Set(['--atlas','--baseline','--out']),
   diff:new Set(['--before','--after','--out']),
 });
@@ -35,13 +35,14 @@ function writeOut(dir,outputs) {
 }
 try {
   if(process.argv.includes('--help')){
-    process.stdout.write('import --bundle PATH --site ID --origin URL --out NEW_DIR [--capture-dir PATH] [--states-dir PATH] [--owned-target --include-labels] [--native-bin CRAFT_RUST_EXE]\nreconcile --atlas PATH --baseline PATH --out NEW_DIR\ndiff --before PATH --after PATH --out NEW_DIR\n');
+    process.stdout.write('import --bundle PATH --site ID --origin URL --out NEW_DIR [--capture-dir PATH] [--states-dir PATH] [--owned-target --include-labels] [--native-bin CRAFT_RUST_EXE] [--artifact-index PATH]\nreconcile --atlas PATH --baseline PATH --out NEW_DIR\ndiff --before PATH --after PATH --out NEW_DIR\n');
   } else {
     const {command,options:a}=argumentsOf(process.argv.slice(2));
     if(command==='import'){
       const src=readJsonCapped(a['--bundle']);
       const native=a['--native-bin']?runNativeVerification({binary:a['--native-bin'],bundlePath:a['--bundle'],bundleSha256:src.sha256,records:src.content.records??[]}):null;
-      const atlas=buildAtlas({bundle:src.content,bundleDigest:src.sha256,siteId:a['--site'],origin:a['--origin'],captureDir:a['--capture-dir'],statesDir:a['--states-dir'],ownedTarget:!!a['--owned-target'],includeLabels:!!a['--include-labels'],nativeVerifiedIds:native?.ids??null});
+      const artifactIndex=a['--artifact-index']?readJsonCapped(a['--artifact-index'],2*1024*1024).content:null;
+      const atlas=buildAtlas({bundle:src.content,bundleDigest:src.sha256,siteId:a['--site'],origin:a['--origin'],captureDir:a['--capture-dir'],statesDir:a['--states-dir'],ownedTarget:!!a['--owned-target'],includeLabels:!!a['--include-labels'],nativeVerifiedIds:native?.ids??null,artifactIndex});
       const out=writeOut(a['--out'],{'atlas.json':JSON.stringify(atlas,null,2)+'\n','coverage.md':coverageMarkdown(atlas)});
       process.stdout.write(JSON.stringify({status:'pass',command,out,verified:atlas.source.verifiedRecords,nativeVerified:atlas.source.nativeVerified,browserRecords:atlas.source.scopedBrowserRecords,controls:atlas.controls.length})+'\n');
     } else if(command==='reconcile') {

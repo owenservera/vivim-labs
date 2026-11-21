@@ -85,3 +85,12 @@ This is a development accelerator, not a second browser actor, database, graph w
 - [`docs/ACCEPTANCE-AND-HANDOFF.md`](docs/ACCEPTANCE-AND-HANDOFF.md): stage evidence, missing work, and continuation instructions.
 
 **Source revisions inspected at planning time**: Craft clone `e64d7cb73d7f39323b7040a984e0f9b3f7981146`, ARBOR `98890827832ea74eba698566cb88bc3a4a7d520c`, Labs `3235146164073a0b487363fac02aa8d569d7cf71` (latest retrieved commit references; local agent must refresh actual branch HEAD). No ARBOR or Craft repository source was changed by this Labs project.
+## R002 / R002.1 — working adapter extensions (2026-11-21)
+
+- [Implementation and native-verifier instructions](docs/ROUND-2-BUILD.md): Craft bundle import, verified PNG/state artifacts, Atlas reconciliation and optional Rust evidence ID verification.
+- [Multi-surface capture index](docs/MULTI-SURFACE-CAPTURE.md): attach multiple first-party routes and states by exact Craft evidence ID; no live browser access in the adapter.
+- [Source-only Claude Studio/Harness baseline](baselines/claude-source-baseline.json): configuration discrepancies, **not** a new runtime measurement or executable profile.
+- [Local-agent handoff](docs/LOCAL-AGENT-R002.md) and [R002.1 status](docs/CURRENT-STATUS-R002-1.md).
+- Local contract suites now report **23 PASS, 0 FAIL**; 5 Draft 2020-12 JSON schemas validated. Actual Craft-native compiled verification, genuine MVP capture and direct ARBOR Studio readback remain **UNRUN** until a local agent executes them.
+
+Use `node src/cli.mjs --help` for `import`, `reconcile` and `diff`. External Craft findings remain read-only proposals; no Host grants or source identity are inferred from captured controls.

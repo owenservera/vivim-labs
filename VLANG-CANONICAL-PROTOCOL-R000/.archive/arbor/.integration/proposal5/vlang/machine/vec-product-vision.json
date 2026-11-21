@@ -1,0 +1,73 @@
+{
+  "schema": "arbor.proposal5.vec-product-vision/1",
+  "date": "2026-11-12",
+  "status": "VISION_ARCHITECTURE_PROPOSED_NOT_IMPLEMENTED",
+  "northStar": "Natural-language reprogramming of VIVIM by ordinary users with deterministic SDK capability composition and minimal LLM dependence.",
+  "home": ".integration/proposal5/vlang/vec/",
+  "normalUserOutput": "durable_versioned_personal_program",
+  "standardRequestCompilation": "typed_data_only_program_IR",
+  "runtime": "installed_precompiled_Rust_capsules_and_existing_Host_action_owners",
+  "developerRustCapsules": "opt_in_comment_extraction_reproducible_build_independent_review_precompiled_module",
+  "paths": [
+    {
+      "mode": "A",
+      "name": "recognized",
+      "llmRequired": false,
+      "requirements": [
+        "registered_grammar",
+        "resolved_typed_slots",
+        "available_sdk_capability"
+      ]
+    },
+    {
+      "mode": "B",
+      "name": "composed",
+      "llmRequired": false,
+      "requirements": [
+        "bounded_typed_composition_graph",
+        "compatible_contracts",
+        "available_grants"
+      ]
+    },
+    {
+      "mode": "C",
+      "name": "new_or_complex",
+      "llmRequired": "optional_with_user_approval",
+      "requirements": [
+        "model_proposes_not_executes",
+        "independent_review",
+        "typed_contract_and_host_authority"
+      ]
+    }
+  ],
+  "programDomains": [
+    "user_personalization",
+    "personal_automation",
+    "advanced_source_mutation_separate_grant"
+  ],
+  "capsuleModes": [
+    "pure_compute",
+    "independently_verified",
+    "effect_proposal_data_only",
+    "source_mutation_separately_authorized_future"
+  ],
+  "trustBoundaries": [
+    "no_comment_or_utterance_grants",
+    "no_shadow_Host",
+    "no_duplicate_scheduler",
+    "no_arbitrary_Rust_per_user_utterance",
+    "no_provider_APIs",
+    "no_default_source_editing_for_UI_personalization",
+    "no_false_deterministic_coverage_claims"
+  ],
+  "acceptanceStatus": "UNRUN_NOT_PREDEV_ACCEPTED",
+  "testsExecuted": false,
+  "sourceRev": "c7d30b79a1550db408e3bfb92302d7e4d4e4f055",
+  "links": [
+    "vec/00-NL-PROGRAMMING-VISION.md",
+    "vec/01-INTENT-COMPILER.md",
+    "vec/02-SDK-AND-PROGRAM-CONTRACTS.md",
+    "vec/03-LLM-ESCALATION.md",
+    "vec/04-PROGRAM-LIFECYCLE-AND-AUTHORITY.md"
+  ]
+}

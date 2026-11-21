@@ -55,3 +55,7 @@ The historical `OWNER-WORK` records are not yet verified in connected GitHub `ma
 
 ## Shared task claims (current)
 **Mandatory before SITREP/task work:** read [TASK-CLAIMS.md](TASK-CLAIMS.md). The task register and the ownership claim overlay are distinct: never list a Dev-checked-out task as Planning's next ten. A check-out needs a fresh GitHub claim, one active executor and a source/file scope; a handoff is not effective until the recipient explicitly accepts it. Unobserved historical ownership is UNKNOWN, not retroactively checked out.
+
+
+## Latest owner UI override — 2026-11-21 (SUPERSEDES GPUI-only directive above)
+**ONE customer-facing VIVIM interface only:** the existing text-box-first First Contact PWA + inline AutoWiki, shared across PC Edge app and mobile PWA. Native GPUI diagnostic workspace is RETIRED AS USER UI, not the product target. No second user-visible dashboard, native shell, tabs, command palette or fallback. Preserve underlying Rust, native HQKG, Studio/Host authorization and history; archive competing launchers after source dependency review. On Windows use `VIVIM.lnk` → `http://127.0.0.1:43187/mobile/index.html?first=1`. The earlier GPUI-only restriction on Edge is explicitly overridden by the owner. Full source cleanup remains pending; coordinate claims before editing ARBOR. See [owner canonical UI decision](OWNER-ONE-UI-20261121.md).

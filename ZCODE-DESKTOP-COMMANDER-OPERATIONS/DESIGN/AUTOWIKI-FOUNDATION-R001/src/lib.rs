@@ -1,5 +1,6 @@
 //! Standalone pre-integration contract reference. No ARBOR runtime effects.
 //! Intended for adaptation into existing Rust graph/wiki projection, not deployment as a peer engine.
+pub mod context_lens;
 use std::collections::{BTreeMap, BTreeSet};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

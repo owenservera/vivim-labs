@@ -4,7 +4,7 @@
 //! the existing Host has checked actor/item/source permissions.
 //! For staging: std-only; no I/O, network, journaling, effect dispatch or cache.
 use std::collections::{BTreeMap, BTreeSet};
-use crate::context_lens::{read_budget, Depth};
+use super::context_lens::{read_budget, Depth};
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct SourceItem<'a> {

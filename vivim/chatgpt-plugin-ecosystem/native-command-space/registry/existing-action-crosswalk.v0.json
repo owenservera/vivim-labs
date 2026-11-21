@@ -1,0 +1,318 @@
+{
+  "schema": "vivim.existing-action-crosswalk-research/0",
+  "based_on_arbor_commit": "66c60ed2fc15ae05bb30f0a1e0f15c695ad3fb6e",
+  "source_catalog_version": 15,
+  "total_source_actions": 38,
+  "summary": {
+    "exact": 7,
+    "partial": 16,
+    "none": 15
+  },
+  "policy": "Research matching only. No production registration, no readiness upgrade, no equivalence guarantees.",
+  "crosswalk": [
+    {
+      "arbor_catalog_id": "control.rule.remember",
+      "source_readiness": "source_wired",
+      "risk": "R2",
+      "candidate_intent_id": "personal.context.teach_alias",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "control.rule.revoke",
+      "source_readiness": "source_wired",
+      "risk": "R2",
+      "candidate_intent_id": "personal.context.revoke_alias",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "control.catalog.list",
+      "source_readiness": "source_wired",
+      "risk": "R0",
+      "candidate_intent_id": "ui.workspace.search_commands",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "vivim.status.show",
+      "source_readiness": "source_wired",
+      "risk": "R0",
+      "candidate_intent_id": "system.settings.system_overview",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "devices.summary",
+      "source_readiness": "source_wired",
+      "risk": "R0",
+      "candidate_intent_id": "devices.network.list_devices",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "devices.approve",
+      "source_readiness": "source_wired",
+      "risk": "R2",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    },
+    {
+      "arbor_catalog_id": "devices.revoke",
+      "source_readiness": "source_wired",
+      "risk": "R2",
+      "candidate_intent_id": "devices.network.revoke_device",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "personalization.context.summary",
+      "source_readiness": "source_wired",
+      "risk": "R0",
+      "candidate_intent_id": "personal.context.context_summary",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "personalization.preference.list",
+      "source_readiness": "source_wired",
+      "risk": "R0",
+      "candidate_intent_id": "personal.context.show_preferences",
+      "mapping_strength": "exact",
+      "note": "Candidate name describes the same basic user-facing operation; args and constraints still require proof."
+    },
+    {
+      "arbor_catalog_id": "personalization.preference.add",
+      "source_readiness": "source_wired",
+      "risk": "R1",
+      "candidate_intent_id": "personal.context.remember_preference",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "personalization.preference.remove",
+      "source_readiness": "source_wired",
+      "risk": "R1",
+      "candidate_intent_id": "personal.context.forget_preference",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "ui.theme.show",
+      "source_readiness": "source_wired",
+      "risk": "R0",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    },
+    {
+      "arbor_catalog_id": "ui.theme.set_preset",
+      "source_readiness": "source_wired",
+      "risk": "R1",
+      "candidate_intent_id": "ui.workspace.change_theme",
+      "mapping_strength": "exact",
+      "note": "Candidate name describes the same basic user-facing operation; args and constraints still require proof."
+    },
+    {
+      "arbor_catalog_id": "ui.theme.undo",
+      "source_readiness": "source_wired",
+      "risk": "R1",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    },
+    {
+      "arbor_catalog_id": "privacy.hard_no.list",
+      "source_readiness": "source_wired",
+      "risk": "R0",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    },
+    {
+      "arbor_catalog_id": "privacy.hard_no.add",
+      "source_readiness": "source_wired",
+      "risk": "R2",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    },
+    {
+      "arbor_catalog_id": "privacy.hard_no.clear",
+      "source_readiness": "source_wired",
+      "risk": "R2",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    },
+    {
+      "arbor_catalog_id": "control.lexicon.teach",
+      "source_readiness": "source_wired",
+      "risk": "R1",
+      "candidate_intent_id": "personal.context.teach_alias",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "control.lexicon.forget",
+      "source_readiness": "source_wired",
+      "risk": "R1",
+      "candidate_intent_id": "personal.context.revoke_alias",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "vivim.network.pause_egress",
+      "source_readiness": "enforcement_missing",
+      "risk": "R2",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    },
+    {
+      "arbor_catalog_id": "machine.network.disable_all",
+      "source_readiness": "unsupported",
+      "risk": "R3",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    },
+    {
+      "arbor_catalog_id": "versions.compare.pinned",
+      "source_readiness": "source_wired",
+      "risk": "R0",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    },
+    {
+      "arbor_catalog_id": "send-message",
+      "source_readiness": "adapter_pending",
+      "risk": "R1",
+      "candidate_intent_id": "communications.send_message",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "read-state",
+      "source_readiness": "adapter_pending",
+      "risk": "R0",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    },
+    {
+      "arbor_catalog_id": "execute-intent",
+      "source_readiness": "adapter_pending",
+      "risk": "R1",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    },
+    {
+      "arbor_catalog_id": "read-journal",
+      "source_readiness": "adapter_pending",
+      "risk": "R0",
+      "candidate_intent_id": "privacy.security.view_audit_log",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "get-capabilities",
+      "source_readiness": "adapter_pending",
+      "risk": "R0",
+      "candidate_intent_id": "ui.workspace.show_capabilities",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "wiki.page.create",
+      "source_readiness": "source_wired",
+      "risk": "R1",
+      "candidate_intent_id": "knowledge.wiki.wiki_create",
+      "mapping_strength": "exact",
+      "note": "Candidate name describes the same basic user-facing operation; args and constraints still require proof."
+    },
+    {
+      "arbor_catalog_id": "wiki.section.edit",
+      "source_readiness": "source_wired",
+      "risk": "R1",
+      "candidate_intent_id": "knowledge.wiki.wiki_edit_section",
+      "mapping_strength": "exact",
+      "note": "Candidate name describes the same basic user-facing operation; args and constraints still require proof."
+    },
+    {
+      "arbor_catalog_id": "wiki.page.move",
+      "source_readiness": "source_wired",
+      "risk": "R1",
+      "candidate_intent_id": "knowledge.wiki.wiki_move_page",
+      "mapping_strength": "exact",
+      "note": "Candidate name describes the same basic user-facing operation; args and constraints still require proof."
+    },
+    {
+      "arbor_catalog_id": "wiki.pages.link",
+      "source_readiness": "source_wired",
+      "risk": "R1",
+      "candidate_intent_id": "knowledge.wiki.wiki_link_pages",
+      "mapping_strength": "exact",
+      "note": "Candidate name describes the same basic user-facing operation; args and constraints still require proof."
+    },
+    {
+      "arbor_catalog_id": "wiki.section.read",
+      "source_readiness": "source_wired",
+      "risk": "R0",
+      "candidate_intent_id": "knowledge.wiki.wiki_read",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "wiki.pages.list",
+      "source_readiness": "source_wired",
+      "risk": "R0",
+      "candidate_intent_id": "knowledge.wiki.wiki_list",
+      "mapping_strength": "exact",
+      "note": "Candidate name describes the same basic user-facing operation; args and constraints still require proof."
+    },
+    {
+      "arbor_catalog_id": "wiki.page.delete",
+      "source_readiness": "adapter_pending",
+      "risk": "R1",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    },
+    {
+      "arbor_catalog_id": "wiki.capture.save",
+      "source_readiness": "source_wired",
+      "risk": "R1",
+      "candidate_intent_id": "knowledge.wiki.wiki_capture",
+      "mapping_strength": "partial",
+      "note": "Overlapping user goal only; do not alias directly without schema/permission comparison."
+    },
+    {
+      "arbor_catalog_id": "program.write_wiki",
+      "source_readiness": "source_wired",
+      "risk": "R1",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    },
+    {
+      "arbor_catalog_id": "program.read_wiki",
+      "source_readiness": "source_wired",
+      "risk": "R0",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    },
+    {
+      "arbor_catalog_id": "program.validate",
+      "source_readiness": "source_wired",
+      "risk": "R0",
+      "candidate_intent_id": null,
+      "mapping_strength": "none",
+      "note": "No intentional mapping; preserve incumbent action."
+    }
+  ]
+}

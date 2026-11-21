@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/vivim-labs/command-frame.proposal.schema.json",
+  "title": "VIVIM ARBOR CommandFrame research proposal — NOT product ABI",
+  "description": "Non-authoritative design schema; no OS effect authorization, readiness or executable action registration follows from schema validation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "utteranceId",
+    "origin",
+    "commandId",
+    "operands",
+    "targets",
+    "catalogRevision",
+    "worldRevision",
+    "provenance"
+  ],
+  "properties": {
+    "schema": {
+      "const": "vivim.command-frame/1"
+    },
+    "utteranceId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "origin": {
+      "enum": [
+        "text",
+        "voice",
+        "pwa",
+        "gpui",
+        "mcp"
+      ]
+    },
+    "commandId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{2,95}$"
+    },
+    "operands": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "kind",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._-]*$"
+          },
+          "kind": {
+            "enum": [
+              "text",
+              "number",
+              "boolean",
+              "timestamp",
+              "duration",
+              "file-reference",
+              "device-reference",
+              "process-reference",
+              "app-reference",
+              "uri-reference",
+              "world-reference",
+              "selection-reference",
+              "predicate"
+            ]
+          },
+          "value": {
+            "type": [
+              "string",
+              "number",
+              "boolean",
+              "object"
+            ],
+            "description": "Value must be fully validated against the registered per-action operand schema; this loose proposal cannot grant access."
+          }
+        }
+      }
+    },
+    "targets": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reference",
+          "sourceRevision",
+          "scopeId"
+        ],
+        "properties": {
+          "reference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "sourceRevision": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "scopeId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        }
+      }
+    },
+    "catalogRevision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "worldRevision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "expectedDeviceRevision": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "surface",
+        "sourceDigest"
+      ],
+      "properties": {
+        "method": {
+          "enum": [
+            "deterministic-nlcl",
+            "native-rust-grammar",
+            "validated-model-candidate",
+            "user-selected-tool"
+          ]
+        },
+        "surface": {
+          "enum": [
+            "text",
+            "voice",
+            "pwa",
+            "gpui",
+            "mcp"
+          ]
+        },
+        "sourceDigest": {
+          "type": "string",
+          "minLength": 32,
+          "maxLength": 128
+        },
+        "ambiguity": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "ruleId": {
+          "type": "string",
+          "maxLength": 128
+        }
+      }
+    }
+  },
+  "$comment": "Only a structural research artifact. Final executable ABI requires stricter per-action typed operand validation, Host trust proofs, idempotency, approval claim and receipt specification; do not register this schema as permission."
+}

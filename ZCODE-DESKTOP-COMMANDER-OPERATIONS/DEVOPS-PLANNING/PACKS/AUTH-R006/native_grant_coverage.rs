@@ -166,7 +166,7 @@ pub fn read_with_current_grant(
         .map_err(FencedReadError::Coverage)?;
     if request.allowed_entities!=&complete.allowed_entities ||
        request.allowed_source_refs!=&complete.allowed_source_refs ||
-       request.focus_entity!=complete.focus_entity ||
+       request.focus_entity!=complete.focus_entity.as_str() ||
        request.scope_id!=trusted_scope_id ||
        request.depth!=depth {
         return Err(FencedReadError::Coverage(CoverageError::ScopeMismatch))

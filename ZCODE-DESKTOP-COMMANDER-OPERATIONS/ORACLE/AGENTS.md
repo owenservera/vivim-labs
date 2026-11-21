@@ -28,3 +28,6 @@ No duplicate tracker; no re-asking the owner to pass work between sessions. If c
 **Decision rule:** if a change does not improve PWA-only completion, reduce owner handoffs, reduce verified AI reasoning, increase trustworthy receipts, or remove a blocker to those outcomes, deprioritize it.
 
 References: [steering](STEERING.md) · [Planner signal](TO-PLANNING.md) · [reconciliation](RECONCILIATION.md) · [cross-session contract](CONTEXT-CONTRACT.md).
+
+## Ownership audit
+Inspect [TASK-CLAIMS.md](../TASK-CLAIMS.md) during source/ownership audits. Flag duplicate checkouts, unacknowledged handoffs, unverifiable claims and stale sessions as NEEDS_RECONCILIATION. Oracle does not claim Dev/Planning execution work or create competing backlog entries. In SITREPs keep claimed execution tasks separate from external dependencies.

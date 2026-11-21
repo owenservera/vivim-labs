@@ -8,6 +8,8 @@ pub mod owned_context;
 pub mod page_alias_projection;
 pub mod readback_guard;
 pub mod query_admission;
+pub mod semantic_evidence;
+pub mod page_assembly;
 use std::collections::{BTreeMap, BTreeSet};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

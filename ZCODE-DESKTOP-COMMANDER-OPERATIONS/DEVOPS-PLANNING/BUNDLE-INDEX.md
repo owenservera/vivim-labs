@@ -11,6 +11,13 @@ This file contains **pointers to known pre-integration artifacts**. It does not 
 
 **Observed source pins:** ARBOR `e2ef16ec221fb752fd50a1e5808d7e9a7a8e3e42`, Labs `b0eb56e41d76ba785eff91858eb82584b08a1162` before Planning commits. **No R003 Rust compilation in this round**, cargo unavailable in cloud. GitHub Planning artifact push ≠ Dev acceptance or user-visible runtime proof.
 
+## R005 semantic proof + human Wiki read pipeline — offer
+
+- **AW-SEMANTIC-PRECODE-R005**: [DevAgent R005 source+code pack](PACKS/SEMANTIC-R005/README.md) | [existing-source/proposed SV proof schema](PACKS/SEMANTIC-R005/SOURCE-TRUTH-AND-ABI.md) | [exact integration plan](PACKS/SEMANTIC-R005/DEVAGENT-INTEGRATION.md) | [acceptance tests](PACKS/SEMANTIC-R005/ACCEPTANCE.md).
+- **Actual source staged:** `DESIGN/AUTOWIKI-FOUNDATION-R001/src/{semantic_evidence,page_assembly,read_pipeline}.rs`, registered in existing `src/lib.rs`; uses R003 narrative and R004 readback/identity guards. No duplicate verifier/graph/page store.
+- **Critical discovery:** current ARBOR Semantic Verifier is **design only / NOT IMPLEMENTED**. Default proof reader None; code cannot call a hypothetical production checker. Source occurrence and test-only evidence do not establish runtime capability. Semantic graph epoch/revision is independent of Wiki journal revision.
+- **Evidence:** 81 authored standalone Rust tests total (37 R003 +20 R004 +24 R005); native HQKG tests 2 additional authored; static export checks PASS. Cargo/rustc build and runtime **UNRUN** in this container. **OFFERED_TO:CHATGPT-DEV; receiver ACK NOT_OBSERVED**.
+
 ## R003/R004 DevAgent code prep — current offer
 
 - **AW-R003-PRECODE-R004:** [R003 DevAgent code-pack entry](PACKS/R003/README.md) | [exact cloud integration runbook](PACKS/R003/DEVAGENT-APPLY.md) | [Rust/native tests](PACKS/R003/TEST-RECIPES.md) | [authorized HQKG query extension](PACKS/R003/authorized_query_extension.rs) | [native integration tests](PACKS/R003/native_hqkg_authorized.rs).

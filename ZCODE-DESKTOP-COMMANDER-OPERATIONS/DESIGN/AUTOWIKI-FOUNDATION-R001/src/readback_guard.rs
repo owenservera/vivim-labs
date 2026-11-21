@@ -10,6 +10,8 @@ pub struct ReadTicket {
     pub epoch: String,
     pub scope_id: String,
     pub wiki_revision: u64,
+    /// Actual current Wiki content digest from Host; never browser-provided.
+    pub wiki_digest: String,
     pub graph_epoch: u64,
     pub latest_input_sequence: u64,
     pub page_id: String,
@@ -19,7 +21,7 @@ pub struct ReadTicket {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ReadbackError {
     Revoked, MissingPage, EpochChanged, ScopeChanged, WikiChanged,
-    GraphChanged, Superseded, FocusChanged, DepthChanged,
+    GraphChanged, DigestChanged, InvalidDigest, Superseded, FocusChanged, DepthChanged,
 }
 
 fn current_page(lens: &Lens) -> Option<&str> {
@@ -32,12 +34,19 @@ fn current_page(lens: &Lens) -> Option<&str> {
 
 /// Create an ephemeral ticket AFTER the incumbent Lens::apply admitted a
 /// canonical page ID. The epoch is Lens's Host/source identity, not graph epoch.
-pub fn issue_read(lens: &Lens, graph_epoch: u64) -> Result<ReadTicket, ReadbackError> {
+pub fn issue_read(
+    lens: &Lens, graph_epoch: u64, trusted_wiki_digest: &str,
+) -> Result<ReadTicket, ReadbackError> {
+    if trusted_wiki_digest.len() != 64 ||
+       !trusted_wiki_digest.bytes().all(|b| b.is_ascii_hexdigit()) {
+        return Err(ReadbackError::InvalidDigest);
+    }
     if lens.revoked { return Err(ReadbackError::Revoked); }
     let page_id = current_page(lens).ok_or(ReadbackError::MissingPage)?;
     Ok(ReadTicket {
         epoch: lens.epoch.clone(), scope_id: lens.scope_id.clone(),
-        wiki_revision: lens.source_revision, graph_epoch,
+        wiki_revision: lens.source_revision,
+        wiki_digest: trusted_wiki_digest.to_owned(), graph_epoch,
         latest_input_sequence: lens.latest_input_sequence,
         page_id: page_id.to_owned(), depth: lens.depth,
     })
@@ -52,6 +61,7 @@ pub fn accept_readback(
     ticket: &ReadTicket,
     projection: &LensProjection,
     current_graph_epoch: u64,
+    current_wiki_digest: &str,
 ) -> Result<(), ReadbackError> {
     if lens.revoked { return Err(ReadbackError::Revoked); }
     if lens.epoch != ticket.epoch { return Err(ReadbackError::EpochChanged); }
@@ -65,6 +75,9 @@ pub fn accept_readback(
     if ticket.graph_epoch != current_graph_epoch ||
        projection.graph_epoch != ticket.graph_epoch {
         return Err(ReadbackError::GraphChanged);
+    }
+    if ticket.wiki_digest != current_wiki_digest {
+        return Err(ReadbackError::DigestChanged);
     }
     if lens.latest_input_sequence != ticket.latest_input_sequence {
         return Err(ReadbackError::Superseded);
@@ -84,6 +97,7 @@ mod tests {
     use super::super::context_lens::{Change, LensEvent};
     use std::collections::BTreeSet;
 
+    fn digest() -> String { "a".repeat(64) }
     fn pages() -> BTreeSet<String> {
         ["wiki.home", "wiki.system"].into_iter().map(str::to_owned).collect()
     }
@@ -103,36 +117,36 @@ mod tests {
     }
     #[test] fn current_ticket_admits_existing_projection() {
         let l = lens();
-        let t = issue_read(&l, 11).unwrap();
-        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 11), Ok(()));
+        let t = issue_read(&l, 11, &digest()).unwrap();
+        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 11, &digest()), Ok(()));
     }
     #[test] fn later_human_or_agent_input_supersedes_response() {
         let mut l = lens();
-        let t = issue_read(&l, 11).unwrap();
+        let t = issue_read(&l, 11, &digest()).unwrap();
         assert_eq!(l.apply(LensEvent::Draft {
             sequence: 1, epoch: "host:epoch".into(), source_revision: 7,
             candidate_page: Some("wiki.system".into()), grounded: true,
         }, &pages()), Ok(Change::Suggested));
-        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 11),
+        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 11, &digest()),
             Err(ReadbackError::Superseded));
     }
     #[test] fn scope_replacement_and_revocation_refuse_private_readback() {
         let mut l = lens();
-        let t = issue_read(&l, 11).unwrap();
+        let t = issue_read(&l, 11, &digest()).unwrap();
         l.apply(LensEvent::SourceChanged {
             epoch: "other:epoch".into(), scope_id: "owner:other".into(),
             revision: 7, home: "wiki.home".into(), trace_allowed: false,
         }, &pages()).unwrap();
-        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 11),
+        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 11, &digest()),
             Err(ReadbackError::EpochChanged));
         l.apply(LensEvent::AccessRevoked, &pages()).unwrap();
-        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 11),
+        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 11, &digest()),
             Err(ReadbackError::Revoked));
     }
     #[test] fn actual_graph_epoch_cannot_be_taken_from_cached_reply() {
         let l = lens();
-        let t = issue_read(&l, 11).unwrap();
-        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 12),
+        let t = issue_read(&l, 11, &digest()).unwrap();
+        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 12, &digest()),
             Err(ReadbackError::GraphChanged));
     }
     #[test] fn pinned_selection_displaces_ambient_suggestion() {
@@ -142,22 +156,34 @@ mod tests {
             sequence: 1, epoch: "host:epoch".into(), source_revision: 7,
             candidate_page: Some("wiki.system".into()), grounded: true,
         }, &pages()).unwrap();
-        let t = issue_read(&l, 11).unwrap();
+        let t = issue_read(&l, 11, &digest()).unwrap();
         assert_eq!(t.page_id, "wiki.home");
-        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 11), Ok(()));
+        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 11, &digest()), Ok(()));
     }
     #[test] fn navigation_or_depth_change_invalidates_old_reply() {
         let mut l = lens();
-        let t = issue_read(&l, 11).unwrap();
+        let t = issue_read(&l, 11, &digest()).unwrap();
         l.apply(LensEvent::Navigate {
             epoch: "host:epoch".into(), source_revision: 7,
             page: "wiki.system".into(),
         }, &pages()).unwrap();
-        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 11),
+        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 11, &digest()),
             Err(ReadbackError::FocusChanged));
-        let t = issue_read(&l, 11).unwrap();
+        let t = issue_read(&l, 11, &digest()).unwrap();
         l.apply(LensEvent::SetDepth(Depth::Explain), &pages()).unwrap();
-        assert_eq!(accept_readback(&l, &t, &projection("wiki.system"), 11),
+        assert_eq!(accept_readback(&l, &t, &projection("wiki.system"), 11, &digest()),
             Err(ReadbackError::DepthChanged));
     }
+    #[test] fn same_revision_different_digest_cannot_repaint() {
+        let l = lens();
+        let t = issue_read(&l, 11, &digest()).unwrap();
+        let another = "b".repeat(64);
+        assert_eq!(accept_readback(&l, &t, &projection("wiki.home"), 11, &another),
+            Err(ReadbackError::DigestChanged));
+    }
+    #[test] fn invalid_source_digest_never_issues_a_ticket() {
+        assert_eq!(issue_read(&lens(), 11, "not-a-digest"),
+            Err(ReadbackError::InvalidDigest));
+    }
+
 }

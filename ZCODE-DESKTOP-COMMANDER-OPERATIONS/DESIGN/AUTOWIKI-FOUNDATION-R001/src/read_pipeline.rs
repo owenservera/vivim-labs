@@ -93,7 +93,8 @@ mod tests {
     #[test] fn without_live_verifier_current_page_is_true_unavailable() {
         let l=lens();let ticket=issue_read(&l,9,&digest()).unwrap();
         let refs=source_refs();let scope=CurrentEvidenceScope {
-            page_id:"wiki.home",wiki_revision:7,source_commit:PIN,
+            page_id:"wiki.home",wiki_revision:7,
+            semantic_source_revision:9,source_commit:PIN,
             allowed_source_refs:&refs,
         };
         let x=project_human_wiki_page(
@@ -106,7 +107,8 @@ mod tests {
     #[test] fn user_or_agent_new_draft_rejects_earlier_read() {
         let mut l=lens();let ticket=issue_read(&l,9,&digest()).unwrap();
         let refs=source_refs();let scope=CurrentEvidenceScope {
-            page_id:"wiki.home",wiki_revision:7,source_commit:PIN,
+            page_id:"wiki.home",wiki_revision:7,
+            semantic_source_revision:9,source_commit:PIN,
             allowed_source_refs:&refs,
         };
         l.apply(LensEvent::Draft {
@@ -120,7 +122,8 @@ mod tests {
     #[test] fn same_revision_changed_wiki_digest_cannot_publish() {
         let l=lens();let ticket=issue_read(&l,9,&digest()).unwrap();
         let refs=source_refs();let scope=CurrentEvidenceScope {
-            page_id:"wiki.home",wiki_revision:7,source_commit:PIN,
+            page_id:"wiki.home",wiki_revision:7,
+            semantic_source_revision:9,source_commit:PIN,
             allowed_source_refs:&refs,
         };
         assert_eq!(project_human_wiki_page(
@@ -130,7 +133,8 @@ mod tests {
     #[test] fn source_mismatch_and_trace_without_permission_fail_closed() {
         let mut l=lens();let ticket=issue_read(&l,9,&digest()).unwrap();
         let refs=source_refs();let scope=CurrentEvidenceScope {
-            page_id:"wiki.system",wiki_revision:7,source_commit:PIN,
+            page_id:"wiki.system",wiki_revision:7,
+            semantic_source_revision:9,source_commit:PIN,
             allowed_source_refs:&refs,
         };
         assert_eq!(project_human_wiki_page(

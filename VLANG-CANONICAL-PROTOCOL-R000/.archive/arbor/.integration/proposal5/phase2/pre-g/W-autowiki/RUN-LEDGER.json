@@ -1,0 +1,108 @@
+{
+  "schema": "arbor.p5.pre-g.autowiki-run-ledger/1",
+  "branch": "work/p5-preg-autowiki-r001",
+  "preparedFrom": "8b23c73bf450738a76b256bf0fa17ecbf86db591",
+  "status": "PREPARED_NOT_PROMOTED",
+  "syntheticOnly": true,
+  "latestVerifiedGitBlobs": {
+    "module": "122770a4732325dc6617484bd4166a292547241c",
+    "tests": "d69fc0f8f855a30d5d3803e2be05819870a51c5f"
+  },
+  "executed": [
+    {
+      "id": "V8-FINAL",
+      "environment": "connected tool isolated V8 module evaluation of exact GitHub committed bytes; structuredClone JSON-equivalent shim",
+      "command": "Fetch exact W/mirror.mjs and W/negative-tests.mjs; remove ESM import/export syntax for V8 evaluation; invoke runNegativeTests()",
+      "exitCode": 0,
+      "passed": 15,
+      "failed": 0,
+      "cases": [
+        "source-linked canonical HQ IDs",
+        "canonical HQ path-bearing document IDs preserved",
+        "stale screen result invalidated",
+        "permission revocation between source read and response",
+        "partial chat history never claims completeness",
+        "wrong source audience omitted",
+        "HQ unavailable never invents knowledge",
+        "ambiguous project not automatically guessed",
+        "unsubmitted draft remains provisional",
+        "flip back does not mutate editor state",
+        "out-of-order async responses cannot overwrite newer screen",
+        "client-claimed Host scope cannot mint grants",
+        "source response revision mismatch is stale",
+        "revocation delta clears source IDs",
+        "invalid screen rejected before source read"
+      ],
+      "note": "Final run against updated committed blobs; 15/15 isolated V8; source-native IDs with slash/# retained"
+    },
+    {
+      "id": "V8-SUBSET",
+      "environment": "isolated V8 partial test diagnostic; omitted out-of-order case",
+      "exitCode": 0,
+      "passed": 13,
+      "failed": 0
+    },
+    {
+      "id": "V8-FIRST",
+      "environment": "isolated V8 before test shim",
+      "exitCode": 1,
+      "passed": null,
+      "failed": 1,
+      "note": "sandbox lacks structuredClone; Node 22 has it"
+    },
+    {
+      "id": "V8-ASYNC-EARLIER",
+      "environment": "isolated V8 before deterministic async barrier fix",
+      "exitCode": null,
+      "result": "TIMEOUT",
+      "note": "test fixture race in out-of-order case; corrected and re-executed successfully"
+    }
+  ],
+  "unrun": [
+    {
+      "id": "NODE-22",
+      "command": "node run-tests.mjs",
+      "exitCode": null,
+      "reason": "native node process not available through connected GitHub action; V8 is not Node CLI"
+    },
+    {
+      "id": "DONOR-ROCK",
+      "command": "node --test research/rock-core-storage/test/*.test.mjs",
+      "exitCode": null,
+      "reason": "donor source read only; no donor checkout or Node runner"
+    },
+    {
+      "id": "JSON-SCHEMA",
+      "command": "Ajv draft-2020-12 validation of all producer/page/delta fixtures",
+      "exitCode": null,
+      "reason": "no schema validator installed/run"
+    },
+    {
+      "id": "HOST-PRODUCT",
+      "command": "Host owner policy integration and personal corpus read",
+      "exitCode": null,
+      "reason": "not wired; no real user data authorized"
+    },
+    {
+      "id": "WINDOWS-PWA",
+      "command": "Windows Host and Android/PWA device flip-back acceptance",
+      "exitCode": null,
+      "reason": "no device execution"
+    },
+    {
+      "id": "STORAGE-RECOVERY",
+      "command": "real byte accounting/replay/compaction with owner source proof",
+      "exitCode": null,
+      "reason": "design guardrails only"
+    }
+  ],
+  "nonClaims": [
+    "no runtime integration",
+    "no W1-G merge",
+    "no device acceptance",
+    "no permanent wiki writes",
+    "no source grants minted",
+    "no destructive storage actions"
+  ],
+  "effectPerformed": false
+}

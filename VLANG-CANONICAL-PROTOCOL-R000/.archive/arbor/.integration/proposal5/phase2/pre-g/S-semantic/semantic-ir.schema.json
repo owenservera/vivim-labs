@@ -1,0 +1,437 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vivim.local/contracts/semantic-wiki-ir.v0.schema.json",
+  "title": "VIVIM Semantic Wiki IR (inert source-comment read projection)",
+  "description": "Research source-to-semantics ABI. This is not permission, accepted Host world, a callable plan or a memory write. All source digests require trusted owner verification before runtime use.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "version",
+    "origin",
+    "catalog",
+    "sources",
+    "nodes",
+    "edges",
+    "actions",
+    "diagnostics",
+    "rejections",
+    "coverage",
+    "outputRole",
+    "effectPerformed"
+  ],
+  "properties": {
+    "schema": {
+      "const": "vivim.semantic-wiki-ir/0.1"
+    },
+    "version": {
+      "const": 1
+    },
+    "origin": {
+      "const": "hq_annotation_v2_owner_crosswalk"
+    },
+    "catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "maxItems": 128,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceId",
+          "repoRef",
+          "path",
+          "contentHash",
+          "symbolId",
+          "status",
+          "annotationCount"
+        ],
+        "properties": {
+          "sourceId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "repoRef": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 450
+          },
+          "contentHash": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "symbolId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "status": {
+            "enum": [
+              "parsed",
+              "rejected"
+            ]
+          },
+          "annotationCount": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "maxItems": 3000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "ref",
+          "source"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "kind": {
+            "enum": [
+              "type",
+              "capability",
+              "effect",
+              "evidence",
+              "contract",
+              "emits",
+              "consumes",
+              "action",
+              "test"
+            ]
+          },
+          "ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "source": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "repoRef",
+              "path",
+              "line",
+              "contentHash",
+              "symbolId"
+            ],
+            "properties": {
+              "repoRef": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 450
+              },
+              "line": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "contentHash": {
+                "type": "string",
+                "pattern": "^[A-Fa-f0-9]{64}$"
+              },
+              "symbolId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              }
+            }
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "maxItems": 12000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "from",
+          "to",
+          "kind"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "from": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "to": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "kind": {
+            "enum": [
+              "supports_capability",
+              "subject_to_contract",
+              "declares_effect",
+              "has_source_evidence",
+              "associated_source_semantics"
+            ]
+          }
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "maxItems": 512,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "semanticAction",
+          "hostActionId",
+          "catalogVersion",
+          "catalogDigest",
+          "title",
+          "readiness",
+          "risk",
+          "parameterNames",
+          "sourceNodeId",
+          "sourceRefs",
+          "status",
+          "authority",
+          "sourceDigestVerified",
+          "runtimeVerified",
+          "executable",
+          "executionPerformed"
+        ],
+        "properties": {
+          "semanticAction": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "hostActionId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "catalogVersion": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "catalogDigest": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "readiness": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "risk": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          },
+          "parameterNames": {
+            "type": "array",
+            "maxItems": 128,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "sourceNodeId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "sourceRefs": {
+            "type": "array",
+            "maxItems": 50,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          },
+          "status": {
+            "const": "source_crosswalk_only"
+          },
+          "authority": {
+            "const": "none"
+          },
+          "sourceDigestVerified": {
+            "const": false
+          },
+          "runtimeVerified": {
+            "const": false
+          },
+          "executable": {
+            "const": false
+          },
+          "executionPerformed": {
+            "const": false
+          }
+        }
+      }
+    },
+    "diagnostics": {
+      "type": "array",
+      "maxItems": 3000,
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "sourceId"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "sourceId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "detail": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "line": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "severity": {
+            "enum": [
+              "error",
+              "warning"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "rejections": {
+      "type": "array",
+      "maxItems": 1280,
+      "items": {
+        "type": "object",
+        "required": [
+          "sourceId",
+          "reason"
+        ],
+        "properties": {
+          "sourceId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "semanticAction": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputs",
+        "parsedSources",
+        "rejectedSources",
+        "actionCrosswalks",
+        "missingOrInvalidBindings",
+        "interpreterScope",
+        "runtimeAcceptance"
+      ],
+      "properties": {
+        "inputs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "parsedSources": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rejectedSources": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "actionCrosswalks": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "missingOrInvalidBindings": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "interpreterScope": {
+          "const": "source_comment_only"
+        },
+        "runtimeAcceptance": {
+          "const": "not_evaluated"
+        }
+      }
+    },
+    "outputRole": {
+      "const": "read_only_semantic_wiki_projection"
+    },
+    "effectPerformed": {
+      "const": false
+    }
+  }
+}

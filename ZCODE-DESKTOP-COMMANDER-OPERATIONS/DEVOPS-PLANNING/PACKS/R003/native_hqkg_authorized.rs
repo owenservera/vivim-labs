@@ -50,7 +50,7 @@ fn private_neighbour_is_excluded_before_graph_traversal() {
         allowed_entities:&allowed,allowed_source_refs:&sources,
         page_for_entity:&pages,
     };
-    let result=read_authorized_context(&g,&grants,&request,Depth::Overview).unwrap();
+    let result=read_authorized_context(&g,&grants,&request,Depth::Overview,"owner:scope",3).unwrap();
     assert_eq!(result.focus_page,"wiki.system");
     assert!(result.cards.iter().all(|card|card.entity_id!="scope/private"));
     assert!(result.related.iter().all(|edge|edge.to_page!="wiki.private"));
@@ -72,7 +72,7 @@ fn incomplete_coverage_does_not_turn_prefix_into_grant() {
         page_for_entity:&pages,
     };
     assert!(matches!(
-        read_authorized_context(&g,&grants,&request,Depth::Overview),
+        read_authorized_context(&g,&grants,&request,Depth::Overview,"owner:scope",3),
         Err(AuthorizedReadError::Admission(QueryAdmissionError::UntrustedCoverage))
     ));
 }

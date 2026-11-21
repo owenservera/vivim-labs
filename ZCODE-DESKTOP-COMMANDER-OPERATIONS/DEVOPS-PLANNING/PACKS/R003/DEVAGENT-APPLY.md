@@ -64,7 +64,7 @@ Host current source/actor grant
 
 ## 4 — Prevent out-of-order visual truth
 
-On each source-admitted draft, call the existing `context_lens::Lens::apply` and obtain current resolved page selection. Call `readback_guard::issue_read` before the async source read; on completion call `accept_readback` against current Lens and fresh **source-attested** graph epoch. Reject source epoch/scope, Wiki revision, input sequence, page or depth mismatch. A human edit supersedes an agent’s pending read; revocation clears private preview. No Send, provider call or graph write on typing.
+On each source-admitted draft, call the existing `context_lens::Lens::apply` and obtain current resolved page selection. Call `readback_guard::issue_read` with the current Host Wiki SHA-256 digest before the async read; on completion call `accept_readback` with the fresh **source-attested** graph epoch and current Wiki digest. Reject same-revision/different-content conflicts. Reject source epoch/scope, Wiki revision, input sequence, page or depth mismatch. A human edit supersedes an agent’s pending read; revocation clears private preview. No Send, provider call or graph write on typing.
 
 ## 5 — Verified English + seven hubs
 
@@ -72,7 +72,7 @@ Use existing `narrative::realize` only with independently verified, current, vis
 
 ## 6 — Test, package, release handoff
 
-Run [TEST-RECIPES.md](TEST-RECIPES.md) in a real cloud checkout with Cargo. First standalone staging tests, then after Dev product integration core and HQKG tests; install `native_hqkg_authorized.rs` into `native/hqkg/tests/autowiki_authorized.rs`. Verify feature-gated native binary linking, Host grant refusal, no-leak and actor race. Only then use the Dev-owned [source-to-live playbook](../../CHATGPT-DEV/RELEASE-AND-INTEGRATION-PLAYBOOK.md) for unchanged URL, native resolver/Origin/HTTPS and actual UI observation. Android is not a native/core gate; report it separately.
+Run [TEST-RECIPES.md](TEST-RECIPES.md) in a real cloud checkout with Cargo. First standalone staging tests, then after Dev product integration core and HQKG tests; install `native_hqkg_authorized.rs` into `native/hqkg/tests/autowiki_authorized.rs`. Verify feature-gated native binary linking, Host grant refusal, no-leak and actor race. Only then use the Dev-owned [source-to-live playbook](../../../CHATGPT-DEV/RELEASE-AND-INTEGRATION-PLAYBOOK.md) for unchanged URL, native resolver/Origin/HTTPS and actual UI observation. Android is not a native/core gate; report it separately.
 
 ## Rollback
 

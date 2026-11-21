@@ -1,0 +1,3 @@
+# Dev receipt
+Report: OW ID; canonical repo; refreshed base SHA; changed paths; ownership/collision check; cloud test commands and actual results; remotely verified main commit SHA; risks; deployment state; physical Android proof state; next owner/action.
+Never merge CODED, PUSHED, DEPLOYED and DEVICE_VERIFIED into one status. Update the shared registry per ../OWNER-WORK/PROCESS.md, respecting single-writer coordination and append-only history.

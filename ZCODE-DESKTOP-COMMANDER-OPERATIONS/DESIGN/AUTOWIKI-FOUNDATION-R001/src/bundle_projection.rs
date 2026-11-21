@@ -109,14 +109,16 @@ pub fn project_context(
     let mut seen = BTreeSet::new();
     let mut cards = Vec::new();
     for item in receipt.items {
+        // Check admission before even validating a private item's metadata,
+        // so a denied title/source cannot affect the outward refusal class.
+        if !request.allowed_entities.contains(item.id) ||
+            item.sources.iter().any(|s| !request.allowed_source_refs.contains(*s)) {
+            return Err(ProjectionError::Unauthorized);
+        }
         if !safe_id(item.id) || !safe_label(item.title) || item.sources.len() > 24 ||
+            item.sources.iter().any(|s| !safe_id(s)) ||
             item.depth > 3 || !seen.insert(item.id) {
             return Err(ProjectionError::MalformedContext);
-        }
-        if !request.allowed_entities.contains(item.id) ||
-            item.sources.iter().any(|s| !safe_id(s) ||
-                !request.allowed_source_refs.contains(*s)) {
-            return Err(ProjectionError::Unauthorized);
         }
         if item.stale { return Err(ProjectionError::StaleSource) }
         // A source-less occurrence cannot become a factual display card.
@@ -139,6 +141,10 @@ pub fn project_context(
     let mut related = Vec::new();
     let mut edge_seen = BTreeSet::new();
     for edge in receipt.edges {
+        // Do not inspect metadata of edges outside the admitted subset.
+        if !known.contains_key(edge.from) || !known.contains_key(edge.to) {
+            continue;
+        }
         if !safe_id(edge.from) || !safe_id(edge.to) || !safe_id(edge.relation) {
             return Err(ProjectionError::MalformedContext);
         }

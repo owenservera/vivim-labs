@@ -156,7 +156,7 @@ mod tests {
         let text=realize("wiki.system",2,Depth::Overview,&[c],&source());
         assert_eq!(text.paragraph,"The Rust core uses one shared graph.");
         assert_eq!(text.sentences[0].claim_id,"claim:1");
-        assert_eq!(text.sentences[0].evidence_refs,["source:1"]);
+        assert_eq!(text.sentences[0].evidence_refs,vec!["source:1".to_string()]);
         assert!(text.complete);
     }
     #[test] fn negation_preserves_truth_conditions() {

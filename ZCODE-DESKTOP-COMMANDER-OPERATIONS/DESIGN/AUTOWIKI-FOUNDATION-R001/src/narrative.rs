@@ -3,7 +3,7 @@
 //! evidence itself and does not assert current device/runtime health.
 //! Sentence strings MUST be rendered via textContent, not innerHTML.
 use std::collections::BTreeSet;
-use crate::{Verification, context_lens::Depth};
+use super::{Verification, context_lens::Depth};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Relationship {

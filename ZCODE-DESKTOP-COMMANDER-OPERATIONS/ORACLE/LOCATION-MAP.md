@@ -47,3 +47,6 @@ Repository: https://github.com/owenservera/ARBOR — fetch its current main SHA 
 
 ## Retrieval discipline
 For a steering turn, read Oracle AGENTS/SITREP + TASK-CLAIMS; check both repo HEADs; inspect only the relevant product seam and evidence; identify **one** first unproven edge; update TO-PLANNING only if signal meaningfully changes. Do not reproduce Planning's task list here, do not invent a replacement owner registry, and do not use Desktop Commander to code.
+
+## Next-phase Wiki ↔ command strategy
+- [WIKI-COMMAND-SYMBIOSIS-R001.md](WIKI-COMMAND-SYMBIOSIS-R001.md): source-grounded five option comparison, explicit Explore/Act mode model, PWA acceptance sequence and Planning crosswalk. Read this only when discussing next-phase reprogrammability; it is **not** an implementation ledger.

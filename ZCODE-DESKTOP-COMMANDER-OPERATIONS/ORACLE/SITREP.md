@@ -20,3 +20,5 @@
 **Next Oracle action:** send [TO-PLANNING.md](TO-PLANNING.md) as a strategic shaping signal; ask Planning to ground task decomposition in existing Rust/Host paths and actual GitHub main, not duplicate a queue. Await explicit recipient acknowledgment; none claimed here.
 
 **Success gauges:** PWA-only verified closure, interventions per closure, AI calls/cost per verified increment, deterministic reuse, recovery/rollback evidence. Baselines not yet measured: **UNKNOWN**, not zero.
+
+**New Oracle product-sequence proposal (2026-11-21):** After the current read-only human/agent Wiki typing milestones, prioritize the Wiki->focused target->catalog action->existing NL compiler->Host-approved plan->verified Wiki revision feedback loop. Five options and exact reused paths are documented in [WIKI-COMMAND-SYMBIOSIS-R001.md](WIKI-COMMAND-SYMBIOSIS-R001.md). Planning crosswalk to PV-04/PV-05/PV-06/PV-10 is **PROPOSED**, not acknowledged. Existing first-contact `?first=1` Send-disabled flow must not be quietly converted into an effects channel. No ARBOR product source was changed in this Oracle research.

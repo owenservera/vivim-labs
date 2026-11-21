@@ -37,3 +37,10 @@ Next accountable role: ...
 ```
 
 Oracle will review that response for alignment, **not rewrite Planning's task list**. Do not require the owner to arbitrate routine cross-agent handoffs.
+
+## Oracle new PWA product-sequencing signal — WIKI_COMMAND_SYMBIOSIS (2026-11-21)
+**Status: PROPOSED / RECIPIENT_ACK_UNOBSERVED.** Owner asks what to integrate *after* refining the two read-only AutoWiki typing milestones, to make Wiki, NL command interpretation and Host effects symbiotic. Full existing-source review and five options: [WIKI-COMMAND-SYMBIOSIS-R001.md](WIKI-COMMAND-SYMBIOSIS-R001.md). This is an additional outcome-shaping recommendation, not a competing task queue or a supersession of the separate PWA_BUILD_INGRESS meta-goal.
+
+**Recommended narrow product result:** select one source-backed Wiki section -> choose a catalog-backed action -> resolve exact pinned target and missing args through incumbent semantic composer -> review existing Host plan -> explicitly approve one R1 edit -> see committed Wiki revision + receipt on the SAME PWA. Ordinary Wiki typing remains read-only. No mode auto-switch that executes. First close the existing human/agent AutoWiki surface without taking over Dev scope.
+
+**Planning disposition request:** cross-map to **PV-04/PV-05/PV-06/PV-10** (existing PWA-visible outcome tracker); B06/U7, AW-012, R003 Rust lens, existing NLCL/Host/Wiki control are candidate reused dependencies. PV-08 visual programming and PV-12 deterministic recipes follow; PV-14 PWA build-intent remains a distinct explicit action. Investigate exact Wiki/HQKG identity, current grant, first-contact mode/Send fencing, selected context -> typed Host plan, and source-fenced readback. No new parser/catalog/graph/journal/permission engine. Acknowledge with accepted/amended/deferred and first evidence gap.

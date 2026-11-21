@@ -1,0 +1,17 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://vivim.live/schemas/application-surface-diff/1",
+  "type":"object","additionalProperties":false,
+  "required":["schema","target","snapshots","evidence","roleCounts","stateEntryCounts","status","authority","caveats"],
+  "properties":{
+    "schema":{"const":"vivim.application-surface-diff/1"},
+    "target":{"type":"object","required":["siteId","origin"]},
+    "snapshots":{"type":"object","required":["before","after"]},
+    "evidence":{"type":"object","required":["added","noLongerPresent"]},
+    "roleCounts":{"type":"array","items":{"type":"object","required":["role","before","after","delta"]}},
+    "stateEntryCounts":{"type":"object","required":["before","after","delta"]},
+    "status":{"const":"observation-difference-only"},
+    "authority":{"type":"object","required":["executionAuthorized","activationPermitted"],"properties":{"executionAuthorized":{"const":false},"activationPermitted":{"const":false}}},
+    "caveats":{"type":"array","items":{"type":"string"}}
+  }
+}

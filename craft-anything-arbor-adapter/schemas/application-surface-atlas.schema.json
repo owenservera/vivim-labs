@@ -18,14 +18,15 @@
     },
     "source": {
       "type": "object", "additionalProperties": false,
-      "required": ["producer", "format", "version", "bundleDigest", "verifiedRecords", "scopedBrowserRecords"],
+      "required": ["producer", "format", "version", "bundleDigest", "verifiedRecords", "scopedBrowserRecords", "nativeVerified"],
       "properties": {
         "producer": {"const": "craft-anything"},
         "format": {"const": "craft-anything-evidence-bundle"},
         "version": {"const": 1},
         "bundleDigest": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
         "verifiedRecords": {"type": "integer", "minimum": 0},
-        "scopedBrowserRecords": {"type": "integer", "minimum": 0}
+        "scopedBrowserRecords": {"type": "integer", "minimum": 0},
+        "nativeVerified": {"type": "boolean"}
       }
     },
     "evidence": {
@@ -48,7 +49,7 @@
     "observations": {"type": "array", "maxItems": 10000, "items": {
       "type": "object", "required": ["kind", "evidenceId", "effectAuthorized"],
       "properties": {
-        "kind": {"enum": ["website-capture", "capture-artifact", "state-capture", "interaction-state", "state-artifact", "walkthrough", "walkthrough-step"]},
+        "kind": {"enum": ["website-capture", "capture-artifact", "state-capture", "interaction-state", "state-artifact", "walkthrough", "walkthrough-step", "accessibility-summary"]},
         "evidenceId": {"type": "string", "pattern": "^ev_[0-9a-f]{64}$"},
         "effectAuthorized": {"const": false}
       },

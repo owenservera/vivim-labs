@@ -1,0 +1,59 @@
+{
+  "schema": "vivim.application-profile-baseline/1",
+  "target": {"siteId":"claude","origin":"https://claude.ai"},
+  "description": "SOURCE-ONLY configuration snapshot. No claim of fresh Claude.ai runtime inspection; do not execute these selectors.",
+  "profiles": [
+    {
+      "owner":"studio",
+      "sourcePath":"studio/src/profiles/sites/claude.mjs",
+      "sourceBlobSha":"28cc85bf1f5e03a029525cae5c60240f27e5a75b",
+      "features":[
+        {
+          "id":"chat.composer","surface":"chat","sourceStatus":"source-measured",
+          "selectors":["div[data-testid=\"chat-input\"]","fieldset div[contenteditable=\"true\"]","div[contenteditable=\"true\"][aria-label*=\"prompt\" i]","div.ProseMirror[contenteditable=\"true\"]","div[contenteditable=\"true\"][role=\"textbox\"]","div[contenteditable=\"true\"]"],
+          "matchTerms":["Write your prompt to Claude"],
+          "notes":"Source explicitly omits the early transient textarea to avoid a known hydration race."
+        },
+        {
+          "id":"chat.send","surface":"chat","sourceStatus":"source-measured",
+          "selectors":["button[aria-label=\"Send message\"]","button[data-testid=\"send-button\"]","fieldset button[type=\"submit\"]","button[type=\"submit\"]"],
+          "matchTerms":["Send message"]
+        },
+        {
+          "id":"chat.reply","surface":"chat","sourceStatus":"source-measured",
+          "selectors":["[data-testid=\"assistant-message\"]","[data-perf-reply-text]"],
+          "matchTerms":[]
+        }
+      ]
+    },
+    {
+      "owner":"harness",
+      "sourcePath":"harness/src/providers/claude.mjs",
+      "sourceBlobSha":"b67048aa3501028d8b77795f8c41217fc3c3d743",
+      "features":[
+        {
+          "id":"chat.composer","surface":"chat","sourceStatus":"configured",
+          "selectors":["div[data-testid=\"chat-input\"]","fieldset div[contenteditable=\"true\"]","div[contenteditable=\"true\"][aria-label=\"Write your prompt to Claude\"]","div.ProseMirror[contenteditable=\"true\"]","textarea","[contenteditable=\"true\"]","[role=\"textbox\"]"],
+          "matchTerms":["Write your prompt to Claude"],
+          "notes":"Contains generic textarea fallback absent from Studio. Possible hydration race; source discrepancy, not a verified runtime bug."
+        },
+        {
+          "id":"chat.send","surface":"chat","sourceStatus":"configured",
+          "selectors":["button[aria-label=\"Send message\"]","button[data-testid=\"send-button\"]","fieldset button[type=\"submit\"]","button[type=\"submit\"]"],
+          "matchTerms":["Send message"]
+        },
+        {
+          "id":"chat.reply","surface":"chat","sourceStatus":"configured",
+          "selectors":["[data-testid=\"assistant-message\"] .standard-markdown","[data-testid=\"assistant-message\"]"],
+          "matchTerms":[]
+        },
+        {
+          "id":"chat.model-selection","surface":"chat","sourceStatus":"configured",
+          "selectors":["button[data-testid=\"model-selector-dropdown\"]"],
+          "matchTerms":["More models"],
+          "notes":"Source declares model chooser and effort vocabulary; runtime behavior not freshly checked."
+        }
+      ]
+    }
+  ]
+}

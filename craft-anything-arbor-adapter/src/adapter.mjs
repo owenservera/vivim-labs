@@ -11,6 +11,8 @@ const OPS = new Set(['web_site_open', 'web_site_capture', 'web_page_states_captu
 const LIMIT_BYTES = 32 * 1024 * 1024;
 const LIMIT_RECORDS = 2500;
 const ROLES = new Set(['button', 'link', 'tab', 'menuitem', 'textbox', 'combobox', 'checkbox', 'radio', 'dialog', 'navigation', 'main', 'form', 'listbox', 'option', 'switch', 'searchbox', 'heading', 'summary']);
+const TAG_ROLES = Object.freeze({a:'link',input:'textbox',textarea:'textbox',select:'combobox',h1:'heading',h2:'heading',h3:'heading',h4:'heading',nav:'navigation'});
+const INTERACTIVE = new Set(['button','link','tab','menuitem','textbox','combobox','checkbox','radio','listbox','option','switch','searchbox','summary']);
 const SIGNIN = /password|secret|credential|token|api[-_]?key|authorization|bearer|cookie|session/i;
 const PERSONAL = /\b[\w.+-]+@[\w.-]+\.[a-z]{2,}\b|\b\d{6,}\b|https?:\/\/|[A-Za-z0-9_-]{40,}/i;
 
@@ -22,12 +24,16 @@ export function canonicalJson(value) {
   if (obj(value)) return `{${Object.keys(value).sort().filter(k => value[k] !== undefined).map(k => `${JSON.stringify(k)}:${canonicalJson(value[k])}`).join(',')}}`;
   return JSON.stringify(value);
 }
-export function evidenceDigest(record) {
+export function evidenceIdentityJson(record) {
   if (!obj(record) || !obj(record.subject)) fail('INVALID_EVIDENCE_SHAPE');
   const { id, summary, carries_target_content, subject, ...rest } = record;
   const { name, ...subjectIdentity } = subject;
-  return `ev_${digest(canonicalJson({ ...rest, subject: subjectIdentity }))}`;
+  return canonicalJson({ ...rest, subject: subjectIdentity });
 }
+export function evidenceDigest(record) {
+  return `ev_${digest(evidenceIdentityJson(record))}`;
+}
+
 export function readJsonCapped(path, maxBytes = LIMIT_BYTES) {
   const abs = resolve(path);
   if (!statSync(abs).isFile() || statSync(abs).size > maxBytes) fail('INPUT_TOO_LARGE_OR_NOT_FILE');
@@ -37,16 +43,24 @@ export function readJsonCapped(path, maxBytes = LIMIT_BYTES) {
   try { content = JSON.parse(bytes.toString('utf8')); } catch { fail('INVALID_JSON'); }
   return { content, sha256: digest(bytes), abs };
 }
-export function validateBundle(bundle) {
+export function validateBundle(bundle, {nativeVerifiedIds = null} = {}) {
   if (!obj(bundle) || bundle.format !== BUNDLE_FORMAT || bundle.version !== 1 || !Array.isArray(bundle.records) || !Array.isArray(bundle.unknowns)) fail('UNSUPPORTED_CRAFT_BUNDLE');
   if (bundle.records.length > LIMIT_RECORDS || bundle.unknowns.length > LIMIT_RECORDS) fail('BUNDLE_LIMIT_EXCEEDED');
   const ids = new Map();
   for (const record of bundle.records) {
     if (!obj(record) || !ID_RE.test(record.id ?? '') || typeof record.operation !== 'string' || record.result === undefined || !obj(record.coverage) || !obj(record.environment)) fail('INVALID_EVIDENCE_SHAPE');
     if (!['observed', 'derived', 'inferred'].includes(record.confidence) || !['complete', 'partial', 'unknown'].includes(record.coverage.status)) fail('INVALID_EVIDENCE_QUALIFIER');
-    if (evidenceDigest(record) !== record.id) fail('EVIDENCE_HASH_MISMATCH', record.id);
-    if (ids.has(record.id) && canonicalJson(ids.get(record.id)) !== canonicalJson(record)) fail('EVIDENCE_ID_COLLISION');
-    ids.set(record.id, record);
+    if (evidenceDigest(record) !== record.id && !(nativeVerifiedIds instanceof Set && nativeVerifiedIds.has(record.id))) fail('EVIDENCE_HASH_MISMATCH', record.id);
+    // Display-only fields can differ without changing Craft's evidence identity.
+    // Preserve the first byte-equivalent identity and refuse any different hashed payload.
+    if (ids.has(record.id) && evidenceIdentityJson(ids.get(record.id)) !== evidenceIdentityJson(record)) fail('EVIDENCE_ID_COLLISION');
+    if (!ids.has(record.id)) ids.set(record.id, record);
+  }
+  for (const unknown of bundle.unknowns) {
+    if (!obj(unknown) || !/^unk_[a-f0-9]{16}$/.test(unknown.id??'') ||
+        !Number.isSafeInteger(unknown.revision) || unknown.revision<1 ||
+        !['open','investigating','blocked','contradicted','resolved'].includes(unknown.status) ||
+        !['low','medium','high','critical'].includes(unknown.severity)) fail('INVALID_CRAFT_UNKNOWN');
   }
   for (const record of ids.values()) for (const parent of record.links ?? []) {
     if (!ID_RE.test(parent)) fail('INVALID_EVIDENCE_LINK');
@@ -78,15 +92,66 @@ function captureMatch(record, dir, field) {
   if (typeof expected !== 'string' || realpathSync(resolve(expected)) !== realpathSync(resolve(dir))) fail('CAPTURE_PROVENANCE_MISMATCH');
   return realpathSync(resolve(dir));
 }
+// Craft's blueprint uses HTML tags (a/input/textarea/select), not only ARIA roles.
+// Never turn a captured node into a selector or a runnable action.
 function sanitizeOutline(items, sourceId, labels) {
   if (!Array.isArray(items)) return [];
-  return items.slice(0, 5000).flatMap((item, index) => {
+  return items.slice(0, 900).flatMap((item, index) => {
     if (!obj(item)) return [];
-    const role = [item.role, item.tag, item.type].find(x=>typeof x === 'string' && ROLES.has(x.toLowerCase()));
+    const tag = typeof item.tag === 'string' ? item.tag.toLowerCase() : '';
+    if (tag === 'input' && ['password','hidden','file'].includes(String(item.type || '').toLowerCase())) return [];
+    const declaredRole = typeof item.role === 'string' ? item.role.toLowerCase() : '';
+    const role = ROLES.has(declaredRole) ? declaredRole
+      : (ROLES.has(tag) ? tag : (TAG_ROLES[tag] ?? null));
     if (!role) return [];
-    const display = safeLabel(item.label ?? item.text ?? item.name ?? item.ariaLabel, labels);
-    return [{kind:'control-observation', sourceEvidenceId:sourceId, position:index, role:role.toLowerCase(), label:display, confidence:'observed', effectAuthorized:false, locatorVerified:false}];
+    const display = INTERACTIVE.has(role) ? safeLabel(item.label ?? item.text ?? item.name ?? item.ariaLabel, labels) : null;
+    return [{kind:'control-observation', sourceEvidenceId:sourceId, position:index, role, label:display, confidence:'observed', effectAuthorized:false, locatorVerified:false}];
   });
+}
+function artifactFile(folder, filename, expectedSha) {
+  // Names come from verified Craft evidence, but never treat them as paths.
+  if (typeof filename !== 'string' || !/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,90}\.png$/.test(filename) ||
+      filename === '..' || !DIGEST_RE.test(expectedSha ?? '')) fail('INVALID_CAPTURE_ASSET_REFERENCE');
+  const path = resolve(folder, filename);
+  if (realpathSync(path) !== path) fail('CAPTURE_ASSET_PATH_UNSAFE');
+  const info = statSync(path);
+  if (!info.isFile() || info.size < 8 || info.size > 32*1024*1024) fail('CAPTURE_ASSET_SIZE_INVALID');
+  const bytes = readFileSync(path);
+  if (!bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))) fail('CAPTURE_ASSET_NOT_PNG');
+  if (digest(bytes) !== expectedSha) fail('CAPTURE_ASSET_DIGEST_MISMATCH');
+  return true;
+}
+function verifyScreenshots(folder, entries) {
+  if (!Array.isArray(entries)) return 0;
+  if (entries.length > 200) fail('CAPTURE_ASSET_LIMIT_EXCEEDED');
+  let count = 0;
+  for (const entry of entries) {
+    if (!obj(entry) || typeof entry.file !== 'string') continue;
+    artifactFile(folder, entry.file, entry.sha256);
+    count++;
+  }
+  return count;
+}
+function verifyCaptureSummary(capture, craftRecord) {
+  if (!obj(capture) || capture.url !== craftRecord.result.url) fail('CAPTURE_CONTENT_MISMATCH');
+  for (const [key,path] of Object.entries({outline:'outline',headings:'headings',links:'links',forms:'forms',images:'assets.images'})) {
+    const expected = craftRecord.result.counts?.[key];
+    if (expected == null) continue;
+    const parts = path.split('.');
+    const value = parts.reduce((v,p)=>v?.[p],capture);
+    if (!Array.isArray(value) || value.length !== expected) fail('CAPTURE_COUNT_MISMATCH', key);
+  }
+  // Craft records its design object in the content-hashed evidence result.
+  if (craftRecord.result.design !== undefined && canonicalJson(capture.design ?? null) !== canonicalJson(craftRecord.result.design ?? null)) fail('CAPTURE_DESIGN_MISMATCH');
+}
+function a11ySummary(capture, sourceId) {
+  const a = capture?.a11y;
+  if (!obj(a)) return null;
+  const landmarks = {};
+  if (obj(a.landmarks)) for (const [key,value] of Object.entries(a.landmarks)) {
+    if (/^[a-z-]{1,32}$/.test(key) && limitedCount(value) !== null) landmarks[key] = value;
+  }
+  return {kind:'accessibility-summary',evidenceId:sourceId,unnamedControls:limitedCount(a.unnamed_controls),imagesWithoutAlt:limitedCount(a.images_without_alt),landmarks,effectAuthorized:false};
 }
 function checkArtifactOrigin(content, origin) {
   if (!obj(content) || normalizedOrigin(content.url) !== origin) fail('ARTIFACT_ORIGIN_MISMATCH');
@@ -107,10 +172,10 @@ function constrainRecord(record, origin) {
     carriesTargetContent:record.carries_target_content === true,
   };
 }
-export function buildAtlas({ bundle, siteId, origin, captureDir = null, statesDir = null, includeLabels = false, ownedTarget = false, bundleDigest = null } = {}) {
+export function buildAtlas({ bundle, siteId, origin, captureDir = null, statesDir = null, includeLabels = false, ownedTarget = false, bundleDigest = null, nativeVerifiedIds = null } = {}) {
   if (!/^[a-z0-9][a-z0-9-]{0,79}$/.test(siteId ?? '') || normalizedOrigin(origin) !== origin) fail('INVALID_TARGET_SCOPE');
   if (includeLabels && !ownedTarget) fail('LABELS_REQUIRE_OWNED_TARGET');
-  const records = validateBundle(bundle);
+  const records = validateBundle(bundle, {nativeVerifiedIds});
   const browser = records.filter(r => OPS.has(r.operation) && scopedUrl(r) === origin && obj(r.result));
   const foreign = records.filter(r=>OPS.has(r.operation) && scopedUrl(r) !== null && scopedUrl(r) !== origin);
   if (foreign.length) fail('MIXED_TARGET_ORIGINS', foreign.length + ' foreign browser record(s)');
@@ -129,8 +194,13 @@ export function buildAtlas({ bundle, siteId, origin, captureDir = null, statesDi
         const folder = captureMatch(r, captureDir, 'output_directory');
         const capture = readJsonCapped(resolve(folder, 'capture.json'), 8*1024*1024);
         checkArtifactOrigin(capture.content, origin);
+        verifyCaptureSummary(capture.content, r);
+        const verifiedScreenshots = verifyScreenshots(folder, r.result.screenshots);
+        const first = controls.length;
         controls.push(...sanitizeOutline(capture.content.outline, r.id, includeLabels));
-        observations.push({kind:'capture-artifact', evidenceId:r.id, sha256:capture.sha256, observedControls:controls.length, artifactAttestedByCraftEvidence:false, effectAuthorized:false});
+        observations.push({kind:'capture-artifact', evidenceId:r.id, sha256:capture.sha256, observedControls:controls.length - first, verifiedScreenshots, artifactAttestedByCraftEvidence:false, effectAuthorized:false});
+        const a11y = a11ySummary(capture.content,r.id);
+        if (a11y) observations.push(a11y);
         usedCapture = true;
       }
     }
@@ -147,8 +217,11 @@ export function buildAtlas({ bundle, siteId, origin, captureDir = null, statesDi
         if (usedStates) fail('MULTIPLE_STATE_REFERENCES');
         const folder = captureMatch(r, statesDir, 'folder');
         const artifact = readJsonCapped(resolve(folder, 'states.json'), 8*1024*1024);
-        if (!obj(artifact.content) || normalizedOrigin(artifact.content.url)!==origin || !Array.isArray(artifact.content.states)) fail('STATES_ARTIFACT_INVALID');
-        observations.push({kind:'state-artifact',evidenceId:r.id,sha256:artifact.sha256, artifactAttestedByCraftEvidence:false,effectAuthorized:false});
+        if (!obj(artifact.content) || artifact.content.url !== r.result.url || !Array.isArray(artifact.content.states) ||
+            canonicalJson(artifact.content.states) !== canonicalJson(states) ||
+            (r.params?.width != null && artifact.content.width !== r.params.width)) fail('STATES_ARTIFACT_INVALID');
+        const verifiedScreenshots = verifyScreenshots(folder, states);
+        observations.push({kind:'state-artifact',evidenceId:r.id,sha256:artifact.sha256,verifiedScreenshots, artifactAttestedByCraftEvidence:false,effectAuthorized:false});
         usedStates = true;
       }
     }
@@ -164,17 +237,17 @@ export function buildAtlas({ bundle, siteId, origin, captureDir = null, statesDi
   }
   if (captureDir && !usedCapture) fail('CAPTURE_NOT_ANCHORED');
   if (statesDir && !usedStates) fail('STATES_NOT_ANCHORED');
-  const unknownIds = bundle.unknowns.map(x => x?.id).filter(x=>typeof x==='string'&&x.length<=100).sort();
+  const unknownIds = [...new Set(bundle.unknowns.map(x => x.id))].sort();
   return {
     schema:ATLAS_SCHEMA,
     target:{siteId,origin,ownedTarget},
-    source:{producer:'craft-anything',format:BUNDLE_FORMAT,version:1,bundleDigest:bundleDigest&&DIGEST_RE.test(bundleDigest)?bundleDigest:null,verifiedRecords:records.length,scopedBrowserRecords:browser.length},
+    source:{producer:'craft-anything',format:BUNDLE_FORMAT,version:1,bundleDigest:bundleDigest&&DIGEST_RE.test(bundleDigest)?bundleDigest:null,verifiedRecords:records.length,scopedBrowserRecords:browser.length,nativeVerified:nativeVerifiedIds instanceof Set},
     evidence:knownEvidence,
     observations,
     controls,
     unknownIds,
     authority:{executionAuthorized:false,activationPermitted:false,sendPermission:false},
-    caveats:['Source hash verifies self-consistency, not authorization or runtime correctness','Capture artifacts carry independent digests, not Craft evidence attestation','No runtime interaction binding is promoted','Absence without complete scoped coverage is unknown']
+    caveats:['JavaScript source hash is only locally checked unless nativeVerified is true; neither hash establishes authorization','Capture artifacts carry independent digests, not Craft evidence attestation','No runtime interaction binding is promoted','Absence without complete scoped coverage is unknown']
   };
 }
 export function coverageMarkdown(atlas) {

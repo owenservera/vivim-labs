@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://vivim.live/schemas/application-surface-reconciliation/1",
+  "type":"object","additionalProperties":false,
+  "required":["schema","target","source","features","divergences","unmapped","summary","authority","caveats"],
+  "properties":{
+    "schema":{"const":"vivim.application-surface-reconciliation/1"},
+    "target":{"type":"object","required":["siteId","origin"],"properties":{"siteId":{"type":"string"},"origin":{"type":"string"}}},
+    "source":{"type":"object","required":["atlasBundleDigest","baselineDigest","baselinePaths"]},
+    "features":{"type":"array","items":{"type":"object","required":["owner","featureId","surface","sourceStatus","sourcePath","configuredSelectors","observationStatus","evidenceRefs","effectAuthorized"]}},
+    "divergences":{"type":"array","items":{"type":"object","required":["featureId","kind","owners","onlyInFirst","onlyInSecond","status"]}},
+    "unmapped":{"type":"array","items":{"type":"object","required":["evidenceId","position","role","label","status"]}},
+    "summary":{"type":"object","required":["configuredFeatures","labelCorrespondences","sourceDivergences","unmappedNamedControls"]},
+    "authority":{"type":"object","required":["executionAuthorized","activationPermitted","sendPermission"],"properties":{
+      "executionAuthorized":{"const":false},"activationPermitted":{"const":false},"sendPermission":{"const":false}
+    }},
+    "caveats":{"type":"array","items":{"type":"string"}}
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "arbor.p5.vec-pwa.source-pins/1",
+  "date": "2026-11-13",
+  "repo": "owenservera/ARBOR",
+  "observedMain": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+  "previousCodeHead": "ffbb8bfeb644b3f8e21c5e624860ee394526f731",
+  "pins": [
+    {
+      "path": "hq/lib/wiki-program.mjs",
+      "blob": "97cde5d6dbb14fc421bfa5eddb11236e9b71c745"
+    },
+    {
+      "path": "hq/lib/wiki.mjs",
+      "blob": "c85c8fbe1409273928ea5c52bc2c20f108ac4dce"
+    },
+    {
+      "path": "hq/lib/comment-wiki-bridge.mjs",
+      "blob": "996b0f75362a66b823d95b321754f2ff17275325"
+    },
+    {
+      "path": "hq/lib/annotation-v2.mjs",
+      "blob": "7e94dfbd4fbca8ef0fdb9e0610053364ce2c38c8"
+    },
+    {
+      "path": "hq/lib/semantic-registry.mjs",
+      "blob": "fetched_and_reviewed_not_locked"
+    },
+    {
+      "path": "apps/mobile-relay/control-language.mjs",
+      "blob": "7805811cffec013407dfba2753e2750dce303408"
+    },
+    {
+      "path": "apps/vivim-host/control/command-intent.mjs",
+      "blob": "52828ce955027b9e083a8afa5625cb0dbc1b730f"
+    },
+    {
+      "path": "apps/vivim-host/control/intent-planner.mjs",
+      "blob": "3d1bbcd5ad80ffa6276ea4e5d2b5f0cfbd8cf4ab"
+    },
+    {
+      "path": "apps/vivim-host/control/command-program.mjs",
+      "blob": "28a65908ea907b28593d8747b0bd6da06a9c7142"
+    },
+    {
+      "path": "packages/tierflow/src/visual-runtime/command/compile.ts",
+      "blob": "4cc5b63bea409171e2b4b0a29398c87907cd35ea"
+    }
+  ],
+  "artifactStatus": "source-pinned-primary-files; exact active HEAD must be rechecked at integration",
+  "testsExecuted": false
+}

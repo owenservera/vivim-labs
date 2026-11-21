@@ -1,0 +1,1907 @@
+{
+  "schema": "vivim.ui-taxonomy/1",
+  "version": 1,
+  "maturity": "DISCOVERY_ONLY_NOT_RENDERER_INSTALLATION",
+  "sourceOfTruth": "apps/mobile-relay/vec/ui-taxonomy/catalog.mjs",
+  "domains": {
+    "foundation": "Structure and presentation",
+    "navigation": "Wayfinding and location",
+    "input": "Controls and user-provided values",
+    "feedback": "Prompts, status and validation",
+    "data": "Information and visualizations",
+    "media": "Media and assets",
+    "application": "Task-level experiences",
+    "spatial": "World-based interfaces",
+    "accessibility": "Assistive and inclusive controls"
+  },
+  "families": [
+    {
+      "domain": "foundation",
+      "family": "layout",
+      "role": "group",
+      "traits": [
+        "container",
+        "responsive",
+        "composable"
+      ],
+      "properties": [
+        "direction",
+        "columns",
+        "gap",
+        "padding",
+        "align",
+        "justify",
+        "width",
+        "height",
+        "minWidth",
+        "maxWidth"
+      ],
+      "events": [
+        "layout-change"
+      ],
+      "kinds": [
+        "stack",
+        "grid",
+        "flex",
+        "row",
+        "column",
+        "flow",
+        "masonry",
+        "wrap",
+        "split-pane",
+        "resizable-pane",
+        "scroll-area",
+        "virtual-list",
+        "sticky-region",
+        "center",
+        "spacer",
+        "aspect-ratio",
+        "constraint-layout",
+        "frame"
+      ]
+    },
+    {
+      "domain": "foundation",
+      "family": "surface",
+      "role": "region",
+      "traits": [
+        "container",
+        "responsive",
+        "surface"
+      ],
+      "properties": [
+        "title",
+        "description",
+        "variant",
+        "density",
+        "width",
+        "height"
+      ],
+      "events": [
+        "open",
+        "close"
+      ],
+      "kinds": [
+        "card",
+        "panel",
+        "section",
+        "accordion",
+        "accordion-item",
+        "collapsible",
+        "drawer",
+        "sheet",
+        "tab-panel",
+        "page",
+        "canvas",
+        "surface",
+        "dialog-layout",
+        "window",
+        "popover-panel",
+        "toolbar-container"
+      ]
+    },
+    {
+      "domain": "foundation",
+      "family": "typography",
+      "role": "text",
+      "traits": [
+        "text",
+        "content",
+        "readable"
+      ],
+      "properties": [
+        "value",
+        "variant",
+        "level",
+        "weight",
+        "align",
+        "truncate"
+      ],
+      "events": [
+        "select"
+      ],
+      "kinds": [
+        "text",
+        "heading",
+        "paragraph",
+        "label",
+        "caption",
+        "helper-text",
+        "overline",
+        "eyebrow",
+        "quote",
+        "code-text",
+        "preformatted",
+        "text-link",
+        "rich-text-view",
+        "markdown-view",
+        "badge",
+        "kbd-text",
+        "numeric-readout"
+      ]
+    },
+    {
+      "domain": "foundation",
+      "family": "decoration",
+      "role": "presentation",
+      "traits": [
+        "decorative"
+      ],
+      "properties": [
+        "color",
+        "size",
+        "variant",
+        "iconRef",
+        "orientation"
+      ],
+      "events": [],
+      "kinds": [
+        "divider",
+        "separator",
+        "icon",
+        "avatar",
+        "image-placeholder",
+        "illustration",
+        "skeleton-pattern",
+        "gradient-background",
+        "shape-rule",
+        "decorative-border",
+        "shadow-layer",
+        "watermark"
+      ]
+    },
+    {
+      "domain": "foundation",
+      "family": "responsive",
+      "role": "group",
+      "traits": [
+        "responsive",
+        "container"
+      ],
+      "properties": [
+        "density",
+        "size",
+        "minWidth",
+        "maxWidth",
+        "direction"
+      ],
+      "events": [
+        "viewport-change"
+      ],
+      "kinds": [
+        "breakpoint",
+        "visibility-gate",
+        "responsive-switch",
+        "safe-area-container",
+        "orientation-container",
+        "aspect-container",
+        "scroll-snap-region",
+        "viewport-fit"
+      ]
+    },
+    {
+      "domain": "navigation",
+      "family": "global",
+      "role": "navigation",
+      "traits": [
+        "focusable",
+        "keyboard-operable",
+        "navigation"
+      ],
+      "properties": [
+        "label",
+        "title",
+        "iconRef",
+        "selected",
+        "disabled"
+      ],
+      "events": [
+        "navigate",
+        "select",
+        "open"
+      ],
+      "kinds": [
+        "nav-bar",
+        "bottom-nav",
+        "top-nav",
+        "side-nav",
+        "tab-bar",
+        "tab",
+        "breadcrumb",
+        "menu",
+        "menu-item",
+        "command-palette",
+        "launcher",
+        "drawer-nav",
+        "app-switcher",
+        "workspace-switcher",
+        "back-button",
+        "forward-button"
+      ]
+    },
+    {
+      "domain": "navigation",
+      "family": "content",
+      "role": "navigation",
+      "traits": [
+        "focusable",
+        "navigation"
+      ],
+      "properties": [
+        "label",
+        "title",
+        "selected",
+        "disabled"
+      ],
+      "events": [
+        "select",
+        "expand",
+        "collapse"
+      ],
+      "kinds": [
+        "pagination",
+        "stepper",
+        "tree-nav",
+        "tree-item",
+        "anchor-nav",
+        "toc",
+        "index-link",
+        "jump-list",
+        "path-bar",
+        "filter-nav",
+        "list-nav",
+        "page-indicator"
+      ]
+    },
+    {
+      "domain": "input",
+      "family": "actions",
+      "role": "button",
+      "traits": [
+        "focusable",
+        "keyboard-operable",
+        "interactive",
+        "intent-only"
+      ],
+      "properties": [
+        "label",
+        "iconRef",
+        "disabled",
+        "variant"
+      ],
+      "events": [
+        "press",
+        "long-press"
+      ],
+      "kinds": [
+        "button",
+        "icon-button",
+        "toggle-button",
+        "split-button",
+        "fab",
+        "menu-button",
+        "link-button",
+        "submit-button",
+        "reset-button",
+        "segmented-button",
+        "shortcut-button",
+        "voice-command-button"
+      ]
+    },
+    {
+      "domain": "input",
+      "family": "text-entry",
+      "role": "textbox",
+      "traits": [
+        "focusable",
+        "keyboard-operable",
+        "interactive",
+        "bindable"
+      ],
+      "properties": [
+        "label",
+        "value",
+        "placeholder",
+        "required",
+        "readOnly",
+        "disabled",
+        "maxLength"
+      ],
+      "events": [
+        "input",
+        "change",
+        "submit"
+      ],
+      "kinds": [
+        "text-field",
+        "textarea",
+        "search-field",
+        "password-field",
+        "email-field",
+        "url-field",
+        "number-as-text-field",
+        "code-editor-input",
+        "markdown-editor-input",
+        "token-input",
+        "chip-input",
+        "mention-input",
+        "inline-rename-field",
+        "otp-input"
+      ]
+    },
+    {
+      "domain": "input",
+      "family": "numeric",
+      "role": "slider",
+      "traits": [
+        "focusable",
+        "keyboard-operable",
+        "interactive",
+        "bindable",
+        "numeric"
+      ],
+      "properties": [
+        "label",
+        "value",
+        "min",
+        "max",
+        "step",
+        "disabled",
+        "required",
+        "unit",
+        "orientation"
+      ],
+      "events": [
+        "input",
+        "change",
+        "commit"
+      ],
+      "kinds": [
+        "slider",
+        "range-slider",
+        "dial",
+        "knob",
+        "spinner",
+        "stepper-input",
+        "numeric-field",
+        "rating-input",
+        "rating-stars",
+        "rating-hearts",
+        "scrubber",
+        "zoom-control",
+        "volume-control",
+        "threshold-control"
+      ]
+    },
+    {
+      "domain": "input",
+      "family": "choice",
+      "role": "group",
+      "traits": [
+        "focusable",
+        "keyboard-operable",
+        "interactive",
+        "bindable",
+        "choice"
+      ],
+      "properties": [
+        "label",
+        "value",
+        "options",
+        "checked",
+        "selected",
+        "disabled",
+        "required"
+      ],
+      "events": [
+        "change",
+        "select"
+      ],
+      "kinds": [
+        "checkbox",
+        "checkbox-group",
+        "radio",
+        "radio-group",
+        "switch",
+        "toggle",
+        "select",
+        "dropdown",
+        "combobox",
+        "multi-select",
+        "listbox",
+        "option-chip",
+        "chip-group",
+        "color-picker",
+        "palette-picker"
+      ]
+    },
+    {
+      "domain": "input",
+      "family": "date-time",
+      "role": "group",
+      "traits": [
+        "focusable",
+        "keyboard-operable",
+        "interactive",
+        "bindable",
+        "temporal"
+      ],
+      "properties": [
+        "label",
+        "value",
+        "min",
+        "max",
+        "required"
+      ],
+      "events": [
+        "change",
+        "select"
+      ],
+      "kinds": [
+        "date-picker",
+        "time-picker",
+        "datetime-picker",
+        "date-range-picker",
+        "calendar-input",
+        "duration-input",
+        "timezone-picker",
+        "recurrence-editor",
+        "week-picker",
+        "month-picker"
+      ]
+    },
+    {
+      "domain": "input",
+      "family": "files",
+      "role": "group",
+      "traits": [
+        "focusable",
+        "interactive",
+        "bindable",
+        "requires-host-grant"
+      ],
+      "properties": [
+        "label",
+        "value",
+        "accept",
+        "multiple",
+        "disabled"
+      ],
+      "events": [
+        "change",
+        "upload-progress",
+        "cancel"
+      ],
+      "kinds": [
+        "file-picker",
+        "file-dropzone",
+        "attachment-picker",
+        "folder-picker",
+        "camera-capture",
+        "microphone-capture",
+        "audio-recorder",
+        "scanner",
+        "import-picker",
+        "export-picker"
+      ]
+    },
+    {
+      "domain": "input",
+      "family": "gestures",
+      "role": "group",
+      "traits": [
+        "interactive",
+        "gesture-driven"
+      ],
+      "properties": [
+        "label",
+        "direction",
+        "value"
+      ],
+      "events": [
+        "tap",
+        "swipe",
+        "pinch",
+        "drag",
+        "drop",
+        "long-press"
+      ],
+      "kinds": [
+        "swipe-zone",
+        "drag-handle",
+        "drop-target",
+        "reorder-handle",
+        "pan-control",
+        "pinch-zoom-control",
+        "joystick-control",
+        "touchpad-control",
+        "gesture-pad",
+        "pull-to-refresh"
+      ]
+    },
+    {
+      "domain": "feedback",
+      "family": "status",
+      "role": "status",
+      "traits": [
+        "readable",
+        "status",
+        "live-region"
+      ],
+      "properties": [
+        "title",
+        "message",
+        "state",
+        "value",
+        "progress"
+      ],
+      "events": [
+        "status-change"
+      ],
+      "kinds": [
+        "status",
+        "toast",
+        "banner",
+        "alert",
+        "info-callout",
+        "warning-callout",
+        "error-callout",
+        "success-callout",
+        "offline-banner",
+        "sync-status",
+        "connection-status",
+        "empty-state",
+        "no-results-state",
+        "permission-status",
+        "activity-indicator"
+      ]
+    },
+    {
+      "domain": "feedback",
+      "family": "progress",
+      "role": "progressbar",
+      "traits": [
+        "readable",
+        "live-region"
+      ],
+      "properties": [
+        "label",
+        "value",
+        "min",
+        "max",
+        "progress",
+        "state"
+      ],
+      "events": [
+        "progress-change"
+      ],
+      "kinds": [
+        "progress-bar",
+        "progress-ring",
+        "spinner-indicator",
+        "loading-indicator",
+        "skeleton",
+        "task-progress",
+        "milestone-progress",
+        "upload-progress",
+        "step-progress",
+        "countdown"
+      ]
+    },
+    {
+      "domain": "feedback",
+      "family": "overlays",
+      "role": "dialog",
+      "traits": [
+        "focusable",
+        "focus-trap",
+        "overlay"
+      ],
+      "properties": [
+        "title",
+        "description",
+        "label"
+      ],
+      "events": [
+        "open",
+        "close",
+        "dismiss",
+        "confirm"
+      ],
+      "kinds": [
+        "modal",
+        "dialog",
+        "alert-dialog",
+        "popover",
+        "tooltip",
+        "context-menu",
+        "hover-card",
+        "command-overlay",
+        "onboarding-tour",
+        "bottom-sheet",
+        "confirmation-sheet",
+        "lightbox"
+      ]
+    },
+    {
+      "domain": "feedback",
+      "family": "validation",
+      "role": "status",
+      "traits": [
+        "readable",
+        "live-region"
+      ],
+      "properties": [
+        "label",
+        "message",
+        "state"
+      ],
+      "events": [
+        "validate",
+        "invalid",
+        "valid"
+      ],
+      "kinds": [
+        "field-error",
+        "field-hint",
+        "validation-summary",
+        "required-indicator",
+        "strength-meter",
+        "conflict-alert",
+        "inline-notice",
+        "validation-badge",
+        "policy-warning"
+      ]
+    },
+    {
+      "domain": "data",
+      "family": "collections",
+      "role": "list",
+      "traits": [
+        "readable",
+        "collection",
+        "bindable"
+      ],
+      "properties": [
+        "title",
+        "items",
+        "sourceRef",
+        "dataRef",
+        "selected"
+      ],
+      "events": [
+        "select",
+        "sort",
+        "filter",
+        "reorder"
+      ],
+      "kinds": [
+        "collection",
+        "list",
+        "list-item",
+        "ordered-list",
+        "definition-list",
+        "tree-view",
+        "masonry-list",
+        "carousel",
+        "feed",
+        "repeater",
+        "card-list",
+        "sortable-list",
+        "grouped-list",
+        "virtualized-collection"
+      ]
+    },
+    {
+      "domain": "data",
+      "family": "tables",
+      "role": "table",
+      "traits": [
+        "readable",
+        "collection",
+        "bindable",
+        "tabular"
+      ],
+      "properties": [
+        "title",
+        "items",
+        "columns",
+        "rows",
+        "dataRef",
+        "selected"
+      ],
+      "events": [
+        "sort",
+        "filter",
+        "select",
+        "resize"
+      ],
+      "kinds": [
+        "table",
+        "data-grid",
+        "pivot-table",
+        "property-grid",
+        "key-value-table",
+        "comparison-table",
+        "editable-table",
+        "hierarchy-table",
+        "matrix-table",
+        "ledger-view",
+        "spreadsheet-view"
+      ]
+    },
+    {
+      "domain": "data",
+      "family": "charts",
+      "role": "img",
+      "traits": [
+        "readable",
+        "data-viz",
+        "bindable"
+      ],
+      "properties": [
+        "title",
+        "items",
+        "dataRef",
+        "value",
+        "min",
+        "max"
+      ],
+      "events": [
+        "select",
+        "zoom",
+        "drill-down"
+      ],
+      "kinds": [
+        "chart",
+        "line-chart",
+        "bar-chart",
+        "area-chart",
+        "pie-chart",
+        "donut-chart",
+        "scatter-chart",
+        "bubble-chart",
+        "histogram",
+        "heatmap",
+        "treemap",
+        "radar-chart",
+        "waterfall-chart",
+        "sankey-chart",
+        "gauge-chart",
+        "sparkline",
+        "box-plot",
+        "candlestick-chart",
+        "funnel-chart"
+      ]
+    },
+    {
+      "domain": "data",
+      "family": "graphs",
+      "role": "img",
+      "traits": [
+        "readable",
+        "data-viz",
+        "bindable",
+        "graph"
+      ],
+      "properties": [
+        "title",
+        "items",
+        "dataRef",
+        "selected"
+      ],
+      "events": [
+        "select",
+        "pan",
+        "zoom",
+        "expand"
+      ],
+      "kinds": [
+        "node-graph",
+        "dependency-graph",
+        "knowledge-graph",
+        "force-graph",
+        "flowchart",
+        "mind-map",
+        "decision-tree",
+        "relationship-map",
+        "topology-map",
+        "graph-inspector"
+      ]
+    },
+    {
+      "domain": "data",
+      "family": "temporal",
+      "role": "list",
+      "traits": [
+        "readable",
+        "data-viz",
+        "bindable",
+        "temporal"
+      ],
+      "properties": [
+        "title",
+        "items",
+        "dataRef",
+        "min",
+        "max"
+      ],
+      "events": [
+        "select",
+        "scrub",
+        "zoom"
+      ],
+      "kinds": [
+        "timeline",
+        "event-timeline",
+        "calendar-view",
+        "agenda-view",
+        "gantt-chart",
+        "activity-feed",
+        "changelog-view",
+        "audit-trail",
+        "history-timeline",
+        "time-series-view"
+      ]
+    },
+    {
+      "domain": "media",
+      "family": "players",
+      "role": "group",
+      "traits": [
+        "interactive",
+        "media",
+        "bindable",
+        "requires-host-grant"
+      ],
+      "properties": [
+        "title",
+        "srcRef",
+        "value",
+        "disabled"
+      ],
+      "events": [
+        "play",
+        "pause",
+        "seek",
+        "stop",
+        "volume-change"
+      ],
+      "kinds": [
+        "audio-player",
+        "video-player",
+        "media-player",
+        "livestream-view",
+        "podcast-player",
+        "playlist-player",
+        "caption-track",
+        "waveform-player",
+        "media-timeline",
+        "subtitle-selector",
+        "media-controls"
+      ]
+    },
+    {
+      "domain": "media",
+      "family": "assets",
+      "role": "img",
+      "traits": [
+        "readable",
+        "media"
+      ],
+      "properties": [
+        "title",
+        "srcRef",
+        "label",
+        "width",
+        "height"
+      ],
+      "events": [
+        "open",
+        "select",
+        "zoom"
+      ],
+      "kinds": [
+        "image-view",
+        "image-gallery",
+        "avatar-group",
+        "thumbnail",
+        "image-cropper",
+        "image-editor",
+        "pdf-viewer",
+        "document-preview",
+        "file-preview",
+        "map-view",
+        "location-picker",
+        "qr-view"
+      ]
+    },
+    {
+      "domain": "application",
+      "family": "composites",
+      "role": "region",
+      "traits": [
+        "container",
+        "composite",
+        "bindable"
+      ],
+      "properties": [
+        "title",
+        "description",
+        "sourceRef",
+        "dataRef",
+        "items"
+      ],
+      "events": [
+        "select",
+        "open"
+      ],
+      "kinds": [
+        "profile-card",
+        "project-card",
+        "task-card",
+        "conversation-card",
+        "event-card",
+        "contact-card",
+        "file-card",
+        "media-card",
+        "metric-card",
+        "stat-card",
+        "insight-card",
+        "recommendation-card"
+      ]
+    },
+    {
+      "domain": "application",
+      "family": "workspaces",
+      "role": "main",
+      "traits": [
+        "container",
+        "responsive",
+        "stateful"
+      ],
+      "properties": [
+        "title",
+        "description",
+        "variant",
+        "density"
+      ],
+      "events": [
+        "open",
+        "close",
+        "switch"
+      ],
+      "kinds": [
+        "workspace",
+        "dashboard",
+        "home-screen",
+        "project-board",
+        "kanban-board",
+        "inbox-surface",
+        "chat-surface",
+        "builder-surface",
+        "search-results-surface",
+        "settings-surface",
+        "profile-surface",
+        "account-surface",
+        "mission-center"
+      ]
+    },
+    {
+      "domain": "application",
+      "family": "workflows",
+      "role": "group",
+      "traits": [
+        "interactive",
+        "workflow",
+        "intent-only"
+      ],
+      "properties": [
+        "title",
+        "state",
+        "items",
+        "value"
+      ],
+      "events": [
+        "start",
+        "pause",
+        "resume",
+        "cancel",
+        "approve",
+        "reject"
+      ],
+      "kinds": [
+        "workflow-canvas",
+        "workflow-step",
+        "trigger-node",
+        "condition-node",
+        "transform-node",
+        "approval-node",
+        "action-node",
+        "schedule-node",
+        "event-node",
+        "branch-node",
+        "loop-node",
+        "rule-editor",
+        "recipe-editor",
+        "automation-inspector"
+      ]
+    },
+    {
+      "domain": "application",
+      "family": "editing",
+      "role": "group",
+      "traits": [
+        "interactive",
+        "editing",
+        "stateful"
+      ],
+      "properties": [
+        "title",
+        "value",
+        "selected"
+      ],
+      "events": [
+        "edit",
+        "undo",
+        "redo",
+        "save",
+        "preview"
+      ],
+      "kinds": [
+        "property-inspector",
+        "layers-panel",
+        "component-tree",
+        "visual-canvas",
+        "drag-editor",
+        "selection-inspector",
+        "theme-editor",
+        "breakpoint-editor",
+        "diff-view",
+        "version-history",
+        "undo-controls"
+      ]
+    },
+    {
+      "domain": "application",
+      "family": "collaboration",
+      "role": "group",
+      "traits": [
+        "interactive",
+        "bindable",
+        "requires-host-grant"
+      ],
+      "properties": [
+        "title",
+        "label",
+        "items",
+        "state"
+      ],
+      "events": [
+        "comment",
+        "mention",
+        "share"
+      ],
+      "kinds": [
+        "comment-thread",
+        "comment-editor",
+        "presence-list",
+        "collaborator-avatar",
+        "activity-stream",
+        "review-panel",
+        "approval-panel",
+        "share-sheet",
+        "permission-editor"
+      ]
+    },
+    {
+      "domain": "application",
+      "family": "system",
+      "role": "region",
+      "traits": [
+        "readable",
+        "system",
+        "bindable"
+      ],
+      "properties": [
+        "title",
+        "state",
+        "value"
+      ],
+      "events": [
+        "connect",
+        "disconnect",
+        "retry"
+      ],
+      "kinds": [
+        "pairing-status",
+        "device-status",
+        "network-indicator",
+        "storage-meter",
+        "battery-indicator",
+        "notification-center",
+        "sync-monitor",
+        "permissions-dashboard",
+        "privacy-panel",
+        "app-updater",
+        "diagnostic-console",
+        "error-boundary"
+      ]
+    },
+    {
+      "domain": "spatial",
+      "family": "primitives",
+      "role": "img",
+      "traits": [
+        "spatial",
+        "object"
+      ],
+      "properties": [
+        "title",
+        "label",
+        "width",
+        "height",
+        "value"
+      ],
+      "events": [
+        "select",
+        "move",
+        "rotate",
+        "scale"
+      ],
+      "kinds": [
+        "shape-box",
+        "shape-sphere",
+        "shape-cylinder",
+        "shape-plane",
+        "shape-text",
+        "shape-billboard",
+        "shape-line",
+        "shape-point"
+      ]
+    },
+    {
+      "domain": "spatial",
+      "family": "interactions",
+      "role": "group",
+      "traits": [
+        "spatial",
+        "gesture-driven"
+      ],
+      "properties": [
+        "title",
+        "label",
+        "value"
+      ],
+      "events": [
+        "pan",
+        "orbit",
+        "zoom",
+        "select"
+      ],
+      "kinds": [
+        "spatial-canvas",
+        "orbit-control",
+        "spatial-pointer",
+        "world-layer",
+        "world-anchor",
+        "minimap",
+        "spatial-grid",
+        "transform-gizmo",
+        "spatial-portal"
+      ]
+    },
+    {
+      "domain": "accessibility",
+      "family": "assistive",
+      "role": "region",
+      "traits": [
+        "accessible",
+        "assistive"
+      ],
+      "properties": [
+        "label",
+        "description",
+        "value"
+      ],
+      "events": [
+        "focus",
+        "announce"
+      ],
+      "kinds": [
+        "skip-link",
+        "focus-ring",
+        "focus-trap",
+        "live-announcer",
+        "screen-reader-label",
+        "contrast-toggle",
+        "reduced-motion-toggle",
+        "large-text-toggle",
+        "keyboard-shortcut-map",
+        "captions-toggle",
+        "transcript-view",
+        "voice-control-toggle"
+      ]
+    }
+  ],
+  "properties": {
+    "accept": {
+      "type": "string",
+      "referenceOnly": false
+    },
+    "align": {
+      "type": "token",
+      "referenceOnly": false
+    },
+    "checked": {
+      "type": "boolean",
+      "referenceOnly": false
+    },
+    "color": {
+      "type": "color-token",
+      "referenceOnly": false
+    },
+    "columns": {
+      "type": "integer",
+      "referenceOnly": false
+    },
+    "dataRef": {
+      "type": "ref",
+      "referenceOnly": true
+    },
+    "density": {
+      "type": "enum",
+      "referenceOnly": false
+    },
+    "description": {
+      "type": "string",
+      "referenceOnly": false
+    },
+    "direction": {
+      "type": "enum",
+      "referenceOnly": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "referenceOnly": false
+    },
+    "gap": {
+      "type": "token",
+      "referenceOnly": false
+    },
+    "height": {
+      "type": "dimension",
+      "referenceOnly": false
+    },
+    "iconRef": {
+      "type": "ref",
+      "referenceOnly": true
+    },
+    "items": {
+      "type": "collection",
+      "referenceOnly": false
+    },
+    "justify": {
+      "type": "token",
+      "referenceOnly": false
+    },
+    "label": {
+      "type": "string",
+      "referenceOnly": false
+    },
+    "level": {
+      "type": "integer",
+      "referenceOnly": false
+    },
+    "max": {
+      "type": "number",
+      "referenceOnly": false
+    },
+    "maxLength": {
+      "type": "integer",
+      "referenceOnly": false
+    },
+    "maxWidth": {
+      "type": "dimension",
+      "referenceOnly": false
+    },
+    "message": {
+      "type": "string",
+      "referenceOnly": false
+    },
+    "min": {
+      "type": "number",
+      "referenceOnly": false
+    },
+    "minWidth": {
+      "type": "dimension",
+      "referenceOnly": false
+    },
+    "multiple": {
+      "type": "boolean",
+      "referenceOnly": false
+    },
+    "options": {
+      "type": "collection",
+      "referenceOnly": false
+    },
+    "orientation": {
+      "type": "enum",
+      "referenceOnly": false
+    },
+    "padding": {
+      "type": "token",
+      "referenceOnly": false
+    },
+    "placeholder": {
+      "type": "string",
+      "referenceOnly": false
+    },
+    "progress": {
+      "type": "number",
+      "referenceOnly": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "referenceOnly": false
+    },
+    "required": {
+      "type": "boolean",
+      "referenceOnly": false
+    },
+    "rows": {
+      "type": "integer",
+      "referenceOnly": false
+    },
+    "selected": {
+      "type": "scalar",
+      "referenceOnly": false
+    },
+    "size": {
+      "type": "token",
+      "referenceOnly": false
+    },
+    "sourceRef": {
+      "type": "ref",
+      "referenceOnly": true
+    },
+    "srcRef": {
+      "type": "ref",
+      "referenceOnly": true
+    },
+    "state": {
+      "type": "enum",
+      "referenceOnly": false
+    },
+    "step": {
+      "type": "number",
+      "referenceOnly": false
+    },
+    "title": {
+      "type": "string",
+      "referenceOnly": false
+    },
+    "truncate": {
+      "type": "boolean",
+      "referenceOnly": false
+    },
+    "unit": {
+      "type": "string",
+      "referenceOnly": false
+    },
+    "value": {
+      "type": "typed",
+      "referenceOnly": false
+    },
+    "variant": {
+      "type": "token",
+      "referenceOnly": false
+    },
+    "weight": {
+      "type": "token",
+      "referenceOnly": false
+    },
+    "width": {
+      "type": "dimension",
+      "referenceOnly": false
+    }
+  },
+  "traits": {
+    "accessible": "accessible",
+    "assistive": "assistive",
+    "bindable": "Uses only Host-authorized typed data bindings",
+    "choice": "choice",
+    "collection": "collection",
+    "composable": "composable",
+    "composite": "composite",
+    "container": "Can contain bounded children",
+    "content": "content",
+    "data-viz": "data viz",
+    "decorative": "decorative",
+    "editing": "editing",
+    "focus-trap": "focus trap",
+    "focusable": "focusable",
+    "gesture-driven": "gesture driven",
+    "graph": "graph",
+    "intent-only": "Never directly invokes an effect",
+    "interactive": "Emits an inert user intent",
+    "keyboard-operable": "keyboard operable",
+    "live-region": "live region",
+    "media": "media",
+    "navigation": "navigation",
+    "numeric": "numeric",
+    "object": "object",
+    "overlay": "overlay",
+    "readable": "readable",
+    "requires-host-grant": "Requires current explicit Host grant",
+    "responsive": "Responsive constraints",
+    "spatial": "spatial",
+    "stateful": "stateful",
+    "status": "status",
+    "surface": "surface",
+    "system": "system",
+    "tabular": "tabular",
+    "temporal": "temporal",
+    "text": "text",
+    "workflow": "workflow",
+    "continuous": "Continuous bounded value control",
+    "range": "Uses one or more bounded value intervals",
+    "two-handles": "Two value boundaries need separate focus/labels",
+    "semantic-heading": "Semantic heading level and document outline"
+  },
+  "overrides": {
+    "input.numeric.slider": {
+      "role": "slider",
+      "props": [
+        "label",
+        "value",
+        "min",
+        "max",
+        "step",
+        "disabled",
+        "orientation"
+      ],
+      "events": [
+        "input",
+        "change",
+        "commit"
+      ],
+      "states": [
+        "idle",
+        "focused",
+        "dragging",
+        "disabled",
+        "invalid"
+      ],
+      "traits": [
+        "continuous",
+        "range"
+      ],
+      "dataShape": "number"
+    },
+    "input.numeric.range-slider": {
+      "role": "slider",
+      "props": [
+        "label",
+        "value",
+        "min",
+        "max",
+        "step"
+      ],
+      "states": [
+        "idle",
+        "focused",
+        "dragging",
+        "disabled",
+        "invalid"
+      ],
+      "traits": [
+        "continuous",
+        "range",
+        "two-handles"
+      ],
+      "dataShape": "range"
+    },
+    "input.actions.button": {
+      "role": "button",
+      "props": [
+        "label",
+        "disabled",
+        "variant"
+      ],
+      "events": [
+        "press"
+      ],
+      "dataShape": "intent"
+    },
+    "input.choice.checkbox": {
+      "role": "button",
+      "props": [
+        "label",
+        "checked",
+        "disabled"
+      ],
+      "events": [
+        "change"
+      ],
+      "dataShape": "boolean"
+    },
+    "input.choice.switch": {
+      "role": "button",
+      "props": [
+        "label",
+        "checked",
+        "disabled"
+      ],
+      "events": [
+        "change"
+      ],
+      "dataShape": "boolean"
+    },
+    "input.text-entry.text-field": {
+      "role": "textbox",
+      "props": [
+        "label",
+        "value",
+        "placeholder",
+        "required",
+        "readOnly",
+        "disabled",
+        "maxLength"
+      ],
+      "dataShape": "text"
+    },
+    "foundation.typography.heading": {
+      "role": "text",
+      "props": [
+        "value",
+        "level",
+        "variant"
+      ],
+      "dataShape": "text"
+    },
+    "foundation.surface.card": {
+      "role": "region",
+      "props": [
+        "title",
+        "description",
+        "sourceRef",
+        "dataRef"
+      ],
+      "dataShape": "record"
+    },
+    "data.charts.chart": {
+      "role": "img",
+      "props": [
+        "title",
+        "items",
+        "sourceRef",
+        "dataRef"
+      ],
+      "dataShape": "series"
+    },
+    "data.collections.collection": {
+      "role": "list",
+      "props": [
+        "title",
+        "items",
+        "sourceRef",
+        "dataRef"
+      ],
+      "dataShape": "collection"
+    },
+    "data.temporal.timeline": {
+      "role": "list",
+      "props": [
+        "title",
+        "items",
+        "sourceRef",
+        "dataRef"
+      ],
+      "dataShape": "timeline"
+    },
+    "foundation.decoration.divider": {
+      "role": "presentation",
+      "props": [
+        "orientation",
+        "color"
+      ],
+      "events": [],
+      "dataShape": "none"
+    },
+    "feedback.status.status": {
+      "role": "status",
+      "props": [
+        "state",
+        "value",
+        "title",
+        "description"
+      ],
+      "states": [
+        "pending",
+        "ok",
+        "warning",
+        "error",
+        "uncertain",
+        "denied"
+      ],
+      "dataShape": "status"
+    },
+    "application.composites.profile-card": {
+      "role": "region",
+      "props": [
+        "title",
+        "description",
+        "sourceRef"
+      ],
+      "dataShape": "profile"
+    },
+    "application.composites.project-card": {
+      "role": "region",
+      "props": [
+        "title",
+        "description",
+        "sourceRef"
+      ],
+      "dataShape": "project"
+    }
+  },
+  "sourceBindings": [
+    [
+      "vivim.ui-surface/1",
+      "stack",
+      "foundation.layout.stack",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-surface/1",
+      "grid",
+      "foundation.layout.grid",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-surface/1",
+      "text",
+      "foundation.typography.text",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-surface/1",
+      "text",
+      "foundation.typography.heading",
+      "source-closed",
+      "heading"
+    ],
+    [
+      "vivim.ui-surface/1",
+      "card",
+      "foundation.surface.card",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-surface/1",
+      "button",
+      "input.actions.button",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-surface/1",
+      "collection",
+      "data.collections.collection",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-surface/1",
+      "profile-card",
+      "application.composites.profile-card",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-surface/1",
+      "project-card",
+      "application.composites.project-card",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-surface/1",
+      "timeline",
+      "data.temporal.timeline",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-surface/1",
+      "chart",
+      "data.charts.chart",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-document/1",
+      "stack",
+      "foundation.layout.stack",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-document/1",
+      "grid",
+      "foundation.layout.grid",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-document/1",
+      "text",
+      "foundation.typography.text",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-document/1",
+      "text",
+      "foundation.typography.heading",
+      "source-closed",
+      "heading"
+    ],
+    [
+      "vivim.ui-document/1",
+      "card",
+      "foundation.surface.card",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-document/1",
+      "button",
+      "input.actions.button",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-document/1",
+      "collection",
+      "data.collections.collection",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-document/1",
+      "profile-card",
+      "application.composites.profile-card",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-document/1",
+      "project-card",
+      "application.composites.project-card",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-document/1",
+      "timeline",
+      "data.temporal.timeline",
+      "source-closed"
+    ],
+    [
+      "vivim.ui-document/1",
+      "chart",
+      "data.charts.chart",
+      "source-closed"
+    ],
+    [
+      "tierflow.component-inspector/1",
+      "stack",
+      "foundation.layout.stack",
+      "fixture-inspector-only"
+    ],
+    [
+      "tierflow.component-inspector/1",
+      "grid",
+      "foundation.layout.grid",
+      "fixture-inspector-only"
+    ],
+    [
+      "tierflow.component-inspector/1",
+      "card",
+      "foundation.surface.card",
+      "fixture-inspector-only"
+    ],
+    [
+      "tierflow.component-inspector/1",
+      "text",
+      "foundation.typography.text",
+      "fixture-inspector-only"
+    ],
+    [
+      "tierflow.component-inspector/1",
+      "heading",
+      "foundation.typography.heading",
+      "fixture-inspector-only"
+    ],
+    [
+      "tierflow.component-inspector/1",
+      "button",
+      "input.actions.button",
+      "fixture-inspector-only"
+    ],
+    [
+      "tierflow.component-inspector/1",
+      "status",
+      "feedback.status.status",
+      "fixture-inspector-only"
+    ],
+    [
+      "tierflow.component-inspector/1",
+      "field",
+      "input.text-entry.text-field",
+      "fixture-inspector-only"
+    ],
+    [
+      "tierflow.component-inspector/1",
+      "divider",
+      "foundation.decoration.divider",
+      "fixture-inspector-only"
+    ],
+    [
+      "tierflow.world-shape/1",
+      "box",
+      "spatial.primitives.shape-box",
+      "world-shape-only"
+    ],
+    [
+      "tierflow.world-shape/1",
+      "sphere",
+      "spatial.primitives.shape-sphere",
+      "world-shape-only"
+    ],
+    [
+      "tierflow.world-shape/1",
+      "cylinder",
+      "spatial.primitives.shape-cylinder",
+      "world-shape-only"
+    ],
+    [
+      "tierflow.world-shape/1",
+      "plane",
+      "spatial.primitives.shape-plane",
+      "world-shape-only"
+    ],
+    [
+      "tierflow.world-shape/1",
+      "text",
+      "spatial.primitives.shape-text",
+      "world-shape-only"
+    ],
+    [
+      "tierflow.world-shape/1",
+      "billboard",
+      "spatial.primitives.shape-billboard",
+      "world-shape-only"
+    ]
+  ],
+  "counts": {
+    "domains": 9,
+    "families": 34,
+    "kinds": 417,
+    "mappings": 37
+  },
+  "sourcePins": {
+    "pwa": "9fde5a498b46f3c88526c32f8948e8c6d7bfc5e7",
+    "tierflowVisual": "28778ba28db763d854310f3b2e5af1e806300206",
+    "tierflowInspector": "fdec0f7ff26b1489dcfb15b509c5941c13141db7",
+    "tierflowWorld": "32d869d1528ff2fa2e42fee9ca091e5544d32eb6"
+  }
+}

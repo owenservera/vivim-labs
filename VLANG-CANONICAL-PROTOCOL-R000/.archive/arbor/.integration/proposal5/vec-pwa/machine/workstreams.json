@@ -1,0 +1,78 @@
+{
+  "schema": "arbor.p5.vec-pwa.workstreams/1",
+  "date": "2026-11-13",
+  "repo": "owenservera/ARBOR",
+  "branch": "work/p5-vec-pwa-ui-kernel-r001",
+  "baseMainSha": "9b79d732da8b92713d399040db4a02d505bc7cf1",
+  "workstreams": [
+    {
+      "id": "A",
+      "objective": "Compiler + SDK registry",
+      "status": "SOURCE_KERNEL_IMPLEMENTED_WIKI_COMMAND_LEGACY",
+      "goal": "Shared VEC envelope, adapter registry; reviewed SDK manifest not yet installed",
+      "anchor": "apps/mobile-relay/vec/compiler.mjs",
+      "authority": "existing-owning-system",
+      "go": false
+    },
+    {
+      "id": "B",
+      "objective": "Wiki compiler migration",
+      "status": "BASELINED_SHADOW_NOT_STARTED",
+      "goal": "HQ Wiki/comment programs progressively absorbed after synthetic differential parity",
+      "anchor": "hq/lib/wiki-program.mjs",
+      "authority": "existing-owning-system",
+      "go": false
+    },
+    {
+      "id": "C",
+      "objective": "Command/NLCL migration",
+      "status": "BASELINED_SHADOW_NOT_STARTED",
+      "goal": "VEC pure intent/command IR; Host catalog/dispatcher remain canonical",
+      "anchor": "apps/mobile-relay/control-language.mjs",
+      "authority": "existing-owning-system",
+      "go": false
+    },
+    {
+      "id": "D",
+      "objective": "Paired PWA UI programming",
+      "status": "SOURCE_IMPLEMENTED_TESTS_UNRUN",
+      "goal": "Exact UI add/rename/remove/move preview via existing Host publish",
+      "anchor": "apps/mobile-relay/vec/ui-adapter.mjs",
+      "authority": "existing-owning-system",
+      "go": false
+    },
+    {
+      "id": "E",
+      "objective": "Native Rust + capsule SDK",
+      "status": "FUTURE_NOT_IMPLEMENTED",
+      "goal": "Product Rust pure DAG parity; HQKG reuse; reviewed capsule sandbox",
+      "anchor": "core/programmability/src/lib.rs",
+      "authority": "existing-owning-system",
+      "go": false
+    },
+    {
+      "id": "F",
+      "objective": "Independent verification and release",
+      "status": "TESTS_AUTHORED_UNRUN",
+      "goal": "Node24/Win/PWA/device/security/ABI gates with exact exit receipts",
+      "anchor": "apps/mobile-relay/test/vec-ui-compiler.test.mjs",
+      "authority": "existing-owning-system",
+      "go": false
+    }
+  ],
+  "testsExecuted": false,
+  "releaseDecision": "NO_GO_CLAIM",
+  "sourceMaturity": "SOURCE_IMPLEMENTED_FIRST_PWA_ADAPTER",
+  "wikiCompilerTakeover": "NOT_STARTED",
+  "commandCompilerTakeover": "NOT_STARTED",
+  "uiTaxonomy": {
+    "schema": "vivim.ui-taxonomy/1",
+    "maturity": "SOURCE_DESCRIBED_AND_LOOKUP_WIRED",
+    "domainCount": 9,
+    "familyCount": 34,
+    "kindCount": 417,
+    "sourceBindingCount": 37,
+    "truth": "catalogued does not mean rendered/approved",
+    "testsExecuted": false
+  }
+}

@@ -146,6 +146,7 @@ mod tests {
                 verdict:ProofVerdict::ProvedUnderModel,scope_complete:true,
                 unknown_paths:0,counterexample:false,evidence_refs:source_refs(),
                 independently_authenticated:true,
+                explanation_checked:true,model_scope_checked:true,
             })
         }
     }

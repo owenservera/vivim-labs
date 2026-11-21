@@ -46,6 +46,25 @@ Post-C-F01 CSV SHA-256: `13693e38fcb9fa10447e3e11c20b813b2b1803961e5ef0ea0a1fd03
 
 Recompression-only follow-up: identical CSV SHA-256 and row values; compressed Git blob `bdde887f6463da8264c7f596158fee372c692d30`, 880621 bytes, below 1 MiB Contents API limit. Supersedes compressed container `8e57be49ce20bedcfae8306ae16acc0b5e882e8f`; no dispositions changed.
 
+### Source reconciliation — 2026-11-21 / five-lane Rust migration (source landed; CSV merge pending)
+
+This is a **source-delta evidence note**, not a replacement ledger or a claim that the compressed CSV has been updated. ARBOR `main` was inspected at `98890827832ea74eba698566cb88bc3a4a7d520c`. Comparing it to the Rust-migration baseline `fc80454cceae7a2e6a95f51cc80aa15855e02fcb` yielded **225 commits and 41 changed files**. Compared with the post-15-round reference `b1b2e8a12fc67b39026c42d0430dfb390f3211db`, HEAD is **five commits ahead**, with five changed test/implementation paths. Evidence: [full source diff](https://github.com/owenservera/ARBOR/compare/fc80454cceae7a2e6a95f51cc80aa15855e02fcb...98890827832ea74eba698566cb88bc3a4a7d520c) and [final five-commit diff](https://github.com/owenservera/ARBOR/compare/b1b2e8a12fc67b39026c42d0430dfb390f3211db...98890827832ea74eba698566cb88bc3a4a7d520c).
+
+Migration workstreams (the **Rust migration A–E names are distinct from this ledger's pre-existing A–E disposition ownership**; do not change `Parallel lane` identities):
+
+- **Rust A — command intelligence:** native command projection/guards, kernel registration and Host command-intent integration; direct sources include `core/programmability/src/command_intent_projection.rs`, `command_ai_guard.rs`, `lib.rs`, `product_kernel.rs`, `apps/vivim-host/control/command-intent.mjs`, and `native-product-pure-sync.mjs`.
+- **Rust B — personal rules:** native deterministic transition/reducer and Host-owned persistence integration; `core/programmability/src/personal_rule_transition.rs`, `apps/vivim-host/control/personal-rule-store.mjs`, and focused regression tests.
+- **Rust C — HQKG managed knowledge:** native managed-context ingest/retrieval and Host context adapter; `native/hqkg/src/managed_context.rs`, `native/hqkg/src/bin/hqkg-personal.rs`, `native/hqkg/tests/host_context_sync.rs`, `apps/vivim-host/chat/rust-context.mjs`, and `product-journal.mjs`.
+- **Rust D — PWA/VEC/WASM:** native `vec.rs` and `vec_admission.rs`, relay visual compiler, WASM adapter, live Wiki/source-coherence and device-grant regression surfaces.
+- **Rust E — GPUI desktop/Tauri:** `native/gpui-desktop/src/{lib,main,visual}.rs`, its Cargo manifest, Tauri `src-tauri/src/main.rs`, and Host-runtime packaging.
+
+The GitHub comparison reports **five added paths** that require an explicit canonical inventory-delta decision (rather than reusing or changing another row's stable ID): `apps/mobile-relay/test/pwa-source-coherence.test.mjs`; `apps/vivim-host/test/command-intent-native.test.mjs`; `core/programmability/src/command_intent_projection.rs`; `core/programmability/src/personal_rule_transition.rs`; `packages/vec-ui-engines/test/rust-wasm-contract.test.mjs`. The other 36 paths are modifications. The existing baseline's 4,741 stable identities must remain intact.
+
+**Evidence classification:** Git objects prove source changes reached `main`, not end-to-end executable integration or approval/device acceptance. This reconciliation did **not** run Cargo, HQKG importer, GPUI, PWA/WASM, Tauri or Host/device suites; verification status from this reconciliation is **UNRUN**. Preserve the 2026-11-20 restoration of 621 path-touched-only closures: never convert them to IMPLEMENTED/PASS solely because a file changed. Host remains sole effects, approvals, receipts, persistence and provider authority; no new engine, journal or provider API is authorized.
+
+**Canonical merge still required:** the compressed `ARBOR-MASTER-INTEGRATION-TRACKER.csv.gz` must be loaded in an environment able to read/write binary gzip, matched by stable ID and path against its latest blob, then updated with source-pin and append-only evidence, explicit new-path deltas, and runtime UNRUN where appropriate. The five-workstream source reconciliation must **not** be represented as a completed 4,741-row ledger merge until gzip readback and invariant checks succeed. No alternative tracker should be created.
+
+
 ## 2. Parallel assignments — filter the ledger, do not clone it
 
 | Lane | Exclusive responsibility | Files | Symbols | Total | Pending initial | Verification revisit | Prior decision revalidation |

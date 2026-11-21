@@ -7,6 +7,7 @@ pub mod quality_feedback;
 pub mod owned_context;
 pub mod page_alias_projection;
 pub mod readback_guard;
+pub mod query_admission;
 use std::collections::{BTreeMap, BTreeSet};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

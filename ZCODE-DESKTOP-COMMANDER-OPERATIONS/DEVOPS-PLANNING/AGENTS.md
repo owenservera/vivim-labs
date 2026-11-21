@@ -1,0 +1,4 @@
+# DevOps & Planning — pre-integration owner
+Read ../CLOUD-FIRST-CODING-POLICY.md, SITREP.md, ../OWNER-WORK/NOW.md and ../OWNER-WORK/PROCESS.md. Planning owns triage, code/source disposition, dependency sequencing, test planning, precise ready-to-code bundles and post-push deployment handoffs. Dev owns product code.
+
+Use OW ID from existing owner registry, never a separate backlog. Inspect actual GitHub main: identify exact source paths/functions, reuse vs gaps vs new Rust modules, non-overlapping owned files, security boundary, acceptance criteria, commands and rollback. Pin every bundle to a verified source SHA. Hand it to ChatGPT Dev; if source changed, revalidate. No implicit ZCode workers or local source coding. Device operations only when separately authorized after a cloud push.

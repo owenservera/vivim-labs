@@ -26,7 +26,8 @@ The existing production catalog `apps/vivim-host/control/action-catalog.v1.json`
 - [07-AGENT-HANDOFF.md](07-AGENT-HANDOFF.md) — tightly scoped implementation mission for ARBOR main.
 - [registry/command-space.v0.json](registry/command-space.v0.json) — **279 machine-readable candidate commands**, all status=proposed.
 - [registry/existing-action-crosswalk.v0.json](registry/existing-action-crosswalk.v0.json) — subset of conservative mappings from proposed intents to inspected current catalog IDs, no readiness promotion.
-- [eval/seed-utterances.v0.jsonl](eval/seed-utterances.v0.jsonl) — proposed positive coverage cases and adversarial/ambiguity cases, **not test results**.
+- [eval/seed-utterances.v0.jsonl](eval/seed-utterances.v0.jsonl) — **322 authored seed cases**: 279 positives + 43 ambiguity/safety cases, **not test results**.
+- [contracts/command-frame.proposal.schema.json](contracts/command-frame.proposal.schema.json) — typed structural research schema, non-executable and not the production ABI.
 
 ## Three execution eras
 

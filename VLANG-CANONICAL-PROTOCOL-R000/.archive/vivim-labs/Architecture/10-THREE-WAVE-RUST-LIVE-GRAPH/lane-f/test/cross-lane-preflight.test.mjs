@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {EXPECTED,auditSources,auditEnvelopes} from '../cross-lane-preflight.mjs';
+const sources=()=>Object.fromEntries(Object.entries(EXPECTED).map(([l,x])=>[l,`export const ${x.constant} = '${x.schema}';\n`]));
+test('real documented source export schemas cannot be sent directly to E',()=>{const r=auditSources(sources());assert.equal(r.status,'BLOCKED');assert.equal(r.issues.filter(x=>x.code==='FEED_ADAPTER_NOT_PROVEN').length,3);assert.deepEqual(r.rows.map(x=>x.actualSchema),Object.values(EXPECTED).map(x=>x.schema))});
+test('missing lane source fails closed',()=>{const s=sources();delete s.B;const r=auditSources(s);assert.ok(r.issues.some(x=>x.lane==='B'&&x.code==='SOURCE_MISSING_OR_UNPARSEABLE'))});
+test('schema drift is explicit even when values are parseable',()=>{const s=sources();s.C=s.C.replace('command-candidates/1','command-candidates/2');const r=auditSources(s);assert.ok(r.issues.some(x=>x.code==='SOURCE_SCHEMA_DRIFT'&&x.lane==='C'))});
+test('exported candidate arrays without converted feed are not integration proof',()=>{const r=auditEnvelopes({A:{schema:EXPECTED.A.schema,files:[]},B:{schema:EXPECTED.B.schema,records:[]},C:{schema:EXPECTED.C.schema,records:[]}});assert.equal(r.status,'BLOCKED');assert.ok(r.issues.some(x=>x.code==='E_FEED_NOT_MATERIALIZED'))});
+test('complete envelope shapes are not falsely described as running Rust',()=>{const e={A:{schema:EXPECTED.A.schema},B:{schema:EXPECTED.B.schema},C:{schema:EXPECTED.C.schema},E:{schema:EXPECTED.E.schema,nodes:[],edges:[]}};assert.equal(auditEnvelopes(e).status,'INPUT_SHAPES_PRESENT_NOT_GRAPH_VERIFIED')});
+test('source hash changes with bytes and ignores untrusted caller claimed pin',()=>{const s=sources();const x=auditSources(s,{A:'claimed'});s.A+='// changed\n';const y=auditSources(s,{A:'claimed'});assert.notEqual(x.rows[0].sourceSha256,y.rows[0].sourceSha256);assert.equal(x.rows[0].gitBlobSha,'claimed')});

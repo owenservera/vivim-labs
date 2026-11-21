@@ -1,0 +1,922 @@
+TAP version 13
+# Subtest: no local runtime evidence is BLOCKED rather than fabricated GO
+ok 1 - no local runtime evidence is BLOCKED rather than fabricated GO
+  ---
+  duration_ms: 2.42617
+  type: 'test'
+  ...
+# Subtest: unapproved shell/delete command refused
+ok 2 - unapproved shell/delete command refused
+  ---
+  duration_ms: 1.334883
+  type: 'test'
+  ...
+# Subtest: safe command executed with exact exit code and duration
+ok 3 - safe command executed with exact exit code and duration
+  ---
+  duration_ms: 42.632689
+  type: 'test'
+  ...
+# Subtest: cross-domain Rust proof must agree with generated wiki
+ok 4 - cross-domain Rust proof must agree with generated wiki
+  ---
+  duration_ms: 3.741564
+  type: 'test'
+  ...
+# Subtest: real nonzero expected refusal is not a successful graph gate
+ok 5 - real nonzero expected refusal is not a successful graph gate
+  ---
+  duration_ms: 29.666768
+  type: 'test'
+  ...
+# Subtest: reports emitted with explicit blocked dossier, never a Wave 2 plan
+ok 6 - reports emitted with explicit blocked dossier, never a Wave 2 plan
+  ---
+  duration_ms: 5.315086
+  type: 'test'
+  ...
+# Subtest: real documented source export schemas cannot be sent directly to E
+ok 7 - real documented source export schemas cannot be sent directly to E
+  ---
+  duration_ms: 1.84549
+  type: 'test'
+  ...
+# Subtest: missing lane source fails closed
+ok 8 - missing lane source fails closed
+  ---
+  duration_ms: 0.323215
+  type: 'test'
+  ...
+# Subtest: schema drift is explicit even when values are parseable
+ok 9 - schema drift is explicit even when values are parseable
+  ---
+  duration_ms: 0.380211
+  type: 'test'
+  ...
+# Subtest: exported candidate arrays without converted feed are not integration proof
+ok 10 - exported candidate arrays without converted feed are not integration proof
+  ---
+  duration_ms: 0.18626
+  type: 'test'
+  ...
+# Subtest: complete envelope shapes are not falsely described as running Rust
+ok 11 - complete envelope shapes are not falsely described as running Rust
+  ---
+  duration_ms: 0.116756
+  type: 'test'
+  ...
+# Subtest: source hash changes with bytes and ignores untrusted caller claimed pin
+ok 12 - source hash changes with bytes and ignores untrusted caller claimed pin
+  ---
+  duration_ms: 0.241092
+  type: 'test'
+  ...
+# Subtest: evidence: accepted source pin and tamper refusal
+ok 13 - evidence: accepted source pin and tamper refusal
+  ---
+  duration_ms: 3.964199
+  type: 'test'
+  ...
+# Subtest: evidence: traversal and symlink refusal
+ok 14 - evidence: traversal and symlink refusal
+  ---
+  duration_ms: 1.331798
+  type: 'test'
+  ...
+# Subtest: evidence: native self-certification and synthetic masquerade refusal
+ok 15 - evidence: native self-certification and synthetic masquerade refusal
+  ---
+  duration_ms: 0.397948
+  type: 'test'
+  ...
+# Subtest: evidence: unobserved native receipts remain blocked
+ok 16 - evidence: unobserved native receipts remain blocked
+  ---
+  duration_ms: 0.224247
+  type: 'test'
+  ...
+# Subtest: HQKGX1: actual manifest digest and known endpoints accepted syntactically
+ok 17 - HQKGX1: actual manifest digest and known endpoints accepted syntactically
+  ---
+  duration_ms: 1.126671
+  type: 'test'
+  ...
+# Subtest: HQKGX1: unverified edge provenance discovered
+ok 18 - HQKGX1: unverified edge provenance discovered
+  ---
+  duration_ms: 0.481433
+  type: 'test'
+  ...
+# Subtest: HQKGX1: crosswalk matches actual deterministic hqg1 node digest
+ok 19 - HQKGX1: crosswalk matches actual deterministic hqg1 node digest
+  ---
+  duration_ms: 0.5196
+  type: 'test'
+  ...
+# Subtest: HQKGX1: D field mismatch exists even for E-provenance shape
+ok 20 - HQKGX1: D field mismatch exists even for E-provenance shape
+  ---
+  duration_ms: 0.334061
+  type: 'test'
+  ...
+# Subtest: source crosswalk: null C semantic status cannot be promoted
+ok 21 - source crosswalk: null C semantic status cannot be promoted
+  ---
+  duration_ms: 0.698478
+  type: 'test'
+  ...
+# Subtest: NL: synthetic 120-case corpus never claims native proof
+ok 22 - NL: synthetic 120-case corpus never claims native proof
+  ---
+  duration_ms: 2.604288
+  type: 'test'
+  ...
+# Subtest: NL: negation with apostrophe is not swallowed as quote
+ok 23 - NL: negation with apostrophe is not swallowed as quote
+  ---
+  duration_ms: 0.192969
+  type: 'test'
+  ...
+# Subtest: NL: quoted payload remains inert candidate not action
+ok 24 - NL: quoted payload remains inert candidate not action
+  ---
+  duration_ms: 0.11999
+  type: 'test'
+  ...
+# Subtest: NL: mixed clause never silently picks first verb
+ok 25 - NL: mixed clause never silently picks first verb
+  ---
+  duration_ms: 0.092228
+  type: 'test'
+  ...
+# Subtest: coverage: zero denominator is BLOCKED, not 100%
+ok 26 - coverage: zero denominator is BLOCKED, not 100%
+  ---
+  duration_ms: 0.207131
+  type: 'test'
+  ...
+# Subtest: coverage: rank is deterministic and deduplicated
+ok 27 - coverage: rank is deterministic and deduplicated
+  ---
+  duration_ms: 0.228052
+  type: 'test'
+  ...
+# Subtest: coverage: all roots need verified Git revision
+ok 28 - coverage: all roots need verified Git revision
+  ---
+  duration_ms: 0.263636
+  type: 'test'
+  ...
+# Subtest: placement: no synthetic data can yield migration decision
+ok 29 - placement: no synthetic data can yield migration decision
+  ---
+  duration_ms: 0.21304
+  type: 'test'
+  ...
+# Subtest: placement: p50/p95 have defined nearest-rank method
+ok 30 - placement: p50/p95 have defined nearest-rank method
+  ---
+  duration_ms: 0.254332
+  type: 'test'
+  ...
+# Subtest: native policy: arbitrary code execution not allowed
+ok 31 - native policy: arbitrary code execution not allowed
+  ---
+  duration_ms: 0.664597
+  type: 'test'
+  ...
+# Subtest: native policy: owner integration lock required even for pinned test
+ok 32 - native policy: owner integration lock required even for pinned test
+  ---
+  duration_ms: 0.414662
+  type: 'test'
+  ...
+# Subtest: wiki: no D generated wiki receipt means BLOCKED
+ok 33 - wiki: no D generated wiki receipt means BLOCKED
+  ---
+  duration_ms: 0.425949
+  type: 'test'
+  ...
+# Subtest: inventory: current/archived requirements are never auto-promoted to runtime truth
+ok 34 - inventory: current/archived requirements are never auto-promoted to runtime truth
+  ---
+  duration_ms: 0.422414
+  type: 'test'
+  ...
+# Subtest: full independent verifier blocks empty native baseline
+ok 35 - full independent verifier blocks empty native baseline
+  ---
+  duration_ms: 0.926229
+  type: 'test'
+  ...
+# Subtest: compiler vector 1: no synthetic source becomes native proof
+ok 36 - compiler vector 1: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.177226
+  type: 'test'
+  ...
+# Subtest: compiler vector 2: no synthetic source becomes native proof
+ok 37 - compiler vector 2: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.091507
+  type: 'test'
+  ...
+# Subtest: compiler vector 3: no synthetic source becomes native proof
+ok 38 - compiler vector 3: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.147301
+  type: 'test'
+  ...
+# Subtest: compiler vector 4: no synthetic source becomes native proof
+ok 39 - compiler vector 4: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.10048
+  type: 'test'
+  ...
+# Subtest: compiler vector 5: no synthetic source becomes native proof
+ok 40 - compiler vector 5: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.080141
+  type: 'test'
+  ...
+# Subtest: compiler vector 6: no synthetic source becomes native proof
+ok 41 - compiler vector 6: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.080521
+  type: 'test'
+  ...
+# Subtest: compiler vector 7: no synthetic source becomes native proof
+ok 42 - compiler vector 7: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.146981
+  type: 'test'
+  ...
+# Subtest: compiler vector 8: no synthetic source becomes native proof
+ok 43 - compiler vector 8: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.096755
+  type: 'test'
+  ...
+# Subtest: compiler vector 9: no synthetic source becomes native proof
+ok 44 - compiler vector 9: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.134092
+  type: 'test'
+  ...
+# Subtest: compiler vector 10: no synthetic source becomes native proof
+ok 45 - compiler vector 10: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.093149
+  type: 'test'
+  ...
+# Subtest: compiler vector 11: no synthetic source becomes native proof
+ok 46 - compiler vector 11: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.083175
+  type: 'test'
+  ...
+# Subtest: compiler vector 12: no synthetic source becomes native proof
+ok 47 - compiler vector 12: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.103375
+  type: 'test'
+  ...
+# Subtest: compiler vector 13: no synthetic source becomes native proof
+ok 48 - compiler vector 13: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.06649
+  type: 'test'
+  ...
+# Subtest: compiler vector 14: no synthetic source becomes native proof
+ok 49 - compiler vector 14: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.056715
+  type: 'test'
+  ...
+# Subtest: compiler vector 15: no synthetic source becomes native proof
+ok 50 - compiler vector 15: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.05368
+  type: 'test'
+  ...
+# Subtest: compiler vector 16: no synthetic source becomes native proof
+ok 51 - compiler vector 16: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.091657
+  type: 'test'
+  ...
+# Subtest: compiler vector 17: no synthetic source becomes native proof
+ok 52 - compiler vector 17: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.065669
+  type: 'test'
+  ...
+# Subtest: compiler vector 18: no synthetic source becomes native proof
+ok 53 - compiler vector 18: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.06014
+  type: 'test'
+  ...
+# Subtest: compiler vector 19: no synthetic source becomes native proof
+ok 54 - compiler vector 19: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.060661
+  type: 'test'
+  ...
+# Subtest: compiler vector 20: no synthetic source becomes native proof
+ok 55 - compiler vector 20: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.060081
+  type: 'test'
+  ...
+# Subtest: compiler vector 21: no synthetic source becomes native proof
+ok 56 - compiler vector 21: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.058448
+  type: 'test'
+  ...
+# Subtest: compiler vector 22: no synthetic source becomes native proof
+ok 57 - compiler vector 22: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.056034
+  type: 'test'
+  ...
+# Subtest: compiler vector 23: no synthetic source becomes native proof
+ok 58 - compiler vector 23: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.057336
+  type: 'test'
+  ...
+# Subtest: compiler vector 24: no synthetic source becomes native proof
+ok 59 - compiler vector 24: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.05351
+  type: 'test'
+  ...
+# Subtest: compiler vector 25: no synthetic source becomes native proof
+ok 60 - compiler vector 25: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.05329
+  type: 'test'
+  ...
+# Subtest: compiler vector 26: no synthetic source becomes native proof
+ok 61 - compiler vector 26: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.052619
+  type: 'test'
+  ...
+# Subtest: compiler vector 27: no synthetic source becomes native proof
+ok 62 - compiler vector 27: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.051908
+  type: 'test'
+  ...
+# Subtest: compiler vector 28: no synthetic source becomes native proof
+ok 63 - compiler vector 28: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.058979
+  type: 'test'
+  ...
+# Subtest: compiler vector 29: no synthetic source becomes native proof
+ok 64 - compiler vector 29: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.091999
+  type: 'test'
+  ...
+# Subtest: compiler vector 30: no synthetic source becomes native proof
+ok 65 - compiler vector 30: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.064617
+  type: 'test'
+  ...
+# Subtest: compiler vector 31: no synthetic source becomes native proof
+ok 66 - compiler vector 31: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.054021
+  type: 'test'
+  ...
+# Subtest: compiler vector 32: no synthetic source becomes native proof
+ok 67 - compiler vector 32: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.052939
+  type: 'test'
+  ...
+# Subtest: compiler vector 33: no synthetic source becomes native proof
+ok 68 - compiler vector 33: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.051517
+  type: 'test'
+  ...
+# Subtest: compiler vector 34: no synthetic source becomes native proof
+ok 69 - compiler vector 34: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.052278
+  type: 'test'
+  ...
+# Subtest: compiler vector 35: no synthetic source becomes native proof
+ok 70 - compiler vector 35: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.052569
+  type: 'test'
+  ...
+# Subtest: compiler vector 36: no synthetic source becomes native proof
+ok 71 - compiler vector 36: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.056735
+  type: 'test'
+  ...
+# Subtest: compiler vector 37: no synthetic source becomes native proof
+ok 72 - compiler vector 37: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.056785
+  type: 'test'
+  ...
+# Subtest: compiler vector 38: no synthetic source becomes native proof
+ok 73 - compiler vector 38: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.055454
+  type: 'test'
+  ...
+# Subtest: compiler vector 39: no synthetic source becomes native proof
+ok 74 - compiler vector 39: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.052018
+  type: 'test'
+  ...
+# Subtest: compiler vector 40: no synthetic source becomes native proof
+ok 75 - compiler vector 40: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.050626
+  type: 'test'
+  ...
+# Subtest: compiler vector 41: no synthetic source becomes native proof
+ok 76 - compiler vector 41: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.053871
+  type: 'test'
+  ...
+# Subtest: compiler vector 42: no synthetic source becomes native proof
+ok 77 - compiler vector 42: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.051827
+  type: 'test'
+  ...
+# Subtest: compiler vector 43: no synthetic source becomes native proof
+ok 78 - compiler vector 43: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.131638
+  type: 'test'
+  ...
+# Subtest: compiler vector 44: no synthetic source becomes native proof
+ok 79 - compiler vector 44: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.066851
+  type: 'test'
+  ...
+# Subtest: compiler vector 45: no synthetic source becomes native proof
+ok 80 - compiler vector 45: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.119239
+  type: 'test'
+  ...
+# Subtest: compiler vector 46: no synthetic source becomes native proof
+ok 81 - compiler vector 46: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.069104
+  type: 'test'
+  ...
+# Subtest: compiler vector 47: no synthetic source becomes native proof
+ok 82 - compiler vector 47: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.056014
+  type: 'test'
+  ...
+# Subtest: compiler vector 48: no synthetic source becomes native proof
+ok 83 - compiler vector 48: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.056795
+  type: 'test'
+  ...
+# Subtest: compiler vector 49: no synthetic source becomes native proof
+ok 84 - compiler vector 49: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.054972
+  type: 'test'
+  ...
+# Subtest: compiler vector 50: no synthetic source becomes native proof
+ok 85 - compiler vector 50: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.057426
+  type: 'test'
+  ...
+# Subtest: compiler vector 51: no synthetic source becomes native proof
+ok 86 - compiler vector 51: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.055713
+  type: 'test'
+  ...
+# Subtest: compiler vector 52: no synthetic source becomes native proof
+ok 87 - compiler vector 52: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.056856
+  type: 'test'
+  ...
+# Subtest: compiler vector 53: no synthetic source becomes native proof
+ok 88 - compiler vector 53: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.053451
+  type: 'test'
+  ...
+# Subtest: compiler vector 54: no synthetic source becomes native proof
+ok 89 - compiler vector 54: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.102013
+  type: 'test'
+  ...
+# Subtest: compiler vector 55: no synthetic source becomes native proof
+ok 90 - compiler vector 55: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.080711
+  type: 'test'
+  ...
+# Subtest: compiler vector 56: no synthetic source becomes native proof
+ok 91 - compiler vector 56: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.067441
+  type: 'test'
+  ...
+# Subtest: compiler vector 57: no synthetic source becomes native proof
+ok 92 - compiler vector 57: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.101151
+  type: 'test'
+  ...
+# Subtest: compiler vector 58: no synthetic source becomes native proof
+ok 93 - compiler vector 58: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.078338
+  type: 'test'
+  ...
+# Subtest: compiler vector 59: no synthetic source becomes native proof
+ok 94 - compiler vector 59: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.074662
+  type: 'test'
+  ...
+# Subtest: compiler vector 60: no synthetic source becomes native proof
+ok 95 - compiler vector 60: no synthetic source becomes native proof
+  ---
+  duration_ms: 0.074021
+  type: 'test'
+  ...
+# Subtest: mutation 1: HQKGX1 tamper rejects
+ok 96 - mutation 1: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.349975
+  type: 'test'
+  ...
+# Subtest: mutation 2: HQKGX1 tamper rejects
+ok 97 - mutation 2: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.12677
+  type: 'test'
+  ...
+# Subtest: mutation 3: HQKGX1 tamper rejects
+ok 98 - mutation 3: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.12636
+  type: 'test'
+  ...
+# Subtest: mutation 4: HQKGX1 tamper rejects
+ok 99 - mutation 4: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.370646
+  type: 'test'
+  ...
+# Subtest: mutation 5: HQKGX1 tamper rejects
+ok 100 - mutation 5: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.156194
+  type: 'test'
+  ...
+# Subtest: mutation 6: HQKGX1 tamper rejects
+ok 101 - mutation 6: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.244266
+  type: 'test'
+  ...
+# Subtest: mutation 7: HQKGX1 tamper rejects
+ok 102 - mutation 7: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.142193
+  type: 'test'
+  ...
+# Subtest: mutation 8: HQKGX1 tamper rejects
+ok 103 - mutation 8: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.117276
+  type: 'test'
+  ...
+# Subtest: mutation 9: HQKGX1 tamper rejects
+ok 104 - mutation 9: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.111417
+  type: 'test'
+  ...
+# Subtest: mutation 10: HQKGX1 tamper rejects
+ok 105 - mutation 10: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.118698
+  type: 'test'
+  ...
+# Subtest: mutation 11: HQKGX1 tamper rejects
+ok 106 - mutation 11: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.11289
+  type: 'test'
+  ...
+# Subtest: mutation 12: HQKGX1 tamper rejects
+ok 107 - mutation 12: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.191317
+  type: 'test'
+  ...
+# Subtest: mutation 13: HQKGX1 tamper rejects
+ok 108 - mutation 13: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.119089
+  type: 'test'
+  ...
+# Subtest: mutation 14: HQKGX1 tamper rejects
+ok 109 - mutation 14: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.127161
+  type: 'test'
+  ...
+# Subtest: mutation 15: HQKGX1 tamper rejects
+ok 110 - mutation 15: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.106831
+  type: 'test'
+  ...
+# Subtest: mutation 16: HQKGX1 tamper rejects
+ok 111 - mutation 16: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.11322
+  type: 'test'
+  ...
+# Subtest: mutation 17: HQKGX1 tamper rejects
+ok 112 - mutation 17: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.100301
+  type: 'test'
+  ...
+# Subtest: mutation 18: HQKGX1 tamper rejects
+ok 113 - mutation 18: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.09344
+  type: 'test'
+  ...
+# Subtest: mutation 19: HQKGX1 tamper rejects
+ok 114 - mutation 19: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.140091
+  type: 'test'
+  ...
+# Subtest: mutation 20: HQKGX1 tamper rejects
+ok 115 - mutation 20: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.105008
+  type: 'test'
+  ...
+# Subtest: mutation 21: HQKGX1 tamper rejects
+ok 116 - mutation 21: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.097917
+  type: 'test'
+  ...
+# Subtest: mutation 22: HQKGX1 tamper rejects
+ok 117 - mutation 22: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.087802
+  type: 'test'
+  ...
+# Subtest: mutation 23: HQKGX1 tamper rejects
+ok 118 - mutation 23: HQKGX1 tamper rejects
+  ---
+  duration_ms: 1.025589
+  type: 'test'
+  ...
+# Subtest: mutation 24: HQKGX1 tamper rejects
+ok 119 - mutation 24: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.124387
+  type: 'test'
+  ...
+# Subtest: mutation 25: HQKGX1 tamper rejects
+ok 120 - mutation 25: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.104237
+  type: 'test'
+  ...
+# Subtest: mutation 26: HQKGX1 tamper rejects
+ok 121 - mutation 26: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.104226
+  type: 'test'
+  ...
+# Subtest: mutation 27: HQKGX1 tamper rejects
+ok 122 - mutation 27: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.1268
+  type: 'test'
+  ...
+# Subtest: mutation 28: HQKGX1 tamper rejects
+ok 123 - mutation 28: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.104407
+  type: 'test'
+  ...
+# Subtest: mutation 29: HQKGX1 tamper rejects
+ok 124 - mutation 29: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.095493
+  type: 'test'
+  ...
+# Subtest: mutation 30: HQKGX1 tamper rejects
+ok 125 - mutation 30: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.097967
+  type: 'test'
+  ...
+# Subtest: mutation 31: HQKGX1 tamper rejects
+ok 126 - mutation 31: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.146881
+  type: 'test'
+  ...
+# Subtest: mutation 32: HQKGX1 tamper rejects
+ok 127 - mutation 32: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.10699
+  type: 'test'
+  ...
+# Subtest: mutation 33: HQKGX1 tamper rejects
+ok 128 - mutation 33: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.097947
+  type: 'test'
+  ...
+# Subtest: mutation 34: HQKGX1 tamper rejects
+ok 129 - mutation 34: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.096285
+  type: 'test'
+  ...
+# Subtest: mutation 35: HQKGX1 tamper rejects
+ok 130 - mutation 35: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.213471
+  type: 'test'
+  ...
+# Subtest: mutation 36: HQKGX1 tamper rejects
+ok 131 - mutation 36: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.118137
+  type: 'test'
+  ...
+# Subtest: mutation 37: HQKGX1 tamper rejects
+ok 132 - mutation 37: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.102694
+  type: 'test'
+  ...
+# Subtest: mutation 38: HQKGX1 tamper rejects
+ok 133 - mutation 38: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.109434
+  type: 'test'
+  ...
+# Subtest: mutation 39: HQKGX1 tamper rejects
+ok 134 - mutation 39: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.214541
+  type: 'test'
+  ...
+# Subtest: mutation 40: HQKGX1 tamper rejects
+ok 135 - mutation 40: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.115984
+  type: 'test'
+  ...
+# Subtest: mutation 41: HQKGX1 tamper rejects
+ok 136 - mutation 41: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.117467
+  type: 'test'
+  ...
+# Subtest: mutation 42: HQKGX1 tamper rejects
+ok 137 - mutation 42: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.098988
+  type: 'test'
+  ...
+# Subtest: mutation 43: HQKGX1 tamper rejects
+ok 138 - mutation 43: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.099769
+  type: 'test'
+  ...
+# Subtest: mutation 44: HQKGX1 tamper rejects
+ok 139 - mutation 44: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.097947
+  type: 'test'
+  ...
+# Subtest: mutation 45: HQKGX1 tamper rejects
+ok 140 - mutation 45: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.098358
+  type: 'test'
+  ...
+# Subtest: mutation 46: HQKGX1 tamper rejects
+ok 141 - mutation 46: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.08648
+  type: 'test'
+  ...
+# Subtest: mutation 47: HQKGX1 tamper rejects
+ok 142 - mutation 47: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.07379
+  type: 'test'
+  ...
+# Subtest: mutation 48: HQKGX1 tamper rejects
+ok 143 - mutation 48: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.083145
+  type: 'test'
+  ...
+# Subtest: mutation 49: HQKGX1 tamper rejects
+ok 144 - mutation 49: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.118958
+  type: 'test'
+  ...
+# Subtest: mutation 50: HQKGX1 tamper rejects
+ok 145 - mutation 50: HQKGX1 tamper rejects
+  ---
+  duration_ms: 0.091297
+  type: 'test'
+  ...
+# Subtest: Rust read-only query: zero real queries never passes
+ok 146 - Rust read-only query: zero real queries never passes
+  ---
+  duration_ms: 0.400922
+  type: 'test'
+  ...
+# Subtest: Rust read-only query: mismatched source commit is detected
+ok 147 - Rust read-only query: mismatched source commit is detected
+  ---
+  duration_ms: 0.20653
+  type: 'test'
+  ...
+# Subtest: Rust read-only query: unknown returned node cannot be fabricated
+ok 148 - Rust read-only query: unknown returned node cannot be fabricated
+  ---
+  duration_ms: 0.215183
+  type: 'test'
+  ...
+# Subtest: compiler: 60 fixtures remain synthetic, not a native compiled crosswalk
+ok 149 - compiler: 60 fixtures remain synthetic, not a native compiled crosswalk
+  ---
+  duration_ms: 0.634402
+  type: 'test'
+  ...
+# Subtest: compiler: source comment cannot award effect permissions
+ok 150 - compiler: source comment cannot award effect permissions
+  ---
+  duration_ms: 0.304777
+  type: 'test'
+  ...
+# Subtest: profile: DEV journal/index cannot ship as PRODUCT dependency
+ok 151 - profile: DEV journal/index cannot ship as PRODUCT dependency
+  ---
+  duration_ms: 0.602965
+  type: 'test'
+  ...
+# Subtest: profile: user data requires consent source identity
+ok 152 - profile: user data requires consent source identity
+  ---
+  duration_ms: 0.479049
+  type: 'test'
+  ...
+1..152
+# tests 152
+# suites 0
+# pass 152
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 150.301514

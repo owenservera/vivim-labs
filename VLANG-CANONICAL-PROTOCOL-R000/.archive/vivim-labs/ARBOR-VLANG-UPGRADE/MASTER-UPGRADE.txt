@@ -1,0 +1,35 @@
+ARBOR — VLANG SEMANTIC INTELLIGENCE UPGRADE
+HIGH-EFFORT MULTILANE PRODUCT IMPLEMENTATION
+Target repository: owenservera/ARBOR
+Target branch: main. No PRs, branches, or separate orchestration project.
+Package: owenservera/vivim-labs / ARBOR-VLANG-UPGRADE
+
+MISSION
+Upgrade existing software into a continuously understandable, safely programmable, increasingly deterministic system. Source and committed user evidence inform a single existing semantic substrate. Intent becomes typed meaning, preview, owner approval, Host effect, durable readback, and reusable learning. Do not rebuild incumbent HQ, HQKG, AutoWiki, VLANG, NLCL, VEC, TierFlow, Host, or PWA.
+
+START
+1. Read this file, then the assigned lane, CURRENT-BASELINE.md and relevant actual executable source/tests. The older lane files are immutable research-derived launch prompts: this master and current baseline supersede conflicting assumptions. Recheck current main HEAD at start and before committing. Preserve concurrent edits; do not revert another lane. If a requirement already exists, validate its real caller and extend only the actual remaining gap.
+2. Read the candidate helpers/tests in source/ selectively. They are tested pure examples, not a new runtime dependency or mandated wire contract. Integrate only compatible primitives into existing modules, use incumbent serialization and version contracts, avoid duplicate logic. No synthetic product fallback. Test fixtures may be used for focused security/unit tests.
+3. Keep product authority: authenticated Host owns effects, current catalog and policy, target resolution, approval, execution, journal, readback, recovery. No cached authorization, AI-driven effect authority, unapproved mutation, unsafe filesystem writes, blind retries or weakened privacy boundaries.
+4. PWA first. Desktop parity through current product interfaces. Bun for JS toolchain; use existing native Cargo checks. No Playwright/Puppeteer, provider APIs, customer Git dependency, new database, separate compiler/VM, new graph, duplicate interpreter/dispatcher or coordination framework.
+
+LANES
+U1 lanes/L1-semantic-incrementality.txt — existing HQ indexing; stable source identities, separate fingerprints, conservative invalidation where resolution is incomplete.
+U2 lanes/L2-evidence-truth.txt — claim origin, assurance and freshness; actual receipts/evidence; source-bound trust.
+U3 lanes/L3-context-packets.txt — incumbent context composer; mandatory constraints, deterministic budget, current dependencies.
+U4 lanes/L4-bound-approval.txt — existing typed plans; exact round-trip sentence and effect binding; preserve Host journal approvals.
+U5 lanes/L5-reusable-learning.txt — extend current owner-approved exact learning, not recreate it. Parameterized safe templates only if incumbent persistence and validation support them; otherwise improve dependency and lifecycle coverage.
+U6 lanes/L6-live-projections.txt — existing Wiki views, source-backed knowledge, personal Wiki remains canonical; authorized writeback only through a proven existing writer.
+U7 lanes/L7-live-semantic-slots.txt — extend shared live composer; typed missing slots, ambiguity, stable entities, correction and freshness.
+
+PARALLEL WORK
+All lanes may begin concurrently. U1 owns indexer/parser/registry fingerprinting; U2 owns trust mapping; coordinate additive schema edits with each other. U3 owns context composer/search; consume U1/U2 output contract when available. U4 owns plan/execute digest and dispatcher mutation changes. U5 owns existing personal-rule persistence and learning UI, invoking the incumbent planner; coordinate catalog/dispatcher integration with U4 using smallest compatible edit. U6 owns Wiki rendering and authorized projection; U2 owns trust fields in wiki-semantics. U7 owns composer draft state, U4 final approval preview; coordinate chat.js/control-chat.mjs edits. Do not introduce new interfaces merely for coordination. Reconcile on latest main before each commit, preserve concurrent work, never force-push.
+
+END-TO-END PRODUCT PROOF
+Use PRODUCT-ACCEPTANCE.md. Final integration is actual coding/testing on main: trace real callers, fix integration failures and eliminate redundant code after reference inspection. A passing helper test is not product proof. Mark unavailable Windows/paired phone, Cargo, and production checks UNRUN; no invented performance claims. Record actual commit SHA, commands/results, remaining limitations and migration/recovery compatibility as final chat output, not bulky repo reports.
+
+DEFINITION OF DONE
+Real user-visible capability through existing Talk/Wiki/Build/desktop surfaces as applicable, actual versioned persisted readback, stable security semantics, source-grounded context and reusable behavior. No architecture restart. If material ambiguity or unsupported execution remains, expose it and retain the existing safe behavior. No claim that all future commands or languages are supported. Deliver committed product source, not another plan.
+
+
+R003 EXECUTION OVERRIDE — U7 is merged into ARBOR-PWA-BASELINE-UPGRADE, R003. Do not launch standalone L7; use ../ARBOR-PWA-BASELINE-UPGRADE/MASTER-UPGRADE.txt and R003-U7-CONVERGENCE.md from Labs root. B06 owns shared live slots, B07 VIEW ALL, B08 visual approval. U1–U6 committed at 7031105ce179151adc9be3fe482b7f4cbb68d55c. Original research and prior lane requirements retained as reference, not an independent launch plan.

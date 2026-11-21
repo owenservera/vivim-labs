@@ -1,0 +1,130 @@
+TAP version 13
+# Subtest: no local runtime evidence is BLOCKED rather than fabricated GO
+ok 1 - no local runtime evidence is BLOCKED rather than fabricated GO
+  ---
+  duration_ms: 2.384598
+  type: 'test'
+  ...
+# Subtest: unapproved shell/delete command refused
+ok 2 - unapproved shell/delete command refused
+  ---
+  duration_ms: 0.827091
+  type: 'test'
+  ...
+# Subtest: safe command executed with exact exit code and duration
+ok 3 - safe command executed with exact exit code and duration
+  ---
+  duration_ms: 35.510989
+  type: 'test'
+  ...
+# Subtest: cross-domain Rust proof must agree with generated wiki
+ok 4 - cross-domain Rust proof must agree with generated wiki
+  ---
+  duration_ms: 2.441733
+  type: 'test'
+  ...
+# Subtest: real nonzero expected refusal is not a successful graph gate
+ok 5 - real nonzero expected refusal is not a successful graph gate
+  ---
+  duration_ms: 25.55599
+  type: 'test'
+  ...
+# Subtest: reports emitted with explicit blocked dossier, never a Wave 2 plan
+ok 6 - reports emitted with explicit blocked dossier, never a Wave 2 plan
+  ---
+  duration_ms: 4.028574
+  type: 'test'
+  ...
+# Subtest: real documented source export schemas cannot be sent directly to E
+ok 7 - real documented source export schemas cannot be sent directly to E
+  ---
+  duration_ms: 2.708142
+  type: 'test'
+  ...
+# Subtest: missing lane source fails closed
+ok 8 - missing lane source fails closed
+  ---
+  duration_ms: 0.50659
+  type: 'test'
+  ...
+# Subtest: schema drift is explicit even when values are parseable
+ok 9 - schema drift is explicit even when values are parseable
+  ---
+  duration_ms: 0.578237
+  type: 'test'
+  ...
+# Subtest: exported candidate arrays without converted feed are not integration proof
+ok 10 - exported candidate arrays without converted feed are not integration proof
+  ---
+  duration_ms: 0.299309
+  type: 'test'
+  ...
+# Subtest: complete envelope shapes are not falsely described as running Rust
+ok 11 - complete envelope shapes are not falsely described as running Rust
+  ---
+  duration_ms: 0.181412
+  type: 'test'
+  ...
+# Subtest: source hash changes with bytes and ignores untrusted caller claimed pin
+ok 12 - source hash changes with bytes and ignores untrusted caller claimed pin
+  ---
+  duration_ms: 0.320581
+  type: 'test'
+  ...
+# Subtest: missing local integration evidence fails closed with all required gaps
+ok 13 - missing local integration evidence fails closed with all required gaps
+  ---
+  duration_ms: 2.429946
+  type: 'test'
+  ...
+# Subtest: no local data is silently treated as a measured Rust/SQLite migration case
+ok 14 - no local data is silently treated as a measured Rust/SQLite migration case
+  ---
+  duration_ms: 1.931688
+  type: 'test'
+  ...
+# Subtest: command execution is opt-in and destructive or arbitrary executables are refused
+ok 15 - command execution is opt-in and destructive or arbitrary executables are refused
+  ---
+  duration_ms: 1.08024
+  type: 'test'
+  ...
+# Subtest: real local harmless subprocess preserves actual exit code and time
+ok 16 - real local harmless subprocess preserves actual exit code and time
+  ---
+  duration_ms: 30.7649
+  type: 'test'
+  ...
+# Subtest: Rust chain identities must appear in generated wiki and source anchors be present
+ok 17 - Rust chain identities must appear in generated wiki and source anchors be present
+  ---
+  duration_ms: 2.43955
+  type: 'test'
+  ...
+# Subtest: unsafe NL plan, mismatched corpus result and unanchored compiler case reported
+ok 18 - unsafe NL plan, mismatched corpus result and unanchored compiler case reported
+  ---
+  duration_ms: 1.454943
+  type: 'test'
+  ...
+# Subtest: reports generated in designated output directory with distinct truthful evidence statuses
+ok 19 - reports generated in designated output directory with distinct truthful evidence statuses
+  ---
+  duration_ms: 3.258278
+  type: 'test'
+  ...
+# Subtest: expected nonzero refusal exit is proof only with matching code and unchanged journal
+ok 20 - expected nonzero refusal exit is proof only with matching code and unchanged journal
+  ---
+  duration_ms: 29.708649
+  type: 'test'
+  ...
+1..20
+# tests 20
+# suites 0
+# pass 20
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 143.358417

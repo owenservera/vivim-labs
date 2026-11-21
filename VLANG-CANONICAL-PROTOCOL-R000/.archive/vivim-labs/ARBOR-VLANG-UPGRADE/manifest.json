@@ -1,0 +1,87 @@
+{
+  "schema": "vivim.labs.upgrade-package/1",
+  "target": "owenservera/ARBOR",
+  "branch": "main",
+  "observedArborHead": "7031105ce179151adc9be3fe482b7f4cbb68d55c",
+  "originalPackageCommit": "b970bef178682e04bd81ee3a0b2b539d6d32c13d",
+  "originalFiles": [
+    {
+      "path": "research/chat-VLANG Semantic Protocol Design (2).txt",
+      "gitBlob": "4550fc73463c7a92532ee9bb5cc89978f604e26b"
+    },
+    {
+      "path": "research/chat-export-1795034880156.json",
+      "gitBlob": "45acb7caffb92eff9901f0c67ce632b85e62df96"
+    },
+    {
+      "path": "lanes/L1-semantic-incrementality.txt",
+      "gitBlob": "e3b6d942bf1a6208a7fc248437c6303143a04b04"
+    },
+    {
+      "path": "lanes/L2-evidence-truth.txt",
+      "gitBlob": "936599102876b016a7926ce01f33ea13a3497a61"
+    },
+    {
+      "path": "lanes/L3-context-packets.txt",
+      "gitBlob": "94d6bbf2ed15abff98fa55bd4876a1990630233a"
+    },
+    {
+      "path": "lanes/L4-bound-approval.txt",
+      "gitBlob": "8b77feb205e971d9120e79cf029a00bf437c59de"
+    },
+    {
+      "path": "lanes/L5-reusable-learning.txt",
+      "gitBlob": "837186c0f6a9a56dac1fce2a416d95824537b431"
+    },
+    {
+      "path": "lanes/L6-live-projections.txt",
+      "gitBlob": "a451ff0d4ceb5735fe92e65fd90ebdc6ec8c3fb8"
+    },
+    {
+      "path": "lanes/L7-live-semantic-slots.txt",
+      "gitBlob": "c8111e5b741b55f364e1b68f4d4d12d090b306ad"
+    },
+    {
+      "path": "ORIGINAL-LAUNCH-INDEX.md",
+      "gitBlob": "bdc904ef5b24c12197164ba29336c1fb349bb889"
+    },
+    {
+      "path": "source/semantic-primitives.mjs",
+      "gitBlob": "e1334f2d9d4fd4ae03964a713fdc86e978eda417"
+    },
+    {
+      "path": "source/semantic-primitives.test.mjs",
+      "gitBlob": "b5e3cb1bb8af8ec8db0b67d2d4eb7b0ab791eafb"
+    }
+  ],
+  "newInstructions": [
+    "README.md",
+    "MASTER-UPGRADE.txt",
+    "CURRENT-BASELINE.md",
+    "PRODUCT-ACCEPTANCE.md"
+  ],
+  "candidateTests": {
+    "status": "prior_reported_7_of_7",
+    "command": "node --test semantic-primitives.test.mjs",
+    "productionIntegration": "UNRUN"
+  },
+  "lanes": [
+    "U1",
+    "U2",
+    "U3",
+    "U4",
+    "U5",
+    "U6",
+    "U7"
+  ],
+  "executionOverride": {
+    "U1toU6": "committed",
+    "U7": "merged_into_ARBOR_PWA_R003",
+    "standaloneLaunch": false,
+    "package": "ARBOR-PWA-BASELINE-UPGRADE",
+    "master": "ARBOR-PWA-BASELINE-UPGRADE/MASTER-UPGRADE.txt",
+    "composerOwner": "B06",
+    "inspectorOwner": "B07",
+    "visualAuthorityOwner": "B08"
+  }
+}

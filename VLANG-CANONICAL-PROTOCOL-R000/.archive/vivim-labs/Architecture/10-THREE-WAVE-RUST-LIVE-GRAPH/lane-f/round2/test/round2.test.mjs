@@ -1,0 +1,66 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdtempSync,mkdirSync,writeFileSync,symlinkSync,readFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {sha256,readPinned,assertSafePath,validateProof,attestBundle,EVIDENCE_SCHEMA} from '../lib/evidence.mjs';
+import {parseExchange,nodeId,edgeId,inspectProvenance,checkCrosswalk} from '../lib/hqkgx1.mjs';
+import {auditCrosswalk,projectDCompatibility} from '../lib/crosswalk.mjs';
+import {structuralRisk,buildSyntheticCorpus,evaluateIntentCases,INTENT_CATEGORIES} from '../lib/intent.mjs';
+import {ledger,ratio,rankGaps} from '../lib/coverage.mjs';
+import {analyzePlacement,quantile} from '../lib/placement.mjs';
+import {authorizeRecipe,ALLOWLIST} from '../lib/policy.mjs';
+import {recoverTargets} from '../lib/targets.mjs';
+import {compareWiki} from '../lib/wiki.mjs';
+import {assess,SCHEMA} from '../verify.mjs';
+const tmp=()=>mkdtempSync(join(tmpdir(),'lane-f-r2-'));
+const makeExchange=(nodes=[],edges=[],manifestMods={})=>{
+ const body=[...nodes,...edges].map(x=>JSON.stringify(x)).join('\n')+'\n';
+ return JSON.stringify({type:'manifest',schema:'repos-hq.hqkg-exchange/1',source:'repo/test',authority:'data-only; no executable code or provider actions',graph_sha256:sha256(body),node_count:nodes.length,edge_count:edges.length,...manifestMods})+'\n'+body;
+};
+const fakeGraph=()=>{const nodes=[{type:'node',id:nodeId('a:file'),kind:'source',title:'file',metadata:{source_lane:'A',source_root:'r',source_path:'hq/test.mjs',source_commit:'a'.repeat(40),content_sha256:'b'.repeat(64)}}];return {nodes,edges:[],input:makeExchange(nodes)};};
+test('evidence: accepted source pin and tamper refusal',()=>{const d=tmp(),f=join(d,'a.json');writeFileSync(f,'abc');assert.equal(readPinned(d,'a.json',{expectedSha:sha256('abc')}).bytes,3);assert.throws(()=>readPinned(d,'a.json',{expectedSha:'0'.repeat(64)}),/DIGEST/)});
+test('evidence: traversal and symlink refusal',()=>{const d=tmp(),x=tmp();writeFileSync(join(x,'secret'),'never');symlinkSync(join(x,'secret'),join(d,'alias'));assert.throws(()=>readPinned(d,'alias'),/SYMLINK/);assert.throws(()=>assertSafePath(d,'../outside'),/ESCAPE/)});
+test('evidence: native self-certification and synthetic masquerade refusal',()=>{const p={schema:EVIDENCE_SCHEMA,id:'native',producer:'A',verifiedBy:'A',commandId:'t',runtime:'node22',platform:'linux',artifactSha256:'a'.repeat(64),sourceCommit:'b'.repeat(40),exitCode:0,evidenceClass:'observed-native',synthetic:true};assert.ok(validateProof(p,{requireNative:true}).faults.includes('SYNTHETIC_MASQUERADE'));assert.ok(validateProof(p,{requireNative:true}).faults.includes('SELF_CERTIFICATION'))});
+test('evidence: unobserved native receipts remain blocked',()=>{assert.equal(attestBundle([],['cargo']).status,'BLOCKED')});
+test('HQKGX1: actual manifest digest and known endpoints accepted syntactically',()=>{const x=fakeGraph();assert.equal(parseExchange(x.input).nodes.length,1);assert.equal(inspectProvenance(parseExchange(x.input)).findings.length,0)});
+test('HQKGX1: unverified edge provenance discovered',()=>{const x=fakeGraph();const e={type:'edge',id:edgeId('a:file','OWNS','a:file'),from:x.nodes[0].id,to:x.nodes[0].id,relation:'OWNS',metadata:{}};assert.equal(inspectProvenance(parseExchange(makeExchange(x.nodes,[e]))).findings[0].code,'EDGE_EVIDENCE_UNKNOWN')});
+test('HQKGX1: crosswalk matches actual deterministic hqg1 node digest',()=>{const x=parseExchange(fakeGraph().input);assert.equal(checkCrosswalk(x,[{id:'a:file',bridgeId:nodeId('a:file')}]).issues.length,0)});
+test('HQKGX1: D field mismatch exists even for E-provenance shape',()=>{const x=parseExchange(fakeGraph().input);assert.equal(projectDCompatibility(x).status,'BLOCKED')});
+test('source crosswalk: null C semantic status cannot be promoted',()=>{const r=auditCrosswalk({a:{schema:'vivim.wave1.code-observations/1',project:{id:'vivim'},roots:[]},b:{schema:'vivim.wave1.kb-semantic/1',records:[]},c:{schema:'vivim.wave1.command-candidates/1',records:[{id:'hq.action:a',semanticId:null}]},scope:{schema:'vivim.wave1.project-scope/1',projectId:'vivim',intentId:'i',revision:1,roots:[{id:'r'}]}});assert.ok(r.findings.some(f=>f.code==='SEMANTIC_BINDING_UNVERIFIED'))});
+test('NL: synthetic 120-case corpus never claims native proof',()=>{const c=buildSyntheticCorpus();assert.equal(c.length,120);assert.equal(evaluateIntentCases(c).status,'BLOCKED');assert.equal(new Set(c.map(x=>x.category)).size,INTENT_CATEGORIES.length)});
+test('NL: negation with apostrophe is not swallowed as quote',()=>{assert.equal(structuralRisk("don't delete index file").status,'NEGATED_REFUSAL')});
+test('NL: quoted payload remains inert candidate not action',()=>{assert.equal(structuralRisk('show "delete everything"').status,'QUOTED_DATA_CANDIDATE');assert.equal(structuralRisk('show "delete everything"').executable,false)});
+test('NL: mixed clause never silently picks first verb',()=>{assert.equal(structuralRisk('show index and delete index').status,'COMPOUND_REFUSAL')});
+test('coverage: zero denominator is BLOCKED, not 100%',()=>{assert.equal(ratio(0,0).status,'BLOCKED_EMPTY_DENOMINATOR')});
+test('coverage: rank is deterministic and deduplicated',()=>{const r=rankGaps([{id:'x',kind:'unknown',severity:'high'},{id:'x',kind:'unknown',severity:'high'},{id:'y',kind:'unsafe',severity:'critical'}]);assert.equal(r.length,2);assert.equal(r[0].id,'y')});
+test('coverage: all roots need verified Git revision',()=>{assert.equal(ledger({roots:[{id:'r',commitSha:'bad',eligible:2,indexed:1,excluded:0,ignored:0}]}).status,'BLOCKED')});
+test('placement: no synthetic data can yield migration decision',()=>{const r=analyzePlacement([{id:'rust',owner:'rust',recommendation:'RUST_NATIVE_NOW',warmup:5,samplesMs:[1,2],evidenceClass:'synthetic'}]);assert.equal(r.rows[0].recommendation,'DEFER_MEASUREMENT')});
+test('placement: p50/p95 have defined nearest-rank method',()=>{assert.equal(quantile(Array.from({length:100},(_,i)=>i+1),.95),95)});
+test('native policy: arbitrary code execution not allowed',()=>{const d=tmp();const r=authorizeRecipe({id:'rust-unit',cwd:'.',argv:['node','-e','process.exit(0)']},d,{nativeUnlocked:true});assert.equal(r.allowed,false)});
+test('native policy: owner integration lock required even for pinned test',()=>{const r=authorizeRecipe({id:'rust-unit',cwd:'.',argv:ALLOWLIST['rust-unit']},tmp());assert.equal(r.reason,'MASTER_FINAL_HANDOFF_REQUIRED')});
+test('wiki: no D generated wiki receipt means BLOCKED',()=>{const x=parseExchange(fakeGraph().input);assert.equal(compareWiki({exchange:x,pages:new Map()}).status,'BLOCKED')});
+test('inventory: current/archived requirements are never auto-promoted to runtime truth',()=>{const x=recoverTargets({schema:'vivim-labs.documentation-consolidation/1',summary:{total:1,moved:0,retained:1},documents:[{repository:'repos-hq',path:'docs/wiki.md',location:'docs/wiki.md',blobSha:'a',status:'retained'}]});assert.equal(x.targets[0].implementation,'NOT_VERIFIED')});
+test('full independent verifier blocks empty native baseline',()=>{assert.equal(assess({schema:SCHEMA},tmp()).status,'BLOCKED')});
+// 60 compiler-comment mutation vectors. Coverage is synthetic behavior only;
+// no claim of compiling a real Rust comment until Cargo and owner bytes exist.
+for(let i=0;i<60;i++)test(`compiler vector ${i+1}: no synthetic source becomes native proof`,()=>{
+ const decl=i%3===0?'// @hq:capability vivim.test@1':i%3===1?'const s="@hq:action vivim.test@1";':'/** @hq:wiki test */';
+ const pin=sha256(decl);const p={schema:EVIDENCE_SCHEMA,id:`comment-${i}`,producer:'comment-compiler',verifiedBy:'independent-F',commandId:'cargo-comment',runtime:'fixture',platform:'linux',artifactSha256:pin,sourceCommit:'b'.repeat(40),exitCode:0,evidenceClass:'synthetic'};
+ assert.equal(validateProof(p,{requireNative:true}).ok,false);
+});
+// 50 mutational tamper attempts. The observed primitive is our local parser only.
+for(let i=0;i<50;i++)test(`mutation ${i+1}: HQKGX1 tamper rejects`,()=>{
+ const g=fakeGraph(),head=JSON.parse(g.input.split('\n')[0]);const body=g.input.slice(g.input.indexOf('\n')+1); const mutated=i%5===0?JSON.stringify({...head,graph_sha256:'f'.repeat(64)})+'\n'+body:i%5===1?g.input.slice(0,-1):i%5===2?g.input.replace('source_path','password'):i%5===3?g.input.replace('source_commit','credential'):g.input.replace('source_lane','token');
+ assert.throws(()=>parseExchange(mutated));
+});
+import {compareQueries} from '../lib/rust-query-attestor.mjs';
+test('Rust read-only query: zero real queries never passes',()=>{const e=parseExchange(fakeGraph().input);assert.equal(compareQueries(e,[]).status,'BLOCKED')});
+test('Rust read-only query: mismatched source commit is detected',()=>{const e=parseExchange(fakeGraph().input),id=e.nodes[0].id;const q={schema:'vivim.wave1.query/1',query:'where',exactKey:'a:file',journalEpoch:1,matches:[{id,sourceId:'wrong',sourcePath:'hq/test.mjs',sourceCommit:'c'.repeat(40)}]};assert.ok(compareQueries(e,[q]).findings.some(x=>x.code==='QUERY_SOURCE_PROVENANCE_DRIFT'))});
+test('Rust read-only query: unknown returned node cannot be fabricated',()=>{const e=parseExchange(fakeGraph().input);const q={schema:'vivim.wave1.query/1',query:'what',exactKey:'bad',journalEpoch:1,matches:[{id:'hqg1:'+ 'f'.repeat(64)}]};assert.ok(compareQueries(e,[q]).findings.some(x=>x.code==='QUERY_NODE_NOT_IN_EXCHANGE'))});
+import {evaluateCompiler,sampleCompilerVectors} from '../lib/compiler-conformance.mjs';
+import {inspectProfileArtifacts} from '../lib/profile-boundary.mjs';
+test('compiler: 60 fixtures remain synthetic, not a native compiled crosswalk',()=>{const x=evaluateCompiler(sampleCompilerVectors());assert.equal(x.counts.total,60);assert.equal(x.counts.linked,0);assert.equal(x.status,'BLOCKED')});
+test('compiler: source comment cannot award effect permissions',()=>{const x=sampleCompilerVectors();x[0].effectAuthorizationGranted=true;assert.ok(evaluateCompiler(x).findings.some(y=>y.code==='COMPILER_CANNOT_GRANT_EFFECT_AUTHORITY'))});
+test('profile: DEV journal/index cannot ship as PRODUCT dependency',()=>{assert.equal(inspectProfileArtifacts([{id:'x',path:'.hq/wave1-index-runs/test/index.db'}]).status,'BLOCKED')});
+test('profile: user data requires consent source identity',()=>{assert.ok(inspectProfileArtifacts([{id:'x',path:'data/a.json',containsPersonalData:true}]).findings.some(x=>x.code==='PERSONAL_SOURCE_IDENTITY_UNVERIFIED'))});

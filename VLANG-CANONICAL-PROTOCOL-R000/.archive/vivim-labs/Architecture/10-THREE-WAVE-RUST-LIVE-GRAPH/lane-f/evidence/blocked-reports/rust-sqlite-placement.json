@@ -1,0 +1,60 @@
+{
+  "schema": "vivim.wave1.lane-f/1",
+  "status": "BLOCKED",
+  "components": [
+    {
+      "id": "source-index",
+      "owner": "UNKNOWN",
+      "recommendation": "DEFER_MEASUREMENT",
+      "evidence": []
+    },
+    {
+      "id": "comment-compiler",
+      "owner": "UNKNOWN",
+      "recommendation": "DEFER_MEASUREMENT",
+      "evidence": []
+    },
+    {
+      "id": "kb-semantic",
+      "owner": "UNKNOWN",
+      "recommendation": "DEFER_MEASUREMENT",
+      "evidence": []
+    },
+    {
+      "id": "command-routing",
+      "owner": "UNKNOWN",
+      "recommendation": "DEFER_MEASUREMENT",
+      "evidence": []
+    },
+    {
+      "id": "rust-graph",
+      "owner": "UNKNOWN",
+      "recommendation": "DEFER_MEASUREMENT",
+      "evidence": []
+    },
+    {
+      "id": "sqlite-search",
+      "owner": "UNKNOWN",
+      "recommendation": "DEFER_MEASUREMENT",
+      "evidence": []
+    },
+    {
+      "id": "wiki",
+      "owner": "UNKNOWN",
+      "recommendation": "DEFER_MEASUREMENT",
+      "evidence": []
+    },
+    {
+      "id": "host-effects",
+      "owner": "UNKNOWN",
+      "recommendation": "DEFER_MEASUREMENT",
+      "evidence": []
+    },
+    {
+      "id": "ui-document",
+      "owner": "UNKNOWN",
+      "recommendation": "DEFER_MEASUREMENT",
+      "evidence": []
+    }
+  ]
+}

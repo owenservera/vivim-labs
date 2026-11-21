@@ -1,0 +1,27 @@
+B09 — REAL PRODUCT CONVERGENCE AND FINISH
+HIGH-EFFORT PRODUCT CODING TASK
+REPOSITORY: owenservera/ARBOR
+TARGET: main (no branch, no PR)
+REVIEWED SOURCE BASELINE: 7c1b01630a806c0ac701bdc21e3f4968fec91097
+PACKAGE: owenservera/vivim-labs/ARBOR-PWA-BASELINE-UPGRADE
+
+MANDATORY START
+Read MASTER-UPGRADE.txt, BASELINE-DESIGN.md, INTEGRATION-CONTRACT.md, CURRENT-BASELINE.md and PRODUCT-ACCEPTANCE.md and R002-SOURCE-ADVANCE.md. Inspect current main HEAD and relevant executable code/tests; local agents also inspect working tree. This baseline is evidence, not permission to overwrite newer implementation. Resolve overlap with actual source; if already implemented, test and improve the remaining product gap. Work directly on main; preserve concurrent edits, use small non-overlapping commits, no force push. No new architecture, runtime, compiler, dispatcher, database, journal, workflow, report, orchestration framework, synthetic product data, provider API, Playwright or Puppeteer. Bun preferred; real Node/Cargo checks where existing modules require them. Keep customer runtime independent of Git. 
+Use existing authenticated Host authority, strict validators, stable identity, exact previews, explicit approval, claim-once effects and persisted readback. Do not expose private content or invent evidence. On unavailable connection, stale or ambiguous result, fail closed; no blind retry. Tests may use fixtures for unit and adversarial checks, never as product sources. No claim of running browser/device/Windows acceptance if unavailable.
+
+OUTCOME
+The complete minimal programmable PWA is working as one product, not a collection of separately claimed green lanes.
+INSPECT
+Latest main and actual B01–B08 modifications, existing real callers/tests. Do not restart architecture discovery. No audit/report-only output.
+IMPLEMENT AND VERIFY
+1. Trace current first-launch, registration, token resolution, TierFlow rendering, typed compiler, owner approval and Host persistence/revision/readback. Fix actual broken imports, missing asset paths, duplicated adapters, inconsistent source identities or stale caller contracts. Preserve concurrent changes; remove obsolete code only after confirming real references.
+2. Execute PRODUCT-ACCEPTANCE.md with actual disposable persistent Host data. Use real pairing, PWA and desktop owner interface, actual browser/CDP if available. Exercise all seven tabs, voice/attachments/media/notes, Wiki edit, control, NL/direct/typed equivalent UI setting, Research add, navigation reorder, safe layout/style, reload/Host restart, restore and cross-device readback.
+3. Verify truthful VIEW ALL inventory vs runtime counts: every actual visible instance registered, only tested adapters installed, unsupported described capabilities labeled honestly. No fake receipts, synthetic product state, hardcoded fabricated status or unproven rollback.
+4. Adversarial: invalid authority/revoked grant, no approval, stale revision, invalid target/value/data refs, inaccessible/private state, missing TierFlow, oversized document, double activation, lost response, uncertain receipt, failed persistence, migration/old state and undo refusal. Fix product failures directly on main.
+5. Run existing targeted tests plus real build/startup. Record exact commands/results and actual final SHA in chat; mark missing runtime/physical acceptance UNRUN. No new gates or orchestration/workflows. If limitation remains, preserve truthful UI and deliver concrete code fixes achieved. 
+FINISH means actual real visible change, persisted and restored with safe authority, all existing functional controls retained, source-backed engine availability and single coherent PWA. No final claim all 417/461 implemented.
+DELIVER
+Committed product code directly on main, exact changed source, observed behavior, real tests and honest unrun limitations. No new reports or workflow files.
+
+R002 SOURCE ADVANCE — MANDATORY CURRENT IMPLEMENTATION DELTA
+New Wiki exact approval and receipt-derived private Wiki-create template are delivered code with tests UNRUN, not tasks to recreate. Verify actual Host-bound visual approval at real route, no bypass from direct interaction, service digest/changeId provenance, current grants/device, canonical content and uncertainty rather than queue done. Existing Wiki exact approval/expiry/actor/contract drift and desktop teaching/fresh-reuse regressions remain intact. Verify new approval/teaching UI source handlers and scope. Shared navigation resolver, no duplicate routing; no broad UI learning. Integrate on main and fix actual product behavior.

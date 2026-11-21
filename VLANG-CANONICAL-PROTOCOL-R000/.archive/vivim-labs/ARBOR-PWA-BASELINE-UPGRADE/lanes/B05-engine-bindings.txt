@@ -1,0 +1,28 @@
+B05 — TYPED UI ENGINE TO COMPONENT BINDINGS
+HIGH-EFFORT PRODUCT CODING TASK
+REPOSITORY: owenservera/ARBOR
+TARGET: main (no branch, no PR)
+REVIEWED SOURCE BASELINE: 7c1b01630a806c0ac701bdc21e3f4968fec91097
+PACKAGE: owenservera/vivim-labs/ARBOR-PWA-BASELINE-UPGRADE
+
+MANDATORY START
+Read MASTER-UPGRADE.txt, BASELINE-DESIGN.md, INTEGRATION-CONTRACT.md, CURRENT-BASELINE.md and PRODUCT-ACCEPTANCE.md and R002-SOURCE-ADVANCE.md. Inspect current main HEAD and relevant executable code/tests; local agents also inspect working tree. This baseline is evidence, not permission to overwrite newer implementation. Resolve overlap with actual source; if already implemented, test and improve the remaining product gap. Work directly on main; preserve concurrent edits, use small non-overlapping commits, no force push. No new architecture, runtime, compiler, dispatcher, database, journal, workflow, report, orchestration framework, synthetic product data, provider API, Playwright or Puppeteer. Bun preferred; real Node/Cargo checks where existing modules require them. Keep customer runtime independent of Git. 
+Use existing authenticated Host authority, strict validators, stable identity, exact previews, explicit approval, claim-once effects and persisted readback. Do not expose private content or invent evidence. On unavailable connection, stale or ambiguous result, fail closed; no blind retry. Tests may use fixtures for unit and adversarial checks, never as product sources. No claim of running browser/device/Windows acceptance if unavailable.
+
+OUTCOME
+Actual engine controls compile current typed settings into real visual changes for eligible registered instances, with truthful installed capability status. No separate color/layout/etc engine implementation per surface.
+INSPECT / OWN
+packages/vec-ui-engines/src/catalog.mjs, registry.mjs, compiler.mjs, validators.mjs, enum-choices.mjs, tokens.mjs, tests; existing Build compileVecThemeRequest; B01 canonical registration and B03 token mapping, B04 TierFlow document/render integration, B08 persisted candidate contract. Existing registry installed:false/MISSING_RENDERER_ADAPTER is intentional until real mapping.
+IMPLEMENT
+1. Inspect exact capability IDs/value schemas and real renderer/native property support. Generate source-backed applicable/installed distinctions in incumbent registry, no declaration-only installation. Map capabilities to reviewed instance types/scope and actual validated render property; maintain pure/no-effect metadata.
+2. P0 appearance: existing color background/accent then real surface/foreground, paint, borders, corners, shadow, typography/text/theme where supported. P0 geometry: spacing, sizing, layout, position, responsive, scroll. P0 usability: navigation, input/focus/gestures/accessibility/states only where existing handler supports setting. Security/history/system are policy-constrained, not freely mutable. Expose other families (transforms/effects/motion/assets/media/charts/data/forms/localization/workflow/templates/composition/diagnostics/spatial) with truthful availability; connect real existing adapters where safe.
+3. Reuse compileUiConfiguration and value validators/enum/token aliases. Bind settings into existing UI proposal/compiler/renderer; no separate patch executor. Define deterministic precedence, reject incompatible setting/target, clamp only when existing contract permits and preview normalized value; mixed batch atomicity and exact approved scope.
+4. Direct controls derive from actual valueSchema, not manually duplicating ranges. NL B06 uses same settings. Renderer B04 consumes normalized output; B08 persists same typed semantics. No arbitrary CSS/JS/HTML or uncontrolled refs. If engine can't be installed until missing support exists, return typed unsupported; no misleading badge.
+5. Attach current capability evidence to existing instance registry; differentiate defined/applicable/sourceMapped/installed/authorized. Current values read from canonical projection, not defaults masquerading as active.
+VERIFY
+Existing engine compiler/registry/token/validator suites, canonical ID mapping, switch invalid types/unsupported scopes, contrast and reduced motion, ambiguous target, stale revision, no unauthorized changes, actual DOM computed style/layout after Host persistence. At least global background/accent and an instance geometry/typography change proven; expand installed set only as real source allows.
+DELIVER
+Committed product code directly on main, exact changed source, observed behavior, real tests and honest unrun limitations. No new reports or workflow files.
+
+R002 SOURCE ADVANCE — MANDATORY CURRENT IMPLEMENTATION DELTA
+No catalog or newly installed adapter changes. Actual Build connects background/accent; registry still separates applicability from installation. Bind actual installed adapter contract/version and normalized setting to candidate and Host approval (B08); adapter changes invalidate preview even without catalog-version change. Derive installed status from real adapter execution, not Wiki learning or approval. No raw sendProposal from engine controls.

@@ -1,0 +1,73 @@
+{
+  "schema": "vivim.wave1.lane-d.round2-execution/1",
+  "date": "2026-11-07",
+  "lane": "D",
+  "status": "SAFE_SOURCE_TESTED_NATIVE_INTEGRATION_BLOCKED",
+  "round2Implemented": [
+    "D2-01",
+    "D2-02",
+    "D2-03",
+    "D2-04",
+    "D2-06",
+    "D2-07",
+    "D2-11-spec-and-fixture"
+  ],
+  "readOnlyPrework": [
+    "D2-05 proposed contract only",
+    "D2-10 standalone inert inspector only",
+    "D2-12 placement spec only"
+  ],
+  "integrationGatedNotRun": [
+    "D2-05 HQ owner writer integration",
+    "D2-08 native edit/deletion/restart",
+    "D2-09 real CLI/NL/wiki parity",
+    "D2-10 real F-witnessed native end-to-end",
+    "D2-12 native Rust vs SQLite benchmarks"
+  ],
+  "testCommand": "node --test wiki-oracle.test.mjs test/*.test.mjs",
+  "nodeVersion": "v22.16.0",
+  "exitCode": 0,
+  "tests": {
+    "tests": 108,
+    "pass": 108,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "round1LegacyTests": 19,
+  "round2NewTests": 89,
+  "testInput": "SYNTHETIC_ONLY; source-contract structural inspection from GitHub",
+  "syntaxCheck": "node --check on all .mjs source: exit 0",
+  "sourceBaseline": {
+    "labsHeadAtStart": "302ba15e7be9d25abb46d2981c51923ef87b952e",
+    "reposHqHeadAtStart": "04c84b1f8cc59d8aa516541b952e2a97f4ccc600"
+  },
+  "masterCompletionEvidence": "NOT_FOUND in inspected main tree; do not infer other running session state",
+  "a_b_c_to_e_contractCrosswalk": "BLOCKED / native producer schemas do not match E source-records/1",
+  "eRustImportRun": false,
+  "eRustJournalCreated": false,
+  "hqWriterIntegrationRun": false,
+  "fIndependentVerification": false,
+  "nativeCargoRun": false,
+  "wikiPagesIntegrated": 0,
+  "scopeCoverage": null,
+  "verifiedChains": 0,
+  "unsafeHostActionsExecuted": 0,
+  "indexDbResets": 0,
+  "wikiConfigWrites": 0,
+  "canonicalWriterEdits": 0,
+  "wave2Designed": false,
+  "evidence": {
+    "allTestsLogSha256": "b7d9baf3d682cd10e4478564dde0ec12f393e8a3eee68c11ea9f3549d936094a",
+    "logPath": "evidence/all-node-tests.log"
+  },
+  "unverified": [
+    "Node testing is not a Rust journal",
+    "No actual owner-machine data",
+    "No approved HQ wiki read-view",
+    "Legacy D oracle kept intact",
+    "Native Cargo absent",
+    "Product release not tested"
+  ]
+}

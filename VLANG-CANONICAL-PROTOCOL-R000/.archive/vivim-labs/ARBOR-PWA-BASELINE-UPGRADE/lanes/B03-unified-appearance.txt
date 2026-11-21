@@ -1,0 +1,28 @@
+B03 — ONE VISUAL TOKEN AND APPEARANCE SYSTEM
+HIGH-EFFORT PRODUCT CODING TASK
+REPOSITORY: owenservera/ARBOR
+TARGET: main (no branch, no PR)
+REVIEWED SOURCE BASELINE: 7c1b01630a806c0ac701bdc21e3f4968fec91097
+PACKAGE: owenservera/vivim-labs/ARBOR-PWA-BASELINE-UPGRADE
+
+MANDATORY START
+Read MASTER-UPGRADE.txt, BASELINE-DESIGN.md, INTEGRATION-CONTRACT.md, CURRENT-BASELINE.md and PRODUCT-ACCEPTANCE.md and R002-SOURCE-ADVANCE.md. Inspect current main HEAD and relevant executable code/tests; local agents also inspect working tree. This baseline is evidence, not permission to overwrite newer implementation. Resolve overlap with actual source; if already implemented, test and improve the remaining product gap. Work directly on main; preserve concurrent edits, use small non-overlapping commits, no force push. No new architecture, runtime, compiler, dispatcher, database, journal, workflow, report, orchestration framework, synthetic product data, provider API, Playwright or Puppeteer. Bun preferred; real Node/Cargo checks where existing modules require them. Keep customer runtime independent of Git. 
+Use existing authenticated Host authority, strict validators, stable identity, exact previews, explicit approval, claim-once effects and persisted readback. Do not expose private content or invent evidence. On unavailable connection, stale or ambiguous result, fail closed; no blind retry. Tests may use fixtures for unit and adversarial checks, never as product sources. No claim of running browser/device/Windows acceptance if unavailable.
+
+OUTCOME
+Global and per-view/component appearance uses coherent typed values from existing UI engines and existing Host appearance state. One theme affects real shell and supported visual components consistently.
+INSPECT / OWN
+packages/vec-ui-engines/src/tokens.mjs, validators.mjs, existing color capabilities; apps/mobile-relay/visual-theme.mjs, theme-plan.mjs, visual-bootstrap.mjs, bootstrap-phone.mjs, shell CSS in index.html, apps/vivim-host/public/vivim-tokens.css, host.css, mobile-first.css; actual Host theme/revision projection. B05 owns engine adapter registry/compiler; B08 owns persistence; B04 owns TierFlow render plan.
+IMPLEMENT
+1. Trace all current appearance writers/readers: presets, bootstrap CSS variables/cache, surface.theme, Host styles and font assets. Choose incumbent typed token/setting representation; document compatibility as code/tests, no separate theme store or alternate publisher. Map existing theme keys and normalize preset and token aliases deterministically.
+2. Use source-backed neutral graphite/light equivalent, existing fonts, one accent, semantic states, consistent spacing, corner geometry, borders and shadow. Define deterministic resolution default -> owner global -> bounded view -> allowed instance override; protect status meaning and contrast. Use existing token resolver, validators and readable foreground/contrast logic, remove duplicate math only after dependency proof.
+3. Wire installed appearance settings end-to-end through B05 typed binding, B08 committed revision readback, PWA shell and supported TierFlow nodes, not only preview card. Handle font size, background/accent, surface/foreground where implemented, spacing, radius and existing density/motion. Paint/border/shadow only advertise after actual validated mapping. No arbitrary CSS, URL, inline JS, unapproved assets.
+4. Preserve existing user theme choices, old revision format, active preset and restoration; old source remains readable. Clear stale private projection/cache on revocation. First paint safe neutral fallback never claims committed customization. Explicit approval prior to durable theme update; avoid separate duplicate theme/visual writes.
+5. Provide same direct-control and NL typed settings entry; B06 owns routing. Confirm changes repaint intended shell/canvas/desktop without unrelated mutation.
+VERIFY
+Use token and theme regression tests, old/new persisted state migration, contrast/reduced motion, invalid colors/aliases/cycles, missing/stale/unauthorized projection. Actual computed CSS/readback across Talk/Wiki/Build and responsive desktop. No claim of every appearance capability installed until verified.
+DELIVER
+Committed product code directly on main, exact changed source, observed behavior, real tests and honest unrun limitations. No new reports or workflow files.
+
+R002 SOURCE ADVANCE — MANDATORY CURRENT IMPLEMENTATION DELTA
+Style new Host-bound meaning, receipt, uncertain and protected approval controls via shared tokens without changing trust semantics or hiding exact values. Existing theme settings remain distinct from Wiki/learning. Inspect choose-preset and undo-theme flows; B08 owns exact approval and proof. Appearance changes cannot suppress approval, recovery or accessibility.

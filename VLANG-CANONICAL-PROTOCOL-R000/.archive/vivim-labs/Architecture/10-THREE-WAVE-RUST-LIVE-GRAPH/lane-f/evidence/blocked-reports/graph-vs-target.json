@@ -1,0 +1,342 @@
+{
+  "schema": "vivim.wave1.lane-f/1",
+  "status": "BLOCKED",
+  "sourceRoots": {
+    "indexed": 0,
+    "total": 3
+  },
+  "graph": {
+    "nodes": 0,
+    "edges": 0,
+    "chain": null
+  },
+  "artifacts": {
+    "graph": null,
+    "wiki": null,
+    "journal": null
+  },
+  "gaps": [
+    {
+      "kind": "untested",
+      "id": "root:vivim-labs",
+      "detail": "Unverified source SHA or indexing receipt",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "root:repos-hq",
+      "detail": "Unverified source SHA or indexing receipt",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "root:tierflow",
+      "detail": "Unverified source SHA or indexing receipt",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "scoped-reset",
+      "detail": "No evidence path supplied",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "reset-safety",
+      "detail": "No local reset-preservation/intent proof",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "rust-graph",
+      "detail": "No evidence path supplied",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "wiki-output",
+      "detail": "No evidence path supplied",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "missing",
+      "id": "A-B-C-in-Rust",
+      "detail": "Rust graph lacks independently evidenced code/KB/command domain",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "missing",
+      "id": "source-kb-command-chain",
+      "detail": "Unproven Rust cross-domain traversal",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "intent-safety",
+      "detail": "No evidence path supplied",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "nl:exact",
+      "detail": "No source-pinned observed case",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "nl:negation",
+      "detail": "No source-pinned observed case",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "nl:quotation",
+      "detail": "No source-pinned observed case",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "nl:conjunction",
+      "detail": "No source-pinned observed case",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "nl:ambiguity",
+      "detail": "No source-pinned observed case",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "nl:typo",
+      "detail": "No source-pinned observed case",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "nl:missing-slot",
+      "detail": "No source-pinned observed case",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "nl:unsupported",
+      "detail": "No source-pinned observed case",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "nl:wrong-target",
+      "detail": "No source-pinned observed case",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "compiler-conformance",
+      "detail": "No evidence path supplied",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "compiler-conformance",
+      "detail": "Native compiler/linker crosswalk not proven",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "placement-native",
+      "detail": "No evidence path supplied",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "placement:source-index",
+      "detail": "No measured owner/benchmark evidence",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "placement:comment-compiler",
+      "detail": "No measured owner/benchmark evidence",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "placement:kb-semantic",
+      "detail": "No measured owner/benchmark evidence",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "placement:command-routing",
+      "detail": "No measured owner/benchmark evidence",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "placement:rust-graph",
+      "detail": "No measured owner/benchmark evidence",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "placement:sqlite-search",
+      "detail": "No measured owner/benchmark evidence",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "placement:wiki",
+      "detail": "No measured owner/benchmark evidence",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "placement:host-effects",
+      "detail": "No measured owner/benchmark evidence",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "placement:ui-document",
+      "detail": "No measured owner/benchmark evidence",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "rust-dev-journal",
+      "detail": "No evidence path supplied",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "required:hq-test",
+      "detail": "Missing successful native execution",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "required:cargo-test",
+      "detail": "Missing successful native execution",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "required:rust-import",
+      "detail": "Missing successful native execution",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "required:rust-noop",
+      "detail": "Missing successful native execution",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "required:rust-restart",
+      "detail": "Missing successful native execution",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "required:rust-invalid",
+      "detail": "Missing successful native execution",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "required:rust-collision",
+      "detail": "Missing successful native execution",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "required:rust-stale",
+      "detail": "Missing successful native execution",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "required:rust-secret",
+      "detail": "Missing successful native execution",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "required:where",
+      "detail": "Missing successful native execution",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "required:what",
+      "detail": "Missing successful native execution",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "required:talks-to",
+      "detail": "Missing successful native execution",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "required:gap",
+      "detail": "Missing successful native execution",
+      "severity": "critical",
+      "evidence": null
+    },
+    {
+      "kind": "untested",
+      "id": "required:wiki",
+      "detail": "Missing successful native execution",
+      "severity": "critical",
+      "evidence": null
+    }
+  ]
+}

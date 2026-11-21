@@ -1,0 +1,31 @@
+B06 — UNIVERSAL NATURAL-LANGUAGE AND DIRECT UI PROGRAMMING
+HIGH-EFFORT PRODUCT CODING TASK
+REPOSITORY: owenservera/ARBOR
+TARGET: main (no branch, no PR)
+REVIEWED SOURCE BASELINE: 7031105ce179151adc9be3fe482b7f4cbb68d55c
+PACKAGE: owenservera/vivim-labs/ARBOR-PWA-BASELINE-UPGRADE
+
+MANDATORY START
+Read MASTER-UPGRADE.txt, BASELINE-DESIGN.md, INTEGRATION-CONTRACT.md, CURRENT-BASELINE.md and PRODUCT-ACCEPTANCE.md and R002-SOURCE-ADVANCE.md. Inspect current main HEAD and relevant executable code/tests; local agents also inspect working tree. This baseline is evidence, not permission to overwrite newer implementation. Resolve overlap with actual source; if already implemented, test and improve the remaining product gap. Work directly on main; preserve concurrent edits, use small non-overlapping commits, no force push. No new architecture, runtime, compiler, dispatcher, database, journal, workflow, report, orchestration framework, synthetic product data, provider API, Playwright or Puppeteer. Bun preferred; real Node/Cargo checks where existing modules require them. Keep customer runtime independent of Git. 
+Use existing authenticated Host authority, strict validators, stable identity, exact previews, explicit approval, claim-once effects and persisted readback. Do not expose private content or invent evidence. On unavailable connection, stale or ambiguous result, fail closed; no blind retry. Tests may use fixtures for unit and adversarial checks, never as product sources. No claim of running browser/device/Windows acceptance if unavailable.
+
+OUTCOME
+Talk, Build, Wiki and shared composer can configure any registered supported visual instance through one existing VEC compilation/preview/approval route. Direct typed controls and NL produce equivalent meaning. Unknown intents refuse or clarify, never route unauthorized operations to providers.
+INSPECT / OWN
+apps/mobile-relay/vec/compiler.mjs, ui-adapter.mjs, build-composer.mjs, composer-assist.mjs, build-canvas.mjs, control-language.mjs/control-chat.mjs relevant shared routing; VLANG/NLCL and existing Host planner. B01 identity, B05 setting adapters, B08 persistence; coordinate R4/VLANG live slots and B07 inspector. 
+IMPLEMENT
+1. Read current unified interpretation and source-backed context; reuse NLCL/VLANG canonical classification and VEC dispatch, no second interpreter or independent routing table. Resolve actual instance identity via B01 and current context, typed engine capability via B05. Preserve exact user literal values, ambiguity and clarification; no guessing unknown target or interpreting navigation as UI mutation.
+2. Expand existing UI grammar/typed config for global theme, supported instance appearance/layout, navigation ordering, composer placement, real supported add/rename/move/remove. Multi-component changes specify exact target set; bounded operations, no silent widening. Distinguish display transforms from canonical data mutations; Wiki edits stay actual Host Wiki journal/planner.
+3. Direct controls/keyboard/touch and typed values call same compiler/adapter and approval surface. Live semantic hints may show current target/value/unsupported features without sending. Known changes stay local; unknown legitimate design requests may use existing explicitly bounded provider draft path only as inert preview, never execute.
+4. Show exact before/after actual component, normalized value/operation, source revision, affected scope, actual candidate visual. Explicit Activate/approve binds same candidate; Host revalidates current target, revision and authorization. No effect during typing/preview, no auto resend on lost response; existing readback/uncertain states, undo through B08 owner authority.
+5. Preserve existing A2 Wiki and A3 Build product paths, native sessions and provider chat; no alternate dispatcher or duplicated composer.
+VERIFY
+Actual NL/direct equivalent candidate for background color, real card styling, supported navigation reorder, actual mic position, add Research, Wiki navigation/edit. Test unknown or ambiguous target, unsupported capability, invalid value, stale revision, wrong scope, no approval, double activation, lost result, permission revocation. Existing NLCL/VEC, live composer and real Host/PWA integration tests. Do not claim unsupported example commands pass.
+DELIVER
+Committed product code directly on main, exact changed source, observed behavior, real tests and honest unrun limitations. No new reports or workflow files.
+
+R002 SOURCE ADVANCE — MANDATORY CURRENT IMPLEMENTATION DELTA
+control-language.mjs already owns resolveLocalDestination, resolveDesktopDestination and resolveProductRoute; buildRequestRoute delegates. Preserve local navigation -> current Host meaning/clarification/refusal -> bounded VEC UI -> provider choice, reuse composer-assist. Wiki approvalMeaning now supplies exact resolved args, optional deterministic sentence and semanticDigest; retain consumption. Never claim visual round-trip verified without actual compiler equality. Coordinate B08 on exact approved visual proposal and digests; all NL/direct/typed edits require preview/Activate, selection inert. No generalized visual learning; receipt template remains desktop-only Wiki creation, canonical NLCL/refusal wins.
+
+
+R003 — ABSORBS U7. Sole shared semantic composer owner. Extend composer-assist.mjs composeDraftHints/composerResponse/describeDraft/draftSuggestions/mountComposerAssist and actual Host interpretation callers. Preserve two-TAB, inert suggestions, debounce/latest-input-wins, expiry, scope reset, Escape, Enter and IME. Add typed action, stable target/parameter slots, literal spans where incumbent parser supports, missing/ambiguous/refused statuses, provenance and current revisions. Derive choices from authorized actual Wiki/instance/catalog and installed engine schemas, not invented entities. Selective corrections preserve other text and literal values, recompile and invalidate stale results. Use U3 context and U5 desktop-private Wiki-create learning only through existing authorized interfaces. No generalized visual learning. B07 passes selection inertly; B02 mounts same behavior across Talk/Build/Wiki/desktop. Submit obtains fresh Host meaning and exact preview; B08 alone binds approval and persistence. See R003-U7-CONVERGENCE.md for tests.

@@ -2,8 +2,8 @@
 //! This is an inert review candidate, not an owner-task writer, code modifier,
 //! model invocation, automatic VLANG registration or permission grant.
 use std::collections::BTreeSet;
-use crate::bundle_projection::LensProjection;
-use crate::narrative::{Narrative, RealizationCode};
+use super::bundle_projection::LensProjection;
+use super::narrative::{Narrative, RealizationCode};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Stage {
@@ -99,8 +99,8 @@ pub fn review_candidates(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::bundle_projection::ContextCard;
-    use crate::narrative::{Narrative,RealizationDiagnostic};
+    use super::super::bundle_projection::ContextCard;
+    use super::super::narrative::{Narrative,RealizationDiagnostic};
     fn sample() -> (LensProjection,Narrative) {
         (LensProjection {
             focus_page:"wiki.system".into(),scope_id:"owner:1".into(),

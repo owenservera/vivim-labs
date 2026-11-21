@@ -1,35 +1,305 @@
 {
-  "schema": "vivim-labs.vlang-archive/1",
-  "created": "2026-11-21",
-  "canonical": "VLANG-CANONICAL-PROTOCOL-R000",
-  "policy": "Additive exact copies; stale and conflicting documents retained",
-  "sourceSnapshots": [
+  "schema": "vivim-labs.vlang-protocol.archive/2",
+  "date": "2026-11-21",
+  "description": "Additive, non-destructive archive; stale and conflicting sources deliberately retained",
+  "archiveRoot": "VLANG-CANONICAL-PROTOCOL-R000/.archive",
+  "archiveTreeShaBeforeCatalog": "09616feaf9e841e51da1a05358aae3894a132faf",
+  "countsBeforeCatalog": {
+    "files": 728,
+    "dirs": 124,
+    "collections": 23,
+    "verifiedFullTreeCopies": 21,
+    "curatedSourceSets": 2
+  },
+  "collections": [
     {
-      "repo": "owenservera/vivim-labs",
-      "commit": "d880e7dba5dd0c3b9263dbaf9ccfcb1eb6600178",
-      "paths": [
-        "ARBOR-VLANG-UPGRADE",
-        "ARBOR-PWA-BASELINE-UPGRADE",
-        "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH"
-      ],
-      "method": "reuse original Git trees unchanged"
+      "name": "Original VLANG product upgrade",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/vivim-labs/ARBOR-VLANG-UPGRADE",
+      "sourceRepository": "owenservera/vivim-labs",
+      "sourceRef": "d880e7dba5dd0c3b9263dbaf9ccfcb1eb6600178",
+      "sourcePath": "ARBOR-VLANG-UPGRADE",
+      "sourceTreeSha": "54b237e8353dc149e831617957e510630da698a3",
+      "archiveTreeSha": "54b237e8353dc149e831617957e510630da698a3",
+      "exactTreeMatch": true,
+      "fileCount": 17,
+      "bytes": 860433
     },
     {
-      "repo": "owenservera/repos-hq",
-      "commit": "2651bc8",
-      "path": "docs/research/semantic-language-kernel",
-      "files": 4,
-      "method": "SHA-verified cross-repository copy"
+      "name": "PWA convergence/U7",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/vivim-labs/ARBOR-PWA-BASELINE-UPGRADE",
+      "sourceRepository": "owenservera/vivim-labs",
+      "sourceRef": "d880e7dba5dd0c3b9263dbaf9ccfcb1eb6600178",
+      "sourcePath": "ARBOR-PWA-BASELINE-UPGRADE",
+      "sourceTreeSha": "be718c97c0d7070866873e61d7b67c312903a322",
+      "archiveTreeSha": "be718c97c0d7070866873e61d7b67c312903a322",
+      "exactTreeMatch": true,
+      "fileCount": 19,
+      "bytes": 275103
+    },
+    {
+      "name": "Rust live graph architecture",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/vivim-labs/Architecture",
+      "sourceRepository": "owenservera/vivim-labs",
+      "sourceRef": "d880e7dba5dd0c3b9263dbaf9ccfcb1eb6600178",
+      "sourcePath": "Architecture",
+      "sourceTreeSha": "6a4e5c172c4447d752dd66788368c057ef0f7b85",
+      "archiveTreeSha": "6a4e5c172c4447d752dd66788368c057ef0f7b85",
+      "exactTreeMatch": true,
+      "fileCount": 106,
+      "bytes": 744708
+    },
+    {
+      "name": "Original research chat exports",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/vivim-labs/research/vlang",
+      "sourceRepository": "owenservera/vivim-labs",
+      "sourceRef": "d880e7dba5dd0c3b9263dbaf9ccfcb1eb6600178",
+      "sourcePath": "research/vlang",
+      "sourceTreeSha": "5e5c621054a0832b50c3966927731b9e2c61d32b",
+      "archiveTreeSha": "5e5c621054a0832b50c3966927731b9e2c61d32b",
+      "exactTreeMatch": true,
+      "fileCount": 12,
+      "bytes": 845961
+    },
+    {
+      "name": "Consolidated old semantic-language-kernel",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/vivim-labs/documentation-consolidation/repos-hq/docs/research/semantic-language-kernel",
+      "sourceRepository": "owenservera/vivim-labs",
+      "sourceRef": "d880e7dba5dd0c3b9263dbaf9ccfcb1eb6600178",
+      "sourcePath": "documentation-consolidation/repos-hq/docs/research/semantic-language-kernel",
+      "sourceTreeSha": "c3a6afed307e64768cbf1a4c0f446b365ce6d7e1",
+      "archiveTreeSha": "c3a6afed307e64768cbf1a4c0f446b365ce6d7e1",
+      "exactTreeMatch": true,
+      "fileCount": 5,
+      "bytes": 28273
+    },
+    {
+      "name": "Knowledge-base consolidation",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/vivim-labs/KB-consolidation",
+      "sourceRepository": "owenservera/vivim-labs",
+      "sourceRef": "d880e7dba5dd0c3b9263dbaf9ccfcb1eb6600178",
+      "sourcePath": "KB-consolidation",
+      "sourceTreeSha": "939735f8dc095f91ce727df93b436ac425417a9c",
+      "archiveTreeSha": "939735f8dc095f91ce727df93b436ac425417a9c",
+      "exactTreeMatch": true,
+      "fileCount": 6,
+      "bytes": 10180
+    },
+    {
+      "name": "2026-11-18 VLANG reset",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/vivim-labs/arbor-source-reset-20261118/files/.integration/proposal5/vlang",
+      "sourceRepository": "owenservera/vivim-labs",
+      "sourceRef": "d880e7dba5dd0c3b9263dbaf9ccfcb1eb6600178",
+      "sourcePath": "arbor-source-reset-20261118/files/.integration/proposal5/vlang",
+      "sourceTreeSha": "a927f86b0d5ff36eacf236e9266b8b1b0deced21",
+      "archiveTreeSha": "a927f86b0d5ff36eacf236e9266b8b1b0deced21",
+      "exactTreeMatch": true,
+      "fileCount": 23,
+      "bytes": 88878
+    },
+    {
+      "name": "2026-11-18 SCF reset",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/vivim-labs/arbor-source-reset-20261118/files/.integration/proposal5/semantic-capability-fabric",
+      "sourceRepository": "owenservera/vivim-labs",
+      "sourceRef": "d880e7dba5dd0c3b9263dbaf9ccfcb1eb6600178",
+      "sourcePath": "arbor-source-reset-20261118/files/.integration/proposal5/semantic-capability-fabric",
+      "sourceTreeSha": "c22e481b446c13440746087bbb5e230f1944ee5d",
+      "archiveTreeSha": "c22e481b446c13440746087bbb5e230f1944ee5d",
+      "exactTreeMatch": true,
+      "fileCount": 58,
+      "bytes": 216198
+    },
+    {
+      "name": "2026-11-18 semantic engineering reset",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/vivim-labs/arbor-source-reset-20261118/files/.integration/proposal5/semantic-engineering-program",
+      "sourceRepository": "owenservera/vivim-labs",
+      "sourceRef": "d880e7dba5dd0c3b9263dbaf9ccfcb1eb6600178",
+      "sourcePath": "arbor-source-reset-20261118/files/.integration/proposal5/semantic-engineering-program",
+      "sourceTreeSha": "1259c52c6daa79e9614d30510b1deca8b7803f19",
+      "archiveTreeSha": "1259c52c6daa79e9614d30510b1deca8b7803f19",
+      "exactTreeMatch": true,
+      "fileCount": 17,
+      "bytes": 33172
+    },
+    {
+      "name": "2026-11-18 VEC PWA reset",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/vivim-labs/arbor-source-reset-20261118/files/.integration/proposal5/vec-pwa",
+      "sourceRepository": "owenservera/vivim-labs",
+      "sourceRef": "d880e7dba5dd0c3b9263dbaf9ccfcb1eb6600178",
+      "sourcePath": "arbor-source-reset-20261118/files/.integration/proposal5/vec-pwa",
+      "sourceTreeSha": "42cf8e1a0a4ed3e3a96f85a32f601d359efbe79c",
+      "archiveTreeSha": "42cf8e1a0a4ed3e3a96f85a32f601d359efbe79c",
+      "exactTreeMatch": true,
+      "fileCount": 13,
+      "bytes": 45657
+    },
+    {
+      "name": "2026-11-18 VEC UI reset",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/vivim-labs/arbor-source-reset-20261118/files/.integration/proposal5/vec-ui-engines",
+      "sourceRepository": "owenservera/vivim-labs",
+      "sourceRef": "d880e7dba5dd0c3b9263dbaf9ccfcb1eb6600178",
+      "sourcePath": "arbor-source-reset-20261118/files/.integration/proposal5/vec-ui-engines",
+      "sourceTreeSha": "a954444749b40c6f6e79b232c2f947cbd1cea583",
+      "archiveTreeSha": "a954444749b40c6f6e79b232c2f947cbd1cea583",
+      "exactTreeMatch": true,
+      "fileCount": 113,
+      "bytes": 264908
+    },
+    {
+      "name": "ARBOR VLANG historical protocol",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/arbor/.integration/proposal5/vlang",
+      "sourceRepository": "owenservera/ARBOR",
+      "sourceRef": "c5734110a584454163bf3c1012ca7df9c4da6f78",
+      "sourcePath": ".integration/proposal5/vlang",
+      "sourceTreeSha": "91bbbabf8e76bb69a894d0f7275c63304a07508c",
+      "archiveTreeSha": "91bbbabf8e76bb69a894d0f7275c63304a07508c",
+      "exactTreeMatch": true,
+      "fileCount": 33,
+      "bytes": 141492
+    },
+    {
+      "name": "ARBOR semantic capability fabric",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/arbor/.integration/proposal5/semantic-capability-fabric",
+      "sourceRepository": "owenservera/ARBOR",
+      "sourceRef": "c5734110a584454163bf3c1012ca7df9c4da6f78",
+      "sourcePath": ".integration/proposal5/semantic-capability-fabric",
+      "sourceTreeSha": "cce9e54039924227af7cb0ce2d0024780a4a26dc",
+      "archiveTreeSha": "cce9e54039924227af7cb0ce2d0024780a4a26dc",
+      "exactTreeMatch": true,
+      "fileCount": 79,
+      "bytes": 298022
+    },
+    {
+      "name": "ARBOR semantic engineering convergence",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/arbor/.integration/proposal5/semantic-engineering-program",
+      "sourceRepository": "owenservera/ARBOR",
+      "sourceRef": "c5734110a584454163bf3c1012ca7df9c4da6f78",
+      "sourcePath": ".integration/proposal5/semantic-engineering-program",
+      "sourceTreeSha": "2451311fe899a44d8485393cfc3e2ea5ee02bbe0",
+      "archiveTreeSha": "2451311fe899a44d8485393cfc3e2ea5ee02bbe0",
+      "exactTreeMatch": true,
+      "fileCount": 19,
+      "bytes": 37550
+    },
+    {
+      "name": "ARBOR VEC/PWA",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/arbor/.integration/proposal5/vec-pwa",
+      "sourceRepository": "owenservera/ARBOR",
+      "sourceRef": "c5734110a584454163bf3c1012ca7df9c4da6f78",
+      "sourcePath": ".integration/proposal5/vec-pwa",
+      "sourceTreeSha": "3776be74065d3d61ac7fbb263d02bfdb77494a66",
+      "archiveTreeSha": "3776be74065d3d61ac7fbb263d02bfdb77494a66",
+      "exactTreeMatch": true,
+      "fileCount": 17,
+      "bytes": 293677
+    },
+    {
+      "name": "ARBOR VEC UI engines",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/arbor/.integration/proposal5/vec-ui-engines",
+      "sourceRepository": "owenservera/ARBOR",
+      "sourceRef": "c5734110a584454163bf3c1012ca7df9c4da6f78",
+      "sourcePath": ".integration/proposal5/vec-ui-engines",
+      "sourceTreeSha": "a3fd1bc3ceea7dac79126110d057768902b90e4b",
+      "archiveTreeSha": "a3fd1bc3ceea7dac79126110d057768902b90e4b",
+      "exactTreeMatch": true,
+      "fileCount": 118,
+      "bytes": 581616
+    },
+    {
+      "name": "ARBOR semantic pre-G",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/arbor/.integration/proposal5/phase2/pre-g/S-semantic",
+      "sourceRepository": "owenservera/ARBOR",
+      "sourceRef": "c5734110a584454163bf3c1012ca7df9c4da6f78",
+      "sourcePath": ".integration/proposal5/phase2/pre-g/S-semantic",
+      "sourceTreeSha": "8a1f14a4438f801a15b3a5fa2f24fb0d6be0f98d",
+      "archiveTreeSha": "8a1f14a4438f801a15b3a5fa2f24fb0d6be0f98d",
+      "exactTreeMatch": true,
+      "fileCount": 15,
+      "bytes": 83846
+    },
+    {
+      "name": "ARBOR AutoWiki pre-G",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/arbor/.integration/proposal5/phase2/pre-g/W-autowiki",
+      "sourceRepository": "owenservera/ARBOR",
+      "sourceRef": "c5734110a584454163bf3c1012ca7df9c4da6f78",
+      "sourcePath": ".integration/proposal5/phase2/pre-g/W-autowiki",
+      "sourceTreeSha": "b81f4849f9dea9cafc7306454fb0b3a3ef75f698",
+      "archiveTreeSha": "b81f4849f9dea9cafc7306454fb0b3a3ef75f698",
+      "exactTreeMatch": true,
+      "fileCount": 9,
+      "bytes": 47627
+    },
+    {
+      "name": "ARBOR foundational prompts",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/arbor/.integration/proposal5/foundations/prompts",
+      "sourceRepository": "owenservera/ARBOR",
+      "sourceRef": "c5734110a584454163bf3c1012ca7df9c4da6f78",
+      "sourcePath": ".integration/proposal5/foundations/prompts",
+      "sourceTreeSha": "23a18e0856620e507a45a7778e1d833ed1294653",
+      "archiveTreeSha": "23a18e0856620e507a45a7778e1d833ed1294653",
+      "exactTreeMatch": true,
+      "fileCount": 11,
+      "bytes": 72412
+    },
+    {
+      "name": "ARBOR HQ/Rust source evidence",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/arbor/source-evidence-c573411",
+      "sourceRepository": "owenservera/ARBOR",
+      "sourceRef": "c5734110a584454163bf3c1012ca7df9c4da6f78",
+      "sourcePath": "curated hq/lib, hq/test and core/programmability/src files",
+      "sourceTreeSha": null,
+      "archiveTreeSha": "59522d447acda79efd785de0d1e196157f41e9bb",
+      "exactTreeMatch": null,
+      "fileCount": 14,
+      "bytes": 225822
+    },
+    {
+      "name": "Original repos-hq kernel 2026-11-02",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/repos-hq/commit-2651bc8/docs/research/semantic-language-kernel",
+      "sourceRepository": "owenservera/repos-hq",
+      "sourceRef": "2651bc8",
+      "sourcePath": "docs/research/semantic-language-kernel",
+      "sourceTreeSha": "28e4490fa0dc106c629b0c34dbe55e9147fc95fb",
+      "archiveTreeSha": "28e4490fa0dc106c629b0c34dbe55e9147fc95fb",
+      "exactTreeMatch": true,
+      "fileCount": 4,
+      "bytes": 18915
+    },
+    {
+      "name": "repos-hq Rust comments sprint",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/repos-hq/current/CHATGPT-SPRINT/SPRINT-02",
+      "sourceRepository": "owenservera/repos-hq",
+      "sourceRef": "1e7a0db0dedc8fe403fb334727faa9b3b5f185c4",
+      "sourcePath": "CHATGPT-SPRINT/SPRINT-02",
+      "sourceTreeSha": "b599c0091b3373f915da6101cc1a1cb9699308bd",
+      "archiveTreeSha": "b599c0091b3373f915da6101cc1a1cb9699308bd",
+      "exactTreeMatch": true,
+      "fileCount": 7,
+      "bytes": 14229
+    },
+    {
+      "name": "repos-hq parser/KB source evidence",
+      "archivePath": "VLANG-CANONICAL-PROTOCOL-R000/.archive/repos-hq/source-evidence-1e7a0db",
+      "sourceRepository": "owenservera/repos-hq",
+      "sourceRef": "1e7a0db0dedc8fe403fb334727faa9b3b5f185c4",
+      "sourcePath": "curated hq/lib and docs files",
+      "sourceTreeSha": null,
+      "archiveTreeSha": "faec65d4693122f242c2ff5c2bc079e1cc2ab5e0",
+      "exactTreeMatch": null,
+      "fileCount": 10,
+      "bytes": 280876
     }
   ],
-  "futureSources": [
-    "owenservera/ARBOR .integration/proposal5/vlang",
-    "owenservera/ARBOR .integration/proposal5/semantic-engineering-program",
-    "owenservera/ARBOR .integration/proposal5/semantic-capability-fabric",
-    "owenservera/ARBOR .integration/proposal5/vec-pwa"
-  ],
+  "conversationEvidence": {
+    "rawText": "VLANG-CANONICAL-PROTOCOL-R000/.archive/vivim-labs/ARBOR-VLANG-UPGRADE/research/chat-VLANG Semantic Protocol Design (2).txt",
+    "rawJson": "VLANG-CANONICAL-PROTOCOL-R000/.archive/vivim-labs/ARBOR-VLANG-UPGRADE/research/chat-export-1795034880156.json",
+    "additionalRawCopies": "VLANG-CANONICAL-PROTOCOL-R000/.archive/vivim-labs/research/vlang/2026-11-18/",
+    "recoveredIndex": "VLANG-CANONICAL-PROTOCOL-R000/.archive/conversations/RECOVERED-CONVERSATION-INDEX.md",
+    "policy": "Conversation index is summary/discovery, not verbatim for chats without source exports"
+  },
   "limits": [
-    "Only two original conversation exports identified",
-    "Historical claims need live-code verification"
-  ]
+    "Snapshot collection is not an exhaustive export of all ChatGPT conversation turns",
+    "Runtime conformance, compilation coverage and deployment state are not assessed by archival copy",
+    "Historical documents may conflict and include obsolete implementation assumptions"
+  ],
+  "verification": "Every full-source collection's archived Git tree SHA matched its source tree SHA; curated subsets preserve source paths and Git blob content but are not complete source subtrees."
 }

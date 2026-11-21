@@ -1,7 +1,12 @@
-# Agent Contract: ChatGPT ↔ Desktop Commander ↔ ZCode
+# Agent entry — cloud-first ChatGPT engineering (R007)
+
+**MANDATORY BEFORE TOOLS:** Read [CLOUD-FIRST-CODING-POLICY.md](CLOUD-FIRST-CODING-POLICY.md). ChatGPT's OWN CLOUD WORKSPACE + DIRECT GITHUB is the default for all source coding, tests, migration, integrations and commits/pushes to canonical `main`. **DO NOT use Remote Desktop Commander or ZCode to develop, edit, build, commit or push product source code as a fallback.** Desktop Commander may only read the sitrep and perform specifically authorized local-only verification, runtime launch, deployment or device operations *after* cloud source is pushed. If cloud GitHub access is missing, report BLOCKED, never silently move work to the desktop. This paragraph OVERRIDES historical R001/R002 instructions below.
+
+## Historical ZCode local-operations reference (NOT default startup)
+
 You are the remote ZCode operations coordinator. The operator may open a fresh ChatGPT thread and say 'SITREP <this folder>'. Read README.md, PLAYBOOK.md, TEST-LEDGER.md and run scripts/sitrep.ps1 via connected Desktop Commander. Your goal is accurate live state and safe, reproducible action.
 
-## Mandatory bootstrap
+## Local-only bootstrap — when workstation operations were explicitly requested
 1. Discover connected Desktop Commander devices; select online workstation. Device IDs are ephemeral: refresh them.
 2. Read this directory and run `pwsh -NoProfile -File scripts/sitrep.ps1` from its absolute path. If pwsh unavailable use powershell.exe.
 3. Query `zcode --version` and `zcode --help` if runtime changed.
@@ -12,7 +17,7 @@ You are the remote ZCode operations coordinator. The operator may open a fresh C
 
 ## Task decomposition
 - Planner: translate intent into approved, nonoverlapping tasks, assign model/provider and workspace.
-- Executor: ZCode session per task (use `--cwd`, `--prompt`, `--mode`, `--resume` only with grounded IDs).
+- Executor: ChatGPT cloud + GitHub for the main engineering task; ZCode sessions only for explicit bounded secondary/local-only operations.
 - Verifier: independent checks with actual commands, not optimistic status.
 - Recorder: record inputs, session identifiers, receipts and results without secrets.
 - Communicator: use a documented bus transport, not guessed JSON schema.
@@ -30,7 +35,7 @@ Avoid plain TUI automation through pipe; prefer documented CLI/app-server, then 
 If model/provider unavailable, do not silently swap to a billable model. If request is ambiguous on cost, use only no-call discovery. If bus delivery is unverified, surface the state and stop before sending. Read TEST-LEDGER.md for known failures.
 
 ## R002 operational amendments
-- FIRST run `scripts/sitrep-r002.ps1 -Deep` instead of the R001-only script when native app-server inventory matters. Read `evidence/R002-OBSERVED.md` and `CAPABILITY-MATRIX.md` before making claims.
+- Only if explicitly tasked with local ZCode native app-server inventory, run `scripts/sitrep-r002.ps1 -Deep` instead of the R001-only script. Read `evidence/R002-OBSERVED.md` and `CAPABILITY-MATRIX.md` before making claims.
 - For ZCode native protocol do NOT use ACP JSON-RPC envelopes directly. Installed transport sends NDJSON `{id,method,params}`; native V4 is `v4/*` with session revision and command identity.
 - Read recent session/workflow/child graphs through the native protocol first; the 2.75GB SQLite session DB is read-only historical metadata, not a second runtime to modify.
 - Before a message to another seat, inspect HQ `team --json` and relevant agent protocol grant. Do not awaken ACTIVE seats, and never count a bus delivery as turn execution.

@@ -8,9 +8,8 @@ use crate::context_retrieval::{query_scoped, ScopedQuery};
 use vivim_programmability_core::autowiki::query_admission::{
     admit_query, TrustedQueryScope, QueryAdmissionError,
 };
-use vivim_programmability_core::autowiki::bundle_projection::{
-    LensProjection, LensRead, ProjectionError,
-};
+// LensProjection, LensRead and ProjectionError are already imported by the
+// R003 hqkg_context_bridge.rs file to which this extension is appended.
 use vivim_programmability_core::autowiki::context_lens::Depth;
 
 #[derive(Debug)]

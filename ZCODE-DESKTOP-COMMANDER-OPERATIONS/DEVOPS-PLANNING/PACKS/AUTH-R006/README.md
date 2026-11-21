@@ -8,6 +8,7 @@
 
 - [native_grant_coverage.rs](native_grant_coverage.rs): derives `CompleteGraphCoverage` from the current actor grant and bounded native graph scan. Creates `TrustedQueryScope` only after full coverage, delegates to the **existing** R004 `read_authorized_context` and finally rechecks Host grant revision. Missing/revoked/changed grant, unknown nodes, insufficient source evidence and oversized graph all refuse.
 - [native_grant_coverage_test.rs](native_grant_coverage_test.rs): 8 native integration tests for private-neighbor exclusion, missing/mismatched grant, ghost node, unauthorized source, preflight revocation, one bounded HQKG query and mid-read revocation.
+- [HOST-GRANT-SOURCE-AUDIT.md](HOST-GRANT-SOURCE-AUDIT.md): verified Host source boundaries and exact unavailable entity-grant producer
 - [DEVAGENT-APPLY.md](DEVAGENT-APPLY.md): source-pinned Rust installation, existing Host grant bridge requirement, feature gates, rollback.
 - [VERIFICATION.md](VERIFICATION.md): commands, test/permission/scope boundaries and performance notes.
 

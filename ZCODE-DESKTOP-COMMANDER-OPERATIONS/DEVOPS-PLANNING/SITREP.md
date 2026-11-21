@@ -27,3 +27,6 @@
 
 ## Fresh-agent operating reminder
 Read only role AGENTS, this SITREP, relevant bundle, actual ARBOR source and source receipts; inspect other folders only as necessary. Respect direct GitHub main, narrow paths and one effect authority. If a necessary file is local-only, mark **REMOTE_SOURCE_UNAVAILABLE** rather than silently using Desktop Commander for code work.
+
+## Mandatory future SITREP tracker section (ownership-aware)
+Source: [TASK-CLAIMS](../TASK-CLAIMS.md) plus actual authoritative task records. **Last 5**: latest five *recorded check-ins* ordered by UTC event, state/owner/evidence/pending; don't infer timestamps from OW IDs. **Next 10**: ten highest-priority *Planning-owned or explicitly claimable Planning* tasks, status/owner/pending/blocker; **exclude currently Dev-claimed execution**. Show Dev/Oracle/owner work under **Waiting on others**, as dependencies only. If there are fewer than 5/10 verifiable records, show the actual count and mark the rest unavailable, without inventing tasks. Every newly started task must first get an atomic claim; this snapshot does not retroactively check out historical work.

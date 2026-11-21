@@ -15,7 +15,7 @@
 
 | Task / authoritative reference | Active executor | Scope / source pin | Claim state | Latest check-in / evidence | Pending / handoff |
 | --- | --- | --- | --- | --- | --- |
-| _No claims recorded yet. Historical assignment in prose is not an active checkout._ | — | — | UNCLAIMED/UNKNOWN | — | Reconcile existing Dev and Planning responsibilities before new claims |
+| GPUI + AutoWiki dual-milestone **Labs-only prep** (2026-11-21 owner instruction; related OW-007/009, no new OW ID assigned) | **None (paused by owner)**; Planning is future prep executor, Dev owns ARBOR execution | Labs staging only; detailed [handoff](DEVOPS-PLANNING/HANDOFF-GPUI-AUTOWIKI-20261121.md); source SHA refresh on resume | **UNCLAIMED / PAUSED** (no checkout) | **2026-11-21 10:32 UTC:** source audit completed; GPUI manual Wiki search and existing Host agent flow verified in source; handoff committed Labs `ffade9c`; new GPUI code UNWRITTEN; tests UNRUN | On owner resume: reconcile claims, check out Labs-only scope, code+test staged GPUI/Rust package, check in; **no ARBOR changes this round** |
 
 ## SITREP selection rule
 

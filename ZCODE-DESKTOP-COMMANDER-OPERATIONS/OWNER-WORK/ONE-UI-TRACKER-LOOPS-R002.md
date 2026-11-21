@@ -1,5 +1,7 @@
 # VIVIM: 10 simple tracker-driven improvement loops — R002 (supersedes R001)
 
+> **Execution-level continuation (Round 3):** [ONE-UI-TRACKER-LOOPS-R003-EXECUTION-SPEC.md](ONE-UI-TRACKER-LOOPS-R003-EXECUTION-SPEC.md) — exact existing-workflow patch targets, first ten tracker test assignments, no-write safety gates and the verified 25/25 focused baseline. This R002 remains the simple overarching design.
+
 Date: 2026-11-21. Status: **DESIGN ONLY — NO BACKGROUND WORKERS LAUNCHED**.
 Decision: the owner rejected the R001 "Parallel Evolution Engine" as overengineered. No stochastic harness, no alternative UI, no new fleet, no duplicate tracker, no artificial architecture milestones. Keep **one text-box First Contact PWA** and repeatedly improve the two reached product behaviors: type → Wiki responds; local agent can enter text in that same composer through the existing authorized path (the independent agent-originated live ACK remains to be verified).
 

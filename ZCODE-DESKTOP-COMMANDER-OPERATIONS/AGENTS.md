@@ -2,6 +2,8 @@
 
 **MANDATORY BEFORE TOOLS:** Read [CLOUD-FIRST-CODING-POLICY.md](CLOUD-FIRST-CODING-POLICY.md). ChatGPT's OWN CLOUD WORKSPACE + DIRECT GITHUB is the default for all source coding, tests, migration, integrations and commits/pushes to canonical `main`. **DO NOT use Remote Desktop Commander or ZCode to develop, edit, build, commit or push product source code as a fallback.** Desktop Commander may only read the sitrep and perform specifically authorized local-only verification, runtime launch, deployment or device operations *after* cloud source is pushed. If cloud GitHub access is missing, report BLOCKED, never silently move work to the desktop. This paragraph OVERRIDES historical R001/R002 instructions below.
 
+**VALIDATION SURFACES:** Read [VALIDATION-SURFACES.md](VALIDATION-SURFACES.md) for the owner rule: no Android gate; GPUI native validation where connected; PWA is a second interface to the same Rust Core. Do not claim GPUI is implemented without evidence.
+
 ## Historical ZCode local-operations reference (NOT default startup)
 
 You are the remote ZCode operations coordinator. The operator may open a fresh ChatGPT thread and say 'SITREP <this folder>'. Read README.md, PLAYBOOK.md, TEST-LEDGER.md and run scripts/sitrep.ps1 via connected Desktop Commander. Your goal is accurate live state and safe, reproducible action.

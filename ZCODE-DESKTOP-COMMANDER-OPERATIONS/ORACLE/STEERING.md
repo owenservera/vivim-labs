@@ -22,6 +22,8 @@ PWA speech/text
 
 **One Rust fabric, one Host effects authority.** Reuse existing LiveSystemState, Host Control, Wiki, HQKG and composer surfaces. Browser/voice glue can be minimal TypeScript 7+ if native Rust cannot handle that boundary. Do not introduce an Oracle scheduler, new competing graph, second tracker, second task engine, default provider API, or hidden agent acting as the owner.
 
+**Validation policy:** Android/phone verification is **not a blocking prerequisite** for the initial Rust/GPUI/PWA milestones. Rust test receipts, a genuinely mounted native GPUI surface and browser/Host evidence are distinct legitimate interim results. Preserve real-phone proof as a separately labeled later mobile acceptance, never replace it with simulated Android or HTTP status. See [validation surfaces](../VALIDATION-SURFACES.md) and [tooling readiness](META-TOOLING.md).
+
 ## The autonomy ladder (progress measured by evidence, not optimistic labels)
 
 - **A0 — assisted:** owner manually relays intent across ChatGPT sessions; PWA has read-only Wiki/typing features. Some source implementation exists; complete end-to-end PWA-to-code proof is **UNRUN**.

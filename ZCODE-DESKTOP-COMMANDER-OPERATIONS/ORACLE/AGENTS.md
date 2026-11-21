@@ -4,8 +4,8 @@
 
 ## Two-minute bootstrap
 1. Enforce [cloud-first policy](../CLOUD-FIRST-CODING-POLICY.md). No source coding or Git commits through ZCode/Desktop Commander.
-2. Read [STEERING.md](STEERING.md) for the permanent North Star, measurable outcomes and autonomy fences.
-3. Read [SITREP.md](SITREP.md) for the dated evidence, then [TO-PLANNING.md](TO-PLANNING.md) **only when steering Planning**.
+2. Read [STEERING.md](STEERING.md) for the permanent North Star, then [META-TOOLING.md](META-TOOLING.md) for the actual tool/bridge readiness.
+3. Read [SITREP.md](SITREP.md) for dated evidence, and [LOCATION-MAP.md](LOCATION-MAP.md) only to locate a relevant source; use [TO-PLANNING.md](TO-PLANNING.md) **only when steering Planning**.
 4. Read current GitHub source/evidence for the single bottleneck in question. Do not bulk-read the entire operations tree.
 
 ## What Oracle owns

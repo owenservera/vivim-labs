@@ -1,0 +1,47 @@
+{
+  "schema": "arbor.proposal5.scf-verifier-proposal/1",
+  "date": "2026-11-12",
+  "status": "DESIGN_AND_CONTRACT_PREPARED_TESTS_UNRUN",
+  "branch": "work/p5-semantic-capability-fabric-r001",
+  "sourceMainBaseline": "f9823a5131e73e7562db5a4ec14e1ec481557d69",
+  "verifierIdentity": "VIVIM Semantic Verifier",
+  "roles": {
+    "compiler": "HQ Semantic Wiki Compiler",
+    "verifier": "independent claim and explanation checker",
+    "execution": "sandboxed test harness and existing domain owner read-only receipts"
+  },
+  "proposedTags": [
+    "@hq:verify",
+    "@hq:observe",
+    "@hq:explain"
+  ],
+  "existingTags": [
+    "@hq:context",
+    "@hq:owner",
+    "@hq:capability",
+    "@hq:contract",
+    "@hq:effect",
+    "@hq:test",
+    "@hq:invariant"
+  ],
+  "supportedVerdicts": [
+    "PROVED_UNDER_MODEL",
+    "REFUTED",
+    "SUPPORTED_BY_TESTS",
+    "UNKNOWN",
+    "BLOCKED"
+  ],
+  "forbids": [
+    "self_certifying_compiler",
+    "unreviewed_oracle",
+    "claim_as_grant",
+    "second_effect_executor",
+    "second_wiki_writer",
+    "unwitnessed_external_success",
+    "unbounded_prose_as_verified",
+    "promotion_during_active_HVI_without_owner_gate"
+  ],
+  "actualProductCodeChanged": false,
+  "testsExecuted": false,
+  "gate": "AFTER_SCF_AND_HVI_SOURCE_GATES; independent checker acceptance required"
+}

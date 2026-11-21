@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vivim.local/contracts/sv/claim.v0.schema.json",
+  "title": "VIVIM Semantic Verifier ClaimSpec v0 (proposal)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "unitRef",
+    "capabilityRefs",
+    "sourcePin",
+    "contractRef",
+    "specDigest",
+    "approvedBy",
+    "properties"
+  ],
+  "properties": {
+    "schema": {
+      "const": "arbor.sv.claim/0.1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]*@[0-9]+(?:\\.[0-9]+)*$"
+    },
+    "unitRef": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 256
+    },
+    "capabilityRefs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 256
+      }
+    },
+    "sourcePin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commitSha",
+        "treeSha"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 256
+        },
+        "commitSha": {
+          "$ref": "#/$defs/sha40"
+        },
+        "treeSha": {
+          "$ref": "#/$defs/sha40"
+        }
+      }
+    },
+    "contractRef": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 256
+    },
+    "specDigest": {
+      "$ref": "#/$defs/sha64"
+    },
+    "approvedBy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ownerRef",
+        "decisionRef"
+      ],
+      "properties": {
+        "ownerRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "decisionRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        }
+      }
+    },
+    "properties": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 128,
+      "items": {
+        "$ref": "#/$defs/property"
+      }
+    },
+    "observationProfileRef": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 256
+    },
+    "explanationPackRef": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 256
+    }
+  },
+  "$defs": {
+    "sha40": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "sha64": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "property": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "quantifier",
+        "predicateRef",
+        "oracleRef",
+        "assumptions",
+        "requiredEvidence",
+        "risk"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "kind": {
+          "enum": [
+            "precondition",
+            "postcondition",
+            "invariant",
+            "forbidden_effect",
+            "error_behavior",
+            "resource_bound",
+            "equivalence"
+          ]
+        },
+        "quantifier": {
+          "enum": [
+            "sampled_inputs",
+            "bounded_all_states",
+            "all_inputs_with_formal_proof"
+          ]
+        },
+        "predicateRef": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 256
+        },
+        "oracleRef": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 256
+        },
+        "assumptions": {
+          "type": "array",
+          "maxItems": 64,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        },
+        "requiredEvidence": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "source_attestation",
+              "static_fact",
+              "trusted_oracle",
+              "test_execution",
+              "formal_proof",
+              "bounded_state_exploration",
+              "runtime_owner_receipt",
+              "complete_effect_boundary"
+            ]
+          }
+        },
+        "risk": {
+          "enum": [
+            "R0",
+            "R1",
+            "R2",
+            "R3"
+          ]
+        }
+      }
+    }
+  }
+}

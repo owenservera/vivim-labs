@@ -1,0 +1,69 @@
+{
+  "schema": "arbor.sv.claim/0.1",
+  "id": "arbor.hvi.snapshot-at.verify@1",
+  "unitRef": "arbor.hvi.source.snapshot-at@1",
+  "capabilityRefs": [
+    "arbor.hvi.pin-source@1",
+    "arbor.hvi.compare-revisions@1"
+  ],
+  "sourcePin": {
+    "repository": "owenservera/ARBOR",
+    "commitSha": "f9823a5131e73e7562db5a4ec14e1ec481557d69",
+    "treeSha": "13eda0d9c7f717a46d00eee46a22b1a19edb65be"
+  },
+  "contractRef": "arbor.hvi.source-manifest@1",
+  "specDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "approvedBy": {
+    "ownerRef": "EXAMPLE_ONLY_NOT_APPROVED",
+    "decisionRef": "EXAMPLE_ONLY_DO_NOT_USE_AS_RECEIPT"
+  },
+  "properties": [
+    {
+      "id": "P1-pin-preservation",
+      "kind": "postcondition",
+      "quantifier": "sampled_inputs",
+      "predicateRef": "predicate.equal-input-output-sha@1",
+      "oracleRef": "oracle.reviewed-pin-preservation@1",
+      "assumptions": [
+        "pin has immutable Git commit SHA"
+      ],
+      "requiredEvidence": [
+        "source_attestation",
+        "trusted_oracle",
+        "test_execution"
+      ],
+      "risk": "R0"
+    },
+    {
+      "id": "P2-no-host-write",
+      "kind": "forbidden_effect",
+      "quantifier": "bounded_all_states",
+      "predicateRef": "predicate.no-host-effects@1",
+      "oracleRef": "oracle.reviewed-effect-boundary@1",
+      "assumptions": [
+        "all Host effect boundaries are observed for bounded model"
+      ],
+      "requiredEvidence": [
+        "source_attestation",
+        "bounded_state_exploration",
+        "complete_effect_boundary"
+      ],
+      "risk": "R2"
+    },
+    {
+      "id": "P3-invalid-sha-rejected",
+      "kind": "error_behavior",
+      "quantifier": "sampled_inputs",
+      "predicateRef": "predicate.invalid-sha-denied@1",
+      "oracleRef": "oracle.reviewed-bad-pin-cases@1",
+      "assumptions": [],
+      "requiredEvidence": [
+        "trusted_oracle",
+        "test_execution"
+      ],
+      "risk": "R1"
+    }
+  ],
+  "observationProfileRef": "arbor.hvi.snapshot-at.observe@1",
+  "explanationPackRef": "arbor.hvi.snapshot-at.explanation@1"
+}

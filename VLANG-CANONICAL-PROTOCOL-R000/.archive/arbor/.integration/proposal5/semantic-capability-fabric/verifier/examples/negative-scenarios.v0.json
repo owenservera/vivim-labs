@@ -1,0 +1,63 @@
+{
+  "schema": "arbor.sv.negative-cases/0.1",
+  "status": "FIXTURES_DESIGNED_NOT_EXECUTED",
+  "cases": [
+    {
+      "id": "N1",
+      "claim": "function never writes Host World",
+      "simulatedObservation": {
+        "events": [],
+        "complete": false
+      },
+      "expectedVerdict": "UNKNOWN",
+      "why": "Empty partial trace is not proof of absence"
+    },
+    {
+      "id": "N2",
+      "claim": "function preserves input commit SHA",
+      "simulatedObservation": {
+        "inputSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "outputSha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "complete": true
+      },
+      "expectedVerdict": "REFUTED",
+      "why": "Witness contradicts postcondition under admitted input"
+    },
+    {
+      "id": "N3",
+      "claim": "function always returns stable output",
+      "simulatedObservation": {
+        "testCases": 1000,
+        "failed": 0,
+        "completeDomain": false
+      },
+      "expectedVerdict": "SUPPORTED_BY_TESTS",
+      "why": "Sampled tests cannot prove universal claim"
+    },
+    {
+      "id": "N4",
+      "claim": "deployed binary matches tested code",
+      "simulatedObservation": {
+        "testArtifactDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "deployedArtifactDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "expectedVerdict": "BLOCKED",
+      "why": "Artifact attestation mismatch"
+    },
+    {
+      "id": "N5",
+      "claim": "source-based generated narrative claims all effects safe",
+      "simulatedObservation": {
+        "verifiedClaimIds": [
+          "P1"
+        ],
+        "narrativeClaims": [
+          "P1",
+          "P2"
+        ]
+      },
+      "expectedVerdict": "UNKNOWN",
+      "why": "Unbound clause P2 cannot be certified"
+    }
+  ]
+}

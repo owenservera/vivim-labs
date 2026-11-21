@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vivim.local/contracts/sv/proof-receipt.v0.schema.json",
+  "title": "VIVIM Semantic Verifier Property Receipt v0 (proposal)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "receiptId",
+    "claimId",
+    "propertyId",
+    "sourcePin",
+    "specDigest",
+    "verifierDigest",
+    "checkerDigest",
+    "artifactDigest",
+    "verdict",
+    "methods",
+    "assumptions",
+    "runner",
+    "evidence",
+    "coverage",
+    "testExecution",
+    "counterexample"
+  ],
+  "properties": {
+    "schema": {
+      "const": "arbor.sv.proof-receipt/0.1"
+    },
+    "receiptId": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 256
+    },
+    "claimId": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 256
+    },
+    "propertyId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "sourcePin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commitSha"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 256
+        },
+        "commitSha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      }
+    },
+    "specDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "verifierDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "checkerDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "artifactDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "verdict": {
+      "enum": [
+        "PROVED_UNDER_MODEL",
+        "REFUTED",
+        "SUPPORTED_BY_TESTS",
+        "UNKNOWN",
+        "BLOCKED"
+      ]
+    },
+    "methods": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "enum": [
+          "pin_check",
+          "independent_ast",
+          "static_check",
+          "unit_test",
+          "property_test",
+          "metamorphic_test",
+          "mutation_test",
+          "differential_test",
+          "bounded_model_check",
+          "formal_proof_check",
+          "owner_runtime_receipt",
+          "explanation_check"
+        ]
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "maxItems": 128,
+      "items": {
+        "type": "string",
+        "maxLength": 512
+      }
+    },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "environment"
+      ],
+      "properties": {
+        "identity": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "environment": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "attestationRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "ref",
+          "digest"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scopeComplete",
+        "observedPaths",
+        "unknownPaths"
+      ],
+      "properties": {
+        "scopeComplete": {
+          "type": "boolean"
+        },
+        "observedPaths": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unknownPaths": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 2000
+        }
+      }
+    },
+    "testExecution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "EXECUTED",
+            "UNRUN",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "command": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "exitCode": {
+          "type": "integer",
+          "minimum": -255,
+          "maximum": 255
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "stdoutDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "counterexample": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "inputDigest",
+            "expectedDigest",
+            "actualDigest",
+            "replayRef"
+          ],
+          "properties": {
+            "inputDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "expectedDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "actualDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "replayRef": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024
+            }
+          }
+        }
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1024
+      }
+    }
+  }
+}

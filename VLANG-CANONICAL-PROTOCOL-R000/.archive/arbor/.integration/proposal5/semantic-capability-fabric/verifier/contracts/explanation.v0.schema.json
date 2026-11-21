@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vivim.local/contracts/sv/explanation.v0.schema.json",
+  "title": "VIVIM Verified Explanation Envelope v0 (proposal)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "sourcePin",
+    "semanticIrDigest",
+    "specDigest",
+    "packDigest",
+    "clauses",
+    "unknowns",
+    "overallCertification"
+  ],
+  "properties": {
+    "schema": {
+      "const": "arbor.sv.explanation/0.1"
+    },
+    "sourcePin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commitSha"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 256
+        },
+        "commitSha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      }
+    },
+    "artifactDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "semanticIrDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "specDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "packDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "clauses": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "templateRef",
+          "renderedText",
+          "claimIds",
+          "modality",
+          "receiptRefs"
+        ],
+        "properties": {
+          "templateRef": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "renderedText": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "claimIds": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          },
+          "modality": {
+            "enum": [
+              "proved_under_model",
+              "supported_in_tests",
+              "refuted",
+              "unknown",
+              "blocked",
+              "unverified_interpretation"
+            ]
+          },
+          "receiptRefs": {
+            "type": "array",
+            "maxItems": 32,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          },
+          "scopeDescription": {
+            "type": "string",
+            "maxLength": 1024
+          }
+        }
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "maxItems": 512,
+      "items": {
+        "type": "string",
+        "maxLength": 1024
+      }
+    },
+    "overallCertification": {
+      "enum": [
+        "CLAIMS_CHECKED",
+        "PARTIAL",
+        "UNVERIFIED",
+        "BLOCKED"
+      ]
+    }
+  }
+}

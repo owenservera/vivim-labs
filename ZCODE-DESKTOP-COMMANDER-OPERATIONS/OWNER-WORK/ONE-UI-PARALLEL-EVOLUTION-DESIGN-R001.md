@@ -1,3 +1,5 @@
+> **SUPERSEDED, 2026-11-21:** Owner rejected the multi-plane/Monte Carlo-like R001 architecture as excessive. The current simple 1–10 repeating tracker-to-PWA worker design is [ONE-UI-TRACKER-LOOPS-R002.md](ONE-UI-TRACKER-LOOPS-R002.md). Keep R001 for research history only; do not launch or scaffold its proposed experiment platform.
+
 # VIVIM One-UI Parallel Evolution Engine — First-Pass Design R001
 Date: 2026-11-21. Owner: ChatGPT orchestration + ZCode local workflow runtime. Status: DESIGN, NOT LAUNCHED. Product: the **single** First Contact text-box PWA. This is the first of several design passes, NOT an authorization to run 100 browser windows, modify production data, make billable model calls, or duplicate the customer UI.
 

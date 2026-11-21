@@ -22,3 +22,17 @@ The wiki is a materialized view over one graph, not a new database, content auth
 - [Wiring sprint](WIRING-SPRINT-R002.md): three concrete slices, exact insertion points, existing scope fences and proposed transport envelope.
 - [Rust lens](src/context_lens.rs): staged pure state/revision/authorization policy with unit tests; it never parses text or calls Host/HQKG.
 No production change, GitHub Actions run, phone verification or compile proof is implied by these files.
+
+## R003: full compile-ready pre-integration vertical slice
+- [R003 execution handoff](R003-EXECUTION-HANDOFF.md): six-lane owner queue, exact ARBOR module locations, dependency guard, phase gates and commands.
+- [HQKG adapter](integration/hqkg_context_bridge.rs): exact conversion of the existing Rust query_scoped result into a scope/revision-fenced wiki projection; place in native/hqkg only after feature-gated core merge.
+- [Context projection](src/bundle_projection.rs): privacy-fenced, permission-filtered graph cards and exact linked pages.
+- [Owned context](src/owned_context.rs): practical adapter for native HQKG data without another graph walk.
+- [English realizer](src/narrative.rs): human-readable, claim-backed sentences with negation/freshness/claim trace checks.
+- [Quality feedback](src/quality_feedback.rs): inert reviewed VLANG/AutoWiki diagnostics, no self-modifying compiler.
+- [Cross-actor acceptance](tests/preintegration_acceptance.rs): one read-only projection for approved user and agent input.
+- [Rust module root](src/lib.rs): exports all five sibling modules and preserves earlier R001 contracts.
+
+**Verification truth (R003):** 37 Rust test cases are present (static count); source/static imports and brace counts were inspected. No Rust compiler or cargo exists in this cloud container; compilation, rustfmt, clippy, test execution, direct integration, live API/Android evidence are **UNRUN**. Do not label these modules compiled or deployed. A static source check is not a behavioral pass.
+
+**Coexistence:** Dev ChatGPT owns active ARBOR PWA typing/AutoWiki and authorized agent typing. The product tracker now describes a separate first-contact live search-as-you-type path, even though the general Wiki tab's Search/Enter UI also exists. R002 documentation describing search only on Enter referred to that **general Wiki tab**, not the complete first-contact implementation. This R003 package deliberately does not change either one.

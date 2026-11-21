@@ -29,8 +29,13 @@ pub fn read_authorized_context(
     grant: &TrustedQueryScope<'_>,
     request: &LensRead<'_>,
     depth: Depth,
+    trusted_scope_id: &str,
+    trusted_wiki_revision: u64,
 ) -> Result<LensProjection, AuthorizedReadError> {
-    if graph.epoch() != grant.graph_epoch {
+    if graph.epoch() != grant.graph_epoch ||
+       request.scope_id != trusted_scope_id ||
+       request.expected_wiki_revision != trusted_wiki_revision ||
+       request.depth != depth {
         return Err(AuthorizedReadError::Changed);
     }
     let admitted = admit_query(grant, depth).map_err(AuthorizedReadError::Admission)?;
@@ -56,6 +61,6 @@ pub fn read_authorized_context(
         return Err(AuthorizedReadError::Changed);
     }
     project_authorized_context(
-        &bundle, request.scope_id, request.expected_wiki_revision, request,
+        &bundle, trusted_scope_id, trusted_wiki_revision, request,
     ).map_err(AuthorizedReadError::Projection)
 }

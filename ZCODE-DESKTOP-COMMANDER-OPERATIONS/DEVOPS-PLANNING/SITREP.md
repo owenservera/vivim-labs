@@ -2,6 +2,14 @@
 
 **Role state:** planning/pre-integration only; no background agent, live task router, active session bridge or automatic cross-thread synchronization. See [AGENTS](AGENTS.md) -> [PROFILE](PROFILE.md) -> [BUNDLE-INDEX](BUNDLE-INDEX.md); [conversation lessons](CONVERSATION-LESSONS.md) are selective reading.
 
+## R005 semantic and R006 complete graph grant coverage — 2026-11-21
+
+- **R005 source-backed code completed in Labs:** existing R003 crate gained `semantic_evidence.rs` (proof admission only; real SV remains DESIGN/NOT_IMPLEMENTED), `page_assembly.rs` (seven hubs, exact committed IDs, safe unknown/partial state), `read_pipeline.rs` (R004 readback guard -> semantic evidence -> R003 narrative -> page). **25 authored R005 Rust tests**, 82 total staging `#[test]` markers. Runtime/passing tests UNRUN.
+- **R005 handoff:** [SEMANTIC-R005 README](PACKS/SEMANTIC-R005/README.md), [source truth and verifier ABI](PACKS/SEMANTIC-R005/SOURCE-TRUTH-AND-ABI.md), [Dev integration](PACKS/SEMANTIC-R005/DEVAGENT-INTEGRATION.md), [acceptance](PACKS/SEMANTIC-R005/ACCEPTANCE.md). Existing staging module exports and source/digest/model-scope gate presence re-read on GitHub; Dev ACK not observed.
+- **R006 complete graph grant coverage source/tests staged:** [native Rust](PACKS/AUTH-R006/native_grant_coverage.rs) + [8 native tests](PACKS/AUTH-R006/native_grant_coverage_test.rs), [runbook](PACKS/AUTH-R006/DEVAGENT-APPLY.md). Uses real `hqkg::Graph::nodes()`, source refs and existing `query_scoped`; bounded full namespace exclusion, Source/actor grant pre/post-read, no second graph/ACL store. Requires current trusted Host grant producer (not proven). Cargo and native integration tests UNRUN.
+- **No product takeover:** ARBOR main observed `7ae24ff78a797581b510fe7a78105bbe301c0de4`, no ARBOR source changes by Planning; ChatGPT Dev owns active PWA and ARBOR integration; GPUI owner-paused. R005 OFFERED_TO Dev (pending ACK); R006 separate checkout/check-in is recorded in TASK-CLAIMS.
+- **Next Planning candidate:** prep exact Host read-port binding and currently verified grant/source producer with no invented permission source; or semantic verifier dependency follow-up under existing SCF owner. Keep SOURCE vs TEST vs DEPLOY vs visual acceptance distinct.
+
 ## R003 DevAgent code prep R004 — 2026-11-21
 
 - **Labs-only code staged:** 3 new Rust modules in the existing AutoWiki foundation: exact Host Wiki ID -> HQKG hub alias mapping, bounded source-authorized query admission, and stale async readback fencing with current Wiki SHA-256 digest. Existing `src/lib.rs` registers them.

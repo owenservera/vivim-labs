@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vivim.local/contracts/scf/diagnostic.v0.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "code",
+    "severity",
+    "stage",
+    "message",
+    "blocking",
+    "recoverable"
+  ],
+  "properties": {
+    "schema": {
+      "const": "arbor.scf.diagnostic/0.1"
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^SCF_[A-Z0-9_]+$"
+    },
+    "severity": {
+      "enum": [
+        "error",
+        "warning",
+        "info"
+      ]
+    },
+    "stage": {
+      "enum": [
+        "lexer",
+        "attach",
+        "registry",
+        "compile",
+        "storage",
+        "proof",
+        "projection",
+        "authority"
+      ]
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "blocking": {
+      "type": "boolean"
+    },
+    "recoverable": {
+      "type": "boolean"
+    },
+    "path": {
+      "type": "string",
+      "maxLength": 512
+    },
+    "ref": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "startLine",
+        "endLine"
+      ],
+      "properties": {
+        "startLine": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "endLine": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

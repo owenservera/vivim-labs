@@ -1,0 +1,333 @@
+{
+  "schema": "arbor.scf.impl.target-file-plan/1",
+  "state": "DESIGN_ONLY_NO_PRODUCT_CODE",
+  "plannedSourceBaseline": {
+    "arbormainAtPlan": "98f15e327957956ec94189772d5e5813e7b6b07b",
+    "scfBase": "90bd81028fab71c6fadef608404f216e84b1629a",
+    "swcResearch": "7cb2fadd88c5a08c0ec7e084410e150a5b6e0f3d",
+    "scopeCorrection": ".integration/proposal5/hq-version-intelligence/10-NATIVE-TOOLING-ONLY-SCOPE.md"
+  },
+  "priority": "implement A+B before C/D/E, then F/referee and G serial; H/U after security gate",
+  "rows": [
+    {
+      "taskId": "SCF-001",
+      "lane": "A",
+      "owner": "compiler-protocol",
+      "path": "hq/lib/annotation-v2.mjs",
+      "action": "MODIFY",
+      "description": "Expose safe internal real-comment token scanner via additive export; preserve parseAnnotationV2 semantics and diagnostics.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-002",
+      "lane": "A",
+      "owner": "compiler-protocol",
+      "path": "hq/lib/semantic-capability/comment-v3.mjs",
+      "action": "CREATE",
+      "description": "Pure v3 typed-reference tag parser + file/symbol attachment; no side effects.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-003",
+      "lane": "A",
+      "owner": "compiler-protocol",
+      "path": "hq/lib/semantic-capability/source-observation.mjs",
+      "action": "CREATE",
+      "description": "Verify symbol attachment and file source SHA; use extract.mjs real symbol output.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-004",
+      "lane": "A",
+      "owner": "compiler-protocol",
+      "path": "hq/lib/semantic-capability/compiler.mjs",
+      "action": "CREATE",
+      "description": "Compile immutable fact set via v2/SWC adapter, source observations, registries and diagnostics.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-005",
+      "lane": "B",
+      "owner": "registry-storage",
+      "path": "hq/lib/semantic-registry.mjs",
+      "action": "MODIFY",
+      "description": "Extend SEMANTIC_KINDS only for reviewed v3 ref kinds, preserving existing IDs and transitions.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-006",
+      "lane": "B",
+      "owner": "registry-storage",
+      "path": "hq/lib/schema.mjs",
+      "action": "MODIFY",
+      "description": "Wire additive SCF_DDL migration without breaking v1 schema or deleting existing rows.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-007",
+      "lane": "B",
+      "owner": "registry-storage",
+      "path": "hq/lib/semantic-capability/schema.mjs",
+      "action": "CREATE",
+      "description": "Isolated SCF_DDL, versioned derived-index migrations; no second database.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-008",
+      "lane": "B",
+      "owner": "registry-storage",
+      "path": "hq/lib/semantic-capability/store.mjs",
+      "action": "CREATE",
+      "description": "Immutable pinned fact/passport store within existing HQ SQLite; transaction and cache invalidation.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-009",
+      "lane": "B",
+      "owner": "registry-storage",
+      "path": "hq/lib/semantic-capability/registry-adapter.mjs",
+      "action": "CREATE",
+      "description": "Read-only adapter over semantic_id, semantic links, owner catalog/approved source roots.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-010",
+      "lane": "C",
+      "owner": "passports-wiki-hvi",
+      "path": "hq/lib/semantic-capability/passport.mjs",
+      "action": "CREATE",
+      "description": "Pure feature file+symbol many-to-many passports with scoped evidence and coverage.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-011",
+      "lane": "C",
+      "owner": "passports-wiki-hvi",
+      "path": "hq/lib/semantic-capability/semantic-delta.mjs",
+      "action": "CREATE",
+      "description": "Compare 2..N immutable pins using optional accepted HVI interfaces; raw source fallback.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-012",
+      "lane": "C",
+      "owner": "passports-wiki-hvi",
+      "path": "hq/lib/semantic-capability/hvi-adapter.mjs",
+      "action": "CREATE",
+      "description": "Only adapter to HVI accepted API, preserve its native read tool + synthetic-only tests.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-013",
+      "lane": "C",
+      "owner": "passports-wiki-hvi",
+      "path": "hq/lib/wiki.mjs",
+      "action": "MODIFY",
+      "description": "Add optional capabilityPassportModel read projection using existing buildWiki writer; no second writer.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-014",
+      "lane": "D",
+      "owner": "independent-verification",
+      "path": "hq/lib/semantic-capability/verifier-adapter.mjs",
+      "action": "CREATE",
+      "description": "Source-facts to existing verifier ClaimSpec/ProofReceipt schema bridge, no claimed proof.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-015",
+      "lane": "D",
+      "owner": "independent-verification",
+      "path": "hq/lib/semantic-capability/proof-binding.mjs",
+      "action": "CREATE",
+      "description": "Independent checker receipt binding and invalidation by source/spec/build/model digest.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-016",
+      "lane": "D",
+      "owner": "independent-verification",
+      "path": "hq/lib/semantic-capability/explanation.mjs",
+      "action": "CREATE",
+      "description": "Constrained truth-preserving explanation projection; never free-form proved claims.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-017",
+      "lane": "E",
+      "owner": "agent-cli-service",
+      "path": "hq/lib/protocol.mjs",
+      "action": "MODIFY",
+      "description": "Add explicit opt-in touched-file rules/agent guidance; keep v1 lint backwards compatible.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-018",
+      "lane": "E",
+      "owner": "agent-cli-service",
+      "path": "hq/bin/arbor-hq.mjs",
+      "action": "MODIFY",
+      "description": "Add local diagnostic scf check/compile/passport/delta + --allow sources; no implicit permissions.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-019",
+      "lane": "E",
+      "owner": "agent-cli-service",
+      "path": "hq/lib/arbor-service.mjs",
+      "action": "MODIFY",
+      "description": "Add host-mode read-only SCF methods inside permit/withDatabase, exact actor/live grant checks.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-020",
+      "lane": "E",
+      "owner": "agent-cli-service",
+      "path": "hq/lib/semantic-capability/agent-context.mjs",
+      "action": "CREATE",
+      "description": "Bounded source-pinned mission context pack, no new agent scheduler.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-021",
+      "lane": "F",
+      "owner": "independent-tests",
+      "path": "hq/test/scf-lexer.test.mjs",
+      "action": "CREATE",
+      "description": "String/template/regex/comment confusion + scope attach + v1/v2 regression.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-022",
+      "lane": "F",
+      "owner": "independent-tests",
+      "path": "hq/test/scf-registry-store.test.mjs",
+      "action": "CREATE",
+      "description": "Atomic schema migration, identity collision, corrupt digest, ENOSPC/fallback.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-023",
+      "lane": "F",
+      "owner": "independent-tests",
+      "path": "hq/test/scf-compiler.test.mjs",
+      "action": "CREATE",
+      "description": "Many-to-many feature graph, cross-language, stale/refuted claims, immutable pins.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-024",
+      "lane": "F",
+      "owner": "independent-tests",
+      "path": "hq/test/scf-wiki-hvi.test.mjs",
+      "action": "CREATE",
+      "description": "Deterministic wiki hashes, 3 same-repo synthetic pins, native HVI bridge.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-025",
+      "lane": "F",
+      "owner": "independent-tests",
+      "path": "hq/test/scf-verifier.test.mjs",
+      "action": "CREATE",
+      "description": "Independent oracle, proof binding, counterexample and explanation downgrade.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-026",
+      "lane": "F",
+      "owner": "independent-tests",
+      "path": "hq/test/scf-service.test.mjs",
+      "action": "CREATE",
+      "description": "Host grant/deny/revoke/per-read, source privacy and bound limits.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-027",
+      "lane": "F",
+      "owner": "independent-tests",
+      "path": "hq/test/scf-golden.test.mjs",
+      "action": "CREATE",
+      "description": "Golden machine fixtures, schema validation, no generated false runtime state.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-028",
+      "lane": "F",
+      "owner": "independent-tests",
+      "path": "hq/test/scf-performance.test.mjs",
+      "action": "CREATE",
+      "description": "Incremental invalidation, bounded 10k record benchmark, repeatable profile.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-029",
+      "lane": "G",
+      "owner": "integration-only",
+      "path": "hq/package.json",
+      "action": "MODIFY_LATE",
+      "description": "Add explicit scripts only after tests and modules exist; do not relax Node >=24.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-030",
+      "lane": "G",
+      "owner": "integration-only",
+      "path": "integration/reports/SCF-GATE.md",
+      "action": "CREATE_LATE",
+      "description": "Exact merged SHAs, commands/exits, security negatives, blockers and rollback instructions.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-031",
+      "lane": "H",
+      "owner": "post-gate-host",
+      "path": "apps/vivim-host/**",
+      "action": "ADD_LATE",
+      "description": "Only after accepted HVI native tooling and Host authorization; actor + source grant per read.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    },
+    {
+      "taskId": "SCF-032",
+      "lane": "U",
+      "owner": "post-gate-ui",
+      "path": "packages/tierflow/**",
+      "action": "ADD_LATE",
+      "description": "Read-only semantic inspector using sole TierFlow publisher; explicitly empty/unknown on gaps.",
+      "writeAllowedAfterGate": true,
+      "implemented": false
+    }
+  ]
+}

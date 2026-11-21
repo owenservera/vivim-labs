@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vivim.local/contracts/scf/semantic-delta.v0.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "targetPinId",
+    "pins",
+    "rows",
+    "coverage",
+    "errors",
+    "digest"
+  ],
+  "properties": {
+    "schema": {
+      "const": "arbor.scf.semantic-delta/0.1"
+    },
+    "targetPinId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "pins": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 32,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "pinId",
+          "repository",
+          "commitSha",
+          "snapshotDigest"
+        ],
+        "properties": {
+          "pinId": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "repository": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "commitSha": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{40}$"
+          },
+          "snapshotDigest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      }
+    },
+    "rows": {
+      "type": "array",
+      "maxItems": 100000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "capabilityId",
+          "states",
+          "evidenceRefs",
+          "certainty"
+        ],
+        "properties": {
+          "capabilityId": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 256
+          },
+          "states": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "pinId",
+                "classification",
+                "sourceCoverage"
+              ],
+              "properties": {
+                "pinId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                },
+                "classification": {
+                  "enum": [
+                    "PRESENT",
+                    "CHANGED",
+                    "CANDIDATE_REPLACEMENT",
+                    "EXACT_RELOCATION",
+                    "MISSING_AT_PATH",
+                    "UNANNOTATED_CANDIDATE",
+                    "UNOBSERVED",
+                    "BLOCKED"
+                  ]
+                },
+                "sourceCoverage": {
+                  "enum": [
+                    "complete",
+                    "partial",
+                    "missing",
+                    "blocked"
+                  ]
+                }
+              }
+            }
+          },
+          "evidenceRefs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 512
+            }
+          },
+          "certainty": {
+            "enum": [
+              "exact_source",
+              "static_supported",
+              "owner_reviewed",
+              "candidate",
+              "unknown"
+            ]
+          }
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "completePins",
+        "partialPins",
+        "unknownCapabilityRows"
+      ],
+      "properties": {
+        "completePins": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "partialPins": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unknownCapabilityRows": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 256
+      }
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

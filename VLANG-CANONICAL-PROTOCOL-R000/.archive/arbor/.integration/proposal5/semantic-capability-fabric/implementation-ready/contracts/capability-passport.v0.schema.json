@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vivim.local/contracts/scf/capability-passport.v0.schema.json",
+  "title": "SCF Capability Passport v0 — proposal, not installed",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "capabilityId",
+    "pin",
+    "owner",
+    "contributors",
+    "contracts",
+    "tests",
+    "claims",
+    "coverage",
+    "verdict",
+    "snapshotDigest"
+  ],
+  "properties": {
+    "schema": {
+      "const": "arbor.scf.capability-passport/0.1"
+    },
+    "capabilityId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*@[0-9]+(?:\\.[0-9]+)*$"
+    },
+    "pin": {
+      "$ref": "#/$defs/pin"
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "contributors": {
+      "type": "array",
+      "maxItems": 100000,
+      "items": {
+        "$ref": "#/$defs/contribution"
+      }
+    },
+    "contracts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "maxLength": 256
+      }
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/test"
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/claim"
+      }
+    },
+    "coverage": {
+      "$ref": "#/$defs/coverage"
+    },
+    "verdict": {
+      "enum": [
+        "SOURCE_DECLARED",
+        "SOURCE_RESOLVED",
+        "STATIC_SUPPORTED",
+        "SOURCE_WIRED_UNVERIFIED",
+        "RUNTIME_OBSERVED",
+        "CONFLICTING",
+        "UNKNOWN",
+        "BLOCKED"
+      ]
+    },
+    "snapshotDigest": {
+      "$ref": "#/$defs/sha64"
+    },
+    "unknownReasons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 256
+      }
+    }
+  },
+  "$defs": {
+    "sha40": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "sha64": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "pin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commitSha",
+        "treeSha",
+        "completeness"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 256
+        },
+        "commitSha": {
+          "$ref": "#/$defs/sha40"
+        },
+        "treeSha": {
+          "$ref": "#/$defs/sha40"
+        },
+        "completeness": {
+          "enum": [
+            "complete",
+            "partial",
+            "missing",
+            "blocked"
+          ]
+        }
+      }
+    },
+    "contribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "blobSha",
+        "scope",
+        "staticStatus",
+        "role"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "blobSha": {
+          "$ref": "#/$defs/sha40"
+        },
+        "unitRef": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "scope": {
+          "enum": [
+            "file",
+            "symbol",
+            "unknown"
+          ]
+        },
+        "symbol": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "staticStatus": {
+          "enum": [
+            "observed",
+            "contradicted",
+            "not_checked"
+          ]
+        },
+        "role": {
+          "enum": [
+            "owner",
+            "adapter",
+            "consumer",
+            "projection",
+            "test",
+            "helper",
+            "unknown"
+          ]
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 256
+          }
+        }
+      }
+    },
+    "test": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref",
+        "status"
+      ],
+      "properties": {
+        "ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "status": {
+          "enum": [
+            "DECLARED",
+            "FILE_PRESENT",
+            "EXECUTED_PASS",
+            "EXECUTED_FAIL",
+            "UNRUN",
+            "UNKNOWN"
+          ]
+        },
+        "receiptRef": {
+          "type": "string",
+          "maxLength": 256
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claimRef",
+        "propertyId",
+        "verdict"
+      ],
+      "properties": {
+        "claimRef": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "propertyId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "verdict": {
+          "enum": [
+            "PROVED_UNDER_MODEL",
+            "REFUTED",
+            "SUPPORTED_BY_TESTS",
+            "UNKNOWN",
+            "BLOCKED"
+          ]
+        },
+        "receiptRef": {
+          "type": "string",
+          "maxLength": 256
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eligibleFiles",
+        "annotatedFiles",
+        "resolvedFiles",
+        "unknownFiles",
+        "excludedFiles"
+      ],
+      "properties": {
+        "eligibleFiles": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "annotatedFiles": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "resolvedFiles": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unknownFiles": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "excludedFiles": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

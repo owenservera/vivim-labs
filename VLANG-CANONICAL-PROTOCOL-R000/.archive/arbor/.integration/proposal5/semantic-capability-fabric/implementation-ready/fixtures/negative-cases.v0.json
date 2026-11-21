@@ -1,0 +1,103 @@
+{
+  "schema": "arbor.scf.fixture.negative-cases/0.1",
+  "cases": [
+    {
+      "id": "N001",
+      "synthetic": true,
+      "scenario": "source string contains @hq tag",
+      "expected": "lexer_no_tag",
+      "outcome": "SCF_TAG_UNSUPPORTED_VERSION"
+    },
+    {
+      "id": "N002",
+      "synthetic": true,
+      "scenario": "annotation-v2 reports unknown_ref record and error",
+      "expected": "compile_reject_source",
+      "outcome": "SCF_ANNOTATION_UNKNOWN"
+    },
+    {
+      "id": "N003",
+      "synthetic": true,
+      "scenario": "two exported symbols adjacent to one tag",
+      "expected": "attach_refuse",
+      "outcome": "SCF_ATTACHMENT_AMBIGUOUS"
+    },
+    {
+      "id": "N004",
+      "synthetic": true,
+      "scenario": "source path ../.env",
+      "expected": "source_denied",
+      "outcome": "SCF_SOURCE_ESCAPE"
+    },
+    {
+      "id": "N005",
+      "synthetic": true,
+      "scenario": "same pin different blob digest",
+      "expected": "store_reject",
+      "outcome": "SCF_DIGEST_CONFLICT"
+    },
+    {
+      "id": "N006",
+      "synthetic": true,
+      "scenario": "expired or revoked grant at read",
+      "expected": "no_cached_disclosure",
+      "outcome": "SCF_PERMISSION_REVOKED"
+    },
+    {
+      "id": "N007",
+      "synthetic": true,
+      "scenario": "test path exists but no execution receipt",
+      "expected": "test_status_unrun",
+      "outcome": "SCF_TEST_UNOBSERVED"
+    },
+    {
+      "id": "N008",
+      "synthetic": true,
+      "scenario": "SV receipt artifact hash mismatch",
+      "expected": "proof_blocked",
+      "outcome": "SCF_PROOF_ARTIFACT_MISMATCH"
+    },
+    {
+      "id": "N009",
+      "synthetic": true,
+      "scenario": "v3 tag under old parser mode",
+      "expected": "no_v3_facts",
+      "outcome": "SCF_TAG_UNSUPPORTED_VERSION"
+    },
+    {
+      "id": "N010",
+      "synthetic": true,
+      "scenario": "copy feature ID from JS to Rust without ABI/test proof",
+      "expected": "candidate_only",
+      "outcome": "SCF_STATIC_CLAIM_UNPROVEN"
+    },
+    {
+      "id": "N011",
+      "synthetic": true,
+      "scenario": "source manifest partial missing path",
+      "expected": "no_tombstone",
+      "outcome": "SCF_SOURCE_PARTIAL"
+    },
+    {
+      "id": "N012",
+      "synthetic": true,
+      "scenario": "request real repos migration during installation",
+      "expected": "scope_refusal",
+      "outcome": "SCF_SOURCE_UNAUTHORIZED"
+    },
+    {
+      "id": "N013",
+      "synthetic": true,
+      "scenario": "HVI accepted compare interface not installed",
+      "expected": "no_shadow_comparator",
+      "outcome": "SCF_HVI_INTERFACE_UNAVAILABLE"
+    },
+    {
+      "id": "N014",
+      "synthetic": true,
+      "scenario": "fake verified sentence in explanation template",
+      "expected": "downgrade_clause",
+      "outcome": "SCF_SPEC_UNAPPROVED"
+    }
+  ]
+}

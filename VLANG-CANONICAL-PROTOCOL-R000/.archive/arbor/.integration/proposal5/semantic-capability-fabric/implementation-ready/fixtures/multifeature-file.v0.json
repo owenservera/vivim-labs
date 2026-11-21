@@ -1,0 +1,42 @@
+{
+  "schema": "arbor.scf.fixture.multifeature-file/0.1",
+  "synthetic": true,
+  "repo": "synthetic/atlas",
+  "pin": {
+    "repository": "synthetic/atlas",
+    "commitSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "treeSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "completeness": "complete"
+  },
+  "path": "src/snapshot.mjs",
+  "sourceText": "/**\n * @hq:context Synthetic immutable source snapshot.\n * @hq:owner hq\n * @hq:capability synthetic.pin-source@1\n * @hq:capability synthetic.compare-revisions@1\n * @hq:contract synthetic.source-manifest@1\n * @hq:test test:tests/snapshot.test.mjs\n */\nexport function snapshotAt(pin) { return { ...pin, frozen: true }; }\n",
+  "registryEntries": [
+    {
+      "id": "synthetic.pin-source@1",
+      "kind": "capability",
+      "status": "current"
+    },
+    {
+      "id": "synthetic.compare-revisions@1",
+      "kind": "capability",
+      "status": "current"
+    },
+    {
+      "id": "synthetic.source-manifest@1",
+      "kind": "contract",
+      "status": "current"
+    }
+  ],
+  "expected": {
+    "fileMemberships": [
+      "synthetic.compare-revisions@1",
+      "synthetic.pin-source@1"
+    ],
+    "declaredTests": [
+      "test:tests/snapshot.test.mjs"
+    ],
+    "testExecution": "UNRUN",
+    "runtime": "UNKNOWN",
+    "sourceScope": "file"
+  }
+}

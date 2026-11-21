@@ -1,0 +1,46 @@
+{
+  "schema": "arbor.scf.capability-passport/0.1",
+  "capabilityId": "synthetic.compare-revisions@1",
+  "pin": {
+    "repository": "synthetic/atlas",
+    "commitSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "treeSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "completeness": "complete"
+  },
+  "owner": "hq",
+  "contributors": [
+    {
+      "path": "src/snapshot.mjs",
+      "blobSha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "scope": "file",
+      "staticStatus": "not_checked",
+      "role": "helper",
+      "evidenceRefs": [
+        "src:snapshot-header"
+      ]
+    }
+  ],
+  "contracts": [
+    "synthetic.source-manifest@1"
+  ],
+  "tests": [
+    {
+      "ref": "test:tests/snapshot.test.mjs",
+      "status": "UNRUN"
+    }
+  ],
+  "claims": [],
+  "coverage": {
+    "eligibleFiles": 1,
+    "annotatedFiles": 1,
+    "resolvedFiles": 1,
+    "unknownFiles": 0,
+    "excludedFiles": 0
+  },
+  "verdict": "SOURCE_RESOLVED",
+  "snapshotDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "unknownReasons": [
+    "test_execution_unobserved",
+    "runtime_unknown"
+  ]
+}

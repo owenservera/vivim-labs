@@ -1,0 +1,88 @@
+{
+  "schema": "arbor.proposal5.semantic-engineering-program/1",
+  "date": "2026-11-12",
+  "programId": "SEVP-R001",
+  "name": "Semantic Engineering & Verification Program",
+  "status": "FIRST_PASS_SCAFFOLD_DEEP_PREP_PENDING",
+  "repo": "owenservera/ARBOR",
+  "branch": "work/p5-semantic-engineering-program-scaffold-r001",
+  "baseMainSha": "539146ac741516e7d9711c63f4570585b3c3367e",
+  "inputs": [
+    {
+      "kind": "canonical",
+      "ref": "owenservera/ARBOR:main",
+      "sha": "539146ac741516e7d9711c63f4570585b3c3367e",
+      "status": "PINNED_SOURCE_START"
+    },
+    {
+      "kind": "draft-scf-sv",
+      "ref": "owenservera/ARBOR:work/p5-semantic-capability-fabric-r001",
+      "sha": "90bd81028fab71c6fadef608404f216e84b1629a",
+      "status": "DESIGN_NOT_PROMOTED"
+    },
+    {
+      "kind": "hq-research",
+      "ref": "owenservera/repos-hq:research/semantic-wiki-compiler-20261112",
+      "sha": "7cb2fadd88c5a08c0ec7e084410e150a5b6e0f3d",
+      "status": "RESEARCH"
+    },
+    {
+      "kind": "labs",
+      "ref": "owenservera/vivim-labs:lab/nlp-visual-command-ui-20261111",
+      "sha": "67e76c5b730dcc2cd3ab3919c3ba273a6c260db8",
+      "status": "RESEARCH"
+    }
+  ],
+  "goals": [
+    "semantic-agent-protocol",
+    "additive-v3-source-compiler",
+    "typed-fact-abi",
+    "approved-independent-claim-oracle",
+    "independent-verifier",
+    "bounded-executable-evidence",
+    "runtime-owner-witnesses",
+    "claim-bound-verbal-explanation",
+    "hq-wiki-hvi-proof-delta",
+    "agent-ci-ide-and-sdk"
+  ],
+  "candidateRoles": [
+    "S0",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "Z",
+    "G",
+    "R"
+  ],
+  "candidateSlices": [
+    "source-fact-witness",
+    "false-function-refuted",
+    "real-pure-function-supported",
+    "synthetic-authority-witness",
+    "synthetic-three-commit-proof-delta",
+    "agent-passport",
+    "sdk-consumer"
+  ],
+  "firstPassOnly": true,
+  "deepPrepOrdersAuthored": false,
+  "workerPromptsAuthored": false,
+  "waveCountFixed": false,
+  "programTestsExecuted": false,
+  "productCodeModified": false,
+  "realHviComparisonExecuted": false,
+  "sourceIntegrationAuthorized": false,
+  "betaAcceptanceClaimed": false,
+  "constraints": [
+    "no_self_certification",
+    "no_duplicate_authority_or_kb",
+    "no_real_donor_hvi_audit_without_explicit_request",
+    "no_private_corpus_reads",
+    "no_effectful_test_replays",
+    "no_provider_apis",
+    "no_workers_merge_main",
+    "UNRUN_is_not_PASS"
+  ]
+}

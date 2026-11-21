@@ -1,0 +1,71 @@
+{
+  "schema": "arbor.sevp.predev-convergence/1",
+  "date": "2026-11-12",
+  "status": "PREDEV_CONVERGED_WITH_OPEN_GATES",
+  "observed": {
+    "main": "3d45fbf1c3963e4834a5e51ee7f6e63f3a0da298",
+    "scfPr13Head": "0e35c54105f7b8ee8a772b3159d243c6788fb7d4",
+    "sevpPr19OriginalHead": "9e91e973d6a99ba89eb6b3c02a941a0b122e2807"
+  },
+  "authorities": {
+    "implementation": "semantic-capability-fabric/implementation-ready/",
+    "program": "semantic-engineering-program/",
+    "hviPolicy": "hq-version-intelligence/10-NATIVE-TOOLING-ONLY-SCOPE.md",
+    "verifierContracts": "semantic-capability-fabric/verifier/contracts/"
+  },
+  "verified": {
+    "pr13Draft": true,
+    "pr19Draft": true,
+    "productImplementation": false,
+    "semanticTestsExecuted": false,
+    "realMigrationCompared": false,
+    "betaApproved": false
+  },
+  "orderedGates": [
+    "S0",
+    "A_B_F",
+    "C_D_E",
+    "Z1",
+    "G1",
+    "H_U",
+    "Z2",
+    "G2",
+    "R"
+  ],
+  "unresolved": [
+    {
+      "id": "SOURCE_LOCK",
+      "owner": "S0",
+      "required": "re-pin latest source and accepted HVI branches"
+    },
+    {
+      "id": "OWNER_COLLISIONS",
+      "owner": "G/S0",
+      "required": "exclusive writer map across PR13 and PR19"
+    },
+    {
+      "id": "TRUST_ROOTS",
+      "owner": "SV/independentQA",
+      "required": "approval of oracle and spec weakening policy"
+    },
+    {
+      "id": "ABI_RECONCILIATION",
+      "owner": "S0/HVI",
+      "required": "check actual HVI native API and active Host guard"
+    },
+    {
+      "id": "EXECUTABLE_GATES",
+      "owner": "F/Z/G",
+      "required": "record real commands and exits; no UNRUN as PASS"
+    }
+  ],
+  "restrictions": [
+    "synthetic_invented_git_fixtures_only",
+    "no_real_donor_comparisons",
+    "no_auto_migration",
+    "no_provider_apis",
+    "no_effectful_replays",
+    "no_unapproved_merges"
+  ],
+  "sourceDocument": "12-VLANG-MASTER-CONVERGENCE-R002.md"
+}

@@ -2,7 +2,7 @@
 //! Inputs are COPIES of an existing HQKG ContextBundle receipt, not a graph.
 //! The existing native graph owns traversal, source identity and freshness.
 //! This adapter intentionally does not issue a source read or a Host request.
-use crate::bundle_projection::{
+use super::bundle_projection::{
     project_context, ContextReceipt, LensProjection, LensRead,
     ProjectionError, SourceEdge, SourceItem,
 };
@@ -58,7 +58,7 @@ impl OwnedContextReceipt {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::context_lens::Depth;
+    use super::super::context_lens::Depth;
     use std::collections::{BTreeMap,BTreeSet};
     #[test]
     fn owned_receipt_adapts_without_another_graph_walk() {

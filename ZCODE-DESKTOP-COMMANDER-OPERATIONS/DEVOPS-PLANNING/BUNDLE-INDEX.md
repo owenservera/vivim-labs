@@ -13,7 +13,7 @@ This file contains **pointers to known pre-integration artifacts**. It does not 
 
 ## R006 native HQKG complete grant coverage — current offer
 
-- **AW-GRANT-COVERAGE-R006** [Code pack](PACKS/AUTH-R006/README.md) | [Rust native graph grant builder](PACKS/AUTH-R006/native_grant_coverage.rs) | [8 authored native integration tests](PACKS/AUTH-R006/native_grant_coverage_test.rs) | [Dev integration](PACKS/AUTH-R006/DEVAGENT-APPLY.md) | [verification](PACKS/AUTH-R006/VERIFICATION.md).
+- **AW-GRANT-COVERAGE-R006** [Code pack](PACKS/AUTH-R006/README.md) | [Rust native graph grant builder](PACKS/AUTH-R006/native_grant_coverage.rs) | [8 authored native integration tests](PACKS/AUTH-R006/native_grant_coverage_test.rs) | [Dev integration](PACKS/AUTH-R006/DEVAGENT-APPLY.md) | [verification](PACKS/AUTH-R006/VERIFICATION.md) | [Host grant source audit](PACKS/AUTH-R006/HOST-GRANT-SOURCE-AUDIT.md).
 - **Reuse** actual `hqkg::Graph::nodes`, `Graph::epoch`, node source refs, existing R004 `TrustedQueryScope`, and incumbent `query_scoped`. No second grant database, graph/index or Host effects engine. Complete per-prefix exclusions only after a bounded scan, exact actor/source grant, valid focus, and grant+epoch postflight; refuse incomplete/oversized scopes.
 - **Evidence:** 8 Rust integration `#[test]` markers authored, not executed. R003-R005 existing standalone crate now **82** authored tests, R004 separate native HQKG tests **2** authored. Cargo/rustc and live Host grants **UNRUN**; actual Host-grant producer unknown. Dev ACK **NOT OBSERVED**. GPUI remains paused.
 

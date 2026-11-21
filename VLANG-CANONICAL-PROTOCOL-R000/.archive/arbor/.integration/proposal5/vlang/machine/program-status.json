@@ -1,0 +1,54 @@
+{
+  "schema": "arbor.proposal5.vlang-sitrep/1",
+  "date": "2026-11-12",
+  "name": "VLang",
+  "identity": "semantic_engineering_and_verification_program_umbrella_not_executable_language",
+  "home": ".integration/proposal5/vlang/",
+  "authority": "planning_read_only",
+  "maturity": "PREDEV_CONVERGED_WITH_OPEN_GATES",
+  "production_adoption": "NOT_IMPLEMENTED_OR_ACCEPTED",
+  "mainObservedSha": "3d45fbf1c3963e4834a5e51ee7f6e63f3a0da298",
+  "scfDraftSha": "0e35c54105f7b8ee8a772b3159d243c6788fb7d4",
+  "sevpDraftSha": "e41b943e2eb0fd0c60b73918596b219c087f0052",
+  "currentImplementation": "Existing HQ v1/v2/index/registry/SQLite/Wiki source; no accepted integrated SCF/SV product",
+  "definitionOfReady": "S0 approved source pin + collision-free ownership + trusted spec/oracle roots + actual ABI + runnable test prerequisites",
+  "eraCounts": {
+    "implemented": 12,
+    "predev_prepped": 5,
+    "discussed_not_implemented": 9,
+    "vision": 4
+  },
+  "components": 30,
+  "tests_executed_this_sitrep": false,
+  "executed_test_commands": [],
+  "actual_exits": [],
+  "synthetic_fixture_policy": "Only invented synthetic Git fixtures for HVI installation/tests; no actual ARBOR/VIVIM/Labs migration analysis",
+  "restrictions": [
+    "no_provider_apis",
+    "no_second_graph_or_db_owner",
+    "no_second_wiki_writer",
+    "no_second_action_dispatcher",
+    "no_comment_grants",
+    "no_real_donor_comparisons",
+    "no_unapproved_merges",
+    "no_unverified_runtime_claims"
+  ],
+  "references": {
+    "scfPr": "https://github.com/owenservera/ARBOR/pull/13",
+    "sevpPr": "https://github.com/owenservera/ARBOR/pull/19",
+    "hviScope": "https://github.com/owenservera/ARBOR/blob/main/.integration/proposal5/hq-version-intelligence/10-NATIVE-TOOLING-ONLY-SCOPE.md"
+  },
+  "sourcePinsFile": "source-pins.json",
+  "componentsFile": "component-register.json",
+  "gatesFile": "gate-register.json",
+  "proposedProductDirection": {
+    "name": "VEC",
+    "identity": "Natural-language user programming engine",
+    "status": "VISION_ARCHITECTURE_PROPOSED_NOT_IMPLEMENTED",
+    "canonical": "vec/README.md",
+    "machine": "vec-product-vision.json",
+    "primaryOutput": "typed_user_program_IR_not_arbitrary_source_edits",
+    "interpretation": "deterministic_existing_SDK_first_optional_LLM_fallback",
+    "note": "This is additive future scope and does not alter SCF predevelopment gate status"
+  }
+}

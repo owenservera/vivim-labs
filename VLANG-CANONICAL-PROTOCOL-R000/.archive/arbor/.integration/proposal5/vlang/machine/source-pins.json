@@ -1,0 +1,84 @@
+{
+  "schema": "arbor.proposal5.vlang-source-pins/1",
+  "date": "2026-11-12",
+  "lockedImplementationBase": false,
+  "pins": [
+    {
+      "repo": "owenservera/ARBOR",
+      "ref": "main",
+      "sha": "3d45fbf1c3963e4834a5e51ee7f6e63f3a0da298",
+      "role": "canonical_merged_source",
+      "verified_by": "GitHub REST branch ref"
+    },
+    {
+      "repo": "owenservera/ARBOR",
+      "ref": "work/p5-semantic-capability-fabric-r001",
+      "sha": "0e35c54105f7b8ee8a772b3159d243c6788fb7d4",
+      "role": "draft_PR13_engineering_spec",
+      "verified_by": "GitHub REST ref"
+    },
+    {
+      "repo": "owenservera/ARBOR",
+      "ref": "work/p5-semantic-engineering-program-scaffold-r001",
+      "sha": "e41b943e2eb0fd0c60b73918596b219c087f0052",
+      "role": "draft_PR19_umbrella_program",
+      "verified_by": "GitHub REST ref"
+    },
+    {
+      "repo": "owenservera/ARBOR",
+      "ref": "integrate/p5-hq-version-intelligence-r001",
+      "sha": "0539d23404ef5b1de12ad646d807a2fda57c6ab6",
+      "role": "observed_HVI_integration_no_gate_assumed",
+      "verified_by": "GitHub REST ref"
+    },
+    {
+      "repo": "owenservera/ARBOR",
+      "ref": "work/p5-hvi-w2-h-host-r001",
+      "sha": "d24daa9966abb222cd25210f41dcbb4758aa1209",
+      "role": "observed_HVI_H_no_acceptance_assumed",
+      "verified_by": "GitHub REST ref"
+    },
+    {
+      "repo": "owenservera/ARBOR",
+      "ref": "work/p5-hvi-w2-u-inspector-r001",
+      "sha": "5836e9c9f5ba3bee36dbe6896ebfd22364b4c450",
+      "role": "observed_HVI_U_no_acceptance_assumed",
+      "verified_by": "GitHub REST ref"
+    },
+    {
+      "repo": "owenservera/ARBOR",
+      "ref": "work/p5-hvi-w2-z-referee-r001",
+      "sha": "725132c640a1f21d3af5c4b9123b314e4df3133d",
+      "role": "observed_HVI_Z2_no_gate_assumed",
+      "verified_by": "GitHub REST ref"
+    },
+    {
+      "repo": "owenservera/repos-hq",
+      "ref": "research/semantic-wiki-compiler-20261112",
+      "sha": "7cb2fadd88c5a08c0ec7e084410e150a5b6e0f3d",
+      "role": "historical_research_pin_from_SCF_SITREP",
+      "verified_by": "draft_SCF_source_inventory_not_rechecked_live"
+    },
+    {
+      "repo": "owenservera/vivim-labs",
+      "ref": "lab/nlp-visual-command-ui-20261111",
+      "sha": "67e76c5b730dcc2cd3ab3919c3ba273a6c260db8",
+      "role": "historical_lab_pin_from_SCF_SITREP",
+      "verified_by": "draft_SCF_source_inventory_not_rechecked_live"
+    },
+    {
+      "repo": "owenservera/ARBOR",
+      "ref": "work/p5-preg-semantic-wiki-r001",
+      "sha": "d7e59a389a6ec5278595e317dfa904a801783c5b",
+      "role": "historical_preG_pin",
+      "verified_by": "draft_SCF_source_inventory_not_rechecked_live"
+    },
+    {
+      "repo": "owenservera/ARBOR",
+      "ref": "work/p5-fa-pg02-semantic-fabric-r001",
+      "sha": "021864846783d28679b29e563490d4bb100ac079",
+      "role": "historical_PG02_pin",
+      "verified_by": "draft_SCF_source_inventory_not_rechecked_live"
+    }
+  ]
+}

@@ -1,0 +1,284 @@
+{
+  "schema": "arbor.proposal5.vlang-component-register/1",
+  "date": "2026-11-12",
+  "source": "current ARBOR main and PR13/PR19 designs; historical pins marked",
+  "count": 30,
+  "eraCounts": {
+    "implemented": 12,
+    "predev_prepped": 5,
+    "discussed_not_implemented": 9,
+    "vision": 4
+  },
+  "items": [
+    {
+      "id": "VLANG-001",
+      "name": "HQ v1 inline protocol",
+      "era": "implemented",
+      "evidence_state": "source_present_not_runtime_verified",
+      "source": "hq/lib/protocol.mjs",
+      "summary": "Nine descriptive tags and deterministic agent protocol/linter; current source exists.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-002",
+      "name": "HQ v2 typed annotation lexer",
+      "era": "implemented",
+      "evidence_state": "source_present_not_runtime_verified",
+      "source": "hq/lib/annotation-v2.mjs",
+      "summary": "Real-comment parser and nine typed tags; no v3 support claimed.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-003",
+      "name": "HQ semantic identity registry",
+      "era": "implemented",
+      "evidence_state": "source_present_not_runtime_verified",
+      "source": "hq/lib/semantic-registry.mjs",
+      "summary": "Versioned IDs, aliases, owner-reviewed status, existing kinds only.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-004",
+      "name": "HQ SQLite source indexing",
+      "era": "implemented",
+      "evidence_state": "source_present_not_runtime_verified",
+      "source": "hq/lib/indexer.mjs",
+      "summary": "Incremental file/symbol/import/annotation inventory, not SCF passport compiler.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-005",
+      "name": "HQ SQLite schema/storage",
+      "era": "implemented",
+      "evidence_state": "source_present_not_runtime_verified",
+      "source": "hq/lib/schema.mjs",
+      "summary": "In-repo SQLite migration/data boundary; proposed SCF tables absent.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-006",
+      "name": "HQ deterministic Wiki generator",
+      "era": "implemented",
+      "evidence_state": "source_present_not_runtime_verified",
+      "source": "hq/lib/wiki.mjs",
+      "summary": "One canonical derived Wiki output, not independently proof-certified.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-007",
+      "name": "HQ Wiki program owner control",
+      "era": "implemented",
+      "evidence_state": "source_present_not_runtime_verified",
+      "source": "hq/lib/wiki-program.mjs",
+      "summary": "Data-only reviewed program configuration and rollback.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-008",
+      "name": "HQ comment-to-Wiki bridge",
+      "era": "implemented",
+      "evidence_state": "source_present_not_runtime_verified",
+      "source": "hq/lib/comment-wiki-bridge.mjs",
+      "summary": "Bounded Rust comment compiler bridge, separate from proposed v3 SCF.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-009",
+      "name": "HQ development intelligence service",
+      "era": "implemented",
+      "evidence_state": "source_present_not_runtime_verified",
+      "source": "hq/lib/arbor-service.mjs",
+      "summary": "In-repo development-source boundary with reviewed-root authorization.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-010",
+      "name": "Semantic Wiki Compiler v0.1 research",
+      "era": "implemented",
+      "evidence_state": "research_not_promoted",
+      "source": "repos-hq/research/semantic-wiki-compiler/semantic-wiki-compiler.mjs",
+      "summary": "Research-only compiled read model, not accepted product runtime.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-011",
+      "name": "Pre-G Semantic Wiki crosswalk",
+      "era": "implemented",
+      "evidence_state": "prepared_not_promoted",
+      "source": ".integration/proposal5/phase2/pre-g/S-semantic/LANGUAGE-BASELINE.md",
+      "summary": "Previously committed source/fixture preparation on an unpromoted branch.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-012",
+      "name": "PG02 semantic fabric crosswalk",
+      "era": "implemented",
+      "evidence_state": "prepared_not_promoted",
+      "source": ".integration/proposal5/phase2/pre-g/PG02",
+      "summary": "Synthetic adapter work on an unpromoted branch; exact path requires revalidation.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-013",
+      "name": "SCF 44-file implementation kit",
+      "era": "predev_prepped",
+      "evidence_state": "design_documents_only",
+      "source": ".integration/proposal5/semantic-capability-fabric/implementation-ready/README.md",
+      "summary": "Near-code file plans, contracts, recipes, fixtures, 15 prompts and 34 planned tests.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-014",
+      "name": "SCF/SV accepted naming and convergence",
+      "era": "predev_prepped",
+      "evidence_state": "design_documents_only",
+      "source": ".integration/proposal5/semantic-engineering-program/12-VLANG-MASTER-CONVERGENCE-R002.md",
+      "summary": "Pre-development conceptual overlap resolved, open source/trust/ABI gates remain.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-015",
+      "name": "SV independent verifier specification",
+      "era": "predev_prepped",
+      "evidence_state": "design_documents_only",
+      "source": ".integration/proposal5/semantic-capability-fabric/verifier/README.md",
+      "summary": "ClaimSpec, proof receipt, verifier kernel, explanations and red-team acceptance designs.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-016",
+      "name": "SCF agent source contribution protocol",
+      "era": "predev_prepped",
+      "evidence_state": "design_documents_only",
+      "source": ".integration/proposal5/semantic-capability-fabric/02-AGENT-CONTRIBUTOR-PROTOCOL.md",
+      "summary": "Touched-file annotation and PR handshake proposal; no new active lint rule.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-017",
+      "name": "HVI native tooling governing scope",
+      "era": "predev_prepped",
+      "evidence_state": "policy_merged_not_runtime_certified",
+      "source": ".integration/proposal5/hq-version-intelligence/10-NATIVE-TOOLING-ONLY-SCOPE.md",
+      "summary": "Synthetic invented Git fixture restriction; no real donor migration comparisons.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-018",
+      "name": "V3 additive comment grammar",
+      "era": "discussed_not_implemented",
+      "evidence_state": "design_only",
+      "source": ".integration/proposal5/semantic-capability-fabric/03-SEMANTIC-COMMENT-LANGUAGE.md",
+      "summary": "Opt-in semantic/3 and unit/role/lineage tags not parsed by current v2.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-019",
+      "name": "SCF incremental semantic compiler",
+      "era": "discussed_not_implemented",
+      "evidence_state": "design_only",
+      "source": ".integration/proposal5/semantic-capability-fabric/05-INCREMENTAL-COMPILER-AND-WIKI.md",
+      "summary": "Source-bound compile, incremental invalidation and typed facts not built.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-020",
+      "name": "Feature capability passports",
+      "era": "discussed_not_implemented",
+      "evidence_state": "design_only",
+      "source": ".integration/proposal5/semantic-capability-fabric/01-PRODUCT-VISION.md",
+      "summary": "Many-to-many capability membership with declared/derived/proven dimensions.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-021",
+      "name": "HVI semantic enrichment bridge",
+      "era": "discussed_not_implemented",
+      "evidence_state": "design_only",
+      "source": ".integration/proposal5/semantic-capability-fabric/06-HVI-MIGRATION-OPTIMIZATION.md",
+      "summary": "Optional typed semantic enrichments for accepted HVI native 2..N interface.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-022",
+      "name": "Independent SV checker + trusted oracles",
+      "era": "discussed_not_implemented",
+      "evidence_state": "design_only",
+      "source": ".integration/proposal5/semantic-capability-fabric/verifier/03-INDEPENDENT-VERIFICATION-KERNEL.md",
+      "summary": "Independent checker, reviewed spec/oracle roots and negative mutation proofs.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-023",
+      "name": "Proof-bound explanatory Wiki",
+      "era": "discussed_not_implemented",
+      "evidence_state": "design_only",
+      "source": ".integration/proposal5/semantic-capability-fabric/verifier/05-EXPLANATION-TRUTH-CHECKING.md",
+      "summary": "Each factual clause bound to checked claim at exact source/build scope.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-024",
+      "name": "Native agent SDK and diagnostics",
+      "era": "discussed_not_implemented",
+      "evidence_state": "design_only",
+      "source": ".integration/proposal5/semantic-capability-fabric/implementation-ready/07-AGENT-SDK-TEMPLATE.md",
+      "summary": "Introspect/compile/diagnostic API proposal, separate from existing protocol.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-025",
+      "name": "Host-authorized SCF read port",
+      "era": "discussed_not_implemented",
+      "evidence_state": "blocked_pending_HVI_Host_gate",
+      "source": ".integration/proposal5/semantic-capability-fabric/implementation-ready/prompts/50-H-HOST-NATIVE-READ.md",
+      "summary": "Must reuse Host development source grant, revoke and receipts.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-026",
+      "name": "TierFlow capability inspector",
+      "era": "discussed_not_implemented",
+      "evidence_state": "blocked_pending_publisher_gate",
+      "source": ".integration/proposal5/semantic-capability-fabric/implementation-ready/prompts/50-U-TIERFLOW-INSPECTOR.md",
+      "summary": "Read-only, revision-bound UI states and display projection.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-027",
+      "name": "Automatic trusted capability Wiki",
+      "era": "vision",
+      "evidence_state": "vision_only",
+      "source": ".integration/proposal5/semantic-capability-fabric/01-PRODUCT-VISION.md",
+      "summary": "Self-documenting feature knowledge with evidence freshness and causal impact.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-028",
+      "name": "Architecture time machine",
+      "era": "vision",
+      "evidence_state": "vision_only",
+      "source": ".integration/proposal5/semantic-capability-fabric/01-PRODUCT-VISION.md",
+      "summary": "Source/build-pinned N-way semantic revision history and replayable comparisons.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-029",
+      "name": "Truth-constrained change copilot",
+      "era": "vision",
+      "evidence_state": "vision_only",
+      "source": ".integration/proposal5/semantic-engineering-program/00-CHARTER-AND-END-STATE.md",
+      "summary": "Agent receives small pinned context bundles, checks impact and preserves proofs.",
+      "test_executed_this_sitrep": false
+    },
+    {
+      "id": "VLANG-030",
+      "name": "Multi-language proof-carrying development",
+      "era": "vision",
+      "evidence_state": "vision_only",
+      "source": ".integration/proposal5/semantic-engineering-program/00-CHARTER-AND-END-STATE.md",
+      "summary": "Extensible JS/TS/Rust and future language/IDE support; not a general-purpose runtime.",
+      "test_executed_this_sitrep": false
+    }
+  ]
+}

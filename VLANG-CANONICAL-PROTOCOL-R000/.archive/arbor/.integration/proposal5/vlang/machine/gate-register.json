@@ -1,0 +1,63 @@
+{
+  "schema": "arbor.proposal5.vlang-gates/1",
+  "date": "2026-11-12",
+  "releaseGate": "NOT_ASSESSED",
+  "s0Accepted": false,
+  "tests_executed_this_sitrep": false,
+  "gates": [
+    {
+      "id": "G0_SOURCE_PINS",
+      "status": "observed_not_locked",
+      "owner": "S0",
+      "requires": "Repin current main, both drafts, accepted HVI branches; freeze exact workerBaseSha"
+    },
+    {
+      "id": "G1_OWNER_MAP",
+      "status": "open",
+      "owner": "S0_G",
+      "requires": "One collision-free A/B/C/D/E/F/H/U source writer map across PR13 and PR19"
+    },
+    {
+      "id": "G2_TRUST_ROOT",
+      "status": "open",
+      "owner": "SV_independent_QA",
+      "requires": "Owner-approved ClaimSpec/oracles, baseline/spec weakening and revocation policy"
+    },
+    {
+      "id": "G3_ABI",
+      "status": "open",
+      "owner": "S0_HVI",
+      "requires": "Read and reconcile installed HVI/native Host and HQ source interfaces, schema negotiation"
+    },
+    {
+      "id": "G4_TEST_PREREQUISITES",
+      "status": "unrun",
+      "owner": "F_S0",
+      "requires": "Node >=24, runnable source tests, real exits, synthetic negative fixtures"
+    },
+    {
+      "id": "G5_S0_ACCEPTED",
+      "status": "not_confirmed",
+      "owner": "S0_independent",
+      "requires": "Committed S0 evidence plus accepted go/no-go; no A-F starts just from this SITREP"
+    },
+    {
+      "id": "G6_SCF_SOURCE",
+      "status": "not_started",
+      "owner": "A_B_C_D_E_F_Z_G",
+      "requires": "Actual product code, real tests, independent review and serial G gate"
+    },
+    {
+      "id": "G7_PRODUCT_READ",
+      "status": "not_started",
+      "owner": "H_U_Z2_G2",
+      "requires": "Native tool accepted, Host grants/revocation, TierFlow revision guard, executable tests"
+    },
+    {
+      "id": "G8_RELEASE",
+      "status": "out_of_scope",
+      "owner": "Product_security",
+      "requires": "Separate Windows/PWA, native security, device, beta and release gates"
+    }
+  ]
+}

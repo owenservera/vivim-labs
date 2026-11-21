@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ARBOR VLang SITREP program status",
+  "type": "object",
+  "required": [
+    "schema",
+    "date",
+    "home",
+    "authority",
+    "maturity",
+    "mainObservedSha",
+    "eraCounts",
+    "tests_executed_this_sitrep"
+  ],
+  "properties": {
+    "schema": {
+      "const": "arbor.proposal5.vlang-sitrep/1"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "home": {
+      "const": ".integration/proposal5/vlang/"
+    },
+    "authority": {
+      "const": "planning_read_only"
+    },
+    "maturity": {
+      "type": "string"
+    },
+    "mainObservedSha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "scfDraftSha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "sevpDraftSha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "eraCounts": {
+      "type": "object",
+      "required": [
+        "implemented",
+        "predev_prepped",
+        "discussed_not_implemented",
+        "vision"
+      ],
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "tests_executed_this_sitrep": {
+      "type": "boolean"
+    },
+    "executed_test_commands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "actual_exits": {
+      "type": "array"
+    },
+    "restrictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

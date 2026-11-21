@@ -28,7 +28,8 @@ pub struct ProposedSentence<'a> {
     pub object_phrase: &'a str,
     pub negated: bool,
     pub evidence_refs: &'a [&'a str],
-    pub source_revision: u64,
+    /// Native HQKG/semantic revision, NOT the Host Wiki journal revision.
+    pub semantic_source_revision: u64,
     pub source_commit: &'a str,
     pub spec_digest: &'a str,
     pub kind: StatementKind,
@@ -41,6 +42,8 @@ pub struct ProposedSentence<'a> {
 pub struct CurrentEvidenceScope<'a> {
     pub page_id: &'a str,
     pub wiki_revision: u64,
+    /// Independently attested revision in the semantic source's OWN clock domain.
+    pub semantic_source_revision: u64,
     pub source_commit: &'a str,
     pub allowed_source_refs: &'a BTreeSet<String>,
 }
@@ -94,7 +97,7 @@ fn credible(
     scope: &CurrentEvidenceScope<'_>,
 ) -> bool {
     p.independently_authenticated && p.scope_complete && p.unknown_paths==0 &&
-    !p.counterexample && bounded_id(&p.receipt_id) &&
+    bounded_id(&p.receipt_id) &&
     p.claim_id==claim.claim_id && p.property_id==claim.property_id &&
     p.source_commit==claim.source_commit && p.source_commit==scope.source_commit &&
     p.spec_digest==claim.spec_digest &&
@@ -118,8 +121,8 @@ fn classification(
     // Independently checked REFUTED is a dispute, not a proven positive.
     if !credible(&proof,claim,scope) {return Verification::Unknown}
     match proof.verdict {
-        ProofVerdict::Refuted => Verification::Disputed,
-        ProofVerdict::ProvedUnderModel if claim.model_qualified =>
+        ProofVerdict::Refuted if proof.counterexample => Verification::Disputed,
+        ProofVerdict::ProvedUnderModel if claim.model_qualified && !proof.counterexample =>
             Verification::Verified,
         ProofVerdict::SupportedByTests => Verification::Candidate,
         _ => Verification::Unknown,
@@ -155,7 +158,7 @@ pub fn admit_semantic_sentences<'a>(
         if c.source_commit!=scope.source_commit {
             return Err(EvidenceAdmissionError::SourceRevisionConflict);
         }
-        if c.source_revision>scope.wiki_revision {
+        if c.semantic_source_revision>scope.semantic_source_revision {
             return Err(EvidenceAdmissionError::FutureClaim);
         }
         let verification=classification(c,scope,reader);
@@ -163,8 +166,12 @@ pub fn admit_semantic_sentences<'a>(
             claim_id:c.claim_id,subject_id:c.page_id,
             subject_title:c.subject_title,relation:c.relation,
             object_phrase:c.object_phrase,negated:c.negated,
-            evidence_refs:c.evidence_refs,source_revision:c.source_revision,
-            current_at_source:c.source_revision==scope.wiki_revision,
+            evidence_refs:c.evidence_refs,
+            // The semantic source and Wiki journal have separate revision
+            // clocks. Only after checking the semantic revision do we bind
+            // this read-only narrative to the CURRENT Wiki projection fence.
+            source_revision:scope.wiki_revision,
+            current_at_source:c.semantic_source_revision==scope.semantic_source_revision,
             verification,visible:true,
         });
     }
@@ -187,13 +194,13 @@ mod tests {
             page_id:"wiki.system",subject_title:"Under model M, the core",
             relation:Relationship::Uses,object_phrase:"a bounded source policy",
             negated:false,evidence_refs:&["source:one"],
-            source_revision:7,source_commit:PIN,spec_digest:SPEC,
+            semantic_source_revision:9,source_commit:PIN,spec_digest:SPEC,
             kind:StatementKind::ModelBoundContract,model_qualified:true,visible:true,
         }
     }
     fn scope<'a>(allowed:&'a BTreeSet<String>)->CurrentEvidenceScope<'a> {
         CurrentEvidenceScope {page_id:"wiki.system",wiki_revision:7,
-            source_commit:PIN,allowed_source_refs:allowed}
+            semantic_source_revision:9,source_commit:PIN,allowed_source_refs:allowed}
     }
     struct Reader { verdict:ProofVerdict, authentic:bool, complete:bool }
     impl IndependentProofReader for Reader {
@@ -205,7 +212,7 @@ mod tests {
                 spec_digest:SPEC.into(),verifier_digest:"c".repeat(64),
                 checker_digest:"d".repeat(64),artifact_digest:"e".repeat(64),
                 verdict:self.verdict,scope_complete:self.complete,
-                unknown_paths:0,counterexample:false,
+                unknown_paths:0,counterexample:self.verdict==ProofVerdict::Refuted,
                 evidence_refs:sources(),independently_authenticated:self.authentic,
             })
         }
@@ -260,7 +267,7 @@ mod tests {
         let refs=sources();let mut c=sample();c.source_commit="cccccccccccccccccccccccccccccccccccccccc";
         assert!(matches!(admit_semantic_sentences(&[c],&scope(&refs),None),
             Err(EvidenceAdmissionError::SourceRevisionConflict)));
-        let mut c=sample();c.source_revision=8;
+        let mut c=sample();c.semantic_source_revision=10;
         assert!(matches!(admit_semantic_sentences(&[c],&scope(&refs),None),
             Err(EvidenceAdmissionError::FutureClaim)));
     }

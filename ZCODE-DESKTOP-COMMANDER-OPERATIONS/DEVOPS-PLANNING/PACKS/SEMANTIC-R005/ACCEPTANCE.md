@@ -1,6 +1,6 @@
 # R005 acceptance matrix — semantic-to-human AutoWiki
 
-**Observed source QA:** 11 Rust modules exported under existing R003 staging crate, 81 authored `#[test]` markers total in standalone crate (37 R003 +20 R004 +24 R005). R004 pack additionally contains 2 native HQKG tests. Source SHA and module entrypoint checks were reviewed, but **Rust build/test, Host integration, live browser, GPUI and phone are UNRUN** in this round: cargo/rustc unavailable in ChatGPT cloud container.
+**Observed source QA:** 11 Rust modules exported under existing R003 staging crate, 82 authored `#[test]` markers total in standalone crate (37 R003 +20 R004 +25 R005). R004 pack additionally contains 2 native HQKG tests. Source SHA and module entrypoint checks were reviewed, but **Rust build/test, Host integration, live browser, GPUI and phone are UNRUN** in this round: cargo/rustc unavailable in ChatGPT cloud container.
 
 ## Commands (execute only with a genuine Rust toolchain)
 
@@ -20,7 +20,7 @@ cargo test --manifest-path native/hqkg/Cargo.toml --features native-program --li
 cargo test --manifest-path native/hqkg/Cargo.toml --features native-program --test autowiki_authorized
 ```
 
-## R005 test scenarios authored (24 tests; NOT passed)
+## R005 test scenarios authored (25 tests; NOT passed)
 
 | Scenario | Expected result |
 |---|---|

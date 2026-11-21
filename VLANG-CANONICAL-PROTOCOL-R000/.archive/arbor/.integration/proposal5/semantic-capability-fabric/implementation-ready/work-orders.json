@@ -1,0 +1,253 @@
+{
+  "schema": "arbor.scf.impl.work-orders/1",
+  "state": "NOT_STARTED",
+  "mainMustBeCurrentHviAccepted": true,
+  "hviGoverningScope": "TOOLING_ONLY_SYNTHETIC_REPO_FIXTURES",
+  "master": "00-MASTER-IMPLEMENT-ALL.md",
+  "jobs": [
+    {
+      "id": "S0",
+      "phase": 0,
+      "deps": [],
+      "role": "sequential",
+      "file": "01-S0-BASE-AND-ABI-LOCK.md",
+      "branch": "work/p5-scf-s0-lock-r001",
+      "writeScopes": [
+        ".integration/proposal5/semantic-capability-fabric/proofs/S0/**"
+      ],
+      "status": "NOT_STARTED",
+      "executedTests": []
+    },
+    {
+      "id": "A",
+      "phase": 1,
+      "deps": [
+        "S0"
+      ],
+      "role": "parallel",
+      "file": "10-A-COMPILER.md",
+      "branch": "work/p5-scf-a-compiler-r001",
+      "writeScopes": [
+        "hq/lib/annotation-v2.mjs",
+        "hq/lib/semantic-capability/comment-v3.mjs",
+        "hq/lib/semantic-capability/source-observation.mjs",
+        "hq/lib/semantic-capability/compiler.mjs",
+        ".integration/proposal5/semantic-capability-fabric/proofs/A/**"
+      ],
+      "status": "NOT_STARTED",
+      "executedTests": []
+    },
+    {
+      "id": "B",
+      "phase": 1,
+      "deps": [
+        "S0"
+      ],
+      "role": "parallel",
+      "file": "10-B-REGISTRY-STORE.md",
+      "branch": "work/p5-scf-b-registry-r001",
+      "writeScopes": [
+        "hq/lib/semantic-registry.mjs",
+        "hq/lib/schema.mjs",
+        "hq/lib/semantic-capability/schema.mjs",
+        "hq/lib/semantic-capability/store.mjs",
+        "hq/lib/semantic-capability/registry-adapter.mjs",
+        ".integration/proposal5/semantic-capability-fabric/proofs/B/**"
+      ],
+      "status": "NOT_STARTED",
+      "executedTests": []
+    },
+    {
+      "id": "F",
+      "phase": 1,
+      "deps": [
+        "S0"
+      ],
+      "role": "parallel",
+      "file": "10-F-TEST-ORACLES.md",
+      "branch": "work/p5-scf-f-qa-r001",
+      "writeScopes": [
+        "hq/test/scf-*.test.mjs",
+        ".integration/proposal5/semantic-capability-fabric/proofs/F/**"
+      ],
+      "status": "NOT_STARTED",
+      "executedTests": []
+    },
+    {
+      "id": "C",
+      "phase": 2,
+      "deps": [
+        "A",
+        "B"
+      ],
+      "role": "parallel",
+      "file": "20-C-PASSPORT-HVI-WIKI.md",
+      "branch": "work/p5-scf-c-passport-r001",
+      "writeScopes": [
+        "hq/lib/semantic-capability/passport.mjs",
+        "hq/lib/semantic-capability/semantic-delta.mjs",
+        "hq/lib/semantic-capability/hvi-adapter.mjs",
+        "hq/lib/wiki.mjs",
+        ".integration/proposal5/semantic-capability-fabric/proofs/C/**"
+      ],
+      "status": "NOT_STARTED",
+      "executedTests": []
+    },
+    {
+      "id": "D",
+      "phase": 2,
+      "deps": [
+        "A",
+        "B"
+      ],
+      "role": "parallel",
+      "file": "20-D-SEMANTIC-VERIFIER.md",
+      "branch": "work/p5-scf-d-verifier-r001",
+      "writeScopes": [
+        "hq/lib/semantic-capability/verifier-adapter.mjs",
+        "hq/lib/semantic-capability/proof-binding.mjs",
+        "hq/lib/semantic-capability/explanation.mjs",
+        ".integration/proposal5/semantic-capability-fabric/proofs/D/**"
+      ],
+      "status": "NOT_STARTED",
+      "executedTests": []
+    },
+    {
+      "id": "E",
+      "phase": 2,
+      "deps": [
+        "A",
+        "B"
+      ],
+      "role": "parallel",
+      "file": "20-E-AGENT-SERVICE.md",
+      "branch": "work/p5-scf-e-agent-surface-r001",
+      "writeScopes": [
+        "hq/lib/protocol.mjs",
+        "hq/bin/arbor-hq.mjs",
+        "hq/lib/arbor-service.mjs",
+        "hq/lib/semantic-capability/agent-context.mjs",
+        ".integration/proposal5/semantic-capability-fabric/proofs/E/**"
+      ],
+      "status": "NOT_STARTED",
+      "executedTests": []
+    },
+    {
+      "id": "Z1",
+      "phase": 3,
+      "deps": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "role": "sequential",
+      "file": "30-Z1-INDEPENDENT-REFEREE.md",
+      "branch": "work/p5-scf-z1-review-r001",
+      "writeScopes": [
+        ".integration/proposal5/semantic-capability-fabric/proofs/Z1/**"
+      ],
+      "status": "NOT_STARTED",
+      "executedTests": []
+    },
+    {
+      "id": "G1",
+      "phase": 4,
+      "deps": [
+        "Z1"
+      ],
+      "role": "serial-integrator",
+      "file": "40-G1-SERIAL-INTEGRATION.md",
+      "branch": "integrate/p5-scf-r001",
+      "writeScopes": [
+        "integration/reports/SCF-GATE.md",
+        ".integration/proposal5/semantic-capability-fabric/proofs/G1/**",
+        "G-only root/manifest/connection fixes"
+      ],
+      "status": "NOT_STARTED",
+      "executedTests": []
+    },
+    {
+      "id": "H",
+      "phase": 5,
+      "deps": [
+        "G1"
+      ],
+      "role": "parallel",
+      "file": "50-H-HOST-NATIVE-READ.md",
+      "branch": "work/p5-scf-h-host-r001",
+      "writeScopes": [
+        "apps/vivim-host/**",
+        ".integration/proposal5/semantic-capability-fabric/proofs/H/**"
+      ],
+      "status": "NOT_STARTED",
+      "executedTests": []
+    },
+    {
+      "id": "U",
+      "phase": 5,
+      "deps": [
+        "G1"
+      ],
+      "role": "parallel",
+      "file": "50-U-TIERFLOW-INSPECTOR.md",
+      "branch": "work/p5-scf-u-tierflow-r001",
+      "writeScopes": [
+        "packages/tierflow/**",
+        ".integration/proposal5/semantic-capability-fabric/proofs/U/**"
+      ],
+      "status": "NOT_STARTED",
+      "executedTests": []
+    },
+    {
+      "id": "Z2",
+      "phase": 6,
+      "deps": [
+        "H",
+        "U"
+      ],
+      "role": "sequential",
+      "file": "60-Z2-PRODUCT-REFEREE.md",
+      "branch": "work/p5-scf-z2-review-r001",
+      "writeScopes": [
+        ".integration/proposal5/semantic-capability-fabric/proofs/Z2/**"
+      ],
+      "status": "NOT_STARTED",
+      "executedTests": []
+    },
+    {
+      "id": "G2",
+      "phase": 7,
+      "deps": [
+        "Z2"
+      ],
+      "role": "serial-integrator",
+      "file": "70-G2-PRODUCT-INTEGRATION.md",
+      "branch": "integrate/p5-scf-r001",
+      "writeScopes": [
+        "integration/reports/SCF-G2.md",
+        ".integration/proposal5/semantic-capability-fabric/proofs/G2/**",
+        "G-only root/manifest/connection fixes"
+      ],
+      "status": "NOT_STARTED",
+      "executedTests": []
+    },
+    {
+      "id": "R",
+      "phase": 8,
+      "deps": [
+        "G2"
+      ],
+      "role": "sequential",
+      "file": "80-R-FINAL-SYNTHETIC-READINESS.md",
+      "branch": "work/p5-scf-r-readiness-r001",
+      "writeScopes": [
+        ".integration/proposal5/semantic-capability-fabric/proofs/R/**"
+      ],
+      "status": "NOT_STARTED",
+      "executedTests": []
+    }
+  ]
+}

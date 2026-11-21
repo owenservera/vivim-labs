@@ -1,0 +1,304 @@
+{
+  "schema": "arbor.proposal5.foundations.prompt-cohort/1",
+  "date": "2026-11-12",
+  "status": "PROMPTS_COMMITTED_NOT_WORKERS_EXECUTED",
+  "repository": "owenservera/ARBOR",
+  "programBranch": "work/p5-foundational-architecture-prep-r001",
+  "programBaseRef": "work/p5-pre-g-convergence-r001",
+  "GStatusAtAuthoring": "ABSENT_NOT_RUN",
+  "mobilePolicy": "PWA_FIRST_APK_DEFERRED",
+  "originSecurity": [
+    "HOST_SINGLE_EFFECT_OWNER",
+    "NO_SOURCE_COMMENT_EXECUTION",
+    "NO_EXTERNAL_PROVIDER_APIS",
+    "NO_PLAYWRIGHT_PUPPETEER_PRODUCT_PATH",
+    "NO_USER_DATA_INGESTION",
+    "NO_APK_BUILD"
+  ],
+  "sharedContractPath": ".integration/proposal5/foundations/prompts/00-SHARED-PRE-G-CONTRACT.md",
+  "frozen": {
+    "A": {
+      "ref": "work/p5-w01-a-native",
+      "sha": "dda546a11294920d6521a0f64ab7ee62ec993c70"
+    },
+    "B": {
+      "ref": "work/p5-w01-b-host",
+      "sha": "78a5105a9c1f1880d658f350e130b1e2632d3532"
+    },
+    "C": {
+      "ref": "work/p5-w01-c-studio",
+      "sha": "f950b91685927f37b48d020433aa8d2d3c271419"
+    },
+    "D": {
+      "ref": "work/p5-w01-d-hq",
+      "sha": "ad55fe28c2c331841675f308f9199ee4c2add86a"
+    },
+    "E": {
+      "ref": "work/p5-w01-e-ui",
+      "sha": "1a5cf26ce14ebce4e31d9a4373060ace61852645"
+    },
+    "F": {
+      "ref": "work/p5-w01-f-verify",
+      "sha": "be458f3c4cdb7eb38d47b1de2a00d441b7cdc704"
+    }
+  },
+  "supports": {
+    "S": {
+      "ref": "work/p5-preg-semantic-wiki-r001",
+      "sha": "d7e59a389a6ec5278595e317dfa904a801783c5b"
+    },
+    "V": {
+      "ref": "work/p5-preg-visual-language-r001",
+      "sha": "7ad5b3c49aefdf1fdd8b212e5b7eea0e7b92338e"
+    },
+    "W": {
+      "ref": "work/p5-preg-autowiki-r001",
+      "sha": "827d21d1c33aa8597c600b45179452abc35c7af9"
+    },
+    "N0": {
+      "ref": "work/p5-preg-n0-io-r001",
+      "sha": "cde3b6e5521d5b17215ab10088cb8090f8b87e6f"
+    },
+    "T": {
+      "ref": "work/p5-p2-preg-tests-r001",
+      "sha": "c807010e52b4a9f82ea9578a979befd38f74cb31"
+    },
+    "K": {
+      "ref": "work/p5-p2-preg-knowledge-r001",
+      "sha": "4db9e0c2068be36ab42663a76186422c8f9813a1"
+    },
+    "H1": {
+      "ref": "work/p5-p2-highvalue-labs",
+      "sha": "3e6954d21bd70eeccc6e00a310bcb337c3164f50"
+    },
+    "P2C": {
+      "ref": "work/p5-p2-preg-interop-r001",
+      "sha": "73b1ea769de6023dfff857d7e9c4003731f3b112"
+    }
+  },
+  "lanes": [
+    {
+      "id": "PG00",
+      "title": "Source truth and canonical owner census",
+      "phase": "PARALLEL_PRE_G",
+      "runOrder": 1,
+      "workerBranch": "work/p5-fa-pg00-source-truth-r001",
+      "promptPath": ".integration/proposal5/foundations/prompts/FA-PG00-SOURCE-TRUTH.md",
+      "exclusiveWritePrefix": ".integration/proposal5/foundations/proofs/PG00-source-truth/",
+      "taskIds": [
+        "FA-PG00-01",
+        "FA-PG00-02",
+        "FA-PG00-03",
+        "FA-PG00-04",
+        "FA-PG00-05",
+        "FA-PG00-06",
+        "FA-PG00-07",
+        "FA-PG00-08"
+      ],
+      "inputs": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "T",
+        "H1"
+      ],
+      "minimumArtifacts": [
+        "README.md",
+        "SOURCE-DELTA.json",
+        "OWNER-CANONICALITY.json",
+        "CAPABILITY-CROSSWALK.json",
+        "PROOF-PLAN.md",
+        "NEGATIVE-ACCEPTANCE.md",
+        "OWNER-HANDOFF.md",
+        "RUN-LEDGER.json"
+      ],
+      "status": "READY_TO_LAUNCH_NOT_STARTED",
+      "disposition": "PREPARED_NOT_PROMOTED",
+      "writesToProduct": false,
+      "canBlockG": false,
+      "canMerge": false
+    },
+    {
+      "id": "PG01",
+      "title": "Native Rust hot-swap and capability ABI proof",
+      "phase": "PARALLEL_PRE_G",
+      "runOrder": 1,
+      "workerBranch": "work/p5-fa-pg01-native-abi-r001",
+      "promptPath": ".integration/proposal5/foundations/prompts/FA-PG01-NATIVE-ABI.md",
+      "exclusiveWritePrefix": ".integration/proposal5/foundations/proofs/PG01-native-abi/",
+      "taskIds": [
+        "FA-PG01-01",
+        "FA-PG01-02",
+        "FA-PG01-03",
+        "FA-PG01-04",
+        "FA-PG01-05",
+        "FA-PG01-06",
+        "FA-PG01-07",
+        "FA-PG01-08"
+      ],
+      "inputs": [
+        "A",
+        "B",
+        "F",
+        "N0",
+        "P2C"
+      ],
+      "minimumArtifacts": [
+        "README.md",
+        "SOURCE-DELTA.json",
+        "ENGINE-ABI-CROSSWALK.json",
+        "PROOF-PLAN.md",
+        "NEGATIVE-ACCEPTANCE.md",
+        "OWNER-HANDOFF.md",
+        "RUN-LEDGER.json"
+      ],
+      "status": "READY_TO_LAUNCH_NOT_STARTED",
+      "disposition": "PREPARED_NOT_PROMOTED",
+      "writesToProduct": false,
+      "canBlockG": false,
+      "canMerge": false
+    },
+    {
+      "id": "PG02",
+      "title": "Semantic wiki, VIEW ALL and AutoWiki convergence",
+      "phase": "PARALLEL_PRE_G",
+      "runOrder": 1,
+      "workerBranch": "work/p5-fa-pg02-semantic-fabric-r001",
+      "promptPath": ".integration/proposal5/foundations/prompts/FA-PG02-SEMANTIC-FABRIC.md",
+      "exclusiveWritePrefix": ".integration/proposal5/foundations/proofs/PG02-semantic-fabric/",
+      "taskIds": [
+        "FA-PG02-01",
+        "FA-PG02-02",
+        "FA-PG02-03",
+        "FA-PG02-04",
+        "FA-PG02-05",
+        "FA-PG02-06",
+        "FA-PG02-07",
+        "FA-PG02-08"
+      ],
+      "inputs": [
+        "A",
+        "B",
+        "D",
+        "E",
+        "F",
+        "S",
+        "V",
+        "W",
+        "N0"
+      ],
+      "minimumArtifacts": [
+        "README.md",
+        "SOURCE-DELTA.json",
+        "SEMANTIC-ABI-CROSSWALK.json",
+        "CAPABILITY-COMMAND-CROSSWALK.json",
+        "PROOF-PLAN.md",
+        "NEGATIVE-ACCEPTANCE.md",
+        "OWNER-HANDOFF.md",
+        "RUN-LEDGER.json"
+      ],
+      "status": "READY_TO_LAUNCH_NOT_STARTED",
+      "disposition": "PREPARED_NOT_PROMOTED",
+      "writesToProduct": false,
+      "canBlockG": false,
+      "canMerge": false
+    },
+    {
+      "id": "PG03",
+      "title": "PWA-only mobile security and bounded Rock storage",
+      "phase": "PARALLEL_PRE_G",
+      "runOrder": 1,
+      "workerBranch": "work/p5-fa-pg03-pwa-storage-r001",
+      "promptPath": ".integration/proposal5/foundations/prompts/FA-PG03-PWA-ROCK-SECURITY.md",
+      "exclusiveWritePrefix": ".integration/proposal5/foundations/proofs/PG03-pwa-storage/",
+      "taskIds": [
+        "FA-PG03-01",
+        "FA-PG03-02",
+        "FA-PG03-03",
+        "FA-PG03-04",
+        "FA-PG03-05",
+        "FA-PG03-06",
+        "FA-PG03-07",
+        "FA-PG03-08"
+      ],
+      "inputs": [
+        "A",
+        "B",
+        "D",
+        "E",
+        "F",
+        "K",
+        "T"
+      ],
+      "minimumArtifacts": [
+        "README.md",
+        "SOURCE-DELTA.json",
+        "PWA-AUTH-AND-PACKAGING-MATRIX.md",
+        "STORAGE-CLASSIFICATION.json",
+        "PROOF-PLAN.md",
+        "NEGATIVE-ACCEPTANCE.md",
+        "OWNER-HANDOFF.md",
+        "RUN-LEDGER.json"
+      ],
+      "status": "READY_TO_LAUNCH_NOT_STARTED",
+      "disposition": "PREPARED_NOT_PROMOTED",
+      "writesToProduct": false,
+      "canBlockG": false,
+      "canMerge": false
+    },
+    {
+      "id": "PGZ",
+      "title": "Independent convergence referee",
+      "phase": "AFTER_AVAILABLE_WORKERS",
+      "runOrder": 2,
+      "workerBranch": "work/p5-fa-pgz-convergence-r001",
+      "promptPath": ".integration/proposal5/foundations/prompts/FA-PGZ-CONVERGENCE-REFEREE.md",
+      "exclusiveWritePrefix": ".integration/proposal5/foundations/proofs/PGZ-convergence/",
+      "taskIds": [],
+      "inputs": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "S",
+        "V",
+        "W",
+        "N0",
+        "T",
+        "K",
+        "H1"
+      ],
+      "waitFor": [
+        "PG00",
+        "PG01",
+        "PG02",
+        "PG03"
+      ],
+      "minimumArtifacts": [
+        "README.md",
+        "FOUNDATION-CONVERGENCE-MATRIX.json",
+        "CONTRACT-COLLISIONS.md",
+        "MINIMUM-SOURCE-PATCHES.md",
+        "READINESS-MATRIX.md",
+        "NEGATIVE-ACCEPTANCE.md",
+        "RUN-LEDGER.json"
+      ],
+      "status": "READY_TO_LAUNCH_NOT_STARTED",
+      "disposition": "PREPARED_NOT_PROMOTED",
+      "writesToProduct": false,
+      "canBlockG": false,
+      "canMerge": false
+    }
+  ],
+  "limitations": [
+    "Program branch HEAD may advance while authoring; worker must pin the actual branch commit at launch and may not rely on this manifest as the live code SHA.",
+    "G status must be rechecked; this is NOT G or post-G authority.",
+    "Known source commits are authoring snapshots and must be refreshed before beginning any worker.",
+    "Tests declared in prompts are requirements; none have run merely by committing this manifest."
+  ]
+}

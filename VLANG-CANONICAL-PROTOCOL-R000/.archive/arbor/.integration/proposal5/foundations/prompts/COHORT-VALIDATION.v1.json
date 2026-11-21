@@ -1,0 +1,74 @@
+{
+  "schema": "arbor.proposal5.foundations.prompt-cohort-validation-report/1",
+  "date": "2026-11-12",
+  "status": "PROMPTS_READY_WORKERS_NOT_LAUNCHED",
+  "sourceBranch": "work/p5-foundational-architecture-prep-r001",
+  "sourceBase": "work/p5-pre-g-convergence-r001",
+  "GAtAuthoring": "NOT_RUN_INTEGRATION_BRANCH_ABSENT",
+  "mobilePolicy": "PWA_FIRST_APK_DEFERRED",
+  "scope": "Only .integration/proposal5/foundations/",
+  "cohort": {
+    "parallel": [
+      "PG00",
+      "PG01",
+      "PG02",
+      "PG03"
+    ],
+    "referee": [
+      "PGZ"
+    ],
+    "workerBranchesCreated": 0,
+    "workerProofsCommitted": 0,
+    "preGTasksCovered": 32,
+    "postGImplementationPromptsCreated": 0
+  },
+  "files": [
+    "00-SHARED-PRE-G-CONTRACT.md",
+    "FA-PG00-SOURCE-TRUTH.md",
+    "FA-PG01-NATIVE-ABI.md",
+    "FA-PG02-SEMANTIC-FABRIC.md",
+    "FA-PG03-PWA-ROCK-SECURITY.md",
+    "FA-PGZ-CONVERGENCE-REFEREE.md",
+    "LANE-REGISTRY.v1.json",
+    "README.md",
+    "validate-cohort.mjs",
+    "validate-cohort.test.mjs"
+  ],
+  "verification": {
+    "structuralRunner": "V8 evaluation of committed validate-cohort.mjs against committed LANE-REGISTRY.v1.json and WAVE-MANIFEST.v1.json",
+    "result": "PASS",
+    "checksPassed": 16,
+    "checksFailed": 0,
+    "verified": [
+      "unique worker branches and write scopes",
+      "four parallel + later referee",
+      "32 unique existing manifest task refs",
+      "all inputs bound to source snapshots",
+      "no pre-G G merge authority",
+      "no product writes or G blocking",
+      "PWA first/APK deferred",
+      "reject false worker execution claims",
+      "reject fake G GO",
+      "reject unknown source refs"
+    ],
+    "declaredNodeSuite": {
+      "path": "validate-cohort.test.mjs",
+      "cases": 16,
+      "status": "UNRUN"
+    },
+    "githubScopeAtAudit": {
+      "base": "work/p5-pre-g-convergence-r001",
+      "status": "ahead",
+      "filesChanged": 26,
+      "allFilesInsideFoundation": true
+    },
+    "warnings": [
+      "No Cargo/Node/Bun/Windows/PWA/Chrome or live Host/graph execution in prompt authoring.",
+      "16 V8 structural checks are NOT Node tests and do NOT certify runtime safety.",
+      "PG worker branches have NOT been started; each must pin its actual foundation HEAD at launch.",
+      "G absent at authoring; recheck at launch."
+    ]
+  },
+  "promotion": "PREPARED_NOT_PROMOTED",
+  "effectPerformed": false
+}

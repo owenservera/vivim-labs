@@ -1,0 +1,24 @@
+{
+  "schema": "vivim.craft-file-disposition/1",
+  "date": "2026-11-21",
+  "source": "owenservera/craft-anything-VIVIM",
+  "craft_tree_sha": "e64d7cb73d7f39323b7040a984e0f9b3f7981146",
+  "arbor_tree_sha": "171c483b9a449d0e396144712b099540509fb617",
+  "labs_precommit_tree_sha": "2633cebe51024227ec01bb25b49be2f39504b6bd",
+  "files_in_source": 1190,
+  "explicit_decisions": 75,
+  "header_read": 40,
+  "use_cases": 20,
+  "dispositions": {
+    "REFERENCE_ONLY": 562,
+    "DEPENDENCY_REVIEW": 12,
+    "KEEP_EXTERNAL": 7,
+    "NO_PORT": 313,
+    "REVIEW_CANDIDATE": 247,
+    "EXTRACT_PURE": 13,
+    "CONDITIONAL": 27,
+    "STUDY_INTERFACE": 9
+  },
+  "artifact_status": "RESEARCH_FIRST_PASS_ONLY; NO_SOURCE_MIGRATION",
+  "limitation": "Most source files are tree/path-classified; focused HEADER_READ is initial inspection, not full-file verification"
+}

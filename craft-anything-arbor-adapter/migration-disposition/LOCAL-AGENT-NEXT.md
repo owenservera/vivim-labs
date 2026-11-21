@@ -1,0 +1,10 @@
+# Local agent — continue migration disposition
+
+1. Refresh source HEADs for Craft, Labs and ARBOR; check every candidate blob SHA against `FILE-DISPOSITION.csv`, and preserve earlier history when source changes. Work on `main` without PR/branch and preserve stashes.
+2. Open existing Labs `craft-anything-arbor-adapter/docs/CURRENT-STATUS-R002-1.md` and run actual local tests. Close Rust/JS canonical evidence parity with a **genuine** Craft export on a first-party authorized MVP.
+3. Deep-read 12 targets in this order: `crates/evidence/src/lib.rs`, `canonical.rs`, `unknown.rs`, `crates/engine/src/tools/session_tools.rs`, `website_tools.rs`, `compare_tools.rs`, `crates/analysis/src/js_ledger.rs`, `js_compare.rs`, `js_app.rs`, `js_trace.rs`, `crates/js/src/api_ops.rs`, `crates/analysis/src/web_har.rs`. Capture exact APIs, unsafe effects, dependencies, chosen functions, tests and direct ARBOR counterpart for each.
+4. Produce Studio/Harness coverage reconciliation using actual read-only Atlas evidence. Do not convert provisional selectors into executable Host effects, and don't forge Core capture proofs.
+5. Select ONE smallest proven pure algorithm target (typically evidence identity or comparison), implement only after dependency closure and working input/output test vectors. Preserve one HQKG graph, Host approval authority and existing PWA first runtime.
+6. Update `FILE-DISPOSITION.csv` rows with measured statuses and commit SHAs; report exact PASS/FAIL/UNRUN. No provider API dependencies, no Playwright/Puppeteer, no automated authenticated third-party crawl without proper permission.
+
+**Copy prompt:** Continue `vivim-labs/craft-anything-arbor-adapter/migration-disposition/`, refresh the pinned source SHAs and complete genuine Craft evidence parity and read-only Studio coverage. Deep-audit the first 12 specified candidates, then migrate only the smallest source-proven Rust pure behavior, never browser or Host effects. Update the per-file tracker with measured results and main-branch commits. No PRs or speculative verification.

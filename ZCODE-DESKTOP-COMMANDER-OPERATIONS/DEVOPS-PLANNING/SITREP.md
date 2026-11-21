@@ -2,6 +2,14 @@
 
 **Role state:** planning/pre-integration only; no background agent, live task router, active session bridge or automatic cross-thread synchronization. See [AGENTS](AGENTS.md) -> [PROFILE](PROFILE.md) -> [BUNDLE-INDEX](BUNDLE-INDEX.md); [conversation lessons](CONVERSATION-LESSONS.md) are selective reading.
 
+## R003 DevAgent code prep R004 — 2026-11-21
+
+- **Labs-only code staged:** 3 new Rust modules in the existing AutoWiki foundation: exact Host Wiki ID -> HQKG hub alias mapping, bounded source-authorized query admission, and stale async readback fencing with current Wiki SHA-256 digest. Existing `src/lib.rs` registers them.
+- **Native Dev drop-ins staged:** `PACKS/R003/authorized_query_extension.rs` appends to original HQKG bridge, enforcing independently attested graph epoch, Host scope and Wiki revision; `PACKS/R003/native_hqkg_authorized.rs` contains actual test source for private-neighbour and incomplete-exclusion refusal.
+- **Code pack:** [README](PACKS/R003/README.md), [Dev integration](PACKS/R003/DEVAGENT-APPLY.md), [test/receipt recipes](PACKS/R003/TEST-RECIPES.md); listed in [BUNDLE-INDEX](BUNDLE-INDEX.md).
+- **Static checks verified:** 8 Rust modules registered, 57 standalone authored `#[test]` markers (37 pre-existing +20 new), 2 native HQKG tests staged, trusted Host scope/revision and Wiki digest guards present. **NOT COMPILED OR TESTED IN RUST;** cargo/rustc unavailable in this cloud container. No ARBOR runtime edits, no GPUI/phone/deployment proof.
+- **Ownership:** Planning checkout `AW-R003-PRECODE-R004` offers the package to ChatGPT Dev; sender retains handoff ownership until real Dev `ACCEPTED_BY`. Dev's two PWA typing milestones remain Dev-owned. GPUI prep PAUSED. Next independent Planning prep: source verified claim receipts/grounded English or the PWA build-intent pipeline after a separate claim.
+
 ## Master Planning R001 — 2026-11-21 (GitHub current pass)
 
 **Planning source pass CHECKED OUT as `PLAN-MASTER-20261121-R001`; closure in shared TASK-CLAIMS is the authoritative check-in state.** Source observations: ARBOR `e2ef16ec221fb752fd50a1e5808d7e9a7a8e3e42` and pre-pass Labs `b0eb56e41d76ba785eff91858eb82584b08a1162`. Actual source inspection covered Rust Wiki, HQKG scoped context, Host ports and agent-composer, PWA TypeScript composer, staged R003 and existing task semantics. Those observations are not a live deployed pass.

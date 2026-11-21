@@ -54,7 +54,7 @@ fn grammatical(s: &str, max_chars: usize) -> bool {
     let chars: Vec<char> = s.chars().collect();
     !chars.is_empty() && chars.len() <= max_chars && s.trim() == s
         && !s.chars().any(char::is_control)
-        && !s.ends_with(['.', '!', '?'])
+        && !matches!(s.chars().last(), Some('.' | '!' | '?'))
 }
 fn sentence(c: &SentenceClaim<'_>) -> String {
     let verb = match (c.relation, c.negated) {

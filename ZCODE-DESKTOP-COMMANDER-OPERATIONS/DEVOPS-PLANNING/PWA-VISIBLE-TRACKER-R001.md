@@ -34,7 +34,6 @@ Status of every row: `REVIEW` (not production acceptance). PWA tests describe pr
 | **PV-12** | P2 | Reusable workflows surfaced in the PWA | Repeat an approved workflow; PWA offers a verified reusable recipe, execution/undo controls and measured deterministic vs AI-assisted cost where known. | R28,R29 | Review |
 | **PV-13** | P2 | Private sharing, revoke and access feedback | From PWA share one authorized knowledge item privately, inspect access, revoke it and visibly confirm denial after revocation. | R20 | Review |
 | **PV-14** | P1 | Request a product change from the PWA and see progress | Explicitly submit a build/change request, get one durable request ID, see planned/accepted/coded/tested/released/blocked status and any MANUAL bridge; cancel/retry safely. | D01,D02,D11 | Oracle-aligned candidate; no automatic agent dispatch claimed |
-
 | **PV-15** | P1 | Interactive Wiki gesture: hold -> live semantic options -> adjust preview -> cancel, with optional explicitly approved Apply | On unchanged First Contact PWA, type a Wiki query, hold a real result; see options while finger is down, move to change inert preview, cancel with zero effects; only separate Apply can invoke Host grant/receipt. | New owner gesture directive, 21 Nov 2026 (outside original 79 items) | REVIEW / UNCLAIMED; Dev owns eventual ARBOR integration; [R002 pack](../DESIGN/gestures/README.md) |
 
 ### Candidate sequence, not a second queue
@@ -90,7 +89,6 @@ Status of every row: `REVIEW` (not production acceptance). PWA tests describe pr
 | C37 | PV-03 | Cloud GitHub coding and controlled release-only local verification boundary | D09 |
 | C38 | PV-04,PV-08 | Only integration convergence that unblocks a live Wiki or PWA visual change | D17 |
 | C39 | PV-14 | Minimum continuity/handoff docs needed to resume a user-submitted PWA request | D25 |
-
 | C40 | PV-15 | First Contact browser pointer/hold/move/cancel adapter with scroll/text-selection arbitration; stable Wiki row target | New gesture directive |
 | C41 | PV-15 | Pure Rust revision-fenced gesture reducer reusing LiveSurface/Activity; no new authority | New gesture directive |
 | C42 | PV-15,PV-08 | TierFlow A039 semantics + VEC inert contextual preview on the actual Wiki mount | New gesture directive |

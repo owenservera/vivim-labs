@@ -2,6 +2,20 @@
 
 **Role state:** planning/pre-integration only; no background agent, live task router, active session bridge or automatic cross-thread synchronization. See [AGENTS](AGENTS.md) -> [PROFILE](PROFILE.md) -> [BUNDLE-INDEX](BUNDLE-INDEX.md); [conversation lessons](CONVERSATION-LESSONS.md) are selective reading.
 
+## Master Planning R001 — 2026-11-21 (GitHub current pass)
+
+**Planning source pass CHECKED OUT as `PLAN-MASTER-20261121-R001`; closure in shared TASK-CLAIMS is the authoritative check-in state.** Source observations: ARBOR `e2ef16ec221fb752fd50a1e5808d7e9a7a8e3e42` and pre-pass Labs `b0eb56e41d76ba785eff91858eb82584b08a1162`. Actual source inspection covered Rust Wiki, HQKG scoped context, Host ports and agent-composer, PWA TypeScript composer, staged R003 and existing task semantics. Those observations are not a live deployed pass.
+
+**Published preparation catalogue:** [MASTER-PLAN-R001](MASTER-PLAN-R001.md) **37 scoped candidate packets**, [source reuse map](SOURCE-REUSE-MAP-R001.md), [verification and handoff](ACCEPTANCE-AND-HANDOFF-R001.md), [canonical history reconciliation](TRACKER-RECONCILIATION-R001.md). All are Planning documentation and research, not new ARBOR product integration or autonomous workers.
+
+**Last recorded check-ins:** the original GPUI/AutoWiki **PAUSED** check-in at 2026-11-21 10:32 UTC remains historically preserved. This master-planning checkout is a newer *claim*; its final DONE check-in is recorded in TASK-CLAIMS, not retroactively inferred here. Do not invent five events.
+
+**Next ten Planning proposals (all unclaimed):** PL-003, PL-004, AW-001, AW-002, AW-003, AW-004, AW-010, AW-005, AW-006, AW-013. This is a recommended preparation sequence from the catalogue, not ten canonical OWNER-WORK items. AW-001 compilation currently blocked by missing cargo/rustc in the ChatGPT container; source/static audit can proceed. Canonical OWNER-WORK registry remains remote-unavailable.
+
+**Waiting on Dev (not part of Planning Next Ten):** PWA human AutoWiki and authorized agent-visible typing; ARBOR R003 integration after Dev explicitly accepts; controlled live deployment. Native GPUI preparation remains owner-paused. Android is a separate optional acceptance surface, not a native/core prerequisite. Oracle PWA_BUILD_INGRESS signal is pending Planning disposition; no automatic cross-chat dispatch is verified.
+
+**Next accountable Planning action:** check out the smallest independent R003 safety packet after fresh source and TASK-CLAIMS read; first map exact Wiki/graph identity, grants, and existing read port, and validate 37 authored tests if an authorized cloud cargo runner exists. No duplicate Wiki DB, parser, worker, grant system, or Host effects engine.
+
 ## Source observation and limits
 - Observed ARBOR `main` commit: `446a33766fb11a437670260d9b206f00dafedb47` during this bootstrap. **Not a branch lock; repin before implementing.**
 - Labs `main` is receiving these role-profile docs directly; use a fresh HEAD before every bundle.

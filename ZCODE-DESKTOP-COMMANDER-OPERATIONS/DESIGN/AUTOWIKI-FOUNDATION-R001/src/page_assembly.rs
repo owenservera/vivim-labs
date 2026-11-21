@@ -83,7 +83,7 @@ pub fn assemble_human_page(
         return Err(AssembleError::NoCommittedPage);
     };
     if !ids.committed_name_for_hub.contains_key(page_id) ||
-       !context.cards.iter().any(|c|c.page_id==*page_id) {
+       !context.cards.iter().any(|c|c.page_id.as_str()==page_id.as_str()) {
         return Err(AssembleError::NoCommittedPage);
     }
     let included_refs:BTreeSet<&str>=context.cards.iter()
@@ -121,7 +121,7 @@ pub fn assemble_human_page(
     };
     let mut seen=BTreeSet::new();
     let related=context.related.iter()
-        .filter(|edge|edge.from_page==*page_id)
+        .filter(|edge|edge.from_page.as_str()==page_id.as_str())
         .filter_map(|edge|{
             let target=&edge.to_page;
             if !allowed_hubs.contains(target) || !seen.insert(target.as_str()) {
@@ -134,7 +134,7 @@ pub fn assemble_human_page(
             })
         }).collect();
     let navigation=HUBS.iter().map(|alias|HubEntry {
-        alias,*title(alias).map(|t|t).unwrap_or("Unavailable"),
+        alias: *alias,title:title(alias).unwrap_or("Unavailable"),
         committed_canonical_id:if allowed_hubs.contains(*alias) {
             ids.canonical_for_hub.get(*alias).cloned()
         } else {None},

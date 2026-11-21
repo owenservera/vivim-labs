@@ -13,3 +13,11 @@ A small, coherent Wikipedia-like home and its top-level pages, with verified cro
 4. [Rust pre-code](src/lib.rs): dependency-free candidate projection/quality checker; not connected to ARBOR
 
 The wiki is a materialized view over one graph, not a new database, content authority, router, permission subsystem, or compiler. Do not imply a capability runs because it has a page. Each page must show provenance and freshness. Unknown facts must remain unknown; no fabricated causal summaries.
+
+## R002: dynamic context lens (user journey / progressive disclosure)
+- [Dynamic Lens R002](DYNAMIC-LENS-R002.md): ambient suggestions vs selected/pinned page, three disclosure depths, source-epoch fences, read-only context bundles, privacy rules.
+- [Exact source crosswalk](SOURCE-CROSSWALK-R002.md): inspected ARBOR source paths and reuse/gaps, not a runtime guarantee.
+- [UX and trust acceptance](ACCEPTANCE-R002.md): 15 user scenarios, source/authorization/IME stress checks and test gates.
+- [Human copy and presentation](COPY-AND-PRESENTATION-R002.md): example intros, intent-to-card taxonomy and honest fallback language.
+- [Rust lens](src/context_lens.rs): staged pure state/revision/authorization policy with unit tests; it never parses text or calls Host/HQKG.
+No production change, GitHub Actions run, phone verification or compile proof is implied by these files.

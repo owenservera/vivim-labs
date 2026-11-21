@@ -2,6 +2,15 @@
 
 This file contains **pointers to known pre-integration artifacts**. It does not supersede the canonical OW request/update registry. At the 2026-11-21 GitHub read, the operations-tree `OWNER-WORK/` registry and older `DESIGN/PRE-CODE/` and `code/` locations were **not in Labs remote main**. Do not invent their contents or mark their OW requests complete.
 
+## Master Planning catalogue (new source-backed proposal view)
+
+- [MASTER-PLAN-R001](MASTER-PLAN-R001.md): **37 proposed Planning-only task packets** (5 Governance, 16 AutoWiki R003, 8 PWA-to-development pipeline, 3 GPUI paused, 5 verification). This is a **candidate catalogue**, not canonical OW task history or a second active claim system; Planning Next Ten are proposals, unclaimed until TASK-CLAIMS checkout. Existing Dev PWA/ARBOR product tasks are excluded.
+- [SOURCE-REUSE-MAP-R001](SOURCE-REUSE-MAP-R001.md): source-verified map of actual Rust Wiki/HQKG/LiveSystemState/Host/PWA/GPUI seams, prohibiting duplicate stores/engines and flagging unknowns.
+- [ACCEPTANCE-AND-HANDOFF-R001](ACCEPTANCE-AND-HANDOFF-R001.md): exact R003 test commands, source/permission/epoch negative gates, source-to-live ladder, delivery fields and UNRUN states.
+- [TRACKER-RECONCILIATION-R001](TRACKER-RECONCILIATION-R001.md): absent remote OWNER-WORK reconciliation; do not mint OW IDs or silently replace local historical registry.
+
+**Observed source pins:** ARBOR `e2ef16ec221fb752fd50a1e5808d7e9a7a8e3e42`, Labs `b0eb56e41d76ba785eff91858eb82584b08a1162` before Planning commits. **No R003 Rust compilation in this round**, cargo unavailable in cloud. GitHub Planning artifact push ≠ Dev acceptance or user-visible runtime proof.
+
 ## Available on connected GitHub main
 
 | Scope | Available artifact | Owner/collision boundary | Evidence state |

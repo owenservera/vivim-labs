@@ -14,6 +14,8 @@ For VIVIM/ARBOR: **use Desktop Commander Remote as a manually approved research 
 
 ## Research documents
 
+**Current ARBOR-native direction:** [Native command-space architecture and 279-intent research registry](native-command-space/README.md). This is the main design for fully integrating Desktop Commander-class capability **within ARBOR**, not embedding or depending on Desktop Commander. Includes 23-domain taxonomy, 322 seed cases, Host authority model, Rust implementation waves and 90% weighted-completion benchmark.
+
 1. [01-DESKTOP-COMMANDER.md](01-DESKTOP-COMMANDER.md) — actual local/remote architecture, features, install, pricing, privacy and threat model.
 2. [02-CONTEXT7-PULLS.md](02-CONTEXT7-PULLS.md) — 3 Context7 library resolutions + 3 documentation pulls, source pins, implications and evidence limits.
 3. [03-CHATGPT-PLUGIN-PUBLISHING.md](03-CHATGPT-PLUGIN-PUBLISHING.md) — private vs workspace vs public, package layout, review requirements, desktop-only restriction, complexity and cost drivers.

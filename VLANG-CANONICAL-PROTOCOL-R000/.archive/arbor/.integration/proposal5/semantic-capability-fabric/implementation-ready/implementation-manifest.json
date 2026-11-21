@@ -1,0 +1,60 @@
+{
+  "schema": "arbor.scf.impl.manifest/1",
+  "state": "DESIGN_ONLY_NOT_IMPLEMENTED",
+  "baseAtAudit": "90bd81028fab71c6fadef608404f216e84b1629a",
+  "currentMainAtAudit": "98f15e327957956ec94189772d5e5813e7b6b07b",
+  "pr": 13,
+  "governingHvi": "NATIVE_TOOLING_ONLY_NO_REAL_DONOR_ANALYSIS",
+  "sections": [
+    "README.md",
+    "00-SOURCE-LOCK.md",
+    "01-DECISION-LOCK.md",
+    "02-TARGET-FILE-PLAN.json",
+    "03-DEPS-AND-INTERFACES.md",
+    "04-ABI-ERROR-SEMANTICS.md",
+    "05-TEST-AND-RELEASE-GATES.md",
+    "06-INTEGRATION-ROLLBACK.md",
+    "07-AGENT-SDK-TEMPLATE.md",
+    "08-LAUNCH-INDEX.md",
+    "work-orders.json",
+    "prompts/00-MASTER-IMPLEMENT-ALL.md"
+  ],
+  "moduleOwners": {
+    "A": "parser compiler source observations",
+    "B": "registry SQLite",
+    "C": "passports Wiki HVI",
+    "D": "SV verifier adapters",
+    "E": "agent protocol CLI Host HQ service",
+    "F": "independent tests",
+    "Z": "independent referee",
+    "G": "serial integration",
+    "H": "Host post-gate",
+    "U": "TierFlow post-gate"
+  },
+  "ownerCanMergeMainOnly": "G via reviewed PR after accepted independent tests",
+  "sourceCodeModified": false,
+  "sourceTestsExecuted": false,
+  "allowRealDonorMigrationAudit": false,
+  "gates": [
+    "S0_ACCEPTED",
+    "A_B_F_PREPARED",
+    "C_D_E_PREPARED",
+    "Z_GO_FOR_G1",
+    "G_ACCEPTED_RUNTIME_SOURCE",
+    "H_U_ACCEPTED",
+    "Z2_GO_FOR_G2",
+    "G2_ACCEPTED"
+  ],
+  "artifacts": {
+    "newBlueprintFiles": 44,
+    "targetProductFiles": 32,
+    "syntheticFixtureFiles": 5,
+    "acceptanceScenarios": 34,
+    "promptFiles": 15,
+    "recipeFiles": 8,
+    "contractSchemas": 3
+  },
+  "currentlyExecutable": false,
+  "testsExecuted": 0,
+  "implementationComplete": false
+}

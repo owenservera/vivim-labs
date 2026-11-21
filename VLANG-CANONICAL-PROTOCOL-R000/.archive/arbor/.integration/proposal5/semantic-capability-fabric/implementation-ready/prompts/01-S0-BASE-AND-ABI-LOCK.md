@@ -1,0 +1,11 @@
+# SCF S0 — Source and ABI preflight
+**Repository:** owenservera/ARBOR. **Reserved worker branch:** `work/p5-scf-s0-lock-r001`. **Exclusive writes:** `.integration/proposal5/semantic-capability-fabric/proofs/S0/**`.
+## Shared invariant and required reading
+Before work inspect the current exact SHA and full source of ARBOR `main`, the SCF draft PR #13 branch, accepted HVI source branches, and the **governing HVI policy** `.integration/proposal5/hq-version-intelligence/10-NATIVE-TOOLING-ONLY-SCOPE.md`. Read **every** SCF `implementation-ready/` root document, all `recipes/`, `contracts/`, `fixtures/`, `tests/`, `work-orders.json`, parent `semantic-capability-fabric/README.md` and SV-R012 `verifier/README.md` plus original `verifier/contracts/*.v0.schema.json`.
+HVI is **native-tooling-only** in this wave. Real VIVIM/ARBOR/Labs migration comparisons are forbidden during installation or tests; use only synthetic invented Git-source fixtures and normal production source-module imports for build/compatibility. No provider APIs, Playwright, Puppeteer, personal corpora, browser sends, direct source effects or new canonical graph/wiki/registry.
+Pin source exact SHA; do not silently use moving HEAD, do not force-push or merge without G gate. Report source pin/branch/changed files/test commands+exits vs UNRUN, actual blockers and gate status. A source-only import is not runtime verification.
+
+## Prerequisite and output
+Check current `main`, PR #13, HVI G1/G2/agent-discovery integration source HEAD and actual branch history. Verify HVI tooling-only governing scope and whether its native comparator `GO_FOR_W2_TOOLING` or `HVI_TOOLING_READY` is backed by **executed synthetic tests**, not work-order docs. If HVI accepted main unavailable, stop product implementation: emit `BLOCKED_HVI_GATE` with exact owner SHA and action list, do not guess.
+Freeze `workerBaseSha` from accepted current main. Read existing v1/v2 parser, registry, schema, indexer, wiki and HQ service exported APIs, SWC research and SV contracts. Confirm module file targets and no writer collision against current G branches.
+Commit under `proofs/S0/`: `BASE-LOCK.json`, `ABI-DIFF.md`, `OWNER-AND-COLLISION.md`, `SOURCE-SHA-MATRIX.json`, `GATE.md`. Gate `GO_FOR_IMPLEMENTATION` or `BLOCKED_SOURCE_DRIFT`. No product source edits.

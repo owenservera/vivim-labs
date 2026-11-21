@@ -1,0 +1,12 @@
+# SCF F — Independent QA and fixtures
+**Repository:** owenservera/ARBOR. **Reserved worker branch:** `work/p5-scf-f-qa-r001`. **Exclusive writes:** `hq/test/scf-*.test.mjs`, `.integration/proposal5/semantic-capability-fabric/proofs/F/**`.
+## Shared invariant and required reading
+Before work inspect the current exact SHA and full source of ARBOR `main`, the SCF draft PR #13 branch, accepted HVI source branches, and the **governing HVI policy** `.integration/proposal5/hq-version-intelligence/10-NATIVE-TOOLING-ONLY-SCOPE.md`. Read **every** SCF `implementation-ready/` root document, all `recipes/`, `contracts/`, `fixtures/`, `tests/`, `work-orders.json`, parent `semantic-capability-fabric/README.md` and SV-R012 `verifier/README.md` plus original `verifier/contracts/*.v0.schema.json`.
+HVI is **native-tooling-only** in this wave. Real VIVIM/ARBOR/Labs migration comparisons are forbidden during installation or tests; use only synthetic invented Git-source fixtures and normal production source-module imports for build/compatibility. No provider APIs, Playwright, Puppeteer, personal corpora, browser sends, direct source effects or new canonical graph/wiki/registry.
+Pin source exact SHA; do not silently use moving HEAD, do not force-push or merge without G gate. Report source pin/branch/changed files/test commands+exits vs UNRUN, actual blockers and gate status. A source-only import is not runtime verification.
+
+## Do exactly this — independent tests only
+1. Fork S0 workerBaseSha and inspect `tests/acceptance-matrix.v0.json`, `fixtures/`, `05-TEST-AND-RELEASE-GATES.md`, original HQ and SV tests. Use machine JSON Schemas in `contracts/` for output validation.
+2. Implement new `hq/test/scf-*.test.mjs` suites for 34 required scenarios: lexing, ambiguous scope, v2 error-bearing records, registry migration/retention, pure compiler, same repo three synthetic pins, five synthetic repos, HVI adapter missing, schema/digests, Wiki deterministic, independent SV oracle/refutation, Host read/deny/revoke, resource bounds, source path secrets and hostile comments.
+3. For unmerged A–E code write tests against normative interfaces using injected pure fixtures, mark integration tests UNRUN; never edit A–E production code or fake a successful runtime gate.
+4. Explicitly separate a test file existing from a test executed. Test oracle must be independent of compiler author; seed known false claim and ensure verifier catches it. Commit only F paths, test matrix + ledger under proof/F, report PREPARED_NOT_INTEGRATED.

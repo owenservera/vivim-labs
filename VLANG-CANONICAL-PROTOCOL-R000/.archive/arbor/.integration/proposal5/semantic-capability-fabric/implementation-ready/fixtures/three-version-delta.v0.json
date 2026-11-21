@@ -1,0 +1,60 @@
+{
+  "schema": "arbor.scf.semantic-delta/0.1",
+  "targetPinId": "atlas-c",
+  "pins": [
+    {
+      "pinId": "atlas-a",
+      "repository": "synthetic/atlas",
+      "commitSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "snapshotDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "pinId": "atlas-b",
+      "repository": "synthetic/atlas",
+      "commitSha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "snapshotDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    {
+      "pinId": "atlas-c",
+      "repository": "synthetic/atlas",
+      "commitSha": "cccccccccccccccccccccccccccccccccccccccc",
+      "snapshotDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  ],
+  "rows": [
+    {
+      "capabilityId": "synthetic.compare-revisions@1",
+      "states": [
+        {
+          "pinId": "atlas-a",
+          "classification": "PRESENT",
+          "sourceCoverage": "complete"
+        },
+        {
+          "pinId": "atlas-b",
+          "classification": "CANDIDATE_REPLACEMENT",
+          "sourceCoverage": "complete"
+        },
+        {
+          "pinId": "atlas-c",
+          "classification": "UNOBSERVED",
+          "sourceCoverage": "partial"
+        }
+      ],
+      "evidenceRefs": [
+        "synthetic:source-only:a",
+        "synthetic:declared:b"
+      ],
+      "certainty": "candidate"
+    }
+  ],
+  "coverage": {
+    "completePins": 2,
+    "partialPins": 1,
+    "unknownCapabilityRows": 1
+  },
+  "errors": [
+    "SCF_SOURCE_PARTIAL"
+  ],
+  "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+}

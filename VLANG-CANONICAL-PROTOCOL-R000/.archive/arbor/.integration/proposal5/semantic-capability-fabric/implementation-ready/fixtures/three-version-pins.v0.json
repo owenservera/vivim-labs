@@ -1,0 +1,45 @@
+{
+  "schema": "arbor.scf.fixture.source-pins/0.1",
+  "synthetic": true,
+  "pins": [
+    {
+      "pinId": "atlas-a",
+      "repository": "synthetic/atlas",
+      "commitSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "treeSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "sourceDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "completeness": "complete"
+    },
+    {
+      "pinId": "atlas-b",
+      "repository": "synthetic/atlas",
+      "commitSha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "treeSha": "ffffffffffffffffffffffffffffffffffffffff",
+      "sourceDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "completeness": "complete"
+    },
+    {
+      "pinId": "atlas-c",
+      "repository": "synthetic/atlas",
+      "commitSha": "cccccccccccccccccccccccccccccccccccccccc",
+      "treeSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "sourceDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "completeness": "partial"
+    },
+    {
+      "pinId": "other-d",
+      "repository": "synthetic/other",
+      "commitSha": "dddddddddddddddddddddddddddddddddddddddd",
+      "treeSha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "sourceDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "completeness": "complete"
+    }
+  ],
+  "targetPinId": "atlas-c",
+  "invariants": [
+    "four distinct immutable pins",
+    "same repository three revisions",
+    "synthetic other repo never shares canonical identity",
+    "no implicit HEAD"
+  ]
+}

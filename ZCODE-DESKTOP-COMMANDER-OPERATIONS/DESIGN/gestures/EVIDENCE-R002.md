@@ -28,3 +28,11 @@
 
 ## Acceptance truth
 Design files, code snippets and a Git commit are not integrated gesture behavior. No Rust/browser/Host tests were executed for gestures. No physical PWA hold, drag, cancellation, Host Apply, user-voice multimodal change, haptic or calibrated pressure proof was run. All gates G0–G9 remain UNRUN for this feature. Owner must explicitly accept a code handoff; currently no independent background worker was started.
+
+## Publication and manifest validation receipt — 2026-11-21
+- GitHub Labs R002 bundle commit: bf76871b8ac132d32c3474480ab7833b4b1f420b (12 new gesture files + PWA review tracker PV-15/C40–C44 + Planning bundle index).
+- Shared TASK-CLAIMS handoff row: a765b1cbbdfec810b57c767efee704c00452f6d2; **Planning sender, Dev ACK NOT OBSERVED**.
+- PWA tracker table placement corrected in GitHub commit 25a1c0be8b4b47e748afce90b7589504d045cca0.
+- Manifest static check via connected GitHub fetch and pure JavaScript validation: 12 tasks; 12 unique task IDs; zero missing dependencies; acyclic DAG; gates G0–G9 all present; autoLaunch=false; autoClaim=false; GEST-02–GEST-12 all UNCLAIMED/UNASSIGNED. **Static manifest integrity PASS**.
+- Local Desktop Commander listing verifies 12 gesture files. Local owner REQUESTS/UPDATES appended with OW-20261121-018 and NOW/CONTEXT-MAP/DESIGN index linked; private/local registry not wholesale copied to GitHub.
+- Rust reducer integration, build/test execution, Host behavior, live PWA hold/preview/cancel, real Android pressure or gesture evidence: **UNRUN**.

@@ -79,6 +79,9 @@ This is a development accelerator, not a second browser actor, database, graph w
 - [`docs/SOURCE-ASSESSMENT.md`](docs/SOURCE-ASSESSMENT.md): source-level findings and exact contracts.
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md): semantic observation and data ownership pipeline.
 - [`docs/LOCAL-AGENT-RUNBOOK.md`](docs/LOCAL-AGENT-RUNBOOK.md): actionable execution instructions.
+- [`docs/CRAFT-MCP-FIRST-RUN.md`](docs/CRAFT-MCP-FIRST-RUN.md): actual Craft tool names and JSON payloads from source.
+- [`docs/CLAUDE-SURFACE-BASELINE.md`](docs/CLAUDE-SURFACE-BASELINE.md): Claude source-level coverage matrix, without fabricated runtime claims.
+- [`schemas/application-surface-atlas.schema.json`](schemas/application-surface-atlas.schema.json): draft 2020-12 output contract.
 - [`docs/ACCEPTANCE-AND-HANDOFF.md`](docs/ACCEPTANCE-AND-HANDOFF.md): stage evidence, missing work, and continuation instructions.
 
 **Source revisions inspected at planning time**: Craft clone `e64d7cb73d7f39323b7040a984e0f9b3f7981146`, ARBOR `98890827832ea74eba698566cb88bc3a4a7d520c`, Labs `3235146164073a0b487363fac02aa8d569d7cf71` (latest retrieved commit references; local agent must refresh actual branch HEAD). No ARBOR or Craft repository source was changed by this Labs project.

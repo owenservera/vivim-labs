@@ -11,12 +11,18 @@ This file contains **pointers to known pre-integration artifacts**. It does not 
 
 **Observed source pins:** ARBOR `e2ef16ec221fb752fd50a1e5808d7e9a7a8e3e42`, Labs `b0eb56e41d76ba785eff91858eb82584b08a1162` before Planning commits. **No R003 Rust compilation in this round**, cargo unavailable in cloud. GitHub Planning artifact push ≠ Dev acceptance or user-visible runtime proof.
 
+## R006 native HQKG complete grant coverage — current offer
+
+- **AW-GRANT-COVERAGE-R006** [Code pack](PACKS/AUTH-R006/README.md) | [Rust native graph grant builder](PACKS/AUTH-R006/native_grant_coverage.rs) | [8 authored native integration tests](PACKS/AUTH-R006/native_grant_coverage_test.rs) | [Dev integration](PACKS/AUTH-R006/DEVAGENT-APPLY.md) | [verification](PACKS/AUTH-R006/VERIFICATION.md).
+- **Reuse** actual `hqkg::Graph::nodes`, `Graph::epoch`, node source refs, existing R004 `TrustedQueryScope`, and incumbent `query_scoped`. No second grant database, graph/index or Host effects engine. Complete per-prefix exclusions only after a bounded scan, exact actor/source grant, valid focus, and grant+epoch postflight; refuse incomplete/oversized scopes.
+- **Evidence:** 8 Rust integration `#[test]` markers authored, not executed. R003-R005 existing standalone crate now **82** authored tests, R004 separate native HQKG tests **2** authored. Cargo/rustc and live Host grants **UNRUN**; actual Host-grant producer unknown. Dev ACK **NOT OBSERVED**. GPUI remains paused.
+
 ## R005 semantic proof + human Wiki read pipeline — offer
 
 - **AW-SEMANTIC-PRECODE-R005**: [DevAgent R005 source+code pack](PACKS/SEMANTIC-R005/README.md) | [existing-source/proposed SV proof schema](PACKS/SEMANTIC-R005/SOURCE-TRUTH-AND-ABI.md) | [exact integration plan](PACKS/SEMANTIC-R005/DEVAGENT-INTEGRATION.md) | [acceptance tests](PACKS/SEMANTIC-R005/ACCEPTANCE.md).
 - **Actual source staged:** `DESIGN/AUTOWIKI-FOUNDATION-R001/src/{semantic_evidence,page_assembly,read_pipeline}.rs`, registered in existing `src/lib.rs`; uses R003 narrative and R004 readback/identity guards. No duplicate verifier/graph/page store.
 - **Critical discovery:** current ARBOR Semantic Verifier is **design only / NOT IMPLEMENTED**. Default proof reader None; code cannot call a hypothetical production checker. Source occurrence and test-only evidence do not establish runtime capability. Semantic graph epoch/revision is independent of Wiki journal revision.
-- **Evidence:** 81 authored standalone Rust tests total (37 R003 +20 R004 +24 R005); native HQKG tests 2 additional authored; static export checks PASS. Cargo/rustc build and runtime **UNRUN** in this container. **OFFERED_TO:CHATGPT-DEV; receiver ACK NOT_OBSERVED**.
+- **Evidence:** 82 authored standalone Rust tests total (37 R003 +20 R004 +25 R005); native HQKG tests 2 additional authored; static export checks PASS. Cargo/rustc build and runtime **UNRUN** in this container. **OFFERED_TO:CHATGPT-DEV; receiver ACK NOT_OBSERVED**.
 
 ## R003/R004 DevAgent code prep — current offer
 

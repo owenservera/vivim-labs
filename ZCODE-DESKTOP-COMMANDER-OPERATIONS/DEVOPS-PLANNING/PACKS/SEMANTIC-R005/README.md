@@ -32,7 +32,7 @@ This package extends the [incumbent R003/R004 AutoWiki foundation](../../../DESI
 
 ## Test truth
 
-The existing staged crate now has **81 authored Rust `#[test]` cases**: 37 R003 + 20 R004 + 24 R005. Two HQKG integration tests remain in the R004 Dev pack, outside the standalone crate. The module export/reference audit was source-checked. Cargo/rustc are unavailable in this ChatGPT cloud container, so **cargo test, fmt, clippy, integration, deployment and visual acceptance are UNRUN**.
+The existing staged crate now has **82 authored Rust `#[test]` cases**: 37 R003 + 20 R004 + 25 R005. Two HQKG integration tests remain in the R004 Dev pack, outside the standalone crate. The module export/reference audit was source-checked. Cargo/rustc are unavailable in this ChatGPT cloud container, so **cargo test, fmt, clippy, integration, deployment and visual acceptance are UNRUN**.
 
 ## Release and ownership
 

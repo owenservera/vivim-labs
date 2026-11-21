@@ -130,6 +130,79 @@ mod tests {
             &l,&ticket,&context(),9,&"c".repeat(64),&scope,&[],None,&ids(),&hubs(),
         ),Err(PipelineError::Readback(ReadbackError::DigestChanged)));
     }
+
+    // Fixtures below exercise the Rust plumbing only; they DO NOT establish
+    // that the future independent Semantic Verifier is deployed or trusted.
+    struct FakeReader;
+    impl IndependentProofReader for FakeReader {
+        fn read_checked(&self, id:&str, property:&str)
+            -> Option<super::super::semantic_evidence::IndependentlyCheckedProof> {
+            use super::super::semantic_evidence::{IndependentlyCheckedProof,ProofVerdict};
+            Some(IndependentlyCheckedProof {
+                receipt_id:"fixture:proof-1".into(),claim_id:id.into(),
+                property_id:property.into(),source_commit:PIN.into(),
+                spec_digest:"d".repeat(64),verifier_digest:"e".repeat(64),
+                checker_digest:"f".repeat(64),artifact_digest:"1".repeat(64),
+                verdict:ProofVerdict::ProvedUnderModel,scope_complete:true,
+                unknown_paths:0,counterexample:false,evidence_refs:source_refs(),
+                independently_authenticated:true,
+            })
+        }
+    }
+    #[test] fn checked_model_prose_reaches_one_existing_wiki_page() {
+        use super::super::semantic_evidence::{ProposedSentence,StatementKind};
+        use super::super::narrative::Relationship;
+        let l=lens();let ticket=issue_read(&l,9,&digest()).unwrap();
+        let refs=source_refs();
+        let scope=CurrentEvidenceScope {
+            page_id:"wiki.home",wiki_revision:7,
+            semantic_source_revision:9,source_commit:PIN,
+            allowed_source_refs:&refs,
+        };
+        let candidates=[ProposedSentence {
+            claim_id:"claim:one",property_id:"property:one",page_id:"wiki.home",
+            subject_title:"Under model M, the core",relation:Relationship::Uses,
+            object_phrase:"bounded reads",negated:false,
+            evidence_refs:&["source:one"],semantic_source_revision:9,
+            source_commit:PIN,
+            spec_digest:"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            kind:StatementKind::ModelBoundContract,model_qualified:true,
+            visible:true,
+        }];
+        let x=project_human_wiki_page(
+            &l,&ticket,&context(),9,&digest(),&scope,
+            &candidates,Some(&FakeReader),&ids(),&hubs(),
+        ).unwrap();
+        assert_eq!(x.intro,"Under model M, the core uses bounded reads.");
+        assert_eq!(x.status,super::super::page_assembly::ExplanationState::Verified);
+    }
+    #[test] fn no_actual_verifier_never_promotes_the_same_fixture_sentence() {
+        use super::super::semantic_evidence::{ProposedSentence,StatementKind};
+        use super::super::narrative::Relationship;
+        let l=lens();let ticket=issue_read(&l,9,&digest()).unwrap();
+        let refs=source_refs();
+        let scope=CurrentEvidenceScope {
+            page_id:"wiki.home",wiki_revision:7,
+            semantic_source_revision:9,source_commit:PIN,
+            allowed_source_refs:&refs,
+        };
+        let candidates=[ProposedSentence {
+            claim_id:"claim:one",property_id:"property:one",page_id:"wiki.home",
+            subject_title:"Under model M, the core",relation:Relationship::Uses,
+            object_phrase:"bounded reads",negated:false,
+            evidence_refs:&["source:one"],semantic_source_revision:9,
+            source_commit:PIN,
+            spec_digest:"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            kind:StatementKind::ModelBoundContract,model_qualified:true,
+            visible:true,
+        }];
+        let x=project_human_wiki_page(
+            &l,&ticket,&context(),9,&digest(),&scope,
+            &candidates,None,&ids(),&hubs(),
+        ).unwrap();
+        assert_eq!(x.status,super::super::page_assembly::ExplanationState::Unavailable);
+        assert!(!x.intro.contains("bounded reads"));
+    }
     #[test] fn source_mismatch_and_trace_without_permission_fail_closed() {
         let mut l=lens();let ticket=issue_read(&l,9,&digest()).unwrap();
         let refs=source_refs();let scope=CurrentEvidenceScope {

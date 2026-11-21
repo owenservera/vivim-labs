@@ -19,5 +19,6 @@ The wiki is a materialized view over one graph, not a new database, content auth
 - [Exact source crosswalk](SOURCE-CROSSWALK-R002.md): inspected ARBOR source paths and reuse/gaps, not a runtime guarantee.
 - [UX and trust acceptance](ACCEPTANCE-R002.md): 15 user scenarios, source/authorization/IME stress checks and test gates.
 - [Human copy and presentation](COPY-AND-PRESENTATION-R002.md): example intros, intent-to-card taxonomy and honest fallback language.
+- [Wiring sprint](WIRING-SPRINT-R002.md): three concrete slices, exact insertion points, existing scope fences and proposed transport envelope.
 - [Rust lens](src/context_lens.rs): staged pure state/revision/authorization policy with unit tests; it never parses text or calls Host/HQKG.
 No production change, GitHub Actions run, phone verification or compile proof is implied by these files.

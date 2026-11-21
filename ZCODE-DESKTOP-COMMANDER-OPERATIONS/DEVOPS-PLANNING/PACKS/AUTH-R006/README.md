@@ -23,4 +23,4 @@ The initial design scans no more than 65,536 **total** graph nodes and permits a
 
 ## Acceptance status
 
-**8 authored native tests, 0 executed in this round.** The earlier 81 standalone R003–R005 Rust cases and 2 R004 native cases are distinct authored test collections. Run native suite only after Dev receives and applies both R004 bridge + R006 module on a genuine Cargo toolchain. No ARBOR edits, runtime grant, browser screenshot or phone acceptance are claimed.
+**8 authored native tests, 0 executed in this round.** The earlier 82 standalone R003–R005 Rust cases and 2 R004 native cases are distinct authored test collections. Run native suite only after Dev receives and applies both R004 bridge + R006 module on a genuine Cargo toolchain. No ARBOR edits, runtime grant, browser screenshot or phone acceptance are claimed.

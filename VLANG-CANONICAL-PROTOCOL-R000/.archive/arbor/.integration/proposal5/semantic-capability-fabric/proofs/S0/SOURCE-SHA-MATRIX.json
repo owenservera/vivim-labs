@@ -1,0 +1,112 @@
+{
+  "schema": "arbor.scf.s0.source-sha-matrix/1",
+  "auditedAt": "2026-11-12",
+  "repository": "owenservera/ARBOR",
+  "workerBaseSha": "3d45fbf1c3963e4834a5e51ee7f6e63f3a0da298",
+  "workerBaseTreeSha": "fa3180ee68ab2b232dc41df10cd3aa0a3223a06e",
+  "workerBaseDisposition": "FROZEN_FOR_S0_PROOF_ONLY",
+  "acceptedHviMainSha": null,
+  "observedRefs": [
+    {
+      "role": "ARBOR-main",
+      "ref": "main",
+      "sha": "3d45fbf1c3963e4834a5e51ee7f6e63f3a0da298",
+      "state": "CANONICAL_BASELINE"
+    },
+    {
+      "role": "SCF-PR13",
+      "ref": "work/p5-semantic-capability-fabric-r001",
+      "sha": "0e35c54105f7b8ee8a772b3159d243c6788fb7d4",
+      "state": "DRAFT_NOT_MERGED"
+    },
+    {
+      "role": "SEVP-PR19",
+      "ref": "work/p5-semantic-engineering-program-scaffold-r001",
+      "sha": "e41b943e2eb0fd0c60b73918596b219c087f0052",
+      "state": "DRAFT_NOT_MERGED"
+    },
+    {
+      "role": "HVI-G1-reviewed",
+      "ref": "integrate/p5-hq-version-intelligence-r001",
+      "sha": "69447c09f420310aa84c24a1908dede91c963ec8",
+      "state": "G1_NOT_MAIN_ACCEPTED"
+    },
+    {
+      "role": "HVI-current-integration",
+      "ref": "integrate/p5-hq-version-intelligence-r001",
+      "sha": "0539d23404ef5b1de12ad646d807a2fda57c6ab6",
+      "state": "MOVING_CANDIDATE_NOT_ACCEPTED"
+    },
+    {
+      "role": "HVI-H",
+      "ref": "work/p5-hvi-w2-h-host-r001",
+      "sha": "d24daa9966abb222cd25210f41dcbb4758aa1209",
+      "state": "PREPARED_NOT_PROMOTED"
+    },
+    {
+      "role": "HVI-U",
+      "ref": "work/p5-hvi-w2-u-inspector-r001",
+      "sha": "5836e9c9f5ba3bee36dbe6896ebfd22364b4c450",
+      "state": "PREPARED_NOT_PROMOTED"
+    },
+    {
+      "role": "HVI-Z2",
+      "ref": "work/p5-hvi-w2-z-referee-r001",
+      "sha": "725132c640a1f21d3af5c4b9123b314e4df3133d",
+      "state": "REPAIR_REQUIRED"
+    }
+  ],
+  "branchDifferences": {
+    "SCF_v_main": {
+      "ahead": 9,
+      "behind": 17,
+      "mergeBase": "f9823a5131e73e7562db5a4ec14e1ec481557d69",
+      "changes": "SCF proposal docs only"
+    },
+    "SEVP_v_main": {
+      "ahead": 4,
+      "behind": 13,
+      "mergeBase": "539146ac741516e7d9711c63f4570585b3c3367",
+      "changes": "SEVP program docs only"
+    },
+    "HVI_G1_v_main": {
+      "ahead": 85,
+      "behind": 0,
+      "mergeBase": "3d45fbf1c3963e4834a5e51ee7f6e63f3a0da298",
+      "unmergedNativeSource": true
+    }
+  },
+  "observedSourceBlobs": {
+    "main/hq/lib/annotation-v2.mjs": "7e94dfbd4fbca8ef0fdb9e0610053364ce2c38c8",
+    "main/hq/lib/extract.mjs": "2b0696542b0027f474b57c5692f939f326d24ae4",
+    "main/hq/lib/indexer.mjs": "4f5cf53c861d8052e0c56be38307f93cc65e2a5f",
+    "main/hq/lib/semantic-registry.mjs": "ec982381c77147119f62e702a162a203df8e7d4e",
+    "main/hq/lib/schema.mjs": "de479b0761dcdb70b90e75944b9d652db9cbefe3",
+    "main/hq/lib/wiki.mjs": "c85c8fbe1409273928ea5c52bc2c20f108ac4dce",
+    "main/hq/lib/arbor-service.mjs": "a47c232c188d69758daa8d6a2f18070ce8c9a27b",
+    "main/hq/lib/protocol.mjs": "388cb501e03b73d80cfcf756547f59d736a076b4",
+    "main/hq/bin/arbor-hq.mjs": "776c6f35b116d6a8ce751bf9b562e4241f6f8834",
+    "main/hq/package.json": "a68eb6c0db93c62ff12422962e15cf9245f6fd37",
+    "main/integration/beta-gates.json": "81255176eaec6728043777ec7d2c62d41cf16c66",
+    "SCF/implementation-ready/02-TARGET-FILE-PLAN.json": "ac3e9df9f0b873b46854836061f965afaccc5e8b",
+    "SCF/implementation-ready/work-orders.json": "dd16b98a640ca49c0c08fc77a6a180d85949d3c1",
+    "SCF/verifier/contracts/claim.v0.schema.json": "3a2be173e233ced436cae4504e1168f646563bf3",
+    "SCF/verifier/contracts/proof-receipt.v0.schema.json": "178a7884a0ab4bb258de77a0d2661ea1f3462399",
+    "SCF/verifier/contracts/explanation.v0.schema.json": "d84a7515f0f8c7e3227b048310f79a9e240d6361",
+    "G1/hq/version-intelligence/integration/index.mjs": "0aa6a2723d322af78e80ded34541f9093749c663",
+    "G1/hq/version-intelligence/compare/index.mjs": "5203df02605b82951dfa2d5dbee9f0f179e0ecfe",
+    "G1/hq/version-intelligence/integration/comparison-report-adapter.mjs": "8e464df1b46b7e99120769a40b7a509eb42d840d",
+    "H/apps/vivim-host/control/hvi-capability.mjs": "8e6260ca3e925a7171aa600c147b2c98fb626146",
+    "H/apps/vivim-host/control/action-catalog.v1.json": "770feb4f66497fb8c5d0a9396d1e24fb14162a96",
+    "U/packages/tierflow/src/visual-runtime/knowledge/hvi-inspector.mjs": "122105e966ffc4574402b09da62ea669d38d4ca8"
+  },
+  "hviHistoricWorkerHeads": {
+    "A": "53d4bddf4c2a8fd22f12c8d7f3949aac5fd2fe38",
+    "B": "1206a343ab98a6e7abe0c19a9549c6b8c32ea9e0",
+    "C": "7f72c1415d75a7904eb5c267c2a55a9172d33cd8",
+    "D": "622569e9b20f1d6dfae474594eecf544d4fe3d9d",
+    "E": "d8080a4056361266702f38cf47f2a0885fe892eb",
+    "F": "34f5c1568007977e0e3bf0286d4c1ec730d6af26"
+  },
+  "note": "Moving HVI integration SHA is observation, NOT accepted main or worker base; current main remained unchanged during S0."
+}

@@ -1,0 +1,94 @@
+{
+  "schema": "arbor.scf.s0.base-lock/1",
+  "date": "2026-11-12",
+  "repository": "owenservera/ARBOR",
+  "branch": "work/p5-scf-s0-lock-r001",
+  "workerBaseSha": "3d45fbf1c3963e4834a5e51ee7f6e63f3a0da298",
+  "workerBaseTreeSha": "fa3180ee68ab2b232dc41df10cd3aa0a3223a06e",
+  "workerBaseAuthorizedForImplementation": false,
+  "acceptedHviMainSha": null,
+  "scfDraftSha": "0e35c54105f7b8ee8a772b3159d243c6788fb7d4",
+  "sevpDraftSha": "e41b943e2eb0fd0c60b73918596b219c087f0052",
+  "hviG1ReviewedSha": "69447c09f420310aa84c24a1908dede91c963ec8",
+  "hviMovingIntegrationObservedSha": "0539d23404ef5b1de12ad646d807a2fda57c6ab6",
+  "hviHHeadSha": "d24daa9966abb222cd25210f41dcbb4758aa1209",
+  "hviUHeadSha": "5836e9c9f5ba3bee36dbe6896ebfd22364b4c450",
+  "hviZ2HeadSha": "725132c640a1f21d3af5c4b9123b314e4df3133d",
+  "scfTargetSourceFileActions": 32,
+  "scfAcceptanceScenarios": 34,
+  "staticChecks": [
+    {
+      "operation": "JSON.parse of fetched 13 SCF/SV plans, contract schemas and fixtures",
+      "runtime": "GitHub connector Code Mode V8 (not Node24)",
+      "outcome": "13/13 parsed successfully",
+      "testProcessExit": null,
+      "doesNotProve": "AJV schema conformance, Node module execution, CI, authorization"
+    }
+  ],
+  "actualExecutedShellTests": [],
+  "actualTestExits": [],
+  "requiredTests": [
+    {
+      "command": "node --version in Node >=24 checkout",
+      "status": "UNRUN",
+      "exitCode": null,
+      "reason": "GitHub source connector has no Node24 checked-out runner"
+    },
+    {
+      "command": "node --test hq/test/annotation-v2.test.mjs hq/test/semantic-registry.test.mjs",
+      "status": "UNRUN",
+      "exitCode": null,
+      "reason": "S0 source inspection only"
+    },
+    {
+      "command": "node --test hq/test/indexer.test.mjs hq/test/wiki.test.mjs hq/test/arbor-service.test.mjs",
+      "status": "UNRUN",
+      "exitCode": null,
+      "reason": "No S0 executable checkout"
+    },
+    {
+      "command": "node --test hq/test/scf-*.test.mjs",
+      "status": "UNRUN",
+      "exitCode": null,
+      "reason": "SCF implementation/tests do not yet exist"
+    },
+    {
+      "command": "node --test tests/hq-version-intelligence/*.test.mjs",
+      "status": "UNRUN",
+      "exitCode": null,
+      "reason": "HVI G1 GitHub Actions startup_failure with zero jobs; no observed Node24 process exit"
+    },
+    {
+      "command": "strict AJV 8.17 Draft 2020-12 negative suite",
+      "status": "UNRUN",
+      "exitCode": null,
+      "reason": "JSON.parse does not perform JSON Schema validation"
+    },
+    {
+      "command": "synthetic 2/3/5-revision, bad paths, permission/revocation, independent wrong-oracle tests",
+      "status": "UNRUN",
+      "exitCode": null,
+      "reason": "Actual executable integrated test receipt unavailable"
+    },
+    {
+      "command": "Windows, PWA, Android physical/Host grant tests",
+      "status": "UNRUN",
+      "exitCode": null,
+      "reason": "Separate owner acceptance and beta gate blocked"
+    }
+  ],
+  "prohibited": "No A-F/H/U execution, no draft merge, no real donor/ARBOR/VIVIM/Labs comparison, no runtime/beta acceptance",
+  "blockers": [
+    "HVI_G1_UNACCEPTED_ON_MAIN",
+    "HVI_G1_NODE24_TEST_EXIT_UNRUN",
+    "HVI_Z2_REPAIR_REQUIRED",
+    "HVI_MOVING_G2_CANDIDATE_UNACCEPTED",
+    "HOST_DEVELOPMENT_SOURCE_GRANT_NOT_ATTESTED",
+    "H_TO_U_TYPED_REPORT_NOT_INDEPENDENTLY_ACCEPTED",
+    "SV_APPROVED_ORACLE_CHECKER_TRUST_ROOT_ABSENT",
+    "SCF_VS_SEVP_OWNER_CONFLICT",
+    "HVI_16_VS_SCF_32_PIN_BOUND_NOT_RATIFIED"
+  ],
+  "gate": "BLOCKED_SOURCE_DRIFT",
+  "subGate": "BLOCKED_HVI_GATE"
+}

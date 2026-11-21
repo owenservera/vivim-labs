@@ -4,6 +4,7 @@ Labs is VIVIM's **research/evidence repository**, not a fifth primary developmen
 
 ## Start here
 
+- [Mojo × Rust × ARBOR research](MOJO-ARBOR-RESEARCH/README.md) — dedicated evidence-based language strategy, subsystem matrix, optional native compute architecture, benchmark criteria and technology watchlist; research only, not a product adoption decision.
 - [ARBOR tech stack observatory](tech-stack/README.md) — source-pinned technology inventory, architecture/dependency map, per-selection research, release radar and adoption horizon; ARBOR `main` is the stack source of truth.
 - [Z.ai Fullstack four-repository convergence workspace](zai/README.md) — conceptual deduplication, best-of-breed decisions, open items, per-repo work lanes, round manifests, bundle protocol and stretch goals.
 - [Z.ai campaign charter](zai/CAMPAIGN-CHARTER.md) — maximal single-version roadmap as an HQ-generated view, preserving every valuable unique component.

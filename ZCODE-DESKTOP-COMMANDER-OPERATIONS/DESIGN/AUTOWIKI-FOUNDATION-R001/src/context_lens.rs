@@ -11,7 +11,7 @@ pub enum Depth { Overview, Explain, Trace }
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum LensError {
     UnauthorizedPage, StaleInput, SourceRevisionMismatch,
-    SourceEpochMismatch, SourceRevisionRegressed, Revoked,
+    SourceEpochMismatch, SourceRevisionRegressed, Revoked, TraceNotAuthorized,
 }
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Change { NoChange, Suggested, Selected, ChangedDepth, Invalidated, Revoked }
@@ -27,6 +27,8 @@ pub struct Lens {
     pub source_revision: u64,
     pub latest_input_sequence: u64,
     pub revoked: bool,
+    /// Authorization is attested by the existing Host/source owner, never by a UI toggle.
+    pub trace_allowed: bool,
 }
 
 pub enum LensEvent {
@@ -44,7 +46,7 @@ pub enum LensEvent {
     SetDepth(Depth),
     /// Source-owner attested revision transition; any authority scope change
     /// invalidates private state even if the numeric revision is unchanged.
-    SourceChanged { epoch: String, scope_id: String, revision: u64, home: String },
+    SourceChanged { epoch: String, scope_id: String, revision: u64, home: String, trace_allowed: bool },
     ClearSuggestion,
     AccessRevoked,
 }
@@ -66,14 +68,14 @@ pub fn read_budget(depth: Depth) -> BundleBudget {
 impl Lens {
     pub fn new(
         epoch: &str, scope_id: &str, revision: u64, home: &str,
-        allowed: &BTreeSet<String>,
+        trace_allowed: bool, allowed: &BTreeSet<String>,
     ) -> Result<Self, LensError> {
         if !allowed.contains(home) { return Err(LensError::UnauthorizedPage) }
         Ok(Self {
             selected_page: Some(home.to_owned()), suggested_page: None,
             pinned: false, depth: Depth::Overview, epoch: epoch.to_owned(),
             scope_id: scope_id.to_owned(), source_revision: revision,
-            latest_input_sequence: 0, revoked: false,
+            latest_input_sequence: 0, revoked: false, trace_allowed,
         })
     }
     /// Returns only authorized page IDs and information that is *not* evidence
@@ -86,10 +88,11 @@ impl Lens {
             self.suggested_page = None;
             self.pinned = false;
             self.revoked = true;
+            self.trace_allowed = false;
             return Ok(Change::Revoked)
         }
-        if let LensEvent::SourceChanged { epoch, scope_id, revision, home } = event {
-            let reset = self.revoked || epoch != self.epoch || scope_id != self.scope_id;
+        if let LensEvent::SourceChanged { epoch, scope_id, revision, home, trace_allowed } = event {
+            let reset = self.revoked || epoch != self.epoch || scope_id != self.scope_id || trace_allowed != self.trace_allowed;
             if !reset && revision < self.source_revision {
                 return Err(LensError::SourceRevisionRegressed)
             }
@@ -98,6 +101,7 @@ impl Lens {
                 self.suggested_page = None;
                 self.pinned = false;
                 self.revoked = true;
+                self.trace_allowed = false;
                 return Ok(Change::Revoked)
             }
             if reset {
@@ -110,6 +114,7 @@ impl Lens {
                 self.depth = Depth::Overview;
                 self.latest_input_sequence = 0;
                 self.revoked = false;
+                self.trace_allowed = trace_allowed;
                 return Ok(Change::Invalidated)
             }
             if revision == self.source_revision { return Ok(Change::NoChange) }
@@ -130,6 +135,7 @@ impl Lens {
             self.suggested_page = None;
             self.pinned = false;
             self.revoked = true;
+            self.trace_allowed = false;
             return Ok(Change::Revoked)
         }
         match event {
@@ -162,6 +168,7 @@ impl Lens {
                 Ok(Change::NoChange)
             }
             LensEvent::SetDepth(depth) => {
+                if depth == Depth::Trace && !self.trace_allowed { return Err(LensError::TraceNotAuthorized) }
                 self.depth = depth;
                 Ok(Change::ChangedDepth)
             }
@@ -181,7 +188,7 @@ mod tests {
         ["wiki.home", "wiki.system", "wiki.commands"].into_iter()
             .map(str::to_owned).collect()
     }
-    fn initial() -> Lens { Lens::new("epoch-a", "scope-a", 8, "wiki.home", &allow()).unwrap() }
+    fn initial() -> Lens { Lens::new("epoch-a", "scope-a", 8, "wiki.home", false, &allow()).unwrap() }
     fn draft(sequence: u64, page: &str) -> LensEvent {
         LensEvent::Draft { sequence, epoch: "epoch-a".into(), source_revision: 8,
             candidate_page: Some(page.into()), grounded: true }
@@ -222,7 +229,7 @@ mod tests {
         let mut s = initial();
         s.apply(draft(1, "wiki.system"), &allow()).unwrap();
         assert_eq!(s.apply(LensEvent::SourceChanged { epoch:"epoch-a".into(),
-            scope_id:"scope-a".into(), revision: 9, home:"wiki.home".into() }, &allow()),
+            scope_id:"scope-a".into(), revision: 9, home:"wiki.home".into(), trace_allowed:false }, &allow()),
             Ok(Change::Invalidated));
         assert_eq!(s.suggested_page, None);
         assert_eq!(s.apply(draft(2, "wiki.system"), &allow()),
@@ -235,7 +242,7 @@ mod tests {
         s.apply(LensEvent::SetPinned(true), &allow()).unwrap();
         let only_home: BTreeSet<String> = ["wiki.home".to_string()].into_iter().collect();
         s.apply(LensEvent::SourceChanged { epoch:"epoch-a".into(),
-            scope_id:"scope-b".into(), revision:8, home:"wiki.home".into() },
+            scope_id:"scope-b".into(), revision:8, home:"wiki.home".into(), trace_allowed:false },
             &only_home).unwrap();
         assert_eq!(s.selected_page.as_deref(), Some("wiki.home"));
         assert!(!s.pinned);
@@ -254,6 +261,12 @@ mod tests {
         let c = read_budget(Depth::Trace);
         assert!(a.max_items < b.max_items && b.max_items < c.max_items);
         assert!(a.budget_tokens < b.budget_tokens && b.budget_tokens < c.budget_tokens);
+    }
+    #[test] fn trace_requires_source_owner_authorization() {
+        let mut s = initial();
+        assert_eq!(s.apply(LensEvent::SetDepth(Depth::Trace), &allow()),
+            Err(LensError::TraceNotAuthorized));
+        assert_eq!(s.depth, Depth::Overview);
     }
     #[test] fn explicit_link_cannot_open_unauthorized_page() {
         let mut s = initial();

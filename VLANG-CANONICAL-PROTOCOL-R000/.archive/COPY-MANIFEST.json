@@ -1,0 +1,35 @@
+{
+  "schema": "vivim-labs.vlang-archive/1",
+  "created": "2026-11-21",
+  "canonical": "VLANG-CANONICAL-PROTOCOL-R000",
+  "policy": "Additive exact copies; stale and conflicting documents retained",
+  "sourceSnapshots": [
+    {
+      "repo": "owenservera/vivim-labs",
+      "commit": "d880e7dba5dd0c3b9263dbaf9ccfcb1eb6600178",
+      "paths": [
+        "ARBOR-VLANG-UPGRADE",
+        "ARBOR-PWA-BASELINE-UPGRADE",
+        "Architecture/10-THREE-WAVE-RUST-LIVE-GRAPH"
+      ],
+      "method": "reuse original Git trees unchanged"
+    },
+    {
+      "repo": "owenservera/repos-hq",
+      "commit": "2651bc8",
+      "path": "docs/research/semantic-language-kernel",
+      "files": 4,
+      "method": "SHA-verified cross-repository copy"
+    }
+  ],
+  "futureSources": [
+    "owenservera/ARBOR .integration/proposal5/vlang",
+    "owenservera/ARBOR .integration/proposal5/semantic-engineering-program",
+    "owenservera/ARBOR .integration/proposal5/semantic-capability-fabric",
+    "owenservera/ARBOR .integration/proposal5/vec-pwa"
+  ],
+  "limits": [
+    "Only two original conversation exports identified",
+    "Historical claims need live-code verification"
+  ]
+}

@@ -1,0 +1,1902 @@
+{
+  "schema": "arbor.vec-ui-engines.agent-fleet/1",
+  "asOf": "2026-11-13",
+  "repo": "owenservera/ARBOR",
+  "branch": "work/p5-vec-ui-engine-foundation-r001",
+  "contractSourceSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+  "engineFamilies": 37,
+  "total": 100,
+  "uniqueScopes": 100,
+  "waves": {
+    "0": 16,
+    "1": 37,
+    "2": 16,
+    "3": 16,
+    "4": 12,
+    "5": 3
+  },
+  "tasks": [
+    {
+      "id": "A001",
+      "wave": 0,
+      "type": "core",
+      "title": "Descriptor schema and versions",
+      "objective": "Implement a single pure, versioned, bounded contract for descriptor schema and versions; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a001-descriptor-schema-and-versions",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A001/",
+      "dependencies": [
+        "CATALOG_V1"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A002",
+      "wave": 0,
+      "type": "core",
+      "title": "Canonical identity registry",
+      "objective": "Implement a single pure, versioned, bounded contract for canonical identity registry; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a002-canonical-identity-registry",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A002/",
+      "dependencies": [
+        "CATALOG_V1"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A003",
+      "wave": 0,
+      "type": "core",
+      "title": "Typed scalar validation",
+      "objective": "Implement a single pure, versioned, bounded contract for typed scalar validation; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a003-typed-scalar-validation",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A003/",
+      "dependencies": [
+        "CATALOG_V1"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A004",
+      "wave": 0,
+      "type": "core",
+      "title": "Composite value validation",
+      "objective": "Implement a single pure, versioned, bounded contract for composite value validation; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a004-composite-value-validation",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A004/",
+      "dependencies": [
+        "CATALOG_V1"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A005",
+      "wave": 0,
+      "type": "core",
+      "title": "Color-space primitives",
+      "objective": "Implement a single pure, versioned, bounded contract for color-space primitives; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a005-color-space-primitives",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A005/",
+      "dependencies": [
+        "CATALOG_V1"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A006",
+      "wave": 0,
+      "type": "core",
+      "title": "Design token parsing",
+      "objective": "Implement a single pure, versioned, bounded contract for design token parsing; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a006-design-token-parsing",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A006/",
+      "dependencies": [
+        "A001",
+        "A003"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A007",
+      "wave": 0,
+      "type": "core",
+      "title": "Design token alias and graph resolution",
+      "objective": "Implement a single pure, versioned, bounded contract for design token alias and graph resolution; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a007-design-token-alias-and-graph-resolution",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A007/",
+      "dependencies": [
+        "A001",
+        "A003"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A008",
+      "wave": 0,
+      "type": "core",
+      "title": "Theme mode switching",
+      "objective": "Implement a single pure, versioned, bounded contract for theme mode switching; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a008-theme-mode-switching",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A008/",
+      "dependencies": [
+        "A001",
+        "A003"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A009",
+      "wave": 0,
+      "type": "core",
+      "title": "Responsive and state variants",
+      "objective": "Implement a single pure, versioned, bounded contract for responsive and state variants; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a009-responsive-and-state-variants",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A009/",
+      "dependencies": [
+        "A001",
+        "A003"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A010",
+      "wave": 0,
+      "type": "core",
+      "title": "Style cascade and precedence",
+      "objective": "Implement a single pure, versioned, bounded contract for style cascade and precedence; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a010-style-cascade-and-precedence",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A010/",
+      "dependencies": [
+        "A001",
+        "A003"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A011",
+      "wave": 0,
+      "type": "core",
+      "title": "Atomic conflicts and transactions",
+      "objective": "Implement a single pure, versioned, bounded contract for atomic conflicts and transactions; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a011-atomic-conflicts-and-transactions",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A011/",
+      "dependencies": [
+        "A001",
+        "A003"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A012",
+      "wave": 0,
+      "type": "core",
+      "title": "Engine dependency DAG",
+      "objective": "Implement a single pure, versioned, bounded contract for engine dependency dag; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a012-engine-dependency-dag",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A012/",
+      "dependencies": [
+        "A001",
+        "A003"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A013",
+      "wave": 0,
+      "type": "core",
+      "title": "Semantic component applicability",
+      "objective": "Implement a single pure, versioned, bounded contract for semantic component applicability; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a013-semantic-component-applicability",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A013/",
+      "dependencies": [
+        "A001",
+        "A003"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A014",
+      "wave": 0,
+      "type": "core",
+      "title": "Signed package intake and trust roots",
+      "objective": "Implement a single pure, versioned, bounded contract for signed package intake and trust roots; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a014-signed-package-intake-and-trust-roots",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A014/",
+      "dependencies": [
+        "A001",
+        "A003"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A015",
+      "wave": 0,
+      "type": "core",
+      "title": "Revision and provenance ledger",
+      "objective": "Implement a single pure, versioned, bounded contract for revision and provenance ledger; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a015-revision-and-provenance-ledger",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A015/",
+      "dependencies": [
+        "A001",
+        "A003"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A016",
+      "wave": 0,
+      "type": "core",
+      "title": "Cross-runtime distribution and import closure",
+      "objective": "Implement a single pure, versioned, bounded contract for cross-runtime distribution and import closure; no action rights and synthetic false-case tests.",
+      "branch": "work/p5-vec-eng-a016-cross-runtime-distribution-and-import-closure",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/contributions/A016/",
+      "dependencies": [
+        "A001",
+        "A003"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A017",
+      "wave": 1,
+      "type": "engine",
+      "title": "Color Engine",
+      "objective": "Build the canonical Color system implementation covering 17 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a017-color",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/color/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A018",
+      "wave": 1,
+      "type": "engine",
+      "title": "Paint Engine",
+      "objective": "Build the canonical Paint & fill implementation covering 14 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a018-paint",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/paint/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A019",
+      "wave": 1,
+      "type": "engine",
+      "title": "Border Engine",
+      "objective": "Build the canonical Border & stroke implementation covering 13 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a019-border",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/border/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A020",
+      "wave": 1,
+      "type": "engine",
+      "title": "Corners Engine",
+      "objective": "Build the canonical Corner geometry implementation covering 11 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a020-corners",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/corners/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A021",
+      "wave": 1,
+      "type": "engine",
+      "title": "Shadow Engine",
+      "objective": "Build the canonical Shadows & elevation implementation covering 11 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a021-shadow",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/shadow/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A022",
+      "wave": 1,
+      "type": "engine",
+      "title": "Typography Engine",
+      "objective": "Build the canonical Font & typography implementation covering 13 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a022-typography",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/typography/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A023",
+      "wave": 1,
+      "type": "engine",
+      "title": "Text Engine",
+      "objective": "Build the canonical Text presentation implementation covering 13 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a023-text",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/text/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A024",
+      "wave": 1,
+      "type": "engine",
+      "title": "Spacing Engine",
+      "objective": "Build the canonical Whitespace & rhythm implementation covering 12 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a024-spacing",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/spacing/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A025",
+      "wave": 1,
+      "type": "engine",
+      "title": "Sizing Engine",
+      "objective": "Build the canonical Dimensions & constraints implementation covering 13 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a025-sizing",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/sizing/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A026",
+      "wave": 1,
+      "type": "engine",
+      "title": "Layout Engine",
+      "objective": "Build the canonical Layout composition implementation covering 14 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a026-layout",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/layout/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A027",
+      "wave": 1,
+      "type": "engine",
+      "title": "Position Engine",
+      "objective": "Build the canonical Placement & layering implementation covering 13 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a027-position",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/position/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A028",
+      "wave": 1,
+      "type": "engine",
+      "title": "Responsive Engine",
+      "objective": "Build the canonical Responsive adaptation implementation covering 12 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a028-responsive",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/responsive/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A029",
+      "wave": 1,
+      "type": "engine",
+      "title": "Scroll Engine",
+      "objective": "Build the canonical Scroll & virtualization implementation covering 13 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a029-scroll",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/scroll/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A030",
+      "wave": 1,
+      "type": "engine",
+      "title": "Transforms Engine",
+      "objective": "Build the canonical 2D/3D transforms implementation covering 11 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a030-transforms",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/transforms/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A031",
+      "wave": 1,
+      "type": "engine",
+      "title": "Effects Engine",
+      "objective": "Build the canonical Visual effects implementation covering 12 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a031-effects",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/effects/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A032",
+      "wave": 1,
+      "type": "engine",
+      "title": "Motion Engine",
+      "objective": "Build the canonical Motion & animation implementation covering 13 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a032-motion",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/motion/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A033",
+      "wave": 1,
+      "type": "engine",
+      "title": "Assets Engine",
+      "objective": "Build the canonical Asset delivery implementation covering 13 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a033-assets",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/assets/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A034",
+      "wave": 1,
+      "type": "engine",
+      "title": "Media Engine",
+      "objective": "Build the canonical Media playback implementation covering 15 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a034-media",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/media/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A035",
+      "wave": 1,
+      "type": "engine",
+      "title": "Charts Engine",
+      "objective": "Build the canonical Chart encodings implementation covering 13 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a035-charts",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/charts/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A036",
+      "wave": 1,
+      "type": "engine",
+      "title": "Data Engine",
+      "objective": "Build the canonical Data-bound presentation implementation covering 15 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a036-data",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/data/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A037",
+      "wave": 1,
+      "type": "engine",
+      "title": "Navigation Engine",
+      "objective": "Build the canonical Navigation patterns implementation covering 13 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a037-navigation",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/navigation/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A038",
+      "wave": 1,
+      "type": "engine",
+      "title": "Input Engine",
+      "objective": "Build the canonical Input & controls implementation covering 14 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a038-input",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/input/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A039",
+      "wave": 1,
+      "type": "engine",
+      "title": "Gestures Engine",
+      "objective": "Build the canonical Touch & gesture implementation covering 12 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a039-gestures",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/gestures/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A040",
+      "wave": 1,
+      "type": "engine",
+      "title": "Focus Engine",
+      "objective": "Build the canonical Keyboard & focus implementation covering 11 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a040-focus",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/focus/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A041",
+      "wave": 1,
+      "type": "engine",
+      "title": "Accessibility Engine",
+      "objective": "Build the canonical Accessibility guarantees implementation covering 14 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a041-accessibility",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/accessibility/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A042",
+      "wave": 1,
+      "type": "engine",
+      "title": "States Engine",
+      "objective": "Build the canonical UI state machines implementation covering 14 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a042-states",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/states/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A043",
+      "wave": 1,
+      "type": "engine",
+      "title": "Forms Engine",
+      "objective": "Build the canonical Form composition implementation covering 14 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a043-forms",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/forms/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A044",
+      "wave": 1,
+      "type": "engine",
+      "title": "Localization Engine",
+      "objective": "Build the canonical Locale & internationalization implementation covering 12 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a044-localization",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/localization/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A045",
+      "wave": 1,
+      "type": "engine",
+      "title": "Spatial Engine",
+      "objective": "Build the canonical Spatial and world objects implementation covering 13 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a045-spatial",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/spatial/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A046",
+      "wave": 1,
+      "type": "engine",
+      "title": "Theme Engine",
+      "objective": "Build the canonical Design systems & theme modes implementation covering 11 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a046-theme",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/theme/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A047",
+      "wave": 1,
+      "type": "engine",
+      "title": "System Engine",
+      "objective": "Build the canonical Device and runtime implementation covering 12 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a047-system",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/system/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A048",
+      "wave": 1,
+      "type": "engine",
+      "title": "Workflow Engine",
+      "objective": "Build the canonical Interactive workflows implementation covering 11 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a048-workflow",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/workflow/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A049",
+      "wave": 1,
+      "type": "engine",
+      "title": "Security Engine",
+      "objective": "Build the canonical Privacy and authority implementation covering 11 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a049-security",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/security/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A050",
+      "wave": 1,
+      "type": "engine",
+      "title": "History Engine",
+      "objective": "Build the canonical Undo, revisions and persistence implementation covering 11 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a050-history",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/history/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A051",
+      "wave": 1,
+      "type": "engine",
+      "title": "Templates Engine",
+      "objective": "Build the canonical Reusable UI templates implementation covering 9 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a051-templates",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/templates/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A052",
+      "wave": 1,
+      "type": "engine",
+      "title": "Composition Engine",
+      "objective": "Build the canonical Multi-engine composition implementation covering 9 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a052-composition",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/composition/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A053",
+      "wave": 1,
+      "type": "engine",
+      "title": "Diagnostics Engine",
+      "objective": "Build the canonical UI explainability and observability implementation covering 9 declared capabilities. Reuse shared value/token validators; declare unsupported ones and proof for supported ones.",
+      "branch": "work/p5-vec-eng-a053-diagnostics",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/implementations/diagnostics/",
+      "dependencies": [
+        "A001",
+        "A003",
+        "A012"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A054",
+      "wave": 2,
+      "type": "adapter",
+      "title": "Paired PWA renderer mapping",
+      "objective": "Propose a schema-aware typed adapter for paired pwa renderer mapping with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a054-paired-pwa-renderer-mapping",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A054/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A055",
+      "wave": 2,
+      "type": "adapter",
+      "title": "TierFlow Visual document adapter",
+      "objective": "Propose a schema-aware typed adapter for tierflow visual document adapter with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a055-tierflow-visual-document-adapter",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A055/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A056",
+      "wave": 2,
+      "type": "adapter",
+      "title": "TierFlow World spatial adapter",
+      "objective": "Propose a schema-aware typed adapter for tierflow world spatial adapter with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a056-tierflow-world-spatial-adapter",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A056/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A057",
+      "wave": 2,
+      "type": "adapter",
+      "title": "TierFlow component inspector adapter",
+      "objective": "Propose a schema-aware typed adapter for tierflow component inspector adapter with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a057-tierflow-component-inspector-adapter",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A057/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A058",
+      "wave": 2,
+      "type": "adapter",
+      "title": "Host revision and CAS boundary",
+      "objective": "Propose a schema-aware typed adapter for host revision and cas boundary with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a058-host-revision-and-cas-boundary",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A058/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A059",
+      "wave": 2,
+      "type": "adapter",
+      "title": "Legacy PWA theme donor parity",
+      "objective": "Propose a schema-aware typed adapter for legacy pwa theme donor parity with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a059-legacy-pwa-theme-donor-parity",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A059/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A060",
+      "wave": 2,
+      "type": "adapter",
+      "title": "Safe CSS emitter and property allowlist",
+      "objective": "Propose a schema-aware typed adapter for safe css emitter and property allowlist with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a060-safe-css-emitter-and-property-allowlist",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A060/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A061",
+      "wave": 2,
+      "type": "adapter",
+      "title": "Windows Host/native bridge",
+      "objective": "Propose a schema-aware typed adapter for windows host/native bridge with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a061-windows-host-native-bridge",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A061/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A062",
+      "wave": 2,
+      "type": "adapter",
+      "title": "Android paired PWA binding",
+      "objective": "Propose a schema-aware typed adapter for android paired pwa binding with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a062-android-paired-pwa-binding",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A062/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A063",
+      "wave": 2,
+      "type": "adapter",
+      "title": "Studio property inspector",
+      "objective": "Propose a schema-aware typed adapter for studio property inspector with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a063-studio-property-inspector",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A063/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A064",
+      "wave": 2,
+      "type": "adapter",
+      "title": "Template slot and variant binder",
+      "objective": "Propose a schema-aware typed adapter for template slot and variant binder with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a064-template-slot-and-variant-binder",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A064/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A065",
+      "wave": 2,
+      "type": "adapter",
+      "title": "Knowledge-data projection binder",
+      "objective": "Propose a schema-aware typed adapter for knowledge-data projection binder with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a065-knowledge-data-projection-binder",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A065/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A066",
+      "wave": 2,
+      "type": "adapter",
+      "title": "Media source and playback adapter",
+      "objective": "Propose a schema-aware typed adapter for media source and playback adapter with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a066-media-source-and-playback-adapter",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A066/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A067",
+      "wave": 2,
+      "type": "adapter",
+      "title": "Chart data and accessibility adapter",
+      "objective": "Propose a schema-aware typed adapter for chart data and accessibility adapter with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a067-chart-data-and-accessibility-adapter",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A067/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A068",
+      "wave": 2,
+      "type": "adapter",
+      "title": "Spatial 2D fallback adapter",
+      "objective": "Propose a schema-aware typed adapter for spatial 2d fallback adapter with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a068-spatial-2d-fallback-adapter",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A068/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A069",
+      "wave": 2,
+      "type": "adapter",
+      "title": "Print and export presentation adapter",
+      "objective": "Propose a schema-aware typed adapter for print and export presentation adapter with loss report, source pins, revision guards, no new renderer/publisher.",
+      "branch": "work/p5-vec-eng-a069-print-and-export-presentation-adapter",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/adapters/A069/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A014"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A070",
+      "wave": 3,
+      "type": "intent",
+      "title": "Natural language color editing",
+      "objective": "Compile bounded natural-language or visual edits for natural language color editing to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a070-natural-language-color-editing",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A070/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A071",
+      "wave": 3,
+      "type": "intent",
+      "title": "Natural language borders",
+      "objective": "Compile bounded natural-language or visual edits for natural language borders to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a071-natural-language-borders",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A071/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A072",
+      "wave": 3,
+      "type": "intent",
+      "title": "Natural language corners and shadows",
+      "objective": "Compile bounded natural-language or visual edits for natural language corners and shadows to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a072-natural-language-corners-and-shadows",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A072/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A073",
+      "wave": 3,
+      "type": "intent",
+      "title": "Natural language typography",
+      "objective": "Compile bounded natural-language or visual edits for natural language typography to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a073-natural-language-typography",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A073/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A074",
+      "wave": 3,
+      "type": "intent",
+      "title": "Natural language spacing and sizing",
+      "objective": "Compile bounded natural-language or visual edits for natural language spacing and sizing to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a074-natural-language-spacing-and-sizing",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A074/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A075",
+      "wave": 3,
+      "type": "intent",
+      "title": "Natural language responsive layout",
+      "objective": "Compile bounded natural-language or visual edits for natural language responsive layout to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a075-natural-language-responsive-layout",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A075/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A076",
+      "wave": 3,
+      "type": "intent",
+      "title": "Natural language animation",
+      "objective": "Compile bounded natural-language or visual edits for natural language animation to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a076-natural-language-animation",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A076/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A077",
+      "wave": 3,
+      "type": "intent",
+      "title": "Natural language accessibility",
+      "objective": "Compile bounded natural-language or visual edits for natural language accessibility to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a077-natural-language-accessibility",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A077/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A078",
+      "wave": 3,
+      "type": "intent",
+      "title": "Natural language media configuration",
+      "objective": "Compile bounded natural-language or visual edits for natural language media configuration to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a078-natural-language-media-configuration",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A078/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A079",
+      "wave": 3,
+      "type": "intent",
+      "title": "Multi-engine atomic intent compiler",
+      "objective": "Compile bounded natural-language or visual edits for multi-engine atomic intent compiler to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a079-multi-engine-atomic-intent-compiler",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A079/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A080",
+      "wave": 3,
+      "type": "intent",
+      "title": "Semantic target selection/disambiguation",
+      "objective": "Compile bounded natural-language or visual edits for semantic target selection/disambiguation to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a080-semantic-target-selection-disambiguation",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A080/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A081",
+      "wave": 3,
+      "type": "intent",
+      "title": "Visual engine browser and inspector",
+      "objective": "Compile bounded natural-language or visual edits for visual engine browser and inspector to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a081-visual-engine-browser-and-inspector",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A081/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A082",
+      "wave": 3,
+      "type": "intent",
+      "title": "Design token palette editor",
+      "objective": "Compile bounded natural-language or visual edits for design token palette editor to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a082-design-token-palette-editor",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A082/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A083",
+      "wave": 3,
+      "type": "intent",
+      "title": "Visual preview diff and undo",
+      "objective": "Compile bounded natural-language or visual edits for visual preview diff and undo to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a083-visual-preview-diff-and-undo",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A083/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A084",
+      "wave": 3,
+      "type": "intent",
+      "title": "Wiki compiler engine-passport shadow",
+      "objective": "Compile bounded natural-language or visual edits for wiki compiler engine-passport shadow to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a084-wiki-compiler-engine-passport-shadow",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A084/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A085",
+      "wave": 3,
+      "type": "intent",
+      "title": "NLCL command/UI distinction shadow",
+      "objective": "Compile bounded natural-language or visual edits for nlcl command/ui distinction shadow to inert engine/component IDs with ambiguity refusals.",
+      "branch": "work/p5-vec-eng-a085-nlcl-command-ui-distinction-shadow",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/experiences/A085/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A086",
+      "wave": 4,
+      "type": "qa",
+      "title": "Adversarial input fuzzing",
+      "objective": "Implement independent positive and adversarial fixtures for adversarial input fuzzing; execute tests and record exact exits.",
+      "branch": "work/p5-vec-eng-a086-adversarial-input-fuzzing",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/verification/A086/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A087",
+      "wave": 4,
+      "type": "qa",
+      "title": "Token graph/cycle verification",
+      "objective": "Implement independent positive and adversarial fixtures for token graph/cycle verification; execute tests and record exact exits.",
+      "branch": "work/p5-vec-eng-a087-token-graph-cycle-verification",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/verification/A087/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A088",
+      "wave": 4,
+      "type": "qa",
+      "title": "417-component applicability parity",
+      "objective": "Implement independent positive and adversarial fixtures for 417-component applicability parity; execute tests and record exact exits.",
+      "branch": "work/p5-vec-eng-a088-417-component-applicability-parity",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/verification/A088/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A089",
+      "wave": 4,
+      "type": "qa",
+      "title": "CSS/script/URL injection defenses",
+      "objective": "Implement independent positive and adversarial fixtures for css/script/url injection defenses; execute tests and record exact exits.",
+      "branch": "work/p5-vec-eng-a089-css-script-url-injection-defenses",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/verification/A089/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A090",
+      "wave": 4,
+      "type": "qa",
+      "title": "Accessibility and keyboard regression",
+      "objective": "Implement independent positive and adversarial fixtures for accessibility and keyboard regression; execute tests and record exact exits.",
+      "branch": "work/p5-vec-eng-a090-accessibility-and-keyboard-regression",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/verification/A090/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A091",
+      "wave": 4,
+      "type": "qa",
+      "title": "Mobile versus desktop parity",
+      "objective": "Implement independent positive and adversarial fixtures for mobile versus desktop parity; execute tests and record exact exits.",
+      "branch": "work/p5-vec-eng-a091-mobile-versus-desktop-parity",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/verification/A091/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A092",
+      "wave": 4,
+      "type": "qa",
+      "title": "Host revision and idempotency",
+      "objective": "Implement independent positive and adversarial fixtures for host revision and idempotency; execute tests and record exact exits.",
+      "branch": "work/p5-vec-eng-a092-host-revision-and-idempotency",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/verification/A092/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A093",
+      "wave": 4,
+      "type": "qa",
+      "title": "Pairing/revocation/privacy matrix",
+      "objective": "Implement independent positive and adversarial fixtures for pairing/revocation/privacy matrix; execute tests and record exact exits.",
+      "branch": "work/p5-vec-eng-a093-pairing-revocation-privacy-matrix",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/verification/A093/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A094",
+      "wave": 4,
+      "type": "qa",
+      "title": "PWA offline and service worker cache",
+      "objective": "Implement independent positive and adversarial fixtures for pwa offline and service worker cache; execute tests and record exact exits.",
+      "branch": "work/p5-vec-eng-a094-pwa-offline-and-service-worker-cache",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/verification/A094/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A095",
+      "wave": 4,
+      "type": "qa",
+      "title": "CPU/RSS/latency performance baselines",
+      "objective": "Implement independent positive and adversarial fixtures for cpu/rss/latency performance baselines; execute tests and record exact exits.",
+      "branch": "work/p5-vec-eng-a095-cpu-rss-latency-performance-baselines",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/verification/A095/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A096",
+      "wave": 4,
+      "type": "qa",
+      "title": "Low-disk/ENOSPC/restart recovery",
+      "objective": "Implement independent positive and adversarial fixtures for low-disk/enospc/restart recovery; execute tests and record exact exits.",
+      "branch": "work/p5-vec-eng-a096-low-disk-enospc-restart-recovery",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/verification/A096/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A097",
+      "wave": 4,
+      "type": "qa",
+      "title": "Reproducibility and full test matrix",
+      "objective": "Implement independent positive and adversarial fixtures for reproducibility and full test matrix; execute tests and record exact exits.",
+      "branch": "work/p5-vec-eng-a097-reproducibility-and-full-test-matrix",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": "packages/vec-ui-engines/verification/A097/",
+      "dependencies": [
+        "A001",
+        "A013",
+        "A054"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A098",
+      "wave": 5,
+      "type": "lead",
+      "title": "Canonical engine convergence",
+      "objective": "Independently assess approved source, exact pins and acceptance gates for canonical engine convergence; no automatic merge/product GO.",
+      "branch": "work/p5-vec-eng-a098-canonical-engine-convergence",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": ".integration/proposal5/vec-ui-engines/proofs/A098/",
+      "dependencies": [
+        "A001",
+        "A012",
+        "A086"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A099",
+      "wave": 5,
+      "type": "lead",
+      "title": "Independent security and semantic verification",
+      "objective": "Independently assess approved source, exact pins and acceptance gates for independent security and semantic verification; no automatic merge/product GO.",
+      "branch": "work/p5-vec-eng-a099-independent-security-and-semantic-verification",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": ".integration/proposal5/vec-ui-engines/proofs/A099/",
+      "dependencies": [
+        "A001",
+        "A012",
+        "A086"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "A100",
+      "wave": 5,
+      "type": "lead",
+      "title": "Release and physical device acceptance",
+      "objective": "Independently assess approved source, exact pins and acceptance gates for release and physical device acceptance; no automatic merge/product GO.",
+      "branch": "work/p5-vec-eng-a100-release-and-physical-device-acceptance",
+      "baseBranch": "work/p5-vec-ui-engine-foundation-r001",
+      "sourceContractSha": "b9932fac199b59a97be228f9f584de4b1dd287b8",
+      "exclusivePath": ".integration/proposal5/vec-ui-engines/proofs/A100/",
+      "dependencies": [
+        "A001",
+        "A012",
+        "A086"
+      ],
+      "status": "PREPARED_UNRUN",
+      "buildState": "NOT_STARTED",
+      "mergeState": "NOT_AUTHORIZED"
+    }
+  ],
+  "disposition": "WORK_ORDERS_READY_NO_AGENTS_LAUNCHED",
+  "testing": "UNRUN",
+  "merge": "NO_GO"
+}

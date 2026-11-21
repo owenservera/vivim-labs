@@ -1,0 +1,77 @@
+{
+  "schema": "arbor.p5.vec-ui-engines.gates/1",
+  "date": "2026-11-13",
+  "decision": "NO_GO",
+  "gates": [
+    {
+      "id": "G0",
+      "title": "Source lock and identity",
+      "status": "UNRUN_OR_PENDING",
+      "evidence": [],
+      "accepted": false
+    },
+    {
+      "id": "G1",
+      "title": "Typed ABI/value contracts",
+      "status": "UNRUN_OR_PENDING",
+      "evidence": [],
+      "accepted": false
+    },
+    {
+      "id": "G2",
+      "title": "Tokens modes and cascade",
+      "status": "UNRUN_OR_PENDING",
+      "evidence": [],
+      "accepted": false
+    },
+    {
+      "id": "G3",
+      "title": "Domain implementation readiness",
+      "status": "UNRUN_OR_PENDING",
+      "evidence": [],
+      "accepted": false
+    },
+    {
+      "id": "G4",
+      "title": "Renderer/loss mapping",
+      "status": "UNRUN_OR_PENDING",
+      "evidence": [],
+      "accepted": false
+    },
+    {
+      "id": "G5",
+      "title": "Host grants and one publisher",
+      "status": "UNRUN_OR_PENDING",
+      "evidence": [],
+      "accepted": false
+    },
+    {
+      "id": "G6",
+      "title": "Physical device acceptance",
+      "status": "UNRUN_OR_PENDING",
+      "evidence": [],
+      "accepted": false
+    },
+    {
+      "id": "G7",
+      "title": "Independent negative/security tests",
+      "status": "UNRUN_OR_PENDING",
+      "evidence": [],
+      "accepted": false
+    },
+    {
+      "id": "G8",
+      "title": "Performance and low disk",
+      "status": "UNRUN_OR_PENDING",
+      "evidence": [],
+      "accepted": false
+    },
+    {
+      "id": "G9",
+      "title": "Owner release approval",
+      "status": "UNRUN_OR_PENDING",
+      "evidence": [],
+      "accepted": false
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "schema": "vivim.ui-engine-dependencies/1",
+  "version": 1,
+  "asOf": "2026-11-13",
+  "rule": "Edges from dependent engine to required input; no cycle; no engine is an authorization",
+  "dependencies": {
+    "color": [],
+    "paint": [
+      "color",
+      "assets"
+    ],
+    "border": [
+      "color"
+    ],
+    "corners": [
+      "sizing"
+    ],
+    "shadow": [
+      "color",
+      "transforms"
+    ],
+    "typography": [
+      "assets",
+      "color"
+    ],
+    "text": [
+      "typography",
+      "color"
+    ],
+    "spacing": [],
+    "sizing": [],
+    "layout": [
+      "spacing",
+      "sizing"
+    ],
+    "position": [
+      "sizing"
+    ],
+    "responsive": [
+      "layout",
+      "sizing"
+    ],
+    "scroll": [
+      "layout"
+    ],
+    "transforms": [
+      "position"
+    ],
+    "effects": [
+      "color",
+      "paint"
+    ],
+    "motion": [
+      "transforms"
+    ],
+    "assets": [],
+    "media": [
+      "assets"
+    ],
+    "charts": [
+      "data",
+      "color",
+      "typography"
+    ],
+    "data": [],
+    "navigation": [
+      "states"
+    ],
+    "input": [
+      "states"
+    ],
+    "gestures": [
+      "input"
+    ],
+    "focus": [
+      "input"
+    ],
+    "accessibility": [],
+    "states": [],
+    "forms": [
+      "input",
+      "focus",
+      "states"
+    ],
+    "localization": [
+      "text"
+    ],
+    "spatial": [
+      "transforms"
+    ],
+    "theme": [
+      "color",
+      "typography",
+      "spacing",
+      "corners"
+    ],
+    "system": [],
+    "workflow": [
+      "data",
+      "states"
+    ],
+    "security": [],
+    "history": [],
+    "templates": [
+      "layout",
+      "theme"
+    ],
+    "composition": [],
+    "diagnostics": []
+  },
+  "constraints": [
+    "Accessibility is an independent hard gate, not a self-authorizing renderer",
+    "Privacy/security checked before and after any data projection",
+    "Current Host grant and source revision verified at commit",
+    "Reduced motion and enforced target sizes win over cosmetic preferences"
+  ],
+  "layers": [
+    [
+      "default",
+      100
+    ],
+    [
+      "brand",
+      200
+    ],
+    [
+      "theme",
+      300
+    ],
+    [
+      "workspace",
+      400
+    ],
+    [
+      "component-variant",
+      500
+    ],
+    [
+      "component-state",
+      600
+    ],
+    [
+      "owner-workspace",
+      700
+    ],
+    [
+      "owner-component",
+      800
+    ],
+    [
+      "accessibility-user",
+      900
+    ],
+    [
+      "system-safety",
+      1000
+    ]
+  ],
+  "propertyOwners": {
+    "palette+color-space": "color",
+    "border-width-style": "border",
+    "corner-geometry": "corners",
+    "typography-measurements": "typography",
+    "layout-constraints": "layout",
+    "type-parsing": "validators",
+    "token-aliases": "tokens",
+    "final-css+native-projection": "reviewed renderer adapter",
+    "personal-UI-revision": "existing Host publisher"
+  },
+  "conflict": "exact canonical property collision at same layer refuses unless a reviewed resolver exists",
+  "topologicalOrder": [
+    "color",
+    "spacing",
+    "sizing",
+    "assets",
+    "data",
+    "accessibility",
+    "states",
+    "system",
+    "security",
+    "history",
+    "composition",
+    "diagnostics",
+    "border",
+    "corners",
+    "layout",
+    "position",
+    "paint",
+    "typography",
+    "media",
+    "navigation",
+    "input",
+    "workflow",
+    "responsive",
+    "scroll",
+    "transforms",
+    "effects",
+    "text",
+    "charts",
+    "theme",
+    "gestures",
+    "focus",
+    "shadow",
+    "motion",
+    "spatial",
+    "localization",
+    "templates",
+    "forms"
+  ]
+}

@@ -14,6 +14,7 @@ Extension families are *composition*, not new system authorities. The same plugi
 
 ## Start here
 
+- [Native ARBOR natural-language computer control](chatgpt-plugin-ecosystem/native-command-space/README.md): 279 proposed command intents across 23 domains, Rust-first Host integration design, security and 90% task-completion evaluation (not yet implemented).
 - [ChatGPT plugin ecosystem / Desktop Commander research](chatgpt-plugin-ecosystem/README.md): remote vs local MCP, security model, three Context7 documentation pulls, public publishing requirements, Rust-first ARBOR architecture and validation playbook.
 - [Platform inventory — 153 candidate standalone plugin surfaces](extension-points/PLATFORM-SURFACE-INVENTORY.md): ten areas covering Android, mobile relay, desktop, Host, Studio, HQ/Rust, Oracle and TierFlow. Candidate, not implemented hook counts.
 - [Directly inspected implemented hooks](extension-points/VERIFIED-HOOKS.md): source-backed registration, typed action, native projection and Rust engine evidence with explicit gaps.

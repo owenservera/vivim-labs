@@ -69,6 +69,12 @@ pub struct IndependentlyCheckedProof {
     /// Must be true only after trusted independent checker/runner validation.
     /// A source tag, fixture or user-provided boolean is NOT authentication.
     pub independently_authenticated: bool,
+    /// Independent checker has compared the exact presented sentence's
+    /// meaning to the reviewed property and required assumptions.
+    pub explanation_checked: bool,
+    /// Independent checker has validated the precise model limitation,
+    /// not merely trusted a generated model_qualified flag.
+    pub model_scope_checked: bool,
 }
 /// Implement ONLY in a trusted Host/SV source-owner adapter after full schema,
 /// artifact/source pin, checker independence and witness verification. Never
@@ -122,7 +128,9 @@ fn classification(
     if !credible(&proof,claim,scope) {return Verification::Unknown}
     match proof.verdict {
         ProofVerdict::Refuted if proof.counterexample => Verification::Disputed,
-        ProofVerdict::ProvedUnderModel if claim.model_qualified && !proof.counterexample =>
+        ProofVerdict::ProvedUnderModel if claim.model_qualified &&
+            proof.explanation_checked && proof.model_scope_checked &&
+            !proof.counterexample =>
             Verification::Verified,
         ProofVerdict::SupportedByTests => Verification::Candidate,
         _ => Verification::Unknown,
@@ -214,6 +222,7 @@ mod tests {
                 verdict:self.verdict,scope_complete:self.complete,
                 unknown_paths:0,counterexample:self.verdict==ProofVerdict::Refuted,
                 evidence_refs:sources(),independently_authenticated:self.authentic,
+                explanation_checked:true,model_scope_checked:true,
             })
         }
     }
@@ -270,6 +279,22 @@ mod tests {
         let mut c=sample();c.semantic_source_revision=10;
         assert!(matches!(admit_semantic_sentences(&[c],&scope(&refs),None),
             Err(EvidenceAdmissionError::FutureClaim)));
+    }
+    #[test] fn independent_proof_without_checked_explanation_stays_unknown() {
+        struct BadExplanation;
+        impl IndependentProofReader for BadExplanation {
+            fn read_checked(&self,id:&str,prop:&str)->Option<IndependentlyCheckedProof> {
+                let base=Reader{verdict:ProofVerdict::ProvedUnderModel,
+                    authentic:true,complete:true};
+                let mut p=base.read_checked(id,prop).unwrap();
+                p.explanation_checked=false;
+                Some(p)
+            }
+        }
+        let refs=sources();let claims=[sample()];
+        assert_eq!(admit_semantic_sentences(
+            &claims,&scope(&refs),Some(&BadExplanation)).unwrap()[0].verification,
+            Verification::Unknown);
     }
     #[test] fn independent_refutation_is_never_published_as_verified() {
         let refs=sources();let c=[sample()];

@@ -1,0 +1,7155 @@
+{
+  "schema": "vivim.command-space-research/0",
+  "status": "candidate-not-executable",
+  "date": "2026-11-21",
+  "arbor_source_commit": "66c60ed2fc15ae05bb30f0a1e0f15c695ad3fb6e",
+  "baseline_catalog": "apps/vivim-host/control/action-catalog.v1.json@v15",
+  "definitions": 279,
+  "domainCounts": {
+    "files.find": 14,
+    "files.change": 14,
+    "documents": 12,
+    "archives": 10,
+    "apps.process": 13,
+    "terminal": 10,
+    "browser.tabs": 12,
+    "browser.workflow": 12,
+    "knowledge.wiki": 12,
+    "notes.tasks": 14,
+    "calendar.time": 12,
+    "communications": 12,
+    "research.search": 10,
+    "media": 12,
+    "system.settings": 12,
+    "devices.network": 13,
+    "privacy.security": 12,
+    "automation": 12,
+    "developer.git": 12,
+    "developer.build": 13,
+    "ui.workspace": 12,
+    "data.tables": 12,
+    "personal.context": 12
+  },
+  "riskCounts": {
+    "R0": 118,
+    "R1": 89,
+    "R2": 60,
+    "R3": 12
+  },
+  "phaseCounts": {
+    "P0": 65,
+    "P1": 98,
+    "P2": 98,
+    "P3": 18
+  },
+  "coverageClaim": "None. This is design breadth, not observed user-frequency coverage.",
+  "commands": [
+    {
+      "id": "files.find.find_by_name",
+      "domain": "files.find",
+      "adapter": "filesystem",
+      "example": "Find my latest tax PDF",
+      "slots": [
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.find.find_by_content",
+      "domain": "files.find",
+      "adapter": "filesystem",
+      "example": "Search documents for warranty expiry",
+      "slots": [
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.find.list_folder",
+      "domain": "files.find",
+      "adapter": "filesystem",
+      "example": "Show what's in Downloads",
+      "slots": [
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.find.tree_folder",
+      "domain": "files.find",
+      "adapter": "filesystem",
+      "example": "Show the project folder hierarchy",
+      "slots": [
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "depth",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.find.file_info",
+      "domain": "files.find",
+      "adapter": "filesystem",
+      "example": "How big is this file",
+      "slots": [
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.find.largest_files",
+      "domain": "files.find",
+      "adapter": "filesystem",
+      "example": "Find the ten biggest files on my PC",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "limit",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.find.recent_files",
+      "domain": "files.find",
+      "adapter": "filesystem",
+      "example": "What files did I edit today",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "period",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.find.duplicate_candidates",
+      "domain": "files.find",
+      "adapter": "filesystem",
+      "example": "Find duplicate videos without deleting anything",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "method",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.find.empty_folders",
+      "domain": "files.find",
+      "adapter": "filesystem",
+      "example": "Find empty folders in Downloads",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.find.compare_files",
+      "domain": "files.find",
+      "adapter": "filesystem",
+      "example": "Compare these two PDFs or source files",
+      "slots": [
+        {
+          "name": "left",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "right",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.find.disk_usage",
+      "domain": "files.find",
+      "adapter": "filesystem",
+      "example": "Which folders use the most storage",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.find.watch_folder",
+      "domain": "files.find",
+      "adapter": "filesystem",
+      "example": "Tell me when a file arrives in this folder",
+      "slots": [
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "condition",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.find.read_file",
+      "domain": "files.find",
+      "adapter": "filesystem",
+      "example": "Open and read this text file",
+      "slots": [
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.find.preview_file",
+      "domain": "files.find",
+      "adapter": "filesystem",
+      "example": "Preview this file safely",
+      "slots": [
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.change.create_folder",
+      "domain": "files.change",
+      "adapter": "filesystem",
+      "example": "Create a folder for my invoices",
+      "slots": [
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.change.create_file",
+      "domain": "files.change",
+      "adapter": "filesystem",
+      "example": "Create an empty notes file",
+      "slots": [
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.change.rename_file",
+      "domain": "files.change",
+      "adapter": "filesystem",
+      "example": "Rename this report",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.change.move_file",
+      "domain": "files.change",
+      "adapter": "filesystem",
+      "example": "Move the photos into Pictures",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "destination",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.change.copy_file",
+      "domain": "files.change",
+      "adapter": "filesystem",
+      "example": "Copy the contract to Archive",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "destination",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.change.batch_move",
+      "domain": "files.change",
+      "adapter": "filesystem",
+      "example": "Organize Downloads by file type",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "destination",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.change.batch_rename",
+      "domain": "files.change",
+      "adapter": "filesystem",
+      "example": "Rename these images by date",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "rule",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.change.edit_text",
+      "domain": "files.change",
+      "adapter": "filesystem",
+      "example": "Replace this heading in the document",
+      "slots": [
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "old_text",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "new_text",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.change.append_text",
+      "domain": "files.change",
+      "adapter": "filesystem",
+      "example": "Append this note to my log",
+      "slots": [
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.change.restore_version",
+      "domain": "files.change",
+      "adapter": "filesystem",
+      "example": "Restore yesterday's saved version",
+      "slots": [
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "revision",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.change.trash_file",
+      "domain": "files.change",
+      "adapter": "filesystem",
+      "example": "Move this file to the recycle bin",
+      "slots": [
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.change.restore_from_trash",
+      "domain": "files.change",
+      "adapter": "filesystem",
+      "example": "Restore the file I just deleted",
+      "slots": [
+        {
+          "name": "receipt_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.change.delete_permanently",
+      "domain": "files.change",
+      "adapter": "filesystem",
+      "example": "Permanently delete the selected files",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R3",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "privileged_or_destructive",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "files.change.change_permissions",
+      "domain": "files.change",
+      "adapter": "filesystem",
+      "example": "Give this colleague access to the folder",
+      "slots": [
+        {
+          "name": "target",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "principal",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "permission",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R3",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "privileged_or_destructive",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "documents.summarize_document",
+      "domain": "documents",
+      "adapter": "document",
+      "example": "Summarize this PDF in five points",
+      "slots": [
+        {
+          "name": "document",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "format",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "documents.extract_pdf_text",
+      "domain": "documents",
+      "adapter": "document",
+      "example": "Extract text from this PDF",
+      "slots": [
+        {
+          "name": "document",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "documents.find_in_document",
+      "domain": "documents",
+      "adapter": "document",
+      "example": "Find the termination clause in this agreement",
+      "slots": [
+        {
+          "name": "document",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "documents.compare_documents",
+      "domain": "documents",
+      "adapter": "document",
+      "example": "What changed between these contracts",
+      "slots": [
+        {
+          "name": "left",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "right",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "documents.convert_document",
+      "domain": "documents",
+      "adapter": "document",
+      "example": "Convert this markdown to a PDF",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "format",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "documents.merge_pdfs",
+      "domain": "documents",
+      "adapter": "document",
+      "example": "Merge these three PDF files",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "output",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "documents.split_pdf",
+      "domain": "documents",
+      "adapter": "document",
+      "example": "Split this PDF after page ten",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "range",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "documents.rotate_pdf",
+      "domain": "documents",
+      "adapter": "document",
+      "example": "Rotate page three clockwise",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "page",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "documents.extract_pdf_pages",
+      "domain": "documents",
+      "adapter": "document",
+      "example": "Save pages two to five separately",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "range",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "documents.rename_scans",
+      "domain": "documents",
+      "adapter": "document",
+      "example": "Rename scanned receipts by vendor and date",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "pattern",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "documents.redact_pdf",
+      "domain": "documents",
+      "adapter": "document",
+      "example": "Redact the account number in this PDF",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "targets",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "documents.create_document",
+      "domain": "documents",
+      "adapter": "document",
+      "example": "Create a meeting-summary document from these notes",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "template",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "archives.list_archive",
+      "domain": "archives",
+      "adapter": "filesystem",
+      "example": "Show the contents of this ZIP",
+      "slots": [
+        {
+          "name": "archive",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "archives.create_archive",
+      "domain": "archives",
+      "adapter": "filesystem",
+      "example": "Zip the project source folder",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "output",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "archives.extract_archive",
+      "domain": "archives",
+      "adapter": "filesystem",
+      "example": "Unzip this archive into a new folder",
+      "slots": [
+        {
+          "name": "archive",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "destination",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "archives.verify_archive",
+      "domain": "archives",
+      "adapter": "filesystem",
+      "example": "Check whether this ZIP is corrupt",
+      "slots": [
+        {
+          "name": "archive",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "archives.search_archives",
+      "domain": "archives",
+      "adapter": "filesystem",
+      "example": "Find archives containing invoices",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "archives.compare_archives",
+      "domain": "archives",
+      "adapter": "filesystem",
+      "example": "Compare the contents of these two ZIPs",
+      "slots": [
+        {
+          "name": "left",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "right",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "archives.compress_folder",
+      "domain": "archives",
+      "adapter": "filesystem",
+      "example": "Compress older photos to save space",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "algorithm",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "archives.encrypt_archive",
+      "domain": "archives",
+      "adapter": "filesystem",
+      "example": "Password-protect this backup archive",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "destination",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "archives.backup_folder",
+      "domain": "archives",
+      "adapter": "filesystem",
+      "example": "Back up my Documents folder to this drive",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "destination",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "archives.restore_backup",
+      "domain": "archives",
+      "adapter": "filesystem",
+      "example": "Restore these files from a backup",
+      "slots": [
+        {
+          "name": "backup",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "apps.process.list_running_apps",
+      "domain": "apps.process",
+      "adapter": "process",
+      "example": "What applications are running",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "apps.process.open_app",
+      "domain": "apps.process",
+      "adapter": "process",
+      "example": "Open my browser",
+      "slots": [
+        {
+          "name": "app",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "apps.process.open_file_with",
+      "domain": "apps.process",
+      "adapter": "process",
+      "example": "Open this PDF with my reader",
+      "slots": [
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "app",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "apps.process.focus_app",
+      "domain": "apps.process",
+      "adapter": "process",
+      "example": "Switch to the terminal window",
+      "slots": [
+        {
+          "name": "app",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "apps.process.list_windows",
+      "domain": "apps.process",
+      "adapter": "process",
+      "example": "Show my open windows",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "apps.process.close_window",
+      "domain": "apps.process",
+      "adapter": "process",
+      "example": "Close this application window",
+      "slots": [
+        {
+          "name": "window",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "apps.process.list_processes",
+      "domain": "apps.process",
+      "adapter": "process",
+      "example": "Which processes use the most memory",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "apps.process.process_details",
+      "domain": "apps.process",
+      "adapter": "process",
+      "example": "Show details for this process",
+      "slots": [
+        {
+          "name": "process",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "apps.process.terminate_process",
+      "domain": "apps.process",
+      "adapter": "process",
+      "example": "Stop the unresponsive process",
+      "slots": [
+        {
+          "name": "process",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "apps.process.restart_app",
+      "domain": "apps.process",
+      "adapter": "process",
+      "example": "Restart the editor",
+      "slots": [
+        {
+          "name": "app",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "apps.process.start_background_job",
+      "domain": "apps.process",
+      "adapter": "process",
+      "example": "Run this approved background operation",
+      "slots": [
+        {
+          "name": "job_spec",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "apps.process.job_status",
+      "domain": "apps.process",
+      "adapter": "process",
+      "example": "Is my conversion job still running",
+      "slots": [
+        {
+          "name": "job_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "apps.process.cancel_job",
+      "domain": "apps.process",
+      "adapter": "process",
+      "example": "Cancel the job I started",
+      "slots": [
+        {
+          "name": "job_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "terminal.environment_versions",
+      "domain": "terminal",
+      "adapter": "process",
+      "example": "Show installed Rust and Bun versions",
+      "slots": [
+        {
+          "name": "tools",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "terminal.where_executable",
+      "domain": "terminal",
+      "adapter": "process",
+      "example": "Where is cargo installed",
+      "slots": [
+        {
+          "name": "tool",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "terminal.run_approved_tool",
+      "domain": "terminal",
+      "adapter": "process",
+      "example": "Run the project's approved formatter",
+      "slots": [
+        {
+          "name": "tool",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "arguments",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "workspace",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "terminal.start_interactive_session",
+      "domain": "terminal",
+      "adapter": "process",
+      "example": "Start an approved REPL in this workspace",
+      "slots": [
+        {
+          "name": "tool",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "workspace",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "terminal.send_session_input",
+      "domain": "terminal",
+      "adapter": "process",
+      "example": "Send this code into my active REPL",
+      "slots": [
+        {
+          "name": "session_id",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "input",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "terminal.read_session_output",
+      "domain": "terminal",
+      "adapter": "process",
+      "example": "Show the latest output from that job",
+      "slots": [
+        {
+          "name": "session_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "terminal.list_sessions",
+      "domain": "terminal",
+      "adapter": "process",
+      "example": "Which terminal sessions are active",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "terminal.stop_session",
+      "domain": "terminal",
+      "adapter": "process",
+      "example": "Stop this terminal session",
+      "slots": [
+        {
+          "name": "session_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "terminal.check_command_status",
+      "domain": "terminal",
+      "adapter": "process",
+      "example": "Did my last command finish successfully",
+      "slots": [
+        {
+          "name": "receipt_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "terminal.run_arbitrary_shell",
+      "domain": "terminal",
+      "adapter": "process",
+      "example": "Execute this raw shell string",
+      "slots": [
+        {
+          "name": "command",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "workspace",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R3",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "privileged_or_destructive",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.tabs.list_tabs",
+      "domain": "browser.tabs",
+      "adapter": "studio",
+      "example": "What tabs are open in my browser",
+      "slots": [
+        {
+          "name": "profile",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.tabs.open_url",
+      "domain": "browser.tabs",
+      "adapter": "studio",
+      "example": "Open the official documentation in a new tab",
+      "slots": [
+        {
+          "name": "url",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.tabs.focus_tab",
+      "domain": "browser.tabs",
+      "adapter": "studio",
+      "example": "Switch to the ARBOR GitHub tab",
+      "slots": [
+        {
+          "name": "tab",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.tabs.close_tab",
+      "domain": "browser.tabs",
+      "adapter": "studio",
+      "example": "Close the duplicated tab",
+      "slots": [
+        {
+          "name": "tab",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.tabs.reload_tab",
+      "domain": "browser.tabs",
+      "adapter": "studio",
+      "example": "Refresh the current page",
+      "slots": [
+        {
+          "name": "tab",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.tabs.search_tabs",
+      "domain": "browser.tabs",
+      "adapter": "studio",
+      "example": "Find the tab about GPUI",
+      "slots": [
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.tabs.save_bookmark",
+      "domain": "browser.tabs",
+      "adapter": "studio",
+      "example": "Bookmark this page",
+      "slots": [
+        {
+          "name": "tab",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "folder",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.tabs.list_bookmarks",
+      "domain": "browser.tabs",
+      "adapter": "studio",
+      "example": "Find my saved Rust links",
+      "slots": [
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.tabs.extract_page_text",
+      "domain": "browser.tabs",
+      "adapter": "studio",
+      "example": "Read the visible article text",
+      "slots": [
+        {
+          "name": "tab",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.tabs.download_link",
+      "domain": "browser.tabs",
+      "adapter": "studio",
+      "example": "Download the linked public PDF",
+      "slots": [
+        {
+          "name": "link",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "destination",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.tabs.capture_page",
+      "domain": "browser.tabs",
+      "adapter": "studio",
+      "example": "Save an authorized screenshot of the current page",
+      "slots": [
+        {
+          "name": "tab",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.tabs.browser_history_search",
+      "domain": "browser.tabs",
+      "adapter": "studio",
+      "example": "Find the site I visited yesterday",
+      "slots": [
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "period",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.workflow.click_element",
+      "domain": "browser.workflow",
+      "adapter": "studio",
+      "example": "Press the settings button on this page",
+      "slots": [
+        {
+          "name": "tab",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "target",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.workflow.fill_form",
+      "domain": "browser.workflow",
+      "adapter": "studio",
+      "example": "Fill in this form with my selected details",
+      "slots": [
+        {
+          "name": "tab",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "fields",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.workflow.select_option",
+      "domain": "browser.workflow",
+      "adapter": "studio",
+      "example": "Choose the monthly view",
+      "slots": [
+        {
+          "name": "tab",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "field",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.workflow.navigate_workspace",
+      "domain": "browser.workflow",
+      "adapter": "studio",
+      "example": "Open this project's issue tracker",
+      "slots": [
+        {
+          "name": "site",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "target",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.workflow.read_account_data",
+      "domain": "browser.workflow",
+      "adapter": "studio",
+      "example": "Show my latest account activity on this website",
+      "slots": [
+        {
+          "name": "site",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.workflow.upload_file",
+      "domain": "browser.workflow",
+      "adapter": "studio",
+      "example": "Upload this approved file to the form",
+      "slots": [
+        {
+          "name": "site",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.workflow.download_report",
+      "domain": "browser.workflow",
+      "adapter": "studio",
+      "example": "Download this report from the signed-in website",
+      "slots": [
+        {
+          "name": "site",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "report",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.workflow.submit_form",
+      "domain": "browser.workflow",
+      "adapter": "studio",
+      "example": "Submit this completed form",
+      "slots": [
+        {
+          "name": "site",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "form",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.workflow.purchase_checkout",
+      "domain": "browser.workflow",
+      "adapter": "studio",
+      "example": "Complete this purchase",
+      "slots": [
+        {
+          "name": "merchant",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "cart",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R3",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "privileged_or_destructive",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.workflow.publish_post",
+      "domain": "browser.workflow",
+      "adapter": "studio",
+      "example": "Publish the drafted post on the site",
+      "slots": [
+        {
+          "name": "site",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "draft",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R3",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "privileged_or_destructive",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.workflow.change_account_settings",
+      "domain": "browser.workflow",
+      "adapter": "studio",
+      "example": "Update a setting in this account",
+      "slots": [
+        {
+          "name": "site",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "setting",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R3",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "privileged_or_destructive",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "browser.workflow.browser_effect_status",
+      "domain": "browser.workflow",
+      "adapter": "studio",
+      "example": "Did the website save my changes",
+      "slots": [
+        {
+          "name": "receipt_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "knowledge.wiki.wiki_search",
+      "domain": "knowledge.wiki",
+      "adapter": "knowledge",
+      "example": "Search my Wiki for device pairing",
+      "slots": [
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "knowledge.wiki.wiki_read",
+      "domain": "knowledge.wiki",
+      "adapter": "knowledge",
+      "example": "Show the architecture page",
+      "slots": [
+        {
+          "name": "page",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "knowledge.wiki.wiki_list",
+      "domain": "knowledge.wiki",
+      "adapter": "knowledge",
+      "example": "List all Wiki pages",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "knowledge.wiki.wiki_create",
+      "domain": "knowledge.wiki",
+      "adapter": "knowledge",
+      "example": "Create a new Wiki page for this research",
+      "slots": [
+        {
+          "name": "page",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "knowledge.wiki.wiki_edit_section",
+      "domain": "knowledge.wiki",
+      "adapter": "knowledge",
+      "example": "Update this Wiki section",
+      "slots": [
+        {
+          "name": "page",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "section",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "knowledge.wiki.wiki_move_page",
+      "domain": "knowledge.wiki",
+      "adapter": "knowledge",
+      "example": "Move this Wiki page to the top",
+      "slots": [
+        {
+          "name": "page",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "position",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "knowledge.wiki.wiki_link_pages",
+      "domain": "knowledge.wiki",
+      "adapter": "knowledge",
+      "example": "Link these two Wiki pages",
+      "slots": [
+        {
+          "name": "from",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "to",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "knowledge.wiki.wiki_capture",
+      "domain": "knowledge.wiki",
+      "adapter": "knowledge",
+      "example": "Save this conversation excerpt into the Wiki",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "knowledge.wiki.wiki_revision",
+      "domain": "knowledge.wiki",
+      "adapter": "knowledge",
+      "example": "What changed in the Wiki today",
+      "slots": [
+        {
+          "name": "page",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "period",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "knowledge.wiki.wiki_restore",
+      "domain": "knowledge.wiki",
+      "adapter": "knowledge",
+      "example": "Restore this Wiki section from yesterday",
+      "slots": [
+        {
+          "name": "page",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "revision",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "knowledge.wiki.knowledge_sources",
+      "domain": "knowledge.wiki",
+      "adapter": "knowledge",
+      "example": "Where did you learn this fact",
+      "slots": [
+        {
+          "name": "fact",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "knowledge.wiki.knowledge_export",
+      "domain": "knowledge.wiki",
+      "adapter": "knowledge",
+      "example": "Export selected Wiki pages",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "format",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "notes.tasks.capture_note",
+      "domain": "notes.tasks",
+      "adapter": "tasks",
+      "example": "Remember this thought as a note",
+      "slots": [
+        {
+          "name": "content",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "notes.tasks.list_notes",
+      "domain": "notes.tasks",
+      "adapter": "tasks",
+      "example": "Show notes from this week",
+      "slots": [
+        {
+          "name": "period",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "notes.tasks.find_note",
+      "domain": "notes.tasks",
+      "adapter": "tasks",
+      "example": "Find the note about hosting costs",
+      "slots": [
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "notes.tasks.summarize_notes",
+      "domain": "notes.tasks",
+      "adapter": "tasks",
+      "example": "Summarize my project notes",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "notes.tasks.create_task",
+      "domain": "notes.tasks",
+      "adapter": "tasks",
+      "example": "Create a task to review the release",
+      "slots": [
+        {
+          "name": "title",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "due",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "notes.tasks.list_tasks",
+      "domain": "notes.tasks",
+      "adapter": "tasks",
+      "example": "What are my tasks for today",
+      "slots": [
+        {
+          "name": "period",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "notes.tasks.update_task",
+      "domain": "notes.tasks",
+      "adapter": "tasks",
+      "example": "Change this task's due date",
+      "slots": [
+        {
+          "name": "task",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "field",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "notes.tasks.complete_task",
+      "domain": "notes.tasks",
+      "adapter": "tasks",
+      "example": "Mark this task as done",
+      "slots": [
+        {
+          "name": "task",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "notes.tasks.reopen_task",
+      "domain": "notes.tasks",
+      "adapter": "tasks",
+      "example": "Reopen that task",
+      "slots": [
+        {
+          "name": "task",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "notes.tasks.prioritize_tasks",
+      "domain": "notes.tasks",
+      "adapter": "tasks",
+      "example": "Rank these tasks by urgency",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "criteria",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "notes.tasks.convert_note_to_tasks",
+      "domain": "notes.tasks",
+      "adapter": "tasks",
+      "example": "Extract actionable tasks from this note",
+      "slots": [
+        {
+          "name": "note",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "notes.tasks.create_checklist",
+      "domain": "notes.tasks",
+      "adapter": "tasks",
+      "example": "Make a packing checklist",
+      "slots": [
+        {
+          "name": "topic",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "notes.tasks.summarize_day",
+      "domain": "notes.tasks",
+      "adapter": "tasks",
+      "example": "What did I get done today",
+      "slots": [
+        {
+          "name": "day",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "notes.tasks.task_history",
+      "domain": "notes.tasks",
+      "adapter": "tasks",
+      "example": "When did I close this task",
+      "slots": [
+        {
+          "name": "task",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "calendar.time.calendar_agenda",
+      "domain": "calendar.time",
+      "adapter": "calendar",
+      "example": "What's on my calendar today",
+      "slots": [
+        {
+          "name": "period",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "calendar.time.find_free_time",
+      "domain": "calendar.time",
+      "adapter": "calendar",
+      "example": "Find a free hour tomorrow",
+      "slots": [
+        {
+          "name": "duration",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "period",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "calendar.time.create_event",
+      "domain": "calendar.time",
+      "adapter": "calendar",
+      "example": "Add this appointment to my calendar",
+      "slots": [
+        {
+          "name": "title",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "time",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "attendees",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "calendar.time.reschedule_event",
+      "domain": "calendar.time",
+      "adapter": "calendar",
+      "example": "Move the meeting to Friday",
+      "slots": [
+        {
+          "name": "event",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "time",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "calendar.time.cancel_event",
+      "domain": "calendar.time",
+      "adapter": "calendar",
+      "example": "Cancel the meeting",
+      "slots": [
+        {
+          "name": "event",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "calendar.time.accept_invite",
+      "domain": "calendar.time",
+      "adapter": "calendar",
+      "example": "Accept the meeting invitation",
+      "slots": [
+        {
+          "name": "event",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "calendar.time.decline_invite",
+      "domain": "calendar.time",
+      "adapter": "calendar",
+      "example": "Decline the invite",
+      "slots": [
+        {
+          "name": "event",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "calendar.time.set_reminder",
+      "domain": "calendar.time",
+      "adapter": "calendar",
+      "example": "Remind me at four to leave",
+      "slots": [
+        {
+          "name": "content",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "time",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "calendar.time.list_reminders",
+      "domain": "calendar.time",
+      "adapter": "calendar",
+      "example": "What reminders do I have",
+      "slots": [
+        {
+          "name": "period",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "calendar.time.cancel_reminder",
+      "domain": "calendar.time",
+      "adapter": "calendar",
+      "example": "Cancel my dentist reminder",
+      "slots": [
+        {
+          "name": "reminder",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "calendar.time.time_conversion",
+      "domain": "calendar.time",
+      "adapter": "calendar",
+      "example": "What time is the call in Madrid",
+      "slots": [
+        {
+          "name": "time",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "zone",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "calendar.time.schedule_focus",
+      "domain": "calendar.time",
+      "adapter": "calendar",
+      "example": "Block two hours for coding tomorrow",
+      "slots": [
+        {
+          "name": "duration",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "period",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "communications.inbox_unread",
+      "domain": "communications",
+      "adapter": "communications",
+      "example": "Show my unread emails",
+      "slots": [
+        {
+          "name": "account",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "communications.find_email",
+      "domain": "communications",
+      "adapter": "communications",
+      "example": "Find the message about the invoice",
+      "slots": [
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "communications.summarize_thread",
+      "domain": "communications",
+      "adapter": "communications",
+      "example": "Summarize this email thread",
+      "slots": [
+        {
+          "name": "thread",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "communications.draft_email",
+      "domain": "communications",
+      "adapter": "communications",
+      "example": "Draft a reply to this email",
+      "slots": [
+        {
+          "name": "thread",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "communications.send_email",
+      "domain": "communications",
+      "adapter": "communications",
+      "example": "Send the approved email",
+      "slots": [
+        {
+          "name": "draft",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "recipients",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "communications.schedule_email",
+      "domain": "communications",
+      "adapter": "communications",
+      "example": "Schedule this email for Monday",
+      "slots": [
+        {
+          "name": "draft",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "time",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "communications.archive_email",
+      "domain": "communications",
+      "adapter": "communications",
+      "example": "Archive these emails",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "communications.delete_email",
+      "domain": "communications",
+      "adapter": "communications",
+      "example": "Move these emails to Trash",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "communications.find_contact",
+      "domain": "communications",
+      "adapter": "communications",
+      "example": "Find this person's saved contact details",
+      "slots": [
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "communications.create_contact",
+      "domain": "communications",
+      "adapter": "communications",
+      "example": "Add this contact to my address book",
+      "slots": [
+        {
+          "name": "name",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "details",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "communications.send_message",
+      "domain": "communications",
+      "adapter": "communications",
+      "example": "Send this message to the selected person",
+      "slots": [
+        {
+          "name": "recipient",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "communications.draft_message",
+      "domain": "communications",
+      "adapter": "communications",
+      "example": "Write a message to the team without sending it",
+      "slots": [
+        {
+          "name": "audience",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "research.search.search_web",
+      "domain": "research.search",
+      "adapter": "research",
+      "example": "Search the web for Rust MCP libraries",
+      "slots": [
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "research.search.compare_sources",
+      "domain": "research.search",
+      "adapter": "research",
+      "example": "Compare these three articles",
+      "slots": [
+        {
+          "name": "sources",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "research.search.summarize_page",
+      "domain": "research.search",
+      "adapter": "research",
+      "example": "Give me the key points from this article",
+      "slots": [
+        {
+          "name": "url",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "research.search.verify_claim",
+      "domain": "research.search",
+      "adapter": "research",
+      "example": "Check whether this claim is supported",
+      "slots": [
+        {
+          "name": "claim",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "research.search.find_documentation",
+      "domain": "research.search",
+      "adapter": "research",
+      "example": "Find the official API documentation",
+      "slots": [
+        {
+          "name": "product",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "topic",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "research.search.track_topic",
+      "domain": "research.search",
+      "adapter": "research",
+      "example": "Track future publications about this topic",
+      "slots": [
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "cadence",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "research.search.save_research",
+      "domain": "research.search",
+      "adapter": "research",
+      "example": "Save these research results to my Wiki",
+      "slots": [
+        {
+          "name": "sources",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "location",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "research.search.extract_citations",
+      "domain": "research.search",
+      "adapter": "research",
+      "example": "List source citations from this document",
+      "slots": [
+        {
+          "name": "document",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "research.search.translate_text",
+      "domain": "research.search",
+      "adapter": "research",
+      "example": "Translate this article into Spanish",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "language",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "research.search.summarize_selection",
+      "domain": "research.search",
+      "adapter": "research",
+      "example": "Summarize the text I've selected",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "media.find_photos",
+      "domain": "media",
+      "adapter": "media",
+      "example": "Find pictures taken in June",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "period",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "media.group_photos",
+      "domain": "media",
+      "adapter": "media",
+      "example": "Group these photos by event",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "rule",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "media.image_metadata",
+      "domain": "media",
+      "adapter": "media",
+      "example": "Show image dimensions and dates",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "media.resize_images",
+      "domain": "media",
+      "adapter": "media",
+      "example": "Resize these pictures to 1080 pixels",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "size",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "media.convert_images",
+      "domain": "media",
+      "adapter": "media",
+      "example": "Convert these images to WebP",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "format",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "media.rotate_image",
+      "domain": "media",
+      "adapter": "media",
+      "example": "Rotate the selected picture",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "angle",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "media.strip_metadata",
+      "domain": "media",
+      "adapter": "media",
+      "example": "Remove location metadata from selected pictures",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "media.play_media",
+      "domain": "media",
+      "adapter": "media",
+      "example": "Play this video in my player",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "media.pause_media",
+      "domain": "media",
+      "adapter": "media",
+      "example": "Pause playback",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "media.transcribe_audio",
+      "domain": "media",
+      "adapter": "media",
+      "example": "Transcribe this local voice note",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "language",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "media.extract_video_audio",
+      "domain": "media",
+      "adapter": "media",
+      "example": "Extract audio from this video",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "output",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "media.find_large_media",
+      "domain": "media",
+      "adapter": "media",
+      "example": "Find large videos on this drive",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "size_min",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "system.settings.system_overview",
+      "domain": "system.settings",
+      "adapter": "system",
+      "example": "Show my PC system information",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "system.settings.battery_status",
+      "domain": "system.settings",
+      "adapter": "system",
+      "example": "How much battery remains",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "system.settings.memory_usage",
+      "domain": "system.settings",
+      "adapter": "system",
+      "example": "What's using all my memory",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "system.settings.cpu_usage",
+      "domain": "system.settings",
+      "adapter": "system",
+      "example": "Which process is using CPU",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "system.settings.storage_overview",
+      "domain": "system.settings",
+      "adapter": "system",
+      "example": "How much disk space is free",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "system.settings.os_version",
+      "domain": "system.settings",
+      "adapter": "system",
+      "example": "What Windows version am I running",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "system.settings.list_startup_apps",
+      "domain": "system.settings",
+      "adapter": "system",
+      "example": "Which apps launch at startup",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "system.settings.toggle_dark_mode",
+      "domain": "system.settings",
+      "adapter": "system",
+      "example": "Switch to dark mode",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "system.settings.adjust_volume",
+      "domain": "system.settings",
+      "adapter": "system",
+      "example": "Set volume to thirty percent",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "level",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "system.settings.adjust_brightness",
+      "domain": "system.settings",
+      "adapter": "system",
+      "example": "Lower screen brightness",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "level",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "system.settings.set_default_app",
+      "domain": "system.settings",
+      "adapter": "system",
+      "example": "Make this app the default PDF viewer",
+      "slots": [
+        {
+          "name": "filetype",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "app",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "system.settings.restart_computer",
+      "domain": "system.settings",
+      "adapter": "system",
+      "example": "Restart my computer after approval",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R3",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "privileged_or_destructive",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "devices.network.list_devices",
+      "domain": "devices.network",
+      "adapter": "devices",
+      "example": "Which devices are paired",
+      "slots": [
+        {
+          "name": "owner",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "devices.network.device_status",
+      "domain": "devices.network",
+      "adapter": "devices",
+      "example": "Is my phone connected",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "devices.network.pair_device",
+      "domain": "devices.network",
+      "adapter": "devices",
+      "example": "Pair my phone with the Host",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "devices.network.revoke_device",
+      "domain": "devices.network",
+      "adapter": "devices",
+      "example": "Revoke this device's access",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "devices.network.device_grants",
+      "domain": "devices.network",
+      "adapter": "devices",
+      "example": "Which permissions does this phone have",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "devices.network.network_status",
+      "domain": "devices.network",
+      "adapter": "devices",
+      "example": "Am I connected to the internet",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "devices.network.wifi_details",
+      "domain": "devices.network",
+      "adapter": "devices",
+      "example": "Which WiFi network am I on",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "devices.network.scan_local_devices",
+      "domain": "devices.network",
+      "adapter": "devices",
+      "example": "Find nearby authorized devices",
+      "slots": [
+        {
+          "name": "network",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "devices.network.send_to_device",
+      "domain": "devices.network",
+      "adapter": "devices",
+      "example": "Send this file to my paired phone",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "devices.network.remote_read_file",
+      "domain": "devices.network",
+      "adapter": "devices",
+      "example": "Open a file from my paired computer",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "devices.network.remote_start_job",
+      "domain": "devices.network",
+      "adapter": "devices",
+      "example": "Run an approved job on my paired PC",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "job",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "devices.network.toggle_wifi",
+      "domain": "devices.network",
+      "adapter": "devices",
+      "example": "Turn off WiFi",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R3",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "privileged_or_destructive",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "devices.network.change_firewall",
+      "domain": "devices.network",
+      "adapter": "devices",
+      "example": "Change this firewall rule",
+      "slots": [
+        {
+          "name": "rule",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "action",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R3",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "privileged_or_destructive",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "privacy.security.list_grants",
+      "domain": "privacy.security",
+      "adapter": "privacy",
+      "example": "Show who can access my data",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "privacy.security.review_permissions",
+      "domain": "privacy.security",
+      "adapter": "privacy",
+      "example": "Which apps have microphone permission",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "privacy.security.revoke_grant",
+      "domain": "privacy.security",
+      "adapter": "privacy",
+      "example": "Remove this app's permission",
+      "slots": [
+        {
+          "name": "grant",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "privacy.security.view_audit_log",
+      "domain": "privacy.security",
+      "adapter": "privacy",
+      "example": "Show what commands were executed today",
+      "slots": [
+        {
+          "name": "period",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "privacy.security.inspect_receipt",
+      "domain": "privacy.security",
+      "adapter": "privacy",
+      "example": "Show the receipt for this operation",
+      "slots": [
+        {
+          "name": "receipt_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "privacy.security.pause_external_access",
+      "domain": "privacy.security",
+      "adapter": "privacy",
+      "example": "Pause the Host's external connections",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "privacy.security.privacy_exclusions",
+      "domain": "privacy.security",
+      "adapter": "privacy",
+      "example": "What is excluded from indexing",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "privacy.security.exclude_folder",
+      "domain": "privacy.security",
+      "adapter": "privacy",
+      "example": "Exclude this sensitive folder from indexing",
+      "slots": [
+        {
+          "name": "path",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "privacy.security.purge_indexed_cache",
+      "domain": "privacy.security",
+      "adapter": "privacy",
+      "example": "Remove my private indexed data",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R3",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "privileged_or_destructive",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "privacy.security.export_my_data",
+      "domain": "privacy.security",
+      "adapter": "privacy",
+      "example": "Export selected private data locally",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "privacy.security.delete_my_data",
+      "domain": "privacy.security",
+      "adapter": "privacy",
+      "example": "Delete my stored personal data",
+      "slots": [
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R3",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "privileged_or_destructive",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "privacy.security.show_recent_shares",
+      "domain": "privacy.security",
+      "adapter": "privacy",
+      "example": "Which files have I shared recently",
+      "slots": [
+        {
+          "name": "period",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "automation.define_workflow",
+      "domain": "automation",
+      "adapter": "automation",
+      "example": "When a PDF arrives save it to invoices",
+      "slots": [
+        {
+          "name": "trigger",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "actions",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "automation.list_workflows",
+      "domain": "automation",
+      "adapter": "automation",
+      "example": "What automations do I have",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "automation.preview_workflow",
+      "domain": "automation",
+      "adapter": "automation",
+      "example": "Show what this automation would do",
+      "slots": [
+        {
+          "name": "workflow",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "automation.enable_workflow",
+      "domain": "automation",
+      "adapter": "automation",
+      "example": "Turn this automation on",
+      "slots": [
+        {
+          "name": "workflow",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "automation.disable_workflow",
+      "domain": "automation",
+      "adapter": "automation",
+      "example": "Pause the recurring automation",
+      "slots": [
+        {
+          "name": "workflow",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "automation.run_workflow",
+      "domain": "automation",
+      "adapter": "automation",
+      "example": "Run my weekly cleanup routine",
+      "slots": [
+        {
+          "name": "workflow",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "automation.workflow_status",
+      "domain": "automation",
+      "adapter": "automation",
+      "example": "What is the progress of my workflow",
+      "slots": [
+        {
+          "name": "workflow",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "automation.workflow_history",
+      "domain": "automation",
+      "adapter": "automation",
+      "example": "Show previous execution receipts",
+      "slots": [
+        {
+          "name": "workflow",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "automation.cancel_workflow",
+      "domain": "automation",
+      "adapter": "automation",
+      "example": "Cancel this running automation",
+      "slots": [
+        {
+          "name": "workflow",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "automation.retry_failed_step",
+      "domain": "automation",
+      "adapter": "automation",
+      "example": "Retry the failed reversible step",
+      "slots": [
+        {
+          "name": "workflow",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "step",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "automation.undo_last_action",
+      "domain": "automation",
+      "adapter": "automation",
+      "example": "Undo the last reversible file operation",
+      "slots": [
+        {
+          "name": "receipt_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "automation.schedule_workflow",
+      "domain": "automation",
+      "adapter": "automation",
+      "example": "Run this verified task every Friday",
+      "slots": [
+        {
+          "name": "workflow",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "cadence",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.git.repo_status",
+      "domain": "developer.git",
+      "adapter": "developer",
+      "example": "Show Git changes in ARBOR",
+      "slots": [
+        {
+          "name": "repo",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.git.repo_diff",
+      "domain": "developer.git",
+      "adapter": "developer",
+      "example": "What changed since the last commit",
+      "slots": [
+        {
+          "name": "repo",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "base",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.git.repo_log",
+      "domain": "developer.git",
+      "adapter": "developer",
+      "example": "Show the last ten commits",
+      "slots": [
+        {
+          "name": "repo",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "limit",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.git.repo_search",
+      "domain": "developer.git",
+      "adapter": "developer",
+      "example": "Find the function that parses commands",
+      "slots": [
+        {
+          "name": "repo",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.git.repo_branches",
+      "domain": "developer.git",
+      "adapter": "developer",
+      "example": "List branches in this repository",
+      "slots": [
+        {
+          "name": "repo",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.git.repo_create_branch",
+      "domain": "developer.git",
+      "adapter": "developer",
+      "example": "Create a feature branch",
+      "slots": [
+        {
+          "name": "repo",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.git.repo_stage_files",
+      "domain": "developer.git",
+      "adapter": "developer",
+      "example": "Stage these source changes",
+      "slots": [
+        {
+          "name": "repo",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "selection",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.git.repo_commit",
+      "domain": "developer.git",
+      "adapter": "developer",
+      "example": "Commit the approved changes",
+      "slots": [
+        {
+          "name": "repo",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "message",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.git.repo_pull",
+      "domain": "developer.git",
+      "adapter": "developer",
+      "example": "Pull the latest branch with a safe strategy",
+      "slots": [
+        {
+          "name": "repo",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.git.repo_push",
+      "domain": "developer.git",
+      "adapter": "developer",
+      "example": "Push my committed changes",
+      "slots": [
+        {
+          "name": "repo",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.git.repo_reset_hard",
+      "domain": "developer.git",
+      "adapter": "developer",
+      "example": "Discard all uncommitted changes",
+      "slots": [
+        {
+          "name": "repo",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R3",
+      "phase": "P3",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "privileged_or_destructive",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.git.repo_compare_revisions",
+      "domain": "developer.git",
+      "adapter": "developer",
+      "example": "Compare these two Git revisions",
+      "slots": [
+        {
+          "name": "repo",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "left",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "right",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.build.run_tests",
+      "domain": "developer.build",
+      "adapter": "developer",
+      "example": "Run focused Rust tests for this crate",
+      "slots": [
+        {
+          "name": "workspace",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "suite",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.build.check_rust",
+      "domain": "developer.build",
+      "adapter": "developer",
+      "example": "Run cargo check on this crate",
+      "slots": [
+        {
+          "name": "workspace",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.build.format_code",
+      "domain": "developer.build",
+      "adapter": "developer",
+      "example": "Format the Rust files",
+      "slots": [
+        {
+          "name": "workspace",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.build.lint_code",
+      "domain": "developer.build",
+      "adapter": "developer",
+      "example": "Run the approved linter",
+      "slots": [
+        {
+          "name": "workspace",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.build.build_workspace",
+      "domain": "developer.build",
+      "adapter": "developer",
+      "example": "Build the local project",
+      "slots": [
+        {
+          "name": "workspace",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "target",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.build.inspect_test_failures",
+      "domain": "developer.build",
+      "adapter": "developer",
+      "example": "Summarize the test failures",
+      "slots": [
+        {
+          "name": "receipt_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.build.find_dependencies",
+      "domain": "developer.build",
+      "adapter": "developer",
+      "example": "List dependencies of this crate",
+      "slots": [
+        {
+          "name": "workspace",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.build.package_artifact",
+      "domain": "developer.build",
+      "adapter": "developer",
+      "example": "Package the Windows app",
+      "slots": [
+        {
+          "name": "workspace",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "target",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.build.check_server_health",
+      "domain": "developer.build",
+      "adapter": "developer",
+      "example": "Is my local development server running",
+      "slots": [
+        {
+          "name": "service",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.build.start_dev_server",
+      "domain": "developer.build",
+      "adapter": "developer",
+      "example": "Start the approved development server",
+      "slots": [
+        {
+          "name": "workspace",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "service",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.build.stop_dev_server",
+      "domain": "developer.build",
+      "adapter": "developer",
+      "example": "Stop the development server",
+      "slots": [
+        {
+          "name": "session_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.build.explain_code",
+      "domain": "developer.build",
+      "adapter": "developer",
+      "example": "Explain how this module works",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "developer.build.diagnose_build",
+      "domain": "developer.build",
+      "adapter": "developer",
+      "example": "Why is the Rust build failing",
+      "slots": [
+        {
+          "name": "receipt_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "ui.workspace.navigate_screen",
+      "domain": "ui.workspace",
+      "adapter": "ui",
+      "example": "Open the Wiki screen",
+      "slots": [
+        {
+          "name": "screen",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "ui.workspace.show_all",
+      "domain": "ui.workspace",
+      "adapter": "ui",
+      "example": "Show all available views",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "ui.workspace.show_capabilities",
+      "domain": "ui.workspace",
+      "adapter": "ui",
+      "example": "What can ARBOR do on this device",
+      "slots": [
+        {
+          "name": "device",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "ui.workspace.search_commands",
+      "domain": "ui.workspace",
+      "adapter": "ui",
+      "example": "What command handles duplicate files",
+      "slots": [
+        {
+          "name": "query",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "ui.workspace.preview_action",
+      "domain": "ui.workspace",
+      "adapter": "ui",
+      "example": "Show exactly what will change",
+      "slots": [
+        {
+          "name": "proposal_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "ui.workspace.approve_action",
+      "domain": "ui.workspace",
+      "adapter": "ui",
+      "example": "Approve this pending action",
+      "slots": [
+        {
+          "name": "proposal_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "ui.workspace.reject_action",
+      "domain": "ui.workspace",
+      "adapter": "ui",
+      "example": "Reject the proposed operation",
+      "slots": [
+        {
+          "name": "proposal_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "ui.workspace.open_receipt",
+      "domain": "ui.workspace",
+      "adapter": "ui",
+      "example": "Show what happened after the last command",
+      "slots": [
+        {
+          "name": "receipt_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "ui.workspace.change_theme",
+      "domain": "ui.workspace",
+      "adapter": "ui",
+      "example": "Use the dark theme",
+      "slots": [
+        {
+          "name": "preset",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "ui.workspace.change_layout",
+      "domain": "ui.workspace",
+      "adapter": "ui",
+      "example": "Put the Wiki beside the chat",
+      "slots": [
+        {
+          "name": "layout",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "ui.workspace.pin_panel",
+      "domain": "ui.workspace",
+      "adapter": "ui",
+      "example": "Keep the device panel visible",
+      "slots": [
+        {
+          "name": "panel",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "ui.workspace.restore_layout",
+      "domain": "ui.workspace",
+      "adapter": "ui",
+      "example": "Restore yesterday's workspace layout",
+      "slots": [
+        {
+          "name": "revision",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "data.tables.inspect_csv",
+      "domain": "data.tables",
+      "adapter": "data",
+      "example": "Describe the columns in this CSV",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "data.tables.filter_rows",
+      "domain": "data.tables",
+      "adapter": "data",
+      "example": "Show rows where total exceeds one thousand",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "predicate",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "data.tables.sort_table",
+      "domain": "data.tables",
+      "adapter": "data",
+      "example": "Sort this spreadsheet by date",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "column",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "order",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "data.tables.deduplicate_rows",
+      "domain": "data.tables",
+      "adapter": "data",
+      "example": "Remove duplicate rows from this CSV",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "keys",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "data.tables.join_tables",
+      "domain": "data.tables",
+      "adapter": "data",
+      "example": "Combine these two spreadsheets by customer ID",
+      "slots": [
+        {
+          "name": "left",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "right",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "keys",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "data.tables.aggregate_data",
+      "domain": "data.tables",
+      "adapter": "data",
+      "example": "Sum sales by month",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "group_by",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "measure",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "data.tables.clean_values",
+      "domain": "data.tables",
+      "adapter": "data",
+      "example": "Normalize dates in this table",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "column",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "rule",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "data.tables.export_csv",
+      "domain": "data.tables",
+      "adapter": "data",
+      "example": "Export this table as CSV",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "output",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "data.tables.convert_excel",
+      "domain": "data.tables",
+      "adapter": "data",
+      "example": "Convert this workbook to CSV",
+      "slots": [
+        {
+          "name": "source",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "output",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "data.tables.chart_data",
+      "domain": "data.tables",
+      "adapter": "data",
+      "example": "Create a chart from this table",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "x",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "y",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "data.tables.find_outliers",
+      "domain": "data.tables",
+      "adapter": "data",
+      "example": "Find unusual spending amounts",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "column",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "data.tables.edit_cells",
+      "domain": "data.tables",
+      "adapter": "data",
+      "example": "Update these workbook cells",
+      "slots": [
+        {
+          "name": "file",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "range",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "values",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "personal.context.show_preferences",
+      "domain": "personal.context",
+      "adapter": "personal",
+      "example": "What preferences have I saved",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "personal.context.remember_preference",
+      "domain": "personal.context",
+      "adapter": "personal",
+      "example": "Remember that I prefer Rust",
+      "slots": [
+        {
+          "name": "preference",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "personal.context.forget_preference",
+      "domain": "personal.context",
+      "adapter": "personal",
+      "example": "Remove this saved preference",
+      "slots": [
+        {
+          "name": "preference",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R1",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "local_change",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "personal.context.show_command_aliases",
+      "domain": "personal.context",
+      "adapter": "personal",
+      "example": "What custom commands have I taught you",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "personal.context.teach_alias",
+      "domain": "personal.context",
+      "adapter": "personal",
+      "example": "When I say archive this use my archive workflow",
+      "slots": [
+        {
+          "name": "phrase",
+          "type": "reference-or-text",
+          "required": true
+        },
+        {
+          "name": "action",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "personal.context.revoke_alias",
+      "domain": "personal.context",
+      "adapter": "personal",
+      "example": "Forget this custom command phrase",
+      "slots": [
+        {
+          "name": "phrase",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "personal.context.context_summary",
+      "domain": "personal.context",
+      "adapter": "personal",
+      "example": "Summarize my current project context",
+      "slots": [
+        {
+          "name": "project",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "personal.context.explain_action_reason",
+      "domain": "personal.context",
+      "adapter": "personal",
+      "example": "Why did ARBOR choose this operation",
+      "slots": [
+        {
+          "name": "receipt_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "personal.context.show_current_target",
+      "domain": "personal.context",
+      "adapter": "personal",
+      "example": "What does this refer to right now",
+      "slots": [
+        {
+          "name": "reference",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R0",
+      "phase": "P0",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "read",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "personal.context.change_command_scope",
+      "domain": "personal.context",
+      "adapter": "personal",
+      "example": "For this session only use my work folder",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "personal.context.export_preferences",
+      "domain": "personal.context",
+      "adapter": "personal",
+      "example": "Export my approved preferences",
+      "slots": [
+        {
+          "name": "scope",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P2",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    },
+    {
+      "id": "personal.context.privacy_do_not_remember",
+      "domain": "personal.context",
+      "adapter": "personal",
+      "example": "Don't remember this conversation",
+      "slots": [
+        {
+          "name": "context_id",
+          "type": "reference-or-text",
+          "required": true
+        }
+      ],
+      "risk": "R2",
+      "phase": "P1",
+      "status": "proposed",
+      "authority": "host-only",
+      "language": [
+        "en"
+      ],
+      "effectKind": "sensitive_or_external",
+      "result": "typed-receipt",
+      "notes": "Candidate semantic command, NOT an existing executable ARBOR action."
+    }
+  ]
+}

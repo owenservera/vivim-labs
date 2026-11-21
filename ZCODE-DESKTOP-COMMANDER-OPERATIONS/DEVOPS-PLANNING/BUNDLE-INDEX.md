@@ -11,6 +11,13 @@ This file contains **pointers to known pre-integration artifacts**. It does not 
 
 **Observed source pins:** ARBOR `e2ef16ec221fb752fd50a1e5808d7e9a7a8e3e42`, Labs `b0eb56e41d76ba785eff91858eb82584b08a1162` before Planning commits. **No R003 Rust compilation in this round**, cargo unavailable in cloud. GitHub Planning artifact push ≠ Dev acceptance or user-visible runtime proof.
 
+## R003/R004 DevAgent code prep — current offer
+
+- **AW-R003-PRECODE-R004:** [R003 DevAgent code-pack entry](PACKS/R003/README.md) | [exact cloud integration runbook](PACKS/R003/DEVAGENT-APPLY.md) | [Rust/native tests](PACKS/R003/TEST-RECIPES.md) | [authorized HQKG query extension](PACKS/R003/authorized_query_extension.rs) | [native integration tests](PACKS/R003/native_hqkg_authorized.rs).
+- **Staged in existing R003 Rust crate:** [exact source-owned page alias projection](../DESIGN/AUTOWIKI-FOUNDATION-R001/src/page_alias_projection.rs), [stale readback/digest guard](../DESIGN/AUTOWIKI-FOUNDATION-R001/src/readback_guard.rs), [complete source-grant query admission](../DESIGN/AUTOWIKI-FOUNDATION-R001/src/query_admission.rs), and [registered modules in src/lib.rs](../DESIGN/AUTOWIKI-FOUNDATION-R001/src/lib.rs). Existing five R003 Rust modules untouched.
+- **Evidence:** 57 statically counted authored standalone Rust tests (37 original + 20 new), 2 additional staged native HQKG integration tests; module export and source-fence static checks PASS. Rust cargo/fmt/clippy/ARBOR compilation/runtime **UNRUN** (no cargo/rustc in this ChatGPT cloud container). ARBOR product code **UNCHANGED**.
+- **Ownership:** Planning sender; **OFFERED_TO:CHATGPT-DEV**, receiver ACK **NOT OBSERVED**. Dev must re-pin ARBOR and obtain current genuine Host actor/source scope and graph-exclusion coverage; never infer permission from query prefix or current expected revision. GPUI preparation remains owner-paused.
+
 ## Available on connected GitHub main
 
 | Scope | Available artifact | Owner/collision boundary | Evidence state |

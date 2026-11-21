@@ -52,3 +52,6 @@ If model/provider unavailable, do not silently swap to a billable model. If requ
 - [ChatGPT Dev](CHATGPT-DEV/AGENTS.md) — primary cloud/GitHub source coder; [Dev SITREP](CHATGPT-DEV/SITREP.md).
 - [DevOps / Planning](DEVOPS-PLANNING/AGENTS.md) — OW-scoped ready-to-code bundles and deployment planning; [Planning SITREP](DEVOPS-PLANNING/SITREP.md).
 The historical `OWNER-WORK` records are not yet verified in connected GitHub `main`; **do not treat local-only references as an accessible shared registry** or invent a replacement. Use current source-backed GitHub evidence until Planning reconciles the canonical work source. [Oracle's North Star](ORACLE/STEERING.md) and [steering signal to Planning](ORACLE/TO-PLANNING.md) shape outcomes without editing Planning's task list. Each session must explicitly refresh shared artifacts; sessions do not automatically sync.
+
+## Shared task claims (current)
+**Mandatory before SITREP/task work:** read [TASK-CLAIMS.md](TASK-CLAIMS.md). The task register and the ownership claim overlay are distinct: never list a Dev-checked-out task as Planning's next ten. A check-out needs a fresh GitHub claim, one active executor and a source/file scope; a handoff is not effective until the recipient explicitly accepts it. Unobserved historical ownership is UNKNOWN, not retroactively checked out.

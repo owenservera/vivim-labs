@@ -3,7 +3,7 @@
 **Source**: https://github.com/owenservera/DesktopCommanderMCP-VIVIM  
 **Pinned source**: `main@9a101b17e44577f0baefa4c7120f087881c5cc56`  
 **Origin**: fork of `wonderwhy-er/DesktopCommanderMCP`; public, MIT; package version `0.3.4`.  
-**Assessment date**: 2026-11-22. **Status**: preliminary source-tree and manifest inspection; no builds or runtime tests executed.
+**Assessment date**: 2026-11-22. **Status**: preliminary source-tree and manifest inspection; no builds or runtime tests executed. **Owner correction (2026-11-22): Extract valuable capabilities as first-class native ARBOR functionality, not as an additional MCP adapter, server or surface.**
 
 ## What was actually inspected
 
@@ -15,19 +15,19 @@
 
 | Component | Source paths | Fit / potential benefit | Research disposition |
 |---|---|---|---|
-| Terminal/process lifecycle | `src/terminal-manager.ts`, `src/command-manager.ts`, `src/tools/process.ts`, `src/handlers/terminal-handlers.ts`, `process-handlers.ts` | bounded local runtime diagnostics, output streaming, process cancellation, verified exit evidence | **ADAPT / investigate**; preserve Host effect authority |
-| Filesystem + search | `src/tools/filesystem.ts`, `src/search-manager.ts`, `src/handlers/filesystem-handlers.ts`, `search-handlers.ts` | allowlisted local context discovery and SITREP evidence, not universal disk access | **ADAPT / investigate**; permission gating required |
-| Diff editing and fuzzy search | `src/tools/edit.ts`, `src/tools/fuzzySearch*.ts`, `src/handlers/edit-search-handlers.ts` | diagnostics and constrained repair tooling | **REFERENCE** first; must not bypass cloud-first GitHub source workflow |
-| Typed MCP transport/contracts | `src/server.ts`, `src/tools/schemas.ts`, `src/types.ts` | interoperable tool registration, schemas and results | **REFERENCE**; avoid duplicate router/service |
-| Configuration and guardrails | `src/config-manager.ts`, `src/config-recovery.ts`, `src/tools/config.ts` | allowlist, runtime policy, recovery inspiration | **ADAPT / investigate** within existing host contracts |
-| Remote device and network | `src/remote-device/` includes MQTT, authentication, remote channels, telemetry | may inform post-push local device verification; raises remote-execution risk | **DEFER** pending threat model and existing transport comparison |
+| Terminal/process lifecycle | `src/terminal-manager.ts`, `src/command-manager.ts`, `src/tools/process.ts`, `src/handlers/terminal-handlers.ts`, `process-handlers.ts` | native Rust process lifecycle, bounded stdout/stderr streaming, cancellation, verified exit evidence | **ADAPT / investigate**; preserve Host effect authority |
+| Filesystem + search | `src/tools/filesystem.ts`, `src/search-manager.ts`, `src/handlers/filesystem-handlers.ts`, `search-handlers.ts` | native Rust allowlisted local context discovery, filesystem search and SITREP evidence, not universal disk access | **ADAPT / investigate**; permission gating required |
+| Diff editing and fuzzy search | `src/tools/edit.ts`, `src/tools/fuzzySearch*.ts`, `src/handlers/edit-search-handlers.ts` | diagnostics and constrained repair tooling | **PORT SELECTIVELY** for native controlled diffs and inspect-only fuzzy search; must not bypass cloud-first GitHub source workflow |
+| Typed MCP transport/contracts | `src/server.ts`, `src/tools/schemas.ts`, `src/types.ts` | interoperable tool registration, schemas and results | **REFERENCE** only for capabilities/contracts; do NOT integrate an MCP server/router |
+| Configuration and guardrails | `src/config-manager.ts`, `src/config-recovery.ts`, `src/tools/config.ts` | allowlist, runtime policy, recovery inspiration | **NATIVE PORT / investigate** within existing Host authority and approval contracts |
+| Remote device and network | `src/remote-device/` includes MQTT, authentication, remote channels, telemetry | may inform post-push local device verification; raises remote-execution risk | **DEFER**; re-use existing mobile relay rather than native port of a competing transport |
 | UI runtime | `src/ui/` includes config-editor/file-preview | not a GPUI renderer or TierFlow migration target | **REFERENCE only**, do not build separate PC UI |
 
 **Not yet proven:** individual APIs, security behavior, input validation, runtime performance, OS compatibility, dependency necessity, actual GPUI integration, or mobile parity.
 
 ## Architectural rule
 
-**ARBOR owns the harness and effects.** Desktop Commander is an optional, bounded *local adapter* for explicit inspections and on-device verifications, not another first-class PC interface or primary code-writing agent. No automatic shell execution from untrusted text, broad filesystem write capabilities, remote-device tunnel, browser session capture or local source development authority.
+**ARBOR owns the harness and effects.** Desktop Commander is a *source donor*: selected proven behaviors should be reimplemented or selectively migrated into the existing Rust Host/native modules as first-class capabilities, with no additional MCP daemon, adapter boundary, duplicate process supervisor, remote tunnel, second PC interface, or primary local code-writing agent. No automatic shell execution from untrusted text, broad filesystem write capabilities, remote-device tunnel, browser session capture or local source development authority.
 
 User-visible acceptance must tie any integrated capability to a real command/event on the GPUI command surface, truthful AutoWiki feedback/receipts, and corresponding mobile semantic state. An adapter with no visible PWA/GPUI behavior is at most an enabling dependency, not an independently approved roadmap item.
 
@@ -35,12 +35,22 @@ User-visible acceptance must tie any integrated capability to a real command/eve
 
 1. Read exact source implementation and tests for process execution, search, patching, config/permissions, and remote device; identify real APIs and test coverage.
 2. Compare against current ARBOR harness and native Host files at pinned ARBOR commit; list duplicates and safe extension seams with concrete paths.
-3. Design **read-only SITREP inspector** as first candidate: allowlisted filesystem and process status → typed Host receipt → wiki projection → GPUI/mobile parity. Require explicit user approval for any action that changes local OS state.
+3. Design the **native SITREP inspector** as the first product slice: extend existing ARBOR native supervisor with allowlisted filesystem/process observations → canonical Host event/receipt → wiki projection → same state in GPUI and mobile. No stand-alone adapter. Require explicit user approval for any action that changes local OS state.
 4. Define isolation for binaries/subprocesses, path traversal prevention, output redaction, command injection prevention, and cancellation.
-5. Record exact license/attributions and compare TypeScript/Node requirements to Rust-first policy; prefer native Rust port only when it is simpler than minimal interop.
+5. Record exact license/attributions and compare TypeScript/Node behavior to Rust-first policy; native Rust is the default target, while small TypeScript interop remains only for genuinely browser-bound concerns.
 6. Run build/test, then Windows on-device checks; mark every unperformed check UNRUN.
 
 ### Evidence boundaries
 - Source SHA above is observed from GitHub's main branch at intake; do not infer it is a VIVIM-specific change.
 - `package.json` references `npm`, `tsc`, and a UI runtime builder. That is upstream implementation data, *not* an ARBOR decision to adopt npm or JavaScript.
 - No changes made to source repository or ARBOR; this file is public-safe Labs research.
+
+## ARBOR native landing zones (directory-confirmed on `main@060286a28255ad9ec48289e67f0d666e9c159df8`)
+
+- `native/host-supervisor/` — inspect and extend the **existing** Rust supervisor for process lifecycle, stream capture and cancellation. Do not create another supervisor.
+- `native/gpui-desktop/` — expose native commands/status and progress in the **single** desktop surface; no separate desktop window/webview.
+- `apps/vivim-host/` — existing Host effects, receipts, security and Wiki projection integration; treat as one authority.
+- `apps/mobile-relay/` — existing phone transport; do not copy Desktop Commander MQTT/remote-device stack without explicit evidence of missing functionality.
+- `harness/src/core/` — pre-existing harness surface includes CDP, journal, send/reply, tabs; do not presume that Desktop Commander MCP belongs here wholesale.
+
+These are directory-level leads, **not confirmed implementation seams**. Next code agent must inspect Rust source/functions, contracts and tests before editing. Acceptance must be user-visible on GPUI and mobile, with no added MCP service. Research remains non-authoritative; implementing code in ARBOR requires separate source review and tests.

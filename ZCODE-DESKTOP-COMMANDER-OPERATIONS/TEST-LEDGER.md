@@ -70,3 +70,24 @@ All R002 data and source paths: `evidence/R002-OBSERVED.md`. Next test gates: `R
 | V4 delta/resync, HQ wake, workflow run/cancel, model comparisons | UNRUN | Outside successful read-only gates; no synthetic success claim |
 
 Further source paths, command constraints and transcripts of sanitized status: `evidence/R003-OBSERVED.md`. ARBOR local edits and worktrees preserved.
+
+
+## R008 — Desktop Commander continuous evidence and daily learning (2026-11-22)
+
+Cloud/GitHub source is authoritative for the archiver scripts; Desktop Commander was used **only** to deploy/test local observability tools, not to modify product source or commit ARBOR changes. Raw command arguments and outputs remain within the PC's Git-ignored `.private/desktop-commander-stream/` directory.
+
+| Acceptance gate | Outcome | Verified evidence / scope |
+|---|---|---|
+| Desktop Commander raw-source preservation | PASS | Initial private source snapshot 2 files, 4,599,238 bytes, checksum/manifest, raw sources untouched; historic trimmed content unavailable |
+| Rolling tool-history incremental index | PASS | First pass 2,453 records/0 malformed/331 upstream omissions; subsequent dedup observed 71 new/2,453 duplicate/0 malformed |
+| Rolling argument-log incrementality | PASS | Fixed JSON ISO date conversion to prevent recopying full argument log, commit `01b944d4`; post-fix only 16,066 new bytes, no false rollover |
+| Archive two-minute scheduled run | PASS | Windows `VIVIM-DesktopCommander-Archive`, limited interactive user, last checked 2026-11-22 17:52:29 UTC, result `0x00000000`, private latest receipt `SUCCESS` at 17:52:33 UTC |
+| Private byte-oriented stdout/stderr test recorder | PASS (process capture only) | Versioned `scripts/capture-validation-output.ps1`, GitHub `50c3e757`; real read-only ZCode `sitrep.ps1` on PC exit 0, 785 stdout bytes, 0 stderr bytes, local receipt `validation-runs/20261122T1749349111290Z-ZCODE-READONLY-SITREP-e4ac12cd/receipt.json` |
+| Recorder beyond Desktop Commander's 4-KiB history omission boundary | UNRUN (large-output live trial) | Uses concurrent raw `BaseStream.CopyToAsync` streams; no actual output over 4 KiB was yet verified |
+| Metadata-only learning scans | PASS | Local analyzers, no model/provider calls; current verified 2,847 index rows, 351 omitted-output observations, 43 nonzero-exit observations; GitHub `9c9034e` adds daily/delta/stable latest reports |
+| Daily local learning Task Scheduler | PASS | `VIVIM-DesktopCommander-DailyLearning` scheduled at 19:05 PC local time, manually started through Task Scheduler 17:52:12 UTC; independent check Ready, last result `0x00000000`, stable learning report generated 17:52:19 UTC |
+| Read-only combined health check | PASS | `scripts/desktop-commander-health.ps1` commit `d4426768`; PC invocation 17:53:23 UTC, 0 failures, 0 warnings, `HEALTH_RESULT=PASS`, exit 0 |
+| Product regression fixes at current ARBOR SHA | UNRUN / NOT CLAIMED | Historical Wiki/PWA/401-403 patterns are occurrence signals and need exact source SHA reproduction and accepted product test receipts |
+| Physical GPUI/Android device acceptance | UNRUN in this observability lane | No device or source-code feature claims are made by archive health checks |
+
+**Source versus evidence rule:** last known R008 run had 2,867 unique index hashes (which can advance independently of the 2,847-row daily report). A successful remote tool call or process exit is never counted as a passing application assertion. No raw stream data, unredacted output, or arbitrary command replay is published to GitHub.

@@ -54,3 +54,8 @@ Earlier planning docs referenced `../OWNER-WORK/NOW.md`, `../OWNER-WORK/UPDATES.
 
 - [Prepared gesture design/Dev handoff](../DESIGN/gestures/README.md) — 12 source-pinned bounded work packages, [machine manifest](../DESIGN/gestures/manifest.v1.json), G0–G9 physical PWA proof matrix; ARBOR source pin cf2e5c8.
 - Proposed PWA-visible review outcome **PV-15**, supports existing PV-01/04/05/06/08/10 and reuses TierFlow A039, VEC, Rust LiveSurface, Activity Fabric, First Contact Wiki and Host permissions. **PREPARED / no ARBOR source changes / tests UNRUN / Dev ACK not observed.**
+
+## GESTURES-R003 — shared GPUI/PWA Rust precode (2026-11-22)
+
+- [R003 shared contract](../DESIGN/gestures/R003-CANONICAL-CONTRACT.md), [pure Rust reducer](../DESIGN/gestures/src/gesture_interaction.rs), [Dev bridge](../DESIGN/gestures/R003-DEV-INTEGRATION.md), [G0–G11 gates](../DESIGN/gestures/R003-ACCEPTANCE.md) and [evidence](../DESIGN/gestures/R003-EVIDENCE.md). This **supersedes R002's PWA-only framing**, while reusing its previous groundwork and IDs.
+- **15 trackable GEST items**, with GEST-04 PRECODE_STAGED_UNRUN and GEST-13–15 native GPUI/phone parity additions. 17 Rust tests AUTHORED / UNRUN (rustc/cargo unavailable). **No ARBOR source changes, no Dev acceptance, no deployment/physical verification.**

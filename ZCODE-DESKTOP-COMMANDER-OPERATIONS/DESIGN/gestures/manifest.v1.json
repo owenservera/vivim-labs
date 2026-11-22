@@ -1,9 +1,9 @@
 {
   "schema": "vivim.planning.gestures/1",
-  "revision": "R002",
+  "revision": "R003",
   "createdDate": "2026-11-21",
   "canonicalRepo": "owenservera/ARBOR",
-  "pinnedArborSha": "cf2e5c8da0d5f46f17a5de0cc24ab838778e60c0",
+  "pinnedArborSha": "1d754a3f672cf1ec1b69986b2f040718b1e4c0aa",
   "labsRepo": "owenservera/vivim-labs",
   "localOwnerRequest": "OW-20261121-018",
   "reviewOutcome": "PV-15",
@@ -69,7 +69,7 @@
     },
     {
       "id": "GEST-04",
-      "description": "Rust pure bounded gesture session reducer",
+      "description": "Rust pure cross-viewport gesture reducer (staged in Labs, not integrated or compiled)",
       "dependsOn": [
         "GEST-02"
       ],
@@ -78,7 +78,7 @@
         "G3",
         "G4"
       ],
-      "status": "UNCLAIMED",
+      "status": "PRECODE_STAGED_UNRUN",
       "executor": "UNASSIGNED",
       "workClass": "PWA_VISIBLE_DEPENDENCY",
       "productOutcome": "PV-15"
@@ -222,6 +222,69 @@
       "executor": "UNASSIGNED",
       "workClass": "PWA_VISIBLE_DEPENDENCY",
       "productOutcome": "PV-15"
+    },
+    {
+      "id": "GEST-13",
+      "description": "Native GPUI input/focus adapter to shared Rust gesture semantics; no WebView/Edge",
+      "dependsOn": [
+        "GEST-04"
+      ],
+      "gates": [
+        "G1",
+        "G3",
+        "G7",
+        "G10"
+      ],
+      "status": "UNCLAIMED",
+      "executor": "UNASSIGNED",
+      "workClass": "CANONICAL_SURFACE_DEPENDENCY",
+      "productOutcome": "PV-15"
+    },
+    {
+      "id": "GEST-14",
+      "description": "GPUI and PWA consume same revision-fenced semantic gesture preview / Host readback",
+      "dependsOn": [
+        "GEST-06",
+        "GEST-08",
+        "GEST-13"
+      ],
+      "gates": [
+        "G4",
+        "G10",
+        "G11"
+      ],
+      "status": "UNCLAIMED",
+      "executor": "UNASSIGNED",
+      "workClass": "CANONICAL_SURFACE_DEPENDENCY",
+      "productOutcome": "PV-15"
+    },
+    {
+      "id": "GEST-15",
+      "description": "Physical native Windows + unchanged phone PWA bidirectional gesture/parity acceptance",
+      "dependsOn": [
+        "GEST-12",
+        "GEST-14"
+      ],
+      "gates": [
+        "G8",
+        "G10",
+        "G11"
+      ],
+      "status": "UNCLAIMED",
+      "executor": "UNASSIGNED",
+      "workClass": "CANONICAL_SURFACE_DEPENDENCY",
+      "productOutcome": "PV-15"
     }
-  ]
+  ],
+  "updatedDate": "2026-11-22",
+  "r003ObservedArborMainSha": "1d754a3f672cf1ec1b69986b2f040718b1e4c0aa",
+  "r002PinnedArborSha": "cf2e5c8da0d5f46f17a5de0cc24ab838778e60c0",
+  "canonicalViewportPolicy": "ONE VIVIM SURFACE; Windows GPUI native master rendering; mobile PWA responsive projection",
+  "precode": {
+    "path": "DESIGN/gestures/src/gesture_interaction.rs",
+    "compiled": "UNRUN",
+    "authorTestMarkers": 17,
+    "checks": "static delimiter PASS",
+    "integratedInArbor": false
+  }
 }

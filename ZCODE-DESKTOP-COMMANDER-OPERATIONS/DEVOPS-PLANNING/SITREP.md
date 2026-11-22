@@ -1,7 +1,7 @@
 # DevOps / Planning SITREP — 2026-11-21 (GitHub bootstrap R004)
 
-## Gestures R002 / PV-15 (new owner request, 2026-11-21)
-- **PLANNING PREPARED; PRODUCT UNRUN.** [Source-pinned gesture packet](../DESIGN/gestures/README.md) reuses First Contact AutoWiki, TierFlow wave4 (gesture currently unsupported), VEC pure previews, Rust LiveSurface/Activity Fabric and existing Host permission authority. [12-item manifest](../DESIGN/gestures/manifest.v1.json) passes static uniqueness/dependency/no-auto-launch checks, G0–G9 acceptance specified, no ARBOR implementation or device gesture tests performed.
+## Gestures R003 / PV-15 (canonical shared source; 2026-11-22)
+- **RUST PRECODE STAGED; PRODUCT UNRUN.** R003 adds [shared GPUI/PWA gesture contract](../DESIGN/gestures/R003-CANONICAL-CONTRACT.md), [pure Rust reducer](../DESIGN/gestures/src/gesture_interaction.rs) with 17 authored tests (not compiled), 15 task IDs and native Windows/phone parity gates; [R002 source-pinned packet](../DESIGN/gestures/README.md) reuses First Contact AutoWiki, TierFlow wave4 (gesture currently unsupported), VEC pure previews, Rust LiveSurface/Activity Fabric and existing Host permission authority. [12-item manifest](../DESIGN/gestures/manifest.v1.json) passes static uniqueness/dependency/no-auto-launch checks, G0–G9 acceptance specified, no ARBOR implementation or device gesture tests performed.
 - Existing [PWA-visible review tracker](PWA-VISIBLE-TRACKER-R001.md) now has **PV-15, C40–C44**; [TASK-CLAIMS](../TASK-CLAIMS.md) records Planning sender-owned handoff awaiting explicit Dev ACK. Do not treat a prepared packet as a Dev checkout or restart the customer UI. Source pin ARBOR cf2e5c8; refresh before Dev implementation.
 
 

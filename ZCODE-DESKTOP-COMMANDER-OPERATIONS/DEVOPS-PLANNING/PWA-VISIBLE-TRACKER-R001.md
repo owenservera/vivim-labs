@@ -34,7 +34,7 @@ Status of every row: `REVIEW` (not production acceptance). PWA tests describe pr
 | **PV-12** | P2 | Reusable workflows surfaced in the PWA | Repeat an approved workflow; PWA offers a verified reusable recipe, execution/undo controls and measured deterministic vs AI-assisted cost where known. | R28,R29 | Review |
 | **PV-13** | P2 | Private sharing, revoke and access feedback | From PWA share one authorized knowledge item privately, inspect access, revoke it and visibly confirm denial after revocation. | R20 | Review |
 | **PV-14** | P1 | Request a product change from the PWA and see progress | Explicitly submit a build/change request, get one durable request ID, see planned/accepted/coded/tested/released/blocked status and any MANUAL bridge; cancel/retry safely. | D01,D02,D11 | Oracle-aligned candidate; no automatic agent dispatch claimed |
-| **PV-15** | P1 | Interactive Wiki gesture: hold -> live semantic options -> adjust preview -> cancel, with optional explicitly approved Apply | On unchanged First Contact PWA, type a Wiki query, hold a real result; see options while finger is down, move to change inert preview, cancel with zero effects; only separate Apply can invoke Host grant/receipt. | New owner gesture directive, 21 Nov 2026 (outside original 79 items) | REVIEW / UNCLAIMED; Dev owns eventual ARBOR integration; [R002 pack](../DESIGN/gestures/README.md) |
+| **PV-15** | P1 | ONE canonical interactive gesture across native GPUI and responsive phone PWA | On the same source-backed Wiki item, hold -> see live options -> move/adjust inert preview -> cancel; verify equivalent GPUI and PWA semantic transitions and Host revisions. Separate Apply alone can request an authorized effect. | Owner gesture initiative Nov 21–22 (outside original 79 items) | REVIEW / UNCLAIMED; [R003 shared contract](../DESIGN/gestures/R003-CANONICAL-CONTRACT.md); Dev integration not accepted |
 
 ### Candidate sequence, not a second queue
 
@@ -94,6 +94,9 @@ Status of every row: `REVIEW` (not production acceptance). PWA tests describe pr
 | C42 | PV-15,PV-08 | TierFlow A039 semantics + VEC inert contextual preview on the actual Wiki mount | New gesture directive |
 | C43 | PV-15,PV-06 | Separate explicit Apply to existing Host plan/grant/approval/receipt/readback, only if safe command exists | New gesture directive |
 | C44 | PV-15,PV-10 | Accessible alternatives, privacy/consent, actual same-link PWA proof, independent regressions | New gesture directive |
+| C45 | PV-15 | Native GPUI pointer/focus/keyboard adapter to exact shared Rust semantic gesture contract | Nov 22 canonical-surface directive |
+| C46 | PV-15,PV-08 | GPUI and phone render the same transient semantic preview and verify Host revision coherence | Nov 22 canonical-surface directive |
+| C47 | PV-15,PV-03 | Physical Windows native GPUI + phone PWA gesture, cancel and PC↔phone revision acceptance | Nov 22 canonical-surface directive |
 
 ## 3. Parked from the active PWA-first queue
 
@@ -129,3 +132,7 @@ Do not assign or mark work DONE from this review document. Planning may amend th
 ## R002 extension from 21 Nov owner directive — Gestures
 
 PV-15 and C40–C44 are a **new proposed outcome and bounded dependencies**, not part of the original 79 conversation items/coverage audit, not a current checkout, and not proof of PWA gesture support. [Source atlas, state contract, machine task manifest, acceptance and Dev handoff](../DESIGN/gestures/README.md). Keep Dev's existing First Contact claim and stable-link URL. Promotion only through the existing owner/keeper/claim workflow.
+
+## R003 canonical viewport amendment (22 Nov)
+
+The Windows GPUI is native master authoring/rendering and phone PWA is one responsive viewport of the SAME semantic surface. **PV-15 remains a single existing PWA-observable outcome**, not another product queue; C45–C47 extend it with GPUI and physical cross-device acceptance. [R003 Rust precode](../DESIGN/gestures/src/gesture_interaction.rs) stays inert, UNCOMPILED and UNINTEGRATED until Dev explicitly checks out source work. Refer to [acceptance](../DESIGN/gestures/R003-ACCEPTANCE.md).

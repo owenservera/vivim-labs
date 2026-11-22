@@ -1,10 +1,16 @@
 # Gestures — VIVIM bidirectional command space
 
-**R002 · 2026-11-21 · Planning/Dev handoff, not deployed code**
+**R003 · 2026-11-22 · shared GPUI/PWA core precode staged, not product-integrated**
 
 Principle: A gesture is a live negotiation, not a one-shot trigger. Hold, movement, focus, language and real UI feedback shape a changing proposed command. The person can inspect, revise, release, cancel or explicitly Apply; only existing Host authority can commit an effect.
 
-## Agent entry (read in this order)
+## R003 first: canonical GPUI + mobile PWA
+
+[Canonical shared interaction contract](R003-CANONICAL-CONTRACT.md) · [Pure Rust precode](src/gesture_interaction.rs) · [Dev integration](R003-DEV-INTEGRATION.md) · [Cross-viewport gates](R003-ACCEPTANCE.md) · [Truthful evidence](R003-EVIDENCE.md).
+
+**One semantic gesture reducer, two native input adapters.** Windows GPUI is the master native authoring/rendering viewport; mobile PWA renders the same semantic surface. Existing Host remains the only authority for commands/effects. The R002 PWA-first text below is historical and must be interpreted through ARBOR's 2026-11-22 ONE-CANONICAL-LIVE-SURFACE rule.
+
+## R002 background entry (read selectively)
 1. [SITREP.md](SITREP.md): observed source pin, status and next safe step.
 2. [SOURCE-ATLAS-R002.md](SOURCE-ATLAS-R002.md): exact ARBOR source reuse, verified gaps, collision zones.
 3. [ARCHITECTURE-R002.md](ARCHITECTURE-R002.md): preview/commit separation, reducer states and invariant fences.
@@ -27,4 +33,4 @@ On the unchanged First Contact URL: type -> real Wiki card -> hold, see live con
 - Host alone owns authorization/effects/receipts. ChatGPT Dev codes ARBOR via cloud GitHub main; Planning may prepare Labs files only.
 - Local owner registry is not fully published to GitHub; remote PWA review tracker + TASK-CLAIMS are separate sources, not a new merged task database.
 
-**Status:** R002 documentation package PREPARED; integration, tests, PWA proof, cross-session agent ACK and deployment all UNRUN until separately evidenced.
+**Status:** R003 Rust PRECODE STAGED (17 authored tests, compiler UNRUN); R002 docs retained. ARBOR integration, real GPUI/PWA adapter wiring, host effects, device parity, Dev ACK and deployment remain UNRUN.

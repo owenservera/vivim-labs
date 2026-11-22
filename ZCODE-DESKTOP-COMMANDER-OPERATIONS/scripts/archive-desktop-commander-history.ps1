@@ -55,9 +55,11 @@ try {
 } finally { $read.Dispose() }
 
 $snapshotSha = (Get-FileHash -LiteralPath $staging -Algorithm SHA256).Hash.ToLowerInvariant()
-$snapshotPath = Join-Path $rawDir ('tool-history-' + $snapshotSha + '.jsonl')
-if (Test-Path -LiteralPath $snapshotPath) { Remove-Item -LiteralPath $staging -Force }
-else { Move-Item -LiteralPath $staging -Destination $snapshotPath }
+# Keep the full source copy only while indexing; durable raw storage is delta-only.
+# This avoids duplicating a multi-MB bounded history every minute on a low-disk PC.
+$snapshotPath = $staging
+$snapshotBytes = (Get-Item -LiteralPath $staging).Length
+$segmentPath = Join-Path $rawDir ('segment-' + (Get-Date).ToUniversalTime().ToString('yyyyMMddTHHmmssfffffffZ') + '-' + $snapshotSha.Substring(0, 12) + '.jsonl')
 
 $seenPath = Join-Path $indexDir 'seen.sha256'
 $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
@@ -107,19 +109,24 @@ foreach ($line in [IO.File]::ReadLines($snapshotPath)) {
         evidence_scope = 'metadata_only_no_raw_args_or_outputs'
     }
     $json = $row | ConvertTo-Json -Compress -Depth 5
+    # Store raw source exactly once, privately, without duplicating the rolling file.
+    Append-Utf8 $segmentPath $line
     Append-Utf8 (Join-Path $indexDir ('days/' + $eventDay + '.jsonl')) $json
     Append-Utf8 (Join-Path $indexDir ('tools/' + $safeName + '/' + $eventDay + '.jsonl')) $json
     Append-Utf8 $seenPath $id
     [void]$seen.Add($id)
     $new++
 }
+Remove-Item -LiteralPath $staging -Force
+$segmentBytes = if (Test-Path -LiteralPath $segmentPath) { (Get-Item -LiteralPath $segmentPath).Length } else { 0 }
 $receipt = [ordered]@{
     schema = 'desktop-commander-capture-receipt-v1'
     captured_utc = (Get-Date).ToUniversalTime().ToString('o')
     source = $sourcePath
-    source_snapshot = $snapshotPath
-    snapshot_sha256 = $snapshotSha
-    snapshot_bytes = (Get-Item -LiteralPath $snapshotPath).Length
+    observed_source_sha256 = $snapshotSha
+    observed_source_bytes = $snapshotBytes
+    private_raw_delta_segment = if ($segmentBytes -gt 0) { $segmentPath } else { $null }
+    private_raw_delta_bytes = $segmentBytes
     lines_observed = $total
     records_added_to_index = $new
     duplicates_skipped = $duplicates
@@ -132,6 +139,7 @@ $receipt = [ordered]@{
 $receiptPath = Join-Path $receiptsDir ('capture-' + (Get-Date).ToUniversalTime().ToString('yyyyMMddTHHmmssfffffffZ') + '-' + $snapshotSha.Substring(0,12) + '.json')
 [IO.File]::WriteAllText($receiptPath, ($receipt | ConvertTo-Json -Depth 4), [Text.UTF8Encoding]::new($false))
 Write-Output ('CAPTURE_RECEIPT=' + $receiptPath)
-Write-Output ('SNAPSHOT_SHA256=' + $snapshotSha)
+Write-Output ('OBSERVED_SOURCE_SHA256=' + $snapshotSha)
+Write-Output ('RAW_DELTA_BYTES=' + $segmentBytes)
 Write-Output ('OBSERVED=' + $total + ' NEW=' + $new + ' DUPLICATE=' + $duplicates + ' MALFORMED=' + $malformed + ' LARGE_OUTPUT_OMITTED=' + $omitted)
 if ($malformed -gt 0) { Write-Warning 'Malformed/incomplete source lines detected; source may have been mid-write. Retry capture later.' }

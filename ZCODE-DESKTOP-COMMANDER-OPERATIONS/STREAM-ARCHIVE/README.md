@@ -11,7 +11,7 @@ Turn Desktop Commander activity into a durable, local-only chronological record 
 - Its `get_recent_tool_calls` reads local `tool-history.jsonl`, with history trimming and outputs larger than 4 KiB omitted. These are **not full-fidelity stdout/stderr or all past sessions**.
 - The upstream Desktop Commander implementation also records raw input arguments in `%USERPROFILE%\\.claude-server-commander\\claude_tool_call.log`, rotating near 10 MiB into timestamped files. This covers commands/paths but **not tool outputs** and may contain secrets. Its historical rotated files should be preserved privately. <https://github.com/wonderwhy-er/DesktopCommanderMCP>
 - A tool-call success is not a product/test success. Multiple recent PWA tests failed despite successful tool invocations.
-- No claims of continuous collection, lossless history or local installation until verified.
+- Continuous **two-minute on-PC collection is verified** by Windows Task Scheduler and a recent `SUCCESS` receipt; continued uptime should be checked. This is **not lossless historical recovery**: upstream discarded records and oversized outputs remain unavailable.
 
 ## Verified local execution (22 Nov 2026)
 
@@ -28,13 +28,18 @@ ZCODE-DESKTOP-COMMANDER-OPERATIONS/
   STREAM-ARCHIVE/               # Versioned design and reviewed SITREPs only
     README.md
     SITREP-20261122.md
-  local-logs/                   # LOCAL PRIVATE: excluded from Git
+  .private/desktop-commander-stream/ # LIVE LOCAL PRIVATE: excluded from Git
     raw/YYYY-MM-DD/             # Incremental unique JSONL raw segments; sensitive
     raw/arguments/              # Argument-log byte deltas + rotated logs; sensitive
     index/days/YYYY-MM-DD.jsonl # One row per observed tool call
     index/tools/TOOL/YYYY-MM-DD.jsonl
     index/seen.sha256           # Deduplication hashes
     receipts/capture-*.json    # Observed capture runs and evidence gaps
+    state/cycle-latest.json     # Success receipt used by health check
+    reports/learning-latest.md # Daily aggregate; NO raw command text
+    reports/learning-latest.json
+    validation-runs/RUN_ID/     # Full stdout.bin/stderr.bin + SHA256 metadata
+    scripts/                    # Local copies of versioned Labs runner scripts
 ```
 
 ## Capture
@@ -42,13 +47,14 @@ First discover and verify the real local `tool-history.jsonl` path with read-onl
 
 ```powershell
 $dc = Join-Path $env:USERPROFILE '.claude-server-commander'
-pwsh -NoProfile -File .\scripts\archive-desktop-commander-history.ps1 -Source (Join-Path $dc 'tool-history.jsonl')
-pwsh -NoProfile -File .\scripts\archive-desktop-commander-arguments.ps1 -SourceDirectory $dc
+$archive = 'C:\\0-BlackBoxProject-0\\vivim-labs\\ZCODE-DESKTOP-COMMANDER-OPERATIONS\\.private\\desktop-commander-stream'
+pwsh -NoProfile -File .\scripts\archive-desktop-commander-history.ps1 -Source (Join-Path $dc 'tool-history.jsonl') -ArchiveRoot $archive
+pwsh -NoProfile -File .\scripts\archive-desktop-commander-arguments.ps1 -SourceDirectory $dc -ArchiveRoot $archive
 ```
 
 The script snapshots the rolling source temporarily, stores only previously unseen raw records as private increment segments, and emits minimal metadata indexes. It does not invoke ZCode, scrape the browser, modify ARBOR, or contact a network. No raw command arguments, typed text or outputs enter the index. Source snapshots are SHA-256 stamped in receipts and the temporary copy is deleted after indexing, limiting disk growth. Raw delta segments must stay private.
 
-**Continuity:** A single execution preserves only the history still present in the source. To prevent future trimming gaps, arrange frequent owner-approved capture for **both** scripts (e.g., once per minute) and verify missed intervals. Do not claim that historical trimmed calls can be reconstructed. A true complete stdout/stderr stream also requires explicit tee capture at the runner before Desktop Commander's 4-KiB omission boundary.
+**Continuity:** The owner-authorized Windows Scheduled Task `VIVIM-DesktopCommander-Archive` already runs both scripts **every two minutes**, without elevated privileges, while the interactive user is available. A single execution preserves only history still present in the source; verify the task and receipt freshness regularly. Do not claim that historical trimmed calls can be reconstructed. A true complete stdout/stderr stream also requires explicit tee capture at the runner before Desktop Commander's 4-KiB omission boundary.
 
 ## Learning workflow
 1. Raw evidence stays on PC. Index actions by date, tool, source hash, and status without raw parameters.
@@ -58,3 +64,12 @@ The script snapshots the rolling source temporarily, stores only previously unse
 
 ## Safety
 Treat raw history as sensitive: CLI arguments and outputs may contain tokens, personal data, source paths and provider information. No raw logs in Git, public issues, agent prompts, remote uploads or training corpora without separate opt-in and sanitization. Do not extend this into keystroke, screen or browser-session recording. Prefer short retention for raw data and preserve only needed diagnostic receipts.
+## Daily learning and verification — deployed 22 November 2026
+
+Daily analysis is run by Windows Scheduled Task `VIVIM-DesktopCommander-DailyLearning` at **19:05 PC local time**; a real scheduled-process invocation ended with Windows result `0x00000000` on 22 Nov and updated `reports/learning-latest.json`. The deterministic script `scripts/summarize-desktop-commander-index.ps1` only computes aggregates, pattern hit counts and daily timeline counts, with stable `learning-latest.{json,md}` outputs. No model is invoked, no token expense is incurred, and no raw text is uploaded.
+
+On-demand health acceptance for both jobs is `scripts/desktop-commander-health.ps1 -ArchiveRoot $archive`. Verified on 22 Nov at 17:53:23 UTC with `HEALTH_RESULT=PASS`, 0 failures and 0 warnings. The check separately verifies schedule results, successful capture receipt freshness, latest learning report, unique hash index and disk headroom. It's a point-in-time check, not proof of indefinite uptime.
+
+To preserve **complete raw stdout and stderr for one explicitly selected validation command**, use `scripts/capture-validation-output.ps1` with `-ArchiveRoot $archive`, `-EvidenceId`, `-Surface`, `-SourceSha`, `-Executable` and `-CommandArguments`. Product tests require exact 40-character Git source SHA; `UNPINNED-OPS` is permitted only for local operational diagnostics. The runner captures the two streams directly into separate byte-oriented local files and records hashes in a private receipt; it never replays archived commands or attempts provider calls by itself. First real read-only ZCode SITREP capture passed (exit 0, 785 stdout bytes, 0 stderr bytes). **A live >4 KiB output test has not yet been executed.** Don't confuse process exit zero with product acceptance.
+
+The native Desktop Commander history record schema exposes `timestamp`, `toolName`, `arguments`, `output` and `duration`, but **no session ID** on the inspected record. Day and tool indexes are grounded; per-session grouping cannot be truthfully reconstructed from missing identifiers.

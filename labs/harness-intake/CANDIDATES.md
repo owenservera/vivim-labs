@@ -4,7 +4,7 @@ As of 2026-11-22. New source pinned at `9a101b17e44577f0baefa4c7120f087881c5cc56
 
 | Priority | Candidate / source | Existing consumer or collision to inspect | Intended visible result | State |
 |---|---|---|---|---|
-| P0 | [DesktopCommanderMCP-VIVIM](https://github.com/owenservera/DesktopCommanderMCP-VIVIM) | ARBOR `harness/`, `apps/`, `studio/`, `native/` | Bounded, authorized local process/filesystem observability and safe command feedback; NOT another UI | IDENTIFIED; INITIAL TREE REVIEW |
+| P0 | [DesktopCommanderMCP-VIVIM](https://github.com/owenservera/DesktopCommanderMCP-VIVIM) | ARBOR `harness/`, `apps/`, `studio/`, `native/` | First-class native Rust process/filesystem/search capabilities in existing Host supervisor; NOT an MCP adapter or another UI | IDENTIFIED; INITIAL TREE REVIEW |
 | P0 | [ARBOR current harness](https://github.com/owenservera/ARBOR/tree/main/harness) | Canonical baseline / contracts / test hooks | No regression to existing command surface | DIRECTORY CONFIRMED; NOT AUDITED |
 | P0 | [ARBOR native](https://github.com/owenservera/ARBOR/tree/main/native) + [apps](https://github.com/owenservera/ARBOR/tree/main/apps) | GPUI implementation and desktop/mobile parity | Desktop native view and phone share visible state | DIRECTORY CONFIRMED; NOT AUDITED |
 | P0 | [ARBOR wiki](https://github.com/owenservera/ARBOR/tree/main/wiki) | AutoWiki knowledge projections and host event contract | Typing visibly changes wiki | DIRECTORY CONFIRMED; NOT AUDITED |

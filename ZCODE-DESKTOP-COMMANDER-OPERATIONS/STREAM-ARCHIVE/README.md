@@ -9,6 +9,7 @@ Turn Desktop Commander activity into a durable, local-only chronological record 
 - Live device: DESKTOP-9KB03LU, Desktop Commander 0.3.4.
 - Desktop Commander reports 3,805 total tool calls, 3,786 successful and 19 failed, 5 sessions; 1,000 recent calls in in-memory history.
 - Its `get_recent_tool_calls` reads local `tool-history.jsonl`, with history trimming and outputs larger than 4 KiB omitted. These are **not full-fidelity stdout/stderr or all past sessions**.
+- The upstream Desktop Commander implementation also records raw input arguments in `%USERPROFILE%\\.claude-server-commander\\claude_tool_call.log`, rotating near 10 MiB into timestamped files. This covers commands/paths but **not tool outputs** and may contain secrets. Its historical rotated files should be preserved privately. <https://github.com/wonderwhy-er/DesktopCommanderMCP>
 - A tool-call success is not a product/test success. Multiple recent PWA tests failed despite successful tool invocations.
 - No claims of continuous collection, lossless history or local installation until verified.
 
@@ -20,7 +21,8 @@ ZCODE-DESKTOP-COMMANDER-OPERATIONS/
     README.md
     SITREP-20261122.md
   local-logs/                   # LOCAL PRIVATE: excluded from Git
-    raw/YYYY-MM-DD/             # Atomic snapshots of source JSONL; sensitive
+    raw/YYYY-MM-DD/             # Incremental unique JSONL raw segments; sensitive
+    raw/arguments/              # Argument-log byte deltas + rotated logs; sensitive
     index/days/YYYY-MM-DD.jsonl # One row per observed tool call
     index/tools/TOOL/YYYY-MM-DD.jsonl
     index/seen.sha256           # Deduplication hashes
@@ -31,12 +33,14 @@ ZCODE-DESKTOP-COMMANDER-OPERATIONS/
 First discover and verify the real local `tool-history.jsonl` path with read-only device inspection; **do not assume where it lives**. From the project workspace, run:
 
 ```powershell
-pwsh -NoProfile -File .\scripts\archive-desktop-commander-history.ps1 -Source 'ACTUAL_PATH\tool-history.jsonl'
+$dc = Join-Path $env:USERPROFILE '.claude-server-commander'
+pwsh -NoProfile -File .\scripts\archive-desktop-commander-history.ps1 -Source (Join-Path $dc 'tool-history.jsonl')
+pwsh -NoProfile -File .\scripts\archive-desktop-commander-arguments.ps1 -SourceDirectory $dc
 ```
 
-The script copies the source to a local immutable snapshot and emits minimal metadata indexes. It does not invoke ZCode, scrape the browser, modify ARBOR, or contact a network. No raw command arguments, typed text or outputs enter the index. Snapshot filenames incorporate SHA-256 to avoid overwriting identical archives; the raw snapshots must stay private.
+The script snapshots the rolling source temporarily, stores only previously unseen raw records as private increment segments, and emits minimal metadata indexes. It does not invoke ZCode, scrape the browser, modify ARBOR, or contact a network. No raw command arguments, typed text or outputs enter the index. Source snapshots are SHA-256 stamped in receipts and the temporary copy is deleted after indexing, limiting disk growth. Raw delta segments must stay private.
 
-**Continuity:** A single execution preserves only the history still present in the source. To prevent future trimming gaps, arrange frequent owner-approved capture (e.g., once per minute) and verify missed intervals. Do not claim that historical trimmed calls can be reconstructed. A true complete stdout/stderr stream also requires explicit tee capture at the runner before Desktop Commander's 4-KiB omission boundary.
+**Continuity:** A single execution preserves only the history still present in the source. To prevent future trimming gaps, arrange frequent owner-approved capture for **both** scripts (e.g., once per minute) and verify missed intervals. Do not claim that historical trimmed calls can be reconstructed. A true complete stdout/stderr stream also requires explicit tee capture at the runner before Desktop Commander's 4-KiB omission boundary.
 
 ## Learning workflow
 1. Raw evidence stays on PC. Index actions by date, tool, source hash, and status without raw parameters.

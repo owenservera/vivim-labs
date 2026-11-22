@@ -43,3 +43,11 @@ The native read-only Rust observer is implemented at `native/zcode-observer/`. R
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\0-BlackBoxProject-0\vivim-labs\ZCODE-DESKTOP-COMMANDER-OPERATIONS\scripts\rust-observe-r003.ps1" -WithHistoricalParent
 ```
 Observed: `R003_RUST_OBSERVER_COMPLETE`, exit 0; 3/3 Rust tests, Clippy clean, read-only commands/query and V4 snapshot with epoch/sequence, historical parent native projection 18 child IDs / 18 ended / 0 running. Full facts: `evidence/R003-OBSERVED.md` and `TEST-LEDGER.md`. Concurrent ZCode headless workers hit upstream OpenRouter free-model 429; new Agent child fanout is still blocked/unverified. Do not treat local source definitions as active agents or silently switch billable providers.
+
+## R008 — Desktop Commander stream archive and learning (2026-11-22)
+
+**Live on the owner's Windows PC.** The existing Desktop Commander logs are backed up privately, converted into deduplicated time/tool indexes, and collected by the limited-privilege `VIVIM-DesktopCommander-Archive` Windows Scheduled Task every two minutes while the interactive user is available. A real scheduled cycle was verified with `LastTaskResult=0x00000000` and an on-PC success receipt. The scheduler does not code, run models, execute logged commands or send raw history to GitHub.
+
+Start with [STREAM-ARCHIVE/README.md](STREAM-ARCHIVE/README.md), the [verified deployment receipt](STREAM-ARCHIVE/DEPLOYMENT-20261122.md), and [measured lessons](STREAM-ARCHIVE/LESSONS-20261122.md). The private on-device archive is `.private/desktop-commander-stream/`, covered by the existing `.private/` Git ignore. Daily/tool indexes and scheduled capture receipts are there; local redacted deterministic trend reports reside under `.private/desktop-commander-stream/reports/`.
+
+On demand, run `scripts/summarize-desktop-commander-index.ps1` against the explicit local archive root. No AI inference, provider credit or model spend is required. Raw argument logs may contain secrets and never belong in repository commits, issue text or agent prompts. The upstream history truncates large outputs and older calls; do not claim a lossless past stream. Evidence-derived task proposals go into the **existing** `TASK-CLAIMS.md`, `TEST-LEDGER.md`, and ARBOR canonical tracker after exact-SHA reproduction, not a competing backlog.

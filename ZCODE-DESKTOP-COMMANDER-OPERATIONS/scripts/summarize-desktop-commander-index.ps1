@@ -47,7 +47,7 @@ foreach ($file in @(Get-ChildItem -LiteralPath $rawDir -Recurse -File -Filter 's
     if ($o -match 'Set-PSReadLineOption') { $patterns.powershell_profile_noise++ }
     if ($o -match 'all PWA module imports exist|install precaches every shell asset|install resolves shell paths') { $patterns.pwa_offline_asset_assertion++ }
     if ($o -match 'Wiki-first typing automatically updates') { $patterns.wiki_typing_assertion++ }
-    if ($o -match 'actual:\\s*403' -and $o -match 'expected:\\s*401') { $patterns.http_401_403_test_mismatch++ }
+    if ($o -match 'actual:\s*403' -and $o -match 'expected:\s*401') { $patterns.http_401_403_test_mismatch++ }
     if ($o -match 'Tracked/untracked workspace is not clean') { $patterns.git_dirty_build_guard++ }
     if ($o -match '(?i)(rate.limit|too.many.requests|HTTP 429|upstream 429)') { $patterns.model_rate_limit++ }
     if ($o -match 'PowerShell did not answer in 15 seconds') { $patterns.precheck_timeout++ }
@@ -70,12 +70,12 @@ $json = $report | ConvertTo-Json -Depth 10
 $summary = @(
   '# Desktop Commander — private evidence trends',
   '',
-  'Generated UTC: ' + $report.generated_utc,
+  ('Generated UTC: ' + $report.generated_utc),
   '',
-  'Indexed unique history rows: **' + $records.Count + '**',
-  'Upstream omitted-output rows: **' + $omitted + '**',
-  'Entries with process exit 0: **' + $okExit + '**',
-  'Entries with process exit nonzero: **' + $badExit + '**',
+  ('Indexed unique history rows: **' + $records.Count + '**'),
+  ('Upstream omitted-output rows: **' + $omitted + '**'),
+  ('Entries with process exit 0: **' + $okExit + '**'),
+  ('Entries with process exit nonzero: **' + $badExit + '**'),
   '',
   '## Private source pattern counts (observation rows, not unique incidents)'
 )

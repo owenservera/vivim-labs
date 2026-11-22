@@ -30,14 +30,15 @@ On-device archive and metadata-only learning index for the owner's existing Desk
 - Windows Scheduled Task `VIVIM-DesktopCommander-Archive` was **created** with a **two-minute** trigger, existing interactive user principal, limited run level, no privilege escalation, no model calls and no network effect.
 - Task runs `pwsh.exe -NoProfile -NonInteractive` against the private copy of `archive-desktop-commander-cycle.ps1`, which holds a named mutex, calls the two existing Labs archivers and records local receipts.
 - Manually invoking the cycle script completed `CAPTURE_CYCLE=SUCCESS`, `CYCLE_EXIT=0`; the latest verified manual receipt finished 2026-11-22 17:19:04 UTC.
-- The Scheduled Task reported Running (`0x00041301`) after being triggered; an overlap attempt was recorded as `0x800710E0`. **Do not claim the schedule accepted a completed run until a newer cycle receipt and a successful task result are both observed.**
+- Initial scheduled Task Scheduler states included Running (`0x00041301`) and one overlap refusal (`0x800710E0`); these are retained as diagnostic observations, not asserted task failures.
+- **Scheduled execution VERIFIED:** at **2026-11-22 17:26:29 UTC**, Task Scheduler started the job. The local `state/cycle-entered.json` was written at 17:26:30 UTC and `state/cycle-latest.json` reported `SUCCESS` at **17:26:34.4089822 UTC**. A later independent query returned `Task Status=Ready`, **`LastTaskResult=0x00000000`**, next scheduled run **17:28:28 UTC**. The unique record index grew to **2,759 hashes**. This proves an unattended scheduled tick, not just manual invocation.
 - Scheduler diagnostic beacons for future invocations were added to the runner in GitHub commit `cdbd1903` and copied locally.
 - Estimated local private archive size at one point was **13,978,863 bytes** across **51 files**; inspect disk usage and avoid copying the entire bounded source on every cycle.
 
 ## Evidence quality and remaining gates
 - Raw logs are confined to the existing Git-ignored `.private` tree; logs may contain tokens, paths, personal data, and commands. Never publish them or infer permission for training.
 - Upstream history is trimmed; outputs over 4 KiB are replaced with omission markers. This archive preserves what remains and records missing evidence explicitly, not a reconstructed lossless historical stream.
-- The scheduled-task execution path is not yet fully accepted; inspect `state/cycle-entered.json`, `state/cycle-latest.json`, and private scheduler errors. A created/Running task is not a verified successful periodic capture.
+- The scheduled task has one verified successful automatic tick. Continue checking receipt freshness and task last result; an unattended success today is not proof of indefinite uptime, historical completeness, or future operation while the user is logged out.
 - A separate explicit output-tee at the original test runner would be required for full-fidelity stdout/stderr beyond Desktop Commander's omission boundary.
 - Keep the ARBOR product task ledger authoritative. Improvements derived from this index must be reproduced against exact GitHub SHAs and validated separately on GPUI, PWA and physical phone.
 

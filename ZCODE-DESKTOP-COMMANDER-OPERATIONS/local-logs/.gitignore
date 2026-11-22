@@ -1,0 +1,3 @@
+# Keep all raw Desktop Commander history, indexes and capture receipts local.
+*
+!.gitignore

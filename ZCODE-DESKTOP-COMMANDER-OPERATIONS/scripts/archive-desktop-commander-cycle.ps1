@@ -12,11 +12,25 @@ param(
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+# Execution beacon distinguishes Scheduler failing to launch from an in-script failure.
+$beaconDir = Join-Path $ArchiveRoot 'state'
+[void][IO.Directory]::CreateDirectory($beaconDir)
+$beacon = [ordered]@{
+  schema = 'desktop-commander-cycle-enter-v1'
+  entered_utc = [DateTimeOffset]::UtcNow.ToString('o')
+  pid = $PID
+  user_profile_available = [bool]$env:USERPROFILE
+}
+[IO.File]::WriteAllText((Join-Path $beaconDir 'cycle-entered.json'), ($beacon | ConvertTo-Json -Depth 3), [Text.UTF8Encoding]::new($false))
 $mutex = [System.Threading.Mutex]::new($false, 'Local\VIVIM_DesktopCommander_HistoryArchive')
 $acquired = $false
 try {
   $acquired = $mutex.WaitOne(0)
-  if (-not $acquired) { Write-Output 'CAPTURE_SKIP=ALREADY_RUNNING'; exit 0 }
+  if (-not $acquired) {
+    [IO.File]::WriteAllText((Join-Path $beaconDir 'cycle-skipped.txt'), ([DateTimeOffset]::UtcNow.ToString('o') + ' ALREADY_RUNNING'), [Text.UTF8Encoding]::new($false))
+    Write-Output 'CAPTURE_SKIP=ALREADY_RUNNING'
+    exit 0
+  }
   $histFile = Join-Path $SourceDirectory 'tool-history.jsonl'
   if (-not (Test-Path -LiteralPath $histFile -PathType Leaf)) { throw 'DC_HISTORY_NOT_FOUND' }
   $histScript = Join-Path $PSScriptRoot 'archive-desktop-commander-history.ps1'
@@ -49,7 +63,13 @@ try {
   Move-Item -LiteralPath $temp -Destination $latest -Force
   Write-Output 'CAPTURE_CYCLE=SUCCESS'
 } catch {
-  Write-Error ('CAPTURE_CYCLE_FAILED: ' + $_.Exception.Message) -ErrorAction Continue
+  $errorInfo = [ordered]@{
+    schema = 'desktop-commander-cycle-error-v1'
+    observed_utc = [DateTimeOffset]::UtcNow.ToString('o')
+    error = ($_.Exception.Message -replace '(?i)(token|key|secret)=[^\\s]+', '$1=[redacted]')
+  }
+  [IO.File]::WriteAllText((Join-Path $beaconDir 'cycle-last-error.json'), ($errorInfo | ConvertTo-Json -Depth 3), [Text.UTF8Encoding]::new($false))
+  Write-Error 'CAPTURE_CYCLE_FAILED: see private state/cycle-last-error.json' -ErrorAction Continue
   exit 1
 } finally {
   if ($acquired) { $mutex.ReleaseMutex() }

@@ -40,7 +40,7 @@ if (Test-Path -LiteralPath $seenRotated) {
     foreach ($hash in [IO.File]::ReadLines($seenRotated)) { if ($hash.Length -eq 64) { [void]$seen.Add($hash) } }
 }
 $rotatedNew = 0; $rotatedBytes = [long]0
-$candidates = @(Get-ChildItem -LiteralPath $srcDir -File -Filter 'claude_tool_call*.log' -ErrorAction Stop)
+$candidates = @(Get-ChildItem -LiteralPath $srcDir -File -Filter 'claude_tool_call*' -ErrorAction Stop)
 foreach ($file in $candidates) {
     if ($file.Name -eq 'claude_tool_call.log') { continue }
     # A rotated file is immutable after rename; copy once by content hash.
@@ -61,7 +61,13 @@ if (Test-Path -LiteralPath $active -PathType Leaf) {
     $fileInfo = Get-Item -LiteralPath $active
     # Creation time identifies the active file across a size-preserving rotation.
     $creationUtc = $fileInfo.CreationTimeUtc.ToString('o')
-    if ($null -ne $state -and [string]$state.source -eq $active -and [string]$state.creation_utc -eq $creationUtc) {
+    # ConvertFrom-Json can materialize ISO timestamps as DateTime instead of a string.
+    # Normalise both sides before comparing or every cycle duplicates the full log.
+    $priorCreationUtc = ''
+    if ($null -ne $state) {
+        try { $priorCreationUtc = ([DateTime]$state.creation_utc).ToUniversalTime().ToString('o') } catch { }
+    }
+    if ($null -ne $state -and [string]$state.source -eq $active -and $priorCreationUtc -eq $creationUtc) {
         $offset = [long]$state.offset_bytes
     } else { $rollover = ($null -ne $state) }
     $reader = [IO.FileStream]::new($active, [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::ReadWrite)

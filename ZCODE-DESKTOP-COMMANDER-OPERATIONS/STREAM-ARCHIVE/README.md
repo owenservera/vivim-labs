@@ -1,6 +1,6 @@
 # Desktop Commander stream archive — R001
 
-Status: archival specification and script committed to VIVIM Labs. **Not evidence of a PC capture until the actual local source and archive paths are verified.**
+Status: **live on Windows, 2026-11-22**. Initial private backup, incremental capture, and one Windows scheduled cycle were verified. Last observed scheduled run at 17:26:29 UTC returned Task Scheduler result `0x00000000` and an on-PC `SUCCESS` receipt. Continued availability still requires monitoring.
 
 ## Purpose
 Turn Desktop Commander activity into a durable, local-only chronological record for debugging, failure clustering, task receipts, and lessons learned. Keep raw evidence private on the PC; only reviewed, redacted lessons or receipts belong in GitHub. This does not create a second ARBOR Host journal, browser recorder, process supervisor, or agent that writes product source.
@@ -12,6 +12,14 @@ Turn Desktop Commander activity into a durable, local-only chronological record 
 - The upstream Desktop Commander implementation also records raw input arguments in `%USERPROFILE%\\.claude-server-commander\\claude_tool_call.log`, rotating near 10 MiB into timestamped files. This covers commands/paths but **not tool outputs** and may contain secrets. Its historical rotated files should be preserved privately. <https://github.com/wonderwhy-er/DesktopCommanderMCP>
 - A tool-call success is not a product/test success. Multiple recent PWA tests failed despite successful tool invocations.
 - No claims of continuous collection, lossless history or local installation until verified.
+
+## Verified local execution (22 Nov 2026)
+
+The private runtime archive is located at `C:\\0-BlackBoxProject-0\\vivim-labs\\ZCODE-DESKTOP-COMMANDER-OPERATIONS\\.private\\desktop-commander-stream`; it is explicitly excluded from Git. The same archiver scripts are versioned in Labs and their copies reside in this private directory's `scripts/` folder.
+
+Windows Task Scheduler task: `VIVIM-DesktopCommander-Archive`, every **2 minutes** while the interactive user session is available, limited privileges. Its last independently confirmed scheduled cycle succeeded at 17:26:34 UTC; `state/cycle-latest.json` is the truth source for finished work. No provider calls, browser recording, extra ARBOR Host or product source edits.
+
+To inspect without modifying anything: `Get-ScheduledTaskInfo -TaskName 'VIVIM-DesktopCommander-Archive'` and read `state/cycle-latest.json`. If a receipt is stale, inspect `state/cycle-entered.json` and `state/cycle-last-error.json` before restarting anything.
 
 ## Local-only data layout
 

@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-22 (Europe/Madrid)  
 **Canonical implementation evidence:** [ARBOR — Phone signed-in AI relay](https://github.com/owenservera/ARBOR/blob/main/docs/integration/PHONE-SIGNED-IN-AI-RELAY-20261122.md).  
-**Deployed PC Host:** ARBOR `972dd30f4f51817d067ff9a1b2f1369446881126`; pinned rollback-protected deployment passed; mobile PWA URL unchanged.
+**Deployed PC Host:** ARBOR `10006454b433efd53affc74e5e7a3d6518f96432`; pinned rollback-protected deployment passed; mobile PWA URL unchanged.
 
 **Completed:** unified first-contact composer and source-backed signed-in account handoff; per-provider validation; draft preservation; no silent conversation retarget; exact current worker-capability heartbeat; phone send gate rejects a missing, stale, unsupported or incompatible consumer. Focused tests and full Node PWA/Host suite passed. Studio and production Host both healthy at final checks.
 
@@ -18,3 +18,5 @@
 5. AIR-05: separately close the private-sharing Rust package report `SHARE_RUST_NOT_PACKAGED`.
 
 **Ownership:** ZCode can research, iterate and challenge evidence/test contracts. Desktop Commander may inspect and run local acceptance/deploy; it is not the primary source code editor. ChatGPT Dev controls ARBOR GitHub `main`. No provider APIs, no fabricated send evidence, no message-body copies in the tracker.
+
+**Final acceptance amendment (same day):** The server now refuses stale/unsupported phone AI queue submissions in addition to the phone-side guard. Focused and full PWA/Host tests passed at `10006454`, rollback-protected cutover succeeded on the unchanged URL, and Host/Studio were healthy afterward. ChatGPT reply remains uncertain and no phone delivery is claimed. See ARBOR canonical record for the precise HTTP/heartbeat contract.

@@ -16,7 +16,7 @@
 ## Evidence actually executed
 - **73/73 Node Host + mobile UI tests PASS, 0 fail**, clean isolated exact Git revision `179f46be3f40625ee8c9296a7d595567f3994b4d`. Scope includes original bootstrap 7-pass mocks, owner permission and expiration, live Host HTTP wiki-context private/pwa response, preview DOM read-path checks, private-source refusal, Direct phone safety and existing Wiki editor tests.
 - **49/49 GPUI Rust library tests PASS**, same isolated revision, `cargo test --manifest-path native/gpui-desktop/Cargo.toml --lib`; new Oracle progress source test included.
-- A follow-up regression was added after that snapshot verifying the authenticated generic GPUI/PWA summary contains **only progress, not private Oracle claims** (`c454781d7f931ce7394e59b17cb1d2a199bcf2b9`). Treat that addition as unverified until subsequent test receipt.
+- **Follow-up post-push recheck: 73/73 Node tests PASS, 0 fail, 0 skipped**, at exact clean archived ARBOR SHA `c67894f26c757c16881aab6ac2789cf293111d76`, including `c454781d7f931ce7394e59b17cb1d2a199bcf2b9` which verifies authenticated generic GPUI/PWA summaries contain only progress metadata, never private Oracle statements.
 - GPUI executable with desktop feature has a **separate compile/physical acceptance gate**; Rust *library* pass is not executable acceptance. No real Chrome ChatGPT prompt extraction performed or claimed.
 - Offline Cargo initially lacked pinned `core-foundation 0.10.0`; a normal isolated Cargo resolve retrieved pinned dependencies without editing tracked repository dependency declarations.
 

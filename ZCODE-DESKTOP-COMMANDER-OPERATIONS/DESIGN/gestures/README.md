@@ -4,6 +4,10 @@
 
 Principle: A gesture is a live negotiation, not a one-shot trigger. Hold, movement, focus, language and real UI feedback shape a changing proposed command. The person can inspect, revise, release, cancel or explicitly Apply; only existing Host authority can commit an effect.
 
+## R004 core integration
+
+[ARBOR pure Rust integration receipt](R004-INTEGRATION-RECEIPT.md): shared `gesture_interaction` source is registered on ARBOR main at [bb6873b3](https://github.com/owenservera/ARBOR/commit/bb6873b3be280980b453fba006ff5c771d207471). **CODED/PUSHED, Rust compilation UNRUN, GPUI/PWA adapters NOT WIRED, Host Apply NOT WIRED.**
+
 ## R003 first: canonical GPUI + mobile PWA
 
 [Canonical shared interaction contract](R003-CANONICAL-CONTRACT.md) · [Pure Rust precode](src/gesture_interaction.rs) · [Dev integration](R003-DEV-INTEGRATION.md) · [Cross-viewport gates](R003-ACCEPTANCE.md) · [Truthful evidence](R003-EVIDENCE.md).
@@ -33,4 +37,4 @@ On the unchanged First Contact URL: type -> real Wiki card -> hold, see live con
 - Host alone owns authorization/effects/receipts. ChatGPT Dev codes ARBOR via cloud GitHub main; Planning may prepare Labs files only.
 - Local owner registry is not fully published to GitHub; remote PWA review tracker + TASK-CLAIMS are separate sources, not a new merged task database.
 
-**Status:** R003 Rust PRECODE STAGED (17 authored tests, compiler UNRUN); R002 docs retained. ARBOR integration, real GPUI/PWA adapter wiring, host effects, device parity, Dev ACK and deployment remain UNRUN.
+**Status:** R004 Rust core REGISTERED on ARBOR main (17 authored tests, compiler UNRUN). Native GPUI and phone PWA adapters, Host Apply, device parity and deployment remain UNRUN. Dev accepted **core-only** integration; remaining product implementation paths are not claimed.

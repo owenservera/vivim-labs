@@ -78,8 +78,8 @@
         "G3",
         "G4"
       ],
-      "status": "PRECODE_STAGED_UNRUN",
-      "executor": "UNASSIGNED",
+      "status": "CODED_PUSHED_TESTS_UNRUN",
+      "executor": "ChatGPT Dev / gesture-core-20261122",
       "workClass": "PWA_VISIBLE_DEPENDENCY",
       "productOutcome": "PV-15"
     },
@@ -285,6 +285,17 @@
     "compiled": "UNRUN",
     "authorTestMarkers": 17,
     "checks": "static delimiter PASS",
-    "integratedInArbor": false
+    "integratedInArbor": true,
+    "mainSourceBlob": "e5f9d40e22a8bebce65dff4f7112c4e4600235d0",
+    "sourceIntegrationCommit": "bb6873b3be280980b453fba006ff5c771d207471"
+  },
+  "r004CoreCommit": "bb6873b3be280980b453fba006ff5c771d207471",
+  "implementation": {
+    "coreRegistered": true,
+    "rustTestsRun": false,
+    "nativeGpuiAdapter": false,
+    "phonePwaAdapter": false,
+    "hostApply": false,
+    "physicalDeviceProof": false
   }
 }

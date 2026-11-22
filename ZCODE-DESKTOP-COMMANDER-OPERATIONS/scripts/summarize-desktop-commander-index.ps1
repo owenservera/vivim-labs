@@ -9,6 +9,8 @@ happens on private raw tool-history records in memory, with aggregate counts onl
 param([Parameter(Mandatory=$true)][string]$ArchiveRoot)
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+$root = [IO.Path]::GetFullPath($ArchiveRoot)
+if ($root -notmatch '(?i)[\\/]\.private[\\/]') { throw 'PRIVATE_ARCHIVE_ROOT_REQUIRED' }
 $idxDir = Join-Path $ArchiveRoot 'index/days'
 $rawDir = Join-Path $ArchiveRoot 'raw'
 $reportDir = Join-Path $ArchiveRoot 'reports'
@@ -53,6 +55,16 @@ foreach ($file in @(Get-ChildItem -LiteralPath $rawDir -Recurse -File -Filter 's
     if ($o -match 'PowerShell did not answer in 15 seconds') { $patterns.precheck_timeout++ }
   }
 }
+$daily = @($records | Group-Object -Property {
+  if ([string]::IsNullOrWhiteSpace([string]$_.timestamp_utc)) { 'undated' }
+  else { ([string]$_.timestamp_utc).Substring(0,10) }
+} | Sort-Object Name | ForEach-Object { [ordered]@{day_utc=$_.Name;observed_rows=$_.Count} })
+$latestPath = Join-Path $reportDir 'learning-latest.json'
+$previousCount = $null
+if (Test-Path -LiteralPath $latestPath -PathType Leaf) {
+  try { $previousCount = [int](Get-Content -LiteralPath $latestPath -Raw | ConvertFrom-Json).observed_index_rows } catch { }
+}
+$newSincePrior = if ($null -ne $previousCount) {[math]::Max(0,$records.Count-$previousCount)} else {$null}
 $report = [ordered]@{
   schema = 'dc-local-learning-observatory-v1'
   generated_utc = [DateTimeOffset]::UtcNow.ToString('o')
@@ -62,6 +74,9 @@ $report = [ordered]@{
   process_exit_zero_entries = $okExit
   process_exit_nonzero_entries = $badExit
   raw_history_records_scanned = $scannedRaw
+  previous_report_rows_if_any = $previousCount
+  new_rows_since_previous_report_if_any = $newSincePrior
+  daily_observed_rows = $daily
   pattern_hit_entries = $patterns
   top_tool_events = @($toolRows | Select-Object -First 12)
   warning = 'Pattern hits and nonzero exit rows are event observations, NOT unique failing jobs. Counts can understate output-truncated records.'
@@ -76,18 +91,28 @@ $summary = @(
   ('Upstream omitted-output rows: **' + $omitted + '**'),
   ('Entries with process exit 0: **' + $okExit + '**'),
   ('Entries with process exit nonzero: **' + $badExit + '**'),
+  ('New rows since last local learning report: **' + $(if ($null -ne $newSincePrior) {$newSincePrior} else {'UNKNOWN_FIRST_RUN'}) + '**'),
   '',
   '## Private source pattern counts (observation rows, not unique incidents)'
 )
 foreach ($kv in $patterns.GetEnumerator()) { $summary += ('- ' + $kv.Key + ': ' + $kv.Value) }
 $summary += @('', '## Most-observed tool types')
 foreach ($tool in ($toolRows | Select-Object -First 10)) { $summary += ('- ' + $tool.tool + ': ' + $tool.observations) }
+$summary += @('', '## Index record coverage by UTC day')
+foreach ($day in $daily) { $summary += ('- ' + $day.day_utc + ': ' + $day.observed_rows + ' observed events') }
 $summary += @('', 'These counts are incomplete when upstream omitted tool outputs. The raw logs stay on this PC and are never included in this report.', '', 'Proposed learning path: reproduce an observed pattern at its exact ARBOR SHA; file a bounded claim in existing TASK-CLAIMS / TEST-LEDGER; ChatGPT cloud fixes source and records a new test receipt.')
 $stamp = (Get-Date).ToUniversalTime().ToString('yyyyMMddTHHmmssfffffffZ')
 $jsonPath = Join-Path $reportDir ('learning-' + $stamp + '.json')
 $mdPath = Join-Path $reportDir ('learning-' + $stamp + '.md')
 [IO.File]::WriteAllText($jsonPath, $json, [Text.UTF8Encoding]::new($false))
 [IO.File]::WriteAllLines($mdPath, $summary, [Text.UTF8Encoding]::new($false))
+# Atomic stable latest handles for the existing SITREP and future daily scheduler.
+$tmpJson = $latestPath + '.' + [guid]::NewGuid().ToString('N') + '.tmp'
+$tmpMd = (Join-Path $reportDir 'learning-latest.md') + '.' + [guid]::NewGuid().ToString('N') + '.tmp'
+[IO.File]::WriteAllText($tmpJson, $json, [Text.UTF8Encoding]::new($false))
+[IO.File]::WriteAllLines($tmpMd, $summary, [Text.UTF8Encoding]::new($false))
+Move-Item -LiteralPath $tmpJson -Destination $latestPath -Force
+Move-Item -LiteralPath $tmpMd -Destination (Join-Path $reportDir 'learning-latest.md') -Force
 Write-Output ('METADATA_LEARNING_JSON=' + $jsonPath)
 Write-Output ('METADATA_LEARNING_MD=' + $mdPath)
 Write-Output ('OBSERVATIONS=' + $records.Count + ' OMITTED=' + $omitted + ' NONZERO_EXIT_ENTRIES=' + $badExit)

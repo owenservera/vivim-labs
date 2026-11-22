@@ -109,3 +109,8 @@ Source of truth: [full R009 evidence and exact local receipt paths](STREAM-ARCHI
 | Native GPUI visible typing/menu + real phone | **UNRUN** | No screenshots, PC↔phone synchronized live typing, or native approval/Host effects exercised by this test pass |
 
 **Interpretation:** 43 targeted test assertions and 196 canonical assertions are **overlapping**, not 239 unique tests. PWA/Host source at the tested SHA is green; current advanced HEAD and device acceptance remain explicitly open. Existing ARBOR tracker/ChatGPT Dev owner retain source and product acceptance authority; PC archive only supplies receipts.
+
+
+### R009 source freshness follow-up
+
+A subsequent GitHub `main` check observed **`384c6368a44d9934b9fce112b29c6e3e952a08eb`**, now **18 commits ahead** of the green-tested `10006454` SHA, changing 18 files including PWA/Wiki/Host/GPUI source. **Latest HEAD code tests: UNRUN.** A local read-only source-presence preflight could not execute because Desktop Commander's command safety validator timed out after 5 seconds; the tool confirmed nothing ran, so no checkout/verification was attempted. See the R009 evidence document's final section. Existing ChatGPT Dev cloud source execution and ARBOR product owner claims remain unchanged.

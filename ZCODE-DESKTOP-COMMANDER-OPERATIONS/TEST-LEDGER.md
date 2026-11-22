@@ -91,3 +91,21 @@ Cloud/GitHub source is authoritative for the archiver scripts; Desktop Commander
 | Physical GPUI/Android device acceptance | UNRUN in this observability lane | No device or source-code feature claims are made by archive health checks |
 
 **Source versus evidence rule:** last known R008 run had 2,867 unique index hashes (which can advance independently of the 2,847-row daily report). A successful remote tool call or process exit is never counted as a passing application assertion. No raw stream data, unredacted output, or arbitrary command replay is published to GitHub.
+
+
+## R009 — SHA-pinned real ARBOR PWA/Host source verification (2026-11-22)
+
+Source of truth: [full R009 evidence and exact local receipt paths](STREAM-ARCHIVE/ARBOR-PWA-VERIFICATION-20261122.md). Local test source was an **existing clean, isolated release checkout** at ARBOR `10006454b433efd53affc74e5e7a3d6518f96432`; the initial GitHub `main` ref `37984694509c3d9a63919a7dab87a812f3937a70` differed by documentation only. After concurrent cloud commits, checked `main` reached `87143c69a587d1456d01b148735d37785ad0a7f4` (**12 code-changing commits ahead**) and was not rerun in this read-only lane.
+
+| Gate | Outcome | Real source, SHA and observed receipt |
+|---|---|---|
+| Clean isolated source revision | **PASS** | Windows `git rev-parse HEAD=10006454…` and `git status --porcelain` empty, all named test files present |
+| Targeted Wiki + PWA offline and First Contact | **PASS AT 10006454** | Existing `wiki-live-context`, `pwa-asset-graph`, `service-worker`, `first-customer` suites: **29/29 TAP assertions**, 0 failure/skips, process exit 0, private receipt `ARBOR-PWA-WIKI-OFFLINE-R001` |
+| Direct-phone Host auth + agent composer | **PASS AT 10006454** | Existing `direct-phone` and `agent-composer-browser` suites: **14/14 TAP assertions**, 0 failures/skips, exit 0, private receipt `ARBOR-HOST-DIRECT-PHONE-COMPOSER` |
+| Repository canonical PWA/Host/Media runner | **PASS AT 10006454** | `node integration/scripts/pwa-run-now.mjs`, existing repository runner; **25/25 command groups**, including **22 syntax checks + 3 test suites**, **196/196 TAP assertions** (162 mobile, 22 Host, 12 media), zero failures/skips/cancels, 23,499 raw stdout bytes privately captured, process exit 0 |
+| Independent canonical report-parser | **PASS** | New Labs `scripts/summarize-pwa-verification-receipt.ps1` commit `bbcaa974` validated exact 40-hex SHA, private stdout hash, runner summary and TAP assertions. Generated `code-verification-summary.json` inside canonical private validation run. `CODE_VERIFICATION_STATUS=PASS` |
+| Mainline CI for initial `3798469` | **INFRASTRUCTURE NOT TESTED / STARTUP FAILURE** | GitHub Actions [run 45053550538](https://github.com/owenservera/ARBOR/actions/runs/45053550538) reported `startup_failure` with zero jobs; not counted as test failure or PASS |
+| Latest `main` after concurrent updates | **UNRUN / REFRESH REQUIRED** | `87143c6` contains new Wiki, Host, native GPUI code and tests; exact-SHA source rerun required before promoting green source status |
+| Native GPUI visible typing/menu + real phone | **UNRUN** | No screenshots, PC↔phone synchronized live typing, or native approval/Host effects exercised by this test pass |
+
+**Interpretation:** 43 targeted test assertions and 196 canonical assertions are **overlapping**, not 239 unique tests. PWA/Host source at the tested SHA is green; current advanced HEAD and device acceptance remain explicitly open. Existing ARBOR tracker/ChatGPT Dev owner retain source and product acceptance authority; PC archive only supplies receipts.

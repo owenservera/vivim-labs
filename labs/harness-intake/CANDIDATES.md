@@ -1,10 +1,10 @@
 # Harness intake — candidate register (research, not product status)
 
-As of 2026-11-22. `UNINSPECTED` means no source-level audit has yet been performed for this intake. Priority expresses expected product relevance, **not** implementation readiness.
+As of 2026-11-22. New source pinned at `9a101b17e44577f0baefa4c7120f087881c5cc56`; see [source assessment](DESKTOP-COMMANDER.md). `UNINSPECTED` means no source-level audit has yet been performed for this intake. Priority expresses expected product relevance, **not** implementation readiness.
 
 | Priority | Candidate / source | Existing consumer or collision to inspect | Intended visible result | State |
 |---|---|---|---|---|
-| P0 | **Owner's newly created GitHub repo — URL/name pending** | ARBOR `harness/`, `apps/`, `studio/`, `native/` | To be determined from actual source | UNIDENTIFIED |
+| P0 | [DesktopCommanderMCP-VIVIM](https://github.com/owenservera/DesktopCommanderMCP-VIVIM) | ARBOR `harness/`, `apps/`, `studio/`, `native/` | Bounded, authorized local process/filesystem observability and safe command feedback; NOT another UI | IDENTIFIED; INITIAL TREE REVIEW |
 | P0 | [ARBOR current harness](https://github.com/owenservera/ARBOR/tree/main/harness) | Canonical baseline / contracts / test hooks | No regression to existing command surface | DIRECTORY CONFIRMED; NOT AUDITED |
 | P0 | [ARBOR native](https://github.com/owenservera/ARBOR/tree/main/native) + [apps](https://github.com/owenservera/ARBOR/tree/main/apps) | GPUI implementation and desktop/mobile parity | Desktop native view and phone share visible state | DIRECTORY CONFIRMED; NOT AUDITED |
 | P0 | [ARBOR wiki](https://github.com/owenservera/ARBOR/tree/main/wiki) | AutoWiki knowledge projections and host event contract | Typing visibly changes wiki | DIRECTORY CONFIRMED; NOT AUDITED |

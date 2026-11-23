@@ -1,5 +1,36 @@
 # DevOps / Planning SITREP — 2026-11-21 (GitHub bootstrap R004)
 
+## CURRENT PLANNER UPKEEP — 2026-11-23 R006 reconciliation
+
+**Authoritative views:** [ARBOR #33](https://github.com/owenservera/ARBOR/issues/33) is the 71-item delivery oversight ledger; [#32](https://github.com/owenservera/ARBOR/issues/32) handles ChatGPT delivery; [#31](https://github.com/owenservera/ARBOR/issues/31) handles release/phone; [the 100-step CS ledger](https://github.com/owenservera/ARBOR/blob/main/docs/product/CANONICAL-SURFACE-100-STEP-LEDGER.md) is the physical/UI acceptance checklist; [TASK-CLAIMS](../TASK-CLAIMS.md) records 13 ownership rows; and [MASTER-PLAN-R001](MASTER-PLAN-R001.md) has 37 Planning candidates. These are *overlapping views*, not 71+100+37 additive delivery tasks.
+
+### Exact-source status / blockers
+- ARBOR issue #33 before this maintenance: **6/71 verified closed, 65 open**; CS ledger: **3/100 verified, 97 open**. The CS acceptance document received a source/evidence census at [ARBOR `d862578`](https://github.com/owenservera/ARBOR/commit/d862578dadbfcca20a9959ee0fd318f3cdc491ed). Do not invent UI completion.
+- Latest focused source-test anchor **ARBOR `a34a7f5a`**: independent Windows **44/44 Host/Studio/Work** and **26/26 mobile/Host/Studio** test groups PASS. `d862578` changed documentation only; do not call it a new tested runtime. PY-001 is **Dev-claimed CODED/PUSHED/TESTED**, not still a Planning-only handoff; Studio Work was `initialized:false`, real `personal.work.create`, explicit PWA submit, physical UI proof OPEN.
+- Actual latest no-effect Windows verifier: `local-logs/native-verifier/latest.json`, source `a34a7f5a`, finished 2026-11-23T20:14:05 UTC, **BLOCKED/PARALLEL_TEST_RUNNER_EXIT_3**. `vlang-iterations/latest.json`: VLANG assertions FAIL and TIMEOUT; safety TIMEOUT; AutoWiki **12/12 PASS**; visual **21/21 PASS**; zero provider sends/Host effects/source writes. Earlier 215/215 is historical, not present-source green. Single-instance native observer has a 12-minute task limit; no new scheduler.
+- Existing guarded Studio ChatGPT worker PID 17188 was live at 19:52 UTC with 9 historical commands fenced, 17/17 worker preflight tests PASS at its pinned source. Fresh OS/thread/browser verification and a *new owner-submitted message* remain required before any real provider send. Historical uncertain `CREATION_UNPINNED/TYPING_UNCONFIRMED` key must never be replayed.
+- ZCode: 18 workflow definitions; actual prior `dwf_run` audit had 361 global history rows and two orphaned running entries, **zero current dynamic model workers verified**. Six genuinely working, approved-cost routes not proven. Reuse existing model registry/fallback and reject unapproved paid routes.
+- Ownership: ChatGPT Dev primary application source writer; Planner prepares Labs docs/packets and coordinates evidence; Oracle checks provenance; ZCode local no-effect verification only; Desktop Commander bounded runtime/device evidence. `OFFERED_TO` is **not** `ACCEPTED_BY`; never take an already claimed source file.
+
+### Next ten Planning upkeep / prep candidates (not ten active agents)
+| Rank | Existing target | Next documented action | Boundary |
+|---:|---|---|---|
+| 1 | Z01/Z07 + VF-001 | Triage newest VLANG/safety regression with exact failing assertions and SHA | Dev owns source fix |
+| 2 | PY-002 under PY-001 | Clarify existing Host-reviewed `personal.work.create` producer | Dev owns active implementation |
+| 3 | PY-003 | Bring CAS/idempotency negative matrix current | No second Work store |
+| 4 | PY-004 | Map Work status into existing Host/LiveSystemState | No duplicate event bus |
+| 5 | P0-AI-CHAT/#32 | Refresh non-effect worker/thread/browser preflight | Never replay uncertain key |
+| 6 | VF-001/VF-002 | Source→test→package→serve→GPUI/phone receipts | Offered, not Dev/Oracle ACKed |
+| 7 | PY-007/#31 | Exact-source release and rollback-safe phone URL checklist | Live cutover controlled by Dev |
+| 8 | AW-010/R006 | Verify actual Host issuer/source grants and complete HQKG exclusion | R006 still offer, ACK absent |
+| 9 | Z02/Z03 | Verify live dynamic workflow plus cost-admitted top six routes | Existing router only |
+| 10 | PL-003/R05 | Reconcile OW, 100-CS and 71-master receipts with active claims | Docs only, no claimed Dev source writes |
+
+### Upkeep invariant
+Each maintained item must retain stable ID, owner/claim, dependency, blocker, observed SHA, last evidence state and next verifiable action. Keep separate CODED, PUSHED, SOURCE_TESTED, PACKAGED, SERVING, HOST_ACK, PROVIDER_VERIFIED, GPUI_VERIFIED and ANDROID_VERIFIED. Never relabel an unrun stage PASS; never hide prior failures. Refresh GitHub main/issues/claim CAS before every next edit.
+
+---
+
 ## LIVE CONTINUATION — 2026-11-23 R003 planning / runtime readiness
 
 **Canonical oversight:** [ARBOR #33](https://github.com/owenservera/ARBOR/issues/33), [#32 provider](https://github.com/owenservera/ARBOR/issues/32), [#31 same-source phone release](https://github.com/owenservera/ARBOR/issues/31). **No new backlog.** Planning-only [TASK-CLAIMS](../TASK-CLAIMS.md) PY-001 now **READY_FOR_HANDOFF / OFFERED_TO:CHATGPT-DEV**, sender retains until explicit ACK. Dev owns all ARBOR source integration and the two P0 product missions.

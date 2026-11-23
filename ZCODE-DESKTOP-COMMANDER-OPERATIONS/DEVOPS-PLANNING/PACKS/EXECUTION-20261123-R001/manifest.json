@@ -15,13 +15,19 @@
     "repo": "owenservera/vivim-labs",
     "observedSha": "adb885fb60dbc52aeda60c7715e50078c7f7a158",
     "observerTask": "VIVIM-VLANG-Observer",
-    "lastVerifiedSourceSha": "7b9e7dbd5f17042febea33e6b8563d536987545f",
+    "lastVerifiedSourceSha": "0cd77a2185afe204e41e04fe3d3d588133a3eac6",
     "lastDeterministicPass": 215,
     "lastDeterministicFail": 0,
     "sourceWrites": 0,
     "hostEffects": 0,
     "providerSends": 0,
-    "freshObserver": "TRIGGERED_PENDING_RECEIPT"
+    "freshObserver": "PASS_HASH_BOUND_CURRENT_SOURCE_AT_2026-11-23T19:14:41Z",
+    "latestRunId": "vlang-2026-11-23T19-13-20-587Z",
+    "maxConcurrentLanes": 1,
+    "latestNativeSha256": "389C67DB9FA6913E1B257A5339846BCEA5BA96FB4429DC168059A0D2B33CEC14",
+    "lastNativeGpuiLibPass": 61,
+    "actualAndroidParity": "UNRUN",
+    "actualProviderReply": "UNRUN"
   },
   "immutableRules": [
     "Refresh main before work",
@@ -162,7 +168,7 @@
         "R06"
       ],
       "owner": "ZCode bounded read-only; Desktop Commander Windows operations; ChatGPT reconciles",
-      "state": "EXISTING_OBSERVER_RUNNING_NOT_CURRENT_SHA_PASS",
+      "state": "CURRENT_SHA_DETERMINISTIC_PASS_LIVE_MODEL_AND_PHONE_UNRUN",
       "success": [
         "exact-SHA hash-bound regression receipt",
         "no effects or spend",
@@ -184,5 +190,6 @@
   ],
   "claimSurface": "ZCODE-DESKTOP-COMMANDER-OPERATIONS/TASK-CLAIMS.md",
   "agentEntrypoint": "ZCODE-DESKTOP-COMMANDER-OPERATIONS/DEVOPS-PLANNING/PACKS/EXECUTION-20261123-R001/AGENT-HANDOFF.md",
-  "autoDispatch": false
+  "autoDispatch": false,
+  "latestPickup": "ZCODE-DESKTOP-COMMANDER-OPERATIONS/DEVOPS-PLANNING/PACKS/EXECUTION-20261123-R001/CURRENT-PICKUP-20261123.md"
 }

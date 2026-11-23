@@ -29,6 +29,8 @@ $receipt = @{
   sourceSha = $null
   nativeSha256 = $null
   testReceipt = $null
+  verificationContract = 'native-sha-bound/1'
+  runnerSha256 = $null
   sourceWrites = 0
   hostEffects = 0
   providerSends = 0
@@ -87,11 +89,26 @@ try {
   $stagedHash = (Get-FileHash -LiteralPath $staged -Algorithm SHA256).Hash
   if ($sourceHash -ne $stagedHash) { throw 'STAGED_NATIVE_HASH_MISMATCH' }
   $receipt.nativeSha256 = $stagedHash
+  $receipt.runnerSha256 = (Get-FileHash -LiteralPath $runner -Algorithm SHA256).Hash
+  # Do not inherit a PASS for the same source if the compiled executable or
+  # test runner changed. The pre-contract journal intentionally forces a replay.
+  $prior = $null
+  if (Test-Path -LiteralPath $journal -PathType Leaf) {
+    try { $prior = Get-Content -LiteralPath $journal -Raw | ConvertFrom-Json } catch { }
+  }
+  $forceTests = ($null -eq $prior -or
+    $prior.verificationContract -ne $receipt.verificationContract -or
+    $prior.state -ne 'PASS' -or
+    $prior.sourceSha -ne $sha -or
+    $prior.nativeSha256 -ne $stagedHash -or
+    $prior.runnerSha256 -ne $receipt.runnerSha256)
 
   $oldRoot = [Environment]::GetEnvironmentVariable('VIVIM_ARBOR_ROOT', 'Process')
   try {
     [Environment]::SetEnvironmentVariable('VIVIM_ARBOR_ROOT', $checkout, 'Process')
-    & node --experimental-strip-types $runner --once
+    $nodeArgs = @('--experimental-strip-types', $runner, '--once')
+    if ($forceTests) { $nodeArgs += '--force' }
+    & node @nodeArgs
     $testExit = $LASTEXITCODE
   } finally {
     [Environment]::SetEnvironmentVariable('VIVIM_ARBOR_ROOT', $oldRoot, 'Process')

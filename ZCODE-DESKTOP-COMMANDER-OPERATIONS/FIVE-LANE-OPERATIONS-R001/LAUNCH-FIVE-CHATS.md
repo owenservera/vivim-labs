@@ -1,5 +1,7 @@
 # Five ChatGPT chats — final copy/paste launcher (R003)
 
+> **Owner stack-first directive now enforced in each of the five full launch prompts:** Every cycle must actively reconcile connected GitHub source and Labs claims; use the existing ZCode model/workflow infrastructure for properly admitted checks; use Desktop Commander for local tests, runtime and actual device evidence; use Planning/Oracle context; and create/verify the dedicated chat's hourly continuation automation. The goal is executable product progress, not five redundant SITREPs. Tools without relevant capability or safe permission are reported unavailable, never imitated.
+
 **Use ChatGPT NEW CHAT five times.** Paste exactly ONE corresponding message from below in each new chat. Each message points to a complete, already-written role prompt. A link or prompt file alone does not start execution; it is the pasted message plus enabled tools that permits the chat to act.
 
 **Current authority:** [ARBOR #33](https://github.com/owenservera/ARBOR/issues/33), [#32](https://github.com/owenservera/ARBOR/issues/32), [#31](https://github.com/owenservera/ARBOR/issues/31), [R002 strategy](STRATEGIC-AUDIT-R002.md), [R002 manifest](manifest.json), [role/claim board](LANE-BOARD.md).

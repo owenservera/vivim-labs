@@ -9,6 +9,8 @@ The single source of truth for the design and real execution receipt is
 
 Four disjoint lanes: Z-VLANG, Z-SAFETY, Z-AUTOWIKI, Z-VISUAL. Tests use existing source/runtime, not a second grammar. One independent agent verifier rejects unsupported proposed improvements.
 
+**2026-11-23 reliability update:** The four *independent test lanes* are now executed **sequentially on this Windows verifier** (`maxConcurrentLanes=1`; Labs `78472401`), because 4-lane and 2-lane simultaneous runs caused transient 1200ms native-child timing failures although each implicated test file passed in isolation. The fully serialized exact-SHA `0cd77a21` run returned **215/215 PASS**, four green lanes, Rust SHA256-verified, zero Host/provider/source effects; [receipt and lineage](DEVOPS-PLANNING/PACKS/EXECUTION-20261123-R001/VERIFICATION-RECEIPT.md). This does **not** disable separate read-only agent fanout or prove model availability/phone rendering.
+
 ### Execute / inspect / stop
 
 ```powershell

@@ -1,5 +1,7 @@
 # DevOps/Planning bundle index — verified links, not a task ledger
 
+**Live pickup refresh — 2026-11-23:** [Current-source ready work, provenance and agent lanes](PACKS/EXECUTION-20261123-R001/CURRENT-PICKUP-20261123.md) updates the R001 five-package intake with ARBOR `0cd77a21`, 215/215 deterministic checks and 61/61 native GPUI Rust tests; physical native theme/Wiki accepted, real provider and Android parity unverified. See [#33 latest shared receipt](https://github.com/owenservera/ARBOR/issues/33#issuecomment-7111406219). No new claim or cross-session ACK is implied.
+
 This file contains **pointers to known pre-integration artifacts**. It does not supersede the canonical OW request/update registry. At the 2026-11-21 GitHub read, the operations-tree `OWNER-WORK/` registry and older `DESIGN/PRE-CODE/` and `code/` locations were **not in Labs remote main**. Do not invent their contents or mark their OW requests complete.
 
 ## Current execution pack — 23 November 2026

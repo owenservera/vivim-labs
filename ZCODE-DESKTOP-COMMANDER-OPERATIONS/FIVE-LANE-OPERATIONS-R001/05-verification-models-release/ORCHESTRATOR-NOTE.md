@@ -60,3 +60,25 @@ Record the literal Node version, TAP totals, exit code, \`git archive\` source S
 **CI R04:** \`d0e5d8a6\` push action run \`45279777200\` reports \`startup_failure\` with zero allocated jobs. Repo Actions policy/billing/runner endpoints remain unavailable through the connected GitHub read interface; owner/admin confirmation and one actual scheduled runner job are required. Never report this as a failed source test.
 
 **Z03 model admission:** Do not launch a paid/fallback model or legacy DWF. The existing read-only SQLite audit showed zero verified live owner-process candidates; all six preferred routes remain unadmitted until fresh provider/plan/cost/quota/fallback receipts exist.
+
+## L05 sustained execution check-in — 2026-11-23 22:50 UTC
+
+Read current ARBOR #33 and Labs TASK-CLAIMS before new source work. This is an evidence handoff, not a scheduler or a claim.
+
+**R03: tested, scoped claim RELEASED; full cleanup remains OPEN.** Cloud Node v22.16.0 exact-file test 8/8 PASS (exit 0); ARBOR source commits 95759fa and e2fd907, verified Git blob hashes. Immutable inventory at ARBOR commit 2c66bdd, main base e2fd907c35cf4b2795a37c5a67f93c2a0df6e6b8: 77 non-main exact-tip comparisons; 37 unique-commit branches PRESERVE, 40 ancestor-only REVIEW, 0 unknown. No branch deletion, archive, merge or force push. Owner-facing receipt: https://github.com/owenservera/ARBOR/issues/33#issuecomment-7116003128
+
+**Z03: tested, scoped source and pilot claims RELEASED; live model admission OPEN.** ARBOR pure receipt gate 12e3309/91c91f1 and exact CLI d027a1c/1a665ba: Node v22.16.0 13/13 PASS, exit 0, both Git source blobs matched. Existing Labs manual pilot updated 2445791/9707d0d to require verified cost/health/source receipt before launcher and direct child, include untracked source fence, preserve read-only status. Labs authored five static tests at 9e495ed; exact live PS source blob 0310c160617e3c9ae63dbb8410618ffaf44f0bf7 static checks 5/5 PASS. Native PowerShell execution and five authored Node contract tests remain UNRUN due Desktop Commander command-validator denial. No model calls or paid fallback. Zero newly verified live model seats. Owner-facing receipt: https://github.com/owenservera/ARBOR/issues/33#issuecomment-7116197655
+
+**R04: infrastructure blocker unchanged.** GitHub run 45282979144 at ARBOR d02f0e219d2b3eb7e2aaf4f1db23911e35979709 completed startup_failure (BuildFailed), jobs=[]; no CI source tests executed. Connector cannot read GitHub Actions policy/billing/runner administration. Owner must check GitHub repository Settings > Actions > General / Runners and billing/eligibility, then obtain one actual job ID with exact Node24 command/exit before claiming repaired.
+
+**R01: historical local WIP preserved, current audit OPEN.** Read-only .source-sync/receipt-ARBOR.json says 2026-11-22 preserved 8 tracked and 28 untracked, deleted 0, detached worktree wip-ARBOR-98890827. Direct Git-ref file reads 2026-11-23: local main 48f61abee5d68f2ab9012e0665c66941da669633; local origin/main 2b0ddf4e51d707403aada5fa1e8ed1f9b73ce572; GitHub main later d02f0e219d2b3eb7e2aaf4f1db23911e35979709. Current dirty status UNVERIFIED; do not reset or merge while L02 works in detached native build checkout.
+
+**R07: source pushed, tests remain UNRUN.** Source a019852cc85bbec945dd1495647928680ed0ada2 and six synthetic tests d0e5d8a6b6a5d5b39c5aef93b1bb5aa92614cd96. Windows Desktop Commander denied even node --version before process dispatch with command-validator PowerShell timeout; no false PASS. Prior packaging 6/6 at different source 95c9e53 does not cover the new commit. R07 claim was released; broader task OPEN.
+
+### EXACT NEXT EXECUTABLE ACTION
+
+First re-open live #33/#24/#31 and TASK-CLAIMS. If Windows command permission has recovered, execute the existing exact `git archive` + Node R07 PowerShell block in this note's earlier 'Single next executable action' section, pinning source d0e5d8a6b6a5d5b39c5aef93b1bb5aa92614cd96, and running:
+
+node --test tools/packaging/test/frozen-manifest-self-containment.test.mjs tools/packaging/test/stage-gpui-runtime.test.mjs tools/packaging/test/bundle-gpui-desktop.test.mjs tools/packaging/test/gpui-local-integration.test.mjs tools/packaging/test/build-gpui-installer.test.mjs
+
+Capture Node version, actual TAP counts, exit, SHA and symlink skip. Do not edit primary checkout, restart Host, touch phone pairing, or call any model. If blocked before execution again, label UNRUN and immediately pivot to independent read-only R03 unique-file diff review, or a fresh unclaimed R06/Z07 no-effect source gate. Keep source/test/package/served/Host/native/Android gates separate: same-SHA full package, physical native paint and Android bidirectional acknowledgement remain unverified.

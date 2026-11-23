@@ -44,3 +44,26 @@ Remove-Item $issue -Force
 The `--issue-body` argument is optional for local structural checks, but **required to claim the lane manifest agrees with current #33**. Validation reads issue text and the manifest; it does not change the tracker, claim tasks or launch a worker. Regression tests: `node --experimental-strip-types --test validate.test.mjs` ([test source](validate.test.mjs)).
 
 **Exact receipt, 2026-11-23:** the isolated Windows test archive at Labs main `793fa1a7dae1824a8299141657914ab7dc8402d7` completed **9/9 tests PASS**, validator exit 0. The independently fetched **actual #33 body** then yielded `open:64, checked:7, verifiedAgainstIssue:true, errors:[], issues:[]`, exit 0. The original dirty Labs checkout was preserved, not reset. This is tracker-coverage proof, not five launched agents or live phone/provider acceptance.
+
+## R004 — full-workspace durability and work inventory
+
+The launch files are now **complete work entrypoints** instead of starter prompts only. Each of the five folders has these additional documents:
+
+- `WORK-INDEX.md`: every currently assigned canonical #33 task, the real task wording, source link, task dependencies and end-to-end acceptance. Current mapping = **64 open/7 checked**, exactly one primary among five lanes.
+- `PLANNING-CROSSWALK.md`: all **37 original PL/AW/PY/GP/VF preparation candidates** allocated exactly once as *references*, with original priority, proposal state, prerequisites and the Planning source link. These are **not** 37 additional canonical tasks.
+- `CONTEXT-AND-TOOLS.md`: authoritative ARBOR/Labs/Planning/Oracle documents and source code, intended ZCode workflows and safety/admission notes, Desktop Commander and cloud GitHub responsibilities.
+- `NEXT-CYCLE.md`: a dependency-ranked continuing work queue, implementation and verification loop, evidence protocol and exit criterion.
+
+The full ChatGPT `CHATGPT-LAUNCH.md` in every folder now explicitly **requires all four files** before task selection and at each recurring cycle. Existing `AGENTS.md`, `START-PROMPT.md` and `HANDOFF.md` remain.
+
+| Lane | Full canonical work list | Planning crosswalk | Source/tool registry | Next-cycle queue |
+|---|---|---|---|---|
+| L01 | [19 tasks](01-chatgpt-provider/WORK-INDEX.md) | [1 proposal](01-chatgpt-provider/PLANNING-CROSSWALK.md) | [links](01-chatgpt-provider/CONTEXT-AND-TOOLS.md) | [queue](01-chatgpt-provider/NEXT-CYCLE.md) |
+| L02 | [19 tasks](02-gpui-mobile-surface/WORK-INDEX.md) | [6 proposals](02-gpui-mobile-surface/PLANNING-CROSSWALK.md) | [links](02-gpui-mobile-surface/CONTEXT-AND-TOOLS.md) | [queue](02-gpui-mobile-surface/NEXT-CYCLE.md) |
+| L03 | [7 tasks](03-work-oracle-autowiki/WORK-INDEX.md) | [16 proposals](03-work-oracle-autowiki/PLANNING-CROSSWALK.md) | [links](03-work-oracle-autowiki/CONTEXT-AND-TOOLS.md) | [queue](03-work-oracle-autowiki/NEXT-CYCLE.md) |
+| L04 | [10 tasks](04-vlang-visual-gestures/WORK-INDEX.md) | [3 proposals](04-vlang-visual-gestures/PLANNING-CROSSWALK.md) | [links](04-vlang-visual-gestures/CONTEXT-AND-TOOLS.md) | [queue](04-vlang-visual-gestures/NEXT-CYCLE.md) |
+| L05 | [9 tasks](05-verification-models-release/WORK-INDEX.md) | [11 proposals](05-verification-models-release/PLANNING-CROSSWALK.md) | [links](05-verification-models-release/CONTEXT-AND-TOOLS.md) | [queue](05-verification-models-release/NEXT-CYCLE.md) |
+
+**Validation:** isolated exact GitHub Labs main `f3b4c2b1624a1646d5e60b1e01e951d90194e37a`, Windows Node 24 `validate.test.mjs` **9/9 PASS**; `validate.ts --issue-body <actual authenticated #33 issue text>` output `filesChecked:47`, `open:64`, `checked:7`, `verifiedAgainstIssue:true`, empty errors, exit 0. GitHub archive contained 49 files under the workspace. The original Labs checkout had one unrelated modified file, which was neither overwritten nor reset.
+
+**Maintainability:** these files are a source-linked snapshot and operational runbook. New work, task completion, changed source or new owner directives **must be refreshed from #33, TASK-CLAIMS and Planning at each scheduled cycle**; never silently promote a historical snapshot. The existing hourly central automation and native observer are not replaced. Five actual ChatGPT lane automations still require individual creation/verification in their own launched chats.

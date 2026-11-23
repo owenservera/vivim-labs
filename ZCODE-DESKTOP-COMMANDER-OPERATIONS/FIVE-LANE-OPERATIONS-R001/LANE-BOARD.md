@@ -39,3 +39,9 @@ Do not register another router, scheduler or Host. Local ZCode `dwf_run` labels 
 Use `READY_NOT_LAUNCHED / SOURCE_READ / CLAIMED / RUNNING_VERIFIED / TESTED / BLOCKED / DONE_VERIFIED`. Record `CODED, PUSHED, SOURCE_TESTED, PACKAGED, SERVING, HOST_ACK, PROVIDER_VERIFIED, GPUI_VERIFIED, PHONE_RENDERED` separately. Every handoff includes exact source SHA, task, owner, claimed paths, command/exit, verification scope, unavailable stages, next gate and actual receiver acknowledgment. A GitHub comment or published prompt is not a wake receipt.
 
 **Priority:** L01 true signed-in message→reply first, L04 negative test/fix in parallel, L02 release/device proof, L03 authorized Work/knowledge, L05 enforces truth continuously. Branch archive and old UI retirement follow accepted product capability; don't confuse inventory with parity.
+
+
+## Live critical-path sequencing
+
+Before prioritizing or claiming the next item, read [R004 five-lane strategic execution sequence](STRATEGIC-EXECUTION-SEQUENCE-R004.md). It combines the actual L01/L04 claim scopes, L02 S11 delivery, currently enabled L01–L03 hourly recurrences, isolated ARBOR package/deployment gate, and bounded real ZCode/Windows verifier status. **L04/L05 ChatGPT hourly recurrences have not yet been verified** at this read; a claim is not an automation. This is a source-linked orchestrator note; defer to live #33 and TASK-CLAIMS for status.
+

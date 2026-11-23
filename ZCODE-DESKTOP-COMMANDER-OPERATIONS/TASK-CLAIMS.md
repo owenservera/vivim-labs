@@ -96,6 +96,8 @@ The [Planning master task catalogue R001](DEVOPS-PLANNING/MASTER-PLAN-R001.md) c
 
 | **U04/S09 — native GPUI remote keyboard/IME focus and replay contract** | **ChatGPT unified engineering / gpui-native-ime-r014 — ACTIVE SOURCE OWNER** | ARBOR `native/gpui-desktop/src/remote_viewport_contract.rs` ONLY; source blob `6c55fc8dc726930b53a4143ff9cade9d4ca64edb`; existing L02 S03 build no source edits, no Host/PWA app.js | **ACTIVE / CODE_PENDING / INERT TESTS ONLY** | 2026-11-24: extend native InputFence beyond touch with source-owner-focused key and IME composition event validation, bounded UTF16/controls, one sequence across touch/text and no input effect authority. Pure Rust exact-source regression. | Source-pinned `rustc --test` Windows, claim release; physical IME/Android integration not accepted. |
 
+| **U04/S09 — thin PWA keyboard/IME to native GPUI packet contract** | **ChatGPT unified engineering / gpui-pwa-ime-r015 — ACTIVE SOURCE OWNER** | NEW ARBOR `apps/mobile-relay/gpui-text-input-contract.mjs` + NEW `apps/mobile-relay/test/gpui-text-input-contract.test.mjs` ONLY; no `app.js` or Host edits; matches owning native Rust TextPhase/fence | **ACTIVE / CODE_PENDING / INERT TESTS ONLY** | 2026-11-24: browser-safe composition and key event packet builder with validated frame identity, bounded UTF-16 Unicode, no forged focus/control ID, no direct Host effect. Native Rust contract claim separate. | Exact-SHA Node test, release; no actual mobile keyboard or paired device acceptance. |
+
 ## Concurrency and recovery
 
 - One task executor, one edit scope at a time. Parallel agents may work separate tasks and scopes; overlapping source files require a recorded owner-to-owner agreement before coding.

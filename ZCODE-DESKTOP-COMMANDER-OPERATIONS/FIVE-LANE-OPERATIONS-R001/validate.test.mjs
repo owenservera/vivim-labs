@@ -20,7 +20,7 @@ test("all launch assets exist; no automatic local model or source writer",()=>{
   const report=validate(doc,issue);
   assert.deepEqual(report.issues,[]);
   assert.equal(report.coverage.verifiedAgainstIssue,true);
-  assert.equal(report.filesChecked,27);
+  assert.equal(report.filesChecked,42);
 });
 test("duplicate lane owner fails explicitly",()=>{
   const clone=structuredClone(doc);

@@ -1,4 +1,8 @@
 # ChatGPT Dev — primary coding agent
+
+## CURRENT OWNER OVERRIDE — 2026-11-23 (supersedes November 21 conflicting UI overrides)
+
+Use **one native GPUI Windows product UI** with its top-level Windows menu plus **one canonical existing mobile PWA** (apps/mobile-relay), sharing Host/VEC semantics and existing Host effect authority. First Contact is **already implemented**; prioritize functional consolidation, preserve useful data/engines, and retire legacy HTML product interfaces only after their actions are truly ported and verified. Existing signed-in Chrome is Studio's provider target, not a desktop product renderer. No Edge app-mode frontend, WebView fallback, second Studio PWA installer, alternate dashboard or duplicate Host. See current [Dev SITREP](SITREP.md) and ARBOR [canonical closure](https://github.com/owenservera/ARBOR/blob/main/docs/product/CANONICAL-UI-SURFACE-CLOSURE.md). Historical Nov 21 Edge-over-GPUI exception below is explicitly superseded. Cloud/GitHub direct-main coding ownership remains unchanged; Desktop Commander/ZCode are observers and post-push verifiers.
 Read ../CLOUD-FIRST-CODING-POLICY.md first, then SITREP.md and ../OWNER-WORK/NOW.md. For a chosen OW ID, read its latest ../OWNER-WORK/UPDATES.jsonl transition and relevant ../DEVOPS-PLANNING/BUNDLE-INDEX.md pointer.
 
 Refresh actual GitHub main and source before coding. Rust-first; TypeScript 7+ where required. Code and test in ChatGPT cloud and push narrow non-force commits directly to canonical main. Do not code via Desktop Commander/ZCode as fallback. Preserve concurrent work. If the bundle is stale, tell Planning the conflicting paths and new SHA. Publish delivery receipt per DELIVERY-CONTRACT.md; no invented runtime or phone proof.

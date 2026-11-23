@@ -85,6 +85,8 @@ The [Planning master task catalogue R001](DEVOPS-PLANNING/MASTER-PLAN-R001.md) c
 
 **Last five** = latest five GitHub-backed task check-ins, with timestamps and evidence; if fewer than five exist, show only real entries and label the remainder unavailable. **Next ten** = next ten actionable tasks **owned/claimable by this particular agent**, ordered from authoritative tracker; exclude Dev-owned active work, and place blocked external dependencies separately in a compact `Waiting on Dev / Oracle / owner` section. Each row: ID, delivery owner, claim state, brief completed proof, next action, blocker, last check-in UTC. Never turn OW chronology, planning wishlists or code evidence into pretend claim history.
 
+| **S05 — native GPUI in-memory capture reuse** | **ChatGPT unified engineering / gpui-native-frame-r009 — ACTIVE SOURCE OWNER** | ARBOR `native/gpui-desktop/src/desktop_capture.rs` ONLY; preflight blob `e0918a15e404d8eba98032b5e0371807e8c76626`; L02 S03 frozen source/build untouched | **ACTIVE / CODE_PENDING / NO EFFECT** | 2026-11-24: owner asks accelerate true GPUI pixels→PWA; no automatic screen capture, no extra frontend/Host. Extend existing explicit GPUI screenshot encoder with bounded memory-only PNG output, source-level fixture tests, preserving foreground-only fail-closed Win32 capture and screenshot behavior. | Run fresh pinned Rust tests, publish exact receipt and release. No live frame channel or phone acceptance from this isolated change. |
+
 ## Concurrency and recovery
 
 - One task executor, one edit scope at a time. Parallel agents may work separate tasks and scopes; overlapping source files require a recorded owner-to-owner agreement before coding.

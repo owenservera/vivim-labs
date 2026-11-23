@@ -45,3 +45,5 @@ Use `READY_NOT_LAUNCHED / SOURCE_READ / CLAIMED / RUNNING_VERIFIED / TESTED / BL
 
 Before prioritizing or claiming the next item, read [R004 five-lane strategic execution sequence](STRATEGIC-EXECUTION-SEQUENCE-R004.md). It combines the actual L01/L04 claim scopes, L02 S11 delivery, currently enabled L01–L03 hourly recurrences, isolated ARBOR package/deployment gate, and bounded real ZCode/Windows verifier status. **L04/L05 ChatGPT hourly recurrences have not yet been verified** at this read; a claim is not an automation. This is a source-linked orchestrator note; defer to live #33 and TASK-CLAIMS for status.
 
+
+> **Live lane coordinator R005:** [Current five-chat assignments and exact last proven deliverables](ORCHESTRATOR-NEXT-ACTIONS-R005.md). Recheck live claims and #33 on each turn. Existing L04/L05 chats have completed source/evidence increments, but their hourly ChatGPT tasks are not verified; do not confuse chat launch with a scheduler.

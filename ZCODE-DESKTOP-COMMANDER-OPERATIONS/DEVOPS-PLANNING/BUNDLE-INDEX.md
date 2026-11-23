@@ -70,3 +70,9 @@ Earlier planning docs referenced `../OWNER-WORK/NOW.md`, `../OWNER-WORK/UPDATES.
 
 - [ARBOR NOW→FUTURE source-backed wiring audit](https://github.com/owenservera/ARBOR/blob/main/docs/product/ARBOR-NOW-FUTURE-WIRING-20261123.md) — actual working paths vs proof missing, shared authority map and critical dependency order; **not** a new tracker.
 - [R002 ready-package / agent pickup delta](PACKS/EXECUTION-20261123-R001/WIRING-DELTA-R002.md) and [machine-readable R002 state](PACKS/EXECUTION-20261123-R001/wiring-delta-r002.json) — add-on to existing R001 package. Latest observed 210/215 verifier BLOCKED at ARBOR 0cd77a2 and Labs serial-native runner 7847240 awaiting new complete evidence; do not silently inherit old green result.
+
+## R003 owner-ready source packets
+
+- [Explicit PWA Build/Change admission — PY-001](PACKS/EXECUTION-20261123-R001/PWA-BUILD-INTENT-R003.md) and [machine intake](PACKS/EXECUTION-20261123-R001/pickup-r003.json). Labs-only Planning claim; newly authored ARBOR `studio/test/unit/pwa-work-ingress-reuse.test.mjs` validates pure Work reducer reuse but **does not prove** a Host-authorized PWA writer. Receiver must claim/ACK before editing ARBOR.
+- [Read-only Studio/ChatGPT readiness — P0-AI-CHAT](PACKS/EXECUTION-20261123-R001/PROVIDER-READINESS-R003.md). Actual Studio owner-idle read observed, no provider send/settled reply/phone receipt. Do not run state-changing local conversation-reconcile helper as a health probe.
+- Earlier [R001 execution pack](PACKS/EXECUTION-20261123-R001/README.md) and [R002 wiring audit](PACKS/EXECUTION-20261123-R001/WIRING-DELTA-R002.md) remain linked; all work maps back to #33 and existing TASK-CLAIMS.

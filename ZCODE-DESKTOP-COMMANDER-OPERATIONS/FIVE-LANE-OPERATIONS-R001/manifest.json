@@ -1,6 +1,6 @@
 {
   "schema": "vivim.five-lane-operation/1",
-  "version": "R001",
+  "version": "R002",
   "authority": {
     "repository": "owenservera/ARBOR",
     "branch": "main",
@@ -18,14 +18,21 @@
       "folder": "01-chatgpt-provider",
       "priority": "P0",
       "issueIds": [
-        "A01-A16"
+        "A01-A16",
+        "C01-C03"
       ],
       "workflowRefs": [
         ".zcode/workflows/arbor-area-c.dwf.ts",
         ".zcode/workflows/arbor-chatgpt-bridge.dwf.ts"
       ],
       "execution": "READY_NOT_LAUNCHED",
-      "sourceEdits": "CLAIM_REQUIRED"
+      "sourceEdits": "CLAIM_REQUIRED",
+      "primaryScope": "Signed-in provider session correctness and Studio capture/interaction proofs",
+      "secondaryDependencies": [
+        "L02 for C04/C05 native parity and device presentation"
+      ],
+      "preferredVerifier": ".zcode/workflows/arbor-product-verification-parallel.dwf.ts",
+      "workflowLaunch": "MANUAL_ADMISSION_REQUIRED"
     },
     {
       "id": "L02",
@@ -34,14 +41,21 @@
       "issueIds": [
         "S02-S14",
         "U01-U04",
-        "U10"
+        "C04-C05"
       ],
       "workflowRefs": [
         ".zcode/workflows/arbor-area-d.dwf.ts",
         ".zcode/workflows/arbor-area-e.dwf.ts"
       ],
       "execution": "READY_NOT_LAUNCHED",
-      "sourceEdits": "CLAIM_REQUIRED"
+      "sourceEdits": "CLAIM_REQUIRED",
+      "primaryScope": "Native GPUI, shared PWA, source-pinned packaging, source-to-device proof",
+      "secondaryDependencies": [
+        "L01 provider reply",
+        "L04 U10 semantic visual feedback"
+      ],
+      "preferredVerifier": ".zcode/workflows/arbor-product-verification-parallel.dwf.ts",
+      "workflowLaunch": "MANUAL_ADMISSION_REQUIRED"
     },
     {
       "id": "L03",
@@ -49,7 +63,6 @@
       "priority": "P0/P1",
       "issueIds": [
         "U05",
-        "U07",
         "O01-O06"
       ],
       "workflowRefs": [
@@ -57,7 +70,14 @@
         ".zcode/workflows/arbor-oracle-corpus-verify.dwf.ts"
       ],
       "execution": "READY_NOT_LAUNCHED",
-      "sourceEdits": "CLAIM_REQUIRED"
+      "sourceEdits": "CLAIM_REQUIRED",
+      "primaryScope": "Real Work admission, Oracle provenance, authorized knowledge, Wiki",
+      "secondaryDependencies": [
+        "L04 U07 Host VLANG plan approval contract",
+        "Dev-owned PY-001 claim"
+      ],
+      "preferredVerifier": ".zcode/workflows/arbor-oracle-corpus-verify.dwf.ts",
+      "workflowLaunch": "MANUAL_ADMISSION_REQUIRED"
     },
     {
       "id": "L04",
@@ -65,30 +85,54 @@
       "priority": "P0/P1",
       "issueIds": [
         "U06-U11",
-        "G02-G05",
-        "Z01"
+        "G02-G05"
       ],
       "workflowRefs": [
         ".zcode/workflows/arbor-vlang-iterative-observers.dwf.ts",
         ".zcode/workflows/arbor-product-verification-parallel.dwf.ts"
       ],
       "execution": "READY_NOT_LAUNCHED",
-      "sourceEdits": "CLAIM_REQUIRED"
+      "sourceEdits": "CLAIM_REQUIRED",
+      "primaryScope": "Rust NL planning, Host-approved commands, TierFlow visual feedback, gestures",
+      "secondaryDependencies": [
+        "L03 Work submit",
+        "L02 GPUI and PWA adapter rendering"
+      ],
+      "preferredVerifier": ".zcode/workflows/arbor-vlang-iterative-observers.dwf.ts",
+      "workflowLaunch": "MANUAL_ADMISSION_REQUIRED"
     },
     {
       "id": "L05",
       "folder": "05-verification-models-release",
       "priority": "P0/P1",
       "issueIds": [
-        "Z02-Z07",
-        "R01-R07"
+        "Z02-Z04",
+        "Z07",
+        "R01",
+        "R03-R04",
+        "R06-R07"
       ],
       "workflowRefs": [
         ".zcode/workflows/arbor-product-verification-parallel.dwf.ts",
         ".zcode/workflows/arbor-area-a.dwf.ts"
       ],
       "execution": "READY_NOT_LAUNCHED",
-      "sourceEdits": "CLAIM_REQUIRED"
+      "sourceEdits": "CLAIM_REQUIRED",
+      "primaryScope": "Independent source/run/model/CI and full release evidence",
+      "secondaryDependencies": [
+        "All lanes for acceptance only; L02 owns production promotion"
+      ],
+      "preferredVerifier": ".zcode/workflows/arbor-product-verification-parallel.dwf.ts",
+      "workflowLaunch": "MANUAL_ADMISSION_REQUIRED"
     }
-  ]
+  ],
+  "workflowAdmission": "REFERENCE_ONLY_UNTIL_RUNTIME_AND_EFFECT_PERMISSIONS_VERIFIED",
+  "strategicAudit": "STRATEGIC-AUDIT-R002.md",
+  "snapshot": {
+    "master": "ARBOR issue #33",
+    "checked": 7,
+    "open": 64,
+    "recordedDate": "2026-11-23",
+    "role": "coverage check only, not a second task ledger"
+  }
 }

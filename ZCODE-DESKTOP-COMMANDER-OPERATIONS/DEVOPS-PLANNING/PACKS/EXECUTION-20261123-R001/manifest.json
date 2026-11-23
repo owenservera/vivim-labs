@@ -1,0 +1,188 @@
+{
+  "schema": "vivim.agent-execution-packs/1",
+  "createdAt": "2026-11-23",
+  "canonical": {
+    "ownerRepo": "owenservera/ARBOR",
+    "branch": "main",
+    "observedSha": "84ca3c36980238c730875f647baedc18ec7e0747",
+    "masterIssue": 33,
+    "aiIssue": 32,
+    "releaseIssue": 31,
+    "lastAccepted": 6,
+    "totalMaster": 71
+  },
+  "operations": {
+    "repo": "owenservera/vivim-labs",
+    "observedSha": "adb885fb60dbc52aeda60c7715e50078c7f7a158",
+    "observerTask": "VIVIM-VLANG-Observer",
+    "lastVerifiedSourceSha": "7b9e7dbd5f17042febea33e6b8563d536987545f",
+    "lastDeterministicPass": 215,
+    "lastDeterministicFail": 0,
+    "sourceWrites": 0,
+    "hostEffects": 0,
+    "providerSends": 0,
+    "freshObserver": "TRIGGERED_PENDING_RECEIPT"
+  },
+  "immutableRules": [
+    "Refresh main before work",
+    "One GitHub source owner per file",
+    "ChatGPT cloud direct GitHub main codes",
+    "Host sole approvals effects receipts",
+    "GPUI native Windows and PWA shared canonical semantic surface",
+    "No legacy uncertain provider request replay",
+    "No browser owner duplication",
+    "ZCode read-only 4-lane scout",
+    "No paid model fallback without approval",
+    "No application source edits via Desktop Commander",
+    "No device acceptance from simulated tests"
+  ],
+  "packages": [
+    {
+      "id": "P0-AI-CHAT",
+      "priority": "P0",
+      "taskIds": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08",
+        "A10",
+        "A12"
+      ],
+      "owner": "ChatGPT Dev",
+      "state": "READY_TO_PICK_UP_NOT_ACCEPTED",
+      "requiresOwnerFreshPrompt": true,
+      "dependencies": [
+        "#32",
+        "read-only uncertain-key and busy Studio reconciliation"
+      ],
+      "success": [
+        "fresh composer+thread pinned",
+        "exactly one send",
+        "settled provider reply",
+        "Host receipt",
+        "real phone render+ACK"
+      ]
+    },
+    {
+      "id": "P0-RELEASE-SYNC",
+      "priority": "P0",
+      "taskIds": [
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S13",
+        "S14"
+      ],
+      "owner": "ChatGPT Dev",
+      "verifier": "Desktop Commander",
+      "state": "READY_TO_PICK_UP_NOT_ACCEPTED",
+      "success": [
+        "one source-SHA immutable package",
+        "existing URL unchanged",
+        "two-way source/view revision proof",
+        "actual Android ACK",
+        "rollback"
+      ]
+    },
+    {
+      "id": "P1-GPUI",
+      "priority": "P1",
+      "taskIds": [
+        "U01",
+        "U02",
+        "U03",
+        "U04",
+        "U09",
+        "G02",
+        "G03",
+        "G04",
+        "G05"
+      ],
+      "owner": "ChatGPT Dev",
+      "verifier": "Desktop Commander",
+      "state": "READY_TO_PICK_UP_NOT_ACCEPTED",
+      "success": [
+        "physical native menu/IME/typing",
+        "read-only Wiki feedback",
+        "native screenshot+actual interaction",
+        "gesture parity receipts"
+      ]
+    },
+    {
+      "id": "P1-VLANG-WIKI-ORACLE",
+      "priority": "P1",
+      "taskIds": [
+        "U05",
+        "U06",
+        "U07",
+        "U08",
+        "O01",
+        "O02",
+        "O03",
+        "O04",
+        "O05",
+        "O06"
+      ],
+      "owner": "ChatGPT Dev",
+      "planning": "Labs preintegration only",
+      "auditor": "Oracle",
+      "state": "READY_TO_PICK_UP_NOT_ACCEPTED",
+      "success": [
+        "deterministic Host typed command with approval",
+        "source-backed scoped Wiki/AutoWiki",
+        "authorized real corpus with provenance and deletion",
+        "no new parser/world authority"
+      ]
+    },
+    {
+      "id": "OPS-OBSERVERS",
+      "priority": "P1",
+      "taskIds": [
+        "Z01",
+        "Z02",
+        "Z03",
+        "Z04",
+        "Z05",
+        "Z06",
+        "Z07",
+        "S12",
+        "R04",
+        "R05",
+        "R06"
+      ],
+      "owner": "ZCode bounded read-only; Desktop Commander Windows operations; ChatGPT reconciles",
+      "state": "EXISTING_OBSERVER_RUNNING_NOT_CURRENT_SHA_PASS",
+      "success": [
+        "exact-SHA hash-bound regression receipt",
+        "no effects or spend",
+        "CI runner job evidence",
+        "tracker evidence not duplicate source edits"
+      ]
+    }
+  ],
+  "verificationStates": [
+    "CODED",
+    "PUSHED",
+    "SOURCE_TESTED",
+    "PACKAGED",
+    "STAGED",
+    "DEPLOYED",
+    "PROVIDER_VERIFIED",
+    "GPUI_RENDERED",
+    "PHONE_RENDERED"
+  ],
+  "claimSurface": "ZCODE-DESKTOP-COMMANDER-OPERATIONS/TASK-CLAIMS.md",
+  "agentEntrypoint": "ZCODE-DESKTOP-COMMANDER-OPERATIONS/DEVOPS-PLANNING/PACKS/EXECUTION-20261123-R001/AGENT-HANDOFF.md",
+  "autoDispatch": false
+}

@@ -1,7 +1,7 @@
 # PY-001 — Explicit PWA Build / Change intent admission: implementation-ready R003
 
 **Claim:** PY-001 Planning-only, scoped to this Labs packet. **Arbor source observed:** `dfb5480b17f5daa8861352e0cb81dd97e01e9f9d`. **Labs source observed:** `6840fa86db4426254ede07ace5dfcdbd070cd1e0`. The source SHA is an observation, not a long-term pin. **Do not edit ARBOR application source until Dev accepts a nonoverlapping claim.**
-**Authority:** [master issue #33](https://github.com/owenservera/ARBOR/issues/33) → existing `P1-VLANG-WIKI-ORACLE` / `P0-RELEASE-SYNC` packets; [owner claims](../../TASK-CLAIMS.md). The prepared packet does **not** claim an actual implementation, receiver ACK, queued job, provider message, or phone UI.
+**Authority:** [master issue #33](https://github.com/owenservera/ARBOR/issues/33) → existing `P1-VLANG-WIKI-ORACLE` / `P0-RELEASE-SYNC` packets; [owner claims](../../../TASK-CLAIMS.md). The prepared packet does **not** claim an actual implementation, receiver ACK, queued job, provider message, or phone UI.
 
 ## Outcome and blocking decision
 

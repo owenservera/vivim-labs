@@ -1,5 +1,55 @@
 # DevOps / Planning SITREP — 2026-11-21 (GitHub bootstrap R004)
 
+## LIVE CONTINUATION — 2026-11-23 R003 planning / runtime readiness
+
+**Canonical oversight:** [ARBOR #33](https://github.com/owenservera/ARBOR/issues/33), [#32 provider](https://github.com/owenservera/ARBOR/issues/32), [#31 same-source phone release](https://github.com/owenservera/ARBOR/issues/31). **No new backlog.** Planning-only [TASK-CLAIMS](../TASK-CLAIMS.md) PY-001 now **READY_FOR_HANDOFF / OFFERED_TO:CHATGPT-DEV**, sender retains until explicit ACK. Dev owns all ARBOR source integration and the two P0 product missions.
+
+### Source/actual evidence at the live pass
+
+- Observed ARBOR latest `dfb5480b17f5daa8861352e0cb81dd97e01e9f9d` includes new `studio/test/unit/pwa-work-ingress-reuse.test.mjs`: **6 authored no-effect source tests** for existing Studio Work reducer. They do **not** prove Host-owned PWA ingress and have **no run receipt here**. Existing `studio/src/agents/personal-agent-service.mjs` remains Studio local CAS, not automatically authorized PWA Work.
+- Native Windows no-effect source-pinned observer **215/215 PASS** at **older exact ARBOR `f5623943b746daac3d55a0ae4896430083a568ba`**: 22/22 VLANG, 160/160 safety, 12/12 AutoWiki, 21/21 visual; `vlang-2026-11-23T19-24-07-866Z`, wrapper `PASS`, finished 2026-11-23T19:25:31Z. Existing hourly Task Scheduler is `Ready`, last exit 0. All four lanes run serialized (`maxConcurrentLanes=1`); `sourceWrites=0`, `hostEffects=0`, `providerSends=0`. **No complete 215-case proof yet for later dfb source**. No release promotion/phone test.
+- Existing Studio read-only probe returned `ready:true / STUDIO_OWNER_IDLE / supportedProviders:[chatgpt]`. This proves only incumbent owner status + no currently active conversation writer as checked; **not** ChatGPT account/thread/composer verification, new send, settled reply or phone paint. Host root HTTP 308; Studio root 200.
+- Inspected local `.private/reconcile-studio-sessions.mjs` contains **state-changing POST /conversations/{id}/reconcile**. It is not read-only and must never be auto-run in no-effect SITREP. No private IDs/prompts published.
+- User-visible native GPUI theme Dusk↔Tide+Undo, Host receipt and AutoWiki `wiki`→3 sections/revision1 physically proven at `0cd77a2` in prior #33 evidence. Android reverse state, signed-in chat provider and same-SHA complete package remain open.
+- Only limited ZCode model pings were historically verified; configured providers or 93 agent definition files do **not** establish six healthy/cost-approved active routes, a live model scout or background Dev ACK. Reuse existing router. CI Actions zero-job startup failure remains a separate unresolved platform gate.
+
+### R003 prepared implementation handoffs (public-safe, no local source edits)
+
+- [PY-001 explicit PWA Build/Change admission](PACKS/EXECUTION-20261123-R001/PWA-BUILD-INTENT-R003.md): exact PWA Build UI, Host Control, Studio Work CAS and 15 no-effect/phone refusal cases. **PY-002 Host-owned durable writer is a blocking decision**; no direct mobile POST to Studio, second DB, separate dispatcher or hidden provider send.
+- [P0-AI-CHAT read-only Studio readiness and no-replay packet](PACKS/EXECUTION-20261123-R001/PROVIDER-READINESS-R003.md): actual owner idle observation; safe next source/browser/thread/worker checks; old uncertain turn never replayed.
+- [Machine pickup R003](PACKS/EXECUTION-20261123-R001/pickup-r003.json) plus the [existing R001 packet](PACKS/EXECUTION-20261123-R001/README.md), [R002 wiring audit](PACKS/EXECUTION-20261123-R001/WIRING-DELTA-R002.md) and [verified runner receipt](PACKS/EXECUTION-20261123-R001/VERIFICATION-RECEIPT.md).
+
+### Next ten Planning candidates (proposed, **not ten active agents**)
+
+| Rank | Existing ID | Truthful next preparation | Blocker / external owner |
+|---:|---|---|---|
+| 1 | **PY-002** | Prove Host-authorized, actor-scoped durable Work writer from existing Studio/Host components | **BLOCKED_SOURCE**, Dev owner decision |
+| 2 | **PY-005** | Inspect existing HQ ZCode wake; specify admission/ACK without executing any live session | Cost/seat/owner grant unverified |
+| 3 | **PY-003** | Define same-key/same-payload and conflicting-key cross-device CAS negative tests | PY-002 writer decision |
+| 4 | **PY-004** | Map existing LiveSystemState source-backed Work status projection, no new event bus | PY-002 |
+| 5 | **PY-006** | One OFFERED_TO→ACCEPTED_BY scoped Dev handoff using existing claim CAS | Receiver not ACKed |
+| 6 | **PY-007** | Single-SHA packaging, served source and phone receipt recipe | Dev #31 |
+| 7 | **VF-001** | SOURCE→TEST→PACKAGE→SERVE→HOST_ACK→GPUI→PHONE evidence matrix | Physical phone |
+| 8 | **VF-002** | Align real native/Android captures with Host source/epoch revisions | Physical phone |
+| 9 | **VF-004** | Revoked grant, IME, stale epoch, concurrent human/agent negatives | Owner source grant |
+| 10 | **AW-010** | Source-pin existing Host Wiki/HQKG read path and exact source grant producer | Existing sender-owned R003/R006 pack; no second claim |
+
+**Waiting on Dev/Oracle/owner:** #32 real fresh provider message and settled reply; #31 immutable Host/GPUI/PWA candidate plus Android two-way proof; Oracle authorized real personal corpus with provenance/revoke/delete; full GPUI interaction/legacy retirement gates; CI runner/billing/support and six verified model routes. Do not silently transfer these to Planning.
+
+### Last five explicit timestamped claim check-ins (not inferred from OW IDs)
+
+1. **2026-11-23 19:32 UTC PY-001** — new R003 Planning packet offered; Dev acceptance not observed.
+2. **2026-11-22 17:53 UTC DC-STREAM-R008** — local archive/daily learning evidence, RELEASED.
+3. **2026-11-21 11:43 UTC AW-GRANT-R006** — PREPARED/OFFERED, Rust tests authored but UNRUN.
+4. **2026-11-21 11:39 UTC AW-SEMANTIC-R005** — PREPARED/OFFERED, tests authored but UNRUN.
+5. **2026-11-21 10:56 UTC AW-R003-PRECODE-R004** — PREPARED/OFFERED, tests authored but UNRUN.
+
+The GitHub claim overlay may not contain every external agent event, and several historical check-ins have only a calendar day, not exact time. Never claim these five are the entire historical activity log.
+
+**Next accountable owner handoff:** Dev acknowledges the offered PY-001 scope in [TASK-CLAIMS](../TASK-CLAIMS.md) only after refreshing source; resolves PY-002 canonical writer or returns a specific blocking proof. Planning may continue independent PY-005/VF source research, but may not write ARBOR application source. Oracle validates requested real/device evidence, no synthetic PASS.
+
+---
+
 ## Current planning takeover — 2026-11-23, after exact-source verification
 
 **This section supersedes dated source/test assumptions below; not the historical evidence itself.** Live source snapshot ARBOR `0cd77a2185afe204e41e04fe3d3d588133a3eac6`; current deterministic Windows source-pinned observer `215/215 PASS` across four serially executed scopes, matching hash-bound native receipt and `61/61` GPUI Rust library tests. Previous 4-/2-concurrent Windows test failures were recorded and narrowed to likely subprocess contention, not erased. Recent real GPUI physical Host theme/Undo and three-section AutoWiki readback succeeded; fresh AI provider reply, Android phone parity, full release closure and six working model routes are still **UNRUN/UNPROVEN**. Canonical #33 remains the completion ledger; do not silently close unchecked items.

@@ -1,5 +1,17 @@
 # FIVE-LANE OPERATING DIRECTIVE — R001 (with R002 strategic overlay)
 
+## R003 mandatory stack-first execution policy
+
+**USE THE EXISTING STACK ON EVERY CYCLE, NOT JUST WHEN REMINDED.** Before planning or concluding a development cycle, inventory and use the already-connected capabilities relevant to that cycle:
+- **Connected GitHub + ARBOR `main`:** primary source reading, claimed Rust-first/TypeScript 7+ production coding, commits, tracker #33 and exact-SHA evidence. Cloud GitHub writes are the normal product-code path, not local Desktop Commander edits.
+- **VIVIM Labs + Planning + Oracle + `TASK-CLAIMS.md`:** same canonical task IDs, owner/source collision checks, handoffs, provenance, priority and outcome governance. Reconcile with current state, never duplicate a ledger.
+- **ZCode native workflows, saved agents and original provider registry:** inspect existing `.zcode/workflows` and current model/provider health; use the **conditionally admitted** exact-SHA verification workflows and bounded model scouts when actual run IDs, permissions, quotas and costs are proved. Prefer existing capabilities over new wrappers. Do not launch effectful historical DWFs unchanged.
+- **Remote Desktop Commander:** inspect/test the authorized Windows machine and incumbent Studio/Host/GPUI/ZCode processes; independently verify post-push builds, logs, screens, phone/device, real source-to-runtime drift and operating tasks. No local product-source overwrite by default.
+- **Context7/current documentation, Files/connected apps and Automations:** use when a concrete task benefits; never substitute extra tools for user consent, truthful evidence, or a working model seat. In each dedicated lane chat, schedule exactly one **hourly** bounded continuation when supported, verify enabled task/ID/next run and never mistake hourly recurrence for an uninterrupted process.
+- **Available tools:** discover available connectors on each turn rather than assuming a past session's tools are attached. State unavailability clearly, continue with other capable tools and record blocked proof stages. `Use the stack` means proactively employ *each relevant working layer* and exploit reuse; it does not authorize indiscriminate account effects, provider sends, surprise billable routes, parallel source writes, live Host restart or production promotion.
+
+**Minimum every-cycle tool evidence:** current GitHub main SHA + TASK-CLAIMS collision scan; one substantive product/source or deterministic verification action; source-bound test/exit receipt; Desktop/ZCode checks when relevant and available; #33 checkpoint; explicit next claimable action; accurate automation state. No SITREP-only loops when work is safely executable.
+
 ## R002 strategic ruling (supersedes conflicting R001 lane-ID prose)
 
 - Read [STRATEGIC-AUDIT-R002.md](STRATEGIC-AUDIT-R002.md) and [LANE-BOARD.md](LANE-BOARD.md) **before** treating a lane's earlier `AGENTS.md` or `START-PROMPT.md` as an ownership claim. The **R002 manifest contains one primary lane for each of 64 open #33 IDs**; earlier references to U07/U10/Z01 and missing C01–C05 are historic descriptions or secondary dependencies, not a right to duplicate task ownership.

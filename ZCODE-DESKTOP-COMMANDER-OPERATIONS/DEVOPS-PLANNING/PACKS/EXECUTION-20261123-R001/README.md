@@ -38,3 +38,7 @@
 
 ## How others receive this
 This file is committed to the *existing* Labs operations tree and linked from its `DEVOPS-PLANNING/BUNDLE-INDEX.md` plus master GitHub tracker #33. An agent reading either canonical entrypoint can pick up the correct scope and post a claim under `TASK-CLAIMS.md`. **Publication is not a live notification, automatic agent invocation or cross-chat acknowledgement.** Each agent must explicitly check out an unclaimed packet and return evidence; no silent task reassignment.
+
+## R002 current wiring and ready-package overlay
+
+The [ARBOR source-backed NOW→FUTURE wiring audit](https://github.com/owenservera/ARBOR/blob/main/docs/product/ARBOR-NOW-FUTURE-WIRING-20261123.md), [R002 executable pickup delta](WIRING-DELTA-R002.md), and [R002 machine manifest](wiring-delta-r002.json) supersede stale **observed-state snapshots** in this R001 README without changing the original five R001 work-package IDs, owners or safety contracts. They do **not** auto-dispatch work. Refresh current GitHub HEAD and task claims before accepting any package.

@@ -1,4 +1,14 @@
-# FIVE-LANE OPERATING DIRECTIVE — R001
+# FIVE-LANE OPERATING DIRECTIVE — R001 (with R002 strategic overlay)
+
+## R002 strategic ruling (supersedes conflicting R001 lane-ID prose)
+
+- Read [STRATEGIC-AUDIT-R002.md](STRATEGIC-AUDIT-R002.md) and [LANE-BOARD.md](LANE-BOARD.md) **before** treating a lane's earlier `AGENTS.md` or `START-PROMPT.md` as an ownership claim. The **R002 manifest contains one primary lane for each of 64 open #33 IDs**; earlier references to U07/U10/Z01 and missing C01–C05 are historic descriptions or secondary dependencies, not a right to duplicate task ownership.
+- **Native GPUI on Windows + one Android PWA** is the latest canonical UI decision; older Nov 21 Edge-only and PWA-only design notes are superseded for the Windows product UI. No extra desktop web frontend or lost legacy functionality.
+- Existing `arbor-area-a`…`e` and `arbor-integrate` are **REFERENCE_ONLY**: they include legacy component tracker edits, local builders and/or commit/merge operations; do not call them no-effect observers. `arbor-life` has a production Host restart path; `arbor-chatgpt-bridge` performs an actual provider send. Do not execute either unchanged or in apparent audit mode. The R002 matrix specifies conditional verification-only candidates.
+- **Five missions ≠ five launched ZCode model runs.** The recorded Windows auditor saw 18 workflow definitions, 361 historical `dwf_run` rows and no verified current live model-driven worker. Five prompts do not create sessions or agent wakes. The existing model registry and fallback are retained; no model call without verified seat/health/cost, no paid surprise or 429 retry storm. Start with deterministic tests; at most two independently admitted read-only ZCode model workers afterward.
+- **One writer and one acceptance source:** Cloud ChatGPT Dev integrates claimed ARBOR code; Planning prepares Labs packets, Oracle audits, L05 supplies independent evidence, and the sole orchestrator reconciles #33. Existing hourly ChatGPT automation and Windows observer remain the current schedules; no duplicate cron, DWF engine, queue, second Host or new tracker.
+- Current source changes fast; latest named Studio/browser PIDs, snapshot test totals and code SHAs are *historical observations* until refreshed. Product success needs the full source→package→serve→real signed-in provider→GPUI/Android evidence chain as appropriate.
+
 
 Applies to every lane. **This is a scoped execution package, not a new job scheduler, provider router, Host, ownership register or product backlog.**
 

@@ -30,7 +30,11 @@ function Assert-ModelAdmission {
 if($Action -eq 'child'){
   if($Sha -notmatch '^[a-f0-9]{40}$'){throw 'MISSING_EXACT_SOURCE_SHA'}
   $childHead=(& git -C $root rev-parse HEAD).Trim()
-  if($childHead -ne $Sha){throw 'CHILD_SOURCE_SHA_MISMATCH'}
+  $childUp=(& git -C $root rev-parse refs/remotes/origin/main).Trim()
+  $childDirty=@(& git -C $root status --porcelain --untracked-files=all)
+  if($childHead -ne $Sha -or $childHead -ne $childUp -or $childDirty.Count -gt 0){
+    throw 'CHILD_SOURCE_SHA_OR_TREE_MISMATCH'
+  }
   Assert-ModelAdmission -SelectedSha $Sha -ReceiptPath $AdmissionReceipt
   Set-Location $root
   $prompt="Load the official dynamic-workflows skill. Invoke CreateWorkflow by EXISTING project path .zcode/workflows/arbor-vlang-iterative-observers.dwf.ts with arguments sha=$Sha. Read-only source and test verification only; no file writes, Host actions, browser or provider sends. Do not retry model 429 or select paid fallback. Report the actual run ID or exact error, not a plan."
@@ -40,7 +44,7 @@ if($Action -eq 'child'){
 $latest='C:\0-BlackBoxProject-0\vivim-labs\ZCODE-DESKTOP-COMMANDER-OPERATIONS\local-logs\vlang-iterations\latest.json'
 $head=(& git -C $root rev-parse HEAD).Trim()
 $up=(& git -C $root rev-parse refs/remotes/origin/main).Trim()
-$dirty=@(& git -C $root status --porcelain --untracked-files=no)
+$dirty=@(& git -C $root status --porcelain --untracked-files=all)
 if($head -notmatch '^[a-f0-9]{40}$' -or $head -ne $up -or $dirty.Count -gt 0){throw 'BLOCKED_UNPINNED_SOURCE'}
 $marker=Join-Path $logRoot ($head+'.json')
 if($Action -eq 'status'){

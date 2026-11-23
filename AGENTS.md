@@ -25,3 +25,7 @@ VIVIM has exactly four primary GitHub repos: `repos-hq` (existing shared intelli
 7. No force-push, history rewrite, concurrent destructive cleanup or source-owner effect changes without explicit authorization.
 
 Each campaign round must identify four pinned repos and deliver a manifest, conceptual overlap/unique-value dispositions, decision and open-item deltas, tests, missing gates and bundle-restoration evidence. Git bundles are **not** public-safe by default and must not be committed into this repository.
+
+## Current 2026-11-23 engineering intake
+
+Read [ARBOR now→future wiring audit](https://github.com/owenservera/ARBOR/blob/main/docs/product/ARBOR-NOW-FUTURE-WIRING-20261123.md) and [R002 delta to the existing execution pack](ZCODE-DESKTOP-COMMANDER-OPERATIONS/DEVOPS-PLANNING/PACKS/EXECUTION-20261123-R001/WIRING-DELTA-R002.md) before touching any current VIVIM/ARBOR plan. #33 is the authoritative oversight checklist and Labs `TASK-CLAIMS.md` is the atomic ownership overlay. Publication is not cross-session acknowledgment or an active agent claim. Keep Labs public-safe and do not copy private desktop/provider logs here.

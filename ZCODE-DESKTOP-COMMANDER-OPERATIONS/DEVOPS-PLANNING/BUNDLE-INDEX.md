@@ -63,3 +63,8 @@ Earlier planning docs referenced `../OWNER-WORK/NOW.md`, `../OWNER-WORK/UPDATES.
 
 - [R003 shared contract](../DESIGN/gestures/R003-CANONICAL-CONTRACT.md), [pure Rust reducer](../DESIGN/gestures/src/gesture_interaction.rs), [Dev bridge](../DESIGN/gestures/R003-DEV-INTEGRATION.md), [G0–G11 gates](../DESIGN/gestures/R003-ACCEPTANCE.md) and [evidence](../DESIGN/gestures/R003-EVIDENCE.md). This **supersedes R002's PWA-only framing**, while reusing its previous groundwork and IDs.
 - **15 trackable GEST items**, with GEST-04 PRECODE_STAGED_UNRUN and GEST-13–15 native GPUI/phone parity additions. 17 Rust tests AUTHORED / UNRUN (rustc/cargo unavailable). **No ARBOR source changes, no Dev acceptance, no deployment/physical verification.**
+
+## Current wiring audit / R002 execution delta
+
+- [ARBOR NOW→FUTURE source-backed wiring audit](https://github.com/owenservera/ARBOR/blob/main/docs/product/ARBOR-NOW-FUTURE-WIRING-20261123.md) — actual working paths vs proof missing, shared authority map and critical dependency order; **not** a new tracker.
+- [R002 ready-package / agent pickup delta](PACKS/EXECUTION-20261123-R001/WIRING-DELTA-R002.md) and [machine-readable R002 state](PACKS/EXECUTION-20261123-R001/wiring-delta-r002.json) — add-on to existing R001 package. Latest observed 210/215 verifier BLOCKED at ARBOR 0cd77a2 and Labs serial-native runner 7847240 awaiting new complete evidence; do not silently inherit old green result.

@@ -29,6 +29,34 @@
 3. **VF-001 / VF-002:** keep the SOURCE→TEST→PACKAGE→SERVE→HOST_ACK→GPUI→PHONE ladder and screenshot/receipt correlation precise. The GPUI physical theme/Wiki pass applies to the exact 0cd SHA; it does not satisfy PC↔phone.
 4. **PL-003:** source/collision refresh is already named in older AW-R003 preparation; do **not** claim it a second time without reconciling the existing sender-owned Labs task claim.
 
+## Source-reuse discovery: existing Work and agent dispatch seams (same current ARBOR main)
+
+**PY-002 is still a Host/PWA integration blocker, but the "no existing Work source" assumption is too broad.** Source inspected on ARBOR `main`:
+- [`studio/src/agents/personal-agent-work.mjs`](https://github.com/owenservera/ARBOR/blob/main/studio/src/agents/personal-agent-work.mjs): existing local Work reducer, deterministic `work-<digest>` ID, input idempotency, queued/active/blocked/completed/cancelled transitions, evidence references and finite caps. It explicitly **never dispatches** tools or calls providers.
+- [`studio/src/agents/personal-agent-service.mjs`](https://github.com/owenservera/ARBOR/blob/main/studio/src/agents/personal-agent-service.mjs): incumbent `VersionedStore` with `compareAndSave` CAS at `personal-agent/primary`, explicitly scoped to one local data directory/identity. This is **not** proven to be the owner-authorized Host durable task writer nor a cross-device identity.
+- [`studio/src/studio/personal-agent-routes.mjs`](https://github.com/owenservera/ARBOR/blob/main/studio/src/studio/personal-agent-routes.mjs): local `GET/POST /personal-agent/work`, `GET /personal-agent/outcomes`, and explicit status/next-action transitions. Provider-reply work preview/apply requires an already-stored settled reply and human confirmation; it never sends a provider message. **Do not expose these Studio APIs directly to untrusted mobile callers** or mistake their existence for a completed PWA→Host admission path.
+- [`hq/lib/channel-transport.mjs`](https://github.com/owenservera/ARBOR/blob/main/hq/lib/channel-transport.mjs): incumbent ZCode session wake/liveness integration exists, but the source is not an authorized current Dev-agent acceptance channel. Session IDs, seats, run receipts, deduplication/uncertainty and cost admission still need proof. Do not create another dispatcher or run `--resume` on a personal session as a read-only probe.
+- [`studio/src/studio/chat-channel.mjs`](https://github.com/owenservera/ARBOR/blob/main/studio/src/studio/chat-channel.mjs): guarded provider-neutral channel has request ID/revocation logic, but its static `SERVED_SITES` currently covers ChatGPT, Claude and Gemini; other known scopes (including Qwen) are *reserved but not served by this channel*. Even these three are not proof of currently signed-in/settled-provider delivery.
+
+**Planning directive:** map an *explicit, owner-authorized PWA submit* to the existing Host authority and suitable durable Work record only after identity/session/write ownership is demonstrated. Provide an idempotent request ID, status/readback, cancellation/deny/offline fencing, one Dev ACK. Treat Studio Work as a reusable candidate, not as an automatically promoted canonical database. Dev retains integration; Planning supplies the source seam and refusal tests.
+
+### Next ten claimable Planning proposals (from existing 37-candidate catalogue; none automatically claimed)
+
+| Rank | Existing ID | State before checkout | Precise preparation / dependency |
+| --- | --- | --- | --- |
+| 1 | PY-001 | SCOPED | Explicit PWA Build/Change action; drafts/IME/speech remain inert |
+| 2 | PY-002 | BLOCKED_SOURCE | Choose the authoritative Host-owned work writer; assess Studio Work candidate and avoid duplicate durable stores |
+| 3 | PY-005 | SCOPED | Supported Dev dispatch/ACK vs manual bridge; inspect existing ZCode wake without executing it |
+| 4 | PY-003 | SCOPED | Cross-device idempotency/deny/offline/cancel policy once writer known |
+| 5 | PY-004 | SCOPED | Revision-accurate PWA work status readback using existing LiveSystemState |
+| 6 | PY-006 | SCOPED | Planning OFFERED_TO → Dev ACCEPTED_BY atomic claim/ack contract |
+| 7 | PY-007 | SCOPED | Source→test→package→serve→phone release receipt chain |
+| 8 | VF-001 | SCOPED | Separate evidence gates (SOURCE/TEST/PACKAGE/SERVE/HOST_ACK/GPUI/PHONE) |
+| 9 | VF-002 | SCOPED | Actual screenshot, source revision and Host receipt correlation |
+| 10 | VF-004 | SCOPED | Revoked grant, stale epoch, IME, human-agent race and no-send negative cases |
+
+These are **Planning preparation candidates**, not independent ARBOR implementation claims; any unmet dependency stays blocked. The existing R003/R005/R006 OFFERED_TO sender-owned claims stay untouched, and Dev-owned #32/#31 remain the live product priority.
+
 ## Pickup/receipt contract
 
 Before any file edit: fetch current remote `main` / file blob SHA and the existing claim; record a disjoint file scope. ChatGPT alone edits ARBOR application source, Rust by default and TS 7+ for browser glue; ZCode/desktop do source-pinned read-only/local verification. No provider API, Playwright/Puppeteer, second browser owner, user-data scraping without authorization, retries of uncertain sends, model paid fallback, or uncontrolled ZCode `arbor-life` workflow.

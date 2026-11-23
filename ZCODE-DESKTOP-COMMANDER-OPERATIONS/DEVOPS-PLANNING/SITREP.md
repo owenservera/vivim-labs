@@ -1,5 +1,15 @@
 # DevOps / Planning SITREP — 2026-11-21 (GitHub bootstrap R004)
 
+## Current planning takeover — 2026-11-23, after exact-source verification
+
+**This section supersedes dated source/test assumptions below; not the historical evidence itself.** Live source snapshot ARBOR `0cd77a2185afe204e41e04fe3d3d588133a3eac6`; current deterministic Windows source-pinned observer `215/215 PASS` across four serially executed scopes, matching hash-bound native receipt and `61/61` GPUI Rust library tests. Previous 4-/2-concurrent Windows test failures were recorded and narrowed to likely subprocess contention, not erased. Recent real GPUI physical Host theme/Undo and three-section AutoWiki readback succeeded; fresh AI provider reply, Android phone parity, full release closure and six working model routes are still **UNRUN/UNPROVEN**. Canonical #33 remains the completion ledger; do not silently close unchecked items.
+
+**Planner-owned next preparation (non-Dev):** (1) cross-map Oracle PWA_BUILD_INGRESS to existing PY-001–PY-007 and identify real work request writer + explicit dispatch ACK or MANUAL boundary; (2) source-repin AW-010/AW-013 Host/HQKG actor/source-ref grants and refusal tests before offering R006 to Dev; (3) receipt/visual correlation VF-001/VF-002; (4) only after current claims reconciliation, revisit PL-003 already included in sender-owned AW-R003 precode scope. Dev owns #32 provider transport, #31 release parity, and GPUI live product source. Oracle audits, ZCode/Remote Desktop Commander gather bounded local evidence. **No new autonomous agent was launched and no task claim was transferred by this Planning update.**
+
+**Ready-to-go shared work packages and per-role pickup:** [CURRENT-PICKUP-20261123.md](PACKS/EXECUTION-20261123-R001/CURRENT-PICKUP-20261123.md), [R001 machine manifest](PACKS/EXECUTION-20261123-R001/manifest.json), [agent handoff](PACKS/EXECUTION-20261123-R001/AGENT-HANDOFF.md), [acceptance](PACKS/EXECUTION-20261123-R001/ACCEPTANCE.md); current read receipt posted to [ARBOR #33](https://github.com/owenservera/ARBOR/issues/33#issuecomment-7111406219). GitHub publication is shared-state availability, not a live ChatGPT/ZCode notification or receiver ACK.
+
+---
+
 ## Gestures R004 / core-only ARBOR source integration (2026-11-22)
 - **CODED/PUSHED, NOT COMPILED/DEPLOYED:** ChatGPT Dev accepted the core-only source claim and pushed [ARBOR bb6873b3](https://github.com/owenservera/ARBOR/commit/bb6873b3be280980b453fba006ff5c771d207471), registering a pure shared Rust gesture reducer in the existing programmability core. [Source/verification receipt](../DESIGN/gestures/R004-INTEGRATION-RECEIPT.md) and [manifest](../DESIGN/gestures/manifest.v1.json): GEST-04 core CODED/PUSHED; 17 tests AUTHORED, cargo tests UNRUN (cloud rustc/cargo unavailable); GPUI/PWA adapters, Host Apply, and physical device sync UNRUN. Outcome PV-15 is NOT ACCEPTED.
 

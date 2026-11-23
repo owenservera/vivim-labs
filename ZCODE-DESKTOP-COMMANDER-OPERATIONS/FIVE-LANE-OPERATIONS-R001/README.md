@@ -26,3 +26,21 @@ A ready-to-run **five-lane operational handoff** using existing `ARBOR/.zcode/wo
 **Validation:** `node --experimental-strip-types FIVE-LANE-OPERATIONS-R001/validate.ts` when run from the parent operations folder (Node 24+). It checks only the local package structure and source references; it does *not* start sessions or prove model execution.
 
 **Current baseline:** master #33 recorded 7/71 verified, 64 open; source-level ChatGPT/Studio tests and prior native verifier are distinct; no genuine provider/phone reply or five live model workers established by this folder package. Refresh the evidence at run time.
+
+## R003: real canonical-issue coverage validation
+
+The upgraded [`validate.ts`](validate.ts) checks the full R002 task-range mapping for duplicates, malformed ranges, safe launch configuration and the **27 current launch assets**. Without an issue body it explicitly returns `coverage.verifiedAgainstIssue=false`: an internal 64-ID count is not a current canonical issue comparison.
+
+For a **live GitHub #33 check** on a machine with an authenticated GitHub CLI, use a temporary file and keep the main checkout untouched:
+
+```powershell
+$issue = Join-Path $env:TEMP 'arbor-issue33-current.md'
+gh issue view 33 --repo owenservera/ARBOR --json body --jq .body |
+  Out-File -FilePath $issue -Encoding utf8
+node --experimental-strip-types .\validate.ts --issue-body $issue
+Remove-Item $issue -Force
+```
+
+The `--issue-body` argument is optional for local structural checks, but **required to claim the lane manifest agrees with current #33**. Validation reads issue text and the manifest; it does not change the tracker, claim tasks or launch a worker. Regression tests: `node --experimental-strip-types --test validate.test.mjs` ([test source](validate.test.mjs)).
+
+**Exact receipt, 2026-11-23:** the isolated Windows test archive at Labs main `793fa1a7dae1824a8299141657914ab7dc8402d7` completed **9/9 tests PASS**, validator exit 0. The independently fetched **actual #33 body** then yielded `open:64, checked:7, verifiedAgainstIssue:true, errors:[], issues:[]`, exit 0. The original dirty Labs checkout was preserved, not reset. This is tracker-coverage proof, not five launched agents or live phone/provider acceptance.

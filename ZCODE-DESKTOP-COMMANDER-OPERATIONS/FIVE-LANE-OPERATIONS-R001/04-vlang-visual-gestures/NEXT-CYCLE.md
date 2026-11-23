@@ -1,5 +1,8 @@
 # L04 — Continuing work queue and completion criteria
 
+> **30-task fleet finish line:** Work toward **30 newly accepted distinct ARBOR #33 checklist tasks** across L01–L05 (baseline 7/71 checked; target at least 37/71). Do not count partial code increments, commits or reports as completed canonical tasks. Read [R006](../LONG-RUN-EXECUTION-R006.md) and keep taking genuinely unclaimed work until the available execution ends; save a precise handoff for the next run.
+
+
 > **Owner's multi-hour lane contract:** [R006 sustained task-consumption loop](../LONG-RUN-EXECUTION-R006.md). After each safe code/test/receipt increment **take another unclaimed task in the same turn**; do not stop at first success or SITREP. Refresh live claims before every iteration; preserve actual limits.
 
 

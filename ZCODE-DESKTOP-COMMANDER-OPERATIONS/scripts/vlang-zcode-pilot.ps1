@@ -4,14 +4,34 @@
 [CmdletBinding()]
 param(
   [ValidateSet('status','launch','child')][string]$Action='status',
-  [string]$Sha=''
+  [string]$Sha='',
+  [string]$AdmissionReceipt=''
 )
 $ErrorActionPreference='Stop'
 $root='C:\0-BlackBoxProject-0\ARBOR'
 $logRoot=Join-Path $PSScriptRoot '..\local-logs\vlang-model'
 New-Item -ItemType Directory -Path $logRoot -Force | Out-Null
+# Retains existing ZCode provider registry; only validates independently
+# supplied exact-source health, quota and owner-approved billing metadata.
+function Assert-ModelAdmission {
+  param([string]$SelectedSha,[string]$ReceiptPath)
+  if([string]::IsNullOrWhiteSpace($ReceiptPath) -or
+     -not [IO.Path]::IsPathRooted($ReceiptPath) -or
+     -not (Test-Path -LiteralPath $ReceiptPath -PathType Leaf)){
+    throw 'MODEL_ADMISSION_RECEIPT_REQUIRED'
+  }
+  $gate=Join-Path $root 'scripts\zcode-model-session-admission.mjs'
+  if(-not (Test-Path -LiteralPath $gate -PathType Leaf)){
+    throw 'MODEL_ADMISSION_GATE_UNAVAILABLE'
+  }
+  & node $gate --verify $ReceiptPath $SelectedSha
+  if($LASTEXITCODE -ne 0){throw 'MODEL_ADMISSION_UNVERIFIED'}
+}
 if($Action -eq 'child'){
   if($Sha -notmatch '^[a-f0-9]{40}$'){throw 'MISSING_EXACT_SOURCE_SHA'}
+  $childHead=(& git -C $root rev-parse HEAD).Trim()
+  if($childHead -ne $Sha){throw 'CHILD_SOURCE_SHA_MISMATCH'}
+  Assert-ModelAdmission -SelectedSha $Sha -ReceiptPath $AdmissionReceipt
   Set-Location $root
   $prompt="Load the official dynamic-workflows skill. Invoke CreateWorkflow by EXISTING project path .zcode/workflows/arbor-vlang-iterative-observers.dwf.ts with arguments sha=$Sha. Read-only source and test verification only; no file writes, Host actions, browser or provider sends. Do not retry model 429 or select paid fallback. Report the actual run ID or exact error, not a plan."
   & zcode --mode plan --workflow-mode alwaysOn --agent-always-background on --cwd $root --prompt $prompt
@@ -32,12 +52,13 @@ if($Action -eq 'status'){
 if(-not (Test-Path $latest)){throw 'FIRST_RUN_DETERMINISTIC_VERIFIER'}
 $verified=Get-Content $latest -Raw|ConvertFrom-Json
 if($verified.sha -ne $head -or $verified.state -ne 'PASS'){throw 'DETERMINISTIC_BASELINE_NOT_VERIFIED'}
+Assert-ModelAdmission -SelectedSha $head -ReceiptPath $AdmissionReceipt
 if(Test-Path $marker){throw 'MODEL_PILOT_ALREADY_ATTEMPTED_FOR_SHA_NO_AUTO_RETRY'}
 $state=@{sha=$head;startedAt=(Get-Date).ToUniversalTime().ToString('o');state='ADMITTED';runId=$null}
 $state|ConvertTo-Json|Set-Content -LiteralPath $marker -Encoding utf8
 $stdout=Join-Path $logRoot ($head+'.stdout.log')
 $stderr=Join-Path $logRoot ($head+'.stderr.log')
-$argv=@('-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',('"{0}"' -f $PSCommandPath),'-Action','child','-Sha',$head)
+$argv=@('-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',('"{0}"' -f $PSCommandPath),'-Action','child','-Sha',$head,'-AdmissionReceipt',('"{0}"' -f $AdmissionReceipt))
 $p=Start-Process -FilePath 'powershell.exe' -ArgumentList $argv -PassThru -WindowStyle Hidden -RedirectStandardOutput $stdout -RedirectStandardError $stderr
 $deadline=(Get-Date).AddSeconds(100)
 $reason=$null

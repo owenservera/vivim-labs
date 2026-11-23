@@ -50,3 +50,7 @@ The [ARBOR source-backed NOW→FUTURE wiring audit](https://github.com/owenserve
 - [PY-001 explicit PWA Build/Change admission packet](PWA-BUILD-INTENT-R003.md): preserves the existing Preview/Activate and hidden design conversation but demands a **distinct explicit Work submit**, authenticated Host writer, CAS/idempotency, no automatic provider send, and 15 negative/phone acceptance tests. Existing Studio Work reducer **reused** but its owner-authorized Host binding is still **blocked at PY-002**.
 - [P0-AI-CHAT safe Studio readiness](PROVIDER-READINESS-R003.md): current read-only probe observed `STUDIO_OWNER_IDLE` and ChatGPT target, **not a real authenticated provider reply**; warns that local reconciliation helper performs state-changing POST and must not run as a status check.
 - [Machine-readable R003 pickup state](pickup-r003.json): precise owner scopes, no agent auto-dispatch, actual evidence versus UNRUN. Existing R002 [wiring map](WIRING-DELTA-R002.md) and [R001 assignment/claims](AGENT-HANDOFF.md) remain authoritative; these are narrow addenda, **not** new tasks/engines.
+
+## R004 actually coded Work admission receipt
+
+- [43/43 exact-SHA source/compatibility receipt](WORK-INGRESS-SOURCE-RECEIPT-R004.md): ARBOR `2a5182c3` added guarded Host Work admission, reused Studio Work CAS behind existing Host-private port, owner-only GET status. Live Studio is **uninitialized** and production Host reviewed Work action/PWA submit are **not wired**. Dev owns source; Planning/Oracle prepare or audit nonoverlapping gates. No phone/provider acceptance.

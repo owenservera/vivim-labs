@@ -42,10 +42,48 @@
     "total": 215,
     "wrapperState": "BLOCKED",
     "newLabsSerialRunner": "78472401a1c9c7b75c8688c81ef22379aae3732f",
-    "newCompletePassObserved": false,
+    "newCompletePassObserved": true,
     "providerSends": 0,
     "hostEffects": 0,
-    "sourceWrites": 0
+    "sourceWrites": 0,
+    "followup": {
+      "examinedAt": "2026-11-23T20:18:46+01:00",
+      "arborSourceSha": "0cd77a2185afe204e41e04fe3d3d588133a3eac6",
+      "labsSerialRunnerSha": "78472401a1c9c7b75c8688c81ef22379aae3732f",
+      "state": "PASS",
+      "pass": 215,
+      "total": 215,
+      "lanes": [
+        {
+          "id": "Z-VLANG",
+          "pass": 22,
+          "total": 22
+        },
+        {
+          "id": "Z-SAFETY",
+          "pass": 160,
+          "total": 160
+        },
+        {
+          "id": "Z-AUTOWIKI",
+          "pass": 12,
+          "total": 12
+        },
+        {
+          "id": "Z-VISUAL",
+          "pass": 21,
+          "total": 21
+        }
+      ],
+      "receipt": "vlang-2026-11-23T19-13-20-587Z",
+      "nativeSha256": "389C67DB9FA6913E1B257A5339846BCEA5BA96FB4429DC168059A0D2B33CEC14",
+      "runnerSha256": "5D929411261DB2D365F422AE80E5F2E13848F24130000F351F8277F1C569D6CB",
+      "sourceWrites": 0,
+      "hostEffects": 0,
+      "providerSends": 0,
+      "releasePromoted": false
+    },
+    "latestARBORSourceVerification": "NOT_YET_RUN_FOR_HEAD_AFTER_0cd77a2"
   },
   "ready": [
     {

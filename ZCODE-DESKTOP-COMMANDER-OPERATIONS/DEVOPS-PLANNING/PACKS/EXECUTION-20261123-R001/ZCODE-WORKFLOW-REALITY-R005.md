@@ -13,6 +13,14 @@
 - Windows scheduled task `VIVIM-VLANG-Observer` was **Running** during inspection, separate from ZCode model workflow execution. Last completed `local-logs/native-verifier/latest.json` was `BLOCKED` at exact **ARBOR `516a23e8`**, finished **2026-11-23 19:49:51 UTC**; this does not invalidate older `215/215 PASS` on a different exact SHA. `VLANG` failure details live in [existing R005 repro packet](VLANG-REPRO-20261123.md); no rerun is declared green.
 - ARBOR current moving GitHub main observed `a34a7f5a88afb687f86fc9fba79a7e886052f48c` at 20:01 UTC. Refresh main before any step. The local original ARBOR checkout was verified clean and `HEAD==origin/main==2a5182c3` at the earlier live probe; do not assume it remains current after remote commits.
 
+## R005 operational correction — 2026-11-23 21:10 Europe/Madrid
+
+The native observer is **scheduled and working at the Task Scheduler layer**, but the latest completed source verification was still blocked at the previous exact SHA. A 20:56 local scheduled attempt returned Windows `LastTaskResult=267014` (`0x41306`, terminated) without a newer completion receipt. Its actual task had `ExecutionTimeLimit=PT4M`; the serial native build+four test lanes can exceed four minutes. The task log did not independently prove the exact termination cause, so do not claim certainty beyond the observed terminated result and too-short limit.
+
+**Fix applied on actual Windows PC:** changed the existing `VIVIM-VLANG-Observer` task setting to `ExecutionTimeLimit=PT12M`; confirmed `State=Ready LIMIT=PT12M` while retaining hourly trigger and `MultipleInstances=IgnoreNew`. Matching future installer source updated in existing `scripts/vlang-schedule.ps1` at Labs commit [4434fe9](https://github.com/owenservera/vivim-labs/commit/4434fe9729ca899974582660c28645989fe82f28). No second scheduler or model backend was added.
+
+**New controlled attempt started via existing task** at **21:10:14 Europe/Madrid**; Windows Task Scheduler returned `TRIGGER_STATE=Running LIMIT=PT12M`, next normal trigger `21:46:02`. The run has **NOT been independently observed complete or PASS** at this receipt. The existing mutex and scheduler ignore-new setting prevent competing instances. Future agent: inspect `local-logs/native-verifier/latest.json`, match `sourceSha`/binary hash/test receipt, and report terminal state; never equate `Running` with success.
+
 ## Actual ready-to-pick-up work — no phantom background execution
 
 1. **Z01 existing deterministic observer — Desktop Commander, no source writes.** Do not register a second task or start a duplicate concurrent native-heavy run. Wait for current Windows task completion, then capture its `native-verifier/latest.json`, `vlang-iterations/latest.json`, source SHA, hashes and per-lane counts. A stale previous result is not a new PASS. For a failing source isolate one negative test and offer it through existing #33 and the Dev claim owner; do not patch ARBOR locally.

@@ -9,3 +9,9 @@
 **Boundaries:** Respect incumbent app.js and Dev PY-001 Host files; no live Host restart, phone URL/pairing change, or release promotion without no-effect preflight and rollback.
 
 **Cross-lane handoff:** [Orchestrator R005](../ORCHESTRATOR-NEXT-ACTIONS-R005.md) and [critical path R004](../STRATEGIC-EXECUTION-SEQUENCE-R004.md). One claim→code→exact-source test→receipt→release→next task cycle at a time. At true stop, post exact SHA/tests/blockers; never claim an agent is still running after a ChatGPT turn ends.
+
+## Orchestrator observed follow-up — 2026-11-23 21:57 UTC
+
+**New evidence:** L02 S04 root Cargo.lock + bun.lock committed [ARBOR 6c583d7](https://github.com/owenservera/ARBOR/commit/6c583d7b0d04981dc363110f83e4ad02603c386a), scoped claim released; lock metadata verified, actual full package/live GPUI/Android STILL OPEN. Continue S02/S03/S05 one immutable same-source stage+rollback and validate installed Bun version.
+
+**Interpretation:** Source-tested increments are real; canonical #33 delivery checkboxes remain subject to separate live/native/phone acceptance. Recheck current claims before code writes. No automatic agent wake or model execution is implied by this note.

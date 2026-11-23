@@ -1,5 +1,7 @@
 # DevOps/Planning bundle index — verified links, not a task ledger
 
+**Live ZCode workflow status R005 (20:03 UTC, 2026-11-23):** [ready agent pickup + exact database reality](PACKS/EXECUTION-20261123-R001/ZCODE-WORKFLOW-REALITY-R005.md) and [read-only TS diagnostic](../scripts/zcode-workflow-run-status.ts). ZCode GUI/app-servers and scheduled deterministic verifier exist, but the dynamic-workflow DB has 361 historical runs and both `running` records have stale events and dead owner PIDs; **zero current model-driven workers verified**. This is not a new dispatcher, run, or owner claim. Read the linked report before claiming Z02/Z03/Z07. Source/runtime acceptance remains in #33 and `TASK-CLAIMS.md`.
+
 **Live pickup refresh — 2026-11-23:** [Current-source ready work, provenance and agent lanes](PACKS/EXECUTION-20261123-R001/CURRENT-PICKUP-20261123.md) updates the R001 five-package intake with ARBOR `0cd77a21`, 215/215 deterministic checks and 61/61 native GPUI Rust tests; physical native theme/Wiki accepted, real provider and Android parity unverified. See [#33 latest shared receipt](https://github.com/owenservera/ARBOR/issues/33#issuecomment-7111406219). No new claim or cross-session ACK is implied.
 
 This file contains **pointers to known pre-integration artifacts**. It does not supersede the canonical OW request/update registry. At the 2026-11-21 GitHub read, the operations-tree `OWNER-WORK/` registry and older `DESIGN/PRE-CODE/` and `code/` locations were **not in Labs remote main**. Do not invent their contents or mark their OW requests complete.

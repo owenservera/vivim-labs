@@ -2,6 +2,10 @@
 
 This file contains **pointers to known pre-integration artifacts**. It does not supersede the canonical OW request/update registry. At the 2026-11-21 GitHub read, the operations-tree `OWNER-WORK/` registry and older `DESIGN/PRE-CODE/` and `code/` locations were **not in Labs remote main**. Do not invent their contents or mark their OW requests complete.
 
+## Current execution pack — 23 November 2026
+
+- **[Source-pinned agent execution pack R001](PACKS/EXECUTION-20261123-R001/README.md)**: five nonoverlapping ready-to-pick-up packages for AI conversations (#32), same-source release/two-way phone parity (#31), native GPUI acceptance, VLANG/AutoWiki/Oracle, and ZCode/Desktop Commander verification. **[Agent responsibilities](PACKS/EXECUTION-20261123-R001/AGENT-HANDOFF.md)** · **[acceptance recipes](PACKS/EXECUTION-20261123-R001/ACCEPTANCE.md)** · **[machine manifest](PACKS/EXECUTION-20261123-R001/manifest.json)**. Last verified observer 215/215 at older SHA `7b9e7dbd`; new source observer manually triggered, result pending at publication. **Publication is not agent acceptance, source deployment or physical device PASS.** Always refresh main and `TASK-CLAIMS` before pickup.
+
 ## Master Planning catalogue (new source-backed proposal view)
 
 - [MASTER-PLAN-R001](MASTER-PLAN-R001.md): **37 proposed Planning-only task packets** (5 Governance, 16 AutoWiki R003, 8 PWA-to-development pipeline, 3 GPUI paused, 5 verification). This is a **candidate catalogue**, not canonical OW task history or a second active claim system; Planning Next Ten are proposals, unclaimed until TASK-CLAIMS checkout. Existing Dev PWA/ARBOR product tasks are excluded.

@@ -5,7 +5,7 @@
 ## Every lane: nested loop inside its current turn
 
 **While tools and safe execution budget remain:**
-1. Read current canonical ARBOR main and [#33](https://github.com/owenservera/ARBOR/issues/33), Labs [TASK-CLAIMS](https://github.com/owenservera/vivim-labs/blob/main/ZCODE-DESKTOP-COMMANDER-OPERATIONS/TASK-CLAIMS.md), own [NEXT-CYCLE.md](README.md) and own ORCHESTRATOR-NOTE.md. Refresh *each time* before claiming new files. These resources already cover 64 open tasks; **do not build another queue**.
+1. Read current canonical ARBOR main and [#33](https://github.com/owenservera/ARBOR/issues/33), Labs [TASK-CLAIMS](https://github.com/owenservera/vivim-labs/blob/main/ZCODE-DESKTOP-COMMANDER-OPERATIONS/TASK-CLAIMS.md), own NEXT-CYCLE.md and own ORCHESTRATOR-NOTE.md. Refresh *each time* before claiming new files. These resources already cover 64 open tasks; **do not build another queue**.
 2. **First resume the exact active claimed task you already own**. Do not cherry-pick a different task because it looks simpler; if impossible, record an exact blocker and release only when safe.
 3. Make the smallest real source implementation in your claimed existing scope; push to canonical ARBOR `main` with CAS/no competing changes. Run **exact source SHA** tests. Publish receipt to existing #33 and release claim, without marking wider acceptance complete unless there is actual Host/native/Android evidence.
 4. **Do not finish here.** Select the next independent, unclaimed item from your full `WORK-INDEX.md` and `NEXT-CYCLE.md` / #33; claim, code, test, push, receipt and release again. Repeat rather than writing a second progress report. Track per-task source SHA, scope and test count.

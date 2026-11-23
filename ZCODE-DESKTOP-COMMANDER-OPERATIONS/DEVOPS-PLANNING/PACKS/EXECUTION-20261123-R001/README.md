@@ -10,6 +10,8 @@
 3. This pack's [AGENT-HANDOFF.md](AGENT-HANDOFF.md) and [ACCEPTANCE.md](ACCEPTANCE.md); machine-readable [manifest.json](manifest.json).
 4. Check the actual GitHub HEAD/file SHA, local receipt SHA and task claim before acting. No stale-sha inheritance.
 
+**Latest verification addendum:** [2026-11-23 native/ZCode exact-source receipt](VERIFICATION-RECEIPT.md) — 215/215 PASS at ARBOR `0cd77a21` with four lanes serialized on the constrained PC, plus separate 5/5 Chat UI tests at ARBOR `7991f675`; not a device/provider pass.
+
 ## Current verified state / cautions
 - ARBOR recent main includes Host-theme GPUI projection and F00 Oracle/Wiki regression (commits `063f91cc`, `126f32e1`, `84ca3c36`); source updates are **not deployed/device acceptance**.
 - Owner's Desktop Commander device `DESKTOP-9KB03LU` online at inspection. Local ARBOR HEAD `5b129485783c` (behind observed GitHub main); Labs local `adb885fb60db` clean tracked; `repos_hq` has two unrelated tracked changes. **Never reset, pull over, overwrite or use local checkout as main source authority**.

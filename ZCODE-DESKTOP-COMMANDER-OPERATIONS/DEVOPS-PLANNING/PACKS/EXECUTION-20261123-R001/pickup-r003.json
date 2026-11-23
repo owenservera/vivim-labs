@@ -1,6 +1,6 @@
 {
   "schema": "vivim.planning-pickup/3",
-  "observedAtUTC": "2026-11-23T19:30:50.621Z",
+  "observedAtUTC": "2026-11-23T19:34:04.955Z",
   "owner": "ChatGPT DevOps/Planning",
   "canonical": {
     "repo": "owenservera/ARBOR",
@@ -12,7 +12,9 @@
   "sourcePins": {
     "arbor": "dfb5480b17f5daa8861352e0cb81dd97e01e9f9d",
     "studioWorkReducerTestAddedAt": "dfb5480b17f5daa8861352e0cb81dd97e01e9f9d",
-    "sourceRefreshRequired": true
+    "sourceRefreshRequired": true,
+    "newestVerifiedDeterministicArborSha": "f5623943b746daac3d55a0ae4896430083a568ba",
+    "newestCommittedTestSha": "dfb5480b17f5daa8861352e0cb81dd97e01e9f9d"
   },
   "claim": {
     "id": "PY-001",
@@ -77,9 +79,45 @@
         "passed": 215,
         "total": 215
       },
-      "currentSourceRecheck": "RUNNING_OR_UNCONFIRMED",
+      "currentSourceRecheck": "PASS_AT_f562; NEW_TEST_dfb_NOT_INCLUDED",
       "effects": 0,
-      "sends": 0
+      "sends": 0,
+      "followup": {
+        "exactArborSha": "f5623943b746daac3d55a0ae4896430083a568ba",
+        "state": "PASS",
+        "receipt": "vlang-2026-11-23T19-24-07-866Z",
+        "wrapperFinishedAt": "2026-11-23T19:25:31.2525233Z",
+        "maxConcurrentLanes": 1,
+        "lanes": [
+          {
+            "id": "Z-VLANG",
+            "pass": 22,
+            "total": 22
+          },
+          {
+            "id": "Z-SAFETY",
+            "pass": 160,
+            "total": 160
+          },
+          {
+            "id": "Z-AUTOWIKI",
+            "pass": 12,
+            "total": 12
+          },
+          {
+            "id": "Z-VISUAL",
+            "pass": 21,
+            "total": 21
+          }
+        ],
+        "pass": 215,
+        "total": 215,
+        "sourceWrites": 0,
+        "hostEffects": 0,
+        "providerSends": 0,
+        "releasePromoted": false,
+        "newerDfbreuseTestExecution": "UNRUN"
+      }
     }
   ],
   "requiredAcceptance": [

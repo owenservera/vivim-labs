@@ -44,7 +44,15 @@ function exec(program:string,args:string[],timeout=18000):string {
   return execFileSync(program,args,{encoding:"utf8",timeout,windowsHide:true,
     maxBuffer:4*1024*1024,stdio:["ignore","pipe","pipe"]}).trim();
 }
-function api(path:string):any{return JSON.parse(exec("gh",["api",path]));}
+function snapshot():any {
+  // One authenticated GraphQL request replaces five sequential REST calls;
+  // latest comments, both HEADs and claims blob are from one observation.
+  const q='query{arbor:repository(owner:"owenservera",name:"ARBOR"){defaultBranchRef{target{... on Commit{oid}}}issue(number:33){body updatedAt comments(last:35){nodes{databaseId createdAt body}}}}labs:repository(owner:"owenservera",name:"vivim-labs"){defaultBranchRef{target{... on Commit{oid}}}object(expression:"main:ZCODE-DESKTOP-COMMANDER-OPERATIONS/TASK-CLAIMS.md"){... on Blob{oid text}}}}';
+  const result=JSON.parse(exec("gh",["api","graphql","-f","query="+q],45000));
+  if(result.errors?.length||!result.data?.arbor?.issue||!result.data?.labs?.object?.text)
+    throw new Error("GRAPHQL_SOURCE_UNAVAILABLE");
+  return result.data;
+}
 function readAudit(dir:string):object {
   const p=join(dir,"scripts","zcode-workflow-run-status.ts");
   if(!existsSync(p))return {state:"UNAVAILABLE"};
@@ -82,17 +90,16 @@ function main():void {
       }else{console.log("WATCH_SKIPPED_ALREADY_RUNNING");return;}
     }
     const observedUtc=new Date().toISOString();
-    const a=api("repos/owenservera/ARBOR/commits/main");
-    const l=api("repos/owenservera/vivim-labs/commits/main");
-    const issue=api("repos/owenservera/ARBOR/issues/33");
-    const comments=api("repos/owenservera/ARBOR/issues/33/comments?per_page=100");
-    const doc=api("repos/owenservera/vivim-labs/contents/"+CLAIM_PATH);
-    const claims=Buffer.from(String(doc.content||"").replace(/\s/g,""),"base64").toString("utf8");
+    const data=snapshot();
+    const issue=data.arbor.issue;
+    const comments=(issue.comments.nodes||[]).map((c:any)=>({
+      id:c.databaseId,created_at:c.createdAt,body:c.body}));
+    const claims=data.labs.object.text;
     const byLane=summarizeClaims(claims),receipts=summarizeReceipts(comments);
     const state={
       schema:"vivim.five-lane-readonly-watch/1",observedUtc,
       classification:"SOURCE_MONITOR_NOT_LIVE_AGENT_PROOF",
-      source:{arborSha:a.sha,labsSha:l.sha,claimsBlobSha:doc.sha},
+      source:{arborSha:data.arbor.defaultBranchRef.target.oid,labsSha:data.labs.defaultBranchRef.target.oid,claimsBlobSha:data.labs.object.oid},
       master:{...summarizeIssue(issue.body||""),updatedAt:issue.updated_at},
       lanes:Object.fromEntries(LANES.map(x=>[x,{activeClaims:byLane[x],recentIssueReceipts:receipts[x]}])),
       zcode:readAudit(ops),
@@ -110,7 +117,7 @@ function main():void {
       JSON.stringify({observedUtc,fingerprint,source:state.source,master:state.master,
         laneClaims:Object.fromEntries(LANES.map(x=>[x,byLane[x].length])),
         lastCommentId:comments.at(-1)?.id||null,zcode:state.zcode})+"\n","utf8");
-    console.log(JSON.stringify({status:"WATCH_PASS",observedUtc,arborSha:a.sha,labsSha:l.sha,
+    console.log(JSON.stringify({status:"WATCH_PASS",observedUtc,arborSha:state.source.arborSha,labsSha:state.source.labsSha,
       open:state.master.open,changed:prior?.fingerprint!==fingerprint,
       activeClaims:Object.fromEntries(LANES.map(x=>[x,byLane[x].length])),zcode:state.zcode}));
   }catch(e:any){

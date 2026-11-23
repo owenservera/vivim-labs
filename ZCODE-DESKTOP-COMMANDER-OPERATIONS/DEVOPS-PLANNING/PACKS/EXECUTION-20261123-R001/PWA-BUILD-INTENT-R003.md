@@ -51,9 +51,9 @@ A person must be able to type a desired Build/Change outcome in the **one** cano
 Current no-effect precursor (source checkout **must** be freshly pinned to a commit containing the new test):
 ```powershell
 node --test --test-concurrency=1 studio/test/unit/pwa-work-ingress-reuse.test.mjs
-node --test --test-concurrency=1 apps/mobile-relay/test/build-composer.test.mjs apps/mobile-relay/test/control-client.test.mjs
+node --test --test-concurrency=1 apps/mobile-relay/test/build-composer.test.mjs apps/mobile-relay/test/universal-control-chat.test.mjs
 ```
-**Second test path requires existence confirmation before execution**; do not report PASS if missing. The first source test's six authored cases are currently **UNRUN in this packet**. No executable code was added here.
+**Both existing browser test paths were independently confirmed in ARBOR's current test directory**; runner outcome still UNRUN in this packet. The first source test's six authored cases are currently **UNRUN in this packet**. No executable code was added here.
 
 Dev must add an explicit Host/API/phone regression suite after choosing the writer; acceptance matrix (all **UNRUN** today):
 1. draft/IME/multiline/voice partial does not submit

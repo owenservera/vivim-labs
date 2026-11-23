@@ -1,5 +1,8 @@
 # L02 — Continuing work queue and completion criteria
 
+> **30-task fleet finish line:** Work toward **30 newly accepted distinct ARBOR #33 checklist tasks** across L01–L05 (baseline 7/71 checked; target at least 37/71). Do not count partial code increments, commits or reports as completed canonical tasks. Read [R006](../LONG-RUN-EXECUTION-R006.md) and keep taking genuinely unclaimed work until the available execution ends; save a precise handoff for the next run.
+
+
 ## OWNER OBJECTIVE — ONE GPUI RENDERER, PWA AS REMOTE VIEWPORT (2026-11-23)
 
 **Latest explicit owner decision; supersedes previous separate GPUI-vs-PWA renderer or shared-schema-only parity plans.** VIVIM must have **one actual product UI renderer: native Rust GPUI**. The installed Android PWA at the **same existing owner HTTPS URL** is a **thin remote viewport of GPUI-rendered output**, not a second app interpreting a component tree into an independent DOM product interface. Adding or modifying a button, layout, animation or component must be done **once in GPUI** and visible on both native Windows and the paired phone. A phone gesture, keyboard/IME event or button tap returns to the correct owned GPUI viewport/session; effects, grants, receipts and approvals remain with the incumbent Host.

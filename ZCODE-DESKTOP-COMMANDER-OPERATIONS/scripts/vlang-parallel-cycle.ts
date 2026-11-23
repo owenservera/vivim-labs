@@ -61,12 +61,15 @@ async function auditLane(lane:Lane):Promise<Result>{
  // The 160-test safety lane takes ~44s alone on Windows and can exceed 65s
  // under four-lane contention. Still fail closed if the bounded 120s expires.
  const timeoutMs=lane.id==="Z-SAFETY"?120000:65000;
- const outcome=await command("node",["--test",...lane.files],timeoutMs);
+ // Keep four independent lanes parallel, but run each lane’s test files
+ // serially: overcommitting short-lived Rust/Host subprocesses caused flaky
+ // 1.2s native readbacks and Chat UI readiness waits on the 4-core Windows host.
+ const outcome=await command("node",["--test","--test-concurrency=1",...lane.files],timeoutMs);
  const output=outcome.stdout+"\n"+outcome.stderr;
  const tests=metric(output,"tests"),pass=metric(output,"pass"),fail=metric(output,"fail"),skipped=metric(output,"skipped");
  const ok=outcome.exitCode===0&&tests!==null&&tests>0&&pass!==null&&pass>0&&fail===0;
  return {lane:lane.id,status:ok?"PASS":"FAIL",exitCode:outcome.exitCode,
-  tests,pass,fail,skipped,durationMs:outcome.durationMs,...(ok?{}:{error:output.slice(-400)})};
+  tests,pass,fail,skipped,durationMs:outcome.durationMs,...(ok?{}:{error:output.slice(-1600)})};
 }
 async function gitValue(args:string[]):Promise<string|null>{
  const r=await command("git",args,12000);return r.exitCode===0?r.stdout.trim():null;

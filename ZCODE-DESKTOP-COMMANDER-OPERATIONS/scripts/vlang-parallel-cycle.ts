@@ -96,12 +96,14 @@ async function oneCycle(){
   }catch{}
  }
  console.log("PINNED_SHA="+sha+" PARALLEL_LANES="+lanes.length);
- // Native Host parity exercises a 1.2 s bounded Rust child process. Four
- // concurrent Node lane processes on the owner Windows host intermittently
- // starve that child, returning null/NATIVE_INTENT_INVALID, and can delay UI
- // readiness. Preserve all four lanes and every assertion, but admit only two
- // lanes simultaneously. Tests within each lane remain serial and time-bounded.
- const maxConcurrentLanes=2;
+ // The Host native bridge enforces a 1.2 s synchronous Rust subprocess timeout.
+ // Source-pinned no-effect runs of four and then two simultaneous Node lanes
+ // produced intermittent NATIVE_INTENT_INVALID and UI-readiness failures;
+ // each failing source test file passed individually. Run all four independent
+ // test lanes sequentially on this constrained Windows verifier, preserving
+ // every assertion and the per-file/per-lane timeouts. This is not a reduction
+ // of ZCode's separate model scout fanout or its no-effect permissions.
+ const maxConcurrentLanes=1;
  const results:Result[]=[];
  for(let i=0;i<lanes.length;i+=maxConcurrentLanes){
   const batch=await Promise.all(lanes.slice(i,i+maxConcurrentLanes).map(auditLane));

@@ -5,7 +5,7 @@ The single source of truth for the design and real execution receipt is
 
 **Source workflow:** ARBOR `.zcode/workflows/arbor-vlang-iterative-observers.dwf.ts` at `f79788da`.
 **Local observer:** `scripts/vlang-parallel-cycle.ts`, Node 24+ TypeScript.
-**Task control:** `scripts/vlang-schedule.ps1`, Windows task `VIVIM-VLANG-Observer`.
+**Task control:** `scripts/vlang-schedule.ps1`, Windows task `VIVIM-VLANG-Observer`. **Model circuit breaker:** `scripts/vlang-zcode-pilot.ps1`; each SHA gets at most one admitted ZCode pilot, and a 429/timeout stops its scoped process tree.
 
 Four disjoint lanes: Z-VLANG, Z-SAFETY, Z-AUTOWIKI, Z-VISUAL. Tests use existing source/runtime, not a second grammar. One independent agent verifier rejects unsupported proposed improvements.
 
@@ -15,6 +15,7 @@ Four disjoint lanes: Z-VLANG, Z-SAFETY, Z-AUTOWIKI, Z-VISUAL. Tests use existing
 $ops='C:\0-BlackBoxProject-0\vivim-labs\ZCODE-DESKTOP-COMMANDER-OPERATIONS'
 node --experimental-strip-types "$ops\scripts\vlang-parallel-cycle.ts" --once
 powershell -NoProfile -ExecutionPolicy Bypass -File "$ops\scripts\vlang-schedule.ps1" -Action status
+powershell -NoProfile -ExecutionPolicy Bypass -File "$ops\scripts\vlang-zcode-pilot.ps1" -Action status
 Get-Content "$ops\local-logs\vlang-iterations\latest.json"
 # Stop automatic recurring test observations:
 powershell -NoProfile -ExecutionPolicy Bypass -File "$ops\scripts\vlang-schedule.ps1" -Action remove

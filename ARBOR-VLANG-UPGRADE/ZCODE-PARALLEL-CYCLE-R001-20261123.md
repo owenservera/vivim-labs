@@ -1,5 +1,5 @@
 # ARBOR VLANG / NL-to-Command — ZCode parallel iteration R001
-Date: 2026-11-23 (Europe/Madrid). Owner: ChatGPT primary source integration; ZCode independent observers. 
+Date: 2026-11-23 (Europe/Madrid). Owner: ChatGPT primary source integration; ZCode independent observers.
 Status: **deterministic parallel cycle PASS / Windows scheduler installed**. **ZCode model workflow launch is a separate acceptance gate; do not label it running without an accepted run ID.**
 
 ## ERA 1 — Existing product and what was reused
@@ -41,18 +41,19 @@ All four exit codes were 0. Physical GPUI typing, Windows native menu painting, 
 
 ## ERA 3 — Actual model pilot / owner handoff
 
-One bounded headless ZCode request was dispatched at pinned `f79788da`, with `--workflow-mode alwaysOn --mode plan`, instructing the official `CreateWorkflow` interface to run the existing DWF by project path and exact SHA. A first `.cmd`/Start-Process argument-quoting attempt yielded only a generic greeting and launched nothing; a corrected direct PowerShell `& zcode --prompt $prompt` invocation **did launch** DWF run **`dwfrun-43fc3e3e-fbb4-460f-91e1-c74ecd59b39e`**, with a logged pinned-SHA admission. The ZCode provider concurrently returned an upstream **rate_limit_error**; the accepted run is NOT yet evidence of successful model-scout results or verifier completion. Original prompts contained no private chat/corpus material. Do not retry the same pilot blindly or silently switch to paid providers; require actual terminal run evidence to upgrade model-scout status from BLOCKED.
+One bounded headless ZCode request was dispatched at pinned `f79788da`, with `--workflow-mode alwaysOn --mode plan`, instructing the official `CreateWorkflow` interface to run the existing DWF by project path and exact SHA. A first `.cmd`/Start-Process argument-quoting attempt yielded only a generic greeting and launched nothing; a corrected direct PowerShell `& zcode --prompt $prompt` invocation **did launch** DWF run **`dwfrun-43fc3e3e-fbb4-460f-91e1-c74ecd59b39e`**, with a logged pinned-SHA admission. The ZCode provider concurrently returned an upstream **rate_limit_error** from the Baidu/OpenRouter shared pool; the accepted run is NOT evidence of successful model-scout results or verifier completion. The scoped headless pilot produced repeated HTTP 429 diagnostics (about 446 KB stderr) and was **explicitly stopped at PID 17552** on November 23 to prevent further retries. No model-scout PASS or terminal DWF success is verified; never automatically restart this run ID. Original prompts contained no private chat/corpus material. Do not retry the same pilot blindly or silently switch to paid providers; require actual terminal run evidence to upgrade model-scout status from BLOCKED.
 
 Operator commands (PowerShell, current Windows PC):
 ```powershell
 $root = 'C:\0-BlackBoxProject-0\vivim-labs\ZCODE-DESKTOP-COMMANDER-OPERATIONS'
 node --experimental-strip-types "$root\scripts\vlang-parallel-cycle.ts" --once
 powershell -NoProfile -ExecutionPolicy Bypass -File "$root\scripts\vlang-schedule.ps1" -Action status
+powershell -NoProfile -ExecutionPolicy Bypass -File "$root\scripts\vlang-zcode-pilot.ps1" -Action status
 # To disable the hourly observer:
 powershell -NoProfile -ExecutionPolicy Bypass -File "$root\scripts\vlang-schedule.ps1" -Action remove
 ```
 
-Evidence: `$root/local-logs/vlang-iterations/latest.json`, per-run JSON, `vlang-zcode-pilot.stdout.log`, `vlang-zcode-pilot.stderr.log`. Those are local-only, not durable public training material.
+Evidence: `$root/local-logs/vlang-iterations/latest.json`, per-run JSON, `vlang-model/<sha>.json` model-admission fence and the scoped ZCode pilot stdout/stderr logs. Those are local-only, not durable public training material. Added `scripts/vlang-zcode-pilot.ps1`: a one-attempt-per-SHA model pilot wrapper that rejects an unverified deterministic baseline, watches for a 429/timeout, stops only its own spawned process tree and records BLOCKED rather than automatically retrying.
 
 Operational improvement loop: **(1)** source SHA and canonical tracker task, **(2)** deterministic regression lanes, **(3)** only after a healthy provider, parallel ZCode read-only scouts, **(4)** independent verifier with precise reproduction and one held-out neighbor, **(5)** ChatGPT source owner chooses one minimal Rust-first correction and pushes `main`, **(6)** deterministic replay and physical UI verification, **(7)** keeper updates original task ledger. Never train on heldout results; incorporate only user-approved miss evidence. Two no-defect cycles or quota 429 => stop AI calls and keep cheap deterministic observer.
 

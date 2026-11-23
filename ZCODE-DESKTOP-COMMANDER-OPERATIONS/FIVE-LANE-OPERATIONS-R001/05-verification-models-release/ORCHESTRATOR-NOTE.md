@@ -9,3 +9,9 @@
 **Boundaries:** Do not run effectful legacy workflows, call paid models without health/cost admission, or claim desktop/Android acceptance from unit tests.
 
 **Cross-lane handoff:** [Orchestrator R005](../ORCHESTRATOR-NEXT-ACTIONS-R005.md) and [critical path R004](../STRATEGIC-EXECUTION-SEQUENCE-R004.md). One claim→code→exact-source test→receipt→release→next task cycle at a time. At true stop, post exact SHA/tests/blockers; never claim an agent is still running after a ChatGPT turn ends.
+
+## Orchestrator observed follow-up — 2026-11-23 21:57 UTC
+
+**New evidence:** L05 R06 source-drift/untracked safety fence [ARBOR 1a05a38](https://github.com/owenservera/ARBOR/commit/1a05a38cb7af684abea78dc785b886041d3700d3) passed 8/8 offline mocked workflow cases, claim RELEASED. CI R04 remains 0-job startup failure (root cause UNKNOWN). Next one real GitHub Actions allocated job eligibility/runner proof and permitted-cost model admission; no unapproved model or effectful workflow.
+
+**Interpretation:** Source-tested increments are real; canonical #33 delivery checkboxes remain subject to separate live/native/phone acceptance. Recheck current claims before code writes. No automatic agent wake or model execution is implied by this note.

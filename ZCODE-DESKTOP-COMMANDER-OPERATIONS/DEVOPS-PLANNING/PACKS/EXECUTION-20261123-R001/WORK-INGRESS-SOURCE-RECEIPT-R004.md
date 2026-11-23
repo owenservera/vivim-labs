@@ -24,13 +24,13 @@ Run on connected owner Windows machine in an isolated detached Git worktree, Nod
 ```powershell
 node --check apps/vivim-host/server.mjs
 node --test --test-concurrency=1 apps/vivim-host/test/pwa-work-admission.test.mjs apps/vivim-host/test/pwa-work-studio-port.test.mjs apps/vivim-host/test/pwa-work-host-status.test.mjs studio/test/unit/pwa-work-ingress-reuse.test.mjs
-# 33 tests | 33 passed | 0 failed | exit 0
+# 34 tests | 34 passed | 0 failed | exit 0
 
 node --test --test-concurrency=1 apps/vivim-host/test/studio-operations.test.mjs apps/vivim-host/test/studio-approved-actions.test.mjs
 # 10 tests | 10 passed | 0 failed | exit 0
 ```
 
-**Total independent targeted+existing compatibility = 44/44 PASS.** First narrow attempt at older SHA `6cbb6e7` was 11/12 (test expected uncertain for a **definite** key collision); corrected assertion only at `f44ae9b5`, 12/12 then 22/22 at `358bd923`, final 33+10 at `a34a7f5a`. No tests removed, no asserts relaxed, no source edited on PC, no provider sends, no Host effect, no live/physical phone check. Old deterministic 215-case ZCode receipt **does not include the new 43-case suite**.
+**Total independent targeted+existing compatibility = 44/44 PASS.** First narrow attempt at older SHA `6cbb6e7` was 11/12 (test expected uncertain for a **definite** key collision); corrected assertion only at `f44ae9b5`, 12/12 then 22/22 at `358bd923`, 33+10 at `2a5182c3`, then 34+10 at `a34a7f5a`. No tests removed, no asserts relaxed, no source edited on PC, no provider sends, no Host effect, no live/physical phone check. Old deterministic 215-case ZCode receipt **does not include the new 44-case suite**.
 
 
 **Latest safety iteration:** [ARBOR `7f7825d`](https://github.com/owenservera/ARBOR/commit/7f7825d72c189516902562484014d61055a4ef25) distinguishes Studio `STUDIO_WORK_NOT_READY` / pre-POST unavailability as definite `WORK_STORE_NOT_READY`; [test `a34a7f5`](https://github.com/owenservera/ARBOR/commit/a34a7f5a88afb687f86fc9fba79a7e886052f48c) adds the negative case and independently preserves `WORK_COMMIT_UNCERTAIN` for uncertain post-send outcomes. Full exact-SHA six-file combined Node run: **44/44 PASS**, 0 fail, exit 0. These assertions were not relaxed.
@@ -47,6 +47,6 @@ A single **read-only GET** to the existing *live* Studio `http://127.0.0.1:38730
 4. **Phone work readback (PY-004):** existing LiveSystemState and paired device scopes, no direct private Studio API access on the phone. Distinct SOURCE→TEST→PACKAGE→HOST→GPUI→ANDROID steps per #31.
 5. **Dispatch (PY-005):** default `not-dispatched`/MANUAL until a separately authorized ZCode/ChatGPT coding session has a verified current claim, healthy cost-approved model and durable ACK. No background worker started.
 
-**Observed verdict:** CODED/PUSHED and **44/44 tests PASS** at exact 2a518; OWNER-ONLY LIVE ROUTE DEPLOYMENT **UNRUN**; LIVE WORK INITIALIZATION **ABSENT**; PWA Submit **UNWIRED**; Host-review action **UNWIRED**; real Work POST **NOT PERFORMED**; phone ACK **UNRUN**; providerSends **0**; live sourceWrites **0**. 
+**Observed verdict:** CODED/PUSHED and **44/44 tests PASS** at exact `a34a7f5a`; OWNER-ONLY LIVE ROUTE DEPLOYMENT **UNRUN**; LIVE WORK INITIALIZATION **ABSENT**; PWA Submit **UNWIRED**; Host-review action **UNWIRED**; real Work POST **NOT PERFORMED**; phone ACK **UNRUN**; providerSends **0**; live sourceWrites **0**. 
 
 **Handoff:** Dev retains the active PY-001 claim until the next scope/producer is accepted and implemented. Oracle can validate the evidence gates; Planning can work on nonoverlapping preparation. See [canonical Task Claims](../../../TASK-CLAIMS.md) and [ARBOR #33](https://github.com/owenservera/ARBOR/issues/33).

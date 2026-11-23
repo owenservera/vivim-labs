@@ -1,5 +1,14 @@
 # R006 — sustained multi-task five-lane execution contract
 
+## 30-task campaign target — owner override, 24 November 2026
+
+**Fleet target: 30 additional, DISTINCT, genuinely completed ARBOR #33 tasks** beyond the verified starting point of **7/71 checked**. The measurable checkpoint is **at least 37/71 checked**, with each of the 30 new task IDs backed by its own required acceptance evidence. This is a cross-lane total, not 30 artificial substeps, not 30 comments, not 30 commits and not 30 tasks per lane (several lane queues are shorter than that). Never game the counter by inventing tasks or closing a partially accepted item. Refresh the real checklist and count every time; this initial baseline is not a substitute for live truth.
+
+**Operating rule:** An individual lane must NOT voluntarily stop at its first source fix, successful test, handoff or SITREP. Resume an active claim, do the real work, test, push, receipt, release, take the next eligible scope, and repeat while tools and execution budget permit. At genuine per-turn/tool/session limits, write a precise continuation checkpoint and resume the same campaign on the next scheduled or owner-triggered invocation; no ChatGPT prompt can guarantee an unbroken 3–5-hour turn or wake a finished conversation. If 30 task closures require real-device, provider-send, paid-cost or other permission gates, preserve those as OPEN and move to genuinely independent safe work.
+
+**Fleet tracking:** Start current closed count from live #33, compute `newly_accepted = current_checked - 7` only when those checked IDs are newly accepted after the baseline, report `newly_accepted/30` and each genuinely closed ID with source, exact-SHA tests and acceptance receipt. Keep code increments and partial acceptance separately; do not equate code shipped with #33 closure. Keep working after one genuine closure until the fleet reaches 30 new acceptances or no safe execution remains in this invocation.
+
+
 **Owner direction (23 November 2026):** The five existing ChatGPT development chats are not five one-shot SITREP generators. Each lane has a long, finite assigned backlog. **Do real engineering across consecutive tasks during a single invocation**; aim for a sustained 3–5-hour *campaign* when an appropriate execution environment supports it. A single ordinary ChatGPT turn still has finite compute/tool limits and cannot promise to remain awake afterward. Scheduled continuations reopen the same existing queue; a passive GitHub watcher is **not** a coding agent.
 
 ## Every lane: nested loop inside its current turn

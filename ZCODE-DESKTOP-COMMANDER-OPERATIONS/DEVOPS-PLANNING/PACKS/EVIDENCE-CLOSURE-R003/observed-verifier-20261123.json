@@ -1,0 +1,29 @@
+{
+  "schema": "vivim.acceptance-evidence/1",
+  "taskId": "Z01-VERIFIER",
+  "claim": "SOURCE_TESTED",
+  "currentMainSha": "dfb5480b17f5daa8861352e0cb81dd97e01e9f9d",
+  "source": {
+    "repository": "owenservera/ARBOR",
+    "sha": "f5623943b746daac3d55a0ae4896430083a568ba"
+  },
+  "test": {
+    "state": "PASS",
+    "sourceSha": "f5623943b746daac3d55a0ae4896430083a568ba",
+    "passed": 215,
+    "failed": 0,
+    "skipped": 0,
+    "runId": "vlang-2026-11-23T19-24-07-866Z",
+    "command": "VIVIM-VLANG-Observer: source-pinned-native-cycle.ps1",
+    "nativeSha256": "389C67DB9FA6913E1B257A5339846BCEA5BA96FB4429DC168059A0D2B33CEC14",
+    "runnerSha256": "5D929411261DB2D365F422AE80E5F2E13848F24130000F351F8277F1C569D6CB",
+    "receiptSchema": "vivim.native-parallel-verification/1"
+  },
+  "noEffects": {
+    "sourceWrites": 0,
+    "hostEffects": 0,
+    "providerSends": 0
+  },
+  "evidenceClass": "isolated-windows-source-test",
+  "qualification": "Source-pinned deterministic 215/215 run at previous source SHA only; no immutable release, production service, physical phone render, provider reply, or current-HEAD recheck."
+}

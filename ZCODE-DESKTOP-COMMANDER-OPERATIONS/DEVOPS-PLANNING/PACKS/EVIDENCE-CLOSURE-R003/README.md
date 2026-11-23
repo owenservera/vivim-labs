@@ -1,5 +1,7 @@
 # VF-001 / VF-002 — exact-source evidence closure and two-device acceptance pack R003
 
+**Fresh exact-HEAD acceptance addendum (19:36:34Z):** [Current ARBOR `dfb5480b` source-pinned receipt](observed-current-head-20261123.json) records the existing Windows observer **215/215 PASS**, four serial no-effect scopes (22/160/12/21), SHA-bound native binary + runner, zero source writes/Host effects/provider sends. The [receipt checker](receipt-gate.ts) actually admitted `SOURCE_TESTED` with `currentHeadMatches:true` against this same head; Windows focused Work reducer tests **6/6 PASS** at that SHA. `PACKAGED`, `LIVE_SERVED`, Host/device/Android/provider delivery remain **UNRUN/NOT ADMITTED**. The earlier [f562 historical sample](observed-verifier-20261123.json) is preserved for stale-source rejection regression. Refresh HEAD before using either sample.
+
 **Date:** 2026-11-23 · **Role:** Planning pre-integration only · **Status:** source code + deterministic tests authored, physical devices unverified by this pack.
 
 **Canonical master:** [ARBOR #33](https://github.com/owenservera/ARBOR/issues/33). Existing delivery issues [#32 AI](https://github.com/owenservera/ARBOR/issues/32) and [#31 runtime/phone](https://github.com/owenservera/ARBOR/issues/31). This packet is a reusable reviewer of proof, **not** another task ledger, executable effect engine, deployment script, screenshot recorder or agent dispatcher. It neither replaces the existing source-pinned VLANG observer nor changes its schedule.

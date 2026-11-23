@@ -9,3 +9,9 @@
 **Boundaries:** Do not duplicate the existing Windows native observer or edit L02 app.js/GPUI adapters without explicit shared source ACK; never run unapproved Host effects.
 
 **Cross-lane handoff:** [Orchestrator R005](../ORCHESTRATOR-NEXT-ACTIONS-R005.md) and [critical path R004](../STRATEGIC-EXECUTION-SEQUENCE-R004.md). One claim→code→exact-source test→receipt→release→next task cycle at a time. At true stop, post exact SHA/tests/blockers; never claim an agent is still running after a ChatGPT turn ends.
+
+## Orchestrator observed follow-up — 2026-11-23 21:57 UTC
+
+**New evidence:** L04 U06 quoted-literal guard [ARBOR 620adb01](https://github.com/owenservera/ARBOR/commit/620adb019cc9f16febc53193139705c7fb579d69) source-tested its focused regression 1/1 and claim RELEASED. Do not claim the larger current native VLANG suite green; previous 142/152, 10 failures. Next independently reproduce current-SHA command/approval failures and patch one disjoint, newly checked-out scope.
+
+**Interpretation:** Source-tested increments are real; canonical #33 delivery checkboxes remain subject to separate live/native/phone acceptance. Recheck current claims before code writes. No automatic agent wake or model execution is implied by this note.

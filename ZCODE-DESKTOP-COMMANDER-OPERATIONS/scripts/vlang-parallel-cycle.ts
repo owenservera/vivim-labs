@@ -96,9 +96,19 @@ async function oneCycle(){
   }catch{}
  }
  console.log("PINNED_SHA="+sha+" PARALLEL_LANES="+lanes.length);
- const results=await Promise.all(lanes.map(auditLane));
+ // Native Host parity exercises a 1.2 s bounded Rust child process. Four
+ // concurrent Node lane processes on the owner Windows host intermittently
+ // starve that child, returning null/NATIVE_INTENT_INVALID, and can delay UI
+ // readiness. Preserve all four lanes and every assertion, but admit only two
+ // lanes simultaneously. Tests within each lane remain serial and time-bounded.
+ const maxConcurrentLanes=2;
+ const results:Result[]=[];
+ for(let i=0;i<lanes.length;i+=maxConcurrentLanes){
+  const batch=await Promise.all(lanes.slice(i,i+maxConcurrentLanes).map(auditLane));
+  results.push(...batch);
+ }
  const state=results.every(x=>x.status==="PASS")?"PASS": "FAIL";
- const report={schema:"vivim.vlang-scout-cycle/1",runId,sha,state,lanes:results,
+ const report={schema:"vivim.vlang-scout-cycle/1",runId,sha,state,maxConcurrentLanes,lanes:results,
   hostEffects:0,providerSends:0,sourceWrites:0,
   unrun:["Live GPUI physical input","Android PWA cross-device parity","ZCode model scouts unless separately launched and verified"],
   next:"Submit one source-pinned reproducible defect to ChatGPT primary coder; never auto-patch parser or Host effects"};

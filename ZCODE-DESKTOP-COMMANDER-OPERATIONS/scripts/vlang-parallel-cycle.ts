@@ -58,7 +58,10 @@ function metric(output:string,key:string):number|null{
 async function auditLane(lane:Lane):Promise<Result>{
  for(const file of lane.files)if(!existsSync(join(root,file)))
   return {lane:lane.id,status:"BLOCKED",exitCode:null,tests:null,pass:null,fail:null,skipped:null,durationMs:0,error:"MISSING_TEST "+file};
- const outcome=await command("node",["--test",...lane.files]);
+ // The 160-test safety lane takes ~44s alone on Windows and can exceed 65s
+ // under four-lane contention. Still fail closed if the bounded 120s expires.
+ const timeoutMs=lane.id==="Z-SAFETY"?120000:65000;
+ const outcome=await command("node",["--test",...lane.files],timeoutMs);
  const output=outcome.stdout+"\n"+outcome.stderr;
  const tests=metric(output,"tests"),pass=metric(output,"pass"),fail=metric(output,"fail"),skipped=metric(output,"skipped");
  const ok=outcome.exitCode===0&&tests!==null&&tests>0&&pass!==null&&pass>0&&fail===0;

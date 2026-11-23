@@ -73,6 +73,9 @@ Earlier planning docs referenced `../OWNER-WORK/NOW.md`, `../OWNER-WORK/UPDATES.
 
 ## R003 owner-ready source packets
 
+- **[VF-001/VF-002 exact-source evidence closure pack](PACKS/EVIDENCE-CLOSURE-R003/README.md)** — reusable offline, fail-closed [TypeScript receipt classifier](PACKS/EVIDENCE-CLOSURE-R003/receipt-gate.ts), [six tests](PACKS/EVIDENCE-CLOSURE-R003/receipt-gate.test.mjs), and [actual bounded 215-case run input](PACKS/EVIDENCE-CLOSURE-R003/observed-verifier-20261123.json). Windows `node --experimental-strip-types --test` **6/6 PASS**, actual historical ARBOR `f5623943` classified `SOURCE_TESTED` only; `PACKAGED`/Host/GPUI/Android **not admitted**. [Sender-owned claim in TASK-CLAIMS](../TASK-CLAIMS.md) is `READY_FOR_HANDOFF / OFFERED_TO`, not receiver ACK. No source, phone or provider effects.
+
+
 - [Explicit PWA Build/Change admission — PY-001](PACKS/EXECUTION-20261123-R001/PWA-BUILD-INTENT-R003.md) and [machine intake](PACKS/EXECUTION-20261123-R001/pickup-r003.json). Labs-only Planning claim; newly authored ARBOR `studio/test/unit/pwa-work-ingress-reuse.test.mjs` validates pure Work reducer reuse but **does not prove** a Host-authorized PWA writer. Receiver must claim/ACK before editing ARBOR.
 - [Read-only Studio/ChatGPT readiness — P0-AI-CHAT](PACKS/EXECUTION-20261123-R001/PROVIDER-READINESS-R003.md). Actual Studio owner-idle read observed, no provider send/settled reply/phone receipt. Do not run state-changing local conversation-reconcile helper as a health probe.
 - Earlier [R001 execution pack](PACKS/EXECUTION-20261123-R001/README.md) and [R002 wiring audit](PACKS/EXECUTION-20261123-R001/WIRING-DELTA-R002.md) remain linked; all work maps back to #33 and existing TASK-CLAIMS.

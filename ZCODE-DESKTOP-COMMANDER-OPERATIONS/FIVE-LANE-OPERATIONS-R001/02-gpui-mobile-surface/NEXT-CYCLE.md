@@ -1,5 +1,8 @@
 # L02 — Continuing work queue and completion criteria
 
+> **Owner's multi-hour lane contract:** [R006 sustained task-consumption loop](../LONG-RUN-EXECUTION-R006.md). After each safe code/test/receipt increment **take another unclaimed task in the same turn**; do not stop at first success or SITREP. Refresh live claims before every iteration; preserve actual limits.
+
+
 > **Most recent cross-chat orchestrator note:** [Source-backed next action, active claim and boundaries](ORCHESTRATOR-NOTE.md). Read on every continuation before selecting the next task. It does not grant a source-file claim or wake another session.
 
 

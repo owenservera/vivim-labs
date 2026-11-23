@@ -1,0 +1,98 @@
+{
+  "schema": "vivim.planning-pickup/3",
+  "observedAtUTC": "2026-11-23T19:30:50.621Z",
+  "owner": "ChatGPT DevOps/Planning",
+  "canonical": {
+    "repo": "owenservera/ARBOR",
+    "issue": 33,
+    "provider": 32,
+    "release": 31,
+    "claim": "ZCODE-DESKTOP-COMMANDER-OPERATIONS/TASK-CLAIMS.md"
+  },
+  "sourcePins": {
+    "arbor": "dfb5480b17f5daa8861352e0cb81dd97e01e9f9d",
+    "studioWorkReducerTestAddedAt": "dfb5480b17f5daa8861352e0cb81dd97e01e9f9d",
+    "sourceRefreshRequired": true
+  },
+  "claim": {
+    "id": "PY-001",
+    "scope": "Labs-only Build/Change admission contract",
+    "state": "PREPARED_OFFERED_TO_CHATGPT_DEV_ACK_NOT_OBSERVED",
+    "arborSourceWrites": 0,
+    "applicationEffects": 0,
+    "providerSends": 0,
+    "phoneAcceptance": false
+  },
+  "packets": [
+    {
+      "id": "P1-VLANG-WIKI-ORACLE/PY-001",
+      "file": "PWA-BUILD-INTENT-R003.md",
+      "ready": "CONTRACT_PREPARED_WRITER_UNPROVEN",
+      "owner": "ChatGPT Dev",
+      "prerequisite": "PY-002 Host-authorized Work writer identity/source-of-truth",
+      "existingCode": [
+        "apps/mobile-relay/app.js",
+        "apps/mobile-relay/build-canvas.mjs",
+        "apps/mobile-relay/build-composer.mjs",
+        "apps/mobile-relay/control-client.mjs",
+        "apps/vivim-host/control/dispatcher.mjs",
+        "studio/src/agents/personal-agent-work.mjs",
+        "studio/src/agents/personal-agent-service.mjs",
+        "studio/src/studio/personal-agent-routes.mjs"
+      ],
+      "authoredSourceTest": "studio/test/unit/pwa-work-ingress-reuse.test.mjs",
+      "sourceTestOutcome": "UNRUN_THIS_SESSION",
+      "manualDispatchOnly": true
+    },
+    {
+      "id": "P0-AI-CHAT/A01-A03",
+      "file": "PROVIDER-READINESS-R003.md",
+      "ready": "STUDIO_OWNER_IDLE_OBSERVED_NOT_PROVIDER_DELIVERY",
+      "owner": "ChatGPT Dev",
+      "observation": {
+        "ready": true,
+        "reason": "STUDIO_OWNER_IDLE",
+        "supportedProviders": [
+          "chatgpt"
+        ],
+        "source": "Studio read-only GET probe",
+        "credentialOrThreadConfirmed": false,
+        "workerConfirmed": false,
+        "realMessageSubmitted": false,
+        "phoneRendered": false
+      },
+      "prohibited": [
+        "replay historic uncertain ChatGPT key",
+        "POST reconcile as SITREP",
+        "double Studio/Chrome owner",
+        "unapproved provider send"
+      ]
+    },
+    {
+      "id": "OPS-OBSERVERS/Z01-Z07",
+      "file": "VERIFICATION-RECEIPT.md",
+      "ready": "OLDER_SOURCE_PASS_CURRENT_SOURCE_PENDING",
+      "olderVerified": {
+        "arborSha": "0cd77a2185afe204e41e04fe3d3d588133a3eac6",
+        "passed": 215,
+        "total": 215
+      },
+      "currentSourceRecheck": "RUNNING_OR_UNCONFIRMED",
+      "effects": 0,
+      "sends": 0
+    }
+  ],
+  "requiredAcceptance": [
+    "source revision",
+    "Host owner grant",
+    "idempotency",
+    "separate explicit UI action",
+    "no auto dispatch",
+    "no provider replay",
+    "same source both viewports",
+    "real phone receipt"
+  ],
+  "taskListMutation": "none: existing #33 and Master-Plan-R001 remain canonical",
+  "automaticAgentDispatch": false,
+  "claimedRecipientAcceptance": false
+}

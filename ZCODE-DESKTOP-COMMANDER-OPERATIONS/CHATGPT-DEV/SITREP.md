@@ -2,6 +2,19 @@
 
 ## CURRENT OWNER OVERRIDE + DEV SITREP — 2026-11-23
 
+### Current completed development increment — Studio route recovery and PWA/GPUI source parity
+
+**Exact latest ARBOR main:** [f147ddf7](https://github.com/owenservera/ARBOR/commit/f147ddf7fb18630947d46f10a735b70acc9e6d1c). This supersedes older code SHAs below; earlier receipts remain historical.
+
+- Recovered the actual Studio service on the owner's PC using existing `studio serve --studio-port 38730 --port 38702 --data-dir C:\VIVIM` without launching signed-in Chrome or Studio HTML UI. Preflight `studio doctor`: 95 historical saved sessions, no recording currently marked active, dedicated browser not running. Existing restarted Studio listener: HTTP 200 on legacy `/api/status`, HTTP 200 on versioned Drive jobs/sites, recorder idle, no active Drive jobs, 9 known site definitions. The first Studio process was intentionally stopped only after verifying recorder idle and no running Drive job, then replaced from current cloud-pushed source. It is **live now but not a durable OS startup service guarantee**.
+- Root cause exposed by real HTTP probes: `apps/vivim-host/onboarding/studio-port.mjs` had incorrectly sent all routes to `/api/v1`. Studio's capture/status/targets are on `/api`; Drive/conversations are on `/api/v1`. Source fixes `e1a5024a`, `b357b93e`, `34b27965` and new tests prove correct API ownership and definite preflight failure without hidden retries. **Unknown outcome AFTER a Studio POST remains uncertain and cannot be retried.**
+- Live no-effect read through the **actual corrected StudioPort module** returned schema `vivim.studio-operations/1` source-backed, capture idle, provider browser not-running/unverified, 0 capture targets; Drive 9 sites, 0 active jobs. This is true connected-source evidence, not a synthetic test or provider-delivery proof.
+- Existing canonical phone PWA Control card now shows **source-sanitized Studio operations status-only** from the SAME owner Host projection GPUI uses; no duplicate page, new effect engine, new login or second browser. Source `4cd88425` + `07416b66` + tests `a7880e9a`; PWA shell cache v47 `e3f7903b`, convergence test `f147ddf7`.
+- Clean source-pinned Windows tests: **8/8 PWA** and **22/22 Studio/Host** PASS at `f147ddf7`, earlier Studio source-boundary suite 28/28 PASS at `0cd311b6`. Live existing Host 43187 serves latest `/mobile/app.js`, `/mobile/ux/model.mjs` and `/mobile/sw.js` (200 + new-source marker on all). Running Host process and native GPUI binary remain on the **older verified** source-stamped `1b79747c` baseline until safe package promotion; do not represent native runtime as rebased onto latest JS source or Android acceptance as complete.
+- **NEXT:** Source-pin native Host/GPUI promote without interrupting phone URLs/pairing, prove actual owner-only Host Studio status readback, then safely validate native Studio action review/approval and real Android composer+Wiki parity. Continue master ledger [ARBOR #33](https://github.com/owenservera/ARBOR/issues/33); signed-in ChatGPT send/reply requires original uncertain-turn reconciliation first [#32](https://github.com/owenservera/ARBOR/issues/32). No unsafe `arbor-life` ZCode workflow; tools remain scoped.
+
+---
+
 ### Latest closed-loop implementation — same day, after prior receipts
 
 - **ARBOR canonical main now [1b79747c](https://github.com/owenservera/ARBOR/commit/1b79747c9eb1aa46083e19d86d14d86deca547ea)**. Four Studio capture/Drive actions have been ported to *existing GPUI Developer and Windows File/Tools surfaces* using the incumbent Host Control plan -> separate approval -> one-shot execution -> journal receipt, and the sole Studio HTTP owner. First Contact is unchanged; no duplicate engine. Original Studio action pages remain for unique functionality and recovery until real acceptance.

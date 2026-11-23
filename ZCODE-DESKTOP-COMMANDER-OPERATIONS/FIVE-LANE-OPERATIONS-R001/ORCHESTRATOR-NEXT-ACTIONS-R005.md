@@ -35,3 +35,18 @@
 `lane | task | source HEAD | active claim & file scope | delivered commit | tests exit/quantity | deployed build SHA | live model run/seat/cost | Host approval | native paint | Android acknowledgement | defect/blocker | next exact step`.
 
 **This is the operator coordination checkpoint** to consult alongside [strategic R004](STRATEGIC-EXECUTION-SEQUENCE-R004.md) and each lane's `NEXT-CYCLE.md`. Only the live authoritative tracker and claims define execution acceptance.
+
+## Actual five-minute Desktop Commander / ZCode read-only watcher — 2026-11-23
+
+**Now installed and schedule-tested on Windows:** Task Scheduler `VIVIM-FiveLane-SourceWatch`, every **5 minutes**, single-instance (`IgnoreNew`), interactive logged-in account, read-only, initial source commit [67d1176](https://github.com/owenservera/vivim-labs/commit/67d1176c48766ea48f1cee38af3aa0b7ccb1c7da), [3-unit regression](https://github.com/owenservera/vivim-labs/commit/59afc4259e2d4221176f4a551706ab1687d169ae) and [single GraphQL query fix](https://github.com/owenservera/vivim-labs/commit/b36acf048b282d11b457cf8a34a2c16d55c04327). Authenticated `gh api graphql` reads current ARBOR/Labs main source heads, #33 issue/last public receipts, Labs claim blob; existing local `scripts/zcode-workflow-run-status.ts` is run **read-only** for liveness. Writes only to **private local** `ZCODE-DESKTOP-COMMANDER-OPERATIONS/.private/five-lane-watch/{latest.json,changes.jsonl,last-error.json}` — no provider, Host, model, source edit, commit, test claim or cross-thread wake.
+
+**Verification receipt:** Windows Node v24 `node --experimental-strip-types --no-warnings --test orchestrator-watch.test.mjs` **3/3 PASS**; direct revised GraphQL watcher **WATCH_PASS** exit 0 at 2026-11-23T21:56:11Z, ARBOR `6c583d7` and Labs `a2851bb` source snapshots, 64 open, zero verified ZCode model worker candidates. First scheduled run had a real `gh` REST timeout (Windows task result **1**), detected and repaired by replacing five serialized REST queries with one bounded GraphQL query; **the actual subsequent scheduled run was verified** with Task Scheduler **Last Result 0**, **Last Run 2026-11-23 22:56:48 Europe/Madrid**, next recurrence configured 23:00:23. Keep later failure receipts visible; a one-time success is not 24/7 uptime proof.
+
+**All five lane-specific note paths published and linked from NEXT-CYCLE:**
+- [L01 source/current handoff](01-chatgpt-provider/ORCHESTRATOR-NOTE.md)
+- [L02 source/current handoff](02-gpui-mobile-surface/ORCHESTRATOR-NOTE.md)
+- [L03 source/current handoff](03-work-oracle-autowiki/ORCHESTRATOR-NOTE.md)
+- [L04 source/current handoff](04-vlang-visual-gestures/ORCHESTRATOR-NOTE.md)
+- [L05 source/current handoff](05-verification-models-release/ORCHESTRATOR-NOTE.md)
+
+**How the real work continues:** The existing enabled hourly ChatGPT `VIVIM Continuous Dev Cycle` instructions were updated *in place* to read five notes, exact claims, and fresh local watcher receipts and then perform further claim-safe GitHub coding/tests within that scheduled turn. The watcher is a **source activity logger, not an autonomous AI coding agent**. Other scheduled ChatGPT L01–L03 continue hourly; L04/L05 chats are only active during their turns, not auto-relaunched by the Windows watcher. Five ChatGPT slots remain occupied including the independent Brent reference task. No existing native verifier or Desk Commander archive schedule was displaced.

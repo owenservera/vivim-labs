@@ -1,0 +1,100 @@
+{
+  "schema": "vivim.wiring-execution-delta/2",
+  "observedAt": "2026-11-23",
+  "base": {
+    "arbor": "7991f675d8bbcd4d31daf0de76d1cebab8a03a56",
+    "labs": "78472401a1c9c7b75c8688c81ef22379aae3732f"
+  },
+  "sourceOfTruth": {
+    "masterIssue": 33,
+    "providerIssue": 32,
+    "releaseIssue": 31,
+    "claims": "ZCODE-DESKTOP-COMMANDER-OPERATIONS/TASK-CLAIMS.md",
+    "wiringAudit": "https://github.com/owenservera/ARBOR/blob/main/docs/product/ARBOR-NOW-FUTURE-WIRING-20261123.md"
+  },
+  "agentAutoDispatched": false,
+  "existingSchedulerOnly": true,
+  "currentObserver": {
+    "examinedArborSha": "0cd77a2185afe204e41e04fe3d3d588133a3eac6",
+    "lanes": [
+      {
+        "id": "Z-VLANG",
+        "pass": 21,
+        "total": 22
+      },
+      {
+        "id": "Z-SAFETY",
+        "pass": 156,
+        "total": 160
+      },
+      {
+        "id": "Z-AUTOWIKI",
+        "pass": 12,
+        "total": 12
+      },
+      {
+        "id": "Z-VISUAL",
+        "pass": 21,
+        "total": 21
+      }
+    ],
+    "pass": 210,
+    "total": 215,
+    "wrapperState": "BLOCKED",
+    "newLabsSerialRunner": "78472401a1c9c7b75c8688c81ef22379aae3732f",
+    "newCompletePassObserved": false,
+    "providerSends": 0,
+    "hostEffects": 0,
+    "sourceWrites": 0
+  },
+  "ready": [
+    {
+      "id": "OPS-OBSERVERS",
+      "gate": "fresh-exact-sha-verifier",
+      "claim": "requires-current-claims-read",
+      "executor": "ZCode+Desktop Commander",
+      "sourceWrite": false
+    },
+    {
+      "id": "P0-AI-CHAT",
+      "gate": "reconcile-uncertain-chatgpt-key-and-session",
+      "claim": "requires-current-claims-read",
+      "executor": "ChatGPT Dev",
+      "providerSendAllowed": false
+    },
+    {
+      "id": "P0-RELEASE-SYNC",
+      "gate": "one-source-package-and-two-way-phone",
+      "claim": "requires-current-claims-read",
+      "executor": "ChatGPT Dev; Desktop Commander observes"
+    },
+    {
+      "id": "P1-GPUI",
+      "gate": "native-visual-IME-and-receipts",
+      "claim": "check-concurrent-GPUI-dev-owner",
+      "executor": "ChatGPT Dev"
+    },
+    {
+      "id": "P1-VLANG-WIKI-ORACLE",
+      "gate": "verified-Host-grant-producer",
+      "claim": "Labs-precode-OFFERED-to-Dev-not-assumed-accepted",
+      "executor": "ChatGPT Dev / Planning prep / Oracle audit"
+    },
+    {
+      "id": "UI-RETIREMENT",
+      "gate": "feature-parity-prior-to-removal",
+      "claim": "requires-current-claims-read",
+      "executor": "ChatGPT Dev"
+    }
+  ],
+  "invariants": [
+    "one-Host-effect-authority",
+    "one-Studio-signed-in-browser-owner",
+    "one-semantic-surface-two-renderers",
+    "cloud-GitHub-main-source-writes-only",
+    "no-replay-uncertain-turns",
+    "no-automatic-provider-sends",
+    "no-paid-model-fallback",
+    "no-test-count-as-phone-acceptance"
+  ]
+}

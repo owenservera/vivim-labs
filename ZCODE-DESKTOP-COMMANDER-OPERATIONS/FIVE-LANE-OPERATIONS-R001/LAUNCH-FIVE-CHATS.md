@@ -63,3 +63,7 @@ Every lane acts through GitHub source plus Labs [TASK-CLAIMS](https://github.com
 **Critical first acceptance:** real new ChatGPT thread/composer→settled reply→Host journal→native GPUI + Android PWA. Independently, unblock exact-source VLANG safety, the Host-reviewed Work producer and immutable release. L05 certifies receipts and CI instead of becoming a second source integrator.
 
 **Troubleshooting:** If the ChatGPT lane says it cannot open the GitHub link, make it search the connected `owenservera/vivim-labs` repository and fetch this exact path first; if no tools are available, paste the full prompt from the linked file. If an automation fails to create, the lane must report no scheduled execution; don't infer background operation from the instruction alone.
+
+
+> **Execution order:** Read the [current five-lane R004 strategic sequence](STRATEGIC-EXECUTION-SEQUENCE-R004.md) before independent source changes. Provider safety, immutable device package and VLANG safety progress in parallel; integrate through one owner-authorized real provider turn and two-device proof. Reconcile claims, and preserve existing local dirty work.
+

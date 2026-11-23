@@ -12,7 +12,7 @@ const root = dirname(fileURLToPath(import.meta.url));
 const required = ["README.md", "AGENTS.md", "DIRECTIVE.md", "LANE-BOARD.md", "STRATEGIC-AUDIT-R002.md",
   "LAUNCH-FIVE-CHATS.md", "manifest.json", ...["01-chatgpt-provider", "02-gpui-mobile-surface",
   "03-work-oracle-autowiki", "04-vlang-visual-gestures", "05-verification-models-release"]
-    .flatMap(x => ["AGENTS.md", "START-PROMPT.md", "HANDOFF.md", "CHATGPT-LAUNCH.md"].map(y => join(x,y)))];
+    .flatMap(x => ["AGENTS.md", "START-PROMPT.md", "HANDOFF.md", "CHATGPT-LAUNCH.md", "WORK-INDEX.md", "CONTEXT-AND-TOOLS.md", "NEXT-CYCLE.md"].map(y => join(x,y)))];
 
 export function expandIssueIds(range: string): string[] {
   const match = /^([A-Z])([0-9]{2})(?:-([A-Z])?([0-9]{2}))?$/.exec(range);

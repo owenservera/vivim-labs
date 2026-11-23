@@ -1,3 +1,6 @@
+
+> **Live orchestration sequence (23 Nov R004):** [Source-grounded five-lane critical path, real ZCode/Desktop Commander sitrep and next ten accountable steps](STRATEGIC-EXECUTION-SEQUENCE-R004.md). This controls dependencies and source collisions but does **not** replace the live #33 backlog or enable unapproved effects.
+
 # VIVIM / ARBOR — Five Parallel Lanes (R001)
 
 A ready-to-run **five-lane operational handoff** using existing `ARBOR/.zcode/workflows` and canonical issue/claims authority. The five lanes are organizational workspaces and starting prompts, not new ZCode DWF registrations or automatic provider/model sends.

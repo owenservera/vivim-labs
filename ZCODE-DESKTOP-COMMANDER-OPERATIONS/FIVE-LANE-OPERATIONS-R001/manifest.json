@@ -1,0 +1,94 @@
+{
+  "schema": "vivim.five-lane-operation/1",
+  "version": "R001",
+  "authority": {
+    "repository": "owenservera/ARBOR",
+    "branch": "main",
+    "masterIssue": 33,
+    "claims": "ZCODE-DESKTOP-COMMANDER-OPERATIONS/TASK-CLAIMS.md"
+  },
+  "defaultExecution": "read_only",
+  "maxUnverifiedModelWorkers": 0,
+  "maxInitialAdmittedReadOnlyWorkers": 2,
+  "autostart": false,
+  "ownsScheduler": false,
+  "lanes": [
+    {
+      "id": "L01",
+      "folder": "01-chatgpt-provider",
+      "priority": "P0",
+      "issueIds": [
+        "A01-A16"
+      ],
+      "workflowRefs": [
+        ".zcode/workflows/arbor-area-c.dwf.ts",
+        ".zcode/workflows/arbor-chatgpt-bridge.dwf.ts"
+      ],
+      "execution": "READY_NOT_LAUNCHED",
+      "sourceEdits": "CLAIM_REQUIRED"
+    },
+    {
+      "id": "L02",
+      "folder": "02-gpui-mobile-surface",
+      "priority": "P0",
+      "issueIds": [
+        "S02-S14",
+        "U01-U04",
+        "U10"
+      ],
+      "workflowRefs": [
+        ".zcode/workflows/arbor-area-d.dwf.ts",
+        ".zcode/workflows/arbor-area-e.dwf.ts"
+      ],
+      "execution": "READY_NOT_LAUNCHED",
+      "sourceEdits": "CLAIM_REQUIRED"
+    },
+    {
+      "id": "L03",
+      "folder": "03-work-oracle-autowiki",
+      "priority": "P0/P1",
+      "issueIds": [
+        "U05",
+        "U07",
+        "O01-O06"
+      ],
+      "workflowRefs": [
+        ".zcode/workflows/arbor-area-b.dwf.ts",
+        ".zcode/workflows/arbor-oracle-corpus-verify.dwf.ts"
+      ],
+      "execution": "READY_NOT_LAUNCHED",
+      "sourceEdits": "CLAIM_REQUIRED"
+    },
+    {
+      "id": "L04",
+      "folder": "04-vlang-visual-gestures",
+      "priority": "P0/P1",
+      "issueIds": [
+        "U06-U11",
+        "G02-G05",
+        "Z01"
+      ],
+      "workflowRefs": [
+        ".zcode/workflows/arbor-vlang-iterative-observers.dwf.ts",
+        ".zcode/workflows/arbor-product-verification-parallel.dwf.ts"
+      ],
+      "execution": "READY_NOT_LAUNCHED",
+      "sourceEdits": "CLAIM_REQUIRED"
+    },
+    {
+      "id": "L05",
+      "folder": "05-verification-models-release",
+      "priority": "P0/P1",
+      "issueIds": [
+        "Z02-Z07",
+        "R01-R07"
+      ],
+      "workflowRefs": [
+        ".zcode/workflows/arbor-product-verification-parallel.dwf.ts",
+        ".zcode/workflows/arbor-area-a.dwf.ts"
+      ],
+      "execution": "READY_NOT_LAUNCHED",
+      "sourceEdits": "CLAIM_REQUIRED"
+    }
+  ]
+}

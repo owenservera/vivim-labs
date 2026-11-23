@@ -1,4 +1,21 @@
 # ChatGPT Dev SITREP — 2026-11-21
+
+## CURRENT OWNER OVERRIDE + DEV SITREP — 2026-11-23
+
+**Supersedes conflicting November 21 UI directions below:** First Contact is ALREADY BUILT. The next priority is to **consolidate and gracefully retire duplicate frontends**, preserving useful Host, Studio, TierFlow engines, personal history and evidence. Windows = one native Rust GPUI product window and a top-level native File/Edit/View/Tools/Developer/Settings/Help menu. Mobile = the single existing apps/mobile-relay PWA. Shared Host/VEC semantics, one Host state/effect authority, and one Studio signed-in browser owner. Do not build a second desktop Edge/PWA window, second Studio installable PWA, second product dashboard, database or browser controller.
+
+### Product work pushed directly to ARBOR main
+
+- Verified ARBOR main source: https://github.com/owenservera/ARBOR/commit/a8512662e93a3259eb8e0f6c3b34e57e684157bb. Clean original Windows ARBOR checkout fast-forwarded to the same SHA.
+- Retired local Host iframe root (308 to existing canonical Host PWA preview, wrapper JS/CSS no longer served), removed Grokbot alternative product link, retired second Studio PWA manifest and shell-worker registration (410 manifest, cleanup-only worker). Studio personal-app view and APIs survive as migration/recovery compatibility, private state unchanged.
+- Migrated Studio delivery history, capture status and Drive job metadata into GPUI's existing Developer tools via an owner-authorized Host read-model and the existing bounded Studio loopback GET port. File and Tools native menu entries open these readbacks; no provider sends, Chrome driver, recording actions, Drive mutations or authorization bypass added. Studio's unique action workflows are NOT yet ported, so old HTML routes are not all retired.
+- At the exact source a8512662: Node focused Host and Studio tests **19/19 PASS**, GPUI desktop Cargo check with --features desktop --offline --locked PASS; native Rust library **59/59 PASS at preceding source 0873cfa9** (subsequent edits touched Host/tests only). Initial Host integration test failure caught a missing Studio adapter parameter and a too-short owner token fixture; both fixed and rerun PASS. No prior-failure erasure.
+- **DEPLOYED / physical GPUI / Android PHONE VERIFIED: UNRUN** for this increment; tests alone do not establish release parity.
+- On Windows at 2026-11-23 12:49 UTC, read-only scripts/sitrep.ps1 exited 0: ZCode 0.18.0, 93 *agent definition files* but 0 matching ZCode processes, provider rules 21, model rules 218. No active ZCode development worker verified.
+- Legacy ZCode arbor-life workflow includes Host restart and legacy mutation paths even under nominal audit modes. **Do not run against personal Host** until isolated, no-write observer contract is actually enforced. ChatGPT cloud/GitHub main remains sole application code writer; ZCode may handle bounded supporting read-only tests.
+- Next: migrate capture Start/Stop, Drive dry-run/cancel and owner approval using existing Host permissions, validate GPUI plus Android behavior, then retire remaining legacy Studio/Host HTML routes without losing their data. Continue ARBOR master tracker https://github.com/owenservera/ARBOR/issues/33 and current canonical UI closure document; do not create a new backlog.
+
+---
 This is a role snapshot, not an active coding session.
 Active user-visible priorities: (1) user types and AutoWiki appears, (2) agent types and AutoWiki appears. Relevant owner request identifiers include OW-007, OW-009, OW-014 and OW-017; always check latest updates.
 Historical OW-014 deployment reports ARBOR 95089a3 and 37 focused tests passing, but real Android proof UNRUN. Current GitHub main and live Host are not verified by this file.

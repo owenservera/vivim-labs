@@ -27,8 +27,8 @@ foreach ($file in @(Get-ChildItem -LiteralPath $idxDir -File -Filter '*.jsonl' -
 $groups = @($records | Group-Object -Property tool | Sort-Object -Property Count -Descending)
 $toolRows = @($groups | ForEach-Object { [ordered]@{tool=$_.Name;observations=$_.Count} })
 $omitted = @($records | Where-Object {$_.process_output_omitted -eq $true}).Count
-$badExit = @($records | Where-Object {$null -ne $_.process_exit_code_if_present -and [int]$_.process_exit_code_if_present -ne 0}).Count
-$okExit = @($records | Where-Object {$null -ne $_.process_exit_code_if_present -and [int]$_.process_exit_code_if_present -eq 0}).Count
+$badExit = @($records | Where-Object {$null -ne $_.process_exit_code_if_present -and [long]$_.process_exit_code_if_present -ne 0}).Count
+$okExit = @($records | Where-Object {$null -ne $_.process_exit_code_if_present -and [long]$_.process_exit_code_if_present -eq 0}).Count
 $patterns = [ordered]@{
   powershell_profile_noise = 0
   pwa_offline_asset_assertion = 0

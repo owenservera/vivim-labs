@@ -79,6 +79,8 @@
 
 | **U09/U03 — Material 3 Expressive native presentation (owner-directed)** | **None — released on owner reprioritization** | Former scope `native/gpui-desktop/src/first_contact.rs`; base `cf6b2c64f79f5a72e40db046a82a229f62053bd1` | **RELEASED / DEFERRED / NO SOURCE CHANGE** | 2026-11-24: owner directs finish pending work first. Existing GPUI single-renderer integration, active S03/S05 and canonical #33 take precedence. | Resume expressive presentation only after pending work is completed and owner priority permits; fresh claim required. |
 
+| **S09/U03 — native remote control identity and ambiguous hit refusal** | **ChatGPT / native-input-identity-r001** | ARBOR `native/gpui-desktop/src/remote_viewport_contract.rs` ONLY; base `cf6b2c64f79f5a72e40db046a82a229f62053bd1`; excludes active R018/R020 | **ACTIVE / INERT SOURCE TESTS** | 2026-11-24: reject ambiguous hit and duplicate native target identities instead of first-match ACK | Exact-source Rust tests; no live effect or deployment. |
+
 ## Planning proposal catalogue (unclaimed)
 
 The [Planning master task catalogue R001](DEVOPS-PLANNING/MASTER-PLAN-R001.md) contains **37 researched preparation candidates** with priorities, dependencies, source reuse and acceptance criteria. These are NOT 37 active checkout rows and are NOT a substitute for missing canonical OWNER-WORK. Only individually claimed work appears as active in the claim register. The [source reuse map](DEVOPS-PLANNING/SOURCE-REUSE-MAP-R001.md) and [test/handoff checklist](DEVOPS-PLANNING/ACCEPTANCE-AND-HANDOFF-R001.md) are the preparation entry points. Dev's currently owned product coding is excluded from Planning Next Ten.

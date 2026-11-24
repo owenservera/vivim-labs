@@ -119,6 +119,8 @@ The [Planning master task catalogue R001](DEVOPS-PLANNING/MASTER-PLAN-R001.md) c
 
 | **S05 — native owner immediate GPUI screen-sharing revoke** | **ChatGPT unified engineering / gpui-native-revoke-20261124 — ACTIVE SOURCE OWNER** | ARBOR `apps/vivim-host/remote/gpui-direct-channel.mjs` + `apps/vivim-host/test/gpui-direct-channel.test.mjs` ONLY; existing same Host listener unchanged | **ACTIVE / CODE_PENDING / INERT TESTS ONLY** | Native GPUI Stop must immediately scrub Host PNG and input queue instead of waiting 5s expiry. Add owner-token-gated, no-Origin POST `api/gpui/native-stop` and robust revocation test; no phone ability to stop other's share. | Exact-SHA source tests then release, bind stop in Rust native peer. |
 
+| **S02/S05 — PWA GPUI module offline shell fallback** | **ChatGPT unified engineering / gpui-sw-cache-r019 — ACTIVE SOURCE OWNER** | ARBOR `apps/mobile-relay/sw.js` GPUI optional shell precache only + NEW `apps/mobile-relay/test/gpui-sw-shell.test.mjs`; existing `app.js`, Host server, native GPUI excluded | **ACTIVE / CODE_PENDING / NO LIVE DEPLOY** | New GPUI Direct viewport scripts must be optional cached shell modules for already-paired mobile offline fallback; bump service-worker generation atomically; ensure no /api/grant/token/POST cached or replayed, no second product renderer. Existing last known good critical shell remains rollback. | Source-pinned regression / exact SHA then release; service-worker update not activated on real Android. |
+
 ## Concurrency and recovery
 
 - One task executor, one edit scope at a time. Parallel agents may work separate tasks and scopes; overlapping source files require a recorded owner-to-owner agreement before coding.

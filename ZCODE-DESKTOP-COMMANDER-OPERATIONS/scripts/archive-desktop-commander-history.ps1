@@ -95,7 +95,10 @@ foreach ($line in [IO.File]::ReadLines($snapshotPath)) {
     $isOmitted = $text.Contains('[output omitted from history:')
     if ($isOmitted) { $omitted++ }
     $exit = $null
-    if ($text -match 'completed with exit code\s+([0-9]+)') { $exit = [int]$Matches[1] }
+    if ($text -match 'completed with exit code\s+(-?[0-9]+)') {
+        $parsedExit = [long]0
+        if ([long]::TryParse($Matches[1], [ref]$parsedExit)) { $exit = $parsedExit }
+    }
     $row = [ordered]@{
         schema = 'desktop-commander-index-v1'
         timestamp_utc = $stampUtc

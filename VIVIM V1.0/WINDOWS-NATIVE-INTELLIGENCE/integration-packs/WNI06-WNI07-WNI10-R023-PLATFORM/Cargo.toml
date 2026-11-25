@@ -1,0 +1,8 @@
+[package]
+name = "vivim-native-platform-probe"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "=0.61.3", default-features = false, features = ["Foundation_Metadata", "Graphics_Capture", "Win32_System_WinRT"] }

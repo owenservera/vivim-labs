@@ -15,3 +15,6 @@
 
 ## Subsequent owner direction (deferred)
 Special auto-generated bundle classes, starting with live development. Dynamically create task-specific custom agent files/profiles with VLANG context for coding harnesses, using prior agentic coding work. Integrate the existing approximately 200-file agentic coding toolkit and link its artifacts so they can be generated live when useful. Owner explicitly says add to list, do not implement now.
+
+## Subsequent owner direction — automated parallel workstream and build
+The system itself should always generate and maintain the bounds of work and builds that can be done in parallel without breaking things. Agents can pick up this intelligence and choose how to parallelize instead of designing it from scratch. Using the plan is optional; generating it does not authorize execution. Add to future work, keep immediate compiler priorities.

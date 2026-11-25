@@ -19,3 +19,8 @@ Immediate next task is P0-02 after source recheck. P0-04 and P0-05 can prepare i
 | P1-04 | Dynamic agent creation: compile role, agent file, profile and VLANG context for the active task and supported coding harness. | Real harness receives usable, scoped, versioned agent package; no new authority from generated profile. |
 | P1-05 | Integrate existing approximately 200-file agentic coding toolkit via semantic links and live on-demand generation of useful artifacts. | Identify exact donor, map canonical definitions, remove duplication, verify usefulness on real tasks. |
 Owner explicitly deferred implementation. Current P0 remains unchanged. Relevant recovery candidate: Labs agentic_excelence/agentic-file-system; exact toolkit identity/count not verified.
+
+| ID | Additional deferred work | Acceptance |
+|---|---|---|
+| P1-06 | Automated parallel workstream and build planning. Derive live revision-bound optional plans from actual task claims, semantic dependencies and impact, read/write scopes, shared contracts and build artifacts, build/test order and resource constraints. Reuse HQKG, existing campaign/task/build infrastructure and Chronos. Provide independent lanes, exclusions, prerequisites and join points through development bundles. Incrementally update affected plans. | Demonstrate real dependency-aware plans and independent review; reject stale plans and surface unknown conflicts. Agents may inspect/select/reject lanes without automatically launching work. Verify actual parallel changes and builds before claiming safety or acceleration. |
+P1-06 is deferred; P0 unchanged.

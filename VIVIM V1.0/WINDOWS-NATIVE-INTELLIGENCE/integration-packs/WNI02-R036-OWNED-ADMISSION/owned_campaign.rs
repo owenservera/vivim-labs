@@ -6,7 +6,7 @@
 //! and workspace; the campaign is exclusive to this one process owner.
 use crate::{campaign::{Lease,Report},resource_campaign::{ResourceCampaign,Admission,Error as CampaignError},scheduler::{Snapshot,Reserved},workstation_process::{OwnedProcess,LocalProcessSpec}};
 use std::{collections::BTreeMap,io,process::ExitStatus};
-#[derive(Debug)]pub enum Error{Campaign(CampaignError),UnknownLease,LaunchUncertain{lease:Lease,error:io::Error},Process(io::Error)}
+#[derive(Debug)]pub enum Error{Campaign(CampaignError),Policy(crate::meta_policy::PolicyError),UnknownLease,LaunchUncertain{lease:Lease,error:io::Error},Process(io::Error)}
 impl From<CampaignError> for Error{fn from(e:CampaignError)->Self{Self::Campaign(e)}}
 impl From<io::Error> for Error{fn from(e:io::Error)->Self{Self::Process(e)}}
 struct Running{lease:Lease,process:OwnedProcess}
@@ -25,6 +25,15 @@ impl OwnedCampaign{
  /// retain that reservation, with no automatic retry or external exit assertion.
  pub fn start(&mut self,worker:&str,now:u64,ttl:u64,sample:Snapshot,build:impl FnOnce(&Lease)->Option<LocalProcessSpec>)->Result<Admission,Error>{
   let a=self.campaign.admit(worker,now,ttl,sample)?;
+  self.launch(a,build)
+ }
+ /// Same incumbent resident rule evaluator and campaign, not a second policy registry.
+ /// Policy generation and resource revision travel with the result; policy cannot widen fixed ceilings.
+ pub fn start_with_policy(&mut self,resident:&mut crate::meta_resident::Resident,worker:&str,now:u64,ttl:u64,sample:Snapshot,build:impl FnOnce(&Lease)->Option<LocalProcessSpec>)->Result<crate::meta_policy::Decision,Error>{
+  let mut d=crate::meta_policy::admit(resident,&mut self.campaign,worker,now,ttl,sample).map_err(Error::Policy)?;
+  d.admission=self.launch(d.admission,build)?;Ok(d)
+ }
+ fn launch(&mut self,a:Admission,build:impl FnOnce(&Lease)->Option<LocalProcessSpec>)->Result<Admission,Error>{
   let Admission::Granted(lease)=a else{return Ok(a)};
   let Some(spec)=build(&lease)else{self.campaign.confirm_exit(&lease)?;return Err(Error::Process(io::Error::new(io::ErrorKind::PermissionDenied,"prelaunch refusal")));};
   match OwnedProcess::start(spec){
@@ -97,5 +106,29 @@ impl OwnedCampaign{
   let r=c.start("a",s.now_ms(),30000,sample,|_|{let mut p=spec("short");p.executable=p.workspace.join("nonexistent-r036.exe");Some(p)});
   let lease=match r{Err(Error::LaunchUncertain{lease,..})=>lease,_=>panic!("launch should be uncertain")};
   assert_eq!(c.reserved().tasks,1);assert_eq!(c.uncertain_count(),1);assert!(matches!(c.cancel(&lease),Err(Error::UnknownLease)));
+ }
+
+ #[test]fn resident_policy_tightens_real_owned_jobs(){
+  use crate::{meta_policy::{PARALLEL,BUSY,MEMORY,DISK},protocol::{Definition,Snapshot as Language},meta_resident::Resident};
+  use std::collections::BTreeSet;
+  const PARAMS:&str="((cpus int) (busy int) (active int) (memory int) (disk int))";
+  let rule=|id:&str,rev:u64,value:u64|Definition{id:id.into(),revision:rev,dependencies:BTreeSet::new(),body:format!("meta/1 (fn {PARAMS} int (int {value}))")};
+  let rows=[(PARALLEL,2),(BUSY,10000),(MEMORY,128),(DISK,64)].map(|(id,v)|format!("{id}\t1\t\t{}",rule(id,1,v).body));
+  let mut resident=Resident::start(Language::parse(&rows.join("\n")).unwrap()).unwrap();
+  let(mut c,s,sample)=setup();
+  let a=c.start_with_policy(&mut resident,"a",s.now_ms(),30000,sample,|_|Some(spec("long"))).unwrap();
+  assert_eq!((a.generation,a.sample_revision),(1,sample.revision));let lease=grant(a.admission);
+  resident.apply(1,vec![rule(PARALLEL,2,1)],BTreeSet::new()).unwrap();
+  let b=c.start_with_policy(&mut resident,"b",s.now_ms(),30000,sample,|_|panic!("policy deferred launch")).unwrap();
+  assert_eq!((b.generation,b.budget.max_parallel),(2,1));assert!(matches!(b.admission,Admission::Deferred(_)));
+  assert_eq!(c.reserved().tasks,1);assert_eq!(c.poll(&lease).unwrap(),None);
+  resident.apply(2,vec![rule(PARALLEL,3,3)],BTreeSet::new()).unwrap();
+  assert!(matches!(c.start_with_policy(&mut resident,"b",s.now_ms(),30000,sample,|_|panic!("widened policy")),Err(Error::Policy(_))));
+  assert_eq!(c.reserved().tasks,1);
+  resident.apply(3,vec![rule(PARALLEL,4,1)],BTreeSet::new()).unwrap();
+  assert!(!c.cancel(&lease).unwrap().success());assert_eq!(c.reserved().tasks,0);
+  let b=grant(c.start_with_policy(&mut resident,"b",s.now_ms(),30000,sample,|_|Some(spec("long"))).unwrap().admission);
+  assert_eq!(c.reserved().tasks,1);assert!(!c.cancel(&b).unwrap().success());assert_eq!(c.reserved().tasks,0);
+  println!("RESIDENT_POLICY_REAL_JOB generation=4 narrowed=1 widened_refused=true cancelled_released=true");
  }
 }

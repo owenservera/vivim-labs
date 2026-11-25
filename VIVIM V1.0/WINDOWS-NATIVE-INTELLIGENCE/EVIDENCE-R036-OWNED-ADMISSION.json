@@ -1,0 +1,35 @@
+{
+  "schema": "vivim.labs.owned-admission/1",
+  "source": "1ba61b437c8c3b2ee95292d999ab8e022f3396d7",
+  "session": "ctl-7146a2394c78edb3",
+  "exitCode": 0,
+  "success": true,
+  "passed": 28,
+  "failed": 0,
+  "elapsedMs": 31214,
+  "testSeconds": 4.95,
+  "verified": [
+    "actual native resource sampling",
+    "two actual rustc children as prior R035 fixture",
+    "two simultaneously live incumbent owned process jobs",
+    "third job deferred at resource ceiling",
+    "forged worker lease refused",
+    "actual owned cancellation and normal exit release",
+    "prelaunch refusal releases and uncertain start retains hold",
+    "incumbent root/descendant Job Object containment tests"
+  ],
+  "sample": {
+    "logicalCpus": 8,
+    "cpuBusyBasisPoints": 9270,
+    "memoryAvailableBytes": 13862309888,
+    "diskAvailableBytes": 6679871488
+  },
+  "limits": [
+    "One in-memory campaign owner; no cross-campaign durable Host receipt binding.",
+    "Costs are estimates, not OS enforced resource quotas.",
+    "Launch error conservatively quarantines capacity pending trusted reconciliation; no automatic retry.",
+    "No production edits or deployment."
+  ],
+  "productReviewed": "95d046c20d5af0a4e116d6fe6cacc9300203452c",
+  "arborReviewed": "ff1de3b70ca87d143301a7f934673acbf9e182e6"
+}

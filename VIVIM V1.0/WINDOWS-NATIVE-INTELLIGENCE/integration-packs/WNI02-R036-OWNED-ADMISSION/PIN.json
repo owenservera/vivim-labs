@@ -62,5 +62,41 @@
       "ref": "ff1de3b70ca87d143301a7f934673acbf9e182e6"
     }
   ],
-  "scope": "single isolated SDK campaign; incumbent process owner reused; no new process server"
+  "scope": "single isolated SDK campaign; incumbent process owner reused; no new process server",
+  "extension": {
+    "productPin": "95d046c20d5af0a4e116d6fe6cacc9300203452c",
+    "scope": "Reuse resident policy and profiles from parallel Labs contribution; exact incumbent Meta-VLANG modules; no production wiring.",
+    "sources": [
+      {
+        "repo": "owenservera/vivim-labs",
+        "ref": "1ba61b437c8c3b2ee95292d999ab8e022f3396d7",
+        "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI02-R034-SDK-ADMISSION/meta-policy.rs",
+        "sha": "f5f135ec73f8982ea9342d6b935b2e7a1d199e53"
+      },
+      {
+        "repo": "owenservera/vivim-labs",
+        "ref": "1ba61b437c8c3b2ee95292d999ab8e022f3396d7",
+        "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI02-R034-SDK-ADMISSION/workload-profile.rs",
+        "sha": "0dbc3674f9d91b00ac09dfc474fb6d2c87aaf317"
+      },
+      {
+        "repo": "owenservera/vivim-product",
+        "ref": "95d046c20d5af0a4e116d6fe6cacc9300203452c",
+        "path": "crates/protocol-sdk/src/protocol.rs",
+        "sha": "d48f0a084d938096e4d880c4901c3b22c6d282dc"
+      },
+      {
+        "repo": "owenservera/vivim-product",
+        "ref": "95d046c20d5af0a4e116d6fe6cacc9300203452c",
+        "path": "crates/protocol-sdk/src/meta_language.rs",
+        "sha": "6062169c18b2e0b5ffe71db99181a9c6fc073cb1"
+      },
+      {
+        "repo": "owenservera/vivim-product",
+        "ref": "95d046c20d5af0a4e116d6fe6cacc9300203452c",
+        "path": "crates/protocol-sdk/src/meta_resident.rs",
+        "sha": "22cc11b91295aef674a7419a40ada444915529fa"
+      }
+    ]
+  }
 }

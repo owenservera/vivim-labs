@@ -7,3 +7,9 @@ mod hardware;
 #[path="native-sampling.rs"] mod native_sampling;
 mod workstation_process;
 mod owned_campaign;
+
+mod protocol;
+mod meta_language;
+mod meta_resident;
+#[path="meta-policy.rs"] mod meta_policy;
+#[path="workload-profile.rs"] mod workload_profile;

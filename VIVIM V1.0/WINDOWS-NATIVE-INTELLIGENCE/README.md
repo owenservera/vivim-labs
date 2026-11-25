@@ -38,3 +38,7 @@ First slice: WNI02 aggregate resources through existing Host to MCP and GPUI; WN
 ## R004 — ACP connection core and observation correctness
 
 [WNI03 ACP routing implementation](packages/WNI03-R004-ACP-ROUTER.md) adds bounded protocol framing, v1 initialization, session ownership/routing, prompt correlation, cancellation and default-denied delegated permission handling. Watcher handle validation and journal gap fencing strengthened. Rust compile/OS tests remain unrun; no ARBOR modification or provider invocation.
+
+## R005 — USN record decoding and exact overlay validation
+
+[USN decoder](packages/WNI01-R005-USN-DECODER.md) handles V2/V3 records without collecting filenames or opening a volume. [Overlay verifier](overlay-verifier.mjs) exercised all 14 WNI02-R003 source outputs against pinned GitHub base blobs; see [evidence](EVIDENCE-R005.json) for ten cloud checks. Source replay is not compile or live acceptance. ARBOR unchanged.

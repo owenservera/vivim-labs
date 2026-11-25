@@ -1,0 +1,31 @@
+{
+  "schema": "vivim.labs.windows-overlay-evidence/1",
+  "arborBase": "67859e96c12a55d4341d4008cf8a5b1528d18eea",
+  "labsBase": "47eb08b40e32ba25d136175993fd8520fb8fc0a7",
+  "pack": "WNI02-R003",
+  "checks": [
+    "replayed 14 exact pinned files",
+    "source projection 10 required wiring markers",
+    "stale blob rejected",
+    "duplicate path rejected",
+    "absent anchor rejected",
+    "traversal rejected",
+    "replacement/addition collision rejected",
+    "missing addition rejected",
+    "missing GPUI projection rejected",
+    "patched MCP CommonJS parses"
+  ],
+  "coverage": {
+    "actionId": "windows.system.resources.read",
+    "mcpName": "vivim_windows_system_resources_read",
+    "markers": 10,
+    "sourceProjectionOnly": true,
+    "liveAccepted": false
+  },
+  "method": "V8 execution of verifier logic against connector-retrieved pinned source contents and blob IDs; prior tool run emitted all ten checks before exceeding tool-call limit; not local git hash verification",
+  "nativeCompile": "UNRUN",
+  "nodeFixtureTests": "UNRUN",
+  "liveMcp": "UNRUN",
+  "gpuiRender": "UNRUN",
+  "arborChanged": false
+}

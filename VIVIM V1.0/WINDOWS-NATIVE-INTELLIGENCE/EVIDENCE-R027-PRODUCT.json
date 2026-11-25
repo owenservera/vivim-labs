@@ -1,0 +1,51 @@
+{
+  "schema": "vivim.labs.product-acceleration/1",
+  "productBase": "5da225899ff635f1161ad07212e34f9517ac9f53",
+  "arborExtractors": "fbc5ed081c16f2ee470c487d1d7162a8d9aa0143",
+  "r026": {
+    "source": "f4678b01778dc083214a6a62ecd4d4ebea78880b",
+    "session": "ctl-d0d277bdab0f8e21",
+    "exitCode": 0,
+    "success": true,
+    "unitPassed": 6,
+    "pinnedBlobs": 1,
+    "additions": 3,
+    "nativeFixture": {
+      "declarations": 32,
+      "coldMs": 21.4004,
+      "warmMs": 0.872,
+      "coldWire": 32,
+      "warmWire": 1,
+      "extracts": 1,
+      "parses": 1,
+      "exactOutput": true,
+      "freshIndexMetadata": true
+    },
+    "combinedFixture": {
+      "declarations": 32,
+      "coldMs": 20.3552,
+      "warmMs": 0.886,
+      "coldWire": 32,
+      "warmWire": 1,
+      "extracts": 1,
+      "parses": 1,
+      "exactOutput": true,
+      "freshIndexMetadata": true
+    }
+  },
+  "combinedOverlay": {
+    "pinnedBlobs": 2,
+    "additions": 6,
+    "prepared": "pending",
+    "sourceBase": "5da225899ff635f1161ad07212e34f9517ac9f53"
+  },
+  "context7": "/nodejs/node/v24.22.2",
+  "limits": [
+    "Actual SDK and actual ARBOR extractors, synthetic owned HQ evidence provider; not live HQ graph/Wiki integration.",
+    "Single controlled benchmark; not end-to-end speedup.",
+    "No automatic source watcher or full project index skip; source evidence checked before and after reuse.",
+    "Bounded in-process cache; fresh runtime starts cold."
+  ],
+  "productWrites": false,
+  "arborWrites": false
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "vivim.labs.exact-overlay/1",
+  "baseCommit": "5da225899ff635f1161ad07212e34f9517ac9f53",
+  "patches": [
+    {
+      "path": "adapters/hq/resident-protocol.mjs",
+      "baseBlob": "13d67b215366039317e1f5d50c34df647d16a2db",
+      "edits": [
+        {
+          "from": "import {isAbsolute} from 'node:path';",
+          "to": "import {isAbsolute} from 'node:path';\nimport {createBindCache} from './bind-cache.mjs';"
+        },
+        {
+          "from": "  // @hq:invariant Serialize commands and responses without interleaving batches.",
+          "to": "  const bindCache=createBindCache(generation,async command=>{child.stdin.write(command+'\\n');return await next();});\n  // @hq:invariant Serialize commands and responses without interleaving batches."
+        },
+        {
+          "from": "busy=true;try{const out=[];for(const command of commands){child.stdin.write(command+'\\n');out.push(await next());}return out;}finally{busy=false;}",
+          "to": "busy=true;try{return await bindCache.batch(commands);}catch(e){bindCache.clear();close();throw e;}finally{busy=false;}"
+        },
+        {
+          "from": "return {generation,definitionCount,pid:child.pid,batch,close};",
+          "to": "return {generation,definitionCount,pid:child.pid,batch,close:()=>{bindCache.clear();close();},bindCacheStats:bindCache.stats};"
+        }
+      ]
+    }
+  ],
+  "additions": [
+    {
+      "path": "adapters/hq/bind-cache.mjs",
+      "source": "overlay/adapters/hq/bind-cache.mjs"
+    },
+    {
+      "path": "adapters/hq/bind-cache.test.mjs",
+      "source": "overlay/adapters/hq/bind-cache.test.mjs"
+    },
+    {
+      "path": "adapters/hq/bind-cache-native.test-run.mjs",
+      "source": "overlay/adapters/hq/bind-cache-native.test-run.mjs"
+    }
+  ]
+}

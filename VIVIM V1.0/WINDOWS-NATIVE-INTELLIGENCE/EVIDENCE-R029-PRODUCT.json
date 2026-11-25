@@ -1,0 +1,53 @@
+{
+  "schema": "vivim.labs.product-acceleration/1",
+  "productBase": "5da225899ff635f1161ad07212e34f9517ac9f53",
+  "arborReviewed": "4296859ad23429bf3782931a79c2ab4d0909311e",
+  "r028": {
+    "source": "35ae9804dc7992db6041ede09f85a105defe085b",
+    "environment": "isolated Linux Node v22.16.0; not Windows",
+    "verifiedSourceBlobs": {
+      "wiki-articles.mjs": "ba9e26c794cabe8738043e1116d20e3e71ff8cc4",
+      "dev-session.mjs": "229eee42c264d1e3367ca2e3f4b8dcb090748a10"
+    },
+    "verifiedAddedBlobs": {
+      "article-cache.mjs": "1129cde03e0c43870ac620575c907ff364926e50",
+      "article-cache.test.mjs": "c81d9a0d02eb9b0cdbda0df574375231396bb5c0",
+      "article-cache-bench.mjs": "34ef05d242ffa337a0812c28115297d48309bec6"
+    },
+    "patchedBlobs": {
+      "wiki-articles.mjs": "ad4b86cf18b23e757e9571490fccf69d90059b13",
+      "dev-session.mjs": "e5c0bd2c60fc4b508f319ded8f46a1d7bb4ed921"
+    },
+    "devSessionSyntax": "passed",
+    "newTestsPassed": 6,
+    "originalTestPassed": 1,
+    "originalTestBlobVerified": true,
+    "failed": 0,
+    "benchmark": {
+      "pages": 64,
+      "changed": 1,
+      "reused": 63,
+      "fullMs": 24.809786,
+      "incrementalMs": 8.869943,
+      "coldMs": 46.057696,
+      "cacheBytes": 750653,
+      "exactOutput": true
+    },
+    "windowsAcceptance": "UNVERIFIED; request outcome denied or uncertain, same request ID inspected, no session receipt returned",
+    "windowsRequestId": "fb9843db79e64837a5a9b6275c81e198"
+  },
+  "graphDecision": "Existing HQ kg-export.mjs complete universe, edge reconcile, tombstones and acknowledgement contract inspected; retain import, no skip based on file identity. Incremental graph optimization remains pending.",
+  "combinedOverlay": {
+    "pinnedBlobs": 4,
+    "additions": 9,
+    "sourceCollisionCheck": "passed",
+    "fullPreflight": "pending"
+  },
+  "context7": "/nodejs/node/v24.22.2",
+  "productWrites": false,
+  "arborWrites": false,
+  "limits": [
+    "No live Product session, full HQ/Wiki graph pipeline, Windows runtime acceptance or complete combined preflight.",
+    "Benchmark controlled fixture only. Cache reuses article compilation, not all HQ Markdown generation or JSON publication."
+  ]
+}

@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {createArticleCache} from './article-cache.mjs';
+import {compileArticles} from './wiki-articles.mjs';
+const pages=Array.from({length:64},(_,i)=>({id:'page:'+i,path:'p'+i+'.md',text:'# Page '+i+'\n## Context\n'+Array.from({length:96},(_,j)=>'Observation '+j+' with [related](./p'+((i+1)%64)+'.md) and metadata.').join('\n')}));
+const opt={sourceRevision:1,protocolGeneration:1,graphEpoch:1,definitions:[]};
+const c=createArticleCache();let t=performance.now();compileArticles(pages,{...opt,articleCache:c});const cold=performance.now()-t;
+pages[32]={...pages[32],text:pages[32].text+'\nUpdated one article.'};
+const next={...opt,sourceRevision:2,graphEpoch:2};t=performance.now();const w=compileArticles(pages,{...next,articleCache:c});const incremental=performance.now()-t;
+t=performance.now();const expected=compileArticles(pages,next);const full=performance.now()-t;
+assert.deepEqual(w,expected);assert.equal(c.stats().hits,63);assert.equal(c.stats().misses,65);
+console.log(JSON.stringify({pages:64,changed:1,coldMs:cold,incrementalMs:incremental,fullMs:full,exactOutput:true,stats:c.stats()}));

@@ -1,0 +1,128 @@
+{
+  "schema": "vivim.labs.exact-overlay/1",
+  "baseCommit": "5da225899ff635f1161ad07212e34f9517ac9f53",
+  "patches": [
+    {
+      "path": "adapters/hq/resident-protocol.mjs",
+      "baseBlob": "13d67b215366039317e1f5d50c34df647d16a2db",
+      "edits": [
+        {
+          "from": "import {isAbsolute} from 'node:path';",
+          "to": "import {isAbsolute} from 'node:path';\nimport {createBindCache} from './bind-cache.mjs';"
+        },
+        {
+          "from": "  // @hq:invariant Serialize commands and responses without interleaving batches.",
+          "to": "  const bindCache=createBindCache(generation,async command=>{child.stdin.write(command+'\\n');return await next();});\n  // @hq:invariant Serialize commands and responses without interleaving batches."
+        },
+        {
+          "from": "busy=true;try{const out=[];for(const command of commands){child.stdin.write(command+'\\n');out.push(await next());}return out;}finally{busy=false;}",
+          "to": "busy=true;try{return await bindCache.batch(commands);}catch(e){bindCache.clear();close();throw e;}finally{busy=false;}"
+        },
+        {
+          "from": "return {generation,definitionCount,pid:child.pid,batch,close};",
+          "to": "return {generation,definitionCount,pid:child.pid,batch,close:()=>{bindCache.clear();close();},bindCacheStats:bindCache.stats};"
+        }
+      ]
+    },
+    {
+      "path": "adapters/hq/protocol-v1.mjs",
+      "baseBlob": "6e8c3abc4dde3db7b28bc0c8147524735fcebc4b",
+      "edits": [
+        {
+          "from": "import { isAbsolute } from 'node:path';",
+          "to": "import { isAbsolute } from 'node:path';\nimport { sourceCache } from './source-compile-cache.mjs';"
+        },
+        {
+          "from": "  const annotations=extractAnnotations('rust',e.text).map(a=>({line:a.line,kind:a.kind,value:a.text}));",
+          "to": "  const reuse=sourceCache({exchange,hq,project,path,binary,extractAnnotations,parseAnnotationV2,e});\n  const cached=await reuse?.read();\n  if(cached){\n    const current=hq.sourceEvidence({project,path,startLine:1,endLine:1});\n    if(current.status!=='indexed'||current.currentHash!==e.currentHash||current.devSourceId!==e.devSourceId||current.sourceId!==e.sourceId||current.projectRevision!==e.projectRevision||current.indexWatermark!==e.indexWatermark)throw Error('V1_SOURCE_CHANGED');\n    return {schema,protocolGeneration:exchange.generation,sourceId:e.sourceId,sourceDigest:e.currentHash,indexWatermark:e.indexWatermark,projectRevision:e.projectRevision,...cached,authority:'read_only_projection',scopeCoverage:'unbound'};\n  }\n  const annotations=extractAnnotations('rust',e.text).map(a=>({line:a.line,kind:a.kind,value:a.text}));"
+        },
+        {
+          "from": "  return {schema,protocolGeneration:generation,sourceId:e.sourceId,sourceDigest:e.currentHash,indexWatermark:e.indexWatermark,projectRevision:e.projectRevision,declarations,\n    diagnostics:typed.diagnostics.map(d=>({line:d.line,code:d.code,severity:d.severity})),authority:'read_only_projection',scopeCoverage:'unbound'};",
+          "to": "  const result={schema,protocolGeneration:generation,sourceId:e.sourceId,sourceDigest:e.currentHash,indexWatermark:e.indexWatermark,projectRevision:e.projectRevision,declarations,\n    diagnostics:typed.diagnostics.map(d=>({line:d.line,code:d.code,severity:d.severity})),authority:'read_only_projection',scopeCoverage:'unbound'};\n  if(current.devSourceId===e.devSourceId&&current.sourceId===e.sourceId&&current.projectRevision===e.projectRevision&&current.indexWatermark===e.indexWatermark)reuse?.write(result);\n  return result;"
+        }
+      ]
+    },
+    {
+      "path": "adapters/hq/wiki-articles.mjs",
+      "baseBlob": "ba9e26c794cabe8738043e1116d20e3e71ff8cc4",
+      "edits": [
+        {
+          "from": "definitions=[],sourceRevision}){",
+          "to": "definitions=[],sourceRevision,articleCache=null}){"
+        },
+        {
+          "from": " const articles=pages.map(p=>{",
+          "to": " const reuse=articleCache?.scope(pages,definitions,protocolGeneration);\n const buildArticle=p=>{"
+        },
+        {
+          "from": " });\n const dict=definitions.map(d=>{",
+          "to": " };\n const articles=pages.map(p=>reuse?reuse(p,buildArticle):buildArticle(p));\n const dict=definitions.map(d=>{"
+        },
+        {
+          "from": "export function publishArticles({data,wiki,generation,graphEpoch,definitions,sourceRevision}){",
+          "to": "export function publishArticles({data,wiki,generation,graphEpoch,definitions,sourceRevision,articleCache=null}){"
+        },
+        {
+          "from": "definitions,sourceRevision});\n const file=join(data,'development-wiki.json')",
+          "to": "definitions,sourceRevision,articleCache});\n const file=join(data,'development-wiki.json')"
+        }
+      ]
+    },
+    {
+      "path": "adapters/hq/dev-session.mjs",
+      "baseBlob": "229eee42c264d1e3367ca2e3f4b8dcb090748a10",
+      "edits": [
+        {
+          "from": "import {publishArticles,readArticle,paneObservation} from './wiki-articles.mjs';",
+          "to": "import {publishArticles,readArticle,paneObservation} from './wiki-articles.mjs';\nimport {createArticleCache} from './article-cache.mjs';"
+        },
+        {
+          "from": "let state=null,dict=[],articleSet=null,selected='index';",
+          "to": "const articleCache=createArticleCache();\nlet state=null,dict=[],articleSet=null,selected='index';"
+        },
+        {
+          "from": "definitions:dict,sourceRevision:index.generation});",
+          "to": "definitions:dict,sourceRevision:index.generation,articleCache});"
+        }
+      ]
+    }
+  ],
+  "additions": [
+    {
+      "path": "adapters/hq/bind-cache.mjs",
+      "source": "overlay/adapters/hq/bind-cache.mjs"
+    },
+    {
+      "path": "adapters/hq/bind-cache.test.mjs",
+      "source": "overlay/adapters/hq/bind-cache.test.mjs"
+    },
+    {
+      "path": "adapters/hq/bind-cache-native.test-run.mjs",
+      "source": "overlay/adapters/hq/bind-cache-native.test-run.mjs"
+    },
+    {
+      "path": "adapters/hq/source-compile-cache.mjs",
+      "source": "overlay/adapters/hq/source-compile-cache.mjs"
+    },
+    {
+      "path": "adapters/hq/source-compile-cache.test.mjs",
+      "source": "overlay/adapters/hq/source-compile-cache.test.mjs"
+    },
+    {
+      "path": "adapters/hq/source-compile-native.test-run.mjs",
+      "source": "overlay/adapters/hq/source-compile-native.test-run.mjs"
+    },
+    {
+      "path": "adapters/hq/article-cache.mjs",
+      "source": "overlay/adapters/hq/article-cache.mjs"
+    },
+    {
+      "path": "adapters/hq/article-cache.test.mjs",
+      "source": "overlay/adapters/hq/article-cache.test.mjs"
+    },
+    {
+      "path": "adapters/hq/article-cache-bench.mjs",
+      "source": "overlay/adapters/hq/article-cache-bench.mjs"
+    }
+  ]
+}

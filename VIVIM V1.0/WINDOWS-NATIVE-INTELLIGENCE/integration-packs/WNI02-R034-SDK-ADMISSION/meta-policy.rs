@@ -1,6 +1,6 @@
 //! @hq:context Bind actual resident Meta-VLANG definitions to native SDK admission.
 //! @hq:invariant Pure policy can only narrow Host-owned resource ceilings; no grants or process effects.
-use crate::{meta_resident::Resident,meta_language::{Value,Diagnostic},scheduler::{Snapshot,Budget,Block},resource_campaign::{ResourceCampaign,Admission,Error}};
+use crate::{meta_resident::Resident,meta_language::{Value,Diagnostic},scheduler::{Snapshot,Budget,Block,Reserved},resource_campaign::{ResourceCampaign,Admission,Error,combine}};
 pub const PARALLEL:&str="sdk.scheduler.parallel";
 pub const BUSY:&str="sdk.scheduler.busy_ceiling";
 pub const MEMORY:&str="sdk.scheduler.memory_reserve_mib";
@@ -26,9 +26,13 @@ pub fn evaluate(r:&mut Resident,s:Snapshot,fixed:Budget,active:u32)->Result<Budg
  Ok(Budget{max_parallel:parallel as u32,busy_ceiling_bp:ceiling as u16,memory_reserve:memory,disk_reserve:disk,..fixed})
 }
 pub fn admit(r:&mut Resident,c:&mut ResourceCampaign,worker:&str,now:u64,ttl:u64,s:Snapshot)->Result<Decision,PolicyError>{
+ admit_shared(r,c,worker,now,ttl,s,Reserved::default())
+}
+pub(crate) fn admit_shared(r:&mut Resident,c:&mut ResourceCampaign,worker:&str,now:u64,ttl:u64,s:Snapshot,external:Reserved)->Result<Decision,PolicyError>{
  let generation=r.generation();
- let budget=evaluate(r,s,c.budget(),c.reserved().tasks)?;
- let admission=c.admit_bounded(worker,now,ttl,s,budget).map_err(PolicyError::Admission)?;
+ let total=combine(c.reserved(),external).map_err(PolicyError::Admission)?;
+ let budget=evaluate(r,s,c.budget(),total.tasks)?;
+ let admission=c.admit_shared(worker,now,ttl,s,budget,external).map_err(PolicyError::Admission)?;
  Ok(Decision{generation,sample_revision:s.revision,budget,admission})
 }
 #[cfg(test)]mod tests{

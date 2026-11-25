@@ -12,6 +12,10 @@ impl From<Block> for Error {fn from(e:Block)->Self{Self::Resource(e)}}
 pub enum Admission {Granted(Lease),Deferred(Vec<(String,Block)>),Empty}
 struct Hold {lease:Lease,cost:Estimate,cancelled:bool}
 pub struct ResourceCampaign {campaign:Campaign,costs:BTreeMap<String,(u64,Estimate)>,held:BTreeMap<u64,Hold>,last:Option<Snapshot>,budget:Budget}
+/// @hq:invariant Shared domain accounting cannot wrap or underestimate existing reservations.
+pub fn combine(a:Reserved,b:Reserved)->Result<Reserved,Error>{
+ Ok(Reserved{memory:a.memory.checked_add(b.memory).ok_or(Error::Invalid)?,disk:a.disk.checked_add(b.disk).ok_or(Error::Invalid)?,cpus:a.cpus.checked_add(b.cpus).ok_or(Error::Invalid)?,tasks:a.tasks.checked_add(b.tasks).ok_or(Error::Invalid)?})
+}
 impl ResourceCampaign {
  pub fn new(tasks:Vec<(Task,Estimate)>,limit:usize,budget:Budget)->Result<Self,Error>{
   if tasks.iter().any(|(_,e)|e.memory==0||e.cpus==0){return Err(Error::Invalid)}
@@ -27,15 +31,21 @@ impl ResourceCampaign {
  }
  pub fn counts(&self)->(usize,usize,usize,usize){self.campaign.counts()}
  pub fn budget(&self)->Budget{self.budget}
+ pub fn has_worker(&self,worker:&str)->bool{self.held.values().any(|h|h.lease.worker==worker)}
  pub fn admit(&mut self,worker:&str,now:u64,ttl:u64,sample:Snapshot)->Result<Admission,Error>{self.admit_bounded(worker,now,ttl,sample,self.budget)}
  /// @hq:invariant Dynamic policy may tighten, never widen, the fixed owner budget.
  pub fn admit_bounded(&mut self,worker:&str,now:u64,ttl:u64,sample:Snapshot,budget:Budget)->Result<Admission,Error>{
+  self.admit_shared(worker,now,ttl,sample,budget,Reserved::default())
+ }
+ /// @hq:invariant The exclusive Host domain supplies other campaigns' retained reservations.
+ pub(crate) fn admit_shared(&mut self,worker:&str,now:u64,ttl:u64,sample:Snapshot,budget:Budget,external:Reserved)->Result<Admission,Error>{
   let fixed=self.budget;
   if budget.max_age_ms>fixed.max_age_ms||budget.memory_reserve<fixed.memory_reserve||budget.disk_reserve<fixed.disk_reserve||budget.cpu_reserve<fixed.cpu_reserve||budget.max_parallel>fixed.max_parallel||budget.busy_ceiling_bp>fixed.busy_ceiling_bp{return Err(Error::Invalid)}
   if worker.trim().is_empty()||worker.len()>96||worker.chars().any(char::is_control)||ttl==0||now.checked_add(ttl).is_none(){return Err(Error::Invalid)}
   if self.last.is_some_and(|s|sample.revision<s.revision||sample.observed_ms<s.observed_ms||(sample.revision==s.revision&&sample!=s)){return Err(Error::StaleSample)}
   // Validate freshness even when queue is empty; do not admit on ambiguous CPU samples.
-  scheduler::plan(sample,budget,self.reserved(),now,&[])?;
+  let already=combine(self.reserved(),external)?;
+  scheduler::plan(sample,budget,already,now,&[])?;
   self.last=Some(sample);
   if self.held.values().any(|h|h.lease.worker==worker){return Err(Error::BusyWorker)}
   self.campaign.advance(now)?;
@@ -49,7 +59,7 @@ impl ResourceCampaign {
   let mut deferred=Vec::new();
   for batch in pending.chunks(256){
    let work:Vec<_>=batch.iter().map(|(_,w)|*w).collect();
-   let plan=scheduler::plan(sample,budget,self.reserved(),now,&work)?;
+   let plan=scheduler::plan(sample,budget,already,now,&work)?;
    if let Some(key)=plan.admitted.first(){
     let (id,_)=batch.iter().find(|(_,w)|w.id==*key).ok_or(Error::Invalid)?;
     let cost=self.costs[id].1;

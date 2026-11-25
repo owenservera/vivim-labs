@@ -13,3 +13,5 @@ mod meta_resident;
 #[cfg(windows)] mod workstation_process;
 #[cfg(windows)] mod owned_campaign;
 #[cfg(all(windows,test))] #[path="owned-metrics-tests.rs"] mod owned_metrics_tests;
+
+#[cfg(windows)] #[path="resource-domain.rs"] mod resource_domain;

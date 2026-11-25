@@ -1,0 +1,107 @@
+{
+  "schema": "vivim.labs.exact-overlay/1",
+  "ownedPin": "1ba61b437c8c3b2ee95292d999ab8e022f3396d7",
+  "profilePin": "130d8ed266fa44882c240b01354b3f358138c037",
+  "files": [
+    {
+      "name": "workstation_windows_job.rs",
+      "blob": "d0ec556b10f9569f199e7ed5b24cd451feed1a96",
+      "edits": [
+        [
+          "pub(super) struct Process{job:OwnedHandle,root:OwnedHandle}",
+          "/// @hq:context Accounting for the exact owned Windows job, never arbitrary PIDs.\n#[derive(Clone,Copy,Debug,PartialEq,Eq)]\npub struct JobMetrics{pub active_processes:u32,pub total_processes:u32,pub user_100ns:u64,pub kernel_100ns:u64,pub peak_job_commit_bytes:u64}\npub(super) struct Process{job:OwnedHandle,root:OwnedHandle}"
+        ],
+        [
+          " pub(super) fn active(&self)->io::Result<u32>{",
+          " pub(super) fn metrics(&self)->io::Result<JobMetrics>{\n  unsafe{\n   let mut a:JOBOBJECT_BASIC_ACCOUNTING_INFORMATION=zeroed();\n   let mut e:JOBOBJECT_EXTENDED_LIMIT_INFORMATION=zeroed();\n   ok(QueryInformationJobObject(raw(&self.job),JobObjectBasicAccountingInformation,(&mut a as *mut JOBOBJECT_BASIC_ACCOUNTING_INFORMATION).cast(),size_of::<JOBOBJECT_BASIC_ACCOUNTING_INFORMATION>()as u32,null_mut()))?;\n   ok(QueryInformationJobObject(raw(&self.job),JobObjectExtendedLimitInformation,(&mut e as *mut JOBOBJECT_EXTENDED_LIMIT_INFORMATION).cast(),size_of::<JOBOBJECT_EXTENDED_LIMIT_INFORMATION>()as u32,null_mut()))?;\n   Ok(JobMetrics{active_processes:a.ActiveProcesses,total_processes:a.TotalProcesses,user_100ns:u64::try_from(a.TotalUserTime).map_err(|_|invalid())?,kernel_100ns:u64::try_from(a.TotalKernelTime).map_err(|_|invalid())?,peak_job_commit_bytes:e.PeakJobMemoryUsed as u64})\n  }\n }\n pub(super) fn active(&self)->io::Result<u32>{"
+        ]
+      ]
+    },
+    {
+      "name": "workstation_process.rs",
+      "blob": "ce28e179a8f161ff33d89c37c58f793dc4b58171",
+      "edits": [
+        [
+          "use windows_job::Process as PlatformChild;",
+          "use windows_job::Process as PlatformChild;\n#[cfg(windows)] pub use windows_job::JobMetrics;"
+        ],
+        [
+          "    pub fn close_input(&mut self){self.input.take();}",
+          "    pub fn close_input(&mut self){self.input.take();}\n    #[cfg(windows)]\n    pub fn job_metrics(&self)->io::Result<JobMetrics>{self.child.metrics()}"
+        ]
+      ]
+    },
+    {
+      "name": "owned_campaign.rs",
+      "blob": "e505bf453686f76694504607172c9cd484b9259b",
+      "edits": [
+        [
+          "use std::{collections::BTreeMap,io,process::ExitStatus};",
+          "use std::{collections::BTreeMap,io,process::ExitStatus,time::Instant};\nuse crate::{meta_resident::Resident,meta_policy::{self,Decision,PolicyError},workstation_process::JobMetrics};\n#[derive(Debug)]pub struct ProfiledExit{pub status:ExitStatus,pub elapsed_ms:u64,pub metrics:Option<JobMetrics>}"
+        ],
+        [
+          "pub enum Error{Campaign(CampaignError),",
+          "pub enum Error{Policy(PolicyError),Campaign(CampaignError),"
+        ],
+        [
+          "struct Running{lease:Lease,process:OwnedProcess}",
+          "impl From<PolicyError> for Error{fn from(e:PolicyError)->Self{Self::Policy(e)}}\nstruct Running{lease:Lease,process:OwnedProcess,started:Instant}"
+        ],
+        [
+          "  let Admission::Granted(lease)=a else{return Ok(a)};",
+          "  self.launch_admitted(a,build)\n }\n /// @hq:invariant Policy and resource admission are one synchronous transition; Host still resolves the approved spec.\n pub fn start_policy(&mut self,r:&mut Resident,worker:&str,now:u64,ttl:u64,sample:Snapshot,build:impl FnOnce(&Lease)->Option<LocalProcessSpec>)->Result<Decision,Error>{\n  let d=meta_policy::admit(r,&mut self.campaign,worker,now,ttl,sample)?;\n  let Decision{generation,sample_revision,budget,admission}=d;\n  let admission=self.launch_admitted(admission,build)?;\n  Ok(Decision{generation,sample_revision,budget,admission})\n }\n fn launch_admitted(&mut self,a:Admission,build:impl FnOnce(&Lease)->Option<LocalProcessSpec>)->Result<Admission,Error>{\n  let Admission::Granted(lease)=a else{return Ok(a)};"
+        ],
+        [
+          "  match OwnedProcess::start(spec){",
+          "  let started=Instant::now();\n  match OwnedProcess::start(spec){"
+        ],
+        [
+          "Running{lease:lease.clone(),process}",
+          "Running{lease:lease.clone(),process,started}"
+        ],
+        [
+          " /// Cancellation is a request followed by owned job termination and readback.",
+          " /// @hq:context Capture whole-job accounting before the incumbent drops its owned handles.\n pub fn settle_profiled(&mut self,lease:&Lease,now:u64,report:Option<Report>)->Result<Option<ProfiledExit>,Error>{\n  let Some(status)=self.owned(lease)?.poll()? else{return Ok(None)};\n  let p=self.running.get(&lease.token).ok_or(Error::UnknownLease)?;\n  let metrics=p.process.job_metrics().ok();\n  let elapsed_ms=p.started.elapsed().as_millis().max(1).min(u64::MAX as u128) as u64;\n  let settled=self.settle(lease,now,report)?;\n  if settled!=Some(status){return Err(Error::UnknownLease)}\n  Ok(Some(ProfiledExit{status,elapsed_ms,metrics}))\n }\n /// Cancellation is a request followed by owned job termination and readback."
+        ],
+        [
+          " pub fn uncertain_count(&self)->usize{self.uncertain.len()}",
+          " pub fn uncertain_count(&self)->usize{self.uncertain.len()}\n pub(crate) fn has_worker(&self,worker:&str)->bool{self.campaign.has_worker(worker)}"
+        ],
+        [
+          "  let d=meta_policy::admit(r,&mut self.campaign,worker,now,ttl,sample)?;",
+          "  self.start_policy_shared(r,worker,now,ttl,sample,Reserved::default(),build)\n }\n pub(crate) fn start_policy_shared(&mut self,r:&mut Resident,worker:&str,now:u64,ttl:u64,sample:Snapshot,external:Reserved,build:impl FnOnce(&Lease)->Option<LocalProcessSpec>)->Result<Decision,Error>{\n  let d=meta_policy::admit_shared(r,&mut self.campaign,worker,now,ttl,sample,external)?;"
+        ]
+      ]
+    },
+    {
+      "name": "workload-profile.rs",
+      "blob": "0dbc3674f9d91b00ac09dfc474fb6d2c87aaf317",
+      "edits": [
+        [
+          "struct Series{rows:VecDeque<Measure>}",
+          "struct Series{rows:VecDeque<Measure>,memory:VecDeque<u64>,disk:VecDeque<u64>}"
+        ],
+        [
+          "Series{rows:VecDeque::new()}",
+          "Series{rows:VecDeque::new(),memory:VecDeque::new(),disk:VecDeque::new()}"
+        ],
+        [
+          "  s.rows.push_back(m);self.seen.insert(receipt,key);Ok(())",
+          "  s.rows.push_back(m);\n  // Missing measurements cannot evict prior known resource readings.\n  for (value,series) in [(m.peak_memory,&mut s.memory),(m.artifact_bytes,&mut s.disk)]{if let Some(v)=value{if series.len()==self.window{series.pop_front();}series.push_back(v);}}\n  self.seen.insert(receipt,key);Ok(())"
+        ],
+        [
+          "s.rows.iter().filter_map(|m|m.peak_memory).max()",
+          "s.memory.iter().copied().max()"
+        ],
+        [
+          "s.rows.iter().filter_map(|m|m.artifact_bytes).max()",
+          "s.disk.iter().copied().max()"
+        ],
+        [
+          "assert_eq!(p.estimate(&k('a'),floor()).unwrap(),Estimate{samples:2,..floor()});",
+          "assert_eq!(p.estimate(&k('a'),floor()).unwrap(),Estimate{memory:250,disk:100,elapsed_ms:10,samples:2});"
+        ]
+      ]
+    }
+  ]
+}

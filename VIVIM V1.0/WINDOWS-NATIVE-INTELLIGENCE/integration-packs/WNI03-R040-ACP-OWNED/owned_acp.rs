@@ -61,13 +61,7 @@ impl OwnedAcp{
  }
 }
 #[cfg(test)]mod tests{
- use super::*;use serde_json::json;use std::{io::{BufRead,Write},thread,time::{Duration,Instant}};
- fn reply(v:Value){let mut out=io::stdout().lock();writeln!(out,"{}",v).unwrap();out.flush().unwrap()}
- // Deterministic protocol fixture subprocess, explicitly not an actual AI coding agent.
- #[test]fn fixture_child(){
-  if std::env::var("VIVIM_ACP_FIXTURE").as_deref()!=Ok("yes"){return}
-  // Rust test harness writes to stdout; fixture is instead executed by a standalone binary in integration tests.
- }
+ use super::*;use std::{thread,time::{Duration,Instant}};
  fn fixture()->LocalProcessSpec{
   let exe=std::env::var_os("VIVIM_ACP_FIXTURE_EXE").expect("compiled standalone ACP fixture");
   let mut environment=Vec::new();if let Some(v)=std::env::var_os("SystemRoot"){environment.push(("SystemRoot".into(),v));}
@@ -90,5 +84,24 @@ impl OwnedAcp{
   assert!(denied&&update);c.close_input();let start=Instant::now();
   loop{let p=c.poll().unwrap();if p.eof&&p.exit.is_some(){assert!(p.exit.unwrap().success());break}assert!(start.elapsed()<Duration::from_secs(5));thread::sleep(Duration::from_millis(10));}
   println!("ACP_OWNED_STDIO_PERMISSION_DENIAL_AND_EXIT_OK");
+ }
+}
+
+#[cfg(test)]mod real_agent{
+ use super::*;use std::{thread,time::{Duration,Instant}};
+ #[test]fn actual_opencode_acp_handshake(){
+  let Some(exe)=std::env::var_os("VIVIM_ACP_AGENT_EXE") else{panic!("actual agent executable not provided")};
+  let workspace=std::env::current_dir().unwrap();
+  // Explicit allowlist; no inherited credentials, no prompt/model request, no tools or MCP servers.
+  let environment=["SystemRoot","WINDIR","PATH","TEMP","TMP","USERPROFILE","LOCALAPPDATA","APPDATA","HOME"].into_iter().filter_map(|n|std::env::var_os(n).map(|v|(n.into(),v))).collect();
+  let mut c=OwnedAcp::start(LocalProcessSpec{executable:exe.into(),workspace,args:vec!["acp".into()],environment,tail_bytes:65536},2).unwrap();
+  c.initialize().unwrap();let start=Instant::now();
+  loop{
+   let u=c.poll().unwrap();if u.events.iter().any(|e|matches!(e,Event::Initialized)){break}
+   assert!(u.exit.is_none(),"actual agent exited before initialization");
+   assert!(start.elapsed()<Duration::from_secs(20),"actual agent initialize timeout");thread::sleep(Duration::from_millis(25));
+  }
+  c.cancel_owned().unwrap();
+  println!("ACTUAL_OPENCODE_ACP_INITIALIZE_OK");
  }
 }

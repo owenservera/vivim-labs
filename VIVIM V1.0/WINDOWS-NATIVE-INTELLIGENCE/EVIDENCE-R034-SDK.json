@@ -1,0 +1,37 @@
+{
+  "schema": "vivim.labs.sdk-resource-admission/1",
+  "source": "9f6ecea9c351a6d4adaf1e372201bad10908d6e3",
+  "productPin": "a1c57c4762b88c0d0684977351066711aef0f27e",
+  "native": {
+    "session": "ctl-053ad291d3be95cb",
+    "exitCode": 0,
+    "passed": 11,
+    "failed": 0,
+    "newTests": 5,
+    "actualOwnedParallelThreads": 2,
+    "resourceSnapshot": "controlled fixture",
+    "wallMs": 23429
+  },
+  "exactBlobs": {
+    "session": "ctl-d80dd0b5398143cb",
+    "exitCode": 0,
+    "files": {
+      "campaign.rs": "7a02fe505374c05c5dad89e71837361fdcad3851",
+      "resource_campaign.rs": "a174599d7c7d7d56c9e3aeeba52cb8ac05d15705",
+      "test-root.rs": "fbb3558eaf57cbdae86a6abde46f40d89f90667e",
+      "scheduler.rs": "355ad3103588fdd6ed647e6f748946a738e0198e"
+    }
+  },
+  "priorFailures": [
+    "PowerShell provider Set-Content Encoding unsupported",
+    "partial fetch missing promisor objects; full isolated fetch corrected",
+    "Git hash-object extended absolute path unsupported; relative path corrected"
+  ],
+  "limits": [
+    "Not installed or cross-campaign Host enforcement",
+    "Exit proof supplied by caller; actual process owner binding pending",
+    "Parallel work was real Rust threads, controlled resource estimates, not real agent subprocesses",
+    "No product/ARBOR writes"
+  ],
+  "r035": "native sample adapter and two actual compiler job test authored, verification pending"
+}

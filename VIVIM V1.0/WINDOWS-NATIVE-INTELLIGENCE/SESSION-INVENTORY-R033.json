@@ -1,0 +1,1254 @@
+{
+  "schema": "vivim.labs.session-handoff/1",
+  "date": "2026-11-25",
+  "snapshot": "9c0de7d3ad87b07d594462deec9a4f4637f46dcf",
+  "scope": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/",
+  "files": [
+    {
+      "path": "ACCEPTANCE.md",
+      "sha": "037770c201d7a9a813c26b7d3fd761a33901d2cc",
+      "bytes": 3667
+    },
+    {
+      "path": "CAPABILITY-CANDIDATES.json",
+      "sha": "ceb27ce2284d581bde539a8b974a2953266f6c82",
+      "bytes": 34905
+    },
+    {
+      "path": "CAPABILITY-PROJECTIONS-R007.json",
+      "sha": "597aaa844eff0b992ec94245d2c768a7d1e4f471",
+      "bytes": 88258
+    },
+    {
+      "path": "EVIDENCE-R001.md",
+      "sha": "16f11e775a62497d11cb4c6cf67885c875f7feb3",
+      "bytes": 691
+    },
+    {
+      "path": "EVIDENCE-R005.json",
+      "sha": "907af82315e47b712b98e1ee236fb47e596c8c4c",
+      "bytes": 1123
+    },
+    {
+      "path": "EVIDENCE-R007.json",
+      "sha": "b080bc5ee5e1d822bdea8626057f8619936a1e29",
+      "bytes": 1023
+    },
+    {
+      "path": "EVIDENCE-R008-WINDOWS.json",
+      "sha": "b6ec70466fefed77f0d7467236870af7f9a4261a",
+      "bytes": 1690
+    },
+    {
+      "path": "EVIDENCE-R009-WINDOWS.json",
+      "sha": "f25e452e7e6954df82ca691fa2b7245617711980",
+      "bytes": 1108
+    },
+    {
+      "path": "EVIDENCE-R010-NATIVE-ADAPTER.json",
+      "sha": "dfeddc01b2997271ed2bf9cc844a674802ce7d7a",
+      "bytes": 1185
+    },
+    {
+      "path": "EVIDENCE-R012-WINDOWS.json",
+      "sha": "a8febb3922f0b7d5ab8fa5a9574749a77c97e9cd",
+      "bytes": 2590
+    },
+    {
+      "path": "EVIDENCE-R015-WINDOWS.json",
+      "sha": "d6f955ba61fc8369b484c876f074726570dbf5af",
+      "bytes": 2040
+    },
+    {
+      "path": "EVIDENCE-R019-WINDOWS.json",
+      "sha": "a4949efcceebcbf48271eb6e6c7bc740e40512c2",
+      "bytes": 1504
+    },
+    {
+      "path": "EVIDENCE-R021-WINDOWS.json",
+      "sha": "fb7dc8fd4216a596986ecb85d681b3f4b21ab409",
+      "bytes": 1666
+    },
+    {
+      "path": "EVIDENCE-R023-WINDOWS.json",
+      "sha": "459e87218bc16a3962e3705260aab26e1e1a9af0",
+      "bytes": 1948
+    },
+    {
+      "path": "EVIDENCE-R025-PRODUCT.json",
+      "sha": "188fe5ea6ad621b35386200bed8c92c09a090544",
+      "bytes": 1215
+    },
+    {
+      "path": "EVIDENCE-R027-PRODUCT.json",
+      "sha": "c1cc6b40222f0a36608e1390cc6d024205c193fb",
+      "bytes": 2021
+    },
+    {
+      "path": "EVIDENCE-R029-PRODUCT.json",
+      "sha": "a8972b450c8fffa0167c1b222cd4c9b3737eaced",
+      "bytes": 2199
+    },
+    {
+      "path": "EVIDENCE-R031-PRODUCT.json",
+      "sha": "310f86b4dcf85da1317ed7b01d9c97ef92b13012",
+      "bytes": 3081
+    },
+    {
+      "path": "INTEGRATION.md",
+      "sha": "b66356390649ff3a377b94b1cf80672389a26cdb",
+      "bytes": 4617
+    },
+    {
+      "path": "MASTER-TRACKER.md",
+      "sha": "2d427724a23bd8b210c7a1486a75d78351a3f4ca",
+      "bytes": 7011
+    },
+    {
+      "path": "README.md",
+      "sha": "5be84b7bd360731569052d7810f152514e4f0fe3",
+      "bytes": 11204
+    },
+    {
+      "path": "SOURCES.md",
+      "sha": "3648527e87ebdc8665f8985aeb22eb9d6520fcb5",
+      "bytes": 4220
+    },
+    {
+      "path": "capability-compiler.mjs",
+      "sha": "bb6a631a5d645c17e48fa2a90bf72c37b0dbf07d",
+      "bytes": 5022
+    },
+    {
+      "path": "capability-compiler.test.mjs",
+      "sha": "93299e84cc6153abbe7656014ae71f71a47b98c3",
+      "bytes": 3231
+    },
+    {
+      "path": "coverage.mjs",
+      "sha": "b2a302c14701940d08df54a2f3952eabe0095bd6",
+      "bytes": 1813
+    },
+    {
+      "path": "coverage.test.mjs",
+      "sha": "93af20aba8c0db13a0b8185fc5f24cca8d0198f0",
+      "bytes": 1563
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R012/PATCH-SPEC.json",
+      "sha": "b9933ba46f0f9fbd74383d4fb081efed81e7f5a1",
+      "bytes": 20162
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R012/README.md",
+      "sha": "72d350e58f636c3354916972abde897d0bd34281",
+      "bytes": 1478
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R012/overlay/apps/vivim-host/control/native-resource-port.mjs",
+      "sha": "2fe2bdec1fc666269a889a8e8a0caaab85acf3de",
+      "bytes": 3634
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R012/overlay/apps/vivim-host/test/native-resource-port.test.mjs",
+      "sha": "c0ec9124fe5e3dc9870bce852cda74355e4e8c0f",
+      "bytes": 2581
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R012/overlay/native/host-supervisor/src/bin/vivim-workstation-probe/native_resources.rs",
+      "sha": "709ffdbbd0b16adf445d2c8dd90e029cf9c2bb25",
+      "bytes": 2230
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R012/overlay/native/host-supervisor/src/workstation_conpty.rs",
+      "sha": "b975cee54d8315f93c83b3b15f02c7a2c8f7c8c8",
+      "bytes": 3268
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R012/overlay/tools/mcp/vivim-arbor/tests/native-resource-tunnel.test.cjs",
+      "sha": "aabd5946f26a59c41e7e840bd0800ed239c19ab5",
+      "bytes": 1897
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R012/prepare-overlay.mjs",
+      "sha": "03d251982f8e1469498e230101bc7b6eed858143",
+      "bytes": 2167
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R015/PATCH-SPEC.json",
+      "sha": "10050fdd290939c96520bfb71774b1a5509b13a7",
+      "bytes": 21317
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R015/README.md",
+      "sha": "d49ecae389e516bbf66557b83f6a3444fa61b95f",
+      "bytes": 1428
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R015/overlay/apps/vivim-host/control/native-resource-port.mjs",
+      "sha": "2fe2bdec1fc666269a889a8e8a0caaab85acf3de",
+      "bytes": 3634
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R015/overlay/apps/vivim-host/test/native-resource-port.test.mjs",
+      "sha": "c0ec9124fe5e3dc9870bce852cda74355e4e8c0f",
+      "bytes": 2581
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R015/overlay/hq/lib/windows-observation-checkpoint.mjs",
+      "sha": "b86fa8f3380a66acb895707ad808246cc342bd01",
+      "bytes": 4021
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R015/overlay/hq/lib/windows-observation-checkpoint.test.mjs",
+      "sha": "294a7d2d863fce7eead8e6b64c65478e850f3ae7",
+      "bytes": 2874
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R015/overlay/native/host-supervisor/src/bin/vivim-workstation-probe/native_resources.rs",
+      "sha": "709ffdbbd0b16adf445d2c8dd90e029cf9c2bb25",
+      "bytes": 2230
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R015/overlay/native/host-supervisor/src/workstation_conpty.rs",
+      "sha": "b975cee54d8315f93c83b3b15f02c7a2c8f7c8c8",
+      "bytes": 3268
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R015/overlay/tools/mcp/vivim-arbor/tests/native-resource-tunnel.test.cjs",
+      "sha": "aabd5946f26a59c41e7e840bd0800ed239c19ab5",
+      "bytes": 1897
+    },
+    {
+      "path": "integration-packs/WNI-COMBINED-R015/prepare-overlay.mjs",
+      "sha": "03d251982f8e1469498e230101bc7b6eed858143",
+      "bytes": 2167
+    },
+    {
+      "path": "integration-packs/WNI01-R013-HQ/PATCH-SPEC.json",
+      "sha": "49c1865ded89d3b2a088420b5dc50882b01a7c46",
+      "bytes": 1300
+    },
+    {
+      "path": "integration-packs/WNI01-R013-HQ/README.md",
+      "sha": "47ec5153f479de113eeea4b6bd3fbe2b4723928b",
+      "bytes": 1304
+    },
+    {
+      "path": "integration-packs/WNI01-R013-HQ/overlay/hq/lib/windows-observation-checkpoint.mjs",
+      "sha": "b86fa8f3380a66acb895707ad808246cc342bd01",
+      "bytes": 4021
+    },
+    {
+      "path": "integration-packs/WNI01-R013-HQ/overlay/hq/lib/windows-observation-checkpoint.test.mjs",
+      "sha": "294a7d2d863fce7eead8e6b64c65478e850f3ae7",
+      "bytes": 2874
+    },
+    {
+      "path": "integration-packs/WNI01-R013-HQ/prepare-overlay.mjs",
+      "sha": "03d251982f8e1469498e230101bc7b6eed858143",
+      "bytes": 2167
+    },
+    {
+      "path": "integration-packs/WNI01-R025-PRODUCT-BIND-CACHE/PATCH-SPEC.json",
+      "sha": "3dea3f40135eb7d9624c12cf0d95a2ec62bda2e4",
+      "bytes": 1774
+    },
+    {
+      "path": "integration-packs/WNI01-R025-PRODUCT-BIND-CACHE/overlay/adapters/hq/bind-cache-native.test-run.mjs",
+      "sha": "545768216efebfc526122d35b7fe9ed82b84d1c3",
+      "bytes": 1057
+    },
+    {
+      "path": "integration-packs/WNI01-R025-PRODUCT-BIND-CACHE/overlay/adapters/hq/bind-cache.mjs",
+      "sha": "d4e5fa2adff35708a93b5dd112732d2eec0fffc7",
+      "bytes": 3070
+    },
+    {
+      "path": "integration-packs/WNI01-R025-PRODUCT-BIND-CACHE/overlay/adapters/hq/bind-cache.test.mjs",
+      "sha": "b84d3845d72b5186c64507e7d601891ff8f6c861",
+      "bytes": 2467
+    },
+    {
+      "path": "integration-packs/WNI01-R025-PRODUCT-BIND-CACHE/prepare-overlay.mjs",
+      "sha": "03d251982f8e1469498e230101bc7b6eed858143",
+      "bytes": 2167
+    },
+    {
+      "path": "integration-packs/WNI01-R026-SELECTIVE-COMPILE/PATCH-SPEC.json",
+      "sha": "05ace3831cbef388078da545a183d6c08ef78390",
+      "bytes": 2829
+    },
+    {
+      "path": "integration-packs/WNI01-R026-SELECTIVE-COMPILE/overlay/adapters/hq/source-compile-cache.mjs",
+      "sha": "bbc588bff10eddc19a4a8cfe74cc090dd1d1a7cf",
+      "bytes": 2505
+    },
+    {
+      "path": "integration-packs/WNI01-R026-SELECTIVE-COMPILE/overlay/adapters/hq/source-compile-cache.test.mjs",
+      "sha": "f01f462e6a906c0310846642a7608c379a7440ec",
+      "bytes": 2717
+    },
+    {
+      "path": "integration-packs/WNI01-R026-SELECTIVE-COMPILE/overlay/adapters/hq/source-compile-native.test-run.mjs",
+      "sha": "4f7a2df97c5500e37e4266139dffb5a2bcd60162",
+      "bytes": 2092
+    },
+    {
+      "path": "integration-packs/WNI01-R026-SELECTIVE-COMPILE/prepare-overlay.mjs",
+      "sha": "03d251982f8e1469498e230101bc7b6eed858143",
+      "bytes": 2167
+    },
+    {
+      "path": "integration-packs/WNI01-R027-PRODUCT-COMBINED/PATCH-SPEC.json",
+      "sha": "ccd4fe606dcdfb14be66bec8c1a818b47ab7d2fb",
+      "bytes": 4458
+    },
+    {
+      "path": "integration-packs/WNI01-R027-PRODUCT-COMBINED/overlay/adapters/hq/bind-cache-native.test-run.mjs",
+      "sha": "545768216efebfc526122d35b7fe9ed82b84d1c3",
+      "bytes": 1057
+    },
+    {
+      "path": "integration-packs/WNI01-R027-PRODUCT-COMBINED/overlay/adapters/hq/bind-cache.mjs",
+      "sha": "d4e5fa2adff35708a93b5dd112732d2eec0fffc7",
+      "bytes": 3070
+    },
+    {
+      "path": "integration-packs/WNI01-R027-PRODUCT-COMBINED/overlay/adapters/hq/bind-cache.test.mjs",
+      "sha": "b84d3845d72b5186c64507e7d601891ff8f6c861",
+      "bytes": 2467
+    },
+    {
+      "path": "integration-packs/WNI01-R027-PRODUCT-COMBINED/overlay/adapters/hq/source-compile-cache.mjs",
+      "sha": "bbc588bff10eddc19a4a8cfe74cc090dd1d1a7cf",
+      "bytes": 2505
+    },
+    {
+      "path": "integration-packs/WNI01-R027-PRODUCT-COMBINED/overlay/adapters/hq/source-compile-cache.test.mjs",
+      "sha": "f01f462e6a906c0310846642a7608c379a7440ec",
+      "bytes": 2717
+    },
+    {
+      "path": "integration-packs/WNI01-R027-PRODUCT-COMBINED/overlay/adapters/hq/source-compile-native.test-run.mjs",
+      "sha": "4f7a2df97c5500e37e4266139dffb5a2bcd60162",
+      "bytes": 2092
+    },
+    {
+      "path": "integration-packs/WNI01-R027-PRODUCT-COMBINED/prepare-overlay.mjs",
+      "sha": "03d251982f8e1469498e230101bc7b6eed858143",
+      "bytes": 2167
+    },
+    {
+      "path": "integration-packs/WNI01-R028-INCREMENTAL-WIKI/PATCH-SPEC.json",
+      "sha": "9c6ba781769305ef67cd5b20fcefea013cebcc2c",
+      "bytes": 2520
+    },
+    {
+      "path": "integration-packs/WNI01-R028-INCREMENTAL-WIKI/overlay/adapters/hq/article-cache-bench.mjs",
+      "sha": "34ef05d242ffa337a0812c28115297d48309bec6",
+      "bytes": 1147
+    },
+    {
+      "path": "integration-packs/WNI01-R028-INCREMENTAL-WIKI/overlay/adapters/hq/article-cache.mjs",
+      "sha": "1129cde03e0c43870ac620575c907ff364926e50",
+      "bytes": 1807
+    },
+    {
+      "path": "integration-packs/WNI01-R028-INCREMENTAL-WIKI/overlay/adapters/hq/article-cache.test.mjs",
+      "sha": "c81d9a0d02eb9b0cdbda0df574375231396bb5c0",
+      "bytes": 2921
+    },
+    {
+      "path": "integration-packs/WNI01-R028-INCREMENTAL-WIKI/prepare-overlay.mjs",
+      "sha": "03d251982f8e1469498e230101bc7b6eed858143",
+      "bytes": 2167
+    },
+    {
+      "path": "integration-packs/WNI01-R029-PRODUCT-COMBINED/PATCH-SPEC.json",
+      "sha": "c64fc6fee18526a1569974f565746afc02dbfcce",
+      "bytes": 6833
+    },
+    {
+      "path": "integration-packs/WNI01-R029-PRODUCT-COMBINED/overlay/adapters/hq/article-cache-bench.mjs",
+      "sha": "34ef05d242ffa337a0812c28115297d48309bec6",
+      "bytes": 1147
+    },
+    {
+      "path": "integration-packs/WNI01-R029-PRODUCT-COMBINED/overlay/adapters/hq/article-cache.mjs",
+      "sha": "1129cde03e0c43870ac620575c907ff364926e50",
+      "bytes": 1807
+    },
+    {
+      "path": "integration-packs/WNI01-R029-PRODUCT-COMBINED/overlay/adapters/hq/article-cache.test.mjs",
+      "sha": "c81d9a0d02eb9b0cdbda0df574375231396bb5c0",
+      "bytes": 2921
+    },
+    {
+      "path": "integration-packs/WNI01-R029-PRODUCT-COMBINED/overlay/adapters/hq/bind-cache-native.test-run.mjs",
+      "sha": "545768216efebfc526122d35b7fe9ed82b84d1c3",
+      "bytes": 1057
+    },
+    {
+      "path": "integration-packs/WNI01-R029-PRODUCT-COMBINED/overlay/adapters/hq/bind-cache.mjs",
+      "sha": "d4e5fa2adff35708a93b5dd112732d2eec0fffc7",
+      "bytes": 3070
+    },
+    {
+      "path": "integration-packs/WNI01-R029-PRODUCT-COMBINED/overlay/adapters/hq/bind-cache.test.mjs",
+      "sha": "b84d3845d72b5186c64507e7d601891ff8f6c861",
+      "bytes": 2467
+    },
+    {
+      "path": "integration-packs/WNI01-R029-PRODUCT-COMBINED/overlay/adapters/hq/source-compile-cache.mjs",
+      "sha": "bbc588bff10eddc19a4a8cfe74cc090dd1d1a7cf",
+      "bytes": 2505
+    },
+    {
+      "path": "integration-packs/WNI01-R029-PRODUCT-COMBINED/overlay/adapters/hq/source-compile-cache.test.mjs",
+      "sha": "f01f462e6a906c0310846642a7608c379a7440ec",
+      "bytes": 2717
+    },
+    {
+      "path": "integration-packs/WNI01-R029-PRODUCT-COMBINED/overlay/adapters/hq/source-compile-native.test-run.mjs",
+      "sha": "4f7a2df97c5500e37e4266139dffb5a2bcd60162",
+      "bytes": 2092
+    },
+    {
+      "path": "integration-packs/WNI01-R029-PRODUCT-COMBINED/prepare-overlay.mjs",
+      "sha": "03d251982f8e1469498e230101bc7b6eed858143",
+      "bytes": 2167
+    },
+    {
+      "path": "integration-packs/WNI01-R030-LIVE-REFRESH/PATCH-SPEC.json",
+      "sha": "787730664e6d06dd82c45ed361bfa9fb615c619c",
+      "bytes": 2545
+    },
+    {
+      "path": "integration-packs/WNI01-R030-LIVE-REFRESH/overlay/adapters/hq/refresh-loop.mjs",
+      "sha": "d34d0f1e5449885b7d4bf698ce490e348c246de9",
+      "bytes": 3912
+    },
+    {
+      "path": "integration-packs/WNI01-R030-LIVE-REFRESH/overlay/adapters/hq/refresh-loop.test.mjs",
+      "sha": "76c942cf6839148804664b3673b43fd94ce81e95",
+      "bytes": 2519
+    },
+    {
+      "path": "integration-packs/WNI01-R030-LIVE-REFRESH/prepare-overlay.mjs",
+      "sha": "03d251982f8e1469498e230101bc7b6eed858143",
+      "bytes": 2167
+    },
+    {
+      "path": "integration-packs/WNI01-R031-PRODUCT-LIVE/PATCH-SPEC.json",
+      "sha": "57ce58cbde0dee7aebbb752fc7f47eee26d896c3",
+      "bytes": 9089
+    },
+    {
+      "path": "integration-packs/WNI01-R031-PRODUCT-LIVE/live-product.test-run.mjs",
+      "sha": "ce98f62b7a7c5a6feb98f79ec6e9f73021aa2065",
+      "bytes": 6276
+    },
+    {
+      "path": "integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/article-cache-bench.mjs",
+      "sha": "34ef05d242ffa337a0812c28115297d48309bec6",
+      "bytes": 1147
+    },
+    {
+      "path": "integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/article-cache.mjs",
+      "sha": "1129cde03e0c43870ac620575c907ff364926e50",
+      "bytes": 1807
+    },
+    {
+      "path": "integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/article-cache.test.mjs",
+      "sha": "c81d9a0d02eb9b0cdbda0df574375231396bb5c0",
+      "bytes": 2921
+    },
+    {
+      "path": "integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/bind-cache-native.test-run.mjs",
+      "sha": "545768216efebfc526122d35b7fe9ed82b84d1c3",
+      "bytes": 1057
+    },
+    {
+      "path": "integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/bind-cache.mjs",
+      "sha": "d4e5fa2adff35708a93b5dd112732d2eec0fffc7",
+      "bytes": 3070
+    },
+    {
+      "path": "integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/bind-cache.test.mjs",
+      "sha": "b84d3845d72b5186c64507e7d601891ff8f6c861",
+      "bytes": 2467
+    },
+    {
+      "path": "integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/refresh-loop.mjs",
+      "sha": "d34d0f1e5449885b7d4bf698ce490e348c246de9",
+      "bytes": 3912
+    },
+    {
+      "path": "integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/refresh-loop.test.mjs",
+      "sha": "76c942cf6839148804664b3673b43fd94ce81e95",
+      "bytes": 2519
+    },
+    {
+      "path": "integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/source-compile-cache.mjs",
+      "sha": "bbc588bff10eddc19a4a8cfe74cc090dd1d1a7cf",
+      "bytes": 2505
+    },
+    {
+      "path": "integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/source-compile-cache.test.mjs",
+      "sha": "f01f462e6a906c0310846642a7608c379a7440ec",
+      "bytes": 2717
+    },
+    {
+      "path": "integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/source-compile-native.test-run.mjs",
+      "sha": "4f7a2df97c5500e37e4266139dffb5a2bcd60162",
+      "bytes": 2092
+    },
+    {
+      "path": "integration-packs/WNI01-R031-PRODUCT-LIVE/prepare-overlay.mjs",
+      "sha": "03d251982f8e1469498e230101bc7b6eed858143",
+      "bytes": 2167
+    },
+    {
+      "path": "integration-packs/WNI02-R002/EVIDENCE.json",
+      "sha": "64d4b813dd5459c060637d434107a7254f31831b",
+      "bytes": 646
+    },
+    {
+      "path": "integration-packs/WNI02-R002/PATCH-SPEC.json",
+      "sha": "ef39574c191087682b1efe9b6bf812f17b6c1e17",
+      "bytes": 10313
+    },
+    {
+      "path": "integration-packs/WNI02-R002/README.md",
+      "sha": "4b8f7b038188de3b84b6bf0f7d0a02baab840c17",
+      "bytes": 4138
+    },
+    {
+      "path": "integration-packs/WNI02-R002/overlay/apps/vivim-host/control/native-resource-port.mjs",
+      "sha": "2fe2bdec1fc666269a889a8e8a0caaab85acf3de",
+      "bytes": 3634
+    },
+    {
+      "path": "integration-packs/WNI02-R002/overlay/apps/vivim-host/test/native-resource-port.test.mjs",
+      "sha": "c0ec9124fe5e3dc9870bce852cda74355e4e8c0f",
+      "bytes": 2581
+    },
+    {
+      "path": "integration-packs/WNI02-R002/overlay/native/host-supervisor/src/bin/vivim-workstation-probe/native_resources.rs",
+      "sha": "709ffdbbd0b16adf445d2c8dd90e029cf9c2bb25",
+      "bytes": 2230
+    },
+    {
+      "path": "integration-packs/WNI02-R002/overlay/tools/mcp/vivim-arbor/tests/native-resource-tunnel.test.cjs",
+      "sha": "aabd5946f26a59c41e7e840bd0800ed239c19ab5",
+      "bytes": 1897
+    },
+    {
+      "path": "integration-packs/WNI02-R002/prepare-overlay.mjs",
+      "sha": "03d251982f8e1469498e230101bc7b6eed858143",
+      "bytes": 2167
+    },
+    {
+      "path": "integration-packs/WNI02-R003/PATCH-SPEC.json",
+      "sha": "271bfa5a863fb8c1ef7c643d6db7a40065c7ea3b",
+      "bytes": 13280
+    },
+    {
+      "path": "integration-packs/WNI02-R003/README.md",
+      "sha": "013aa3749a18a50efc1fb7b44e59b98056fad4d9",
+      "bytes": 2484
+    },
+    {
+      "path": "integration-packs/WNI02-R003/overlay/apps/vivim-host/control/native-resource-port.mjs",
+      "sha": "2fe2bdec1fc666269a889a8e8a0caaab85acf3de",
+      "bytes": 3634
+    },
+    {
+      "path": "integration-packs/WNI02-R003/overlay/apps/vivim-host/test/native-resource-port.test.mjs",
+      "sha": "c0ec9124fe5e3dc9870bce852cda74355e4e8c0f",
+      "bytes": 2581
+    },
+    {
+      "path": "integration-packs/WNI02-R003/overlay/native/host-supervisor/src/bin/vivim-workstation-probe/native_resources.rs",
+      "sha": "709ffdbbd0b16adf445d2c8dd90e029cf9c2bb25",
+      "bytes": 2230
+    },
+    {
+      "path": "integration-packs/WNI02-R003/overlay/tools/mcp/vivim-arbor/tests/native-resource-tunnel.test.cjs",
+      "sha": "aabd5946f26a59c41e7e840bd0800ed239c19ab5",
+      "bytes": 1897
+    },
+    {
+      "path": "integration-packs/WNI02-R003/prepare-overlay.mjs",
+      "sha": "03d251982f8e1469498e230101bc7b6eed858143",
+      "bytes": 2167
+    },
+    {
+      "path": "integration-packs/WNI02-R003/test-native-resource.mjs",
+      "sha": "3cd38bd985a6946b77b475c53fdbe1f836e84474",
+      "bytes": 2025
+    },
+    {
+      "path": "integration-packs/WNI03-R011-CONPTY/PATCH-SPEC.json",
+      "sha": "4a60025dd446807dc0871e817c5953d0fe88ba60",
+      "bytes": 7293
+    },
+    {
+      "path": "integration-packs/WNI03-R011-CONPTY/README.md",
+      "sha": "98c5f4b0ad7f1b0e59168ad5505b289bf3f6b8c6",
+      "bytes": 1881
+    },
+    {
+      "path": "integration-packs/WNI03-R011-CONPTY/overlay/native/host-supervisor/src/workstation_conpty.rs",
+      "sha": "b975cee54d8315f93c83b3b15f02c7a2c8f7c8c8",
+      "bytes": 3268
+    },
+    {
+      "path": "integration-packs/WNI03-R011-CONPTY/prepare-overlay.mjs",
+      "sha": "03d251982f8e1469498e230101bc7b6eed858143",
+      "bytes": 2167
+    },
+    {
+      "path": "integration-packs/WNI04-R020-SEARCH/README.md",
+      "sha": "e9ce88248c94e65ed583d4d4e835b50c668f3e86",
+      "bytes": 2765
+    },
+    {
+      "path": "integration-packs/WNI04-R020-SEARCH/Test-WindowsIndex.ps1",
+      "sha": "afda413ddd266b87fddc645e486825649d27c599",
+      "bytes": 1800
+    },
+    {
+      "path": "integration-packs/WNI04-R020-SEARCH/WindowsIndex.ps1",
+      "sha": "0fad40cb0de3d80f4a77278bae3bdec04d542a7f",
+      "bytes": 6553
+    },
+    {
+      "path": "integration-packs/WNI05-R022-UIA/Cargo.toml",
+      "sha": "0b2c563894305e43313e22a5dc00b9c679794e17",
+      "bytes": 425
+    },
+    {
+      "path": "integration-packs/WNI05-R022-UIA/README.md",
+      "sha": "6d3066c67a4817d0c793d4e8e5a97ea7e0e1f649",
+      "bytes": 1485
+    },
+    {
+      "path": "integration-packs/WNI05-R022-UIA/src/lib.rs",
+      "sha": "13c7659d920dbf9d0ff1bb6a3dd0d102d7bff434",
+      "bytes": 6703
+    },
+    {
+      "path": "integration-packs/WNI06-WNI07-WNI10-R023-PLATFORM/Cargo.toml",
+      "sha": "fa6a448dcad6d88067bc75287cb1a76c1e524763",
+      "bytes": 274
+    },
+    {
+      "path": "integration-packs/WNI06-WNI07-WNI10-R023-PLATFORM/README.md",
+      "sha": "8cd3021030d95c735eb73c27982320f8e48aebb4",
+      "bytes": 1610
+    },
+    {
+      "path": "integration-packs/WNI06-WNI07-WNI10-R023-PLATFORM/src/lib.rs",
+      "sha": "6ad7fd89fd9cd4b7fe5b90b24e61118fcddf63e7",
+      "bytes": 1810
+    },
+    {
+      "path": "materialize-base.mjs",
+      "sha": "f6dfeb21ad8293f93bad94b6a1738a930b06e984",
+      "bytes": 3126
+    },
+    {
+      "path": "overlay-verifier.mjs",
+      "sha": "560ebaa50cc8cc1cd4ab595ab18df2f558c5042d",
+      "bytes": 3149
+    },
+    {
+      "path": "packages/WNI01-R003-NATIVE-WATCHER.md",
+      "sha": "8e6511061338bb82d5e1efcaad20cf5e75338cdf",
+      "bytes": 1988
+    },
+    {
+      "path": "packages/WNI01-R005-USN-DECODER.md",
+      "sha": "0bfcb177be8ae8e15e1b0de3bba3bcbb15771d7a",
+      "bytes": 1273
+    },
+    {
+      "path": "packages/WNI01-filesystem-delta.md",
+      "sha": "b45fb5871a24641ffdc665eb176f43f45872809a",
+      "bytes": 2549
+    },
+    {
+      "path": "packages/WNI02-R006-ETW-PRODUCER.md",
+      "sha": "02aa0a990973fc394d86c553d35854c1787ae32b",
+      "bytes": 1083
+    },
+    {
+      "path": "packages/WNI02-R011-HARDWARE.md",
+      "sha": "658ff696776253bfeff88fe9a3b8215b0c544205",
+      "bytes": 452
+    },
+    {
+      "path": "packages/WNI02-R013-SCHEDULER-ETW.md",
+      "sha": "663b1276c37c01757c24fca6d31be343badf2abb",
+      "bytes": 933
+    },
+    {
+      "path": "packages/WNI02-system-diagnostics.md",
+      "sha": "eb341478d74a608f3b948beedb1d7abb99be19df",
+      "bytes": 3015
+    },
+    {
+      "path": "packages/WNI03-R004-ACP-ROUTER.md",
+      "sha": "6e2c9e1e97d66a8a928045be042ad6af9dce8dd5",
+      "bytes": 3459
+    },
+    {
+      "path": "packages/WNI03-R006-CONPTY-STREAM.md",
+      "sha": "dd742c8721ecbc4df246c2240c7a89c95ac316e5",
+      "bytes": 2111
+    },
+    {
+      "path": "packages/WNI03-R009-ACP-TRANSPORT.md",
+      "sha": "e181ce33ccffd5ad816608a4b67f31eca50f99b8",
+      "bytes": 1496
+    },
+    {
+      "path": "packages/WNI03-native-terminal-agents.md",
+      "sha": "ccf33ae0f041d8d13b6ae93de68108ec0a4ed1b1",
+      "bytes": 3210
+    },
+    {
+      "path": "packages/WNI04-R006-SEARCH-QUERY.md",
+      "sha": "87c4c5beba9f3c31fa7b2d762d67d8f275a48dbc",
+      "bytes": 1004
+    },
+    {
+      "path": "packages/WNI04-R014-FILE-METADATA.md",
+      "sha": "c21abafe1bcc357a817ed50900fe1ab67958d8b6",
+      "bytes": 1484
+    },
+    {
+      "path": "packages/WNI04-indexed-search.md",
+      "sha": "6b5a0ab52c7383cd3e610e30bc3617a720199e76",
+      "bytes": 2428
+    },
+    {
+      "path": "packages/WNI05-R017-SEMANTIC-STATE.md",
+      "sha": "8230d7c058c2398d9f52961789278aa3733863ca",
+      "bytes": 1543
+    },
+    {
+      "path": "packages/WNI05-R018-HYBRID-PLANNING.md",
+      "sha": "ead3aa658e25e2062f7cc8c97b75f06e10207f30",
+      "bytes": 1179
+    },
+    {
+      "path": "packages/WNI05-native-app-semantics.md",
+      "sha": "b8df0832bace4334d17b350e8355282a6c658869",
+      "bytes": 2655
+    },
+    {
+      "path": "packages/WNI06-app-actions.md",
+      "sha": "6609ccc8d99bcecd1f13b59a1e39c8aac56da16e",
+      "bytes": 2379
+    },
+    {
+      "path": "packages/WNI07-windows-capture.md",
+      "sha": "959512f3181fdba03ac94d1764657b78eae0c022",
+      "bytes": 2361
+    },
+    {
+      "path": "packages/WNI08-configuration-reconciliation.md",
+      "sha": "bce8fea0a607a35f800b020680fdb06e6c42b907",
+      "bytes": 2284
+    },
+    {
+      "path": "packages/WNI09-workload-isolation.md",
+      "sha": "f58c1448f66871d32c5a76f043a5c6ba2a15dfa5",
+      "bytes": 2212
+    },
+    {
+      "path": "packages/WNI10-hardware-adaptive-ai.md",
+      "sha": "2dc3912c5152d6c5fb76fdfd0874dad841cbe819",
+      "bytes": 2005
+    },
+    {
+      "path": "packages/WNI11-R007-CAPABILITY-COMPILER.md",
+      "sha": "a172215ce8c1d765156e41c16794dffa35087ef2",
+      "bytes": 1738
+    },
+    {
+      "path": "packages/WNI11-binding-minimization.md",
+      "sha": "b462727846295e89a9848daee958387567e08908",
+      "bytes": 1682
+    },
+    {
+      "path": "research/R016-MICROSOFT-HYBRID-INTELLIGENCE.md",
+      "sha": "2608abdec4c79924da3c8461e17866992347fdcc",
+      "bytes": 8163
+    },
+    {
+      "path": "research/R019-STUDIO-HARNESS-HANDOFF.md",
+      "sha": "419916b455f27f1a96cefa31c32a892ca143fb46",
+      "bytes": 3135
+    },
+    {
+      "path": "rust-starter/Cargo.toml",
+      "sha": "06a1f1bd33789dffcf882005fd645e7a4361baf7",
+      "bytes": 473
+    },
+    {
+      "path": "rust-starter/src/acp.rs",
+      "sha": "7fdf55f1ba981b4f1d6fb852e49dcd678e8c3b6f",
+      "bytes": 11182
+    },
+    {
+      "path": "rust-starter/src/acp_transport.rs",
+      "sha": "7b90309dfd4b54063db7b1db661827109169bcce",
+      "bytes": 6331
+    },
+    {
+      "path": "rust-starter/src/change.rs",
+      "sha": "fd06df54c75b7d830105c3b1f146f7612479be31",
+      "bytes": 3427
+    },
+    {
+      "path": "rust-starter/src/conpty.rs",
+      "sha": "b975cee54d8315f93c83b3b15f02c7a2c8f7c8c8",
+      "bytes": 3268
+    },
+    {
+      "path": "rust-starter/src/etw.rs",
+      "sha": "c867551f6296a8d96574d2185240645023d13a48",
+      "bytes": 2392
+    },
+    {
+      "path": "rust-starter/src/etw_decode.rs",
+      "sha": "0eac1c1f1a1b9fa8cd0630ef17487b064fe049e7",
+      "bytes": 3892
+    },
+    {
+      "path": "rust-starter/src/etw_record.rs",
+      "sha": "30230f3007b7dc76c87247fb2e16d1b49c3c192e",
+      "bytes": 2429
+    },
+    {
+      "path": "rust-starter/src/file_metadata.rs",
+      "sha": "bcbc34866e28aca835ddbe6eac43bbbba814e323",
+      "bytes": 3200
+    },
+    {
+      "path": "rust-starter/src/hardware.rs",
+      "sha": "003f0d9109ad4433f1ec1dc1fc114844613a204b",
+      "bytes": 1838
+    },
+    {
+      "path": "rust-starter/src/indexed_search.rs",
+      "sha": "cca3228175bd61d05b21c3afcfa192bb6dbc9813",
+      "bytes": 5770
+    },
+    {
+      "path": "rust-starter/src/interaction_plan.rs",
+      "sha": "98b01a973ae20451ecb5e1a769d037a78286ba85",
+      "bytes": 5364
+    },
+    {
+      "path": "rust-starter/src/journal.rs",
+      "sha": "5aa1b4e89883a1722f1f86c3feead076f331af47",
+      "bytes": 4047
+    },
+    {
+      "path": "rust-starter/src/lib.rs",
+      "sha": "ec162050e3a8072d0b4a2d9278e3913b12a97ece",
+      "bytes": 512
+    },
+    {
+      "path": "rust-starter/src/recovery.rs",
+      "sha": "a7092f6e2a6cf76723c8eac687afac884bbbb14b",
+      "bytes": 1762
+    },
+    {
+      "path": "rust-starter/src/refresh_fence.rs",
+      "sha": "dfe0da19000306299fa2142b37191c6b0688751f",
+      "bytes": 4932
+    },
+    {
+      "path": "rust-starter/src/resources.rs",
+      "sha": "a160c98b46ca11fcce1d626bbbb33fb5b676467f",
+      "bytes": 3998
+    },
+    {
+      "path": "rust-starter/src/scheduler.rs",
+      "sha": "355ad3103588fdd6ed647e6f748946a738e0198e",
+      "bytes": 4189
+    },
+    {
+      "path": "rust-starter/src/search.rs",
+      "sha": "6424810c36d750d58fdd048f8214f78c8801031f",
+      "bytes": 1985
+    },
+    {
+      "path": "rust-starter/src/semantic_surface.rs",
+      "sha": "c94f8b17d5582682a444d1f9f698909d011b56f3",
+      "bytes": 8984
+    },
+    {
+      "path": "rust-starter/src/session.rs",
+      "sha": "71df874899e40def3e787a8724a6b44dc9bedbf7",
+      "bytes": 1738
+    },
+    {
+      "path": "rust-starter/src/stream.rs",
+      "sha": "00921046c59a2570e467fcb45e94018c0d6f099e",
+      "bytes": 3345
+    },
+    {
+      "path": "rust-starter/src/usn.rs",
+      "sha": "29885b1a205b0b2a2e5ea410a3dee287a2ae33c9",
+      "bytes": 5820
+    },
+    {
+      "path": "rust-starter/src/watcher.rs",
+      "sha": "0131c7818b3caa8e76ab5cf0ce83144b69e54c62",
+      "bytes": 7658
+    }
+  ],
+  "commits": [
+    {
+      "sha": "9c0de7d3ad87b07d594462deec9a4f4637f46dcf",
+      "message": "docs(windows-native): mark priority 1 isolated integration complete"
+    },
+    {
+      "sha": "f6ca3bda362fce1ce2c5d1bd4d6150071fe91d8a",
+      "message": "docs(windows-native): retain verified R032 live mutation and deletion acceptance"
+    },
+    {
+      "sha": "6f85fabd1c3920cd71a557dca3a773728ba2e143",
+      "message": "test(windows-native): verify precise missing-source contract and surviving sibling"
+    },
+    {
+      "sha": "d2db3affdefd16121cd86439483140d52c0dfca6",
+      "message": "test(windows-native): extend live acceptance to graph no-op and source deletion R032"
+    },
+    {
+      "sha": "bca502e5a6bc55c8ccf8c4fa4a84872d986fb569",
+      "message": "test(windows-native): retain actual Windows source-to-graph-to-Wiki acceptance R031"
+    },
+    {
+      "sha": "8c3a01959ec3f5ec06a6bbb2961e72e8ba6c22dd",
+      "message": "test(windows-native): actual resident Product source-to-Wiki acceptance fixture"
+    },
+    {
+      "sha": "295faf74fa383692ec6e44c8ee9730d865961787",
+      "message": "feat(windows-native): consolidate compiler Wiki and live source refresh R031"
+    },
+    {
+      "sha": "36a464ff83780e47db030646e5a45c9c9a78ff77",
+      "message": "fix(windows-native): correct serialized session dispatch chain"
+    },
+    {
+      "sha": "807acd8590f0adb1c7d53693ac46a534cbfa6562",
+      "message": "feat(windows-native): continuous source observation and serialized Product refresh R030"
+    },
+    {
+      "sha": "212b7256f3119c62cc673c08d978d81dd3802695",
+      "message": "feat(windows-native): consolidate selective compiler and Wiki acceleration R029"
+    },
+    {
+      "sha": "35ae9804dc7992db6041ede09f85a105defe085b",
+      "message": "feat(windows-native): incremental Product Wiki article reuse R028"
+    },
+    {
+      "sha": "0da879218e4725d5937697c024520971b777fa92",
+      "message": "test(windows-native): record combined Product acceleration overlay acceptance R027"
+    },
+    {
+      "sha": "9417952262950f86681c4703c9a2146d646b9742",
+      "message": "feat(windows-native): combine Product resident and selective source cache overlays R027"
+    },
+    {
+      "sha": "f4678b01778dc083214a6a62ecd4d4ebea78880b",
+      "message": "feat(windows-native): selective source compilation reuse against Product R026"
+    },
+    {
+      "sha": "7bd4b803ea6a0f77dcc02df57f1fe80de3646131",
+      "message": "test(windows-native): record actual Product SDK cache and source refresh verification"
+    },
+    {
+      "sha": "4e8febe5f44d83053363e9b9a55e5c30b9f3c12d",
+      "message": "feat(windows-native): exact resident SDK bind reuse candidate for Product R025"
+    },
+    {
+      "sha": "b6e29308c7b8b8e59167b490ee73075d30969f7e",
+      "message": "feat(windows-native): coalesce source invalidations for resident compiler refresh R024"
+    },
+    {
+      "sha": "072ecc2443e7030e48f57f5992965d9ab7840f98",
+      "message": "test(windows-native): preserve R022 R023 native probe evidence and tracker"
+    },
+    {
+      "sha": "25f0c757c9c08f30e95bbf9c8ebca6817dc89728",
+      "message": "research(windows-native): optional WinRT platform support probes R023"
+    },
+    {
+      "sha": "8bcdbcf61d4d0647cddda3410cb69a16ac72f371",
+      "message": "research(windows-native): selected-window native UIA observation R022"
+    },
+    {
+      "sha": "d98dbfeec2f1a1bf4d59adef2163cf57a270d557",
+      "message": "test(windows-native): record native search proof and 61 passing Rust tests R021"
+    },
+    {
+      "sha": "1cb9c9547785f2ccd18db20e63dd3c8ccf06d18d",
+      "message": "research(windows-native): validate indexed result envelope and HQ fallback decision R021"
+    },
+    {
+      "sha": "b36c80d49d70b2a73ae0217d4b07d50aaa1bc961",
+      "message": "fix(windows-native): retain bounded search provider failure stage without private error text"
+    },
+    {
+      "sha": "851b2056841bb3b8c5069dcbee6106eb599b3efc",
+      "message": "research(windows-native): scoped SystemIndex and Shell property proof adapter R020"
+    },
+    {
+      "sha": "6c8e2b4a534652bfd75bc721f5c58a03b6232197",
+      "message": "test(windows-native): retain 56 Windows tests and scoped Studio Harness extraction handoff R019"
+    },
+    {
+      "sha": "3ef6db9bf02c338871204ddef8663bf2eb28d4e3",
+      "message": "research(windows-native): bounded semantic wait and hybrid route planner R018"
+    },
+    {
+      "sha": "b6cb6b414e0e2cf16dfcab4dab573d9ad0fd2017",
+      "message": "research(windows-native): extract scoped semantic references and recovery projection R017"
+    },
+    {
+      "sha": "8e96cb8972de60d089476a6b060bc04e5766e0f5",
+      "message": "research(windows-native): fresh Microsoft HCU UFO and hybrid intelligence donor review R016"
+    },
+    {
+      "sha": "48ff35d8aecad8da87f497af4e866a217e2141bf",
+      "message": "test(windows-native): record verified R015 combined preflight and master tracker"
+    },
+    {
+      "sha": "650b7f35b08668d5e259e1aa392e8bd0174760fa",
+      "message": "research(windows-native): combine current HQ and Windows overlays R015"
+    },
+    {
+      "sha": "f46f8aa3d2da8fc4ed1950a747ffc30657fd43ce",
+      "message": "research(windows-native): native file identity and bounded ETW record ingress R014"
+    },
+    {
+      "sha": "f5777243f01b7bf01b329cd66c7518a62ac97adb",
+      "message": "research(windows-native): transactional HQ observation checkpoint, resource planner and ETW decoder R013"
+    },
+    {
+      "sha": "373b23b19727231bb7d2088a899404fede765b38",
+      "message": "test(windows-native): record combined overlay preflight and regression evidence"
+    },
+    {
+      "sha": "497ffb8b9b4dbcd34c0f7a60664112fbf7451b21",
+      "message": "research(windows): consolidate exact overlays and record native ConPTY child acceptance R012"
+    },
+    {
+      "sha": "cde3c42806e23419aa9ccb4bfec14d3daa4b58c2",
+      "message": "fix(windows-native): console fixture requests read access for GetConsoleMode"
+    },
+    {
+      "sha": "18019cbbaf9f2b1273a8cd01edda63cbf745c716",
+      "message": "test(windows-native): verify actual console handle and WriteConsoleW capture"
+    },
+    {
+      "sha": "3fbf227e1ea4395046351e3d3d91eea14407a433",
+      "message": "test(windows-native): keep PTY input open until child exit and inspect terminal output"
+    },
+    {
+      "sha": "de15a435390e373f293dd7b6868d5cc1f4093ec0",
+      "message": "research(windows): attach ConPTY to incumbent job worker and aggregate topology R011"
+    },
+    {
+      "sha": "ad90055058eb55ff1d1a3acc6b051b891ec0cb38",
+      "message": "test(windows-native): retain real resource adapter fixture evidence R010"
+    },
+    {
+      "sha": "35b66115547bb82a1a0b32321080225a4663c377",
+      "message": "test(windows-native): record 33 native tests and exact overlay Windows verification"
+    },
+    {
+      "sha": "60746eed57ca7dd632f5a9fc8355c6f241f3c3ca",
+      "message": "research(windows): record native Windows acceptance and combine ACP transport R009"
+    },
+    {
+      "sha": "b500e25bda69cda7cab40b7832fb682bcd397309",
+      "message": "fix(windows-native): use windows-sys REGHANDLE alias after native compiler check"
+    },
+    {
+      "sha": "14a53d5d112aec48d32ab5c000dfb58d1eccc126",
+      "message": "research(windows): compile shared Host MCP app capability schemas R007"
+    },
+    {
+      "sha": "7e75c25477e252ace3ff432470f1bff198dade81",
+      "message": "research(windows): native ConPTY resources, stream accounting, ETW producer and typed search R006"
+    },
+    {
+      "sha": "6f3f38e58c445228ca7be8052cb0c954ef681e9f",
+      "message": "research(windows): bounded USN V2 V3 decoder and exact overlay verification R005"
+    },
+    {
+      "sha": "47eb08b40e32ba25d136175993fd8520fb8fc0a7",
+      "message": "research(windows): bounded ACP session router and filesystem observation fencing R004"
+    },
+    {
+      "sha": "e7d89039b5406014577866827cab9a6501f37c5c",
+      "message": "research(windows): native overlapped watcher and bounded journal plus GPUI resource control R003"
+    },
+    {
+      "sha": "d47ae2ee64ce3a2399344edae95da56632fccbf0",
+      "message": "research(windows): exact-source native resource Host MCP GPUI overlay R002"
+    },
+    {
+      "sha": "ac1c0aab1eea34ab5083e315521835712f0d31b4",
+      "message": "research(windows): source-pinned native intelligence extraction packages and shared MCP app coverage"
+    }
+  ],
+  "capabilityCandidates": [
+    {
+      "id": "WNI01",
+      "name": "filesystem-delta",
+      "actionIds": [
+        "windows.filesystem.changes.status",
+        "windows.filesystem.changes.read",
+        "windows.filesystem.changes.configure"
+      ]
+    },
+    {
+      "id": "WNI02",
+      "name": "system-diagnostics",
+      "actionIds": [
+        "windows.system.resources.read",
+        "windows.system.volume.capacity",
+        "windows.system.diagnostics.read",
+        "windows.system.diagnostics.configure"
+      ]
+    },
+    {
+      "id": "WNI03",
+      "name": "native-terminal-agents",
+      "actionIds": [
+        "windows.terminal.capabilities.read",
+        "windows.agent.sessions.list",
+        "windows.agent.session.status",
+        "windows.agent.session.start",
+        "windows.agent.session.cancel"
+      ]
+    },
+    {
+      "id": "WNI04",
+      "name": "indexed-search",
+      "actionIds": [
+        "windows.knowledge.search.status",
+        "windows.knowledge.search.query",
+        "windows.knowledge.file.properties"
+      ]
+    },
+    {
+      "id": "WNI05",
+      "name": "native-app-semantics",
+      "actionIds": [
+        "windows.application.inspect",
+        "windows.application.element.query",
+        "windows.application.action.invoke"
+      ]
+    },
+    {
+      "id": "WNI06",
+      "name": "app-actions",
+      "actionIds": [
+        "windows.application.actions.discover",
+        "windows.application.action.describe",
+        "windows.application.action.execute"
+      ]
+    },
+    {
+      "id": "WNI07",
+      "name": "windows-capture",
+      "actionIds": [
+        "windows.application.capture.status",
+        "windows.application.capture.request",
+        "windows.application.capture.stop"
+      ]
+    },
+    {
+      "id": "WNI08",
+      "name": "configuration-reconciliation",
+      "actionIds": [
+        "windows.system.configuration.inspect",
+        "windows.system.configuration.plan",
+        "windows.system.configuration.apply"
+      ]
+    },
+    {
+      "id": "WNI09",
+      "name": "workload-isolation",
+      "actionIds": [
+        "windows.workload.isolation.status",
+        "windows.workload.isolation.plan",
+        "windows.workload.isolation.run"
+      ]
+    },
+    {
+      "id": "WNI10",
+      "name": "hardware-adaptive-ai",
+      "actionIds": [
+        "windows.intelligence.local.status",
+        "windows.intelligence.local.evaluate"
+      ]
+    },
+    {
+      "id": "WNI11",
+      "name": "binding-minimization",
+      "actionIds": [
+        "windows.system.native.support"
+      ]
+    }
+  ],
+  "latestProductOverlay": {
+    "path": "integration-packs/WNI01-R031-PRODUCT-LIVE",
+    "baseCommit": "5da225899ff635f1161ad07212e34f9517ac9f53",
+    "patches": [
+      {
+        "path": "adapters/hq/resident-protocol.mjs",
+        "baseBlob": "13d67b215366039317e1f5d50c34df647d16a2db"
+      },
+      {
+        "path": "adapters/hq/protocol-v1.mjs",
+        "baseBlob": "6e8c3abc4dde3db7b28bc0c8147524735fcebc4b"
+      },
+      {
+        "path": "adapters/hq/wiki-articles.mjs",
+        "baseBlob": "ba9e26c794cabe8738043e1116d20e3e71ff8cc4"
+      },
+      {
+        "path": "adapters/hq/dev-session.mjs",
+        "baseBlob": "229eee42c264d1e3367ca2e3f4b8dcb090748a10"
+      }
+    ],
+    "additions": [
+      "adapters/hq/bind-cache.mjs",
+      "adapters/hq/bind-cache.test.mjs",
+      "adapters/hq/bind-cache-native.test-run.mjs",
+      "adapters/hq/source-compile-cache.mjs",
+      "adapters/hq/source-compile-cache.test.mjs",
+      "adapters/hq/source-compile-native.test-run.mjs",
+      "adapters/hq/article-cache.mjs",
+      "adapters/hq/article-cache.test.mjs",
+      "adapters/hq/article-cache-bench.mjs",
+      "adapters/hq/refresh-loop.mjs",
+      "adapters/hq/refresh-loop.test.mjs"
+    ]
+  },
+  "latestEvidence": "EVIDENCE-R031-PRODUCT.json",
+  "note": "Inventory captures exact pre-handoff source tree; handoff documents themselves are not included. No secrets, private corpus, or raw workstation outputs."
+}

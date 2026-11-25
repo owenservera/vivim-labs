@@ -100,3 +100,7 @@ R012 combined preflight update: 11 raw source blobs verified, five additions, 3/
 ## R020–R021 — Windows indexed search proof and Shell metadata
 
 [Proof adapter](integration-packs/WNI04-R020-SEARCH/README.md), [Windows evidence](EVIDENCE-R021-WINDOWS.json). Actual Shell property read succeeded; SystemIndex execution unavailable with diagnosed HRESULT. Seven fixture checks and 61/61 native tests (five new Rust validator/fallback tests) passed with normal exit. Optional stock COM bridge only, no new mandatory dependencies or production changes.
+
+## Canonical continuation — R033
+
+Start with [SESSION-HANDOFF-R033.md](SESSION-HANDOFF-R033.md) and [exact source inventory](SESSION-INVENTORY-R033.json). Consolidated R001–R032 history, architecture, source pins, verification, limitations, original 14-priority order and continuation instructions. Priority 1 bounded isolated acceptance verified; continue Priority 2. Earlier README status is historical where superseded. No production deployment.

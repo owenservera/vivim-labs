@@ -1,0 +1,56 @@
+{
+  "schema": "vivim.labs.windows-native-test/1",
+  "r022": {
+    "source": "8bcdbcf61d4d0647cddda3410cb69a16ac72f371",
+    "session": "ctl-29b0adeb46ea6c54",
+    "exitCode": 0,
+    "success": true,
+    "passed": 1,
+    "failed": 0,
+    "compileSeconds": 43.27,
+    "testSeconds": 0.38,
+    "observedChildCount": 0,
+    "verified": [
+      "native selected hidden window root observation",
+      "process creation identity",
+      "wrong identity and invalid limit rejection",
+      "destroyed HWND refusal"
+    ],
+    "limitations": [
+      "child enumeration returned zero for hidden fixture",
+      "no action invocation",
+      "no native runtime-ID binding or complete snapshot"
+    ],
+    "bindings": "windows 0.61.3, windows-sys 0.61.2"
+  },
+  "r023": {
+    "source": "25f0c757c9c08f30e95bbf9c8ebca6817dc89728",
+    "session": "ctl-07d5316395c62eff",
+    "exitCode": 0,
+    "success": true,
+    "passed": 1,
+    "failed": 0,
+    "compileSeconds": 8.4,
+    "testSeconds": 0.14,
+    "observations": {
+      "graphicsCapture": "Present (IsSupported=true)",
+      "actionCatalogType": "Present (metadata)",
+      "legacyMlSessionType": "Present (metadata)",
+      "newMlCatalogType": "Unknown (API error)"
+    },
+    "limitations": [
+      "no screen capture",
+      "no action enumeration or invocation",
+      "no inference, model download, App SDK initialization, or accelerator verification"
+    ]
+  },
+  "context7": [
+    "/websites/microsoft_github_io_windows-docs-rs_doc_windows",
+    "/microsoft/windows-rs/0.61.0"
+  ],
+  "method": "Actual Windows offline Rust builds and tests through existing VIVIM terminal, owned scratch fixtures. 61-test core suite from R021 remains separate; two additional isolated crate tests passed. No claim of full app, live MCP, or phone acceptance.",
+  "arborReviewed": "fbc5ed081c16f2ee470c487d1d7162a8d9aa0143",
+  "arborWrites": false,
+  "productionDeployed": false,
+  "newMandatoryDependencies": false
+}

@@ -64,3 +64,7 @@ WNI05: scoped semantic reference lifecycle, complete snapshot delta and acknowle
 ## R021 — Windows Search and property bridge
 
 WNI04: real selected-file Shell property size verification, seven scoped adapter checks and five new Rust result-validation/fallback tests. SystemIndex provider connects but execution returns 0x80040154; index unavailable, not empty/complete. Keep existing HQ fallback; no index/service changes. Native Rust OLE DB implementation and live Host/MCP/GPUI integration pending. Latest native suite 61/61, normal exit 0. [Evidence](EVIDENCE-R021-WINDOWS.json).
+
+## R022–R023 — native UIA and optional platform probes
+
+Selected hidden-window UIA root and process identity verified; zero child results, native runtime IDs and action readback pending. Graphics Capture IsSupported true; App Actions and legacy ML type metadata present; new ML catalog unknown. Both isolated native tests passed, normal exit. WNI08/09, ETW consumption, full interactive ConPTY, ACP worker and continuous collector remain pending. No ARBOR writes or deployment. [Evidence](EVIDENCE-R023-WINDOWS.json).

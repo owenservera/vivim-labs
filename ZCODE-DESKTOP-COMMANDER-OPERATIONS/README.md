@@ -1,3 +1,5 @@
+> **Current entrypoint — 25 November 2026:** [ChatGPT Context Guru SITREP](CONTEXT-GURU-SITREP-20261125.md). Use GitHub and authorized VIVIM ARBOR MCP for current operations. Historical Desktop Commander instructions below are retained as migration evidence, not the current default; commercial Commander is no longer authorized for the independence workstream per ARBOR MCP R021. Do not run legacy scripts through an unauthorized route.
+
 # ZCode × Desktop Commander — ChatGPT Operator (R001)
 Status: R001 bootstrap, 2026-11-21. Workspace: `C:\0-BlackBoxProject-0\vivim-labs\ZCODE-DESKTOP-COMMANDER-OPERATIONS`.
 

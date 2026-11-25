@@ -1,0 +1,26 @@
+{
+  "schema": "vivim.labs.sdk-policy-profile/1",
+  "source": "130d8ed266fa44882c240b01354b3f358138c037",
+  "productPin": "95d046c20d5af0a4e116d6fe6cacc9300203452c",
+  "session": "ctl-d0964a56b22ebca5",
+  "exitCode": 0,
+  "elapsedMs": 20761,
+  "passed": 45,
+  "failed": 0,
+  "exactNewBlobs": 7,
+  "tests": {
+    "newPolicy": 3,
+    "newProfile": 3,
+    "includesR035": 16,
+    "incumbentKernel": 23
+  },
+  "priorFailures": [
+    "request ID length 33 corrected",
+    "native git text decode altered Unicode; byte-stream materialization corrected"
+  ],
+  "limits": [
+    "R036 policy changes controlled snapshots, R035 live native samples regression passed",
+    "R037 initial profile tests supplied measurements",
+    "No production Host wiring"
+  ]
+}

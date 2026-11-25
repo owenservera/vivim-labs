@@ -6,4 +6,4 @@ publish = false
 [lib]
 path = "native-test-root.rs"
 [target.'cfg(windows)'.dependencies]
-windows-sys = { version = "=0.61.2", default-features = false, features = ["Win32_Foundation","Win32_System_SystemInformation","Win32_System_Threading","Win32_Storage_FileSystem","Win32_Security"] }
+windows-sys = { version = "=0.61.2", default-features = false, features = ["Win32_Foundation","Win32_System_SystemInformation","Win32_System_Threading","Win32_Storage_FileSystem","Win32_Security","Win32_System_JobObjects","Win32_System_Pipes"] }

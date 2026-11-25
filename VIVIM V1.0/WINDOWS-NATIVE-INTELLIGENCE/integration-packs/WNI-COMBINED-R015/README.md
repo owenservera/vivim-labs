@@ -3,3 +3,7 @@
 Base ARBOR 4c884c92306209b37728e0a9e9efa74f4b30f254. Combines resource+ConPTY R012 with HQ observation transaction R013. 12 exact source replacements, 7 additions. Two GPUI source blobs changed since the previous pin; exact anchors replayed on the newer source and authenticated request client and passive-read guard remain present. This is source compatibility, not compiled GPUI verification. Prior R012 preserved. No ARBOR changes.
 
 Use `node ../../materialize-base.mjs <local Git repo> PATCH-SPEC.json <new raw-blob output>`, then `node prepare-overlay.mjs <raw-blob output> <new overlay output>`. Materializer now also checks addition paths in the complete pinned Git tree. Verify current target again before merge. Resource and ConPTY fixture evidence R008–R012; HQ SQLite fixture tests passed. R014 native Rust starter (scheduler, ETW record boundary, metadata) is separately tested and NOT automatically copied by this overlay. Full ARBOR crate, actual indexer/collector, GPUI and live new MCP actions remain pending. No deployment. Combined preflight pending.
+
+## Actual Windows preflight
+
+Session ctl-933fca73f6b6e676 exited 0. All 12 exact Git blobs verified, 7 additions generated, 7/7 Node Host/MCP and SQLite fixture tests passed. Complete pinned tree collision checks passed. Full application compilation and new live capability acceptance remain pending.

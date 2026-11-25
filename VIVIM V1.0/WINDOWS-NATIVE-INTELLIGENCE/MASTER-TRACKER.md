@@ -40,3 +40,15 @@ Scope: Labs-only implementation, no ARBOR source modifications or deployment. Ow
 | 18 local inference support | pending |
 
 Evidence R008–R012. Latest native starter: 35 tests pass, outer job cancelled after output; worker: 6 tests pass, normal exit. 27 schema checks and 3 Host/MCP fixture tests, 2 extra resource probe tests previously observed. Do not sum overlapping tests as unique. No real production new capability invocation.
+
+## R015 sprint update
+
+| Item | Latest evidence | Remaining |
+|---|---|---|
+| WNI01 HQ observation transaction | 4/4 actual SQLite fixture tests; exact indexer transaction hook | Continuous collector coverage and actual Wiki readback |
+| WNI02 resource scheduler | Deterministic resource admission and budget tests | Host atomic reservation and public projection |
+| WNI02 ETW | Closed numeric decoder, generation/source correlation and actual Windows EVENT_RECORD struct fixture | Native trace session controller and real consumer |
+| WNI04 file metadata | Native owned-file handle metadata/identity/size test | Full Property System and Windows Search execution |
+| WNI11 combined overlay | R015: 12 exact Git blobs, 7 additions, 7/7 Node tests, normal exit | Reconcile current source, full crate/GPUI and live MCP |
+
+Native starter 45/45 test output (includes prior 35); both R013 and R014 enclosing jobs needed owned-job cancellation after output closed. No production acceptance claim. No new mandatory dependency or ARBOR writes. Evidence: [R015](EVIDENCE-R015-WINDOWS.json).

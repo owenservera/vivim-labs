@@ -54,7 +54,17 @@
       "ETW EVENT_RECORD struct boundary"
     ]
   },
-  "combinedPreflight": "pending",
+  "combinedPreflight": {
+    "source": "650b7f35b08668d5e259e1aa392e8bd0174760fa",
+    "session": "ctl-933fca73f6b6e676",
+    "exitCode": 0,
+    "verifiedRawGitBlobs": 12,
+    "additions": 7,
+    "bytes": 400967,
+    "nodeFixtureTestsPassed": 7,
+    "failed": 0,
+    "sourceChanged": false
+  },
   "arborChanged": false,
   "productionDeployed": false
 }

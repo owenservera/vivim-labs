@@ -80,3 +80,7 @@ R012 combined preflight update: 11 raw source blobs verified, five additions, 3/
 ## R014 — native handle metadata and ETW record boundary
 
 [Native metadata and ETW boundary](packages/WNI04-R014-FILE-METADATA.md). New Rust modules, tests pending. No ARBOR edits.
+
+## R015 — verified combined HQ/Windows overlay
+
+[Combined preparation package](integration-packs/WNI-COMBINED-R015/README.md) targets ARBOR 4c884c92306209b37728e0a9e9efa74f4b30f254. Actual Windows preflight: 12 raw Git blobs, 7 additions, 7/7 Node fixture tests with normal exit. Native starter 45/45 tests observed; [evidence](EVIDENCE-R015-WINDOWS.json) records owned-job cleanup. [Master tracker](MASTER-TRACKER.md) updated. Full ARBOR/GPUI build, live new MCP and actual continuous collector remain pending.

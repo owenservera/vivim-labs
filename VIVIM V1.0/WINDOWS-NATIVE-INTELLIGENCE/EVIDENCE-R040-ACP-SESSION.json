@@ -1,0 +1,29 @@
+{
+  "schema": "vivim.labs.owned-acp-session/1",
+  "source": "d8d545cc54f39881ed55ea1b23fe1c2113f38860",
+  "session": "ctl-a2b166bd96e43eef",
+  "exitCode": 0,
+  "passed": 24,
+  "failed": 0,
+  "elapsedMs": 30939,
+  "actualAgent": {
+    "version": "OpenCode 2.2.7",
+    "initialized": true,
+    "sessionCreated": true,
+    "ownedCancellation": true,
+    "providerPromptSent": false
+  },
+  "fixture": {
+    "initialize": true,
+    "session": true,
+    "prompt": true,
+    "permissionDeclined": true,
+    "update": true,
+    "settlement": true,
+    "eof": true
+  },
+  "limits": [
+    "Actual model-backed prompt, real-agent cancellation during pending prompt, reconnect and installed Host receipt integration remain open.",
+    "No production changes."
+  ]
+}

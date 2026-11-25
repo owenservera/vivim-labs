@@ -1,0 +1,36 @@
+{
+  "schema": "vivim.labs.owned-etw-compiler/1",
+  "source": "58f5d881b8b076ddebcea0bdbfd5d9e3ad8050e3",
+  "session": "ctl-3f635369d61ec772",
+  "exitCode": 0,
+  "passed": 17,
+  "failed": 0,
+  "elapsedMs": 25196,
+  "exactBlobs": 9,
+  "live": {
+    "providerEnabled": true,
+    "pidFilter": true,
+    "actualOwnedRustc": true,
+    "events": 2,
+    "sequence": [
+      1,
+      2
+    ],
+    "durationMs": 499,
+    "etlBytes": 196608,
+    "artifactBytes": 25272,
+    "lossReported": 0,
+    "cleanup": true
+  },
+  "limits": [
+    "Short bounded ETL capture, not continuous real-time tracing.",
+    "Only current VIVIM numeric provider and same live process; compiler job duration emitted by caller, not kernel sampling.",
+    "Index and actual agent work instrumentation remain pending.",
+    "No production deployment."
+  ],
+  "references": [
+    "https://learn.microsoft.com/en-us/windows/win32/etw/configuring-and-starting-an-event-tracing-session",
+    "https://learn.microsoft.com/en-us/windows/win32/etw/consuming-events",
+    "windows-sys 0.61.2 exact workstation registry bindings"
+  ]
+}

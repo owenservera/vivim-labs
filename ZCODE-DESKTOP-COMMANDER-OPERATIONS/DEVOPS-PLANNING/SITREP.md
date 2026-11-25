@@ -1,5 +1,12 @@
 # DevOps / Planning SITREP — 2026-11-21 (GitHub bootstrap R004)
 
+## Current owner direction — 2026-11-25 / independent Oracle-Planner R002
+
+**Read the updated [master plan R002](../DEVOPS-PLANNING/MASTER-PLAN-R001.md) first.** It supersedes the historical operational priorities below. Cloud/GitHub for source; VIVIM ARBOR tunnel first for authorized workstation ops; commercial Desktop Commander only explicitly scoped allowed missing-capability fallback. Never bypass denied operations. The live independent VIVIM health profile is ready, private-readonly, Host discovery disabled; no remote filesystem/process or native agent execution is claimed. Source-pinned MCP configured integration tests 7/7 cloud PASS, Windows acceptance blocked. ARBOR observed `79885422`; Labs observed `db666292` prior to this update. Prior local service probes timed out, CI failed without steps; causes unverified. Prioritize MCP-U01/U02 + MCP-U10 owned typed operational reads, then native ZCode/Codex lifecycle and actual Host/GPUI/phone acceptance. Preserve 71 master IDs, 37 historical planning candidates, existing active claims, single GPUI renderer, existing phone URL, Host authority and model registry. No new scheduler, ownership transfer or implicit dispatch. See [routing policy](../CLOUD-FIRST-CODING-POLICY.md), [ARBOR MCP plan](https://github.com/owenservera/ARBOR/blob/main/tools/mcp/vivim-arbor/PLAN.md), [#33](https://github.com/owenservera/ARBOR/issues/33).
+
+---
+
+
 ## CURRENT PLANNER UPKEEP — 2026-11-23 R006 reconciliation
 
 **Authoritative views:** [ARBOR #33](https://github.com/owenservera/ARBOR/issues/33) is the 71-item delivery oversight ledger; [#32](https://github.com/owenservera/ARBOR/issues/32) handles ChatGPT delivery; [#31](https://github.com/owenservera/ARBOR/issues/31) handles release/phone; [the 100-step CS ledger](https://github.com/owenservera/ARBOR/blob/main/docs/product/CANONICAL-SURFACE-100-STEP-LEDGER.md) is the physical/UI acceptance checklist; [TASK-CLAIMS](../TASK-CLAIMS.md) records 13 ownership rows; and [MASTER-PLAN-R001](MASTER-PLAN-R001.md) has 37 Planning candidates. These are *overlapping views*, not 71+100+37 additive delivery tasks.

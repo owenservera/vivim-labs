@@ -34,3 +34,7 @@ First slice: WNI02 aggregate resources through existing Host to MCP and GPUI; WN
 ## R003 — real native watcher, bounded observation journal and app control
 
 [WNI01 native watcher and journal](packages/WNI01-R003-NATIVE-WATCHER.md) adds executable Rust source and tests; production handle-binding/continuous-stream adapter pending. [WNI02 R003 exact-source overlay](integration-packs/WNI02-R003/README.md) supersedes R002 and adds a native GPUI Developer control. Native compile and live acceptance unrun. No ARBOR edits.
+
+## R004 — ACP connection core and observation correctness
+
+[WNI03 ACP routing implementation](packages/WNI03-R004-ACP-ROUTER.md) adds bounded protocol framing, v1 initialization, session ownership/routing, prompt correlation, cancellation and default-denied delegated permission handling. Watcher handle validation and journal gap fencing strengthened. Rust compile/OS tests remain unrun; no ARBOR modification or provider invocation.

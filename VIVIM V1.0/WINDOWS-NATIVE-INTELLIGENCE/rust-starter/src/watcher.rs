@@ -11,7 +11,7 @@ mod win {
  use std::{os::windows::{ffi::OsStrExt,fs::MetadataExt},ptr::{null,null_mut}};
  use windows_sys::Win32::{
   Foundation::{CloseHandle,GetLastError,HANDLE,INVALID_HANDLE_VALUE,ERROR_IO_PENDING,ERROR_NOTIFY_ENUM_DIR,ERROR_OPERATION_ABORTED,WAIT_OBJECT_0,WAIT_TIMEOUT},
-  Storage::FileSystem::{CreateFileW,ReadDirectoryChangesW,FILE_LIST_DIRECTORY,FILE_SHARE_READ,FILE_SHARE_WRITE,FILE_SHARE_DELETE,OPEN_EXISTING,FILE_FLAG_BACKUP_SEMANTICS,FILE_FLAG_OVERLAPPED,FILE_FLAG_OPEN_REPARSE_POINT,FILE_ATTRIBUTE_REPARSE_POINT,FILE_NOTIFY_CHANGE_FILE_NAME,FILE_NOTIFY_CHANGE_DIR_NAME,FILE_NOTIFY_CHANGE_LAST_WRITE,FILE_NOTIFY_CHANGE_SIZE,GetDriveTypeW},
+  Storage::FileSystem::{CreateFileW,ReadDirectoryChangesW,FILE_LIST_DIRECTORY,FILE_SHARE_READ,FILE_SHARE_WRITE,FILE_SHARE_DELETE,OPEN_EXISTING,FILE_FLAG_BACKUP_SEMANTICS,FILE_FLAG_OVERLAPPED,FILE_FLAG_OPEN_REPARSE_POINT,FILE_ATTRIBUTE_REPARSE_POINT,FILE_NOTIFY_CHANGE_FILE_NAME,FILE_NOTIFY_CHANGE_DIR_NAME,FILE_NOTIFY_CHANGE_LAST_WRITE,FILE_NOTIFY_CHANGE_SIZE,GetDriveTypeW,GetFinalPathNameByHandleW,GetFileInformationByHandle,BY_HANDLE_FILE_INFORMATION,FILE_NAME_NORMALIZED,VOLUME_NAME_DOS},
   System::{IO::{OVERLAPPED,CancelIoEx,GetOverlappedResult},Threading::{CreateEventW,WaitForSingleObject}}
  };
  struct Handle(HANDLE);
@@ -41,9 +41,17 @@ mod win {
   // No subtree traversal. FILE_FLAG_OPEN_REPARSE_POINT protects the final component.
   let raw=unsafe{CreateFileW(wide.as_ptr(),FILE_LIST_DIRECTORY,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,null(),OPEN_EXISTING,FILE_FLAG_BACKUP_SEMANTICS|FILE_FLAG_OVERLAPPED|FILE_FLAG_OPEN_REPARSE_POINT,null_mut())};
   if raw==INVALID_HANDLE_VALUE{return Err(os());}let file=Handle(raw);
-  // Recheck canonical path before registering the observation. Host must also
-  // compare handle identity/approved grant for production integration; this
-  // primitive is not a sandbox or complete race-resistant scope resolver.
+  // Compare actual opened handle path and attributes before starting I/O.
+  // Host must additionally pin scope identity and grant, and reject stale paths.
+  let mut info:BY_HANDLE_FILE_INFORMATION=unsafe{std::mem::zeroed()};
+  if unsafe{GetFileInformationByHandle(file.0,&mut info)}==0{return Err(os());}
+  if info.dwFileAttributes&FILE_ATTRIBUTE_REPARSE_POINT!=0{return Err(WatchError::InvalidScope);}
+  let mut actual=vec![0u16;32768];
+  let len=unsafe{GetFinalPathNameByHandleW(file.0,actual.as_mut_ptr(),actual.len() as u32,FILE_NAME_NORMALIZED|VOLUME_NAME_DOS)};
+  if len==0||len as usize>=actual.len(){return Err(WatchError::InvalidScope);}
+  let actual=String::from_utf16(&actual[..len as usize]).map_err(|_|WatchError::InvalidScope)?;
+  let expected=path.to_str().ok_or(WatchError::InvalidScope)?;
+  if !actual.strip_prefix(r"\\?\").unwrap_or(&actual).eq_ignore_ascii_case(expected){return Err(WatchError::InvalidScope);}
   validate(path)?;
   let raw=unsafe{CreateEventW(null(),1,0,null())};
   if raw.is_null(){return Err(os());}let event=Handle(raw);
@@ -68,7 +76,7 @@ mod win {
    return if wait==WAIT_TIMEOUT{Ok(Observation::TimedOut)}else{Err(WatchError::Malformed)};
   }
   let mut n=0;
-  if unsafe{GetOverlappedResult(file.0,&*ov,&mut n,0)}==0{
+  if unsafe{GetOverlappedResult(file.0,&*ov,&mut n,1)}==0{
    let code=unsafe{GetLastError()};
    if code==ERROR_NOTIFY_ENUM_DIR||code==ERROR_OPERATION_ABORTED{return Ok(Observation::Gap);}
    return Err(WatchError::Os(code));

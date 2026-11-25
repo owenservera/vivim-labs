@@ -12,9 +12,13 @@ impl<T:Clone> Journal<T>{
   Ok(Self{generation,sequence:0,capacity,entries:VecDeque::with_capacity(capacity),gap:false})
  }
  pub fn current(&self)->Cursor{Cursor{generation:self.generation,sequence:self.sequence}}
- pub fn mark_gap(&mut self){self.gap=true;self.entries.clear();}
+ pub fn mark_gap(&mut self)->Result<Cursor,JournalError>{
+  self.gap=true;self.entries.clear();
+  self.sequence=self.sequence.checked_add(1).ok_or(JournalError::Exhausted)?;
+  Ok(self.current())
+ }
  pub fn push(&mut self,value:T)->Result<Cursor,JournalError>{
-  if self.gap{return Err(JournalError::Gap);}
+  if self.gap{self.sequence=self.sequence.checked_add(1).ok_or(JournalError::Exhausted)?;return Err(JournalError::Gap);}
   let next=self.sequence.checked_add(1).ok_or(JournalError::Exhausted)?;
   self.sequence=next;let cursor=self.current();
   if self.entries.len()==self.capacity{self.entries.pop_front();}
@@ -38,6 +42,6 @@ impl<T:Clone> Journal<T>{
 #[cfg(test)]mod tests{
  use super::*;
  #[test]fn page_no_skip(){let mut j=Journal::new(1,4).unwrap();let start=j.current();for n in 1..=3{j.push(n).unwrap();}match j.read(start,2).unwrap(){Page::Items{items,next,more}=>{assert_eq!(items.iter().map(|x|x.value).collect::<Vec<_>>(),vec![1,2]);assert!(more);match j.read(next,2).unwrap(){Page::Items{items,more,..}=>{assert_eq!(items[0].value,3);assert!(!more);},_=>panic!()}},_=>panic!()}}
- #[test]fn overflow_and_generation(){let mut j=Journal::new(7,2).unwrap();let old=j.current();j.push(1).unwrap();j.push(2).unwrap();j.push(3).unwrap();assert!(matches!(j.read(old,2).unwrap(),Page::Rebaseline{..}));let latest=j.current();j.mark_gap();assert_eq!(j.push(4),Err(JournalError::Gap));assert!(j.rebaseline(old,8).is_err());let next=j.rebaseline(latest,8).unwrap();assert!(matches!(j.read(old,2).unwrap(),Page::Rebaseline{..}));assert!(matches!(j.read(next,2).unwrap(),Page::Items{more:false,..}));}
+ #[test]fn overflow_and_generation(){let mut j=Journal::new(7,2).unwrap();let old=j.current();j.push(1).unwrap();j.push(2).unwrap();j.push(3).unwrap();assert!(matches!(j.read(old,2).unwrap(),Page::Rebaseline{..}));let latest=j.mark_gap().unwrap();assert_eq!(j.push(4),Err(JournalError::Gap));assert!(j.rebaseline(old,8).is_err());assert!(j.rebaseline(latest,8).is_err());let fence=j.current();let next=j.rebaseline(fence,8).unwrap();assert!(matches!(j.read(old,2).unwrap(),Page::Rebaseline{..}));assert!(matches!(j.read(next,2).unwrap(),Page::Items{more:false,..}));}
  #[test]fn bounds(){assert!(Journal::<u8>::new(0,1).is_err());assert!(Journal::<u8>::new(1,16385).is_err());let j=Journal::<u8>::new(1,1).unwrap();assert!(j.read(j.current(),201).is_err());}
 }

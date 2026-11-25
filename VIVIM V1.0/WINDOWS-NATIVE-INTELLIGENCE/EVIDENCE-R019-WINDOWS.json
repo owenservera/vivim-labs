@@ -1,0 +1,45 @@
+{
+  "schema": "vivim.labs.windows-native-test/1",
+  "r017": {
+    "source": "b6cb6b414e0e2cf16dfcab4dab573d9ad0fd2017",
+    "session": "ctl-e3a6ed232343bb6a",
+    "passed": 53,
+    "failed": 0,
+    "ignored": 0,
+    "newTests": 8,
+    "compileSeconds": 8.92,
+    "testSeconds": 1.04,
+    "cleanup": {
+      "receipt": "ctl-62b1b0936d2bd256",
+      "cancelled": true,
+      "exitCode": 0,
+      "success": false
+    }
+  },
+  "r018": {
+    "source": "3ef6db9bf02c338871204ddef8663bf2eb28d4e3",
+    "session": "ctl-bec61a95f6eef5cc",
+    "passed": 56,
+    "failed": 0,
+    "ignored": 0,
+    "newTests": 3,
+    "compileSeconds": 5.78,
+    "testSeconds": 1.03,
+    "cleanup": {
+      "receipt": "ctl-6fbbf9e4a451a1fe",
+      "cancelled": true,
+      "exitCode": 0,
+      "success": false
+    }
+  },
+  "method": "Actual Windows cargo tests via existing VIVIM scratch terminal. Both enclosing jobs remained running after all test output and streams closed; cancelled only owned test jobs. Test outcomes verified, enclosing success not claimed.",
+  "connector": "Initial terminal request rejected as MCP not initialized. Same request retried following health check, one applied receipt. No connector change.",
+  "context7": [
+    "/microsoft/ufo",
+    "/microsoft/winappcli"
+  ],
+  "nativeUiAcceptance": "UNRUN; added modules are pure Rust scoped state and planning, no actual app operation",
+  "arborReviewed": "f1d4f41dfce4af4f9f7ab1ea4be98bd3739cf3d3",
+  "arborWrites": false,
+  "productionDeployed": false
+}

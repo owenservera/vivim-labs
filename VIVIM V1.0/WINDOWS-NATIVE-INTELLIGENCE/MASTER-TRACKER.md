@@ -56,3 +56,7 @@ Native starter 45/45 test output (includes prior 35); both R013 and R014 enclosi
 ## R017/R018 — HCU and UFO extraction
 
 WNI05: scoped semantic reference lifecycle, complete snapshot delta and acknowledgment, incumbent receipt recovery projection, bounded condition predicates and hybrid route selection authored. No Windows UIA collector, app integration or public MCP action yet. WNI07 and WNI06 remain research-only. R015 combined overlay remains the tested integration candidate; new modules are independently staged. ARBOR unchanged by this workstream.
+
+## R019 verification
+
+56/56 native test output (11 new HCU-inspired tests over R015), actual Windows via VIVIM. Owned test jobs required cleanup after output closed. [Evidence](EVIDENCE-R019-WINDOWS.json); [incumbent source handoff](research/R019-STUDIO-HARNESS-HANDOFF.md). WNI05 state/ref/diff/recovery/route primitives verified; actual native UIA and production integration pending. All 33 original public candidates still not live. No ARBOR writes.

@@ -1,0 +1,15 @@
+# R019 — scoped interaction extraction handoff
+
+Reviewed ARBOR snapshot f1d4f41dfce4af4f9f7ab1ea4be98bd3739cf3d3. No changes to ARBOR. This is a mapping of independently compiled primitives, not a claim that incumbent modules already implement them.
+
+| Existing source | Exact blob | Integration relationship |
+|---|---|---|
+| studio/src/studio/state-snapshot.mjs | 323e699918e3f0e200f82d2a709bbc5c41470287 | Existing browser/tab/window/page/account freshness and missing facts. Preserve composer; map only approved provider observation into semantic_surface Registry; missing facts or incomplete provider enumeration invalidate refs, do not fabricate complete native app coverage. |
+| studio/src/studio/agent-actions.mjs | 41ddc3307d7f0275c6888b4c5b453041388e22e8 | Existing action parsing, validation, classification, budgets. Hybrid route planner proposes a registered channel only; never bypass validation or introduce an independent executor. |
+| studio/src/studio/adapter-accepted-session.mjs | c3eb00f2af017114ea62b18f7587d7bb05e32ad9 | Existing Core-accepted session to adapter evidence bridge. Feed only accepted evidence through existing intake, not arbitrary observations as successful effects. |
+| studio/src/export/capabilities.mjs | e0cce53ba9c91130be51c52b3ad11231291a5e24 | Existing capability exports; no second public capability registry. Reconcile semantic action IDs with Host and existing WNI candidate compiler. |
+| native/gpui-desktop/src/surface_registry.rs | a3653037521e71e2a7b2590947a496f0edaab0d9 | Existing canonical surface registry. No renderer replacement; expose current state and results through existing controls, no independent GUI automation surface. |
+
+R017 semantic_surface.rs and recovery.rs, R018 interaction_plan.rs are independently compiled and can be moved into incumbent Rust module boundary after owner review. No extra dependency crate. Native UIA provider is still needed; ensure exact process creation identity, app/window generation, provider completeness, data minimization and existing Host scope. Never treat opaque reference possession as permission. Reference absence means only a reference is no longer in the current filtered snapshot; it does not prove target disappearance, particularly after identity replacement or a revision gap. A provider-confirmed target predicate and current effect readback are required for business-level verification. Wait predicates do not own timers or effects; they return deterministic state. Recovery requires authoritative receipt state and never authorizes retry.
+
+Actual Windows tests: R017 53 passing, R018 56 passing (11 additional over R015), both owned job wrappers required cancellation after streams closed. See EVIDENCE-R019-WINDOWS.json. The R015 combined overlay remains separate and pinned, and these modules are not silently included. Pending: actual selected-app UIA adapter, native/semantic/visual state bridge, end-to-end Host and MCP/GPUI projections; no browser divergence per R033. WNI02 ETW consumer, WNI04 search execution, WNI03 full interactive attachment/ACP worker and continuous WNI01 collector remain unfinished.

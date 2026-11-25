@@ -92,3 +92,7 @@ R012 combined preflight update: 11 raw source blobs verified, five additions, 3/
 ## R018 — hybrid route and condition primitives
 
 [Hybrid planning](packages/WNI05-R018-HYBRID-PLANNING.md): deterministic native/semantic/visual selection with explicit pre-dispatch fallback only; revision-bound condition waits and no automatic replay. Three additional tests. No new authority, browser or UI executor.
+
+## R019 — Windows verification and current Studio/Harness handoff
+
+[56/56 native tests](EVIDENCE-R019-WINDOWS.json), including eleven new semantic-state, reconciliation, wait and hybrid-route fixtures. [Exact-source handoff](research/R019-STUDIO-HARNESS-HANDOFF.md) maps the independent modules to existing Studio/Harness at f1d4f41. Native UIA/app and new MCP/GPUI acceptance remain unrun; no ARBOR changes.

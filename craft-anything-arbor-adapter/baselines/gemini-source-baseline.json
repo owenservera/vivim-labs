@@ -1,0 +1,152 @@
+{
+  "schema": "vivim.application-profile-baseline/1",
+  "target": {
+    "siteId": "gemini",
+    "origin": "https://gemini.google.com"
+  },
+  "description": "Bounded SOURCE-ONLY profile snapshot; not fresh live inspection. Selectors are inert research data, never execute. Unlisted features remain unknown.",
+  "profiles": [
+    {
+      "owner": "studio",
+      "sourcePath": "studio/src/profiles/sites/gemini.mjs",
+      "sourceBlobSha": "e7fea2cdc92341220c4ee7901cf859b82ed9885a",
+      "features": [
+        {
+          "id": "chat.composer",
+          "surface": "chat",
+          "sourceStatus": "source-measured",
+          "selectors": [
+            "textarea[placeholder=\"Ask Gemini\"]",
+            "div[data-placeholder=\"Ask Gemini\"]",
+            "rich-textarea div[contenteditable=\"true\"]",
+            "div.ql-editor[contenteditable=\"true\"]",
+            "textarea",
+            "[contenteditable=\"true\"]",
+            "[role=\"textbox\"]"
+          ],
+          "matchTerms": [
+            "Ask Gemini"
+          ],
+          "notes": "Historical warm vs cold hydration discrepancy; verify both states."
+        },
+        {
+          "id": "chat.send",
+          "surface": "chat",
+          "sourceStatus": "source-measured",
+          "selectors": [
+            "button[aria-label=\"Send message\"]",
+            "button.send-button",
+            "button[type=\"submit\"]"
+          ],
+          "matchTerms": [
+            "Send message"
+          ]
+        },
+        {
+          "id": "chat.reply",
+          "surface": "chat",
+          "sourceStatus": "source-measured",
+          "selectors": [
+            "assistant-messages-primary > div",
+            "user-query, model-response",
+            "model-response",
+            "[data-message-author-role=\"assistant\"]",
+            "article",
+            "[data-testid*=\"assistant\" i]"
+          ],
+          "matchTerms": []
+        },
+        {
+          "id": "chat.auth",
+          "surface": "chat",
+          "sourceStatus": "source-measured",
+          "selectors": [
+            "a[aria-label*=\"Google Account\" i]",
+            "a[href*=\"accounts.google.com/SignOutOptions\"]",
+            "a[href*=\"accounts.google.com\"]",
+            "a[href*=\"/signin\"]",
+            "form[action*=\"signin\"]"
+          ],
+          "matchTerms": [],
+          "notes": "Signed-in markers must outrank broad account links."
+        }
+      ]
+    },
+    {
+      "owner": "harness",
+      "sourcePath": "harness/src/providers/gemini.mjs",
+      "sourceBlobSha": "e528ac6fb55aa953e5712dd1d88ec1cb1628c020",
+      "features": [
+        {
+          "id": "chat.composer",
+          "surface": "chat",
+          "sourceStatus": "configured",
+          "selectors": [
+            "textarea[placeholder=\"Ask Gemini\"]",
+            "div[data-placeholder=\"Ask Gemini\"]",
+            "rich-textarea div[contenteditable=\"true\"]",
+            "div.ql-editor[contenteditable=\"true\"]",
+            "textarea",
+            "[contenteditable=\"true\"]",
+            "[role=\"textbox\"]"
+          ],
+          "matchTerms": [
+            "Ask Gemini"
+          ]
+        },
+        {
+          "id": "chat.send",
+          "surface": "chat",
+          "sourceStatus": "configured",
+          "selectors": [
+            "button[aria-label=\"Send message\"]",
+            "button.send-button",
+            "button[type=\"submit\"]"
+          ],
+          "matchTerms": [
+            "Send message"
+          ]
+        },
+        {
+          "id": "chat.reply",
+          "surface": "chat",
+          "sourceStatus": "configured",
+          "selectors": [
+            "model-response message-content",
+            "assistant-messages-primary > div",
+            "user-query, model-response",
+            "model-response",
+            "[data-message-author-role=\"assistant\"]",
+            "article",
+            "[data-testid*=\"assistant\" i]"
+          ],
+          "matchTerms": []
+        },
+        {
+          "id": "chat.auth",
+          "surface": "chat",
+          "sourceStatus": "configured",
+          "selectors": [
+            "a[aria-label*=\"Google Account\" i]",
+            "a[href*=\"accounts.google.com/SignOutOptions\"]",
+            "a[href*=\"accounts.google.com/ServiceLogin\"]",
+            "a[href*=\"accounts.google.com\"][href*=\"signin\" i]",
+            "a[href*=\"/signin\"]",
+            "form[action*=\"signin\"]"
+          ],
+          "matchTerms": [],
+          "notes": "Harness uses narrower auth-wall selectors."
+        },
+        {
+          "id": "chat.model-selection",
+          "surface": "chat",
+          "sourceStatus": "configured",
+          "selectors": [
+            "button[data-test-id=\"bard-mode-menu-button\"]"
+          ],
+          "matchTerms": []
+        }
+      ]
+    }
+  ]
+}

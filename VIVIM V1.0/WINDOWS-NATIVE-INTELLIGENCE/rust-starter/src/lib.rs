@@ -16,3 +16,5 @@ pub mod etw;
 pub mod search;
 
 pub mod acp_transport;
+
+pub mod hardware;

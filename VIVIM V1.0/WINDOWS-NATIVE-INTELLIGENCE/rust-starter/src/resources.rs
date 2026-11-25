@@ -48,6 +48,8 @@ mod win {
         if unsafe{GetDriveTypeW(root.as_ptr())}!=3{return Err(ProbeError::Unsupported);}
         let (mut available,mut total,mut free)=(0u64,0u64,0u64);
         if unsafe{GetDiskFreeSpaceExW(root.as_ptr(),&mut available,&mut total,&mut free)}==0{return Err(error());}
+        if total==0||available>total||available>free{return Err(ProbeError::InvalidSample);}
+        // Free bytes may exceed caller-quota total bytes; keep semantics separate.
         Ok(Capacity{available_bytes:available,total_bytes:total,free_bytes:free})
     }
 }

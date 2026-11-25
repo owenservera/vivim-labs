@@ -1,0 +1,2 @@
+# Hardware topology and fixed-volume capacity
+Actual aggregate Win32 APIs, hardware.rs and resources.rs. No identifiers or files; caller-approved fixed drive only. Windows processor counts across all groups, page and allocation sizes. Disk availability may differ from physical free bytes because of quota. Context7 windows-rs 0.61.0 and native signature compilation. Native tests supplied, verification pending. MCP/GPUI extension not yet integrated.

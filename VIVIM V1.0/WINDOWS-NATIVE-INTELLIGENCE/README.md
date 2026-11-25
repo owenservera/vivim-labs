@@ -62,3 +62,7 @@ First slice: WNI02 aggregate resources through existing Host to MCP and GPUI; WN
 ## R010 — real native probe to Host adapter
 
 [Actual Windows adapter evidence](EVIDENCE-R010-NATIVE-ADAPTER.json): exact overlay native module compiled in scratch, 2/2 native probe tests and valid real Host-port observation. The containing test job required owned-job cancellation after output closed; no overall successful job claim. Full application/live new MCP acceptance pending. ARBOR unchanged.
+
+## R011 — native ConPTY child attachment and hardware topology
+
+[ConPTY source overlay](integration-packs/WNI03-R011-CONPTY/README.md), [hardware and fixed-volume capacity](packages/WNI02-R011-HARDWARE.md). Actual Rust source and native test fixtures prepared, compile pending. ARBOR unchanged.

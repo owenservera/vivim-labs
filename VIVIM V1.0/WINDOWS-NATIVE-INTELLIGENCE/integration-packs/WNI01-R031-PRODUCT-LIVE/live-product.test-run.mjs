@@ -47,7 +47,9 @@ try{
  const {queryDevelopmentGraph}=await import(pathToFileURL(join(arbor,'hq/lib/kg-export.mjs')).href);
  const key='hqg1:'+createHash('sha256').update(['source-file','product-lab',path].join('\0')).digest('hex');
  const deletedGraph=queryDevelopmentGraph({root:data,journal:join(data,'.hq','kg-journal.hqj'),operation:'wiring',key});
- assert.notEqual(deletedGraph.state,'unavailable','native graph query must execute');assert.equal(deletedGraph.result?.source?.digest,undefined,'deleted source digest must not remain visible');
+ assert.equal(deletedGraph.state,'unavailable');assert.equal(deletedGraph.reason,'native_graph_exit_2');assert.match(deletedGraph.detail,/indexed source file absent/);assert.equal(deletedGraph.result?.source?.digest,undefined,'deleted source digest must not remain visible');
+ const siblingKey='hqg1:'+createHash('sha256').update(['source-file','product-lab','stable.rs'].join('\0')).digest('hex');
+ const siblingGraph=queryDevelopmentGraph({root:data,journal:join(data,'.hq','kg-journal.hqj'),operation:'wiring',key:siblingKey});assert.equal(siblingGraph.state,'indexed-snapshot');assert.equal(siblingGraph.epoch,removed.graphEpoch);assert.equal(siblingGraph.result?.source?.digest,stable);
  console.log(JSON.stringify({actualProduct:true,actualHq:true,actualNativeGraph:true,actualNativeSdk:true,automaticRefresh:true,sourceDigestChanged:true,graphEpochBefore:before.graphEpoch,graphEpochAfter:after.graphEpoch,wikiReadback:true,focusProof:true,unchangedGraphEpoch:noChange.graphEpoch,deletionGraphEpoch:removed.graphEpoch,deletionReadback:deletedGraph.state,deletedWikiArticle:true,unchangedSibling:true}));
  child.stdin.write('{"op":"quit"}\n');child.stdin.end();
  const exit=await new Promise((resolve,reject)=>{const t=setTimeout(()=>reject(Error('QUIT_TIMEOUT')),10000);child.once('exit',c=>{clearTimeout(t);resolve(c)});});assert.equal(exit,0);

@@ -50,3 +50,7 @@ First slice: WNI02 aggregate resources through existing Host to MCP and GPUI; WN
 ## R007 — shared capability compiler
 
 [Compiler package](packages/WNI11-R007-CAPABILITY-COMPILER.md) generates 33 current-Host-compatible candidate schemas and MCP/app projections with 19/19 cloud checks passed. All candidates remain non-executable pending real adapters and grants; no ARBOR edits.
+
+## R008/R009 — first Windows-native verification and owned ACP transport
+
+[Windows test evidence](EVIDENCE-R008-WINDOWS.json): 28 native Rust tests passed on the actual Windows workstation via existing VIVIM MCP; 27 actual Node checks passed in the preceding test. ETW type corrected to REGHANDLE. [ACP transport integration](packages/WNI03-R009-ACP-TRANSPORT.md) combines bounded framing, router and stream accounting. New R009 tests pending. No ARBOR or production changes.

@@ -1,0 +1,50 @@
+{
+  "schema": "vivim.labs.windows-native-test/1",
+  "testedSource": "b500e25bda69cda7cab40b7832fb682bcd397309",
+  "nodeSource": "14a53d5d112aec48d32ab5c000dfb58d1eccc126",
+  "native": {
+    "session": "ctl-66a67adb5197e30d",
+    "exitCode": 0,
+    "passed": 28,
+    "failed": 0,
+    "ignored": 0,
+    "toolchain": "rustc 1.99.1 x86_64-pc-windows-msvc",
+    "windowsSys": "0.61.2",
+    "compileSeconds": 7.6,
+    "testSeconds": 1.03,
+    "realFixtures": [
+      "ConPTY create/resize/close (no child attached)",
+      "ReadDirectoryChangesW local fixture",
+      "ETW owned event write (no consumer)",
+      "GlobalMemoryStatusEx physical memory"
+    ]
+  },
+  "node": {
+    "session": "ctl-801eed529c44de21",
+    "coveragePassed": 8,
+    "compilerPassed": 19,
+    "overallSessionExit": 101,
+    "note": "Both node harnesses completed successfully; subsequent cargo command failed due to missing MSVC linker environment. Later native run passed."
+  },
+  "failedAttempts": [
+    {
+      "session": "ctl-31ecf9052062842e",
+      "cause": "PowerShell provider-qualified extended path rejected by git -C"
+    },
+    {
+      "session": "ctl-801eed529c44de21",
+      "cause": "MSVC link.exe missing in process environment"
+    },
+    {
+      "session": "ctl-f75cd452ffa4d02a",
+      "cause": "vswhere returned no registered VC workload"
+    },
+    {
+      "session": "ctl-879a3b140ee8f1c4",
+      "cause": "ETW REGHANDLE alias mismatch; fixed in tested source"
+    }
+  ],
+  "scope": "isolated approved scratch; no ARBOR worktree/runtime/grant changes",
+  "liveMcpNativeCapability": "UNRUN; tests transported through existing live terminal tool, not new capability tools",
+  "arborChanged": false
+}

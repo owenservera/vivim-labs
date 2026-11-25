@@ -49,6 +49,7 @@ fn response_id(v:&Value)->bool{v.is_u64()||v.as_str().is_some_and(|s|!s.is_empty
 impl Router{
  pub fn new(generation:u64)->Result<Self,Error>{if generation==0{return Err(Error::State);}Ok(Self{generation,phase:Phase::Fresh,next:1,pending:HashMap::new(),sessions:HashSet::new(),active:HashSet::new(),cancelled:HashSet::new()})}
  pub fn generation(&self)->u64{self.generation}
+ pub fn has_pending(&self)->bool{!self.pending.is_empty()||!self.active.is_empty()}
  fn request(&mut self,method:&str,params:Value,p:Pending)->Result<Value,Error>{
   if self.pending.len()>=MAX_PENDING{return Err(Error::Limit);}
   let id=self.next;self.next=id.checked_add(1).ok_or(Error::Exhausted)?;

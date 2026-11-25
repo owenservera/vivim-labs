@@ -16,7 +16,8 @@ const bounded=(x,n)=>Array.isArray(x)&&x.length<=n;
 const only=(x,keys)=>obj(x)&&Object.keys(x).every(k=>keys.includes(k));
 const qualifiers=new Set(['observed','partial','restricted','not-applicable']);
 function inspectAtlas(atlas){
- const t=TARGETS[atlas?.target?.siteId];
+ const siteId=atlas?.target?.siteId;
+ const t=typeof siteId==='string'&&Object.hasOwn(TARGETS,siteId)?TARGETS[siteId]:null;
  if(!t||atlas.target.origin!==t.origin||atlas.schema!=='vivim.application-surface-atlas/0.1'||atlas.source?.producer!=='craft-anything'||atlas.source?.version!==1||!sha.test(atlas.source?.bundleDigest??'')||!bounded(atlas.evidence,2500)||!bounded(atlas.controls,5000)||!bounded(atlas.observations,10000)||!bounded(atlas.unknownIds,2500)||Object.keys(inert()).some(k=>atlas.authority?.[k]!==false))fail('ATLAS_SCOPE_OR_CONTRACT');
  const evidence=new Set(),controls=new Map(), observations=new Set();
  for(const e of atlas.evidence){if(!ev.test(e?.evidenceId??'')||evidence.has(e.evidenceId))fail('EVIDENCE_INVALID');evidence.add(e.evidenceId);}
@@ -38,6 +39,7 @@ export function compileProposal(atlas,review=null){
    for(const r of row.refs){
     if(!only(r,['evidenceId','position'])||!evidence.has(r.evidenceId))fail('REVIEW_EVIDENCE_INVALID');
     const p=r.position??null,k=key(r.evidenceId,p);
+    if(p!==null&&(!Number.isSafeInteger(p)||p<0))fail('REVIEW_REFERENCE_INVALID');
     if(seen.has(k)||(p===null?!observations.has(r.evidenceId):!controls.has(k)))fail('REVIEW_REFERENCE_INVALID');
     seen.add(k);refs.push({evidenceId:r.evidenceId,position:p,role:p===null?null:controls.get(k)});
    }

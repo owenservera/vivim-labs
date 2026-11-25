@@ -13,10 +13,10 @@ impl Event{
 mod win{
  use super::*;
  use std::ptr::null;
- use windows_sys::{core::GUID,Win32::System::Diagnostics::Etw::{EventRegister,EventWriteString,EventUnregister}};
+ use windows_sys::{core::GUID,Win32::System::Diagnostics::Etw::{EventRegister,EventWriteString,EventUnregister,REGHANDLE}};
  // Labs experimental provider identity; reserve canonical GUID with ARBOR before shipping.
  const PROVIDER:GUID=GUID::from_u128(0x69aa8a70_95c5_4a31_b188_9c8917890fd2);
- pub struct Provider{handle:u64}
+ pub struct Provider{handle:REGHANDLE}
  impl Provider{
   pub fn register()->Result<Self,Error>{let mut handle=0;let r=unsafe{EventRegister(&PROVIDER,None,null(),&mut handle)};if r!=0{Err(Error::Os(r))}else{Ok(Self{handle})}}
   /// Successful submission does not establish that any consumer received it.

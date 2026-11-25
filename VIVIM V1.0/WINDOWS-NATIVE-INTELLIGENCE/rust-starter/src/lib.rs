@@ -9,3 +9,8 @@ pub mod journal;
 pub mod acp;
 
 pub mod usn;
+
+pub mod conpty;
+pub mod stream;
+pub mod etw;
+pub mod search;

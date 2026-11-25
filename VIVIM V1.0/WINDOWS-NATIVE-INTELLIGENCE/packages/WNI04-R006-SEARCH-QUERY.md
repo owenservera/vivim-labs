@@ -1,0 +1,5 @@
+# WNI04 R006 — typed indexed search query candidate
+
+[search.rs](../rust-starter/src/search.rs) implements bounded exact-name Windows Search SQL, local canonical scope syntax, apostrophe escaping, fixed property projection and TOP limit. No arbitrary SQL, no implicit full-text query, no COM connection yet. Host supplies the actual approved root and revalidates each hit against current grant, canonical path and protected-name policy; syntactic scope validation is not authorization or filesystem confinement. ADO/OLE DB SystemIndex adapter and post-query canonical verification are next. Existing HQ index remains fallback. Do not expose actual search results until live scope checks and device admission wired.
+
+References: https://learn.microsoft.com/en-us/windows/win32/search/-search-sql-folderdepth ; https://learn.microsoft.com/en-us/windows/win32/search/-search-sql-literals ; https://learn.microsoft.com/en-us/windows/win32/search/using-sql-and-aqs-to-query-the-index . Compile/tests UNRUN.

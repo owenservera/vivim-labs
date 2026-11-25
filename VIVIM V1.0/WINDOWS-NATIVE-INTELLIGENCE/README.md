@@ -42,3 +42,7 @@ First slice: WNI02 aggregate resources through existing Host to MCP and GPUI; WN
 ## R005 — USN record decoding and exact overlay validation
 
 [USN decoder](packages/WNI01-R005-USN-DECODER.md) handles V2/V3 records without collecting filenames or opening a volume. [Overlay verifier](overlay-verifier.mjs) exercised all 14 WNI02-R003 source outputs against pinned GitHub base blobs; see [evidence](EVIDENCE-R005.json) for ten cloud checks. Source replay is not compile or live acceptance. ARBOR unchanged.
+
+## R006 — ConPTY, stream accounting, ETW and indexed search source
+
+[ConPTY and stream transport](packages/WNI03-R006-CONPTY-STREAM.md), [ETW producer](packages/WNI02-R006-ETW-PRODUCER.md), [typed indexed-search query](packages/WNI04-R006-SEARCH-QUERY.md). Four new Rust modules and fixture tests; no process attach, ETW consumer or OLE DB execution yet. Compiler absent from current cloud runtime; tests unrun. No ARBOR writes.

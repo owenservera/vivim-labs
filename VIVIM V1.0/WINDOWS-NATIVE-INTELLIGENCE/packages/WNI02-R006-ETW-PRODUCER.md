@@ -1,0 +1,5 @@
+# WNI02 R006 — ETW instrumentation candidate
+
+[etw.rs](../rust-starter/src/etw.rs) registers an experimental VIVIM-owned provider, emits a bounded closed numeric event through EventWriteString, unregisters on drop. No system trace session, event consumer, administrator operation or external process monitoring. No raw paths, arguments or text. Provider GUID must be reserved canonically before shipping. A successful event write is not evidence of capture; actual consumer correlation requires an approved VIVIM provider session and loss accounting. Diagnostic event types are scoped task lifecycle and queue gaps. Existing Host owns actual observations, scope and receipts; no new telemetry service.
+
+References: https://learn.microsoft.com/en-us/windows/win32/api/evntprov/nf-evntprov-eventregister ; https://learn.microsoft.com/en-us/windows/win32/api/evntprov/nf-evntprov-eventwritestring ; https://learn.microsoft.com/en-us/windows/win32/etw/about-event-tracing . Context7 version-pinned windows-sys guidance returned generic examples. Compile and real consumer tests UNRUN.

@@ -15,3 +15,6 @@ Scope precedence: explicit current founder decisions > ratified V1 product bound
 
 ## R002 — controlling onboarding direction (2026-11-25)
 [ONBOARDING-EXPERIENCE-R002.md](ONBOARDING-EXPERIENCE-R002.md) is the controlling onboarding experience proposal with confirmed owner opening sequence. It supersedes R001 journey ordering. The earlier matrix is a capability acceptance inventory, not the sequential user journey. Installation + preferred AI connection first, then immediate authorized context acquisition and natural value discovery. Full scope remains pending.
+
+## Settings and configuration workstream
+[UX, Settings & Configuration R001](../UX-SETTINGS-CONFIGURATION/README.md) owns configuration discovery, user-facing settings and migration research. It supports R002 through shared setting IDs, scoped authorization, truthful status and recovery; it does not redefine V1 or introduce a mandatory settings tour.

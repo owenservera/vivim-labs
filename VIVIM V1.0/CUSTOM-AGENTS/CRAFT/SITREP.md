@@ -1,15 +1,20 @@
-# CRAFT — SITREP
+# CRAFT — SITREP — R007 Host-first activation
+2026-11-25. Owner direction: run stock Craft; maximize existing ARBOR Host reuse; first four complete UI campaigns; reuse shared direct DeepSeek V4.1 Flash worker, not ZCode for inference. No new product service/registry or fork.
 
-Seeded 2026-11-25 from owner-defined work and Labs baseline 40f68004d0b6e592a0cec40d494bc846787c7882. Status: charter ready; current execution/acceptance must be refreshed. No new code/test results claimed by consolidation.
+## Actual activation receipts
+- Native VIVIM machineScope:true, Host supervised terminal execution, no Desktop Commander. Source handoff [R035](https://github.com/owenservera/ARBOR/commit/67859e96c12a55d4341d4008cf8a5b1528d18eea). Current grant temporary; honor local revocation.
+- Stock Craft source e64d7cb73d7f39323b7040a984e0f9b3f7981146, CLI 0.6.1. Initial doctor ctl-75d77638afc642fd exited 1: missing browser config, stale ZCode registration, no optional AI backend. Native settings-set engines.tools.chromium -> installed Chrome 158 executable, ctl-169d954ed7dcf55d exit 0. Stock setup dry run ctl-4604ab1d78da6897 exit 0; targeted stock ZCode registration repair ctl-5d646c6547c98c0e exit 0, automatic backup, no restart. This is optional MCP client compatibility, not selected inference path.
+- Post-repair doctor ctl-33a469e7c80a2649 exit 0 healthy=true, browser detected, ZCode connected, MCP protocol 2025-06-18 default 30 tools; no optional AI backend. ARBOR Host localhost 43187 root HTTP 200 HTML; ports 38730/4173 not ready. 8.77 GB free observed.
+- Actual stock restricted clean-room MCP via Host-managed Node stdio smoke, ctl-cc0bc05e616d827b: initialize and tools/list succeeded (80 tools), actual open/capture/export/close schemas confirmed. First-party web_site_open localhost:43187 refused with consent_required. No browser open, capture, export or import claimed. Respect Craft consent; supported local owner approval path, no indiscriminate allow-run, no shared unrestricted signed-in MCP. Process closed after smoke. No protected credentials read.
 
-## Current focus
-Run stock Craft first; capture complete ChatGPT, Claude, Gemini and Facebook surfaces including settings; shape evidence into Studio/Harness packages.
+## Convergence
+Reuse current native workstation process/receipts, stock local Craft sign-in/consent and projects, original evidence export, existing Labs importer and native verifier, R005 compiler/index, R006 handoff, existing Studio R003 GET routes and incumbent projectCraftIntelligence. Existing Studio/Harness integration owner and R033 hold: no parallel production edits or restarts. Existing HQKG/VLANG semantic admission consumes evidence-bound non-callable proposals. No duplicate browser controller or renderer.
+R005/R006 previous isolated 15/15 contract tests; 65 planned surfaces, 27 proposed operations, not measured coverage. [Verification](https://github.com/owenservera/vivim-labs/blob/main/craft-anything-arbor-adapter/integration-packages/VERIFICATION-R005-R006.md). [Studio source contract](https://github.com/owenservera/ARBOR/blob/main/docs/CRAFT-INTELLIGENCE-STUDIO-R003.md).
+Direct DeepSeek V4.1 Flash shared proposal worker: other session reports implementation committed and 11/11 adapter tests, task activation and experience log, source-bound proposals and token receipts. Exact worker path/commit not recovered; credential binding and live inference not proven. Reuse that worker only once its owner verifies local binding and exact model; do not install separate keys, read credential stores, send raw browser content or add a second model registry. Feed only permitted sanitized structural evidence and scoped source excerpts; no automatic operation promotion.
 
-## Source of truth / evidence
-- [craft-anything-arbor-adapter](https://github.com/owenservera/vivim-labs/tree/main/craft-anything-arbor-adapter)
-
-## Next action
-Reconcile R006 evidence and owner-machine activation; perform authorized real capture before claiming full surface.
-
-## Handoff
-Record actual source SHA, existing claim, completed work, evidence, blockers and next step here. Do not overwrite an incumbent owner's claims.
+## Round 1
+A. Complete local Craft supported consent workflow on actual owned Host page (43187), then capture/export original evidence and verify with existing native evidence example. Do not treat root HTML as full product scope.
+B. Import original bundle into existing adapter, reconcile against source profiles, compile R005 review and existing Studio index; invoke actual incumbent projector in isolated readback before configuring running service via owner. Keep private outputs local. 
+C. Owner normal local sign-in in Craft visible windows per exact host, then inspect authorized ChatGPT, Claude, Gemini, Facebook sequentially, all reachable settings/submenus/recovery and other R005 planned surfaces, explicit unknowns/exclusions. No mutations during discovery. Avoid copying Studio profile. No synthetic or guessed selectors.
+D. Shared DeepSeek worker processes sanitized evidence, records proposed mappings, independent verification before existing registry/Host capability admission.
+Immediate next action: obtain supported Craft project consent for first-party website open; then real capture. No new AI backend configured or live inference in this round.

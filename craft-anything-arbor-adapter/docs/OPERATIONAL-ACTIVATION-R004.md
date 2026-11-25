@@ -1,0 +1,30 @@
+# Craft Anything — operational activation and application surface campaign R004
+Date: 2026-11-25 | Owner-directed: check in plan and begin. | Main only.
+## Mission
+Turn Craft into a development-only external software investigation engine feeding Studio's existing semantic intelligence, HQKG/AutoWiki and VLANG. Prove the genuine evidence-to-atlas-to-Studio path first, then grow reusable read capabilities. Host remains sole effect/approval authority, Studio existing product browser actor, native GPUI sole product renderer and PWA its remote viewport. No provider API, Playwright/Puppeteer, duplicated graph/registry/browser owner or auto-promotion. Craft isolated investigation profile; third-party observations only within applicable permission/terms, never bypass auth or capture secrets. Raw captures and account data remain private/local.
+## Source baseline
+- Craft clone local/GitHub e64d7cb73d7f39323b7040a984e0f9b3f7981146, clean local status observed; expected target/release and target/debug CLI binaries not found. Rust/cargo 1.99.1. C: free 12.26 GB; check build contention and disk before compiling.
+- Labs adapter R002.1 reports 23 contract tests passing, five schemas validated; genuine native verification/capture/readback unproven.
+- ARBOR R003 read-only multi-target connector: https://github.com/owenservera/ARBOR/blob/main/docs/CRAFT-INTELLIGENCE-STUDIO-R003.md
+- Studio core contract: https://github.com/owenservera/ARBOR/blob/main/docs/product/STUDIO-CORE-CONVERGENCE-R001.md
+- Existing local Host 43187 request timed out during SITREP; confirm actual running endpoint before capture; do not restart busy shared processes.
+## Sequence and acceptance
+| ID | Work | Evidence required | Initial status |
+|---|---|---|---|
+| C01 | Compile locked Craft CLI, locate/build native verifier; resource-aware shared machine, no destructive cleanup | exact source SHA, commands, exit, binary version | READY |
+| C02 | Persistent isolated restricted MCP, enumerate tool schemas | actual initialize/tools/list, no provider account | WAIT C01 |
+| C03 | Capture real authorized running VIVIM application, navigation/chat/wiki/settings/pairing/workspace only when present | private original evidence IDs, 1440/768/390 responsive observations; safe state exploration | WAIT C02 |
+| C04 | Export original bundle and verify native Rust identities | actual native receipt with matching digest, no forced flags | WAIT C03 |
+| C05 | Import and reconcile atlas, source baselines, unknowns | real atlas/coverage/reconciliation, repeatable command, fresh test report | WAIT C04 |
+| C06 | Studio configured readback (existing R003 endpoints); GPUI read model via current contract when ready | observed genuine evidence IDs, no duplicate UI | WAIT C05 |
+| C07 | ChatGPT authorized scope, first history/navigation/composer/attachments; coordinate existing history-sync and provider work | account-bound scoped observations, no unauthorized extraction, no prompt send during inventory | WAIT C06 |
+| C08 | Claude authorized scope, use existing source baseline | same, reconcile profile discrepancies | WAIT C06 |
+| C09 | Map evidence into existing Studio learner and HQKG/VLANG; source-qualified read operations only, no effects from Craft | held-out evidence, revision invalidation, existing admission path | WAIT C06 |
+| C10 | Measure deterministic read-only task completion on independent real first-party tasks | 30 proposed held-out tasks, accuracy/abstention/provenance/latency/LLM calls; target zero VIVIM inference calls on learned operations | WAIT C09 |
+## Application campaign
+Wave 0: actual VIVIM-owned running app. Wave 1 AI: 01 ChatGPT (history/sync, composer, projects, attachments, models, tools/artifacts, streaming); 02 Claude (existing baseline, artifacts/projects/knowledge/connectors); 03 Gemini (chat/Canvas/research/attachments); 04 MiniMax (agent/coding/files); 05 Z.ai (chat/coding/reasoning); 06 Kimi (research/documents/agent). Wave 2: 07 GitHub (repo/issues/commits/actions), 08 Gmail (search/threads/compose/attachments), 09 Drive (files/folders/sharing), 10 Docs (document structure/editing), 11 Sheets (cells/formulas/charts), 12 Calendar (events/availability), 13 Outlook (mail/calendar), 14 Perplexity (research/citations), 15 Hugging Face (models/datasets/Spaces), 16 OpenRouter (model catalogue/usage), 17 Vercel (deployments/logs), 18 Figma (components/design), 19 Notion (pages/databases), 20 YouTube (search/transcripts/media). Feature names are candidate surfaces, not entitlements or measured capabilities. Later waves conditional on actual authorization and scope.
+Each target has twelve investigation families: navigation; identity; inputs; actions; states; data; outputs; interaction/accessibility; permissions; recovery; responsive; change detection. 20 × 12 = 240 initial external work packages, plus first-party proving run. Each row records origin, authorization scope, route/state/control identity, source revision, capture ID, confidence, coverage, unknowns, read/effect classification, existing Studio mapping, drift/invalidations, and acceptance status. Unknown != absent; source-present != live; observations != grants.
+## Work allocation
+Serialize actual browser capture on laptop, parallelize cloud analysis: Craft operator (C01–05); Studio Session 05 (C06/C09); HQKG/AutoWiki and VLANG Sessions 01–03 (existing contracts); verification (C10). Coordinate current claims and #31/#32/#33 rather than opening competing product backlog. No third-party effect until separately authorized through existing Host path. Prefer VIVIM-native workstation operations when available, Commander for missing workstation capability only.
+## Next command
+Read docs/CRAFT-MCP-FIRST-RUN.md and docs/ROUND-2-BUILD.md. Build scoped locked CLI at exact local HEAD using resource-limited cargo jobs; verify actual output before starting persistent restricted MCP. Run adapter contract tests on local matching checkout. Record all PASS/FAIL/UNRUN and no raw capture data in Git. Do not overwrite concurrent changes.

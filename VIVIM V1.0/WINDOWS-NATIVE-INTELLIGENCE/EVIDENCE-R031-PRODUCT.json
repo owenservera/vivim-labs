@@ -42,5 +42,43 @@
   ],
   "context7": "/nodejs/node/v24.22.2",
   "productWrites": false,
-  "arborWrites": false
+  "arborWrites": false,
+  "r032": {
+    "source": "6f85fabd1c3920cd71a557dca3a773728ba2e143",
+    "session": "ctl-e3daa64b0f8b9af0",
+    "exitCode": 0,
+    "success": true,
+    "elapsedMs": 8004,
+    "live": {
+      "actualProduct": true,
+      "actualHq": true,
+      "actualNativeGraph": true,
+      "actualNativeSdk": true,
+      "automaticRefresh": true,
+      "sourceDigestChanged": true,
+      "graphEpochBefore": 7,
+      "graphEpochAfter": 9,
+      "wikiReadback": true,
+      "focusProof": true,
+      "unchangedGraphEpoch": 9,
+      "deletionGraphEpoch": 12,
+      "deletionReadback": "unavailable",
+      "deletionReason": "native_graph_exit_2",
+      "deletionDetailMatches": "indexed source file absent",
+      "deletedWikiArticle": true,
+      "unchangedSibling": true
+    },
+    "priorFailure": {
+      "source": "d2db3affdefd16121cd86439483140d52c0dfca6",
+      "session": "ctl-3cb17b917478ebad",
+      "exitCode": 1,
+      "reason": "Incorrect test assumption that missing wiring would yield a successful graph response. Corrected to require precise missing-source reason and a successful same-epoch surviving-sibling query."
+    }
+  },
+  "acceptance": {
+    "priority": 1,
+    "status": "100% for isolated integration acceptance",
+    "deployment": false,
+    "limits": "See limits above; production incorporation, full collector coverage, and release validation remain distinct."
+  }
 }

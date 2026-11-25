@@ -1,0 +1,34 @@
+{
+  "schema": "vivim.labs.windows-integration-test/1",
+  "source": "60746eed57ca7dd632f5a9fc8355c6f241f3c3ca",
+  "arborBase": "67859e96c12a55d4341d4008cf8a5b1528d18eea",
+  "native": {
+    "session": "ctl-1c4800609e2d3fc6",
+    "exitCode": 0,
+    "passed": 33,
+    "failed": 0,
+    "ignored": 0,
+    "newAcpTransportTests": 5,
+    "compileSeconds": 4.62,
+    "testSeconds": 1.03
+  },
+  "overlay": {
+    "session": "ctl-39ef1a9a2e3dbb48",
+    "exitCode": 0,
+    "verifiedRawGitBlobs": 10,
+    "addedFiles": 4,
+    "nodeTestsPassed": 3,
+    "nodeTestsFailed": 0,
+    "sourceChanged": false,
+    "scope": "actual Node fixture tests using patched Host port and MCP transport; no live capability invocation"
+  },
+  "diagnostic": {
+    "session": "ctl-65510594058fa1e2",
+    "pinnedBlobIdsMatched": 10,
+    "archiveBytesMatched": 0,
+    "explanation": "Git archive produced changed text bytes on Windows; exact source check correctly refused. Raw git cat-file blob extraction fixed preflight without normalizing or relaxing hash checks."
+  },
+  "priorNodeChecks": 27,
+  "arborChanged": false,
+  "deployed": false
+}

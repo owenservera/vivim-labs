@@ -54,3 +54,7 @@ First slice: WNI02 aggregate resources through existing Host to MCP and GPUI; WN
 ## R008/R009 — first Windows-native verification and owned ACP transport
 
 [Windows test evidence](EVIDENCE-R008-WINDOWS.json): 28 native Rust tests passed on the actual Windows workstation via existing VIVIM MCP; 27 actual Node checks passed in the preceding test. ETW type corrected to REGHANDLE. [ACP transport integration](packages/WNI03-R009-ACP-TRANSPORT.md) combines bounded framing, router and stream accounting. New R009 tests pending. No ARBOR or production changes.
+
+### R009 acceptance update
+
+[Windows evidence](EVIDENCE-R009-WINDOWS.json): 33/33 native Rust tests, 3/3 actual overlay Node fixture tests; earlier 27/27 actual schema tests. [Exact Git blob materializer](materialize-base.mjs) preserves strict source pinning when archive/checkout changes text bytes. No deployment or ARBOR changes.

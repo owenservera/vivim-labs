@@ -3,3 +3,7 @@
 [Source](../rust-starter/src/acp_transport.rs) combines existing lossless byte Stream, Framer and Router with connection generation, exact byte offset, bounded event batches, error poisoning and EOF reconciliation. No worker launch, provider or permission grant. Wrong generation cannot consume current stream, mismatched offset closes it, and incomplete outstanding request never becomes a success. The ACK is a memory parsing acknowledgment, not durable transaction/effect evidence. Host must route only owned stdout and never mix stderr, manage lifecycle and require current permission on every effect. Five integration tests supplied. Native compile and tests of this new R009 module pending; R008 tests independently passed before R009.
 
 Existing worker source pinned to ARBOR 67859e96c12a55d4341d4008cf8a5b1528d18eea. The existing output tail is lossy by design and must not be treated as ACP input after a gap. Integrate transport inside the existing native worker on owned stdout before tail truncation, with Host-controlled event projection. No direct ACP endpoint, auto-grants or separate process executor. ACP v1 research in R004 remains applicable.
+
+## Verified Windows update
+
+At source 60746eed57ca7dd632f5a9fc8355c6f241f3c3ca all 33 Rust tests passed, including five new ACP transport integration tests. Actual agent process attachment and provider operations remain unrun. See [evidence](../EVIDENCE-R009-WINDOWS.json).

@@ -1,0 +1,66 @@
+{
+  "schema": "vivim.labs.owned-admission/1",
+  "productReviewed": "95d046c20d5af0a4e116d6fe6cacc9300203452c",
+  "productCampaignBlob": "031317b7c98b4dc9adf30dadd32fa704ddec3c5e",
+  "arbor": "ff1de3b70ca87d143301a7f934673acbf9e182e6",
+  "labBase": "130d8ed266fa44882c240b01354b3f358138c037",
+  "sources": [
+    {
+      "name": "campaign.rs",
+      "sha": "7a02fe505374c05c5dad89e71837361fdcad3851",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI02-R034-SDK-ADMISSION/campaign.rs",
+      "repo": "owenservera/vivim-labs",
+      "ref": "130d8ed266fa44882c240b01354b3f358138c037"
+    },
+    {
+      "name": "resource_campaign.rs",
+      "sha": "adb5e7e2c08dead02f0eda34ad5e5ffd6b6b2fe6",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI02-R034-SDK-ADMISSION/resource_campaign.rs",
+      "repo": "owenservera/vivim-labs",
+      "ref": "130d8ed266fa44882c240b01354b3f358138c037"
+    },
+    {
+      "name": "native-sampling.rs",
+      "sha": "16e5325df1db7759d20ccad32822bae79e0cb54b",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI02-R034-SDK-ADMISSION/native-sampling.rs",
+      "repo": "owenservera/vivim-labs",
+      "ref": "130d8ed266fa44882c240b01354b3f358138c037"
+    },
+    {
+      "name": "scheduler.rs",
+      "sha": "355ad3103588fdd6ed647e6f748946a738e0198e",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/rust-starter/src/scheduler.rs",
+      "repo": "owenservera/vivim-labs",
+      "ref": "130d8ed266fa44882c240b01354b3f358138c037"
+    },
+    {
+      "name": "resources.rs",
+      "sha": "a160c98b46ca11fcce1d626bbbb33fb5b676467f",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/rust-starter/src/resources.rs",
+      "repo": "owenservera/vivim-labs",
+      "ref": "130d8ed266fa44882c240b01354b3f358138c037"
+    },
+    {
+      "name": "hardware.rs",
+      "sha": "003f0d9109ad4433f1ec1dc1fc114844613a204b",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/rust-starter/src/hardware.rs",
+      "repo": "owenservera/vivim-labs",
+      "ref": "130d8ed266fa44882c240b01354b3f358138c037"
+    },
+    {
+      "name": "workstation_process.rs",
+      "sha": "ce28e179a8f161ff33d89c37c58f793dc4b58171",
+      "path": "native/host-supervisor/src/workstation_process.rs",
+      "repo": "owenservera/ARBOR",
+      "ref": "ff1de3b70ca87d143301a7f934673acbf9e182e6"
+    },
+    {
+      "name": "workstation_windows_job.rs",
+      "sha": "d0ec556b10f9569f199e7ed5b24cd451feed1a96",
+      "path": "native/host-supervisor/src/workstation_windows_job.rs",
+      "repo": "owenservera/ARBOR",
+      "ref": "ff1de3b70ca87d143301a7f934673acbf9e182e6"
+    }
+  ],
+  "scope": "single isolated SDK campaign; incumbent process owner reused; no new process server"
+}

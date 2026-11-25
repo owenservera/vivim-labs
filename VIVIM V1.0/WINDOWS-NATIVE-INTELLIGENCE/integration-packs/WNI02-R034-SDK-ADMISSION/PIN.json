@@ -1,0 +1,15 @@
+{
+  "schema": "vivim.labs.sdk-admission/1",
+  "productPin": "a1c57c4762b88c0d0684977351066711aef0f27e",
+  "productPath": "crates/protocol-sdk/src/campaign.rs",
+  "productBlob": "031317b7c98b4dc9adf30dadd32fa704ddec3c5e",
+  "labBase": "00fd528e5751c4281c5f0ab968257da8447382d0",
+  "schedulerPath": "rust-starter/src/scheduler.rs",
+  "schedulerBlob": "355ad3103588fdd6ed647e6f748946a738e0198e",
+  "scope": "isolated exact Product campaign overlay; no production edits",
+  "files": [
+    "campaign.rs",
+    "resource_campaign.rs",
+    "test-root.rs"
+  ]
+}

@@ -1,10 +1,19 @@
 # Cloud-first coding contract — mandatory for ChatGPT agents (2026-11-21)
 
+## Owner directive — VIVIM-first workstation operations (2026-11-25, R030)
+
+**Mandatory for every ChatGPT development session:** use the installed VIVIM ARBOR MCP connector for authorized workstation operations. Direct general terminal execution is now live, not recipe-only. Desktop Commander is retired as a routine operations dependency; use it only for an explicitly authorized, specific missing capability or recovery, and record the gap. Do not route around authorization failures. Cloud/GitHub remains the primary source engineering and canonical main-commit venue; local validation, build, launch, packaging and deployment go through VIVIM first. ZCode is subordinate, direct CLI only for explicitly scoped work; no ZCode workflows.
+
+At session start, discover actual VIVIM tools and read tunnel health and grant summary. Prefer PowerShell 7+ (program ID `pwsh`), not Windows PowerShell 5.1. Use existing terminal/session/file operations within the current grant, preserve claims and concurrent work, and record exit/output/receipt evidence. Never print credentials. If a grant expires or is missing, use the supported owner-approved renewal path. Do not automatically expand permissions. If catalogue is stale, use ChatGPT Settings → Plugins → VIVIM ARBOR → scroll to Tools → Refresh tools; recheck tool discovery and run a harmless direct smoke test. No disconnect/reinstall needed. Browser automation of this refresh was demonstrated through a temporary bridge; native Studio-driven refresh and self-upgrade still require completion.
+
+Canonical operating detail: [ARBOR MCP handoff](https://github.com/owenservera/ARBOR/blob/main/tools/mcp/vivim-arbor/HANDOFF.md) and [cloud-first / VIVIM-first policy](https://github.com/owenservera/vivim-labs/blob/main/ZCODE-DESKTOP-COMMANDER-OPERATIONS/CLOUD-FIRST-CODING-POLICY.md). This directive supersedes historical Desktop Commander defaults, recipe-only/health-only status and legacy ZCode workflow instructions, without changing task ownership, source venue or approval boundaries.
+
+
 **Scope:** Every ChatGPT session that reads this ZCODE-DESKTOP-COMMANDER-OPERATIONS sitrep, AGENTS file, ownership tracker, or descendant runbook. This is the authoritative tool-routing rule for engineering work. Nested files may narrow this contract, never silently relax it. Follow higher-priority instructions and explicit task-specific user overrides.
 
 ## Owner override — 25 November 2026: VIVIM-first operations
 
-This section governs every local-only operation and supersedes older Desktop Commander defaults in this document and descendant runbooks. Cloud/GitHub remains first for source work. For workstation-only operations, discover actual VIVIM ARBOR tunnel tools and use a live supported scoped capability first. Current browser profile is health-only; do not assume discovery, filesystem, process or execution tools exist. Commercial Desktop Commander is temporary fallback for a specifically identified, separately authorized missing capability; record why it was needed and route the gap to MCP-U10/master U11. Never use it to circumvent an authorization denial or safety restriction, or for routine repository reads/polling. Host owns product effects; no raw remote shell, secret exposure or unapproved paid model calls. Preserve existing transport identity and fallback until real accepted parity. See [master plan R002](DEVOPS-PLANNING/MASTER-PLAN-R001.md) and [MCP plan](https://github.com/owenservera/ARBOR/blob/main/tools/mcp/vivim-arbor/PLAN.md).
+This section governs every local-only operation and supersedes older Desktop Commander defaults in this document and descendant runbooks. Cloud/GitHub remains first for source work. For workstation-only operations, discover actual VIVIM ARBOR tunnel tools and use a live supported scoped capability first. Historical health-only status is superseded by R030: general terminal, scoped file and session tools are live; always discover the actual current grant. Commercial Desktop Commander is temporary fallback for a specifically identified, separately authorized missing capability; record why it was needed and route the gap to MCP-U10/master U11. Never use it to circumvent an authorization denial or safety restriction, or for routine repository reads/polling. Host owns product effects; no raw remote shell, secret exposure or unapproved paid model calls. Preserve existing transport identity and fallback until real accepted parity. See [master plan R002](DEVOPS-PLANNING/MASTER-PLAN-R001.md) and [MCP plan](https://github.com/owenservera/ARBOR/blob/main/tools/mcp/vivim-arbor/PLAN.md).
 
 **Product renderer correction:** native Rust GPUI is the sole product renderer; Android PWA is a paired authenticated viewport of actual GPUI output. Preserve phone URL and existing behavior pending physical verification. Older PWA-first/Edge language is historical.
 
@@ -22,7 +31,7 @@ This section governs every local-only operation and supersedes older Desktop Com
 | Tool / venue | Allowed by default | Forbidden as an implicit fallback |
 |---|---|---|
 | ChatGPT cloud/container and GitHub connector | Source read/edit, Rust-first implementation, available cloud tests, commit/push directly to `main`, verify remote SHA | Force push, destructive resets, overwriting concurrent work, invented test results |
-| VIVIM ARBOR tunnel | Primary authorized local operations, limited to tools actually exposed and scoped | Unapproved effects, unrestricted shell, secret disclosure, bypassing denied scopes |
+| VIVIM ARBOR tunnel | Primary authorized local operations, limited to tools actually exposed and scoped | Unapproved effects, shell outside the current explicit grant, secret disclosure, bypassing denied scopes |
 | Remote Desktop Commander | Temporary gap-specific fallback for authorized local evidence, packaging, on-device tests | Source write/patch/refactor, agent-coded local builds as substitute for cloud coding, local `git add/commit/push`, unrequested ZCode sessions |
 | ZCode | Explicitly bounded auxiliary lanes and workstation-specific operations | Main user-directed implementation, autonomous edit/commit, silent foreground delegation |
 | No suitable tool | Honest BLOCKED/UNRUN report | Claiming work shipped or inventing proof |
@@ -34,7 +43,7 @@ For each coding task, state: (a) canonical GitHub owner/repo and refreshed base 
 
 ## Product defaults
 - Rust for all sensible product/core/CLI/integration work; TypeScript 7+ only where Rust is impractical for that component.
-- One unified Rust fabric and existing Host effect authority; PWA first. Do not create competing engines.
+- One unified Rust fabric and existing Host effect authority; Native GPUI sole renderer; PWA is its authenticated remote viewport. Do not create competing engines.
 - Direct `main`, no routine PR/branch/worktree; non-force fast-forward coordination; preserve all dirty local/remote work, other agents' paths, stashes and sensitive files.
 - The Labs operations folder is for navigation, ownership and evidence, **not** a substitute repository for ARBOR production code.
 

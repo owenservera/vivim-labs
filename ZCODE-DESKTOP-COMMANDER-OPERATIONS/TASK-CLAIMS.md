@@ -1,5 +1,14 @@
 # Shared task check-in / check-out claims (ownership overlay, not a backlog)
 
+## Owner directive — VIVIM-first workstation operations (2026-11-25, R030)
+
+**Mandatory for every ChatGPT development session:** use the installed VIVIM ARBOR MCP connector for authorized workstation operations. Direct general terminal execution is now live, not recipe-only. Desktop Commander is retired as a routine operations dependency; use it only for an explicitly authorized, specific missing capability or recovery, and record the gap. Do not route around authorization failures. Cloud/GitHub remains the primary source engineering and canonical main-commit venue; local validation, build, launch, packaging and deployment go through VIVIM first. ZCode is subordinate, direct CLI only for explicitly scoped work; no ZCode workflows.
+
+At session start, discover actual VIVIM tools and read tunnel health and grant summary. Prefer PowerShell 7+ (program ID `pwsh`), not Windows PowerShell 5.1. Use existing terminal/session/file operations within the current grant, preserve claims and concurrent work, and record exit/output/receipt evidence. Never print credentials. If a grant expires or is missing, use the supported owner-approved renewal path. Do not automatically expand permissions. If catalogue is stale, use ChatGPT Settings → Plugins → VIVIM ARBOR → scroll to Tools → Refresh tools; recheck tool discovery and run a harmless direct smoke test. No disconnect/reinstall needed. Browser automation of this refresh was demonstrated through a temporary bridge; native Studio-driven refresh and self-upgrade still require completion.
+
+Canonical operating detail: [ARBOR MCP handoff](https://github.com/owenservera/ARBOR/blob/main/tools/mcp/vivim-arbor/HANDOFF.md) and [cloud-first / VIVIM-first policy](https://github.com/owenservera/vivim-labs/blob/main/ZCODE-DESKTOP-COMMANDER-OPERATIONS/CLOUD-FIRST-CODING-POLICY.md). This directive supersedes historical Desktop Commander defaults, recipe-only/health-only status and legacy ZCode workflow instructions, without changing task ownership, source venue or approval boundaries.
+
+
 **Purpose:** one GitHub-visible owner-claim surface for ChatGPT Dev, DevOps/Planning, and Oracle. The canonical task descriptions, ordering, and statuses remain in OWNER-WORK when accessible, otherwise in verified ARBOR/Labs trackers. This file is **not** a replacement task ledger. A task absent here is **UNCLAIMED/UNKNOWN**, not automatically available to overwrite.
 
 ## Required protocol

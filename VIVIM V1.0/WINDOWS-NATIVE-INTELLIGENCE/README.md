@@ -72,3 +72,7 @@ First slice: WNI02 aggregate resources through existing Host to MCP and GPUI; WN
 [Master tracker](MASTER-TRACKER.md), [combined resource/ConPTY overlay](integration-packs/WNI-COMBINED-R012/README.md), [native evidence](EVIDENCE-R012-WINDOWS.json). Native starter 35 passing tests; exact worker 6/6 normal exit including explicit console marker. Standard handles and interactive input remain unresolved; no full terminal acceptance. Combined overlay preflight pending. ARBOR unchanged.
 
 R012 combined preflight update: 11 raw source blobs verified, five additions, 3/3 Node overlay tests, normal exit. See R012 evidence.
+
+## R013 — transactional HQ checkpoint, resource admission and ETW decoding
+
+[HQ overlay](integration-packs/WNI01-R013-HQ/README.md) targets latest pinned indexer and existing SQLite transaction. [Rust scheduler and ETW decoder](packages/WNI02-R013-SCHEDULER-ETW.md) add bounded deterministic primitives. Tests pending. No ARBOR modifications.

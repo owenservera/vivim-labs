@@ -18,3 +18,6 @@ pub mod search;
 pub mod acp_transport;
 
 pub mod hardware;
+
+pub mod scheduler;
+pub mod etw_decode;

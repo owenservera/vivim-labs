@@ -1,0 +1,30 @@
+{
+  "schema": "vivim.labs.exact-overlay/1",
+  "baseCommit": "4c884c92306209b37728e0a9e9efa74f4b30f254",
+  "patches": [
+    {
+      "path": "hq/lib/indexer.mjs",
+      "baseBlob": "9c728884117d492f19b798d56cc3b643f4821ed7",
+      "edits": [
+        {
+          "from": "import { transaction, getMeta, setMeta } from './schema.mjs';",
+          "to": "import { transaction, getMeta, setMeta } from './schema.mjs';\nimport {commitObservation} from './windows-observation-checkpoint.mjs';"
+        },
+        {
+          "from": "    return stmts.projectById.get(projectRow.id);",
+          "to": "    if(options.nativeObservation!==undefined){\n      const claim=options.nativeObservation;\n      // Internal trusted caller only; never deserialize this from MCP/GPUI.\n      result.nativeCheckpoint=commitObservation(db,projectRow.id,{...claim,complete:errors.length===0&&result.incomplete.length===0});\n    }\n    return stmts.projectById.get(projectRow.id);"
+        }
+      ]
+    }
+  ],
+  "additions": [
+    {
+      "path": "hq/lib/windows-observation-checkpoint.mjs",
+      "source": "overlay/hq/lib/windows-observation-checkpoint.mjs"
+    },
+    {
+      "path": "hq/lib/windows-observation-checkpoint.test.mjs",
+      "source": "overlay/hq/lib/windows-observation-checkpoint.test.mjs"
+    }
+  ]
+}

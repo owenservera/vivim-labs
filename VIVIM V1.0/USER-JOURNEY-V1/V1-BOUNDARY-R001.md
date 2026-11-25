@@ -19,3 +19,6 @@ Full arbitrary web/app coverage, arbitrary autonomous agent orchestration, unres
 
 ## Boundary rule
 Every MUST must trace to a specific observable journey and actual device acceptance. Source-implemented, tested, deployed and human-verified are separate states. Proposed narrower V1 does not supersede B01–B12 until owner ratifies differences. Do not ship or tag on this document alone. See decisions for persona, provider breadth, history, workspace lifecycle, commands and distribution.
+
+## R002 superseding clarification
+The proposed outcomes above are supporting capabilities, not ordered journey steps. Primary onboarding is installation/workspace, preferred AI connection, immediate authorized context acquisition, meaningful value discovery in setup. Quiet composer is the post-setup default. Phone pairing is not required before first value. Immediate acquisition is mandatory; complete historical coverage remains an open scope decision. See [R002](ONBOARDING-EXPERIENCE-R002.md).

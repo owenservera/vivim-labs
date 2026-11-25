@@ -177,3 +177,10 @@ This is a proposed architecture, not a claim of original invention of the underl
 **My machine. My data. My intelligence.**
 
 **Every breakthrough in artificial intelligence should make VIVIM stronger, never obsolete.**
+
+## Companion architecture and implementation crosswalk — 2026-11-25
+
+- [Rust reprogrammable graph architecture R001](RUST-REPROGRAMMABLE-GRAPH-ARCHITECTURE-R001.md): source-pinned review of HQKG, engine generations, typed DAGs, durable graph state, semantic computation, and the persistent behavioral learning proposal. Distinguishes existing source from unverified integration and future design.
+- [Rust graph convergence work program R001](RUST-GRAPH-CONVERGENCE-WORK-R001.md): 25 proposed deliverables and real acceptance criteria, to reconcile with existing ARBOR #33 and active Core-IP work rather than duplicate execution ownership.
+
+These companions operationalize sections 3–7 and 10–11. Preserve personally owned intelligence independently of replaceable engines, and reuse the existing native runtime. No production implementation or acceptance is implied by publication.

@@ -60,3 +60,7 @@ WNI05: scoped semantic reference lifecycle, complete snapshot delta and acknowle
 ## R019 verification
 
 56/56 native test output (11 new HCU-inspired tests over R015), actual Windows via VIVIM. Owned test jobs required cleanup after output closed. [Evidence](EVIDENCE-R019-WINDOWS.json); [incumbent source handoff](research/R019-STUDIO-HARNESS-HANDOFF.md). WNI05 state/ref/diff/recovery/route primitives verified; actual native UIA and production integration pending. All 33 original public candidates still not live. No ARBOR writes.
+
+## R021 — Windows Search and property bridge
+
+WNI04: real selected-file Shell property size verification, seven scoped adapter checks and five new Rust result-validation/fallback tests. SystemIndex provider connects but execution returns 0x80040154; index unavailable, not empty/complete. Keep existing HQ fallback; no index/service changes. Native Rust OLE DB implementation and live Host/MCP/GPUI integration pending. Latest native suite 61/61, normal exit 0. [Evidence](EVIDENCE-R021-WINDOWS.json).

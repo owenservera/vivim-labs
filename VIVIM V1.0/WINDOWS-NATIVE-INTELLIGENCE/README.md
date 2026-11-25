@@ -96,3 +96,7 @@ R012 combined preflight update: 11 raw source blobs verified, five additions, 3/
 ## R019 — Windows verification and current Studio/Harness handoff
 
 [56/56 native tests](EVIDENCE-R019-WINDOWS.json), including eleven new semantic-state, reconciliation, wait and hybrid-route fixtures. [Exact-source handoff](research/R019-STUDIO-HARNESS-HANDOFF.md) maps the independent modules to existing Studio/Harness at f1d4f41. Native UIA/app and new MCP/GPUI acceptance remain unrun; no ARBOR changes.
+
+## R020–R021 — Windows indexed search proof and Shell metadata
+
+[Proof adapter](integration-packs/WNI04-R020-SEARCH/README.md), [Windows evidence](EVIDENCE-R021-WINDOWS.json). Actual Shell property read succeeded; SystemIndex execution unavailable with diagnosed HRESULT. Seven fixture checks and 61/61 native tests (five new Rust validator/fallback tests) passed with normal exit. Optional stock COM bridge only, no new mandatory dependencies or production changes.

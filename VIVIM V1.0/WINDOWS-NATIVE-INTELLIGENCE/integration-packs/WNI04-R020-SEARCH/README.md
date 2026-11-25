@@ -9,3 +9,7 @@ Test-WindowsIndex.ps1 performs seven fixture checks and attempts real Windows in
 ## R021 result validation
 
 Native Rust indexed_search.rs validates the bounded proof-adapter envelope and distinguishes unavailable from successful incomplete index observations; existing HQ must provide fallback/merge, never a second index. Path syntax is an additional rejection layer, not authorization. Native Rust unit tests supplied. No raw paths published by Windows fixture. Actual search query execution returned HRESULT -2147221164 (0x80040154) at execute-query; WSearch Running, 64-bit process. Shell property returned correct fixture size. No registration repair or service change attempted.
+
+## R021 verification
+
+Actual Windows proof runs exited 0, seven fixture checks passed including real Shell property size retrieval. Index execution unavailable (0x80040154 at execute-query); Windows Search service running, no service changes. Rust suite 61/61, normal exit 0, including five new parser/fallback tests. Full native Rust COM implementation, positive indexed result, incumbent HQ merge and public MCP/GPUI integration remain pending. [Evidence](../../EVIDENCE-R021-WINDOWS.json).

@@ -1,0 +1,46 @@
+{
+  "schema": "vivim.labs.windows-native-test/1",
+  "proof": {
+    "source": "851b2056841bb3b8c5069dcbee6106eb599b3efc",
+    "session": "ctl-6bee21558dce9368",
+    "exitCode": 0,
+    "checks": 7,
+    "indexedSearch": "unavailable",
+    "indexCoverageComplete": false,
+    "shellProperty": "ok",
+    "fixtureSizeVerified": true
+  },
+  "diagnostics": {
+    "source": "b36c80d49d70b2a73ae0217d4b07d50aaa1bc961",
+    "session": "ctl-569fe40f7e92403a",
+    "exitCode": 0,
+    "checks": 7,
+    "searchStatus": "unavailable",
+    "failureStage": "execute-query",
+    "hresult": -2147221164,
+    "hex": "0x80040154",
+    "serviceStatus": "Running",
+    "process64Bit": true
+  },
+  "rust": {
+    "source": "1cb9c9547785f2ccd18db20e63dd3c8ccf06d18d",
+    "session": "ctl-6058c73efbbfcc46",
+    "exitCode": 0,
+    "passed": 61,
+    "failed": 0,
+    "ignored": 0,
+    "newTests": 5,
+    "compileSeconds": 6.98,
+    "testSeconds": 1.03,
+    "jobSuccess": true
+  },
+  "method": "Actual Windows via incumbent VIVIM terminal, owned scratch fixture only; no live new capability invocation. 7 fixture checks include accepted unavailable state, not positive SystemIndex query. Repeated proof checks not counted twice.",
+  "context7": {
+    "library": "/microsoft/windows-rs/0.61.0",
+    "limitation": "generic binding guidance; Microsoft primary OLE DB and SCOPE docs used for concrete proof adapter"
+  },
+  "implementationDecision": "PowerShell 7 and stock Windows COM for narrow proof bridge; Rust parser/fallback. Native Rust OLE DB adapter still pending. No new mandatory runtime or dependency.",
+  "arborChanged": false,
+  "productionDeployed": false,
+  "serviceChanges": false
+}

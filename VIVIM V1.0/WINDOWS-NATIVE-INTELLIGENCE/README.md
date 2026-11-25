@@ -26,3 +26,7 @@ Source baseline: [ARBOR 972dbcc](https://github.com/owenservera/ARBOR/commit/972
 | [WNI11 binding-minimization](packages/WNI11-binding-minimization.md) | P0 | Cargo.toml feature list + dependency budget | Candidate |
 
 First slice: WNI02 aggregate resources through existing Host to MCP and GPUI; WNI01 approved directory deltas into existing HQ/AutoWiki; WNI03 existing worker/ACP lifecycle. All other recipes remain explicitly proposed. Studio/Harness owns WNI05/06/07 integration; no duplicated UI stack. Machine-wide terminal authorization is separate and is not changed by this pack. Existing Settings project is the config owner. Live tunnel reported maintenance/drained, so Windows build, real MCP invocation and app interaction are UNRUN.
+
+## R002 — exact-source integration overlay
+
+[WNI02 native resources vertical slice](integration-packs/WNI02-R002/README.md): pinned ARBOR 67859e96c12a55d4341d4008cf8a5b1528d18eea, 9 exact-blob edits and 4 added source/test files; reuses native probe, Host, MCP, staging and GPUI control client. Isolated overlay only. 11/11 cloud checks passed; Windows compile, Node fixture tests, actual app control and live MCP remain unverified. Workstream remains Labs-only until owner decides integration.

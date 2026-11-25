@@ -1,0 +1,23 @@
+{
+  "base": "67859e96c12a55d4341d4008cf8a5b1528d18eea",
+  "checks": [
+    "all exact source edits replay",
+    "catalog unique",
+    "same action across projections",
+    "MCP CommonJS syntax",
+    "valid probe result",
+    "unknown CPU remains partial",
+    "unsupported explicit",
+    "malformed result refused 7",
+    "malformed result refused 8",
+    "malformed result refused 9",
+    "malformed result refused 10"
+  ],
+  "cloud": "V8 source replay and pure result validation",
+  "nativeCompile": "UNRUN",
+  "nodeFixtureTests": "UNRUN",
+  "gpuiClient": "source candidate",
+  "gpuiUI": "UNRUN",
+  "mcpLive": "UNRUN",
+  "arborChanged": false
+}

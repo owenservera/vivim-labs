@@ -1,0 +1,28 @@
+{
+  "schema": "vivim.labs.sdk-resource-domain/1",
+  "source": "7ca571dc4e1cbf6023f61ef784fe5e1f8a755768",
+  "state": "implemented_native_verification_pending",
+  "authoredTests": 3,
+  "verification": {
+    "requestId": "8716afe60e4e40d78ada36214ebf0078",
+    "receipt": null,
+    "reason": "workstation terminal returned INVALID_ARGUMENT / denied or outcome uncertain; same request ID inspected, no applied receipt",
+    "scratchReadback": "R038 files present; no R039 overlay or resource-domain.rs materialized",
+    "notRetriedUnderNewId": true
+  },
+  "latestVerified": {
+    "source": "33cad64669638c12b01a874216fe355c53d51a1b",
+    "evidence": "EVIDENCE-R038-SDK.json",
+    "passed": 58,
+    "failed": 0
+  },
+  "productReadback": {
+    "head": "5a9d52a583e148752afcdd9167cbe975d33d561f",
+    "campaignBlob": "031317b7c98b4dc9adf30dadd32fa704ddec3c5e",
+    "campaignStillMatches": true
+  },
+  "limits": [
+    "Exclusive in-memory domain candidate; no persistence, installed Host integration or actual agent execution.",
+    "No R039 compile or runtime acceptance claimed."
+  ]
+}

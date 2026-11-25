@@ -1,0 +1,126 @@
+{
+  "schema": "vivim.application-profile-baseline/1",
+  "target": {
+    "siteId": "chatgpt",
+    "origin": "https://chatgpt.com"
+  },
+  "description": "Bounded SOURCE-ONLY profile snapshot; not fresh live inspection. Selectors are inert research data, never execute. Unlisted features remain unknown.",
+  "profiles": [
+    {
+      "owner": "studio",
+      "sourcePath": "studio/src/profiles/sites/chatgpt.mjs",
+      "sourceBlobSha": "34f91b8c475f85210d13adc56545c8eb1526d2e6",
+      "features": [
+        {
+          "id": "chat.composer",
+          "surface": "chat",
+          "sourceStatus": "source-measured",
+          "selectors": [
+            "form div[contenteditable=\"true\"]",
+            "#prompt-textarea",
+            "div.ProseMirror[contenteditable=\"true\"]",
+            "[data-testid=\"prompt-textarea\"]",
+            "textarea",
+            "[contenteditable=\"true\"]",
+            "[role=\"textbox\"]"
+          ],
+          "matchTerms": []
+        },
+        {
+          "id": "chat.send",
+          "surface": "chat",
+          "sourceStatus": "source-measured",
+          "selectors": [
+            "button[data-testid=\"send-button\"]",
+            "#composer-submit-button",
+            "form button[type=\"submit\"]",
+            "button[type=\"submit\"]"
+          ],
+          "matchTerms": [
+            "Send",
+            "Send prompt"
+          ],
+          "notes": "Historical source note: button strategy replaces unreliable synthesized Enter; verify current readiness."
+        },
+        {
+          "id": "chat.reply",
+          "surface": "chat",
+          "sourceStatus": "source-measured",
+          "selectors": [
+            "[data-markdown-text-style=\"assistant-message\"]",
+            "[data-content-search-unit-key$=\"assistant\"]",
+            "[data-chatgpt-search-unit-key$=\"assistant\"]",
+            "[data-message-author-role=\"assistant\"]",
+            "article",
+            "[data-testid*=\"assistant\" i]"
+          ],
+          "matchTerms": []
+        }
+      ]
+    },
+    {
+      "owner": "harness",
+      "sourcePath": "harness/src/providers/chatgpt.mjs",
+      "sourceBlobSha": "22e74c737c8892236d73eade409b0cc8d7e6591f",
+      "features": [
+        {
+          "id": "chat.composer",
+          "surface": "chat",
+          "sourceStatus": "configured",
+          "selectors": [
+            "form div[contenteditable=\"true\"]",
+            "#prompt-textarea",
+            "div.ProseMirror[contenteditable=\"true\"]",
+            "[data-testid=\"prompt-textarea\"]",
+            "textarea",
+            "[contenteditable=\"true\"]",
+            "[role=\"textbox\"]"
+          ],
+          "matchTerms": []
+        },
+        {
+          "id": "chat.send",
+          "surface": "chat",
+          "sourceStatus": "configured",
+          "selectors": [
+            "button[data-testid=\"send-button\"]",
+            "form button[aria-label=\"Send\"]",
+            "button[aria-label=\"Send prompt\"]",
+            "#composer-submit-button",
+            "form button[type=\"submit\"]",
+            "button[type=\"submit\"]"
+          ],
+          "matchTerms": [
+            "Send",
+            "Send prompt"
+          ]
+        },
+        {
+          "id": "chat.reply",
+          "surface": "chat",
+          "sourceStatus": "configured",
+          "selectors": [
+            "[data-markdown-text-style=\"assistant-message\"]",
+            "[data-content-search-unit-key$=\"assistant\"]",
+            "[data-chatgpt-search-unit-key$=\"assistant\"]",
+            "[data-message-author-role=\"assistant\"]",
+            "article",
+            "[data-testid*=\"assistant\" i]"
+          ],
+          "matchTerms": []
+        },
+        {
+          "id": "chat.model-selection",
+          "surface": "chat",
+          "sourceStatus": "configured",
+          "selectors": [
+            "button[aria-label=\"Select ChatGPT model\"], button[aria-label=\"Seleccionar modelo de ChatGPT\"]"
+          ],
+          "matchTerms": [
+            "Select ChatGPT model"
+          ]
+        }
+      ]
+    }
+  ]
+}

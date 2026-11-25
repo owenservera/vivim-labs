@@ -1,0 +1,479 @@
+{
+  "schema": "vivim.vcl.axis-registry/0.1",
+  "status": "design_candidate_not_runtime",
+  "version": "0.1.0",
+  "notes": "Factorized registry, not a list of all products. Continuous axes bounded; invalid combinations filtered; use semantic policies; no effect authority.",
+  "axes": {
+    "target": {
+      "kind": "union",
+      "options": [
+        "grapheme",
+        "token",
+        "span",
+        "disjoint_span_set",
+        "clause",
+        "sentence",
+        "paragraph",
+        "semantic_node",
+        "semantic_group",
+        "relationship",
+        "composer",
+        "composer_edge",
+        "composer_corner",
+        "adjacent_surface",
+        "overlay",
+        "external_anchor"
+      ]
+    },
+    "topology": {
+      "kind": "enum",
+      "options": [
+        "single",
+        "nested",
+        "overlapping",
+        "disjoint",
+        "linked",
+        "branched",
+        "shared_scope",
+        "parallel",
+        "sequential"
+      ]
+    },
+    "geometry": {
+      "kind": "enum",
+      "options": [
+        "text_ink",
+        "text_run",
+        "tight_rect",
+        "rounded_rect",
+        "pill",
+        "per_line_fragments",
+        "joined_multiline_contour",
+        "convex_hull",
+        "orthogonal_contour",
+        "brackets",
+        "rail",
+        "underline",
+        "connector_path",
+        "point_anchor",
+        "freeform_path"
+      ]
+    },
+    "stroke_pattern": {
+      "kind": "enum",
+      "options": [
+        "none",
+        "solid",
+        "dotted",
+        "dashed",
+        "dash_dot",
+        "double",
+        "wavy",
+        "custom_pattern"
+      ]
+    },
+    "stroke_edges": {
+      "kind": "set",
+      "options": [
+        "top",
+        "right",
+        "bottom",
+        "left",
+        "all",
+        "open_start",
+        "open_end"
+      ]
+    },
+    "stroke_width": {
+      "kind": "scalar",
+      "units": "logical_px",
+      "min": 0,
+      "max": 8
+    },
+    "stroke_color": {
+      "kind": "token_or_rgba"
+    },
+    "stroke_opacity": {
+      "kind": "scalar",
+      "min": 0,
+      "max": 1
+    },
+    "stroke_cap": {
+      "kind": "enum",
+      "options": [
+        "butt",
+        "round",
+        "square"
+      ]
+    },
+    "stroke_join": {
+      "kind": "enum",
+      "options": [
+        "round",
+        "miter",
+        "bevel"
+      ]
+    },
+    "corner_radius": {
+      "kind": "scalar_or_per_corner",
+      "units": "logical_px",
+      "min": 0,
+      "max": 48
+    },
+    "fill": {
+      "kind": "union",
+      "options": [
+        "none",
+        "solid",
+        "tint",
+        "gradient",
+        "pattern",
+        "semantic_surface"
+      ]
+    },
+    "fill_color": {
+      "kind": "token_or_rgba"
+    },
+    "fill_opacity": {
+      "kind": "scalar",
+      "min": 0,
+      "max": 1
+    },
+    "padding": {
+      "kind": "scalar_or_per_side",
+      "units": "logical_px",
+      "min": 0,
+      "max": 32
+    },
+    "offset": {
+      "kind": "vector",
+      "units": "logical_px"
+    },
+    "gap": {
+      "kind": "scalar",
+      "units": "logical_px",
+      "min": 0,
+      "max": 32
+    },
+    "typography_family": {
+      "kind": "token"
+    },
+    "typography_weight": {
+      "kind": "enum",
+      "options": [
+        "thin",
+        "light",
+        "regular",
+        "medium",
+        "semibold",
+        "bold",
+        "black"
+      ]
+    },
+    "typography_slant": {
+      "kind": "enum",
+      "options": [
+        "upright",
+        "italic",
+        "oblique"
+      ]
+    },
+    "typography_width": {
+      "kind": "enum",
+      "options": [
+        "condensed",
+        "normal",
+        "expanded"
+      ]
+    },
+    "typography_size": {
+      "kind": "scalar_or_token"
+    },
+    "typography_color": {
+      "kind": "token_or_rgba"
+    },
+    "text_decoration": {
+      "kind": "set",
+      "options": [
+        "underline",
+        "overline",
+        "strikethrough",
+        "highlight",
+        "outline"
+      ]
+    },
+    "text_decoration_pattern": {
+      "kind": "enum",
+      "options": [
+        "solid",
+        "dotted",
+        "dashed",
+        "wavy",
+        "double"
+      ]
+    },
+    "placement": {
+      "kind": "enum",
+      "options": [
+        "inline",
+        "above_span",
+        "below_span",
+        "leading",
+        "trailing",
+        "inside_group",
+        "inside_editor",
+        "editor_edge_inside",
+        "editor_edge_outside",
+        "editor_corner",
+        "gutter",
+        "toolbar",
+        "interpretation_strip",
+        "adjacent_panel",
+        "popover",
+        "overlay"
+      ]
+    },
+    "edge": {
+      "kind": "enum",
+      "options": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ]
+    },
+    "alignment": {
+      "kind": "enum",
+      "options": [
+        "start",
+        "center",
+        "end",
+        "baseline",
+        "stretch",
+        "auto"
+      ]
+    },
+    "anchor_offset": {
+      "kind": "scalar",
+      "units": "logical_px"
+    },
+    "collision": {
+      "kind": "enum",
+      "options": [
+        "shift",
+        "stack",
+        "merge",
+        "flip",
+        "overflow_menu",
+        "hide_nonessential",
+        "wrap"
+      ]
+    },
+    "connector_route": {
+      "kind": "enum",
+      "options": [
+        "straight",
+        "orthogonal",
+        "curve",
+        "elbow",
+        "bus",
+        "auto"
+      ]
+    },
+    "connector_terminal": {
+      "kind": "enum",
+      "options": [
+        "none",
+        "arrow",
+        "dot",
+        "diamond",
+        "bracket",
+        "bar"
+      ]
+    },
+    "icon": {
+      "kind": "registry_ref"
+    },
+    "icon_size": {
+      "kind": "scalar_or_token"
+    },
+    "label": {
+      "kind": "optional_text_or_localization_ref"
+    },
+    "component": {
+      "kind": "enum",
+      "options": [
+        "decoration",
+        "badge",
+        "button",
+        "chip",
+        "picker",
+        "cycle_control",
+        "menu",
+        "slider",
+        "toggle",
+        "status",
+        "tooltip",
+        "inspector",
+        "progress",
+        "connector",
+        "group"
+      ]
+    },
+    "trigger": {
+      "kind": "set",
+      "options": [
+        "click",
+        "tap",
+        "hover",
+        "focus",
+        "long_press",
+        "key",
+        "wheel",
+        "swipe",
+        "drag",
+        "selection",
+        "voice",
+        "none"
+      ]
+    },
+    "gesture_behavior": {
+      "kind": "enum",
+      "options": [
+        "inspect",
+        "open_picker",
+        "cycle_previous",
+        "cycle_next",
+        "stage_value",
+        "expand",
+        "collapse",
+        "dismiss",
+        "reorder_draft",
+        "copy",
+        "none"
+      ]
+    },
+    "feedback": {
+      "kind": "set",
+      "options": [
+        "visual",
+        "haptic",
+        "sound",
+        "accessible_announcement"
+      ]
+    },
+    "motion": {
+      "kind": "enum",
+      "options": [
+        "none",
+        "fade",
+        "slide",
+        "scale",
+        "morph",
+        "pulse",
+        "progress"
+      ]
+    },
+    "motion_duration": {
+      "kind": "scalar",
+      "units": "ms",
+      "min": 0,
+      "max": 1000
+    },
+    "visibility": {
+      "kind": "enum",
+      "options": [
+        "always",
+        "on_focus",
+        "on_hover",
+        "on_selection",
+        "on_ambiguity",
+        "on_review",
+        "on_execution",
+        "on_inspect",
+        "adaptive"
+      ]
+    },
+    "density": {
+      "kind": "enum",
+      "options": [
+        "quiet",
+        "assisted",
+        "inspect"
+      ]
+    },
+    "layer": {
+      "kind": "enum",
+      "options": [
+        "background",
+        "group_fill",
+        "span_fill",
+        "text",
+        "text_decoration",
+        "group_stroke",
+        "relation",
+        "adornment",
+        "selection",
+        "caret",
+        "popover"
+      ]
+    },
+    "binding": {
+      "kind": "typed_semantic_ref"
+    },
+    "state": {
+      "kind": "structured",
+      "fields": [
+        "interpretation",
+        "availability",
+        "authorization",
+        "execution",
+        "freshness"
+      ]
+    },
+    "accessibility": {
+      "kind": "structured",
+      "fields": [
+        "name",
+        "description",
+        "role",
+        "keyboard_action",
+        "focus_order",
+        "non_color_cue",
+        "reduced_motion"
+      ]
+    }
+  },
+  "composition": {
+    "precedence": [
+      "base_theme",
+      "density",
+      "semantic_role",
+      "interpretation_state",
+      "availability",
+      "authorization",
+      "execution",
+      "interaction_state",
+      "accessibility"
+    ],
+    "constraints": [
+      "edge only for edge/corner anchors; connector axes only for relationships",
+      "no arbitrary executable callbacks; typed inert UI intents only",
+      "no stale source revision accepted",
+      "required accessibility and non-color state cues",
+      "no authorization inferred from visual style",
+      "no overlap obscuring text, selection, or caret",
+      "provider/account choices from scoped live registry only",
+      "no continuous animation for ordinary typing; reduced motion supported",
+      "unknown required extensions rejected; optional extensions degrade safely"
+    ],
+    "limits": {
+      "max_expressions_per_frame": 256,
+      "max_ranges_per_expression": 64,
+      "max_group_depth": 8,
+      "max_adornments_per_anchor": 12,
+      "max_connector_count": 64
+    },
+    "testing": "single-axis boundary, pairwise covering arrays, selected three-way interactions, real command journeys, geometry/property tests and actual GPUI acceptance"
+  }
+}

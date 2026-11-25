@@ -24,3 +24,6 @@ pub mod etw_decode;
 
 pub mod file_metadata;
 pub mod etw_record;
+
+pub mod semantic_surface;
+pub mod recovery;

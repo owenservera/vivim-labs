@@ -1,0 +1,7 @@
+# R017 — HCU-inspired semantic observation and recovery core
+
+Independent Rust implementation in semantic_surface.rs and recovery.rs. Source donor HCU 8ce82b310b014ab1133b28febc2eca81527e43e6 (MIT); inspected ax_ref_registry.go, request_replay.go, ax_snapshot_store.go. Context7 /microsoft/ufo hybrid control discovery and observe/act/verify guidance. No donor code copied, no additional dependency.
+
+Registry uses exact owner/app/window/generation identity; complete revisioned snapshots, opaque provider identity/fingerprint, monotonically allocated references; invalidate on gap, missing or incomplete observation, or changed identity. Sensitive controls omitted. No control labels or values retained in this primitive. Consumer-specific acknowledged baseline, full/diff/unchanged projection and explicit loss reset; no delivery inferred from sending a response. Recovery only projects incumbent durable Host receipt state; never retries, authorizes or issues an effect. No competing replay store. Reference possession is not authorization. Caller must enforce current grant, native identity readback and provider-selected app scope.
+
+Integration belongs to existing Studio/Harness owner: use provider-bound UIA identity and existing semantic state, Host receipts and app/phone renderer. No new UI controller, browser automation, registry authority or endpoint. This is a pure source candidate; no UIA collector/action executor, native app acceptance or new public MCP registration. Eight Rust fixture tests supplied; native run pending.

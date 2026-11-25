@@ -11,3 +11,11 @@ Priority is the owner's desired observable result: an agent gets useful context 
 | P1-01 | Extend real campaign execution, authenticated identities, evidence aggregation, bounded resource allocation and review using existing infrastructure. | Two actual independent agents first, then measured scale; 1,000 logical tasks target distinct from running agents. |
 | P1-02 | Improve language from findings; use real source examples at file/item/block/footer level. | Useful consumer and agent projections; measured benefit vs authoring burden; independently reviewed migration. |
 Immediate next task is P0-02 after source recheck. P0-04 and P0-05 can prepare isolated work in parallel without competing graph ownership. Chronos staged activation/import must be source-reviewed and tested; no duplicate time engine. Preserve revision/lineage references during normal work, defer time-slider implementation. Do not turn this queue into a general VIVIM roadmap.
+
+## Deferred additions — not current implementation
+| ID | Work | Acceptance |
+|---|---|---|
+| P1-03 | Special bundle classes, starting with live development; use existing DCB and task activation. | Class-specific context automatically compiled and refreshed with relevant dependencies. |
+| P1-04 | Dynamic agent creation: compile role, agent file, profile and VLANG context for the active task and supported coding harness. | Real harness receives usable, scoped, versioned agent package; no new authority from generated profile. |
+| P1-05 | Integrate existing approximately 200-file agentic coding toolkit via semantic links and live on-demand generation of useful artifacts. | Identify exact donor, map canonical definitions, remove duplication, verify usefulness on real tasks. |
+Owner explicitly deferred implementation. Current P0 remains unchanged. Relevant recovery candidate: Labs agentic_excelence/agentic-file-system; exact toolkit identity/count not verified.

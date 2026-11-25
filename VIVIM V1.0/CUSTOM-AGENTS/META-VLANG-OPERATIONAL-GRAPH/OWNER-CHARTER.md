@@ -12,3 +12,6 @@
 - File-open context includes recent meaningful work: why opened, intended change, what actually happened, outcome, dates/times, unresolved issues. Last five summaries as an example; revisitable archive. Git messages may contribute, but uncommitted/failed research also matters. Protocol placement: durable header/item/inline/footer semantics plus dynamically compiled historical context.
 - Long-term vision: timeline slider moves backward/forward through actual code and corresponding reconstructible state, recompiles as appropriate. Explicitly future objective, not immediate delivery requirement.
 - Latest instruction: create dedicated custom-agent folder for this work. Preserve the vision and existing design records, prioritize direct owner intent, practical immediate execution.
+
+## Subsequent owner direction (deferred)
+Special auto-generated bundle classes, starting with live development. Dynamically create task-specific custom agent files/profiles with VLANG context for coding harnesses, using prior agentic coding work. Integrate the existing approximately 200-file agentic coding toolkit and link its artifacts so they can be generated live when useful. Owner explicitly says add to list, do not implement now.

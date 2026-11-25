@@ -59,3 +59,7 @@ Owner open decisions: first visible categories vs advanced; retention/sync defau
 ## R003 — Current owner God Mode / development unblocker
 
 The existing production connector is the owner God Mode installation; User Mode comes later. No repeated per-session capability configuration. See [God Mode configuration handoff](OWNER-WORKSTATION-GOD-MODE-R003.md) for the proposed stable descriptors, existing authority bindings, batch discovery and live activation status. P0 is removing actual development access blockers through the current connector, not another browser or settings surface.
+
+## Windows Native Intelligence — R001 candidate integration
+
+[Windows Native Intelligence extraction pack](../WINDOWS-NATIVE-INTELLIGENCE/README.md) proposes 11 Windows-first packages and 33 shared MCP/app capability descriptors. Settings owns approved enablement, scope, retention and effective support/readback; no second settings store. See the [integration contract](../WINDOWS-NATIVE-INTELLIGENCE/INTEGRATION.md#configuration-integration). All descriptors are candidates until incumbent Host wiring, live grants and MCP/GPUI acceptance. No live configuration change.

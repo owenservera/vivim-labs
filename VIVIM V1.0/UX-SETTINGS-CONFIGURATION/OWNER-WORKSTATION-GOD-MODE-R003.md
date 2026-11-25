@@ -51,3 +51,11 @@ P0 architecture (proposal, not deployed):
 
 Current interim staging: source 488ab7365a9c902e06e6346ed878b2bb0a7dcf60 built on Windows through specifically authorized Desktop Commander bootstrap; process 21196 exited 0 in 198.86s; release seal and verification matched, rootCount=10, 16 MCP tools; promotionPerformed=false, LIVE_HOST_UNCHANGED=True. Craft and seven additional active development roots selected (plus arbor/scratch); 84 immediate repo siblings observed, which exceeded 16-root contract. This candidate is NOT the proposed machine-wide profile, and not yet active. No new Studio/browser implementation, no full machine access verified. Prioritize machine-scope contract over repeated static expansion; maintain current working connection.
 
+
+## R006 — Production owner-machine mode live (2026-11-25)
+
+Existing connector now reports machineScope:true, ARBOR source [972dbcc](https://github.com/owenservera/ARBOR/commit/972dbccafea7b9fde47913207c2fefcf02ac8365). Full Windows tests: 110 Host/MCP + 28 native + 17 candidate adapter passed; staged seal verified; production Host PID 12772, original tunnel supervisor PID 13632, protected rollback retained and maintenance cleared. First promotion failed because maintenance blocks grant-summary probe; incumbent restored and checked before successful corrected handover. No new connector or browser surface.
+
+Actual ChatGPT VIVIM-only acceptance: absolute native Labs directory listing (50 entries); direct unregistered stock Craft executable in absolute cwd, version 0.6.1 exit 0 (ctl-93f308fda3b6bb8f); stock Craft doctor ran exit 1 due to stale ZCode registration/unconfigured integrations; Claude Code setup dry-run preview exit 0 (ctl-81818fcbac0c1bc4). No actual Craft client configuration changed.
+
+Settings effective state: owner-machine mode enabled, use existing tool names with root_id machine and absolute path/cwd. Registered roots are not required for ordinary machine-mode operations. Grant currently expires 2026-11-26T01:55:15.038Z; renewal, persistent configuration lifecycle, broader file/terminal/GUI fidelity and separate-session acceptance remain open. No separate User Mode work. Canonical [live handoff](https://github.com/owenservera/ARBOR/blob/main/tools/mcp/vivim-arbor/HANDOFF.md). No new Studio/Harness implementation.

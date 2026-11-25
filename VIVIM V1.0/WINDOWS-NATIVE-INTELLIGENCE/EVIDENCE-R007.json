@@ -1,0 +1,30 @@
+{
+  "schema": "vivim.labs.windows-compiler-evidence/1",
+  "checks": [
+    "all 33 unique",
+    "all candidate projections disabled",
+    "all Host schema fields supported",
+    "app and Host parity",
+    "integer adapter converges on Host representation",
+    "boolean conversion and separate receipt key",
+    "no duplicate agent start idempotency key",
+    "canonical drive",
+    "limit overflow refused",
+    "ambiguous numeric text refused",
+    "extra argument refused",
+    "missing effect receipt key refused",
+    "ambiguous boolean refused",
+    "invalid receipt key refused",
+    "path in drive argument refused",
+    "control characters refused",
+    "duplicate capability refused",
+    "missing grant requirement refused",
+    "prototype-like argument refused"
+  ],
+  "candidates": 33,
+  "method": "Actual V8 execution of compiler and test logic on committed R001 manifest; no Host or MCP server invoked",
+  "nativeCompile": "UNRUN",
+  "nodeFileHarness": "UNRUN",
+  "liveAccepted": 0,
+  "arborChanged": false
+}

@@ -46,3 +46,7 @@ First slice: WNI02 aggregate resources through existing Host to MCP and GPUI; WN
 ## R006 — ConPTY, stream accounting, ETW and indexed search source
 
 [ConPTY and stream transport](packages/WNI03-R006-CONPTY-STREAM.md), [ETW producer](packages/WNI02-R006-ETW-PRODUCER.md), [typed indexed-search query](packages/WNI04-R006-SEARCH-QUERY.md). Four new Rust modules and fixture tests; no process attach, ETW consumer or OLE DB execution yet. Compiler absent from current cloud runtime; tests unrun. No ARBOR writes.
+
+## R007 — shared capability compiler
+
+[Compiler package](packages/WNI11-R007-CAPABILITY-COMPILER.md) generates 33 current-Host-compatible candidate schemas and MCP/app projections with 19/19 cloud checks passed. All candidates remain non-executable pending real adapters and grants; no ARBOR edits.

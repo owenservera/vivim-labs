@@ -1,0 +1,3433 @@
+{
+  "schema": "vivim.labs.windows-projections/1",
+  "arborBase": "67859e96c12a55d4341d4008cf8a5b1528d18eea",
+  "rows": [
+    {
+      "id": "windows.filesystem.changes.status",
+      "semanticId": "windows.filesystem.changes.status@1",
+      "package": "WNI01",
+      "fields": {
+        "scope_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.filesystem.changes.status",
+        "title": "filesystem changes status",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "scope_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_filesystem_changes_status",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "scope_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "scope_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.filesystem.changes.status",
+        "args": {
+          "scope_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.filesystem.changes.read",
+      "semanticId": "windows.filesystem.changes.read@1",
+      "package": "WNI01",
+      "fields": {
+        "scope_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "cursor": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "limit": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 3
+          },
+          "mcp": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200
+          },
+          "kind": "integer",
+          "min": 1,
+          "max": 200
+        }
+      },
+      "host": {
+        "id": "windows.filesystem.changes.read",
+        "title": "filesystem changes read",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "scope_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "cursor": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "limit": {
+            "type": "string",
+            "min": 1,
+            "max": 3
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_filesystem_changes_read",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "scope_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "cursor": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          },
+          "required": [
+            "scope_id",
+            "cursor",
+            "limit"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.filesystem.changes.read",
+        "args": {
+          "scope_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "cursor": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "limit": {
+            "type": "string",
+            "min": 1,
+            "max": 3
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.filesystem.changes.configure",
+      "semanticId": "windows.filesystem.changes.configure@1",
+      "package": "WNI01",
+      "fields": {
+        "scope_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "enabled": {
+          "host": {
+            "type": "enum",
+            "values": [
+              "enabled",
+              "disabled"
+            ]
+          },
+          "mcp": {
+            "type": "boolean"
+          },
+          "kind": "boolean"
+        }
+      },
+      "host": {
+        "id": "windows.filesystem.changes.configure",
+        "title": "filesystem changes configure",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R2",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "scope_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "enabled": {
+            "type": "enum",
+            "values": [
+              "enabled",
+              "disabled"
+            ]
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_filesystem_changes_configure",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "scope_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "enabled": {
+              "type": "boolean"
+            },
+            "request_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$"
+            }
+          },
+          "required": [
+            "scope_id",
+            "enabled",
+            "request_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.filesystem.changes.configure",
+        "args": {
+          "scope_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "enabled": {
+            "type": "enum",
+            "values": [
+              "enabled",
+              "disabled"
+            ]
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": true
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.resources.read",
+      "semanticId": "windows.system.resources.read@1",
+      "package": "WNI02",
+      "fields": {},
+      "host": {
+        "id": "windows.system.resources.read",
+        "title": "system resources read",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {},
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_system_resources_read",
+        "inputSchema": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.system.resources.read",
+        "args": {},
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.volume.capacity",
+      "semanticId": "windows.system.volume.capacity@1",
+      "package": "WNI02",
+      "fields": {
+        "drive": {
+          "host": {
+            "type": "enum",
+            "values": [
+              "A:",
+              "B:",
+              "C:",
+              "D:",
+              "E:",
+              "F:",
+              "G:",
+              "H:",
+              "I:",
+              "J:",
+              "K:",
+              "L:",
+              "M:",
+              "N:",
+              "O:",
+              "P:",
+              "Q:",
+              "R:",
+              "S:",
+              "T:",
+              "U:",
+              "V:",
+              "W:",
+              "X:",
+              "Y:",
+              "Z:"
+            ]
+          },
+          "mcp": {
+            "type": "string",
+            "pattern": "^[A-Za-z]:$"
+          },
+          "kind": "drive"
+        }
+      },
+      "host": {
+        "id": "windows.system.volume.capacity",
+        "title": "system volume capacity",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "drive": {
+            "type": "enum",
+            "values": [
+              "A:",
+              "B:",
+              "C:",
+              "D:",
+              "E:",
+              "F:",
+              "G:",
+              "H:",
+              "I:",
+              "J:",
+              "K:",
+              "L:",
+              "M:",
+              "N:",
+              "O:",
+              "P:",
+              "Q:",
+              "R:",
+              "S:",
+              "T:",
+              "U:",
+              "V:",
+              "W:",
+              "X:",
+              "Y:",
+              "Z:"
+            ]
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_system_volume_capacity",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "drive": {
+              "type": "string",
+              "pattern": "^[A-Za-z]:$"
+            }
+          },
+          "required": [
+            "drive"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.system.volume.capacity",
+        "args": {
+          "drive": {
+            "type": "enum",
+            "values": [
+              "A:",
+              "B:",
+              "C:",
+              "D:",
+              "E:",
+              "F:",
+              "G:",
+              "H:",
+              "I:",
+              "J:",
+              "K:",
+              "L:",
+              "M:",
+              "N:",
+              "O:",
+              "P:",
+              "Q:",
+              "R:",
+              "S:",
+              "T:",
+              "U:",
+              "V:",
+              "W:",
+              "X:",
+              "Y:",
+              "Z:"
+            ]
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.diagnostics.read",
+      "semanticId": "windows.system.diagnostics.read@1",
+      "package": "WNI02",
+      "fields": {
+        "session_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "cursor": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "limit": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 3
+          },
+          "mcp": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200
+          },
+          "kind": "integer",
+          "min": 1,
+          "max": 200
+        }
+      },
+      "host": {
+        "id": "windows.system.diagnostics.read",
+        "title": "system diagnostics read",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "session_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "cursor": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "limit": {
+            "type": "string",
+            "min": 1,
+            "max": 3
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_system_diagnostics_read",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "session_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "cursor": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          },
+          "required": [
+            "session_id",
+            "cursor",
+            "limit"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.system.diagnostics.read",
+        "args": {
+          "session_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "cursor": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "limit": {
+            "type": "string",
+            "min": 1,
+            "max": 3
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.diagnostics.configure",
+      "semanticId": "windows.system.diagnostics.configure@1",
+      "package": "WNI02",
+      "fields": {
+        "scope_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "enabled": {
+          "host": {
+            "type": "enum",
+            "values": [
+              "enabled",
+              "disabled"
+            ]
+          },
+          "mcp": {
+            "type": "boolean"
+          },
+          "kind": "boolean"
+        }
+      },
+      "host": {
+        "id": "windows.system.diagnostics.configure",
+        "title": "system diagnostics configure",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R2",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "scope_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "enabled": {
+            "type": "enum",
+            "values": [
+              "enabled",
+              "disabled"
+            ]
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_system_diagnostics_configure",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "scope_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "enabled": {
+              "type": "boolean"
+            },
+            "request_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$"
+            }
+          },
+          "required": [
+            "scope_id",
+            "enabled",
+            "request_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.system.diagnostics.configure",
+        "args": {
+          "scope_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "enabled": {
+            "type": "enum",
+            "values": [
+              "enabled",
+              "disabled"
+            ]
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": true
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.terminal.capabilities.read",
+      "semanticId": "windows.terminal.capabilities.read@1",
+      "package": "WNI03",
+      "fields": {},
+      "host": {
+        "id": "windows.terminal.capabilities.read",
+        "title": "terminal capabilities read",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {},
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_terminal_capabilities_read",
+        "inputSchema": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.terminal.capabilities.read",
+        "args": {},
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.agent.sessions.list",
+      "semanticId": "windows.agent.sessions.list@1",
+      "package": "WNI03",
+      "fields": {},
+      "host": {
+        "id": "windows.agent.sessions.list",
+        "title": "agent sessions list",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {},
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_agent_sessions_list",
+        "inputSchema": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.agent.sessions.list",
+        "args": {},
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.agent.session.status",
+      "semanticId": "windows.agent.session.status@1",
+      "package": "WNI03",
+      "fields": {
+        "session_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.agent.session.status",
+        "title": "agent session status",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "session_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_agent_session_status",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "session_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "session_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.agent.session.status",
+        "args": {
+          "session_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.agent.session.start",
+      "semanticId": "windows.agent.session.start@1",
+      "package": "WNI03",
+      "fields": {
+        "profile_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "scope_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.agent.session.start",
+        "title": "agent session start",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R2",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "profile_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "scope_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_agent_session_start",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "profile_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "scope_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "request_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$"
+            }
+          },
+          "required": [
+            "profile_id",
+            "scope_id",
+            "request_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.agent.session.start",
+        "args": {
+          "profile_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "scope_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": true
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.agent.session.cancel",
+      "semanticId": "windows.agent.session.cancel@1",
+      "package": "WNI03",
+      "fields": {
+        "session_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.agent.session.cancel",
+        "title": "agent session cancel",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R2",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "session_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_agent_session_cancel",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "session_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "request_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$"
+            }
+          },
+          "required": [
+            "session_id",
+            "request_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.agent.session.cancel",
+        "args": {
+          "session_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": true
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.knowledge.search.status",
+      "semanticId": "windows.knowledge.search.status@1",
+      "package": "WNI04",
+      "fields": {},
+      "host": {
+        "id": "windows.knowledge.search.status",
+        "title": "knowledge search status",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {},
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_knowledge_search_status",
+        "inputSchema": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.knowledge.search.status",
+        "args": {},
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.knowledge.search.query",
+      "semanticId": "windows.knowledge.search.query@1",
+      "package": "WNI04",
+      "fields": {
+        "scope_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "query": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 512
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 512
+        },
+        "limit": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 3
+          },
+          "mcp": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200
+          },
+          "kind": "integer",
+          "min": 1,
+          "max": 200
+        }
+      },
+      "host": {
+        "id": "windows.knowledge.search.query",
+        "title": "knowledge search query",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "scope_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "query": {
+            "type": "string",
+            "min": 1,
+            "max": 512
+          },
+          "limit": {
+            "type": "string",
+            "min": 1,
+            "max": 3
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_knowledge_search_query",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "scope_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "query": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          },
+          "required": [
+            "scope_id",
+            "query",
+            "limit"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.knowledge.search.query",
+        "args": {
+          "scope_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "query": {
+            "type": "string",
+            "min": 1,
+            "max": 512
+          },
+          "limit": {
+            "type": "string",
+            "min": 1,
+            "max": 3
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.knowledge.file.properties",
+      "semanticId": "windows.knowledge.file.properties@1",
+      "package": "WNI04",
+      "fields": {
+        "scope_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "file_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.knowledge.file.properties",
+        "title": "knowledge file properties",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "scope_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "file_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_knowledge_file_properties",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "scope_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "file_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "scope_id",
+            "file_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.knowledge.file.properties",
+        "args": {
+          "scope_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "file_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.inspect",
+      "semanticId": "windows.application.inspect@1",
+      "package": "WNI05",
+      "fields": {
+        "app_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.application.inspect",
+        "title": "application inspect",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "app_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_application_inspect",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "app_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "app_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.application.inspect",
+        "args": {
+          "app_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.element.query",
+      "semanticId": "windows.application.element.query@1",
+      "package": "WNI05",
+      "fields": {
+        "app_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "query": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 512
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 512
+        },
+        "limit": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 3
+          },
+          "mcp": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200
+          },
+          "kind": "integer",
+          "min": 1,
+          "max": 200
+        }
+      },
+      "host": {
+        "id": "windows.application.element.query",
+        "title": "application element query",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "app_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "query": {
+            "type": "string",
+            "min": 1,
+            "max": 512
+          },
+          "limit": {
+            "type": "string",
+            "min": 1,
+            "max": 3
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_application_element_query",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "app_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "query": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          },
+          "required": [
+            "app_id",
+            "query",
+            "limit"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.application.element.query",
+        "args": {
+          "app_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "query": {
+            "type": "string",
+            "min": 1,
+            "max": 512
+          },
+          "limit": {
+            "type": "string",
+            "min": 1,
+            "max": 3
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.action.invoke",
+      "semanticId": "windows.application.action.invoke@1",
+      "package": "WNI05",
+      "fields": {
+        "app_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "element_ref": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "action": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "revision": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.application.action.invoke",
+        "title": "application action invoke",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R2",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "app_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "element_ref": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "action": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "revision": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_application_action_invoke",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "app_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "element_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "action": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "revision": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "request_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$"
+            }
+          },
+          "required": [
+            "app_id",
+            "element_ref",
+            "action",
+            "revision",
+            "request_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.application.action.invoke",
+        "args": {
+          "app_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "element_ref": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "action": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "revision": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": true
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.actions.discover",
+      "semanticId": "windows.application.actions.discover@1",
+      "package": "WNI06",
+      "fields": {
+        "app_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.application.actions.discover",
+        "title": "application actions discover",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "app_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_application_actions_discover",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "app_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "app_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.application.actions.discover",
+        "args": {
+          "app_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.action.describe",
+      "semanticId": "windows.application.action.describe@1",
+      "package": "WNI06",
+      "fields": {
+        "action_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.application.action.describe",
+        "title": "application action describe",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "action_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_application_action_describe",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "action_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "action_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.application.action.describe",
+        "args": {
+          "action_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.action.execute",
+      "semanticId": "windows.application.action.execute@1",
+      "package": "WNI06",
+      "fields": {
+        "action_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "input_ref": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "revision": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.application.action.execute",
+        "title": "application action execute",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R2",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "action_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "input_ref": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "revision": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_application_action_execute",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "action_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "input_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "revision": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "request_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$"
+            }
+          },
+          "required": [
+            "action_id",
+            "input_ref",
+            "revision",
+            "request_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.application.action.execute",
+        "args": {
+          "action_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "input_ref": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "revision": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": true
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.capture.status",
+      "semanticId": "windows.application.capture.status@1",
+      "package": "WNI07",
+      "fields": {},
+      "host": {
+        "id": "windows.application.capture.status",
+        "title": "application capture status",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {},
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_application_capture_status",
+        "inputSchema": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.application.capture.status",
+        "args": {},
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.capture.request",
+      "semanticId": "windows.application.capture.request@1",
+      "package": "WNI07",
+      "fields": {
+        "app_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "purpose": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.application.capture.request",
+        "title": "application capture request",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R2",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "app_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "purpose": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_application_capture_request",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "app_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "purpose": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "request_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$"
+            }
+          },
+          "required": [
+            "app_id",
+            "purpose",
+            "request_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.application.capture.request",
+        "args": {
+          "app_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "purpose": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": true
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.capture.stop",
+      "semanticId": "windows.application.capture.stop@1",
+      "package": "WNI07",
+      "fields": {
+        "capture_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.application.capture.stop",
+        "title": "application capture stop",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R2",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "capture_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_application_capture_stop",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "capture_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "request_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$"
+            }
+          },
+          "required": [
+            "capture_id",
+            "request_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.application.capture.stop",
+        "args": {
+          "capture_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": true
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.configuration.inspect",
+      "semanticId": "windows.system.configuration.inspect@1",
+      "package": "WNI08",
+      "fields": {
+        "profile_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.system.configuration.inspect",
+        "title": "system configuration inspect",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "profile_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_system_configuration_inspect",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "profile_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "profile_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.system.configuration.inspect",
+        "args": {
+          "profile_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.configuration.plan",
+      "semanticId": "windows.system.configuration.plan@1",
+      "package": "WNI08",
+      "fields": {
+        "profile_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.system.configuration.plan",
+        "title": "system configuration plan",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "profile_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_system_configuration_plan",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "profile_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "profile_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.system.configuration.plan",
+        "args": {
+          "profile_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.configuration.apply",
+      "semanticId": "windows.system.configuration.apply@1",
+      "package": "WNI08",
+      "fields": {
+        "plan_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "revision": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.system.configuration.apply",
+        "title": "system configuration apply",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R2",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "plan_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "revision": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_system_configuration_apply",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "plan_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "revision": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "request_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$"
+            }
+          },
+          "required": [
+            "plan_id",
+            "revision",
+            "request_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.system.configuration.apply",
+        "args": {
+          "plan_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "revision": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": true
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.workload.isolation.status",
+      "semanticId": "windows.workload.isolation.status@1",
+      "package": "WNI09",
+      "fields": {},
+      "host": {
+        "id": "windows.workload.isolation.status",
+        "title": "workload isolation status",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {},
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_workload_isolation_status",
+        "inputSchema": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.workload.isolation.status",
+        "args": {},
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.workload.isolation.plan",
+      "semanticId": "windows.workload.isolation.plan@1",
+      "package": "WNI09",
+      "fields": {
+        "profile_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.workload.isolation.plan",
+        "title": "workload isolation plan",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "profile_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_workload_isolation_plan",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "profile_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "profile_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.workload.isolation.plan",
+        "args": {
+          "profile_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.workload.isolation.run",
+      "semanticId": "windows.workload.isolation.run@1",
+      "package": "WNI09",
+      "fields": {
+        "plan_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "revision": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.workload.isolation.run",
+        "title": "workload isolation run",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R2",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "plan_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "revision": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_workload_isolation_run",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "plan_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "revision": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "request_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$"
+            }
+          },
+          "required": [
+            "plan_id",
+            "revision",
+            "request_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.workload.isolation.run",
+        "args": {
+          "plan_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "revision": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": true
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.intelligence.local.status",
+      "semanticId": "windows.intelligence.local.status@1",
+      "package": "WNI10",
+      "fields": {},
+      "host": {
+        "id": "windows.intelligence.local.status",
+        "title": "intelligence local status",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {},
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_intelligence_local_status",
+        "inputSchema": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.intelligence.local.status",
+        "args": {},
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.intelligence.local.evaluate",
+      "semanticId": "windows.intelligence.local.evaluate@1",
+      "package": "WNI10",
+      "fields": {
+        "model_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "fixture_ref": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        },
+        "budget_id": {
+          "host": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "mcp": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "host": {
+        "id": "windows.intelligence.local.evaluate",
+        "title": "intelligence local evaluate",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R2",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {
+          "model_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "fixture_ref": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "budget_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_intelligence_local_evaluate",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "model_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "fixture_ref": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "budget_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "request_id": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{32}$"
+            }
+          },
+          "required": [
+            "model_id",
+            "fixture_ref",
+            "budget_id",
+            "request_id"
+          ],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.intelligence.local.evaluate",
+        "args": {
+          "model_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "fixture_ref": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          },
+          "budget_id": {
+            "type": "string",
+            "min": 1,
+            "max": 128
+          }
+        },
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": true
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.native.support",
+      "semanticId": "windows.system.native.support@1",
+      "package": "WNI11",
+      "fields": {},
+      "host": {
+        "id": "windows.system.native.support",
+        "title": "system native support",
+        "category": "workstation",
+        "owner": "host-control",
+        "readiness": "adapter_pending",
+        "risk": "R0",
+        "target": "local-workstation",
+        "surfaces": [
+          "text",
+          "desktop",
+          "mobile",
+          "visual"
+        ],
+        "privacy": "authenticated-pc-owner-only",
+        "aiCandidate": false,
+        "args": {},
+        "examples": [],
+        "reversible": false,
+        "subject": "windows-native",
+        "priority": "P0",
+        "precondition": "Candidate adapter pending; current Host grant and exact effect approval required."
+      },
+      "mcp": {
+        "name": "vivim_windows_system_native_support",
+        "inputSchema": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "registered": false
+      },
+      "app": {
+        "actionId": "windows.system.native.support",
+        "args": {},
+        "enabled": false,
+        "desktopOwnerOnly": true,
+        "mobileAvailable": false
+      },
+      "authority": {
+        "executionAuthorized": false,
+        "requiresLiveGrant": true,
+        "requiresEffectApproval": false
+      },
+      "result": "vivim.windows.native-result/1"
+    }
+  ]
+}

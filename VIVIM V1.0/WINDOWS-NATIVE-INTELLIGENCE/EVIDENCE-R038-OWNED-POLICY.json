@@ -1,0 +1,33 @@
+{
+  "schema": "vivim.labs.owned-admission-policy/1",
+  "source": "57d5978b2ad23b204dd637fa79397c5f97601542",
+  "session": "ctl-c9a01269c7e9a4cc",
+  "exitCode": 0,
+  "success": true,
+  "passed": 58,
+  "failed": 0,
+  "elapsedMs": 35223,
+  "testSeconds": 4.75,
+  "exactSourceBlobsVerified": 13,
+  "productPin": "95d046c20d5af0a4e116d6fe6cacc9300203452c",
+  "sample": {
+    "logicalCpus": 8,
+    "cpuBusyBasisPoints": 6630,
+    "memoryAvailableBytes": 14087073792,
+    "diskAvailableBytes": 6368362496
+  },
+  "livePolicy": {
+    "generation": 4,
+    "narrowedParallelLimit": 1,
+    "wideningRefused": true,
+    "priorHoldPreserved": true,
+    "cancelReleased": true,
+    "subsequentAdmission": true
+  },
+  "limits": [
+    "Single campaign, in-memory owner; cross-campaign durable Host receipt binding remains distinct.",
+    "Profile reducer tested; actual process measurement feedback not wired.",
+    "Actual compiler children in native sampling fixture; owned-process adapter exercised with live fixture children; R039 adds direct compiler test.",
+    "No OS-enforced memory/disk quotas, no production edits or deployment."
+  ]
+}

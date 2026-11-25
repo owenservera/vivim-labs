@@ -131,4 +131,51 @@ impl OwnedCampaign{
   assert_eq!(c.reserved().tasks,1);assert!(!c.cancel(&b).unwrap().success());assert_eq!(c.reserved().tasks,0);
   println!("RESIDENT_POLICY_REAL_JOB generation=4 narrowed=1 widened_refused=true cancelled_released=true");
  }
+
+ #[test]fn real_compilers_through_owned_policy(){
+  use crate::{meta_policy::{PARALLEL,BUSY,MEMORY,DISK},protocol::Snapshot as Language,meta_resident::Resident};
+  use std::{path::PathBuf,process::Command};
+  let cwd=std::env::current_dir().unwrap();
+  let out=cwd.join(format!("wni-r039-{}-{}",std::process::id(),std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_nanos()));
+  std::fs::create_dir(&out).unwrap();
+  struct Fixture(PathBuf);
+  impl Drop for Fixture{fn drop(&mut self){let _=std::fs::remove_dir_all(&self.0);}}
+  let _fixture=Fixture(out.clone());
+  let sysroot=Command::new("rustc").args(["--print","sysroot"]).output().unwrap();
+  assert!(sysroot.status.success());
+  let exe=PathBuf::from(String::from_utf8(sysroot.stdout).unwrap().trim()).join("bin").join("rustc.exe");
+  assert!(exe.is_file());
+  let rows=[(PARALLEL,2),(BUSY,10000),(MEMORY,128),(DISK,64)].map(|(id,v)|format!("{id}\t1\t\tmeta/1 (fn ((cpus int) (busy int) (active int) (memory int) (disk int)) int (int {v}))"));
+  let mut resident=Resident::start(Language::parse(&rows.join("\n")).unwrap()).unwrap();
+  let drive=cwd.to_str().unwrap().strip_prefix(r"\\?\").unwrap_or(cwd.to_str().unwrap()).chars().next().unwrap();
+  let mut sampler=NativeSampler::new(drive);
+  assert_eq!(sampler.capture(),Err(SampleError::Warmup));thread::sleep(Duration::from_millis(180));
+  let mut sample=sampler.capture().unwrap();
+  for _ in 0..4{if sample.cpu_busy_bp!=Some(10000){break;}thread::sleep(Duration::from_millis(180));sample=sampler.capture().unwrap();}
+  assert_ne!(sample.cpu_busy_bp,Some(10000),"CPU saturated; admission must defer");
+  let tasks=["campaign","scheduler"].into_iter().map(|name|(Task{id:name.into(),source:format!("{name}.rs"),objective:"compile exact Rust metadata".into()},Estimate{memory:128*1024*1024,disk:8*1024*1024,cpus:1,priority:1,enqueued_ms:0})).collect();
+  let budget=Budget{max_age_ms:5000,memory_reserve:128*1024*1024,disk_reserve:64*1024*1024,cpu_reserve:0,max_parallel:2,busy_ceiling_bp:10000};
+  let mut owner=OwnedCampaign::new(ResourceCampaign::new(tasks,2,budget).unwrap()).unwrap();
+  let mut jobs=Vec::new();let begin=Instant::now();
+  for worker in ["rustc-a","rustc-b"]{
+   let d=owner.start_with_policy(&mut resident,worker,sampler.now_ms(),30000,sample,|lease|{
+    let src=cwd.join(&lease.task.source);let dst=out.join(format!("{}.rmeta",lease.task.id));
+    assert!(src.is_file());
+    let environment=["SystemRoot","TEMP","TMP"].into_iter().filter_map(|k|std::env::var_os(k).map(|v|(k.into(),v))).collect();
+    Some(LocalProcessSpec{executable:exe.clone(),workspace:cwd.clone(),args:vec!["--edition=2021".into(),"--crate-type=lib".into(),"--emit=metadata".into(),"--crate-name".into(),lease.task.id.clone().into(),src.into_os_string(),"-o".into(),dst.into_os_string()],environment,tail_bytes:8192})
+   }).unwrap();
+   assert_eq!(d.generation,1);
+   jobs.push(grant(d.admission));
+  }
+  assert_eq!(owner.reserved().tasks,2);
+  let mut sizes=Vec::new();
+  for lease in jobs{
+   loop{match owner.poll(&lease).unwrap(){Some(status)=>{assert!(status.success(),"owned compiler failed: {status}");break},None=>{assert!(begin.elapsed()<Duration::from_secs(20));thread::sleep(Duration::from_millis(20));}}}
+   let path=out.join(format!("{}.rmeta",lease.task.id));
+   let size=std::fs::metadata(path).unwrap().len();assert!(size>0);sizes.push(size);
+   assert!(owner.settle(&lease,sampler.now_ms(),Some(Report{evidence:vec![format!("metadata-bytes:{size}")],observation:"owned compiler exited and artifact observed".into(),recommendation:"independent review".into()})).unwrap().unwrap().success());
+  }
+  assert_eq!(owner.reserved(),Reserved::default());assert_eq!(owner.counts(),(0,0,2,0));
+  println!("OWNED_REAL_COMPILERS=2 POLICY_GENERATION=1 ARTIFACT_BYTES={sizes:?} ELAPSED_MS={}",begin.elapsed().as_millis());
+ }
 }

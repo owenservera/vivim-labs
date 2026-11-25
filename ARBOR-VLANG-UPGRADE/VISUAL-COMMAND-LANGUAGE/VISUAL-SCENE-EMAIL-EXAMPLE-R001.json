@@ -1,0 +1,249 @@
+{
+  "schema": "vivim.vcl.example/0.1",
+  "status": "illustrative_not_runtime",
+  "text": "Email James through Gmail and attach report.pdf",
+  "revision": {
+    "draft_id": "example",
+    "draft_revision": 1,
+    "catalog_revision": "example",
+    "world_revision": "example"
+  },
+  "nodes": [
+    {
+      "id": "email",
+      "role": "action",
+      "ranges": [
+        {
+          "start": 0,
+          "end": 5,
+          "encoding": "utf8-byte"
+        }
+      ]
+    },
+    {
+      "id": "recipient",
+      "role": "recipient",
+      "ranges": [
+        {
+          "start": 6,
+          "end": 11,
+          "encoding": "utf8-byte"
+        }
+      ]
+    },
+    {
+      "id": "provider",
+      "role": "provider",
+      "ranges": [
+        {
+          "start": 20,
+          "end": 25,
+          "encoding": "utf8-byte"
+        }
+      ]
+    },
+    {
+      "id": "account",
+      "role": "account",
+      "ranges": [],
+      "state": "unresolved",
+      "choices": {
+        "source": "authorized_live_registry",
+        "values": null
+      }
+    },
+    {
+      "id": "attachment",
+      "role": "attachment",
+      "ranges": [
+        {
+          "start": 30,
+          "end": 47,
+          "encoding": "utf8-byte"
+        }
+      ],
+      "state": "unresolved"
+    },
+    {
+      "id": "file",
+      "role": "file",
+      "ranges": [
+        {
+          "start": 37,
+          "end": 47,
+          "encoding": "utf8-byte"
+        }
+      ],
+      "state": "unresolved"
+    }
+  ],
+  "relations": [
+    {
+      "id": "r1",
+      "from": "recipient",
+      "to": "email",
+      "kind": "argument_of"
+    },
+    {
+      "id": "r2",
+      "from": "provider",
+      "to": "email",
+      "kind": "provider_of"
+    },
+    {
+      "id": "r3",
+      "from": "account",
+      "to": "provider",
+      "kind": "account_of"
+    },
+    {
+      "id": "r4",
+      "from": "attachment",
+      "to": "email",
+      "kind": "attachment_of"
+    },
+    {
+      "id": "r5",
+      "from": "file",
+      "to": "attachment",
+      "kind": "argument_of"
+    }
+  ],
+  "expressions": [
+    {
+      "id": "outer",
+      "target": {
+        "kind": "span_set",
+        "ranges": [
+          {
+            "start": 0,
+            "end": 47,
+            "encoding": "utf8-byte"
+          }
+        ]
+      },
+      "geometry": "joined_multiline_contour",
+      "style": {
+        "stroke_pattern": "solid",
+        "stroke_color": "group.neutral",
+        "stroke_width": 1,
+        "corner_radius": 8,
+        "padding": 5
+      },
+      "placement": "inline",
+      "layer": "group_stroke"
+    },
+    {
+      "id": "email-group",
+      "target": {
+        "kind": "span_set",
+        "ranges": [
+          {
+            "start": 0,
+            "end": 11,
+            "encoding": "utf8-byte"
+          }
+        ]
+      },
+      "geometry": "rounded_rect",
+      "style": {
+        "stroke_pattern": "solid",
+        "stroke_color": "role.action",
+        "stroke_width": 1.5,
+        "corner_radius": 5
+      },
+      "layer": "group_stroke"
+    },
+    {
+      "id": "attachment-group",
+      "target": {
+        "kind": "node",
+        "id": "attachment"
+      },
+      "geometry": "per_line_fragments",
+      "style": {
+        "stroke_pattern": "dashed",
+        "stroke_color": "state.unresolved",
+        "stroke_width": 1.5,
+        "corner_radius": 5
+      },
+      "layer": "group_stroke"
+    },
+    {
+      "id": "relation",
+      "target": {
+        "kind": "relationship",
+        "id": "r4"
+      },
+      "geometry": "connector_path",
+      "style": {
+        "connector_route": "auto",
+        "stroke_pattern": "solid",
+        "stroke_color": "relationship.neutral",
+        "connector_terminal": "dot"
+      },
+      "layer": "relation"
+    },
+    {
+      "id": "gmail-account",
+      "target": {
+        "kind": "composer_edge",
+        "side": "right",
+        "anchor": "provider-edge"
+      },
+      "binding": {
+        "provider_node": "provider",
+        "slot": "account"
+      },
+      "placement": "editor_edge_outside",
+      "alignment": "center",
+      "component": "cycle_control",
+      "icon": "provider.gmail",
+      "label": "Choose Gmail account",
+      "collision": "overflow_menu",
+      "interactions": [
+        {
+          "trigger": "tap",
+          "intent": "OpenChoices",
+          "slot": "account"
+        },
+        {
+          "trigger": "key",
+          "intent": "CycleChoice",
+          "slot": "account",
+          "condition": "focused"
+        },
+        {
+          "trigger": "wheel",
+          "intent": "CycleChoice",
+          "slot": "account",
+          "condition": "focused_and_engaged"
+        },
+        {
+          "trigger": "swipe",
+          "intent": "CycleChoice",
+          "slot": "account",
+          "condition": "picker_engaged"
+        },
+        {
+          "trigger": "selection",
+          "intent": "StageChoice",
+          "slot": "account",
+          "condition": "current_authorized_choice"
+        }
+      ],
+      "accessibility": {
+        "name": "Gmail account",
+        "role": "button",
+        "non_color_cue": "Choose account",
+        "keyboard_action": "Open choices; next/previous while engaged"
+      },
+      "layer": "adornment"
+    }
+  ],
+  "notes": [
+    "Example uses no real account identities or registered capability claims.",
+    "A visual group does not imply a separate send. User selection stages a typed edit only.",
+    "Production ranges require exact draft digest and full revision fence."
+  ]
+}

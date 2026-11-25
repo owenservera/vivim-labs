@@ -29,6 +29,10 @@ Model-free path covers reindexing, graph queries, context generation, Wiki regen
 | P0-F | Z-VLANG/Z-AUTO/Z-SAFETY, master Z01/Z02/Z07/R06 | Independent blind benchmark of full model-free path, not just parser tests or cache hits. Compare against consented LLM baseline on identical scoped inputs/capabilities; no model call needed to run deterministic suite. |
 | Parallel supporting | MCP-U01/U02/U10, #31/#32, S02–S14 | Maintain tunnel-first and GPUI-only renderer; local operation access and real viewport/provider integration remain important, but must not delay cloud source/semantic experiments. |
 
+## Core-IP execution cohort
+
+[Three high-effort ChatGPT implementation sessions R001](CORE-IP-THREE-SESSION-EXECUTION-R001.md) is the current owner-directed execution design: 01 VLANG compiler/HQKG; 02 AutoWiki/context/NL; 03 VEC/native composition/independent benchmark. These are launch-ready proposed scopes mapped to existing tasks, not new backlog IDs or active claims. Cloud/GitHub first, supported VIVIM tunnel for necessary local work, commercial Commander only for a justified permitted gap. Preserve existing source ownership and refresh current claims before launch. No worker has been launched by the plan.
+
 ## R003 evidence addendum — independent cloud source gap assessment (25 Nov)
 
 ARBOR exact pin `c6d4c77e81cb55bfa1cb9dac049f876f39fffecf`; no local/tunnel operations or provider calls required. Findings, not newly claimed tasks:

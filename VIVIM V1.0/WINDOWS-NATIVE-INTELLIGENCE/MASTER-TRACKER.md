@@ -76,3 +76,7 @@ Selected hidden-window UIA root and process identity verified; zero child result
 ## R034 — SDK resource-aware campaign admission
 
 11/11 native Rust tests passed, exact source blobs confirmed; five new resource campaign tests including two owned parallel Rust threads, admission ordering, lease expiry/cancel fencing, stale snapshot and large bounded queue. [Evidence](EVIDENCE-R034-SDK.json). Existing Product campaign exact overlay and Labs scheduler reused. No production changes; current Host process receipt integration, live native sampling, cross-campaign budget and actual agent workloads remain open. R035 native sampling/real compiler fixture authored. Original 14-item order unchanged.
+
+## R035 — actual native samples and compiler workload
+
+16/16 Windows tests passed, exit 0, eight materialized source blobs verified. Existing Win32 resource and topology probes drive the same R034 admission transition; two real rustc metadata jobs admitted and launched before waiting, both exit successfully and release all reservations. [Evidence](EVIDENCE-R035-SDK.json). Product main campaign blob unchanged at b3debb7. Single-group CPU scope, conservative configured resource estimates, no production Host receipt/cross-campaign binding or live policy activation yet. Next: reprogrammable SDK admission policy bounded by fixed resource constraints, then incumbent owned-process receipts. No tracker reordering or production writes.

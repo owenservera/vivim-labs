@@ -1,0 +1,47 @@
+{
+  "schema": "vivim.labs.sdk-resource-admission-native/1",
+  "source": "5b394d90c7616606091ecd9cd811756147b4cf74",
+  "session": "ctl-673a9cb6871b80b6",
+  "exitCode": 0,
+  "elapsedMs": 20739,
+  "exactBlobsVerified": 8,
+  "tests": {
+    "passed": 16,
+    "failed": 0,
+    "includesR034": 11,
+    "newLiveSdkFixture": 1,
+    "incumbentNativeProbeTests": 4
+  },
+  "sample": {
+    "revision": 1,
+    "logicalCpus": 8,
+    "cpuBusyBasisPoints": 4838,
+    "memoryAvailableBytes": 14177288192,
+    "diskAvailableBytes": 7092862976
+  },
+  "compiler": {
+    "ownedRustcChildren": 2,
+    "outputs": "metadata",
+    "sources": [
+      "campaign.rs",
+      "scheduler.rs"
+    ],
+    "launchedBeforeWaiting": true,
+    "successfulExits": 2,
+    "allReservationsReleased": true
+  },
+  "productCompatibility": {
+    "mainAtReadback": "b3debb7d742a03be729c9f369dd0acbb0a2fca9e",
+    "campaignBlob": "031317b7c98b4dc9adf30dadd32fa704ddec3c5e",
+    "sameAsR034Pin": true
+  },
+  "limits": [
+    "Single processor group only",
+    "Real sample, estimated task resource costs, not OS-enforced limits",
+    "Two real compiler children admitted and launched before waiting; actual CPU overlap not measured",
+    "Fixture process ownership, not production Host receipt binding",
+    "No live Meta-VLANG policy or cross-campaign authority yet",
+    "No actual agent subprocess or production edits"
+  ],
+  "context7": "/microsoft/windows-rs; existing exact native probes and compiled signatures authoritative"
+}

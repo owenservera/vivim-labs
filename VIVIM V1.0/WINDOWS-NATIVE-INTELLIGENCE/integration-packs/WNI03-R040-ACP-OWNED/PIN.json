@@ -1,0 +1,14 @@
+{
+  "lab": "b3f23c1d77e2e7ff667076224b25c0100992e4a8",
+  "arbor": "ff1de3b70ca87d143301a7f934673acbf9e182e6",
+  "sources": [
+    "acp.rs",
+    "stream.rs",
+    "acp_transport.rs"
+  ],
+  "owned": [
+    "workstation_process.rs",
+    "workstation_windows_job.rs"
+  ],
+  "scope": "Native owned ACP stdio, deterministic peer fixture only. Actual agent session pending."
+}

@@ -1,0 +1,64 @@
+{
+  "schema": "vivim.labs.exact-overlay/1",
+  "baseCommit": "5da225899ff635f1161ad07212e34f9517ac9f53",
+  "patches": [
+    {
+      "path": "adapters/hq/wiki-articles.mjs",
+      "baseBlob": "ba9e26c794cabe8738043e1116d20e3e71ff8cc4",
+      "edits": [
+        {
+          "from": "definitions=[],sourceRevision}){",
+          "to": "definitions=[],sourceRevision,articleCache=null}){"
+        },
+        {
+          "from": " const articles=pages.map(p=>{",
+          "to": " const reuse=articleCache?.scope(pages,definitions,protocolGeneration);\n const buildArticle=p=>{"
+        },
+        {
+          "from": " });\n const dict=definitions.map(d=>{",
+          "to": " };\n const articles=pages.map(p=>reuse?reuse(p,buildArticle):buildArticle(p));\n const dict=definitions.map(d=>{"
+        },
+        {
+          "from": "export function publishArticles({data,wiki,generation,graphEpoch,definitions,sourceRevision}){",
+          "to": "export function publishArticles({data,wiki,generation,graphEpoch,definitions,sourceRevision,articleCache=null}){"
+        },
+        {
+          "from": "definitions,sourceRevision});\n const file=join(data,'development-wiki.json')",
+          "to": "definitions,sourceRevision,articleCache});\n const file=join(data,'development-wiki.json')"
+        }
+      ]
+    },
+    {
+      "path": "adapters/hq/dev-session.mjs",
+      "baseBlob": "229eee42c264d1e3367ca2e3f4b8dcb090748a10",
+      "edits": [
+        {
+          "from": "import {publishArticles,readArticle,paneObservation} from './wiki-articles.mjs';",
+          "to": "import {publishArticles,readArticle,paneObservation} from './wiki-articles.mjs';\nimport {createArticleCache} from './article-cache.mjs';"
+        },
+        {
+          "from": "let state=null,dict=[],articleSet=null,selected='index';",
+          "to": "const articleCache=createArticleCache();\nlet state=null,dict=[],articleSet=null,selected='index';"
+        },
+        {
+          "from": "definitions:dict,sourceRevision:index.generation});",
+          "to": "definitions:dict,sourceRevision:index.generation,articleCache});"
+        }
+      ]
+    }
+  ],
+  "additions": [
+    {
+      "path": "adapters/hq/article-cache.mjs",
+      "source": "overlay/adapters/hq/article-cache.mjs"
+    },
+    {
+      "path": "adapters/hq/article-cache.test.mjs",
+      "source": "overlay/adapters/hq/article-cache.test.mjs"
+    },
+    {
+      "path": "adapters/hq/article-cache-bench.mjs",
+      "source": "overlay/adapters/hq/article-cache-bench.mjs"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createArticleCache} from './article-cache.mjs';
+import {compileArticles,publishArticles} from './wiki-articles.mjs';
+import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+const pages=()=>[{id:'index',path:'index.md',text:'# Home\n## Intro\n[File](./a.md) and [Missing](./x.md)'},{id:'a',path:'a.md',text:'# A\n## Text\nHello'}];
+const opts=(n=1)=>({sourceRevision:n,protocolGeneration:1,graphEpoch:n,definitions:[]});
+const run=(p,o,c)=>compileArticles(p,{...o,articleCache:c});
+test('warm articles equivalent with fresh snapshot provenance',()=>{const c=createArticleCache(),p=pages();run(p,opts(),c);const w=run(p,opts(2),c);assert.deepEqual(w,compileArticles(p,opts(2)));assert.equal(c.stats().hits,2);assert.equal(w.graphEpoch,2);assert.equal(w.sourceRevision,2);});
+test('only changed article rebuilt',()=>{const c=createArticleCache(),p=pages();run(p,opts(),c);p[1].text+='\nChanged';assert.deepEqual(run(p,opts(2),c),compileArticles(p,opts(2)));assert.equal(c.stats().misses,3);assert.equal(c.stats().hits,1);});
+test('new target resolves old unresolved link and deletion invalidates',()=>{const c=createArticleCache(),p=pages();run(p,opts(),c);p.push({id:'x',path:'x.md',text:'# X'});const w=run(p,opts(2),c);assert.deepEqual(w,compileArticles(p,opts(2)));assert.equal(w.articles[0].unresolved.length,0);p.pop();assert.equal(run(p,opts(3),c).articles[0].unresolved.length,1);});
+test('protocol generation and dictionary invalidate',()=>{const c=createArticleCache(),p=pages();run(p,opts(),c);const o={...opts(2),definitions:[{id:'annotation.context',revision:1,meaning:'Context',dependencies:[]}]};assert.deepEqual(run(p,o,c),compileArticles(p,o));assert.equal(c.stats().hits,0);o.protocolGeneration=2;run(p,o,c);assert.equal(c.stats().hits,0);});
+test('mutating returned article never poisons cache and limits enforced',()=>{const c=createArticleCache({maxEntries:2,maxBytes:4096}),p=pages();const w=run(p,opts(),c);w.articles[0].title='corrupt';assert.deepEqual(run(p,opts(),c),compileArticles(p,opts()));assert.ok(c.stats().entries<=2);assert.ok(c.stats().bytes<=4096);});
+test('real publication writes current snapshot and digest',()=>{const data=mkdtempSync(join(tmpdir(),'wni-wiki-'));try{mkdirSync(join(data,'wiki'));const p=pages(),c=createArticleCache();for(const a of p)writeFileSync(join(data,'wiki',a.path),a.text);const wiki={pages:p.map(({id,path})=>({id,path}))};const publish=n=>publishArticles({data,wiki,generation:1,graphEpoch:n,definitions:[],sourceRevision:n,articleCache:c});publish(1);const b=publish(2);assert.deepEqual(JSON.parse(readFileSync(b.info.file,'utf8')),b.snapshot);assert.deepEqual(b.snapshot,compileArticles(p,opts(2)));assert.equal(c.stats().hits,2);}finally{rmSync(data,{recursive:true,force:true});}});

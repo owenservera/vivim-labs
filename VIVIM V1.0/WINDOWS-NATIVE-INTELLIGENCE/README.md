@@ -88,3 +88,7 @@ R012 combined preflight update: 11 raw source blobs verified, five additions, 3/
 ## R017 — HCU semantic state and reconciliation core
 
 [Extraction package](packages/WNI05-R017-SEMANTIC-STATE.md): independent Rust scoped references, acknowledged observation deltas, and receipt recovery projection. Eight tests supplied, native run pending. No ARBOR changes or separate UI engine.
+
+## R018 — hybrid route and condition primitives
+
+[Hybrid planning](packages/WNI05-R018-HYBRID-PLANNING.md): deterministic native/semantic/visual selection with explicit pre-dispatch fallback only; revision-bound condition waits and no automatic replay. Three additional tests. No new authority, browser or UI executor.

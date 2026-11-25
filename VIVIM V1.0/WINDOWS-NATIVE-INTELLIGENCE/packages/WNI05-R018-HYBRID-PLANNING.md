@@ -1,0 +1,5 @@
+# R018 — hybrid capability selection and observation predicates
+
+Context7 /microsoft/ufo hybrid control detection and /microsoft/winappcli exact condition wait/readback research. Independent dependency-free Rust module interaction_plan.rs. Bounded condition waits over complete selected-app snapshots, explicit unknown/foreign/stale/timeout states; no fixed sleeps, no arbitrary input or action executor. Native registered API first, then semantic and optional visual route; alternate path only when the Host has verified no previous dispatch. Pending or uncertain effect -> reconcile, never retry; completed or rejected -> stop. This complements R017 reference and receipt projections. No new control surface, provider, action grant or execution registry.
+
+Studio/Harness owner integration: map existing provider observations to scoped refs; feed only trusted full snapshots and actual effect receipts. Current implementation cannot prove app-level business success from element absence. Existing Host must check actual postconditions, grants and identity before applying any effect. Three new pure Rust tests supplied. No actual application manipulation or MCP registration.

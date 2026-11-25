@@ -27,3 +27,5 @@ pub mod etw_record;
 
 pub mod semantic_surface;
 pub mod recovery;
+
+pub mod interaction_plan;

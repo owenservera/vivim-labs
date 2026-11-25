@@ -52,3 +52,7 @@ Evidence R008–R012. Latest native starter: 35 tests pass, outer job cancelled 
 | WNI11 combined overlay | R015: 12 exact Git blobs, 7 additions, 7/7 Node tests, normal exit | Reconcile current source, full crate/GPUI and live MCP |
 
 Native starter 45/45 test output (includes prior 35); both R013 and R014 enclosing jobs needed owned-job cancellation after output closed. No production acceptance claim. No new mandatory dependency or ARBOR writes. Evidence: [R015](EVIDENCE-R015-WINDOWS.json).
+
+## R017/R018 — HCU and UFO extraction
+
+WNI05: scoped semantic reference lifecycle, complete snapshot delta and acknowledgment, incumbent receipt recovery projection, bounded condition predicates and hybrid route selection authored. No Windows UIA collector, app integration or public MCP action yet. WNI07 and WNI06 remain research-only. R015 combined overlay remains the tested integration candidate; new modules are independently staged. ARBOR unchanged by this workstream.

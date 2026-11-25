@@ -1,0 +1,60 @@
+{
+  "schema": "vivim.labs.windows-preparation/1",
+  "arborBase": "4c884c92306209b37728e0a9e9efa74f4b30f254",
+  "previousCombinedBase": "67859e96c12a55d4341d4008cf8a5b1528d18eea",
+  "sourceAnchorReplay": {
+    "pinnedFiles": 12,
+    "additions": 7,
+    "changedBaseBlobs": [
+      {
+        "path": "native/gpui-desktop/src/control.rs",
+        "previous": "20b3f4def96bade2983f98361af90819de921fcb",
+        "current": "9ce0724332b1478124edc2ee0e34908debc1a0ad",
+        "exactAnchorsReplayed": true
+      },
+      {
+        "path": "native/gpui-desktop/src/main.rs",
+        "previous": "ea8d775ff445178412e1717be02e06acceb7a161",
+        "current": "f36b122b3650f17cc102f99a8c5a6d7a8b9b94ab",
+        "exactAnchorsReplayed": true
+      }
+    ],
+    "allAnchorsReplayed": true,
+    "method": "earlier connector inspection of 11 R012 pinned files and exact R013 indexer anchors"
+  },
+  "nativeR013": {
+    "source": "f5777243f01b7bf01b329cd66c7518a62ac97adb",
+    "session": "ctl-02921ab1dec5b2dc",
+    "passed": 43,
+    "failed": 0,
+    "sqlitePassed": 4,
+    "sqliteFailed": 0,
+    "jobDisposition": {
+      "cancelReceipt": "ctl-abff9a16bbada615",
+      "cancelled": true,
+      "exitCode": 0,
+      "success": false
+    }
+  },
+  "nativeR014": {
+    "source": "f46f8aa3d2da8fc4ed1950a747ffc30657fd43ce",
+    "session": "ctl-858d5a49e3e2f252",
+    "passed": 45,
+    "failed": 0,
+    "ignored": 0,
+    "testSeconds": 1.04,
+    "jobDisposition": {
+      "cancelReceipt": "ctl-78c1f4fedd6f07f4",
+      "cancelled": true,
+      "exitCode": 0,
+      "success": false
+    },
+    "newFixtures": [
+      "owned Windows file-handle metadata",
+      "ETW EVENT_RECORD struct boundary"
+    ]
+  },
+  "combinedPreflight": "pending",
+  "arborChanged": false,
+  "productionDeployed": false
+}

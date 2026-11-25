@@ -28,6 +28,13 @@ for(const row of spec.patches){
  if(sha!==row.baseBlob)throw Error('Git blob bytes mismatch');
  files.push({path:row.path,data});
 }
+// Check complete pinned Git tree, not only partial materialized files.
+if(!Array.isArray(spec.additions)||spec.additions.length>256)throw Error('Invalid additions');
+for(const row of spec.additions){
+ if(!safe(row.path)||!safe(row.source)||seen.has(row.path.toLowerCase()))throw Error('Invalid addition or collision');
+ seen.add(row.path.toLowerCase());
+ if(git(['ls-tree','-z',spec.baseCommit,'--',row.path]).length!==0)throw Error('Addition exists in pinned Git tree '+row.path);
+}
 mkdirSync(target,{recursive:false});
 for(const f of files){const p=join(target,f.path);mkdirSync(dirname(p),{recursive:true});writeFileSync(p,f.data,{flag:'wx'});}
 console.log(JSON.stringify({baseCommit:spec.baseCommit,verifiedBlobs:files.length,bytes:total,sourceChanged:false}));

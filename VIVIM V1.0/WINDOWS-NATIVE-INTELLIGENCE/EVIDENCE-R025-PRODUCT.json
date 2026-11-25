@@ -1,0 +1,40 @@
+{
+  "schema": "vivim.labs.product-acceleration/1",
+  "productBase": "5da225899ff635f1161ad07212e34f9517ac9f53",
+  "r024": {
+    "source": "b6e29308c7b8b8e59167b490ee73075d30969f7e",
+    "session": "ctl-7b02505e022d3818",
+    "passed": 66,
+    "newTests": 5,
+    "exitCode": 0,
+    "success": true
+  },
+  "r025": {
+    "source": "4e8febe5f44d83053363e9b9a55e5c30b9f3c12d",
+    "session": "ctl-28590c49a6d11d68",
+    "exitCode": 0,
+    "success": true,
+    "pinnedSourceBlobs": 1,
+    "additions": 3,
+    "nodeTestsPassed": 6,
+    "nativeSdkBuiltOffline": true,
+    "actualNativeBindFixture": {
+      "rows": 64,
+      "coldMs": 17.9,
+      "warmMs": 0.33,
+      "coldBindRoundTrips": 64,
+      "warmGenerationChecks": 1,
+      "exactOutput": true,
+      "cacheBytes": 17198
+    },
+    "limitations": [
+      "One controlled fixture, not a full compiler/index/Wiki benchmark",
+      "No product checkout modified except isolated scratch baseline; no production integration",
+      "Does not skip source extraction or source/graph readback",
+      "Existing Node adapter language retained; native compiler unchanged"
+    ]
+  },
+  "context7": "/nodejs/node/v24.22.2",
+  "productWrites": false,
+  "arborWrites": false
+}

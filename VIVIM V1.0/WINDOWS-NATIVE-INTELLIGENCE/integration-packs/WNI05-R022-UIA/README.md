@@ -1,0 +1,7 @@
+# WNI05 R022 — native selected-window UIA probe
+
+Independent Windows-only Rust test crate. Context7 selected /websites/microsoft_github_io_windows-docs-rs_doc_windows for IUIAutomation::ElementFromHandle, FindAll, CurrentProcessId, CurrentIsEnabled and /microsoft/windows-rs/0.61.0 for low-level bindings. Reuse windows 0.61.3 already present in ARBOR GPUI Cargo.lock (reviewed fbc5ed081c16f2ee470c487d1d7162a8d9aa0143); isolated crate only, no new mandatory production dependency. No FlaUI or other runtime.
+
+Probe accepts a locally Host-bound HWND and PID+creation ticks, reads selected root and direct child control type and enabled state, excludes password controls and rejects foreign processes. Revalidates native window/process identity at end. No titles, names, content, text, input, screenshots, foreground window enumeration or global UI access. The identity fence does not establish control identity or defeat HWND reuse within one process: no actionable references issued. Direct children are not a complete tree. Host must enforce independent scope, approved window lifetime/generation and helper deadline; UIA FindAll itself may block or allocate. No direct exposure to MCP yet. Test fixture is a hidden locally created native window and button, with separate message-pump thread. Fixture acceptance requires real COM and selected root observation; child count reported explicitly.
+
+No ARBOR changes. Native compile/test pending. No separate Studio/Harness controller.

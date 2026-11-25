@@ -7,3 +7,7 @@ Cloud source-anchor replay for the GPUI addition passed. All prior R002 evidence
 ## R009 native Windows verification update
 
 Exact source replay and all three Node Host/MCP fixture tests now passed through existing VIVIM terminal. Windows git archive can transform source bytes; use `node ../../materialize-base.mjs <local Git repo> PATCH-SPEC.json <new raw-blob output>` first, then `node prepare-overlay.mjs <raw-blob output> <new overlay output>`. The raw extraction procedure used in the real test checked ten Git blob IDs and original bytes; this packaged helper is an expanded source candidate and should be exercised separately. No ARBOR worktree writes. See [evidence](../../EVIDENCE-R009-WINDOWS.json). Actual GPUI compile/render and newly exposed live MCP still unverified.
+
+### R010 real native adapter fixture
+
+The exact native resource module compiled as an isolated fixture binary: 2/2 native tests passed, and the actual Host port returned an OK observation (120ms CPU sampling, closed result schema validated). The containing test job did not settle after streams closed, so only the owned test job was cancelled; overall job success=false. The observation and native test outputs are real but are not end-to-end production acceptance. [Evidence](../../EVIDENCE-R010-NATIVE-ADAPTER.json). The accompanying test-native-resource.mjs reproduces the adapter test against an explicitly built scratch binary, never a production binary or config. The full ARBOR crate, GPUI and new live MCP tool still require integration acceptance.

@@ -58,3 +58,7 @@ First slice: WNI02 aggregate resources through existing Host to MCP and GPUI; WN
 ### R009 acceptance update
 
 [Windows evidence](EVIDENCE-R009-WINDOWS.json): 33/33 native Rust tests, 3/3 actual overlay Node fixture tests; earlier 27/27 actual schema tests. [Exact Git blob materializer](materialize-base.mjs) preserves strict source pinning when archive/checkout changes text bytes. No deployment or ARBOR changes.
+
+## R010 — real native probe to Host adapter
+
+[Actual Windows adapter evidence](EVIDENCE-R010-NATIVE-ADAPTER.json): exact overlay native module compiled in scratch, 2/2 native probe tests and valid real Host-port observation. The containing test job required owned-job cancellation after output closed; no overall successful job claim. Full application/live new MCP acceptance pending. ARBOR unchanged.

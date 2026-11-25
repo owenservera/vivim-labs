@@ -1,0 +1,35 @@
+{
+  "schema": "vivim.labs.native-resource-fixture/1",
+  "pack": "WNI02-R003",
+  "arborBase": "67859e96c12a55d4341d4008cf8a5b1528d18eea",
+  "testSession": "ctl-43afeed642496af5",
+  "nativeProbeTests": {
+    "passed": 2,
+    "failed": 0,
+    "testSeconds": 0.12
+  },
+  "probeBuild": "success",
+  "adapterObservation": {
+    "actualNativeAdapter": true,
+    "status": "ok",
+    "aggregateSchemaValid": true,
+    "cpuScope": "calling-processor-group",
+    "sampleMs": 120,
+    "rawMemoryValuesPublished": false
+  },
+  "jobDisposition": {
+    "stdoutClosed": true,
+    "stderrClosed": true,
+    "jobStillRunningAfterOutput": true,
+    "cancelReceipt": "ctl-63364e94ba36dbdd",
+    "cancelled": true,
+    "state": "exited",
+    "exitCode": 0,
+    "success": false,
+    "note": "Successful test and adapter output observed before cleanup; containing job did not settle on its own, so cancelled only the owned test job. Do not represent overall job as successful."
+  },
+  "scope": "isolated scratch fixture compiled from exact overlay native module; no production binary replacement, Host or grant modification",
+  "newLiveMcpTool": "UNRUN",
+  "gpuiCompile": "UNRUN",
+  "arborChanged": false
+}

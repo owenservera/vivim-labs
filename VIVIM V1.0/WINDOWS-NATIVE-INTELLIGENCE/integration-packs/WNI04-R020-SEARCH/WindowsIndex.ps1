@@ -44,13 +44,17 @@ function New-WniSearchQuery([string]$Root,[string]$Name,[int]$Limit) {
 function Invoke-WniIndexedSearch([string]$Root,[string]$Name,[int]$Limit=20) {
     $sql=New-WniSearchQuery $Root $Name $Limit
     $rootItem=Get-WniLocalPath $Root $true
-    $result=[ordered]@{schema='vivim.windows.indexed-search/1';status='unavailable';coverage='index-only';complete=$false;rows=@();observed=0;discarded=0;atLimit=$false}
-    $conn=$null;$rs=$null
+    $result=[ordered]@{schema='vivim.windows.indexed-search/1';status='unavailable';coverage='index-only';complete=$false;rows=@();observed=0;discarded=0;atLimit=$false;failureStage=$null;hresult=$null}
+    $conn=$null;$rs=$null;$stage='create-connection'
     try {
         $conn=New-Object -ComObject ADODB.Connection
+        $stage='configure-connection'
         $conn.ConnectionTimeout=3;$conn.CommandTimeout=5
+        $stage='open-provider'
         $conn.Open("Provider=Search.CollatorDSO.1;Extended Properties='Application=Windows';")
+        $stage='execute-query'
         $rs=$conn.Execute($sql)
+        $stage='read-records'
         $rows=[Collections.Generic.List[object]]::new()
         $seen=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
         while (!$rs.EOF -and $result.observed -lt $Limit) {
@@ -66,7 +70,7 @@ function Invoke-WniIndexedSearch([string]$Root,[string]$Name,[int]$Limit=20) {
         $result.rows=@($rows.ToArray());$result.status='ok'
     } catch {
         # Never echo provider exception text (may contain paths or SQL).
-        $result.status='unavailable';$result.rows=@()
+        $result.status='unavailable';$result.rows=@();$result.failureStage=$stage;$result.hresult=[int]$_.Exception.HResult
     } finally {
         if ($null -ne $rs){try{$rs.Close()}catch{};if([Runtime.InteropServices.Marshal]::IsComObject($rs)){[void][Runtime.InteropServices.Marshal]::FinalReleaseComObject($rs)}}
         if ($null -ne $conn){try{$conn.Close()}catch{};if([Runtime.InteropServices.Marshal]::IsComObject($conn)){[void][Runtime.InteropServices.Marshal]::FinalReleaseComObject($conn)}}

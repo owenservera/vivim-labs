@@ -30,3 +30,7 @@ First slice: WNI02 aggregate resources through existing Host to MCP and GPUI; WN
 ## R002 — exact-source integration overlay
 
 [WNI02 native resources vertical slice](integration-packs/WNI02-R002/README.md): pinned ARBOR 67859e96c12a55d4341d4008cf8a5b1528d18eea, 9 exact-blob edits and 4 added source/test files; reuses native probe, Host, MCP, staging and GPUI control client. Isolated overlay only. 11/11 cloud checks passed; Windows compile, Node fixture tests, actual app control and live MCP remain unverified. Workstream remains Labs-only until owner decides integration.
+
+## R003 — real native watcher, bounded observation journal and app control
+
+[WNI01 native watcher and journal](packages/WNI01-R003-NATIVE-WATCHER.md) adds executable Rust source and tests; production handle-binding/continuous-stream adapter pending. [WNI02 R003 exact-source overlay](integration-packs/WNI02-R003/README.md) supersedes R002 and adds a native GPUI Developer control. Native compile and live acceptance unrun. No ARBOR edits.

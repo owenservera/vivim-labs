@@ -2,3 +2,6 @@
 pub mod resources;
 pub mod change;
 pub mod session;
+
+pub mod watcher;
+pub mod journal;

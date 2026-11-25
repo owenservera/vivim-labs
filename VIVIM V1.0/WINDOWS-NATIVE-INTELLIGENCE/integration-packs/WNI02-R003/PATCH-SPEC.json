@@ -1,0 +1,192 @@
+{
+  "schema": "vivim.labs.exact-overlay/1",
+  "baseCommit": "67859e96c12a55d4341d4008cf8a5b1528d18eea",
+  "patches": [
+    {
+      "path": "native/host-supervisor/Cargo.toml",
+      "baseBlob": "0b16e01710a317fb4ccb9905a9de9ef210b1f43c",
+      "edits": [
+        {
+          "from": "\"Win32_System_Threading\"]",
+          "to": "\"Win32_System_Threading\", \"Win32_System_SystemInformation\"]"
+        }
+      ]
+    },
+    {
+      "path": "native/host-supervisor/src/bin/vivim-workstation-probe.rs",
+      "baseBlob": "203447026a876c5d1904f7df19e59622bced7636",
+      "edits": [
+        {
+          "from": "fn run()->Result<(),()>{",
+          "to": "#[path=\"vivim-workstation-probe/native_resources.rs\"]\nmod native_resources;\nfn run()->Result<(),()>{"
+        },
+        {
+          "from": " if args.len()!=2||args[0]!=\"--node-version\"{return Err(());}",
+          "to": " if args.len()==1&&args[0]==\"--native-resources\"{return native_resources::print_snapshot();}\n if args.len()!=2||args[0]!=\"--node-version\"{return Err(());}"
+        }
+      ]
+    },
+    {
+      "path": "apps/vivim-host/control/dispatcher.mjs",
+      "baseBlob": "ffe30199495578ed2753a0fdcfa45dda5408e21e",
+      "edits": [
+        {
+          "from": "import {createWorkstationProcessPort,WORKSTATION_PROCESS_ACTION} from './workstation-process-port.mjs';",
+          "to": "import {createWorkstationProcessPort,WORKSTATION_PROCESS_ACTION} from './workstation-process-port.mjs';\nimport {createNativeResourcePort,NATIVE_RESOURCE_ACTION} from './native-resource-port.mjs';"
+        },
+        {
+          "from": "const workstationAction=id=>id===WORKSTATION_PROCESS_ACTION||",
+          "to": "const workstationAction=id=>id===NATIVE_RESOURCE_ACTION||id===WORKSTATION_PROCESS_ACTION||"
+        },
+        {
+          "from": "workstationProcess, workstationSession, workstationFile }) {",
+          "to": "workstationProcess, workstationSession, workstationFile, nativeResources }) {"
+        },
+        {
+          "from": "    [FILE_READ]: args=>workstationFile.read(FILE_READ,args),",
+          "to": "    [NATIVE_RESOURCE_ACTION]: args=>nativeResources.read(args),\n    [FILE_READ]: args=>workstationFile.read(FILE_READ,args),"
+        },
+        {
+          "from": "workstationFile=createWorkstationFilePort(),",
+          "to": "workstationFile=createWorkstationFilePort(), nativeResources=createNativeResourcePort(),"
+        },
+        {
+          "from": "studio,workstationProcess,workstationSession,workstationFile });",
+          "to": "studio,workstationProcess,workstationSession,workstationFile,nativeResources });"
+        }
+      ]
+    },
+    {
+      "path": "apps/vivim-host/control/action-catalog.v1.json",
+      "baseBlob": "d71e97bef27cff2be9195b72fbef5996ec2233c6",
+      "edits": [
+        {
+          "from": "    {\n      \"id\": \"workstation.file.read\",",
+          "to": "    {\n      \"id\": \"windows.system.resources.read\",\n      \"title\": \"Read native computer resource usage\",\n      \"category\": \"workstation\",\n      \"owner\": \"host-control\",\n      \"executor\": \"apps/vivim-host/control/dispatcher.mjs:createExecutors\",\n      \"readiness\": \"source_wired\",\n      \"risk\": \"R0\",\n      \"target\": \"local-workstation\",\n      \"surfaces\": [\n        \"text\",\n        \"desktop\",\n        \"mobile\",\n        \"visual\"\n      ],\n      \"privacy\": \"authenticated-pc-owner-only\",\n      \"aiCandidate\": false,\n      \"args\": {},\n      \"examples\": [\n        \"Read native computer resource usage\"\n      ],\n      \"reversible\": false,\n      \"subject\": \"workstation\",\n      \"priority\": \"P0\",\n      \"precondition\": \"Authenticated typed desktop-owner request and active locally configured native resource grant; hash-pinned native helper. Mobile invocation awaits device-scope admission.\"\n    },\n    {\n      \"id\": \"workstation.file.read\","
+        }
+      ]
+    },
+    {
+      "path": "tools/mcp/vivim-arbor/server/workstation-tunnel.cjs",
+      "baseBlob": "ba98e0a79e679726abc9dacc157f2a68a9ae5f17",
+      "edits": [
+        {
+          "from": "const TERMINAL=S+'terminal_start';",
+          "to": "const TERMINAL=S+'terminal_start';\nconst NATIVE_RESOURCES='windows.system.resources.read';"
+        },
+        {
+          "from": "'allowWrites','terminal','machineScope'])",
+          "to": "'allowWrites','terminal','machineScope','nativeResources'])"
+        },
+        {
+          "from": "  return {v,h:hash(raw)};",
+          "to": "  if(v.nativeResources!==undefined&&v.nativeResources!==true)bad();\n  return {v,h:hash(raw)};"
+        },
+        {
+          "from": "  if(action===TERMINAL){terminalRequest(args);}",
+          "to": "  if(action===NATIVE_RESOURCES){if(g.nativeResources!==true||!keys(args,[])||mutating)bad();}\n  else if(action===TERMINAL){terminalRequest(args);}"
+        },
+        {
+          "from": "  if(action.startsWith(S)){if((action===S+'output'?",
+          "to": "  if(action===NATIVE_RESOURCES){if(p.result.schema!=='vivim.windows.native-result/1'||p.result.actionId!==action||p.result.configSha!==g.rootConfigSha||!['ok','partial','unsupported'].includes(p.result.status))bad();}\n  else if(action.startsWith(S)){if((action===S+'output'?"
+        },
+        {
+          "from": " for(const [name,action,fields,mutating]of definitions){",
+          "to": " if(g.nativeResources===true)tools.push(['vivim_windows_system_resources_read','Read aggregate Windows memory and CPU resource usage; no process or file contents.',{type:'object',properties:{},required:[],additionalProperties:false},a=>{if(!keys(a,[]))bad();return readAction(NATIVE_RESOURCES,a);},true]);\n for(const [name,action,fields,mutating]of definitions){"
+        }
+      ]
+    },
+    {
+      "path": "tools/mcp/vivim-arbor/server/release-evidence.mjs",
+      "baseBlob": "dd8ca02f817c8152205a086d61d7ade402f11b3a",
+      "edits": [
+        {
+          "from": " const machine=manifest.ownerProfile==='machine';",
+          "to": " const resourceEnabled=manifest.nativeResources===true;\n if((manifest.nativeResources!==undefined&&!resourceEnabled)||(grant?.nativeResources!==undefined&&grant.nativeResources!==true)||resourceEnabled!==(grant?.nativeResources===true)||resourceEnabled!==(roots?.nativeResources!==undefined)||(resourceEnabled&&(!roots.nativeResources||Object.keys(roots.nativeResources).length!==1||roots.nativeResources.expiresAt!==grant.expiresAt)))deny();\n const machine=manifest.ownerProfile==='machine';"
+        }
+      ]
+    },
+    {
+      "path": "tools/mcp/vivim-arbor/windows/Install-WorkstationProfile.ps1",
+      "baseBlob": "429039a50ba439e0f508aeb3cd80805b019c0149",
+      "edits": [
+        {
+          "from": " [switch]$EnableOwnerMachine\n)",
+          "to": " [switch]$EnableOwnerMachine,\n [switch]$EnableNativeResources\n)"
+        },
+        {
+          "from": "Write-Json (Join-Path $grantDir 'grant.json') $grant",
+          "to": "if($EnableNativeResources){\n $rootData=Get-Content -LiteralPath $rootFile -Raw|ConvertFrom-Json -AsHashtable\n $rootData.nativeResources=@{expiresAt=$grant.expiresAt}\n Write-Json $rootFile $rootData\n $grant.rootConfigSha=Hash $rootFile\n $grant.nativeResources=$true\n}\nWrite-Json (Join-Path $grantDir 'grant.json') $grant"
+        },
+        {
+          "from": "if($EnableOwnerMachine){$m.ownerProfile='machine'}",
+          "to": "if($EnableOwnerMachine){$m.ownerProfile='machine'}\nif($EnableNativeResources){$m.nativeResources=$true}"
+        },
+        {
+          "from": "$expectedTools=if($EnableGeneralTerminal){16}else{15}",
+          "to": "$expectedTools=if($EnableGeneralTerminal){16}else{15}\nif($EnableNativeResources){$expectedTools+=1;if($names -notcontains 'vivim_windows_system_resources_read'){throw 'Native resource tool missing'}}"
+        }
+      ]
+    },
+    {
+      "path": "tools/mcp/vivim-arbor/windows/Build-WorkstationRelease.ps1",
+      "baseBlob": "04b74fefa2cede6b3b76585a8e33cfe51863f845",
+      "edits": [
+        {
+          "from": " [switch]$EnableOwnerMachine\n)",
+          "to": " [switch]$EnableOwnerMachine,\n [switch]$EnableNativeResources\n)"
+        },
+        {
+          "from": "-EnableOwnerMachine:$EnableOwnerMachine",
+          "to": "-EnableOwnerMachine:$EnableOwnerMachine -EnableNativeResources:$EnableNativeResources"
+        },
+        {
+          "from": "'apps/vivim-host/test/workstation-machine-path.test.mjs')",
+          "to": "'apps/vivim-host/test/workstation-machine-path.test.mjs','apps/vivim-host/test/native-resource-port.test.mjs','tools/mcp/vivim-arbor/tests/native-resource-tunnel.test.cjs')"
+        }
+      ]
+    },
+    {
+      "path": "native/gpui-desktop/src/control.rs",
+      "baseBlob": "20b3f4def96bade2983f98361af90819de921fcb",
+      "edits": [
+        {
+          "from": "pub fn plan(text: &str) -> Result<Review, ReadError> {",
+          "to": "/// Typed read through the same existing owner-authenticated Host as MCP.\npub fn read_native_resources() -> Result<Value,ReadError> {\n    let action=\"windows.system.resources.read\";\n    let p=request(\"plan\",Some(json!({\"actionId\":action,\"args\":{}})))?;\n    if p[\"actionId\"]!=action || p[\"source\"]!=\"desktop\" || p[\"origin\"]!=\"typed\" ||\n       p[\"outcome\"]!=\"done\" || p[\"effect\"]!=\"read\" ||\n       p[\"result\"][\"schema\"]!=\"vivim.windows.native-result/1\" ||\n       p[\"result\"][\"actionId\"]!=action {return Err(ReadError::InvalidProjection);}\n    Ok(p[\"result\"].clone())\n}\npub fn plan(text: &str) -> Result<Review, ReadError> {"
+        }
+      ]
+    },
+    {
+      "path": "native/gpui-desktop/src/main.rs",
+      "baseBlob": "ea8d775ff445178412e1717be02e06acceb7a161",
+      "edits": [
+        {
+          "from": "    fn save_developer_diagnostics(&mut self,cx:&mut Context<Self>) {",
+          "to": "    fn read_windows_resources(&mut self,cx:&mut Context<Self>) {\n        if !passive_read_allowed(self.busy,self.uncertain,\n            self.review.as_ref().is_some_and(Review::needs_approval)){\n            self.developer_status=\"Finish or cancel the pending Host decision first\".into();cx.notify();return;\n        }\n        self.busy=true;\n        self.developer_status=\"Reading native resource counters through Host…\".into();cx.notify();\n        let source_epoch=self.source_epoch;\n        let task=cx.background_executor().spawn(async move {control::read_native_resources()});\n        cx.spawn(async move |this,cx|{\n            let result=task.await;\n            let _=this.update(cx,|view,cx|{\n                view.busy=false;\n                if view.source_epoch!=source_epoch{\n                    view.developer_status=\"Resource observation invalidated by a Host state change\".into();cx.notify();return;\n                }\n                view.developer_status=match result{\n                    Ok(v) if v[\"status\"]==\"unsupported\"=>\"Native resource probe unsupported\".into(),\n                    Ok(v)=>{\n                        let d=&v[\"data\"];\n                        match (d[\"memoryTotalBytes\"].as_u64(),d[\"memoryAvailableBytes\"].as_u64()){\n                            (Some(t),Some(a)) if t>0&&a<=t=>{\n                                let cpu=d[\"cpuBusyBasisPoints\"].as_u64().filter(|n|*n<=10000)\n                                    .map(|n|format!(\"{:.1}% (calling processor group)\",n as f64/100.0))\n                                    .unwrap_or_else(||\"unavailable\".into());\n                                format!(\"RAM {:.2}/{:.2} GiB used · CPU {} · native Host observation\",\n                                  (t-a) as f64/1073741824.0,t as f64/1073741824.0,cpu)\n                            },\n                            _=>\"Invalid native resource projection\".into()\n                        }\n                    },\n                    Err(e)=>format!(\"Native resource read unavailable: {}\",e.label())\n                };cx.notify();\n            });\n        }).detach();\n    }\n    fn save_developer_diagnostics(&mut self,cx:&mut Context<Self>) {"
+        },
+        {
+          "from": "                        .child(Button::new(\"dev-save-report\").label(\"Save diagnostic report\")",
+          "to": "                        .child(Button::new(\"dev-native-resources\").label(\"Read Windows CPU and memory\")\n                            .on_click(cx.listener(|v,_,_,cx|v.read_windows_resources(cx))))\n                        .child(Button::new(\"dev-save-report\").label(\"Save diagnostic report\")"
+        }
+      ]
+    }
+  ],
+  "additions": [
+    {
+      "path": "native/host-supervisor/src/bin/vivim-workstation-probe/native_resources.rs",
+      "source": "overlay/native/host-supervisor/src/bin/vivim-workstation-probe/native_resources.rs"
+    },
+    {
+      "path": "apps/vivim-host/control/native-resource-port.mjs",
+      "source": "overlay/apps/vivim-host/control/native-resource-port.mjs"
+    },
+    {
+      "path": "apps/vivim-host/test/native-resource-port.test.mjs",
+      "source": "overlay/apps/vivim-host/test/native-resource-port.test.mjs"
+    },
+    {
+      "path": "tools/mcp/vivim-arbor/tests/native-resource-tunnel.test.cjs",
+      "source": "overlay/tools/mcp/vivim-arbor/tests/native-resource-tunnel.test.cjs"
+    }
+  ]
+}

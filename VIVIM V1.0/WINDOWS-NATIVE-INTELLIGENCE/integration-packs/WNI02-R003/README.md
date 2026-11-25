@@ -1,0 +1,5 @@
+# WNI02 R003 — native resource read with GPUI user control
+
+Supersedes WNI02-R002 overlay. Same ARBOR base 67859e96c12a55d4341d4008cf8a5b1528d18eea; 10 pinned files, 4 additions. Includes previous sealed native probe/Host/MCP/release changes plus a real native GPUI Developer panel button "Read Windows CPU and memory", using existing authenticated control client, background executor, busy/approval fence, source epoch and current Developer status surface. No new renderer or dependencies. The button is an authored source patch, not a compiled or installed control. Mobile remains unavailable under current device authorization. Apply only the R003 overlay, not R002 plus R003. Run prepare-overlay.mjs read-only against exact source bytes; output to new independent folder only. No ARBOR modifications from Labs.
+
+Cloud source-anchor replay for the GPUI addition passed. All prior R002 evidence remains limited to its original checks. Rust/GPUI compilation, full Node tests and native real MCP/user acceptance UNRUN.

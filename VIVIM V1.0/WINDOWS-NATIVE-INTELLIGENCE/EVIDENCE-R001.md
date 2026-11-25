@@ -1,0 +1,3 @@
+# R001 evidence
+
+Cloud V8 executed the same coverage helper and checks used in coverage.test.mjs: {"checks":8,"candidateCount":33,"mcpMapped":33,"appMapped":33,"sourceWiringEvidenceDeclared":0,"liveAccepted":0,"executionAuthorized":false}. This is candidate mapping/validation, not a production Host test. Node file harness, native Rust compile/tests, actual Windows probes and MCP/app execution UNRUN. Tunnel health maintenance/drained, grant summary unavailable. No production changes, new permissions or installs. No upstream source copied. Package recipes are implementation handoffs; only the starter algorithms and aggregate probes have source code in this pack. No performance claim.

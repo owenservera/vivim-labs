@@ -1,0 +1,1072 @@
+{
+  "schema": "vivim.labs.windows-extraction-pack/1",
+  "sourceArbor": "972dbccafea7b9fde47913207c2fefcf02ac8365",
+  "date": "2026-11-25",
+  "authority": "candidate evidence only; existing ARBOR Host catalog owns execution",
+  "packages": [
+    {
+      "id": "WNI01",
+      "name": "filesystem-delta",
+      "priority": "P0",
+      "source": [
+        "https://learn.microsoft.com/en-us/windows/win32/fileio/using-the-change-journal-identifier",
+        "https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-readdirectorychangesw"
+      ],
+      "owner": "native Host + HQ",
+      "code": "src/change.rs (parser and revision reducer; OS reader pending)",
+      "extract": "Use ReadDirectoryChangesW on explicitly approved directories as the default non-elevated watcher. Open directory handle with FILE_LIST_DIRECTORY and shared read/write/delete; cancel with CancelIoEx or worker shutdown. Treat zero bytes, ERROR_NOTIFY_ENUM_DIR and bounded queue overflow as a gap. USN_QUERY/READ are optional privileged NTFS capabilities; no auto-elevation, volume-wide filename ingestion or journal creation. Persist journal ID plus cursor only after authorized batch commit. Re-scan approved scope on journal rotation or gap. Do not reconstruct global private file paths from raw volume records.",
+      "accept": "Real temp directory create/rename/delete; restart cursor; force gap, rebaseline; non-admin USN refusal; verify no events from unapproved roots.",
+      "actionIds": [
+        "windows.filesystem.changes.status",
+        "windows.filesystem.changes.read",
+        "windows.filesystem.changes.configure"
+      ]
+    },
+    {
+      "id": "WNI02",
+      "name": "system-diagnostics",
+      "priority": "P0",
+      "source": [
+        "https://learn.microsoft.com/en-us/windows/win32/etw/about-event-tracing",
+        "https://learn.microsoft.com/en-us/windows/win32/etw/consuming-events",
+        "https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-globalmemorystatusex",
+        "https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-getsystemtimes"
+      ],
+      "owner": "native Host + workstation",
+      "code": "src/resources.rs (native aggregate CPU/memory and selected fixed-drive capacity); ETW adapter pending",
+      "extract": "Aggregate memory and system CPU deltas through Win32; report unavailable for unsupported processor group coverage rather than imply whole-machine certainty. Drive capacity only for an approved fixed drive. ETW start with VIVIM-owned provider and owned task correlation; StartTrace/EnableTraceEx2/OpenTrace/ProcessTrace with cancellation and bounded event queue; TDH decode allowlisted fields. No command lines, unrelated process payloads, credentials, network payloads or persistent system-wide tracing by default. Preserve dropped-event count; correlate owned process creation time + session ID, not PID alone.",
+      "accept": "Compare memory/capacity to native OS APIs, verify nonzero CPU delta and invalid sample refusal; emit one owned event, verify correlation, stop and verify no remaining trace session.",
+      "actionIds": [
+        "windows.system.resources.read",
+        "windows.system.volume.capacity",
+        "windows.system.diagnostics.read",
+        "windows.system.diagnostics.configure"
+      ]
+    },
+    {
+      "id": "WNI03",
+      "name": "native-terminal-agents",
+      "priority": "P0",
+      "source": [
+        "https://github.com/microsoft/intelligent-terminal/blob/7ef2e637b810d58f20ef53f61275a0ec849cf26f/tools/wta/OVERVIEW.md",
+        "https://github.com/microsoft/intelligent-terminal/blob/7ef2e637b810d58f20ef53f61275a0ec849cf26f/doc/agent-profiles.md",
+        "https://github.com/microsoft/intelligent-terminal/blob/7ef2e637b810d58f20ef53f61275a0ec849cf26f/doc/security-model.md",
+        "https://learn.microsoft.com/en-us/windows/console/createpseudoconsole"
+      ],
+      "owner": "workstation + Host",
+      "code": "src/session.rs (receipt-fenced lifecycle reducer); ConPTY and ACP transport pending",
+      "extract": "Donor WTA master pools agent CLI connections and routes ACP sessions to owners. Reuse protocol discovery and lifecycle ideas; do not copy its renderer, COM terminal controller, named-pipe server or install another terminal. Extend existing Windows Job Object worker with optional CreatePseudoConsole, separate pipe IO, PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE and deterministic shutdown. ACP profile selection uses existing provider registry and cost policy. Keep approval/receipt authority in Host; treat delegate proposals as proposals, not completed effects.",
+      "accept": "Real ConPTY echo/resize/interrupt, no stuck handles, child cancellation, two owned ACP sessions with no output mix-up, settled receipt and no unexpected provider charges.",
+      "actionIds": [
+        "windows.terminal.capabilities.read",
+        "windows.agent.sessions.list",
+        "windows.agent.session.status",
+        "windows.agent.session.start",
+        "windows.agent.session.cancel"
+      ]
+    },
+    {
+      "id": "WNI04",
+      "name": "indexed-search",
+      "priority": "P0",
+      "source": [
+        "https://learn.microsoft.com/en-us/windows/win32/search/using-sql-and-aqs-to-query-the-index",
+        "https://learn.microsoft.com/en-us/windows/win32/properties/props-system-itempathdisplay"
+      ],
+      "owner": "HQ + existing file port",
+      "code": "adapter recipe only",
+      "extract": "Use Windows Search OLE DB SystemIndex with fixed SELECT fields, bounded results and properly escaped literal input; never accept caller-supplied SQL. Resolve scope from Host grant, filter returned paths against approved canonical roots and recheck access before opening; index hits are candidate evidence, not proof of current contents. Windows Property System IPropertyStore for allowlisted file metadata. Fall back to existing HQ index, never silently index the whole machine. COM initialization and cleanup on dedicated worker.",
+      "accept": "Known authorized fixture indexed, query matches it, out-of-scope hit withheld, stale/missing file clearly marked, service disabled fallback; query-injection test.",
+      "actionIds": [
+        "windows.knowledge.search.status",
+        "windows.knowledge.search.query",
+        "windows.knowledge.file.properties"
+      ]
+    },
+    {
+      "id": "WNI05",
+      "name": "native-app-semantics",
+      "priority": "P0",
+      "source": [
+        "https://github.com/microsoft/winappCli/blob/c9e6a9bdf010add8edaddb790689e3cbaae33cd5/docs/ui-automation.md",
+        "https://github.com/microsoft/winappCli/blob/c9e6a9bdf010add8edaddb790689e3cbaae33cd5/src/winapp-CLI/WinApp.UIAutomation/PACKAGE.md",
+        "https://learn.microsoft.com/en-us/windows/win32/winauto/uiauto-eventsoverview"
+      ],
+      "owner": "dedicated Studio/Harness convergence",
+      "code": "donor extraction recipe only; R033 hold on integration",
+      "extract": "Port semantic selector, element identity, wait-for assertion and cooperative desktop-turn arbitration into existing Studio/Harness. Rust windows COM UIA, selected app only; mask password controls, no arbitrary desktop recording; actions must be registered and authorized. Bind window identity + runtime ID + semantic fingerprint + observed revision. Reject stale selectors, serialize focus ownership and read back after action. No WinApp UI runtime or browser controller; library donor is .NET, so use patterns only unless approved otherwise.",
+      "accept": "Notepad fixture unique selector, ambiguous selector refusal, state change invalidates stale revision, selected-app readback, no competing renderer or focus contention.",
+      "actionIds": [
+        "windows.application.inspect",
+        "windows.application.element.query",
+        "windows.application.action.invoke"
+      ]
+    },
+    {
+      "id": "WNI06",
+      "name": "app-actions",
+      "priority": "P0",
+      "source": [
+        "https://learn.microsoft.com/en-us/windows/ai/app-actions/",
+        "https://learn.microsoft.com/en-us/windows/ai/app-actions/actions-consume"
+      ],
+      "owner": "Studio/Harness + VLANG registry",
+      "code": "adapter recipe only; SDK availability probe required",
+      "extract": "Microsoft.AI.Actions consumer SDK is documented; verify package identity, OS version, supported provider registration and Rust/WinRT accessibility before choosing a minimal adapter. Import action metadata as proposed semantic IDs; never auto-promote discovery to execution rights. Bind typed arguments, target identity and risk through Host. Optional adapter, no Copilot dependency, no blanket claim every app supports actions.",
+      "accept": "On supported Windows, discover documented fixture provider, invoke harmless typed action after Host approval, verify output; unavailable platform returns explicit unsupported; reject arbitrary action ID.",
+      "actionIds": [
+        "windows.application.actions.discover",
+        "windows.application.action.describe",
+        "windows.application.action.execute"
+      ]
+    },
+    {
+      "id": "WNI07",
+      "name": "windows-capture",
+      "priority": "P1",
+      "source": [
+        "https://learn.microsoft.com/en-us/windows/uwp/audio-video-camera/screen-capture",
+        "https://github.com/microsoft/winappCli/blob/c9e6a9bdf010add8edaddb790689e3cbaae33cd5/src/winapp-CLI/WinApp.UIAutomation/PACKAGE.md"
+      ],
+      "owner": "dedicated Studio/Harness + GPUI",
+      "code": "donor extraction recipe only",
+      "extract": "Use Windows Graphics Capture picker or supported owner-consented selected-window API; keep session visible and revocable. Capture limited to selected app, no covert desktop surveillance, credential windows excluded, no frames in public evidence. Use GPUI existing render/capture paths; no second renderer or browser surface. Return authorized artifact ref and revision, not raw frames in routine MCP tool responses.",
+      "accept": "Owner selects test window; verify scope, stop/revoke, minimized/occluded support reported accurately, phone and GPUI state consistent; refuse nonselected target.",
+      "actionIds": [
+        "windows.application.capture.status",
+        "windows.application.capture.request",
+        "windows.application.capture.stop"
+      ]
+    },
+    {
+      "id": "WNI08",
+      "name": "configuration-reconciliation",
+      "priority": "P1",
+      "source": [
+        "https://learn.microsoft.com/en-us/windows/package-manager/configuration/",
+        "https://learn.microsoft.com/en-us/powershell/dsc/overview"
+      ],
+      "owner": "Settings + Host",
+      "code": "adapter recipe only",
+      "extract": "Read-only inventory first; existing Settings stores desired state. WinGet/DSC optional supported commands, version probe, pinned trusted manifests. Plan diff before mutation; exact Host approval; only supported owner-selected packages, no silent elevation, install scripts or broad security setting changes. Track source digest and readback; rollback only where supported. Do not make DSC or WinGet a mandatory service.",
+      "accept": "Read installed versions, plan known harmless fixture, demonstrate dry-run leaves state unchanged; approved apply with readback and explicit rollback capability.",
+      "actionIds": [
+        "windows.system.configuration.inspect",
+        "windows.system.configuration.plan",
+        "windows.system.configuration.apply"
+      ]
+    },
+    {
+      "id": "WNI09",
+      "name": "workload-isolation",
+      "priority": "P1",
+      "source": [
+        "https://learn.microsoft.com/en-us/windows/apps/develop/mxc/",
+        "https://learn.microsoft.com/en-us/windows/apps/develop/mxc/releases"
+      ],
+      "owner": "native workstation + Host",
+      "code": "optional backend recipe only",
+      "extract": "Probe Microsoft Execution Containers supported backends before dependency adoption; optional mxc-sdk feature, explicit policy and trust model, no host prep by default. Existing Job Object process containment is lifecycle control, not sandbox. Use isolation for approved delegated workload only; never silently downgrade a requested isolation guarantee.",
+      "accept": "Supported backend starts fixture with specified resources, unauthorized resource denied, stop cleans workload, unsupported backend fails closed; record memory/disk overhead.",
+      "actionIds": [
+        "windows.workload.isolation.status",
+        "windows.workload.isolation.plan",
+        "windows.workload.isolation.run"
+      ]
+    },
+    {
+      "id": "WNI10",
+      "name": "hardware-adaptive-ai",
+      "priority": "P2",
+      "source": [
+        "https://learn.microsoft.com/en-us/windows/ai/overview",
+        "https://learn.microsoft.com/en-us/windows/ai/apis/"
+      ],
+      "owner": "native intelligence + model registry",
+      "code": "adapter recipe only",
+      "extract": "Probe supported Windows ML/Foundry execution providers and OS/hardware requirements. Use existing model registry and explicit resource budgets; no automatic model downloads, paid fallback or assumption of NPU. Small CPU task benchmarks first. Keep local inference optional; feed bounded typed outputs to existing verifier/semantic engine. Preserve model license and data provenance.",
+      "accept": "Known permitted local fixture, compare latency/RAM/accuracy vs incumbent deterministic method; unsupported GPU/NPU path marked unavailable; no network fallback.",
+      "actionIds": [
+        "windows.intelligence.local.status",
+        "windows.intelligence.local.evaluate"
+      ]
+    },
+    {
+      "id": "WNI11",
+      "name": "binding-minimization",
+      "priority": "P0",
+      "source": [
+        "https://github.com/microsoft/windows-rs",
+        "https://docs.rs/windows-sys/0.61.2/windows_sys/"
+      ],
+      "owner": "native engineering",
+      "code": "Cargo.toml feature list + dependency budget",
+      "extract": "Use incumbent windows-sys 0.61.2 and narrowly scoped Win32 features for raw APIs. Use windows only where COM/WinRT requires it and verify incremental build/disk footprint. No wholesale framework or global package installs. Generate specialized bindings only if measurements justify; pin SDK and license provenance. Capability support means runtime probe, not compile success.",
+      "accept": "Cargo tree before/after, no new mandatory service or runtime, supported Windows tests, cold/warm build time and disk delta.",
+      "actionIds": [
+        "windows.system.native.support"
+      ]
+    }
+  ],
+  "descriptors": [
+    {
+      "id": "windows.filesystem.changes.status",
+      "semanticId": "windows.filesystem.changes.status@1",
+      "mcp": "vivim_windows_filesystem_changes_status",
+      "risk": "R0",
+      "package": "WNI01",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "scope_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.filesystem.changes.read",
+      "semanticId": "windows.filesystem.changes.read@1",
+      "mcp": "vivim_windows_filesystem_changes_read",
+      "risk": "R0",
+      "package": "WNI01",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "scope_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "cursor": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "limit": {
+          "type": "integer",
+          "min": 1,
+          "max": 200
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.filesystem.changes.configure",
+      "semanticId": "windows.filesystem.changes.configure@1",
+      "mcp": "vivim_windows_filesystem_changes_configure",
+      "risk": "R2",
+      "package": "WNI01",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "scope_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "enabled": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.resources.read",
+      "semanticId": "windows.system.resources.read@1",
+      "mcp": "vivim_windows_system_resources_read",
+      "risk": "R0",
+      "package": "WNI02",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {},
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.volume.capacity",
+      "semanticId": "windows.system.volume.capacity@1",
+      "mcp": "vivim_windows_system_volume_capacity",
+      "risk": "R0",
+      "package": "WNI02",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "drive": {
+          "type": "string",
+          "min": 1,
+          "max": 2
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.diagnostics.read",
+      "semanticId": "windows.system.diagnostics.read@1",
+      "mcp": "vivim_windows_system_diagnostics_read",
+      "risk": "R0",
+      "package": "WNI02",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "session_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "cursor": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "limit": {
+          "type": "integer",
+          "min": 1,
+          "max": 200
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.diagnostics.configure",
+      "semanticId": "windows.system.diagnostics.configure@1",
+      "mcp": "vivim_windows_system_diagnostics_configure",
+      "risk": "R2",
+      "package": "WNI02",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "scope_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "enabled": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.terminal.capabilities.read",
+      "semanticId": "windows.terminal.capabilities.read@1",
+      "mcp": "vivim_windows_terminal_capabilities_read",
+      "risk": "R0",
+      "package": "WNI03",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {},
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.agent.sessions.list",
+      "semanticId": "windows.agent.sessions.list@1",
+      "mcp": "vivim_windows_agent_sessions_list",
+      "risk": "R0",
+      "package": "WNI03",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {},
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.agent.session.status",
+      "semanticId": "windows.agent.session.status@1",
+      "mcp": "vivim_windows_agent_session_status",
+      "risk": "R0",
+      "package": "WNI03",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "session_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.agent.session.start",
+      "semanticId": "windows.agent.session.start@1",
+      "mcp": "vivim_windows_agent_session_start",
+      "risk": "R2",
+      "package": "WNI03",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "profile_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "scope_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "request_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.agent.session.cancel",
+      "semanticId": "windows.agent.session.cancel@1",
+      "mcp": "vivim_windows_agent_session_cancel",
+      "risk": "R2",
+      "package": "WNI03",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "session_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.knowledge.search.status",
+      "semanticId": "windows.knowledge.search.status@1",
+      "mcp": "vivim_windows_knowledge_search_status",
+      "risk": "R0",
+      "package": "WNI04",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {},
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.knowledge.search.query",
+      "semanticId": "windows.knowledge.search.query@1",
+      "mcp": "vivim_windows_knowledge_search_query",
+      "risk": "R0",
+      "package": "WNI04",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "scope_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "query": {
+          "type": "string",
+          "min": 1,
+          "max": 512
+        },
+        "limit": {
+          "type": "integer",
+          "min": 1,
+          "max": 200
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.knowledge.file.properties",
+      "semanticId": "windows.knowledge.file.properties@1",
+      "mcp": "vivim_windows_knowledge_file_properties",
+      "risk": "R0",
+      "package": "WNI04",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "scope_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "file_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.inspect",
+      "semanticId": "windows.application.inspect@1",
+      "mcp": "vivim_windows_application_inspect",
+      "risk": "R0",
+      "package": "WNI05",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "app_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.element.query",
+      "semanticId": "windows.application.element.query@1",
+      "mcp": "vivim_windows_application_element_query",
+      "risk": "R0",
+      "package": "WNI05",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "app_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "query": {
+          "type": "string",
+          "min": 1,
+          "max": 512
+        },
+        "limit": {
+          "type": "integer",
+          "min": 1,
+          "max": 200
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.action.invoke",
+      "semanticId": "windows.application.action.invoke@1",
+      "mcp": "vivim_windows_application_action_invoke",
+      "risk": "R2",
+      "package": "WNI05",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "app_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "element_ref": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "action": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "revision": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.actions.discover",
+      "semanticId": "windows.application.actions.discover@1",
+      "mcp": "vivim_windows_application_actions_discover",
+      "risk": "R0",
+      "package": "WNI06",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "app_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.action.describe",
+      "semanticId": "windows.application.action.describe@1",
+      "mcp": "vivim_windows_application_action_describe",
+      "risk": "R0",
+      "package": "WNI06",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "action_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.action.execute",
+      "semanticId": "windows.application.action.execute@1",
+      "mcp": "vivim_windows_application_action_execute",
+      "risk": "R2",
+      "package": "WNI06",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "action_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "input_ref": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "revision": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.capture.status",
+      "semanticId": "windows.application.capture.status@1",
+      "mcp": "vivim_windows_application_capture_status",
+      "risk": "R0",
+      "package": "WNI07",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {},
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.capture.request",
+      "semanticId": "windows.application.capture.request@1",
+      "mcp": "vivim_windows_application_capture_request",
+      "risk": "R2",
+      "package": "WNI07",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "app_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "purpose": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.application.capture.stop",
+      "semanticId": "windows.application.capture.stop@1",
+      "mcp": "vivim_windows_application_capture_stop",
+      "risk": "R2",
+      "package": "WNI07",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "capture_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.configuration.inspect",
+      "semanticId": "windows.system.configuration.inspect@1",
+      "mcp": "vivim_windows_system_configuration_inspect",
+      "risk": "R0",
+      "package": "WNI08",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "profile_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.configuration.plan",
+      "semanticId": "windows.system.configuration.plan@1",
+      "mcp": "vivim_windows_system_configuration_plan",
+      "risk": "R0",
+      "package": "WNI08",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "profile_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.configuration.apply",
+      "semanticId": "windows.system.configuration.apply@1",
+      "mcp": "vivim_windows_system_configuration_apply",
+      "risk": "R2",
+      "package": "WNI08",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "plan_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "revision": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.workload.isolation.status",
+      "semanticId": "windows.workload.isolation.status@1",
+      "mcp": "vivim_windows_workload_isolation_status",
+      "risk": "R0",
+      "package": "WNI09",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {},
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.workload.isolation.plan",
+      "semanticId": "windows.workload.isolation.plan@1",
+      "mcp": "vivim_windows_workload_isolation_plan",
+      "risk": "R0",
+      "package": "WNI09",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "profile_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.workload.isolation.run",
+      "semanticId": "windows.workload.isolation.run@1",
+      "mcp": "vivim_windows_workload_isolation_run",
+      "risk": "R2",
+      "package": "WNI09",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "plan_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "revision": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.intelligence.local.status",
+      "semanticId": "windows.intelligence.local.status@1",
+      "mcp": "vivim_windows_intelligence_local_status",
+      "risk": "R0",
+      "package": "WNI10",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {},
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.intelligence.local.evaluate",
+      "semanticId": "windows.intelligence.local.evaluate@1",
+      "mcp": "vivim_windows_intelligence_local_evaluate",
+      "risk": "R2",
+      "package": "WNI10",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {
+        "model_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "fixture_ref": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        },
+        "budget_id": {
+          "type": "string",
+          "min": 1,
+          "max": 128
+        }
+      },
+      "result": "vivim.windows.native-result/1"
+    },
+    {
+      "id": "windows.system.native.support",
+      "semanticId": "windows.system.native.support@1",
+      "mcp": "vivim_windows_system_native_support",
+      "risk": "R0",
+      "package": "WNI11",
+      "readiness": "proposed",
+      "requiresLiveGrant": true,
+      "surfaces": [
+        "mcp",
+        "text",
+        "desktop",
+        "mobile",
+        "visual"
+      ],
+      "args": {},
+      "result": "vivim.windows.native-result/1"
+    }
+  ]
+}

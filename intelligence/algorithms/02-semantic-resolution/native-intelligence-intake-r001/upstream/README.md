@@ -4,3 +4,6 @@ Selected MIT-licensed upstream source retained byte-identically with each origin
 - [mlb2251/stitch/LICENSE](https://github.com/mlb2251/stitch/blob/350804b7b35807c78bd21c313785ae5152ae2985/LICENSE) — blob `5a58015d602a6b93a052154e2af750717a2c814d`, byte-identical.
 - [mlb2251/stitch/src/pattern_args.rs](https://github.com/mlb2251/stitch/blob/350804b7b35807c78bd21c313785ae5152ae2985/src/pattern_args.rs) — blob `ce8ba28437e8268d93ab99652f054e9a5f9a9668`, byte-identical.
 - [mlb2251/stitch/src/compression.rs](https://github.com/mlb2251/stitch/blob/350804b7b35807c78bd21c313785ae5152ae2985/src/compression.rs) — blob `afa923776f678021e30e41b25227955b61d96a92`, byte-identical.
+
+- [egraphs-good/egg/LICENSE](https://github.com/egraphs-good/egg/blob/73975c9819efb4af2f3c6c1b44fa53f8c5742574/LICENSE) — blob `6e6d258f048daa07590e9b32c113e262adfd92c1`, byte-identical.
+- [egraphs-good/egg/src/extract.rs](https://github.com/egraphs-good/egg/blob/73975c9819efb4af2f3c6c1b44fa53f8c5742574/src/extract.rs) — blob `9f77a911aedfc138d7bd68c537fb314449f5aff8`, byte-identical.

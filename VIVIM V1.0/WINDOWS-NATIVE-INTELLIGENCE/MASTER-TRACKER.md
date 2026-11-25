@@ -80,3 +80,7 @@ Selected hidden-window UIA root and process identity verified; zero child result
 ## R035 — actual native samples and compiler workload
 
 16/16 Windows tests passed, exit 0, eight materialized source blobs verified. Existing Win32 resource and topology probes drive the same R034 admission transition; two real rustc metadata jobs admitted and launched before waiting, both exit successfully and release all reservations. [Evidence](EVIDENCE-R035-SDK.json). Product main campaign blob unchanged at b3debb7. Single-group CPU scope, conservative configured resource estimates, no production Host receipt/cross-campaign binding or live policy activation yet. Next: reprogrammable SDK admission policy bounded by fixed resource constraints, then incumbent owned-process receipts. No tracker reordering or production writes.
+
+## SDK-intensive R036–R038 — typed policy and native workload feedback
+
+45/45 exact-pin native tests passed for live Meta-VLANG policy and bounded workload profile; [evidence](EVIDENCE-R036-R037-SDK.json). Reused the concurrently landed owned-admission package at 1ba61b4, applied exact-source overlay rather than duplicate process owner. R038 combined 58/58 Windows tests, normal exit 0, whole-job lifecycle and actual compiler feedback: 64 MiB initial reservation, measured 115101696-byte peak job commit, second job admitted at 143877120 bytes. [Evidence](EVIDENCE-R038-SDK.json). Unknown measurements retain prior known samples. Production Host/cross-campaign authority and actual agent protocol still open; original priority list unchanged.

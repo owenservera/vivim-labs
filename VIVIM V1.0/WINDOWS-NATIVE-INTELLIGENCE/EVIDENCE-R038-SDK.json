@@ -1,0 +1,54 @@
+{
+  "schema": "vivim.labs.sdk-owned-feedback/1",
+  "source": "33cad64669638c12b01a874216fe355c53d51a1b",
+  "ownerPin": "1ba61b437c8c3b2ee95292d999ab8e022f3396d7",
+  "productPin": "95d046c20d5af0a4e116d6fe6cacc9300203452c",
+  "session": "ctl-f78556cafeb08569",
+  "exitCode": 0,
+  "elapsedMs": 39680,
+  "passed": 58,
+  "failed": 0,
+  "exactOverlay": true,
+  "ownedParallel": {
+    "admitted": 2,
+    "cancelConfirmed": 1,
+    "normalExit": 1,
+    "released": 2
+  },
+  "compilerFeedback": [
+    {
+      "round": 1,
+      "elapsedMs": 497,
+      "peakJobCommitBytes": 115101696,
+      "artifactBytes": 26726,
+      "user100ns": 2031250,
+      "kernel100ns": 2500000,
+      "reservedMemory": 67108864,
+      "nextMemory": 143877120,
+      "nextElapsedMs": 622
+    },
+    {
+      "round": 2,
+      "elapsedMs": 427,
+      "peakJobCommitBytes": 115212288,
+      "artifactBytes": 26726,
+      "user100ns": 1406250,
+      "kernel100ns": 2187500,
+      "reservedMemory": 143877120,
+      "nextMemory": 144015360,
+      "nextElapsedMs": 622
+    }
+  ],
+  "limitations": [
+    "Peak job committed memory is not physical working set; reservation estimate is not OS-enforced.",
+    "Artifact length does not establish total temporary disk consumption.",
+    "Compiler executable digest keys this fixture; full dependency/toolchain closure digest remains open.",
+    "Wall-time values are two observations, not a speedup benchmark.",
+    "In-memory receipt IDs scoped to profile instance; persistent provenance and production Host binding pending.",
+    "Cross-campaign admission authority not yet verified."
+  ],
+  "priorFailures": [
+    "Transient MCP initialization conflict before operational call; normal recipe check restored connection."
+  ],
+  "productionWrites": false
+}

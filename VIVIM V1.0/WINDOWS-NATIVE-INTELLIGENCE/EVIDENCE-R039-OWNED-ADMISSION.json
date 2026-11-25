@@ -1,0 +1,66 @@
+{
+  "schema": "vivim.labs.owned-admission-policy/1",
+  "source": "541cf6d54a3ca6a6243e6fccebf07c42f7462c79",
+  "session": "ctl-b5356209d120f3d2",
+  "exitCode": 0,
+  "success": true,
+  "passed": 59,
+  "failed": 0,
+  "elapsedMs": 27508,
+  "testSeconds": 5.38,
+  "productPin": "95d046c20d5af0a4e116d6fe6cacc9300203452c",
+  "arborPin": "ff1de3b70ca87d143301a7f934673acbf9e182e6",
+  "nativeSample": {
+    "logicalCpus": 8,
+    "cpuBusyBasisPoints": 4895,
+    "memoryAvailableBytes": 14062370816,
+    "diskAvailableBytes": 6109614080
+  },
+  "realOwnedCompilerJobs": {
+    "count": 2,
+    "policyGeneration": 1,
+    "metadataArtifactBytes": [
+      27452,
+      24826
+    ],
+    "elapsedMs": 487,
+    "exitStatusSuccess": true,
+    "reservationsReleased": true,
+    "reviewRequired": true
+  },
+  "liveOwnedJobLifecycle": {
+    "parallelJobs": 2,
+    "cancelConfirmed": 1,
+    "normalExit": 1,
+    "released": 2,
+    "thirdDeferred": true,
+    "forgedLeaseRejected": true,
+    "uncertainLaunchHoldRetained": true
+  },
+  "residentPolicy": {
+    "generation": 4,
+    "narrowedParallelLimit": 1,
+    "priorHoldPreserved": true,
+    "wideningRefused": true,
+    "cancelReleased": true,
+    "subsequentAdmission": true
+  },
+  "acceptance": {
+    "scope": "bounded single-campaign isolated integration",
+    "status": "passed",
+    "priority": 2,
+    "limitations": [
+      "Actual Product campaign and resident modules compiled in isolation; not installed as a production Product command.",
+      "One in-memory campaign owner, not a shared durable cross-campaign Host reservation ledger.",
+      "Resource estimates govern admission; OS memory/disk quotas are not enforced.",
+      "The compiler pair was launched before waiting; actual CPU execution overlap was not measured.",
+      "Uncertain launch retains a reservation pending trusted reconciliation; no automatic retry.",
+      "Workload profile reducer tested in this package; concurrent R038-SDK evidence separately covers measured job feedback.",
+      "No actual agent subprocess or provider call."
+    ]
+  },
+  "context7": "/websites/doc_rust-lang_stable_std",
+  "productWrites": false,
+  "arborWrites": false,
+  "productionDeployment": false
+}

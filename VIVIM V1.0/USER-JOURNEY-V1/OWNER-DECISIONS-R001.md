@@ -15,3 +15,6 @@ Owner interview required before ratification. Do not reopen settled architecture
 | D10 | What exact limitations are unacceptable on day one? | No stale/mismatched UI, silent data loss, wrong-account effects, unverified coverage or duplicate sends |
 
 Interview order: D01, D02, D07 first; then scope/depth questions D03–D06, D08–D10. Record each explicit answer as dated owner decision with source, impacted journey and changed boundary. No implied acceptance from silence.
+
+## R002 owner decisions — 2026-11-25
+OD01 confirmed: install/workspace and preferred AI connection are first. OD02 confirmed: after sign-in, begin pulling context from selected preferred AI (e.g. ChatGPT with years of conversations), under scoped acquisition authorization. OD03 confirmed: the other listed items are capabilities, not journey steps; setup should introduce value naturally. Audience, full history coverage, provider launch set and precise first reveal remain open. Next question: personal profile, current projects/decisions, or combined living World as the first reveal? See [R002](ONBOARDING-EXPERIENCE-R002.md).

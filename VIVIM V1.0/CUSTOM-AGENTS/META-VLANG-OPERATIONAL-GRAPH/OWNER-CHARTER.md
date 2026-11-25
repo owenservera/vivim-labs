@@ -18,3 +18,6 @@ Special auto-generated bundle classes, starting with live development. Dynamical
 
 ## Subsequent owner direction — automated parallel workstream and build
 The system itself should always generate and maintain the bounds of work and builds that can be done in parallel without breaking things. Agents can pick up this intelligence and choose how to parallelize instead of designing it from scratch. Using the plan is optional; generating it does not authorize execution. Add to future work, keep immediate compiler priorities.
+
+## Native user-input foundation
+Owner: the most primitive VIVIM instance is the native textbox, wired now to real-time intent compilation and always-on AutoWiki. Thousand parallel agents are also real product users (not coding agents); they exercise this actual input and observe the live output. Special dynamic-context class: real-time Wiki and real-time command, separating interpreted intent, registered capabilities, executor readiness and actual command execution. Reuse existing ARBOR designs and native paths.

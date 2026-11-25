@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createBindCache} from './bind-cache.mjs';
+const digest='a'.repeat(64),command=(line=1,hash=digest)=>['bind',1,'product:fixture.rs',hash,line,'context','fixture'].join('\t');
+const response=c=>{const a=c.split('\t');return ['OK vivim.meta-vlang.source/1',a[1],1,a[2],a[3],a[4],a[5],'unbound','source-assertion',a[6]].join('\t');};
+function setup(options){let generation=1;const sent=[];let malformed=false;const cache=createBindCache(1,async c=>{sent.push(c);if(c==='status')return 'OK generation='+generation;if(c.startsWith('bind\t'))return malformed?'ERR fixture':response(c);return 'OK fixture';},options);return{cache,sent,setGeneration:g=>generation=g,malform:()=>malformed=true};}
+test('exact warm batch saves native round trips and preserves output',async()=>{const {cache,sent}=setup();const rows=Array.from({length:64},(_,i)=>command(i+1));const first=await cache.batch(rows);assert.equal(sent.length,64);await cache.batch(['definitions']);await cache.batch(['describe annotation.context']);const before=sent.length;assert.deepEqual(await cache.batch(rows),first);assert.equal(sent.length-before,1);assert.equal(cache.stats().hits,64);});
+test('changed source digest forces fresh native work',async()=>{const {cache,sent}=setup();await cache.batch([command()]);await cache.batch([command(1,'b'.repeat(64))]);assert.equal(sent.length,2);assert.equal(cache.stats().hits,0);});
+test('generation change refuses cached result',async()=>{const {cache,setGeneration}=setup();await cache.batch([command()]);setGeneration(2);await assert.rejects(cache.batch([command()]),/GENERATION_CHANGED/);assert.equal(cache.stats().entries,0);});
+test('mutation clears and disables cache',async()=>{const {cache,sent}=setup();await cache.batch([command()]);await cache.batch(['update 1 fixture']);await cache.batch([command()]);assert.equal(sent.length,3);assert.equal(cache.stats().disabled,true);});
+test('invalid response never caches partial batch',async()=>{const {cache,malform}=setup();await cache.batch([command()]);malform();const r=await cache.batch([command(2),command(3)]);assert.deepEqual(r,['ERR fixture','ERR fixture']);assert.equal(cache.stats().entries,0);});
+test('capacity stays bounded',async()=>{const {cache}=setup({maxEntries:2,maxBytes:1024});await cache.batch([command(1),command(2),command(3)]);assert.equal(cache.stats().entries,2);assert.ok(cache.stats().bytes<=1024);});

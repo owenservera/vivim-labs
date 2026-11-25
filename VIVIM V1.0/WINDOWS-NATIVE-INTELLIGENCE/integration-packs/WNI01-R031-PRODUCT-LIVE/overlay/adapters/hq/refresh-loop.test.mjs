@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdtempSync,mkdirSync,writeFileSync,rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {setTimeout as delay} from 'node:timers/promises';
+import {createRefreshLoop,observeRoot} from './refresh-loop.mjs';
+test('coalesces burst into one serialized refresh',async()=>{let n=0;const l=createRefreshLoop({refresh:async()=>++n,debounceMs:20,settleMs:5});try{await l.enqueue(l.perform);for(let i=0;i<100;i++)l.invalidate();assert.throws(l.requireCurrent,/REQUIRED/);await delay(100);assert.equal(n,2);l.requireCurrent();}finally{await l.close();}});
+test('edit during refresh causes another pass, never silent acknowledgement',async()=>{let n=0;const l=createRefreshLoop({refresh:async()=>{if(++n===1)l.invalidate();return n;},debounceMs:20,settleMs:2});try{assert.equal(await l.enqueue(l.perform),2);l.requireCurrent();}finally{await l.close();}});
+test('failure and unsettled refresh do not become current',async()=>{let n=0;const l=createRefreshLoop({refresh:async()=>{n++;l.invalidate();return n},maxPasses:2,debounceMs:100,settleMs:1});try{await assert.rejects(l.enqueue(l.perform),/UNSETTLED/);assert.throws(l.requireCurrent,/REQUIRED/);l.lost();assert.throws(l.requireCurrent,/UNAVAILABLE/);}finally{await l.close();}});
+test('requests and refresh cannot interleave',async()=>{const order=[];const l=createRefreshLoop({observe:false,refresh:async()=>{order.push('start');await delay(5);order.push('end');return 1}});try{await Promise.all([l.enqueue(l.perform),l.enqueue(()=>{l.requireCurrent();order.push('read')})]);assert.deepEqual(order,['start','end','read']);}finally{await l.close();}});
+test('actual nested file change, scoped watcher and automatic refresh',async()=>{const base=mkdtempSync(join(tmpdir(),'wni-refresh-')),source=join(base,'source'),data=join(base,'data');mkdirSync(source);mkdirSync(data);mkdirSync(join(source,'nested'));let n=0;const l=createRefreshLoop({refresh:async()=>++n,debounceMs:30,settleMs:15});let w;try{assert.throws(()=>observeRoot({source,data:source,loop:l}),/INSIDE_SOURCE/);w=observeRoot({source,data,loop:l});await l.enqueue(l.perform);writeFileSync(join(source,'nested','fixture.rs'),'fn fixture(){}');for(let i=0;i<100&&n<2;i++)await delay(25);assert.ok(n>=2);for(let i=0;i<100&&l.status().dirty;i++)await delay(25);l.requireCurrent();assert.ok(l.status().revision>=1);}finally{w?.close();await l.close();rmSync(base,{recursive:true,force:true});}});

@@ -1,8 +1,14 @@
-# Agent entry — cloud-first ChatGPT engineering (R007)
+# Agent entry — cloud-first engineering / VIVIM-first operations (R008)
 
 **MANDATORY BEFORE TOOLS:** Read [CLOUD-FIRST-CODING-POLICY.md](CLOUD-FIRST-CODING-POLICY.md). ChatGPT's OWN CLOUD WORKSPACE + DIRECT GITHUB is the default for all source coding, tests, migration, integrations and commits/pushes to canonical `main`. **DO NOT use Remote Desktop Commander or ZCode to develop, edit, build, commit or push product source code as a fallback.** Desktop Commander may only read the sitrep and perform specifically authorized local-only verification, runtime launch, deployment or device operations *after* cloud source is pushed. If cloud GitHub access is missing, report BLOCKED, never silently move work to the desktop. This paragraph OVERRIDES historical R001/R002 instructions below.
 
 **VALIDATION SURFACES:** Read [VALIDATION-SURFACES.md](VALIDATION-SURFACES.md) for the owner rule: no Android gate; GPUI native validation where connected; PWA is a second interface to the same Rust Core. Do not claim GPUI is implemented without evidence.
+
+## Current owner directive — 25 November 2026 (supersedes all historical instructions below)
+
+Read [master plan R002](DEVOPS-PLANNING/MASTER-PLAN-R001.md) and [cloud-first policy](CLOUD-FIRST-CODING-POLICY.md). Use GitHub/cloud for source work; VIVIM ARBOR tunnel is the primary authorized local operations surface. Its current browser profile exposes health only. Do not infer that other capabilities are available; identify missing capability, use explicit bounded commercial Commander fallback only if authorized and allowed, never bypass a refusal or safety check. Preserve current working connection. Reuse Host grants, native Rust modules, existing model registry and durable receipts. Reference MCP-U01–U12 separately from master U01–U11. No additional backlog, worker claim or scheduler.
+
+**ONE actual product renderer: native Rust GPUI.** Phone PWA is a thin paired authenticated remote viewport of GPUI frames with input returned to the same native control. The historical November 21 Edge/PWA-only override at the end is superseded. Existing native and phone acceptance requirements remain. Preserve active claims, URL and pairing.
 
 ## Historical ZCode local-operations reference (NOT default startup)
 
@@ -57,5 +63,5 @@ The historical `OWNER-WORK` records are not yet verified in connected GitHub `ma
 **Mandatory before SITREP/task work:** read [TASK-CLAIMS.md](TASK-CLAIMS.md). The task register and the ownership claim overlay are distinct: never list a Dev-checked-out task as Planning's next ten. A check-out needs a fresh GitHub claim, one active executor and a source/file scope; a handoff is not effective until the recipient explicitly accepts it. Unobserved historical ownership is UNKNOWN, not retroactively checked out.
 
 
-## Latest owner UI override — 2026-11-21 (SUPERSEDES GPUI-only directive above)
+## Historical owner UI override — 2026-11-21 (SUPERSEDED by current GPUI directive above)
 **ONE customer-facing VIVIM interface only:** the existing text-box-first First Contact PWA + inline AutoWiki, shared across PC Edge app and mobile PWA. Native GPUI diagnostic workspace is RETIRED AS USER UI, not the product target. No second user-visible dashboard, native shell, tabs, command palette or fallback. Preserve underlying Rust, native HQKG, Studio/Host authorization and history; archive competing launchers after source dependency review. On Windows use `VIVIM.lnk` → `http://127.0.0.1:43187/mobile/index.html?first=1`. The earlier GPUI-only restriction on Edge is explicitly overridden by the owner. Full source cleanup remains pending; coordinate claims before editing ARBOR. See [owner canonical UI decision](OWNER-ONE-UI-20261121.md).

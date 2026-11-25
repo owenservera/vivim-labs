@@ -1,0 +1,46 @@
+{
+  "schema": "vivim.labs.product-acceleration/1",
+  "productBase": "5da225899ff635f1161ad07212e34f9517ac9f53",
+  "arborBase": "579fa727ca735d215a6319fccea334b6cb2210d5",
+  "r030": {
+    "source": "36a464ff83780e47db030646e5a45c9c9a78ff77",
+    "session": "ctl-f12a2787f2f47225",
+    "exitCode": 0,
+    "passed": 5,
+    "nestedFileNotification": true,
+    "initialSyntaxFailure": "ctl-4e6145b2f3ee6864; corrected dispatch chain",
+    "invalidRequestId": "31 characters; corrected before new isolated test"
+  },
+  "r031": {
+    "source": "8c3a01959ec3f5ec06a6bbb2961e72e8ba6c22dd",
+    "session": "ctl-91d60011f3efdefd",
+    "exitCode": 0,
+    "success": true,
+    "pinnedBlobs": 4,
+    "additions": 11,
+    "verifiedBytes": 20309,
+    "combinedTestsPassed": 24,
+    "nativeGraphBuildSeconds": 54.54,
+    "live": {
+      "actualProduct": true,
+      "actualHq": true,
+      "actualNativeGraph": true,
+      "actualNativeSdk": true,
+      "automaticRefresh": true,
+      "sourceDigestChanged": true,
+      "graphEpochBefore": 4,
+      "graphEpochAfter": 6,
+      "wikiReadback": true,
+      "focusProof": true
+    }
+  },
+  "limits": [
+    "Live acceptance uses an owned small Git fixture, actual pinned SDK and HQ native binaries, not the owner's live repository.",
+    "fs.watch uses OS-native notifications through incumbent Node glue; notifications are hints, not complete coverage proof; full HQ refresh retained.",
+    "Graph exporter still projects complete universe; existing native importer handles incremental reconciliation. No separate graph authority.",
+    "No deployment or production writes."
+  ],
+  "context7": "/nodejs/node/v24.22.2",
+  "productWrites": false,
+  "arborWrites": false
+}

@@ -4,3 +4,8 @@ mod resource_campaign;
 mod resources;
 mod hardware;
 #[path="native-sampling.rs"] mod native_sampling;
+mod protocol;
+mod meta_language;
+mod meta_resident;
+#[path="meta-policy.rs"] mod meta_policy;
+#[path="workload-profile.rs"] mod workload_profile;

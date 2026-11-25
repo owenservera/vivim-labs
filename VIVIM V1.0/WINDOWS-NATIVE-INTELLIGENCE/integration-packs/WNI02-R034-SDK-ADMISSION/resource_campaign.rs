@@ -26,11 +26,16 @@ impl ResourceCampaign {
   self.held.values().fold(Reserved::default(),|r,h|Reserved{memory:r.memory.saturating_add(h.cost.memory),disk:r.disk.saturating_add(h.cost.disk),cpus:r.cpus.saturating_add(h.cost.cpus),tasks:r.tasks.saturating_add(1)})
  }
  pub fn counts(&self)->(usize,usize,usize,usize){self.campaign.counts()}
- pub fn admit(&mut self,worker:&str,now:u64,ttl:u64,sample:Snapshot)->Result<Admission,Error>{
+ pub fn budget(&self)->Budget{self.budget}
+ pub fn admit(&mut self,worker:&str,now:u64,ttl:u64,sample:Snapshot)->Result<Admission,Error>{self.admit_bounded(worker,now,ttl,sample,self.budget)}
+ /// @hq:invariant Dynamic policy may tighten, never widen, the fixed owner budget.
+ pub fn admit_bounded(&mut self,worker:&str,now:u64,ttl:u64,sample:Snapshot,budget:Budget)->Result<Admission,Error>{
+  let fixed=self.budget;
+  if budget.max_age_ms>fixed.max_age_ms||budget.memory_reserve<fixed.memory_reserve||budget.disk_reserve<fixed.disk_reserve||budget.cpu_reserve<fixed.cpu_reserve||budget.max_parallel>fixed.max_parallel||budget.busy_ceiling_bp>fixed.busy_ceiling_bp{return Err(Error::Invalid)}
   if worker.trim().is_empty()||worker.len()>96||worker.chars().any(char::is_control)||ttl==0||now.checked_add(ttl).is_none(){return Err(Error::Invalid)}
   if self.last.is_some_and(|s|sample.revision<s.revision||sample.observed_ms<s.observed_ms||(sample.revision==s.revision&&sample!=s)){return Err(Error::StaleSample)}
   // Validate freshness even when queue is empty; do not admit on ambiguous CPU samples.
-  scheduler::plan(sample,self.budget,self.reserved(),now,&[])?;
+  scheduler::plan(sample,budget,self.reserved(),now,&[])?;
   self.last=Some(sample);
   if self.held.values().any(|h|h.lease.worker==worker){return Err(Error::BusyWorker)}
   self.campaign.advance(now)?;
@@ -44,7 +49,7 @@ impl ResourceCampaign {
   let mut deferred=Vec::new();
   for batch in pending.chunks(256){
    let work:Vec<_>=batch.iter().map(|(_,w)|*w).collect();
-   let plan=scheduler::plan(sample,self.budget,self.reserved(),now,&work)?;
+   let plan=scheduler::plan(sample,budget,self.reserved(),now,&work)?;
    if let Some(key)=plan.admitted.first(){
     let (id,_)=batch.iter().find(|(_,w)|w.id==*key).ok_or(Error::Invalid)?;
     let cost=self.costs[id].1;

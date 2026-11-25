@@ -1,5 +1,7 @@
 # VIVIM Labs — public-safe research, evaluation and campaign evidence
 
+**Current agent entrypoint (2026-11-25):** [Canonical ChatGPT agents](VIVIM%20V1.0/CUSTOM-AGENTS/README.md). Use this for SITREP/continue requests; historical campaign maps are retained as evidence.
+
 Labs is VIVIM's **research/evidence repository**, not a fifth primary development authority. It holds source-linked experiments, tests, historical documentation archives and the Z.ai convergence campaign record. It **does not** own the product roadmap, Host effects, visual runtime or central development index.
 
 ## Start here

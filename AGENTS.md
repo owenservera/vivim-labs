@@ -1,5 +1,9 @@
 # VIVIM Labs — agent and contributor rules
 
+## Canonical ChatGPT agent routing (2026-11-25)
+
+Resolve all named agent SITREP/continue requests via [VIVIM V1.0/CUSTOM-AGENTS](VIVIM%20V1.0/CUSTOM-AGENTS/README.md) and its registry. Historical agent maps are not active dispatch authority. Existing source claims, owner decisions, #33 and production source remain authoritative. No new scheduler or independent ledger is created. Do not activate archived roles.
+
 ## Owner directive — VIVIM-first workstation operations (2026-11-25, R030)
 
 **Mandatory for every ChatGPT development session:** use the installed VIVIM ARBOR MCP connector for authorized workstation operations. Direct general terminal execution is now live, not recipe-only. Desktop Commander is retired as a routine operations dependency; use it only for an explicitly authorized, specific missing capability or recovery, and record the gap. Do not route around authorization failures. Cloud/GitHub remains the primary source engineering and canonical main-commit venue; local validation, build, launch, packaging and deployment go through VIVIM first. ZCode is subordinate, direct CLI only for explicitly scoped work; no ZCode workflows.

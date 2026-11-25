@@ -1,11 +1,3 @@
-# VIVIM agent workspaces
+# Archived keeper workspaces
 
-One folder per permanent specialist seat. Each seat scaffolds, owns, and maintains
-its workspace: BRIEF.md (mission/question), STATUS.md (phase + deliverable table —
-the file to read first), LOG.md (dated journal). Everything here is public-safe by
-rule: no credentials, no private sessions, no machine-local paths that matter.
-
-Seats (2026-11-11, owner directive — see repos-hq docs/CXO-TEAMS.md):
-rust-core-keeper, hq-data-keeper, dcb-context-keeper, host-control-keeper,
-tierflow-visual-keeper, android-shell-keeper, platform-security-auditor,
-nlp-commands-keeper, auto-cmd-wiki-keeper, tierflow-platform-keeper.
+Moved unchanged to [archive](../archive/2026-11-25/workspaces/README.md). For active agents use [canonical custom agents](../../VIVIM%20V1.0/CUSTOM-AGENTS/README.md). Historical individual paths remain available at https://github.com/owenservera/vivim-labs/tree/40f68004d0b6e592a0cec40d494bc846787c7882/agents/workspaces.

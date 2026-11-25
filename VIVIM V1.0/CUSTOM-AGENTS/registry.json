@@ -1,0 +1,392 @@
+{
+  "schema": "vivim.labs.agent-routing/1",
+  "effective": "2026-11-25",
+  "baseline": "40f68004d0b6e592a0cec40d494bc846787c7882",
+  "authority": "navigation only; ARBOR #33 and TASK-CLAIMS retain execution authority",
+  "agents": [
+    {
+      "id": "CONTEXT",
+      "name": "Context / Labs steward",
+      "priority": "P0",
+      "mode": "coordination",
+      "aliases": [
+        "context guru",
+        "labs steward",
+        "orchestrator"
+      ],
+      "path": "CONTEXT",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/CONTEXT-GURU-SITREP-20261125.md",
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/DEVOPS-PLANNING/CORE-IP-THREE-SESSION-EXECUTION-R001.md",
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/TASK-CLAIMS.md"
+      ],
+      "next": "Audit the live #33 and current claims; update only agent routing and source pointers.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "WORKSTATION",
+      "name": "VIVIM MCP / native operations",
+      "priority": "P0",
+      "mode": "implementation",
+      "aliases": [
+        "mcp",
+        "desktop commander migration",
+        "core-ip 04"
+      ],
+      "path": "WORKSTATION",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/DEVOPS-PLANNING/CORE-IP-THREE-SESSION-EXECUTION-R001.md",
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/CLOUD-FIRST-CODING-POLICY.md",
+        "https://github.com/owenservera/ARBOR/blob/main/tools/mcp/vivim-arbor/HANDOFF.md"
+      ],
+      "next": "Verify live grants and real terminal/file/process operations; reconcile remaining independence checklist; record evidence.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "SETTINGS",
+      "name": "UX / Settings / Configuration",
+      "priority": "P0",
+      "mode": "design-and-integration",
+      "aliases": [
+        "configuration",
+        "ux settings"
+      ],
+      "path": "SETTINGS",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "VIVIM V1.0/UX-SETTINGS-CONFIGURATION/README.md",
+        "VIVIM V1.0/UX-SETTINGS-CONFIGURATION/OWNER-WORKSTATION-GOD-MODE-R003.md"
+      ],
+      "next": "Reconcile current registry and settings UI; implement first no-code configuration seam within claimed scope.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "VLANG",
+      "name": "VLANG / Meta-VLANG operational graph",
+      "priority": "P0",
+      "mode": "implementation",
+      "aliases": [
+        "meta-vlang",
+        "vlang agent",
+        "operational graph"
+      ],
+      "path": "META-VLANG-OPERATIONAL-GRAPH",
+      "entry": "AGENT.md",
+      "sitrep": "EVIDENCE-AND-HANDOFF.md",
+      "sources": [
+        "VIVIM V1.0/CUSTOM-AGENTS/META-VLANG-OPERATIONAL-GRAPH/AGENT.md",
+        "VIVIM V1.0/CUSTOM-AGENTS/META-VLANG-OPERATIONAL-GRAPH/EXECUTION-QUEUE.md",
+        "VLANG-CANONICAL-PROTOCOL-R000",
+        "ARBOR-VLANG-UPGRADE",
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/DEVOPS-PLANNING/CORE-IP-THREE-SESSION-EXECUTION-R001.md"
+      ],
+      "next": "Follow existing owner charter and execution queue; do not start a second compiler.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "HQKG",
+      "name": "Semantic compiler / HQKG",
+      "priority": "P0",
+      "mode": "implementation",
+      "aliases": [
+        "semantic compiler",
+        "core-ip 01"
+      ],
+      "path": "HQKG",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/DEVOPS-PLANNING/CORE-IP-THREE-SESSION-EXECUTION-R001.md",
+        "VIVIM V1.0/RUST-GRAPH-CONVERGENCE-WORK-R001.md"
+      ],
+      "next": "Read CORE-IP 01 current source claim; continue symbol-level extraction and actual tests.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "AUTOWIKI",
+      "name": "AutoWiki / contextual intelligence / Oracle",
+      "priority": "P0",
+      "mode": "implementation",
+      "aliases": [
+        "oracle",
+        "work",
+        "core-ip 02"
+      ],
+      "path": "AUTOWIKI",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/DEVOPS-PLANNING/CORE-IP-THREE-SESSION-EXECUTION-R001.md",
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/DESIGN/AUTOWIKI-FOUNDATION-R001",
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/ORACLE/SITREP.md"
+      ],
+      "next": "Reconcile current U05 and Core-IP 02 claim; verify revision/readback and real user/agent update paths.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "VEC",
+      "name": "Native computational reasoning / execution",
+      "priority": "P0",
+      "mode": "implementation",
+      "aliases": [
+        "computational intelligence",
+        "core-ip 03"
+      ],
+      "path": "VEC",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/DEVOPS-PLANNING/CORE-IP-THREE-SESSION-EXECUTION-R001.md",
+        "VIVIM V1.0/RUST-REPROGRAMMABLE-GRAPH-ARCHITECTURE-R001.md"
+      ],
+      "next": "Reconcile actual VEC source and claim; measure a real typed task against baseline with evidence.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "STUDIO",
+      "name": "Studio / Harness / external software",
+      "priority": "P0",
+      "mode": "implementation",
+      "aliases": [
+        "harness",
+        "provider",
+        "core-ip 05"
+      ],
+      "path": "STUDIO",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/DEVOPS-PLANNING/CORE-IP-THREE-SESSION-EXECUTION-R001.md",
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/DEVOPS-PLANNING/STUDIO-CORE-SITREP-R001.md",
+        "craft-anything-arbor-adapter"
+      ],
+      "next": "Verify existing ChatGPT thread/composer and Studio/Harness integration seam; coordinate provider claims.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "CRAFT",
+      "name": "Craft Anything surface extraction",
+      "priority": "P0",
+      "mode": "labs-only",
+      "aliases": [
+        "craft anything"
+      ],
+      "path": "CRAFT",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "craft-anything-arbor-adapter"
+      ],
+      "next": "Reconcile R006 evidence and owner-machine activation; perform authorized real capture before claiming full surface.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "GPUI",
+      "name": "Native GPUI / phone viewport",
+      "priority": "P0",
+      "mode": "implementation",
+      "aliases": [
+        "pwa",
+        "mobile",
+        "phone"
+      ],
+      "path": "GPUI",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "ARBOR-PWA-BASELINE-UPGRADE/README.md",
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/FIVE-LANE-OPERATIONS-R001/02-gpui-mobile-surface/HANDOFF.md",
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/OWNER-ONE-UI-20261121.md"
+      ],
+      "next": "Reconcile current package and claim; verify same-source phone interactions and actual device acceptance.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "PRODUCT",
+      "name": "VIVIM V1 product / user journey",
+      "priority": "P0",
+      "mode": "product-design",
+      "aliases": [
+        "v1",
+        "user journey",
+        "onboarding"
+      ],
+      "path": "PRODUCT",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "VIVIM V1.0/PRODUCT-REPOSITORY-R001.md",
+        "VIVIM V1.0/USER-JOURNEY-V1/README.md",
+        "VIVIM V1.0/USER-JOURNEY-V1/V1-BOUNDARY-R001.md"
+      ],
+      "next": "Reconcile onboarding decisions with demo and product source; do not expand V1 without owner decision.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "INSTALLER",
+      "name": "Installer / self-upgrade",
+      "priority": "P0",
+      "mode": "isolated-dev",
+      "aliases": [
+        "self-upgrade",
+        "one click"
+      ],
+      "path": "INSTALLER",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/CLOUD-FIRST-CODING-POLICY.md",
+        "https://github.com/owenservera/ARBOR/blob/main/tools/mcp/vivim-arbor/HANDOFF.md",
+        "VIVIM V1.0/USER-JOURNEY-V1/README.md"
+      ],
+      "next": "Inspect existing installer/self-update source and test isolated dev install plus rollback; do not replace working connector prematurely.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "VISUAL",
+      "name": "Visual command language / gestures",
+      "priority": "P1",
+      "mode": "design-and-integration",
+      "aliases": [
+        "vcl",
+        "gestures",
+        "symbolic commands"
+      ],
+      "path": "VISUAL",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "ARBOR-VLANG-UPGRADE/VISUAL-COMMAND-LANGUAGE/README.md",
+        "ARBOR-VLANG-UPGRADE/VISUAL-COMMAND-LANGUAGE/MASTER-VISUAL-INVENTORY.md",
+        "ARBOR-VLANG-UPGRADE/VISUAL-COMMAND-LANGUAGE/SYMBOLIC-INPUT-RESEARCH-R001.md"
+      ],
+      "next": "Reconcile visual axes and symbol families; deliver compositional SDK contract and actual examples without a competing renderer.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "VWIN",
+      "name": "Windows native intelligence",
+      "priority": "P1",
+      "mode": "labs-only",
+      "aliases": [
+        "windows native intelligence"
+      ],
+      "path": "VWIN",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/README.md",
+        "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/EVIDENCE-R005.json"
+      ],
+      "next": "Continue R005 successor, real Windows verification and integration-ready overlays in existing research folder.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "CANVAS",
+      "name": "Universal canvas / drawing",
+      "priority": "P1",
+      "mode": "labs-only",
+      "aliases": [
+        "drawing",
+        "universal canvas"
+      ],
+      "path": "CANVAS",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "UNIVERSAL-CANVAS-RESEARCH/README.md",
+        "UNIVERSAL-CANVAS-RESEARCH/WIRING-DESIGN-R001.md"
+      ],
+      "next": "Run bounded renderer experiments and document measured GPUI capability gaps.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "MESSAGING",
+      "name": "Universal messaging",
+      "priority": "P1",
+      "mode": "design",
+      "aliases": [
+        "universal messaging",
+        "whatsapp",
+        "messenger"
+      ],
+      "path": "MESSAGING",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "craft-anything-arbor-adapter",
+        "VIVIM V1.0/USER-JOURNEY-V1/README.md"
+      ],
+      "next": "Define canonical conversation/composer adapter contract; inspect provider surface evidence, do not invent a second renderer.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "SYNC",
+      "name": "Personal knowledge sync / historical recovery",
+      "priority": "P1",
+      "mode": "design-and-integration",
+      "aliases": [
+        "youtube",
+        "chatgpt history",
+        "knowledge sync"
+      ],
+      "path": "SYNC",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "VIVIM V1.0/USER-JOURNEY-V1/README.md",
+        "personal-knowledge-lifecycle"
+      ],
+      "next": "Find existing source in old repos, document permitted access and incremental sync; verify real source before claiming recovery.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "PERSONAL-AI",
+      "name": "Local personal intelligence",
+      "priority": "P1",
+      "mode": "labs-only",
+      "aliases": [
+        "local ai",
+        "personal intelligence"
+      ],
+      "path": "PERSONAL-AI",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "VIVIM V1.0/FUTURE-PROOF-PERSONAL-INTELLIGENCE-R001.md",
+        "VIVIM V1.0/RUST-REPROGRAMMABLE-GRAPH-ARCHITECTURE-R001.md",
+        "VIVIM V1.0/RUST-GRAPH-CONVERGENCE-WORK-R001.md"
+      ],
+      "next": "Reconcile native engine/graph research against production source; isolate measurable experiments and avoid a second graph.",
+      "activation": "charter-ready; live status unverified"
+    },
+    {
+      "id": "VERIFICATION",
+      "name": "Verification / models / release / Blaze",
+      "priority": "P0",
+      "mode": "verification",
+      "aliases": [
+        "blaze",
+        "qa",
+        "models",
+        "release"
+      ],
+      "path": "VERIFICATION",
+      "entry": "AGENT.md",
+      "sitrep": "SITREP.md",
+      "sources": [
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/FIVE-LANE-OPERATIONS-R001/05-verification-models-release/HANDOFF.md",
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/TEST-LEDGER.md",
+        "ZCODE-DESKTOP-COMMANDER-OPERATIONS/MODELS-AND-PROVIDERS.md",
+        "performance"
+      ],
+      "next": "Refresh actual claims and CI; verify Blaze benchmark and model admission; distinguish blocked from passing.",
+      "activation": "charter-ready; live status unverified"
+    }
+  ]
+}

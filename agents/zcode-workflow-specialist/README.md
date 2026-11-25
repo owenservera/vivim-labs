@@ -1,5 +1,7 @@
 # ZCode Workflow Specialist — VIVIM Labs
 
+**Retired as active ChatGPT agent:** retained in place for historical package/install/test compatibility. Current routing: [VERIFICATION](../../VIVIM%20V1.0/CUSTOM-AGENTS/VERIFICATION/AGENT.md). Follow root VIVIM-first policy; do not dispatch historical ZCode workflows.
+
 Research snapshot: 2026-11-13. Source: official `zai-org/zcode` repository, resolved in Context7 as `/zai-org/zcode`. This is a **research and agent package**, not proof that any particular installed ZCode build exposes every feature.
 
 ## Purpose

@@ -31,3 +31,5 @@ pub mod recovery;
 pub mod interaction_plan;
 
 pub mod indexed_search;
+
+pub mod refresh_fence;

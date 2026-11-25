@@ -21,3 +21,6 @@ pub mod hardware;
 
 pub mod scheduler;
 pub mod etw_decode;
+
+pub mod file_metadata;
+pub mod etw_record;

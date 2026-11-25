@@ -76,3 +76,7 @@ R012 combined preflight update: 11 raw source blobs verified, five additions, 3/
 ## R013 — transactional HQ checkpoint, resource admission and ETW decoding
 
 [HQ overlay](integration-packs/WNI01-R013-HQ/README.md) targets latest pinned indexer and existing SQLite transaction. [Rust scheduler and ETW decoder](packages/WNI02-R013-SCHEDULER-ETW.md) add bounded deterministic primitives. Tests pending. No ARBOR modifications.
+
+## R014 — native handle metadata and ETW record boundary
+
+[Native metadata and ETW boundary](packages/WNI04-R014-FILE-METADATA.md). New Rust modules, tests pending. No ARBOR edits.

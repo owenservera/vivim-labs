@@ -66,3 +66,7 @@ First slice: WNI02 aggregate resources through existing Host to MCP and GPUI; WN
 ## R011 — native ConPTY child attachment and hardware topology
 
 [ConPTY source overlay](integration-packs/WNI03-R011-CONPTY/README.md), [hardware and fixed-volume capacity](packages/WNI02-R011-HARDWARE.md). Actual Rust source and native test fixtures prepared, compile pending. ARBOR unchanged.
+
+## R012 — verified ConPTY attachment and consolidated overlay
+
+[Master tracker](MASTER-TRACKER.md), [combined resource/ConPTY overlay](integration-packs/WNI-COMBINED-R012/README.md), [native evidence](EVIDENCE-R012-WINDOWS.json). Native starter 35 passing tests; exact worker 6/6 normal exit including explicit console marker. Standard handles and interactive input remain unresolved; no full terminal acceptance. Combined overlay preflight pending. ARBOR unchanged.

@@ -1,0 +1,73 @@
+{
+  "schema": "vivim.labs.windows-native-sprint/1",
+  "arborBase": "67859e96c12a55d4341d4008cf8a5b1528d18eea",
+  "starterSource": "de15a435390e373f293dd7b6868d5cc1f4093ec0",
+  "starter": {
+    "session": "ctl-e4739a189731e7e0",
+    "testsPassed": 35,
+    "failed": 0,
+    "ignored": 0,
+    "testSeconds": 1.03,
+    "jobDisposition": {
+      "cancelReceipt": "ctl-96780c98559a9654",
+      "cancelled": true,
+      "exitCode": 0,
+      "success": false,
+      "note": "Tests completed; outer job did not settle after both streams closed and was explicitly cancelled."
+    },
+    "newTests": [
+      "aggregate logical processor topology",
+      "fixed fixture volume capacity"
+    ]
+  },
+  "conpty": {
+    "source": "cde3c42806e23419aa9ccb4bfec14d3daa4b58c2",
+    "session": "ctl-ba505a7cd1ad070f",
+    "exitCode": 0,
+    "passed": 6,
+    "failed": 0,
+    "testSeconds": 3.11,
+    "verified": [
+      "native resource create/resize/close",
+      "existing quoting and environment tests",
+      "owned child creation with JOB_LIST and PSEUDOCONSOLE attributes",
+      "explicit CONOUT$ GetConsoleMode and WriteConsoleW marker captured in PTY output",
+      "child exit and reader drain"
+    ],
+    "limitations": [
+      "ordinary inherited stdout/stderr projection failed prior fixture",
+      "interactive input and cancellation during active console IO unverified",
+      "existing OwnedProcess and Host/session dispatcher not wired"
+    ],
+    "failedAttempts": [
+      {
+        "session": "ctl-41d637322a43e885",
+        "cause": "child exit not successful with input closed before exit"
+      },
+      {
+        "session": "ctl-e0263da9a7d30910",
+        "cause": "child succeeded but redirected standard output marker not captured in PTY pipe"
+      },
+      {
+        "session": "ctl-d154cf91cfbcb5f4",
+        "cause": "GetConsoleMode requires read access; fixture opened console write-only"
+      }
+    ]
+  },
+  "combined": {
+    "pinnedFiles": 11,
+    "additions": 5,
+    "sharedFeatureAnchor": "explicit reviewed union",
+    "actualPreparation": "pending"
+  },
+  "context7": {
+    "library": "/microsoft/windows-rs/0.61.0",
+    "queries": [
+      "ConPTY process attributes",
+      "aggregate system topology and volume APIs"
+    ],
+    "limitation": "returned generic binding guidance; actual installed Windows bindings and native tests used to verify specifics"
+  },
+  "arborChanged": false,
+  "productionDeployed": false
+}

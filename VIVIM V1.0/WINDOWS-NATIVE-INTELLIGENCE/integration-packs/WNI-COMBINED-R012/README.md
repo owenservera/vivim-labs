@@ -1,0 +1,5 @@
+# Combined resource and ConPTY source overlay R012
+
+Exact ARBOR baseline 67859e96c12a55d4341d4008cf8a5b1528d18eea. Combines WNI02-R003 and WNI03-R011-CONPTY (fixture correction cde3c42806e23419aa9ccb4bfec14d3daa4b58c2). 11 pinned replacements, 5 additions. The sole overlap is Cargo.toml, explicitly merged as a union of Win32 features. No new dependency crate or service. Prepare against raw Git blobs with ../../materialize-base.mjs; never apply separate overlays in addition to this one. Source checkout remains unchanged. The hardware topology and capacity code is in rust-starter and is not included in this combined overlay yet.
+
+The ConPTY child fixture passed 6/6 in a standalone exact-worker crate, including explicit console handle write and pipe capture. Standard-handle behavior, interactive stdin, active cancellation and the incumbent OwnedProcess/Host session adapter still require work. The resources probe/port fixture was previously tested (R009/R010). GPUI, full native ARBOR crate and production MCP acceptance remain pending. Combined actual preflight pending at this commit. No deployment, no live grant changes. See ../../EVIDENCE-R012-WINDOWS.json.

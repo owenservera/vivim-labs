@@ -13,3 +13,8 @@ Existing engineering tracking: [ARBOR #33](https://github.com/owenservera/ARBOR/
 - [Email scene example](VISUAL-SCENE-EMAIL-EXAMPLE-R001.json) — illustrative nested/disjoint wrappers, relations and account selector.
 
 Design candidates only; production Rust and GPUI integration remain unimplemented in this round.
+
+## Historical symbolic command language
+
+- [Recovered symbolic input research](SYMBOLIC-INPUT-RESEARCH-R001.md) — D-217, Omega lineage, existing ARBOR source and native VCL integration.
+- [Machine-readable 17-family source crosswalk](SYMBOLIC-INPUT-CROSSWALK-R001.json) — source-derived examples, color hints, aliases and proposed discovery menus. Not a runtime registry.

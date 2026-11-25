@@ -36,8 +36,29 @@
   "combinedOverlay": {
     "pinnedBlobs": 2,
     "additions": 6,
-    "prepared": "pending",
-    "sourceBase": "5da225899ff635f1161ad07212e34f9517ac9f53"
+    "prepared": "passed",
+    "sourceBase": "5da225899ff635f1161ad07212e34f9517ac9f53",
+    "source": "9417952262950f86681c4703c9a2146d646b9742",
+    "session": "ctl-012aa9e02e06ad95",
+    "exitCode": 0,
+    "success": true,
+    "nodeTestsPassed": 12,
+    "bindFixture": {
+      "rows": 64,
+      "coldMs": 17.5,
+      "warmMs": 0.35,
+      "warmRoundTrips": 1,
+      "exactOutput": true
+    },
+    "sourceFixture": {
+      "declarations": 32,
+      "coldMs": 18.2572,
+      "warmMs": 0.8335,
+      "coldWire": 32,
+      "warmWire": 1,
+      "exactOutput": true,
+      "freshIndexMetadata": true
+    }
   },
   "context7": "/nodejs/node/v24.22.2",
   "limits": [

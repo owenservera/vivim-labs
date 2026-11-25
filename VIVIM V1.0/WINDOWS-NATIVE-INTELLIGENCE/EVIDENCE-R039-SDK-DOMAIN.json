@@ -1,0 +1,26 @@
+{
+  "schema": "vivim.labs.sdk-resource-domain/2",
+  "source": "7ca571dc4e1cbf6023f61ef784fe5e1f8a755768",
+  "materializer": "7864eb52b6c662731f2328ded554dc1563aed9c2",
+  "session": "ctl-879a4d202f374ad5",
+  "exitCode": 0,
+  "elapsedMs": 56068,
+  "passed": 61,
+  "failed": 0,
+  "verifiedBlobs": 19,
+  "domain": {
+    "globalParallelCap": true,
+    "workerIdentity": true,
+    "policyGlobalActiveCount": true,
+    "snapshotFence": true,
+    "foreignLeaseRejected": true,
+    "uncertainLaunchHoldAcrossCampaigns": true,
+    "realProcessOwnership": true
+  },
+  "previousFailure": "Shallow fetch omitted exact older tree; explicit immutable source fetch corrected.",
+  "limits": [
+    "One exclusive in-memory domain; no durable Host ledger or installed production binding.",
+    "No OS resource quota enforcement; configured estimates."
+  ],
+  "productionWrites": false
+}

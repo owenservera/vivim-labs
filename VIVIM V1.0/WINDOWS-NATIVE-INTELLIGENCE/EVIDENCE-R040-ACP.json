@@ -1,0 +1,28 @@
+{
+  "schema": "vivim.labs.owned-acp/1",
+  "source": "e0dfb25806d38f22a608d9aaa61a38a6ebc7e073",
+  "initial": {
+    "session": "ctl-ddd79e21695375c0",
+    "passed": 23,
+    "failed": 1,
+    "exitCode": 101,
+    "verifiedBlobs": 9,
+    "fixture": "owned stdio initialize/session/prompt/permission cancelled/update/settled/exit all verified",
+    "failure": "First PATH executable is stale Node launcher; MODULE_NOT_FOUND."
+  },
+  "actualAgent": {
+    "session": "ctl-054146e3bebd6196",
+    "version": "OpenCode 2.2.7",
+    "passed": 1,
+    "exitCode": 0,
+    "handshake": true,
+    "ownedCancellation": true,
+    "promptSent": false
+  },
+  "limits": [
+    "Actual agent initialize only; no live provider request or actual agent session/prompt settlement.",
+    "Bounded stdout tail overflow causes fail-closed gap; not continuous lossless capture at arbitrarily high rates."
+  ],
+  "context7": "/agentclientprotocol/agent-client-protocol",
+  "productionWrites": false
+}

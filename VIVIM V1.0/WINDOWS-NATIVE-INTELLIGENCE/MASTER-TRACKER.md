@@ -92,3 +92,7 @@ Selected hidden-window UIA root and process identity verified; zero child result
 ## R039 SDK shared admission domain — authored
 
 [Exact source candidate](integration-packs/WNI02-R034-SDK-ADMISSION/resource-domain.rs) extends existing resource admission and owned campaign wrapper with global held-resource accounting, resident policy inputs, worker uniqueness, sample fencing and domain-bound lease identity. Three native tests authored. [Verification status](EVIDENCE-R039-SDK.json): workstation launch receipt unavailable; scratch readback did not show R039 materialization; no new-ID retry of the uncertain launch. The verified combined baseline remains R038 58/58. No production writes or acceptance claim.
+
+## R039 shared domain + R040 ACP
+
+R039 shared resource domain verified: 61/61 Windows Rust tests, 19 exact source blobs, normal exit 0; global cap, actual owned jobs, global worker uniqueness, sample fencing, foreign lease denial and uncertain-launch retention across campaigns. [Evidence](EVIDENCE-R039-SDK-DOMAIN.json). R040 existing ACP transport connected to incumbent OwnedProcess; deterministic owned stdio session/prompt/update/permission denial/EOF passed. First actual-agent test failed due orphaned Node launcher, alternate native OpenCode 2.2.7 initialize verified with clean job cancellation. [Evidence](EVIDENCE-R040-ACP.json). Actual agent session/new extension authored; actual provider prompt, production binding, and full ACP acceptance pending. No ARBOR/Product changes.

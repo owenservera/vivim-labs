@@ -101,7 +101,16 @@ impl OwnedAcp{
    assert!(u.exit.is_none(),"actual agent exited before initialization");
    assert!(start.elapsed()<Duration::from_secs(20),"actual agent initialize timeout");thread::sleep(Duration::from_millis(25));
   }
+  let cwd=std::env::current_dir().unwrap();let cwd=cwd.to_str().unwrap();
+  c.new_session(cwd).unwrap();let start=Instant::now();
+  loop{
+   let u=c.poll().unwrap();
+   if u.events.iter().any(|e|matches!(e,Event::SessionCreated{..})){break}
+   assert!(!u.events.iter().any(|e|matches!(e,Event::Failed{..})),"actual session/new rejected");
+   assert!(u.exit.is_none(),"actual agent exited before session creation");
+   assert!(start.elapsed()<Duration::from_secs(20),"actual agent session/new timeout");thread::sleep(Duration::from_millis(25));
+  }
   c.cancel_owned().unwrap();
-  println!("ACTUAL_OPENCODE_ACP_INITIALIZE_OK");
+  println!("ACTUAL_OPENCODE_ACP_INITIALIZE_AND_SESSION_OK");
  }
 }

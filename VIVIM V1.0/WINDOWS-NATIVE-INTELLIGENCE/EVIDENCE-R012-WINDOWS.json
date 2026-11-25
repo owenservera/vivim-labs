@@ -58,7 +58,12 @@
     "pinnedFiles": 11,
     "additions": 5,
     "sharedFeatureAnchor": "explicit reviewed union",
-    "actualPreparation": "pending"
+    "actualPreparation": "passed",
+    "session": "ctl-18c1b706f8d594cf",
+    "exitCode": 0,
+    "verifiedRawGitBlobs": 11,
+    "nodeFixtureTestsPassed": 3,
+    "nodeFixtureTestsFailed": 0
   },
   "context7": {
     "library": "/microsoft/windows-rs/0.61.0",

@@ -29,6 +29,10 @@
         {
           "from": "}finally{runtime.close();}",
           "to": "}finally{observer?.close();await loop.close();runtime.close();}"
+        },
+        {
+          "from": " else if(req.op==='wiki-index')result=",
+          "to": " if(req.op==='wiki-index')result="
         }
       ]
     }

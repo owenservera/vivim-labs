@@ -46,8 +46,10 @@ test('does not accept labels without an owned-target declaration',()=>{
 test('imported capture contents require matching Craft-recorded path and origin',()=>{
   const dir=mkdtempSync(join(tmpdir(),'craft-bridge-'));
   const cap=join(dir,'capture');mkdirSync(cap);
-  const r=record({result:{url:origin+'/',output_directory:cap,counts:{outline:1}}});
+  const r=record({result:{url:origin+'/',output_directory:cap,counts:{outline:2}}});
   writeFileSync(join(cap,'capture.json'),JSON.stringify({url:origin+'/',outline:[{role:'button',label:'Create project'},{role:'button',label:'email@example.com'}]}));
+  const mismatched=record({result:{...r.result,counts:{outline:1}}});
+  assert.throws(()=>buildAtlas({bundle:bundle(mismatched),siteId:'test',origin,captureDir:cap}),/CAPTURE_COUNT_MISMATCH: outline/);
   const a=buildAtlas({bundle:bundle(r),siteId:'test',origin,captureDir:cap,includeLabels:true,ownedTarget:true});
   assert.equal(a.controls.length,2);assert.equal(a.controls[0].label,'Create project');assert.equal(a.controls[1].label,null);
   assert.equal(a.observations.find(x=>x.kind==='capture-artifact').artifactAttestedByCraftEvidence,false);

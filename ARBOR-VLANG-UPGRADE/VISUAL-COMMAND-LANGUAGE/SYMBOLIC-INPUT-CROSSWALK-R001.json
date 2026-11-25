@@ -1,0 +1,314 @@
+{
+  "schema": "vivim.vcl.symbolic-input-research/0.1",
+  "status": "source_derived_research_not_runtime_registry",
+  "source": {
+    "repository": "owenservera/ARBOR",
+    "path": "apps/mobile-relay/nlcl/symbols.mjs",
+    "blob_sha": "fecb5cba4bbee79701107aba67c6f620e833738a",
+    "origin": "owenservera/vivim-omega D-217"
+  },
+  "families": [
+    {
+      "glyph": "/",
+      "family": "command",
+      "historical_meaning": "invoke an op — the primary verb family",
+      "natural_language": [
+        "do",
+        "run",
+        "invoke"
+      ],
+      "historical_examples": [
+        "/send 'hello' to Peter",
+        "/rules"
+      ],
+      "historical_color_hint": "emerald",
+      "proposed_discovery": "registered commands"
+    },
+    {
+      "glyph": "@",
+      "family": "reference",
+      "historical_meaning": "a grounded entity mention (person, message, rule)",
+      "natural_language": [
+        "this",
+        "that",
+        "it",
+        "them"
+      ],
+      "historical_examples": [
+        "@peter",
+        "@this",
+        "send @this → @sarah"
+      ],
+      "historical_color_hint": "amber",
+      "proposed_discovery": "grounded entities"
+    },
+    {
+      "glyph": "#",
+      "family": "tag",
+      "historical_meaning": "label / categorize",
+      "natural_language": [
+        "tag",
+        "as",
+        "label"
+      ],
+      "historical_examples": [
+        "#urgent",
+        "tag it #quarterly"
+      ],
+      "historical_color_hint": "teal",
+      "proposed_discovery": "tags/topics"
+    },
+    {
+      "glyph": "!",
+      "family": "force",
+      "historical_meaning": "execute now — skip the confirmation card",
+      "natural_language": [
+        "now",
+        "immediately",
+        "just do it"
+      ],
+      "historical_examples": [
+        "! /send 'go' to Peter",
+        "send it now!"
+      ],
+      "historical_color_hint": "rose",
+      "proposed_discovery": "urgency intent (never approval bypass)"
+    },
+    {
+      "glyph": "?",
+      "family": "query",
+      "historical_meaning": "interrogate the world / ask the assistant",
+      "natural_language": [
+        "what",
+        "who",
+        "help",
+        "list"
+      ],
+      "historical_examples": [
+        "? who is Peter",
+        "what can I say?"
+      ],
+      "historical_color_hint": "emerald",
+      "proposed_discovery": "read/inspection capabilities"
+    },
+    {
+      "glyph": "+",
+      "family": "add",
+      "historical_meaning": "include / create",
+      "natural_language": [
+        "add",
+        "with",
+        "also",
+        "new"
+      ],
+      "historical_examples": [
+        "+rule …",
+        "add contact Maria"
+      ],
+      "historical_color_hint": "teal",
+      "proposed_discovery": "add/attach targets"
+    },
+    {
+      "glyph": "-",
+      "family": "remove",
+      "historical_meaning": "exclude / delete / disable",
+      "natural_language": [
+        "without",
+        "remove",
+        "disable",
+        "except"
+      ],
+      "historical_examples": [
+        "-rule forwarding",
+        "disable rule 2"
+      ],
+      "historical_color_hint": "rose",
+      "proposed_discovery": "exclude/remove targets"
+    },
+    {
+      "glyph": "&",
+      "family": "combine",
+      "historical_meaning": "and / then — chain two commands",
+      "natural_language": [
+        "and",
+        "then",
+        "also"
+      ],
+      "historical_examples": [
+        "/list & /rules"
+      ],
+      "historical_color_hint": "orange",
+      "proposed_discovery": "related command stages"
+    },
+    {
+      "glyph": "$",
+      "family": "value",
+      "historical_meaning": "variable binding — name a thing for reuse",
+      "natural_language": [
+        "set",
+        "save as",
+        "call it"
+      ],
+      "historical_examples": [
+        "$draft = /send …",
+        "send $draft"
+      ],
+      "historical_color_hint": "amber",
+      "proposed_discovery": "scoped bindings"
+    },
+    {
+      "glyph": "*",
+      "family": "wildcard",
+      "historical_meaning": "all / every",
+      "natural_language": [
+        "all",
+        "every",
+        "everything"
+      ],
+      "historical_examples": [
+        "read *",
+        "* from Peter"
+      ],
+      "historical_color_hint": "orange",
+      "proposed_discovery": "bounded match preview"
+    },
+    {
+      "glyph": "%",
+      "family": "config",
+      "historical_meaning": "parameter tuning on an existing capability",
+      "natural_language": [
+        "set",
+        "configure",
+        "tune"
+      ],
+      "historical_examples": [
+        "% inbox limit 20"
+      ],
+      "historical_color_hint": "teal",
+      "proposed_discovery": "configuration parameters"
+    },
+    {
+      "glyph": "∆",
+      "family": "delta",
+      "historical_meaning": "change an existing thing (vs + which creates)",
+      "natural_language": [
+        "change",
+        "update",
+        "make it"
+      ],
+      "historical_examples": [
+        "∆ rule 1 → @sarah"
+      ],
+      "historical_color_hint": "orange",
+      "proposed_discovery": "change targets and diff"
+    },
+    {
+      "glyph": "✓",
+      "family": "confirm",
+      "historical_meaning": "approve the pending consent / action card",
+      "natural_language": [
+        "yes",
+        "confirm",
+        "do it",
+        "allow"
+      ],
+      "historical_examples": [
+        "✓",
+        "confirm consent_x1"
+      ],
+      "historical_color_hint": "emerald",
+      "proposed_discovery": "pending exact plan review (not verification)"
+    },
+    {
+      "glyph": "=",
+      "family": "assert",
+      "historical_meaning": "definition / teaching — a word means an op",
+      "natural_language": [
+        "means",
+        "is",
+        "equals"
+      ],
+      "historical_examples": [
+        "blitz = /send",
+        "teach blitz means send"
+      ],
+      "historical_color_hint": "amber",
+      "proposed_discovery": "alias/definition proposal"
+    },
+    {
+      "glyph": "^",
+      "family": "priority",
+      "historical_meaning": "escalate — run before queued work",
+      "natural_language": [
+        "urgent",
+        "important",
+        "first",
+        "asap"
+      ],
+      "historical_examples": [
+        "^ /send 'fire' to Peter"
+      ],
+      "historical_color_hint": "rose",
+      "proposed_discovery": "priority choices"
+    },
+    {
+      "glyph": "~",
+      "family": "approximate",
+      "historical_meaning": "fuzzy mode for this parse",
+      "natural_language": [
+        "about",
+        "roughly",
+        "like"
+      ],
+      "historical_examples": [
+        "~ send to petr"
+      ],
+      "historical_color_hint": "orange",
+      "proposed_discovery": "fuzzy alternatives"
+    },
+    {
+      "glyph": "→",
+      "family": "direction",
+      "historical_meaning": "slot routing — to / into / for",
+      "natural_language": [
+        "to",
+        "into",
+        "for"
+      ],
+      "historical_examples": [
+        "/send @this → @peter"
+      ],
+      "historical_color_hint": "teal",
+      "proposed_discovery": "destination slots"
+    }
+  ],
+  "lexical_aliases": {
+    "∆": [
+      "∆",
+      "Δ"
+    ],
+    "✓": [
+      "✓",
+      "✔"
+    ],
+    "→": [
+      "→",
+      "->",
+      "=>",
+      ">"
+    ]
+  },
+  "attached_prefixes": [
+    "@",
+    "/",
+    "#",
+    "$"
+  ],
+  "constraints": [
+    "Do not use historical ! meaning to bypass current Host approval.",
+    "Typed ✓ is not verified execution and cannot independently approve a plan.",
+    "Punctuation in quoted payloads, paths, email addresses, code, URLs, numeric values and ordinary prose must be context-disambiguated; do not silently execute.",
+    "No fabricated choices; suggestions sourced from current authorized registry.",
+    "No second grammar. This file is research/adapter input; original canonical parser remains source of truth."
+  ]
+}

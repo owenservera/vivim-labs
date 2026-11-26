@@ -70,7 +70,7 @@ impl SelectedGroup{
   same_window(self.root)?;for id in &self.selected{child(self.root,*id)?}
   self.known=current;Ok(rows)
  }
- pub fn prepare(&mut self,s:Snapshot)->Result<Delta,Error>{Ok(self.delivery.prepare(s)?)}
+ pub fn prepare(&mut self,s:Snapshot)->Result<Delta,Error>{if self.registry.snapshot()?!=s{return Err(Error::Semantic(sem::Error::Stale))}Ok(self.delivery.prepare(s)?)}
  pub fn ack(&mut self,revision:u64)->Result<(),Error>{Ok(self.delivery.acknowledge(self.scope,revision)?)}
  pub fn resolve(&self,r:sem::Ref,rev:u64)->Result<&Control,Error>{Ok(self.registry.resolve(r,rev)?)}
 }
@@ -93,10 +93,11 @@ impl SelectedGroup{
   let (root,a,b)=rx.recv_timeout(Duration::from_secs(5)).unwrap();let root=uia::identity(root).unwrap();let a=uia::identity(a).unwrap();let b=uia::identity(b).unwrap();
   let mut group=SelectedGroup::new(1,1,1,root,vec![a,b]).unwrap();
   let first=group.capture().unwrap();assert_eq!(first.entries.len(),2);assert!(first.entries.iter().all(|e|e.control.role==Role::Button&&e.control.enabled));
+  let mut forged=first.clone();forged.entries[0].control.enabled=false;assert!(group.prepare(forged).is_err());
   let reference=first.entries[0].reference;assert!(matches!(group.prepare(first.clone()).unwrap(),Delta::Full(_)));
   assert!(group.prepare(first.clone()).is_err());group.ack(first.revision).unwrap();
   tx.send(Command::Disable).unwrap();ack.recv_timeout(Duration::from_secs(3)).unwrap();
-  let second=group.capture().unwrap();assert_eq!(second.entries.len(),2);
+  let second=group.capture().unwrap();assert_eq!(second.entries.len(),2);assert!(group.prepare(first.clone()).is_err());
   assert_eq!(group.resolve(reference,first.revision),Err(Error::Semantic(sem::Error::Stale)));
   let disabled=second.entries.iter().find(|e|!e.control.enabled).unwrap();
   assert!(first.entries.iter().any(|e|e.reference==disabled.reference));

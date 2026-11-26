@@ -34,6 +34,8 @@ public final class MainActivity extends Activity {
     private boolean activityMode;
     private String launchStatus = "";
     private boolean nativeReady;
+    private TextView startupStatus;
+    private static final java.util.concurrent.atomic.AtomicBoolean startupRunning=new java.util.concurrent.atomic.AtomicBoolean();
     private native int nativeProbeVersion();
     private native int nativeClassify(int expected, int actual, int rgb);
     private final int[] colors = {Color.rgb(18,95,171),Color.rgb(22,145,70),Color.rgb(178,65,30)};
@@ -51,6 +53,7 @@ public final class MainActivity extends Activity {
         TextView nativeStatus=new TextView(this);
         nativeStatus.setText(nativeReady ? "Rust JNI ABI v2 loaded and called" : "Rust JNI unavailable");
         root.addView(nativeStatus);
+        startupStatus=new TextView(this);startupStatus.setText("Startup diagnostics pending");root.addView(startupStatus);
         status = new TextView(this);
         status.setText("Idle. Tap Start to create a private display.");
         root.addView(status);
@@ -64,11 +67,32 @@ public final class MainActivity extends Activity {
         button(root,"Developer Instrument",v -> openDeveloper());
         button(root,"Native downloads",v -> startActivity(new Intent(this,DownloadActivity.class)));
         setContentView(root);
+        runStartupSelfTest();
     }
-    private void openDeveloper(){
+    private void runStartupSelfTest(){
+        if(!startupRunning.compareAndSet(false,true)){startupStatus.setText("Startup diagnostics already running");return;}
+        final boolean[] checks=runJniChecks();
+        final Context ctx=getApplicationContext();
+        final boolean notice=WhatsAppNoticeService.available(),capture=SnapshotService.active;
+        new Thread(()->{
+            String message;
+            try{
+                String receipt=StartupSelfTest.run(ctx,checks,notice,capture,"automatic-activity-startup");
+                StartupSelfTest.persist(ctx,receipt);
+                org.json.JSONObject r=new org.json.JSONObject(receipt);
+                message=r.optString("status").equals("diagnostic_failed")?"Startup diagnostics failed; receipt saved":"Startup diagnostics complete; receipt saved (inspect results)";
+            }catch(Exception e){message="Startup diagnostic receipt unavailable: "+e.getClass().getSimpleName();}
+            finally{startupRunning.set(false);}
+            final String done=message;runOnUiThread(()->{if(!isDestroyed())startupStatus.setText(done);});
+        },"vivim-startup-selftest").start();
+    }
+    private boolean[] runJniChecks(){
         boolean[] checks=new boolean[5];
         try{checks[0]=nativeReady&&nativeProbeVersion()==2;checks[1]=nativeClassify(3,3,0x7139a1)==2;checks[2]=nativeClassify(3,4,0x7139a1)==0;checks[3]=nativeClassify(3,3,0x125fab)==1;checks[4]=nativeClassify(0,0,0x7139a1)==0;}catch(LinkageError e){java.util.Arrays.fill(checks,false);}
-        startActivity(new Intent(this,DevActivity.class).putExtra("jni",checks));
+        return checks;
+    }
+    private void openDeveloper(){
+        startActivity(new Intent(this,DevActivity.class).putExtra("jni",runJniChecks()));
     }
     private void openWhatsApp() {
         stopProbe("Preparing user-requested WhatsApp launch");

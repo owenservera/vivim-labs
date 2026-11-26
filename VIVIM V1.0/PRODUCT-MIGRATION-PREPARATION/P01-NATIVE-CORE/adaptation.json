@@ -1,0 +1,187 @@
+{
+  "schema": "vivim.labs.p01.adaptation/1",
+  "lane": "P01-NATIVE-CORE",
+  "status": "inert isolated candidate; no SDK acceptance or promotion",
+  "sourcePins": {
+    "ARBOR": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+    "Product": "11812e6b1c06ac047329169ef5d848da3f85788c",
+    "observedProductMain": "ff9c7159933a9fbc8e045fface44c14d553493b5",
+    "stagedTasksBlob": "827ea5bb92be0fb8b52ffc67ba0b53eb0a0059c4",
+    "testCommit": "431840ee9446fd8c57c23a84461923b1ffc3cfff",
+    "testBlob": "ac764907a0872474c2587f242b85ccbb31fb295e"
+  },
+  "route": "Direct Product after independent intel-200/210 acceptance and owner authorization. Prefer smaller planning-only sample if P05 receipt presentation conflict remains.",
+  "candidate": {
+    "scope": "core/programmability only; isolated package; no registration",
+    "deterministicRules": [
+      {
+        "id": "P01-D01",
+        "path": "core/programmability/src/control_planning.rs",
+        "blob": "1f8721bfe30e89485de622ddca9319b8a782b1b1",
+        "sha256": "8b56062bf09aef7417dfa036539bf332a64baaaa90c97944584f9b517594b08b",
+        "operation": "copy exact bytes into absent candidate path; if identical already exists, no edit; if different exists, refuse collision",
+        "destination": "core/programmability/src/control_planning.rs"
+      },
+      {
+        "id": "P01-D02",
+        "path": "core/programmability/src/control_plan_presentation.rs",
+        "blob": "eb63317189282c231153e33ff98ea7910f24d42b",
+        "sha256": "80a43959454d3cfe0dbbf234ebc47963d5e7e2f0bc29fb0da37b2882a9449886",
+        "operation": "copy exact bytes into absent candidate path; identical no-op; divergent refuse",
+        "destination": "core/programmability/src/control_plan_presentation.rs"
+      },
+      {
+        "id": "P01-D03",
+        "path": "core/programmability/src/lib.rs",
+        "targetBaseBlob": "deb5509cae250f511afa09a5790174f7eaa14eb9",
+        "operation": "Preserve existing bytes and append exactly once to an isolated copy; reject stale or ambiguous root; compliant result no-op",
+        "anchor": "pub mod resident_semantic;",
+        "append": "\npub mod control_planning;\npub mod control_plan_presentation;\n"
+      },
+      {
+        "id": "P01-D04",
+        "path": "core/programmability/Cargo.toml",
+        "targetBaseBlob": "639c789822f5975659fa56fde06ecaf858e80ef5",
+        "operation": "no edit; serde_json already available. Donor lock exact only for standalone qualification, do not overwrite Product workspace lock."
+      },
+      {
+        "id": "P01-D05",
+        "path": "core/programmability/tests/control_contract.rs",
+        "testOrigin": "Labs tests/control_contract.rs",
+        "blob": "ac764907a0872474c2587f242b85ccbb31fb295e",
+        "operation": "copy exact test bytes into absent isolated candidate test path; no production registration"
+      }
+    ],
+    "unchanged": [
+      "source_digest.rs",
+      "development_projection.rs",
+      "resident_semantic.rs"
+    ],
+    "excluded": [
+      "ARBOR lib.rs replacement",
+      "Host action catalogue in candidate runtime",
+      "live approvals/receipts/transport",
+      "HQKG storage",
+      "control_catalog_compat.rs"
+    ]
+  },
+  "obligations": [
+    {
+      "id": "P01-S01",
+      "severity": "mandatory",
+      "kind": "agent-required",
+      "file": "core/programmability/src/control_planning.rs",
+      "symbols": [
+        "typed",
+        "candidate",
+        "project",
+        "validate_args"
+      ],
+      "anchors": [
+        "pub fn typed(input:&Value)->Value{",
+        "pub fn candidate(input:&Value)->Value{",
+        "fn project(action:&Value,args:&Value,source:&str,origin:&str)->Result<Value,&'static str>{"
+      ],
+      "evidence": "Exact donor blob. Caller-supplied action catalog is data; ready status is not authorization. AI candidate approval remains required. UTF-16 string length matches existing JS contract.",
+      "definition": "Map to current Meta-VLANG capability and authority definitions; retain schema/argument/refusal semantics.",
+      "acceptance": "SDK must bind real source spans and prove no effect authority. Original and candidate tests; independently reviewed mapping. Do not invent a registered capability."
+    },
+    {
+      "id": "P01-S02",
+      "severity": "mandatory",
+      "kind": "agent-required",
+      "file": "core/programmability/src/control_plan_presentation.rs",
+      "symbols": [
+        "format_review",
+        "format_receipt",
+        "format_inspection"
+      ],
+      "anchors": [
+        "pub fn format_review(plan:&Value)->Option<String>{",
+        "pub fn format_receipt(receipt:&Value,binding:&Value)->Option<(String,String)>{",
+        "pub fn format_inspection(record:&Value,expected_id:&str)->Option<String>{"
+      ],
+      "evidence": "Exact donor blob; owner plan requires desktop binding, exact ID/digest, explicit approval channel; formatting does not verify origin or issue approval.",
+      "definition": "Separate inert presentation from P05 Host receipt authority; preserve unknown fields and exact JSON values, avoid representing caller-supplied verified status as runtime proof.",
+      "acceptance": "Bounded source-scope review with P05, distinct graph/readback proof, no approval issuance/replay."
+    },
+    {
+      "id": "P01-S03",
+      "severity": "mandatory",
+      "kind": "agent-required",
+      "file": "core/programmability/src/lib.rs",
+      "symbols": [
+        "control_planning",
+        "control_plan_presentation"
+      ],
+      "anchors": [
+        "pub mod resident_semantic;"
+      ],
+      "evidence": "Pinned and observed current Product lib blob identical; only three existing modules exported.",
+      "definition": "Confirm no duplicate current graph capabilities elsewhere in Product; choose reuse over duplicate registry entries.",
+      "acceptance": "Current source graph collision/impact query and scoped owner-approved destination plan."
+    },
+    {
+      "id": "P01-S04",
+      "severity": "mandatory",
+      "kind": "blocked",
+      "file": "core/programmability/src/control_catalog_compat.rs",
+      "symbols": [
+        "published_catalog_reconstructs_exact_fingerprinted_predecessors"
+      ],
+      "anchors": [
+        "assertion left Number(25) right 15 at line 95"
+      ],
+      "evidence": "Original full donor test failed after exact canonical catalogue fixture was materialized.",
+      "definition": "Historical compatibility contract vs current catalog; do not change a test or version to force success.",
+      "acceptance": "Separate owner/Host disposition with historical catalogue fingerprint evidence; not part of selected slice."
+    },
+    {
+      "id": "P01-S05",
+      "severity": "mandatory",
+      "kind": "blocked",
+      "file": "core/programmability/Cargo.toml",
+      "symbols": [],
+      "anchors": [
+        "[dependencies]"
+      ],
+      "evidence": "No top-level license file found; metadata package license declarations recorded; actual notices/rights not reviewed.",
+      "definition": "External source admission requires license and ownership disposition.",
+      "acceptance": "Explicit owner/internal transfer and third-party license/notice disposition, compare exact current workspace lock."
+    },
+    {
+      "id": "P01-S06",
+      "severity": "mandatory",
+      "kind": "unsupported-until-sdk",
+      "file": "crates/protocol-sdk/src/migration.rs",
+      "symbols": [
+        "plan",
+        "Plan"
+      ],
+      "anchors": [
+        "pub fn plan(source: &str, anchors: &[Anchor], rules: &[Rule]) -> Result<Plan, Error> {"
+      ],
+      "evidence": "Pinned migration.rs only plans exact non-chaining existing annotation changes; it is not a source parser/writer.",
+      "definition": "Do not pretend existing annotation rules can import a crate or infer missing meanings; SDK 201–210 owns native external admission/conformance.",
+      "acceptance": "Current SDK actual compiler/admission/packet/patch pipeline with explicit unsupported case handling."
+    }
+  ],
+  "sdkTaskMap": {
+    "intel-201": "Use closure.json immutable origin entries; reject missing pin, divergent bytes, path escape and unresolved license. No admission claim yet.",
+    "intel-202": "Use selected source/target maps, 67-file broader baseline closure, exact serde_json dependency graph and M01 overlay equivalence. Current full graph duplicate scan remains.",
+    "intel-203": "D01–D05 exact-copy/anchored no-op candidates. SDK must bind generation, replay, reject ambiguity and validate idempotence; do not fabricate new annotations.",
+    "intel-204": "Partition D01–D05 vs S01–S06. SDK actual conformance diagnostics and verified spans still required; no annotation-count acceptance.",
+    "intel-205": "Generate a revision-bound packet containing exact original/candidate digests, S01/S02/S03 source spans, allowed candidate-only edit scope, acceptance checks, packet acknowledgment; no secret or model call.",
+    "intel-206": "Submit scoped patch only against current digest; reject stale/conflicting/out-of-scope patch, recompile and regenerate obligations; no production writes.",
+    "intel-207": "Use EVIDENCE.json actual isolated baseline and candidate tests; add original contract checks, current Product workspace/graph/Wiki readback and independent review, license closure. Preserve failed broader donor test.",
+    "intel-208": "Use existing vivim-intel native lifecycle; this Labs package is not an alternate planner or engine. Demonstrate resumable bounded replay in SDK.",
+    "intel-209": "Propose exact destination delta only after owner authorization and fresh source/destination pin; retain evidence and rollback; no production activation.",
+    "intel-210": "Fresh unmigrated control_planning sample plus VWin other lane sample; demonstrate compliant/partial/unsupported/stale/conflict/fail cases through actual SDK after intel-200. Existing M01 is already-compliant lineage reference, not fresh adoption."
+  },
+  "unresolved": [
+    "No Meta-VLANG conformance or live SDK packet acceptance claimed.",
+    "No actual Product graph/Wiki readback for candidate.",
+    "No owner release or production changes.",
+    "No current full Product equivalence scan; re-pin before adoption."
+  ]
+}

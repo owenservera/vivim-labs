@@ -9,7 +9,8 @@ export SCCACHE_CACHE_SIZE="${SCCACHE_CACHE_SIZE:-512M}"
 export RUST_TEST_THREADS="${RUST_TEST_THREADS:-1}"
 # Opt in after cache server verification; native rustc is the reliable default.
 if [ "${VIVIM_USE_SCCACHE:-0}" = 1 ]; then
-  export RUSTC_WRAPPER="$(command -v sccache)"
+  RUSTC_WRAPPER="$(command -v sccache)"
+  export RUSTC_WRAPPER
 fi
 cd "$(dirname "$0")/vivim-product"
 exec "$@"

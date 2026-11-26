@@ -1,6 +1,6 @@
 {
   "schema": "vivim.labs.p05.evidence/1",
-  "status": "partial; execution package authored, donor regression execution pending",
+  "status": "isolated portable closure verified on actual Windows; original full Host dispatcher/session integration blocked",
   "pins": {
     "ARBOR": "b13b8d67b4adb84ec91612196c8b4257df71968b",
     "Labs": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
@@ -29,14 +29,79 @@
       "operation": "MCP session status/output",
       "status": "blocked",
       "error": "MCP server is not initialized; send initialize and notifications/initialized before operational requests"
+    },
+    {
+      "operation": "Windows preflight completed",
+      "receipt": "ctl-d9be630bde9e0ac3",
+      "exit": 0,
+      "toolchain": {
+        "rustc": "1.99.1",
+        "cargo": "1.99.1",
+        "node": "24.22.1"
+      }
+    },
+    {
+      "operation": "Exact blob materialization and original terminal validation + new cross-process journal tests",
+      "sourceCommit": "14e9788590b9867ed1e97ced16ef7487de81a5b4",
+      "receipt": "ctl-601e6ea46c914cb6",
+      "exit": 0,
+      "testCount": 11,
+      "passed": 11,
+      "failed": 0,
+      "scope": "Node child exit; overall initial runner exit 1 because linker unavailable",
+      "verified": [
+        "8 original validation tests",
+        "3 added journal regressions: exact approval digest/actor, two real OS processes competing for one exclusive claim, immutable receipt and reopen"
+      ]
+    },
+    {
+      "operation": "Initial native link",
+      "receipt": "ctl-601e6ea46c914cb6",
+      "exit": 101,
+      "error": "link.exe not on session PATH; Windows source compiled to link stage"
+    },
+    {
+      "operation": "MSVC explicit vcvars64.bat from installed VS 18 Community",
+      "receipt": "ctl-4385294ffc7f2329",
+      "exit": 0,
+      "passed": 16,
+      "failed": 0,
+      "workerBuilt": true,
+      "warning": "inherited shared .arbor-verifier-target received build cache artifacts; no production source modified"
+    },
+    {
+      "operation": "Native rerun with explicit scratch CARGO_TARGET_DIR and --target-dir",
+      "receipt": "ctl-c15f857ec298e2a2",
+      "nativeExit": 0,
+      "passed": 16,
+      "failed": 0,
+      "workerBuilt": true,
+      "scope": "11 library tests including Windows job tree cleanup and 2 recovery tests; 5 native worker tests; real process fixtures"
+    },
+    {
+      "operation": "Original Host integration tests on bounded 9,057,262-byte pinned source checkout",
+      "receipt": "ctl-c15f857ec298e2a2",
+      "passed": 7,
+      "failedSuites": 2,
+      "scope": "7 original recovery adapter tests passed; dispatcher and session suite failed before tests because hq/lib/meta-vlang-v1.mjs was not materialized"
+    },
+    {
+      "operation": "Authorized incremental hq/lib closure rerun",
+      "receipt": "ctl-a980a4f47524b080",
+      "status": "failed",
+      "code": "HOST_EFFECT_NOT_APPLIED",
+      "scope": "No execution or new test results confirmed; no workaround attempted"
     }
   ],
   "commandsPending": [
-    "node verify.mjs NEW_SCRATCH REPOS.json"
+    "Run original control-dispatcher.test.mjs and workstation-session-port.test.mjs from isolated pinned ARBOR tree including hq/lib and any further exact imports, with VIVIM_WORKSTATION_SESSION_EXE set to isolated native worker; record full exit and receipt."
   ],
   "limitations": [
-    "No completed Windows process or Rust regression results yet.",
-    "No live Host effect tested; journal tests are isolated file and OS-process tests.",
-    "Cloud container has Node but no Rust/Cargo and no network to fetch pins."
+    "34 distinct tests passed: 11 Node + 16 Rust + 7 original recovery adapter. The repeated Rust run is not counted twice.",
+    "No full Host dispatcher/session integration acceptance; two suites failed during import, later start refused.",
+    "No deployment, production action registration or Product migration; intel-200/210 and owner authorization remain required.",
+    "First successful native build inherited shared verifier cache; rerun used explicit scratch target; no production source edits.",
+    "Intermittent MCP initialization failures; no authority bypass.",
+    "Journal regression covers local exclusive claim and process contention, not power-loss durability."
   ]
 }

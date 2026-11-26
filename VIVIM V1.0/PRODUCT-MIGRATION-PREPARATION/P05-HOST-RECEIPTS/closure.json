@@ -245,7 +245,16 @@
   ],
   "licenseStatus": "Private incumbent source; no standalone LICENSE at pinned ARBOR root; owner internal-use scope only; redistribution and dependency-license audit pending; no donor copies committed",
   "unavailable": [
-    "full dispatcher transitive dependencies not yet closed",
-    "native dependency lock resolution and Windows tests not yet verified"
-  ]
+    "full dispatcher transitive dependencies not yet closed: hq/lib/meta-vlang-v1.mjs and its imports identified; follow-up Host start refused",
+    "exact portable Cargo dependency lock not committed; offline resolved versions at test time; release lock audit pending"
+  ],
+  "verified": {
+    "portableWindows": {
+      "node": 11,
+      "rust": 16,
+      "recoveryAdapter": 7,
+      "nativeWorkerBuilt": true
+    },
+    "fullHostIntegration": "blocked: missing hq/lib import, then HOST_EFFECT_NOT_APPLIED"
+  }
 }

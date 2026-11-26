@@ -25,6 +25,6 @@ copyFileSync(join(here,'journal-regression.test.mjs'),join(actual,'journal-regre
 const results=[];function run(program,args,env=process.env){const r=spawnSync(program,args,{cwd:actual,env,encoding:'utf8',timeout:300000,maxBuffer:8*1024*1024});const row={program,args,exit:r.status,error:r.error?.message??null,stdout:r.stdout,stderr:r.stderr};results.push(row);console.log(JSON.stringify(row));}
 run(process.execPath,['--version']);
 run(process.execPath,['--test',join(actual,'ARBOR','apps','vivim-host','test','workstation-terminal-policy.test.mjs'),join(actual,'ARBOR','apps','vivim-host','test','workstation-terminal-request.test.mjs'),join(actual,'journal-regression.test.mjs')],{...process.env,P05_JOURNAL:join(actual,'ARBOR','apps','vivim-host','control','journal.mjs')});
-run('rustc',['--version']);run('cargo',['--version']);run('cargo',['test','--offline','--manifest-path',join(dirname(p),'Cargo.toml'),'--','--test-threads=1']);
+run('rustc',['--version']);run('cargo',['--version']);run('cargo',['test','--offline','--manifest-path',join(dirname(p),'Cargo.toml'),'--target-dir',join(actual,'target'),'--','--test-threads=1'],{...process.env,CARGO_TARGET_DIR:join(actual,'target')});
 writeFileSync(join(actual,'P05-RESULTS.json'),JSON.stringify({platform:process.platform,selected,results},null,2));
 process.exitCode=results.some(r=>r.exit!==0)?1:0;

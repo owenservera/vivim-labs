@@ -1,0 +1,114 @@
+{
+  "schema": "vivim.p04.closure/1",
+  "status": "materialized-build-blocked",
+  "product": {
+    "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+    "files": {
+      "crates/protocol-sdk/src/campaign.rs": "3ca396600bfaf8f51ba9636ded04d0e24f7dbd23",
+      "crates/protocol-sdk/src/task_planner.rs": "d1cca5de2a2ce35f0cf12b2b000d7ba29269e90f",
+      "crates/protocol-sdk/src/meta_resident.rs": "d16dbce5589987f0cf3f11914bd3b678f2558353",
+      "crates/protocol-sdk/src/meta_language.rs": "b6ca2f63e0060f7474724b2f885b35dd4cc49675",
+      "crates/protocol-sdk/src/protocol.rs": "d48f0a084d938096e4d880c4901c3b22c6d282dc",
+      "crates/protocol-sdk/src/semantic_primitives.rs": "5e79481699b842fa60aeafd17860f78070293f17",
+      "crates/protocol-sdk/src/lib.rs": "57e2ed614fa971fa4bb51d95bd607b42d6341718",
+      "crates/protocol-sdk/Cargo.toml": "80f1578e6d06cff45917b16c4ea3ba5b36304c1a",
+      "Cargo.toml": "bf82e0d1f8821f2eeed137fbb7ee69c55b11bc01"
+    },
+    "closure": "entire exact Product tracked tree materialized to scratch, dependency on unchanged Product SDK and programmability core; every blob checked against its pinned git object"
+  },
+  "labs": {
+    "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+    "base": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/",
+    "pack": "integration-packs/WNI02-R034-SDK-ADMISSION/",
+    "files": {
+      "Cargo.toml": "8b2e26c3be8abeacb155e712543ca25f2787c3e7",
+      "native-test-root.rs": "b9f491354b9672eaecd92be7509c938110117f83",
+      "resource_campaign.rs": "04fb4b21346297d54c3aab1fb150f7ac440b19e3",
+      "native-sampling.rs": "16e5325df1db7759d20ccad32822bae79e0cb54b",
+      "meta-policy.rs": "cf95f8c620750be46216a3d4e17cffb734b869cd",
+      "workload-profile.rs": "0dbc3674f9d91b00ac09dfc474fb6d2c87aaf317",
+      "R039-OVERLAY.json": "4c8de9dedfe1df3f9464f55bec0be912fd160d96",
+      "owned-metrics-tests.rs": "c56576275895c34ae6908a16f48d57c79d063afe",
+      "resource-domain.rs": "c688c69a0cfd04c2dd337baad1ba773102189ae0"
+    },
+    "starter": {
+      "scheduler.rs": "355ad3103588fdd6ed647e6f748946a738e0198e",
+      "resources.rs": "a160c98b46ca11fcce1d626bbbb33fb5b676467f",
+      "hardware.rs": "003f0d9109ad4433f1ec1dc1fc114844613a204b"
+    }
+  },
+  "owner": {
+    "commit": "1ba61b437c8c3b2ee95292d999ab8e022f3396d7",
+    "pack": "integration-packs/WNI02-R036-OWNED-ADMISSION/",
+    "files": {
+      "owned_campaign.rs": "e505bf453686f76694504607172c9cd484b9259b",
+      "workstation_process.rs": "ce28e179a8f161ff33d89c37c58f793dc4b58171",
+      "workstation_windows_job.rs": "d0ec556b10f9569f199e7ed5b24cd451feed1a96"
+    }
+  },
+  "edges": {
+    "resource_campaign": [
+      "campaign",
+      "scheduler"
+    ],
+    "meta_policy": [
+      "meta_resident",
+      "meta_language",
+      "resource_campaign",
+      "scheduler"
+    ],
+    "resource_domain": [
+      "owned_campaign",
+      "meta_policy",
+      "resource_campaign",
+      "scheduler",
+      "workstation_process"
+    ],
+    "owned_campaign": [
+      "resource_campaign",
+      "workstation_process",
+      "meta_policy"
+    ],
+    "workstation_process": [
+      "workstation_windows_job"
+    ],
+    "native_sampling": [
+      "hardware",
+      "resources",
+      "scheduler"
+    ],
+    "owned_metrics_tests": [
+      "native_sampling",
+      "owned_campaign",
+      "meta_policy",
+      "workload_profile"
+    ],
+    "windows_adapter": [
+      "windows-sys =0.61.2",
+      "Win32 JobObjects, Threading, Pipes, Foundation, SystemInformation, Storage, Security"
+    ],
+    "sdk": [
+      "vivim-programmability-core",
+      "serde_json"
+    ]
+  },
+  "conflicts": [
+    "Current Campaign uses claim_task/pending/release instead of claim_selected/pending_ids/abandon.",
+    "TaskPlanner owns existing semantic campaign; isolated ResourceCampaign is not an approved second production scheduler.",
+    "Current meta_language requires semantic_primitives and full SDK closure."
+  ],
+  "license": {
+    "firstParty": "Owner-repository provenance established; redistribution terms not independently established; no new external code imported.",
+    "thirdParty": "windows-sys existing pinned dependency; dependency license inventory pending; no distribution."
+  },
+  "unavailable": [
+    "MSVC link.exe not found in the authorized shell; cargo test exited 101 before running any tests.",
+    "Full Cargo resolved dependency and license audit pending."
+  ],
+  "materialization": {
+    "receipt": "ctl-9ce8b7bb0f226b90",
+    "blobs": 126,
+    "edits": 30,
+    "path": "C:/0-BlackBoxProject-0/scratch/p04-96ee6c42/MATERIALIZATION.json"
+  }
+}

@@ -5,13 +5,13 @@
 use crate::file_metadata::{self,Metadata};
 use std::{ffi::c_void,fs::File,mem::zeroed,os::windows::ffi::OsStrExt,path::Path,ptr::{null,null_mut}};
 use windows_sys::{core::GUID,Win32::{Foundation::PROPERTYKEY,System::{Com::{CoInitializeEx,CoUninitialize,CoTaskMemFree,COINIT_APARTMENTTHREADED,StructuredStorage::{PROPVARIANT,PropVariantClear,PropVariantToUInt64,PropVariantToStringAlloc}},Variant::{VT_UI8,VT_LPWSTR,VT_BSTR}},UI::Shell::PropertiesSystem::{SHGetPropertyStoreFromParsingName,PSGetPropertyKeyFromName,GPS_FASTPROPERTIESONLY}}};
-#[derive(Debug,PartialEq,Eq)]pub enum Error{Invalid,Changed,Metadata(file_metadata::Error),Io,Com(i32)}
+#[derive(Debug,PartialEq,Eq)]pub enum Error{Invalid,Changed,Metadata(file_metadata::Error),Io,Com{stage:&'static str,code:i32}}
 impl From<file_metadata::Error> for Error{fn from(e:file_metadata::Error)->Self{Self::Metadata(e)}}
 #[derive(Debug,PartialEq,Eq)]pub struct Properties{pub metadata:Metadata,pub size:u64,pub item_type:Option<String>}
 const IID:GUID=GUID::from_u128(0x886d8eeb_8cf2_4446_8d02_cdbA1dbdcf99);
-fn hr(v:i32)->Result<(),Error>{if v<0{Err(Error::Com(v))}else{Ok(())}}
+fn hr(stage:&'static str,v:i32)->Result<(),Error>{if v<0{Err(Error::Com{stage,code:v})}else{Ok(())}}
 struct Apartment;
-impl Apartment{fn enter()->Result<Self,Error>{hr(unsafe{CoInitializeEx(null(),COINIT_APARTMENTTHREADED as u32)})?;Ok(Self)}}
+impl Apartment{fn enter()->Result<Self,Error>{hr("CoInitializeEx",unsafe{CoInitializeEx(null(),COINIT_APARTMENTTHREADED as u32)})?;Ok(Self)}}
 impl Drop for Apartment{fn drop(&mut self){unsafe{CoUninitialize()}}}
 #[repr(C)]struct StoreVtable{
  query_interface:usize,add_ref:usize,
@@ -24,16 +24,23 @@ impl Store{
  fn vtable(&self)->&StoreVtable{unsafe{&**self.0.cast::<*const StoreVtable>()}}
  fn open(path:&Path)->Result<Self,Error>{
   let mut name:Vec<u16>=path.as_os_str().encode_wide().collect();
+  // Shell parsing names use DOS syntax, not the Win32 verbatim drive prefix.
+  // Do not translate UNC or device namespaces.
+  let verbatim:[u16;4]=[92,92,63,92];
+  if name.starts_with(&verbatim){
+   if name.len()<7||!((65..=90).contains(&name[4])||(97..=122).contains(&name[4]))||name[5]!=58||name[6]!=92{return Err(Error::Invalid)}
+   name.drain(..4);
+  }
   if name.is_empty()||name.len()>1024||name.contains(&0){return Err(Error::Invalid)}
   name.push(0);let mut ptr=null_mut();
-  hr(unsafe{SHGetPropertyStoreFromParsingName(name.as_ptr(),null_mut(),GPS_FASTPROPERTIESONLY,&IID,&mut ptr)})?;
+  hr("SHGetPropertyStoreFromParsingName",unsafe{SHGetPropertyStoreFromParsingName(name.as_ptr(),null_mut(),GPS_FASTPROPERTIESONLY,&IID,&mut ptr)})?;
   if ptr.is_null(){return Err(Error::Invalid)}Ok(Self(ptr))
  }
  fn get(&self,name:&str)->Result<Variant,Error>{
   let key_name:Vec<u16>=name.encode_utf16().chain(Some(0)).collect();let mut key:PROPERTYKEY=unsafe{zeroed()};
-  hr(unsafe{PSGetPropertyKeyFromName(key_name.as_ptr(),&mut key)})?;
+  hr("PSGetPropertyKeyFromName",unsafe{PSGetPropertyKeyFromName(key_name.as_ptr(),&mut key)})?;
   let mut value=Variant(unsafe{zeroed()});
-  hr(unsafe{(self.vtable().get_value)(self.0,&key,&mut value.0)})?;Ok(value)
+  hr("IPropertyStore.GetValue",unsafe{(self.vtable().get_value)(self.0,&key,&mut value.0)})?;Ok(value)
  }
 }
 impl Drop for Store{fn drop(&mut self){unsafe{(self.vtable().release)(self.0);}}}
@@ -45,7 +52,7 @@ impl Drop for Text{fn drop(&mut self){unsafe{CoTaskMemFree(self.0.cast());}}}
 fn item_type(store:&Store)->Option<String>{
  let value=store.get("System.ItemType").ok()?;
  if !matches!(value.kind(),VT_LPWSTR|VT_BSTR){return None}
- let mut ptr=null_mut();hr(unsafe{PropVariantToStringAlloc(&value.0,&mut ptr)}).ok()?;
+ let mut ptr=null_mut();hr("PropVariantToStringAlloc",unsafe{PropVariantToStringAlloc(&value.0,&mut ptr)}).ok()?;
  if ptr.is_null(){return None}let text=Text(ptr);let mut chars=Vec::new();
  for i in 0..=17{let c=unsafe{*text.0.add(i)};if c==0{let s=String::from_utf16(&chars).ok()?;return (s.len()>=2&&s.starts_with('.')&&s[1..].bytes().all(|b|b.is_ascii_alphanumeric()||b"_-".contains(&b))).then_some(s)}chars.push(c);}
  None
@@ -63,7 +70,7 @@ pub fn observe(approved_path:&Path,file:&File)->Result<Properties,Error>{
  let _com=Apartment::enter()?;let store=Store::open(approved_path)?;
  let value=store.get("System.Size")?;
  if value.kind()!=VT_UI8{return Err(Error::Invalid)}
- let mut size=0;hr(unsafe{PropVariantToUInt64(&value.0,&mut size)})?;
+ let mut size=0;hr("PropVariantToUInt64",unsafe{PropVariantToUInt64(&value.0,&mut size)})?;
  let item_type=item_type(&store);
  if size!=metadata.size||file_metadata::observe(file)?!=metadata{return Err(Error::Changed)}
  recheck(approved_path,metadata)?;

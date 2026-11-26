@@ -120,3 +120,22 @@ Priority 7: 13/13 Windows tests, ordinary native standard handles, input/output,
 ## R048–R049 — measured inference and live ETW
 
 R048 actual native WinML CPU 100 evaluations × 4 exact outputs; 11,705 µs batch, 180 ms setup, peak working set 22,708,224 bytes vs direct Rust 7,380,992 bytes; DirectX unavailable at device creation (HRESULT -2147023728), no NPU route. [Evidence](EVIDENCE-R048-WINML-DEVICES.json). R049 19/19 Windows tests, four contiguous events for two actual compiler jobs observed before shutdown, zero reported loss, deliberate sequence gap refused; original ETL regression passes. [Evidence](EVIDENCE-R049-ETW-LIVE.json). Production integration and general trained inference remain separate.
+
+
+## R050–R052 — ACP recovery and HCU integrity
+
+R050 fixture model readback, cancellation, and historical replay passed, but both actual OpenCode tests failed on optional model metadata. R052 separates unknown model metadata from session authority and invalidates uncertain model state. Actual OpenCode reconnect and session/load passed across two owned processes; 26/27 suite passed, first session/new rejected. The exact failed test subsequently passed in isolation (1/1); intermittent cause is unresolved, no single clean 27/27 claim. No actual provider prompt or exact model readback. [ACP evidence](EVIDENCE-R052-ACP-RECOVERY.json). R051 HCU 13/13, seven exact source blobs; selected actual native controls, stale and forged snapshot refused, ACK and invalidation retained. [HCU evidence](EVIDENCE-R051-HCU-INTEGRITY.json).
+
+### Priorities 1–9 acceptance checkpoint
+
+1. Filesystem/compiler: bounded isolated acceptance complete (R032).
+2. Resource admission: bounded isolated acceptance complete (R039).
+3. ACP: partial; actual initialize/session/load/reconnect and deterministic cancellation/model readback verified, real provider prompt/model readback and intermittent session rejection open.
+4. ETW: bounded live compiler instrumentation acceptance complete (R049); always-on/production instrumentation not included.
+5. Capability compiler: 33/33 candidate contracts and typed projections verified; actual live registered MCP/GPUI routes remain open.
+6. File intelligence: native property and HQ digest join verified; Windows SystemIndex provider query unavailable, no repair or bypass undertaken.
+7. ConPTY: bounded isolated acceptance complete (R045); actual standard streams, resize, clean exit, cancellation and unrelated job preservation.
+8. HCU: real selected-control observation, integrity, delta and ACK verified; full application observation and existing Studio/Host effect receipt binding open.
+9. Local inference: bounded reference fixture acceptance complete (R048); actual CPU evaluation, latency/memory/reference comparison, DirectX unavailable, NPU unverified and not routed. Not a trained model or LLM benchmark.
+
+Five bounded priorities complete; four partial. Original priorities preserved; no production ARBOR/Product writes, no deployment, no priorities 10–14 advanced in this checkpoint.

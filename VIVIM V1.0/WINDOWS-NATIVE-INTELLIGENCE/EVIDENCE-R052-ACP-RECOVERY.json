@@ -1,0 +1,40 @@
+{
+  "schema": "vivim.labs.acp-recovery/1",
+  "source": "791cc7f3929df7c543b9246ec055374ddd76f427",
+  "runs": [
+    {
+      "source": "fd33f8ed3240df6a7ee9a7b7eb7705ffcb3e60f7",
+      "session": "ctl-b311d7fbdb53195d",
+      "exitCode": 101,
+      "passed": 24,
+      "failed": 2,
+      "verifiedBlobs": 9,
+      "error": "Optional model metadata rejected actual agent responses; fixture cancel/model/replay passed."
+    },
+    {
+      "session": "ctl-704f7cd3cb994bcc",
+      "exitCode": 101,
+      "elapsedMs": 87827,
+      "passed": 26,
+      "failed": 1,
+      "verifiedBlobs": 9,
+      "actualReconnect": true,
+      "fixtureModelCancelReplay": true,
+      "remainingFailure": "Actual session/new rejected in first test."
+    },
+    {
+      "session": "ctl-77eaddb0eda951f5",
+      "exitCode": 0,
+      "elapsedMs": 11748,
+      "passed": 1,
+      "failed": 0,
+      "filteredOut": 26,
+      "actualInitializeAndSession": true
+    }
+  ],
+  "limits": [
+    "Not a clean 27/27 single run. Isolated retry passed; intermittent rejection remains unresolved.",
+    "Exact actual model configuration not verified; no actual provider prompt or in-flight provider cancellation. No provider charges or credential forwarding requested by these tests.",
+    "No production writes."
+  ]
+}

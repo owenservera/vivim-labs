@@ -1,0 +1,21 @@
+{
+  "schema": "vivim.labs.hcu-snapshot-integrity/1",
+  "source": "707d6fb5410148581f94599e28debc7eb2afe156",
+  "session": "ctl-7fae2c0310ddea8b",
+  "exitCode": 0,
+  "elapsedMs": 23045,
+  "passed": 13,
+  "failed": 0,
+  "verifiedBlobs": 7,
+  "actual": {
+    "selectedControls": 2,
+    "changed": 1,
+    "ack": true,
+    "forgedSnapshotRefused": true,
+    "staleSnapshotRefused": true,
+    "destroyedInvalidated": true
+  },
+  "limits": [
+    "Selected owned HWND group, not whole application. No real Studio/Host action receipt or production binding. Initial launch receipt failed without effect; subsequent distinct verified launch exited 0."
+  ]
+}

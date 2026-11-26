@@ -1,0 +1,164 @@
+{
+  "schema": "vivim.labs.p01.evidence/1",
+  "lane": "P01-NATIVE-CORE",
+  "date": "2026-11-26",
+  "status": "isolated selected slice passes; full donor suite has one reproduced baseline failure; no production readiness claim",
+  "source": {
+    "ARBOR": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+    "Product": "11812e6b1c06ac047329169ef5d848da3f85788c",
+    "LabsManifestReadHead": "353675694b73e45769666e9b295156d2b08c37e7",
+    "observedProductMain": "ff9c7159933a9fbc8e045fface44c14d553493b5",
+    "testCommit": "431840ee9446fd8c57c23a84461923b1ffc3cfff",
+    "testBlob": "ac764907a0872474c2587f242b85ccbb31fb295e",
+    "closure": "closure.json",
+    "adaptation": "adaptation.json"
+  },
+  "environment": {
+    "venue": "Owner Windows workstation through VIVIM MCP; no Desktop Commander or local coding agent",
+    "scratch": "C:\\0-BlackBoxProject-0\\scratch\\p01-native-core-20261126-a01",
+    "git": "2.51.2.windows.1",
+    "cargo": "1.99.1 (5f94df478 2026-08-27)",
+    "rustc": "1.99.1 (58cf8f9c3 2026-10-13)",
+    "msvc": "14.51.36231",
+    "windowsSdk": "10.0.26100.0",
+    "buildEnv": {
+      "CARGO_TARGET_DIR": "C:\\0-BlackBoxProject-0\\scratch\\p01-native-core-20261126-a01\\target",
+      "CARGO_INCREMENTAL": "0",
+      "CARGO_PROFILE_DEV_DEBUG": "0",
+      "CARGO_PROFILE_TEST_DEBUG": "0",
+      "PATH": "prepend installed MSVC Hostx64/x64 bin",
+      "LIB": "MSVC lib/x64; Windows SDK ucrt/x64; um/x64"
+    },
+    "lock": "Exact donor standalone Cargo.lock blob 0794dd46af05badde437d559f765679abb7ed761 used for all isolated tests; no current Product workspace lock mutation."
+  },
+  "runs": [
+    {
+      "receipt": "ctl-08559fa698f4f4b4",
+      "command": "git --version; cargo --version; rustc --version",
+      "exitCode": 0,
+      "result": "toolchain observed"
+    },
+    {
+      "receipt": "ctl-7ed9208a57d8cf81",
+      "command": "git cat-file -t <pins>; rev-parse local HEAD and origin/main",
+      "exitCode": 0,
+      "result": "ARBOR and Product pins local; Labs pin/launchpad absent locally at that point; individual git commands reported missing objects/path; no shared checkout changed"
+    },
+    {
+      "receipt": "ctl-4a5361a4a57b23d9",
+      "command": "git clone --no-checkout --shared Labs into scratch; fetch Labs main into scratch; node materialize.mjs MANIFEST.json pinned repos.json",
+      "result": "11 exact files, 58,956 bytes, readback verified; no production edits"
+    },
+    {
+      "receipt": "ctl-a6b42a3d13d7180c",
+      "command": "git archive then Expand-Archive",
+      "exitCode": 1,
+      "result": "PowerShell Archive module AuthorizationManager check failed; abandoned that path; used the authorized Git blob acquisition method instead"
+    },
+    {
+      "receipt": "ctl-a2f6cd5e81a98e67",
+      "command": "git ls-tree -r and git cat-file blob for exact pinned core/programmability trees; SHA-1 Git blob verification and SHA-256 for each file",
+      "exitCode": 0,
+      "result": "66 donor files, six Product files, no top-level license path located; exact closure manifests"
+    },
+    {
+      "receipt": "ctl-2f033bc9dac567eb",
+      "command": "cargo test --locked --offline --manifest-path <donor or product>/core/programmability/Cargo.toml --quiet",
+      "exitCode": 1,
+      "donorExitCode": 101,
+      "productExitCode": 101,
+      "result": "Initial linker link.exe missing from PATH"
+    },
+    {
+      "receipt": "ctl-485ddcc96c89c6e7",
+      "command": "Locate installed MSVC linker and Windows SDK libraries",
+      "exitCode": 0,
+      "result": "Installed linker 14.51.36231 and SDK 10.0.26100.0 found; session-scoped PATH and LIB restored"
+    },
+    {
+      "receipt": "ctl-f46d3dc3d3da90a6",
+      "command": "cargo test --jobs 2 --locked --offline --manifest-path <donor or product>/core/programmability/Cargo.toml --quiet",
+      "exitCode": 1,
+      "donorExitCode": 101,
+      "productExitCode": 0,
+      "productTests": {
+        "passed": 8,
+        "failed": 0
+      },
+      "result": "Product baseline passed; donor test build exposed required exact Host action catalogue include"
+    },
+    {
+      "receipt": "ctl-490338c750220793",
+      "command": "Copy Product baseline to scratch candidate, exact donor control_planning.rs and control_plan_presentation.rs; append two exports; fetch exact committed Labs test; cargo test --jobs 2 --locked --offline --manifest-path candidate/Cargo.toml --quiet",
+      "exitCode": 0,
+      "tests": {
+        "passed": 15,
+        "failed": 0,
+        "existingProduct": 8,
+        "additionalControl": 7
+      },
+      "result": "Actual candidate test passed with exact donor module SHA-256 digests; no production registry or effects"
+    },
+    {
+      "receipt": "ctl-90add69bc5620807",
+      "command": "Materialize pinned Host catalogue fixture; cargo test --jobs 2 --locked --offline --manifest-path donor/core/programmability/Cargo.toml --quiet",
+      "exitCode": 101,
+      "tests": {
+        "passed": 152,
+        "failed": 1
+      },
+      "result": "Full donor compiled; original control_catalog_compat::tests::published_catalog_reconstructs_exact_fingerprinted_predecessors fails at src/control_catalog_compat.rs:95; actual catalogue version 25 expected 15. Cargo stopped before other integration tests."
+    },
+    {
+      "receipt": "ctl-0a0314a8dde38f75",
+      "command": "cargo metadata --offline --locked --format-version 1 --manifest-path donor/core/programmability/Cargo.toml",
+      "exitCode": 0,
+      "result": "22 packages; exact resolved dependency relationships and declared license data in closure.json"
+    },
+    {
+      "receipt": "ctl-7cd9831e794d8fa2",
+      "command": "cargo test --jobs 2 --locked --offline --no-fail-fast --manifest-path donor/core/programmability/Cargo.toml --quiet; then add exact Labs test fixture in scratch donor copy and run cargo test --jobs 2 --locked --offline --manifest-path donor/core/programmability/Cargo.toml --test control_contract --quiet",
+      "exitCode": 1,
+      "originalCargoExit": 101,
+      "parityCargoExit": 0,
+      "original": {
+        "passed": 192,
+        "failed": 1,
+        "unitPassed": 152,
+        "unitFailed": 1,
+        "integrationPassed": 40
+      },
+      "parity": {
+        "passed": 7,
+        "failed": 0
+      },
+      "result": "Reproduced baseline failure, all eight original integration test targets passed. All seven Labs tests also pass against donor."
+    },
+    {
+      "receipt": "ctl-c7325bdccb252fba",
+      "command": "git ls-tree -r --name-only <observed Product main> core/programmability; git grep -I -l <targeted control module names, schema and capability IDs> <current pin> -- '*.rs' '*.json' '*.mjs'",
+      "exitCode": 0,
+      "grepExit": 1,
+      "result": "Six-file core; no targeted textual matches; semantic graph collision scan not performed"
+    }
+  ],
+  "replay": {
+    "status": "first assembly observed; comparison pending",
+    "receipt": "ctl-099ca5328bbdd033",
+    "commit": "7fafba14c5cb3c8916b62bca36e7e127eb942f75",
+    "files": 77,
+    "bytes": 634947,
+    "candidateFiles": 10,
+    "exitCode": null,
+    "output": "{\"lane\":\"P01-NATIVE-CORE\",\"files\":77,\"bytes\":634947,\"status\":\"materialized-readback-verified\"}\n{\"candidate\":\"C:\\\\0-BlackBoxProject-0\\\\scratch\\\\p01-native-core-20261126-a01\\\\replay-a\\\\candidate\",\"files\":10,\"status\":\"assembled\"}\n"
+  },
+  "candidateReceipt": null,
+  "limitations": [
+    "Exact isolated qualification, not complete Product workspace build or deployment.",
+    "One original donor regression preserved; selected two-module slice excludes control_catalog_compat.",
+    "M01 exact annotation overlay verified for existing source_digest and development_projection; retain both and Product resident_semantic.",
+    "No top-level LICENSE/COPYING/NOTICE found, package-declared licenses inventoried; internal rights and actual notices review unresolved.",
+    "No SDK intel-200 or intel-210 acceptance; semantic Product graph/Wiki readback, authority compatibility and owner release pending.",
+    "MCP intermittent initialization conflicts encountered; recovered by re-reading health and retrying session output; no permission expansion."
+  ]
+}

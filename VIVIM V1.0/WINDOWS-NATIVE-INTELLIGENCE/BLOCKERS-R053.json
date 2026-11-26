@@ -1,0 +1,300 @@
+{
+  "schema": "vivim.labs.windows-native.blockers/1",
+  "revision": "R053",
+  "recordedDate": "2026-11-26",
+  "reviewedLabsCommit": "c719350c4a15ed79e9fe5c7dc4dd6093b053529b",
+  "checkpoint": "1e2d3c7c162ee9632fe534a9f90e4409cdc5d7c1",
+  "scope": "Priorities 1–9; Labs only; no production changes or grant activation",
+  "acceptance": {
+    "boundedComplete": [
+      1,
+      2,
+      4,
+      7,
+      9
+    ],
+    "partial": [
+      3,
+      5,
+      6,
+      8
+    ]
+  },
+  "ownership": "Proposed role assignments; not confirmed task assignments or new grants.",
+  "blockers": [
+    {
+      "id": "WNI-B03-A",
+      "priority": 3,
+      "title": "Intermittent actual ACP session/new rejection",
+      "state": "open",
+      "class": "implementation / runtime compatibility",
+      "severity": "high",
+      "owner": "Windows native terminal and ACP adapter; coordinate with SDK L05-HARNESS",
+      "evidence": [
+        {
+          "file": "EVIDENCE-R052-ACP-RECOVERY.json",
+          "source": "791cc7f3929df7c543b9246ec055374ddd76f427",
+          "session": "ctl-704f7cd3cb994bcc",
+          "observed": "26/27 passed; session/new rejected in first actual agent test; actual reconnect passed."
+        },
+        {
+          "file": "EVIDENCE-R052-ACP-RECOVERY.json",
+          "session": "ctl-77eaddb0eda951f5",
+          "observed": "Exact failed test passed in isolation, 1/1, 26 filtered."
+        }
+      ],
+      "unknown": "Agent rejection reason and reproducibility; no confirmed root cause.",
+      "dependencies": [
+        "Exact installed OpenCode executable/version and isolated workspace/config",
+        "Existing OwnedProcess/ACP transport"
+      ],
+      "remediation": [
+        "Capture bounded sanitized RPC error code and stage, agent exit and correlation; do not publish raw provider errors or paths.",
+        "Reproduce sequentially across fresh owned sessions and distinguish server startup, config, workspace, and protocol failures.",
+        "Correct proven cause in existing adapter; retain generation fencing, loss rejection and no auto-resend."
+      ],
+      "acceptance": [
+        "Clean 27/27 exact-pin Windows suite in one run.",
+        "Repeat actual initialize/new/load/reconnect across three independently started owned processes or sessions; record each result and no orphaned jobs.",
+        "Negative cases continue refusing stale generation and unknown state."
+      ]
+    },
+    {
+      "id": "WNI-B03-B",
+      "priority": 3,
+      "title": "Actual approved-model readback, provider prompt and cancellation",
+      "state": "open",
+      "class": "provider compatibility / authorization",
+      "severity": "high",
+      "owner": "SDK L05-HARNESS with ACP adapter owner and existing model registry",
+      "evidence": [
+        {
+          "file": "EVIDENCE-R052-ACP-RECOVERY.json",
+          "session": "ctl-704f7cd3cb994bcc",
+          "observed": "Fixture model/cancel/replay passed; actual model configuration not verified; no actual provider prompt."
+        }
+      ],
+      "unknown": "Exact actual model config shape and availability, approved provider credential/budget binding, actual cancellation behavior.",
+      "dependencies": [
+        "WNI-B03-A",
+        "Existing approved model/provider registry and explicit data/budget grant",
+        "Real ACP capability advertisement"
+      ],
+      "remediation": [
+        "Inspect actual advertised configuration shape and version using bounded metadata only; preserve unknown metadata as unavailable.",
+        "Bind exact approved model and verify current value after selection; no implicit fallback to another model.",
+        "Run a small non-private read-only prompt with no tool access in an isolated session only after grant and exact model readback; verify correlated stream/settlement and an independently authorized cancellation case."
+      ],
+      "acceptance": [
+        "Record exact provider/model identity, readback, scope, bounded prompt and settlement receipt without secrets.",
+        "Actual in-flight cancellation settles or is explicitly reconciled, never treated as success on notification alone.",
+        "No unexpected model, tool effect, duplicate prompt, or unauthorized charge; missing prerequisites remain blocked."
+      ]
+    },
+    {
+      "id": "WNI-B05-A",
+      "priority": 5,
+      "title": "Live Host/MCP registration and GPUI interaction parity",
+      "state": "open",
+      "class": "integration / owner authorization",
+      "severity": "high",
+      "owner": "Incumbent Host/MCP/GPUI owners; coordinate SDK L04-ASSURANCE and P06-MCP-GRAPH",
+      "evidence": [
+        {
+          "file": "EVIDENCE-R042-CAPABILITY.json",
+          "source": "659058219a73c3bffc57b8b07e85dedae1dbc05a",
+          "session": "ctl-36c65bbfd3f66185",
+          "observed": "33 candidate rows, 132 typed projections, 33 GPUI presentation calls, 132 AI candidate refusals, zero ID collisions; no live registration or renderer."
+        }
+      ],
+      "unknown": "Current canonical registry drift, activation-ready subset, actual interactive and receipt parity.",
+      "dependencies": [
+        "Current canonical capability registry and schemas",
+        "Existing Host dispatcher, grants, receipts and GPUI surface",
+        "Per-adapter native acceptance; WNI-B08-B for semantic effects",
+        "Explicit approval before production activation"
+      ],
+      "remediation": [
+        "Reconcile exact current canonical registry; classify each of 33 as supported, unavailable, pending or rejected without widening grants.",
+        "In isolated staging, use existing dispatcher and registration path; do not introduce a parallel registry or renderer.",
+        "Exercise actual MCP discovery/invocation and GPUI interaction against a reviewed supported subset; verify denial for disabled candidates and shared receipt correlation. Extend coverage per candidate before any live acceptance claim."
+      ],
+      "acceptance": [
+        "33/33 dispositions and schema/source bindings recorded; no ID collisions.",
+        "For each activated candidate, live MCP and GPUI route to same Host contract with grant, denial, approval where required, effect receipt and recovery readback.",
+        "Unready candidates stay disabled and correctly reported; owner reviews production adoption separately."
+      ]
+    },
+    {
+      "id": "WNI-B06-A",
+      "priority": 6,
+      "title": "Windows SystemIndex provider query unavailable",
+      "state": "open",
+      "class": "workstation platform dependency",
+      "severity": "medium",
+      "owner": "Windows file intelligence owner; workstation administrator only for explicitly approved repairs",
+      "evidence": [
+        {
+          "file": "EVIDENCE-R044-HQ-JOIN.json",
+          "source": "b3d3e7f9896f1f369463019aa2a158ac9b066e3d",
+          "session": "ctl-ff60fc66f7fe7f4c",
+          "observed": "execute-query returned HRESULT -2147221164 (0x80040154); zero accepted hits means unavailable, not empty index. HQ add/change/delete and stale refusal passed."
+        }
+      ],
+      "unknown": "Whether COM registration, process context/bitness, provider availability or another platform condition causes failure.",
+      "dependencies": [
+        "Windows Search service/provider in actual execution context",
+        "Existing scoped HQ fallback and file identity checks"
+      ],
+      "remediation": [
+        "Read-only diagnose service, provider availability/bitness and execution context; preserve stage-specific HRESULT.",
+        "Test actual scoped query on known indexed owned fixture, not global search; do not repair COM registry or service without explicit authorization.",
+        "Reuse native handle/digest and HQ fallback on unavailable provider; prepare native OLE DB adapter only against proven provider behavior."
+      ],
+      "acceptance": [
+        "Positive scoped indexed hit for known fixture with correct identity and provenance, plus explicit empty-result and unavailable distinction.",
+        "Verify edit/delete reconciliation and stale hit refusal; no arbitrary file access.",
+        "If OS provider cannot be restored within scope, owner must explicitly approve a documented fallback-only scope change; not automatic closure."
+      ]
+    },
+    {
+      "id": "WNI-B06-B",
+      "priority": 6,
+      "title": "Shell Property System failure on exact source fixture",
+      "state": "open",
+      "class": "optional platform compatibility",
+      "severity": "medium",
+      "owner": "Windows file intelligence owner",
+      "evidence": [
+        {
+          "file": "EVIDENCE-R044-HQ-JOIN.json",
+          "session": "ctl-ff60fc66f7fe7f4c",
+          "observed": "SHGetPropertyStoreFromParsingName returned -2147024809 (0x80070057/E_INVALIDARG); DOS path normalization did not resolve earlier failure."
+        },
+        {
+          "file": "EVIDENCE-R043-PROPERTY.json",
+          "observed": "Separate owned .txt property readback passed."
+        }
+      ],
+      "unknown": "File-type/path/provider-specific reason; native handle evidence remains valid.",
+      "dependencies": [
+        "Owned source fixture and exact file identity",
+        "Existing Shell COM adapter"
+      ],
+      "remediation": [
+        "Compare approved file types, normalized paths and property-store flags using stage-specific errors.",
+        "Keep optional property failure separate from native handle/digest and HQ result."
+      ],
+      "acceptance": [
+        "Successful native property readback on the exact scoped source fixture, or explicitly documented supported/unsupported property matrix reviewed by owner.",
+        "No fabricated property values or silent identity substitution."
+      ]
+    },
+    {
+      "id": "WNI-B08-A",
+      "priority": 8,
+      "title": "Full approved application semantic observation",
+      "state": "open",
+      "class": "implementation / coverage",
+      "severity": "high",
+      "owner": "Windows native app semantics and incumbent Studio/Harness owners; coordinate SDK L03-SEMANTICS",
+      "evidence": [
+        {
+          "file": "EVIDENCE-R051-HCU-INTEGRITY.json",
+          "source": "707d6fb5410148581f94599e28debc7eb2afe156",
+          "session": "ctl-7fae2c0310ddea8b",
+          "observed": "13/13 passed; two selected HWND controls, one delta, ACK, forged/stale/destroyed refusals."
+        },
+        {
+          "file": "EVIDENCE-R046-HCU.json",
+          "observed": "Hidden root enumeration returned zero children; explicit selected group passed."
+        }
+      ],
+      "unknown": "Coverage and provider behavior beyond explicit selected HWND group, including non-HWND descendants and provider timeouts.",
+      "dependencies": [
+        "Existing UIA probe, semantic Registry/Delivery and authorized window scope",
+        "Supervised helper deadlines; generation/identity fencing"
+      ],
+      "remediation": [
+        "Implement bounded scoped tree observation using existing UIA and semantic primitives; handle virtualization, partial/foreign trees, password controls and timeouts without leaking values.",
+        "Use owned application fixture with nested and dynamic controls; validate semantic identity across changes and provider restart.",
+        "Project only complete observations as complete; no absence inference from partial enumeration."
+      ],
+      "acceptance": [
+        "Actual bounded full-tree observation within declared fixture scope, including non-HWND descendants where provider supports them; coverage limitations explicit.",
+        "Create/change/remove controls produce correct revisions/deltas and acknowledgment; timeout/partial/foreign/sensitive cases fail closed.",
+        "No unapproved window access or private text projection."
+      ]
+    },
+    {
+      "id": "WNI-B08-B",
+      "priority": 8,
+      "title": "Existing Studio/Host action receipt and recovery binding",
+      "state": "open",
+      "class": "integration / owner authorization",
+      "severity": "high",
+      "owner": "Incumbent Studio/Host owners; coordinate SDK L04-ASSURANCE and P05-HOST-RECEIPTS",
+      "evidence": [
+        {
+          "file": "EVIDENCE-R051-HCU-INTEGRITY.json",
+          "session": "ctl-7fae2c0310ddea8b",
+          "observed": "Selected-control observation and state changes verified; no real Studio/Host action receipt or production binding."
+        }
+      ],
+      "unknown": "Actual canonical dispatcher binding, approval flow and postcondition correlation across stale/refreshed UI.",
+      "dependencies": [
+        "WNI-B08-A for full-app coverage; selected-group effects can be isolated earlier",
+        "Existing Host grant, action identity, effect receipt and recovery contracts",
+        "Reviewed safe owned control fixture"
+      ],
+      "remediation": [
+        "Resolve scoped reference against fresh observation immediately before dispatch; bind operation to existing Host grant/approval and idempotency contract.",
+        "In isolated incumbent Studio/Host path, exercise harmless owned control action and independent postcondition readback.",
+        "On uncertain outcome reconcile by original request ID; no fallback or retry without verified pre-dispatch refusal."
+      ],
+      "acceptance": [
+        "Actual Host receipt correlates exact scope, revision, action, postcondition and resulting semantic delta/ACK.",
+        "Stale/disabled/foreign/forged references and missing grants cannot cause effects.",
+        "Restart/uncertain receipt reconciliation proves no duplicate effect; no production activation without owner review."
+      ]
+    }
+  ],
+  "nonBlockingScopeLimits": [
+    {
+      "priority": 1,
+      "scope": "Global/continuous watcher coverage and production HQ/AutoWiki adoption; bounded R032 acceptance unchanged.",
+      "evidence": "EVIDENCE-R031-PRODUCT.json"
+    },
+    {
+      "priority": 2,
+      "scope": "Durable authenticated cross-campaign Host receipts, restart reconciliation and quota enforcement; bounded R039 acceptance unchanged.",
+      "evidence": "EVIDENCE-R039-SDK-DOMAIN.json"
+    },
+    {
+      "priority": 4,
+      "scope": "Always-on supervised instrumentation, system-wide coverage and real OS buffer-loss stress not verified; R049 deliberate sequence gap is distinct.",
+      "evidence": "EVIDENCE-R049-ETW-LIVE.json"
+    },
+    {
+      "priority": 7,
+      "scope": "Real TUI agent, installed Host endpoint and wedged ClosePseudoConsole outer-helper deadline acceptance not verified; bounded terminal fixture passed.",
+      "evidence": "EVIDENCE-R045-CONPTY.json"
+    },
+    {
+      "priority": 9,
+      "scope": "DirectX ExplicitDevice HRESULT -2147023728, NPU unverified/not routed, trained-model/LLM performance and production registry/quotas not verified. CPU reference acceptance unchanged.",
+      "evidence": "EVIDENCE-R048-WINML-DEVICES.json"
+    }
+  ],
+  "recommendedOrder": [
+    "WNI-B03-A",
+    "WNI-B03-B",
+    "WNI-B08-A",
+    "WNI-B08-B",
+    "WNI-B05-A",
+    "WNI-B06-A",
+    "WNI-B06-B"
+  ],
+  "parallel": "P6 read-only diagnostic can proceed independently; P5 contract reconciliation can proceed alongside P8, but effect activation depends on each adapter. No changes to original priority ordering.",
+  "closureRule": "Close only with exact source/build pins, actual execution receipts, reproducible acceptance, explicit limitations and owner review where scope/activation changes. No untested candidates counted as complete."
+}

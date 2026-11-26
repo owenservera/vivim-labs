@@ -139,3 +139,7 @@ R050 fixture model readback, cancellation, and historical replay passed, but bot
 9. Local inference: bounded reference fixture acceptance complete (R048); actual CPU evaluation, latency/memory/reference comparison, DirectX unavailable, NPU unverified and not routed. Not a trained model or LLM benchmark.
 
 Five bounded priorities complete; four partial. Original priorities preserved; no production ARBOR/Product writes, no deployment, no priorities 10–14 advanced in this checkpoint.
+
+## R053 — blocker register
+
+[BLOCKERS-R053.md](BLOCKERS-R053.md) and [BLOCKERS-R053.json](BLOCKERS-R053.json): seven open blocker records across priorities 3, 5, 6, 8; proposed owners, exact evidence, unknowns, dependencies, remediation and closure criteria. Residual limits for bounded-complete priorities are recorded separately. No acceptance status changed, no new activation or production modifications.

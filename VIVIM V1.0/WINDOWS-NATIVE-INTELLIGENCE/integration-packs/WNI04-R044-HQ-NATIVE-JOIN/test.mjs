@@ -46,5 +46,5 @@ try{
  assert.equal(bind(b),null,'stale HQ digest must not bind');
  const changed=index();assert.equal(changed.changed,1);assert.ok(bind(b));
  unlinkSync(path);const removed=index();assert.equal(removed.removed,1);assert.equal(hq().length,0);assert.equal(bind(b),null);
- console.log(JSON.stringify({event:'HQ_NATIVE_JOIN_OK',initialSize:a.size,updatedSize:b.size,identityPreserved:true,staleRefused:true,deletedRefused:true,windowsIndexStatus:indexResult.status,indexFailureStage:indexResult.stage??null,hresult:indexResult.hresult??null,acceptedIndexHits,hqAdded:first.added,hqChanged:changed.changed,hqRemoved:removed.removed}));
+ console.log(JSON.stringify({event:'HQ_NATIVE_JOIN_OK',initialSize:a.size,updatedSize:b.size,identityPreserved:true,shellProperty:a.shellProperty,staleRefused:true,deletedRefused:true,windowsIndexStatus:indexResult.status,indexFailureStage:indexResult.stage??null,hresult:indexResult.hresult??null,acceptedIndexHits,hqAdded:first.added,hqChanged:changed.changed,hqRemoved:removed.removed}));
 }finally{db.close();rmSync(dir,{recursive:true,force:true});}

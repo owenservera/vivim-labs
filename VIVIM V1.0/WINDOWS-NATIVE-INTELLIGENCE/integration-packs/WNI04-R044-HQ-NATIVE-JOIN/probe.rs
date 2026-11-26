@@ -18,16 +18,25 @@ fn run()->Result<serde_json::Value,String>{
   Some("--file")=>{
    let root=std::env::current_dir().map_err(|e|e.to_string())?;
    let path=root.join(PathBuf::from("src/campaign.rs"));let mut file=File::open(&path).map_err(|_|"FILE_UNAVAILABLE")?;
-   let before=native_property::observe(&path,&file).map_err(|e|format!("{e:?}"))?;
+   // Native handle identity/size is authoritative for this read. Shell property
+   // support is an optional, explicitly reported observation, not a prerequisite.
+   let before=file_metadata::observe(&file).map_err(|e|format!("{e:?}"))?;
    if before.size>256*1024{return Err("SOURCE_LIMIT".into())}
+   let property=match native_property::observe(&path,&file){
+    Ok(p) if p.metadata==before=>json!({"status":"ok","size":p.size,"itemType":p.item_type}),
+    Ok(_)=>return Err("SOURCE_CHANGED".into()),
+    Err(native_property::Error::Com{stage,code})=>json!({"status":"unavailable","stage":stage,"hresult":code}),
+    Err(e)=>return Err(format!("{e:?}")),
+   };
    let mut bytes=Vec::new();(&mut file).take(256*1024+1).read_to_end(&mut bytes).map_err(|_|"READ_FAILED")?;
-   let after=native_property::observe(&path,&file).map_err(|e|format!("{e:?}"))?;
-   if before!=after||before.size!=bytes.len() as u64{return Err("SOURCE_CHANGED".into())}
+   let after=file_metadata::observe(&file).map_err(|e|format!("{e:?}"))?;
+   let reopened=File::open(&path).map_err(|_|"SOURCE_CHANGED")?;
+   if before!=after||file_metadata::observe(&reopened).map_err(|e|format!("{e:?}"))?!=before||before.size!=bytes.len() as u64{return Err("SOURCE_CHANGED".into())}
    let text=String::from_utf8(bytes).map_err(|_|"UTF8_REQUIRED")?;
    let digest=source_digest::digest_utf8(&json!({"text":text}));
    if digest["outcome"]!="computed"{return Err("DIGEST_FAILED".into())}
-   let id=before.metadata.identity.file_id.iter().map(|b|format!("{b:02x}")).collect::<String>();
-   Ok(json!({"schema":"vivim.labs.native-source-observation/1","relative":"src/campaign.rs","sourceDigest":digest["digest"],"size":before.size,"itemType":before.item_type,"fileId":id,"volume":format!("{:016x}",before.metadata.identity.volume),"authority":"none"}))
+   let id=before.identity.file_id.iter().map(|b|format!("{b:02x}")).collect::<String>();
+   Ok(json!({"schema":"vivim.labs.native-source-observation/1","relative":"src/campaign.rs","sourceDigest":digest["digest"],"size":before.size,"shellProperty":property,"fileId":id,"volume":format!("{:016x}",before.identity.volume),"authority":"none"}))
   }
   _=>Err("FIXTURE_MODE_REQUIRED".into())
  }

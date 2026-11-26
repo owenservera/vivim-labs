@@ -13,6 +13,8 @@ public final class WhatsAppActivity extends Activity {
     private EditText phone,draft;
     private TextView status;
     private ImageView preview;
+    private TextView notices;
+    private String noticeSample="";
     private android.graphics.Bitmap exportCopy;
     @Override public void onCreate(Bundle b){
         super.onCreate(b);
@@ -21,6 +23,11 @@ public final class WhatsAppActivity extends Activity {
         TextView heading=new TextView(this);heading.setText("VIVIM WhatsApp Studio — local prototype");heading.setTextSize(23);root.addView(heading);
         status=new TextView(this);root.addView(status);
         button(root,"Open WhatsApp",v->open());
+        button(root,"Notification access settings",v->noticeSettings());
+        button(root,"Read up to 3 active WhatsApp chat previews",v->{noticeSample=WhatsAppNoticeService.sample();notices.setText(noticeSample);});
+        notices=new TextView(this);notices.setText("No notification sample requested.");notices.setTextIsSelectable(true);root.addView(notices);
+        button(root,"Share reviewed preview text",v->shareNotices());
+        button(root,"Clear preview text",v->{noticeSample="";notices.setText("Cleared");});
         button(root,"Authorize one app snapshot",v->capture());
         button(root,"Show latest local snapshot",v->refresh());
         preview=new ImageView(this);preview.setAdjustViewBounds(true);root.addView(preview,new LinearLayout.LayoutParams(-1,-2));
@@ -34,6 +41,14 @@ public final class WhatsAppActivity extends Activity {
         setContentView(scroll);refresh();
     }
     private void button(LinearLayout root,String text,View.OnClickListener action){Button b=new Button(this);b.setText(text);b.setOnClickListener(action);root.addView(b);}
+    private void noticeSettings(){
+        new AlertDialog.Builder(this).setTitle("Optional notification access").setMessage("Android notification access is broad. VIVIM only samples active WhatsApp message previews when you press Read. It does not collect notification events, store history, or upload data. Android may redact content. Revoke access here whenever you wish.").setNegativeButton("Cancel",null).setPositiveButton("Open Android settings",(d,w)->{try{startActivity(new Intent(android.provider.Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));}catch(Exception e){status.setText("Settings unavailable");}}).show();
+    }
+    private void shareNotices(){
+        if(noticeSample.isEmpty()){status.setText("Read and review previews first");return;}
+        String reviewed=noticeSample;
+        new AlertDialog.Builder(this).setTitle("Share reviewed excerpts?").setMessage("Choose the recipient app yourself. This may send private chat content to that app.").setNegativeButton("Cancel",null).setPositiveButton("Choose app",(d,w)->startActivity(Intent.createChooser(new Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT,reviewed),"Share reviewed excerpts"))).show();
+    }
     private void open(){
         Intent i=getPackageManager().getLaunchIntentForPackage("com.whatsapp");
         if(i==null){status.setText("WhatsApp unavailable");return;}dispatch(i);

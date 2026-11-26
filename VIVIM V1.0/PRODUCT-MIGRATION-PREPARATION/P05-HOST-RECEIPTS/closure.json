@@ -1,0 +1,251 @@
+{
+  "schema": "vivim.labs.p05.closure/1",
+  "pins": {
+    "ARBOR": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+    "Labs": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+    "Product": "11812e6b1c06ac047329169ef5d848da3f85788c"
+  },
+  "entries": [
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/host-supervisor/Cargo.toml",
+      "blob": "0b16e01710a317fb4ccb9905a9de9ef210b1f43c",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/host-supervisor/src/lib.rs",
+      "blob": "7052514491513ac06eaafd974687322e9242a81e",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/host-supervisor/src/workstation_process.rs",
+      "blob": "ce28e179a8f161ff33d89c37c58f793dc4b58171",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/host-supervisor/src/workstation_windows_job.rs",
+      "blob": "d0ec556b10f9569f199e7ed5b24cd451feed1a96",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/action-catalog.v1.json",
+      "blob": "03600add09203b1f7eb784577c2f0b4434a5ef64",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/dispatcher.mjs",
+      "blob": "141056a4820c52aa7fd3ea4583279aab601d3d08",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/intent-planner.mjs",
+      "blob": "88ba130d77682f68cb3ab2752be1d7fd6ceb5131",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI02-R036-OWNED-ADMISSION/PIN.json",
+      "blob": "70c03808a9e663569ef39696ae265035586eb6fd",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI02-R036-OWNED-ADMISSION/owned_campaign.rs",
+      "blob": "5cf6f0d7a2cf935a116d1ea9fbaaafa64f47b509",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/rust-starter/src/recovery.rs",
+      "blob": "a7092f6e2a6cf76723c8eac687afac884bbbb14b",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/journal.mjs",
+      "blob": "3f8f77faa61edfeaf01cc997d3c5877fbc412b91",
+      "role": "dependency"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/workstation-session-port.mjs",
+      "blob": "c2e6ad4631ff3c259d4fd557785bf4a93dd5673b",
+      "role": "dependency"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/workstation-process-port.mjs",
+      "blob": "1043d52e29b5b3dd24401ea64848a527da201e23",
+      "role": "dependency"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/workstation-terminal-policy.mjs",
+      "blob": "ef118aaa1bd2d4ef7e380b81ce697aab2cbab6f0",
+      "role": "dependency"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/workstation-terminal-request.mjs",
+      "blob": "2e7c23ef4d7e64c79f2d06daba8449e68ff9d325",
+      "role": "dependency"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/workstation-machine-path.mjs",
+      "blob": "d7a1607f174c83139326d11750981be0e5b56bf8",
+      "role": "dependency"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/workstation-text-codec.mjs",
+      "blob": "3a70896571ef31eecfc7aa4b97935dab7758c143",
+      "role": "dependency"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/host-supervisor/src/bin/vivim-workstation-session.rs",
+      "blob": "9c472d7a6c670d1c33f8f51785b6ab3677b2f38b",
+      "role": "dependency"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/test/control-dispatcher.test.mjs",
+      "blob": "16917137a184cfc91428a6e6d9be7d7567b3d2a8",
+      "role": "original-test"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/test/workstation-session-port.test.mjs",
+      "blob": "e6e3de02c8de5e79656e8f71a36c17ebb808606f",
+      "role": "original-test"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/test/workstation-terminal-policy.test.mjs",
+      "blob": "9b6d73d3a1d5dac6d6e26da36a465160d73a7f94",
+      "role": "original-test"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/test/workstation-terminal-request.test.mjs",
+      "blob": "ed9c896f2da2f8e638039a1cd9688179518de1fc",
+      "role": "original-test"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/test/recovery-host-adapter.test.mjs",
+      "blob": "7c02c9027c6966889ab2e2a18801e6813011eb22",
+      "role": "original-test"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/recovery/host-adapter.mjs",
+      "blob": "c9e56944568f94c2e9fafd3201c0fd9444335dc9",
+      "role": "dependency"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/recovery/intelligence.mjs",
+      "blob": "547cc45bb73ab158a9dc8573dd3647b9bf4671e2",
+      "role": "dependency"
+    }
+  ],
+  "isolatedSelected": [
+    "native/host-supervisor/src/workstation_process.rs",
+    "native/host-supervisor/src/workstation_windows_job.rs",
+    "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/rust-starter/src/recovery.rs",
+    "apps/vivim-host/control/journal.mjs",
+    "apps/vivim-host/control/workstation-terminal-policy.mjs",
+    "apps/vivim-host/control/workstation-terminal-request.mjs",
+    "apps/vivim-host/control/workstation-machine-path.mjs",
+    "apps/vivim-host/control/workstation-text-codec.mjs",
+    "native/host-supervisor/src/bin/vivim-workstation-session.rs",
+    "apps/vivim-host/test/workstation-terminal-policy.test.mjs",
+    "apps/vivim-host/test/workstation-terminal-request.test.mjs"
+  ],
+  "dependencyGraph": {
+    "journal.mjs": [
+      "node:fs",
+      "node:crypto",
+      "node:path"
+    ],
+    "workstation-terminal-policy.mjs": [
+      "workstation-machine-path.mjs",
+      "workstation-terminal-request.mjs"
+    ],
+    "workstation-terminal-request.mjs": [
+      "workstation-machine-path.mjs",
+      "workstation-text-codec.mjs"
+    ],
+    "workstation_process.rs": [
+      "std",
+      "workstation_windows_job.rs on Windows"
+    ],
+    "workstation_windows_job.rs": [
+      "windows-sys 0.61.2 with incumbent features"
+    ],
+    "vivim-workstation-session.rs": [
+      "serde_json 1",
+      "workstation_process.rs"
+    ],
+    "recovery.rs": [
+      "std only"
+    ],
+    "dispatcher.mjs": [
+      "journal.mjs",
+      "intent-planner.mjs",
+      "workstation-session-port.mjs",
+      "workstation-process-port.mjs",
+      "full incumbent Host runtime, not isolated here"
+    ],
+    "workstation-session-port.mjs": [
+      "workstation-terminal-policy.mjs",
+      "workstation-terminal-request.mjs",
+      "workstation-text-codec.mjs",
+      "native worker",
+      "incumbent dispatcher"
+    ]
+  },
+  "destinationConflicts": [
+    "Product Campaign lease is scheduling authority only, never Host approval or effect claim",
+    "Do not import supervisor server startup or create a second journal",
+    "Dispatcher imports unrelated product/wiki/personal semantic ports; whole dispatcher closure not yet resolved"
+  ],
+  "licenseStatus": "Private incumbent source; no standalone LICENSE at pinned ARBOR root; owner internal-use scope only; redistribution and dependency-license audit pending; no donor copies committed",
+  "unavailable": [
+    "full dispatcher transitive dependencies not yet closed",
+    "native dependency lock resolution and Windows tests not yet verified"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "vivim.labs.p05.adaptation/1",
+  "gate": "No donor incorporation until intel-200 and intel-210 accepted and owner authorizes.",
+  "taskReferences": [
+    "011–020",
+    "071–090",
+    "121–150",
+    "181–190",
+    "201–210"
+  ],
+  "taskMappingStatus": "Range-level manifest mapping only; exact active 201–210 catalogue not authorized for change.",
+  "routes": [
+    {
+      "files": [
+        "workstation_process.rs",
+        "workstation_windows_job.rs",
+        "vivim-workstation-session.rs"
+      ],
+      "deterministic": "preserve source bytes and native original tests; isolated crate shell only",
+      "semantic": "Host-approved spec only; Windows job ownership is not portable process-tree ownership",
+      "destination": "incumbent Host native worker; Product adoption after ARBOR operational acceptance"
+    },
+    {
+      "files": [
+        "journal.mjs",
+        "dispatcher.mjs",
+        "intent-planner.mjs",
+        "action-catalog.v1.json"
+      ],
+      "deterministic": "retain journal and dispatcher in existing Host; map typed plan/approval/claim/receipt fields without generating another ledger",
+      "semantic": "prove grant denial, stale approval, durable claim, readback and uncertain effect; do not infer grant from planner or model",
+      "destination": "existing Host authority; Product SDK consumes inert contract projection"
+    },
+    {
+      "files": [
+        "recovery.rs"
+      ],
+      "deterministic": "preserve exact module; compare to Product existing semantics before adoption",
+      "semantic": "bind to authenticated owner/generation/request/digest; missing or unknown never triggers retry",
+      "destination": "pure SDK candidate only after equivalence and acceptance"
+    },
+    {
+      "files": [
+        "workstation-terminal-policy.mjs",
+        "workstation-terminal-request.mjs",
+        "workstation-machine-path.mjs",
+        "workstation-text-codec.mjs",
+        "workstation-session-port.mjs"
+      ],
+      "deterministic": "preserve existing typed request and canonical path validation",
+      "semantic": "separate authorization and actual process completion; revocation must remain Host-controlled",
+      "destination": "existing Host adapters, no second transport"
+    }
+  ],
+  "unsupported": [
+    "power-loss durability not demonstrated by exclusive create alone",
+    "no direct PID control, no auto retry of unknown effect, no Windows tree guarantee on non-Windows"
+  ],
+  "handoff": {
+    "P04": "Resource reservation is advisory admission; bind lease to Host request and settle/release only with owned session terminal observation plus cleanup, not receipt of start or output close alone. Unknown retains reservation or requires explicit reconciliation. P04 owns accounting.",
+    "P06": "Transport forwards exact request identity and authenticated owner scope; reads existing receipt by same identity; no independent claim, replay, approval or raw worker exposure. Start receipt is not completion. Graph projection is read-only; unknown remains unknown."
+  }
+}

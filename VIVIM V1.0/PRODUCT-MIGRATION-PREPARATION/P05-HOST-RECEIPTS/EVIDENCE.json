@@ -1,0 +1,42 @@
+{
+  "schema": "vivim.labs.p05.evidence/1",
+  "status": "partial; execution package authored, donor regression execution pending",
+  "pins": {
+    "ARBOR": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+    "Labs": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+    "Product": "11812e6b1c06ac047329169ef5d848da3f85788c"
+  },
+  "priorEvidence": [
+    {
+      "source": "WNI02-R036-OWNED-ADMISSION/PIN.json",
+      "scope": "historical owned campaign uses identical process and Windows job blobs; not a new run"
+    }
+  ],
+  "newEvidence": [
+    {
+      "operation": "MCP tunnel health and grants",
+      "status": "ready; machine scope and terminal grant reported"
+    },
+    {
+      "operation": "authorized harmless Windows terminal preflight",
+      "requestId": "05a10000000000000000000000000001",
+      "receipt": "ctl-d9be630bde9e0ac3",
+      "status": "applied start",
+      "result": "running; windows-job",
+      "exit": null
+    },
+    {
+      "operation": "MCP session status/output",
+      "status": "blocked",
+      "error": "MCP server is not initialized; send initialize and notifications/initialized before operational requests"
+    }
+  ],
+  "commandsPending": [
+    "node verify.mjs NEW_SCRATCH REPOS.json"
+  ],
+  "limitations": [
+    "No completed Windows process or Rust regression results yet.",
+    "No live Host effect tested; journal tests are isolated file and OS-process tests.",
+    "Cloud container has Node but no Rust/Cargo and no network to fetch pins."
+  ]
+}

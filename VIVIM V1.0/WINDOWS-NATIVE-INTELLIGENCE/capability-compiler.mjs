@@ -8,7 +8,7 @@ const id=s=>typeof s==="string"&&/^[a-z][a-z0-9._-]{2,95}$/.test(s);
 const arg=s=>typeof s==="string"&&/^[a-z][a-z0-9_]{0,63}$/.test(s)&&!["constructor","prototype","__proto__"].includes(s);
 const hex=s=>typeof s==="string"&&/^[a-f0-9]{32}$/.test(s);
 function field(key,f){
- if(!arg(key)||!plain(f)||!Number.isSafeInteger(f.min)||!Number.isSafeInteger(f.max)||f.min<1||f.max<f.min||f.max>8192)fail("INVALID_FIELD");
+ if(!arg(key)||!plain(f)||!Number.isSafeInteger(f.min)||!Number.isSafeInteger(f.max)||f.min<1||f.max<f.min||f.max>8000)fail("INVALID_FIELD");
  if(key==="enabled")return {host:{type:"enum",values:["enabled","disabled"]},mcp:{type:"boolean"},kind:"boolean"};
  if(key==="drive")return {host:{type:"enum",values:Array.from({length:26},(_,i)=>String.fromCharCode(65+i)+":")},mcp:{type:"string",pattern:"^[A-Za-z]:$"},kind:"drive"};
  if(f.type==="integer")return {host:{type:"string",min:String(f.min).length,max:String(f.max).length},mcp:{type:"integer",minimum:f.min,maximum:f.max},kind:"integer",min:f.min,max:f.max};
@@ -32,7 +32,7 @@ export function compile(manifest){
   const hostArgs=Object.fromEntries(names.map(k=>[k,fields[k].host]));
   const props=Object.fromEntries(names.map(k=>[k,fields[k].mcp]));
   if(effect)props.request_id={type:"string",pattern:"^[a-f0-9]{32}$"};
-  const host={id:d.id,title:d.id.split(".").slice(1).join(" "),category:"workstation",owner:"host-control",readiness:"adapter_pending",risk:d.risk,target:"local-workstation",surfaces:["text","desktop","mobile","visual"],privacy:"authenticated-pc-owner-only",aiCandidate:false,args:hostArgs,examples:[],reversible:false,subject:"windows-native",priority:"P0",precondition:"Candidate adapter pending; current Host grant and exact effect approval required."};
+  const host={id:d.id,title:d.id.split(".").slice(1).join(" "),category:"workstation",owner:"host-control",readiness:"adapter_pending",risk:d.risk,target:"local-workstation",surfaces:["text","desktop","mobile","visual"],privacy:"authenticated-pc-owner-only",aiCandidate:false,args:hostArgs,examples:[`Inspect proposed capability ${d.id}`],reversible:false,subject:"windows-native",priority:"P0",precondition:"Candidate adapter pending; current Host grant and exact effect approval required."};
   return {id:d.id,semanticId:d.semanticId,package:d.package,fields,host,mcp:{name:d.mcp,inputSchema:{type:"object",properties:props,required:Object.keys(props),additionalProperties:false},registered:false},app:{actionId:d.id,args:hostArgs,enabled:false,desktopOwnerOnly:true,mobileAvailable:false},authority:{executionAuthorized:false,requiresLiveGrant:true,requiresEffectApproval:effect},result:d.result};
  });
 }
@@ -49,7 +49,7 @@ function val(f,x,mode){
   if(!Number.isSafeInteger(n)||n<f.min||n>f.max)fail("INVALID_INTEGER");
   return String(n);
  }
- if(typeof x!=="string"||x.length<f.min||x.length>f.max||/[\x00-\x1f\x7f]/.test(x))fail("INVALID_STRING");
+ if(typeof x!=="string"||x.length<f.min||x.length>f.max||x!==x.trim()||/[\x00-\x1f\x7f]/.test(x))fail("INVALID_STRING");
  return x;
 }
 export function normalize(row,input,mode){

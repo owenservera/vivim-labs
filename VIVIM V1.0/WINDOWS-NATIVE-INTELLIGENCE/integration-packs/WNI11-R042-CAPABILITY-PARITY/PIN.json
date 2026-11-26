@@ -1,0 +1,6 @@
+{
+  "arbor": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+  "productReviewed": "b02be1d52a2a141c37dbf63c2e24f61d628e1e73",
+  "compilerBase": "bb6a631a5d645c17e48fa2a90bf72c37b0dbf07d",
+  "scope": "Existing compiler correction; exact native planner and presentation, no live registration or GPUI renderer."
+}

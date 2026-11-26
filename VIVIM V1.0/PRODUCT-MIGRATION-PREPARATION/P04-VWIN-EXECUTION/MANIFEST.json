@@ -1,0 +1,118 @@
+{
+  "schema": "vivim.labs.product-preparation/1",
+  "lane": "P04-VWIN-EXECUTION",
+  "title": "VWin resource-aware execution and SDK scheduling",
+  "status": "preparation-only",
+  "route": "Direct Product for resident policy, shared resource domain and compiler reservations already tested against Product; ARBOR-first for live process/terminal effect adapters only where needed.",
+  "ownership": "Resource sampling, scheduling, budgets and SDK campaign reservations; P05 owns Host process lifecycle and P06 owns MCP transport.",
+  "objective": "Reconcile R039 overlays with current task planner and existing campaign/owned-job API; prove actual resource accounting, admission, release/cancel and no oversubscription in isolated Windows runs.",
+  "sdkTaskReferences": [
+    "071–080",
+    "091–100",
+    "171–180",
+    "181–190",
+    "201–210"
+  ],
+  "pins": {
+    "ARBOR": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+    "Labs": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+    "Product": "11812e6b1c06ac047329169ef5d848da3f85788c"
+  },
+  "entries": [
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI02-R034-SDK-ADMISSION/R039-OVERLAY.json",
+      "blob": "4c8de9dedfe1df3f9464f55bec0be912fd160d96",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI02-R034-SDK-ADMISSION/resource-domain.rs",
+      "blob": "c688c69a0cfd04c2dd337baad1ba773102189ae0",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI02-R034-SDK-ADMISSION/meta-policy.rs",
+      "blob": "cf95f8c620750be46216a3d4e17cffb734b869cd",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI02-R034-SDK-ADMISSION/resource_campaign.rs",
+      "blob": "04fb4b21346297d54c3aab1fb150f7ac440b19e3",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/EVIDENCE-R039-OWNED-ADMISSION.json",
+      "blob": "3c380fee69914983c139c0e618bd1e360020724a",
+      "role": "prior-evidence"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/EVIDENCE-R038-OWNED-POLICY.json",
+      "blob": "3e39630e9e6ce1e66d32db83d0d0df4c4ccc7ed2",
+      "role": "prior-evidence"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/EVIDENCE-R041-ETW.json",
+      "blob": "3bb9ae9177d2fe98bc0cb4266f1b6d7eeca7334b",
+      "role": "prior-evidence"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/rust-starter/src/scheduler.rs",
+      "blob": "355ad3103588fdd6ed647e6f748946a738e0198e",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/rust-starter/src/resources.rs",
+      "blob": "a160c98b46ca11fcce1d626bbbb33fb5b676467f",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/campaign.rs",
+      "blob": "3ca396600bfaf8f51ba9636ded04d0e24f7dbd23",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/task_planner.rs",
+      "blob": "6c397b841de452ad107e453c74bc78a0201716cb",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/meta_resident.rs",
+      "blob": "777a4eb42572dc00e3c3fac25595a0b5e3fdb8c9",
+      "role": "target-reference"
+    }
+  ],
+  "unresolved": [],
+  "handoff": {
+    "requiredOutputs": [
+      "closure.json",
+      "adaptation.json",
+      "EVIDENCE.json",
+      "HANDOFF.md"
+    ],
+    "writeScope": "VIVIM V1.0/PRODUCT-MIGRATION-PREPARATION/P04-VWIN-EXECUTION/",
+    "gate": "No donor incorporation until intel-200 and intel-210 accepted and owner authorizes."
+  }
+}

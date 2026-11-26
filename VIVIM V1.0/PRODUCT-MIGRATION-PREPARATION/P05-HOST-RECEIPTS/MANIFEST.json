@@ -1,0 +1,104 @@
+{
+  "schema": "vivim.labs.product-preparation/1",
+  "lane": "P05-HOST-RECEIPTS",
+  "title": "Host execution, receipts and recovery",
+  "status": "preparation-only",
+  "route": "ARBOR-first for operational effect authority and live acceptance; then Product adoption of verified portable contracts and owned-process implementation.",
+  "ownership": "Host supervisor, dispatch/catalog, effect admission, owned process, receipt/recovery contracts. P04 owns resource policy, P06 transport. No live actions without separate permission.",
+  "objective": "Prepare smallest authority-preserving Host slice; reproduce grant denial, claim/replay, cancellation, unknown outcome and owned cleanup. Map source and tests; no new Host authority.",
+  "sdkTaskReferences": [
+    "011–020",
+    "071–090",
+    "121–150",
+    "181–190",
+    "201–210"
+  ],
+  "pins": {
+    "ARBOR": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+    "Labs": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+    "Product": "11812e6b1c06ac047329169ef5d848da3f85788c"
+  },
+  "entries": [
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/host-supervisor/Cargo.toml",
+      "blob": "0b16e01710a317fb4ccb9905a9de9ef210b1f43c",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/host-supervisor/src/lib.rs",
+      "blob": "7052514491513ac06eaafd974687322e9242a81e",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/host-supervisor/src/workstation_process.rs",
+      "blob": "ce28e179a8f161ff33d89c37c58f793dc4b58171",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/host-supervisor/src/workstation_windows_job.rs",
+      "blob": "d0ec556b10f9569f199e7ed5b24cd451feed1a96",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/action-catalog.v1.json",
+      "blob": "03600add09203b1f7eb784577c2f0b4434a5ef64",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/dispatcher.mjs",
+      "blob": "141056a4820c52aa7fd3ea4583279aab601d3d08",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/intent-planner.mjs",
+      "blob": "88ba130d77682f68cb3ab2752be1d7fd6ceb5131",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI02-R036-OWNED-ADMISSION/PIN.json",
+      "blob": "70c03808a9e663569ef39696ae265035586eb6fd",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI02-R036-OWNED-ADMISSION/owned_campaign.rs",
+      "blob": "5cf6f0d7a2cf935a116d1ea9fbaaafa64f47b509",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/rust-starter/src/recovery.rs",
+      "blob": "a7092f6e2a6cf76723c8eac687afac884bbbb14b",
+      "role": "donor-or-contract"
+    }
+  ],
+  "unresolved": [],
+  "handoff": {
+    "requiredOutputs": [
+      "closure.json",
+      "adaptation.json",
+      "EVIDENCE.json",
+      "HANDOFF.md"
+    ],
+    "writeScope": "VIVIM V1.0/PRODUCT-MIGRATION-PREPARATION/P05-HOST-RECEIPTS/",
+    "gate": "No donor incorporation until intel-200 and intel-210 accepted and owner authorizes."
+  }
+}

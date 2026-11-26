@@ -72,9 +72,9 @@ public final class SnapshotService extends Service {
         if(old!=null)old.close();
     }
     private void frame(ImageReader source){
-        if(finished || snapshot!=null || source!=reader || !visible || SystemClock.elapsedRealtime()<readyAt) return;
+        if(finished || source!=reader) return;
         try(Image image=source.acquireLatestImage()){
-            if(image==null || !visible || SystemClock.elapsedRealtime()<readyAt) return;
+            if(image==null || snapshot!=null || !visible || SystemClock.elapsedRealtime()<readyAt) return;
             Image.Plane p=image.getPlanes()[0]; ByteBuffer b=p.getBuffer();
             int w=image.getWidth(),h=image.getHeight(),stride=p.getRowStride(),pixel=p.getPixelStride();
             int[] argb=new int[w*h]; boolean any=false;

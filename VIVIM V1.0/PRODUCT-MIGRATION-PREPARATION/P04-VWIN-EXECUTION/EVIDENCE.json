@@ -1,0 +1,45 @@
+{
+  "schema": "vivim.p04.evidence/1",
+  "status": "PARTIAL_MATERIALIZED_BUILD_BLOCKED",
+  "productCommit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+  "labDonorCommit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+  "materializerCommit": "96ee6c4248f788e2dd2048202624ca073003a095",
+  "observations": [
+    {
+      "kind": "real-windows-materialization",
+      "receipt": "ctl-9ce8b7bb0f226b90",
+      "status": "completed",
+      "verifiedBlobs": 126,
+      "deterministicEdits": 30,
+      "output": "C:/0-BlackBoxProject-0/scratch/p04-96ee6c42/MATERIALIZATION.json"
+    },
+    {
+      "kind": "real-windows-build-attempt",
+      "command": "cargo test --offline",
+      "status": "failed-before-tests",
+      "exitCode": 101,
+      "diagnostic": "linker link.exe not found in authorized shell",
+      "workdir": "C:/0-BlackBoxProject-0/scratch/p04-96ee6c42/execution"
+    },
+    {
+      "kind": "toolchain-discovery-retry",
+      "receipt": "ctl-57a9d64673b9241e",
+      "status": "HOST_EFFECT_NOT_APPLIED"
+    }
+  ],
+  "historicalEvidence": {
+    "source": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE R039",
+    "classification": "prior donor acceptance, not current Product execution verification"
+  },
+  "acceptance": {
+    "sourceMaterialization": "PASS",
+    "currentCompilation": "BLOCKED",
+    "currentTests": "NOT_RUN",
+    "realWindowsWorkloads": "NOT_RUN",
+    "hostAuthority": "NOT_ACTIVATED",
+    "productWrites": 0,
+    "arborWrites": 0,
+    "originalVWinWrites": 0
+  },
+  "next": "Resolve existing Windows MSVC environment through authorized Host recipe, rerun offline tests against same isolated package, record actual workload receipts and reconcile task planner."
+}

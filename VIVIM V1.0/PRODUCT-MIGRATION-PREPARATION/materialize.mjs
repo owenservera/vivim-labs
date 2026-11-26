@@ -22,7 +22,7 @@ for(const r of names){
  if(typeof roots[r]!=='string')throw Error('ROOT_REQUIRED '+r);
  const root=realpathSync(roots[r]);
  const actual=realpathSync(git(root,['rev-parse','--show-toplevel']).toString().trim());
- if(actual!==root)throw Error('ROOT_NOT_GIT_TOPLEVEL '+r);
+ if(relative(root,actual)!=='')throw Error('ROOT_NOT_GIT_TOPLEVEL '+r);
  if(within(root,dest)||within(dest,root))throw Error('DESTINATION_OVERLAPS_REPOSITORY '+r);
  local[r]=root;
 }

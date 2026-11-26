@@ -1,0 +1,127 @@
+{
+  "schema": "vivim.labs.product-preparation/1",
+  "lane": "P06-MCP-GRAPH",
+  "title": "VIVIM MCP and graph-native capability interface",
+  "status": "preparation-only",
+  "route": "ARBOR-first for live transport/refresh and Host effect parity; direct Product only for SDK-native schema/query and pure introspection after readiness.",
+  "ownership": "MCP schemas, tool projection, versioning, graph identity and session/receipt correlation; no independent dispatcher, graph or grant authority.",
+  "objective": "Inventory actual installed tools versus source-defined tools, map schema/Host action/implementation/graph identity; prepare safe read-only parity tests and explicit registration/refresh obligations.",
+  "sdkTaskReferences": [
+    "011–020",
+    "041–050",
+    "061–070",
+    "111–120",
+    "159",
+    "181–190",
+    "201–210"
+  ],
+  "pins": {
+    "ARBOR": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+    "Labs": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+    "Product": "11812e6b1c06ac047329169ef5d848da3f85788c"
+  },
+  "entries": [
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "AGENTS.md",
+      "blob": "89bfb200415c1b62390200a348fc452f3bd039b4",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "tools/mcp/vivim-arbor/HANDOFF.md",
+      "blob": "13da650699beaccba1957813d8658303fb50bad8",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "tools/mcp/vivim-arbor/server/workstation-tunnel.cjs",
+      "blob": "a4de81a8e1471397b1c0fd1617d30d506e3fb4ae",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "tools/mcp/vivim-arbor/server/tunnel-readonly.cjs",
+      "blob": "45e3df9dafe0c2492823115d58363a5a9d974b3b",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "tools/mcp/vivim-arbor/tests/workstation-tunnel.test.cjs",
+      "blob": "31b1d4f9db6e7aec6831e8a806d2d4bc703a3a57",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "tools/mcp/vivim-arbor/tests/development-file-read.test.cjs",
+      "blob": "b7d2b6b82bd534cf95bcde4152e0b6fd2e303280",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/CAPABILITY-CANDIDATES.json",
+      "blob": "ceb27ce2284d581bde539a8b974a2953266f6c82",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/capability-compiler.mjs",
+      "blob": "125ffc7683be297f5c790dc4427ba67714375f82",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI11-R042-CAPABILITY-PARITY/PIN.json",
+      "blob": "93fd79666923fca57574b96288e95973a69b844d",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI11-R042-CAPABILITY-PARITY/parity.rs",
+      "blob": "c2c60817df05b4e7ac922fd66da7aea11ba6752e",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/bin/vivim-intel.rs",
+      "blob": "9765cfba42d97bd6b49e048782ceea609d1390b2",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/task_planner.rs",
+      "blob": "6c397b841de452ad107e453c74bc78a0201716cb",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/semantic_relations.rs",
+      "blob": "df475a0f53b81e07e1155cc2a6bcf55c5b8ed7e7",
+      "role": "target-reference"
+    }
+  ],
+  "unresolved": [],
+  "handoff": {
+    "requiredOutputs": [
+      "closure.json",
+      "adaptation.json",
+      "EVIDENCE.json",
+      "HANDOFF.md"
+    ],
+    "writeScope": "VIVIM V1.0/PRODUCT-MIGRATION-PREPARATION/P06-MCP-GRAPH/",
+    "gate": "No donor incorporation until intel-200 and intel-210 accepted and owner authorizes."
+  }
+}

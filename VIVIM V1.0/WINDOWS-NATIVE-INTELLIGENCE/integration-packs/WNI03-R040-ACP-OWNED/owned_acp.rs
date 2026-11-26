@@ -27,6 +27,11 @@ impl OwnedAcp{
  }
  pub fn initialize(&mut self)->Result<(),Error>{self.open()?;let q=self.transport.initialize()?;self.send(q)}
  pub fn new_session(&mut self,approved_cwd:&str)->Result<(),Error>{self.open()?;let q=self.transport.new_session(approved_cwd)?;self.send(q)}
+ pub fn load_supported(&self)->bool{self.transport.load_supported()}
+ pub fn models(&self,session:&str)->Option<&crate::acp::ModelState>{self.transport.models(session)}
+ pub fn load_session(&mut self,session:&str,approved_cwd:&str)->Result<(),Error>{self.open()?;let q=self.transport.load_session(session,approved_cwd)?;self.send(q)}
+ pub fn set_model(&mut self,session:&str,model:&str)->Result<(),Error>{self.open()?;let q=self.transport.set_model(session,model)?;self.send(q)}
+ pub fn prompt_on_model(&mut self,session:&str,model:&str,text:&str)->Result<(),Error>{if self.models(session).map(|m|m.current.as_str())!=Some(model){return Err(Error::Poisoned)}self.prompt(session,text)}
  pub fn prompt(&mut self,session:&str,approved_text:&str)->Result<(),Error>{
   self.open()?;
   if approved_text.len()>512{return Err(Error::FrameLimit)} // conservative bound for JSON escaping
@@ -112,5 +117,41 @@ impl OwnedAcp{
   }
   c.cancel_owned().unwrap();
   println!("ACTUAL_OPENCODE_ACP_INITIALIZE_AND_SESSION_OK");
+ }
+}
+
+#[cfg(test)]mod recovery_tests{
+ use super::*;use std::{thread,time::{Duration,Instant}};
+ fn spec(real:bool)->LocalProcessSpec{
+  let exe=std::env::var_os(if real{"VIVIM_ACP_AGENT_EXE"}else{"VIVIM_ACP_FIXTURE_EXE"}).unwrap();
+  let environment=["SystemRoot","WINDIR","PATH","TEMP","TMP","USERPROFILE","LOCALAPPDATA","APPDATA","HOME"].into_iter().filter_map(|n|std::env::var_os(n).map(|v|(n.into(),v))).collect();
+  LocalProcessSpec{executable:exe.into(),workspace:std::env::current_dir().unwrap(),args:if real{vec!["acp".into()]}else{vec![]},environment,tail_bytes:65536}
+ }
+ fn wait(c:&mut OwnedAcp,pred:impl Fn(&Event)->bool)->Event{
+  let t=Instant::now();loop{let u=c.poll().unwrap();for e in u.events{if pred(&e){return e}assert!(!matches!(e,Event::Failed{..}),"request refused");}assert!(u.exit.is_none());assert!(t.elapsed()<Duration::from_secs(20));thread::sleep(Duration::from_millis(20));}
+ }
+ fn connect(real:bool,g:u64)->OwnedAcp{let mut c=OwnedAcp::start(spec(real),g).unwrap();c.initialize().unwrap();wait(&mut c,|e|matches!(e,Event::Initialized));c}
+ fn create(c:&mut OwnedAcp)->String{let cwd=std::env::current_dir().unwrap();c.new_session(cwd.to_str().unwrap()).unwrap();match wait(c,|e|matches!(e,Event::SessionCreated{..})){Event::SessionCreated{session}=>session,_=>unreachable!()}}
+ #[test]fn actual_owned_fixture_cancel_model_readback_and_replay(){
+  let mut c=connect(false,10);let sid=create(&mut c);assert!(c.load_supported());
+  assert!(c.set_model(&sid,"not-offered").is_err());c.set_model(&sid,"fixture/b").unwrap();
+  assert!(c.prompt_on_model(&sid,"fixture/b","cancel fixture").is_err());
+  wait(&mut c,|e|matches!(e,Event::ModelSelected{model,..} if model=="fixture/b"));
+  c.prompt_on_model(&sid,"fixture/b","cancel fixture").unwrap();wait(&mut c,|e|matches!(e,Event::Update{..}));
+  c.cancel_prompt(&sid).unwrap();wait(&mut c,|e|matches!(e,Event::PromptSettled{stop_reason,..} if stop_reason=="cancelled"));
+  c.cancel_owned().unwrap();
+  let mut next=connect(false,11);let cwd=std::env::current_dir().unwrap();
+  assert!(next.prompt(&sid,"must refuse stale generation").is_err());next.load_session(&sid,cwd.to_str().unwrap()).unwrap();
+  let mut replay=false;let start=Instant::now();'outer:loop{for e in next.poll().unwrap().events{match e{Event::ReplayUpdate{session,..}=>{assert_eq!(session,sid);replay=true;},Event::SessionLoaded{session}=>{assert_eq!(session,sid);break 'outer},Event::Update{..}=>panic!("replay marked live"),_=>{}}}assert!(start.elapsed()<Duration::from_secs(5));thread::sleep(Duration::from_millis(10));}
+  assert!(replay);next.cancel_owned().unwrap();println!("ACP_MODEL_CANCEL_REPLAY_OK");
+ }
+ #[test]fn actual_opencode_reconnect_without_prompt(){
+  let mut c=connect(true,20);let sid=create(&mut c);let load=c.load_supported();
+  if let Some(m)=c.models(&sid){println!("ACP_ACTUAL_MODEL_CONFIG choices={} approved_free_advertised={}",m.choices.len(),m.choices.iter().any(|v|v=="openrouter/baidu/ernie-5.5-flash-preview:free"));}
+  c.cancel_owned().unwrap();
+  if !load{println!("ACTUAL_ACP_LOAD_UNAVAILABLE");return}
+  let mut next=connect(true,21);assert!(next.load_supported());let cwd=std::env::current_dir().unwrap();next.load_session(&sid,cwd.to_str().unwrap()).unwrap();
+  wait(&mut next,|e|matches!(e,Event::SessionLoaded{session} if session==&sid));
+  next.cancel_owned().unwrap();println!("ACTUAL_ACP_RECONNECT_OK");
  }
 }

@@ -16,6 +16,10 @@ impl Transport{
   Ok(Self{router:Router::new(generation).map_err(Error::Protocol)?,framer:Framer::default(),stdout:Stream::new(Mode::Lossless,capacity).map_err(Error::Stream)?,ack:0,closed:false})
  }
  pub fn generation(&self)->u64{self.router.generation()}
+ pub fn load_supported(&self)->bool{self.router.load_supported()}
+ pub fn models(&self,session:&str)->Option<&acp::ModelState>{self.router.models(session)}
+ pub fn load_session(&mut self,session:&str,approved_cwd:&str)->Result<Value,Error>{self.ensure_open()?;self.router.load_session(session,approved_cwd).map_err(Error::Protocol)}
+ pub fn set_model(&mut self,session:&str,model:&str)->Result<Value,Error>{self.ensure_open()?;self.router.set_model(session,model).map_err(Error::Protocol)}
  fn ensure_open(&self)->Result<(),Error>{if self.closed{Err(Error::Closed)}else{Ok(())}}
  pub fn initialize(&mut self)->Result<Value,Error>{self.ensure_open()?;self.router.initialize().map_err(Error::Protocol)}
  pub fn new_session(&mut self,approved_cwd:&str)->Result<Value,Error>{self.ensure_open()?;self.router.new_session(approved_cwd).map_err(Error::Protocol)}

@@ -29,15 +29,16 @@ impl Framer{
  pub fn finish(&mut self)->Result<(),Error>{if self.poisoned||!self.buf.is_empty(){self.poisoned=true;Err(Error::Malformed)}else{Ok(())}}
 }
 #[derive(Debug,Clone,Copy,PartialEq,Eq)]enum Phase{Fresh,Initializing,Ready,Closed}
-#[derive(Debug,Clone,PartialEq,Eq)]enum Pending{Initialize,NewSession,Prompt(String)}
+#[derive(Debug,Clone,PartialEq,Eq)]enum Pending{Initialize,NewSession,LoadSession(String),SetModel(String,String),Prompt(String)}
 #[derive(Debug,Clone,PartialEq)]pub enum Event{
- Initialized, SessionCreated{session:String}, Update{session:String,update:Value},
+ Initialized, SessionCreated{session:String}, SessionLoaded{session:String}, ModelSelected{session:String,model:String}, Update{session:String,update:Value}, ReplayUpdate{session:String,update:Value},
  PromptSettled{session:String,stop_reason:String}, Failed{session:Option<String>},
  PermissionCancelled{session:String,response:Value}, UnsupportedRequest{response:Value}, IgnoredNotification
 }
 pub struct Router{
- generation:u64,phase:Phase,next:u64,pending:HashMap<u64,Pending>,sessions:HashSet<String>,active:HashSet<String>,cancelled:HashSet<String>
+ generation:u64,phase:Phase,next:u64,pending:HashMap<u64,Pending>,sessions:HashSet<String>,active:HashSet<String>,cancelled:HashSet<String>,load_supported:bool,models:HashMap<String,ModelState>
 }
+#[derive(Debug,Clone,PartialEq,Eq)]pub struct ModelState{pub config_id:String,pub current:String,pub choices:Vec<String>}
 fn rpc(method:&str,id:Option<u64>,params:Value)->Value{
  let mut v=json!({"jsonrpc":"2.0","method":method,"params":params});
  if let Some(id)=id{v["id"]=json!(id);}v
@@ -45,10 +46,27 @@ fn rpc(method:&str,id:Option<u64>,params:Value)->Value{
 fn valid_session(s:&str)->bool{!s.is_empty()&&s.len()<=256&&!s.chars().any(char::is_control)}
 fn session(v:&Value)->Result<&str,Error>{v["sessionId"].as_str().filter(|s|valid_session(s)).ok_or(Error::Malformed)}
 fn exact(v:&Value,keys:&[&str])->bool{v.as_object().is_some_and(|o|o.keys().all(|k|keys.contains(&k.as_str())))}
+fn model_id(s:&str)->bool{!s.is_empty()&&s.len()<=256&&s.bytes().all(|b|b.is_ascii_alphanumeric()||b"._-/:#".contains(&b))}
+fn model_state(v:&Value)->Result<Option<ModelState>,Error>{
+ let Some(options)=v.get("configOptions") else{return Ok(None)};
+ let options=options.as_array().ok_or(Error::Malformed)?;if options.len()>64{return Err(Error::Limit)}
+ let mut result=None;
+ for option in options.iter().filter(|o|o["category"]=="model"||o["id"]=="model"){
+  if result.is_some()||option["type"]!="select"{return Err(Error::Malformed)}
+  let id=option["id"].as_str().filter(|s|model_id(s)).ok_or(Error::Malformed)?;
+  let current=option["currentValue"].as_str().filter(|s|model_id(s)).ok_or(Error::Malformed)?;
+  let mut choices=Vec::new();let options=option["options"].as_array().ok_or(Error::Malformed)?;
+  for item in options{let group=item.get("options").and_then(Value::as_array);let rows=group.map(Vec::as_slice).unwrap_or(std::slice::from_ref(item));for row in rows{let value=row["value"].as_str().filter(|s|model_id(s)).ok_or(Error::Malformed)?;if choices.len()>=2048||choices.iter().any(|x|x==value){return Err(Error::Limit)}choices.push(value.to_owned());}}
+  if !choices.iter().any(|s|s==current){return Err(Error::Malformed)}
+  result=Some(ModelState{config_id:id.into(),current:current.into(),choices});
+ }Ok(result)
+}
 fn response_id(v:&Value)->bool{v.is_u64()||v.as_str().is_some_and(|s|!s.is_empty()&&s.len()<=128&&!s.chars().any(char::is_control))}
 impl Router{
- pub fn new(generation:u64)->Result<Self,Error>{if generation==0{return Err(Error::State);}Ok(Self{generation,phase:Phase::Fresh,next:1,pending:HashMap::new(),sessions:HashSet::new(),active:HashSet::new(),cancelled:HashSet::new()})}
+ pub fn new(generation:u64)->Result<Self,Error>{if generation==0{return Err(Error::State);}Ok(Self{generation,phase:Phase::Fresh,next:1,pending:HashMap::new(),sessions:HashSet::new(),active:HashSet::new(),cancelled:HashSet::new(),load_supported:false,models:HashMap::new()})}
  pub fn generation(&self)->u64{self.generation}
+ pub fn load_supported(&self)->bool{self.load_supported}
+ pub fn models(&self,session:&str)->Option<&ModelState>{self.models.get(session)}
  pub fn has_pending(&self)->bool{!self.pending.is_empty()||!self.active.is_empty()}
  fn request(&mut self,method:&str,params:Value,p:Pending)->Result<Value,Error>{
   if self.pending.len()>=MAX_PENDING{return Err(Error::Limit);}
@@ -68,8 +86,20 @@ impl Router{
   if self.sessions.len()+self.pending.values().filter(|p|matches!(p,Pending::NewSession)).count()>=MAX_SESSIONS{return Err(Error::Limit);}
   self.request("session/new",json!({"cwd":approved_cwd,"mcpServers":[]}),Pending::NewSession)
  }
+ pub fn load_session(&mut self,id:&str,approved_cwd:&str)->Result<Value,Error>{
+  if self.phase!=Phase::Ready||!self.load_supported||!valid_session(id)||self.sessions.contains(id)||self.pending.values().any(|p|matches!(p,Pending::LoadSession(s) if s==id)){return Err(Error::State)}
+  if approved_cwd.is_empty()||approved_cwd.len()>1024||approved_cwd.chars().any(char::is_control){return Err(Error::Malformed)}
+  if self.sessions.len()+self.pending.values().filter(|p|matches!(p,Pending::LoadSession(_)|Pending::NewSession)).count()>=MAX_SESSIONS{return Err(Error::Limit)}
+  self.request("session/load",json!({"sessionId":id,"cwd":approved_cwd,"mcpServers":[]}),Pending::LoadSession(id.into()))
+ }
+ pub fn set_model(&mut self,id:&str,approved_model:&str)->Result<Value,Error>{
+  if self.phase!=Phase::Ready||!self.sessions.contains(id)||self.active.contains(id)||self.pending.values().any(|p|matches!(p,Pending::SetModel(s,_) if s==id)){return Err(Error::State)}
+  let m=self.models.get(id).ok_or(Error::State)?;
+  if !m.choices.iter().any(|x|x==approved_model){return Err(Error::Foreign)}
+  self.request("session/set_config_option",json!({"sessionId":id,"configId":m.config_id,"value":approved_model}),Pending::SetModel(id.into(),approved_model.into()))
+ }
  pub fn prompt(&mut self,id:&str,approved_text:&str)->Result<Value,Error>{
-  if self.phase!=Phase::Ready||!self.sessions.contains(id)||self.active.contains(id){return Err(Error::State);}
+  if self.phase!=Phase::Ready||!self.sessions.contains(id)||self.active.contains(id)||self.pending.values().any(|p|matches!(p,Pending::SetModel(s,_) if s==id)){return Err(Error::State);}
   if approved_text.is_empty()||approved_text.len()>64*1024{return Err(Error::Limit);}
   let v=self.request("session/prompt",json!({"sessionId":id,"prompt":[{"type":"text","text":approved_text}]}),Pending::Prompt(id.into()))?;
   self.active.insert(id.into());Ok(v)
@@ -80,7 +110,7 @@ impl Router{
   if self.phase!=Phase::Ready||!self.active.contains(id)||!self.cancelled.insert(id.into()){return Err(Error::State);}
   Ok(rpc("session/cancel",None,json!({"sessionId":id})))
  }
- pub fn close(&mut self){self.phase=Phase::Closed;self.pending.clear();self.sessions.clear();self.active.clear();self.cancelled.clear();}
+ pub fn close(&mut self){self.phase=Phase::Closed;self.pending.clear();self.sessions.clear();self.active.clear();self.cancelled.clear();self.models.clear();self.load_supported=false;}
  pub fn ingest(&mut self,generation:u64,v:Value)->Result<Event,Error>{
   if generation!=self.generation{return Err(Error::Foreign);}
   if self.phase==Phase::Closed||v["jsonrpc"]!="2.0"||!v.is_object(){return Err(Error::Malformed);}
@@ -90,9 +120,12 @@ impl Router{
    if method=="session/update"{
     if v.get("id").is_some()||self.phase!=Phase::Ready{return Err(Error::Malformed);}
     let id=session(params)?;
-    if !self.sessions.contains(id){return Err(Error::Foreign);}
+    let replay=self.pending.values().any(|p|matches!(p,Pending::LoadSession(s) if s==id));
+    if !self.sessions.contains(id)&&!replay{return Err(Error::Foreign);}
     let update=params["update"].clone();
     if !update.is_object()||update["sessionUpdate"].as_str().is_none(){return Err(Error::Malformed);}
+    if replay{return Ok(Event::ReplayUpdate{session:id.into(),update})}
+    if update["sessionUpdate"]=="config_option_update"{if let Some(m)=model_state(&update)?{self.models.insert(id.into(),m);}}
     return Ok(Event::Update{session:id.into(),update});
    }
    if let Some(id)=v.get("id"){
@@ -114,7 +147,7 @@ impl Router{
   if let Some(error)=v.get("error"){
    if error["code"].as_i64().is_none()||error["message"].as_str().is_none(){return Err(Error::Malformed);}
    self.pending.remove(&id);
-   let session=match pending{Pending::Initialize=>{self.close();None},Pending::NewSession=>None,Pending::Prompt(s)=>{self.active.remove(&s);self.cancelled.remove(&s);Some(s)}};
+   let session=match pending{Pending::Initialize=>{self.close();None},Pending::NewSession=>None,Pending::LoadSession(s)|Pending::SetModel(s,_)=>Some(s),Pending::Prompt(s)=>{self.active.remove(&s);self.cancelled.remove(&s);Some(s)}};
    // Never echo arbitrary agent error text into receipts or public logs.
    return Ok(Event::Failed{session});
   }
@@ -122,13 +155,25 @@ impl Router{
   let event=match pending{
    Pending::Initialize=>{
     if self.phase!=Phase::Initializing||r["protocolVersion"]!=1{self.close();return Err(Error::State);}
-    self.phase=Phase::Ready;Event::Initialized
+    self.load_supported=r["agentCapabilities"]["loadSession"]==true;self.phase=Phase::Ready;Event::Initialized
    },
    Pending::NewSession=>{
     if self.phase!=Phase::Ready{return Err(Error::State);}
     let s=session(r)?;
     if self.sessions.len()>=MAX_SESSIONS||!self.sessions.insert(s.into()){return Err(Error::Foreign);}
+    if let Some(m)=model_state(r)?{self.models.insert(s.into(),m);}
     Event::SessionCreated{session:s.into()}
+   },
+   Pending::LoadSession(s)=>{
+    if self.phase!=Phase::Ready||r.get("sessionId").is_some_and(|v|v.as_str()!=Some(&s))||!r.is_object(){return Err(Error::Malformed)}
+    if self.sessions.len()>=MAX_SESSIONS||!self.sessions.insert(s.clone()){return Err(Error::Foreign)}
+    if let Some(m)=model_state(r)?{self.models.insert(s.clone(),m);}
+    Event::SessionLoaded{session:s}
+   },
+   Pending::SetModel(s,model)=>{
+    let m=model_state(r)?.ok_or(Error::Malformed)?;
+    if m.current!=model{return Err(Error::Foreign)}
+    self.models.insert(s.clone(),m);Event::ModelSelected{session:s,model}
    },
    Pending::Prompt(s)=>{
     let reason=r["stopReason"].as_str().filter(|r|matches!(*r,"end_turn"|"max_tokens"|"max_turn_requests"|"refusal"|"cancelled")).ok_or(Error::Malformed)?;

@@ -45,7 +45,7 @@ public final class MainActivity extends Activity {
         root.setOrientation(LinearLayout.VERTICAL);
         root.setPadding(24,48,24,24);
         TextView title = new TextView(this);
-        title.setText("VIVIM Surface Probe v0.4 — local Studio");
+        title.setText("VIVIM Android Owner Console v0.5");
         title.setTextSize(22);
         root.addView(title);
         TextView nativeStatus=new TextView(this);
@@ -60,6 +60,7 @@ public final class MainActivity extends Activity {
         button(root,"Stop and release",v -> stopProbe("Stopped"));
         button(root,"Open WhatsApp on phone",v -> openWhatsApp());
         button(root,"WhatsApp Studio",v -> startActivity(new Intent(this,WhatsAppActivity.class)));
+        button(root,"Android Owner Console",v -> startActivity(new Intent(this,OwnerActivity.class)));
         setContentView(root);
     }
     private void openWhatsApp() {

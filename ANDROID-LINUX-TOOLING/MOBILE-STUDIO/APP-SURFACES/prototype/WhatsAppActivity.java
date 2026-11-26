@@ -15,9 +15,11 @@ public final class WhatsAppActivity extends Activity {
     private ImageView preview;
     private TextView notices;
     private String noticeSample="";
+    private String pendingText;
     private android.graphics.Bitmap exportCopy;
     @Override public void onCreate(Bundle b){
         super.onCreate(b);
+        if(Build.VERSION.SDK_INT>=33)setRecentsScreenshotEnabled(false);
         ScrollView scroll=new ScrollView(this);
         LinearLayout root=new LinearLayout(this); root.setOrientation(LinearLayout.VERTICAL);root.setPadding(24,48,24,24);scroll.addView(root);
         TextView heading=new TextView(this);heading.setText("VIVIM WhatsApp Studio — local prototype");heading.setTextSize(23);root.addView(heading);
@@ -27,6 +29,9 @@ public final class WhatsAppActivity extends Activity {
         button(root,"Read up to 3 active WhatsApp chat previews",v->{noticeSample=WhatsAppNoticeService.sample();notices.setText(noticeSample);});
         notices=new TextView(this);notices.setText("No notification sample requested.");notices.setTextIsSelectable(true);root.addView(notices);
         button(root,"Share reviewed preview text",v->shareNotices());
+        button(root,"Export reviewed previews as JSON",v->exportNotices());
+        button(root,"Open selected active notification chat",v->chooseNotice());
+        button(root,"Review up to 3 chats × 3 excerpts",v->startActivity(new Intent(this,ReviewedActivity.class)));
         button(root,"Clear preview text",v->{noticeSample="";notices.setText("Cleared");});
         button(root,"Authorize one app snapshot",v->capture());
         button(root,"Show latest local snapshot",v->refresh());
@@ -43,6 +48,23 @@ public final class WhatsAppActivity extends Activity {
     private void button(LinearLayout root,String text,View.OnClickListener action){Button b=new Button(this);b.setText(text);b.setOnClickListener(action);root.addView(b);}
     private void noticeSettings(){
         new AlertDialog.Builder(this).setTitle("Optional notification access").setMessage("Android notification access is broad. VIVIM only samples active WhatsApp message previews when you press Read. It does not collect notification events, store history, or upload data. Android may redact content. Revoke access here whenever you wish.").setNegativeButton("Cancel",null).setPositiveButton("Open Android settings",(d,w)->{try{startActivity(new Intent(android.provider.Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));}catch(Exception e){status.setText("Settings unavailable");}}).show();
+    }
+    private void chooseNotice(){
+        java.util.List<WhatsAppNoticeService.Target> targets=WhatsAppNoticeService.targets();
+        if(targets.isEmpty()){status.setText("No eligible active chat notification");return;}
+        CharSequence[] labels=new CharSequence[targets.size()];for(int j=0;j<labels.length;j++)labels[j]=targets.get(j).label;
+        new AlertDialog.Builder(this).setTitle("Open chat — may mark messages read").setItems(labels,(d,j)->{
+            status.setText(WhatsAppNoticeService.open(targets.get(j)));
+        }).setNegativeButton("Cancel",null).show();
+    }
+    private void exportNotices(){
+        if(noticeSample.isEmpty()){status.setText("Read and review previews first");return;}
+        try{
+            String reviewed=new org.json.JSONObject().put("schema","vivim.whatsapp.active-preview/1").put("source","active-notifications-only").put("complete_history",false).put("reviewed_text",noticeSample).put("created_at_ms",System.currentTimeMillis()).toString(2);
+            new AlertDialog.Builder(this).setTitle("Export reviewed notification excerpts?").setMessage(reviewed).setNegativeButton("Cancel",null).setPositiveButton("Choose file",(d,w)->{
+                pendingText=reviewed;Intent i=new Intent(Intent.ACTION_CREATE_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType("application/json").putExtra(Intent.EXTRA_TITLE,"vivim-reviewed-previews.json");startActivityForResult(i,73);
+            }).show();
+        }catch(org.json.JSONException e){status.setText("Export preparation failed");}
     }
     private void shareNotices(){
         if(noticeSample.isEmpty()){status.setText("Read and review previews first");return;}
@@ -84,6 +106,10 @@ public final class WhatsAppActivity extends Activity {
     }
     @Override protected void onActivityResult(int request,int code,Intent data){
         super.onActivityResult(request,code,data);
+        if(request==73){
+            try{if(code==RESULT_OK&&data!=null&&data.getData()!=null&&pendingText!=null){try(java.io.OutputStream out=getContentResolver().openOutputStream(data.getData())){if(out==null)throw new java.io.IOException();out.write(pendingText.getBytes(java.nio.charset.StandardCharsets.UTF_8));}status.setText("Reviewed preview JSON saved");}}
+            catch(Exception e){status.setText("Export failed");}finally{pendingText=null;}return;
+        }
         if(request==72){
             try{if(code==RESULT_OK && data!=null && data.getData()!=null && exportCopy!=null){try(java.io.OutputStream out=getContentResolver().openOutputStream(data.getData())){if(out==null||!exportCopy.compress(android.graphics.Bitmap.CompressFormat.PNG,100,out))throw new java.io.IOException();}status.setText("Reviewed observation exported");}}
             catch(Exception e){status.setText("Export failed: "+e.getClass().getSimpleName());}
@@ -95,6 +121,6 @@ public final class WhatsAppActivity extends Activity {
         catch(RuntimeException e){status.setText("Capture start unavailable: "+e.getClass().getSimpleName());}
     }
     @Override protected void onResume(){super.onResume();if(status!=null)refresh();}
-    @Override protected void onDestroy(){if(exportCopy!=null){exportCopy.recycle();exportCopy=null;}super.onDestroy();}
+    @Override protected void onDestroy(){if(exportCopy!=null){exportCopy.recycle();exportCopy=null;}pendingText=null;noticeSample="";super.onDestroy();}
     private void refresh(){preview.setImageDrawable(null);if(SnapshotService.snapshot!=null)preview.setImageBitmap(SnapshotService.snapshot);status.setText(SnapshotService.active?"Capture active — return after it stops":SnapshotService.result);}
 }

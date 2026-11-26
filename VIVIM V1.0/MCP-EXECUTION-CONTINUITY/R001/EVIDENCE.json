@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-26",
+  "pin": "8fccdbe85678d37aa50293b4ce877fb2eae14dc4",
+  "entries": [
+    {
+      "path": "tools/mcp/vivim-arbor/server/tunnel-readonly.cjs",
+      "blob": "7bb244e0611d93b35cfc84664ee7dcc0bec8a547"
+    },
+    {
+      "path": "tools/mcp/vivim-arbor/server/workstation-tunnel.cjs",
+      "blob": "fe025578e3da42c27cd1a4cee359e2c28bc322d4"
+    },
+    {
+      "path": "tools/mcp/vivim-arbor/server/maintenance-gate.cjs",
+      "blob": "30f5d430faee45e0751818851a69c0a6d3c4c90b"
+    },
+    {
+      "path": "tools/mcp/vivim-arbor/tests/tunnel-readonly.test.cjs",
+      "blob": "0ea623ca4fbc55b490496548e3845db7112f5b6c"
+    },
+    {
+      "path": "tools/mcp/vivim-arbor/tests/workstation-tunnel.test.cjs",
+      "blob": "30ca164dcb7af8eafc4fcd2f544c1b4ac2d43647"
+    },
+    {
+      "path": "native/host-supervisor/src/bin/vivim-workstation-session.rs",
+      "blob": "9c472d7a6c670d1c33f8f51785b6ab3677b2f38b"
+    },
+    {
+      "path": "tools/mcp/vivim-arbor/android/vivim-android-runtime.cjs",
+      "blob": "204cf46a3b8d8a405d2bda6325bef675bd30a29b"
+    },
+    {
+      "path": "tools/mcp/vivim-arbor/SESSION-WAIT.md",
+      "blob": "dfbc555c6f473c8e84b796b176b4fea6d3d19c74"
+    }
+  ],
+  "tests": {
+    "candidateJsIsolate": {
+      "count": 22,
+      "passed": [
+        "A unchanged",
+        "B only metadata",
+        "C instructions",
+        "annotations intact",
+        "schema only D",
+        "unrelated descriptor unchanged",
+        "running",
+        "open stream",
+        "remaining bytes",
+        "success",
+        "failed",
+        "cancelled",
+        "timed out",
+        "gap",
+        "read failure",
+        "invalid cursor",
+        "unknown state",
+        "exit unknown",
+        "raw unchanged",
+        "baseline text only",
+        "cursor string",
+        "start not completed"
+      ],
+      "scope": "executed fixture checks of exact candidate functions; not native Node/relay/live verification"
+    },
+    "overlay": {
+      "passed": true,
+      "scope": "in-memory exact anchor transformation against pinned donor"
+    },
+    "node": "not run",
+    "live": "not run",
+    "deployment": "not performed"
+  },
+  "status": "prepared for isolated regression and baseline A; not release-approved"
+}

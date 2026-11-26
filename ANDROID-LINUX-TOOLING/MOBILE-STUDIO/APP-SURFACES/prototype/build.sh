@@ -10,10 +10,20 @@ rustc --edition=2021 --crate-type lib --emit=obj -C opt-level=z -C panic=abort -
 ld.lld -shared --no-undefined -soname libvivim_probe.so -z max-page-size=16384 -z noexecstack -o out/jni/libvivim_probe.so out/jni/probe.o
 llvm-strip --strip-unneeded out/jni/libvivim_probe.so
 if llvm-readelf -d out/jni/libvivim_probe.so | grep -E "RUNPATH|RPATH|NEEDED"; then exit 1; fi
+# The existing research-only build can omit the optional engine.
+rm -f out/jni/libvivim_download_core.so
+if [ -n "${VIVIM_DOWNLOAD_CORE:-}" ]; then
+  core="$(cd "$VIVIM_DOWNLOAD_CORE" && pwd)"
+  cargo rustc --manifest-path "$core/Cargo.toml" --target-dir "$core/target" --features android-jni --lib -- -C link-arg=-Wl,-z,max-page-size=16384
+  cp "$core/target/debug/libvivim_download_core.so" out/jni/
+  llvm-strip --strip-unneeded out/jni/libvivim_download_core.so
+  if llvm-readelf -d out/jni/libvivim_download_core.so | grep -E 'RUNPATH|RPATH'; then exit 1; fi
+  if llvm-readelf -d out/jni/libvivim_download_core.so | grep NEEDED | grep -Ev '\[(libc|libm|libdl|liblog|libandroid)\.so\]'; then exit 1; fi
+fi
 aapt2 link -I "$ANDROID_JAR" --manifest AndroidManifest.xml -o out/unsigned.apk
-javac --release 8 -cp "$ANDROID_JAR" -d out/classes MainActivity.java FixtureActivity.java WhatsAppActivity.java SnapshotService.java OwnerActivity.java WhatsAppNoticeService.java ReviewedActivity.java DevActivity.java
+javac --release 8 -cp "$ANDROID_JAR" -d out/classes MainActivity.java FixtureActivity.java WhatsAppActivity.java SnapshotService.java OwnerActivity.java WhatsAppNoticeService.java ReviewedActivity.java DevActivity.java DownloadActivity.java DownloadService.java
 d8 --lib "$ANDROID_JAR" --min-api 26 --output out/dex out/classes/live/vivim/surfaceprobe/*.class
-python -c 'import zipfile; z=zipfile.ZipFile("out/unsigned.apk","a",compression=zipfile.ZIP_DEFLATED); z.write("out/dex/classes.dex","classes.dex"); z.write("out/jni/libvivim_probe.so","lib/arm64-v8a/libvivim_probe.so"); z.close()'
+python -c 'import zipfile; z=zipfile.ZipFile("out/unsigned.apk","a",compression=zipfile.ZIP_DEFLATED); z.write("out/dex/classes.dex","classes.dex"); z.write("out/jni/libvivim_probe.so","lib/arm64-v8a/libvivim_probe.so"); import os; z.write("out/jni/libvivim_download_core.so","lib/arm64-v8a/libvivim_download_core.so") if os.path.isfile("out/jni/libvivim_download_core.so") else None; z.close()'
 # Compressed ARM64 library is explicitly extracted by Android. ELF LOAD alignment is 16 KiB.
 input=out/unsigned.apk
 if command -v zipalign >/dev/null; then zipalign -f 4 "$input" out/aligned.apk; input=out/aligned.apk; fi

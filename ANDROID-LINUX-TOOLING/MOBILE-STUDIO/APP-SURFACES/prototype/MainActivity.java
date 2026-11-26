@@ -62,6 +62,7 @@ public final class MainActivity extends Activity {
         button(root,"WhatsApp Studio",v -> startActivity(new Intent(this,WhatsAppActivity.class)));
         button(root,"Android Owner Console",v -> startActivity(new Intent(this,OwnerActivity.class)));
         button(root,"Developer Instrument",v -> openDeveloper());
+        button(root,"Native downloads",v -> startActivity(new Intent(this,DownloadActivity.class)));
         setContentView(root);
     }
     private void openDeveloper(){

@@ -1,0 +1,3 @@
+# Native Android torrent service
+
+Source integration of the ARBOR download-core JNI ABI (commit b5e15526ec8450a2f867956c4b3ef53a0aa7b1b2). Existing owner console entry, no exported service or new app. Explicit start/restore, magnet, SAF import, list, pause, resume, non-destructive remove, and stop. App-private payload/session storage, foreground dataSync notification, timeout callback cancellation and no sticky restart. Build using VIVIM_DOWNLOAD_CORE pointing to a verified ARBOR checkout of native/download-core. Without it the existing APK remains buildable and download UI reports unavailable. Do not promote as device verified until actual APK JNI load and lawful peer transfer are observed. Cross-device synchronization and production canonical renderer remain pending.

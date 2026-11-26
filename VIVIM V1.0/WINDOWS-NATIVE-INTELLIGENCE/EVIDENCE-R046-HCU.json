@@ -1,0 +1,23 @@
+{
+  "schema": "vivim.labs.hcu-selected-group/1",
+  "source": "5457fdd70f24f260dd8d9d58733b92a9e9fe63c2",
+  "session": "ctl-c672cf177fdeb3f8",
+  "passed": 13,
+  "failed": 0,
+  "exitCode": 0,
+  "elapsedMs": 50255,
+  "verifiedBlobs": 7,
+  "actual": {
+    "selectedControls": 2,
+    "deltaUpsert": 1,
+    "ack": true,
+    "staleRefused": true,
+    "disabledRefused": true,
+    "destroyedInvalidated": true
+  },
+  "limits": [
+    "Selected explicit HWND-backed group only, not entire app tree.",
+    "Actual EnableWindow on owned fixture, not a UIA action or Host effect receipt.",
+    "Existing hidden-root enumeration still yields zero children; no application-wide discovery claim."
+  ]
+}

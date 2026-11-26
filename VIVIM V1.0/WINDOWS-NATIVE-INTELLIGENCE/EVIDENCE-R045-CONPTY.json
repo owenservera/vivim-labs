@@ -1,0 +1,38 @@
+{
+  "schema": "vivim.labs.owned-conpty/1",
+  "source": "329138d094dfc0f8a7094feae027f6d7dc28ada5",
+  "arbor": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+  "session": "ctl-24b3cbfd1d7ebb79",
+  "passed": 13,
+  "failed": 0,
+  "exitCode": 0,
+  "elapsedMs": 29747,
+  "verifiedBlobs": 8,
+  "actual": {
+    "normalConsoleHandles": true,
+    "stdin": true,
+    "stdout": true,
+    "stderrMerged": true,
+    "resize": [
+      100,
+      30
+    ],
+    "normalExit": true,
+    "cancel": true,
+    "unrelatedJobPreserved": true,
+    "directPipeRegression": true
+  },
+  "previous": {
+    "source": "26211b78cce16ec28d0df11a8dca46f8f0daed75",
+    "session": "ctl-3c6ec7798e1aa948",
+    "passed": 11,
+    "failed": 2,
+    "reason": "Inherited redirected standard handles; corrected with explicit zero std handles and STARTF_USESTDHANDLES."
+  },
+  "limits": [
+    "Standalone console fixture; no actual TUI agent acceptance or installed Host endpoint.",
+    "ClosePseudoConsole uses independent drain; outer supervised helper timeout required on wedged OS close.",
+    "Merged terminal stream distinct from structured ACP."
+  ],
+  "reference": "https://github.com/microsoft/terminal/issues/11276"
+}

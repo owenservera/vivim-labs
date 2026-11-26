@@ -12,7 +12,8 @@ impl Apartment{fn enter()->Result<Self,Error>{unsafe{cv("RoInitialize",RoInitial
 impl Drop for Apartment{fn drop(&mut self){unsafe{RoUninitialize()}}}
 #[derive(Debug)]pub struct Evidence{pub digest:String,pub load_ms:u128,pub eval_us:u128,pub reference_us:u128,pub runs:u32,pub scores:[f32;4],pub memory_available:u64,pub logical_cpus:u32,pub cpu_busy_bp:u16}
 const MIB:u64=1024*1024;
-pub fn evaluate_owned_fixture(dir:&Path)->Result<Evidence,Error>{
+pub fn evaluate_owned_fixture(dir:&Path,kind:LearningModelDeviceKind)->Result<Evidence,Error>{
+ if !matches!(kind,LearningModelDeviceKind::Cpu|LearningModelDeviceKind::DirectX){return Err(Error::Invalid)}
  if !dir.is_absolute()||!dir.is_dir(){return Err(Error::Invalid)}
  let top=hardware::topology().map_err(|e|Error::Resource(format!("{e:?}")))?;
  if top.processor_groups!=1{return Err(Error::Deferred)}
@@ -33,14 +34,14 @@ pub fn evaluate_owned_fixture(dir:&Path)->Result<Evidence,Error>{
  let digest=format!("{:x}",Sha256::digest(&bytes));
  let _com=Apartment::enter()?;let start=Instant::now();
  let model=cv("LoadFromFilePath",LearningModel::LoadFromFilePath(&HSTRING::from(file.to_str().ok_or(Error::Invalid)?)))?;
- let device=cv("CpuDevice",LearningModelDevice::Create(LearningModelDeviceKind::Cpu))?;
+ let device=cv("ExplicitDevice",LearningModelDevice::Create(kind))?;
  let session=cv("CreateSession",LearningModelSession::CreateFromModelOnDevice(&model,&device))?;
  let load_ms=start.elapsed().as_millis();
  let binding=cv("Binding",LearningModelBinding::CreateFromSession(&session))?;
  let input=cv("TensorFloat",TensorFloat::CreateFromShapeArrayAndDataArray(&[4,3],&fixture::FEATURES))?;
  cv("Bind",binding.Bind(&HSTRING::from("X"),&input))?;
- let base_start=Instant::now();let expected=std::hint::black_box(fixture::reference());let reference_us=base_start.elapsed().as_micros();
- let mut scores=[0.;4];let start=Instant::now();let runs=10;
+ let base_start=Instant::now();let mut expected=[0.;4];for _ in 0..100{expected=std::hint::black_box(fixture::reference_input(std::hint::black_box(&fixture::FEATURES)));}let reference_us=base_start.elapsed().as_micros();
+ let mut scores=[0.;4];let start=Instant::now();let runs=100;
  for i in 0..runs{
   let result=cv("Evaluate",session.Evaluate(&binding,&HSTRING::from(format!("wni-{i}"))))?;
   if !cv("Succeeded",result.Succeeded())?{return Err(Error::Runtime{stage:"EvaluateStatus",code:cv("ErrorStatus",result.ErrorStatus())?})}

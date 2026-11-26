@@ -1,0 +1,32 @@
+{
+  "schema": "vivim.labs.winml-cpu/1",
+  "source": "353675694b73e45769666e9b295156d2b08c37e7",
+  "session": "ctl-772baf481c623d26",
+  "passed": 9,
+  "failed": 0,
+  "exitCode": 0,
+  "elapsedMs": 28683,
+  "verifiedBlobs": 8,
+  "actual": {
+    "digest": "1c933b19d62d1eeae1135a70afa8007652411e4b627879e920ca5e9fcb6f11f4",
+    "modelBytes": 161,
+    "loadMs": 148,
+    "evalUs": 5290,
+    "referenceUs": 4,
+    "runs": 10,
+    "scores": [
+      6.125,
+      1.125,
+      3.125,
+      1.625
+    ],
+    "memoryAvailable": 14246805504,
+    "logicalCpus": 8,
+    "cpuBusyBp": 2500
+  },
+  "limits": [
+    "Locally authored 161-byte reference graph; actual native WinML, not a trained AI or general LLM.",
+    "Initial baseline timing one reference vs ten evaluations; comparable benchmark pending.",
+    "No GPU/NPU verification or production wiring."
+  ]
+}

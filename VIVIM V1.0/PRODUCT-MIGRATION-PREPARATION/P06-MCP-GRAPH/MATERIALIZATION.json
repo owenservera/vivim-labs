@@ -1,0 +1,138 @@
+{
+  "schema": "vivim.labs.preparation-materialization/1",
+  "lane": "P06-MCP-GRAPH",
+  "entries": [
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "AGENTS.md",
+      "blob": "89bfb200415c1b62390200a348fc452f3bd039b4",
+      "role": "donor-or-contract",
+      "materializedPath": "ARBOR/AGENTS.md",
+      "size": 10064,
+      "sha256": "67ad2c3d1d27ac23ca9c746cba94ac32c35901452d8639c316a0477313ea5d66"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "tools/mcp/vivim-arbor/HANDOFF.md",
+      "blob": "13da650699beaccba1957813d8658303fb50bad8",
+      "role": "donor-or-contract",
+      "materializedPath": "ARBOR/tools/mcp/vivim-arbor/HANDOFF.md",
+      "size": 58806,
+      "sha256": "2685683290a2e62d61786e2d754e5bb287322eb1fef5624178f304277db43926"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "tools/mcp/vivim-arbor/server/workstation-tunnel.cjs",
+      "blob": "a4de81a8e1471397b1c0fd1617d30d506e3fb4ae",
+      "role": "donor-or-contract",
+      "materializedPath": "ARBOR/tools/mcp/vivim-arbor/server/workstation-tunnel.cjs",
+      "size": 16895,
+      "sha256": "7fa589240afc7b2e1ddaee24bdc0bc9da48021d1816c6f81744adc472153f4ed"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "tools/mcp/vivim-arbor/server/tunnel-readonly.cjs",
+      "blob": "45e3df9dafe0c2492823115d58363a5a9d974b3b",
+      "role": "donor-or-contract",
+      "materializedPath": "ARBOR/tools/mcp/vivim-arbor/server/tunnel-readonly.cjs",
+      "size": 7306,
+      "sha256": "1fb6087258db6408c5efc16f7120c06d29e406ba664e52cb8d937819a2479ffc"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "tools/mcp/vivim-arbor/tests/workstation-tunnel.test.cjs",
+      "blob": "31b1d4f9db6e7aec6831e8a806d2d4bc703a3a57",
+      "role": "donor-or-contract",
+      "materializedPath": "ARBOR/tools/mcp/vivim-arbor/tests/workstation-tunnel.test.cjs",
+      "size": 14920,
+      "sha256": "849401d1f93890ed1ff383d6c10637c45d113f87a1c66956f1081afadac840c7"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "tools/mcp/vivim-arbor/tests/development-file-read.test.cjs",
+      "blob": "b7d2b6b82bd534cf95bcde4152e0b6fd2e303280",
+      "role": "donor-or-contract",
+      "materializedPath": "ARBOR/tools/mcp/vivim-arbor/tests/development-file-read.test.cjs",
+      "size": 1740,
+      "sha256": "e1294bcf1f1ec781b4fbdb65c20acfb7981e32ad68dec5b239215910d9936a32"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/CAPABILITY-CANDIDATES.json",
+      "blob": "ceb27ce2284d581bde539a8b974a2953266f6c82",
+      "role": "donor-or-contract",
+      "materializedPath": "Labs/VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/CAPABILITY-CANDIDATES.json",
+      "size": 34905,
+      "sha256": "ceef820ad2b0db7c09fd405734fcb3e09ca0b0ab22db428dcb6209a8c84b7996"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/capability-compiler.mjs",
+      "blob": "125ffc7683be297f5c790dc4427ba67714375f82",
+      "role": "donor-or-contract",
+      "materializedPath": "Labs/VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/capability-compiler.mjs",
+      "size": 5073,
+      "sha256": "e2a332fd20707612b11a1ed5cb18d4d72b195e97bf693f3269cd43d4f3fcf89e"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI11-R042-CAPABILITY-PARITY/PIN.json",
+      "blob": "93fd79666923fca57574b96288e95973a69b844d",
+      "role": "donor-or-contract",
+      "materializedPath": "Labs/VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI11-R042-CAPABILITY-PARITY/PIN.json",
+      "size": 307,
+      "sha256": "7fe65f90e19ac56a2d47da82d833ecb959aed79785656e3875f9b8efedc8aa56"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI11-R042-CAPABILITY-PARITY/parity.rs",
+      "blob": "c2c60817df05b4e7ac922fd66da7aea11ba6752e",
+      "role": "donor-or-contract",
+      "materializedPath": "Labs/VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI11-R042-CAPABILITY-PARITY/parity.rs",
+      "size": 2370,
+      "sha256": "0192b664540c3647ec3b9b12210dfd60a79c60533fc8d1b4b55523343af9bd4d"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/bin/vivim-intel.rs",
+      "blob": "9765cfba42d97bd6b49e048782ceea609d1390b2",
+      "role": "target-reference",
+      "materializedPath": "Product/crates/protocol-sdk/src/bin/vivim-intel.rs",
+      "size": 13250,
+      "sha256": "eda3478258e6e4b8ea639cf233193fe8762b45e7b0e478b02fe1749d23b981cc"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/task_planner.rs",
+      "blob": "6c397b841de452ad107e453c74bc78a0201716cb",
+      "role": "target-reference",
+      "materializedPath": "Product/crates/protocol-sdk/src/task_planner.rs",
+      "size": 28715,
+      "sha256": "a9a59c97f747de36b41c87f4e5f839af2fc5114d88c5c49b06d0988b312aa2d8"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/semantic_relations.rs",
+      "blob": "df475a0f53b81e07e1155cc2a6bcf55c5b8ed7e7",
+      "role": "target-reference",
+      "materializedPath": "Product/crates/protocol-sdk/src/semantic_relations.rs",
+      "size": 7152,
+      "sha256": "4340dd69ae66215aff33789b127647627589af7ed6694be575c8bac529d07575"
+    }
+  ],
+  "bytes": 201503,
+  "assurance": "exact-source-readback-only; not dependency closure, compilation, conformance or migration acceptance"
+}

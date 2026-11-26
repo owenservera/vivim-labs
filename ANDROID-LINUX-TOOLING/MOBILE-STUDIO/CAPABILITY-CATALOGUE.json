@@ -1,0 +1,371 @@
+{
+  "schema": "vivim.labs.mobile-capability-research/1",
+  "status": "research-only",
+  "platform": "Android API 35",
+  "entries": [
+    {
+      "id": "APP-01",
+      "capability": "App discovery",
+      "interface": "PackageManager/launcher intents",
+      "evidence": "partial-device-evidence",
+      "boundary": "131 visible third-party packages; native companion visibility differs"
+    },
+    {
+      "id": "APP-02",
+      "capability": "App labels/icons/version",
+      "interface": "PackageManager",
+      "evidence": "research",
+      "boundary": "visibility filter"
+    },
+    {
+      "id": "APP-03",
+      "capability": "Launch app",
+      "interface": "Intent",
+      "evidence": "research",
+      "boundary": "user-directed foreground launch"
+    },
+    {
+      "id": "APP-04",
+      "capability": "Deep links and supported actions",
+      "interface": "Intent/App Links",
+      "evidence": "research",
+      "boundary": "exported interfaces; verify resolution"
+    },
+    {
+      "id": "APP-05",
+      "capability": "Share text/files",
+      "interface": "ACTION_SEND/FileProvider",
+      "evidence": "research",
+      "boundary": "user-selected target and URI grant"
+    },
+    {
+      "id": "APP-06",
+      "capability": "Receive shared content",
+      "interface": "Intent filters",
+      "evidence": "research",
+      "boundary": "explicit user share"
+    },
+    {
+      "id": "APP-07",
+      "capability": "App-provided integration",
+      "interface": "exported documented APIs",
+      "evidence": "research",
+      "boundary": "per-app contract"
+    },
+    {
+      "id": "UI-01",
+      "capability": "UI semantic nodes",
+      "interface": "AccessibilityService",
+      "evidence": "restricted-research",
+      "boundary": "user enablement; distribution/purpose restrictions; no general autonomous agent via Play"
+    },
+    {
+      "id": "UI-02",
+      "capability": "User-directed node actions",
+      "interface": "AccessibilityNodeInfo",
+      "evidence": "restricted-research",
+      "boundary": "supported exposed action, policy review"
+    },
+    {
+      "id": "UI-03",
+      "capability": "User-directed gestures",
+      "interface": "AccessibilityService",
+      "evidence": "restricted-research",
+      "boundary": "explicit scope, no protected screens"
+    },
+    {
+      "id": "UI-04",
+      "capability": "Screen share",
+      "interface": "MediaProjection",
+      "evidence": "research",
+      "boundary": "per-session user consent; secure windows excluded"
+    },
+    {
+      "id": "UI-05",
+      "capability": "Test UI",
+      "interface": "UI Automator",
+      "evidence": "research",
+      "boundary": "owned test fixture; authorized instrumentation only"
+    },
+    {
+      "id": "UI-06",
+      "capability": "Keyboard input",
+      "interface": "InputMethodService",
+      "evidence": "restricted-research",
+      "boundary": "user chooses IME; no credential collection"
+    },
+    {
+      "id": "DATA-01",
+      "capability": "Selected documents",
+      "interface": "Storage Access Framework",
+      "evidence": "research",
+      "boundary": "user-selected URI"
+    },
+    {
+      "id": "DATA-02",
+      "capability": "Selected folders",
+      "interface": "ACTION_OPEN_DOCUMENT_TREE",
+      "evidence": "research",
+      "boundary": "scoped directory; protected roots excluded"
+    },
+    {
+      "id": "DATA-03",
+      "capability": "Photos/videos",
+      "interface": "Photo Picker/MediaStore",
+      "evidence": "research",
+      "boundary": "user selection or appropriate media permission"
+    },
+    {
+      "id": "DATA-04",
+      "capability": "Local graph and cache",
+      "interface": "SQLite",
+      "evidence": "device-verified",
+      "boundary": "local SQL smoke test"
+    },
+    {
+      "id": "DATA-05",
+      "capability": "Clipboard",
+      "interface": "ClipboardManager",
+      "evidence": "research",
+      "boundary": "foreground/platform restrictions; no surveillance"
+    },
+    {
+      "id": "DATA-06",
+      "capability": "Contacts",
+      "interface": "ContactsContract/picker",
+      "evidence": "research",
+      "boundary": "selection or separate grant"
+    },
+    {
+      "id": "DATA-07",
+      "capability": "Calendar",
+      "interface": "CalendarContract/intents",
+      "evidence": "research",
+      "boundary": "permission or user-mediated edit"
+    },
+    {
+      "id": "DATA-08",
+      "capability": "App-private data",
+      "interface": "Android sandbox",
+      "evidence": "unavailable-by-design",
+      "boundary": "no cross-app private filesystem access"
+    },
+    {
+      "id": "EVENT-01",
+      "capability": "Notification events",
+      "interface": "NotificationListenerService",
+      "evidence": "restricted-research",
+      "boundary": "special access, per-app opt-in, sensitive fields excluded"
+    },
+    {
+      "id": "EVENT-02",
+      "capability": "Post own notification",
+      "interface": "NotificationManager",
+      "evidence": "research",
+      "boundary": "notification permission when required"
+    },
+    {
+      "id": "EVENT-03",
+      "capability": "Usage summary",
+      "interface": "UsageStatsManager",
+      "evidence": "restricted-research",
+      "boundary": "special access, purpose limitation"
+    },
+    {
+      "id": "EVENT-04",
+      "capability": "Device state",
+      "interface": "BroadcastReceiver/BatteryManager",
+      "evidence": "research",
+      "boundary": "supported public events"
+    },
+    {
+      "id": "MEDIA-01",
+      "capability": "Media playback",
+      "interface": "MediaSession",
+      "evidence": "research",
+      "boundary": "own session or authorized controller"
+    },
+    {
+      "id": "MEDIA-02",
+      "capability": "Camera capture",
+      "interface": "CameraX/camera intent",
+      "evidence": "research",
+      "boundary": "user action and camera permission if needed"
+    },
+    {
+      "id": "MEDIA-03",
+      "capability": "Microphone",
+      "interface": "AudioRecord",
+      "evidence": "research",
+      "boundary": "explicit recording consent and indicators"
+    },
+    {
+      "id": "MEDIA-04",
+      "capability": "Speech-to-text",
+      "interface": "SpeechRecognizer",
+      "evidence": "research",
+      "boundary": "permission and provider availability"
+    },
+    {
+      "id": "MEDIA-05",
+      "capability": "Text-to-speech",
+      "interface": "TextToSpeech",
+      "evidence": "research",
+      "boundary": "available engine"
+    },
+    {
+      "id": "MEDIA-06",
+      "capability": "Volume/vibration",
+      "interface": "AudioManager/Vibrator",
+      "evidence": "research",
+      "boundary": "bounded user-directed action"
+    },
+    {
+      "id": "HW-01",
+      "capability": "Battery and charging",
+      "interface": "BatteryManager",
+      "evidence": "research",
+      "boundary": "public device state"
+    },
+    {
+      "id": "HW-02",
+      "capability": "Motion and environment sensors",
+      "interface": "SensorManager",
+      "evidence": "research",
+      "boundary": "hardware availability and permissions"
+    },
+    {
+      "id": "HW-03",
+      "capability": "Location",
+      "interface": "LocationManager",
+      "evidence": "restricted-research",
+      "boundary": "separate explicit location consent; not requested now"
+    },
+    {
+      "id": "HW-04",
+      "capability": "Bluetooth",
+      "interface": "BluetoothManager",
+      "evidence": "research",
+      "boundary": "nearby devices permission where required"
+    },
+    {
+      "id": "HW-05",
+      "capability": "USB",
+      "interface": "UsbManager",
+      "evidence": "research",
+      "boundary": "per-device user consent"
+    },
+    {
+      "id": "HW-06",
+      "capability": "NFC",
+      "interface": "NfcAdapter",
+      "evidence": "research",
+      "boundary": "hardware feature and scope"
+    },
+    {
+      "id": "NET-01",
+      "capability": "Network status",
+      "interface": "ConnectivityManager",
+      "evidence": "research",
+      "boundary": "supported permissions"
+    },
+    {
+      "id": "NET-02",
+      "capability": "HTTP/local service",
+      "interface": "Termux networking",
+      "evidence": "partial-device-evidence",
+      "boundary": "GitHub and Cargo network worked"
+    },
+    {
+      "id": "NET-03",
+      "capability": "Wi-Fi interaction",
+      "interface": "WifiManager",
+      "evidence": "restricted-research",
+      "boundary": "OS restrictions; no silent configuration"
+    },
+    {
+      "id": "WORK-01",
+      "capability": "Scheduled work",
+      "interface": "WorkManager",
+      "evidence": "research",
+      "boundary": "constraints/recovery; not always-on"
+    },
+    {
+      "id": "WORK-02",
+      "capability": "Foreground service",
+      "interface": "Android Service",
+      "evidence": "research",
+      "boundary": "visible notification, service type, platform timeouts"
+    },
+    {
+      "id": "WORK-03",
+      "capability": "Native execution",
+      "interface": "VIVIM Android MCP",
+      "evidence": "device-verified",
+      "boundary": "existing development grant"
+    },
+    {
+      "id": "WORK-04",
+      "capability": "Git checkout",
+      "interface": "Git/gh",
+      "evidence": "device-verified",
+      "boundary": "authenticated clone; push not tested"
+    },
+    {
+      "id": "WORK-05",
+      "capability": "Build SDK",
+      "interface": "Cargo",
+      "evidence": "partial-device-evidence",
+      "boundary": "native smoke passed; Product build not established"
+    },
+    {
+      "id": "WORK-06",
+      "capability": "APK toolchain",
+      "interface": "JDK/Gradle/Android SDK",
+      "evidence": "partial-device-evidence",
+      "boundary": "JDK installed; Gradle/build tools missing"
+    },
+    {
+      "id": "WORK-07",
+      "capability": "Debugging",
+      "interface": "ADB",
+      "evidence": "partial-device-evidence",
+      "boundary": "binary exists; no pairing or shell privileges verified"
+    },
+    {
+      "id": "COMM-01",
+      "capability": "Compose messages/email",
+      "interface": "SENDTO/VIEW intent",
+      "evidence": "research",
+      "boundary": "user confirms send; per-app support"
+    },
+    {
+      "id": "COMM-02",
+      "capability": "Dial",
+      "interface": "ACTION_DIAL",
+      "evidence": "research",
+      "boundary": "user confirms call"
+    },
+    {
+      "id": "SYS-01",
+      "capability": "Settings navigation",
+      "interface": "Settings intents",
+      "evidence": "research",
+      "boundary": "user chooses changes; no bypass"
+    },
+    {
+      "id": "SYS-02",
+      "capability": "App install/update",
+      "interface": "PackageInstaller",
+      "evidence": "restricted-research",
+      "boundary": "user-mediated system approval; no silent install"
+    },
+    {
+      "id": "SYS-03",
+      "capability": "Protected surfaces/security settings",
+      "interface": "OS protections",
+      "evidence": "unavailable-by-design",
+      "boundary": "no bypass, root, or grant escalation"
+    }
+  ]
+}

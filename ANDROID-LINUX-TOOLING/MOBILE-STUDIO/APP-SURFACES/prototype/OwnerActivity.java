@@ -19,6 +19,8 @@ public final class OwnerActivity extends Activity {
         TextView heading=new TextView(this);heading.setText("VIVIM Android Owner Console");heading.setTextSize(23);root.addView(heading);
         status=new TextView(this);root.addView(status);
         Button wa=new Button(this);wa.setText("WhatsApp Studio");wa.setOnClickListener(v->startActivity(new Intent(this,WhatsAppActivity.class)));root.addView(wa);
+        Button review=new Button(this);review.setText("Reviewed conversation handoff");review.setOnClickListener(v->startActivity(new Intent(this,ReviewedActivity.class)));root.addView(review);
+        Button capabilities=new Button(this);capabilities.setText("Capability status");capabilities.setOnClickListener(v->new android.app.AlertDialog.Builder(this).setTitle("Owner-device capabilities").setMessage("Native app discovery and tap-to-launch; owned virtual displays; local snapshot with system consent; optional active WhatsApp previews ("+(WhatsAppNoticeService.available()?"connected":"not connected")+"); draft and recipient handoff; reviewed local exports. No automatic send, remote app control, or unrestricted chat history.").setPositiveButton("OK",null).show());root.addView(capabilities);
         Button refresh=new Button(this);refresh.setText("Discover launchable apps");refresh.setOnClickListener(v->discover());root.addView(refresh);
         search=new EditText(this);search.setHint("Filter by name or package");search.setSingleLine(true);root.addView(search);
         search.addTextChangedListener(new android.text.TextWatcher(){

@@ -1,0 +1,87 @@
+{
+  "schema": "vivim.labs.p06.adaptation/1",
+  "sourcePins": "closure.json",
+  "sdkTaskReferences": [
+    "011–020",
+    "041–050",
+    "061–070",
+    "111–120",
+    "159",
+    "181–190",
+    "201–210"
+  ],
+  "gate": "intel-200 and intel-210 independently accepted plus owner-authorized scope; repin current Product before migration",
+  "transforms": [
+    {
+      "from": "isolated/src/lib.rs::introspect",
+      "to": "Product protocol-sdk projection/query module (exact path subject to integration review)",
+      "deterministic": [
+        "replace wire identities with existing Identity::new",
+        "use ExactRef and canonical source digests on edges",
+        "reuse Relation::admit and targets; no second graph store"
+      ],
+      "semanticObligations": [
+        "separate nominal action, capability revision, transport alias, schema digest, deployed binding and observed grant evidence",
+        "model source-defined versus live/client-visible; never infer a grant from schema",
+        "explicit wait composite action; no synthetic Host wait action"
+      ]
+    },
+    {
+      "from": "isolated/src/lib.rs::normalize_candidate",
+      "to": "Product Datum/Shape adapter; no new general schema engine",
+      "deterministic": [
+        "R042 boolean/drive/integer/string conversion",
+        "transport request_id outside semantic args",
+        "UTF-16 length parity with JS donor"
+      ],
+      "semanticObligations": [
+        "ECMAScript trim versus Rust trim edge cases; canonical numeric and Unicode policy",
+        "unsupported schema versions fail closed; keep schema definition identity and digest separately",
+        "terminal request_json -> base64 request belongs only to transport"
+      ]
+    },
+    {
+      "from": "isolated/src/lib.rs::correlate",
+      "to": "P05 receipt projection interface, then Product read-only query",
+      "deterministic": [
+        "same plan ID/digest/action/args and status correlation",
+        "session ID equality only for applied start"
+      ],
+      "semanticObligations": [
+        "consume already authenticated Host truth; never trust arbitrary client JSON or public redacted MCP receipt as raw truth",
+        "bind persisted request claim, grant fingerprint and canonical args digest via P05; current helper only matches supplied fields",
+        "uncertain never authorizes retry; do not persist a parallel receipt ledger"
+      ]
+    },
+    {
+      "from": "isolated/fixture.mjs",
+      "to": "integration-only test overlay",
+      "deterministic": [
+        "derive actual source-defined table from exact Git blobs",
+        "compare client-discovered contract names and required string fields",
+        "compile all R042 descriptors using unchanged donor"
+      ],
+      "semanticObligations": [
+        "compare full JSON Schema/annotations and live build seal when discovery authorized; current field comparison partial",
+        "do not use fixture results as operational acceptance"
+      ]
+    }
+  ],
+  "handoffs": {
+    "P02": {
+      "requested": "Identity + ExactRef + typed evidence relation admission, revision-aware deletion; capability, Host action, tool alias, schema revision; retain provenance and unknown states",
+      "status": "interface proposal only; no cross-lane write"
+    },
+    "P05": {
+      "requested": "authenticated persisted claim, exact plan and receipt readback, grant fingerprint, request/args digest, owned session correlation, uncertainty recovery",
+      "status": "interface proposal only; no cross-lane write"
+    }
+  },
+  "unsupported": [
+    "arbitrary JSON Schema, optional/nested union fields",
+    "unobserved deployed/granted state",
+    "live registry activation, refresh, grants",
+    "direct receipt authenticity or retry decisions",
+    "cross-client acceptance"
+  ]
+}

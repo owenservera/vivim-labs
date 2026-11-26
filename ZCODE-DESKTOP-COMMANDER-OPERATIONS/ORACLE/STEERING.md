@@ -55,3 +55,6 @@ Oracle publishes a **small outcome-level shaping signal** in [TO-PLANNING.md](TO
 
 ## Current evidence limit
 The connected GitHub Labs operations tree did not expose the historical local `OWNER-WORK/` registry on 2026-11-21; do **not** claim that file is a remote shared queue. ARBOR has source-backed composer/Wiki pieces and integration reports; autonomous PWA-to-chat-agent dispatch, fully verified phone control and measured AI reduction are **not yet proven**.
+
+## 2026-11-26 destination — native Oracle rather than an external coordinating chat
+This charter's PWA-first owner loop remains valid, but Oracle's planned home is **inside VIVIM Product** as a persistent, graph-grounded accountable actor. Labs/ChatGPT Oracle today remains a **strategic preparer**, not an installed resident agent. A living Product actor means stable Identity, scoped graph lens, accepted goals, observable activity, versioned source/protocol, checkpoints and recoverable Host-owned receipts; it does **not** mean a second graph or a Host superuser. See [native Oracle migration SITREP](ORACLE-RESIDENT-PRODUCT-MIGRATION-R001.md). Run a Product-only pure actor self-application test first; respect the current intel-200/intel-210 migration gates before incorporating Labs/ARBOR donor code.

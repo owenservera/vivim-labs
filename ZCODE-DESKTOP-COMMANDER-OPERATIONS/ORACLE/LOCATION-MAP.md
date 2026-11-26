@@ -50,3 +50,8 @@ For a steering turn, read Oracle AGENTS/SITREP + TASK-CLAIMS; check both repo HE
 
 ## Next-phase Wiki ↔ command strategy
 - [WIKI-COMMAND-SYMBIOSIS-R001.md](WIKI-COMMAND-SYMBIOSIS-R001.md): source-grounded five option comparison, explicit Explore/Act mode model, PWA acceptance sequence and Planning crosswalk. Read this only when discussing next-phase reprogrammability; it is **not** an implementation ledger.
+
+## Native Oracle convergence (26 Nov)
+- [ORACLE-RESIDENT-PRODUCT-MIGRATION-R001.md](ORACLE-RESIDENT-PRODUCT-MIGRATION-R001.md) — cross-repo SITREP, Oracle as graph-backed Product actor, O0–O5 gates and P01–P06 migration decision map. Read for the new native-agent objective; not another task ledger.
+- Product [foundation](https://github.com/owenservera/vivim-product/blob/main/docs/FOUNDATION-R001.md), [backbone](https://github.com/owenservera/vivim-product/blob/main/docs/META-VLANG-DURABLE-COMPUTATIONAL-BACKBONE-R001.md), [typed primitives](https://github.com/owenservera/vivim-product/blob/main/crates/protocol-sdk/src/semantic_primitives.rs), [task planner](https://github.com/owenservera/vivim-product/blob/main/crates/protocol-sdk/src/task_planner.rs), [resident evaluator](https://github.com/owenservera/vivim-product/blob/main/crates/protocol-sdk/src/meta_resident.rs).
+- Labs [P01–P06 preparation launchpad](https://github.com/owenservera/vivim-labs/blob/main/VIVIM%20V1.0/PRODUCT-MIGRATION-PREPARATION/README.md) — each lane retains independent source/test/authorization ownership.

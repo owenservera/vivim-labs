@@ -1,0 +1,118 @@
+{
+  "schema": "vivim.labs.product-preparation/1",
+  "lane": "P01-NATIVE-CORE",
+  "title": "Native Rust core and programmability",
+  "status": "preparation-only",
+  "route": "Direct Product after readiness; preserve existing M01, no repeat migration.",
+  "ownership": "Pure core/programmability primitives, dependency closure and original contract fixtures; exclude HQKG storage, Host runtime and transport.",
+  "objective": "Identify already-migrated M01, compare exact donor and current Product implementations, select smallest behavior-preserving next crate slice; establish real compile/test baseline.",
+  "sdkTaskReferences": [
+    "021–050",
+    "051–060",
+    "111–130",
+    "201–210"
+  ],
+  "pins": {
+    "ARBOR": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+    "Labs": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+    "Product": "11812e6b1c06ac047329169ef5d848da3f85788c"
+  },
+  "entries": [
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "core/programmability/Cargo.toml",
+      "blob": "18ba45fc845b56db3660c3f1fd46f86695c0ce39",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "core/programmability/src/lib.rs",
+      "blob": "f840ec4641023b7a08154f379cca5a4b9bd1b8be",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "core/programmability/src/source_digest.rs",
+      "blob": "171a1e454401d5eaf5fe20948ddde5bf0809696b",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "core/programmability/src/development_projection.rs",
+      "blob": "bd72c969ab91d81cc4a011b7117223c733fdde3c",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "core/programmability/src/control_planning.rs",
+      "blob": "1f8721bfe30e89485de622ddca9319b8a782b1b1",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "core/programmability/src/control_plan_presentation.rs",
+      "blob": "eb63317189282c231153e33ff98ea7910f24d42b",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "core/programmability/Cargo.toml",
+      "blob": "639c789822f5975659fa56fde06ecaf858e80ef5",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "core/programmability/src/lib.rs",
+      "blob": "deb5509cae250f511afa09a5790174f7eaa14eb9",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "protocol/migrations/M01-native-development-primitives.json",
+      "blob": "d1f1cf314492f251b82700523e64325320dd7bf0",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/migration.rs",
+      "blob": "1cbd2aab573d42fb38e90c25af5cc3304c0c9531",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "docs/MIGRATION-EXECUTION-R002.md",
+      "blob": "0ca8c47e42604061baddd0fa6bb11329c464fa7b",
+      "role": "target-reference"
+    }
+  ],
+  "unresolved": [],
+  "acceptance": [
+    "Resolve exact dependency closure, licenses and ownership before any adoption; identify existing Product equivalents.",
+    "Materialize pinned sources into a new isolated scratch tree; verify Git blob and record SHA-256; no donor or target writes.",
+    "Run real existing baseline tests where possible, record actual commands, exit codes, exact source and test evidence; no fabricated acceptance.",
+    "Produce source-bound adaptation plan against intel-201–210, distinguishing deterministic transformations and LLM semantic obligations.",
+    "Return inert candidate manifest, original tests, evidence, known blockers, recommended route and next ready action; no Product or ARBOR incorporation."
+  ],
+  "handoff": {
+    "requiredOutputs": [
+      "closure.json",
+      "adaptation.json",
+      "EVIDENCE.json",
+      "HANDOFF.md"
+    ],
+    "writeScope": "VIVIM V1.0/PRODUCT-MIGRATION-PREPARATION/P01-NATIVE-CORE/",
+    "sharedFiles": "read-only; master owns shared index; don't edit original VWin or other lanes",
+    "gate": "Product intel-200 and intel-210 accepted with owner authorization; no actual migration beforehand"
+  }
+}

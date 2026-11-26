@@ -1,0 +1,117 @@
+{
+  "schema": "vivim.labs.product-preparation/1",
+  "lane": "P02-HQKG-GRAPH",
+  "title": "HQKG and semantic graph",
+  "status": "preparation-only",
+  "route": "Direct Product for pure graph/compiler closure after readiness; ARBOR only for operational adapter gaps.",
+  "ownership": "HQKG source/symbol identity, graph exchange, query/index, reconciliation and evidence projections; no independent graph or source writer.",
+  "objective": "Map native graph dependency closure and incumbent HQ adapters; reproduce actual import/query/deletion with isolated data; distinguish pure graph code from operating environment.",
+  "sdkTaskReferences": [
+    "021–060",
+    "061–070",
+    "151–160",
+    "201–210"
+  ],
+  "pins": {
+    "ARBOR": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+    "Labs": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+    "Product": "11812e6b1c06ac047329169ef5d848da3f85788c"
+  },
+  "entries": [
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/hqkg/Cargo.toml",
+      "blob": "3b4eb158a0a8b5618da73e0878de603d74946e07",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/hqkg/src/lib.rs",
+      "blob": "8387eb03bea09ea4777e6a875a454c4c062b06bd",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/hqkg/src/semantic_source.rs",
+      "blob": "ee767b2ab3dc2550d9370a9e7b846aba0dc33f05",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/hqkg/src/engine.rs",
+      "blob": "885199953482da9ab41ddde5378d7bf455c51df3",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/hqkg/src/context_retrieval.rs",
+      "blob": "d90bb60a41944b2d9ee05540f2ff4f46b381ce53",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/hqkg/src/invalidate.rs",
+      "blob": "a5bfe9ff7736753ea6661d2672917f5604adf521",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "native/hqkg/tests/semantic_source.rs",
+      "blob": "2e10d6059490f2354ba08beaeb4d701ee7482998",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/semantic-registry.mjs",
+      "blob": "ed55a274610e68b9428240ec27e7d5424c9fc850",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/arbor-service.mjs",
+      "blob": "f00d688aff7cd4bd1b5e85f5caf362ca2aa3d417",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/semantic_relations.rs",
+      "blob": "df475a0f53b81e07e1155cc2a6bcf55c5b8ed7e7",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/semantic_primitives.rs",
+      "blob": "7372fda1ce5d3d06315b45d6fb62c51cc367f4ba",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/development_intelligence.rs",
+      "blob": "7cc193f4ec9504b7cf6256431080d5cf128a571a",
+      "role": "target-reference"
+    }
+  ],
+  "unresolved": [],
+  "handoff": {
+    "requiredOutputs": [
+      "closure.json",
+      "adaptation.json",
+      "EVIDENCE.json",
+      "HANDOFF.md"
+    ],
+    "writeScope": "VIVIM V1.0/PRODUCT-MIGRATION-PREPARATION/P02-HQKG-GRAPH/",
+    "gate": "No donor incorporation until intel-200 and intel-210 accepted and owner authorizes."
+  }
+}

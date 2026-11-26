@@ -100,3 +100,7 @@ R039 shared resource domain verified: 61/61 Windows Rust tests, 19 exact source 
 ## R040 actual agent session and R041 ETW consumer
 
 24/24 Windows ACP suite at d8d545c, actual OpenCode v2.2.7 initialize + session/new + owned cancellation, deterministic peer prompt and EOF verified. [Evidence](EVIDENCE-R040-ACP-SESSION.json). Real provider prompt, in-flight cancel/reconnect and installed receipt bridge remain open. R041 native ETW 17/17 exit 0: actual same-process numeric provider, PID filter, owned rustc metadata compile, two exact correlated events, 499 ms observed, ETL 196608 bytes, 25272-byte artifact; zero reported loss and owned file cleanup. [Evidence](EVIDENCE-R041-ETW.json). Continuous live collector, indexing/agent instrumentation remain open. No production writes or deployment.
+
+## R042 — incumbent capability compiler parity
+
+Fixed empty candidate examples rejected by current Host validator, aligned string bounds/trim. Actual Windows Node and Rust run: 19/19 incumbent Node checks, one exhaustive native test across 33 candidates, 132 native typed projections, 33 GPUI presentation calls and 132 AI candidate refusals. 59 existing actions + 33 candidates = 92 validated catalogue rows, zero ID collisions; all candidates disabled and unregistered. [Evidence](EVIDENCE-R042-CAPABILITY.json). Exact pure Host validator region, native planner and GPUI presentation reused; no live MCP registration or renderer interaction. No production changes.

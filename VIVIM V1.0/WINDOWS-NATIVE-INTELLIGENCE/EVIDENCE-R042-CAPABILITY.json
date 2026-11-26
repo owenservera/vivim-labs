@@ -1,0 +1,26 @@
+{
+  "schema": "vivim.labs.native-capability-parity/1",
+  "source": "659058219a73c3bffc57b8b07e85dedae1dbc05a",
+  "arborPin": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+  "productReviewed": "b02be1d52a2a141c37dbf63c2e24f61d628e1e73",
+  "session": "ctl-36c65bbfd3f66185",
+  "exitCode": 0,
+  "elapsedMs": 28846,
+  "verifiedBlobs": 11,
+  "nodeChecks": 19,
+  "nativeTests": 1,
+  "candidateRows": 33,
+  "incumbentRows": 59,
+  "combinedRows": 92,
+  "identityCollisions": 0,
+  "typedProjections": 132,
+  "gpuiPresentationCalls": 33,
+  "aiCandidateRefusals": 132,
+  "transportIdExtraArgumentRefusals": 33,
+  "limits": [
+    "Exact pure validator region executed, not full live Host server.",
+    "MCP input schema and normalization tested; no tools registered or live MCP requests.",
+    "Native GPUI presentation function compiled, not a rendered or interactive GPUI window.",
+    "No production writes or activation."
+  ]
+}

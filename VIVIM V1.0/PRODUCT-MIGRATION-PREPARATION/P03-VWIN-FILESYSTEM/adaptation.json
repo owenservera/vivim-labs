@@ -1,0 +1,132 @@
+{
+  "schema": "vivim.p03.adaptation/1",
+  "sourcePin": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+  "stagedCatalogue": {
+    "path": "protocol/task-catalog-deltas/external-source-adoption-r001.json",
+    "blob": "827ea5bb92be0fb8b52ffc67ba0b53eb0a0059c4",
+    "active": false
+  },
+  "route": "Direct Product for portable refresh/Wiki/native file identity; ARBOR/P05 for live OS/Host proof",
+  "candidates": [
+    {
+      "files": [
+        "adapters/hq/dev-session.mjs",
+        "adapters/hq/refresh-loop.mjs"
+      ],
+      "transform": "exact unique anchored edits; opt-in trailing --watch, preserve meta binary and sdk-context",
+      "obligations": [
+        "refuse dirty reads",
+        "intermediate disk snapshot exposure must be fenced",
+        "notification loss is unknown; no complete coverage claim"
+      ]
+    },
+    {
+      "files": [
+        "adapters/hq/wiki-articles.mjs",
+        "adapters/hq/article-cache.mjs"
+      ],
+      "transform": "exact original article cache edits",
+      "obligations": [
+        "retain graph epoch and fresh snapshot digest; namespace/deletion/dictionary invalidation"
+      ]
+    },
+    {
+      "files": [
+        "adapters/hq/protocol-v1.mjs",
+        "adapters/hq/agent-context.mjs",
+        "adapters/hq/resident-protocol.mjs"
+      ],
+      "transform": "retain incumbent; no R031 cache duplication",
+      "obligations": [
+        "generation and readback preserve exact semantics"
+      ]
+    },
+    {
+      "files": [
+        "core/programmability/src/source_digest.rs",
+        "crates/protocol-sdk/src/semantic_primitives.rs",
+        "crates/protocol-sdk/src/development_intelligence.rs"
+      ],
+      "transform": "reuse digest, ExactRef/RevisionVector and Intelligence::scan",
+      "obligations": [
+        "volume/fileId observation distinct from project/path and graph identity; lexical assurance unchanged"
+      ]
+    },
+    {
+      "files": [
+        "native_property.rs",
+        "file_metadata.rs",
+        "indexed_search.rs",
+        "probe.rs"
+      ],
+      "transform": "exact R044 donor and current digest/campaign",
+      "obligations": [
+        "P02 graph identity; P05 Host admission; optional Shell/index failure stays typed; no arbitrary path authority"
+      ]
+    }
+  ],
+  "sdk": [
+    {
+      "task": "intel-201",
+      "obligation": "admit exact manifest and materialization blobs; record destination, license, scope; refuse missing pin/scope escape",
+      "status": "not accepted"
+    },
+    {
+      "task": "intel-202",
+      "obligation": "classify Node adapter vs Rust native; collision/closure report; retain Product cache and native primitives",
+      "status": "not accepted"
+    },
+    {
+      "task": "intel-203",
+      "obligation": "convert unique exact anchor script to versioned SDK rule with replay and compliant no-op; current script is a fail-closed materializer, not SDK rule",
+      "status": "not accepted"
+    },
+    {
+      "task": "intel-204",
+      "obligation": "stable file/span obligations: watcher coverage, stale external Wiki publication, native dependency/license and optional provider; classify mechanically resolvable vs agent-required/blocked",
+      "status": "not accepted"
+    },
+    {
+      "task": "intel-205",
+      "obligation": "revision-bound packet with source and output blobs, exact spans, authorized lane writes, tests, digest/ack; no secrets",
+      "status": "not accepted"
+    },
+    {
+      "task": "intel-206",
+      "obligation": "inert patch intake, base and scope validation, recompile; stale/conflict/no-progress/cancel cases",
+      "status": "not accepted"
+    },
+    {
+      "task": "intel-207",
+      "obligation": "rerun native R044 and actual current R032 graph+Wiki, original tests, deletion and sibling; license and independent review",
+      "status": "not accepted"
+    },
+    {
+      "task": "intel-208",
+      "obligation": "invoke incumbent vivim-intel adoption lifecycle; no duplicate CLI, engine model calls or effects",
+      "status": "not accepted"
+    },
+    {
+      "task": "intel-209",
+      "obligation": "repin destination and owner approval; atomic proposal, recovery and receipts; no production edit",
+      "status": "not accepted"
+    },
+    {
+      "task": "intel-210",
+      "obligation": "use fresh R044 native identity sample; prove all compliant/partial/unsupported/stale/conflict/failing cases and intel-200; separate owner release",
+      "status": "not accepted"
+    }
+  ],
+  "llmObligations": [
+    "reconcile P02 and P05 contracts before production",
+    "map observation vs authority, no semantic elevation",
+    "resolve external Wiki fencing and watcher loss semantics",
+    "prove parity without replacing existing cache"
+  ],
+  "unsupported": [
+    "complete watcher coverage",
+    "positive indexed search",
+    "active catalogue changes",
+    "production activation"
+  ]
+}

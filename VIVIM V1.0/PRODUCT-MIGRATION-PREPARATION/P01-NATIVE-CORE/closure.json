@@ -1,0 +1,808 @@
+{
+  "schema": "vivim.labs.p01.closure/1",
+  "lane": "P01-NATIVE-CORE",
+  "status": "isolated-candidate-tested; broader donor original baseline failure",
+  "manifestMaterialization": {
+    "schema": "vivim.labs.preparation-materialization/1",
+    "lane": "P01-NATIVE-CORE",
+    "entries": [
+      {
+        "repository": "ARBOR",
+        "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+        "path": "core/programmability/Cargo.toml",
+        "blob": "18ba45fc845b56db3660c3f1fd46f86695c0ce39",
+        "role": "donor-or-contract",
+        "materializedPath": "ARBOR/core/programmability/Cargo.toml",
+        "size": 391,
+        "sha256": "0a8951a20c0539d83183c37dad27a459a8ddf1e95298764d1dc949e429290e85"
+      },
+      {
+        "repository": "ARBOR",
+        "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+        "path": "core/programmability/src/lib.rs",
+        "blob": "f840ec4641023b7a08154f379cca5a4b9bd1b8be",
+        "role": "donor-or-contract",
+        "materializedPath": "ARBOR/core/programmability/src/lib.rs",
+        "size": 20692,
+        "sha256": "adc8966ad30cb347e4143a7644c55c7a6e9ae52fc6d993a9ab712cba2331ab2f"
+      },
+      {
+        "repository": "ARBOR",
+        "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+        "path": "core/programmability/src/source_digest.rs",
+        "blob": "171a1e454401d5eaf5fe20948ddde5bf0809696b",
+        "role": "donor-or-contract",
+        "materializedPath": "ARBOR/core/programmability/src/source_digest.rs",
+        "size": 800,
+        "sha256": "fd935f2fbbfa581dee54aff61bfe811b3173041125ffd9da698ca7b9693fed50"
+      },
+      {
+        "repository": "ARBOR",
+        "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+        "path": "core/programmability/src/development_projection.rs",
+        "blob": "bd72c969ab91d81cc4a011b7117223c733fdde3c",
+        "role": "donor-or-contract",
+        "materializedPath": "ARBOR/core/programmability/src/development_projection.rs",
+        "size": 8312,
+        "sha256": "4cf5f2640b6d53631a0f481f2f8b67b9428d0d5da8b142d5a4bc9773fc173703"
+      },
+      {
+        "repository": "ARBOR",
+        "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+        "path": "core/programmability/src/control_planning.rs",
+        "blob": "1f8721bfe30e89485de622ddca9319b8a782b1b1",
+        "role": "donor-or-contract",
+        "materializedPath": "ARBOR/core/programmability/src/control_planning.rs",
+        "size": 6605,
+        "sha256": "8b56062bf09aef7417dfa036539bf332a64baaaa90c97944584f9b517594b08b"
+      },
+      {
+        "repository": "ARBOR",
+        "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+        "path": "core/programmability/src/control_plan_presentation.rs",
+        "blob": "eb63317189282c231153e33ff98ea7910f24d42b",
+        "role": "donor-or-contract",
+        "materializedPath": "ARBOR/core/programmability/src/control_plan_presentation.rs",
+        "size": 6778,
+        "sha256": "80a43959454d3cfe0dbbf234ebc47963d5e7e2f0bc29fb0da37b2882a9449886"
+      },
+      {
+        "repository": "Product",
+        "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+        "path": "core/programmability/Cargo.toml",
+        "blob": "639c789822f5975659fa56fde06ecaf858e80ef5",
+        "role": "target-reference",
+        "materializedPath": "Product/core/programmability/Cargo.toml",
+        "size": 381,
+        "sha256": "79f32ec1a22a726b073e99ebfcf7ebc9b032e3fc2af6b3d72c1976875f7aab83"
+      },
+      {
+        "repository": "Product",
+        "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+        "path": "core/programmability/src/lib.rs",
+        "blob": "deb5509cae250f511afa09a5790174f7eaa14eb9",
+        "role": "target-reference",
+        "materializedPath": "Product/core/programmability/src/lib.rs",
+        "size": 476,
+        "sha256": "42bec730eefabbd318de124dbff6a8aae27731241337d58a5d2bb205cf94f5b8"
+      },
+      {
+        "repository": "Product",
+        "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+        "path": "protocol/migrations/M01-native-development-primitives.json",
+        "blob": "d1f1cf314492f251b82700523e64325320dd7bf0",
+        "role": "target-reference",
+        "materializedPath": "Product/protocol/migrations/M01-native-development-primitives.json",
+        "size": 3421,
+        "sha256": "ddc4cf0dbb1f5eb22196920b0fb6aa795587f73cb6dca170b84a8e13176f8294"
+      },
+      {
+        "repository": "Product",
+        "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+        "path": "crates/protocol-sdk/src/migration.rs",
+        "blob": "1cbd2aab573d42fb38e90c25af5cc3304c0c9531",
+        "role": "target-reference",
+        "materializedPath": "Product/crates/protocol-sdk/src/migration.rs",
+        "size": 6321,
+        "sha256": "0bbc21d5648ccb08598180ed2f5c21110d1419ef8fe878b1345b17b708f6905f"
+      },
+      {
+        "repository": "Product",
+        "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+        "path": "docs/MIGRATION-EXECUTION-R002.md",
+        "blob": "0ca8c47e42604061baddd0fa6bb11329c464fa7b",
+        "role": "target-reference",
+        "materializedPath": "Product/docs/MIGRATION-EXECUTION-R002.md",
+        "size": 4779,
+        "sha256": "24d3e31dc4afcf9646a63e7adcee9892861b4f8e16b58171fd53bbb574f6ca96"
+      }
+    ],
+    "bytes": 58956,
+    "assurance": "exact-source-readback-only; not dependency closure, compilation, conformance or migration acceptance"
+  },
+  "donor": {
+    "repo": "ARBOR",
+    "rev": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+    "records": [
+      {
+        "path": "core/programmability/Cargo.lock",
+        "blob": "0794dd46af05badde437d559f765679abb7ed761",
+        "sha256": "1ee15f0f2709a0e3fe4491b96ebb0a06cd2b8fa1670cea9c6097a949e234f2a1"
+      },
+      {
+        "path": "core/programmability/Cargo.toml",
+        "blob": "18ba45fc845b56db3660c3f1fd46f86695c0ce39",
+        "sha256": "0a8951a20c0539d83183c37dad27a459a8ddf1e95298764d1dc949e429290e85"
+      },
+      {
+        "path": "core/programmability/GRAPH-INTEGRATION.md",
+        "blob": "341883a92eb3bc04b016f796d736f10719d754cc",
+        "sha256": "84457a6f17a3b30d385d1a22edad00636b76608dd6abc4efa659ca0dd6633d95"
+      },
+      {
+        "path": "core/programmability/README.md",
+        "blob": "a52d72e68b644d16328c6ce64343b95d1d59d482",
+        "sha256": "a52dcd004bca0e49e4349cdcf78257e467ff062b1b358156bc9052457479413b"
+      },
+      {
+        "path": "core/programmability/examples/realtime_command.rs",
+        "blob": "0ab7e2835f758654c2dab2be6b1bbbfa80536c82",
+        "sha256": "d7604147728f75277cf13800f28625a56332ef54e29217e5fcd04751220f85da"
+      },
+      {
+        "path": "core/programmability/src/activity_fabric/episode.rs",
+        "blob": "1ae02a1dd5daddd1eb6baf4bec6fd6aa4b7cbdd3",
+        "sha256": "f39d81f4b606f55b7822a62e22358592974454befc5ed3d3a2f32f9d1f5fb7bb"
+      },
+      {
+        "path": "core/programmability/src/activity_fabric/event.rs",
+        "blob": "660d4d928b1968fa7c754b94e3e19ffd69b3ad76",
+        "sha256": "19ef06586520abb42ed335b1dc21d23e808c79073bdcda76d8ef5bff45caf475"
+      },
+      {
+        "path": "core/programmability/src/activity_fabric/learning.rs",
+        "blob": "b01da803e317033698bdf44400b004ec0f5b2c5d",
+        "sha256": "e0a4e3f1bf76cd41cc2a1baaef482339e863cf44c21126ed442261a4a52bb0ca"
+      },
+      {
+        "path": "core/programmability/src/activity_fabric/live_projection.rs",
+        "blob": "e0f3eea9cd8c0817c20bf36a8a839c913d231b3f",
+        "sha256": "d8288b5c0f07224adc02d477693e56cf55fa568c88baca933e6d93eb0245d5d3"
+      },
+      {
+        "path": "core/programmability/src/activity_fabric/mod.rs",
+        "blob": "909353f29a80034e1f50f27eb8f64c59f372786f",
+        "sha256": "653cb346c13acdde6335492d7bcac9fddb248d60a22483840bc3b264eeaa2a74"
+      },
+      {
+        "path": "core/programmability/src/activity_fabric/note.rs",
+        "blob": "83c00a4c1c71b9f6e19d63c291a0278adc97ae78",
+        "sha256": "f6896b6c7c7ae0b00eb80beb1d89271ac4465aeb64df17d5bde0a75bc876c8f8"
+      },
+      {
+        "path": "core/programmability/src/agent_composer.rs",
+        "blob": "cc20864d409e3c62dfb9ca61a3460e78430cf43f",
+        "sha256": "9235885f7f9e4760f5b717edeeb39268363c505ef71b00422edeff177b787aa6"
+      },
+      {
+        "path": "core/programmability/src/bin/vivim-product-pure.rs",
+        "blob": "9066484878d7aec30d6746457fe63e4917b0ead5",
+        "sha256": "dfd14c235d8137ea1a17c478d60a745e95f4c64299d2e2f34a3c4bfa645e7c7b"
+      },
+      {
+        "path": "core/programmability/src/bin/vivim-program-validate.rs",
+        "blob": "293a6d94aec6323574cbe40e21b093e593cb8d4a",
+        "sha256": "8662dc730064ef4a0f321475bd37cee693988eb1fa607710b7fa4f4823b787d1"
+      },
+      {
+        "path": "core/programmability/src/bin/vivim-surface-edit-admit.rs",
+        "blob": "c23bd66cfdbc24bb184e5578cf23b6b71d6cbf90",
+        "sha256": "97f5518c4beafd69e5b7ee85280b39dc0e76d49e5f023b68117183c5a6404526"
+      },
+      {
+        "path": "core/programmability/src/bin/vivim-vec-project.rs",
+        "blob": "2495b0044dcfa52d9a484627aec0fd166283b690",
+        "sha256": "40d13034a0b1919cfadc9d8a714964c680082959c6210d3f89416e98fe6b64f8"
+      },
+      {
+        "path": "core/programmability/src/browser_abi.rs",
+        "blob": "25275c38cea0cb98a246e9d38fd959d3b506a771",
+        "sha256": "8eb90df96616c8029f2d295f4b03c0dc8c4beb6f1d8187ca6d17e2719b769ee7"
+      },
+      {
+        "path": "core/programmability/src/command_ai_guard.rs",
+        "blob": "5877cd84dfb0de062115d2b35d879d21c6768611",
+        "sha256": "040f3d85cc49fb8c894232f0552f9316f40dc674f254fb5021e73c33ec7c7628"
+      },
+      {
+        "path": "core/programmability/src/command_intent_projection.rs",
+        "blob": "1789de0b502586a01ebc09d554cb83cdb9b12b87",
+        "sha256": "68fc3af967c082ee9a22e961e6d2ec876676c4c4dafac047da55970afe09884a"
+      },
+      {
+        "path": "core/programmability/src/command_program.rs",
+        "blob": "c039586c1da05b71e8a40147d4f49ea0ac8609c3",
+        "sha256": "09fc11dafeb394c5ac224f62f22c2d9948a8a1c05731d780b5c8b04411267916"
+      },
+      {
+        "path": "core/programmability/src/configuration.rs",
+        "blob": "bfcbc78290c1106a9cfc0aee4122d907c1d62bc1",
+        "sha256": "e0f5755792b4bc44340ac9aff630299294c06086d293b29b8b6fae66a4b7e118"
+      },
+      {
+        "path": "core/programmability/src/configuration.v1.json",
+        "blob": "3abd12f38b37d3021e43559142e73248ed99752c",
+        "sha256": "f77127f94bb1e2501ead4bb37011f834b0da306c94d2d516278833c7e170410f"
+      },
+      {
+        "path": "core/programmability/src/context_grounding.rs",
+        "blob": "27b0a6292781fb87890e20009084f0a9ac2ce5e4",
+        "sha256": "2d70d8e9d6b5878baf0b7835b4775b01a4478ebe3e836ab5b34fc89fe3a7130e"
+      },
+      {
+        "path": "core/programmability/src/control_catalog_compat.rs",
+        "blob": "0038906e756a844cecbe565223a0167bfeac5308",
+        "sha256": "9f54ba9ae93fb29f44e92987b85c48402c984c85a8897e666c0c30cc96e58a44"
+      },
+      {
+        "path": "core/programmability/src/control_lexicon.rs",
+        "blob": "46f54a277781330cfb755b908a87f41b2bd4a8a7",
+        "sha256": "d99c2c2fb782ee365b5642d10445bea80bd306e14a279137ed75a32f47151ca2"
+      },
+      {
+        "path": "core/programmability/src/control_lifecycle.rs",
+        "blob": "6d7b6bf57bcdba18e269e8ac18ca15e4460eed90",
+        "sha256": "0f4f0cfcc6a540b2b46790850cad0ac99727f4ca8903b110d005902bb2e0e339"
+      },
+      {
+        "path": "core/programmability/src/control_plan_presentation.rs",
+        "blob": "eb63317189282c231153e33ff98ea7910f24d42b",
+        "sha256": "80a43959454d3cfe0dbbf234ebc47963d5e7e2f0bc29fb0da37b2882a9449886"
+      },
+      {
+        "path": "core/programmability/src/control_planning.rs",
+        "blob": "1f8721bfe30e89485de622ddca9319b8a782b1b1",
+        "sha256": "8b56062bf09aef7417dfa036539bf332a64baaaa90c97944584f9b517594b08b"
+      },
+      {
+        "path": "core/programmability/src/development_projection.rs",
+        "blob": "bd72c969ab91d81cc4a011b7117223c733fdde3c",
+        "sha256": "4cf5f2640b6d53631a0f481f2f8b67b9428d0d5da8b142d5a4bc9773fc173703"
+      },
+      {
+        "path": "core/programmability/src/first_contact.rs",
+        "blob": "1de17e4f0eb56e4af728b1f70e02453d471044e7",
+        "sha256": "65f6626d875b05a51d49d84c27de167bed5e4092baed9fb215957473c700450f"
+      },
+      {
+        "path": "core/programmability/src/gesture_interaction.rs",
+        "blob": "e5f9d40e22a8bebce65dff4f7112c4e4600235d0",
+        "sha256": "2740b3952aff8b4aa353c52792dcfdc4dea9294fd7654bf2f1b20fde021c4f1c"
+      },
+      {
+        "path": "core/programmability/src/lib.rs",
+        "blob": "f840ec4641023b7a08154f379cca5a4b9bd1b8be",
+        "sha256": "adc8966ad30cb347e4143a7644c55c7a6e9ae52fc6d993a9ab712cba2331ab2f"
+      },
+      {
+        "path": "core/programmability/src/lineage.rs",
+        "blob": "c2735c064ff788bbcb9b211075137b0444810b94",
+        "sha256": "22bcf3f90f49606e871f25bb9d2391b12f5147ebc9c6319f3dbcfb2c62ef82e9"
+      },
+      {
+        "path": "core/programmability/src/live_surface.rs",
+        "blob": "72eb5fa6390ba8d0b8d2438d7ad3869bd64fb76d",
+        "sha256": "fd86d60a4d70536386585758417e21163f2dc341c44d84b646322051ae4f2c58"
+      },
+      {
+        "path": "core/programmability/src/live_system.rs",
+        "blob": "3fa3f1ce3fbe445e72e66ac4ff4fc1bf7611c3f8",
+        "sha256": "71dcca6009f32c7d5da827ac1c6d4eead639eb1ff0ad76b209e1d1b5be0c9139"
+      },
+      {
+        "path": "core/programmability/src/media_language.rs",
+        "blob": "426bf6565ab42d45a887e01e387906f7c684b492",
+        "sha256": "8dee3aaa02e875342e4b557e8f43ffe304e27e617cd2ba9c389877efb8c74219"
+      },
+      {
+        "path": "core/programmability/src/navigation.rs",
+        "blob": "9abdebe41a3594dae2dd12dbaeb3bea4e2f41cf4",
+        "sha256": "dae28d7719c152facd903b6bdcdeb2f1f21161da0802be4bf3c911c37c7cf31c"
+      },
+      {
+        "path": "core/programmability/src/personal_rule_selection.rs",
+        "blob": "3c13e7cbb0d250264acefb17e12a72469f794f40",
+        "sha256": "7cf1627983db0e46414b5f88166a94c6583d52979816a8aded9f141737c72761"
+      },
+      {
+        "path": "core/programmability/src/personal_rule_transition.rs",
+        "blob": "7e37962939c474b6d8991327825f6969490d0f45",
+        "sha256": "c801cd4c7a6922738e58b72d0dc725c9a473f420f921928f8c10a9495160bf94"
+      },
+      {
+        "path": "core/programmability/src/product_kernel.rs",
+        "blob": "b7d9f32dac794444a3f4220827ac63a0b8f9ebf0",
+        "sha256": "b9671d505fa7ea83b8fbe9bf261228d71ad88f69183f4e977403b9ff1d3be646"
+      },
+      {
+        "path": "core/programmability/src/product_kernel/application_intelligence.rs",
+        "blob": "206c9144c6e35943a4622e8f15bd2c9ef6e4892b",
+        "sha256": "465fe1bca648de01883dd19956ef433b95443be3405803a80da711af8c5c10c8"
+      },
+      {
+        "path": "core/programmability/src/realtime_command.rs",
+        "blob": "8dc314161cf92076b46b6158d08a2d37d396c36e",
+        "sha256": "2e1ebc2e62b2edd697dfbc15fcdc7fce0c31ee214224efba4f473ce4a267c327"
+      },
+      {
+        "path": "core/programmability/src/recovery_diagnosis.rs",
+        "blob": "040f656de739d9b194048b04708ef7d1ef7af9b5",
+        "sha256": "dfc504af4d18dd46d6312684559ccdd1a15987bc409632b78b8e9d1338fc2328"
+      },
+      {
+        "path": "core/programmability/src/semantic_observation.rs",
+        "blob": "17f8a9df9f59b86a8b1e6465f3ed425a374fcfb1",
+        "sha256": "b3d418d39d812c9bb6c67d9eb2579078a1b53a5a48aec7372caa4b47171b1eb3"
+      },
+      {
+        "path": "core/programmability/src/source_digest.rs",
+        "blob": "171a1e454401d5eaf5fe20948ddde5bf0809696b",
+        "sha256": "fd935f2fbbfa581dee54aff61bfe811b3173041125ffd9da698ca7b9693fed50"
+      },
+      {
+        "path": "core/programmability/src/ui_tokens.rs",
+        "blob": "7e12ac3f07c5e9762e11f628b45b31d8bac5c458",
+        "sha256": "29ef0d39b6874932c9abdb9045874d2b705329ef88c3c0450dca5bfaddd7fde8"
+      },
+      {
+        "path": "core/programmability/src/ui_value.rs",
+        "blob": "3c11ef8b8a17527c8a9e607aa9681b99d0d451bc",
+        "sha256": "8d673b1e9e8fa0b72508db1de7cb37a01ed3c3f6e95d47cc65bb471977ca3039"
+      },
+      {
+        "path": "core/programmability/src/vec.rs",
+        "blob": "45a9e5c10791259215975031bdd2ad7cc9e607b0",
+        "sha256": "77bfec9d61809aba217a5216cc553805c9abeb1fa9529a21ae80acbbca4a5e25"
+      },
+      {
+        "path": "core/programmability/src/vec_admission.rs",
+        "blob": "f358f72b3a2da1f0def977ba77d4c15be10ba897",
+        "sha256": "36f11231aa89e3e23b8a4e7bc47474c56a2dc465e54b06b5cfe1f203ce763991"
+      },
+      {
+        "path": "core/programmability/src/visual.rs",
+        "blob": "947bf89e7703dd06dbf54c1163a4205f239d89a5",
+        "sha256": "b6869e1eb87235f60a02fe183ace3813c9c64ae1f08764ab4577e3f6f45e6769"
+      },
+      {
+        "path": "core/programmability/src/wiki_journal.rs",
+        "blob": "e240b382697b2af1f06f70bdae433fb49114a7bd",
+        "sha256": "b5550a67246d8602d17cd8e66d80eb88a8c916b73260d0d16180bb474a46918e"
+      },
+      {
+        "path": "core/programmability/src/wiki_read.rs",
+        "blob": "467c18ebb29eabb9a5f7a28c627db415dec43a2b",
+        "sha256": "df59e14b1a6d96a8c49422f85b089478a8cfefd58bf665c02bb0fc745c1d053d"
+      },
+      {
+        "path": "core/programmability/src/wiki_read_recipe.rs",
+        "blob": "342980249264e5b4dd2812213ed5c3175501dbbb",
+        "sha256": "eff0fc47889e5e0845452b8ccfce300a5e988a751ed6a9840b0a3859a2162f61"
+      },
+      {
+        "path": "core/programmability/src/wiki_replay.rs",
+        "blob": "44733c1fc55b5257588d37c72cdbcd77a27a430f",
+        "sha256": "2c40c530b4732713dc25379dc30500e2a433e289ee27ced2da897bc25db24e56"
+      },
+      {
+        "path": "core/programmability/src/wiki_target.rs",
+        "blob": "95c6da499ac131ddee3486dbd7420b48db3eee40",
+        "sha256": "71e5aaa3d1698611d2ee4497012a703cab2d3f61cbb108a550b2b59a310894ef"
+      },
+      {
+        "path": "core/programmability/src/wiki_write_recipe.rs",
+        "blob": "211147eefc9f393a91cf3379fef237fbb70cfcf5",
+        "sha256": "f916f9170a7661b7deebb39485d08b9f8a1df83e4b689c2732415c1cc47c578d"
+      },
+      {
+        "path": "core/programmability/src/wire.rs",
+        "blob": "fd67f5221dbffd9a10eb171a95e562f1778020e8",
+        "sha256": "6aaa9875a4549ce4c645434756f97afa0796fd46b84219641f3f8aff032a16c1"
+      },
+      {
+        "path": "core/programmability/src/workstation_capabilities.rs",
+        "blob": "9a336b13d42a6c6038fd1eeef815196af3e31d53",
+        "sha256": "5d48eb80d215262bdfebf85312e2a12d81268d275a55ef6e01c760e60823fc84"
+      },
+      {
+        "path": "core/programmability/tests/wiki_capture_source_fence_contract.rs",
+        "blob": "f48c29c21b6244540b5f6745a78547382c202779",
+        "sha256": "31f39a419711270b62439157f959d2a30dcd487e0b57cc105fedf855e7e687ea"
+      },
+      {
+        "path": "core/programmability/tests/wiki_change_chronology_contract.rs",
+        "blob": "8d63c6534e7591b69533580bccea5b60097460b4",
+        "sha256": "467b13304ca06bcb6a0ce68c6715916fed517bcd124a72e65a9a1cf8f57337d1"
+      },
+      {
+        "path": "core/programmability/tests/wiki_change_sequence_contract.rs",
+        "blob": "0d21a68a2dfe5fd1318d650e3af85af2fbf3fd6e",
+        "sha256": "64e24aaa86600d09e02d91ff3780efd8203be5f0b1abaeb7ef432206fa2a7d32"
+      },
+      {
+        "path": "core/programmability/tests/wiki_full_source_validation_contract.rs",
+        "blob": "03a9d6e07899a90fc828a0148eaa81123896ed2a",
+        "sha256": "de0f883ee210d1577c4ce4f953cba5f8378d1034ff098211735e8422cbe331b0"
+      },
+      {
+        "path": "core/programmability/tests/wiki_replay_safety_contract.rs",
+        "blob": "d3d1c5afa59ffbbbf14acb6d2add8cdf878a2fcd",
+        "sha256": "76f722ddaf0a3fa4b5486e5c24889a4ed409ed0ecb494c5fec5aa881e361acad"
+      },
+      {
+        "path": "core/programmability/tests/wiki_search_unicode_contract.rs",
+        "blob": "ccbac8a5ec6a6946ef60acc4c1671a52d0ff9511",
+        "sha256": "d7227dfe2741247cd9da28316994faa69fc6dccd2fcde039cacecfe90e8e1f2d"
+      },
+      {
+        "path": "core/programmability/tests/wiki_source_delta_contract.rs",
+        "blob": "dad0e6e009f6873d55b7a17214cffa568d2063f1",
+        "sha256": "37cfc4750cf37c9017f6ffd54e756f6d105d37078342f95a71f47988bc2cfa22"
+      },
+      {
+        "path": "core/programmability/tests/wiki_unique_entryid_contract.rs",
+        "blob": "bb7a2796a972e0b68e38f9e980a3291b56bc7932",
+        "sha256": "d0810ada791925f185c9e95183346942c00964a89d85eb683af2b0b033b7f738"
+      },
+      {
+        "path": "apps/vivim-host/control/action-catalog.v1.json",
+        "blob": "03600add09203b1f7eb784577c2f0b4434a5ef64",
+        "sha256": "48e2f2738ccadadc6cc39a1bfc00920340751efc5b62648dedda6f96cbb8f1fe",
+        "role": "original donor compile-time test fixture"
+      }
+    ]
+  },
+  "product": {
+    "repo": "vivim-product",
+    "rev": "11812e6b1c06ac047329169ef5d848da3f85788c",
+    "records": [
+      {
+        "path": "core/programmability/Cargo.toml",
+        "blob": "639c789822f5975659fa56fde06ecaf858e80ef5",
+        "sha256": "79f32ec1a22a726b073e99ebfcf7ebc9b032e3fc2af6b3d72c1976875f7aab83"
+      },
+      {
+        "path": "core/programmability/src/development_projection.rs",
+        "blob": "38a0c8eb867a1464ccce601f09e7fa612dad9dc1",
+        "sha256": "71afb2ea7bd49c4b2c21f766e164473af65782f49fbd4ca86e29d1c6d138229b"
+      },
+      {
+        "path": "core/programmability/src/lib.rs",
+        "blob": "deb5509cae250f511afa09a5790174f7eaa14eb9",
+        "sha256": "42bec730eefabbd318de124dbff6a8aae27731241337d58a5d2bb205cf94f5b8"
+      },
+      {
+        "path": "core/programmability/src/resident_semantic.rs",
+        "blob": "c9b6d1f9b732b670ff18c07d9928c6efbdb51d83",
+        "sha256": "6499f6dbf88b23b8c6fdb5eb1ed5b4a38fe6179934609f6b960b590b77a19738"
+      },
+      {
+        "path": "core/programmability/src/source_digest.rs",
+        "blob": "d07c2d6fa1e30b88c185199e6fd238f193742f4f",
+        "sha256": "afbd40004d2a9c24e6a0584e68dce14b2d3858c33a83f93e8c9cb5f46d760433"
+      },
+      {
+        "path": "core/programmability/tests/migration_contract.rs",
+        "blob": "1c235e64b2ae41703bf5155298231b50ac27aa13",
+        "sha256": "b2b703f0675b9a7bc88f6a9f024e8c7705ab857a8da6473f0968f0e1f47a69b3"
+      }
+    ]
+  },
+  "cargoGraph": {
+    "lockBlob": "0794dd46af05badde437d559f765679abb7ed761",
+    "packages": [
+      {
+        "name": "block-buffer",
+        "version": "0.10.4",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": [
+          "generic-array@0.14.7"
+        ]
+      },
+      {
+        "name": "cfg-if",
+        "version": "1.0.5",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": []
+      },
+      {
+        "name": "cpufeatures",
+        "version": "0.2.17",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": [
+          "libc@0.2.191"
+        ]
+      },
+      {
+        "name": "crypto-common",
+        "version": "0.1.7",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": [
+          "generic-array@0.14.7",
+          "typenum@1.20.1"
+        ]
+      },
+      {
+        "name": "digest",
+        "version": "0.10.7",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": [
+          "block-buffer@0.10.4",
+          "crypto-common@0.1.7"
+        ]
+      },
+      {
+        "name": "generic-array",
+        "version": "0.14.7",
+        "license": "MIT",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": [
+          "typenum@1.20.1",
+          "version_check@0.9.5"
+        ]
+      },
+      {
+        "name": "itoa",
+        "version": "1.0.19",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": []
+      },
+      {
+        "name": "libc",
+        "version": "0.2.191",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": []
+      },
+      {
+        "name": "memchr",
+        "version": "2.8.3",
+        "license": "Unlicense OR MIT",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": []
+      },
+      {
+        "name": "proc-macro2",
+        "version": "1.0.107",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": [
+          "unicode-ident@1.0.27"
+        ]
+      },
+      {
+        "name": "quote",
+        "version": "1.0.47",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": [
+          "proc-macro2@1.0.107"
+        ]
+      },
+      {
+        "name": "serde",
+        "version": "1.0.229",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": [
+          "serde_core@1.0.229",
+          "serde_derive@1.0.229"
+        ]
+      },
+      {
+        "name": "serde_core",
+        "version": "1.0.229",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": [
+          "serde_derive@1.0.229"
+        ]
+      },
+      {
+        "name": "serde_derive",
+        "version": "1.0.229",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": [
+          "proc-macro2@1.0.107",
+          "quote@1.0.47",
+          "syn@3.0.10"
+        ]
+      },
+      {
+        "name": "serde_json",
+        "version": "1.0.154",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": [
+          "itoa@1.0.19",
+          "memchr@2.8.3",
+          "serde@1.0.229",
+          "serde_core@1.0.229",
+          "zmij@1.0.23"
+        ]
+      },
+      {
+        "name": "sha2",
+        "version": "0.10.9",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": [
+          "cfg-if@1.0.5",
+          "cpufeatures@0.2.17",
+          "digest@0.10.7"
+        ]
+      },
+      {
+        "name": "syn",
+        "version": "3.0.10",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": [
+          "proc-macro2@1.0.107",
+          "quote@1.0.47",
+          "unicode-ident@1.0.27"
+        ]
+      },
+      {
+        "name": "typenum",
+        "version": "1.20.1",
+        "license": "MIT OR Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": []
+      },
+      {
+        "name": "unicode-ident",
+        "version": "1.0.27",
+        "license": "(MIT OR Apache-2.0) AND Unicode-3.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": []
+      },
+      {
+        "name": "version_check",
+        "version": "0.9.5",
+        "license": "MIT/Apache-2.0",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": []
+      },
+      {
+        "name": "vivim-programmability-core",
+        "version": "0.1.0",
+        "license": null,
+        "licenseFile": null,
+        "source": null,
+        "dependencies": [
+          "serde@1.0.229",
+          "serde_json@1.0.154",
+          "sha2@0.10.9"
+        ]
+      },
+      {
+        "name": "zmij",
+        "version": "1.0.23",
+        "license": "MIT",
+        "licenseFile": null,
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "dependencies": []
+      }
+    ],
+    "qualification": "Offline cargo metadata from exact donor lock. Product and candidate isolated tests also use donor lock; this is not current Product workspace lock acceptance."
+  },
+  "selectedSlice": {
+    "modules": [
+      "core/programmability/src/control_planning.rs",
+      "core/programmability/src/control_plan_presentation.rs"
+    ],
+    "imports": [
+      "serde_json"
+    ],
+    "newExternalDependencies": [],
+    "dependencies": "No sibling crate imports or compile-time includes in either selected module; target already depends on serde_json. Planning and presentation are distinct authority boundaries.",
+    "originalContractFixtures": {
+      "crateTests": [
+        "core/programmability/tests/wiki_capture_source_fence_contract.rs",
+        "core/programmability/tests/wiki_change_chronology_contract.rs",
+        "core/programmability/tests/wiki_change_sequence_contract.rs",
+        "core/programmability/tests/wiki_full_source_validation_contract.rs",
+        "core/programmability/tests/wiki_replay_safety_contract.rs",
+        "core/programmability/tests/wiki_search_unicode_contract.rs",
+        "core/programmability/tests/wiki_source_delta_contract.rs",
+        "core/programmability/tests/wiki_unique_entryid_contract.rs"
+      ],
+      "compileTimeCatalog": "apps/vivim-host/control/action-catalog.v1.json",
+      "externalHostRuntimeReference": "apps/vivim-host/control/intent-planner.mjs; operational parity not included",
+      "selectedModulesInlineTests": "None found; seven additional Labs regression fixtures are separately authored, not original donor tests."
+    }
+  },
+  "reuse": [
+    {
+      "path": "core/programmability/src/source_digest.rs",
+      "donorBlob": "171a1e454401d5eaf5fe20948ddde5bf0809696b",
+      "productBlob": "d07c2d6fa1e30b88c185199e6fd238f193742f4f",
+      "disposition": "retain existing M01; exact declared annotation overlay reproduced"
+    },
+    {
+      "path": "core/programmability/src/development_projection.rs",
+      "donorBlob": "bd72c969ab91d81cc4a011b7117223c733fdde3c",
+      "productBlob": "38a0c8eb867a1464ccce601f09e7fa612dad9dc1",
+      "disposition": "retain existing M01; exact declared annotation overlay reproduced"
+    },
+    {
+      "path": "core/programmability/src/resident_semantic.rs",
+      "disposition": "preserve Product-only module"
+    }
+  ],
+  "currentComparison": {
+    "commit": "ff9c7159933a9fbc8e045fface44c14d553493b5",
+    "checked": [
+      "core/programmability/src/lib.rs",
+      "core/programmability/src/source_digest.rs",
+      "core/programmability/src/development_projection.rs"
+    ],
+    "result": "All three unchanged from Product pin. Whole current Product semantic duplicate search still required before actual adoption."
+  },
+  "destinationConflicts": [
+    {
+      "path": "core/programmability/src/lib.rs",
+      "rule": "append only two exact exports in isolated copy; never replace root with ARBOR lib.rs"
+    },
+    {
+      "path": "core/programmability/Cargo.toml",
+      "rule": "retain Product manifest; donor Cargo.lock used only as isolated reproducibility lock"
+    },
+    {
+      "path": "core/programmability/src/control_catalog_compat.rs",
+      "rule": "exclude; original donor catalogue regression, not part of selected slice"
+    },
+    {
+      "path": "Host receipt presentation",
+      "rule": "pure formatting only, P05 retains live authority; no registration"
+    }
+  ],
+  "license": {
+    "internal": "Internal transfer lineage; no top-level LICENSE/COPYING/NOTICE located at pinned ARBOR or Product root. Internal authorization for preparation only; redistribution/ownership disposition pending.",
+    "thirdParty": "Cargo package-declared licenses enumerated above; no full license text/notice redistribution audit, no admission/promotion claim.",
+    "blockers": [
+      "Resolve internal code ownership/redistribution",
+      "Review exact dependency notices and obligations",
+      "Original donor catalogue compatibility test failed",
+      "External operational contracts and current Product graph collision scan pending"
+    ]
+  }
+}

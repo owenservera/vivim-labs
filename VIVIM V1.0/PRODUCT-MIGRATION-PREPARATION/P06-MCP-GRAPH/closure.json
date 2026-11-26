@@ -85,14 +85,15 @@
     "MCP schema publication and refresh remain ARBOR"
   ],
   "license": {
-    "status": "unresolved donor redistribution clearance; no donor source duplicated in Git; ARBOR root LICENSE lookup 404, not proof of absence of license; serde_json dependency already used by Product, exact lockfile and transitive notices pending"
+    "status": "unresolved donor redistribution clearance; no donor source duplicated in Git; ARBOR root LICENSE lookup 404, not proof of absence of license; serde_json dependency already used by Product, resolved exact lockfile preserved; transitive notices pending"
   },
   "unavailable": [
     "full deployed registry listing (hostDiscovery=false)",
     "current per-tool grant/deployed build attestation",
     "P02 and P05 interface revisions",
     "full live transport dependencies outside pure package",
-    "original R042 native fixture rerun and source materialization receipt export pending"
+    "original R042 native fixture rerun pending; MATERIALIZATION.json exported"
   ],
-  "assurance": "preparation-only; pinned donor references are not an authorization or deployment"
+  "assurance": "preparation-only; pinned donor references are not an authorization or deployment",
+  "resolvedDependencyLock": "isolated/Cargo.lock"
 }

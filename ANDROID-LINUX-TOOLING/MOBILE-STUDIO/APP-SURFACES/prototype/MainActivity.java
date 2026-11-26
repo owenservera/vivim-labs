@@ -45,7 +45,7 @@ public final class MainActivity extends Activity {
         root.setOrientation(LinearLayout.VERTICAL);
         root.setPadding(24,48,24,24);
         TextView title = new TextView(this);
-        title.setText("VIVIM Android Owner Console v0.7");
+        title.setText("VIVIM Android Owner Console v0.8");
         title.setTextSize(22);
         root.addView(title);
         TextView nativeStatus=new TextView(this);
@@ -61,7 +61,13 @@ public final class MainActivity extends Activity {
         button(root,"Open WhatsApp on phone",v -> openWhatsApp());
         button(root,"WhatsApp Studio",v -> startActivity(new Intent(this,WhatsAppActivity.class)));
         button(root,"Android Owner Console",v -> startActivity(new Intent(this,OwnerActivity.class)));
+        button(root,"Developer Instrument",v -> openDeveloper());
         setContentView(root);
+    }
+    private void openDeveloper(){
+        boolean[] checks=new boolean[5];
+        try{checks[0]=nativeReady&&nativeProbeVersion()==2;checks[1]=nativeClassify(3,3,0x7139a1)==2;checks[2]=nativeClassify(3,4,0x7139a1)==0;checks[3]=nativeClassify(3,3,0x125fab)==1;checks[4]=nativeClassify(0,0,0x7139a1)==0;}catch(LinkageError e){java.util.Arrays.fill(checks,false);}
+        startActivity(new Intent(this,DevActivity.class).putExtra("jni",checks));
     }
     private void openWhatsApp() {
         stopProbe("Preparing user-requested WhatsApp launch");

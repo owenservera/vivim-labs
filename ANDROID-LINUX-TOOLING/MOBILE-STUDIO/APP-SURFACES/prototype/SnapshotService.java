@@ -56,6 +56,7 @@ public final class SnapshotService extends Service {
             configureReader(p.x,p.y);
             display=projection.createVirtualDisplay("VIVIM one-shot",width,height,density,DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,reader.getSurface(),null,main);
             if(display==null){finishCapture("Display unavailable"); return START_NOT_STICKY;}
+            main.postDelayed(()->{if(reader!=null)frame(reader);},2600);
             main.postDelayed(()->finishCapture("No visible frame before timeout"),12000);
         }catch(Exception e){finishCapture("Capture unavailable: "+e.getClass().getSimpleName());}
         return START_NOT_STICKY;
@@ -71,7 +72,7 @@ public final class SnapshotService extends Service {
         if(old!=null)old.close();
     }
     private void frame(ImageReader source){
-        if(finished || source!=reader) return;
+        if(finished || snapshot!=null || source!=reader || !visible || SystemClock.elapsedRealtime()<readyAt) return;
         try(Image image=source.acquireLatestImage()){
             if(image==null || !visible || SystemClock.elapsedRealtime()<readyAt) return;
             Image.Plane p=image.getPlanes()[0]; ByteBuffer b=p.getBuffer();
@@ -83,7 +84,7 @@ public final class SnapshotService extends Service {
             }
             if(!any)return;
             snapshot=Bitmap.createBitmap(argb,w,h,Bitmap.Config.ARGB_8888);
-            finishCapture("One frame captured locally: "+w+" x "+h+"; review selected content");
+            main.post(()->finishCapture("One frame captured locally: "+w+" x "+h+"; review selected content"));
         }catch(RuntimeException e){finishCapture("Frame unavailable: "+e.getClass().getSimpleName());}
     }
     private void finishCapture(String message){

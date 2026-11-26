@@ -1,0 +1,148 @@
+{
+  "schema": "vivim.labs.p06.evidence/1",
+  "round": "R002",
+  "date": "2026-11-26",
+  "refreshedBase": "fcdf469d45df86c1bea26a454e24f37e18816b83",
+  "implementationTestPin": "ee74c29ff11e6ae599d9264a602d4f936597fc83",
+  "sourceBlob": "1037ce0dc11a34de43a83380124b30e2f701a878",
+  "toolchain": {
+    "rustc": "1.99.1 (58cf8f9c3 2026-10-13)",
+    "host": "x86_64-pc-windows-msvc",
+    "git": "2.51.2.windows.1",
+    "msvc": "14.51.36231",
+    "windowsSdk": "10.0.26100.0",
+    "nodeVersion": "not separately captured",
+    "serde_json": "1.0.154",
+    "targetDir": "R002 dedicated scratch target; R001 inherited existing verifier target cache; no shared source edits"
+  },
+  "observations": {
+    "liveHealth": "ready/private-workstation",
+    "clientToolNames": 16,
+    "reportedWorkstationTools": 15,
+    "hostDiscovery": false,
+    "machineScope": true,
+    "sourceDefinedTools": 18,
+    "sourceOnly": [
+      "vivim_development_file_read",
+      "vivim_session_wait"
+    ],
+    "candidateCount": 33,
+    "grantChanges": 0,
+    "bindingActivations": 0,
+    "productionDeployments": 0
+  },
+  "runs": [
+    {
+      "receipt": "ctl-7ff7b2703aa76721",
+      "command": "rustc --version; git --version; inspect repo directory names",
+      "exit": 0,
+      "assurance": "actual Windows transport and owned process"
+    },
+    {
+      "receipt": "ctl-45192488f3151468",
+      "command": "git cat-file -t <manifest pins>",
+      "exit": 0,
+      "detail": "ARBOR/Product pins present; Labs pins subcommand exits 128; no shared checkout fetch/reset"
+    },
+    {
+      "receipt": "ctl-871a0cb957d096ab",
+      "command": "git init --bare <scratch>; git fetch --depth=1 <Labs URL> ccd15368...",
+      "exit": 0
+    },
+    {
+      "receipt": "ctl-726172d6d643489f",
+      "command": "git fetch exact test source 42cdf89b...; git archive lane; master materialize.mjs; node isolated/fixture.mjs; node --test workstation-tunnel.test.cjs development-file-read.test.cjs; cargo test --offline --manifest-path isolated/Cargo.toml",
+      "exit": 101,
+      "materialization": {
+        "files": 13,
+        "bytes": 201503,
+        "status": "verified",
+        "receipt": "MATERIALIZATION.json"
+      },
+      "fixture": {
+        "source": 18,
+        "client": 16,
+        "candidates": 33
+      },
+      "originalNodeTests": {
+        "pass": 12,
+        "fail": 0,
+        "exit": 0
+      },
+      "rust": "compile reached linker; link.exe not on PATH"
+    },
+    {
+      "receipt": "ctl-a021caf9551e9811",
+      "command": "attempt VS DevShell environment discovery",
+      "exit": 1,
+      "detail": "ProgramFiles(x86) variable absent in scoped process"
+    },
+    {
+      "receipt": "ctl-35ae2e1401867e94",
+      "command": "vswhere discovery with explicit path",
+      "exit": 1,
+      "detail": "vswhere returned no matching install"
+    },
+    {
+      "receipt": "ctl-b3c926b1324e90c9",
+      "command": "rustc -vV; rustup target list --installed; inspect installed VS/SDK directories",
+      "exit": 0
+    },
+    {
+      "receipt": "ctl-9abb0d7336311163",
+      "command": "set process-local PATH and LIB to existing MSVC/SDK; cargo test --offline",
+      "exit": 0,
+      "rustTests": {
+        "pass": 2,
+        "fail": 0
+      },
+      "scope": "R001 source 42cdf89b"
+    },
+    {
+      "receipt": "ctl-dd6e6ba70a1305df",
+      "command": "combined fetch and R002 test request",
+      "status": "failed",
+      "detail": "HOST_EFFECT_NOT_APPLIED; status not owned; no re-execution of same request"
+    },
+    {
+      "receipt": "ctl-b52266ec7f502097",
+      "command": "separately scoped git fetch --depth=1 <Labs URL> ee74c29f... in scratch bare repo",
+      "exit": 0
+    },
+    {
+      "receipt": "ctl-5034036f1877b537",
+      "command": "git archive exact R002 isolated package into new scratch; verify blob; set local MSVC/SDK environment and dedicated CARGO_TARGET_DIR; cargo test --offline --manifest-path isolated/Cargo.toml; Get-FileHash SHA256 on source, manifest, lock, fixture and materialization",
+      "exit": 0,
+      "elapsedMs": 15980,
+      "rustTests": {
+        "pass": 2,
+        "fail": 0,
+        "docTests": 0,
+        "candidateNormalizationPositive": 66,
+        "candidateUnexpectedArgumentRefusals": 33,
+        "declaredRelations": 48,
+        "clientFieldParity": 16,
+        "receiptTests": "valid binding, wrong claim plan ID/digest, receipt action/args/digest/schema/approval mismatch, session mismatch, uncertain no retry"
+      },
+      "stdout": "test tests::receipt_correlation_never_retries ... ok; test tests::actual_donor_projection ... ok; test result: ok. 2 passed; 0 failed"
+    }
+  ],
+  "sha256": {
+    "isolated/src/lib.rs": "e36a05f13489a74bec19aaa4fbfbf7934c8546ec2d7a45f3baa2b8607a823418",
+    "isolated/Cargo.toml": "c09445588e9749f0ba43f8651854817ee2118cd6c75457c0813f74cb2b7d96cf",
+    "isolated/Cargo.lock": "e5933d37db647f8571a2ddf664a5d165cc206504fa23a4578f6af737acf50871",
+    "fixture.json": "213ae995c263c3e483f029d53c5f73923c79c5db426b8d295d030252968e77e0",
+    "MATERIALIZATION.json": "f08c931da2fc6381251bd1be2f4c72446d3e6c15d1ecb5e5d8a4189249738f6f"
+  },
+  "limitations": [
+    "intermittent MCP initialization errors; read-only status retried; no grant change",
+    "original transport tests use injected Host fixtures, not production execution",
+    "actual compiler oracle and source catalogue tested, not live R042 registration",
+    "no original R042 native planner rerun or independently checked historical runtime receipt",
+    "full deployed tool schema and grant binding unknown; field names only compared",
+    "P02/P05 contracts proposed not integrated; digest authenticity not verified by pure helper",
+    "license clearance and transitive notices pending",
+    "intel-200/210 acceptance not assessed by P06"
+  ],
+  "scope": "only P06 Labs folder committed; isolated scratch and first inherited verifier cache used; no production edits, refresh, registration or activation"
+}

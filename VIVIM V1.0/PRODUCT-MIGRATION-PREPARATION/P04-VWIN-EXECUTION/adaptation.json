@@ -1,0 +1,112 @@
+{
+  "schema": "vivim.p04.adaptation/1",
+  "base": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+  "materializerCommit": "96ee6c4248f788e2dd2048202624ca073003a095",
+  "status": "candidate-not-admitted",
+  "deterministic": [
+    {
+      "file": "resource_campaign.rs",
+      "transforms": [
+        "pending_ids -> costs keys filtered by incumbent pending",
+        "claim_selected -> claim_task",
+        "abandon -> release only if exact incumbent lease still current; never release a newer lease",
+        "track monotonic clock after advance and submit",
+        "enforce per-campaign cap on retained holds"
+      ],
+      "destination": "SDK reservation adapter; refactor to bind the existing TaskPlanner campaign, not duplicate it"
+    },
+    {
+      "file": "scheduler.rs",
+      "transforms": [
+        "none"
+      ],
+      "destination": "pure SDK policy"
+    },
+    {
+      "file": "meta-policy.rs",
+      "transforms": [
+        "none"
+      ],
+      "destination": "pure SDK resident evaluation; fixed Host ceiling must only narrow"
+    },
+    {
+      "file": "workload-profile.rs",
+      "transforms": [
+        "R039 exact overlay: keep known memory/disk readings across missing observations"
+      ],
+      "destination": "pure SDK feedback reducer; accept trusted provenance only"
+    },
+    {
+      "file": "resource-domain.rs",
+      "transforms": [
+        "R039 source unchanged in isolated package"
+      ],
+      "destination": "split pure aggregate admission from Host effect coordinator; do not port as-is into SDK"
+    },
+    {
+      "file": "owned_campaign.rs",
+      "transforms": [
+        "R039 exact overlay"
+      ],
+      "destination": "Host-only adapter; P05 concurrence required"
+    },
+    {
+      "file": "workstation_process.rs / workstation_windows_job.rs",
+      "transforms": [
+        "R039 exact accounting overlay"
+      ],
+      "destination": "Host-only native ownership; use existing P05 lifecycle"
+    },
+    {
+      "file": "native-sampling.rs / resources.rs / hardware.rs",
+      "transforms": [
+        "none"
+      ],
+      "destination": "Host read-only sampling; SDK consumes authenticated snapshot"
+    },
+    {
+      "file": "native-test-root.rs / Cargo.toml",
+      "transforms": [
+        "reuse current Product SDK as path dependency"
+      ],
+      "destination": "Labs only"
+    }
+  ],
+  "sdkObligations": [
+    {
+      "tasks": "071–080",
+      "semantic": "retain incumbent logical lease, independent review, and exact identity; reservation persists after lease expiry until terminal proof"
+    },
+    {
+      "tasks": "091–100",
+      "semantic": "combine risk tiers, context validity, dependency readiness and physical capacity; resource feasibility cannot authorize writes"
+    },
+    {
+      "tasks": "171–180",
+      "semantic": "evaluate resident rule generation and exact snapshot revision; refuse widening or unknown/stale readings"
+    },
+    {
+      "tasks": "181–190",
+      "semantic": "source-bound workload profile and measured whole-job feedback; receipts are not self-authenticating"
+    },
+    {
+      "tasks": "201–210",
+      "semantic": "reconcile with actual staged catalogue before activation; pin inputs and deterministic transforms, explicit LLM obligations, current verification and independent acceptance; no new task IDs invented"
+    }
+  ],
+  "llmRemediation": [
+    "Design planner reservation transaction and rollback on checkout/focus/record failure; do not make second Campaign owner.",
+    "Use immutable contextRef/catalogDigest/revision vector with resource sample and policy generation; revalidate before launch.",
+    "Host/P05 must correlate request/lease/session/receipt and retain uncertain holds through restart; authenticate terminal evidence; idempotent settlement.",
+    "Clarify scheduler memory semantics (available memory vs reserved estimates double counting conservatively), per-drive disk, estimate calibration, multi-group CPU, monotonic clock units; admission is not OS quota.",
+    "Bind pure policy definitions to existing Meta-VLANG authority and test diagnostics/cache/recovery; do not add provider invocation."
+  ],
+  "unsupported": [
+    "No positive current Windows build/run",
+    "No installed Host integration",
+    "No durable cross-campaign ledger",
+    "No hard OS resource enforcement",
+    "No agent or provider subprocess acceptance"
+  ],
+  "gate": "intel-200 and intel-210 independent acceptance plus owner scope authorization before any Product incorporation"
+}

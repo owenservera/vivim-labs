@@ -7,7 +7,7 @@ from pathlib import Path
 
 MAX_RECEIPT=65536
 
-def verify(receipt, expected_sha, expected_version):
+def verify(receipt, expected_sha, expected_version, expected_internet=False):
     checks={}
     checks["schema"]=receipt.get("schema")=="vivim.android.developer-receipt/1"
     checks["source_claim"]=receipt.get("source")=="apk-process"
@@ -24,7 +24,7 @@ def verify(receipt, expected_sha, expected_version):
     checks["cache"]=value("own_cache_roundtrip").get("exact_match") is True
     contracts=value("whatsapp_contracts")
     checks["whatsapp_intent_resolution"]=contracts.get("launcher_resolved") is True and contracts.get("text_share_resolved") is True and contracts.get("effect_attempted") is False
-    checks["no_internet_permission"]=value("permission_state").get("internet_declared") is False
+    checks["internet_permission_matches_candidate"]=value("permission_state").get("internet_declared") is expected_internet
     return {"checks":checks,"all_passed":all(checks.values()),"evidence":"owner-supplied receipt; consistency checked, not cryptographic runtime attestation"}
 
 def main():
@@ -32,6 +32,7 @@ def main():
     p.add_argument("receipt",type=Path,help="Explicitly selected diagnostic JSON")
     p.add_argument("apk",type=Path,help="Exact expected signed APK")
     p.add_argument("--version",type=int,required=True)
+    p.add_argument("--expected-internet", action="store_true", help="Candidate explicitly declares Internet permission")
     a=p.parse_args()
     with a.receipt.open("rb") as f:
         raw=f.read(MAX_RECEIPT+1)
@@ -40,7 +41,7 @@ def main():
         digest=hashlib.file_digest(f,"sha256").hexdigest()
     data=json.loads(raw)
     if not isinstance(data,dict): raise SystemExit("Invalid receipt object")
-    result=verify(data,digest,a.version)
+    result=verify(data,digest,a.version,a.expected_internet)
     print(json.dumps(result,indent=2))
     return 0 if result["all_passed"] else 1
 

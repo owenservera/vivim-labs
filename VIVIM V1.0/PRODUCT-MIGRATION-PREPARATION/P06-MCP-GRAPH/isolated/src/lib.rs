@@ -20,7 +20,7 @@ pub fn introspect(catalog:&Value,source:&Value,client:&Value,candidates:&Value)-
  for a in rows{let id=s(a,"id")?;if !token(id)||by_action.insert(id,a).is_some(){return Err("ACTION_ID")}}
  let mut client_names=BTreeSet::new();
  for v in visible{let n=s(v,"name")?;if !token(n)||!client_names.insert(n){return Err("CLIENT_ID")}}
- let mut names=BTreeSet::new();let mut identities=BTreeSet::new();let mut output=Vec::new();
+ let mut names=BTreeSet::new();let mut identities=BTreeSet::new();let mut output=Vec::new();let mut relations=Vec::new();
  for d in defs{
   let n=s(d,"name")?;if !token(n)||!names.insert(n){return Err("TOOL_ID")}
   let action=d["action"].as_str();
@@ -39,8 +39,9 @@ pub fn introspect(catalog:&Value,source:&Value,client:&Value,candidates:&Value)-
    let mut expected:BTreeSet<&str>=d["fields"].as_array().ok_or("SOURCE_FIELDS")?.iter().map(|x|x.as_str().ok_or("FIELD")).collect::<R<_>>()?;
    if d["mutating"]==true{expected.insert("request_id");}
    let actual:BTreeSet<&str>=c["fields"].as_array().ok_or("CLIENT_FIELDS")?.iter().map(|x|x.as_str().ok_or("FIELD")).collect::<R<_>>()?;
-   Some(expected==actual)
+   Some(expected==actual&&actual.len()==c["fields"].as_array().ok_or("CLIENT_FIELDS")?.len())
   }else{None};
+  if let Some(a)=action{relations.push(json!({"subject":{"domain":"mcp-tool","key":n},"predicate":"declared-projects","object":{"domain":"host-action","key":a},"assurance":"source-declaration-only"}));}
   output.push(json!({"tool":n,"identity":action.map(|a|json!({"domain":"host-action","key":a})).unwrap_or_else(||json!({"domain":"mcp-tool","key":n})), "hostAction":action,"sourceDefined":true,"clientVisible":client_names.contains(n),"fieldParity":schema_match,"deployed":null,"granted":null,"executionAuthorized":false}));
  }
  for n in client_names.difference(&names){output.push(json!({"tool":n,"sourceDefined":false,"clientVisible":true,"deployed":null,"granted":null,"executionAuthorized":false}));}
@@ -48,10 +49,12 @@ pub fn introspect(catalog:&Value,source:&Value,client:&Value,candidates:&Value)-
   let id=s(p,"id")?;let sem=s(p,"semanticId")?;let n=s(&p["mcp"],"name")?;
   if !token(id)||sem!=format!("{id}@1")||!token(n)||!names.insert(n)||!identities.insert(id)||client_names.contains(n)||by_action.contains_key(id){return Err("CANDIDATE_COLLISION")}
   if p["mcp"]["registered"]!=false||p["app"]["enabled"]!=false||p["authority"]["executionAuthorized"]!=false||p["authority"]["requiresLiveGrant"]!=true||p["host"]["readiness"]!="adapter_pending"||p["host"]["id"]!=id||p["app"]["actionId"]!=id||p["app"]["args"]!=p["host"]["args"]||p["host"]["aiCandidate"]!=false{return Err("CANDIDATE_AUTHORITY")}
+  relations.push(json!({"subject":{"domain":"mcp-tool","key":n},"predicate":"proposes-projection","object":{"domain":"capability","key":sem},"assurance":"inert-candidate-only"}));
   output.push(json!({"tool":n,"identity":{"domain":"capability","key":sem},"hostAction":id,"sourceDefined":true,"clientVisible":false,"candidate":true,"deployed":null,"granted":null,"executionAuthorized":false}));
  }
  output.sort_by(|a,b|a["tool"].as_str().cmp(&b["tool"].as_str()));
- Ok(json!({"schema":"vivim.labs.p06.introspection/1","authority":"projection-only","rows":output}))
+ relations.sort_by_key(|a|a.to_string());
+ Ok(json!({"schema":"vivim.labs.p06.introspection/1","authority":"projection-only","rows":output,"declaredRelations":relations}))
 }
 /// Validate the supported R042 compiler schema subset; unknown forms are refused.
 /// This is not a general JSON Schema implementation or authorization check.
@@ -87,7 +90,7 @@ pub fn normalize_candidate(row:&Value,input:&Value,mcp:bool)->R<Value>{
 /// This does not authenticate the input or independently recompute its digest.
 pub fn correlate(claim:&Value,plan:&Value,receipt:&Value)->R<Value>{
  let request=s(claim,"requestId")?;let id=s(plan,"planId")?;let digest=s(plan,"planDigest")?;let action=s(plan,"actionId")?;
- if !hex(request,32)||!ctl(id)||!hex(digest,64)||!token(action)||claim["actionId"]!=action||claim["args"]!=plan["args"]||!plan["args"].is_object(){return Err("CLAIM_PLAN_MISMATCH")}
+ if !hex(request,32)||!ctl(id)||!hex(digest,64)||!token(action)||claim["planId"]!=id||claim["planDigest"]!=digest||claim["actionId"]!=action||claim["args"]!=plan["args"]||!plan["args"].is_object(){return Err("CLAIM_PLAN_MISMATCH")}
  if plan["outcome"]!="approval_required"||plan["risk"]!="R2"||receipt["schema"]!="vivim.control-receipt/1"||receipt["planId"]!=id||receipt["planDigest"]!=digest||receipt["actionId"]!=action||receipt["args"]!=plan["args"]||receipt["approvedVia"]!="desktop-owner-token"{return Err("RECEIPT_MISMATCH")}
  let status=s(receipt,"status")?;
  if !["applied","failed","uncertain"].contains(&status){return Err("STATUS")}
@@ -108,6 +111,7 @@ mod tests{
   let r=introspect(&f["catalog"],&f["source"],&f["client"],&f["candidates"]).unwrap();
   let rows=r["rows"].as_array().unwrap();
   assert_eq!(rows.iter().filter(|x|x["candidate"]==true).count(),33);
+  assert_eq!(r["declaredRelations"].as_array().unwrap().len(),48);
   assert_eq!(rows.iter().filter(|x|x["clientVisible"]==true).count(),16);
   assert_eq!(rows.iter().filter(|x|x["sourceDefined"]==true&&x["clientVisible"]==false&&x["candidate"]!=true).count(),2);
   assert!(rows.iter().all(|x|x["executionAuthorized"]==false&&x["granted"].is_null()));
@@ -123,10 +127,12 @@ mod tests{
  }
  #[test]fn receipt_correlation_never_retries(){
   let action="workstation.session.terminal_start";let id="ctl-0123456789abcdef";let d="a".repeat(64);let args=json!({"request":"b64:eA=="});
-  let c=json!({"requestId":"b".repeat(32),"actionId":action,"args":args});
+  let c=json!({"requestId":"b".repeat(32),"actionId":action,"args":args,"planId":id,"planDigest":d});
   let p=json!({"planId":id,"planDigest":d,"actionId":action,"args":args,"outcome":"approval_required","risk":"R2"});
   let mut r=json!({"schema":"vivim.control-receipt/1","planId":id,"planDigest":d,"actionId":action,"args":args,"approvedVia":"desktop-owner-token","status":"applied","executionPerformed":true,"result":{"sessionId":id}});
   assert_eq!(correlate(&c,&p,&r).unwrap()["sessionId"],id);
+  let mut wrong_claim=c.clone();wrong_claim["planId"]=json!("ctl-ffffffffffffffff");assert!(correlate(&wrong_claim,&p,&r).is_err());
+  wrong_claim=c.clone();wrong_claim["planDigest"]=json!("f".repeat(64));assert!(correlate(&wrong_claim,&p,&r).is_err());
   for key in ["planDigest","actionId","args","approvedVia","schema"]{let mut wrong=r.clone();wrong[key]=json!("wrong");assert!(correlate(&c,&p,&wrong).is_err());}
   r["result"]["sessionId"]=json!("ctl-ffffffffffffffff");assert!(correlate(&c,&p,&r).is_err());
   r["status"]=json!("uncertain");let v=correlate(&c,&p,&r).unwrap();assert_eq!(v["retryAuthorized"],false);assert!(v["sessionId"].is_null());

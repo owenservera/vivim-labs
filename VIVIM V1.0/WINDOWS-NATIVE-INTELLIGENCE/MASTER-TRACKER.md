@@ -108,3 +108,7 @@ Fixed empty candidate examples rejected by current Host validator, aligned strin
 ## R043 — native Windows Property System readback
 
 2/2 actual Windows tests, exit 0, exact four source blobs; fixed COM properties System.Size and System.ItemType, owned handle identity retained across edit, foreign same-content file rejected. [Evidence](EVIDENCE-R043-PROPERTY.json). R044 actual HQ/source-digest join authored; verification pending. Native OLE DB index execution remains separate; no production changes.
+
+## R044 — exact native file evidence joined to incumbent HQ
+
+Actual Windows run passed, exit 0. Reused 22 exact source blobs including current Product digest and campaign source, incumbent HQ indexer/file query and existing scoped Windows index proof. Owned source 9109→9142 bytes, same file identity, digest changed; stale HQ binding refused, reindex reconciled, deletion removed indexed source and refused prior binding. [Evidence](EVIDENCE-R044-HQ-JOIN.json). Windows Search remains unavailable at execute-query (0x80040154); Shell COM on this source reports E_INVALIDARG, explicit unavailable, while native handle metadata and digest remain valid. R043 .txt property proof remains separate. No production writes.

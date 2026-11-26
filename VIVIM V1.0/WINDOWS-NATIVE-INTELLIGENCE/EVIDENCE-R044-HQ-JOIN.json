@@ -1,0 +1,48 @@
+{
+  "schema": "vivim.labs.hq-native-source-join/1",
+  "source": "b3d3e7f9896f1f369463019aa2a158ac9b066e3d",
+  "arborPin": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+  "productPin": "b02be1d52a2a141c37dbf63c2e24f61d628e1e73",
+  "session": "ctl-ff60fc66f7fe7f4c",
+  "exitCode": 0,
+  "elapsedMs": 14177,
+  "exactBlobs": 22,
+  "patchedBlobsReverified": 3,
+  "actual": {
+    "initialSize": 9109,
+    "updatedSize": 9142,
+    "identityPreserved": true,
+    "staleRefused": true,
+    "deletedRefused": true,
+    "hqAdded": 1,
+    "hqChanged": 1,
+    "hqRemoved": 1,
+    "windowsIndexStatus": "unavailable",
+    "indexFailureStage": "execute-query",
+    "indexHresult": -2147221164,
+    "acceptedIndexHits": 0,
+    "shellProperty": {
+      "status": "unavailable",
+      "stage": "SHGetPropertyStoreFromParsingName",
+      "hresult": -2147024809
+    }
+  },
+  "priorFailures": [
+    {
+      "session": "ctl-8df053cf741dfa27",
+      "reason": "Shell property rejected source path E_INVALIDARG"
+    },
+    {
+      "session": "ctl-24915632153188c7",
+      "reason": "Stage-specific HRESULT confirmed Shell property failure; DOS path normalization alone did not fix it"
+    }
+  ],
+  "limits": [
+    "Actual incumbent HQ indexer/search and Product digest over owned exact source fixture; no production database.",
+    "Windows Search provider execution still unavailable, no positive indexed result or native OLE DB adapter.",
+    "Shell COM property is optional for source; native handle and exact digest verified. R043 actual .txt COM property proof separate.",
+    "No arbitrary file scope or production authority."
+  ],
+  "productWrites": false,
+  "arborWrites": false
+}

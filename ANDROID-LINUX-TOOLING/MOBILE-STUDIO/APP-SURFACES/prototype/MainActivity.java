@@ -81,14 +81,17 @@ public final class MainActivity extends Activity {
         if(source!=reader) return;
         try(Image image=source.acquireLatestImage()) {
             if(image==null) return;
-            ByteBuffer b=image.getPlanes()[0].getBuffer().duplicate();
+            Image.Plane plane=image.getPlanes()[0];
+            ByteBuffer b=plane.getBuffer().duplicate();
+            int center=(image.getHeight()/2)*plane.getRowStride()+(image.getWidth()/2)*plane.getPixelStride();
+            String sample=String.format("#%02x%02x%02x",b.get(center)&255,b.get(center+1)&255,b.get(center+2)&255);
             MessageDigest md=MessageDigest.getInstance("SHA-256"); md.update(b);
             byte[] bytes=md.digest(); StringBuilder hex=new StringBuilder();
             for(byte x:bytes) hex.append(String.format("%02x",x&255));
             String digest=hex.toString();
             frames++; if(!digest.equals(lastDigest)){ distinct++; lastDigest=digest; }
             status.setText("Private display: "+display.getDisplay().getDisplayId()
-                +"\nFrames: "+frames+"\nFrame digest transitions: "+distinct+"\nSHA-256: "+digest);
+                +"\nFrames: "+frames+"\nFrame digest transitions: "+distinct+"\nCenter RGB: "+sample+"\nSHA-256: "+digest);
         } catch(Exception e) { stopProbe("Frame error: "+e.getClass().getSimpleName()); }
     }
     private void stopProbe(String message) {

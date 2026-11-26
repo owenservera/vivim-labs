@@ -33,16 +33,24 @@ public final class MainActivity extends Activity {
     private int distinct, frames, colorIndex;
     private boolean activityMode;
     private String launchStatus = "";
+    private boolean nativeReady;
+    private native int nativeProbeVersion();
+    private native int nativeClassify(int expected, int actual, int rgb);
     private final int[] colors = {Color.rgb(18,95,171),Color.rgb(22,145,70),Color.rgb(178,65,30)};
     @Override public void onCreate(Bundle saved) {
         super.onCreate(saved);
+        try { System.loadLibrary("vivim_probe"); nativeReady=nativeProbeVersion()==2; }
+        catch(LinkageError error) { nativeReady=false; }
         LinearLayout root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
         root.setPadding(24,48,24,24);
         TextView title = new TextView(this);
-        title.setText("VIVIM Surface Probe — own content only");
+        title.setText("VIVIM Surface Probe v0.3 — owned display");
         title.setTextSize(22);
         root.addView(title);
+        TextView nativeStatus=new TextView(this);
+        nativeStatus.setText(nativeReady ? "Rust JNI ABI v2 loaded and called" : "Rust JNI unavailable");
+        root.addView(nativeStatus);
         status = new TextView(this);
         status.setText("Idle. Tap Start to create a private display.");
         root.addView(status);
@@ -50,7 +58,17 @@ public final class MainActivity extends Activity {
         button(root,"Launch owned activity on private display",v -> startProbe(true));
         button(root,"Change fixture color",v -> changeFixture());
         button(root,"Stop and release",v -> stopProbe("Stopped"));
+        button(root,"Open WhatsApp on phone",v -> openWhatsApp());
         setContentView(root);
+    }
+    private void openWhatsApp() {
+        stopProbe("Preparing user-requested WhatsApp launch");
+        try {
+            Intent intent=getPackageManager().getLaunchIntentForPackage("com.whatsapp");
+            if(intent==null) { status.setText("WhatsApp launch target not available"); return; }
+            startActivity(intent);
+            status.setText("WhatsApp launch requested. Confirm actual app visually.");
+        } catch(Exception e) { status.setText("Launch unavailable: "+e.getClass().getSimpleName()); }
     }
     private void button(LinearLayout root,String name,View.OnClickListener action) {
         Button b = new Button(this); b.setText(name); b.setOnClickListener(action); root.addView(b);
@@ -105,7 +123,8 @@ public final class MainActivity extends Activity {
             Image.Plane plane=image.getPlanes()[0];
             ByteBuffer b=plane.getBuffer().duplicate();
             int center=(image.getHeight()/2)*plane.getRowStride()+(image.getWidth()/2)*plane.getPixelStride();
-            String sample=String.format("#%02x%02x%02x",b.get(center)&255,b.get(center+1)&255,b.get(center+2)&255);
+            int rgb=((b.get(center)&255)<<16)|((b.get(center+1)&255)<<8)|(b.get(center+2)&255);
+            String sample=String.format("#%06x",rgb);
             MessageDigest md=MessageDigest.getInstance("SHA-256"); md.update(b);
             byte[] bytes=md.digest(); StringBuilder hex=new StringBuilder();
             for(byte x:bytes) hex.append(String.format("%02x",x&255));
@@ -114,7 +133,7 @@ public final class MainActivity extends Activity {
             status.setText("Private display: "+display.getDisplay().getDisplayId()
                 +"\nFrames: "+frames+"\nFrame digest transitions: "+distinct+"\nCenter RGB: "+sample+"\nSHA-256: "+digest
                 +(activityMode ? "\nOwned activity actual display: "+FixtureActivity.actualDisplay
-                    +"\n"+(FixtureActivity.actualDisplay==display.getDisplay().getDisplayId() && sample.equalsIgnoreCase("#7139a1") ? "OWNED ACTIVITY RENDER CONFIRMED" : "Awaiting matching display and fixture color") : ""));
+                    +"\n"+(nativeReady && nativeClassify(display.getDisplay().getDisplayId(),FixtureActivity.actualDisplay,rgb)==2 ? "RUST: OWNED ACTIVITY RENDER CONFIRMED" : "Awaiting matching display, fixture color and Rust ABI") : ""));
         } catch(Exception e) { stopProbe("Frame error: "+e.getClass().getSimpleName()); }
     }
     private void stopProbe(String message) {

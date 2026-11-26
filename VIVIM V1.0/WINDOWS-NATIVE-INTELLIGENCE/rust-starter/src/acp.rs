@@ -83,7 +83,7 @@ impl Router{
  pub fn new_session(&mut self,approved_cwd:&str)->Result<Value,Error>{
   if self.phase!=Phase::Ready{return Err(Error::State);}
   if approved_cwd.is_empty()||approved_cwd.len()>1024||approved_cwd.chars().any(char::is_control){return Err(Error::Malformed);}
-  if self.sessions.len()+self.pending.values().filter(|p|matches!(p,Pending::NewSession)).count()>=MAX_SESSIONS{return Err(Error::Limit);}
+  if self.sessions.len()+self.pending.values().filter(|p|matches!(p,Pending::NewSession|Pending::LoadSession(_))).count()>=MAX_SESSIONS{return Err(Error::Limit);}
   self.request("session/new",json!({"cwd":approved_cwd,"mcpServers":[]}),Pending::NewSession)
  }
  pub fn load_session(&mut self,id:&str,approved_cwd:&str)->Result<Value,Error>{
@@ -125,7 +125,7 @@ impl Router{
     let update=params["update"].clone();
     if !update.is_object()||update["sessionUpdate"].as_str().is_none(){return Err(Error::Malformed);}
     if replay{return Ok(Event::ReplayUpdate{session:id.into(),update})}
-    if update["sessionUpdate"]=="config_option_update"{if let Some(m)=model_state(&update)?{self.models.insert(id.into(),m);}}
+    if update["sessionUpdate"]=="config_option_update"{self.models.remove(id);if let Ok(Some(m))=model_state(&update){self.models.insert(id.into(),m);}}
     return Ok(Event::Update{session:id.into(),update});
    }
    if let Some(id)=v.get("id"){
@@ -147,7 +147,7 @@ impl Router{
   if let Some(error)=v.get("error"){
    if error["code"].as_i64().is_none()||error["message"].as_str().is_none(){return Err(Error::Malformed);}
    self.pending.remove(&id);
-   let session=match pending{Pending::Initialize=>{self.close();None},Pending::NewSession=>None,Pending::LoadSession(s)|Pending::SetModel(s,_)=>Some(s),Pending::Prompt(s)=>{self.active.remove(&s);self.cancelled.remove(&s);Some(s)}};
+   let session=match pending{Pending::Initialize=>{self.close();None},Pending::NewSession=>None,Pending::LoadSession(s)=>Some(s),Pending::SetModel(s,_)=>{self.models.remove(&s);Some(s)},Pending::Prompt(s)=>{self.active.remove(&s);self.cancelled.remove(&s);Some(s)}};
    // Never echo arbitrary agent error text into receipts or public logs.
    return Ok(Event::Failed{session});
   }
@@ -161,16 +161,17 @@ impl Router{
     if self.phase!=Phase::Ready{return Err(Error::State);}
     let s=session(r)?;
     if self.sessions.len()>=MAX_SESSIONS||!self.sessions.insert(s.into()){return Err(Error::Foreign);}
-    if let Some(m)=model_state(r)?{self.models.insert(s.into(),m);}
+    if let Ok(Some(m))=model_state(r){self.models.insert(s.into(),m);}
     Event::SessionCreated{session:s.into()}
    },
    Pending::LoadSession(s)=>{
     if self.phase!=Phase::Ready||r.get("sessionId").is_some_and(|v|v.as_str()!=Some(&s))||!r.is_object(){return Err(Error::Malformed)}
     if self.sessions.len()>=MAX_SESSIONS||!self.sessions.insert(s.clone()){return Err(Error::Foreign)}
-    if let Some(m)=model_state(r)?{self.models.insert(s.clone(),m);}
+    if let Ok(Some(m))=model_state(r){self.models.insert(s.clone(),m);}
     Event::SessionLoaded{session:s}
    },
    Pending::SetModel(s,model)=>{
+    self.models.remove(&s);
     let m=model_state(r)?.ok_or(Error::Malformed)?;
     if m.current!=model{return Err(Error::Foreign)}
     self.models.insert(s.clone(),m);Event::ModelSelected{session:s,model}
@@ -189,6 +190,7 @@ impl Router{
  fn reply(id:&Value,result:Value)->Value{json!({"jsonrpc":"2.0","id":id,"result":result})}
  fn ready()->Router{let mut r=Router::new(1).unwrap();let init=r.initialize().unwrap();assert_eq!(r.ingest(1,reply(&init["id"],json!({"protocolVersion":1}))).unwrap(),Event::Initialized);r}
  fn add(r:&mut Router,s:&str){let q=r.new_session("C:\\owned").unwrap();assert_eq!(r.ingest(1,reply(&q["id"],json!({"sessionId":s}))).unwrap(),Event::SessionCreated{session:s.into()});}
+ #[test]fn unknown_model_metadata_does_not_grant_model_authority(){let mut r=ready();let q=r.new_session("C:\\owned").unwrap();assert_eq!(r.ingest(1,reply(&q["id"],json!({"sessionId":"s","configOptions":[{"id":"model","type":"unknown"}]}))).unwrap(),Event::SessionCreated{session:"s".into()});assert!(r.models("s").is_none());assert!(r.set_model("s","x").is_err());}
  #[test]fn framing(){let mut f=Framer::default();assert!(f.feed(b"{\"jsonrpc\":").unwrap().is_empty());assert_eq!(f.feed(b"\"2.0\"}\n{}\r\n").unwrap().len(),2);assert!(f.finish().is_ok());assert_eq!(f.feed(b"not-json\n"),Err(Error::Malformed));assert_eq!(f.feed(b"{}\n"),Err(Error::Poisoned));}
  #[test]fn frame_limit_and_truncation(){let mut f=Framer::default();assert_eq!(f.feed(&vec![b'x';MAX_FRAME+1]),Err(Error::Limit));let mut g=Framer::default();g.feed(b"{").unwrap();assert!(g.finish().is_err());}
  #[test]fn concurrent_sessions_and_generation(){

@@ -1,0 +1,365 @@
+{
+  "schema": "vivim.p03.closure/1",
+  "pins": {
+    "Labs": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+    "Product": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+    "ARBOR": "b13b8d67b4adb84ec91612196c8b4257df71968b"
+  },
+  "entries": [
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/SESSION-HANDOFF-R033.md",
+      "blob": "93397dcad97695ae5bd21dd1cc1fae69845a8779",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI01-R031-PRODUCT-LIVE/PATCH-SPEC.json",
+      "blob": "57ce58cbde0dee7aebbb752fc7f47eee26d896c3",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/EVIDENCE-R031-PRODUCT.json",
+      "blob": "310f86b4dcf85da1317ed7b01d9c97ef92b13012",
+      "role": "prior-evidence"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/rust-starter/src/refresh_fence.rs",
+      "blob": "dfe0da19000306299fa2142b37191c6b0688751f",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/rust-starter/src/watcher.rs",
+      "blob": "0131c7818b3caa8e76ab5cf0ce83144b69e54c62",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/rust-starter/src/usn.rs",
+      "blob": "29885b1a205b0b2a2e5ea410a3dee287a2ae33c9",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI04-R043-NATIVE-PROPERTY/native_property.rs",
+      "blob": "f593fcd2c128599a851576ce16d701b8e2bb371d",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI04-R044-HQ-NATIVE-JOIN/materialize.mjs",
+      "blob": "2ecd859445143bfdfd6fa885d6e35ce119629b4c",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI04-R044-HQ-NATIVE-JOIN/probe.rs",
+      "blob": "5d0a8974227ba0110fa9b9c6380805e88449d251",
+      "role": "donor-or-contract"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/EVIDENCE-R044-HQ-JOIN.json",
+      "blob": "cf6f7b6ca77164190e1c31b1093636e9761a2c0c",
+      "role": "prior-evidence"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "adapters/hq/dev-session.mjs",
+      "blob": "d3397eed888c4b800904b9e175928d93d40d6366",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/development_intelligence.rs",
+      "blob": "7cc193f4ec9504b7cf6256431080d5cf128a571a",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/semantic_primitives.rs",
+      "blob": "7372fda1ce5d3d06315b45d6fb62c51cc367f4ba",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "adapters/hq/dev-session.mjs",
+      "blob": "d3397eed888c4b800904b9e175928d93d40d6366",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "adapters/hq/wiki-articles.mjs",
+      "blob": "ba9e26c794cabe8738043e1116d20e3e71ff8cc4",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "adapters/hq/wiki-articles.test.mjs",
+      "blob": "c212378d18c7d4d5f460d35dde2aaedbcaf5d2ba",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "adapters/hq/protocol-v1.mjs",
+      "blob": "7bf970e526ead17e3128a8410c9107047dcbd783",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "adapters/hq/protocol-v1.test.mjs",
+      "blob": "80a1bae084e9c256b252cdbaa8b666d963357158",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "adapters/hq/graph-source.mjs",
+      "blob": "fe94b4a4640034b7a31624d11d2cc9a6972c257d",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "adapters/hq/resident-protocol.mjs",
+      "blob": "d26ec0610ba11c8f6cff27053b0c4a8db3482d39",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "adapters/hq/agent-context.mjs",
+      "blob": "1fbbdc8891800ad28de69e9e195907e662419a1c",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "adapters/hq/source-anchor.mjs",
+      "blob": "bfe3d54ffe04ca9eee452538c41508e99d9bc422",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "adapters/hq/task-activation.mjs",
+      "blob": "bc3dd9bcb854d9a1ab995b705b094266eec2e987",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "adapters/hq/sdk-context-lens.mjs",
+      "blob": "412071a75e499f6e5f749d69e2d3be21e2296f44",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "core/programmability/src/source_digest.rs",
+      "blob": "d07c2d6fa1e30b88c185199e6fd238f193742f4f",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "crates/protocol-sdk/src/campaign.rs",
+      "blob": "3ca396600bfaf8f51ba9636ded04d0e24f7dbd23",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "crates/protocol-sdk/src/development_intelligence.rs",
+      "blob": "92d62fd4cda3e251b14eb7bd6851428859a8cb79",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "crates/protocol-sdk/src/semantic_primitives.rs",
+      "blob": "5e79481699b842fa60aeafd17860f78070293f17",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Product",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "path": "protocol/task-catalog-deltas/external-source-adoption-r001.json",
+      "blob": "827ea5bb92be0fb8b52ffc67ba0b53eb0a0059c4",
+      "role": "current-interface"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/refresh-loop.mjs",
+      "blob": "d34d0f1e5449885b7d4bf698ce490e348c246de9",
+      "role": "selected-donor"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/refresh-loop.test.mjs",
+      "blob": "76c942cf6839148804664b3673b43fd94ce81e95",
+      "role": "selected-donor"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/article-cache.mjs",
+      "blob": "1129cde03e0c43870ac620575c907ff364926e50",
+      "role": "selected-donor"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI01-R031-PRODUCT-LIVE/overlay/adapters/hq/article-cache.test.mjs",
+      "blob": "c81d9a0d02eb9b0cdbda0df574375231396bb5c0",
+      "role": "selected-donor"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/annotation-v2.mjs",
+      "blob": "7e94dfbd4fbca8ef0fdb9e0610053364ce2c38c8",
+      "role": "R044-HQ"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/capability-schema.mjs",
+      "blob": "fa7e25c1328b69300c285ff86dd973620fde62bd",
+      "role": "R044-HQ"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/extract.mjs",
+      "blob": "db770b61549089b8351ead1fd7ead087dae4df49",
+      "role": "R044-HQ"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/git.mjs",
+      "blob": "32e775537f74aa886239783081a82d2b8a670e04",
+      "role": "R044-HQ"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/indexer.mjs",
+      "blob": "9c728884117d492f19b798d56cc3b643f4821ed7",
+      "role": "R044-HQ"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/lang.mjs",
+      "blob": "28ce92b6116ff3866bc8f8bb2c4d394dd0d9de",
+      "role": "R044-HQ"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/rust-syntax-adapter.mjs",
+      "blob": "15c8c73e3a2c11712104ddb00d63f5b0188f57d1",
+      "role": "R044-HQ"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/schema.mjs",
+      "blob": "2dda37b973ac77dd3735a288774a203538bcf98f",
+      "role": "R044-HQ"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/search.mjs",
+      "blob": "2aaa4659e1b95429af05a185317f8977ebeaa7be",
+      "role": "R044-HQ"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/semantic-optimizers.mjs",
+      "blob": "ce620c4ae21a7ea4269bc772808dffbe12526233",
+      "role": "R044-HQ"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/semantic-registry.mjs",
+      "blob": "ed55a274610e68b9428240ec27e7d5424c9fc850",
+      "role": "R044-HQ"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/util.mjs",
+      "blob": "aefc0b0d8b6c7683b6a05ab93e0e932901d45a66",
+      "role": "R044-HQ"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "hq/lib/walk.mjs",
+      "blob": "38f8bfe82220909cbd456d3115ecad350656fe1e",
+      "role": "R044-HQ"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI04-R044-HQ-NATIVE-JOIN/Cargo.toml",
+      "blob": "1aabe72e4bfc6200f1b68bc1b1be1dbe42c409e1",
+      "role": "native-test"
+    },
+    {
+      "repository": "Labs",
+      "commit": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+      "path": "VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE/integration-packs/WNI04-R044-HQ-NATIVE-JOIN/test.mjs",
+      "blob": "75100249dc399865ab0ca9a12a7ac3bb8e4679ca",
+      "role": "native-test"
+    }
+  ],
+  "dependencyGraph": {
+    "refresh": "dev-session -> refresh-loop, article-cache, wiki-articles, existing agent-context/resident-protocol/sdk-context-lens; tests -> graph-source/protocol-v1 and Wiki",
+    "native": "prepare-native.mjs declares 22 exact source paths; probe -> file_metadata/native_property/source_digest/indexed_search; test -> incumbent HQ schema/indexer/search; cargo -> serde_json, sha2, windows-sys =0.61.2; optional pwsh SystemIndex"
+  },
+  "destinationConflicts": [
+    "Current protocol-v1 and agent-context already provide source compilation cache; no duplicate R031 bind or compile cache",
+    "Current dev-session has optional meta binary and SDK context; retain",
+    "Product native digest, ExactRef and scan already exist"
+  ],
+  "license": {
+    "status": "pending repository and transitive notice review; no grant inferred"
+  },
+  "unresolved": [
+    "Full current native SDK/HQ graph build closure for live R032",
+    "R044 additional Git blob IDs emitted by materializer; current native build not yet observed",
+    "R043 standalone test not rerun",
+    "Host watcher completeness and authority",
+    "license review"
+  ]
+}

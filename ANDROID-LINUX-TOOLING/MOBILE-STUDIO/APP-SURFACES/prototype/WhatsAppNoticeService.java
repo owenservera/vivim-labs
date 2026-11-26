@@ -39,7 +39,7 @@ public final class WhatsAppNoticeService extends NotificationListenerService {
             if(name.isEmpty())name=bounded(b.getCharSequence(Notification.EXTRA_TITLE),120);
             if(name.isEmpty())continue;
             String identity=n.getShortcutId()!=null?n.getShortcutId():name;
-            if(!seen.add(identity))continue;
+            if(seen.contains(identity))continue;
             ArrayList<String> lines=new ArrayList<>();
             try{
                 if(android.os.Build.VERSION.SDK_INT>=28){
@@ -60,12 +60,38 @@ public final class WhatsAppNoticeService extends NotificationListenerService {
                 if(!preview.isEmpty())lines.add("Preview: "+preview);
             }
             if(lines.isEmpty())continue;
-            out.append("\n").append(++count).append(". ").append(name).append("\n");
+            seen.add(identity);
+            out.append("\n").append(++count).append(". ").append(name).append(" · notification ").append(java.text.DateFormat.getDateTimeInstance().format(new Date(s.getPostTime()))).append("\n");
             for(String l:lines)out.append(l).append("\n");
             if(count==3)break;
         }
         if(count==0)out.append("\nNo eligible conversation previews exposed by Android.");
         return out.toString();
+    }
+    static final class Target {
+        final String key,label;final long postTime;
+        Target(String k,String l,long t){key=k;label=l;postTime=t;}
+    }
+    static java.util.List<Target> targets(){
+        ArrayList<Target> result=new ArrayList<>();WhatsAppNoticeService svc=connected;if(svc==null)return result;
+        try{
+            StatusBarNotification[] all=svc.getActiveNotifications();if(all==null)return result;
+            Arrays.sort(all,(a,b)->Long.compare(b.getPostTime(),a.getPostTime()));
+            Set<String> names=new HashSet<>();
+            for(StatusBarNotification s:all){
+                Notification n=s.getNotification();if(!"com.whatsapp".equals(s.getPackageName())||(n.flags&Notification.FLAG_GROUP_SUMMARY)!=0||!Notification.CATEGORY_MESSAGE.equals(n.category)||n.visibility==Notification.VISIBILITY_SECRET||n.contentIntent==null||!"com.whatsapp".equals(n.contentIntent.getCreatorPackage())||n.extras==null)continue;
+                String label=bounded(n.extras.getCharSequence(Notification.EXTRA_CONVERSATION_TITLE),120);if(label.isEmpty())label=bounded(n.extras.getCharSequence(Notification.EXTRA_TITLE),120);
+                if(label.isEmpty()||!names.add(label))continue;result.add(new Target(s.getKey(),label,s.getPostTime()));if(result.size()==3)break;
+            }
+        }catch(RuntimeException e){result.clear();}return result;
+    }
+    static String open(Target t){
+        WhatsAppNoticeService svc=connected;if(svc==null)return "Notification access not connected";
+        try{
+            StatusBarNotification[] all=svc.getActiveNotifications(new String[]{t.key});if(all==null||all.length!=1)return "Notification changed; refresh";
+            StatusBarNotification s=all[0];Notification n=s.getNotification();if(!"com.whatsapp".equals(s.getPackageName())||!t.key.equals(s.getKey())||s.getPostTime()!=t.postTime||n.contentIntent==null||!"com.whatsapp".equals(n.contentIntent.getCreatorPackage()))return "Notification changed; refresh";
+            n.contentIntent.send();return "Chat open requested; verify actual conversation in WhatsApp.";
+        }catch(Exception e){return "Chat open unavailable; use WhatsApp picker.";}
     }
     static String bounded(CharSequence s,int max){
         if(s==null)return "";

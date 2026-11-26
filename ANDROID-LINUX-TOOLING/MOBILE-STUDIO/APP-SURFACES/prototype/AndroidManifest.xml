@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="live.vivim.surfaceprobe" android:versionCode="6" android:versionName="0.6">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="live.vivim.surfaceprobe" android:versionCode="7" android:versionName="0.7">
     <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="35"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION"/>
@@ -12,5 +12,6 @@
         <service android:name=".SnapshotService" android:exported="false" android:foregroundServiceType="mediaProjection"/>
         <activity android:name=".OwnerActivity" android:exported="false"/>
         <service android:name=".WhatsAppNoticeService" android:label="VIVIM on-demand WhatsApp previews" android:exported="true" android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"><intent-filter><action android:name="android.service.notification.NotificationListenerService"/></intent-filter></service>
+        <activity android:name=".ReviewedActivity" android:exported="false"/>
     </application>
 </manifest>

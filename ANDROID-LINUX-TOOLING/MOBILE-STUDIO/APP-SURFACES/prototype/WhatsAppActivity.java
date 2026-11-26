@@ -60,7 +60,7 @@ public final class WhatsAppActivity extends Activity {
         super.onActivityResult(request,code,data);
         if(request!=71)return;
         if(code!=RESULT_OK||data==null){status.setText("Capture consent declined");return;}
-        try{startForegroundService(new Intent(this,SnapshotService.class).putExtra("consent",data));status.setText("Snapshot requested. Return here to view it.");}
+        try{preview.setImageDrawable(null);startForegroundService(new Intent(this,SnapshotService.class).putExtra("consent",data));status.setText("Snapshot requested. Return here to view it.");}
         catch(RuntimeException e){status.setText("Capture start unavailable: "+e.getClass().getSimpleName());}
     }
     @Override protected void onResume(){super.onResume();if(status!=null)refresh();}

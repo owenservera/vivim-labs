@@ -18,5 +18,21 @@
     "Fixed fast Property System allowlist; not a native Windows Search OLE DB query.",
     "Before/after path and handle readback is not race-proof confinement; Host still authorizes exact paths.",
     "No production changes."
-  ]
+  ],
+  "regression": {
+    "source": "87644b6f0c75abdfb5515c4a5b2e0a9e2329289f",
+    "session": "ctl-7a2b2547981da888",
+    "exitCode": 0,
+    "passed": 2,
+    "failed": 0,
+    "elapsedMs": 7587,
+    "verifiedReplacementBlob": true,
+    "actual": {
+      "sizeBefore": 25,
+      "sizeAfter": 33,
+      "itemType": ".txt",
+      "identityPreserved": true,
+      "foreignHandleRejected": true
+    }
+  }
 }

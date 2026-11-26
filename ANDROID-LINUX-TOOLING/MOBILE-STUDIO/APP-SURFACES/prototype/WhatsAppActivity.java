@@ -13,6 +13,7 @@ public final class WhatsAppActivity extends Activity {
     private EditText phone,draft;
     private TextView status;
     private ImageView preview;
+    private android.graphics.Bitmap exportCopy;
     @Override public void onCreate(Bundle b){
         super.onCreate(b);
         ScrollView scroll=new ScrollView(this);
@@ -23,6 +24,7 @@ public final class WhatsAppActivity extends Activity {
         button(root,"Authorize one app snapshot",v->capture());
         button(root,"Show latest local snapshot",v->refresh());
         preview=new ImageView(this);preview.setAdjustViewBounds(true);root.addView(preview,new LinearLayout.LayoutParams(-1,-2));
+        button(root,"Export reviewed snapshot",v->exportSnapshot());
         button(root,"Clear snapshot / stop capture",v->{preview.setImageDrawable(null);stopService(new Intent(this,SnapshotService.class));SnapshotService.clear();refresh();});
         phone=new EditText(this);phone.setHint("International number (optional, digits only)");phone.setInputType(3);root.addView(phone);
         draft=new EditText(this);draft.setHint("Message draft — not sent automatically");draft.setMinLines(3);root.addView(draft);
@@ -51,6 +53,15 @@ public final class WhatsAppActivity extends Activity {
         try{startActivity(i);status.setText("WhatsApp requested; review target and text in WhatsApp. Not sent.");}
         catch(ActivityNotFoundException|SecurityException e){status.setText("WhatsApp action unavailable");}
     }
+    private void exportSnapshot(){
+        android.graphics.Bitmap shown=SnapshotService.snapshot;
+        if(shown==null || SnapshotService.active || shown.isRecycled()){status.setText("No completed snapshot");return;}
+        new AlertDialog.Builder(this).setTitle("Export reviewed image?").setMessage("Save exactly one reviewed image to a location you choose. No automatic upload.").setNegativeButton("Cancel",null).setPositiveButton("Choose file",(d,w)->{
+            if(SnapshotService.snapshot!=shown || shown.isRecycled())return;
+            if(exportCopy!=null)exportCopy.recycle();exportCopy=shown.copy(android.graphics.Bitmap.Config.ARGB_8888,false);
+            Intent i=new Intent(Intent.ACTION_CREATE_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType("image/png").putExtra(Intent.EXTRA_TITLE,"vivim-observation.png");startActivityForResult(i,72);
+        }).show();
+    }
     private void capture(){
         if(SnapshotService.active){status.setText("Capture already active");return;}
         new AlertDialog.Builder(this).setTitle("One local snapshot").setMessage("Choose a single app, WhatsApp, in Android's next dialog. Do not choose entire screen. A visible session captures one frame and stops automatically. No upload or history extraction. Select only content you want to inspect.")
@@ -58,11 +69,17 @@ public final class WhatsAppActivity extends Activity {
     }
     @Override protected void onActivityResult(int request,int code,Intent data){
         super.onActivityResult(request,code,data);
+        if(request==72){
+            try{if(code==RESULT_OK && data!=null && data.getData()!=null && exportCopy!=null){try(java.io.OutputStream out=getContentResolver().openOutputStream(data.getData())){if(out==null||!exportCopy.compress(android.graphics.Bitmap.CompressFormat.PNG,100,out))throw new java.io.IOException();}status.setText("Reviewed observation exported");}}
+            catch(Exception e){status.setText("Export failed: "+e.getClass().getSimpleName());}
+            finally{if(exportCopy!=null){exportCopy.recycle();exportCopy=null;}}return;
+        }
         if(request!=71)return;
         if(code!=RESULT_OK||data==null){status.setText("Capture consent declined");return;}
         try{preview.setImageDrawable(null);startForegroundService(new Intent(this,SnapshotService.class).putExtra("consent",data));status.setText("Snapshot requested. Return here to view it.");}
         catch(RuntimeException e){status.setText("Capture start unavailable: "+e.getClass().getSimpleName());}
     }
     @Override protected void onResume(){super.onResume();if(status!=null)refresh();}
+    @Override protected void onDestroy(){if(exportCopy!=null){exportCopy.recycle();exportCopy=null;}super.onDestroy();}
     private void refresh(){preview.setImageDrawable(null);if(SnapshotService.snapshot!=null)preview.setImageBitmap(SnapshotService.snapshot);status.setText(SnapshotService.active?"Capture active — return after it stops":SnapshotService.result);}
 }

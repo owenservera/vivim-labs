@@ -1,0 +1,11 @@
+# WA02 — Recent conversations, read-only acceptance
+
+Owner priority correction, 2026-11-26: before sending a message, discover the three most recent existing WhatsApp conversations, identify the contact or group, and retrieve only the last few messages. Research default: at most three messages per conversation, nine total; sender and available timestamp; distinguish pinned display order from activity order. No attachments, full history export, message send, private database extraction or public publication of chat content. Group participants means visible sender names; do not enumerate membership unless separately requested. Opening unread chats may mark them read or update presence; disclose and obtain approval before such side effects.
+
+## Live result
+VIVIM Android MCP health ready, version 0.3.0, Termux development grant. Current 12 operations support native process and workspace file operations, not Android screen observation, semantic UI or WhatsApp chat retrieval. Earlier same-user resolver verified installed app launcher, text share and direct chat entry points, not access to existing conversations. No conversation content accessed. WA02 blocked by missing authorized native observation interface, not by missing Git/tooling. No grant expansion attempted.
+
+## Proposed next implementation
+Prepare user-consented Android app-window MediaProjection observation using a native companion, validate first on an owned fixture. On the actual phone, user selects WhatsApp and, where necessary, opens the three selected chats. Derive names and bounded recent messages from the visible surface; flag incomplete coverage, pinned/archived ordering and read-state effects. No continuous capture, protected-window bypass, general autonomous accessibility agent or full-history storage. A screenshot supplied explicitly by the owner is a manual fallback, not native bridge acceptance. A notification listener is not an equivalent substitute for three most recent conversations. Keep all personal evidence local or return only the requested bounded response to owner.
+
+Send milestones remain deferred until this read scenario is accepted. Reuse Product contracts and receipt semantics; no second registry.

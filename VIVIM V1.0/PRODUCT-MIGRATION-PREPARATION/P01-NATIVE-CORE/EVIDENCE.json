@@ -140,19 +140,123 @@
       "exitCode": 0,
       "grepExit": 1,
       "result": "Six-file core; no targeted textual matches; semantic graph collision scan not performed"
+    },
+    {
+      "receipt": "ctl-099ca5328bbdd033",
+      "command": "Run committed prepare.mjs twice in new scratch directories, compare CANDIDATE.json receipts and all 10 candidate files against previously tested candidate.",
+      "exitCode": 0,
+      "result": "Both clean runs materialized 77 unique pinned files, 634,947 bytes; assembled identical 10-file candidates matching all tested bytes."
     }
   ],
   "replay": {
-    "status": "first assembly observed; comparison pending",
+    "status": "PASS: two clean replay receipts and all tested candidate file bytes identical",
     "receipt": "ctl-099ca5328bbdd033",
     "commit": "7fafba14c5cb3c8916b62bca36e7e127eb942f75",
-    "files": 77,
-    "bytes": 634947,
-    "candidateFiles": 10,
-    "exitCode": null,
-    "output": "{\"lane\":\"P01-NATIVE-CORE\",\"files\":77,\"bytes\":634947,\"status\":\"materialized-readback-verified\"}\n{\"candidate\":\"C:\\\\0-BlackBoxProject-0\\\\scratch\\\\p01-native-core-20261126-a01\\\\replay-a\\\\candidate\",\"files\":10,\"status\":\"assembled\"}\n"
+    "exitCode": 0,
+    "elapsedMs": 96998,
+    "materializedFilesPerRun": 77,
+    "materializedBytesPerRun": 634947,
+    "candidateFilesPerRun": 10,
+    "output": "REPLAY_IDENTICAL_TO_TESTED_CANDIDATE files=10"
   },
-  "candidateReceipt": null,
+  "candidateReceipt": {
+    "sha256": "2baf8638b87836f8c85cc29e7254873b377c27cf75b89a96d5452b8b0a04c563",
+    "receipt": {
+      "schema": "vivim.labs.p01.candidate/1",
+      "lane": "P01-NATIVE-CORE",
+      "status": "assembled-not-promoted",
+      "pins": {
+        "ARBOR": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+        "Labs": "431840ee9446fd8c57c23a84461923b1ffc3cfff",
+        "Product": "11812e6b1c06ac047329169ef5d848da3f85788c"
+      },
+      "files": [
+        {
+          "path": "Cargo.toml",
+          "sha256": "79f32ec1a22a726b073e99ebfcf7ebc9b032e3fc2af6b3d72c1976875f7aab83",
+          "origin": {
+            "repository": "Product",
+            "blob": "639c789822f5975659fa56fde06ecaf858e80ef5"
+          }
+        },
+        {
+          "path": "src/development_projection.rs",
+          "sha256": "71afb2ea7bd49c4b2c21f766e164473af65782f49fbd4ca86e29d1c6d138229b",
+          "origin": {
+            "repository": "Product",
+            "blob": "38a0c8eb867a1464ccce601f09e7fa612dad9dc1"
+          }
+        },
+        {
+          "path": "src/lib.rs",
+          "sha256": "f578cd97fc267172edbe5b58215ba64386d2cfc8b0d5b8c190af4c0fa443ed10",
+          "origin": {
+            "repository": "Product",
+            "blob": "deb5509cae250f511afa09a5790174f7eaa14eb9",
+            "rule": "P01-D03"
+          }
+        },
+        {
+          "path": "src/resident_semantic.rs",
+          "sha256": "6499f6dbf88b23b8c6fdb5eb1ed5b4a38fe6179934609f6b960b590b77a19738",
+          "origin": {
+            "repository": "Product",
+            "blob": "c9b6d1f9b732b670ff18c07d9928c6efbdb51d83"
+          }
+        },
+        {
+          "path": "src/source_digest.rs",
+          "sha256": "afbd40004d2a9c24e6a0584e68dce14b2d3858c33a83f93e8c9cb5f46d760433",
+          "origin": {
+            "repository": "Product",
+            "blob": "d07c2d6fa1e30b88c185199e6fd238f193742f4f"
+          }
+        },
+        {
+          "path": "tests/migration_contract.rs",
+          "sha256": "b2b703f0675b9a7bc88f6a9f024e8c7705ab857a8da6473f0968f0e1f47a69b3",
+          "origin": {
+            "repository": "Product",
+            "blob": "1c235e64b2ae41703bf5155298231b50ac27aa13"
+          }
+        },
+        {
+          "path": "src/control_planning.rs",
+          "sha256": "8b56062bf09aef7417dfa036539bf332a64baaaa90c97944584f9b517594b08b",
+          "origin": {
+            "repository": "ARBOR",
+            "blob": "1f8721bfe30e89485de622ddca9319b8a782b1b1"
+          }
+        },
+        {
+          "path": "src/control_plan_presentation.rs",
+          "sha256": "80a43959454d3cfe0dbbf234ebc47963d5e7e2f0bc29fb0da37b2882a9449886",
+          "origin": {
+            "repository": "ARBOR",
+            "blob": "eb63317189282c231153e33ff98ea7910f24d42b"
+          }
+        },
+        {
+          "path": "Cargo.lock",
+          "sha256": "1ee15f0f2709a0e3fe4491b96ebb0a06cd2b8fa1670cea9c6097a949e234f2a1",
+          "origin": {
+            "repository": "ARBOR",
+            "blob": "0794dd46af05badde437d559f765679abb7ed761",
+            "qualificationOnly": true
+          }
+        },
+        {
+          "path": "tests/control_contract.rs",
+          "sha256": "97043020a4bbbd8c3e73a2dcbf98e34782ddfc7644ab10d1c1088943a6b57e94",
+          "origin": {
+            "repository": "Labs",
+            "blob": "ac764907a0872474c2587f242b85ccbb31fb295e"
+          }
+        }
+      ],
+      "assurance": "Exact materialization and deterministic overlay only; no SDK conformance or execution authority."
+    }
+  },
   "limitations": [
     "Exact isolated qualification, not complete Product workspace build or deployment.",
     "One original donor regression preserved; selected two-module slice excludes control_catalog_compat.",

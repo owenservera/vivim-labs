@@ -1,0 +1,14 @@
+# P06 — MCP graph migration preparation R002
+
+## Entry point and route
+`isolated/Cargo.toml`, `isolated/src/lib.rs`, `isolated/fixture.mjs`. Exact source snapshot ee74c29ff11e6ae599d9264a602d4f936597fc83; consult EVIDENCE.json for settled test dispositions. Run the master materializer against MANIFEST.json and exact scratch repos, generate P06_FIXTURE with fixture.mjs, then cargo test --offline --manifest-path isolated/Cargo.toml. Run the two original Node tests from the materialized ARBOR tree. No live registration needed. The first fixture contains 18 source tool names, 16 client names, 33 actual R042 candidate descriptors. Two source-defined tools absent in the observed client: development_file_read and session_wait. Their deployment/grant is unknown. Host discovery false. Current client schema check is required string field-name parity, not full published JSON Schema equality.
+
+## Minimal adoption closure
+- Direct Product SDK: pure normalization, ephemeral source/client introspection and identity/declared relation projection. Replace wire identity construction with Product Identity, ExactRef, Datum/Shape and Relation; bind all graph edges to verified source evidence, preserve revisions and unknown states. No new graph DB, schema engine or executor.
+- ARBOR first: installed transport lifecycle, schema publication/refresh, current Host catalogue and exact operational binding/authority parity. Request-ID ledger and effect approvals remain incumbent. Source-defined tool counts are not proof of deployment.
+- P02 handoff: capability/Host action/MCP alias and schema revision identities, typed relation and evidence paths, revision-aware reconciliation/deletion. No cross-lane write.
+- P05 handoff: only trusted Host/journal admission may supply request claim, plan ID/digest, canonical args and grant fingerprint; raw receipt correlation is not authentication. Public reduced receipt lacks enough evidence for independent verification. Never re-execute uncertain requests. No cross-lane write.
+- P04 may consume read-only correlation for owned sessions; execution and resource policies remain P04/P05.
+
+## Remaining obligations
+Re-pin current Product, reconcile SDK 011–020, 041–050, 061–070, 111–120, 159, 181–190 and 201–210 before integration. Independently demonstrate intel-200 and intel-210 and obtain owner scope authorization. Confirm exact deployed build, full tools/list schema and annotations and binding/grant state through authorized read-only introspection; no refresh or activation in this lane. Resolve Unicode trim parity and full canonical digest/authenticated receipt binding. Original R042 native planner/GPUI test is historical source reference, not rerun by P06. Donor licensing disposition is open; no original donor file duplicated into Git. Preserve original source, receipts and regression suites. No production changes, no active SDK task catalogue edits, no new bindings or grants.

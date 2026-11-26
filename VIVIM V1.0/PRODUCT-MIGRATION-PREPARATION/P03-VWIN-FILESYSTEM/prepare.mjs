@@ -26,7 +26,7 @@ patch('adapters/hq/dev-session.mjs','d3397eed888c4b800904b9e175928d93d40d6366',[
 ["}finally{meta?.close();runtime.close();}","}finally{observer?.close();await loop.close();meta?.close();runtime.close();}"]
 ]);
 for(const n of ['refresh-loop.mjs','refresh-loop.test.mjs','article-cache.mjs','article-cache.test.mjs']){const path='adapters/hq/'+n;if(execFileSync('git',['-C',product,'ls-tree',p,'--',path],{encoding:'utf8'}).trim())throw Error('ADD_COLLISION '+path);const b=read(labs,l,w+'overlay/'+path);stage.push([path,b,hash(b)]);}
-for(const n of ['wiki-articles.test.mjs','protocol-v1.mjs','protocol-v1.test.mjs']){const path='adapters/hq/'+n,b=read(product,p,path);stage.push([path,b,hash(b)]);}
+for(const n of ['wiki-articles.test.mjs','protocol-v1.mjs','protocol-v1.test.mjs','graph-source.mjs','resident-protocol.mjs','agent-context.mjs','source-anchor.mjs','task-activation.mjs','sdk-context-lens.mjs']){const path='adapters/hq/'+n,b=read(product,p,path);stage.push([path,b,hash(b)]);}
 mkdirSync(out);for(const [path,b] of stage){const dst=join(out,path);mkdirSync(dirname(dst),{recursive:true});writeFileSync(dst,b,{flag:'wx'});}
 writeFileSync(join(out,'MATERIALIZATION.json'),JSON.stringify(stage.map(([path,b,sourceBlob])=>({path,sourceBlob,outputBlob:hash(b)})),null,2));
 console.log(JSON.stringify({verified:stage.length,patched:2,out}));

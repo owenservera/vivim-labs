@@ -1,0 +1,6 @@
+# R001 — Physical Android discovery
+2026-11-26. Native bridge health ready, version 0.3.0. Android API 35. A bounded read-only package discovery via pm list packages -3 returned exit 0 and 131 visible third-party packages. This is the command caller's visibility, not the future companion's visibility or complete inventory. Package identities and raw output stay only in private device workspace, never this public Labs repo. No app opened, private data read, permission changed, screen captured or ADB pairing attempted.
+
+Present: am, pm, cmd, settings, adb (37.0.0p1), java, javac. Not found on PATH: dumpsys, app_process, termux-api, termux-battery-status, termux-saf-ls, termux-notification-list, termux-sensor, termux-camera-info, termux-clipboard-get, termux-share, gradle, aapt, aapt2, apksigner, d8. Missing on PATH does not establish absent OS service. Termux package candidates: Gradle 9.9.2, aapt/aapt2 16.0.0.4-4, apksigner 37.0.0; compatibility unverified. No installations in this round.
+
+Prior native Rust smoke, GitHub clone, SQLite and Node passed. Cross-app UI, native companion build, app-specific capabilities and permission state not yet verified. Device fixture testing remains outstanding. No claims of general remote mobile control.

@@ -1,0 +1,36 @@
+{
+  "schema": "vivim.labs.preparation-bootstrap-evidence/1",
+  "date": "2026-11-26",
+  "manifestReadback": {
+    "lanes": 6,
+    "entries": 71,
+    "uniquePinnedFiles": 67,
+    "unresolvedInitialPaths": 0,
+    "assurance": "GitHub pinned source readback, not complete dependency closure"
+  },
+  "materializer": {
+    "sourceCommit": "088c89bbd7090298df197e13d75a40f4b9b0e4b4",
+    "sourceBlob": "a7d2afecb99401ee630fe3c24c6730cf75d90956",
+    "attempts": [
+      {
+        "session": "ctl-751f06721f935009",
+        "exit": 1,
+        "observed": "ROOT_NOT_GIT_TOPLEVEL ARBOR"
+      },
+      {
+        "session": "ctl-37b7a4f47e0eb523",
+        "exit": 1,
+        "observed": "ROOT_NOT_GIT_TOPLEVEL ARBOR after case-insensitive comparison"
+      },
+      {
+        "session": "ctl-903e58567c77169e",
+        "exit": 0,
+        "observed": "Windows Host extended-length drive path and Git ordinary drive path differ lexically; same directory, no GIT_* environment overrides"
+      }
+    ],
+    "disposition": "Extended-length normalization fix committed. Retest request f0d0c8dd04d640b4a650887a2cd4f118 denied or uncertain; same-ID inspection returned MCP server not initialized. No successful materializer fixture test or actual donor materialization claimed. Reconnect through supported owner-authorized path; reconcile uncertain request; rerun in fresh scratch only after known outcome."
+  },
+  "productionWrites": false,
+  "arborWrites": false,
+  "originalVWinWrites": false
+}

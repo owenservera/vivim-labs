@@ -1,0 +1,98 @@
+{
+  "schema": "vivim.labs.p06.closure/1",
+  "manifest": {
+    "path": "MANIFEST.json",
+    "blob": "b1879ac865ee63f2d7e3dd27a2d8553403f0dace",
+    "entries": 13,
+    "materialized": true
+  },
+  "additionalPins": [
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/action-catalog.v1.json",
+      "blob": "03600add09203b1f7eb784577c2f0b4434a5ef64",
+      "role": "Host schema registry; actual fixture source"
+    },
+    {
+      "repository": "ARBOR",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "path": "apps/vivim-host/control/dispatcher.mjs",
+      "blob": "141056a4820c52aa7fd3ea4583279aab601d3d08",
+      "role": "authority reference; full dispatcher closure P05-owned"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/semantic_primitives.rs",
+      "blob": "7372fda1ce5d3d06315b45d6fb62c51cc367f4ba",
+      "role": "reuse Identity, ExactRef, Datum; do not clone definitions"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/Cargo.toml",
+      "blob": "80f1578e6d06cff45917b16c4ea3ba5b36304c1a",
+      "role": "serde_json dependency already present"
+    }
+  ],
+  "edges": [
+    [
+      "isolated/fixture.mjs",
+      "materialized workstation-tunnel.cjs and tunnel-readonly.cjs",
+      "source schema extraction"
+    ],
+    [
+      "isolated/fixture.mjs",
+      "action-catalog.v1.json",
+      "actual Host action/field/risk join"
+    ],
+    [
+      "isolated/fixture.mjs",
+      "capability-compiler.mjs + CAPABILITY-CANDIDATES.json",
+      "actual R042 compiler oracle"
+    ],
+    [
+      "isolated/src/lib.rs",
+      "serde_json 1",
+      "same dependency family as Product SDK"
+    ],
+    [
+      "workstation-tunnel.test.cjs",
+      "workstation-tunnel.cjs",
+      "original test with injected Host fixtures"
+    ],
+    [
+      "development-file-read.test.cjs",
+      "workstation-tunnel.cjs",
+      "original test with injected Host fixtures"
+    ],
+    [
+      "parity.rs",
+      "ARBOR control_planning and control_plan_presentation + native-cases.json",
+      "original R042 reference; not rerun"
+    ],
+    [
+      "tunnel-readonly.cjs",
+      "host-discovery.cjs, workstation-probe-tunnel.cjs, probe-acceptance.cjs, maintenance-gate.cjs",
+      "live ARBOR dependencies not included in pure package"
+    ]
+  ],
+  "destinationConflicts": [
+    "Product semantic_primitives Identity, ExactRef, Datum; use existing",
+    "Product semantic_relations Relation and Edge; no new graph store",
+    "P05 incumbent journal and dispatcher sole receipt authority",
+    "MCP schema publication and refresh remain ARBOR"
+  ],
+  "license": {
+    "status": "unresolved donor redistribution clearance; no donor source duplicated in Git; ARBOR root LICENSE lookup 404, not proof of absence of license; serde_json dependency already used by Product, exact lockfile and transitive notices pending"
+  },
+  "unavailable": [
+    "full deployed registry listing (hostDiscovery=false)",
+    "current per-tool grant/deployed build attestation",
+    "P02 and P05 interface revisions",
+    "full live transport dependencies outside pure package",
+    "original R042 native fixture rerun and source materialization receipt export pending"
+  ],
+  "assurance": "preparation-only; pinned donor references are not an authorization or deployment"
+}

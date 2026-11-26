@@ -1,0 +1,2731 @@
+{
+  "schema": "vivim.labs.p02.closure/1",
+  "status": "native crate tree closed by inventory; build and operational adapter closure not accepted",
+  "pins": {
+    "ARBOR": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+    "Labs": "ccd15368a20aa3651c64f73ac8571a07950ebfd4",
+    "Product": "11812e6b1c06ac047329169ef5d848da3f85788c"
+  },
+  "materialized": [
+    {
+      "path": "core/programmability/Cargo.lock",
+      "blob": "0794dd46af05badde437d559f765679abb7ed761",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/Cargo.toml",
+      "blob": "18ba45fc845b56db3660c3f1fd46f86695c0ce39",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/GRAPH-INTEGRATION.md",
+      "blob": "341883a92eb3bc04b016f796d736f10719d754cc",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/README.md",
+      "blob": "a52d72e68b644d16328c6ce64343b95d1d59d482",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/examples/realtime_command.rs",
+      "blob": "0ab7e2835f758654c2dab2be6b1bbbfa80536c82",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/activity_fabric/episode.rs",
+      "blob": "1ae02a1dd5daddd1eb6baf4bec6fd6aa4b7cbdd3",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/activity_fabric/event.rs",
+      "blob": "660d4d928b1968fa7c754b94e3e19ffd69b3ad76",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/activity_fabric/learning.rs",
+      "blob": "b01da803e317033698bdf44400b004ec0f5b2c5d",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/activity_fabric/live_projection.rs",
+      "blob": "e0f3eea9cd8c0817c20bf36a8a839c913d231b3f",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/activity_fabric/mod.rs",
+      "blob": "909353f29a80034e1f50f27eb8f64c59f372786f",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/activity_fabric/note.rs",
+      "blob": "83c00a4c1c71b9f6e19d63c291a0278adc97ae78",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/agent_composer.rs",
+      "blob": "cc20864d409e3c62dfb9ca61a3460e78430cf43f",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/bin/vivim-product-pure.rs",
+      "blob": "9066484878d7aec30d6746457fe63e4917b0ead5",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/bin/vivim-program-validate.rs",
+      "blob": "293a6d94aec6323574cbe40e21b093e593cb8d4a",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/bin/vivim-surface-edit-admit.rs",
+      "blob": "c23bd66cfdbc24bb184e5578cf23b6b71d6cbf90",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/bin/vivim-vec-project.rs",
+      "blob": "2495b0044dcfa52d9a484627aec0fd166283b690",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/browser_abi.rs",
+      "blob": "25275c38cea0cb98a246e9d38fd959d3b506a771",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/command_ai_guard.rs",
+      "blob": "5877cd84dfb0de062115d2b35d879d21c6768611",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/command_intent_projection.rs",
+      "blob": "1789de0b502586a01ebc09d554cb83cdb9b12b87",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/command_program.rs",
+      "blob": "c039586c1da05b71e8a40147d4f49ea0ac8609c3",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/configuration.rs",
+      "blob": "bfcbc78290c1106a9cfc0aee4122d907c1d62bc1",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/configuration.v1.json",
+      "blob": "3abd12f38b37d3021e43559142e73248ed99752c",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/context_grounding.rs",
+      "blob": "27b0a6292781fb87890e20009084f0a9ac2ce5e4",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/control_catalog_compat.rs",
+      "blob": "0038906e756a844cecbe565223a0167bfeac5308",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/control_lexicon.rs",
+      "blob": "46f54a277781330cfb755b908a87f41b2bd4a8a7",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/control_lifecycle.rs",
+      "blob": "6d7b6bf57bcdba18e269e8ac18ca15e4460eed90",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/control_plan_presentation.rs",
+      "blob": "eb63317189282c231153e33ff98ea7910f24d42b",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/control_planning.rs",
+      "blob": "1f8721bfe30e89485de622ddca9319b8a782b1b1",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/development_projection.rs",
+      "blob": "bd72c969ab91d81cc4a011b7117223c733fdde3c",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/first_contact.rs",
+      "blob": "1de17e4f0eb56e4af728b1f70e02453d471044e7",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/gesture_interaction.rs",
+      "blob": "e5f9d40e22a8bebce65dff4f7112c4e4600235d0",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/lib.rs",
+      "blob": "f840ec4641023b7a08154f379cca5a4b9bd1b8be",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/lineage.rs",
+      "blob": "c2735c064ff788bbcb9b211075137b0444810b94",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/live_surface.rs",
+      "blob": "72eb5fa6390ba8d0b8d2438d7ad3869bd64fb76d",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/live_system.rs",
+      "blob": "3fa3f1ce3fbe445e72e66ac4ff4fc1bf7611c3f8",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/media_language.rs",
+      "blob": "426bf6565ab42d45a887e01e387906f7c684b492",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/navigation.rs",
+      "blob": "9abdebe41a3594dae2dd12dbaeb3bea4e2f41cf4",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/personal_rule_selection.rs",
+      "blob": "3c13e7cbb0d250264acefb17e12a72469f794f40",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/personal_rule_transition.rs",
+      "blob": "7e37962939c474b6d8991327825f6969490d0f45",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/product_kernel.rs",
+      "blob": "b7d9f32dac794444a3f4220827ac63a0b8f9ebf0",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/product_kernel/application_intelligence.rs",
+      "blob": "206c9144c6e35943a4622e8f15bd2c9ef6e4892b",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/realtime_command.rs",
+      "blob": "8dc314161cf92076b46b6158d08a2d37d396c36e",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/recovery_diagnosis.rs",
+      "blob": "040f656de739d9b194048b04708ef7d1ef7af9b5",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/semantic_observation.rs",
+      "blob": "17f8a9df9f59b86a8b1e6465f3ed425a374fcfb1",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/source_digest.rs",
+      "blob": "171a1e454401d5eaf5fe20948ddde5bf0809696b",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/ui_tokens.rs",
+      "blob": "7e12ac3f07c5e9762e11f628b45b31d8bac5c458",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/ui_value.rs",
+      "blob": "3c11ef8b8a17527c8a9e607aa9681b99d0d451bc",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/vec.rs",
+      "blob": "45a9e5c10791259215975031bdd2ad7cc9e607b0",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/vec_admission.rs",
+      "blob": "f358f72b3a2da1f0def977ba77d4c15be10ba897",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/visual.rs",
+      "blob": "947bf89e7703dd06dbf54c1163a4205f239d89a5",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/wiki_journal.rs",
+      "blob": "e240b382697b2af1f06f70bdae433fb49114a7bd",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/wiki_read.rs",
+      "blob": "467c18ebb29eabb9a5f7a28c627db415dec43a2b",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/wiki_read_recipe.rs",
+      "blob": "342980249264e5b4dd2812213ed5c3175501dbbb",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/wiki_replay.rs",
+      "blob": "44733c1fc55b5257588d37c72cdbcd77a27a430f",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/wiki_target.rs",
+      "blob": "95c6da499ac131ddee3486dbd7420b48db3eee40",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/wiki_write_recipe.rs",
+      "blob": "211147eefc9f393a91cf3379fef237fbb70cfcf5",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/wire.rs",
+      "blob": "fd67f5221dbffd9a10eb171a95e562f1778020e8",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/src/workstation_capabilities.rs",
+      "blob": "9a336b13d42a6c6038fd1eeef815196af3e31d53",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/tests/wiki_capture_source_fence_contract.rs",
+      "blob": "f48c29c21b6244540b5f6745a78547382c202779",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/tests/wiki_change_chronology_contract.rs",
+      "blob": "8d63c6534e7591b69533580bccea5b60097460b4",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/tests/wiki_change_sequence_contract.rs",
+      "blob": "0d21a68a2dfe5fd1318d650e3af85af2fbf3fd6e",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/tests/wiki_full_source_validation_contract.rs",
+      "blob": "03a9d6e07899a90fc828a0148eaa81123896ed2a",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/tests/wiki_replay_safety_contract.rs",
+      "blob": "d3d1c5afa59ffbbbf14acb6d2add8cdf878a2fcd",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/tests/wiki_search_unicode_contract.rs",
+      "blob": "ccbac8a5ec6a6946ef60acc4c1671a52d0ff9511",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/tests/wiki_source_delta_contract.rs",
+      "blob": "dad0e6e009f6873d55b7a17214cffa568d2063f1",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "core/programmability/tests/wiki_unique_entryid_contract.rs",
+      "blob": "bb7a2796a972e0b68e38f9e980a3291b56bc7932",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "hq/lib/arbor-service.mjs",
+      "blob": "f00d688aff7cd4bd1b5e85f5caf362ca2aa3d417",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "hq/lib/semantic-registry.mjs",
+      "blob": "ed55a274610e68b9428240ec27e7d5424c9fc850",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/.gitignore",
+      "blob": "d40d3e0d3b439324e544c336c72ff933740385ad",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/Cargo.lock",
+      "blob": "23dc23d9ea8c5efb2d1cba3f5121d76034b5fe43",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/Cargo.toml",
+      "blob": "3b4eb158a0a8b5618da73e0878de603d74946e07",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/MIGRATION.md",
+      "blob": "32600dca5de47d5bc37a9bbc5642b993daf59a06",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/README.md",
+      "blob": "964f7369f0c1391279c2a341956113177bb980a8",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/examples/observability_probe.rs",
+      "blob": "fc754e06d8067eae3b79652149aad0e4c200d181",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/examples/typed_dag.rs",
+      "blob": "b20f5db22eb3df3fd7c0f2e628fc16a93f92f886",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/adapters/dependency_manifest.rs",
+      "blob": "96662c1581e592fa97807764d43043ef515b91dc",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/adapters/mod.rs",
+      "blob": "17ebc8194ffc0997ad5c31f5e8c87264568b082a",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/adapters/research.rs",
+      "blob": "8d239114544c8730ad621514c475183c4e708240",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/algorithm_adapter.rs",
+      "blob": "2a15dd24a62e94074b1fcd6fb7eec2dd51e2d43a",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/apply_ledger.rs",
+      "blob": "07e1adbd891239b27920b5e98d89960b0c46bf76",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/bin/hqkg-chat-context.rs",
+      "blob": "2f3d2ef40ed5299ab52c640791dc8111c43f2e13",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/bin/hqkg-control.rs",
+      "blob": "ea3eb69c58a1b1417fa87ffc8a1a80a2760c3fc3",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/bin/hqkg-deps.rs",
+      "blob": "90d5ccf1d2659830fe14a26d9259d7da0e539a94",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/bin/hqkg-development.rs",
+      "blob": "072aba01fb8de083481256db99cca611c0ec18cf",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/bin/hqkg-import.rs",
+      "blob": "380f86a71c2c0f75af797d747ddf9b65dcb932e0",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/bin/hqkg-personal.rs",
+      "blob": "28fb7683e57b9e14d74db928cce5c547b97907e5",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/bin/hqkg-research.rs",
+      "blob": "13cb65e01baad81e2c55c523cef881a3bf0bdc34",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/bin/hqkg-rust-syntax.rs",
+      "blob": "2e3a8b4bb871fceb75f405a8a4fd99285aa22b9e",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/bin/hqkg-wave1-query.rs",
+      "blob": "85a328b821db3f115d0dfff19579170fb5a9da54",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/bin/hqkg-web-feed.rs",
+      "blob": "b5dd71057626e5efbcbea6b0ca613f16790f8478",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/builtins.rs",
+      "blob": "252ba3641183574aa2101ab541eb29c53dfc7ffc",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/context_retrieval.rs",
+      "blob": "d90bb60a41944b2d9ee05540f2ff4f46b381ce53",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/control.rs",
+      "blob": "2265c4dc864b2f0cdfad560e70d15b1e9396055d",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/database.rs",
+      "blob": "7959af33bfcf77f2e29365d213c5d2338339b1bc",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/development_engine.rs",
+      "blob": "1b1a56400f7c3aeabe96db7e6334a64c0e5dba64",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/development_relations.rs",
+      "blob": "5390cfc7420a7ee82177f19f01c8b788ee604d45",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/durable_dag.rs",
+      "blob": "140161b4f34874dee9c8540dfcd4733ed97f7cd4",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/engine.rs",
+      "blob": "885199953482da9ab41ddde5378d7bf455c51df3",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/graph_change_set.rs",
+      "blob": "3db1ac2b78eaf76da7cbdf4e502540174b7b2ffa",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/import.rs",
+      "blob": "b327e75f1f464df5ca6f46c801d2ad77fd79a957",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/invalidate.rs",
+      "blob": "a5bfe9ff7736753ea6661d2672917f5604adf521",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/lib.rs",
+      "blob": "8387eb03bea09ea4777e6a875a454c4c062b06bd",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/main.rs",
+      "blob": "7ad9a29d2080f9d5d26286eafa3be2aac5989274",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/managed_context.rs",
+      "blob": "973015dffe1f8bfe8974810018056b616226e244",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/native_program.rs",
+      "blob": "e5a15f8df2bb5a982c26c53746ad010cae688034",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/observability.rs",
+      "blob": "4696d63adf0c528c81f182388f4d1467f6a5d619",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/observability/admission.rs",
+      "blob": "f7f2fe3207d9fa52b8ad1e4e369028639fe5ab3c",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/observability/correlation.rs",
+      "blob": "a236454e2cadc22fd8447db91c0bcbdc82e9e286",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/observability/drift.rs",
+      "blob": "ec9d1f33aa90e8a5a40562f1037fc1bf4b5f649e",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/observability/effects.rs",
+      "blob": "647e4d55ac37c4555b3fd613c60c9de2be894611",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/observability/forecast.rs",
+      "blob": "2bcd52639c3ee8eb59c751aac42e447c882d7c59",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/observability/incidents.rs",
+      "blob": "8284970c23381d1dd9452efef8443844c37c752d",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/observability/journey.rs",
+      "blob": "aaede39858ee592d8515befc83eb6a849eb6f566",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/observability/observer.rs",
+      "blob": "4c6deba4c7cd1a744e3c9bda4b1b703b5eb66b24",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/observability/quality.rs",
+      "blob": "9e669b016a248bcd04136d31190f171a41e9bc9d",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/observability/recovery.rs",
+      "blob": "7fdabcaa518f919c345de102971f9c5463999ae9",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/observability/synthesis.rs",
+      "blob": "55bf3d3bc282e472764cf88a3e9890942cd4a14b",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/reconcile.rs",
+      "blob": "8475b92b35f7a4eee49a71d72bf848c69f90c0fa",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/rust_syntax.rs",
+      "blob": "d86c1e5565926a58670dfec3d0b2d464f74a32de",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/scoped_graph.rs",
+      "blob": "02652f34c370b373d8a50ff9c9b775f9128ca120",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/semantic_source.rs",
+      "blob": "ee767b2ab3dc2550d9370a9e7b846aba0dc33f05",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/typed_dag.rs",
+      "blob": "7b476e509ab9525ec9a31f5cc51193e1303df1df",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/utility_adapter.rs",
+      "blob": "fda917b00f501ab0b5350e709c0d937643357475",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/src/web_memory.rs",
+      "blob": "dc356713704991dc86825c57335f530c3676818a",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/algorithm_adapter.rs",
+      "blob": "4df0f804e6ce608860d3ce188c451003124db62f",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/apply_ledger.rs",
+      "blob": "08733da5069ebba8f812ce63aca06f9219335dc3",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/apply_ledger_locking.rs",
+      "blob": "9e5f488326c3cd0e518093647d91c990a8027fbb",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/bench_vertical.rs",
+      "blob": "cdb8e61dcab998c82014bb27a10b4eb70031e47f",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/benchmark_semantic_program.rs",
+      "blob": "2450dbeab9a0060267318ad99831dc3dcbe10009",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/benchmark_typed_dag.rs",
+      "blob": "a9edc4fe61ec556cd1b89fd8406b35b500320f35",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/builtins.rs",
+      "blob": "53457bd7a477b7b3a19623365dfe56a97b65a68b",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/context_retrieval.rs",
+      "blob": "29c37a1b0f7fcacb178be233241bac575d5f96c0",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/control.rs",
+      "blob": "f6b7d1e637baf44878058f0b06ec103a36bff053",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/control_persistence.rs",
+      "blob": "07fbecb14edf48acfcf57dc042e2e32c025a63ab",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/control_recovery.rs",
+      "blob": "989dee5e7a0c50f99fcacf7b07568e8b4e038e9e",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/core.rs",
+      "blob": "278ebc822ddb0f3126500d58a98576451587810d",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/dependency_manifest.rs",
+      "blob": "4dbf1f9076845a712f3ee9fc3826d39ad41c2835",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/development_composition.rs",
+      "blob": "613ba45d2545592b460a633e9d8419cc2725f0e9",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/durable_dag.rs",
+      "blob": "72774dbce671b326ea00b4ce58e7fd99c4909100",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/fixtures/web-memory-revision/revocation-cases.json",
+      "blob": "f60ea4570a3f29fe30cfa67a6d62b3762e6ef808",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/graph_change_set.rs",
+      "blob": "5efb15f4f1907824cde182d7349c6ea885a47f2e",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/graph_indexes.rs",
+      "blob": "7f473365ba028386a656e818d2b5b434a10ee33d",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/host_context_sync.rs",
+      "blob": "f99a31b736a243b03b56a30a048f7cbb07d5a418",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/import.rs",
+      "blob": "de42ad1ad4765561516b4dfa6615fd9bca1d3ea6",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/invalidate-revision.rs",
+      "blob": "b2706b74376646cc61f01a07cf0284d436ebd309",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/invalidate-revision.test.mjs",
+      "blob": "75ba5dff3b124243a260bb07829cd100a45967b4",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/invalidate.rs",
+      "blob": "7b192489db3434c81951a8c726f409a6f271c670",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/keeper_recovery_matrix.rs",
+      "blob": "37a6fbe5828e57e206c068ea3781b801edbc6342",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/observability.rs",
+      "blob": "41b50e66056f1ba27c4b64886002d5dbe15d7065",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/observability_extended.rs",
+      "blob": "4b2e083522f6f526a237f9c25634e0f8e6e2d248",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/personal_lifecycle.rs",
+      "blob": "e5147c8a39674408377287e7f78bdf334706b01b",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/pilot_vertical.rs",
+      "blob": "b255473f140b8d6dec067d12d64a3c53d75de2c1",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/real_development_composition.mjs",
+      "blob": "9106836e014d1e691fc74f962eb829fd7ee0c5b8",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/reconcile.rs",
+      "blob": "b50dde3f6b8887ad82cb7fb9bf19cbc6888370c4",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/research_adapter.rs",
+      "blob": "5eba7c53dede3ebcdd3d204c2ca707d215d37d6a",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/rust_syntax.rs",
+      "blob": "b707b6b0b825be432e9254daabcd35998bb9836a",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/scoped_graph.rs",
+      "blob": "6130d514b5e9a5c8a951f9ff584cd5eb40f0cbad",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/scoped_query_retrieval.rs",
+      "blob": "24da5511c9d6e972cd4797f7ca96935ee50e8a32",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/semantic_source.rs",
+      "blob": "2e10d6059490f2354ba08beaeb4d701ee7482998",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/telemetry_export.rs",
+      "blob": "1f3e111a803eafd85d7d82891f254dc061c93f37",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/typed_dag.rs",
+      "blob": "49c9aba9813d93bb06e0fe1a0747290ef5e2dee7",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/utility_adapter.rs",
+      "blob": "125dc9438d03c4a83cb07d741824f2bcab3d4e77",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/validated_pure_program.rs",
+      "blob": "bc9201d20de4d9cdaee80ea2a79795db1e95aa6a",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/web_feed_process.rs",
+      "blob": "24a1804dfd71be81d8d6a32b6438f694928b3215",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/web_memory.rs",
+      "blob": "a44358fbd7a0fa84e9771c30f3f16b431b21c1c4",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "path": "native/hqkg/tests/web_memory_revocation.rs",
+      "blob": "4cf5b98c0602b96e59435fe491a2ceee82c93415",
+      "commit": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+      "repository": "ARBOR"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/semantic_relations.rs",
+      "blob": "df475a0f53b81e07e1155cc2a6bcf55c5b8ed7e7",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/semantic_primitives.rs",
+      "blob": "7372fda1ce5d3d06315b45d6fb62c51cc367f4ba",
+      "role": "target-reference"
+    },
+    {
+      "repository": "Product",
+      "commit": "11812e6b1c06ac047329169ef5d848da3f85788c",
+      "path": "crates/protocol-sdk/src/development_intelligence.rs",
+      "blob": "7cc193f4ec9504b7cf6256431080d5cf128a571a",
+      "role": "target-reference"
+    }
+  ],
+  "nativeDependencyGraph": {
+    "native/hqkg": {
+      "features": [
+        "importer",
+        "rust-syntax",
+        "native-program"
+      ],
+      "pathDependency": "core/programmability",
+      "lock": "native/hqkg/Cargo.lock",
+      "optionalExcluded": [
+        "sqlite",
+        "postgres",
+        "databases"
+      ],
+      "direct": [
+        "serde_json",
+        "sha2",
+        "syn",
+        "quote",
+        "proc-macro2",
+        "vivim-programmability-core"
+      ]
+    },
+    "core/programmability": {
+      "direct": [
+        "serde",
+        "serde_json",
+        "sha2"
+      ]
+    }
+  },
+  "lockedPackages": [
+    {
+      "name": "ahash",
+      "version": "0.8.12",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "5a15f179cd60c4584b8a8c596927aadc462e27f2ca70c04e0071964a73ba7a75",
+      "dependencies": [
+        "cfg-if",
+        "once_cell",
+        "version_check",
+        "zerocopy"
+      ]
+    },
+    {
+      "name": "async-trait",
+      "version": "0.1.92",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "82f6aeea286b8eb4dd3431a1be1b59d290ace00f5bfd8e2a159bc2a05e2c1667",
+      "dependencies": [
+        "proc-macro2",
+        "quote",
+        "syn 3.0.9"
+      ]
+    },
+    {
+      "name": "base64",
+      "version": "0.22.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6",
+      "dependencies": []
+    },
+    {
+      "name": "bitflags",
+      "version": "2.13.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "3ded4057c258ba199e2d26386d3af3780957ecaee6c4ef4041c6b4b8b97c0b06",
+      "dependencies": []
+    },
+    {
+      "name": "block-buffer",
+      "version": "0.10.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "3078c7629b62d3f0439517fa394996acacc5cbc91c5a20d8c658e77abd503a71",
+      "dependencies": [
+        "generic-array"
+      ]
+    },
+    {
+      "name": "block-buffer",
+      "version": "0.12.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "d2f6c7dbe95a6ed67ad9f18e57daf93a2f034c524b99fd2b76d18fdfeb6660aa",
+      "dependencies": [
+        "hybrid-array"
+      ]
+    },
+    {
+      "name": "bumpalo",
+      "version": "3.20.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "72f5acc6cb2ba439de613abc23857ec3d78374d8ed5ac84e9d11336e87da8649",
+      "dependencies": []
+    },
+    {
+      "name": "byteorder",
+      "version": "1.5.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b",
+      "dependencies": []
+    },
+    {
+      "name": "bytes",
+      "version": "1.12.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "fc652a48c352aef3ea3aed32080501cf3ef6ed5da78602a020c991775b0aff04",
+      "dependencies": []
+    },
+    {
+      "name": "cc",
+      "version": "1.11.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "375989decec1a0fa424442bed520fa12ede43a48475ce8c7417d2c69b32b5f6b",
+      "dependencies": [
+        "find-msvc-tools",
+        "shlex"
+      ]
+    },
+    {
+      "name": "cfg-if",
+      "version": "1.0.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "4e7648175b45a9a48536d676f68d918270699102aa8dab5496df06904c914600",
+      "dependencies": []
+    },
+    {
+      "name": "chacha20",
+      "version": "0.10.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "65c35e4b699c7e15ccbe7ee35c005e4fc0a278d22238a2857e6ce2dadeda1b06",
+      "dependencies": [
+        "cfg-if",
+        "cpufeatures 0.3.1",
+        "rand_core"
+      ]
+    },
+    {
+      "name": "cmov",
+      "version": "0.5.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "0c9ea0ac24bc397ab3c98583a3c9ba74fa56b09a4449bbe172b9b1ddb016027a",
+      "dependencies": []
+    },
+    {
+      "name": "const-oid",
+      "version": "0.10.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "a6ef517f0926dd24a1582492c791b6a4818a4d94e789a334894aa15b0d12f55c",
+      "dependencies": []
+    },
+    {
+      "name": "cpufeatures",
+      "version": "0.2.17",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "59ed5838eebb26a2bb2e58f6d5b5316989ae9d08bab10e0e6d103e656d1b0280",
+      "dependencies": [
+        "libc"
+      ]
+    },
+    {
+      "name": "cpufeatures",
+      "version": "0.3.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "5ca28b0ae3115b884660db4118d803791fd6756b6e88f39c0f3f7859060d7566",
+      "dependencies": [
+        "libc"
+      ]
+    },
+    {
+      "name": "crypto-common",
+      "version": "0.1.7",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "78c8292055d1c1df0cce5d180393dc8cce0abec0a7102adb6c7b1eef6016d60a",
+      "dependencies": [
+        "generic-array",
+        "typenum"
+      ]
+    },
+    {
+      "name": "crypto-common",
+      "version": "0.2.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "ce6e4c961d6cd6c9a86db418387425e8bdeaf05b3c8bc1411e6dca4c252f1453",
+      "dependencies": [
+        "hybrid-array"
+      ]
+    },
+    {
+      "name": "ctutils",
+      "version": "0.4.8",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "261af4dc7a06ea8a527a8717d8cbba3417530d6ea14e1edb3de6b67806be474f",
+      "dependencies": [
+        "cmov"
+      ]
+    },
+    {
+      "name": "digest",
+      "version": "0.10.7",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "9ed9a281f7bc9b7576e61468ba615a66a5c8cfdff42420a70aa82701a3b1e292",
+      "dependencies": [
+        "block-buffer 0.10.4",
+        "crypto-common 0.1.7"
+      ]
+    },
+    {
+      "name": "digest",
+      "version": "0.11.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "f1dd6dbb5841937940781866fa1281a1ff7bd3bf827091440879f9994983d5c2",
+      "dependencies": [
+        "block-buffer 0.12.1",
+        "const-oid",
+        "crypto-common 0.2.2",
+        "ctutils"
+      ]
+    },
+    {
+      "name": "fallible-iterator",
+      "version": "0.2.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "4443176a9f2c162692bd3d352d745ef9413eec5782a80d8fd6f8a1ac692a07f7",
+      "dependencies": []
+    },
+    {
+      "name": "fallible-iterator",
+      "version": "0.3.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "2acce4a10f12dc2fb14a218589d4f1f62ef011b2d0cc4b3cb1bba8e94da14649",
+      "dependencies": []
+    },
+    {
+      "name": "fallible-streaming-iterator",
+      "version": "0.1.9",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "7360491ce676a36bf9bb3c56c1aa791658183a54d2744120f27285738d90465a",
+      "dependencies": []
+    },
+    {
+      "name": "find-msvc-tools",
+      "version": "0.1.15",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "1c66915cc5391097de7a2b0b972e8505aa33c0df401fd3a6811dbdb32881ba48",
+      "dependencies": []
+    },
+    {
+      "name": "futures-channel",
+      "version": "0.3.34",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "b1f9e3d69d39e4862ffed03ed071a76f9a13ba1d9109d355b0f0aa6b15e393c4",
+      "dependencies": [
+        "futures-core",
+        "futures-sink"
+      ]
+    },
+    {
+      "name": "futures-core",
+      "version": "0.3.34",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "92d699e522242e69e3003b94ecc1f960f3a5e015aa7c5d7486e65ad01dd94f5e",
+      "dependencies": []
+    },
+    {
+      "name": "futures-sink",
+      "version": "0.3.34",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "1944426bf7d03f1d14f708785e4b33efd750b36d48a157b836b3efc15ede8e1d",
+      "dependencies": []
+    },
+    {
+      "name": "futures-task",
+      "version": "0.3.34",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "cd417de3d1d015fc3bfd2b1ea46dfc7bab72ef86f1cc7cc9c78e728b34a6d1fd",
+      "dependencies": []
+    },
+    {
+      "name": "futures-util",
+      "version": "0.3.34",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "0d50a92467f8ba5dd6e3ee5d4bd04d73ab2e4e1c44474a0674821dfce14b79bc",
+      "dependencies": [
+        "futures-core",
+        "futures-sink",
+        "futures-task",
+        "pin-project-lite",
+        "slab"
+      ]
+    },
+    {
+      "name": "generic-array",
+      "version": "0.14.7",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "85649ca51fd72272d7821adaf274ad91c288277713d9c18820d8499a7ff69e9a",
+      "dependencies": [
+        "typenum",
+        "version_check"
+      ]
+    },
+    {
+      "name": "getrandom",
+      "version": "0.4.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "300e883d756b2e4ec94e02791f39b04b522276138852cfc41d9fb7e904106099",
+      "dependencies": [
+        "cfg-if",
+        "libc",
+        "r-efi",
+        "rand_core"
+      ]
+    },
+    {
+      "name": "hashbrown",
+      "version": "0.14.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "e5274423e17b7c9fc20b6e7e208532f9b19825d82dfd615708b70edd83df41f1",
+      "dependencies": [
+        "ahash"
+      ]
+    },
+    {
+      "name": "hashlink",
+      "version": "0.9.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "6ba4ff7128dee98c7dc9794b6a411377e1404dba1c97deb8d1a55297bd25d8af",
+      "dependencies": [
+        "hashbrown"
+      ]
+    },
+    {
+      "name": "hmac",
+      "version": "0.13.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "6303bc9732ae41b04cb554b844a762b4115a61bfaa81e3e83050991eeb56863f",
+      "dependencies": [
+        "digest 0.11.3"
+      ]
+    },
+    {
+      "name": "hq-knowledge-graph",
+      "version": "0.1.0",
+      "source": "local",
+      "checksum": null,
+      "dependencies": [
+        "postgres",
+        "proc-macro2",
+        "quote",
+        "rusqlite",
+        "serde_json",
+        "sha2 0.10.9",
+        "syn 2.0.119",
+        "vivim-programmability-core"
+      ]
+    },
+    {
+      "name": "hybrid-array",
+      "version": "0.4.15",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "27f864f10dfb56725ce5ce5472bc52252c8f93a4ab86327122cebf62c5f59a17",
+      "dependencies": [
+        "typenum"
+      ]
+    },
+    {
+      "name": "itoa",
+      "version": "1.0.18",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "8f42a60cbdf9a97f5d2305f08a87dc4e09308d1276d28c869c684d7777685682",
+      "dependencies": []
+    },
+    {
+      "name": "js-sys",
+      "version": "0.3.107",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "8dc09d2154098bbf4ef54eab6b117a3c24cbbffe94046b16ee6d6d4510584d3a",
+      "dependencies": [
+        "cfg-if",
+        "futures-util",
+        "wasm-bindgen"
+      ]
+    },
+    {
+      "name": "libc",
+      "version": "0.2.191",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "65cd87c9a6d60536580b316ad985726104730a5151c99845f2490428ef91240a",
+      "dependencies": []
+    },
+    {
+      "name": "libredox",
+      "version": "0.1.25",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "61ff90caf6077a803a240f62fdbe88645a890bbca49ef8174c3cb0404362171d",
+      "dependencies": [
+        "libc"
+      ]
+    },
+    {
+      "name": "libsqlite3-sys",
+      "version": "0.30.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "2e99fb7a497b1e3339bc746195567ed8d3e24945ecd636e3619d20b9de9e9149",
+      "dependencies": [
+        "cc",
+        "pkg-config",
+        "vcpkg"
+      ]
+    },
+    {
+      "name": "lock_api",
+      "version": "0.4.14",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "224399e74b87b5f3557511d98dff8b14089b3dadafcab6bb93eab67d3aace965",
+      "dependencies": [
+        "scopeguard"
+      ]
+    },
+    {
+      "name": "log",
+      "version": "0.4.35",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "5d15f86d12da44cd8d4ec3c73984537eb7f4cadcb9776a575a0a8a05ca11005c",
+      "dependencies": []
+    },
+    {
+      "name": "md-5",
+      "version": "0.11.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "69b6441f590336821bb897fb28fc622898ccceb1d6cea3fde5ea86b090c4de98",
+      "dependencies": [
+        "cfg-if",
+        "digest 0.11.3"
+      ]
+    },
+    {
+      "name": "memchr",
+      "version": "2.8.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98",
+      "dependencies": []
+    },
+    {
+      "name": "mio",
+      "version": "1.2.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "1788edb87fdc09c7e26304471e2f5be8cdefb1b6930d6e3985fc02ff53bf86ee",
+      "dependencies": [
+        "libc",
+        "wasi 0.11.1+wasi-snapshot-preview1",
+        "windows-sys"
+      ]
+    },
+    {
+      "name": "objc2-core-foundation",
+      "version": "0.3.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "2a180dd8642fa45cdb7dd721cd4c11b1cadd4929ce112ebd8b9f5803cc79d536",
+      "dependencies": [
+        "bitflags"
+      ]
+    },
+    {
+      "name": "objc2-system-configuration",
+      "version": "0.3.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "7216bd11cbda54ccabcab84d523dc93b858ec75ecfb3a7d89513fa22464da396",
+      "dependencies": [
+        "objc2-core-foundation"
+      ]
+    },
+    {
+      "name": "once_cell",
+      "version": "1.21.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50",
+      "dependencies": []
+    },
+    {
+      "name": "parking_lot",
+      "version": "0.12.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "93857453250e3077bd71ff98b6a65ea6621a19bb0f559a85248955ac12c45a1a",
+      "dependencies": [
+        "lock_api",
+        "parking_lot_core"
+      ]
+    },
+    {
+      "name": "parking_lot_core",
+      "version": "0.9.12",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "2621685985a2ebf1c516881c026032ac7deafcda1a2c9b7850dc81e3dfcb64c1",
+      "dependencies": [
+        "cfg-if",
+        "libc",
+        "redox_syscall",
+        "smallvec",
+        "windows-link"
+      ]
+    },
+    {
+      "name": "percent-encoding",
+      "version": "2.3.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "9b4f627cb1b25917193a259e49bdad08f671f8d9708acfd5fe0a8c1455d87220",
+      "dependencies": []
+    },
+    {
+      "name": "phf",
+      "version": "0.13.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "c1562dc717473dbaa4c1f85a36410e03c047b2e7df7f45ee938fbef64ae7fadf",
+      "dependencies": [
+        "phf_shared",
+        "serde"
+      ]
+    },
+    {
+      "name": "phf_shared",
+      "version": "0.13.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "e57fef6bc5981e38c2ce2d63bfa546861309f875b8a75f092d1d54ae2d64f266",
+      "dependencies": [
+        "siphasher"
+      ]
+    },
+    {
+      "name": "pin-project-lite",
+      "version": "0.2.17",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "a89322df9ebe1c1578d689c92318e070967d1042b512afbe49518723f4e6d5cd",
+      "dependencies": []
+    },
+    {
+      "name": "pkg-config",
+      "version": "0.3.34",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "f6b464fbc74e149a392436b17d523f769e057cb6877f6a5c4618bc6f11800548",
+      "dependencies": []
+    },
+    {
+      "name": "postgres",
+      "version": "0.19.14",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "33ad20e0aa0b24f5a394eab4f78c781d248982b22b25cecc7e3aa46a681605bd",
+      "dependencies": [
+        "bytes",
+        "fallible-iterator 0.2.0",
+        "futures-util",
+        "log",
+        "tokio",
+        "tokio-postgres"
+      ]
+    },
+    {
+      "name": "postgres-protocol",
+      "version": "0.6.12",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "08808e3c483c46e999108051c78334f473d5adb59d78bb80a1268c7e6aa6c514",
+      "dependencies": [
+        "base64",
+        "byteorder",
+        "bytes",
+        "fallible-iterator 0.2.0",
+        "hmac",
+        "md-5",
+        "memchr",
+        "rand",
+        "sha2 0.11.1",
+        "stringprep"
+      ]
+    },
+    {
+      "name": "postgres-types",
+      "version": "0.2.14",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "851ca9db4932932d69f3ea811b1abe63087a0f740a47692619dd40d4899b68be",
+      "dependencies": [
+        "bytes",
+        "fallible-iterator 0.2.0",
+        "postgres-protocol"
+      ]
+    },
+    {
+      "name": "proc-macro2",
+      "version": "1.0.107",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "985e7ec9bb745e6ce6535b544d84d6cd6f7ad8bd711c398938ae983b91a766d9",
+      "dependencies": [
+        "unicode-ident"
+      ]
+    },
+    {
+      "name": "quote",
+      "version": "1.0.47",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "1fbf4db142a473a8d80c26bbf18454ed458bf8d26c8219c331daecfdbd079001",
+      "dependencies": [
+        "proc-macro2"
+      ]
+    },
+    {
+      "name": "r-efi",
+      "version": "6.0.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "f8dcc9c7d52a811697d2151c701e0d08956f92b0e24136cf4cf27b57a6a0d9bf",
+      "dependencies": []
+    },
+    {
+      "name": "rand",
+      "version": "0.10.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "65c9fb96cbc91e3478eaae79a69fcd3f1ae4ad052e471fe6732fff548984b4af",
+      "dependencies": [
+        "chacha20",
+        "getrandom",
+        "rand_core"
+      ]
+    },
+    {
+      "name": "rand_core",
+      "version": "0.10.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "63b8176103e19a2643978565ca18b50549f6101881c443590420e4dc998a3c69",
+      "dependencies": []
+    },
+    {
+      "name": "redox_syscall",
+      "version": "0.5.18",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "ed2bf2547551a7053d6fdfafda3f938979645c44812fbfcda098faae3f1a362d",
+      "dependencies": [
+        "bitflags"
+      ]
+    },
+    {
+      "name": "rusqlite",
+      "version": "0.32.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "7753b721174eb8ff87a9a0e799e2d7bc3749323e773db92e0984debb00019d6e",
+      "dependencies": [
+        "bitflags",
+        "fallible-iterator 0.3.0",
+        "fallible-streaming-iterator",
+        "hashlink",
+        "libsqlite3-sys",
+        "smallvec"
+      ]
+    },
+    {
+      "name": "rustversion",
+      "version": "1.0.23",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "cf54715a573b99ac80df0bc206da022bcd442c974952c7b9720069370852e21f",
+      "dependencies": []
+    },
+    {
+      "name": "scopeguard",
+      "version": "1.2.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "94143f37725109f92c262ed2cf5e59bce7498c01bcc1502d7b9afe439a4e9f49",
+      "dependencies": []
+    },
+    {
+      "name": "serde",
+      "version": "1.0.229",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "4148590afebada386688f18773da617792bf2ef03ffc1e4cbd2b1d45b023e0ba",
+      "dependencies": [
+        "serde_core",
+        "serde_derive"
+      ]
+    },
+    {
+      "name": "serde_core",
+      "version": "1.0.229",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "67dca2c9c51e58a4791a4b1ed58308b39c64224d349a935ab5039aa360942a48",
+      "dependencies": [
+        "serde_derive"
+      ]
+    },
+    {
+      "name": "serde_derive",
+      "version": "1.0.229",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "e7a5d71263a5a7d47b41f6b3f06ba276f10cc18b0931f1799f710578e2309348",
+      "dependencies": [
+        "proc-macro2",
+        "quote",
+        "syn 3.0.9"
+      ]
+    },
+    {
+      "name": "serde_json",
+      "version": "1.0.154",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "e7e9cc8b1b85264074fbcc02a88680c4096b1e47df8f739dceb03bf482f04bd6",
+      "dependencies": [
+        "itoa",
+        "memchr",
+        "serde",
+        "serde_core",
+        "zmij"
+      ]
+    },
+    {
+      "name": "sha2",
+      "version": "0.10.9",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "a7507d819769d01a365ab707794a4084392c824f54a7a6a7862f8c3d0892b283",
+      "dependencies": [
+        "cfg-if",
+        "cpufeatures 0.2.17",
+        "digest 0.10.7"
+      ]
+    },
+    {
+      "name": "sha2",
+      "version": "0.11.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "47d7069beb7d6ac7b9acd1039986e73443f24234f41074da099d6f994ac9ad19",
+      "dependencies": [
+        "cfg-if",
+        "cpufeatures 0.3.1",
+        "digest 0.11.3"
+      ]
+    },
+    {
+      "name": "shlex",
+      "version": "2.0.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "f8fadd59c855ef2080decdef8ff161eb6661b86933c9d82e5ba29dc602a55aba",
+      "dependencies": []
+    },
+    {
+      "name": "siphasher",
+      "version": "1.0.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "33f4fe9184a62d842c9ef383018f3306d8ba224fd9d836f56d7288308847c256",
+      "dependencies": []
+    },
+    {
+      "name": "slab",
+      "version": "0.4.12",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "0c790de23124f9ab44544d7ac05d60440adc586479ce501c1d6d7da3cd8c9cf5",
+      "dependencies": []
+    },
+    {
+      "name": "smallvec",
+      "version": "1.16.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "d0d5d4b1981b8bbbb7aed204cae5726d683d5d6ac7e74ec54122ea28f315e7c8",
+      "dependencies": []
+    },
+    {
+      "name": "socket2",
+      "version": "0.6.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "c3d1e2c7f27f8d4cb10542a02c49005dbd6e93095799d6f3be745fae9f8fedd4",
+      "dependencies": [
+        "libc",
+        "windows-sys"
+      ]
+    },
+    {
+      "name": "stringprep",
+      "version": "0.1.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "7b4df3d392d81bd458a8a621b8bffbd2302a12ffe288a9d931670948749463b1",
+      "dependencies": [
+        "unicode-bidi",
+        "unicode-normalization",
+        "unicode-properties"
+      ]
+    },
+    {
+      "name": "syn",
+      "version": "2.0.119",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "872831b642d1a07999a962a351ed35b955ea2cfc8f3862091e2a240a84f17297",
+      "dependencies": [
+        "proc-macro2",
+        "quote",
+        "unicode-ident"
+      ]
+    },
+    {
+      "name": "syn",
+      "version": "3.0.9",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "d78c8dee4c7bf0e14673097256fed6142ce9d3b85a408189d07482442145823b",
+      "dependencies": [
+        "proc-macro2",
+        "quote",
+        "unicode-ident"
+      ]
+    },
+    {
+      "name": "tinyvec",
+      "version": "1.13.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "fd3ca314f692efd6c868f8408f53fe444634a845f96c028b97d35f6a1f79f0ee",
+      "dependencies": []
+    },
+    {
+      "name": "tokio",
+      "version": "1.54.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "b52fd3255258d26fac7264ab5a76b53c13367136dc011d3d6ad4f8ed070396a3",
+      "dependencies": [
+        "bytes",
+        "libc",
+        "mio",
+        "pin-project-lite",
+        "socket2",
+        "windows-sys"
+      ]
+    },
+    {
+      "name": "tokio-postgres",
+      "version": "0.7.18",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "a528f7d280f6d5b9cd149635c8705b0dd049754bc67d81d31fa25169a93809d3",
+      "dependencies": [
+        "async-trait",
+        "byteorder",
+        "bytes",
+        "fallible-iterator 0.2.0",
+        "futures-channel",
+        "futures-util",
+        "log",
+        "parking_lot",
+        "percent-encoding",
+        "phf",
+        "pin-project-lite",
+        "postgres-protocol",
+        "postgres-types",
+        "rand",
+        "socket2",
+        "tokio",
+        "tokio-util",
+        "whoami"
+      ]
+    },
+    {
+      "name": "tokio-util",
+      "version": "0.7.20",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "e464cf451ba96ebfc6f9b6542f17ee8b8956e33f1e40d9690624e59d7a7f8a4b",
+      "dependencies": [
+        "bytes",
+        "futures-core",
+        "futures-sink",
+        "libc",
+        "pin-project-lite",
+        "tokio"
+      ]
+    },
+    {
+      "name": "typenum",
+      "version": "1.20.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "b6f5e870be6c3b371b77fe0ee0bafb859fa4964b4404c27de1d380043c4dda20",
+      "dependencies": []
+    },
+    {
+      "name": "unicode-bidi",
+      "version": "0.3.18",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "5c1cb5db39152898a79168971543b1cb5020dff7fe43c8dc468b0885f5e29df5",
+      "dependencies": []
+    },
+    {
+      "name": "unicode-ident",
+      "version": "1.0.27",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "a2c754d6c33795a1c324727428e5a7dedb5b06195f9890bdbcba760d3e246563",
+      "dependencies": []
+    },
+    {
+      "name": "unicode-normalization",
+      "version": "0.1.26",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "75cd3fb03d5288b3ba9a1ee103ac7e9cbb59f0b03d64f8ddfcc04dd42758a85d",
+      "dependencies": [
+        "tinyvec"
+      ]
+    },
+    {
+      "name": "unicode-properties",
+      "version": "0.1.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "993ad287eb20e8ba755312801cfe1413e0f25d604075863acaddca10b04c1833",
+      "dependencies": []
+    },
+    {
+      "name": "vcpkg",
+      "version": "0.2.15",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "accd4ea62f7bb7a82fe23066fb0957d48ef677f6eeb8215f372f52e48bb32426",
+      "dependencies": []
+    },
+    {
+      "name": "version_check",
+      "version": "0.9.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a",
+      "dependencies": []
+    },
+    {
+      "name": "vivim-programmability-core",
+      "version": "0.1.0",
+      "source": "local",
+      "checksum": null,
+      "dependencies": [
+        "serde",
+        "serde_json",
+        "sha2 0.10.9"
+      ]
+    },
+    {
+      "name": "wasi",
+      "version": "0.11.1+wasi-snapshot-preview1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "ccf3ec651a847eb01de73ccad15eb7d99f80485de043efb2f370cd654f4ea44b",
+      "dependencies": []
+    },
+    {
+      "name": "wasi",
+      "version": "0.14.7+wasi-0.2.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "883478de20367e224c0090af9cf5f9fa85bed63a95c1abf3afc5c083ebc06e8c",
+      "dependencies": [
+        "wasip2"
+      ]
+    },
+    {
+      "name": "wasip2",
+      "version": "1.0.4+wasi-0.2.12",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "b67efb37e106e55ce722a510d6b5f9c17f083e5fc79afc2badeb12cc313d9487",
+      "dependencies": [
+        "wit-bindgen"
+      ]
+    },
+    {
+      "name": "wasite",
+      "version": "1.0.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "66fe902b4a6b8028a753d5424909b764ccf79b7a209eac9bf97e59cda9f71a42",
+      "dependencies": [
+        "wasi 0.14.7+wasi-0.2.4"
+      ]
+    },
+    {
+      "name": "wasm-bindgen",
+      "version": "0.2.130",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "a0181c14ddd6c7b8b0b0132a5f1ea2f32be0d893cd3ea97b6e3b28886b8a3d1c",
+      "dependencies": [
+        "cfg-if",
+        "rustversion",
+        "wasm-bindgen-macro",
+        "wasm-bindgen-shared"
+      ]
+    },
+    {
+      "name": "wasm-bindgen-macro",
+      "version": "0.2.130",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "6e931a02a39abdbf66966fc35902b5ed58344750a70885bed4ebb3d8eaf28ed9",
+      "dependencies": [
+        "quote",
+        "wasm-bindgen-macro-support"
+      ]
+    },
+    {
+      "name": "wasm-bindgen-macro-support",
+      "version": "0.2.130",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "2ca4b54280e455bd831e33a6b8e734baf432fe63fbc35c42ac14ce67a043a53a",
+      "dependencies": [
+        "bumpalo",
+        "proc-macro2",
+        "quote",
+        "syn 3.0.9",
+        "wasm-bindgen-shared"
+      ]
+    },
+    {
+      "name": "wasm-bindgen-shared",
+      "version": "0.2.130",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "3b1f9c3798725016c6ee5f2f57869ec0831e8bbc0ab0310a86e787e97f41389e",
+      "dependencies": [
+        "unicode-ident"
+      ]
+    },
+    {
+      "name": "web-sys",
+      "version": "0.3.107",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "d7d179596ff5ec0f6de4db64d54011bde6289cc49603d3a6e4ce3f329207ab88",
+      "dependencies": [
+        "js-sys",
+        "wasm-bindgen"
+      ]
+    },
+    {
+      "name": "whoami",
+      "version": "2.1.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "626c4bac6755d76ffc12cb01b2eac751db1996b9e0041de9aa02c8c211ddc82c",
+      "dependencies": [
+        "libc",
+        "libredox",
+        "objc2-system-configuration",
+        "wasite",
+        "web-sys"
+      ]
+    },
+    {
+      "name": "windows-link",
+      "version": "0.2.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "f0805222e57f7521d6a62e36fa9163bc891acd422f971defe97d64e70d0a4fe5",
+      "dependencies": []
+    },
+    {
+      "name": "windows-sys",
+      "version": "0.61.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "ae137229bcbd6cdf0f7b80a31df61766145077ddf49416a728b02cb3921ff3fc",
+      "dependencies": [
+        "windows-link"
+      ]
+    },
+    {
+      "name": "wit-bindgen",
+      "version": "0.57.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "1ebf944e87a7c253233ad6766e082e3cd714b5d03812acc24c318f549614536e",
+      "dependencies": []
+    },
+    {
+      "name": "zerocopy",
+      "version": "0.8.63",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "e5fe1f8f1b06191a00962174c61aa5005e0bb391a6d80d07e24d115c01a92ed8",
+      "dependencies": [
+        "zerocopy-derive"
+      ]
+    },
+    {
+      "name": "zerocopy-derive",
+      "version": "0.8.63",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "863ad3ac83293fb4d740aedbfdc9240dd8d1a50c1099acd76ce80ce7c7230c7f",
+      "dependencies": [
+        "proc-macro2",
+        "quote",
+        "syn 2.0.119"
+      ]
+    },
+    {
+      "name": "zmij",
+      "version": "1.0.23",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "checksum": "29666d0abbfad1e3dc4dcf6144730dd3a3ab225bbbdac83319345b1b44ccfc1b",
+      "dependencies": []
+    }
+  ],
+  "targets": [
+    {
+      "path": "adapters/hq/graph-source.mjs",
+      "blob": "fe94b4a4640034b7a31624d11d2cc9a6972c257d",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "repository": "Product"
+    },
+    {
+      "path": "crates/protocol-sdk/src/development_intelligence.rs",
+      "blob": "92d62fd4cda3e251b14eb7bd6851428859a8cb79",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "repository": "Product"
+    },
+    {
+      "path": "crates/protocol-sdk/src/migration.rs",
+      "blob": "6f672716cc672732a7b624e82d75c3d62dc306ed",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "repository": "Product"
+    },
+    {
+      "path": "crates/protocol-sdk/src/semantic_primitives.rs",
+      "blob": "5e79481699b842fa60aeafd17860f78070293f17",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "repository": "Product"
+    },
+    {
+      "path": "crates/protocol-sdk/src/semantic_relations.rs",
+      "blob": "df475a0f53b81e07e1155cc2a6bcf55c5b8ed7e7",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "repository": "Product"
+    },
+    {
+      "path": "protocol/task-catalog-deltas/external-source-adoption-r001.json",
+      "blob": "827ea5bb92be0fb8b52ffc67ba0b53eb0a0059c4",
+      "commit": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+      "repository": "Product"
+    }
+  ],
+  "operationalAdapterDirectImports": {
+    "hq/lib/semantic-registry.mjs": [
+      "util.mjs",
+      "annotation-v2.mjs",
+      "semantic-optimizers.mjs"
+    ],
+    "hq/lib/arbor-service.mjs": [
+      "schema.mjs",
+      "registry.mjs",
+      "indexer.mjs",
+      "search.mjs",
+      "annotation-v2.mjs",
+      "context.mjs",
+      "graph.mjs",
+      "wiki.mjs",
+      "semantic-registry.mjs",
+      "capabilities.mjs",
+      "git.mjs",
+      "util.mjs",
+      "kg-export.mjs"
+    ]
+  },
+  "operationalAdapterPins": [
+    {
+      "path": "hq/lib/action-registry.mjs",
+      "blob": "275ccefd76f69f365d13f7f7bb21cb91f0228369"
+    },
+    {
+      "path": "hq/lib/action-router.mjs",
+      "blob": "f7911158a18d73029850013a76fc91207b69ab51"
+    },
+    {
+      "path": "hq/lib/actions/aliases.mjs",
+      "blob": "ed310c251e51694ccdb9d11b49dda89d000dbc5e"
+    },
+    {
+      "path": "hq/lib/actions/domains-1.mjs",
+      "blob": "1eff0720e4e0b389c6bf4f2310bae177e6265d02"
+    },
+    {
+      "path": "hq/lib/actions/domains-2.mjs",
+      "blob": "467b937b49e8ba0f2f7a1b9a9387c52252e9e626"
+    },
+    {
+      "path": "hq/lib/actions/domains-3.mjs",
+      "blob": "d6cc9ed8fd1faf0e8a06363121e3acf2093f02f7"
+    },
+    {
+      "path": "hq/lib/actions/domains-4.mjs",
+      "blob": "4a98716b336bd7c6bddfe6a659d49d6a4e48dfcc"
+    },
+    {
+      "path": "hq/lib/actions/handlers.mjs",
+      "blob": "c76fc5e5e47b61614418cb41e3dd8f28bea4c1d3"
+    },
+    {
+      "path": "hq/lib/actions/verbs.mjs",
+      "blob": "bab94269836971946a0860ea4cc4b17e37fc090c"
+    },
+    {
+      "path": "hq/lib/aii/plan.mjs",
+      "blob": "71cb71331181c5fab432950265f5c267c86f0dd4"
+    },
+    {
+      "path": "hq/lib/aii/receipts-policy.mjs",
+      "blob": "4986057674afe66ea90b55778a1625058ee3e853"
+    },
+    {
+      "path": "hq/lib/aii/registry.mjs",
+      "blob": "81ab3ca0240e830d3af6515c162f288899ac8759"
+    },
+    {
+      "path": "hq/lib/aii/runner.mjs",
+      "blob": "ea9a617193d8960a10eaf1be371dde9d5b912f21"
+    },
+    {
+      "path": "hq/lib/aii/scenarios.mjs",
+      "blob": "c2a134dea2b30e3ea85fcc66a321d379b38716e0"
+    },
+    {
+      "path": "hq/lib/aii/state.mjs",
+      "blob": "27400070b13eb3f2dadd6f040ace0aec7bef70a3"
+    },
+    {
+      "path": "hq/lib/aii/views.mjs",
+      "blob": "3b008b1d815aec962aec3f75c5f084541fa5266c"
+    },
+    {
+      "path": "hq/lib/annotation-v2.mjs",
+      "blob": "7e94dfbd4fbca8ef0fdb9e0610053364ce2c38c8"
+    },
+    {
+      "path": "hq/lib/approvals.mjs",
+      "blob": "27a5ad2c1482e7102f7c974b7f397f3943995dd4"
+    },
+    {
+      "path": "hq/lib/arbor-service.mjs",
+      "blob": "f00d688aff7cd4bd1b5e85f5caf362ca2aa3d417"
+    },
+    {
+      "path": "hq/lib/ask.mjs",
+      "blob": "e47390f5afe09841e0532ce5e8c80d29f0382176"
+    },
+    {
+      "path": "hq/lib/automation.mjs",
+      "blob": "4eeec1b7d8f64d8a5bae96639d191f6823aacb45"
+    },
+    {
+      "path": "hq/lib/autonomy.mjs",
+      "blob": "6cb34bdbb7b3299490e806453b71c110e17ac374"
+    },
+    {
+      "path": "hq/lib/canon.mjs",
+      "blob": "d256675519435aad2f9dfd84dd9f3a47d6cd21b2"
+    },
+    {
+      "path": "hq/lib/canvas.mjs",
+      "blob": "22bf5059f99f70fc84c7cf96f8236097a2054aeb"
+    },
+    {
+      "path": "hq/lib/capabilities.mjs",
+      "blob": "342563729c6743e98870aa899d2d6876d7369d75"
+    },
+    {
+      "path": "hq/lib/capability-schema.mjs",
+      "blob": "fa7e25c1328b69300c285ff86dd973620fde62bd"
+    },
+    {
+      "path": "hq/lib/catalogue-delta.mjs",
+      "blob": "6849e6df26bd136ee50ae08a260d8ab9e9445ac7"
+    },
+    {
+      "path": "hq/lib/channel-broker.mjs",
+      "blob": "05ed792209f68242c1a5fdf5305e4102b07e78c1"
+    },
+    {
+      "path": "hq/lib/channel-seats.mjs",
+      "blob": "43edb5216f46c2a00ebfced227647d8f67f04ed3"
+    },
+    {
+      "path": "hq/lib/channel-transport.mjs",
+      "blob": "9bdf35fe6139e61267c919f3c43a17e08dfd942a"
+    },
+    {
+      "path": "hq/lib/channel-wake.mjs",
+      "blob": "ac3a4672544243527a0c0434bce31e1314c1c289"
+    },
+    {
+      "path": "hq/lib/cnp.mjs",
+      "blob": "d515beed6a84acdea33605e1755ec7ccaa383a02"
+    },
+    {
+      "path": "hq/lib/comment-wiki-bridge.mjs",
+      "blob": "996b0f75362a66b823d95b321754f2ff17275325"
+    },
+    {
+      "path": "hq/lib/comms-roof.mjs",
+      "blob": "877ab3eab921bb1fe49f3b105e06353e65ac2031"
+    },
+    {
+      "path": "hq/lib/components.mjs",
+      "blob": "ae3b6775d6135d84a533fd7a23ccec9c64526d34"
+    },
+    {
+      "path": "hq/lib/context-budget.mjs",
+      "blob": "d8aec182dce906cfd84c8ac47fa2ebac10e3a06b"
+    },
+    {
+      "path": "hq/lib/context.mjs",
+      "blob": "b234a8b904ef06e5071aa4c69360052d7ee0f004"
+    },
+    {
+      "path": "hq/lib/dogfood.mjs",
+      "blob": "e0f925d9553c17f219bfe04369383a3a4e6af1b5"
+    },
+    {
+      "path": "hq/lib/evidence-join.mjs",
+      "blob": "3cec75cc9c0132ca79885195b8df832eef80ff9a"
+    },
+    {
+      "path": "hq/lib/extract.mjs",
+      "blob": "db770b61549089b8351ead1fd7ead087dae4df49"
+    },
+    {
+      "path": "hq/lib/filetypes.mjs",
+      "blob": "39b63e77cbea19f46a45eb2e432f14950aef15cb"
+    },
+    {
+      "path": "hq/lib/freshness.mjs",
+      "blob": "dcf3e24da1d7c76d524fde76a790671c8827cced"
+    },
+    {
+      "path": "hq/lib/fsf/client.mjs",
+      "blob": "d275e5b7ec3368d895da298a9d8a25af8eea8faf"
+    },
+    {
+      "path": "hq/lib/fsf/server.mjs",
+      "blob": "aa8a45bb364dfc795d72208f4518c943ded6602e"
+    },
+    {
+      "path": "hq/lib/fsf/slices.mjs",
+      "blob": "0a754331533583bd333f7982cd79b616d42ad94d"
+    },
+    {
+      "path": "hq/lib/fsf/store.mjs",
+      "blob": "d12b6c803d95360d972f86b85ff36026dd019064"
+    },
+    {
+      "path": "hq/lib/git-context.mjs",
+      "blob": "5296114e0fa5d3b0e30da4f8f4c7d8aa2ef3d8be"
+    },
+    {
+      "path": "hq/lib/git.mjs",
+      "blob": "32e775537f74aa886239783081a82d2b8a670e04"
+    },
+    {
+      "path": "hq/lib/graph.mjs",
+      "blob": "5e31386e9e3666f7c706e551f2dfc93704a39a2a"
+    },
+    {
+      "path": "hq/lib/home.mjs",
+      "blob": "98c69aae89ab8d6f3468557c7d55c13281841562"
+    },
+    {
+      "path": "hq/lib/indexer.mjs",
+      "blob": "9c728884117d492f19b798d56cc3b643f4821ed7"
+    },
+    {
+      "path": "hq/lib/kb-bind.mjs",
+      "blob": "2c3a64b7c19eb118472aa076be2b25e8eabf9ca2"
+    },
+    {
+      "path": "hq/lib/kb-intake.mjs",
+      "blob": "8ca235b4eeea51b5a103316d7b85d29735d1ad16"
+    },
+    {
+      "path": "hq/lib/kb.mjs",
+      "blob": "cde5f2f57e9b6fff7651fc6af013ad76fcae32ac"
+    },
+    {
+      "path": "hq/lib/kernel/cli.mjs",
+      "blob": "0402b900c9d600a19468ff18d8f9d4e26f1f876a"
+    },
+    {
+      "path": "hq/lib/kernel/store.mjs",
+      "blob": "906aaca3f6c1969392a8a8862101ab4e7c36e92e"
+    },
+    {
+      "path": "hq/lib/kg-export.mjs",
+      "blob": "0cfcbb3c8e1ed4070ff061daceefc5c6efe2fb78"
+    },
+    {
+      "path": "hq/lib/lake.mjs",
+      "blob": "e063fd37c0317d48cca765de24c9d4a88d60658d"
+    },
+    {
+      "path": "hq/lib/lane-health.mjs",
+      "blob": "5be24641d5161ab2e85127b7e7b1470f56eb1a09"
+    },
+    {
+      "path": "hq/lib/lang.mjs",
+      "blob": "28ce92b6116ff3866bc8f8bb2c2b4d394dd0d9de"
+    },
+    {
+      "path": "hq/lib/live-graph/wave1/lane-a-r2-audit.mjs",
+      "blob": "3a26286727ed080f9e02c7ea60081ef8a87af192"
+    },
+    {
+      "path": "hq/lib/live-graph/wave1/lane-a-r2-discovery.mjs",
+      "blob": "9a54459d6e61bdcaee0d228b892c026e3d445eb2"
+    },
+    {
+      "path": "hq/lib/live-graph/wave1/lane-a.mjs",
+      "blob": "ffc7b311979e1d36d7a6a467da7a4dd027d8f19d"
+    },
+    {
+      "path": "hq/lib/machine-probe.mjs",
+      "blob": "fb4419591ec072d3bd64a6164b1030a209e97205"
+    },
+    {
+      "path": "hq/lib/mcp-team-tools.mjs",
+      "blob": "a2bc71982de3956d4808a0ae3def92a34cad8275"
+    },
+    {
+      "path": "hq/lib/mcp.mjs",
+      "blob": "99e08987231f81c28ffa2c65427c3cdb25761812"
+    },
+    {
+      "path": "hq/lib/memory.mjs",
+      "blob": "9d2d2ac9d744c40afa9b3321aa47c8ce35377dd6"
+    },
+    {
+      "path": "hq/lib/meta-vlang-v1.mjs",
+      "blob": "42b0b791461b4576beb676998df46442a60b3e5a"
+    },
+    {
+      "path": "hq/lib/mission-evaluator.mjs",
+      "blob": "da6da69e6b4b3faa2380c001545980d70ad75700"
+    },
+    {
+      "path": "hq/lib/mission-intelligence.mjs",
+      "blob": "83077643029fa454a50327782bb0b3a8615143d2"
+    },
+    {
+      "path": "hq/lib/mission-shadow.mjs",
+      "blob": "6ede8d013e5a66fec501e2f8fa579b489e4afdc4"
+    },
+    {
+      "path": "hq/lib/mission-sources.mjs",
+      "blob": "09e746a1ad46c0d7721c7a1caa9d1ad95d38c088"
+    },
+    {
+      "path": "hq/lib/model-budget.mjs",
+      "blob": "a97dbae0f3a32d31bf186d97b602d5efa08cc721"
+    },
+    {
+      "path": "hq/lib/model-inventory.mjs",
+      "blob": "134ea0df166dfe6c959710e7d37ad61024a6dc22"
+    },
+    {
+      "path": "hq/lib/model-router.mjs",
+      "blob": "4806f78e18e73380be70f2f612237e528f644859"
+    },
+    {
+      "path": "hq/lib/nomenclature.mjs",
+      "blob": "ef2babaa2b5012eef51653ab7119319ee00a9266"
+    },
+    {
+      "path": "hq/lib/personal-corpus-contract.mjs",
+      "blob": "c842fe5848d47179dc3852335747e1227e344d1d"
+    },
+    {
+      "path": "hq/lib/pmo.mjs",
+      "blob": "0e7c4337ed1dae3844a3ec1905cffcf34ef4a44c"
+    },
+    {
+      "path": "hq/lib/protocol.mjs",
+      "blob": "388cb501e03b73d80cfcf756547f59d736a076b4"
+    },
+    {
+      "path": "hq/lib/realtime.mjs",
+      "blob": "fe5bcbde30a866315fe69f2cea308d333fa3ac0d"
+    },
+    {
+      "path": "hq/lib/receipts.mjs",
+      "blob": "c0bc00a630eed02be496ebd31cd01ce66641013a"
+    },
+    {
+      "path": "hq/lib/refresh.mjs",
+      "blob": "a6de97e4f57016142180df0915fbedbb985a01f2"
+    },
+    {
+      "path": "hq/lib/registry.mjs",
+      "blob": "cc46131e051c30fbef1b022310f68b619814da86"
+    },
+    {
+      "path": "hq/lib/release-plan.mjs",
+      "blob": "22bdb8f6e280e21aa6b92c9d8f1895e2d704be06"
+    },
+    {
+      "path": "hq/lib/release-status.mjs",
+      "blob": "2cabb4bf2542e2c86bf806af66a80d145916944f"
+    },
+    {
+      "path": "hq/lib/revive-daemon.mjs",
+      "blob": "8bbd58e6cd5233de0af848cbfdb1b98d9456236d"
+    },
+    {
+      "path": "hq/lib/revive-lane.mjs",
+      "blob": "cbb6d65f44e256628defd6d8fe32cf7e54aae72b"
+    },
+    {
+      "path": "hq/lib/revocations.mjs",
+      "blob": "7f7232077360c0082cb08b5ffce735b6a372836e"
+    },
+    {
+      "path": "hq/lib/rust-syntax-adapter.mjs",
+      "blob": "15c8c73e3a2c11712104ddb00d63f5b0188f57d1"
+    },
+    {
+      "path": "hq/lib/schema.mjs",
+      "blob": "2dda37b973ac77dd3735a288774a203538bcf98f"
+    },
+    {
+      "path": "hq/lib/search.mjs",
+      "blob": "2aaa4659e1b95429af05a185317f8977ebeaa7be"
+    },
+    {
+      "path": "hq/lib/seat-heartbeat.mjs",
+      "blob": "2d0e0cb2018b9e836faaf66010a4a33edae97bbe"
+    },
+    {
+      "path": "hq/lib/seat-watch.mjs",
+      "blob": "14e81103137cb04f11c00b38e3899600a10b6810"
+    },
+    {
+      "path": "hq/lib/semantic-optimizers.mjs",
+      "blob": "ce620c4ae21a7ea4269bc772808dffbe12526233"
+    },
+    {
+      "path": "hq/lib/semantic-registry.mjs",
+      "blob": "ed55a274610e68b9428240ec27e7d5424c9fc850"
+    },
+    {
+      "path": "hq/lib/session-card.mjs",
+      "blob": "9fb8bd8b2de8d25ecd52e0ce416e5e76804dfe27"
+    },
+    {
+      "path": "hq/lib/session-import.mjs",
+      "blob": "4bbd82832bd6d5bdf961ad884e6de9012bd5d464"
+    },
+    {
+      "path": "hq/lib/session-parts.mjs",
+      "blob": "547867bcf9fbf94aea274bf7a1f228df2d8d4d20"
+    },
+    {
+      "path": "hq/lib/session-views.mjs",
+      "blob": "24c73518378b2713f598b83c270bf811b43af0fc"
+    },
+    {
+      "path": "hq/lib/sessions.mjs",
+      "blob": "ab7e6a3640eb1dbce236cda129c3873359206992"
+    },
+    {
+      "path": "hq/lib/skills.mjs",
+      "blob": "bc461c4c6e915375afedb8ceae4a4326739298d9"
+    },
+    {
+      "path": "hq/lib/spawn.mjs",
+      "blob": "1b81f69c0c042fad0d629b5855e7d8d7419de253"
+    },
+    {
+      "path": "hq/lib/task-lifecycle.mjs",
+      "blob": "4f7e1dd36eaba3938a5a253c360fd618033a6a27"
+    },
+    {
+      "path": "hq/lib/taxonomy.mjs",
+      "blob": "38e380f62d6f387b95ce52eb08a70ec0c31d60de"
+    },
+    {
+      "path": "hq/lib/team-automation.mjs",
+      "blob": "ff7a9366a69ac8741cca17d345657b1e05fbcd06"
+    },
+    {
+      "path": "hq/lib/team-dashboard.mjs",
+      "blob": "805e2ff7e52c401aadd8f1ac4b346e5a621c606e"
+    },
+    {
+      "path": "hq/lib/team-panel.mjs",
+      "blob": "cac40a4efe4bcadd9da129452f84f4b1b1151115"
+    },
+    {
+      "path": "hq/lib/team-protocol.mjs",
+      "blob": "dbbdf32156b6156427c8a373527e9b93f9863d68"
+    },
+    {
+      "path": "hq/lib/telemetry.mjs",
+      "blob": "d8e823511524b504a33e842eb51a61f87b43580a"
+    },
+    {
+      "path": "hq/lib/thread-index.mjs",
+      "blob": "8db313fa53fb7b813d0b2ba2ac69f9e20f9b5265"
+    },
+    {
+      "path": "hq/lib/thread-resolve.mjs",
+      "blob": "3988c358c274aa8f74b9743113bbe7015c8d9e20"
+    },
+    {
+      "path": "hq/lib/toolchain-guard.mjs",
+      "blob": "6a6ae49afb061ec38bb1f908e5a8e8ea84bd1ce8"
+    },
+    {
+      "path": "hq/lib/torrent/auto.mjs",
+      "blob": "9ad3ad6053a50f3eb788c7d86ac9a8f3c1b0f43d"
+    },
+    {
+      "path": "hq/lib/torrent/dispatch-adapter.mjs",
+      "blob": "5a3ef79f1fc53310df0aa3848cfa099fda040721"
+    },
+    {
+      "path": "hq/lib/torrent/library.mjs",
+      "blob": "b3b87db5f2c7c189f5a13c4f61194ac4ad8964ba"
+    },
+    {
+      "path": "hq/lib/torrent/poll.mjs",
+      "blob": "4379d1f1c1ba921b5cf0c767ce77b04a1f2f83d0"
+    },
+    {
+      "path": "hq/lib/torrent/qbittorrent.mjs",
+      "blob": "294017d4915f0489cf3daf0b8fd62c6beb6b156c"
+    },
+    {
+      "path": "hq/lib/torrent/releases.mjs",
+      "blob": "64feccc7f1432d2b23789f023b8da698bcf61bc3"
+    },
+    {
+      "path": "hq/lib/torrent/search1337x.mjs",
+      "blob": "63fbf3301837b23ec3c3ce5990e5d97c5aa0ad48"
+    },
+    {
+      "path": "hq/lib/torrent/wanted.mjs",
+      "blob": "c919402b9dc1771df8c6b33b47ec6b60eae0fe95"
+    },
+    {
+      "path": "hq/lib/util.mjs",
+      "blob": "aefc0b0d8b6c7683b6a05ab93e0e932901d45a66"
+    },
+    {
+      "path": "hq/lib/vivim.mjs",
+      "blob": "f9cf3d16f9dfc3eaf806bd6bd63f37200da99f55"
+    },
+    {
+      "path": "hq/lib/walk.mjs",
+      "blob": "38f8bfe82220909cbd456d3115ecad350656fe1e"
+    },
+    {
+      "path": "hq/lib/wave1-kb-read.mjs",
+      "blob": "c6bc8a8a961fc49bde0b8da27b3e280cd50bca0a"
+    },
+    {
+      "path": "hq/lib/wiki-program.mjs",
+      "blob": "97cde5d6dbb14fc421bfa5eddb11236e9b71c745"
+    },
+    {
+      "path": "hq/lib/wiki-runtime/graph-index.mjs",
+      "blob": "e0ef095b0a3aab6d7c64453f0db7ead947f9deab"
+    },
+    {
+      "path": "hq/lib/wiki-runtime/rust-comment-adapter.mjs",
+      "blob": "222718033bd7f6eaa319ede2ef8b2a5102f67252"
+    },
+    {
+      "path": "hq/lib/wiki.mjs",
+      "blob": "c2da082e0d5643ee24d9a2fc8d47ed1a9d0e5caf"
+    },
+    {
+      "path": "hq/lib/work-orders.mjs",
+      "blob": "b9dacb8942b9f1b67925ff1fa88eaa034f0c154f"
+    },
+    {
+      "path": "hq/lib/zcode-doctor.mjs",
+      "blob": "89e97422c578c5ccf1e2d90a24f066ce77f598c4"
+    },
+    {
+      "path": "hq/package.json",
+      "blob": "a68eb6c0db93c62ff12422962e15cf9245f6fd37"
+    }
+  ],
+  "license": {
+    "hqkg": "Cargo.toml declares MIT; no root LICENSE found at pin; confirm copyright/notice before incorporation",
+    "programmability": "manifest has no license declaration; internal reuse requires owner/license disposition; blocked for promotion",
+    "external": "lock checksums recorded; per-dependency license audit pending"
+  },
+  "knownUnavailable": [
+    "MSVC linker absent from direct terminal PATH; native build exit 101",
+    "operational adapter transitive closure and runtime authorization not tested",
+    "Product graph/Wiki readback on same new candidate not tested"
+  ],
+  "destinationConflicts": [
+    {
+      "path": "adapters/hq/graph-source.mjs",
+      "blob": "fe94b4a4640034b7a31624d11d2cc9a6972c257d",
+      "disposition": "retain incumbent; adapt read-only query/projection, do not overwrite"
+    },
+    {
+      "path": "crates/protocol-sdk/src/development_intelligence.rs",
+      "blob": "92d62fd4cda3e251b14eb7bd6851428859a8cb79",
+      "disposition": "retain incumbent; adapt read-only query/projection, do not overwrite"
+    },
+    {
+      "path": "crates/protocol-sdk/src/migration.rs",
+      "blob": "6f672716cc672732a7b624e82d75c3d62dc306ed",
+      "disposition": "retain incumbent; adapt read-only query/projection, do not overwrite"
+    },
+    {
+      "path": "crates/protocol-sdk/src/semantic_primitives.rs",
+      "blob": "5e79481699b842fa60aeafd17860f78070293f17",
+      "disposition": "retain incumbent; adapt read-only query/projection, do not overwrite"
+    },
+    {
+      "path": "crates/protocol-sdk/src/semantic_relations.rs",
+      "blob": "df475a0f53b81e07e1155cc2a6bcf55c5b8ed7e7",
+      "disposition": "retain incumbent; adapt read-only query/projection, do not overwrite"
+    },
+    {
+      "path": "protocol/task-catalog-deltas/external-source-adoption-r001.json",
+      "blob": "827ea5bb92be0fb8b52ffc67ba0b53eb0a0059c4",
+      "disposition": "retain incumbent; adapt read-only query/projection, do not overwrite"
+    }
+  ]
+}

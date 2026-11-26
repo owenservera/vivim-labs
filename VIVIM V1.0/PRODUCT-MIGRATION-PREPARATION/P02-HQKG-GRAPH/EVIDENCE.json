@@ -1,0 +1,50 @@
+{
+  "schema": "vivim.labs.p02.evidence/1",
+  "status": "materialization PASS; build FAIL; overlay UNRUN",
+  "toolchain": {
+    "cargo": "1.99.1 (5f94df478 2026-08-27)",
+    "rustc": "1.99.1 (58cf8f9c3 2026-10-13)",
+    "target": "x86_64-pc-windows-msvc"
+  },
+  "scratch": "C:/0-BlackBoxProject-0/VIVIM-ARBOR-CONNECT/workstation-scratch/p02-hqkg-r001c-20261126",
+  "receipts": [
+    {
+      "session": "ctl-f6ef834d95f66f60",
+      "exit": 0,
+      "result": "toolchain discovery"
+    },
+    {
+      "session": "ctl-206c464e4d8c8e2d",
+      "exit": 1,
+      "result": "provider-qualified path prevented git archive output"
+    },
+    {
+      "session": "ctl-30d7d9d1fd012fc8",
+      "exit": 1,
+      "result": "archive output failed blob identity verification; rejected"
+    },
+    {
+      "session": "ctl-4fcc32fd4e35fd84",
+      "exit": 0,
+      "command": "node git ls-tree -rz; git cat-file blob; verify SHA1 Git object header+bytes; write new scratch only",
+      "result": "166 ARBOR + 3 Product blobs verified and written"
+    },
+    {
+      "session": "ctl-93e56b4f8aaf1c5f",
+      "exit": 1,
+      "cargoExit": 101,
+      "command": "cargo test --manifest-path native/hqkg/Cargo.toml --locked --offline --features importer,rust-syntax,native-program --test semantic_source --test import --test reconcile --test graph_indexes --test invalidate-revision --test development_composition --test rust_syntax",
+      "result": "linker link.exe not found while compiling serde_derive; no test executed"
+    },
+    {
+      "session": "ctl-b339708a1bfa60e7",
+      "exit": 0,
+      "result": "MSVC target installed; vswhere did not return VC tool installation"
+    }
+  ],
+  "limitations": [
+    "new pinned source overlay authored but not run",
+    "no Product conformance, Wiki, live HQ, or independent review",
+    "no Product/ARBOR writes"
+  ]
+}

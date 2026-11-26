@@ -1,0 +1,142 @@
+{
+  "schema": "vivim.labs.p02.adaptation/1",
+  "status": "inert candidate; no activation",
+  "targetPin": "bd8d33693a61021a81a2721f18fa87f3069e6836",
+  "originalPin": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+  "taskCatalogue": {
+    "path": "protocol/task-catalog-deltas/external-source-adoption-r001.json",
+    "blob": "827ea5bb92be0fb8b52ffc67ba0b53eb0a0059c4",
+    "status": "staged-not-active"
+  },
+  "deterministicRules": [
+    {
+      "id": "P02-D01",
+      "rule": "materialize pinned bytes; no source rewrite; verify git blob and calculate SHA256 before SDK admission",
+      "scope": "native/hqkg and dependency closure",
+      "acceptance": "identical replay, no writes outside scratch"
+    },
+    {
+      "id": "P02-D02",
+      "rule": "preserve project-qualified source identity as hqg1 SHA256 of source-file, project, path separated by NUL; map only via incumbent Product verifyGraphSource",
+      "scope": "read-only source projections",
+      "acceptance": "reject wrong path, digest, epoch and identity"
+    },
+    {
+      "id": "P02-D03",
+      "rule": "retain original graph test source; add standalone Labs-only source-bound regression overlay",
+      "scope": "native/hqkg/tests/p02_pinned_source.rs in scratch only",
+      "acceptance": "original and overlay pass separately; no Product writer"
+    }
+  ],
+  "obligations": [
+    {
+      "id": "P02-O01",
+      "severity": "mandatory",
+      "class": "agent-required",
+      "anchor": {
+        "path": "native/hqkg/src/semantic_source.rs",
+        "blob": "ee767b2ab3dc2550d9370a9e7b846aba0dc33f05",
+        "line": 96,
+        "symbol": "pub fn sources"
+      },
+      "destination": "crates/protocol-sdk/src/semantic_primitives.rs",
+      "definition": "intel-204/205; ExactRef/Identity",
+      "issue": "map owner, semantic identity, exact digest and graph epoch without elevating indexed-not-live-checked or syntax-only to behavior",
+      "check": "wrong digest, duplicate identity and ambiguous edge fail closed"
+    },
+    {
+      "id": "P02-O02",
+      "severity": "mandatory",
+      "class": "agent-required",
+      "anchor": {
+        "path": "native/hqkg/src/semantic_source.rs",
+        "blob": "ee767b2ab3dc2550d9370a9e7b846aba0dc33f05",
+        "line": 151,
+        "symbol": "pub fn impact"
+      },
+      "destination": "crates/protocol-sdk/src/semantic_relations.rs",
+      "definition": "intel-202/204/207; Relation",
+      "issue": "preserve reverse imports, depth and truncation; do not treat static impact as runtime invalidation",
+      "check": "depth boundary, cycles, missing source, stale revision"
+    },
+    {
+      "id": "P02-O03",
+      "severity": "mandatory",
+      "class": "agent-required",
+      "anchor": {
+        "path": "native/hqkg/src/import.rs",
+        "blob": "b327e75f1f464df5ca6f46c801d2ad77fd79a957",
+        "line": 363,
+        "symbol": "pub fn apply"
+      },
+      "destination": "adapters/hq/graph-source.mjs (read only; incumbent HQ authority)",
+      "definition": "intel-206/207/209; import ownership",
+      "issue": "retain namespace ownership, tombstones and edge reconciliation; no independent Product graph writer",
+      "check": "foreign node preserved, replay no epoch bump, tombstone persistence, reserved metadata rejection"
+    },
+    {
+      "id": "P02-O04",
+      "severity": "mandatory",
+      "class": "agent-required",
+      "anchor": {
+        "path": "native/hqkg/src/lib.rs",
+        "blob": "8387eb03bea09ea4777e6a875a454c4c062b06bd",
+        "line": 1055,
+        "symbol": "pub fn save_checked"
+      },
+      "destination": "incumbent Host/HQ journal authority",
+      "definition": "intel-209; CAS and rollback",
+      "issue": "preserve checked journal head semantics; do not call legacy unchecked save in live adoption",
+      "check": "stale epoch/bytes, torn journal, writer lock fail closed"
+    },
+    {
+      "id": "P02-O05",
+      "severity": "mandatory",
+      "class": "agent-required",
+      "anchor": {
+        "path": "native/hqkg/src/invalidate.rs",
+        "blob": "a5bfe9ff7736753ea6661d2672917f5604adf521",
+        "line": 550,
+        "symbol": "pub fn invalidate_revision"
+      },
+      "destination": "crates/protocol-sdk/src/development_intelligence.rs",
+      "definition": "intel-204/207; RevisionVector",
+      "issue": "bind cache invalidation to caller namespace and exact source revision; Product graph assurance unobserved must remain explicit",
+      "check": "source deletion, caller isolation, absent watermark and stale digest reject"
+    },
+    {
+      "id": "P02-O06",
+      "severity": "mandatory",
+      "class": "blocked",
+      "anchor": {
+        "path": "core/programmability/Cargo.toml",
+        "blob": "18ba45fc845b56db3660c3f1fd46f86695c0ce39",
+        "line": 1,
+        "symbol": "[package]"
+      },
+      "definition": "intel-201/207",
+      "issue": "license disposition and MSVC build environment unresolved",
+      "check": "owner license disposition, locked native build exits zero"
+    }
+  ],
+  "taskDisposition": {
+    "intel-201": "exact source inventory and blob verification; license pending",
+    "intel-202": "native tree/lock and destination collision inventory; adapter closure incomplete",
+    "intel-203": "identity-preserving candidates only; no verified SDK transform replay",
+    "intel-204": "explicit obligations, SDK compiler conformance unrun",
+    "intel-205": "source-bound obligations only; SDK packet digest/ack pending",
+    "intel-206": "no LLM patch intake or SDK reconciliation exercised",
+    "intel-207": "original donor tests attempted; linker failure; no Product/Wiki proof",
+    "intel-208": "reuse existing SDK adoption orchestration; unrun",
+    "intel-209": "inert proposal only; no authorization or preflight",
+    "intel-210": "NOT ACCEPTED; no migration until intel-200 and intel-210 independent acceptance and owner release"
+  },
+  "allowedWriteScope": "VIVIM V1.0/PRODUCT-MIGRATION-PREPARATION/P02-HQKG-GRAPH/",
+  "unsupported": [
+    "automatic semantic classification from text alone",
+    "effect authorization inferred from index",
+    "second graph journal or source writer",
+    "unbounded traversal or hidden omission"
+  ],
+  "candidateDigest": null
+}

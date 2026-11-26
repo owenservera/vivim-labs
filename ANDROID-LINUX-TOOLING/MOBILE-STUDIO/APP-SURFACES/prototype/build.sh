@@ -11,7 +11,7 @@ ld.lld -shared --no-undefined -soname libvivim_probe.so -z max-page-size=16384 -
 llvm-strip --strip-unneeded out/jni/libvivim_probe.so
 if llvm-readelf -d out/jni/libvivim_probe.so | grep -E "RUNPATH|RPATH|NEEDED"; then exit 1; fi
 aapt2 link -I "$ANDROID_JAR" --manifest AndroidManifest.xml -o out/unsigned.apk
-javac --release 8 -cp "$ANDROID_JAR" -d out/classes MainActivity.java FixtureActivity.java WhatsAppActivity.java SnapshotService.java OwnerActivity.java WhatsAppNoticeService.java
+javac --release 8 -cp "$ANDROID_JAR" -d out/classes MainActivity.java FixtureActivity.java WhatsAppActivity.java SnapshotService.java OwnerActivity.java WhatsAppNoticeService.java ReviewedActivity.java
 d8 --lib "$ANDROID_JAR" --min-api 26 --output out/dex out/classes/live/vivim/surfaceprobe/*.class
 python -c 'import zipfile; z=zipfile.ZipFile("out/unsigned.apk","a",compression=zipfile.ZIP_DEFLATED); z.write("out/dex/classes.dex","classes.dex"); z.write("out/jni/libvivim_probe.so","lib/arm64-v8a/libvivim_probe.so"); z.close()'
 # Compressed ARM64 library is explicitly extracted by Android. ELF LOAD alignment is 16 KiB.

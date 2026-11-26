@@ -775,7 +775,15 @@
       "core/programmability/src/source_digest.rs",
       "core/programmability/src/development_projection.rs"
     ],
-    "result": "All three unchanged from Product pin. Whole current Product semantic duplicate search still required before actual adoption."
+    "result": "All three unchanged from Product pin. Exact current core tree still contains six files. Read-only Git grep against current snapshot across Rust, JSON and MJS found no matches for both new module names, capability IDs, planning input schemas or presentation schema (grep exit 1). This is a targeted textual collision check, not semantic graph parity.",
+    "receipt": "ctl-c7325bdccb252fba",
+    "workspaceLock": {
+      "blob": "f9a85fb4f565bf23c4627d232891c069075855d6",
+      "targetPackages": 23,
+      "donorPackages": 22,
+      "missingDonorNameVersionPairs": 0,
+      "qualification": "Version inventory only; candidate tested with exact donor standalone lock. Full current workspace build still pending."
+    }
   },
   "destinationConflicts": [
     {
@@ -802,7 +810,7 @@
       "Resolve internal code ownership/redistribution",
       "Review exact dependency notices and obligations",
       "Original donor catalogue compatibility test failed",
-      "External operational contracts and current Product graph collision scan pending"
+      "External operational contracts and semantic Product graph collision scan pending"
     ]
   }
 }

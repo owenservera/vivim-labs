@@ -6,8 +6,8 @@ test -f "$ANDROID_JAR"
 umask 077
 mkdir -p out/classes out/dex
 aapt2 link -I "$ANDROID_JAR" --manifest AndroidManifest.xml -o out/unsigned.apk
-javac --release 8 -cp "$ANDROID_JAR" -d out/classes MainActivity.java
-d8 --lib "$ANDROID_JAR" --min-api 26 --output out/dex out/classes/live/vivim/surfaceprobe/MainActivity.class
+javac --release 8 -cp "$ANDROID_JAR" -d out/classes MainActivity.java FixtureActivity.java
+d8 --lib "$ANDROID_JAR" --min-api 26 --output out/dex out/classes/live/vivim/surfaceprobe/*.class
 python -c 'import zipfile; z=zipfile.ZipFile("out/unsigned.apk","a",compression=zipfile.ZIP_DEFLATED); z.write("out/dex/classes.dex","classes.dex"); z.close()'
 # No native .so or uncompressed assets in this fixture. Align if available.
 input=out/unsigned.apk

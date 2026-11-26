@@ -1,0 +1,10 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process');
+function transform(s){
+ const edits=[
+ ["const readline = require('node:readline');","const readline = require('node:readline');\nconst {descriptor,decorate}=require('./continuity-projection.cjs');\nconst continuityMode=process.env.VIVIM_CONTINUITY_MODE||'A';\nif(!['A','B','C','D'].includes(continuityMode))throw Error('INVALID_CONTINUITY_MODE');"],
+ ["tools:tools.map(([name,description,inputSchema,,readOnly])=>({name,description,inputSchema,annotations:name===probeName||readOnly===false?{...annotations,readOnlyHint:false,destructiveHint:true}:annotations}))","tools:tools.map(([name,description,inputSchema,,readOnly])=>descriptor({name,description,inputSchema,annotations:name===probeName||readOnly===false?{...annotations,readOnlyHint:false,destructiveHint:true}:annotations},continuityMode))"],
+ ["return reply(id,{content:[{type:'text',text:JSON.stringify(result)}]});","return reply(id,decorate(p.name,result,continuityMode));"]];
+ for(const [a,b] of edits){if(s.split(a).length!==2)throw Error("anchor mismatch");s=s.replace(a,b)}return s;
+}
+const rootArg=process.argv[2];if(!rootArg||!path.isAbsolute(rootArg))throw Error('absolute disposable worktree required');const root=fs.realpathSync(rootArg);const git=(...a)=>cp.execFileSync('git',['-C',root,...a],{encoding:'utf8'}).trim();if(git('rev-parse','--show-toplevel').replace(/\\/g,'/')!==root.replace(/\\/g,'/')||git('rev-parse','HEAD')!=='8fccdbe85678d37aa50293b4ce877fb2eae14dc4'||git('status','--porcelain'))throw Error('clean exact pinned repository required');const rel='tools/mcp/vivim-arbor/server/tunnel-readonly.cjs',file=path.join(root,rel),helper=path.join(path.dirname(file),'continuity-projection.cjs');if(git('hash-object',rel)!=='7bb244e0611d93b35cfc84664ee7dcc0bec8a547'||fs.existsSync(helper))throw Error('source or destination mismatch');const next=transform(fs.readFileSync(file,'utf8'));fs.copyFileSync(path.join(__dirname,'continuity-projection.cjs'),helper,fs.constants.COPYFILE_EXCL);fs.writeFileSync(file,next);console.log('Disposable candidate overlay prepared; no deployment.');

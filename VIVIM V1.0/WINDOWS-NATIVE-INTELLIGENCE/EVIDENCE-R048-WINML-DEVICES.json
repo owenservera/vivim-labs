@@ -1,0 +1,59 @@
+{
+  "schema": "vivim.labs.winml-device-comparison/1",
+  "source": "fcdf469d45df86c1bea26a454e24f37e18816b83",
+  "session": "ctl-f9cf4ff8fdf1783e",
+  "exitCode": 0,
+  "elapsedMs": 64784,
+  "regression": {
+    "passed": 9,
+    "failed": 0
+  },
+  "verifiedBlobs": 8,
+  "actual": {
+    "reference": {
+      "runs": 100,
+      "elapsedUs": 1,
+      "peakWorkingSetBytes": 7380992,
+      "peakPagefileBytes": 1257472,
+      "scores": [
+        6.125,
+        1.125,
+        3.125,
+        1.625
+      ]
+    },
+    "cpu": {
+      "runs": 100,
+      "elapsedUs": 11705,
+      "loadMs": 180,
+      "peakWorkingSetBytes": 22708224,
+      "peakPagefileBytes": 11022336,
+      "referenceUs": 1,
+      "scores": [
+        6.125,
+        1.125,
+        3.125,
+        1.625
+      ],
+      "digest": "1c933b19d62d1eeae1135a70afa8007652411e4b627879e920ca5e9fcb6f11f4",
+      "memoryAvailable": 14230335488,
+      "logicalCpus": 8,
+      "cpuBusyBp": 4230
+    },
+    "directx": {
+      "exitCode": 2,
+      "status": "unavailable",
+      "stage": "ExplicitDevice",
+      "hresult": -2147023728
+    },
+    "npu": {
+      "status": "unverified_not_routed"
+    }
+  },
+  "limits": [
+    "One fixed locally authored reference model, not trained model or LLM. Process peak working set is not GPU memory.",
+    "Reference timing near timer resolution; no precise speedup ratio asserted.",
+    "CPU admission uses measured host resources and configured estimate, not quota enforcement. DirectX unavailable in current process environment; does not prove GPU absent.",
+    "No network fallback, downloads, production writes or deployment."
+  ]
+}

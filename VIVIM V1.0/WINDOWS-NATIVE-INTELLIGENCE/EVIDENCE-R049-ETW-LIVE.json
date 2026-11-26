@@ -1,0 +1,39 @@
+{
+  "schema": "vivim.labs.etw-live-compiler/1",
+  "source": "5b4fc3311f2c8192e0d4a6bfd550d38196d7549a",
+  "session": "ctl-df6abe7a30ee2143",
+  "exitCode": 0,
+  "elapsedMs": 42712,
+  "passed": 19,
+  "failed": 0,
+  "verifiedBlobs": 9,
+  "actual": {
+    "live": {
+      "events": 4,
+      "sequence": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "observedBeforeStop": true,
+      "durationsMs": [
+        635,
+        747
+      ],
+      "reportedLoss": 0
+    },
+    "deliberateSequenceGapRefused": true,
+    "fileRegression": {
+      "events": 2,
+      "durationMs": 726,
+      "etlBytes": 131072,
+      "artifactBytes": 25276
+    }
+  },
+  "limits": [
+    "Bounded same-process provider and two real owned compiler workloads; no system-wide or always-on tracing.",
+    "Sequence-gap test is deliberate missing sequence, not measured OS buffer loss; OS loss counters checked separately.",
+    "No production instrumentation or deployment."
+  ]
+}

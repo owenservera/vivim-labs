@@ -116,3 +116,7 @@ Actual Windows run passed, exit 0. Reused 22 exact source blobs including curren
 ## R045–R047 — owned ConPTY, actual selected controls and native local inference
 
 Priority 7: 13/13 Windows tests, ordinary native standard handles, input/output, resize, exit and owned cancellation, unrelated job preserved. [Evidence](EVIDENCE-R045-CONPTY.json). Initial redirected-parent failure corrected. Priority 8: 13/13 native tests, actual two selected UIA controls and runtime IDs, one enabled-state delta, ACK, stale/disabled/destroyed references refused. [Evidence](EVIDENCE-R046-HCU.json). Explicit group only, no app-wide capture or Host action. Priority 9: nine native regression tests and actual CPU WinML graph evaluation, 10 runs × four outputs matched direct Rust reference. [Evidence](EVIDENCE-R047-WINML.json). Comparable process memory and 100-run CPU/DirectX evaluation authored. No production changes, no trained model claims.
+
+## R048–R049 — measured inference and live ETW
+
+R048 actual native WinML CPU 100 evaluations × 4 exact outputs; 11,705 µs batch, 180 ms setup, peak working set 22,708,224 bytes vs direct Rust 7,380,992 bytes; DirectX unavailable at device creation (HRESULT -2147023728), no NPU route. [Evidence](EVIDENCE-R048-WINML-DEVICES.json). R049 19/19 Windows tests, four contiguous events for two actual compiler jobs observed before shutdown, zero reported loss, deliberate sequence gap refused; original ETL regression passes. [Evidence](EVIDENCE-R049-ETW-LIVE.json). Production integration and general trained inference remain separate.

@@ -11,7 +11,7 @@ const m=JSON.parse(readFileSync(manifestPath,'utf8'));
 const roots=JSON.parse(readFileSync(rootsPath,'utf8'));
 const sha=/^[a-f0-9]{40}$/;
 const names=new Set(['ARBOR','Labs','Product']);
-const pathOk=p=>typeof p==='string' && p.length<=512 && p.split('/').every(x=>x && x!=='.' && x!=='..' && x.toLowerCase()!=='.git' && !/[\\\\:\\x00-\\x1f<>|?*"]/u.test(x) && !/[. ]$/.test(x) && !/^(con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\\.|$)/i.test(x));
+const pathOk=p=>typeof p==='string' && p.length<=512 && p.split('/').every(x=>x && x!=='.' && x!=='..' && x.toLowerCase()!=='.git' && ![...x].some(c=>c.charCodeAt(0)<32 || String.fromCharCode(92).includes(c) || ':<>|?*"'.includes(c)) && !x.endsWith('.') && !x.endsWith(' ') && !['con','prn','aux','nul',...Array.from({length:9},(_,i)=>'com'+(i+1)),...Array.from({length:9},(_,i)=>'lpt'+(i+1))].includes(x.split('.')[0].toLowerCase()));
 const within=(root,p)=>{const r=relative(root,p);return r===''||(!isAbsolute(r)&&r!=='..'&&!r.startsWith('..'+sep));};
 const git=(cwd,args)=>execFileSync('git',['-C',cwd,...args],{maxBuffer:16*1024*1024,windowsHide:true});
 if(m.schema!=='vivim.labs.product-preparation/1'||!Array.isArray(m.entries)||m.entries.length<1||m.entries.length>500||m.status!=='preparation-only')throw Error('MANIFEST');

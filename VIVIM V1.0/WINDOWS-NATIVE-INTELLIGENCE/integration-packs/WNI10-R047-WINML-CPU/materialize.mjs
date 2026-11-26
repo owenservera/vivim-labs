@@ -1,0 +1,4 @@
+import {execFileSync} from 'node:child_process';import {writeFileSync,mkdirSync} from 'node:fs';import {resolve,join} from 'node:path';
+const d=resolve(process.argv[2]);mkdirSync(d);const lab=process.argv[3],root='VIVIM V1.0/WINDOWS-NATIVE-INTELLIGENCE';
+const entries=[...['Cargo.toml','lib.rs','probe.rs','fixture.rs','winml.rs'].map(n=>[root+'/integration-packs/WNI10-R047-WINML-CPU/'+n,n]),...['resources.rs','hardware.rs','scheduler.rs'].map(n=>[root+'/rust-starter/src/'+n,n])];
+const git=(...a)=>execFileSync('git',a,{maxBuffer:4*1024*1024});for(const [path,name] of entries){const bytes=git('show',lab+':'+path),target=join(d,name);writeFileSync(target,bytes);if(git('hash-object',target).toString().trim()!==git('rev-parse',lab+':'+path).toString().trim())throw Error('BLOB_MISMATCH '+name);}console.log('R047_EXACT_BLOBS_OK '+entries.length);

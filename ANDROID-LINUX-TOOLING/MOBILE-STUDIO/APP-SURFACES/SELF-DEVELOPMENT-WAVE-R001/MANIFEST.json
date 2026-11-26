@@ -1,0 +1,52 @@
+{
+  "schema": "vivim.android.self-development-wave/1",
+  "wave": "R001",
+  "baseline": "467f9b8e03c3a084bd19d369a7cd0ceb8ed3ee70",
+  "repository": "owenservera/vivim-labs",
+  "branch": "main",
+  "integration_owner": "L00-CORE",
+  "rounds": [
+    "implementation",
+    "integration-and-native-tests",
+    "hardening-and-convergence"
+  ],
+  "lanes": [
+    {
+      "id": "L00-CORE",
+      "title": "Core, convergence and release ownership",
+      "scope": "Own canonical interfaces, capability discovery, Android runtime lifecycle, release version allocation, common receipt and session contracts, shared source files, integration, and final physical-device release. Reconcile all concurrent changes (including the download manager); reuse DevActivity and StartupSelfTest. Establish one source-of-truth package identity and explicit compatibility with Product SDK/Factory and ARBOR Host. Assign disjoint file ownership before integration; publish contract and merge sequence immediately. Coordinate the three implementation rounds, consolidate the final signed APK, verify exact installed identity and integrated evidence. Do not mistake a build for installed runtime acceptance.",
+      "deliverable": "CONTRACT.md, integration manifest, actual integrated source, pinned build/release evidence, final consolidated APK and honest native acceptance report.",
+      "evidence": "L00-CORE/EVIDENCE.md"
+    },
+    {
+      "id": "L01-BRIDGE",
+      "title": "Native APK–Termux–MCP bridge",
+      "scope": "Investigate official Android cross-UID IPC, Binder/service eligibility, local peer authentication and existing VIVIM Android MCP protocol. Implement a minimal paired, revocable, scoped diagnostic request/reply channel; reuse existing Termux session and Host contracts. Start with fixed own-app status, test invocation and bounded non-sensitive receipt readback. Authenticate peer identity; implement expiry, replay protection, request binding, rate and payload limits, explicit stop, error reporting. Verify actual two-UID behavior when installed; no arbitrary shell, arbitrary screen capture, private app data relay or generic remote effects. Coordinate public API with L00 and test consumer with L02.",
+      "deliverable": "Bridge implementation and protocol contract, actual native transport and denial tests, session/receipt evidence, integration patch.",
+      "evidence": "L01-BRIDGE/EVIDENCE.md"
+    },
+    {
+      "id": "L02-TEST",
+      "title": "Real live Android self-testing",
+      "scope": "Reuse StartupSelfTest, DevActivity, native Rust classifier, private virtual display fixture and existing receipts. Implement deterministic owned-app runtime test runner, automatic lifecycle/startup checks, timeouts, cancellation, test discovery, resource measurement, private cache cleanup, actual UI/view and display readback, and explicit pass/fail/unavailable/unrun outcomes. Research official Android instrumentation and supported debugging. Exercise owned fixture first; permission-dependent capture requires system consent, no automated consent or third-party messaging. Coordinate L01 diagnostic endpoint and L03 post-install invocation. Distinguish Termux-native unit tests, APK-side actual tests, and physical observations. Produce reproducible real evidence, not mocks as acceptance.",
+      "deliverable": "Owned test catalogue and executable runner, live receipts, native tests and results, integration handoff.",
+      "evidence": "L02-TEST/EVIDENCE.md"
+    },
+    {
+      "id": "L03-UPGRADE",
+      "title": "Native installation, self-upgrade and recovery",
+      "scope": "Research official Android PackageInstaller sessions, installer identity, update ownership, USER_ACTION_NOT_REQUIRED eligibility and API 35 behavior. Implement a VIVIM-owned package update mechanism only: candidate release identity, exact digest, signer equality, monotonic version, authorized release policy, staged write, callback/status persistence, pending-user-action fallback, cancellation and recovery. Preserve known-good artifacts; if downgrade unsupported use higher-version repair after owner-approved recovery policy. Do not silently replace current app, change device management, bypass permissions, install third-party packages or expose general update commands. Coordinate release identity and shared manifest with L00; coordinate startup test with L02; support physical update verification after required owner approval.",
+      "deliverable": "Installer implementation, release journal, negative candidate tests and physical update evidence or exact OS blocker, recovery design and handoff.",
+      "evidence": "L03-UPGRADE/EVIDENCE.md"
+    },
+    {
+      "id": "L04-FACTORY",
+      "title": "SDK Factory, release automation and optimization",
+      "scope": "Inspect actual vivim-product SDK Factory, RDCB, Meta-VLANG, semantic index, native receipts and existing ARBOR Android worker. Build on those interfaces rather than duplicate engines. Implement the source-to-candidate automation: exact pinned source, isolated staging, measured build, native compile/test, signed artifact provenance, candidate registration, diagnostic receipt ingestion, comparison and evidence-based repair/optimization recommendations. Integrate L01/L02/L03 contracts via L00. Optimize context/build reuse, memory, CPU, disk, APK size and test latency with measurements; avoid repeated expensive builds. Preserve prior artifacts, avoid publishing debug keys, never promote on missing runtime evidence. Demonstrate actual phone-side pipeline stages and existing SDK integration; report any cross-repo or native constraint.",
+      "deliverable": "Executable Factory adapter, measured baseline and repeat run, release and diagnostic evidence mapped to existing SDK, integration handoff.",
+      "evidence": "L04-FACTORY/EVIDENCE.md"
+    }
+  ],
+  "authorization": "owner-scoped, supported OS mechanisms; no permission bypass or generic remote effects",
+  "release": "one coordinated candidate, installed runtime evidence required"
+}

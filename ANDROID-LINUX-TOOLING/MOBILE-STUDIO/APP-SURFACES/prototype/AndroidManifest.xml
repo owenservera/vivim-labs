@@ -1,8 +1,8 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="live.vivim.surfaceprobe" android:versionCode="4" android:versionName="0.4">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="live.vivim.surfaceprobe" android:versionCode="5" android:versionName="0.5">
     <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="35"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION"/>
-    <queries><package android:name="com.whatsapp"/></queries>
+    <queries><package android:name="com.whatsapp"/><intent><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent></queries>
     <application android:extractNativeLibs="true" android:label="VIVIM Surface Probe" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:allowBackup="false">
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
@@ -10,5 +10,6 @@
         <activity android:name=".FixtureActivity" android:exported="false" android:resizeableActivity="true" android:taskAffinity="live.vivim.surfaceprobe.fixture"/>
         <activity android:name=".WhatsAppActivity" android:exported="false"/>
         <service android:name=".SnapshotService" android:exported="false" android:foregroundServiceType="mediaProjection"/>
+        <activity android:name=".OwnerActivity" android:exported="false"/>
     </application>
 </manifest>

@@ -1,0 +1,22 @@
+{
+  "schema": "vivim.labs.native-property/1",
+  "source": "2512f204e19d5cc0199bdc1bf460395840452add",
+  "session": "ctl-a3d6fcba16e4ba64",
+  "exitCode": 0,
+  "passed": 2,
+  "failed": 0,
+  "elapsedMs": 20668,
+  "verifiedBlobs": 4,
+  "actual": {
+    "sizeBefore": 25,
+    "sizeAfter": 33,
+    "itemType": ".txt",
+    "identityPreserved": true,
+    "foreignHandleRejected": true
+  },
+  "limits": [
+    "Fixed fast Property System allowlist; not a native Windows Search OLE DB query.",
+    "Before/after path and handle readback is not race-proof confinement; Host still authorizes exact paths.",
+    "No production changes."
+  ]
+}

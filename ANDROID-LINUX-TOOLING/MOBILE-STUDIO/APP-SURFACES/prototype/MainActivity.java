@@ -45,7 +45,7 @@ public final class MainActivity extends Activity {
         root.setOrientation(LinearLayout.VERTICAL);
         root.setPadding(24,48,24,24);
         TextView title = new TextView(this);
-        title.setText("VIVIM Android Owner Console v0.6");
+        title.setText("VIVIM Android Owner Console v0.7");
         title.setTextSize(22);
         root.addView(title);
         TextView nativeStatus=new TextView(this);

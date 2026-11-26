@@ -70,7 +70,7 @@ public final class MainActivity extends Activity {
             if (activityMode) {
                 int id=display.getDisplay().getDisplayId();
                 Intent intent=new Intent(this,FixtureActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                if(android.os.Build.VERSION.SDK_INT>=29 && !ActivityManager.isActivityStartAllowedOnDisplay(this,id,intent)) {
+                if(android.os.Build.VERSION.SDK_INT>=29 && !getSystemService(ActivityManager.class).isActivityStartAllowedOnDisplay(this,id,intent)) {
                     stopProbe("Android denied owned activity launch on display "+id); return;
                 }
                 FixtureActivity.expectedDisplay=id;

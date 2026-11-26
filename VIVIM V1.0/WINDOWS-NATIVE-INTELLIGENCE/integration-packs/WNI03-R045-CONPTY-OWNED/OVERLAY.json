@@ -1,0 +1,77 @@
+{
+  "arbor": "b13b8d67b4adb84ec91612196c8b4257df71968b",
+  "files": [
+    {
+      "name": "workstation_windows_job.rs",
+      "blob": "d0ec556b10f9569f199e7ed5b24cd451feed1a96",
+      "edits": [
+        [
+          "fn invalid()->io::Error",
+          "#[path=\"workstation_conpty.rs\"]\nmod conpty;\nuse conpty::{Console,Size};\nfn invalid()->io::Error"
+        ],
+        [
+          "PROC_THREAD_ATTRIBUTE_HANDLE_LIST,PROC_THREAD_ATTRIBUTE_JOB_LIST},",
+          "PROC_THREAD_ATTRIBUTE_HANDLE_LIST,PROC_THREAD_ATTRIBUTE_JOB_LIST,PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE},"
+        ],
+        [
+          "}\nimpl Drop for Attributes",
+          " fn set_console(&mut self,console:&Console)->io::Result<()>{\n  // HPCON itself is the pointer-sized attribute value, not &HPCON.\n  unsafe{ok(UpdateProcThreadAttribute(self.ptr,0,PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE as usize,console.handle() as *const c_void,size_of::<isize>(),null_mut(),null_mut()))}\n }\n}\nimpl Drop for Attributes"
+        ],
+        [
+          "pub(super) struct Process{job:OwnedHandle,root:OwnedHandle}",
+          "pub(super) struct Process{job:OwnedHandle,root:OwnedHandle,console:Option<Console>}"
+        ],
+        [
+          "let process=Self{job,root};",
+          "let process=Self{job,root,console:None};"
+        ],
+        [
+          " pub(super) fn active(&self)->io::Result<u32>{",
+          " /// Local owner-approved PTY attachment. No public endpoint or second executor.\n /// The caller must drain output on a separate thread before waiting/closing.\n pub(super) fn spawn_console(exe:&Path,cwd:&Path,args:&[OsString],environment:&[(OsString,OsString)],size:Size)\n ->io::Result<(Self,File,File)>{\n  let app=terminated(exe.as_os_str())?;let directory=terminated(cwd.as_os_str())?;\n  let mut cmd=Vec::new();quote(exe.as_os_str(),&mut cmd)?;for arg in args{cmd.push(32);quote(arg,&mut cmd)?;}\n  if cmd.len()>=32767{return Err(invalid());}cmd.push(0);\n  let env=env_block(environment)?;\n  let (console,input,output)=Console::create(size).map_err(|_|io::Error::other(\"pseudoconsole unavailable\"))?;\n  unsafe{\n   let h=CreateJobObjectW(null(),null());if h.is_null(){return Err(io::Error::last_os_error());}\n   let job=own(h);let mut limits:JOBOBJECT_EXTENDED_LIMIT_INFORMATION=zeroed();\n   limits.BasicLimitInformation.LimitFlags=JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE;\n   ok(SetInformationJobObject(raw(&job),JobObjectExtendedLimitInformation,(&limits as *const JOBOBJECT_EXTENDED_LIMIT_INFORMATION).cast(),size_of::<JOBOBJECT_EXTENDED_LIMIT_INFORMATION>()as u32))?;\n   let jobs=[raw(&job)];let mut attrs=Attributes::new()?;\n   attrs.set(PROC_THREAD_ATTRIBUTE_JOB_LIST as usize,&jobs)?;\n   attrs.set_console(&console)?;\n   let mut si:STARTUPINFOEXW=zeroed();si.StartupInfo.cb=size_of::<STARTUPINFOEXW>()as u32;si.lpAttributeList=attrs.ptr;\n   let mut pi:PROCESS_INFORMATION=zeroed();\n   // Console supplies its own streams. No std-handle inheritance, no\n   // CREATE_NO_WINDOW, no breakaway or uncontained fallback.\n   ok(CreateProcessW(app.as_ptr(),cmd.as_mut_ptr(),null(),null(),0,\n    EXTENDED_STARTUPINFO_PRESENT|CREATE_UNICODE_ENVIRONMENT,\n    env.as_ptr().cast(),directory.as_ptr(),&si.StartupInfo,&mut pi))?;\n   let root=own(pi.hProcess);let _thread=own(pi.hThread);\n   Ok((Self{job,root,console:Some(console)},input,output))\n  }\n }\n pub(super) fn resize_console(&self,size:Size)->io::Result<()>{\n  self.console.as_ref().ok_or_else(invalid)?.resize(size).map_err(|_|io::Error::other(\"pseudoconsole resize failed\"))\n }\n /// Only after child tree settled (or cancelled), while reader still drains.\n pub(super) fn finish_console(&mut self)->io::Result<()>{\n  if self.active()?!=0{return Err(io::Error::new(io::ErrorKind::WouldBlock,\"job still active\"));}\n  self.console.take();Ok(())\n }\n pub(super) fn active(&self)->io::Result<u32>{"
+        ],
+        [
+          "use conpty::{Console,Size};",
+          "use conpty::Console;\npub use conpty::Size;"
+        ]
+      ]
+    },
+    {
+      "name": "workstation_process.rs",
+      "blob": "ce28e179a8f161ff33d89c37c58f793dc4b58171",
+      "edits": [
+        [
+          "use windows_job::Process as PlatformChild;",
+          "use windows_job::Process as PlatformChild;\n#[cfg(windows)] pub use windows_job::Size as ConsoleSize;"
+        ],
+        [
+          "        if !spec.executable.is_absolute()",
+          "        Self::start_mode(spec,interactive,#[cfg(windows)] None)\n    }\n    #[cfg(windows)]\n    pub fn start_console(spec:LocalProcessSpec,size:ConsoleSize)->io::Result<Self>{Self::start_mode(spec,true,Some(size))}\n    fn start_mode(spec:LocalProcessSpec,interactive:bool,#[cfg(windows)] console:Option<ConsoleSize>)->io::Result<Self>{\n        if !spec.executable.is_absolute()"
+        ],
+        [
+          "        let (child,stdout,stderr,stdin)=PlatformChild::spawn(&executable,&workspace,&spec.args,&spec.environment,interactive)?;",
+          "        let (child,stdout,stderr,stdin)=if let Some(size)=console{let(child,input,output)=PlatformChild::spawn_console(&executable,&workspace,&spec.args,&spec.environment,size)?;(child,output,None,Some(input))}else{let(child,stdout,stderr,stdin)=PlatformChild::spawn(&executable,&workspace,&spec.args,&spec.environment,interactive)?;(child,stdout,Some(stderr),stdin)};"
+        ],
+        [
+          "        (child,stdout,stderr,stdin)\n        };",
+          "        (child,stdout,Some(stderr),stdin)\n        };"
+        ],
+        [
+          "        drain(stderr,Arc::clone(&process.stderr))?;",
+          "        if let Some(stderr)=stderr{drain(stderr,Arc::clone(&process.stderr))?;}else{process.stderr.lock().map_err(|_|invalid())?.closed=true;}"
+        ],
+        [
+          "        if self.status.is_none() { self.status=self.child.try_wait()?; }",
+          "        if self.status.is_none(){self.status=self.child.try_wait()?;#[cfg(windows)] if self.status.is_some(){self.close_input();self.child.finish_console()?;}}"
+        ],
+        [
+          "        self.status=Some(status);\n        Ok(status)",
+          "        self.status=Some(status);\n        #[cfg(windows)] self.child.finish_console()?;\n        Ok(status)"
+        ],
+        [
+          "    pub fn close_input(&mut self){self.input.take();}",
+          "    pub fn close_input(&mut self){self.input.take();}\n    #[cfg(windows)] pub fn resize_console(&mut self,size:ConsoleSize)->io::Result<()>{if self.poll()?.is_some(){return Err(invalid())}self.child.resize_console(size)}"
+        ]
+      ]
+    }
+  ]
+}

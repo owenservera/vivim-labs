@@ -29,3 +29,6 @@ Earlier iterations: initial archive extraction failed at the PowerShell archive 
 
 ## Next
 Keep this baseline frozen and use the same protocol for subsequent algorithm proposals. Before any scientific expansion, qualify a larger independent calculator conformance corpus (including randomized decimal and key-sequence cases, rounding conventions, historical calculator behavior, resource limits and performance). Add open type/schema registration and independent provider identity/qualification only when the next consumer requires it. No live Product/ARBOR wiring or UI construction is authorized by this experiment.
+
+## Governing continuation (R003)
+[Constitution R003](../CONSTITUTION-R003.md) supersedes the Rust-first research direction for new championship seed implementations. This frozen compatibility baseline is a reference/oracle and registration experiment, not an approved hardware-native backend. New work must qualify machine-to-Rust bootstrap, independent seeds and actual chain computation.

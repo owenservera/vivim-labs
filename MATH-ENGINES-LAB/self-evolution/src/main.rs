@@ -156,33 +156,62 @@ fn witness(r:&Registry,rev:u32,head:Hash,epoch:u64,id:Hash,cases:&[Case],slot:u8
 }
 #[derive(Clone,Copy,Debug,PartialEq,Eq)]
 enum Gate{Accept,Reject,Defer}
-fn verify(r:&Registry,rev:u32,head:Hash,epoch:u64,id:Hash,cases:&[Case],receipts:&[Receipt])->Gate{
+// The verifier's own checks are subject to a mutation tournament. Rule omission
+// is a generated checker defect; the full gate never runs with omitted rules.
+const RULES:[&str;11]=["parent","epoch","identity","suite","digest","witness_scope","unique_witness","complete_claims","case_order","claim_pass","local_replay"];
+fn verify_mask(r:&Registry,rev:u32,head:Hash,epoch:u64,id:Hash,cases:&[Case],receipts:&[Receipt],omit:Option<usize>)->Gate{
+    let on=|n|omit!=Some(n);
     let mut seen=BTreeSet::new();
     for p in receipts{
-        if p.parent!=head||p.epoch!=epoch||p.identity!=id||p.suite!=suite_id(cases)||p.digest!=p.digest()
-            ||!matches!(p.witness,1|2)||!seen.insert(p.witness)||p.claims.len()!=cases.len(){return Gate::Reject;}
-        for (&k,q) in cases.iter().zip(&p.claims){if q.case!=k||!q.pass||!screen_at(r,k,rev){return Gate::Reject;}}
+        let unique=seen.insert(p.witness);
+        let checks=[p.parent==head,p.epoch==epoch,p.identity==id,p.suite==suite_id(cases),p.digest==p.digest(),
+            matches!(p.witness,1|2),unique,p.claims.len()==cases.len()];
+        if checks.iter().enumerate().any(|(i,&valid)|on(i)&&!valid){return Gate::Reject;}
+        for (&k,q) in cases.iter().zip(&p.claims){
+            if (on(8)&&q.case!=k)||(on(9)&&!q.pass)||(on(10)&&!screen_at(r,k,rev)){return Gate::Reject;}
+        }
     }
     if seen.len()<2{Gate::Defer}else{Gate::Accept}
+}
+fn verify(r:&Registry,rev:u32,head:Hash,epoch:u64,id:Hash,cases:&[Case],receipts:&[Receipt])->Gate{
+    verify_mask(r,rev,head,epoch,id,cases,receipts,None)
 }
 fn verifier_attack_lab(r:&Registry,rev:u32,id:Hash,cases:&[Case],head:Hash,epoch:u64){
     let a=witness(r,rev,head,epoch,id,cases,1);let b=witness(r,rev,head,epoch,id,cases,2);
     let run=|p:&[Receipt]|verify(r,rev,head,epoch,id,cases,p);
     assert_eq!(run(&[a.clone(),b.clone()]),Gate::Accept);
     let mut attacks=Vec::new();
-    let mut p=a.clone();p.claims.pop();p.digest=p.digest();attacks.push(p);
-    let mut p=a.clone();p.epoch=epoch+1;p.digest=p.digest();attacks.push(p);
-    let mut p=a.clone();p.parent[0]^=1;p.digest=p.digest();attacks.push(p);
-    let mut p=a.clone();p.identity[0]^=1;p.digest=p.digest();attacks.push(p);
-    let mut p=a.clone();p.suite[0]^=1;p.digest=p.digest();attacks.push(p);
-    let mut p=a.clone();p.claims[0].pass=false;p.digest=p.digest();attacks.push(p);
-    let mut p=a.clone();p.claims.swap(0,1);p.digest=p.digest();attacks.push(p);
-    let mut p=a.clone();p.digest[0]^=1;attacks.push(p);
-    let count=attacks.len();
-    for p in attacks{assert_eq!(run(&[p,b.clone()]),Gate::Reject);}
-    assert_eq!(run(&[a.clone(),a.clone()]),Gate::Reject);
+    // Generate one corruption for every field and claim rule, then rehash
+    // wherever appropriate so a digest check alone cannot hide the omission.
+    for rule in 0..11{
+        if rule==10{continue;}
+        let mut p=a.clone();
+        match rule{
+            0=>p.parent[0]^=1,1=>p.epoch+=1,2=>p.identity[0]^=1,3=>p.suite[0]^=1,
+            4=>p.digest[0]^=1,5=>p.witness=9,6=>p.witness=2,
+            7=>{p.claims.pop();},8=>p.claims.swap(0,1),9=>p.claims[0].pass=false,_=>unreachable!()
+        }
+        if rule!=4{p.digest=p.digest();}
+        attacks.push((rule,p));
+    }
+    let mut killed=0;
+    for (rule,p) in attacks{
+        let pair=[p,b.clone()];assert_eq!(run(&pair),Gate::Reject);
+        if verify_mask(r,rev,head,epoch,id,cases,&pair,Some(rule))!=Gate::Reject{
+            killed+=1;println!("checker_mutation_killed={}",RULES[rule]);
+        }
+    }
+    // The replay checker is itself challenged by two forged passing receipts
+    // for a provider containing a real arithmetic defect.
+    let bad=stage(Op::Add,mutant_fn(Op::Add,0),&BTreeSet::new()).unwrap();
+    let mut p=witness(&bad,2,head,epoch,id,cases,1);let mut q=witness(&bad,2,head,epoch,id,cases,2);
+    for w in [&mut p,&mut q]{for claim in &mut w.claims{claim.pass=true;}w.digest=w.digest();}
+    assert_eq!(verify(&bad,2,head,epoch,id,cases,&[p.clone(),q.clone()]),Gate::Reject);
+    assert_eq!(verify_mask(&bad,2,head,epoch,id,cases,&[p,q],Some(10)),Gate::Accept);
+    killed+=1;println!("checker_mutation_killed={}",RULES[10]);
+    assert_eq!(killed,RULES.len());
     assert_eq!(run(&[a]),Gate::Defer);
-    println!("verifier_generated_receipt_mutations_rejected={} duplicate_rejected=1 offline_deferred=1",count);
+    println!("checker_mutation_tournament={}/{} offline_deferred=1",killed,RULES.len());
 }
 fn closed_loop(){
     let mut learned=BTreeSet::new();let mut head=hash(&[b"self-evolution-genesis"]);let mut epoch=0u64;

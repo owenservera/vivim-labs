@@ -1,0 +1,8 @@
+role	name	meaning
+Harness	Axiom	native operational execution engine that coordinates applications and tools
+MCP	Nexus	universal connection interface and gateway to native capabilities
+SDK	Helix	composable building blocks and instruction primitives
+Factory	Nova	generates and assembles new reusable capabilities
+Language	VLANG	grammar and semantics for composing operational intent
+Interaction	Iris	perception and interaction with human and application surfaces
+Computation	Cosmos	computational reasoning and numerical processing substrate

@@ -9,6 +9,18 @@ use core::arch::global_asm;
 use sha2::{Digest,Sha256};
 use std::{io::Write,process::Command};
 global_asm!(include_str!("abi_probe.S"));
+global_asm!(include_str!("../seeds/P001.S"));
+global_asm!(include_str!("../seeds/P002.S"));
+global_asm!(include_str!("../seeds/P008.S"));
+global_asm!(include_str!("../seeds/P009.S"));
+global_asm!(include_str!("../seeds/P010.S"));
+global_asm!(include_str!("../seeds/P013.S"));
+global_asm!(include_str!("../seeds/P015.S"));
+global_asm!(include_str!("../seeds/P017.S"));
+global_asm!(include_str!("../seeds/P019.S"));
+global_asm!(include_str!("../seeds/P021.S"));
+global_asm!(include_str!("../seeds/P030.S"));
+global_asm!(include_str!("../seeds/P031.S"));
 global_asm!(include_str!("../seeds/P003.S"));
 global_asm!(include_str!("../seeds/P006.S"));
 global_asm!(include_str!("../seeds/P016.S"));
@@ -32,6 +44,18 @@ global_asm!(include_str!(concat!(env!("OUT_DIR"),"/P024.S")));
 type Seed=unsafe extern "win64" fn(i64,i64,u32,*mut i64)->u32;
 unsafe extern "win64"{
     fn r003_abi_probe(seed:Seed,a:i64,b:i64,op:u32,out:*mut i64)->u64;
+    fn p001_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p002_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p008_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p009_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p010_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p013_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p015_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p017_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p019_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p021_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p030_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p031_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p003_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p006_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p016_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
@@ -58,7 +82,19 @@ unsafe extern "win64"{
     fn p026_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p032_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
 }
-const SEEDS:[(u8,Seed,&str);20]=[
+const SEEDS:[(u8,Seed,&str);32]=[
+    (1,p001_seed,include_str!("../seeds/P001.S")),
+    (2,p002_seed,include_str!("../seeds/P002.S")),
+    (8,p008_seed,include_str!("../seeds/P008.S")),
+    (9,p009_seed,include_str!("../seeds/P009.S")),
+    (10,p010_seed,include_str!("../seeds/P010.S")),
+    (13,p013_seed,include_str!("../seeds/P013.S")),
+    (15,p015_seed,include_str!("../seeds/P015.S")),
+    (17,p017_seed,include_str!("../seeds/P017.S")),
+    (19,p019_seed,include_str!("../seeds/P019.S")),
+    (21,p021_seed,include_str!("../seeds/P021.S")),
+    (30,p030_seed,include_str!("../seeds/P030.S")),
+    (31,p031_seed,include_str!("../seeds/P031.S")),
     (3,p003_seed,include_str!("../seeds/P003.S")),
     (6,p006_seed,include_str!("../seeds/P006.S")),
     (16,p016_seed,include_str!("../seeds/P016.S")),

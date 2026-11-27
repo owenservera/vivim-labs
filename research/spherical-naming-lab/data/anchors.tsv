@@ -1,0 +1,100 @@
+Astronomy	asterism	parallax	occultation	transit	proper motion	aperture synthesis	spectroscopy	photometry	astrometry	celestial reference frame
+Cosmology	cosmic web	void	filament	recombination	inflation	dark matter	gravitational lensing	redshift	horizon	acoustic oscillation
+Celestial mechanics	libration	syzygy	apside	precession	nutation	resonance	Lagrange point	orbital transfer	tidal locking	separatrix
+Optics	caustic	diffraction	interference	refraction	polarization	wavefront	coherence	apodization	holography	birefringence
+Fluid mechanics	vortex	streamline	boundary layer	laminar flow	turbulence	advection	vorticity	shear layer	stagnation point	circulation
+Thermodynamics	entropy	enthalpy	exergy	free energy	equilibrium	phase transition	heat capacity	Carnot cycle	chemical potential	dissipation
+Electromagnetism	flux	inductance	capacitance	permittivity	magnetic domain	dipole	skin effect	eddy current	field line	waveguide
+Acoustics	reverberation	standing wave	impedance	harmonic	formant	beat frequency	sonic dispersion	acoustic cavity	echo	phonon
+Quantum mechanics	superposition	entanglement	decoherence	tunneling	spin	wave function	operator	measurement basis	quantization	interferometry
+Solid-state physics	band gap	exciton	dislocation	Brillouin zone	Fermi surface	quasiparticle	superconductivity	ferroelectricity	crystal vacancy	domain wall
+Geology	stratum	unconformity	fold	fault	metamorphism	sediment	terrane	subduction	rift	orogeny
+Geomorphology	alluvial fan	meander	talus	escarpment	delta	watershed	karst	drumlin	pediment	erosion
+Mineralogy	cleavage	habit	lattice	polymorph	solid solution	twinned crystal	inclusion	lustre	streak	paragenesis
+Volcanology	caldera	fumarole	dike	laccolith	pyroclast	lava tube	plume	tephra	volcanic conduit	magmatic differentiation
+Seismology	seismic phase	hypocenter	epicenter	aftershock	moment tensor	Rayleigh wave	Love wave	seismic tomography	attenuation	rupture
+Hydrology	aquifer	infiltration	percolation	runoff	hydrograph	recharge	capillary fringe	groundwater divide	retention basin	baseflow
+Oceanography	halocline	thermocline	upwelling	gyre	isopycnal	estuary	internal wave	Ekman transport	thermohaline circulation	pelagic zone
+Meteorology	frontogenesis	convection	cyclogenesis	vorticity advection	inversion	isobar	dew point	jet stream	orographic lift	cloud microphysics
+Glaciology	firn	crevasse	serac	ablation	accumulation	basal sliding	ice divide	moraine	glacial surge	ice core
+Soil science	pedogenesis	rhizosphere	soil aggregate	cation exchange	humus	eluviation	illuviation	soil horizon	porosity	bioturbation
+Cell biology	organelle	membrane	cytoskeleton	vesicle	centrosome	endocytosis	exocytosis	mitosis	autophagy	cell junction
+Molecular biology	transcription	translation	ribosome	promoter	enhancer	operon	spliceosome	chaperone	polymerase	signal transduction
+Genetics	allele	genotype	phenotype	linkage	recombination	locus	epistasis	penetrance	segregation	heredity
+Genomics	synteny	contig	scaffold	haplotype	pangenome	ortholog	paralog	copy number	sequence alignment	genome annotation
+Epigenetics	methylation	acetylation	chromatin	histone	imprinting	nucleosome	epiallele	chromatin remodeling	gene silencing	enhancer accessibility
+Developmental biology	morphogenesis	gastrulation	organogenesis	morphogen	patterning	differentiation	induction	segmentation	lineage specification	developmental plasticity
+Biochemistry	allostery	catalysis	cofactor	substrate	metabolism	enzyme kinetics	redox	glycolysis	phosphorylation	feedback inhibition
+Structural biology	protein fold	helix	beta sheet	binding pocket	quaternary structure	conformation	protein domain	cryo-electron microscopy	docking	oligomer
+Immunology	antigen	antibody	complement	cytokine	immunological memory	clonal selection	opsonization	immune tolerance	chemotaxis	antigen presentation
+Microbiology	biofilm	quorum sensing	plasmid	spore	conjugation	transduction	transformation	microbial mat	sporulation	horizontal gene transfer
+Botany	meristem	cambium	stoma	xylem	phloem	node	internode	petiole	cotyledon	rhizome
+Plant physiology	turgor	transpiration	phototropism	gravitropism	phyllotaxis	guttation	osmotic regulation	photosynthesis	source sink transport	vernalization
+Mycology	mycelium	hypha	anastomosis	rhizomorph	mycorrhiza	fruiting body	basidium	ascus	sclerotium	spore dispersal
+Zoology	metamorphosis	exoskeleton	endoskeleton	gill	mantle	radula	nematocyst	cnidocyte	segmented body	bioluminescence
+Entomology	ecdysis	instar	elytron	spiracle	antenna	ovipositor	diapause	eusociality	pheromone	tracheal system
+Marine biology	holdfast	byssus	osculum	zooid	coral polyp	kelp forest	filter feeding	counterillumination	nekton	benthic community
+Evolutionary biology	adaptation	exaptation	convergence	divergence	speciation	selection	drift	fitness landscape	coevolution	phylogenetic tree
+Ecology	succession	ecotone	keystone species	niche	food web	mutualism	commensalism	resilience	metapopulation	trophic cascade
+Ethology	imprinting	foraging	territoriality	courtship	social learning	flocking	schooling	orientation	habituation	collective vigilance
+Anatomy	fascia	trabecula	anastomotic arch	septum	sinus	ostium	hilum	pedicle	ligament	tendon
+Neuroscience	synapse	axon	dendrite	myelin	action potential	neuromodulation	neural circuit	plasticity	connectome	reticular formation
+Cognitive science	schema	attention	working memory	mental model	concept formation	embodied cognition	affordance	categorization	prediction	metacognition
+Psychology	conditioning	priming	salience	motivation	reinforcement	habituation learning	perceptual constancy	heuristic	association	self regulation
+Physiology	homeostasis	baroreflex	perfusion	osmosis	ventilation	circadian rhythm	receptor	hormonal axis	autonomic regulation	negative feedback
+Biomechanics	moment arm	elastic recoil	lever	gait	center of mass	force transmission	strain	tensegrity	kinematic chain	locomotion
+Linguistics	morpheme	phoneme	syntax	semantics	pragmatics	lexeme	deixis	recursion	allomorph	grammaticalization
+Phonetics	articulation	vowel space	coarticulation	prosody	fricative	plosive	nasal resonance	voice onset time	intonation	syllable
+Anthropology	kinship	ritual	reciprocity	enculturation	social identity	material culture	exchange	oral tradition	ethnography	symbolism
+Archaeology	stratigraphy	typology	provenance	assemblage	contextual dating	seriation	site formation	artifact	palimpsest	refitting
+Sociology	institution	social network	norm	collective action	role	social capital	diffusion	community	emergence	social stratification
+Geometry	geodesic	manifold	curvature	isometry	projection	simplex	Voronoi cell	geometric duality	tessellation	affine space
+Topology	homotopy	homeomorphism	fiber bundle	covering space	knot	braid	boundary	genus	connected component	compactness
+Algebra	group	ring	field	module	ideal	homomorphism	automorphism	quotient	representation	endomorphism
+Number theory	prime	congruence	residue	valuation	Diophantine equation	continued fraction	modular form	zeta function	quadratic reciprocity	partition
+Graph theory	vertex	edge	bridge	cut	cycle	spanning tree	matching	clique	flow network	graph contraction
+Probability	sample space	random variable	expectation	conditional probability	martingale	Markov chain	stochastic process	coupling	random walk	renewal process
+Statistics	directional statistics	likelihood	quantile	order statistic	permutation test	bootstrap	estimator	covariance	posterior	robustness
+Dynamical systems	attractor	basin	fixed point	bifurcation	limit cycle	phase portrait	Lyapunov exponent	chaos	invariant set	Poincare section
+Numerical analysis	interpolation	quadrature	convergence order	conditioning number	finite difference	finite element	iteration	error bound	preconditioner	spline
+Optimization	objective function	constraint	gradient	duality	Pareto frontier	simplex algorithm	trust region	convexity	stationary point	regularization
+Control theory	controller	observer	setpoint	stability	feedback	feedforward	state space	transfer function	controllability	receding horizon
+Robotics	actuator	end effector	inverse kinematics	localization	mapping	trajectory	grasp	compliance	path planning	sensor fusion
+Signal processing	filter	convolution	Fourier transform	wavelet	sampling	aliasing	modulation	demodulation	correlation	matched filter
+Telecommunications	multiplexing	channel	protocol	relay	handover	routing	packet switching	error correction	duplexing	synchronization
+Materials science	microstructure	grain boundary	composite	fatigue	creep	fracture toughness	sintering	nucleation	precipitation	self healing
+Structural engineering	truss	arch	cantilever	load path	brace	buckling	shear wall	prestress	moment frame	damping
+Systems engineering	interface	requirement	traceability	decomposition	integration	verification	validation	redundancy	fault tree	system boundary
+Manufacturing	jig	fixture	toolpath	casting	forging	lamination	assembly	metrology	tolerance	process capability
+Distributed systems	consensus	replication	quorum	gossip	lease	idempotence	causality	partition tolerance	sharding	coordination
+Computer architecture	pipeline	cache	register	instruction set	memory hierarchy	bus	interrupt	execution unit	branch prediction	prefetch
+Music theory	counterpoint	cadence	ostinato	motif	canon	fugue	tonic	modulation harmony	voice leading	polyrhythm
+Ethnomusicology	call and response	drone	heterophony	oral transmission	performance practice	instrument classification	rhythmic cycle	musical enculturation	ritual music	improvisation
+Art history	chiaroscuro	sfumato	perspective	iconography	fresco	triptych	patina	assemblage art	pentimento	grisaille
+Design	form	function	composition	hierarchy	contrast	balance	negative space	grid	proportion	visual rhythm
+Typography	ligature	kerning	leading	serif	gothic script	glyph	counter	ascender	baseline	letterform
+Architecture	atrium	oculus	architrave	colonnade	voussoir	keystone	fenestration	clerestory	vault	buttress
+Literature	allegory	metaphor	metonymy	synecdoche	leitmotif	intertextuality	narrative	anagnorisis	peripeteia	ekphrasis
+Rhetoric	ethos	pathos	logos	anaphora	chiasmus	antithesis	parallelism	enthymeme	aporia	parataxis
+Mythology	cosmogony	etiology	trickster	axis mundi	liminality	psychopomp	mytheme	archetype	threshold	transformation myth
+Philosophy	ontology	epistemology	axiom	dialectic	phenomenology	identity	causation	agency	intentionality	emergentism
+Economics	scarcity	opportunity cost	equilibrium price	elasticity	externality	comparative advantage	incentive	transaction cost	public good	market clearing
+Network science	centrality	betweenness	assortativity	small world	scale free network	community detection	percolation threshold	multiplex network	network motif	diffusion cascade
+Geography	region	place	spatial interaction	spatial autocorrelation	choropleth	cartography	isoline	spatial diffusion	geodesy	toponymy
+Political science	governance	federalism	subsidiarity	legitimacy	representation	coalition	checks and balances	collective choice	deliberation	institutional design
+Logistics	hub	spoke	cross docking	inventory	replenishment	dispatch	intermodal transport	throughput	distribution network	buffer stock
+Law	jurisdiction	precedent	usufruct	easement	fiduciary duty	contract	delegation	agency law	due process	legal remedy
+Organization studies	division of labor	span of control	matrix organization	coordination mechanism	organizational learning	boundary spanning	delegated authority	routine	organizational memory	adaptive structure
+Library science	classification	cataloguing	authority control	thesaurus	index	bibliography	finding aid	metadata	controlled vocabulary	collection development
+Information science	information retrieval	knowledge representation	semantic indexing	inverted index	taxonomy	folksonomy	information architecture	data lineage	information entropy	relevance
+History of science	paradigm	instrumentation	discovery	scientific revolution	replication crisis	research tradition	experiment	theory formation	scientific correspondence	knowledge diffusion
+Chemistry	bond	reaction pathway	transition state	isomer	ligand	solvation	stoichiometry	chemical equilibrium	reaction intermediate	coordination complex
+Electrochemistry	electrode	electrolyte	half reaction	overpotential	electrical double layer	ion transport	electrolysis	galvanic cell	passivation	electrocatalysis
+Crystallography	unit cell	space group	screw axis	glide plane	reciprocal lattice	Miller index	Bragg reflection	point group	crystal symmetry	structure factor
+Atmospheric physics	radiative transfer	optical depth	aerosol	Rayleigh scattering	Mie scattering	greenhouse effect	planetary boundary layer	atmospheric tide	gravity wave	convective instability
+Planetary science	regolith	albedo	magnetosphere	crater	cryovolcanism	tectonics	planetary differentiation	Hill sphere	Roche limit	exosphere
+Astrobiology	biosignature	habitability	extremophile	prebiotic chemistry	hydrothermal vent	astrochemistry	panspermia	organic synthesis	habitable zone	planetary protection
+Agronomy	crop rotation	intercropping	cover crop	seed bank	fertigation	allelopathy	nutrient cycling	yield gap	soil amendment	agroecosystem
+Forestry	canopy	understory	silviculture	dendrochronology	growth ring	forest succession	seed dispersal	coppice	forest inventory	edge effect
+Horticulture	grafting	rootstock	scion	cutting	layering	bud	pruning	propagation	hardening off	cultivar
+Navigation	azimuth	bearing	waypoint	dead reckoning	great circle	rhumb line	celestial navigation	sextant	compass deviation	triangulation

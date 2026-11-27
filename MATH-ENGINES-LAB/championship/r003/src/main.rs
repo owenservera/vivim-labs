@@ -3,6 +3,7 @@
 //! Shared evaluator supplies independent Rust reference arithmetic, not fallback.
 #[cfg(not(target_arch="x86_64"))]
 compile_error!("R003 seed development currently targets x86-64.");
+mod protocol;
 use core::arch::global_asm;
 use sha2::{Digest,Sha256};
 use std::{io::Write,process::Command};
@@ -107,6 +108,9 @@ fn main(){
         seed_development(args.get(2).expect("entrant id").parse().unwrap());return;
     }
     assert!(decide_match(Some((22,Evidence::default())),None).is_none());
+    let positions=protocol::first_round_positions();
+    assert_eq!(positions.len(),32);
+    println!("BRACKET conferences=4 first_round_positions={}",positions.len());
     let exe=std::env::current_exe().unwrap();
     let mut passed=0;
     for (id,_,_) in SEEDS{

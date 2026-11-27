@@ -1,0 +1,8 @@
+[package]
+name = "vivim-math-bare-metal-lab"
+version = "0.1.0"
+edition = "2021"
+publish = false
+[dependencies]
+vivim-math-engines-lab = { path = ".." }
+vivim-math-compatibility-lab = { path = "../compatibility" }

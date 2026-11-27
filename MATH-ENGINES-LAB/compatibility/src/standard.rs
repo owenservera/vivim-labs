@@ -1,7 +1,7 @@
 //! Standard four-function calculator consumer: interaction state, not a math engine.
 //! All mathematical operations and decimal projections use admitted capabilities.
 use super::*;
-use super::extensions::{PARSE,DISPLAY,PERCENT,SQRT};
+use super::extensions::{PARSE,DISPLAY,PERCENT,SQRT,MAX_ENTRY_BYTES};
 pub const CONSUMER:Key=key("calculator.standard.immediate");
 pub const REQUIREMENTS:&[Requirement]=&[ADD,SUB,MUL,DIV,NEG,PARSE,DISPLAY,PERCENT,SQRT];
 #[derive(Clone,Copy,Debug,PartialEq,Eq)]
@@ -90,7 +90,7 @@ fn apply(reg:&Registry,plan:&Plan,s:&mut State,p:Press)->Result<()> {
             start_entry(s);
             let e=s.entry.as_mut().ok_or(Error::Invalid)?;
             if e=="0"{e.clear();}else if e=="-0"{e.truncate(1);}
-            if e.len()>=39{return Err(Error::Limit);}
+            if e.len()>=MAX_ENTRY_BYTES{return Err(Error::Limit);}
             e.push(char::from(b'0'+d));
         }
         Press::Point=>{

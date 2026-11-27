@@ -38,3 +38,6 @@ Choose embedded recursive verification with a small independently controlled gen
 
 Run from Labs root:
 cargo run --offline --manifest-path MATH-ENGINES-LAB/proof-mining/Cargo.toml
+
+## Governing continuation (R003)
+[Constitution R003](../CONSTITUTION-R003.md) governs future proof mining. Evidence receipts do not alone advance an evolutionary chain: actual independently qualified improvement in bare-metal promotion is mandatory. The earlier eleven-policy results are historical local simulations.

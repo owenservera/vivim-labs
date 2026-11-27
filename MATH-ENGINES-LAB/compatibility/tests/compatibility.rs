@@ -180,3 +180,23 @@ fn decimal_and_square_root_boundary_workpieces(){
     assert_eq!(r.call(&p,SQRT,&[number(0,1)],8),Ok(number(0,1)));
     assert_eq!(r.call(&p,SQRT,&[number(4,1)],8),Ok(number(2,1)));
 }
+
+#[test]
+fn preview_attributes_gaps_without_mutation(){
+    let r=Registry::baseline();
+    let proposal=vec![Provider{contract:A,requires:&[B],run:a},Provider{contract:B,requires:&[C],run:identity}];
+    let gaps=r.preview(key("consumer"),&[A],proposal).unwrap();
+    assert_eq!(gaps,vec![Gap{consumer:B.key,required:C,error:Error::Missing(C.key)}]);
+    assert_eq!((r.len(),r.generation()),(5,1));
+    assert_eq!(r.preview(CONSUMER,REQUIREMENTS,providers()).unwrap(),Vec::<Gap>::new());
+    assert_eq!(r.len(),5);
+}
+#[test]
+fn new_versions_coexist_without_replacing_previous_capability(){
+    let mut r=Registry::baseline();
+    let v2=Requirement{key:Key{id:A.key.id,rev:2,domain:DOMAIN},signature:UNARY};
+    r.admit(vec![Provider{contract:A,requires:&[],run:identity}],&fixtures(A)).unwrap();
+    r.admit(vec![Provider{contract:v2,requires:&[],run:identity}],&fixtures(v2)).unwrap();
+    let p=r.plan(&[A,v2]).unwrap();
+    for cap in [A,v2]{assert_eq!(r.call(&p,cap,&[number(7,1)],8),Ok(number(7,1)));}
+}

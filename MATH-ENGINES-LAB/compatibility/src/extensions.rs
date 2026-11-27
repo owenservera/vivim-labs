@@ -1,6 +1,7 @@
 //! The calculator's missing capabilities are supplied as independent providers.
 //! They extend the simulated host registry, not the frozen kernel.
 use super::*;
+pub const MAX_ENTRY_BYTES:usize=41; // 39 digits, optional sign and decimal point.
 pub const PARSE:Requirement=req("math.decimal.parse",Signature{args:&[Kind::Text],output:Kind::Number,assurance:Assurance::Exact});
 pub const DISPLAY:Requirement=req("math.decimal.display.truncate12",Signature{args:&[Kind::Number],output:Kind::Text,assurance:Assurance::Rounded});
 pub const PERCENT:Requirement=req("math.scalar.percent",UNARY);
@@ -8,7 +9,8 @@ pub const SQRT:Requirement=req("math.scalar.sqrt.floor6",Signature{args:&[Kind::
 
 fn parse(_: &mut Call<'_>,input:&[Value])->Result<Value>{
     let s=input[0].text()?;
-    if s.is_empty()||s.len()>39{return Err(Error::Invalid);}
+    if s.is_empty(){return Err(Error::Invalid);}
+    if s.len()>MAX_ENTRY_BYTES{return Err(Error::Limit);}
     let (negative,s)=match s.strip_prefix('-'){Some(t)=>(true,t),None=>(false,s)};
     let(mut n,mut d,mut point,mut digits)=(0i128,1i128,false,0usize);
     for c in s.bytes(){

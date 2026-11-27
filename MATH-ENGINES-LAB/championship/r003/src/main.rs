@@ -4,6 +4,7 @@
 #[cfg(not(target_arch="x86_64"))]
 compile_error!("R003 seed development currently targets x86-64.");
 mod protocol;
+mod workspace;
 use core::arch::global_asm;
 use sha2::{Digest,Sha256};
 use std::{io::Write,process::Command};
@@ -116,6 +117,10 @@ fn decide_match(a:Option<(u8,Evidence)>,b:Option<(u8,Evidence)>)->Option<u8>{
 }
 fn main(){
     let args:Vec<_>=std::env::args().collect();
+    if args.get(1).map(String::as_str)==Some("scaffold"){
+        workspace::materialize(std::path::Path::new(args.get(2).expect("new workspace path"))).expect("create entrant workspaces");return;
+    }
+    assert_eq!(workspace::roster().expect("valid roster").len(),64);
     if args.get(1).map(String::as_str)==Some("seed"){
         seed_development(args.get(2).expect("entrant id").parse().unwrap());return;
     }

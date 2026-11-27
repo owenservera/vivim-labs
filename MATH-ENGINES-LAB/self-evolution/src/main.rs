@@ -15,7 +15,8 @@ fn hash(parts:&[&[u8]])->Hash{
 enum Op{Add,Sub,Mul,Div}
 const OPS:[Op;4]=[Op::Add,Op::Sub,Op::Mul,Op::Div];
 fn primitive(op:Op)->Requirement{match op{Op::Add=>ADD,Op::Sub=>SUB,Op::Mul=>MUL,Op::Div=>DIV}}
-fn req_v2(op:Op)->Requirement{let mut r=primitive(op);r.key.rev=2;r}
+fn req_at(op:Op,rev:u32)->Requirement{let mut r=primitive(op);r.key.rev=rev;r}
+fn req_v2(op:Op)->Requirement{req_at(op,2)}
 const DEPS:&[Requirement]=&[ADD,SUB,MUL,DIV,NEG];
 #[derive(Clone,Copy,Debug,PartialEq,Eq,PartialOrd,Ord)]
 struct Case{op:Op,x:i128,y:i128}
@@ -87,9 +88,10 @@ fn stage(op:Op,run:Eval,learned:&BTreeSet<Case>)->Result<Registry>{
     r.admit(vec![Provider{contract:req_v2(op),requires:DEPS,run}],&fixtures(op,learned))?;
     Ok(r)
 }
-fn execute(r:&Registry,k:Case)->Result<Value>{
-    let req=req_v2(k.op);r.call(&r.plan(&[req])?,req,&inputs(k),64)
+fn execute_at(r:&Registry,k:Case,rev:u32)->Result<Value>{
+    let req=req_at(k.op,rev);r.call(&r.plan(&[req])?,req,&inputs(k),64)
 }
+fn execute(r:&Registry,k:Case)->Result<Value>{execute_at(r,k,2)}
 fn universe(op:Op)->Vec<Case>{
     (-10..=10).flat_map(|x|(-10..=10).map(move|y|c(op,x,y))).collect()
 }
@@ -121,7 +123,8 @@ fn schedule(s:Strategy,op:Op,seed:u64,learned:&BTreeSet<Case>)->Vec<Case>{
     for _ in 0..256{push(rng.digit(),rng.digit());}
     drop(push);out.truncate(BUDGET);out
 }
-fn screen(r:&Registry,k:Case)->bool{let v=execute(r,k);v==oracle(k)&&invariant(k,&v)}
+fn screen_at(r:&Registry,k:Case,rev:u32)->bool{let v=execute_at(r,k,rev);v==oracle(k)&&invariant(k,&v)}
+fn screen(r:&Registry,k:Case)->bool{screen_at(r,k,2)}
 fn benchmark(){
     println!("strategy,mutants_detected,mutant_trials,executed_cases");
     for s in STRATEGIES{
@@ -147,24 +150,24 @@ fn claim_bytes(claims:&[Claim])->Vec<u8>{
 struct Receipt{parent:Hash,epoch:u64,identity:Hash,suite:Hash,witness:u8,claims:Vec<Claim>,digest:Hash}
 impl Receipt{fn digest(&self)->Hash{hash(&[b"evolve-receipt-v1",&self.parent,&self.epoch.to_be_bytes(),&self.identity,&self.suite,&[self.witness],&claim_bytes(&self.claims)])}}
 fn suite_id(cases:&[Case])->Hash{hash(&[b"suite",&claim_bytes(&cases.iter().map(|&case|Claim{case,pass:false}).collect::<Vec<_>>())])}
-fn witness(r:&Registry,head:Hash,epoch:u64,id:Hash,cases:&[Case],slot:u8)->Receipt{
-    let claims=cases.iter().map(|&case|{let v=execute(r,case);Claim{case,pass:if slot==1{v==oracle(case)}else{invariant(case,&v)}}}).collect();
+fn witness(r:&Registry,rev:u32,head:Hash,epoch:u64,id:Hash,cases:&[Case],slot:u8)->Receipt{
+    let claims=cases.iter().map(|&case|{let v=execute_at(r,case,rev);Claim{case,pass:if slot==1{v==oracle(case)}else{invariant(case,&v)}}}).collect();
     let mut p=Receipt{parent:head,epoch,identity:id,suite:suite_id(cases),witness:slot,claims,digest:[0;32]};p.digest=p.digest();p
 }
 #[derive(Clone,Copy,Debug,PartialEq,Eq)]
 enum Gate{Accept,Reject,Defer}
-fn verify(r:&Registry,head:Hash,epoch:u64,id:Hash,cases:&[Case],receipts:&[Receipt])->Gate{
+fn verify(r:&Registry,rev:u32,head:Hash,epoch:u64,id:Hash,cases:&[Case],receipts:&[Receipt])->Gate{
     let mut seen=BTreeSet::new();
     for p in receipts{
         if p.parent!=head||p.epoch!=epoch||p.identity!=id||p.suite!=suite_id(cases)||p.digest!=p.digest()
             ||!matches!(p.witness,1|2)||!seen.insert(p.witness)||p.claims.len()!=cases.len(){return Gate::Reject;}
-        for (&k,q) in cases.iter().zip(&p.claims){if q.case!=k||!q.pass||!screen(r,k){return Gate::Reject;}}
+        for (&k,q) in cases.iter().zip(&p.claims){if q.case!=k||!q.pass||!screen_at(r,k,rev){return Gate::Reject;}}
     }
     if seen.len()<2{Gate::Defer}else{Gate::Accept}
 }
-fn verifier_attack_lab(r:&Registry,id:Hash,cases:&[Case],head:Hash,epoch:u64){
-    let a=witness(r,head,epoch,id,cases,1);let b=witness(r,head,epoch,id,cases,2);
-    let run=|p:&[Receipt]|verify(r,head,epoch,id,cases,p);
+fn verifier_attack_lab(r:&Registry,rev:u32,id:Hash,cases:&[Case],head:Hash,epoch:u64){
+    let a=witness(r,rev,head,epoch,id,cases,1);let b=witness(r,rev,head,epoch,id,cases,2);
+    let run=|p:&[Receipt]|verify(r,rev,head,epoch,id,cases,p);
     assert_eq!(run(&[a.clone(),b.clone()]),Gate::Accept);
     let mut attacks=Vec::new();
     let mut p=a.clone();p.claims.pop();p.digest=p.digest();attacks.push(p);
@@ -183,6 +186,7 @@ fn verifier_attack_lab(r:&Registry,id:Hash,cases:&[Case],head:Hash,epoch:u64){
 }
 fn closed_loop(){
     let mut learned=BTreeSet::new();let mut head=hash(&[b"self-evolution-genesis"]);let mut epoch=0u64;
+    let mut active=base();let mut revisions=Vec::new();
     let(mut mined,mut rejected,mut repaired,mut synth_attempts,mut holdout_checks)=(0,0,0,0,0);
     for op in OPS{for m in 0..3{
         let bad=stage(op,mutant_fn(op,m),&BTreeSet::new()).unwrap();
@@ -201,24 +205,37 @@ fn closed_loop(){
             let mut ok=true;for &k in &cases{holdout_checks+=1;ok &= screen(&r,k);}
             if ok{selected=Some((i,r));break;}
         }
-        let (i,r)=selected.expect("bounded grammar must contain a repair");
-        let id=hash(&[b"compiled-recipe-id",&[op as u8,i as u8]]);
-        epoch+=1;
-        let a=witness(&r,head,epoch,id,&cases,1);let b=witness(&r,head,epoch,id,&cases,2);
-        assert_eq!(verify(&r,head,epoch,id,&cases,&[a.clone(),b.clone()]),Gate::Accept);
-        if epoch==1{verifier_attack_lab(&r,id,&cases,head,epoch);}
+        let (i,_trial)=selected.expect("bounded grammar must contain a repair");
+        // Register the synthesized recipe on a cumulative, immutable snapshot.
+        // Revision number and predecessor history bind the final proof.
+        let rev=10+m as u32;
+        let mut next=active.clone();
+        let mut admission=fixtures(op,&learned);
+        for f in &mut admission{f.capability=req_at(op,rev);}
+        next.admit(vec![Provider{contract:req_at(op,rev),requires:DEPS,run:RECIPES[i]}],&admission).unwrap();
+        let id=hash(&[b"compiled-recipe-id",&[op as u8,i as u8],&rev.to_be_bytes()]);
+        let current_add=active.plan(&[ADD]).unwrap();
+        let next_epoch=active.call(&current_add,ADD,&[number(epoch as i128,1),number(1,1)],64).unwrap().number().unwrap();
+        assert_eq!(next_epoch.denominator(),1);
+        epoch=u64::try_from(next_epoch.numerator()).unwrap();
+        let a=witness(&next,rev,head,epoch,id,&cases,1);let b=witness(&next,rev,head,epoch,id,&cases,2);
+        assert_eq!(verify(&next,rev,head,epoch,id,&cases,&[a.clone(),b.clone()]),Gate::Accept);
+        if epoch==1{verifier_attack_lab(&next,rev,id,&cases,head,epoch);}
         // Two maliciously optimistic witnesses for the bad candidate still
         // fail independent local replay, even when their receipts hash correctly.
-        let mut a_bad=witness(&bad,head,epoch,id,&cases,1);let mut b_bad=witness(&bad,head,epoch,id,&cases,2);
+        let mut a_bad=witness(&bad,2,head,epoch,id,&cases,1);let mut b_bad=witness(&bad,2,head,epoch,id,&cases,2);
         for p in [&mut a_bad,&mut b_bad]{for q in &mut p.claims{q.pass=true;}p.digest=p.digest();}
-        assert_eq!(verify(&bad,head,epoch,id,&cases,&[a_bad,b_bad]),Gate::Reject);
+        assert_eq!(verify(&bad,2,head,epoch,id,&cases,&[a_bad,b_bad]),Gate::Reject);
         head=hash(&[b"admit",&head,&epoch.to_be_bytes(),&id,&a.digest,&b.digest]);
-        repaired+=1;
-        println!("round={} op={op:?} mutant={} counterexample=({}, {}) recipe={} registry_generation={}",epoch,m,found.x,found.y,i,r.generation());
+        active=next;revisions.push((op,rev));repaired+=1;
+        println!("round={} op={op:?} mutant={} counterexample=({}, {}) recipe={} registry_generation={}",epoch,m,found.x,found.y,i,active.generation());
     }}
+    // Replay every prior approved revision after the last extension.
+    for (op,rev) in revisions{for k in universe(op){assert!(screen_at(&active,k,rev));}}
+    println!("cumulative_registry_size={} generation={} all_historical_revisions_replay=PASS",active.len(),active.generation());
     println!("closed_loop mined={mined} bad_reproposals_rejected={rejected} repaired={repaired} synthesis_attempts={synth_attempts} finite_domain_checks={holdout_checks}");
     // Real calculator consumer regression (unchanged v1 interaction profile).
-    let r=base();let mut calculator=Calculator::new(&r).unwrap();use Press::*;
+    let r=active;let mut calculator=Calculator::new(&r).unwrap();use Press::*;
     for k in [Point,Digit(1),Operator(Binary::Add),Point,Digit(2),Equals]{calculator.press(&r,k).unwrap();}
     assert_eq!(calculator.projection(&r).unwrap().display,"0.3");
     println!("actual_standard_calculator_regression=PASS");

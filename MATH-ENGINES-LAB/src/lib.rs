@@ -21,12 +21,16 @@ pub type MathResult<T> = Result<T, MathError>;
 /// Checked scalar operations. Implementors must document their arithmetic domain;
 /// implementing this trait does not certify mathematical laws or error bounds.
 pub trait Scalar: Copy {
+    const DOMAIN: &'static str;
+    const ASSURANCE: Assurance;
     fn zero() -> Self;
     fn add(self, rhs: Self) -> MathResult<Self>;
     fn mul(self, rhs: Self) -> MathResult<Self>;
 }
 
 impl Scalar for i128 {
+    const DOMAIN: &'static str = "integer.i128";
+    const ASSURANCE: Assurance = Assurance::ExactBounded;
     fn zero() -> Self { 0 }
     fn add(self, rhs: Self) -> MathResult<Self> {
         self.checked_add(rhs).ok_or(MathError::Overflow)
@@ -82,6 +86,8 @@ impl Rational {
 }
 
 impl Scalar for Rational {
+    const DOMAIN: &'static str = "rational.i128";
+    const ASSURANCE: Assurance = Assurance::ExactBounded;
     fn zero() -> Self { Self { numerator: 0, denominator: 1 } }
     fn add(self, rhs: Self) -> MathResult<Self> {
         let g = gcd(self.denominator as u128, rhs.denominator as u128) as i128;
@@ -121,6 +127,8 @@ impl FiniteF64 {
     }
 }
 impl Scalar for FiniteF64 {
+    const DOMAIN: &'static str = "real.finite-f64";
+    const ASSURANCE: Assurance = Assurance::Approximate;
     fn zero() -> Self { Self(0.0) }
     fn add(self, rhs: Self) -> MathResult<Self> { Self::new(self.0 + rhs.0) }
     fn mul(self, rhs: Self) -> MathResult<Self> { Self::new(self.0 * rhs.0) }
@@ -157,8 +165,20 @@ impl Shape2 {
 
 /// Typed operations compose directly; no dynamic registry or serialization.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub struct Capability { pub id: &'static str, pub revision: u32 }
+pub enum Assurance { ExactBounded, Approximate }
 
+/// Domain and assurance are part of a binding's identity. Same operation ID
+/// across scalar domains must not imply interchangeable execution semantics.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct Capability {
+    pub id: &'static str,
+    pub revision: u32,
+    pub domain: &'static str,
+    pub assurance: Assurance,
+}
+
+/// An implementation is a candidate until independently qualified. Assurance
+/// describes the numeric representation, not an externally checked certificate.
 pub trait Operation<I> {
     type Output;
     fn capability(&self) -> Capability;
@@ -169,7 +189,7 @@ pub trait Operation<I> {
 pub struct Sum;
 impl<'a, T: Scalar> Operation<Vector<'a, T>> for Sum {
     type Output = T;
-    fn capability(&self) -> Capability { Capability { id: "math.vector.sum", revision: 1 } }
+    fn capability(&self) -> Capability { Capability { id: "math.vector.sum", revision: 1, domain: T::DOMAIN, assurance: T::ASSURANCE } }
     fn evaluate(&self, input: Vector<'a, T>) -> MathResult<T> {
         input.values.iter().try_fold(T::zero(), |acc, &x| acc.add(x))
     }
@@ -179,7 +199,7 @@ impl<'a, T: Scalar> Operation<Vector<'a, T>> for Sum {
 pub struct Dot;
 impl<'a, 'b, T: Scalar> Operation<(Vector<'a, T>, Vector<'b, T>)> for Dot {
     type Output = T;
-    fn capability(&self) -> Capability { Capability { id: "math.vector.dot", revision: 1 } }
+    fn capability(&self) -> Capability { Capability { id: "math.vector.dot", revision: 1, domain: T::DOMAIN, assurance: T::ASSURANCE } }
     fn evaluate(&self, (a, b): (Vector<'a, T>, Vector<'b, T>)) -> MathResult<T> {
         if a.values.len() != b.values.len() { return Err(MathError::ShapeMismatch); }
         a.values.iter().zip(b.values).try_fold(T::zero(), |acc, (&x, &y)| acc.add(x.mul(y)?))
@@ -191,7 +211,7 @@ impl<'a, 'b, T: Scalar> Operation<(Vector<'a, T>, Vector<'b, T>)> for Dot {
 pub struct Mean;
 impl<'a> Operation<Vector<'a, FiniteF64>> for Mean {
     type Output = FiniteF64;
-    fn capability(&self) -> Capability { Capability { id: "math.statistics.mean.reference", revision: 1 } }
+    fn capability(&self) -> Capability { Capability { id: "math.statistics.mean.reference", revision: 1, domain: FiniteF64::DOMAIN, assurance: FiniteF64::ASSURANCE } }
     fn evaluate(&self, input: Vector<'a, FiniteF64>) -> MathResult<FiniteF64> {
         let len = input.values.len();
         if len == 0 { return Err(MathError::EmptyInput); }

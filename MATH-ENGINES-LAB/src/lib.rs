@@ -24,7 +24,10 @@ pub trait Scalar: Copy {
     const DOMAIN: &'static str;
     const ASSURANCE: Assurance;
     fn zero() -> Self;
+    fn one() -> Self;
     fn add(self, rhs: Self) -> MathResult<Self>;
+    fn sub(self, rhs: Self) -> MathResult<Self>;
+    fn neg(self) -> MathResult<Self>;
     fn mul(self, rhs: Self) -> MathResult<Self>;
 }
 
@@ -32,6 +35,13 @@ impl Scalar for i128 {
     const DOMAIN: &'static str = "integer.i128";
     const ASSURANCE: Assurance = Assurance::ExactBounded;
     fn zero() -> Self { 0 }
+    fn one() -> Self { 1 }
+    fn sub(self, rhs: Self) -> MathResult<Self> {
+        self.checked_sub(rhs).ok_or(MathError::Overflow)
+    }
+    fn neg(self) -> MathResult<Self> {
+        self.checked_neg().ok_or(MathError::Overflow)
+    }
     fn add(self, rhs: Self) -> MathResult<Self> {
         self.checked_add(rhs).ok_or(MathError::Overflow)
     }
@@ -89,18 +99,12 @@ impl Scalar for Rational {
     const DOMAIN: &'static str = "rational.i128";
     const ASSURANCE: Assurance = Assurance::ExactBounded;
     fn zero() -> Self { Self { numerator: 0, denominator: 1 } }
-    fn add(self, rhs: Self) -> MathResult<Self> {
-        let g = gcd(self.denominator as u128, rhs.denominator as u128) as i128;
-        let l = self.denominator / g;
-        let r = rhs.denominator / g;
-        let n = self.numerator.checked_mul(r).ok_or(MathError::Overflow)?
-            .checked_add(rhs.numerator.checked_mul(l).ok_or(MathError::Overflow)?)
-            .ok_or(MathError::Overflow)?;
-        if n == 0 { return Ok(Self::zero()); }
-        let h = gcd(n.unsigned_abs(), g as u128) as i128;
-        let d = l.checked_mul(rhs.denominator / h).ok_or(MathError::Overflow)?;
-        Self::new(n / h, d)
+    fn one() -> Self { Self { numerator: 1, denominator: 1 } }
+    fn neg(self) -> MathResult<Self> {
+        Self::new(self.numerator.checked_neg().ok_or(MathError::Overflow)?, self.denominator)
     }
+    fn sub(self, rhs: Self) -> MathResult<Self> { self.combine(rhs, true) }
+    fn add(self, rhs: Self) -> MathResult<Self> { self.combine(rhs, false) }
     fn mul(self, rhs: Self) -> MathResult<Self> {
         let a = gcd(self.numerator.unsigned_abs(), rhs.denominator as u128) as i128;
         let b = gcd(rhs.numerator.unsigned_abs(), self.denominator as u128) as i128;
@@ -108,6 +112,22 @@ impl Scalar for Rational {
             (self.numerator / a).checked_mul(rhs.numerator / b).ok_or(MathError::Overflow)?,
             (self.denominator / b).checked_mul(rhs.denominator / a).ok_or(MathError::Overflow)?,
         )
+    }
+}
+
+impl Rational {
+    fn combine(self, rhs: Self, subtract: bool) -> MathResult<Self> {
+        let g = gcd(self.denominator as u128, rhs.denominator as u128) as i128;
+        let l = self.denominator / g;
+        let r = rhs.denominator / g;
+        let a = self.numerator.checked_mul(r).ok_or(MathError::Overflow)?;
+        let b = rhs.numerator.checked_mul(l).ok_or(MathError::Overflow)?;
+        let n = (if subtract { a.checked_sub(b) } else { a.checked_add(b) })
+            .ok_or(MathError::Overflow)?;
+        if n == 0 { return Ok(Self::zero()); }
+        let h = gcd(n.unsigned_abs(), g as u128) as i128;
+        let d = l.checked_mul(rhs.denominator / h).ok_or(MathError::Overflow)?;
+        Self::new(n / h, d)
     }
 }
 
@@ -130,8 +150,31 @@ impl Scalar for FiniteF64 {
     const DOMAIN: &'static str = "real.finite-f64";
     const ASSURANCE: Assurance = Assurance::Approximate;
     fn zero() -> Self { Self(0.0) }
+    fn one() -> Self { Self(1.0) }
+    fn sub(self, rhs: Self) -> MathResult<Self> { Self::new(self.0 - rhs.0) }
+    fn neg(self) -> MathResult<Self> { Self::new(-self.0) }
     fn add(self, rhs: Self) -> MathResult<Self> { Self::new(self.0 + rhs.0) }
     fn mul(self, rhs: Self) -> MathResult<Self> { Self::new(self.0 * rhs.0) }
+}
+
+/// Division of integers is explicitly Euclidean quotient and remainder, never
+/// an implicit cast to rational or floating point.
+pub fn integer_div_rem(a: i128, b: i128) -> MathResult<(i128, i128)> {
+    if b == 0 { return Err(MathError::DivisionByZero); }
+    Ok((a.checked_div_euclid(b).ok_or(MathError::Overflow)?,
+        a.checked_rem_euclid(b).ok_or(MathError::Overflow)?))
+}
+
+/// Division semantics for domains that return values within the same domain.
+/// Integer quotient/remainder deliberately does not implement this trait.
+pub trait FieldDivision: Scalar {
+    fn div(self, rhs: Self) -> MathResult<Self>;
+}
+impl FieldDivision for Rational {
+    fn div(self, rhs: Self) -> MathResult<Self> { self.checked_div(rhs) }
+}
+impl FieldDivision for FiniteF64 {
+    fn div(self, rhs: Self) -> MathResult<Self> { self.checked_div(rhs) }
 }
 
 /// A bounded borrowed vector, independent of storage/backend.
@@ -183,6 +226,44 @@ pub trait Operation<I> {
     type Output;
     fn capability(&self) -> Capability;
     fn evaluate(&self, input: I) -> MathResult<Self::Output>;
+}
+
+macro_rules! scalar_binary {
+    ($name:ident, $id:literal, $method:ident, $bound:ident) => {
+        #[derive(Clone, Copy, Debug, Default)]
+        pub struct $name;
+        impl<T: $bound> Operation<(T, T)> for $name {
+            type Output = T;
+            fn capability(&self) -> Capability {
+                Capability { id: $id, revision: 1, domain: T::DOMAIN, assurance: T::ASSURANCE }
+            }
+            fn evaluate(&self, (a,b): (T,T)) -> MathResult<T> { a.$method(b) }
+        }
+    };
+}
+scalar_binary!(Add, "math.scalar.add", add, Scalar);
+scalar_binary!(Subtract, "math.scalar.subtract", sub, Scalar);
+scalar_binary!(Multiply, "math.scalar.multiply", mul, Scalar);
+scalar_binary!(Divide, "math.scalar.divide", div, FieldDivision);
+
+#[derive(Clone, Copy, Debug, Default)]
+pub struct Negate;
+impl<T: Scalar> Operation<T> for Negate {
+    type Output = T;
+    fn capability(&self) -> Capability {
+        Capability { id: "math.scalar.negate", revision: 1, domain: T::DOMAIN, assurance: T::ASSURANCE }
+    }
+    fn evaluate(&self, input: T) -> MathResult<T> { input.neg() }
+}
+
+#[derive(Clone, Copy, Debug, Default)]
+pub struct IntegerDivRem;
+impl Operation<(i128, i128)> for IntegerDivRem {
+    type Output = (i128, i128);
+    fn capability(&self) -> Capability {
+        Capability { id: "math.integer.div-rem-euclid", revision: 1, domain: i128::DOMAIN, assurance: i128::ASSURANCE }
+    }
+    fn evaluate(&self, (a,b): (i128,i128)) -> MathResult<Self::Output> { integer_div_rem(a,b) }
 }
 
 #[derive(Clone, Copy, Debug, Default)]

@@ -1,6 +1,7 @@
 //! Compatibility experiment, not a production registry. The R001 kernel is unchanged.
 #![forbid(unsafe_code)]
 use std::collections::{BTreeMap, BTreeSet};
+use std::sync::Arc;
 use vivim_math_engines_lab::{Rational, MathError, Scalar, Operation, Add, Subtract, Multiply, Divide, Negate};
 pub mod standard;
 pub mod extensions;
@@ -49,9 +50,9 @@ pub struct Provider {
 pub struct Fixture { pub capability: Requirement, pub input: Vec<Value>, pub expected: Result<Value> }
 
 #[derive(Clone)]
-pub struct Registry { entries:BTreeMap<Key,Provider>, generation:u64 }
+pub struct Registry { entries:BTreeMap<Key,Provider>, generation:u64, snapshot:Arc<()> }
 #[derive(Clone,Debug)]
-pub struct Plan { generation:u64, roots:Vec<Requirement> }
+pub struct Plan { generation:u64, roots:Vec<Requirement>, snapshot:Arc<()> }
 #[derive(Clone,Debug,PartialEq,Eq)]
 pub struct Gap { pub consumer:Key, pub required:Requirement, pub error:Error }
 
@@ -65,7 +66,7 @@ impl Registry {
             Provider{contract:DIV,requires:&[],run:|_,v| Ok(Value::Number(Divide.evaluate((v[0].number()?,v[1].number()?))?))},
             Provider{contract:NEG,requires:&[],run:|_,v| Ok(Value::Number(Negate.evaluate(v[0].number()?)?))}
         ] { entries.insert(p.contract.key,p); }
-        Self{entries,generation:1}
+        Self{entries,generation:1,snapshot:Arc::new(())}
     }
     pub fn generation(&self)->u64 { self.generation }
     pub fn len(&self)->usize { self.entries.len() }
@@ -88,7 +89,7 @@ impl Registry {
     }
     pub fn plan(&self,roots:&[Requirement])->Result<Plan> {
         self.validate(roots)?;
-        Ok(Plan{generation:self.generation,roots:roots.to_vec()})
+        Ok(Plan{generation:self.generation,roots:roots.to_vec(),snapshot:self.snapshot.clone()})
     }
     fn validate(&self,roots:&[Requirement])->Result<()> {
         fn walk(reg:&Registry,r:Requirement,visiting:&mut BTreeSet<Key>,done:&mut BTreeSet<Key>,depth:usize)->Result<()> {
@@ -125,10 +126,11 @@ impl Registry {
             }
         }
         next.generation=self.generation.checked_add(1).ok_or(Error::Limit)?;
+        next.snapshot=Arc::new(());
         *self=next;Ok(())
     }
     pub fn call(&self,p:&Plan,r:Requirement,input:&[Value],fuel:u32)->Result<Value>{
-        if p.generation!=self.generation{return Err(Error::Stale);}
+        if p.generation!=self.generation || !Arc::ptr_eq(&p.snapshot,&self.snapshot){return Err(Error::Stale);}
         if !p.roots.contains(&r){return Err(Error::Undeclared(r.key));}
         self.execute(r,input,fuel)
     }

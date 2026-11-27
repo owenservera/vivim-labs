@@ -46,3 +46,6 @@ No existing directories overwritten. Scaffold is reproducible and does not activ
 6. Preserve historical source evidence, use shared discoveries only at declared inheritance boundaries. Never alter Product/ARBOR or frozen math reference kernel for this research.
 
 All unclosed deliverables stay OPEN. This folder is a development scaffold, not proof that the 32 architecture designs have been implemented.
+
+## Final verified development run R001
+Source pin `5c49d502e83b49793553c935a30ccdea6b8fdd96`, Windows session `ctl-23498dd7964bc720`, exited 0. Thirteen tracked blobs verified; 8/8 unit tests, 8/8 native seed development suites (247,872 checks), 32 preview transitions, 32 per-entrant development workspaces materialized and counted; 32 reserved slots. [Machine-readable evidence](DEVELOPMENT-EVIDENCE-R001.json) records all eight source hashes, common executable digest and preview heads. No qualification or advancement, no sealed holdout. Dependencies resolved offline including serde_json 1.0.154; full dependency lock not yet retained. Protocol predicates tested with controlled fixture inputs; real evaluator authorization, persistent per-entrant artifacts, independent seed generation and F10 measurement remain open. Unused scaffold warnings remain.

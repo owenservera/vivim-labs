@@ -14,36 +14,44 @@ impl Binary{
 #[derive(Clone,Copy,Debug,PartialEq,Eq)]
 pub enum Press{
     Digit(u8),Point,Backspace,Operator(Binary),Equals,Percent,Sign,Square,Sqrt,Reciprocal,
-    ClearEntry,AllClear,MemoryClear,MemoryRecall,MemoryStore,MemoryAdd,MemorySubtract
+    ClearEntry,AllClear,MemoryClear,MemoryRecall,MemoryStore,MemoryAdd,MemorySubtract,ClearHistory,Undo
 }
 #[derive(Clone,Copy,Debug,PartialEq,Eq)]
 struct Num{value:Rational,approx:bool}
 impl Num{fn zero()->Self{Self{value:Rational::zero(),approx:false}}}
 #[derive(Clone,Debug)]
+pub struct HistoryEntry { pub lhs:Rational,pub operation:Binary,pub rhs:Rational,pub result:Rational,pub approximate:bool }
+#[derive(Clone,Debug)]
 struct State{
     current:Num,entry:Option<String>,pending:Option<(Num,Binary)>,
-    repeat:Option<(Binary,Num)>,awaiting:bool,memory:Option<Num>
+    repeat:Option<(Binary,Num)>,awaiting:bool,memory:Option<Num>,history:Vec<HistoryEntry>
 }
 impl State{
-    fn new()->Self{Self{current:Num::zero(),entry:None,pending:None,repeat:None,awaiting:false,memory:None}}
+    fn new()->Self{Self{current:Num::zero(),entry:None,pending:None,repeat:None,awaiting:false,memory:None,history:Vec::new()}}
 }
 #[derive(Clone,Debug,PartialEq,Eq)]
 pub struct Projection{pub display:String,pub value:Rational,pub approximate_value:bool,pub memory:bool,pub pending:Option<Binary>}
-pub struct Calculator{plan:Plan,state:State}
+pub struct Calculator{plan:Plan,state:State,previous:Option<State>}
 impl Calculator{
     pub fn gaps(reg:&Registry)->Vec<Gap>{reg.gaps(CONSUMER,REQUIREMENTS)}
-    pub fn new(reg:&Registry)->Result<Self>{Ok(Self{plan:reg.plan(REQUIREMENTS)?,state:State::new()})}
+    pub fn new(reg:&Registry)->Result<Self>{Ok(Self{plan:reg.plan(REQUIREMENTS)?,state:State::new(),previous:None})}
     /// Explicit rebind after another capability has been registered. Existing
     /// operation keys cannot be overwritten by the admission mechanism.
     pub fn rebind(&mut self,reg:&Registry)->Result<()> {self.plan=reg.plan(REQUIREMENTS)?;Ok(())}
     pub fn projection(&self,reg:&Registry)->Result<Projection>{project(reg,&self.plan,&self.state)}
+    pub fn history(&self)->&[HistoryEntry]{&self.state.history}
     /// Stage interaction state, validate its resulting projection, then commit.
     /// Errors preserve the complete previous state, including memory.
     pub fn press(&mut self,reg:&Registry,p:Press)->Result<Projection>{
+        if p==Press::Undo{
+            let next=self.previous.as_ref().ok_or(Error::Invalid)?.clone();
+            let result=project(reg,&self.plan,&next)?;
+            self.state=next;self.previous=None;return Ok(result);
+        }
         let mut next=self.state.clone();
         apply(reg,&self.plan,&mut next,p)?;
         let result=project(reg,&self.plan,&next)?;
-        self.state=next;Ok(result)
+        self.previous=Some(std::mem::replace(&mut self.state,next));Ok(result)
     }
 }
 fn unary(reg:&Registry,plan:&Plan,r:Requirement,a:Num)->Result<Num>{
@@ -66,6 +74,10 @@ fn project(reg:&Registry,plan:&Plan,s:&State)->Result<Projection>{
     let mut display=s.entry.clone().unwrap_or(formatted.text()?.to_owned());
     if n.approx&&!display.starts_with('~'){display.insert(0,'~');}
     Ok(Projection{display,value:n.value,approximate_value:n.approx,memory:s.memory.is_some(),pending:s.pending.map(|(_,op)|op)})
+}
+fn record(s:&mut State,lhs:Num,op:Binary,rhs:Num,result:Num){
+    if s.history.len()>=128{s.history.remove(0);}
+    s.history.push(HistoryEntry{lhs:lhs.value,operation:op,rhs:rhs.value,result:result.value,approximate:result.approx});
 }
 fn put(s:&mut State,n:Num){s.current=n;s.entry=None;s.awaiting=false;}
 fn start_entry(s:&mut State){
@@ -91,7 +103,7 @@ fn apply(reg:&Registry,plan:&Plan,s:&mut State,p:Press)->Result<()> {
         Press::Operator(op)=>{
             let mut lhs=operand(reg,plan,s)?;
             if let Some((previous,old))=s.pending{
-                lhs=if s.awaiting{previous}else{binary(reg,plan,old.requirement(),previous,lhs)?};
+                lhs=if s.awaiting{previous}else{let result=binary(reg,plan,old.requirement(),previous,lhs)?;record(s,previous,old,lhs,result);result};
             }
             s.current=lhs;s.entry=None;s.pending=Some((lhs,op));s.awaiting=true;s.repeat=None;
         }
@@ -99,10 +111,10 @@ fn apply(reg:&Registry,plan:&Plan,s:&mut State,p:Press)->Result<()> {
             let rhs=operand(reg,plan,s)?;
             if let Some((lhs,op))=s.pending{
                 let result=binary(reg,plan,op.requirement(),lhs,rhs)?;
-                put(s,result);s.pending=None;s.repeat=Some((op,rhs));
+                record(s,lhs,op,rhs,result);put(s,result);s.pending=None;s.repeat=Some((op,rhs));
             }else if let Some((op,last))=s.repeat{
                 let result=binary(reg,plan,op.requirement(),rhs,last)?;
-                put(s,result);
+                record(s,rhs,op,last,result);put(s,result);
             }else{put(s,rhs);}
         }
         Press::Percent=>{
@@ -138,9 +150,11 @@ fn apply(reg:&Registry,plan:&Plan,s:&mut State,p:Press)->Result<()> {
             put(s,Num::zero());s.repeat=None;
         }
         Press::AllClear=>{
-            let memory=s.memory;*s=State::new();s.memory=memory;
+            let memory=s.memory;let history=std::mem::take(&mut s.history);*s=State::new();s.memory=memory;s.history=history;
         }
         Press::MemoryClear=>s.memory=None,
+        Press::ClearHistory=>s.history.clear(),
+        Press::Undo=>return Err(Error::Invalid),
         Press::MemoryRecall=>{
             put(s,s.memory.unwrap_or_else(Num::zero));s.repeat=None;
         }

@@ -62,12 +62,13 @@ pub fn first_round_positions()->Vec<(Slot,Slot)>{
 }
 /// Safe matches can have no winner. Both eligible entrants need a frozen
 /// external ranking; ties remain unresolved rather than arbitrary.
-pub fn match_winner(a:Option<(&Submission,Verdict,u64)>,b:Option<(&Submission,Verdict,u64)>)->Option<Slot>{
-    let a=a.filter(|x|x.1==Verdict::Qualified);
-    let b=b.filter(|x|x.1==Verdict::Qualified);
+pub fn match_winner(a:Option<(&Submission,u64)>,b:Option<(&Submission,u64)>,policy:Policy)->Option<Slot>{
+    if let (Some(x),Some(y))=(a,b){if x.0.entrant==y.0.entrant||x.0.round!=y.0.round{return None;}}
+    let a=a.filter(|x|verdict(x.0,policy)==Verdict::Qualified);
+    let b=b.filter(|x|verdict(x.0,policy)==Verdict::Qualified);
     match(a,b){(Some(x),None)=>Some(x.0.entrant),(None,Some(y))=>Some(y.0.entrant),
-        (Some(x),Some(y)) if x.2>y.2=>Some(x.0.entrant),
-        (Some(x),Some(y)) if y.2>x.2=>Some(y.0.entrant),_=>None}
+        (Some(x),Some(y)) if x.1>y.1=>Some(x.0.entrant),
+        (Some(x),Some(y)) if y.1>x.1=>Some(y.0.entrant),_=>None}
 }
 #[cfg(test)]
 mod tests{
@@ -77,5 +78,18 @@ mod tests{
     #[test]fn complete_bracket(){let b=first_round_positions();assert_eq!(b.len(),32);let ids:BTreeSet<_>=b.iter().flat_map(|(a,b)|[a.0,b.0]).collect();assert_eq!(ids,(1..=64).collect());assert_eq!(Round::Calculator.capacity(),2);}
     #[test]fn no_gain_no_progress(){assert!(!improved(m(1,50),m(1,50),p()));assert!(improved(m(1,50),m(2,50),p()));assert!(improved(m(2,50),m(2,45),p()));assert!(!improved(m(0,50),m(0,1),p()));assert!(!improved(m(2,50),m(1,1),p()));}
     #[test]fn comparable_measurements_required(){let mut n=m(2,50);n.suite=[3;32];assert!(!improved(m(1,50),n,p()));n=m(2,50);n.budget=101;assert!(!improved(m(1,50),n,p()));n=m(2,50);n.repetitions=1;assert!(!improved(m(1,50),n,p()));}
-    #[test]fn vacant_match_has_no_winner(){assert!(match_winner(None,None).is_none());}
+    fn submission()->Submission{
+        Submission{entrant:Slot(22),round:Round::Genesis,predecessor:[1;32],proposal:[2;32],executable:[3;32],abi_contract:[4;32],
+        independent_suite:[1;32],evaluator_receipt:[5;32],genesis_obligations:(1..=16).collect(),
+        evidence:crate::Evidence{independent_seed:true,correctness:true,abi:true,artifact:true,actual_chain_and_rust:true,prior_regression:true,recovery:true,sealed_holdout:true,unsafe_accepts:0,promotion_improvement:true},
+        old:m(1,50),new:m(2,50)}
+    }
+    #[test]fn gate_needs_real_fields_and_improvement(){
+        let mut s=submission();assert_eq!(verdict(&s,p()),Verdict::Qualified);
+        s.new=m(1,50);assert_eq!(verdict(&s,p()),Verdict::Deferred);
+        s.new=m(2,50);s.evidence.unsafe_accepts=1;assert_eq!(verdict(&s,p()),Verdict::Rejected);
+        assert!(match_winner(Some((&s,100)),None,p()).is_none());
+        s.evidence.unsafe_accepts=0;s.genesis_obligations.remove(&16);assert_eq!(verdict(&s,p()),Verdict::Deferred);
+    }
+    #[test]fn vacant_match_has_no_winner(){assert!(match_winner(None,None,p()).is_none());}
 }

@@ -39,3 +39,5 @@ Run `cargo test --manifest-path MATH-ENGINES-LAB/Cargo.toml` at Labs root. Tests
 
 ## R002 — verified compatibility experiment (2026-11-27)
 The earlier UNRUN statement above describes the initial R001 round only. [Compatibility laboratory](compatibility/README.md) now records native Windows verification at source pin `4aeed1678bda358419c79283c683450e93e7a1f1`: 11 frozen-kernel tests and 17 compatibility/calculator tests passed, both exit 0. The original kernel source is unchanged. The standard calculator is headless; the registration system is a Labs-only simulation, not live Product/ARBOR integration. Subsequent capability proposals must use this compatibility cycle instead of modifying the base implementation.
+
+> **Current governing specification:** [Mathematical Evolution Championship Constitution R003](CONSTITUTION-R003.md). All subsequent mathematical evolution work must follow its independent bare-metal seed, bootstrap, 64-contestant and advancement requirements. R001/R002 below are historical reference and evidence, not the current promotion policy.

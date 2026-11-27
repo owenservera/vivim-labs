@@ -9,6 +9,10 @@ use core::arch::global_asm;
 use sha2::{Digest,Sha256};
 use std::{io::Write,process::Command};
 global_asm!(include_str!("abi_probe.S"));
+global_asm!(include_str!("../seeds/P014.S"));
+global_asm!(include_str!("../seeds/P018.S"));
+global_asm!(include_str!("../seeds/P020.S"));
+global_asm!(include_str!("../seeds/P023.S"));
 global_asm!(include_str!("../seeds/P004.S"));
 global_asm!(include_str!("../seeds/P005.S"));
 global_asm!(include_str!("../seeds/P007.S"));
@@ -24,6 +28,10 @@ global_asm!(include_str!(concat!(env!("OUT_DIR"),"/P024.S")));
 type Seed=unsafe extern "win64" fn(i64,i64,u32,*mut i64)->u32;
 unsafe extern "win64"{
     fn r003_abi_probe(seed:Seed,a:i64,b:i64,op:u32,out:*mut i64)->u64;
+    fn p014_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p018_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p020_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p023_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p004_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p005_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p007_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
@@ -42,7 +50,11 @@ unsafe extern "win64"{
     fn p026_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p032_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
 }
-const SEEDS:[(u8,Seed,&str);12]=[
+const SEEDS:[(u8,Seed,&str);16]=[
+    (14,p014_seed,include_str!("../seeds/P014.S")),
+    (18,p018_seed,include_str!("../seeds/P018.S")),
+    (20,p020_seed,include_str!("../seeds/P020.S")),
+    (23,p023_seed,include_str!("../seeds/P023.S")),
     (4,p004_seed,include_str!("../seeds/P004.S")),
     (5,p005_seed,include_str!("../seeds/P005.S")),
     (7,p007_seed,include_str!("../seeds/P007.S")),

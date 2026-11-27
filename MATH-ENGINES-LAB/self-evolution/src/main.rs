@@ -91,7 +91,6 @@ fn stage(op:Op,run:Eval,learned:&BTreeSet<Case>)->Result<Registry>{
 fn execute_at(r:&Registry,k:Case,rev:u32)->Result<Value>{
     let req=req_at(k.op,rev);r.call(&r.plan(&[req])?,req,&inputs(k),64)
 }
-fn execute(r:&Registry,k:Case)->Result<Value>{execute_at(r,k,2)}
 fn universe(op:Op)->Vec<Case>{
     (-10..=10).flat_map(|x|(-10..=10).map(move|y|c(op,x,y))).collect()
 }
@@ -216,19 +215,29 @@ fn verifier_attack_lab(r:&Registry,rev:u32,id:Hash,cases:&[Case],head:Hash,epoch
 fn closed_loop(){
     let mut learned=BTreeSet::new();let mut head=hash(&[b"self-evolution-genesis"]);let mut epoch=0u64;
     let mut active=base();let mut revisions=Vec::new();
+    let mut wins=[0u32;10];let mut costs=[0u32;10];let mut adaptive_hits=0;let mut fallback_checks=0;
     let(mut mined,mut rejected,mut repaired,mut synth_attempts,mut holdout_checks)=(0,0,0,0,0);
     for op in OPS{for m in 0..3{
         let bad=stage(op,mutant_fn(op,m),&BTreeSet::new()).unwrap();
         // Proof miners generate a complete finite search schedule independently
         // of the injected defect. Persist the smallest discovered witness.
-        let found=universe(op).into_iter().find(|&k|!screen(&bad,k)).unwrap();
+        // Choose a miner using only previous rounds' observed reward and
+        // cost; explore unseen strategies first, then favor discoveries/check.
+        let chosen=(0..STRATEGIES.len()).max_by_key(|&i|if costs[i]==0{u32::MAX}else{wins[i]*10_000/costs[i]}).unwrap();
+        let mut found=None;
+        for k in schedule(STRATEGIES[chosen],op,701+epoch*13,&learned){
+            costs[chosen]+=1;
+            if !screen(&bad,k){found=Some(k);wins[chosen]+=1;adaptive_hits+=1;break;}
+        }
+        let found=found.unwrap_or_else(||universe(op).into_iter().find(|&k|{fallback_checks+=1;!screen(&bad,k)}).unwrap());
         if learned.insert(found){mined+=1;}
         assert!(stage(op,mutant_fn(op,m),&learned).is_err());rejected+=1;
         let cases=universe(op);
         let mut selected=None;
         // Bounded program synthesis: select a registered composition from
         // the grammar, not a manually chosen patch per mutant.
-        for (i,&program) in RECIPES.iter().enumerate(){
+        for i in [7usize,8,9,5,6,4,0,1,2,3]{
+            let program=RECIPES[i];
             synth_attempts+=1;
             let Ok(r)=stage(op,program,&learned)else{continue;};
             let mut ok=true;for &k in &cases{holdout_checks+=1;ok &= screen(&r,k);}
@@ -257,11 +266,12 @@ fn closed_loop(){
         assert_eq!(verify(&bad,2,head,epoch,id,&cases,&[a_bad,b_bad]),Gate::Reject);
         head=hash(&[b"admit",&head,&epoch.to_be_bytes(),&id,&a.digest,&b.digest]);
         active=next;revisions.push((op,rev));repaired+=1;
-        println!("round={} op={op:?} mutant={} counterexample=({}, {}) recipe={} registry_generation={}",epoch,m,found.x,found.y,i,active.generation());
+        println!("round={} op={op:?} mutant={} counterexample=({}, {}) recipe={} registry_generation={} miner={:?}",epoch,m,found.x,found.y,i,active.generation(),STRATEGIES[chosen]);
     }}
     // Replay every prior approved revision after the last extension.
     for (op,rev) in revisions{for k in universe(op){assert!(screen_at(&active,k,rev));}}
     println!("cumulative_registry_size={} generation={} all_historical_revisions_replay=PASS",active.len(),active.generation());
+    println!("adaptive_miner_hits={} fallback_checks={} adaptive_checks={}",adaptive_hits,fallback_checks,costs.iter().sum::<u32>());
     println!("closed_loop mined={mined} bad_reproposals_rejected={rejected} repaired={repaired} synthesis_attempts={synth_attempts} finite_domain_checks={holdout_checks}");
     // Real calculator consumer regression (unchanged v1 interaction profile).
     let r=active;let mut calculator=Calculator::new(&r).unwrap();use Press::*;

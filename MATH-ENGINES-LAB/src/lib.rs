@@ -68,6 +68,7 @@ impl Rational {
     pub fn denominator(self) -> i128 { self.denominator }
     pub fn checked_div(self, rhs: Self) -> MathResult<Self> {
         if rhs.numerator == 0 { return Err(MathError::DivisionByZero); }
+        if self.numerator == 0 { return Ok(Self::zero()); }
         // Cross-reduce before multiplication, without constructing a reciprocal
         // whose denominator might not fit the representation.
         let a = gcd(self.numerator.unsigned_abs(), rhs.numerator.unsigned_abs());

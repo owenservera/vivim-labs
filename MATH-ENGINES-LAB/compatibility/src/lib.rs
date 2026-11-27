@@ -31,8 +31,8 @@ pub const NEG: Requirement = req("math.scalar.negate",UNARY);
 pub enum Value { Number(Rational), Text(String) }
 impl Value {
     fn kind(&self) -> Kind { match self { Self::Number(_)=>Kind::Number, Self::Text(_)=>Kind::Text } }
-    pub fn number(&self)->Result<Rational,Error> { match self { Self::Number(n)=>Ok(*n), _=>Err(Error::Type) } }
-    pub fn text(&self)->Result<&str,Error> { match self { Self::Text(s)=>Ok(s), _=>Err(Error::Type) } }
+    pub fn number(&self)->Result<Rational> { match self { Self::Number(n)=>Ok(*n), _=>Err(Error::Type) } }
+    pub fn text(&self)->Result<&str> { match self { Self::Text(s)=>Ok(s), _=>Err(Error::Type) } }
 }
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Error {

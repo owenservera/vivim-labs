@@ -128,7 +128,7 @@ fn decide(p:Policy,t:&Trial,c:&mut Cost)->Decision{
         // simulated certificate verifier, not a SNARK or formal proof.
         Policy::Certificate=>{c.hashes+=1;t.available()&&t.claimed==t.actual&&replay(t,full,c)},
         // Bound dependency evidence, verify changed closure, require two
-        // distinct online honest witnesses in this model; do not use votes as truth.
+        // online witness slots in this model; do not use votes as truth.
         Policy::Hybrid=>{if !t.bound()||!t.available(){return Reject;}
             if !replay(t,full,c)||t.claimed!=t.actual{return Reject;}
             c.votes+=u64::from(5-t.s.offline);
@@ -158,4 +158,19 @@ fn main(){
     assert_eq!(old.call(&p,extensions::PERCENT,&[number(37,1)],64),Ok(number(37,100)));
     assert!(trials.iter().all(|t|decide(Policy::Hybrid,t,&mut Cost::default())!=Decision::Accept||t.s.valid));
     println!("rollback_to_known_snapshot=PASS");
+    let upgraded=candidate(0).unwrap();
+    let upgraded_plan=upgraded.plan(&[V2]).unwrap();
+    let mut head=hash(&[b"genesis",b"percent-v1"]);
+    let mut active=1u64;
+    for (epoch,next) in [(1u64,2u64),(2,1),(3,2),(4,1)]{
+        let parent=head;
+        head=hash(&[b"activation-transition-v1",&parent,&epoch.to_be_bytes(),&active.to_be_bytes(),&next.to_be_bytes()]);
+        assert_ne!(head,parent);
+        active=next;
+        let value=if active==2{upgraded.call(&upgraded_plan,V2,&[number(37,1)],64)}
+            else{old.call(&p,extensions::PERCENT,&[number(37,1)],64)};
+        assert_eq!(value,Ok(number(37,100)));
+        println!("activation_epoch={epoch} active_revision={active} result=37/100");
+    }
+    println!("up_down_cycle=PASS");
 }

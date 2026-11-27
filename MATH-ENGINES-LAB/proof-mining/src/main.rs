@@ -2,6 +2,7 @@
 use sha2::{Digest,Sha256};
 use vivim_math_compatibility_lab::{*,extensions,standard::*};
 use vivim_math_engines_lab::MathError;
+mod embedded;
 type Hash=[u8;32];
 fn hash(parts:&[&[u8]])->Hash{
     let mut h=Sha256::new();
@@ -77,8 +78,8 @@ const SCENARIOS:&[Scenario]=&[
     Scenario{name:"four_offline_validators",offline:4,..NORMAL}
 ];
 #[derive(Clone,Copy,Debug)]
-enum Policy{HashOnly,SmokeReplay,FullReplay,Majority,Supermajority,Optimistic,Dag,Checkpoint,Certificate,Hybrid}
-const POLICIES:&[Policy]=&[Policy::HashOnly,Policy::SmokeReplay,Policy::FullReplay,Policy::Majority,Policy::Supermajority,Policy::Optimistic,Policy::Dag,Policy::Checkpoint,Policy::Certificate,Policy::Hybrid];
+enum Policy{HashOnly,SmokeReplay,FullReplay,Majority,Supermajority,Optimistic,Dag,Checkpoint,Certificate,Hybrid,Embedded}
+const POLICIES:&[Policy]=&[Policy::HashOnly,Policy::SmokeReplay,Policy::FullReplay,Policy::Majority,Policy::Supermajority,Policy::Optimistic,Policy::Dag,Policy::Checkpoint,Policy::Certificate,Policy::Hybrid,Policy::Embedded];
 #[derive(Clone)]
 struct Block { parent:Hash, dependency:Hash, epoch:u64, candidate:Hash, evidence:Hash, body:Hash }
 impl Block{
@@ -136,6 +137,20 @@ fn decide(p:Policy,t:&Trial,c:&mut Cost)->Decision{
         Policy::Certificate=>{c.hashes+=1;t.available()&&t.claimed==t.actual&&replay(t,full,c)},
         // Bound dependency evidence, verify changed closure, require two
         // online witness slots in this model; do not use votes as truth.
+        // Math code participates in the transition itself. Predecessor and
+        // independent invariant must agree; candidate cannot authorize itself.
+        Policy::Embedded=>{
+            if !t.bound()||!t.available()||t.claimed.len()!=CASE_COUNT{return Reject;}
+            let predecessor=base();
+            let p=predecessor.plan(&[extensions::PERCENT]).unwrap();
+            let expected=predecessor.call(&p,extensions::PERCENT,&[number(37,1)],64);
+            c.cases+=1;
+            let Some(r)=&t.registry else{return Reject;};
+            let proposed=r.call(&r.plan(&[V2]).unwrap(),V2,&[number(37,1)],64);
+            c.cases+=1;
+            if expected!=Ok(number(37,100))||proposed!=expected{return Reject;}
+            replay(t,full,c)&&t.claimed==t.actual
+        }
         Policy::Hybrid=>{if !t.bound()||!t.available(){return Reject;}
             if !replay(t,full,c)||t.claimed!=t.actual{return Reject;}
             c.votes+=u64::from(5-t.s.offline);
@@ -205,4 +220,5 @@ fn main(){
     mined.admit(vec![Provider{contract:V2,requires:&[DIV],run:good}],&fixtures).unwrap();
     assert_eq!(mined.call(&mined.plan(&[V2]).unwrap(),V2,&[number(n,1)],64),Ok(number(n,100)));
     println!("mined_counterexample={} percent; bad_reproposal=REJECT; corrected_reproposal=ACCEPT",n);
+    embedded::experiment();
 }

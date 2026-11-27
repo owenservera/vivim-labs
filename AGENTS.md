@@ -42,3 +42,7 @@ Each campaign round must identify four pinned repos and deliver a manifest, conc
 ## Current 2026-11-23 engineering intake
 
 Read [ARBOR now→future wiring audit](https://github.com/owenservera/ARBOR/blob/main/docs/product/ARBOR-NOW-FUTURE-WIRING-20261123.md) and [R002 delta to the existing execution pack](ZCODE-DESKTOP-COMMANDER-OPERATIONS/DEVOPS-PLANNING/PACKS/EXECUTION-20261123-R001/WIRING-DELTA-R002.md) before touching any current VIVIM/ARBOR plan. #33 is the authoritative oversight checklist and Labs `TASK-CLAIMS.md` is the atomic ownership overlay. Publication is not cross-session acknowledgment or an active agent claim. Keep Labs public-safe and do not copy private desktop/provider logs here.
+
+## Mathematical evolution championship — mandatory research routing (R003)
+
+For any work under `MATH-ENGINES-LAB/`, read [local agent instructions](MATH-ENGINES-LAB/AGENTS.md) and the [governing constitution](MATH-ENGINES-LAB/CONSTITUTION-R003.md) before proceeding. The constitution governs independent native seeds, machine-to-Rust bootstrap, actual chain computation, adversarial self-evolution and the 64-contestant advancement protocol. Earlier tournament results are not qualified under R003. This routing is scoped to the Labs mathematical research and does not confer production authority.

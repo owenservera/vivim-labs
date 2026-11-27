@@ -7,18 +7,30 @@ mod protocol;
 use core::arch::global_asm;
 use sha2::{Digest,Sha256};
 use std::{io::Write,process::Command};
+global_asm!(include_str!("../seeds/P011.S"));
+global_asm!(include_str!("../seeds/P027.S"));
+global_asm!(include_str!("../seeds/P028.S"));
+global_asm!(include_str!("../seeds/P029.S"));
 global_asm!(include_str!("../seeds/P022.S"));
 global_asm!(include_str!("../seeds/P026.S"));
 global_asm!(include_str!("../seeds/P032.S"));
 global_asm!(include_str!(concat!(env!("OUT_DIR"),"/P024.S")));
 type Seed=unsafe extern "win64" fn(i64,i64,u32,*mut i64)->u32;
 unsafe extern "win64"{
+    fn p011_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p027_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p028_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p029_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p022_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p024_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p026_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p032_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
 }
-const SEEDS:[(u8,Seed,&str);4]=[
+const SEEDS:[(u8,Seed,&str);8]=[
+    (11,p011_seed,include_str!("../seeds/P011.S")),
+    (27,p027_seed,include_str!("../seeds/P027.S")),
+    (28,p028_seed,include_str!("../seeds/P028.S")),
+    (29,p029_seed,include_str!("../seeds/P029.S")),
     (22,p022_seed,include_str!("../seeds/P022.S")),
     (24,p024_seed,include_str!(concat!(env!("OUT_DIR"),"/P024.S"))),
     (26,p026_seed,include_str!("../seeds/P026.S")),
@@ -121,7 +133,7 @@ fn main(){
         std::io::stderr().write_all(&out.stderr).unwrap();
         if out.status.success(){passed+=1;}else{println!("SEED P{id:03} DEV_FAIL exit={:?}",out.status.code());}
     }
-    println!("ROSTER designed=32 reserved=32 native_seed_development={passed}/4 qualified=0 evolution_heads_advanced=0");
+    println!("ROSTER designed=32 reserved=32 native_seed_development={passed}/{} qualified=0 evolution_heads_advanced=0",SEEDS.len());
     assert_eq!(passed,SEEDS.len());
 }
 #[cfg(test)]

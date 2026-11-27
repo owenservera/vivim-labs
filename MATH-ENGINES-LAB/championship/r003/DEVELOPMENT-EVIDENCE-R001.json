@@ -1,0 +1,104 @@
+{
+  "schema": "vivim.math.championship.development-evidence/1",
+  "source_pin": "5c49d502e83b49793553c935a30ccdea6b8fdd96",
+  "platform": "Windows x86-64",
+  "session": "ctl-23498dd7964bc720",
+  "exit_code": 0,
+  "verified_source_blobs": 13,
+  "unit_tests": {
+    "passed": 8,
+    "failed": 0
+  },
+  "roster": {
+    "scaffolded": 32,
+    "reserved": 32,
+    "materialized_development_workspaces": 32,
+    "qualified": 0
+  },
+  "seed_checks_total": 247872,
+  "preview_chain_transitions": 32,
+  "heads_advanced": 0,
+  "seed_results": [
+    {
+      "entrant": "P011",
+      "state": "DEV_PASS_UNQUALIFIED",
+      "checks": 30984,
+      "chain_transitions": 4,
+      "source_sha256": "639a7dd6c65008cd5e7730ec90c4edb27b91976b7375537d8c262209aa963acc",
+      "test_executable_sha256": "dbf49ac6a10efa12d4e6cc0c036c805c851a368befcf2364ba8866c631c9bbca",
+      "preview_head": "351d895c005fdb0cb60d901205f8b9fc9e423ffb12ca6792a75cb025367c7b86"
+    },
+    {
+      "entrant": "P027",
+      "state": "DEV_PASS_UNQUALIFIED",
+      "checks": 30984,
+      "chain_transitions": 4,
+      "source_sha256": "fff1605261eef45b82ec0a7e788b99d228d6466844858462a033cd84a4090216",
+      "test_executable_sha256": "dbf49ac6a10efa12d4e6cc0c036c805c851a368befcf2364ba8866c631c9bbca",
+      "preview_head": "a1ac5746761b21f2cf6156f30374d9b284ec5729059f39572eea313b819d96c9"
+    },
+    {
+      "entrant": "P028",
+      "state": "DEV_PASS_UNQUALIFIED",
+      "checks": 30984,
+      "chain_transitions": 4,
+      "source_sha256": "54d63155dde8378c3e301f0774d8305e8c628216f2f1820a67978ced2a9f71e3",
+      "test_executable_sha256": "dbf49ac6a10efa12d4e6cc0c036c805c851a368befcf2364ba8866c631c9bbca",
+      "preview_head": "acc3f8ef533bd64208fb7b5acae8b5aeec8e0eb02a7b5a5e1ccc7f93f45a8826"
+    },
+    {
+      "entrant": "P029",
+      "state": "DEV_PASS_UNQUALIFIED",
+      "checks": 30984,
+      "chain_transitions": 4,
+      "source_sha256": "509ef8171f68890f196541850dda644bf40898e75adab8d3270512da20da9ab2",
+      "test_executable_sha256": "dbf49ac6a10efa12d4e6cc0c036c805c851a368befcf2364ba8866c631c9bbca",
+      "preview_head": "73ab4e9b8b104e8eea9c962a7a70b3cf8d02d87f5d9da4f3eafbdb4ffd150a6d"
+    },
+    {
+      "entrant": "P022",
+      "state": "DEV_PASS_UNQUALIFIED",
+      "checks": 30984,
+      "chain_transitions": 4,
+      "source_sha256": "e436ec211336faf2d1f19c1cbddc025b085f9259a76fd46a487b84312daab04d",
+      "test_executable_sha256": "dbf49ac6a10efa12d4e6cc0c036c805c851a368befcf2364ba8866c631c9bbca",
+      "preview_head": "ba9d1800823915f3531929bf8abcb5934c83cc2e747d8cb2f566b410e07172fb"
+    },
+    {
+      "entrant": "P024",
+      "state": "DEV_PASS_UNQUALIFIED",
+      "checks": 30984,
+      "chain_transitions": 4,
+      "source_sha256": "b99b3637117f2174c88a666a195e75071d6ca5ba30e9761e0c8bb10ad7d79bf1",
+      "test_executable_sha256": "dbf49ac6a10efa12d4e6cc0c036c805c851a368befcf2364ba8866c631c9bbca",
+      "preview_head": "bb9f2feba4423cbad0a1d961343e69cbe03bc9b9cb2fbff210e4a843ccea7c3e"
+    },
+    {
+      "entrant": "P026",
+      "state": "DEV_PASS_UNQUALIFIED",
+      "checks": 30984,
+      "chain_transitions": 4,
+      "source_sha256": "31f3fe8bd60ef6888e5aa537336d1ad074d4fe4c26453d323254c1c84ea8a541",
+      "test_executable_sha256": "dbf49ac6a10efa12d4e6cc0c036c805c851a368befcf2364ba8866c631c9bbca",
+      "preview_head": "4e905749d75ee252a775c5ffc03cf98c65d40e2220fe5aa8b12def0d4d005cc5"
+    },
+    {
+      "entrant": "P032",
+      "state": "DEV_PASS_UNQUALIFIED",
+      "checks": 30984,
+      "chain_transitions": 4,
+      "source_sha256": "c3682015b3a8a25308429b7de61168a63ae73a048594e23dcfe78669866c64f7",
+      "test_executable_sha256": "dbf49ac6a10efa12d4e6cc0c036c805c851a368befcf2364ba8866c631c9bbca",
+      "preview_head": "d9cf360fc51f3767259e1565ce0acb35d6f0adb206bfb07fe4b85ede0a310097"
+    }
+  ],
+  "limits": [
+    "disclosed development suite",
+    "shared compiled test executable",
+    "process crash containment only",
+    "not sealed holdout",
+    "no independent autonomous generation",
+    "no measured promotion improvement",
+    "no complete qualification"
+  ]
+}

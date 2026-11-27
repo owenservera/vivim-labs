@@ -193,3 +193,61 @@ vivim_native_divrem128:
 .Lzero:
     mov eax, 2
     ret
+
+/* Challenger: use hardware DIV when divisor magnitude fits one 64-bit limb.
+ * Otherwise tail-jump to the original restoring division. This changes no ABI.
+ */
+.globl vivim_native_divrem128_fast
+vivim_native_divrem128_fast:
+    mov r10, [rdx]
+    mov r11, [rdx+8]
+    test r11, r11
+    jz .Lfast_positive_divisor
+    cmp r11, -1
+    jne vivim_native_divrem128
+    test r10, r10
+    jz vivim_native_divrem128
+    neg r10
+    jmp .Lfast_divisor_ready
+.Lfast_positive_divisor:
+    test r10, r10
+    jz .Lzero
+.Lfast_divisor_ready:
+    mov rax, [rcx]
+    mov r9, [rcx+8]
+    mov [rsp+8], rax
+    mov [rsp+16], r9
+    mov rcx, r9
+    xor rcx, r11
+    mov [rsp+24], rcx
+    test r9, r9
+    jns .Lfast_n_positive
+    neg rax
+    adc r9, 0
+    neg r9
+.Lfast_n_positive:
+    mov r11, rax
+    mov rax, r9
+    xor edx, edx
+    div r10
+    mov r9, rax
+    mov rax, r11
+    div r10
+    mov rcx, rdx
+    xor edx, edx
+    cmp qword ptr [rsp+24], 0
+    js .Lfast_q_negative
+    test r9, r9
+    js .Loverflow
+    jmp .Lfast_q_done
+.Lfast_q_negative:
+    neg rax
+    adc r9, 0
+    neg r9
+.Lfast_q_done:
+    cmp qword ptr [rsp+16], 0
+    jns .Ldiv_store
+    neg rcx
+    adc rdx, 0
+    neg rdx
+    jmp .Ldiv_store

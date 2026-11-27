@@ -110,4 +110,41 @@ pub fn validate(root:&Path)->Result<Value>{
 mod tests{
     use super::*;
     #[test]fn rejects_paths_and_identity(){for bad in ["../x","C:/x","a\\b","a//b","a/./b","NUL.txt","a:stream","a/..","x."]{assert!(!safe_rel(bad),"{bad}");}assert!(safe_rel("native/seed.S"));assert!(team_id("example-team"));assert!(!team_id("Evil"));assert!(!team_id("a"));assert!(is_digest(&"a".repeat(64)));}
+    // Structural fixture ONLY; no candidate source is executed and no
+    // mathematical or constitutional qualification is asserted.
+    struct Temp(PathBuf);
+    impl Drop for Temp{fn drop(&mut self){let _=fs::remove_dir_all(&self.0);}}
+    fn fixture()->Temp{
+        let n=std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_nanos();
+        let root=std::env::temp_dir().join(format!("vivim-intake-fixture-{}-{n}",std::process::id()));
+        fs::create_dir(&root).unwrap();let t=Temp(root);
+        let ids:Vec<_>=(1..=32).map(|n|format!("E{n:02}")).collect();
+        fs::write(t.0.join("team.json"),serde_json::to_vec(&serde_json::json!({"schema":"vivim.math.team/1","team_id":"test-team","protocol":"R003-V1","entrants":ids})).unwrap()).unwrap();
+        fs::write(t.0.join("README.md"),"structural fixture").unwrap();
+        for id in ids{
+            let base=t.0.join("entrants").join(&id);
+            for d in ["native","runner/src","obligations","evidence","artifacts"]{fs::create_dir_all(base.join(d)).unwrap();}
+            for f in ["README.md","runner/Cargo.toml","runner/Cargo.lock"]{fs::write(base.join(f),"fixture only").unwrap();}
+            fs::write(base.join("native/seed.S"),".globl vivim_seed_v1\nvivim_seed_v1:\n").unwrap();
+            let mut obligations=serde_json::Map::new();
+            for n in 1..=16{let k=format!("D{n:02}");fs::write(base.join(format!("obligations/{k}.md")),"OPEN").unwrap();obligations.insert(k,Value::String("OPEN".into()));}
+            let m=serde_json::json!({"schema":"vivim.math.entrant/1","team_id":"test-team","entrant_id":id,"name":format!("Fixture {id}"),"architecture_summary":"structural fixture, not architecture","seed":"native/seed.S","seed_symbol":"vivim_seed_v1","abi":"win64-i64-v1","target":"x86_64-pc-windows-msvc","runner_manifest":"runner/Cargo.toml","runner_bin":"vivim-entrant","obligations":obligations,"evidence_index":"evidence/index.json","limitations":["No executable implementation"]});
+            fs::write(base.join("manifest.json"),serde_json::to_vec(&m).unwrap()).unwrap();
+            fs::write(base.join("evidence/index.json"),r#"{"schema":"vivim.math.evidence-index/1","entries":[]}"#).unwrap();
+        }t
+    }
+    #[test]fn accepts_only_structure_then_rejects_bad_evidence(){
+        let t=fixture();let r=validate(&t.0).unwrap();assert_eq!(r["count"],32);assert_eq!(r["qualified"],0);
+        let base=t.0.join("entrants/E01");
+        let mut m=json(&base,"manifest.json").unwrap();m["obligations"]["D01"]=Value::String("IMPLEMENTED".into());
+        fs::write(base.join("manifest.json"),serde_json::to_vec(&m).unwrap()).unwrap();
+        assert!(validate(&t.0).unwrap_err().contains("lack evidence"));
+        let path="native/seed.S";let hash=evidence_hash(&base.join(path)).unwrap();
+        let idx=serde_json::json!({"schema":"vivim.math.evidence-index/1","entries":[{"obligation":"D01","path":path,"sha256":hash,"kind":"source","description":"fixture only"}]});
+        fs::write(base.join("evidence/index.json"),serde_json::to_vec(&idx).unwrap()).unwrap();
+        assert_eq!(validate(&t.0).unwrap()["qualified"],0);
+        fs::write(base.join(path),".globl vivim_seed_v1\nvivim_seed_v1:\n# changed\n").unwrap();
+        assert!(validate(&t.0).unwrap_err().contains("digest mismatch"));
+    }
+
 }

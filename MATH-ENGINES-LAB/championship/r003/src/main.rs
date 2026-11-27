@@ -8,6 +8,11 @@ mod workspace;
 use core::arch::global_asm;
 use sha2::{Digest,Sha256};
 use std::{io::Write,process::Command};
+global_asm!(include_str!("abi_probe.S"));
+global_asm!(include_str!("../seeds/P004.S"));
+global_asm!(include_str!("../seeds/P005.S"));
+global_asm!(include_str!("../seeds/P007.S"));
+global_asm!(include_str!("../seeds/P012.S"));
 global_asm!(include_str!("../seeds/P011.S"));
 global_asm!(include_str!("../seeds/P027.S"));
 global_asm!(include_str!("../seeds/P028.S"));
@@ -18,6 +23,16 @@ global_asm!(include_str!("../seeds/P032.S"));
 global_asm!(include_str!(concat!(env!("OUT_DIR"),"/P024.S")));
 type Seed=unsafe extern "win64" fn(i64,i64,u32,*mut i64)->u32;
 unsafe extern "win64"{
+    fn r003_abi_probe(seed:Seed,a:i64,b:i64,op:u32,out:*mut i64)->u64;
+    fn p004_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p005_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p007_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    fn p012_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    #[cfg(test)] fn r003_bad_gpr(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    #[cfg(test)] fn r003_bad_xmm(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    #[cfg(test)] fn r003_bad_df(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    #[cfg(test)] fn r003_bad_mxcsr(a:i64,b:i64,op:u32,out:*mut i64)->u32;
+    #[cfg(test)] fn r003_bad_x87(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p011_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p027_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p028_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
@@ -27,7 +42,11 @@ unsafe extern "win64"{
     fn p026_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
     fn p032_seed(a:i64,b:i64,op:u32,out:*mut i64)->u32;
 }
-const SEEDS:[(u8,Seed,&str);8]=[
+const SEEDS:[(u8,Seed,&str);12]=[
+    (4,p004_seed,include_str!("../seeds/P004.S")),
+    (5,p005_seed,include_str!("../seeds/P005.S")),
+    (7,p007_seed,include_str!("../seeds/P007.S")),
+    (12,p012_seed,include_str!("../seeds/P012.S")),
     (11,p011_seed,include_str!("../seeds/P011.S")),
     (27,p027_seed,include_str!("../seeds/P027.S")),
     (28,p028_seed,include_str!("../seeds/P028.S")),
@@ -55,7 +74,9 @@ fn call(f:Seed,a:i64,b:i64,op:u32)->Answer{
     let mut buf=[GUARD,SENTINEL,GUARD];
     // SAFETY: source-reviewed statically linked leaf functions; exact Win64
     // argument widths and a valid aligned output pointer. No dynamic code.
-    let status=unsafe{f(a,b,op,buf.as_mut_ptr().add(1))};
+    let report=unsafe{r003_abi_probe(f,a,b,op,buf.as_mut_ptr().add(1))};
+    assert_eq!(report>>32,0,"ABI preservation violation mask");
+    let status=report as u32;
     assert_eq!(buf[0],GUARD,"left output canary");
     assert_eq!(buf[2],GUARD,"right output canary");
     if status!=0{assert_eq!(buf[1],SENTINEL,"output changed on failure");}
@@ -145,6 +166,14 @@ fn main(){
 mod tests{
     use super::*;
     fn full()->Evidence{Evidence{independent_seed:true,correctness:true,abi:true,artifact:true,actual_chain_and_rust:true,prior_regression:true,recovery:true,sealed_holdout:true,unsafe_accepts:0,promotion_improvement:true}}
+    #[test]fn abi_negative_controls(){
+        let controls:[(Seed,u64);5]=[(r003_bad_gpr,1),(r003_bad_xmm,2),(r003_bad_df,4),(r003_bad_mxcsr,8),(r003_bad_x87,16)];
+        for (seed,mask) in controls{
+            let mut out=17;
+            let got=unsafe{r003_abi_probe(seed,1,2,0,&mut out)};
+            assert_eq!(got>>32,mask);assert_eq!(out,17);
+        }
+    }
     #[test]fn advancement_fail_closed(){
         assert!(!eligible(Evidence::default()));assert!(eligible(full()));
         let mut e=full();e.promotion_improvement=false;assert!(!eligible(e));

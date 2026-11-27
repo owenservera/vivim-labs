@@ -40,6 +40,7 @@ fn exact_rational_small_domain_crosscheck() {
             let a = Rational::new(n,d).unwrap();
             let b = Rational::new(m,e).unwrap();
             assert_eq!(a.add(b), Rational::new(n*e+m*d,d*e));
+            assert_eq!(a.sub(b), Rational::new(n*e-m*d,d*e));
             assert_eq!(a.mul(b), Rational::new(n*m,d*e));
             if m != 0 { assert_eq!(a.checked_div(b), Rational::new(n*e,d*m)); }
         }}
@@ -115,4 +116,18 @@ fn numeric_domains_are_not_interchangeable_bindings() {
     assert_ne!(integer, real);
     let b = Binding { target: Target::Product, capability: real, host_key: "real-sum".into(), generation: 1 };
     assert_eq!(invoke(&Snapshot(b.clone()), &b, &Sum, Vector::new(&[1i128],1).unwrap()), Err(MathError::BindingMismatch));
+}
+
+#[test]
+fn scalar_operations_are_typed_and_division_is_explicit() {
+    assert_eq!(Add.evaluate((2i128,3i128)),Ok(5));
+    assert_eq!(Subtract.evaluate((i128::MIN,i128::MIN)),Ok(0));
+    assert_eq!(Negate.evaluate(i128::MIN),Err(MathError::Overflow));
+    assert_eq!(Multiply.evaluate((2i128,3i128)),Ok(6));
+    assert_eq!(Divide.evaluate((Rational::one(),Rational::new(2,1).unwrap())),Rational::new(1,2));
+    assert_eq!(IntegerDivRem.evaluate((-7,3)),Ok((-3,2)));
+    assert_eq!(IntegerDivRem.evaluate((i128::MIN,-1)),Err(MathError::Overflow));
+    assert_eq!(IntegerDivRem.evaluate((1,0)),Err(MathError::DivisionByZero));
+    let min=Rational::new(i128::MIN,1).unwrap();
+    assert_eq!(Subtract.evaluate((min,min)),Ok(Rational::zero()));
 }

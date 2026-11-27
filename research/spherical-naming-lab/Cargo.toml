@@ -3,6 +3,7 @@ name = "spherical-naming-lab"
 version = "0.1.0"
 edition = "2021"
 description = "Reproducible directional-statistics naming research"
-license = "MIT"
+publish = false
+rust-version = "1.70"
 
 [dependencies]

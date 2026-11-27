@@ -80,7 +80,7 @@ fn statistics_reuses_scalar_and_sum() {
 struct Double;
 impl Operation<i128> for Double {
     type Output = i128;
-    fn capability(&self) -> Capability { Capability { id: "lab.test.double", revision: 1 } }
+    fn capability(&self) -> Capability { Capability { id: "lab.test.double", revision: 1, domain: i128::DOMAIN, assurance: i128::ASSURANCE } }
     fn evaluate(&self, input: i128) -> MathResult<i128> { input.mul(2) }
 }
 #[test]
@@ -105,4 +105,14 @@ fn both_targets_use_identical_math_without_shared_registry() {
         let mut wrong=b.clone(); wrong.host_key="different-key".into();
         assert_eq!(invoke(&Snapshot(wrong),&b,&Double,5),Err(MathError::BindingMismatch));
     }
+}
+
+#[test]
+fn numeric_domains_are_not_interchangeable_bindings() {
+    let integer = <Sum as Operation<Vector<'_, i128>>>::capability(&Sum);
+    let real = <Sum as Operation<Vector<'_, FiniteF64>>>::capability(&Sum);
+    assert_eq!(integer.id, real.id);
+    assert_ne!(integer, real);
+    let b = Binding { target: Target::Product, capability: real, host_key: "real-sum".into(), generation: 1 };
+    assert_eq!(invoke(&Snapshot(b.clone()), &b, &Sum, Vector::new(&[1i128],1).unwrap()), Err(MathError::BindingMismatch));
 }

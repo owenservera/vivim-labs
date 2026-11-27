@@ -8,3 +8,6 @@ Next implementation: freeze independent evaluation and 64 contestant manifests, 
 
 ## R003 conceptual roster continuation
 [Contestants P022–P032 — eleven new architectural hypotheses](CONCEPTS-P022-P032-R003.md). These extend the first 21 design ideas to 32/64, not the historical R002 numbered roster. Concept only; no qualification or implementation implied.
+
+## Active constitutional implementation scaffold
+[R003 development workspace and native seed wave](r003/README.md) is the active implementation path. [Canonical 64-slot roster](r003/roster.json) has 32 scaffolded designs and 32 reservations. The R002 code in this parent directory remains a historical comparator only. R003 admission and independent native seeds must not be bypassed by using historical results.

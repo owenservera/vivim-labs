@@ -1,0 +1,5 @@
+# Bare-metal arithmetic precursor — research only
+
+[Constitution R003](../CONSTITUTION-R003.md) governs this experiment. The x86-64 Windows assembly and Rust ABI adapter are preliminary reference/challenger source, NOT a qualified shared seed for all contestants. The tournament requires each of the 64 contestants to generate its own native seed, verify its entire machine-to-Rust bootstrap and actually compute its own ledger state with the qualified seed. Rust binds to qualified native routines; reference arithmetic is for independent checks. No promotion on source existence or successful compilation alone.
+
+The existing source implements bounded signed 128-bit add, subtract, negate, multiply and truncating div/rem, with a hardware-DIV challenger. No qualification result is asserted here. Comparative performance and ABI, error, overflow, alignment, register-preservation, memory, executable identity and recovery checks remain mandatory. Use isolated tests and retain evidence; do not install generated executable code as a production backend. Native seed work stays in standard calculator scope.

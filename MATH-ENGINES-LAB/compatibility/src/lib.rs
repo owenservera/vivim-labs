@@ -103,11 +103,8 @@ impl Registry {
         let(mut visiting,mut done)=(BTreeSet::new(),BTreeSet::new());
         for &r in roots{walk(self,r,&mut visiting,&mut done,0)?;} Ok(())
     }
-    /// Candidate bundle admission is all-or-nothing. Old entries are immutable;
-    /// new versions have different keys. Fixtures are supplied by the caller, not
-    /// by providers. These checks are not a security sandbox or formal proof.
-    pub fn admit(&mut self, bundle:Vec<Provider>, fixtures:&[Fixture])->Result<()> {
-        if bundle.is_empty() || bundle.len()>128 || fixtures.len()>4096 || self.entries.len()+bundle.len()>2048 {return Err(Error::Limit);}
+    fn stage(&self,bundle:Vec<Provider>)->Result<(Self,Vec<Requirement>)>{
+        if bundle.len()>128 || self.entries.len()+bundle.len()>2048 {return Err(Error::Limit);}
         let mut next=self.clone();let mut roots=Vec::new();
         for p in bundle {
             let k=p.contract.key;
@@ -115,6 +112,28 @@ impl Registry {
             if next.entries.contains_key(&k){return Err(Error::Duplicate(k));}
             roots.push(p.contract);next.entries.insert(k,p);
         }
+        Ok((next,roots))
+    }
+    /// Inspect a proposed bundle without admitting it. Missing dependencies
+    /// are attributed to their immediate consumer; cycles are separate errors.
+    pub fn preview(&self,consumer:Key,roots:&[Requirement],bundle:Vec<Provider>)->Result<Vec<Gap>>{
+        let (next,candidates)=self.stage(bundle)?;
+        let mut all=next.gaps(consumer,roots);
+        for &r in &candidates{
+            let p=next.lookup(r)?;
+            for gap in next.gaps(r.key,p.requires){
+                if !all.contains(&gap){all.push(gap);}
+            }
+        }
+        if all.is_empty(){next.validate(roots)?;next.validate(&candidates)?;}
+        Ok(all)
+    }
+    /// Candidate bundle admission is all-or-nothing. Old entries are immutable;
+    /// new versions have different keys. Fixtures are supplied by the caller, not
+    /// by providers. These checks are not a security sandbox or formal proof.
+    pub fn admit(&mut self, bundle:Vec<Provider>, fixtures:&[Fixture])->Result<()> {
+        if bundle.is_empty() || fixtures.len()>4096 {return Err(Error::Limit);}
+        let (mut next,roots)=self.stage(bundle)?;
         next.validate(&roots)?;
         for &r in &roots {
             let cases:Vec<_>=fixtures.iter().filter(|f|f.capability==r).collect();

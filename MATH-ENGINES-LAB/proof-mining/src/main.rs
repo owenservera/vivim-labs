@@ -31,25 +31,27 @@ fn calc(r:&Registry,keys:&[Press])->String{
 // Independently derived expected values: integer/rational equalities and literal
 // calculator sequences. Candidate percentages are run through the real registry;
 // the other workpieces use the unchanged actual calculator profile.
-fn cases(r:&Registry)->Vec<bool>{
+const CASE_COUNT:usize=18;
+const PERCENT_INPUTS:[i128;12]=[25,0,-10,37,99,100,101,200,1234,-37,1,777];
+fn case_at(r:&Registry,i:usize)->bool{
     use Press::*;
-    let p=r.plan(&[V2]).unwrap();
-    let mut out=Vec::new();
-    for n in [25,0,-10,37,99,100,101,200,1234,-37,1,777]{
-        let actual=r.call(&p,V2,&[number(n,1)],64);
-        let pass=match actual{Ok(Value::Number(q))=>q.numerator()*100==n*q.denominator(),_=>false};
-        out.push(pass);
+    if i<12{
+        let n=PERCENT_INPUTS[i];
+        let p=r.plan(&[V2]).unwrap();
+        return match r.call(&p,V2,&[number(n,1)],64){
+            Ok(Value::Number(q))=>q.numerator()*100==n*q.denominator(),_=>false};
     }
-    out.extend([
-        calc(r,&[Point,Digit(1),Operator(Binary::Add),Point,Digit(2),Equals])=="0.3",
-        calc(r,&[Digit(2),Digit(0),Digit(0),Operator(Binary::Add),Digit(1),Digit(0),Percent,Equals])=="220",
-        calc(r,&[Digit(1),Operator(Binary::Divide),Digit(3),Equals,Operator(Binary::Multiply),Digit(3),Equals])=="1",
-        calc(r,&[Digit(2),Sqrt])=="~1.414213",
-        calc(r,&[Digit(4),MemoryStore,AllClear,MemoryRecall,Square])=="16",
-        calc(r,&[Digit(2),Operator(Binary::Add),Digit(3),Equals,Undo])=="3",
-    ]);
-    out
+    match i{
+        12=>calc(r,&[Point,Digit(1),Operator(Binary::Add),Point,Digit(2),Equals])=="0.3",
+        13=>calc(r,&[Digit(2),Digit(0),Digit(0),Operator(Binary::Add),Digit(1),Digit(0),Percent,Equals])=="220",
+        14=>calc(r,&[Digit(1),Operator(Binary::Divide),Digit(3),Equals,Operator(Binary::Multiply),Digit(3),Equals])=="1",
+        15=>calc(r,&[Digit(2),Sqrt])=="~1.414213",
+        16=>calc(r,&[Digit(4),MemoryStore,AllClear,MemoryRecall,Square])=="16",
+        17=>calc(r,&[Digit(2),Operator(Binary::Add),Digit(3),Equals,Undo])=="3",
+        _=>false
+    }
 }
+fn cases(r:&Registry)->Vec<bool>{(0..CASE_COUNT).map(|i|case_at(r,i)).collect()}
 #[derive(Clone,Copy)]
 struct Scenario{
     name:&'static str, mode:u8, stale:bool, forged:bool, withheld:bool, colluders:u8,
@@ -80,7 +82,7 @@ struct Block { parent:Hash, dependency:Hash, epoch:u64, candidate:Hash, evidence
 impl Block{
     fn digest(&self)->Hash{hash(&[b"math-proof-v1",&self.parent,&self.dependency,&self.epoch.to_be_bytes(),&self.candidate,&self.evidence])}
 }
-struct Trial{ admitted:bool, actual:Vec<bool>, claimed:Vec<bool>, block:Block, head:Hash, dependency:Hash, epoch:u64, s:Scenario }
+struct Trial{ registry:Option<Registry>, admitted:bool, actual:Vec<bool>, claimed:Vec<bool>, block:Block, head:Hash, dependency:Hash, epoch:u64, s:Scenario }
 impl Trial{
     fn new(s:Scenario)->Self{
         let r=candidate(s.mode);let admitted=r.is_ok();
@@ -90,7 +92,7 @@ impl Trial{
         let head=hash(&[b"active-head"]);let dependency=hash(&[b"active-division-v1"]);
         let mut block=Block{parent:if s.fork{hash(&[b"other-head"])}else{head},dependency:if s.stale{hash(&[b"old-division"])}else{dependency},epoch:if s.replay{1}else{2},candidate:hash(&[b"percent-v2",&[s.mode]]),evidence,body:[0;32]};
         block.body=block.digest();if s.tampered{block.body[0]^=1;}
-        Self{admitted,actual,claimed,block,head,dependency,epoch:2,s}
+        Self{registry:r.ok(),admitted,actual,claimed,block,head,dependency,epoch:2,s}
     }
     fn integrity(&self)->bool{self.block.digest()==self.block.body}
     fn bound(&self)->bool{self.block.parent==self.head&&self.block.dependency==self.dependency&&self.block.epoch==self.epoch&&!self.s.revoked}
@@ -101,7 +103,10 @@ struct Cost{cases:u64,votes:u64,hashes:u64}
 #[derive(Clone,Copy,PartialEq,Eq,Debug)]
 enum Decision{Accept,Reject,Defer}
 fn replay(t:&Trial,n:usize,c:&mut Cost)->bool{
-    c.cases+=n as u64;t.actual.len()>=n&&t.actual.iter().take(n).all(|v|*v)
+    let Some(r)=&t.registry else{return false;};
+    let mut pass=true;
+    for i in 0..n{c.cases+=1;pass &= case_at(r,i);}
+    pass
 }
 fn votes(t:&Trial,c:&mut Cost,threshold:u8)->Decision{
     let online=5-t.s.offline;let mut yes=0;
@@ -120,7 +125,7 @@ fn decide(p:Policy,t:&Trial,c:&mut Cost)->Decision{
         Policy::Supermajority=>return votes(t,c,4),
         // Challenge window: a challenger needs availability and an online peer.
         // Absence of a challenge is not proof. Here one challenger inspects case 37.
-        Policy::Optimistic=>{if !t.available()||t.s.offline>=4{return Defer;}c.cases+=1;t.actual.get(3)==Some(&true)},
+        Policy::Optimistic=>{if !t.available()||t.s.offline>=4{return Defer;}c.cases+=1;t.registry.as_ref().is_some_and(|r|case_at(r,3))},
         Policy::Dag=>t.bound()&&t.available()&&t.claimed.iter().all(|x|*x),
         // Revalidate whole current closure against anchored head.
         Policy::Checkpoint=>t.bound()&&t.available()&&replay(t,full,c),
@@ -173,4 +178,21 @@ fn main(){
         println!("activation_epoch={epoch} active_revision={active} result=37/100");
     }
     println!("up_down_cycle=PASS");
+    // Mine the counterexample from the independent workpiece, then feed it
+    // back into the caller-owned admission fixtures for the next candidate.
+    let bad=Trial::new(SCENARIOS[1]);
+    let index=bad.actual.iter().position(|v|!*v).unwrap();
+    let n=PERCENT_INPUTS[index];
+    let mut mined=base();
+    let fixtures=[
+        Fixture{capability:V2,input:vec![number(25,1)],expected:Ok(number(1,4))},
+        Fixture{capability:V2,input:vec![number(1,i128::MAX)],expected:Err(Error::Math(MathError::Overflow))},
+        Fixture{capability:V2,input:vec![number(n,1)],expected:Ok(number(n,100))}
+    ];
+    let old_generation=mined.generation();
+    assert_eq!(mined.admit(vec![Provider{contract:V2,requires:&[DIV],run:hidden}],&fixtures),Err(Error::FixtureFailed(V2.key)));
+    assert_eq!(mined.generation(),old_generation);
+    mined.admit(vec![Provider{contract:V2,requires:&[DIV],run:good}],&fixtures).unwrap();
+    assert_eq!(mined.call(&mined.plan(&[V2]).unwrap(),V2,&[number(n,1)],64),Ok(number(n,100)));
+    println!("mined_counterexample={} percent; bad_reproposal=REJECT; corrected_reproposal=ACCEPT",n);
 }

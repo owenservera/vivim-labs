@@ -5,6 +5,7 @@
 compile_error!("R003 seed development currently targets x86-64.");
 mod protocol;
 mod workspace;
+mod external;
 use core::arch::global_asm;
 use sha2::{Digest,Sha256};
 use std::{io::Write,process::Command};
@@ -198,6 +199,14 @@ fn decide_match(a:Option<(u8,Evidence)>,b:Option<(u8,Evidence)>)->Option<u8>{
 }
 fn main(){
     let args:Vec<_>=std::env::args().collect();
+    if args.get(1).map(String::as_str)==Some("validate-team"){
+        let path=args.get(2).expect("extracted team root");
+        match external::validate(std::path::Path::new(path)){
+            Ok(report)=>println!("{}",serde_json::to_string_pretty(&report).unwrap()),
+            Err(error)=>{eprintln!("TEAM_INTAKE_REJECTED: {error}");std::process::exit(2);}
+        }
+        return;
+    }
     if args.get(1).map(String::as_str)==Some("scaffold"){
         workspace::materialize(std::path::Path::new(args.get(2).expect("new workspace path"))).expect("create entrant workspaces");return;
     }

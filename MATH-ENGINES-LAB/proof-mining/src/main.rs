@@ -54,10 +54,10 @@ fn case_at(r:&Registry,i:usize)->bool{
 fn cases(r:&Registry)->Vec<bool>{(0..CASE_COUNT).map(|i|case_at(r,i)).collect()}
 #[derive(Clone,Copy)]
 struct Scenario{
-    name:&'static str, mode:u8, stale:bool, forged:bool, withheld:bool, colluders:u8,
+    name:&'static str, mode:u8, stale:bool, forged:bool, withheld:bool, truncated:bool, colluders:u8,
     offline:u8, replay:bool, revoked:bool, fork:bool, tampered:bool, valid:bool
 }
-const NORMAL:Scenario=Scenario{name:"valid",mode:0,stale:false,forged:false,withheld:false,colluders:0,offline:0,replay:false,revoked:false,fork:false,tampered:false,valid:true};
+const NORMAL:Scenario=Scenario{name:"valid",mode:0,stale:false,forged:false,withheld:false,truncated:false,colluders:0,offline:0,replay:false,revoked:false,fork:false,tampered:false,valid:true};
 const SCENARIOS:&[Scenario]=&[
     NORMAL,
     Scenario{name:"hidden_percent_bug",mode:1,valid:false,..NORMAL},
@@ -72,7 +72,9 @@ const SCENARIOS:&[Scenario]=&[
     Scenario{name:"revoked_provider",revoked:true,valid:false,..NORMAL},
     Scenario{name:"equivocating_head",fork:true,valid:false,..NORMAL},
     Scenario{name:"tampered_block",tampered:true,valid:false,..NORMAL},
-    Scenario{name:"valid_rollback_requalify",..NORMAL}
+    Scenario{name:"valid_rollback_requalify",..NORMAL},
+    Scenario{name:"truncated_proof_good_math",truncated:true,valid:false,..NORMAL},
+    Scenario{name:"four_offline_validators",offline:4,..NORMAL}
 ];
 #[derive(Clone,Copy,Debug)]
 enum Policy{HashOnly,SmokeReplay,FullReplay,Majority,Supermajority,Optimistic,Dag,Checkpoint,Certificate,Hybrid}
@@ -87,7 +89,7 @@ impl Trial{
     fn new(s:Scenario)->Self{
         let r=candidate(s.mode);let admitted=r.is_ok();
         let actual=r.as_ref().map(cases).unwrap_or_default();
-        let claimed=if s.withheld{vec![]}else if s.forged{vec![true;actual.len()]}else{actual.clone()};
+        let claimed=if s.withheld{vec![]}else if s.forged{vec![true;actual.len()]}else if s.truncated{actual.iter().take(actual.len().saturating_sub(1)).copied().collect()}else{actual.clone()};
         let evidence=hash(&[&claimed.iter().map(|x|u8::from(*x)).collect::<Vec<_>>()]);
         let head=hash(&[b"active-head"]);let dependency=hash(&[b"active-division-v1"]);
         let mut block=Block{parent:if s.fork{hash(&[b"other-head"])}else{head},dependency:if s.stale{hash(&[b"old-division"])}else{dependency},epoch:if s.replay{1}else{2},candidate:hash(&[b"percent-v2",&[s.mode]]),evidence,body:[0;32]};
@@ -180,9 +182,17 @@ fn main(){
     println!("up_down_cycle=PASS");
     // Mine the counterexample from the independent workpiece, then feed it
     // back into the caller-owned admission fixtures for the next candidate.
-    let bad=Trial::new(SCENARIOS[1]);
-    let index=bad.actual.iter().position(|v|!*v).unwrap();
-    let n=PERCENT_INPUTS[index];
+    let bad=candidate(1).unwrap();let pbad=bad.plan(&[V2]).unwrap();
+    let mut searched=0u32;let mut found=None;
+    for n in -100i128..=100{
+        searched+=1;
+        let result=bad.call(&pbad,V2,&[number(n,1)],64);
+        if !matches!(result,Ok(Value::Number(q)) if q.numerator()*100==n*q.denominator()){
+            found=Some(n);break;
+        }
+    }
+    let n=found.expect("bounded search must find planted defect");
+    println!("mining_search_cases={searched}");
     let mut mined=base();
     let fixtures=[
         Fixture{capability:V2,input:vec![number(25,1)],expected:Ok(number(1,4))},

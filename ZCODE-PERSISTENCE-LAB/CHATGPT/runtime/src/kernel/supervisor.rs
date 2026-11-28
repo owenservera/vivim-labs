@@ -174,6 +174,10 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             host(store,Action::AssimilateRecurring{rule,payload})?;
             knowledge_runs+=1;progress=true;
         }
+        if store.inspect()?.routing_cycle_needed(){
+            let routing=host(store,Action::RoutingCycle{limit:4})?;
+            progress|=routing["prepared"].as_array().is_some_and(|a|!a.is_empty());
+        }
         while launched<config.max_jobs{
             let w=store.inspect()?;
             if w.running()>=w.slots{break;}

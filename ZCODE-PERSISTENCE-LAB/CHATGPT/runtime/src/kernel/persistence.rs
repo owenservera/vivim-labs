@@ -4,7 +4,7 @@ use super::{model::*,transition::{Action,Actor,Request},evolution::Discovery};
 use crate::{digest,Result};
 use serde::{Serialize,Deserialize};
 use serde_json::{Value,json};
-use std::{collections::BTreeMap,fs::{self,File,OpenOptions},io::Write,path::{Path,PathBuf},time::{SystemTime,UNIX_EPOCH}};
+use std::{collections::{BTreeMap,BTreeSet},fs::{self,File,OpenOptions},io::Write,path::{Path,PathBuf},time::{SystemTime,UNIX_EPOCH}};
 
 fn error(e:impl std::fmt::Display)->String{e.to_string()}
 fn encode<T:Serialize>(x:&T)->Result<Vec<u8>>{serde_json::to_vec(x).map_err(error)}
@@ -61,7 +61,7 @@ impl Transaction{
     }
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
-struct Head {schema:u32,revision:u64,record:String,snapshot:u64,snapshot_digest:Option<String>}
+struct Head {schema:u32,revision:u64,record:String,snapshot:u64,snapshot_digest:Option<String>,#[serde(default,skip_serializing_if="Option::is_none")] index:Option<String>}
 /// The head is append-only; a transaction is committed only when its marker exists.
 /// A missing final marker cannot be distinguished from a crash before admission without
 /// an external anchor. An independent anchor can be exported by the caller.
@@ -94,13 +94,41 @@ impl KernelStore{
         }
         v.sort_unstable();Ok(v)
     }
+    fn latest_head(&self)->Result<Option<Head>>{
+        let Some(rev)=self.heads()?.last().copied() else{return Ok(None);};
+        let head:Envelope<Head>=read(&self.path("head",rev))?;head.check()?;
+        ensure(head.body.schema==1&&head.body.revision==rev&&head.body.snapshot<=rev,"invalid head")?;
+        Ok(Some(head.body))
+    }
     fn load(&self)->Result<Loaded>{
         let heads=self.heads()?;
         let Some(&latest)=heads.last() else{
-            return Ok(Loaded{world:World::default(),receipts:BTreeMap::new(),head:Head{schema:1,revision:0,record:"genesis".into(),snapshot:0,snapshot_digest:None}})
+            return Ok(Loaded{world:World::default(),receipts:BTreeMap::new(),head:Head{schema:1,revision:0,record:"genesis".into(),snapshot:0,snapshot_digest:None,index:None}})
         };
         let top:Envelope<Head>=read(&self.path("head",latest))?;top.check()?;
         ensure(top.body.schema==1&&top.body.revision==latest&&top.body.snapshot<=latest,"invalid head")?;
+        if let Some(root)=&top.body.index{
+            let index=super::index::Index::open(&self.root)?;
+            let (world,receipts)=index.load(root,latest)?;
+            // Verify the bounded chain without re-running potentially expensive
+            // learning/computation commands. Each retained marker names its index.
+            let start=top.body.snapshot;
+            let mut previous=if start==0{"genesis".to_string()}else{
+                let marker:Envelope<Head>=read(&self.path("head",start))?;marker.check()?;
+                ensure(marker.body.revision==start,"checkpoint head mismatch")?;
+                marker.body.record
+            };
+            for rev in (start+1)..=latest{
+                let marker:Envelope<Head>=read(&self.path("head",rev))?;marker.check()?;
+                let rec:Envelope<Record>=read(&self.path("record",rev))?;rec.check()?;
+                ensure(marker.body.revision==rev&&marker.body.record==rec.checksum&&rec.body.revision==rev&&rec.body.previous==previous,"indexed journal chain mismatch")?;
+                let receipt=receipts.get(rec.body.command.id()).ok_or("indexed receipt missing")?;
+                ensure(receipt.revision==rev&&receipt.request_digest==checksum(&rec.body.command)?&&receipt.response==rec.body.response,"indexed receipt mismatch")?;
+                previous=rec.checksum;
+            }
+            ensure(previous==top.body.record&&world.sequence==latest,"indexed tail mismatch")?;
+            return Ok(Loaded{world,receipts,head:top.body});
+        }
         let mut world=World::default();let mut receipts=BTreeMap::new();let mut previous="genesis".to_string();
         let start=top.body.snapshot;
         if start>0{
@@ -123,6 +151,14 @@ impl KernelStore{
         }
         ensure(previous==top.body.record,"tail digest mismatch")?;
         Ok(Loaded{world,receipts,head:top.body})
+    }
+    pub fn lookup(&self,table:&str,key:&str)->Result<Option<Value>>{
+        let _guard=self.lock()?;
+        let Some(head)=self.latest_head()? else{return Ok(None);};
+        if let Some(root)=head.index.as_ref(){return super::index::Index::open(&self.root)?.lookup(root,head.revision,table,key);}
+        let loaded=self.load()?;
+        if table=="receipts"{return loaded.receipts.get(key).map(|r|serde_json::to_value(r).map_err(error)).transpose();}
+        let v=serde_json::to_value(loaded.world).map_err(error)?;Ok(v.get(table).and_then(|t|t.get(key)).cloned())
     }
     pub fn inspect(&self)->Result<World>{let _guard=self.lock()?;Ok(self.load()?.world)}
     pub fn anchor(&self)->Result<Anchor>{
@@ -157,17 +193,25 @@ impl KernelStore{
         let rec=Envelope::new(Record{schema:1,revision:rev,previous:loaded.head.record.clone(),command,response:response.clone()})?;
         write_new(&self.root,&Self::name("record",rev),&rec)?;
         loaded.receipts.insert(request_id,Receipt{request_digest,response:response.clone(),revision:rev});
-        let (snapshot,snapshot_digest)=if rev%SNAP_INTERVAL==0{
-            let snap=Envelope::new(Snapshot{schema:1,revision:rev,previous:rec.checksum.clone(),world:loaded.world,receipts:loaded.receipts})?;
-            write_new(&self.root,&Self::name("snapshot",rev),&snap)?;(rev,Some(snap.checksum))
+        let index=super::index::Index::open(&self.root)?;
+        let index_root=index.write(rev,&loaded.world,&loaded.receipts,loaded.head.index.as_deref())?;
+        let (snapshot,snapshot_digest)=if rev%SNAP_INTERVAL==0||loaded.head.index.is_none(){
+            (rev,Some(index_root.clone()))
         }else{(loaded.head.snapshot,loaded.head.snapshot_digest)};
-        let head=Envelope::new(Head{schema:1,revision:rev,record:rec.checksum,snapshot,snapshot_digest})?;
+        let head=Envelope::new(Head{schema:1,revision:rev,record:rec.checksum,snapshot,snapshot_digest,index:Some(index_root)})?;
         write_new(&self.root,&Self::name("head",rev),&head)?;
         // Keep the current checkpoint and its committed tail; pruning is retryable and
         // cannot invalidate the just-committed transaction.
         if snapshot>0{let _=self.prune(snapshot);}
+        if rev==snapshot{let _=self.collect_index();}
         Ok(response)
     }
+    fn collect_index(&self)->Result<usize>{
+        let mut roots=BTreeSet::new();
+        for rev in self.heads()?{let h:Envelope<Head>=read(&self.path("head",rev))?;h.check()?;if let Some(index)=h.body.index{roots.insert(index);}}
+        super::index::Index::open(&self.root)?.collect(&roots)
+    }
+    pub fn collect_garbage(&self)->Result<usize>{let _guard=self.lock()?;self.load()?;self.collect_index()}
     fn prune(&self,snapshot:u64)->Result<()>{
         for e in fs::read_dir(&self.root).map_err(error)?{
             let e=e.map_err(error)?;let name=e.file_name().to_string_lossy().into_owned();

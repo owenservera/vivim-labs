@@ -19,6 +19,10 @@
       "library": "/openai/codex",
       "url": "https://github.com/openai/codex/blob/main/codex-rs/app-server-protocol/src/protocol/v2/account.rs",
       "finding": "account/rateLimits/read, ordinaryUsageAllowed, shared windows usedPercent and resetsAt; applies to actual authenticated Codex account, not Gemini subscription."
+    },
+    {
+      "url": "https://antigravity.google/docs/cli/commands/usage/",
+      "finding": "Native workstation probe ctl-fe9da7a78d32600a confirmed agy --print /usage returns TSV with Gemini Models group, weekly and five-hour remaining percent and reset UTC. Live collector: MODEL-QUOTA.mjs."
     }
   ],
   "lanes": {
@@ -110,5 +114,15 @@
       "description": "Explicitly classified high-impact failure recovery or design; may use reserved headroom."
     }
   },
-  "routing_note": "Order is an initial heuristic, not proven ranking or token price. Candidate must appear in live authenticated model list, map to observed shared quota group, and satisfy every applicable window. No orchestrator aliases until underlying model family and billing are verified. Switch models at task boundaries; preserve verified context and explicit session bindings; verify effective model on resume or start new bounded incarnation. Log decision, predicted/actual consumption, success, retries, context overhead and model drift. Learn measured verified yield per quota delta; do not equate tokens with plan quota. Compare paired seeds with same scheduler and shared-account fairness, record route mix; later fixed-model control."
+  "routing_note": "Order is an initial heuristic, not proven ranking or token price. Candidate must appear in live authenticated model list, map to observed shared quota group, and satisfy every applicable window. No orchestrator aliases until underlying model family and billing are verified. Switch models at task boundaries; preserve verified context and explicit session bindings; verify effective model on resume or start new bounded incarnation. Log decision, predicted/actual consumption, success, retries, context overhead and model drift. Learn measured verified yield per quota delta; do not equate tokens with plan quota. Compare paired seeds with same scheduler and shared-account fairness, record route mix; later fixed-model control.",
+  "observer": {
+    "module": "MODEL-QUOTA.mjs",
+    "commands": [
+      "agy models",
+      "agy --print-timeout 10s --print /usage"
+    ],
+    "refresh": "Before each admission and after each completed turn, subject to reasonable metadata polling cadence; never infer reset or recovery solely from wall clock.",
+    "billing": "Quota metadata does not prove paid overflow disabled. Separate verified account setting or owner attestation required.",
+    "observed": "2026-11-28T14:00Z session-relative report: 99% five-hour, 94% weekly; historical observation only, not reusable as current admission evidence."
+  }
 }

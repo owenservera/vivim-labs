@@ -80,6 +80,26 @@ struct Head {schema:u32,revision:u64,record:String,snapshot:u64,snapshot_digest:
 /// an external anchor. An independent anchor can be exported by the caller.
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct Anchor {pub revision:u64,pub digest:String}
+#[derive(Clone,Debug,Serialize,Deserialize)]
+struct ArchivedRevision{
+    head:Envelope<Head>,record:Envelope<Record>,
+    #[serde(default,skip_serializing_if="Option::is_none")] snapshot:Option<Envelope<Snapshot>>,
+}
+impl ArchivedRevision{
+    fn check(&self,revision:u64)->Result<()>{
+        self.head.check()?;self.record.check()?;
+        let h=&self.head.body;let r=&self.record.body;
+        ensure(h.schema==1&&r.schema==1&&h.revision==revision&&r.revision==revision
+            &&h.record==self.record.checksum&&h.index==r.index,"archived revision mismatch")?;
+        if let Some(s)=&self.snapshot{
+            s.check()?;ensure(s.body.revision==revision&&s.body.previous==h.record
+                &&h.snapshot==revision&&h.snapshot_digest.as_ref()==Some(&s.checksum),"archived snapshot mismatch")?;
+        }
+        Ok(())
+    }
+}
+#[derive(Clone,Debug,Serialize,Deserialize)]
+pub struct HistoricalPin{pub name:Id,pub revision:u64,pub anchor:Anchor,pub index:Digest}
 struct Loaded {world:World,receipts:BTreeMap<Id,Receipt>,head:Head}
 pub struct KernelStore {root:PathBuf}
 const SNAP_INTERVAL:u64=64;
@@ -208,7 +228,7 @@ impl KernelStore{
         ensure(current.revision==anchor.revision&&current.digest==anchor.digest,"external anchor mismatch")
     }
     pub fn apply(&self,request:Request)->Result<Value>{
-        ensure(!matches!(&request.action,Action::AttestCandidate{..})&&!matches!(&request.actor,Actor::Adapter{..}),"custody and adapter actions require signed ingress")?;
+        ensure(!matches!(&request.action,Action::AttestCandidate{..}|Action::AttestTracePattern{..})&&!matches!(&request.actor,Actor::Adapter{..}),"custody and adapter actions require signed ingress")?;
         self.commit(Transaction::Command{request})
     }
     /// Meter only a whitelisted successful deterministic transition, before
@@ -300,25 +320,149 @@ impl KernelStore{
         let head=Envelope::new(Head{schema:1,revision:rev,record:rec.checksum,snapshot,snapshot_digest,index:Some(index_root)})?;
         write_new(&self.root,&Self::name("head",rev),&head)?;
         #[cfg(test)] super::qualification::pause_at(&self.root,"after_head")?;
-        // Keep the current checkpoint and its committed tail; pruning is retryable and
-        // cannot invalidate the just-committed transaction.
-        if snapshot>0{let _=self.prune(snapshot);}
-        if rev==snapshot{let _=self.collect_index();}
+        // Retirement is best effort after the commit. Never prune an unarchived
+        // committed record. Explicit maintenance reports any failure.
+        if rev==snapshot&&self.prune(snapshot).is_ok(){let _=self.collect_index();}
         Ok(response)
+    }
+    fn archive_root(&self)->PathBuf{self.root.join("journal-archive")}
+    fn pin_root(&self)->PathBuf{self.root.join("historical-pins")}
+    fn archive_path(&self,rev:u64)->PathBuf{
+        self.archive_root().join(format!("{:016x}",rev/1024)).join(Self::name("archive",rev))
+    }
+    fn read_archive(&self,rev:u64)->Result<Option<ArchivedRevision>>{
+        let p=self.archive_path(rev);
+        if !p.exists(){return Ok(None);}
+        let entry:Envelope<ArchivedRevision>=read(&p)?;entry.check()?;entry.body.check(rev)?;
+        Ok(Some(entry.body))
+    }
+    fn archive_revision(&self,rev:u64)->Result<()>{
+        let path=self.archive_path(rev);
+        // A previous retirement may have removed one of the active files.
+        if let Some(old)=self.read_archive(rev)?{
+            if self.path("head",rev).exists(){
+                let h:Envelope<Head>=read(&self.path("head",rev))?;h.check()?;
+                ensure(h.checksum==old.head.checksum,"archive conflicts with active head")?;
+            }
+            if self.path("record",rev).exists(){
+                let r:Envelope<Record>=read(&self.path("record",rev))?;r.check()?;
+                ensure(r.checksum==old.record.checksum,"archive conflicts with active record")?;
+            }
+            if self.path("snapshot",rev).exists(){
+                let s:Envelope<Snapshot>=read(&self.path("snapshot",rev))?;s.check()?;
+                ensure(old.snapshot.as_ref().is_some_and(|x|x.checksum==s.checksum),"archive conflicts with active snapshot")?;
+            }
+            return Ok(());
+        }
+        let head:Envelope<Head>=read(&self.path("head",rev))?;
+        let record:Envelope<Record>=read(&self.path("record",rev))?;
+        let snapshot=if self.path("snapshot",rev).exists(){Some(read(&self.path("snapshot",rev))?)}else{None};
+        let body=ArchivedRevision{head,record,snapshot};body.check(rev)?;
+        let dir=path.parent().ok_or("archive directory missing")?;
+        fs::create_dir_all(dir).map_err(error)?;
+        sync_directory(&self.root)?;sync_directory(&self.archive_root())?;
+        let entry=Envelope::new(body)?;
+        write_new(dir,&Self::name("archive",rev),&entry)?;
+        let verified=self.read_archive(rev)?.ok_or("archive disappeared")?;
+        ensure(verified.head.checksum==entry.body.head.checksum&&verified.record.checksum==entry.body.record.checksum,"archive verification failed")
+    }
+    fn retained_pins(&self)->Result<Vec<HistoricalPin>>{
+        let dir=self.pin_root();if !dir.exists(){return Ok(vec![]);}
+        let mut pins=vec![];
+        for entry in fs::read_dir(dir).map_err(error)?{
+            let entry=entry.map_err(error)?;
+            let name=entry.file_name().to_string_lossy().into_owned();
+            if name.starts_with(".tmp-"){continue;}
+            let key=name.strip_suffix(".json").ok_or("invalid historical pin filename")?;id(key)?;
+            ensure(entry.file_type().map_err(error)?.is_file(),"invalid historical pin file")?;
+            let p:Envelope<HistoricalPin>=read(&entry.path())?;p.check()?;
+            ensure(p.body.name==key&&p.body.revision==p.body.anchor.revision&&hash_id(&p.body.index)&&hash_id(&p.body.anchor.digest),"historical pin identity mismatch")?;
+            pins.push(p.body);
+        }
+        pins.sort_by(|a,b|a.name.cmp(&b.name));Ok(pins)
+    }
+    /// Pins retain actual indexed state, not just the retired command.
+    /// Caller must export the returned anchor independently for tamper evidence.
+    pub fn pin_history(&self,name:&str)->Result<HistoricalPin>{
+        id(name)?;let _guard=self.lock()?;
+        let s=self.load()?;
+        let index=s.head.index.clone().ok_or("historical pin requires indexed state")?;
+        let p=HistoricalPin{name:name.into(),revision:s.head.revision,anchor:Anchor{revision:s.head.revision,digest:checksum(&s.head)?},index};
+        let dir=self.pin_root();fs::create_dir_all(&dir).map_err(error)?;sync_directory(&self.root)?;
+        write_new(&dir,&format!("{name}.json"),&Envelope::new(p.clone())?)?;Ok(p)
+    }
+    pub fn history_pins(&self)->Result<Vec<HistoricalPin>>{let _guard=self.lock()?;self.retained_pins()}
+    pub fn historical_lookup(&self,name:&str,table:&str,key:&str)->Result<Option<Value>>{
+        id(name)?;let _guard=self.lock()?;
+        let p=self.retained_pins()?.into_iter().find(|p|p.name==name).ok_or("historical pin missing")?;
+        // Match the head to the independently exportable anchor. A pin without
+        // its original head or archived head is not a valid historical view.
+        let h=if self.path("head",p.revision).exists(){
+            let h:Envelope<Head>=read(&self.path("head",p.revision))?;h.check()?;h.body
+        }else{self.read_archive(p.revision)?.ok_or("historical head missing")?.head.body};
+        ensure(checksum(&h)?==p.anchor.digest&&h.index.as_ref()==Some(&p.index),"historical pin head mismatch")?;
+        super::index::Index::open(&self.root)?.lookup(&p.index,p.revision,table,key)
+    }
+    pub fn historical_record(&self,rev:u64)->Result<Value>{
+        ensure(rev>0,"invalid historical revision")?;
+        let _guard=self.lock()?;
+        let latest=self.latest_head()?.ok_or("store has no committed revision")?;
+        ensure(rev<=latest.revision,"revision not committed")?;
+        let (h,r,source)=if self.path("head",rev).exists()&&self.path("record",rev).exists(){
+            let h:Envelope<Head>=read(&self.path("head",rev))?;
+            let r:Envelope<Record>=read(&self.path("record",rev))?;
+            let e=ArchivedRevision{head:h,record:r,snapshot:None};e.check(rev)?;(e.head,e.record,"active")
+        }else if let Some(e)=self.read_archive(rev)?{(e.head,e.record,"archive")}
+        else{return Ok(json!({"revision":rev,"available":false,"reason":"historical_record_unavailable_in_existing_store"}));};
+        Ok(json!({"revision":rev,"available":true,"source":source,"anchor":Anchor{revision:rev,digest:h.checksum.clone()},
+            "head":h,"record":r,"send_authority":"none_historical_record_only","integrity":"individual_record_and_head_not_full_chain"}))
+    }
+    /// Point receipt inspection is deliberately not an execution/replay path.
+    /// One-shot response bodies are never returned through this interface.
+    pub fn receipt_status(&self,key:&str)->Result<Value>{
+        id(key)?;let _guard=self.lock()?;
+        let Some(head)=self.latest_head()? else{return Ok(json!({"request":key,"found":false}));};
+        let receipt=if let Some(root)=&head.index{
+            let last:Envelope<Record>=read(&self.path("record",head.revision))?;last.check()?;
+            ensure(last.body.revision==head.revision&&last.body.index==head.index&&last.checksum==head.record,"receipt status head mismatch")?;
+            super::index::Index::open(&self.root)?.lookup(root,head.revision,"receipts",key)?
+                .map(|v|serde_json::from_value::<Receipt>(v).map_err(error)).transpose()?
+        }else{self.load()?.receipts.get(key).cloned()};
+        if let Some(r)=receipt{
+            ensure(r.revision<=head.revision&&hash_id(&r.request_digest),"invalid receipt identity")?;
+            Ok(json!({"request":key,"found":true,"revision":r.revision,"request_digest":r.request_digest,"response_digest":digest(&r.response),
+                "send_authority":"none","scope":"point_receipt_observation_only"}))
+        }else{Ok(json!({"request":key,"found":false,"observed_revision":head.revision,"send_authority":"none"}))}
     }
     fn collect_index(&self)->Result<usize>{
         let mut roots=BTreeSet::new();
         for rev in self.heads()?{let h:Envelope<Head>=read(&self.path("head",rev))?;h.check()?;if let Some(index)=h.body.index{roots.insert(index);}}
+        for p in self.retained_pins()?{roots.insert(p.index);}
         super::index::Index::open(&self.root)?.collect(&roots)
     }
-    pub fn collect_garbage(&self)->Result<usize>{let _guard=self.lock()?;self.load()?;self.collect_index()}
+    pub fn collect_garbage(&self)->Result<usize>{
+        let _guard=self.lock()?;let loaded=self.load()?;
+        if loaded.head.snapshot>0{self.prune(loaded.head.snapshot)?;}
+        self.collect_index()
+    }
     fn prune(&self,snapshot:u64)->Result<()>{
+        // Group by revision, including remnants from a partially completed
+        // retirement. Never infer that an uncommitted preparation was committed.
+        let mut revisions=BTreeSet::new();
         for e in fs::read_dir(&self.root).map_err(error)?{
             let e=e.map_err(error)?;let name=e.file_name().to_string_lossy().into_owned();
             let Some((n,kind))=name.split_once('.') else{continue};
             let Ok(rev)=n.parse::<u64>() else{continue};
-            if rev<snapshot&&matches!(kind,"head.json"|"record.json"|"snapshot.json"){fs::remove_file(e.path()).map_err(error)?;}
-            // Retain the checkpoint record as its index-root anchor.
+            if rev<snapshot&&matches!(kind,"head.json"|"record.json"|"snapshot.json"){revisions.insert(rev);}
+        }
+        for rev in revisions{
+            // Preserve a verifiable head/record pair before removing any part.
+            // Orphan remnants without archive/head are retained, not deleted.
+            if !self.path("head",rev).exists()&&self.read_archive(rev)?.is_none(){continue;}
+            self.archive_revision(rev)?;
+            for kind in ["record","snapshot","head"]{
+                let p=self.path(kind,rev);if p.exists(){fs::remove_file(p).map_err(error)?;}
+            }
         }
         sync_directory(&self.root)
     }

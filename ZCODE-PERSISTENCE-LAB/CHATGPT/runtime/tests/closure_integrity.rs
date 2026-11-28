@@ -129,3 +129,24 @@ fn atomic_host_measurement_replays_without_second_revision(){
     assert!(reopened.apply_metered(bad,"routing").is_err());
     assert_eq!(reopened.anchor().unwrap().revision,1);
 }
+
+#[test]
+fn retired_journal_and_pinned_state_survive_checkpoint_collection(){
+    use persistent_intelligence_runtime::kernel::{persistence::KernelStore,transition::Request};
+    let temp=Temp::new();let store=KernelStore::open(&temp.0).unwrap();
+    let apply=|key:&str,action:Action|store.apply(Request{id:key.into(),actor:Actor::Host,action});
+    apply("initial",Action::Goal{id:"initial".into(),parent:None,objective:"retain evidence".into(),claim_budget:2,predicate:None}).unwrap();
+    let pin=store.pin_history("initial-state").unwrap();
+    assert_eq!(pin.revision,1);
+    for n in 2..=66{apply(&format!("tick-{n}"),Action::Tick{now_ms:n}).unwrap();}
+    store.collect_garbage().unwrap();
+    let old=store.historical_record(1).unwrap();assert_eq!(old["available"],true);assert_eq!(old["source"],"archive");
+    assert_eq!(old["anchor"]["digest"],pin.anchor.digest);
+    assert_eq!(store.historical_lookup("initial-state","goals","initial").unwrap().unwrap()["id"],"initial");
+    assert!(store.historical_lookup("initial-state","receipts","tick-2").unwrap().is_none());
+    let receipt=store.receipt_status("initial").unwrap();assert_eq!(receipt["found"],true);assert_eq!(receipt["revision"],1);
+    assert_eq!(receipt["send_authority"],"none");assert!(receipt.get("response").is_none());
+    assert_eq!(store.history_pins().unwrap().len(),1);
+    let reopened=KernelStore::open(&temp.0).unwrap();assert_eq!(reopened.historical_record(1).unwrap(),old);
+    assert_eq!(reopened.anchor().unwrap().revision,66);
+}

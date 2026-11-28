@@ -27,6 +27,11 @@ fn kernel_cli(args:&[String])->Result<(),String>{
             store.scan(table,cursor,limit,pages,bytes)?
         },
         "collect"=>serde_json::json!({"objects_removed":store.collect_garbage()?}),
+        "history-pin"=>serde_json::to_value(store.pin_history(required(args,3,"pin name")?)?).map_err(|e|e.to_string())?,
+        "history-pins"=>serde_json::to_value(store.history_pins()?).map_err(|e|e.to_string())?,
+        "history-lookup"=>store.historical_lookup(required(args,3,"pin name")?,required(args,4,"table")?,required(args,5,"entity key")?)?.unwrap_or(Value::Null),
+        "history-record"=>store.historical_record(required(args,3,"revision")?.parse::<u64>().map_err(|e|e.to_string())?)?,
+        "receipt-status"=>store.receipt_status(required(args,3,"request ID")?)?,
         "population"=>store.inspect()?.audit_population(),
         "resources"=>store.inspect()?.resource_report(),
         "provider-accounting"=>store.inspect()?.provider_accounting(),

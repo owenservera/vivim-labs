@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-SOURCE-CLOSURE-009",
+  "revision": "R004-SOURCE-CLOSURE-010",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -678,17 +678,16 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "ec3b4897c053d9374706a526c88de3d97b8c9e72",
+        "source_pin": "287ff49f369338a20e80e0d4b5b9f6e6636e2d8b",
         "files": [
           "src/kernel/index.rs",
           "src/kernel/persistence.rs",
           "tests/closure_integrity.rs",
-          "src/kernel/transition.rs",
-          "tests/closure_integrity.rs"
+          "src/kernel/transition.rs"
         ],
-        "remaining": "Bounded revision-fenced indexed scans and atomic initialization batches authored; full-world mutation materialization, long-term receipt retention, legacy migration and scaling qualification remain.",
+        "remaining": "Retirement archives verified head/command pairs before deletion; durable historical root pins survive index collection; bounded direct historical record/entity and receipt status access authored. Earlier pruned records are not recoverable here. Full-world mutation and receipt materialization, archive capacity policy, external anchor custody and actual crash/scaling qualification remain.",
         "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
-        "checkpoint": "STORAGE-BATCH-SCAN-001"
+        "checkpoint": "HISTORICAL-RETENTION-001"
       }
     },
     {
@@ -1167,7 +1166,7 @@
     }
   },
   "completion_dashboard": {
-    "revision": "R004-SOURCE-CLOSURE-009",
+    "revision": "R004-SOURCE-CLOSURE-010",
     "tracker_input_commit": "d05e332f884a11ef3bcbc69658a4de308adc812a",
     "reviewed_runtime_source": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
     "source_status_meaning": "Provisional source labels after targeted readback and integration; not a complete compiler or invariant audit, not verified operation.",
@@ -1376,5 +1375,11 @@
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "verified_credit": 0,
     "reconciled_parent": "4cb723ebc9ecd14492bb4286b6d7aba33ef41267"
+  },
+  "source_closure_010": {
+    "baseline": "287ff49f369338a20e80e0d4b5b9f6e6636e2d8b",
+    "document": "HISTORICAL-RETENTION-001.md",
+    "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
+    "verified_credit": 0
   }
 }

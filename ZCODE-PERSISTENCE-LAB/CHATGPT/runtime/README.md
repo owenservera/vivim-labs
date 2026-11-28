@@ -1,6 +1,6 @@
 # R004 source checkpoint
 
-The new provider-independent kernel is under [`src/kernel/`](src/kernel/). See [implementation checkpoint and CLI](IMPLEMENTATION-R004.md) and the [canonical acceptance tracker](acceptance-tracker.json). R004 has not been compiled, built or tested; the R003 documentation below remains historical and its commands are not an instruction to execute during the current coding-only phase.
+The new provider-independent kernel is under [`src/kernel/`](src/kernel/). See [latest implementation checkpoint 002](IMPLEMENTATION-R004-002.md), [initial implementation checkpoint and CLI](IMPLEMENTATION-R004.md) and the [canonical acceptance tracker](acceptance-tracker.json). R004 has not been compiled, built or tested; the R003 documentation below remains historical and its commands are not an instruction to execute during the current coding-only phase.
 
 ---
 

@@ -13,26 +13,37 @@ fn request_id()->Result<Id>{Ok(format!("r-{}-{}-{}",std::process::id(),SystemTim
 fn apply(store:&KernelStore,actor:Actor,action:Action)->Result<Value>{store.apply(Request{id:request_id()?,actor,action})}
 fn host(store:&KernelStore,action:Action)->Result<Value>{apply(store,Actor::Host,action)}
 #[derive(Clone,Debug,Serialize,Deserialize)]
-pub struct Work {pub class:Class,pub operators:BTreeMap<Id,OperatorContract>,pub input:Value}
+pub struct Work {pub class:Class,pub operators:BTreeMap<Id,OperatorContract>,pub input:Value,#[serde(default)] pub resume:Option<Value>}
 impl Work{
     pub fn from_world(w:&World,class:&str,input:Value)->Result<Self>{
         let c=w.classes.get(class).ok_or("class missing")?.clone();
         let mut operators=BTreeMap::new();
         for n in &c.nodes{operators.insert(n.operator.clone(),w.operators.get(&n.operator).ok_or("operator missing")?.clone());}
-        Ok(Self{class:c,operators,input})
+        Ok(Self{class:c,operators,input,resume:None})
     }
-    pub fn execute(self)->Result<Value>{
+    pub fn execute(self)->Result<Value>{self.execute_with(|_|Ok(()))}
+    pub fn execute_with<F:FnMut(Value)->Result<()>>(self,emit:F)->Result<Value>{
         // Parent validates the actual class lineage. Children need only the executable graph.
         let mut w=World::default();w.operators=self.operators;
         let mut c=self.class;c.lineage.clear();let key=version_key(&c.id,c.version)?;
-        w.validate_class(&c)?;w.classes.insert(key.clone(),c);w.run_class(&key,&self.input)
+        w.validate_class(&c)?;w.classes.insert(key.clone(),c);w.run_class_resumable(&key,&self.input,self.resume.as_ref(),emit)
     }
 }
 pub fn compute_file(input:&Path,output:&Path)->Result<()>{
     let bytes=fs::read(input).map_err(error)?;
     ensure(bytes.len()<=16*MAX_VALUE_BYTES,"work package exceeds budget")?;
     let work:Work=serde_json::from_slice(&bytes).map_err(error)?;
-    let value=work.execute()?;bounded(&value)?;
+    let progress=output.parent().ok_or("result parent missing")?.join("progress");
+    fs::create_dir_all(&progress).map_err(error)?;
+    let value=work.execute_with(|checkpoint|{
+        let n=checkpoint.get("next_node").and_then(Value::as_u64).ok_or("checkpoint cursor missing")?;
+        let dest=progress.join(format!("{n:020}.json"));let tmp=progress.join(format!("{n:020}.tmp"));
+        if dest.exists(){return Ok(());}
+        use std::io::Write;
+        let mut f=fs::OpenOptions::new().create_new(true).write(true).open(&tmp).map_err(error)?;
+        f.write_all(&serde_json::to_vec(&checkpoint).map_err(error)?).map_err(error)?;f.sync_all().map_err(error)?;drop(f);
+        fs::rename(tmp,dest).map_err(error)
+    })?;bounded(&value)?;
     let bytes=serde_json::to_vec(&value).map_err(error)?;
     use std::io::Write;
     let tmp=output.with_extension("tmp");
@@ -40,9 +51,19 @@ pub fn compute_file(input:&Path,output:&Path)->Result<()>{
     f.write_all(&bytes).map_err(error)?;f.sync_all().map_err(error)?;drop(f);
     ensure(!output.exists(),"result already exists")?;fs::rename(tmp,output).map_err(error)
 }
-struct Job {child:Child,task:Id,worker:Id,incarnation:u64,generation:u64,output:PathBuf,started:Instant}
+struct Job {child:Child,task:Id,worker:Id,incarnation:u64,generation:u64,output:PathBuf,started:Instant,last_checkpoint:u64}
 impl Job{
     fn actor(&self)->Actor{Actor::Worker{id:self.worker.clone(),incarnation:self.incarnation}}
+    fn checkpoint(&mut self,store:&KernelStore)->Result<()>{
+        let Some(parent)=self.output.parent() else{return Ok(())};let path=parent.join("progress");
+        if !path.is_dir(){return Ok(());}
+        let mut files=vec![];
+        for e in fs::read_dir(&path).map_err(error)?{let e=e.map_err(error)?;let name=e.file_name().to_string_lossy().into_owned();if let Some(n)=name.strip_suffix(".json").and_then(|x|x.parse::<u64>().ok()){if n>self.last_checkpoint{files.push((n,e.path()));}}}
+        files.sort_by_key(|x|std::cmp::Reverse(x.0));
+        for (n,p) in files{if fs::metadata(&p).map_err(error)?.len()>MAX_VALUE_BYTES as u64{continue;}let bytes=fs::read(p).map_err(error)?;let Ok(data)=serde_json::from_slice::<Value>(&bytes) else{continue;};if data.get("next_node").and_then(Value::as_u64)!=Some(n){continue;}
+            apply(store,self.actor(),Action::Checkpoint{task:self.task.clone(),generation:self.generation,data})?;self.last_checkpoint=n;break;
+        }Ok(())
+    }
 }
 impl Drop for Job{
     fn drop(&mut self){if self.child.try_wait().ok().flatten().is_none(){let _=self.child.kill();let _=self.child.wait();}}
@@ -57,7 +78,7 @@ impl RunConfig{
     }
 }
 fn suitable(w:&World,task:&Task,class:&str)->Option<Id>{
-    w.agents.values().filter(|a|a.goal==task.spec.goal&&a.class==class&&matches!(a.phase,AgentPhase::Dormant|AgentPhase::Recovering))
+    w.agents.values().filter(|a|a.goal==task.spec.goal&&a.class==class&&matches!(a.phase,AgentPhase::Dormant|AgentPhase::Recovering)&&a.incarnations.last().is_none_or(|i|i.ended_ms.is_some()||(i.executor=="native-pure-process"&&i.process_ref.is_none())))
         .filter(|a|task.spec.context.as_ref().is_none_or(|c|c==&a.context)&&w.contexts.get(&a.context).is_some_and(|c|w.assemble(&task.spec,c).is_ok()))
         .min_by_key(|a|(a.incarnations.len(),a.id.clone())).map(|a|a.id.clone())
 }
@@ -97,6 +118,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             let status=jobs[i].child.try_wait().map_err(error)?;
             let w=store.inspect()?;
             let valid=w.tasks.get(&jobs[i].task).is_some_and(|t|t.phase==TaskPhase::Running&&t.lease.as_ref().is_some_and(|l|l.worker==jobs[i].worker&&l.generation==jobs[i].generation&&l.incarnation==jobs[i].incarnation));
+            if valid{jobs[i].checkpoint(store)?;}
             if !valid||jobs[i].started.elapsed()>=Duration::from_millis(config.lease_ms){
                 let job=jobs.swap_remove(i);
                 if valid{let _=apply(store,job.actor(),Action::Fail{task:job.task.clone(),generation:job.generation,reason:"native worker timeout".into()});}
@@ -154,14 +176,16 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             let actor=Actor::Worker{id:worker.clone(),incarnation:lease.incarnation};
             let launch=(||->Result<Job>{
                 let snapshot=store.inspect()?;
-                let work=Work::from_world(&snapshot,&class,claim["input"].clone())?;
+                let mut work=Work::from_world(&snapshot,&class,claim["input"].clone())?;
+                work.resume=claim.get("checkpoint").filter(|v|!v.is_null()).cloned();
+                let last_checkpoint=work.resume.as_ref().and_then(|v|v.get("next_node")).and_then(Value::as_u64).unwrap_or(0);
                 let path=store.project_agent(&worker,&workspace)?;
                 let attempt=path.join("incarnations").join(format!("{}-{}-{}",task,lease.incarnation,lease.generation));
                 fs::create_dir(&attempt).map_err(error)?;
                 let input=attempt.join("work.json");let output=attempt.join("output.json");
                 fs::write(&input,serde_json::to_vec(&work).map_err(error)?).map_err(error)?;
                 let child=Command::new(&exe).arg("kernel-compute").arg(&input).arg(&output).current_dir(&attempt).stdin(Stdio::null()).stdout(Stdio::null()).stderr(Stdio::null()).spawn().map_err(error)?;
-                let job=Job{child,task:task.clone(),worker:worker.clone(),incarnation:lease.incarnation,generation:lease.generation,output,started:Instant::now()};
+                let job=Job{child,task:task.clone(),worker:worker.clone(),incarnation:lease.incarnation,generation:lease.generation,output,started:Instant::now(),last_checkpoint};
                 host(store,Action::BindExecutor{agent:worker.clone(),incarnation:lease.incarnation,process_ref:format!("native-pid-{}",job.child.id())})?;
                 Ok(job)
             })();

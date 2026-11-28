@@ -99,7 +99,7 @@ impl World {
     }
     pub fn schedule_scores(&self)->BTreeMap<Id,i128>{
         let observations=self.observed_costs();
-        let live=|t:&Task|matches!(t.phase,TaskPhase::Pending|TaskPhase::Running|TaskPhase::Submitted);
+        let live=|t:&Task|matches!(t.phase,TaskPhase::Pending|TaskPhase::Running|TaskPhase::Submitted|TaskPhase::Reconciling);
         let costs:BTreeMap<_,u64>=self.tasks.values().filter(|t|live(t)).map(|t|{
             let cost=t.spec.family.as_ref().and_then(|f|observations.get(f)).map(|(sum,n)|u64::try_from((sum/n).max(1)).unwrap_or(u64::MAX)).unwrap_or(u64::from(t.spec.expected_cost));
             (t.spec.id.clone(),cost)

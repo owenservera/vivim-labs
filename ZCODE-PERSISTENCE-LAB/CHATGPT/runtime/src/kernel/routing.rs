@@ -7,6 +7,7 @@ use serde_json::{Value,json};
 use std::collections::{BTreeMap,BTreeSet};
 
 pub const DAY_MS:u64=86_400_000;
+fn default_true()->bool{true}
 #[derive(Clone,Debug,Serialize,Deserialize,PartialEq,Eq)]
 #[serde(tag="kind",rename_all="snake_case")]
 pub enum Window {Fixed{period_ms:u64,anchor_ms:u64},Rolling{period_ms:u64},Lifetime}
@@ -88,6 +89,7 @@ pub struct Demand{
     pub minimum_success_bps:u16,pub deadline_ms:Option<u64>,
     pub allowed_profiles:BTreeSet<Id>,pub allowed_providers:BTreeSet<Id>,
     pub allow_frontier:bool,pub independent_review:bool,
+    #[serde(default="default_true")] pub prefer_native:bool,
     /// Optional extra pools for experiment/goal/task caps.
     pub extra_pools:BTreeSet<Id>,
 }
@@ -108,6 +110,7 @@ pub struct Reservation{
     pub status:Status,pub ceiling:Usage,pub holds:BTreeMap<Id,u64>,pub actual:BTreeMap<Id,u64>,
     pub outcome:Option<Outcome>,pub receipt:Option<String>,pub latency_ms:Option<u64>,
     pub verified:Option<bool>,pub evidence:Option<Id>,pub estimated_success_bps:u16,
+    pub task_generation:Option<u64>,pub agent:Option<Id>,pub incarnation:Option<u64>,
 }
 #[derive(Clone,Debug,Serialize,Deserialize,Default)]
 pub struct Performance{pub verified:u64,pub passed:u64,pub latency_sum_ms:u64,pub failures:u64}
@@ -146,6 +149,7 @@ impl Router{
         ensure(!c.pools.is_empty()&&!c.profiles.is_empty()&&c.pools.len()<=4096&&c.profiles.len()<=4096,"invalid registry size")?;
         if let Some(old)=&self.config{
             ensure(c.policy.version>old.policy.version,"policy version must increase")?;
+            ensure(old.profiles.keys().all(|k|c.profiles.contains_key(k)),"existing profiles must be disabled, not removed")?;
             for (key,p) in &old.pools{
                 let next=c.pools.get(key).ok_or("existing pool cannot be removed")?;
                 ensure(next.unit==p.unit&&next.currency==p.currency&&next.window==p.window,"pool accounting identity immutable")?;
@@ -160,11 +164,16 @@ impl Router{
                 ensure(matches!(p.window,Window::Fixed{..})&&f.emergency_bps<=10_000&&f.opening_bps<=10_000&&f.minimum_uplift_bps<=10_000&&f.per_goal_bps<=10_000&&f.critical_priority<=1000,"invalid frontier policy")?;
             }
         }
+        if c.policy.price_weight>0{
+            let currencies:BTreeSet<_>=c.profiles.values().filter(|p|p.enabled).filter_map(|p|p.tariff.currency.as_ref()).collect();
+            ensure(currencies.len()<=1&&c.profiles.values().filter(|p|p.enabled).all(|p|p.tariff.currency.is_some()||p.tariff.per_request_micro==0&&p.tariff.input_per_million_micro==0&&p.tariff.output_per_million_micro==0&&p.tariff.reasoning_per_million_micro==0),"price weighting requires a common currency")?;
+        }
         for (key,p) in &c.profiles{
             id(key)?;id(&p.provider)?;id(&p.account)?;id(&p.adapter)?;
             ensure(key==&p.id&&!p.model.is_empty()&&!p.thinking.is_empty()&&p.max_context>0&&p.max_output>0&&p.max_parallel>0&&p.prior_success_bps<=10_000,"invalid profile")?;
             ensure(!p.pools.is_empty()&&p.pools.iter().all(|k|c.pools.contains_key(k)),"profile needs quota pools")?;
             ensure(!p.frontier||p.pools.iter().any(|k|c.pools[k].frontier.is_some()),"frontier profile needs protected pool")?;
+            ensure(p.frontier||p.pools.iter().all(|k|c.pools[k].frontier.is_none()),"ordinary profile may not spend protected frontier pool")?;
             for k in &p.pools{amount(&c.pools[k],p,&Usage::default())?;}
             if let Some(old)=self.config.as_ref().and_then(|x|x.profiles.get(key)){
                 ensure(old.provider==p.provider&&old.account==p.account&&old.model==p.model&&old.thinking==p.thinking&&old.adapter==p.adapter,"profile identity immutable; use a new ID")?;
@@ -224,7 +233,7 @@ impl Router{
         let s=self.performance.get(&p.id).and_then(|x|x.get(&d.family));
         let Some(s)=s else{return (p.prior_success_bps,p.prior_latency_ms);};
         let denom=u128::from(s.verified)+8;
-        let quality=((u128::from(s.passed)*10_000+u128::from(p.prior_success_bps)*8)/denom).min(10_000) as u16;
+        let quality=((u128::from(s.passed)*10_000+u128::from(p.prior_success_bps)*8)/(denom+u128::from(s.failures))).min(10_000) as u16;
         let latency=((u128::from(s.latency_sum_ms)+u128::from(p.prior_latency_ms)*8)/denom).min(u128::from(u64::MAX)) as u64;
         (quality,latency)
     }
@@ -240,9 +249,7 @@ impl Router{
         ensure(uplift>=f.minimum_uplift_bps,"insufficient frontier uplift")?;
         let (start,end)=pool.window.bounds(self.clock_ms)?;let end=end.ok_or("frontier requires fixed window")?;
         let elapsed=self.clock_ms.saturating_sub(start);
-        let released=u64::from(f.opening_bps)+(10_000-u64::from(f.opening_bps))*elapsed/(end-start);
-        let ordinary=pool.limit.saturating_sub(bps(pool.limit,f.emergency_bps));
-        let paced=bps(ordinary,released.min(10_000) as u16);
+        let paced=super::frontier::paced_allowance(pool.limit,f,elapsed,end-start)?;
         let (spent,held)=self.totals(pool,None)?;
         ensure(charge<=paced.saturating_sub(spent.saturating_add(held)),"frontier paced or emergency reserve protected")?;
         let (spent,held)=self.totals(pool,Some(&d.goal))?;
@@ -251,7 +258,7 @@ impl Router{
     pub fn recommend(&self,key:&str)->Result<Recommendation>{
         let c=self.config()?;let d=self.demands.get(key).ok_or("routing demand missing")?;
         let history:Vec<_>=self.reservations.values().filter(|r|r.demand==key).collect();
-        if history.iter().any(|r|active(r)||r.verified==Some(true)){
+        if history.iter().any(|r|active(r)||r.verified==Some(true)||(r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none())){
             return Ok(Recommendation{chosen:None,eligible:vec![],excluded:BTreeMap::new(),reason:"active, uncertain or already verified demand".into()});
         }
         if history.len()>=c.policy.max_attempts as usize||d.deadline_ms.is_some_and(|t|t<=self.clock_ms){
@@ -311,11 +318,11 @@ impl Router{
         let c=self.config()?;let p=c.profiles[&choice.profile].clone();let d=self.demands[demand].clone();
         let version=c.policy.version;
         let ceiling=Usage{requests:1,input:d.input_tokens,output:d.output_tokens,reasoning:d.reasoning_tokens,credits:p.credit_ceiling};
-        self.reservations.insert(key.clone(),Reservation{id:key.clone(),demand:demand.into(),goal:d.goal,task:d.task,family:d.family,profile:p,policy_version:version,created_ms:self.clock_ms,started_ms:None,ended_ms:None,status:Status::Reserved,ceiling,holds:choice.holds,actual:BTreeMap::new(),outcome:None,receipt:None,latency_ms:None,verified:None,evidence:None,estimated_success_bps:choice.expected_success_bps});
+        self.reservations.insert(key.clone(),Reservation{id:key.clone(),demand:demand.into(),goal:d.goal,task:d.task,family:d.family,profile:p,policy_version:version,created_ms:self.clock_ms,started_ms:None,ended_ms:None,status:Status::Reserved,ceiling,holds:choice.holds,actual:BTreeMap::new(),outcome:None,receipt:None,latency_ms:None,verified:None,evidence:None,estimated_success_bps:choice.expected_success_bps,task_generation:None,agent:None,incarnation:None});
         self.decisions.insert(key.clone(),rec.clone());
         Ok(json!({"reserved":true,"reservation":key,"decision":rec}))
     }
-    pub fn dispatch(&mut self,key:&str)->Result<()>{
+    pub fn dispatch(&mut self,key:&str,generation:u64,agent:Id,incarnation:u64)->Result<()>{
         let r=self.reservations.get(key).ok_or("reservation missing")?;
         ensure(r.status==Status::Reserved,"reservation not dispatchable")?;
         let d=&self.demands[&r.demand];
@@ -323,6 +330,7 @@ impl Router{
         let c=self.config()?;
         let p=c.profiles.get(&r.profile.id).ok_or("profile removed")?;
         ensure(p.enabled&&c.policy.version==r.policy_version,"reservation policy changed; release and reroute")?;
+        ensure(self.cooldowns.get(&p.id).copied().unwrap_or(0)<=self.clock_ms&&self.provider_cooldowns.get(&p.account).copied().unwrap_or(0)<=self.clock_ms,"profile or account cooling down")?;
         for pool in r.holds.keys(){
             let (spent,held)=self.totals(&c.pools[pool],None)?;
             ensure(spent.saturating_add(held)<=c.pools[pool].limit,"budget reduced below reservations")?;
@@ -334,7 +342,7 @@ impl Router{
                 ensure(after.saturating_add(held)<=o.remaining,"observed quota reduced below reservations")?;
             }
         }
-        let r=self.reservations.get_mut(key).unwrap();r.status=Status::Dispatched;r.started_ms=Some(self.clock_ms);Ok(())
+        let r=self.reservations.get_mut(key).unwrap();r.status=Status::Dispatched;r.started_ms=Some(self.clock_ms);r.task_generation=Some(generation);r.agent=Some(agent);r.incarnation=Some(incarnation);Ok(())
     }
     pub fn unknown(&mut self,key:&str)->Result<()>{
         let r=self.reservations.get_mut(key).ok_or("reservation missing")?;
@@ -373,6 +381,11 @@ impl Router{
         let p=self.performance.entry(r.profile.id.clone()).or_default().entry(r.family.clone()).or_default();
         p.verified=p.verified.saturating_add(1);if accepted{p.passed=p.passed.saturating_add(1);}
         p.latency_sum_ms=p.latency_sum_ms.saturating_add(r.latency_ms.unwrap_or(0));Ok(())
+    }
+    pub fn reconcile_stale(&mut self,live:&BTreeSet<(Id,u64)>){
+        for r in self.reservations.values_mut().filter(|r|r.status==Status::Dispatched){
+            if !r.task_generation.is_some_and(|g|live.contains(&(r.task.clone(),g))){r.status=Status::Unknown;}
+        }
     }
     pub fn cancel_goal(&mut self,goal:&str){
         for r in self.reservations.values_mut().filter(|r|r.goal==goal){

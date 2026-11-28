@@ -9,6 +9,7 @@ fn error(e:impl std::fmt::Display)->String{e.to_string()}
 fn apply(store:&KernelStore,key:Id,action:Action)->Result<Value>{store.apply(Request{id:key,actor:Actor::Host,action})}
 fn key(kind:&str,id:&str)->Id{format!("{kind}-{}",digest(&json!(id)))}
 pub trait Backend {
+    fn supports(&self,envelope:&Envelope)->bool;
     /// Called only after a new committed claim. Err means uncertain outcome.
     fn send(&mut self,envelope:&Envelope,input:&Value)->Result<AdapterReceipt>;
     /// Observation only. None means unknown, not permission to resend.
@@ -32,6 +33,7 @@ pub fn step<B:Backend>(store:&KernelStore,adapter:&str,backend:&mut B,limit:usiz
         if now>current.clock_ms{apply(store,key("adapter-tick",&format!("{adapter}-{now}")),Action::Tick{now_ms:now})?;}
         let state=store.inspect()?;
         let Some(e)=state.router.adapters.handoffs.get(&e.id).cloned() else{continue;};
+        if !backend.supports(&e){continue;}
         let result=match e.phase{
             HandoffPhase::Prepared=>{
                 match apply(store,key("claim",&e.id),Action::ClaimHandoff{handoff:e.id.clone()}){
@@ -51,7 +53,7 @@ pub fn step<B:Backend>(store:&KernelStore,adapter:&str,backend:&mut B,limit:usiz
                 let request=key("finish",&e.id);
                 match apply(store,request,Action::FinishHandoff{receipt}){
                     Ok(_)=>reconciled+=1,
-                    Err(reason)=>{unknown+=1;errors.push(json!({"handoff":e.id,"stage":"finish","reason":reason}));}
+                    Err(reason)=>{unknown+=1;let _=apply(store,key("unknown",&e.id),Action::InferenceUnknown{reservation:e.id.clone()});errors.push(json!({"handoff":e.id,"stage":"finish","reason":reason}));}
                 }
             }
             Ok(None)=>{unknown+=1;let _=apply(store,key("unknown",&e.id),Action::InferenceUnknown{reservation:e.id.clone()});}
@@ -90,6 +92,7 @@ impl Synthetic{
     }
 }
 impl Backend for Synthetic{
+    fn supports(&self,e:&Envelope)->bool{self.check(e).is_ok()}
     fn send(&mut self,e:&Envelope,input:&Value)->Result<AdapterReceipt>{
         self.check(e)?;ensure(digest(input)==e.input_digest,"input digest mismatch")?;
         if let Some(r)=self.existing(e)?{return Ok(r);}
@@ -110,4 +113,34 @@ impl Backend for Synthetic{
     fn reconcile(&mut self,e:&Envelope)->Result<Option<AdapterReceipt>>{
         self.check(e)?;self.existing(e)
     }
+}
+
+/// Explicit bounded offline orchestration. Only synthetic backend calls are
+/// permitted by this entrypoint. No background service or live provider calls.
+pub fn synthetic_cycle(store:&KernelStore,backend:&mut Synthetic,max_rounds:usize,max_operations:usize)->Result<Value>{
+    ensure((1..=128).contains(&max_rounds)&&(1..=128).contains(&max_operations),"invalid synthetic cycle budget")?;
+    let _controller=store.controller_lock()?;
+    let mut records=vec![];
+    for round in 0..max_rounds{
+        let s=store.inspect()?;
+        let wall=u64::try_from(SystemTime::now().duration_since(UNIX_EPOCH).map_err(error)?.as_millis()).map_err(error)?;
+        let now=wall.max(s.clock_ms);
+        if now>s.clock_ms{apply(store,key("synthetic-tick",&format!("{}-{now}",s.sequence)),Action::Tick{now_ms:now})?;}
+        let s=store.inspect()?;
+        // Refuse mixed live/synthetic stores: the offline loop must not
+        // prepare jobs for real providers or contaminate their performance data.
+        let c=s.router.config.as_ref().ok_or("router not configured")?;
+        ensure(c.profiles.values().filter(|p|p.enabled).all(|p|p.provider==backend.config.provider&&p.adapter==backend.config.adapter&&p.account==backend.config.account&&p.model==backend.config.model&&p.thinking==backend.config.thinking),"synthetic cycle requires exclusively matching synthetic profiles")?;
+        let prepared=if s.routing_cycle_needed(){apply(store,key("synthetic-cycle",&format!("{}-{round}",s.sequence)),Action::RoutingCycle{limit:max_operations})?}else{json!({"prepared":[]})};
+        let adapter=backend.config.adapter.clone();
+        let report=step(store,&adapter,backend,max_operations)?;
+        let s=store.inspect()?;
+        let mut verified=0usize;
+        let submitted:Vec<_>=s.router.adapters.handoffs.values().filter(|e|e.adapter==adapter&&e.phase==HandoffPhase::Completed&&s.tasks.get(&e.task).is_some_and(|t|t.phase==super::model::TaskPhase::Submitted&&t.generation==e.generation)).map(|e|e.task.clone()).take(max_operations).collect();
+        for task in submitted{let v=apply(store,key("synthetic-verify",&format!("{}-{}",s.sequence,task)),Action::Verify{task})?;if v["accepted"]==true{verified+=1;}}
+        let progress=prepared["prepared"].as_array().is_some_and(|a|!a.is_empty())||report["settled"].as_u64().unwrap_or(0)>0||verified>0;
+        records.push(json!({"round":round,"prepared":prepared["prepared"].as_array().map_or(0,|a|a.len()),"driver":report,"verified":verified}));
+        if !progress{break;}
+    }
+    Ok(json!({"rounds":records,"provider_calls":0,"mode":"synthetic_only"}))
 }

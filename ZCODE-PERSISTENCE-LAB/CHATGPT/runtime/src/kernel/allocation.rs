@@ -37,9 +37,9 @@ impl World{
         for _ in 0..cap{
             let allowed:BTreeSet<_>=self.router.demands.values().filter(|d|ready.contains(&d.task)&&self.inference_needed(d)&&!selected.contains(&d.id)).map(|d|d.id.clone()).collect();
             let Some(next)=super::frontier::rank(&self.router,&allowed)?.into_iter().next() else{break;};
-            let key=format!("route-{}",digest(&json!([self.sequence+1,receipts.len(),demand])));
-            let response=self.router.reserve(key,&demand)?;
-            selected.insert(demand);receipts.push(response);
+            let key=format!("route-{}",digest(&json!([self.sequence+1,receipts.len(),&next.demand])));
+            let response=self.router.reserve(key,&next.demand)?;
+            selected.insert(next.demand);receipts.push(response);
         }
         Ok(json!({"allocations":receipts,"native_slots_available":slots,"execution":"not_dispatched"}))
     }
@@ -94,13 +94,19 @@ impl World{
         }
         super::frontier::rank(&router,&allowed)
     }
-    pub fn joint_routing_plan(&self,limit:usize)->Result<super::routing_optimizer::BatchPlan>{
+    fn joint_inputs(&self)->(super::routing::Router,BTreeSet<Id>){
         let mut router=self.router.clone();let ready:BTreeSet<_>=self.ready().into_iter().collect();let mut allowed=BTreeSet::new();
         for d in self.router.demands.values().filter(|d|ready.contains(&d.task)&&self.inference_needed(d)){
             let profiles=self.bound_profiles(d);
             if !profiles.is_empty(){router.demands.get_mut(&d.id).unwrap().allowed_profiles=profiles;allowed.insert(d.id.clone());}
         }
-        router.optimize_batch(&allowed,limit)
+        (router,allowed)
+    }
+    pub fn joint_routing_plan(&self,limit:usize)->Result<super::routing_optimizer::BatchPlan>{
+        let (router,allowed)=self.joint_inputs();router.optimize_batch(&allowed,limit)
+    }
+    pub fn compare_routing_policies(&self,limit:usize,policies:Vec<super::routing_optimizer::BatchPolicy>)->Result<Value>{
+        let (router,allowed)=self.joint_inputs();router.compare_batch_policies(&allowed,limit,policies)
     }
     pub fn routing_cycle_needed(&self)->bool{
         self.router.config.is_some()&&self.running()<self.slots&&if self.router.batch_policy.version>0{self.joint_routing_plan(self.slots.saturating_sub(self.running()).min(128)).is_ok_and(|p|!p.assignments.is_empty())}else{self.bound_plan().is_ok_and(|v|!v.is_empty())}

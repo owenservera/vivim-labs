@@ -24,6 +24,20 @@ fn kernel_cli(args:&[String])->Result<(),String>{
             let limit=required(args,3,"plan limit")?.parse::<usize>().map_err(|e|e.to_string())?;
             serde_json::to_value(store.inspect()?.joint_routing_plan(limit)?).map_err(|e|e.to_string())?
         },
+        "routing-shadow-compare"=>{
+            let limit=required(args,3,"plan limit")?.parse::<usize>().map_err(|e|e.to_string())?;
+            let policies=read_json(required(args,4,"shadow policies file")?)?;
+            store.inspect()?.compare_routing_policies(limit,policies)?
+        },
+        "routing-synthetic-cycle"=>{
+            use persistent_intelligence_runtime::kernel::routing_driver::{Synthetic,SyntheticConfig,synthetic_cycle};
+            let config:SyntheticConfig=read_json(required(args,3,"synthetic config")?)?;
+            let ledger=Path::new(required(args,4,"synthetic ledger")?);
+            let rounds=required(args,5,"rounds")?.parse::<usize>().map_err(|e|e.to_string())?;
+            let limit=required(args,6,"operations per round")?.parse::<usize>().map_err(|e|e.to_string())?;
+            let mut backend=Synthetic::open(ledger,config)?;
+            synthetic_cycle(&store,&mut backend,rounds,limit)?
+        },
         "routing-synthetic-step"=>{
             use persistent_intelligence_runtime::kernel::routing_driver::{Synthetic,SyntheticConfig,step};
             let config:SyntheticConfig=read_json(required(args,3,"synthetic config")?)?;

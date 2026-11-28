@@ -2,7 +2,7 @@
 use super::{model::{Id,ensure},routing::Router};
 use crate::{digest,Result};
 use serde::{Serialize,Deserialize};
-use serde_json::json;
+use serde_json::{Value,json};
 use std::collections::BTreeSet;
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct BatchPolicy{
@@ -15,12 +15,18 @@ impl Default for BatchPolicy{
 #[derive(Clone,Debug,Serialize,Deserialize,PartialEq,Eq,PartialOrd,Ord)]
 pub struct Assignment{pub demand:Id,pub profile:Id}
 #[derive(Clone,Debug,Serialize,Deserialize)]
-pub struct BatchPlan{pub policy_version:u64,pub assignments:Vec<Assignment>,pub utility:i64,pub nodes:usize,pub truncated:bool}
+pub struct BatchPlan{pub policy_version:u64,pub assignments:Vec<Assignment>,pub utility:i64,pub nodes:usize,pub truncated:bool,pub expected_success_bps_sum:u64,pub reserved_by_pool:std::collections::BTreeMap<Id,u64>}
 struct Node{router:Router,assignments:Vec<Assignment>,utility:i128}
 impl Router{
     pub fn set_batch_policy(&mut self,p:BatchPolicy)->Result<()>{
         ensure(self.config.is_some()&&p.version>self.batch_policy.version&&(1..=16).contains(&p.beam_width)&&(1..=64).contains(&p.demand_limit)&&(1..=8).contains(&p.profiles_per_demand)&&(1..=512).contains(&p.node_budget)&&p.completion_weight<=100_000&&p.priority_weight<=100_000,"invalid batch policy")?;
         self.batch_policy=p;Ok(())
+    }
+    pub fn compare_batch_policies(&self,allowed:&BTreeSet<Id>,limit:usize,policies:Vec<BatchPolicy>)->Result<Value>{
+        ensure((1..=8).contains(&policies.len()),"invalid shadow policy count")?;
+        let baseline=self.optimize_batch(allowed,limit)?;let mut alternatives=vec![];
+        for policy in policies{let mut shadow=self.clone();shadow.set_batch_policy(policy)?;alternatives.push(shadow.optimize_batch(allowed,limit)?);}
+        Ok(json!({"baseline":baseline,"alternatives":alternatives,"measurement":"estimated_snapshot_only","policy_changed":false}))
     }
     pub fn optimize_batch(&self,allowed:&BTreeSet<Id>,limit:usize)->Result<BatchPlan>{
         ensure((1..=128).contains(&limit),"invalid batch size")?;
@@ -56,6 +62,8 @@ impl Router{
             if nodes>=p.node_budget{break;}
         }
         let best=beam.into_iter().next().ok_or("empty search")?;
-        Ok(BatchPlan{policy_version:p.version,assignments:best.assignments,utility:best.utility.clamp(i128::from(i64::MIN),i128::from(i64::MAX)) as i64,nodes,truncated})
+        let mut expected_success_bps_sum=0u64;let mut reserved_by_pool=std::collections::BTreeMap::<Id,u64>::new();
+        for (key,r) in &best.router.reservations{if !self.reservations.contains_key(key){expected_success_bps_sum=expected_success_bps_sum.saturating_add(u64::from(r.estimated_success_bps));for (pool,charge) in &r.holds{let n=reserved_by_pool.entry(pool.clone()).or_default();*n=n.saturating_add(*charge);}}}
+        Ok(BatchPlan{policy_version:p.version,assignments:best.assignments,utility:best.utility.clamp(i128::from(i64::MIN),i128::from(i64::MAX)) as i64,nodes,truncated,expected_success_bps_sum,reserved_by_pool})
     }
 }

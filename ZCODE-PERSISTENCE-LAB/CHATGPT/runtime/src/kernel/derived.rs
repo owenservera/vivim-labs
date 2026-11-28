@@ -148,10 +148,21 @@ impl Derived{
         if !affected.is_empty(){self.recompute_paths(w,&affected);}
         self.stamps=now;true
     }
+    /// Read old schema-one projections without changing their root hash.
+    pub(crate) fn matches_projection(&self,stored:&Value)->bool{
+        let mut now=self.projection();
+        if stored["schema"]==1{
+            now["schema"]=json!(1);
+            if let Some(top)=now["topology"].as_object_mut(){
+                for k in ["pending","active","running","open_goals","waiting_agents"]{top.remove(k);}
+            }
+        }
+        now==*stored
+    }
     pub(crate) fn projection(&self)->Value{
         // Decimal strings preserve exact wide integer sums in JSON.
         let costs:BTreeMap<_,_>=self.costs.iter().map(|(f,(sum,n))|(f.clone(),[sum.to_string(),n.to_string()])).collect();
-        json!({"schema":1,"topology":self.topology,"costs":costs,"family_outcomes":self.outcomes,"schedule_costs":self.schedule_costs,"critical_paths":self.critical_paths})
+        json!({"schema":2,"topology":self.topology,"costs":costs,"family_outcomes":self.outcomes,"schedule_costs":self.schedule_costs,"critical_paths":self.critical_paths})
     }
 }
 #[derive(Default,Debug)]

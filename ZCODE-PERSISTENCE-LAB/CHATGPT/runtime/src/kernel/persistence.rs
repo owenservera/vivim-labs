@@ -661,8 +661,8 @@ impl KernelStore{
             return Ok(json!({"revision":rev,"available":false,"reason":"checkpoint_projection_not_present_or_oversized"}));
         };
         let world=index.load_world(root,rev)?;
-        let actual=super::derived::Derived::build(&world).projection();
-        ensure(actual==stored,"checkpoint derived projection mismatch")?;
+        let actual=super::derived::Derived::build(&world);
+        ensure(actual.matches_projection(&stored),"checkpoint derived projection mismatch")?;
         Ok(json!({"revision":rev,"root":root,"projection_digest":digest(&stored),
             "available":true,"equivalent":true,"scope":"checkpoint_projection_vs_checkpoint_world_not_current_state"}))
     }

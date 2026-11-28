@@ -171,3 +171,5 @@ Branch-safe mutation lineage and resident incremental topology/cost/attempt proj
 Critical path source addition: recalculate old/new affected dependency components and family cost memberships only; update family outcome counts by exact changed task/attempt contributions. See CRITICAL-PATH-001.md. No qualification credit.
 
 Derived checkpoints: content-addressed projection attached to checkpoint roots, validated by independent reconstruction; GC retains projection objects. Scheduler fixture compares reference implementation under rewiring, changes and divergent clones. No execution. See DERIVED-CHECKPOINT-001.md.
+
+Active frontier source: indexed pending/running/active task, open goal and dependency waiter membership; score only readiness candidates and check live phase/dependencies. Schema-two projection supports comparison of previous schema-one checkpoints. No execution or score credit.

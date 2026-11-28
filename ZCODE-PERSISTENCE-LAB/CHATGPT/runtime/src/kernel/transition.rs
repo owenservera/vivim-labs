@@ -66,10 +66,11 @@ impl World {
         let l=t.lease.as_ref().ok_or("lease missing")?;
         ensure(t.phase==TaskPhase::Running&&l.worker==who&&l.incarnation==n&&l.generation==generation&&self.clock_ms<l.deadline_ms,"stale or expired lease")?;Ok(t)
     }
-    pub fn running(&self)->usize{self.tasks.values().filter(|t|t.phase==TaskPhase::Running).count()}
+    pub fn running(&self)->usize{self.derived_snapshot().topology.running().len()}
     fn ready_keys(&self)->Vec<Id>{
         let fenced:BTreeSet<_>=self.effects.values().filter(|e|matches!(e.phase,EffectPhase::Prepared|EffectPhase::Unknown|EffectPhase::Abandoned)).map(|e|e.task.as_str()).collect();
-        self.tasks.values().filter(|t|t.phase==TaskPhase::Pending&&t.attempts<t.spec.max_attempts
+        let derived=self.derived_snapshot();
+        derived.topology.pending().iter().filter_map(|key|self.tasks.get(key)).filter(|t|t.phase==TaskPhase::Pending&&t.attempts<t.spec.max_attempts
             &&self.goals.get(&t.spec.goal).is_some_and(|g|g.phase==GoalPhase::Open&&g.claims<g.claim_budget)
             &&!fenced.contains(t.spec.id.as_str())
             &&t.spec.dependencies.iter().all(|d|self.tasks.get(d).is_some_and(|x|x.phase==TaskPhase::Verified)))
@@ -78,7 +79,7 @@ impl World {
     pub fn ready(&self)->Vec<Id>{
         let mut v=self.ready_keys();
         if v.len()>1{
-            let scores=self.schedule_scores();
+            let scores=self.schedule_scores_for(&v);
             v.sort_by_key(|t|(std::cmp::Reverse(scores.get(t).copied().unwrap_or(0)),t.clone()));
         }
         v
@@ -147,7 +148,7 @@ impl World {
             let blocked=topology.terminal_dependents(self);
             for key in blocked{let t=self.tasks.get_mut(&key).unwrap();t.phase=TaskPhase::Blocked;t.reason=Some("predecessor terminal".into());changed=true;}
             let mut outcomes=Vec::new();
-            for g in self.goals.values().filter(|g|g.phase==GoalPhase::Open){
+            for g in topology.open_goals().iter().filter_map(|key|self.goals.get(key)).filter(|g|g.phase==GoalPhase::Open){
                 let tasks:Vec<_>=topology.tasks(&g.id).iter().map(|k|&self.tasks[k]).collect();
                 let children:Vec<_>=topology.children(&g.id).iter().map(|k|&self.goals[k]).collect();
                 let active=tasks.iter().any(|t|matches!(t.phase,TaskPhase::Running|TaskPhase::Submitted|TaskPhase::Reconciling));
@@ -178,11 +179,11 @@ impl World {
             }
             if !changed{break;}
         }
-        if self.agents.values().any(|a|a.phase==AgentPhase::WaitingDependency){
+        if !topology.waiting_agents().is_empty(){
             let ready:BTreeSet<_>=self.ready_keys().into_iter().collect();
-            let wake:Vec<_>=self.agents.iter().filter(|(_,a)|a.phase==AgentPhase::WaitingDependency
-                &&a.wait_task.as_ref().is_some_and(|t|ready.contains(t)||self.tasks.get(t).is_some_and(|x|matches!(x.phase,TaskPhase::Verified|TaskPhase::Blocked|TaskPhase::Exhausted|TaskPhase::Cancelled))))
-                .map(|(key,_)|key.clone()).collect();
+            let wake:Vec<_>=topology.waiting_agents().iter().filter(|key|self.agents.get(*key).is_some_and(|a|a.phase==AgentPhase::WaitingDependency
+                &&a.wait_task.as_ref().is_some_and(|t|ready.contains(t)||self.tasks.get(t).is_some_and(|x|matches!(x.phase,TaskPhase::Verified|TaskPhase::Blocked|TaskPhase::Exhausted|TaskPhase::Cancelled)))))
+                .cloned().collect();
             for key in wake{let a=self.agents.get_mut(&key).unwrap();a.phase=AgentPhase::Dormant;a.wait_task=None;}
         }
         Ok(())

@@ -346,7 +346,7 @@ impl Index{
             // Derivation is validated against the reconstructed authoritative
             // world, not accepted merely because its object hash matches.
             let stored=self.get(pin)?;
-            ensure(stored==world.derived_snapshot().projection(),"derived checkpoint disagrees with reconstructed world")?;
+            ensure(world.derived_snapshot().matches_projection(&stored),"derived checkpoint disagrees with reconstructed world")?;
         }
         Ok((world,serde_json::from_value(receipts).map_err(err)?))
     }

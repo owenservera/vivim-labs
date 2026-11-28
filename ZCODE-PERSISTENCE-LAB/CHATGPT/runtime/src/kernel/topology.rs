@@ -12,6 +12,7 @@ pub(crate) struct Topology{
     agents:BTreeMap<Id,Vec<Id>>,leases:BTreeMap<Id,Vec<Id>>,
     successors:BTreeMap<Id,Vec<Id>>,families:BTreeMap<Id,Vec<Id>>,
     goal_rows:BTreeMap<Id,Id>,task_rows:BTreeMap<Id,TaskRow>,agent_rows:BTreeMap<Id,Id>,
+    pending:BTreeSet<Id>,active:BTreeSet<Id>,running:BTreeSet<Id>,open_goals:BTreeSet<Id>,waiting_agents:BTreeSet<Id>,
 }
 #[derive(Clone,Debug,Serialize,Deserialize,PartialEq,Eq)]
 struct TaskRow{goal:Id,parents:BTreeSet<Id>,worker:Option<Id>,family:Option<Id>}
@@ -34,12 +35,18 @@ impl Topology{
         t
     }
     pub(crate) fn goal(&mut self,w:&World,key:&str){
+        if w.goals.get(key).is_some_and(|g|g.phase==GoalPhase::Open){self.open_goals.insert(key.into());}
+        else{self.open_goals.remove(key);}
         let next=w.goals.get(key).and_then(|g|g.parent.clone());
         if self.goal_rows.get(key)==next.as_ref(){return;}
         if let Some(old)=self.goal_rows.remove(key){remove(&mut self.children,&old,key);}
         if let Some(p)=next{add(&mut self.children,&p,key);self.goal_rows.insert(key.into(),p);}
     }
     pub(crate) fn task(&mut self,w:&World,key:&str){
+        let phase=w.tasks.get(key).map(|t|&t.phase);
+        if matches!(phase,Some(TaskPhase::Pending)){self.pending.insert(key.into());}else{self.pending.remove(key);}
+        if matches!(phase,Some(TaskPhase::Running)){self.running.insert(key.into());}else{self.running.remove(key);}
+        if matches!(phase,Some(TaskPhase::Pending|TaskPhase::Running|TaskPhase::Submitted|TaskPhase::Reconciling)){self.active.insert(key.into());}else{self.active.remove(key);}
         let next=w.tasks.get(key).map(|t|TaskRow{goal:t.spec.goal.clone(),parents:t.spec.dependencies.clone(),worker:t.lease.as_ref().map(|l|l.worker.clone()),family:t.spec.family.clone()});
         if self.task_rows.get(key)==next.as_ref(){return;}
         if let Some(old)=self.task_rows.remove(key){
@@ -57,6 +64,7 @@ impl Topology{
         }
     }
     pub(crate) fn agent(&mut self,w:&World,key:&str){
+        if w.agents.get(key).is_some_and(|a|a.phase==AgentPhase::WaitingDependency){self.waiting_agents.insert(key.into());}else{self.waiting_agents.remove(key);}
         let next=w.agents.get(key).map(|a|a.goal.clone());
         if self.agent_rows.get(key)==next.as_ref(){return;}
         if let Some(old)=self.agent_rows.remove(key){remove(&mut self.agents,&old,key);}
@@ -83,16 +91,17 @@ impl Topology{
         }
         seen
     }
+    pub(crate) fn pending(&self)->&BTreeSet<Id>{&self.pending}
+    pub(crate) fn active(&self)->&BTreeSet<Id>{&self.active}
+    pub(crate) fn running(&self)->&BTreeSet<Id>{&self.running}
+    pub(crate) fn open_goals(&self)->&BTreeSet<Id>{&self.open_goals}
+    pub(crate) fn waiting_agents(&self)->&BTreeSet<Id>{&self.waiting_agents}
     pub(crate) fn terminal_dependents(&self,w:&World)->BTreeSet<Id>{
-        let mut out=BTreeSet::new();
-        for (key,t) in &w.tasks{
-            if matches!(t.phase,TaskPhase::Blocked|TaskPhase::Exhausted|TaskPhase::Cancelled){
-                for child in self.successors(key){
-                    if w.tasks.get(child).is_some_and(|t|t.phase==TaskPhase::Pending){out.insert(child.clone());}
-                }
-            }
-        }
-        out
+        // Within settlement, active membership is a superset of any task
+        // that could be pending after lease release. Check live phase/edges.
+        self.active.iter().filter(|key|w.tasks.get(*key).is_some_and(|t|t.phase==TaskPhase::Pending
+            &&t.spec.dependencies.iter().any(|p|w.tasks.get(p).is_some_and(|x|matches!(x.phase,TaskPhase::Blocked|TaskPhase::Exhausted|TaskPhase::Cancelled)))))
+            .cloned().collect()
     }
 }
 impl World{

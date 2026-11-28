@@ -99,10 +99,17 @@ impl World {
     }
     pub fn schedule_scores(&self)->BTreeMap<Id,i128>{
         let derived=self.derived_snapshot();
+        self.score_tasks(&derived,derived.topology.active().iter().map(String::as_str))
+    }
+    pub(crate) fn schedule_scores_for(&self,keys:&[Id])->BTreeMap<Id,i128>{
+        let derived=self.derived_snapshot();
+        self.score_tasks(&derived,keys.iter().map(String::as_str))
+    }
+    fn score_tasks<'a>(&self,derived:&super::derived::Derived,keys:impl Iterator<Item=&'a str>)->BTreeMap<Id,i128>{
         let live=|t:&Task|matches!(t.phase,TaskPhase::Pending|TaskPhase::Running|TaskPhase::Submitted|TaskPhase::Reconciling);
         let costs=&derived.schedule_costs;let path=&derived.critical_paths;let family_outcomes=&derived.outcomes;
         let p=&self.policy;
-        self.tasks.values().filter(|t|live(t)).map(|t|{
+        keys.filter_map(|k|self.tasks.get(k)).filter(|t|live(t)).map(|t|{
             let (attempts,successes)=t.spec.family.as_ref().and_then(|f|family_outcomes.get(f)).copied().unwrap_or((0,0));
             // Laplace-smoothed failure probability and decreasing novelty bonus.
             let failure=1000u128*(u128::from(attempts.saturating_sub(successes))+1)/(u128::from(attempts)+2);

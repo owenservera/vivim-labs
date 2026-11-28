@@ -678,7 +678,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "6e26f4f4c4bc2b31605e9b813dc81f8d67b9e29f",
+        "source_pin": "1b4126ee220295100b3da71c5a33d0edbd7e43f4",
         "files": [
           "src/kernel/index.rs",
           "src/kernel/persistence.rs",
@@ -690,9 +690,9 @@
           "src/kernel/derived.rs",
           "src/kernel/intelligence.rs"
         ],
-        "remaining": "Tracked state pages, resident projections, component-local critical paths and exact family contributions, checkpoint-bound durable derived projections independently reconstructed on read, scheduler reference fixtures authored. Noncheckpoint cold loads rebuild; remaining registry serialization, worst-case whole-graph changes, full retention export and empirical qualification remain.",
+        "remaining": "Tracked state, resident branch-fenced topology, component-local critical paths, incremental family outcomes and costs, indexed active/pending/goal/waiter membership, checkpoint-bound projections and reference scheduler fixtures authored. Noncheckpoint cold loads rebuild; other registries, worst-case connected components, retention export and empirical qualification remain.",
         "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
-        "checkpoint": "DERIVED-CHECKPOINT-001"
+        "checkpoint": "ACTIVE-FRONTIER-001"
       }
     },
     {
@@ -1407,7 +1407,8 @@
     "documents": [
       "DERIVED-STATE-001.md",
       "CRITICAL-PATH-001.md",
-      "DERIVED-CHECKPOINT-001.md"
+      "DERIVED-CHECKPOINT-001.md",
+      "ACTIVE-FRONTIER-001.md"
     ],
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "verified_credit": 0

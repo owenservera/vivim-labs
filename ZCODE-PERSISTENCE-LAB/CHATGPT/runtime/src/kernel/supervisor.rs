@@ -127,7 +127,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             for key in w.ready(){
                 let t=&w.tasks[&key];
                 if let Some(class)=w.match_class(&t.spec){
-                    if suitable(&w,t,&class).is_some()||w.contexts.values().any(|c|w.assemble(&t.spec,c).is_ok())||!t.spec.inputs.values().any(|p|matches!(p.binding,Binding::Context{..})){
+                    if suitable(&w,t,&class).is_some()||w.contexts.values().any(|c|w.assemble(&t.spec,c).is_ok())||!t.spec.inputs.values().any(|p|matches!(&p.binding,Binding::Context{..})){
                         choice=Some((key,class));break;
                     }
                 }
@@ -143,7 +143,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
                 let snapshot=store.inspect()?;
                 let work=Work::from_world(&snapshot,&class,claim["input"].clone())?;
                 let path=store.project_agent(&worker,&workspace)?;
-                let attempt=path.join("incarnations").join(format!("{}-{}",lease.incarnation,lease.generation));
+                let attempt=path.join("incarnations").join(format!("{}-{}-{}",task,lease.incarnation,lease.generation));
                 fs::create_dir(&attempt).map_err(error)?;
                 let input=attempt.join("work.json");let output=attempt.join("output.json");
                 fs::write(&input,serde_json::to_vec(&work).map_err(error)?).map_err(error)?;

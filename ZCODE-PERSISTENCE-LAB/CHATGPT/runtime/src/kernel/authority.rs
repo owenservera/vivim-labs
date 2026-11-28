@@ -86,6 +86,14 @@ impl Authority{
         }
         Ok(p)
     }
+    pub fn authorize_replay(&self,signed:&SignedRequest,world:&World,now_ms:u64)->Result<()>{
+        let p=self.authenticate(signed,now_ms)?;
+        match p.role{
+            Role::Host=>Ok(()),
+            Role::Worker=>{let a=world.agents.get(&p.subject).ok_or("worker missing")?;ensure(p.goals.contains(&a.goal),"worker goal not authorized")?;ensure(a.incarnations.last().is_some_and(|i|Some(i.number)==p.incarnation),"superseded worker")},
+            Role::Verifier=>self.authorize(signed,world,now_ms),
+        }
+    }
     pub fn authorize(&self,signed:&SignedRequest,world:&World,now_ms:u64)->Result<()>{
         let p=self.authenticate(signed,now_ms)?;
         match p.role{

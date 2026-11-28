@@ -2,6 +2,7 @@
 name = "persistent-intelligence-runtime"
 version = "0.1.0"
 edition = "2024"
+default-run = "persistent-intelligence-runtime"
 description = "Provider-neutral durable objective and computational reuse laboratory"
 
 [dependencies]

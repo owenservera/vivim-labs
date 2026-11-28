@@ -406,6 +406,21 @@ impl Router{
             else if r.status==Status::Dispatched{r.status=Status::Unknown;}
         }
     }
+    /// Adapter-facing read-only polling plan. No network requests are made.
+    pub fn quota_refresh_plan(&self)->Result<Value>{
+        let c=self.config()?;let mut due=vec![];
+        for (key,p) in &c.pools{
+            if !p.require_observation&&p.observation_ttl_ms==0{continue;}
+            let (start,end)=p.window.bounds(self.clock_ms)?;
+            let o=self.observations.get(key);
+            let stale=o.is_none_or(|o|self.clock_ms.saturating_sub(o.at_ms)>=p.observation_ttl_ms||matches!(p.window,Window::Fixed{..})&&o.window_start_ms!=start);
+            if !stale{continue;}
+            let adapters:BTreeSet<_>=c.profiles.values().filter(|x|x.enabled&&x.pools.contains(key)).map(|x|x.adapter.clone()).collect();
+            if adapters.is_empty(){continue;}
+            due.push(json!({"pool":key,"unit":p.unit,"currency":p.currency,"window_start_ms":start,"reset_ms":end,"eligible_adapters":adapters,"required":p.require_observation}));
+        }
+        Ok(json!({"clock_ms":self.clock_ms,"observations_due":due}))
+    }
     pub fn budget_report(&self)->Result<Value>{
         let c=self.config()?;let mut pools=BTreeMap::new();
         for (key,p) in &c.pools{

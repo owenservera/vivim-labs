@@ -17,6 +17,16 @@ fn kernel_cli(args:&[String])->Result<(),String>{
     let output=match action{
         "inspect"=>serde_json::to_value(store.inspect()?).map_err(|e|e.to_string())?,
         "ready"=>serde_json::json!(store.inspect()?.ready()),
+        "lookup"=>store.lookup(required(args,3,"table")?,required(args,4,"entity ID")?)?.unwrap_or(Value::Null),
+        "collect"=>serde_json::json!({"objects_removed":store.collect_garbage()?}),
+        "population"=>store.inspect()?.audit_population(),
+        "project-host"=>serde_json::json!({"path":store.project_host_agent(required(args,3,"agent ID")?)?}),
+        "apply-signed"=>{
+            let authority=persistent_intelligence_runtime::kernel::authority::Authority::load(Path::new(required(args,3,"host authority file")?))?;
+            let signed=read_json(required(args,4,"signed request file or -")?)?;
+            let now=u64::try_from(std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_err(|e|e.to_string())?.as_millis()).map_err(|e|e.to_string())?;
+            store.apply_signed(&authority,signed,now)?
+        },
         "import-r003"=>store.import_r003(required(args,4,"migration request ID")?.to_owned(),Path::new(required(args,3,"legacy store")?))?,
         "anchor"=>serde_json::to_value(store.anchor()?).map_err(|e|e.to_string())?,
         "verify-anchor"=>{let anchor:Anchor=read_json(required(args,3,"anchor file")?)?;store.verify_anchor(&anchor)?;serde_json::json!({"verified":true})}

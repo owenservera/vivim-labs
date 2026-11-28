@@ -4,7 +4,7 @@ use super::{model::*,transition::{Action,Actor,Request},evolution::Discovery};
 use crate::{digest,Result};
 use serde::{Serialize,Deserialize};
 use serde_json::{Value,json};
-use std::{collections::{BTreeMap,BTreeSet},fs::{self,File,OpenOptions},io::Write,path::{Path,PathBuf},time::{SystemTime,UNIX_EPOCH,Instant}};
+use std::{collections::{BTreeMap,BTreeSet},fs::{self,File,OpenOptions},io::Write,path::{Path,PathBuf},time::{SystemTime,UNIX_EPOCH,Instant},sync::Mutex};
 
 fn error(e:impl std::fmt::Display)->String{e.to_string()}
 fn encode<T:Serialize>(x:&T)->Result<Vec<u8>>{serde_json::to_vec(x).map_err(error)}
@@ -59,7 +59,7 @@ impl Transaction{
     fn id(&self)->&str{match self{Self::Command{request}=>&request.id,Self::Assimilate{id,..}|Self::ImportLegacy{id,..}=>id}}
     fn run(&self,w:&mut World)->Result<Value>{
         match self{
-            Self::Command{request}=>w.transition(&request.actor,request.action.clone()),
+            Self::Command{request}=>w.transition_owned(&request.actor,request.action.clone()),
             Self::ImportLegacy{state,..}=>{
                 ensure(w.sequence==0,"migration requires a fresh kernel store")?;
                 let (imported,report)=super::migration::import(state)?;*w=imported;
@@ -100,7 +100,23 @@ impl ArchivedRevision{
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct HistoricalPin{pub name:Id,pub revision:u64,pub anchor:Anchor,pub index:Digest}
+#[derive(Clone)]
 struct Loaded {world:World,receipts:BTreeMap<Id,Receipt>,head:Head,lazy_receipts:bool}
+/// Explicit acceleration for a trusted cooperating local host. Does not
+/// claim that unvisited files have been reverified since the last full read.
+#[derive(Clone,Debug,Serialize,Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct HotPolicy{pub max_cached_accesses:u64}
+impl HotPolicy{
+    pub fn validate(&self)->Result<()>{
+        ensure((1..=4096).contains(&self.max_cached_accesses),"invalid resident-state access budget")
+    }
+}
+#[derive(Default)]
+struct Resident{
+    state:Option<Loaded>,accesses:u64,full_loads:u64,hits:u64,invalidations:u64,
+}
+
 impl Loaded{
     fn receipt(&self,index:&super::index::Index,key:&str)->Result<Option<Receipt>>{
         if self.lazy_receipts{
@@ -110,12 +126,21 @@ impl Loaded{
         }else{Ok(self.receipts.get(key).cloned())}
     }
 }
-pub struct KernelStore {root:PathBuf}
+pub struct KernelStore {root:PathBuf,hot:Option<HotPolicy>,resident:Mutex<Resident>}
 const SNAP_INTERVAL:u64=64;
 impl KernelStore{
     pub fn open(root:impl AsRef<Path>)->Result<Self>{
         fs::create_dir_all(root.as_ref()).map_err(error)?;
-        Ok(Self{root:root.as_ref().to_path_buf()})
+        Ok(Self{root:root.as_ref().to_path_buf(),hot:None,resident:Mutex::new(Resident::default())})
+    }
+    pub fn open_hot(root:impl AsRef<Path>,policy:HotPolicy)->Result<Self>{
+        policy.validate()?;let mut store=Self::open(root)?;store.hot=Some(policy);Ok(store)
+    }
+    pub fn resident_report(&self)->Result<Value>{
+        let r=self.resident.lock().map_err(|_|"resident cache poisoned")?;
+        Ok(json!({"enabled":self.hot.is_some(),"policy":self.hot,"cached_revision":r.state.as_ref().map(|s|s.head.revision),
+            "cached_accesses_since_full_load":r.accesses,"full_loads":r.full_loads,"hits":r.hits,"invalidations":r.invalidations,
+            "integrity_scope":"head_tail_and_latest_receipt_per_hit_full_world_at_reload"}))
     }
     pub fn root(&self)->&Path{&self.root}
     pub(crate) fn controller_lock(&self)->Result<File>{
@@ -142,7 +167,40 @@ impl KernelStore{
         ensure(head.body.schema==1&&head.body.revision==rev&&head.body.snapshot<=rev,"invalid head")?;
         Ok(Some(head.body))
     }
-    fn load(&self)->Result<Loaded>{
+    fn load(&self)->Result<Loaded>{self.load_resident(false)}
+    fn load_for_commit(&self)->Result<Loaded>{self.load_resident(true)}
+    fn load_resident(&self,take:bool)->Result<Loaded>{
+        let Some(policy)=&self.hot else{return self.load_uncached();};
+        // All callers already hold the cooperating filesystem writer lock.
+        // Take ownership for mutations: a rejected transition cannot leave a
+        // partially mutated resident snapshot, even if the error is retried.
+        let mut r=self.resident.lock().map_err(|_|"resident cache poisoned")?;
+        let cached=r.state.take();
+        if let Some(s)=cached{
+            let current=self.latest_head()?;
+            let same=match &current{Some(h)=>checksum(h)?==checksum(&s.head)?,None=>false};
+            if same&&r.accesses<policy.max_cached_accesses{
+                let h=current.as_ref().unwrap();let root=h.index.as_ref().ok_or("resident index missing")?;
+                let index=super::index::Index::open(&self.root)?;
+                let manifest=index.manifest(root)?;
+                ensure(manifest.schema==4&&manifest.revision==h.revision&&s.world.sequence==h.revision,"resident revision mismatch")?;
+                let last:Envelope<Record>=read(&self.path("record",h.revision))?;last.check()?;
+                ensure(last.body.revision==h.revision&&last.body.index==h.index&&last.checksum==h.record,"resident tail mismatch")?;
+                let receipt=s.receipt(&index,last.body.command.id())?.ok_or("resident tail receipt missing")?;
+                ensure(receipt.revision==h.revision&&receipt.request_digest==checksum(&last.body.command)?&&receipt.response==last.body.response,"resident receipt mismatch")?;
+                last.body.verify_measurement(&s.world)?;
+                r.accesses+=1;r.hits=r.hits.saturating_add(1);
+                if take{return Ok(s);}
+                let out=s.clone();r.state=Some(s);return Ok(out);
+            }
+            r.invalidations=r.invalidations.saturating_add(1);
+        }
+        let s=self.load_uncached()?;
+        r.full_loads=r.full_loads.saturating_add(1);r.accesses=0;
+        if !take&&s.lazy_receipts{r.state=Some(s.clone());}
+        Ok(s)
+    }
+    fn load_uncached(&self)->Result<Loaded>{
         let heads=self.heads()?;
         let Some(&latest)=heads.last() else{
             return Ok(Loaded{world:World::default(),receipts:BTreeMap::new(),head:Head{schema:1,revision:0,record:"genesis".into(),snapshot:0,snapshot_digest:None,index:None},lazy_receipts:false})
@@ -234,12 +292,12 @@ impl KernelStore{
     pub fn inspect(&self)->Result<World>{let _guard=self.lock()?;Ok(self.load()?.world)}
     /// A consistent observation, rather than two separately acquired snapshots.
     pub fn inspect_with_anchor(&self)->Result<(World,Anchor)>{
-        let _guard=self.lock()?;let s=self.load()?;
+        let _guard=self.lock()?;let s=self.load_uncached()?;
         let anchor=Anchor{revision:s.head.revision,digest:checksum(&s.head)?};
         Ok((s.world,anchor))
     }
     pub fn anchor(&self)->Result<Anchor>{
-        let _guard=self.lock()?;let s=self.load()?;Ok(Anchor{revision:s.head.revision,digest:checksum(&s.head)?})
+        let _guard=self.lock()?;let s=self.load_uncached()?;Ok(Anchor{revision:s.head.revision,digest:checksum(&s.head)?})
     }
     pub fn verify_anchor(&self,anchor:&Anchor)->Result<()>{
         let current=self.anchor()?;
@@ -254,7 +312,7 @@ impl KernelStore{
     /// Lock/load/write latency and failed/uncertain actions are not measured here.
     pub fn apply_metered(&self,request:Request,operation:&str)->Result<Value>{
         ensure(request.actor==Actor::Host&&super::resource::measured_operation(&request.action)==Some(operation),"unsupported metered host operation")?;
-        let _guard=self.lock()?;let loaded=self.load()?;
+        let _guard=self.lock()?;let loaded=self.load_for_commit()?;
         self.commit_loaded_metered(Transaction::Command{request},loaded,Some(operation))
     }
     pub fn assimilate(&self,request_id:Id,name:Id,version:u64,discovery:Discovery)->Result<Value>{
@@ -268,7 +326,7 @@ impl KernelStore{
     }
     pub fn apply_signed(&self,authority:&super::authority::Authority,signed:super::authority::SignedRequest,now_ms:u64)->Result<Value>{
         authority.authenticate(&signed,now_ms)?;
-        let _guard=self.lock()?;let loaded=self.load()?;
+        let _guard=self.lock()?;let loaded=self.load_for_commit()?;
         let command=Transaction::Command{request:signed.request.clone()};
         if loaded.receipt(&super::index::Index::open(&self.root)?,command.id())?.is_some(){authority.authorize_replay(&signed,&loaded.world,now_ms)?;}else{authority.authorize(&signed,&loaded.world,now_ms)?;}
         self.commit_loaded(command,loaded)
@@ -278,7 +336,7 @@ impl KernelStore{
     /// the next observation proves the existing immutable object.
     pub fn local_effect(&self,effect:&str,publish:bool)->Result<Value>{
         id(effect)?;
-        let _guard=self.lock()?;let loaded=self.load()?;
+        let _guard=self.lock()?;let loaded=self.load_for_commit()?;
         let e=loaded.world.effects.get(effect).ok_or("effect missing")?.clone();
         if e.phase==EffectPhase::Committed{return Ok(json!({"effect":effect,"phase":"committed","receipt":e.receipt}));}
         ensure(matches!(e.phase,EffectPhase::Prepared|EffectPhase::Unknown),"effect is not reconcilable")?;
@@ -297,7 +355,7 @@ impl KernelStore{
         self.commit_loaded(Transaction::Command{request},loaded)
     }
     fn commit(&self,command:Transaction)->Result<Value>{
-        let _guard=self.lock()?;let loaded=self.load()?;self.commit_loaded(command,loaded)
+        let _guard=self.lock()?;let loaded=self.load_for_commit()?;self.commit_loaded(command,loaded)
     }
     fn commit_loaded(&self,command:Transaction,loaded:Loaded)->Result<Value>{
         self.commit_loaded_metered(command,loaded,None)
@@ -314,7 +372,13 @@ impl KernelStore{
             if let Transaction::Command{request}= &command{
                 if let Action::ClaimHandoff{handoff}|Action::AuthorizeMailboxTake{handoff,..}=&request.action{return Ok(json!({"handoff_id":handoff,"replayed":true,"send_authority":"none_reconcile_only"}));}
             }
-            return Ok(receipt.response.clone())
+            let replay_response=receipt.response.clone();
+            // A replay consumes no new durable revision. Keep the old
+            // resident state only if it was fully eligible for reuse.
+            if self.hot.is_some()&&loaded.lazy_receipts{
+                self.resident.lock().map_err(|_|"resident cache poisoned")?.state=Some(loaded);
+            }
+            return Ok(replay_response)
         }
         let start=Instant::now();
         let response=command.run(&mut loaded.world)?;
@@ -341,6 +405,11 @@ impl KernelStore{
         // Retirement is best effort after the commit. Never prune an unarchived
         // committed record. Explicit maintenance reports any failure.
         if rev==snapshot&&self.prune(snapshot).is_ok(){let _=self.collect_index();}
+        if self.hot.is_some(){
+            loaded.world.mark_history_clean();loaded.head=head.body;loaded.lazy_receipts=true;loaded.receipts.clear();
+            let mut r=self.resident.lock().map_err(|_|"resident cache poisoned after commit")?;
+            r.state=Some(loaded);
+        }
         Ok(response)
     }
     fn archive_root(&self)->PathBuf{self.root.join("journal-archive")}
@@ -403,7 +472,7 @@ impl KernelStore{
     /// Caller must export the returned anchor independently for tamper evidence.
     pub fn pin_history(&self,name:&str)->Result<HistoricalPin>{
         id(name)?;let _guard=self.lock()?;
-        let s=self.load()?;
+        let s=self.load_uncached()?;
         let index=s.head.index.clone().ok_or("historical pin requires indexed state")?;
         let p=HistoricalPin{name:name.into(),revision:s.head.revision,anchor:Anchor{revision:s.head.revision,digest:checksum(&s.head)?},index};
         let dir=self.pin_root();fs::create_dir_all(&dir).map_err(error)?;sync_directory(&self.root)?;
@@ -461,7 +530,7 @@ impl KernelStore{
     /// Explicit complete current-index audit. Normal transactions only read
     /// historical receipt pages required for the retained journal and replay.
     pub fn audit_index(&self)->Result<Value>{
-        let _guard=self.lock()?;let loaded=self.load()?;
+        let _guard=self.lock()?;let loaded=self.load_uncached()?;
         let root=loaded.head.index.as_ref().ok_or("audit requires indexed state")?;
         let index=super::index::Index::open(&self.root)?;
         let (world,receipts)=index.load(root,loaded.head.revision)?;
@@ -476,7 +545,7 @@ impl KernelStore{
             "root":root,"scope":"current_index_objects_and_receipt_coverage_not_full_archived_chain"}))
     }
     pub fn collect_garbage(&self)->Result<usize>{
-        let _guard=self.lock()?;let loaded=self.load()?;
+        let _guard=self.lock()?;let loaded=self.load_uncached()?;
         if loaded.head.snapshot>0{self.prune(loaded.head.snapshot)?;}
         self.collect_index()
     }

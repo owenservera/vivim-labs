@@ -175,16 +175,22 @@ impl World {
         valid.pop()
     }
     pub fn transition(&mut self,actor:&Actor,action:Action)->Result<Value>{
-        // Public transitions are atomic even for callers not using the durable store.
+        // Public callers keep atomic rollback even outside the durable store.
+        let mut next=self.clone();
+        let output=next.transition_owned(actor,action)?;
+        *self=next;Ok(output)
+    }
+    /// Only the store's disposable private transaction state may use this.
+    /// On any error the entire owned state must be discarded, never reused.
+    pub(crate) fn transition_owned(&mut self,actor:&Actor,action:Action)->Result<Value>{
         if let Action::Submit{..}=&action{if let Actor::Worker{id,..}=actor{
             ensure(!self.agents.get(id).and_then(|a|a.incarnations.last()).is_some_and(|i|i.executor.starts_with("routed:")),"routed result requires host adapter receipt")?;
         }}
-        let mut next=self.clone();
         let output=if let Actor::Adapter{id:adapter}=actor{
-            next.authorize_adapter_action(adapter,&action)?;
-            next.apply_inner(&Actor::Host,action)?
-        }else{next.apply_inner(actor,action)?;};next.reconcile_prepared()?;next.reconcile_inference();next.refresh_routing_waits()?;next.settle()?;next.reconcile_inference();next.refresh_routing_waits()?;next.refresh_handoffs();next.refresh_frontier_demand()?;
-        next.sequence=next.sequence.checked_add(1).ok_or("sequence overflow")?;*self=next;Ok(output)
+            self.authorize_adapter_action(adapter,&action)?;
+            self.apply_inner(&Actor::Host,action)?
+        }else{self.apply_inner(actor,action)?;};self.reconcile_prepared()?;self.reconcile_inference();self.refresh_routing_waits()?;self.settle()?;self.reconcile_inference();self.refresh_routing_waits()?;self.refresh_handoffs();self.refresh_frontier_demand()?;
+        self.sequence=self.sequence.checked_add(1).ok_or("sequence overflow")?;Ok(output)
     }
     pub(crate) fn apply_adapter_action(&mut self,actor:&Actor,action:Action)->Result<Value>{self.apply_inner(actor,action)}
     fn apply_inner(&mut self,actor:&Actor,action:Action)->Result<Value>{

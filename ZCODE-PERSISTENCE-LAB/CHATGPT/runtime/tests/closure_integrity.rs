@@ -195,3 +195,29 @@ fn tracked_world_pages_retain_untouched_history_and_match_full_writer(){
     assert_eq!(restored.blobs,w.blobs);assert_eq!(receipts.len(),2);
     assert_eq!(index.lookup(&first,1,"blobs","blob-5").unwrap(),Some(json!({"n":5})));
 }
+
+#[test]
+fn resident_state_is_fenced_by_external_commits_and_failed_transitions(){
+    use persistent_intelligence_runtime::kernel::{persistence::{KernelStore,HotPolicy},transition::Request};
+    let temp=Temp::new();
+    let hot=KernelStore::open_hot(&temp.0,HotPolicy{max_cached_accesses:4}).unwrap();
+    let cold=KernelStore::open(&temp.0).unwrap();
+    let goal=|request:&str,key:&str|Request{id:request.into(),actor:Actor::Host,action:Action::Goal{id:key.into(),parent:None,objective:"resident fixture".into(),claim_budget:2,predicate:None}};
+    hot.apply(goal("one","one")).unwrap();
+    assert!(hot.inspect().unwrap().goals.contains_key("one"));
+    let report=hot.resident_report().unwrap();assert_eq!(report["cached_revision"],1);
+    assert_eq!(report["hits"],1);
+    cold.apply(goal("two","two")).unwrap();
+    assert!(hot.inspect().unwrap().goals.contains_key("two"));
+    assert_eq!(hot.resident_report().unwrap()["invalidations"],1);
+    let fail=Request{id:"rollback".into(),actor:Actor::Host,action:Action::InitializeBatch{actions:vec![
+        Action::Goal{id:"partial".into(),parent:None,objective:"must rollback".into(),claim_budget:2,predicate:None},
+        Action::Goal{id:"one".into(),parent:None,objective:"duplicate".into(),claim_budget:2,predicate:None}]}};
+    assert!(hot.apply(fail).is_err());
+    assert!(!hot.inspect().unwrap().goals.contains_key("partial"));
+    hot.apply(goal("three","three")).unwrap();
+    for _ in 0..6{assert_eq!(hot.inspect().unwrap().sequence,3);}
+    assert!(hot.resident_report().unwrap()["full_loads"].as_u64().unwrap()>=3);
+    assert_eq!(cold.audit_index().unwrap()["receipts"],3);
+    assert_eq!(hot.anchor().unwrap().digest,cold.anchor().unwrap().digest);
+}

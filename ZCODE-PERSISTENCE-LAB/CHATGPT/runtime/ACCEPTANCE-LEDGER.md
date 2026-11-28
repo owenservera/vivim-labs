@@ -158,3 +158,5 @@ Schema 4 source addition: incremental receipt page insertion and lazy old receip
 
 ## Source closure 011 (unqualified)
 Copy-on-write historical tables and exact-key adaptive page mutations authored. Existing serialization shape retained. E33 remains partial; source and verified counts unchanged. See TRACKED-WORLD-001.md.
+
+Resident mode source addition: explicit bounded hot policy, head/tail/receipt validation, strict independent observation, and private disposable transaction state. No runtime performance or integrity claims beyond authored source. See RESIDENT-WORLD-001.md.

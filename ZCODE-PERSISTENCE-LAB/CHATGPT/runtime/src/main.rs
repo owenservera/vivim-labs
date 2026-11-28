@@ -33,6 +33,13 @@ fn kernel_cli(args:&[String])->Result<(),String>{
         "history-record"=>store.historical_record(required(args,3,"revision")?.parse::<u64>().map_err(|e|e.to_string())?)?,
         "receipt-status"=>store.receipt_status(required(args,3,"request ID")?)?,
         "audit-index"=>store.audit_index()?,
+        "run-hot"=>{
+            let config:RunConfig=read_json(required(args,4,"run configuration")?)?;
+            let policy:persistent_intelligence_runtime::kernel::persistence::HotPolicy=read_json(required(args,5,"resident policy")?)?;
+            let hot=KernelStore::open_hot(root,policy)?;
+            let result=supervise(&hot,Path::new(required(args,3,"workspace")?),config)?;
+            serde_json::json!({"run":result,"resident":hot.resident_report()?})
+        },
         "population"=>store.inspect()?.audit_population(),
         "resources"=>store.inspect()?.resource_report(),
         "provider-accounting"=>store.inspect()?.provider_accounting(),
@@ -234,8 +241,11 @@ fn run()->Result<(),String>{
         use std::path::Path;
         let root=required(&args,1,"kernel store")?;let workspace=required(&args,2,"workspace")?;
         let config:RunConfig=read_json(required(&args,3,"controller configuration")?)?;
-        watch_parent();let store=KernelStore::open(root)?;
-        println!("{}",serde_json::to_string_pretty(&supervise(&store,Path::new(workspace),config)?).map_err(|e|e.to_string())?);return Ok(());
+        watch_parent();
+        let store=if let Some(file)=args.get(4){KernelStore::open_hot(root,read_json(file)?)?}else{KernelStore::open(root)?};
+        let mut result=supervise(&store,Path::new(workspace),config)?;
+        if args.get(4).is_some(){result["resident"]=store.resident_report()?;}
+        println!("{}",serde_json::to_string_pretty(&result).map_err(|e|e.to_string())?);return Ok(());
     }
     if args.first().is_some_and(|x|x=="kernel-compute"){
         if args.get(3).is_some_and(|x|x=="--watch-parent"){persistent_intelligence_runtime::kernel::supervisor::watch_parent();}

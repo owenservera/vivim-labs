@@ -22,6 +22,7 @@ pub struct Planning {
 }
 impl Router {
     pub fn set_frontier_guard(&mut self,g:FrontierGuard)->Result<()>{
+        ensure(self.config.is_some(),"router not configured")?;
         ensure(g.version>self.planning.guard.as_ref().map_or(0,|x|x.version)&&g.max_forecast_bps<=10_000&&g.opportunity_weight<=100_000,"invalid frontier guard")?;
         self.planning.guard=Some(g);Ok(())
     }
@@ -80,7 +81,7 @@ impl Router {
         if d.priority>=f.critical_priority{return Ok(0);}
         let avail=self.available(pool)?.max(1);
         let protect=self.forecast_protection(pool)?;
-        Ok(i128::from(charge)*i128::from(protect)*i128::from(g.opportunity_weight)/i128::from(avail))
+        Ok((i128::from(charge)*10_000/i128::from(avail))*i128::from(protect)*i128::from(g.opportunity_weight)/10_000)
     }
 }
 
@@ -98,8 +99,8 @@ impl World{
                 let mut best=None;
                 for p in c.profiles.values().filter(|p|p.enabled&&p.frontier&&p.pools.contains(key)&&d.capabilities.is_subset(&p.capabilities)){
                     if (!d.allowed_profiles.is_empty()&&!d.allowed_profiles.contains(&p.id))||(!d.allowed_providers.is_empty()&&!d.allowed_providers.contains(&p.provider))||d.excluded_providers.contains(&p.provider){continue;}
-                    if d.input_tokens.saturating_add(d.output_tokens).saturating_add(d.reasoning_tokens)>p.max_context||d.output_tokens>p.max_output||d.reasoning_tokens>p.max_reasoning{continue;}
-                    let u=Usage{requests:1,input:d.input_tokens,output:d.output_tokens,reasoning:d.reasoning_tokens,credits:p.credit_ceiling};
+                    let u=d.usage_for(p);
+                    if u.input.saturating_add(u.output).saturating_add(u.reasoning)>p.max_context||u.output>p.max_output||u.reasoning>p.max_reasoning||u.reasoning<d.minimum_reasoning_tokens{continue;}
                     let amount=super::routing::amount(pool,p,&u)?;
                     best=Some(best.map_or(amount,|old:u64|old.min(amount)));
                 }

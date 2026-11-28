@@ -1,0 +1,75 @@
+{
+  "schema": "vivim.dogfood.campaign/1",
+  "revision": "R010",
+  "seed_commit": "3b1d7e173071710e6795c09427162292f774030e",
+  "scope": "controller-only; primary CHATGPT build excluded",
+  "owner_intent": "Finish a bounded working system, not maximize agent activity. Only lane 01 and 04 selected now; reserve other shares.",
+  "interpretation": "one and one means native Codex GPT for 01 and Antigravity Gemini for 04; no non-Gemini on Antigravity, no custom providers or CCR on Codex. No paid API or overflow. This is a planned assignment, not live inference authorization.",
+  "lanes": {
+    "01": {
+      "provider": "codex",
+      "optimization": "guarded_reference",
+      "knowledge": "independent_discovery",
+      "selected": true,
+      "pool_share": 0.5,
+      "normalized_four_lane_share": 0.25
+    },
+    "02": {
+      "provider": "agy",
+      "optimization": "paced_allocation",
+      "knowledge": "first_principles",
+      "selected": false,
+      "pool_share": 0.5,
+      "normalized_four_lane_share": 0.25
+    },
+    "03": {
+      "provider": "codex",
+      "optimization": "verification_cascade",
+      "knowledge": "architectural_intelligence",
+      "selected": false,
+      "pool_share": 0.5,
+      "normalized_four_lane_share": 0.25
+    },
+    "04": {
+      "provider": "agy",
+      "optimization": "evidence_adaptive",
+      "knowledge": "accumulated_intelligence",
+      "selected": true,
+      "pool_share": 0.5,
+      "normalized_four_lane_share": 0.25
+    }
+  },
+  "budget": {
+    "unit": "percentage points in each observed provider window; not tokens and not cross-provider exchangeable",
+    "local_day": "Europe/Madrid",
+    "opening": "One account-level opening snapshot per local day. For each short window, distributable daily envelope = remaining percentage points minus 15 point shared reserve. For each longer window, divide remaining minus reserve by ceil(days until observed reset), at least one. Conservative one short-window envelope per local day; fresh reset does not replenish local daily cap. Each assigned lane gets half of each envelope; inactive shares held; no borrowing or automatic reassignment.",
+    "provider_reserve_pp": 15,
+    "unknown_delta": "Retain reservation until reconciled; do not treat rounded zero as free; charge max(forecast, observed nonnegative decrease + 1pp) for unchanged window identity; if reset/attribution ambiguous charge at least forecast and block further admission until reconciled.",
+    "local_caps": "Daily token and turn ceiling additionally mandatory, specified by owner/controller, not provider entitlement. Both provider hard windows and local share must pass. Reserve under account-wide single writer before inference; charge failed work too. Pause when either exhausted, persist checkpoint, resume only after fresh backend entitlement, new available local allocation and reconciliation.",
+    "fairness": "No credit shifting between providers, no paid spillover, no automatic consumption of reserved lanes. One in-flight turn per subscription account; two independent accounts can run simultaneously."
+  },
+  "completion": {
+    "common_instruction": "COMPLETION-GOAL.md",
+    "controller_review": "Independent evaluator retains original canonical acceptance criteria; do not copy root material or comparator data into agent workspaces. A lane defines its own finite internal completion contract from its given objective, demonstrates it, and submits a release candidate. Controller independently checks scope coverage and evidence before any external completion label.",
+    "terminal_states": [
+      "COMPLETE_VERIFIED",
+      "WAITING_BUDGET",
+      "WAITING_AUTHORIZATION",
+      "WAITING_RECONCILIATION",
+      "FAILED_BOUNDED",
+      "CANCELLED"
+    ],
+    "nonterminal_states": [
+      "DISCOVER_COMPLETENESS",
+      "PROPOSE_CONTRACT",
+      "FREEZE_CONTRACT",
+      "BUILD",
+      "VERIFY",
+      "REPAIR",
+      "CHECKPOINT",
+      "CANDIDATE_COMPLETE"
+    ],
+    "no_false_completion": "Quota exhaustion, a polished README, task count, passing self-authored trivial tests, agent assertion, lack of ideas, or partial progress never constitutes completion."
+  },
+  "status": "SETUP_ONLY; do not launch until isolated execution, account and billing verification, atomic reservation integration, model pin and scoped-write qualification are complete"
+}

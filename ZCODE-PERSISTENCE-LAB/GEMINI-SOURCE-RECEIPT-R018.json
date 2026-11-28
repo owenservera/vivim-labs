@@ -1,0 +1,61 @@
+{
+  "revision": "R018",
+  "scope": "Owner-authorized source-only Gemini experiment; separate from nine-goal dogfood",
+  "source": {
+    "commit": "108fb9313978a5eb09e7461d2749634a4c5b8b7a",
+    "path": "ZCODE-PERSISTENCE-LAB/CHATGPT/runtime/src",
+    "tree": "9db564042078a766eec46ce18200e14fce8dd561",
+    "files": 42,
+    "scratch_base": "c49551914cc18843978dd2ea197e250ad4c17774"
+  },
+  "model": {
+    "requested": "highest available Gemini effort",
+    "selected": "gemini-4-neon-xhigh",
+    "reported": "gemini-4-neon-xhigh",
+    "effort": "xhigh",
+    "max_variant_listed": false
+  },
+  "prompt": "/goal read all source files - whatever changes edits etc upgrades etc as a git.bundle pure diff /// design your own goa based on the code - what it is now and what it has the potential to bel //",
+  "result": {
+    "cli_exit": 3,
+    "status": "ERROR",
+    "host_session_exited": true,
+    "cli_deadline_seconds": 180,
+    "changed_files": 0,
+    "bundle_created": false,
+    "delivery_folder": "ZCODE-PERSISTENCE-LAB/CHATGPT/runtime/src/Gemini",
+    "delivery_entries": 0,
+    "reported_usage": {
+      "input_tokens": 31585,
+      "output_tokens": 2578,
+      "thinking_tokens": 1845,
+      "cache_read_tokens": 102847,
+      "total_tokens": 34163
+    },
+    "quota_before": {
+      "five_hour": 99,
+      "weekly": 94
+    },
+    "quota_after": {
+      "five_hour": 98,
+      "weekly": 94
+    },
+    "stdout_sha256": "826F7C1C6C7C7B9CA355B910698CD59BE6492D913E81A9CD9A5DE85010038E87"
+  },
+  "local_scratch": "%LOCALAPPDATA%/VIVIM/Gemini-source-afd1307e003a4ef08639b239321e385d",
+  "receipts": {
+    "sync": "ctl-a4fdc7ef76f5ccc7",
+    "initial_export_rejected": "ctl-546ffd8e4071a67b",
+    "exact_materialization": "ctl-9e4177b1df1e407a",
+    "execution": "ctl-b2cf0fa9b5ea53eb",
+    "reconciliation": "ctl-1e0f6f61b070b825"
+  },
+  "limitations": [
+    "No source changes; no fake or empty bundle published.",
+    "Source-only scratch Git repository has no remote; CLI sandbox/shared authenticated profile not a proven hard boundary. Provider defaults and delegated tool behavior not fully isolated.",
+    "Credit fallback explicitly false in session config; effective billing not independently verified.",
+    "Controller set 180-second timeout, which curtailed source analysis. Command tools denied; read and edit tools available; host would construct the incremental bundle.",
+    "Empty directories are not tracked in Git. Delivery folder is local only until a file exists."
+  ],
+  "next": "Resume exact saved conversation in the verified scratch workspace after fresh quota and process-state reconciliation, allow sufficient execution time under owner constraints, package only actual changes as incremental bundle against recorded base; verify bundle and original source unchanged."
+}

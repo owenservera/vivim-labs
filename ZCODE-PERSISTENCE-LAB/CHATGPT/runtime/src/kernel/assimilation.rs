@@ -76,26 +76,18 @@ impl Registry{
     pub fn is_empty(&self)->bool{self.policies.is_empty()&&self.cohorts.is_empty()&&self.candidates.is_empty()&&self.verdicts.is_empty()&&self.promotions.is_empty()&&self.runs.is_empty()}
 }
 fn source_wire(w:&Wire,ids:&BTreeMap<Id,usize>)->Result<Value>{
-    // Serialize the wire first so future wire variants fail closed rather than
-    // silently losing semantics. Node identifiers are normalized by ordinal.
-    let mut v=val(w)?;
-    fn rewrite(v:&mut Value,ids:&BTreeMap<Id,usize>)->Result<()>{
-        match v{
-            Value::Object(m)=>{
-                if m.get("kind").and_then(Value::as_str)==Some("node"){
-                    let key=m.get("id").and_then(Value::as_str).ok_or("node wire identity missing")?;
-                    let n=ids.get(key).ok_or("non-topological class wire")?;
-                    m.insert("id".into(),json!(n));return Ok(());
-                }
-                // Only recurse into known wire containers, not literal values.
-                for (k,x) in m.iter_mut(){if k=="fields"||k=="items"||k=="source"{rewrite(x,ids)?;}}
-            }
-            Value::Array(a)=>for x in a{rewrite(x,ids)?;},
-            _=>{},
+    // Match every typed variant. Never interpret user literal data as a wire.
+    match w{
+        Wire::Input=>Ok(json!({"source":"input"})),
+        Wire::Node{id}=>Ok(json!({"source":"node","ordinal":ids.get(id).ok_or("non-topological class wire")?})),
+        Wire::Field{source,key}=>Ok(json!({"source":"field","wire":source_wire(source,ids)?,"key":key})),
+        Wire::Record{fields}=>{
+            let fields=fields.iter().map(|(k,w)|Ok((k.clone(),source_wire(w,ids)?))).collect::<Result<BTreeMap<_,_>>>()?;
+            Ok(json!({"source":"record","fields":fields}))
         }
-        Ok(())
+        Wire::Array{items}=>Ok(json!({"source":"array","items":items.iter().map(|w|source_wire(w,ids)).collect::<Result<Vec<_>>>()?})),
+        Wire::Literal{value,shape}=>Ok(json!({"source":"literal","value":value,"shape":shape})),
     }
-    rewrite(&mut v,ids)?;Ok(v)
 }
 impl World{
     /// Identity-independent pure graph fingerprint. Class/contract names and
@@ -224,7 +216,11 @@ impl World{
             ensure(self.goals.get(g).is_some_and(|g|g.phase==GoalPhase::Complete),"holdout goal incomplete")?;
             match self.trace_pattern(g,&f.policy){
                 Ok((p,t))=>{
-                    let matches=pin(&p)?==*pattern&&seen.insert(t.input_digest.clone());
+                    let independent=t.tasks.iter().all(|task|{
+                        let generation=self.tasks[task].generation;
+                        self.attempt_history.get(&format!("{task}-{generation}")).is_some_and(|a|a.agent!=c.verifier)
+                    });
+                    let matches=pin(&p)?==*pattern&&seen.insert(t.input_digest.clone())&&independent;
                     passed &=matches;evaluations.push(json!({"goal":g,"trace":t,"passed":matches}));
                 }
                 Err(reason)=>{passed=false;evaluations.push(json!({"goal":g,"error":reason,"passed":false}));}
@@ -256,6 +252,12 @@ impl World{
         // Recheck frozen training provenance before admission. Old evidence is
         // retained even when source classes are subsequently disabled.
         for t in &f.training{let (_,now)=self.trace_pattern(&t.goal,&f.policy)?;ensure(now.trace_digest==t.trace_digest,"frozen trace changed")?;}
+        // Do not admit a pattern after any held-out class was withdrawn.
+        let c=self.assimilation.cohorts.get(&f.cohort).ok_or("trace cohort missing")?;
+        for g in &c.holdout_goals{
+            let (p,_)=self.trace_pattern(g,&f.policy)?;
+            ensure(Some(pin(&p)?)==f.pattern_digest,"held-out trace changed")?;
+        }
         self.assimilation.promotions.insert(key.into(),Promotion{candidate:key.into(),enabled:true,sequence:self.sequence.checked_add(1).ok_or("sequence overflow")?,disabled_reason:None});
         Ok(json!({"candidate":key,"promoted":true}))
     }
@@ -324,6 +326,24 @@ impl World{
             let verified=r.tasks.iter().filter(|t|self.tasks.get(*t).is_some_and(|t|t.phase==TaskPhase::Verified)).count();
             json!({"reuse":r,"verified_tasks":verified,"goal_phase":self.goals.get(&r.goal).map(|g|&g.phase)})
         }).collect();
-        Ok(json!({"registry":self.assimilation,"reuse_outcomes":runs,"acceptance_credit":false}))
+        let mut by_candidate=BTreeMap::<Id,(usize,usize,usize,usize,Option<u64>,usize)>::new();
+        for r in self.assimilation.runs.values(){
+            let a=by_candidate.entry(r.candidate.clone()).or_insert((0,0,0,0,Some(0),0));
+            a.0+=1;
+            match self.goals.get(&r.goal).map(|g|&g.phase){
+                Some(GoalPhase::Complete)=>a.1+=1,Some(GoalPhase::Open)|None=>{},_=>a.2+=1,
+            }
+            for key in &r.tasks{
+                if self.tasks.get(key).is_some_and(|t|t.phase==TaskPhase::Verified){a.3+=1;}
+                for cost in self.run_costs.values().filter(|c|&c.task==key){
+                    a.4=a.4.and_then(|n|n.checked_add(cost.elapsed_ms));a.5+=1;
+                }
+            }
+        }
+        let summaries:Vec<_>=by_candidate.into_iter().map(|(candidate,(runs,completed,failed,verified,elapsed,measured))|
+            json!({"candidate":candidate,"reuse_runs":runs,"completed_goals":completed,"terminal_unsuccessful_goals":failed,
+                "verified_tasks":verified,"measured_worker_ms":if measured==0{None}else{elapsed},"measured_attempts":measured,
+                "cost_savings":"not_estimated_without_matched_baseline"})).collect();
+        Ok(json!({"registry":self.assimilation,"reuse_outcomes":runs,"candidate_yield":summaries,"acceptance_credit":false}))
     }
 }

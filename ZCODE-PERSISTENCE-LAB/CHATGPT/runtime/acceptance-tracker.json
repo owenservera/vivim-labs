@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-SOURCE-CLOSURE-007",
+  "revision": "R004-SOURCE-CLOSURE-008",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -847,14 +847,18 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
+        "source_pin": "dcae44c968578457fc8576b7f705c443ec06686c",
         "files": [
           "src/kernel/recipes.rs",
           "src/kernel/knowledge.rs",
           "src/kernel/custody.rs",
-          "src/kernel/supervisor.rs"
+          "src/kernel/supervisor.rs",
+          "src/kernel/assimilation.rs",
+          "src/kernel/authority.rs",
+          "tests/assimilation.rs"
         ],
-        "remaining": "Verified pure goal-trace recipes reconstruct parameterized DAG coordination and context bindings; repeated exact-input rejected/accepted class substitutions are independently replayed before learned repair publication; unambiguous pure-task rebind preserves oracle. Generalized class/semantic/context discovery and independent cross-goal qualification remain."
+        "remaining": "Generalized pure DAG/context/class structural trace patterns with explicit disjoint cross-goal training/holdouts, durable freeze/rejection, scoped independent verdict and host promotion/disable, fresh context/class/oracle instantiation and reuse yield reporting authored. Arbitrary semantic equivalence, broader learned context selection and actual cross-goal qualification remain; no source or verified gate credit awarded.",
+        "checkpoint": "ASSIMILATION-001"
       }
     },
     {
@@ -1161,7 +1165,7 @@
     }
   },
   "completion_dashboard": {
-    "revision": "R004-SOURCE-CLOSURE-007",
+    "revision": "R004-SOURCE-CLOSURE-008",
     "tracker_input_commit": "d05e332f884a11ef3bcbc69658a4de308adc812a",
     "reviewed_runtime_source": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
     "source_status_meaning": "Provisional source labels after targeted readback and integration; not a complete compiler or invariant audit, not verified operation.",
@@ -1355,6 +1359,12 @@
       "ATOMIC-METERING-001.md",
       "ADAPTER-MAILBOX-002.md"
     ],
+    "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
+    "verified_credit": 0
+  },
+  "source_closure_008": {
+    "baseline": "108fb9313978a5eb09e7461d2749634a4c5b8b7a",
+    "document": "ASSIMILATION-001.md",
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "verified_credit": 0
   }

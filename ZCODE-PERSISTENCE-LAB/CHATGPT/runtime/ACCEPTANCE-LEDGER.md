@@ -144,3 +144,6 @@ Host-only static declaration batches, bounded pinned index scans and a separate 
 
 ## Source closure 007 (unqualified)
 External adapter mailbox and fair reconciliation, optional independent Windows worker-handle observations, programmable logical population and atomic successful host transition accounting authored. E42/E44/E47/E49 and R06/R08/R09 remain partial. Source and verified scores unchanged. No provider calls or qualification executed. See ADAPTER-MAILBOX-001.md, NATIVE-OBSERVATION-001.md and ATOMIC-METERING-001.md.
+
+## Source closure 008 (unqualified)
+Generalized cross-goal structural assimilation, independent review and explicit fresh-oracle reuse, rollback and yield reporting authored. E41 remains partial; no source or verified score change. See ASSIMILATION-001.md and tests/assimilation.rs. No build/test execution.

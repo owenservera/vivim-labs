@@ -97,7 +97,7 @@ pub struct Goal {
 pub struct TaskSpec {
     pub id:Id, pub goal:Id, pub objective:String, pub dependencies:BTreeSet<Id>,
     pub inputs:BTreeMap<String,Port>, pub output:Shape, pub oracle:Oracle,
-    pub class:Option<Id>, pub family:Option<Id>, pub max_attempts:u32,
+    pub class:Option<Id>, pub family:Option<Id>, #[serde(default)] pub context:Option<Id>, pub max_attempts:u32,
     pub priority:i64, pub uncertainty:u32, pub expected_cost:u32,
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -107,6 +107,7 @@ pub struct Task {
     pub spec:TaskSpec, pub version:u64, pub phase:TaskPhase, pub attempts:u32,
     pub generation:u64, pub lease:Option<Lease>, pub input:Option<Value>,
     pub proposal:Option<Digest>, pub artifact:Option<Id>, pub reason:Option<String>,
+    pub assigned_class:Option<Id>, pub assigned_context:Option<Id>,
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Context {
@@ -116,12 +117,12 @@ pub struct Context {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Incarnation {
     pub number:u64, pub executor:String, pub started_ms:u64,
-    pub ended_ms:Option<u64>, pub reason:Option<String>,
+    pub ended_ms:Option<u64>, pub reason:Option<String>, pub process_ref:Option<String>,
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Agent {
     pub id:Id, pub goal:Id, pub parent:Option<Id>, pub class:Id, pub context:Id,
-    pub phase:AgentPhase, pub incarnations:Vec<Incarnation>,
+    pub phase:AgentPhase, pub incarnations:Vec<Incarnation>, pub wait_task:Option<Id>,
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Artifact {
@@ -132,7 +133,7 @@ pub struct Artifact {
 pub struct Evidence {
     pub id:Id, pub task:Id, pub generation:u64, pub oracle:Oracle,
     pub input:Digest, pub candidate:Digest, pub accepted:bool,
-    pub verifier:Id, pub parents:Vec<Id>, pub clock_ms:u64,
+    pub verifier:Id, pub parents:Vec<Id>, pub clock_ms:u64, pub class:Option<Id>, pub context:Option<Id>,
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Checkpoint {
@@ -168,6 +169,7 @@ pub struct Capability {
 pub struct Metrics {
     pub claims:u64, pub accepted:u64, pub rejected:u64, pub failures:u64,
     pub deterministic_runs:u64, pub reused:u64, pub learned:u64,
+    pub candidate_evaluations:u64, pub worker_elapsed_ms:u64, pub verification_rejections:u64,
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct World {

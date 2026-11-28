@@ -1,6 +1,6 @@
 {
   "schema": "vivim.dogfood.cli-recipe/1",
-  "revision": "R010",
+  "revision": "R015",
   "scope": "EXPERIMENTS_ONLY",
   "seed_commit": "3b1d7e173071710e6795c09427162292f774030e",
   "status": "SELECTED_LANE_PENDING_LIVE_QUALIFICATION",
@@ -176,11 +176,12 @@
       "https://antigravity.google/docs/cli/projects/"
     ],
     "findings": [
-      "--print, --output-format stream-json, --input-format stream-json, --conversation, --sandbox, --print-timeout; init conversation_id/cwd/permission_mode; result status and usage; Windows sandbox may permit reading outside user profile; resume automatically selects associated project; session settings --settings observed locally."
+      "--print, --output-format stream-json, --input-format stream-json, --conversation, --sandbox, --print-timeout; init conversation_id/cwd/permission_mode; result status and usage; Windows sandbox may permit reading outside user profile; resume automatically selects associated project; session settings --settings observed locally.",
+      "R015: explicit --conversation starts new process; continuous result.usage can be cumulative, do not add step and result counters; effective model evidence still needs installed CLI qualification."
     ]
   },
   "local_preflight": {
-    "version": "1.5.18",
+    "version": "1.5.19 (R008 observation; recheck and hash before launch)",
     "preferred_program": "%LOCALAPPDATA%\\agy\\bin\\agy.exe",
     "auth": "Not tested; no supported noninteractive auth status verified. Require authorized isolated profile and a bounded smoke after isolation.",
     "receipts": [
@@ -199,7 +200,8 @@
       "--new-project",
       "--project",
       "acp"
-    ]
+    ],
+    "latest_native_metadata": "R014: 17 Gemini configurations, headless /usage verified; isolated login and billing unverified."
   },
   "provider_profile": {
     "requirements": [
@@ -357,7 +359,23 @@
     "simulation": "MODEL-BUDGET.mjs simulate produces SIMULATED_CANDIDATE only; never use simulation output to launch inference.",
     "live": "Only selected lanes 01 and 04; inactive lanes held; no default model or silent fallback. Admission candidate is not permission to execute without atomic reservation.",
     "campaign": "CAMPAIGN-R010.json",
-    "daily_ledger": "CAMPAIGN-BUDGET.mjs"
+    "daily_ledger": "CAMPAIGN-BUDGET.mjs",
+    "qualification_manifest": "QUALIFICATION-RECIPES-R015.json"
   },
-  "completion_goal": "COMPLETION-GOAL.md"
+  "completion_goal": "COMPLETION-GOAL.md",
+  "qualification": {
+    "manifest": "QUALIFICATION-RECIPES-R015.json",
+    "readiness": "EXPERIMENT-READINESS-R014.json",
+    "required": [
+      "Q07",
+      "Q08",
+      "Q09",
+      "Q10",
+      "Q11",
+      "Q12"
+    ],
+    "launch_enabled": false,
+    "scope": "Exact commands retained from R010. Full live qualification required. Provider documentation is not permission to launch."
+  },
+  "completion_charter": "SYSTEM-GOALS-R013.json"
 }

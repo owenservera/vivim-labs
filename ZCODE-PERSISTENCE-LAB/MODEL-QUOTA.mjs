@@ -43,7 +43,7 @@ export function observe({account_key,subscription_only=false,paid_overflow_disab
   const model_groups={};
   if(geminiGroups.length===1&&geminiGroups[0]==='Gemini Models')for(const m of models)model_groups[m]=geminiGroups[0];
   return {provider:'agy',account_key,observed_at:new Date().toISOString(),models,groups,model_groups,subscription_only:subscription_only===true,paid_overflow_disabled:paid_overflow_disabled===true,ordinary_usage_allowed:ordinary_usage_allowed===true?true:null,entitlement_source:'controller attestation; quota report does not prove billing settings or ordinary-usage authorization',source:'agy --print /usage + agy models'};
- }finally{fs.rmSync(scratch,{recursive:true,force:true});}
+ }finally{try{fs.rmSync(scratch,{recursive:true,force:true,maxRetries:2,retryDelay:200});}catch(e){console.error('Quota scratch cleanup deferred: '+e.code);}}
 }
 if(process.argv[1]===fileURLToPath(import.meta.url)){
  const input=JSON.parse(fs.readFileSync(0,'utf8'));

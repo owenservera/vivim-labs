@@ -40,7 +40,34 @@ pub struct AdapterState{
     pub bindings:BTreeMap<Id,AdapterBinding>,pub handoffs:BTreeMap<Id,Envelope>,
     pub receipts:BTreeMap<Id,AdapterReceipt>,
 }
+#[derive(Clone,Debug,Serialize,Deserialize)]
+pub struct ChargeOnlyReceipt{
+    pub handoff:Id,pub provider_receipt:String,pub actual_provider:Id,pub actual_account:Id,
+    pub actual_model:String,pub actual_thinking:String,pub actual_by_reserved_pool:BTreeMap<Id,u64>,
+    pub reason:String,
+}
 impl World{
+    /// Explicit host reconciliation of an identity mismatch. Exact observed
+    /// charges for every original pool are required; no fabricated model credit.
+    pub fn reconcile_handoff_charge(&mut self,r:ChargeOnlyReceipt)->Result<Value>{
+        let e=self.router.adapters.handoffs.get(&r.handoff).ok_or("handoff missing")?.clone();
+        ensure(matches!(e.phase,HandoffPhase::Claimed|HandoffPhase::Unknown),"handoff not outstanding")?;
+        ensure(!r.provider_receipt.trim().is_empty()&&r.provider_receipt.len()<=4096&&!r.reason.trim().is_empty(),"charge reconciliation evidence required")?;
+        let reservation=self.router.reservations.get_mut(&r.handoff).ok_or("reservation missing")?;
+        ensure(matches!(reservation.status,Status::Dispatched|Status::Unknown)&&reservation.holds.keys().eq(r.actual_by_reserved_pool.keys()),"charge pool mismatch")?;
+        let evidence=serde_json::to_value(&r).map_err(|e|e.to_string())?;
+        bounded(&evidence)?;
+        reservation.actual=r.actual_by_reserved_pool.clone();reservation.status=Status::Settled;
+        reservation.outcome=Some(Outcome::Rejected);reservation.ended_ms=Some(self.clock_ms);
+        reservation.receipt=Some(r.provider_receipt.clone());reservation.not_evaluated_reason=Some(r.reason.clone());
+        let profile=reservation.profile.id.clone();
+        self.router.cooldowns.insert(profile,self.clock_ms.saturating_add(86_400_000));
+        let hash=self.put_payload(evidence)?;
+        let x=self.router.adapters.handoffs.get_mut(&r.handoff).unwrap();x.phase=HandoffPhase::Completed;x.receipt=Some(hash.clone());
+        if self.tasks.get(&e.task).is_some_and(|t|t.phase==TaskPhase::Running&&t.generation==e.generation){self.invalidate_attempt(&e.task,"provider identity mismatch")?;}
+        Ok(json!({"settled":r.handoff,"evidence":hash,"model_credit":false}))
+    }
+
     pub fn observe_adapter_quota(&mut self,r:QuotaReceipt)->Result<()>{
         id(&r.id)?;ensure(!r.source_receipt.trim().is_empty()&&r.source_receipt.len()<=4096,"quota source receipt required")?;
         ensure(!self.router.adapters.quota_receipts.contains_key(&r.id),"quota receipt exists")?;

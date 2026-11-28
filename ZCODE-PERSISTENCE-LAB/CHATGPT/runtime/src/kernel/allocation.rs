@@ -5,13 +5,19 @@ use crate::{digest,Result};
 use serde_json::{Value,json};
 use std::collections::BTreeSet;
 impl World{
-    pub fn queue_inference(&mut self,d:Demand)->Result<()>{
+    pub fn queue_inference(&mut self,mut d:Demand)->Result<()>{
         let t=self.tasks.get(&d.task).ok_or("routing task missing")?;
         ensure(t.spec.goal==d.goal&&t.phase==TaskPhase::Pending&&self.goals.get(&d.goal).is_some_and(|g|g.phase==GoalPhase::Open),"routing task not pending in open goal")?;
         if let Some(family)=&t.spec.family{ensure(family==&d.family,"routing family mismatch")?;}
+        if d.independent_review{
+            let origin=d.review_evidence.as_ref().ok_or("independent review requires origin evidence")?;
+            let evidence=self.evidence.get(origin).ok_or("review evidence missing")?;
+            ensure(evidence.accepted&&t.spec.dependencies.contains(&evidence.task),"review must depend on verified origin task")?;
+            for r in self.router.reservations.values().filter(|r|r.task==evidence.task&&r.task_generation==Some(evidence.generation)&&r.evidence.as_ref()==Some(origin)){d.excluded_providers.insert(r.profile.provider.clone());}
+        }else{ensure(d.review_evidence.is_none(),"review evidence requires independent review")?;}
         self.router.queue(d)
     }
-    fn inference_needed(&self,d:&Demand)->bool{
+    pub(crate) fn inference_needed(&self,d:&Demand)->bool{
         self.tasks.get(&d.task).is_some_and(|t|t.phase==TaskPhase::Pending&&self.goals.get(&d.goal).is_some_and(|g|g.phase==GoalPhase::Open)
             &&(!d.prefer_native||d.independent_review||self.match_class(&t.spec).is_none()))
     }
@@ -63,14 +69,14 @@ impl World{
     }
     pub fn reconcile_inference(&mut self){
         let live:BTreeSet<_>=self.tasks.values().filter(|t|matches!(t.phase,TaskPhase::Running|TaskPhase::Submitted)).map(|t|(t.spec.id.clone(),t.generation)).collect();
-        self.router.reconcile_stale(&live);
+        self.router.reconcile_stale(&live);self.router.discard_unverified(&live);
         let terminal:Vec<_>=self.goals.values().filter(|g|g.phase!=GoalPhase::Open).map(|g|g.id.clone()).collect();
         for g in terminal{self.router.cancel_goal(&g);}
     }
 }
 
 impl World{
-    fn bound_profiles(&self,d:&Demand)->BTreeSet<Id>{
+    pub(crate) fn bound_profiles(&self,d:&Demand)->BTreeSet<Id>{
         let Some(c)=&self.router.config else{return BTreeSet::new();};
         let Some(t)=self.tasks.get(&d.task) else{return BTreeSet::new();};
         c.profiles.values().filter(|p|p.enabled&&(d.allowed_profiles.is_empty()||d.allowed_profiles.contains(&p.id)))

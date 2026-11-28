@@ -11,6 +11,7 @@ pub enum Actor {Host,Worker{id:Id,incarnation:u64},Verifier{id:Id}}
 #[derive(Clone,Debug,Serialize,Deserialize)]
 #[serde(tag="action",rename_all="snake_case")]
 pub enum Action {
+    Genesis{manifest:super::genesis::Manifest},
     Goal{id:Id,parent:Option<Id>,objective:String,claim_budget:u64,predicate:Option<Oracle>},
     ReviseGoal{goal:Id,objective:String,predicate:Option<Oracle>},
     Operator{contract:OperatorContract},Class{class:Class},Context{context:Context},
@@ -31,7 +32,7 @@ pub enum Action {
     SetRoutingBatchPolicy{policy:super::routing_optimizer::BatchPolicy},
     BeginRoutingTrial{spec:super::routing_evolution::TrialSpec},CloseRoutingArm,StartRoutingCandidate,AbortRoutingTrial{reason:String},PromoteRoutingTrial{trial:Id},RollbackRoutingTrial{trial:Id},
     SetFrontierGuard{guard:super::routing_planning::FrontierGuard},SetFrontierForecast{forecast:super::routing_planning::Forecast},
-    BindRoutingAdapter{binding:super::routing_adapter::AdapterBinding},ObserveAdapterQuota{receipt:super::routing_adapter::QuotaReceipt},PrepareHandoff{reservation:Id},ClaimHandoff{handoff:Id},FinishHandoff{receipt:super::routing_adapter::AdapterReceipt},RoutingCycle{limit:usize},
+    BindRoutingAdapter{binding:super::routing_adapter::AdapterBinding},ObserveAdapterQuota{receipt:super::routing_adapter::QuotaReceipt},PrepareHandoff{reservation:Id},ClaimHandoff{handoff:Id},FinishHandoff{receipt:super::routing_adapter::AdapterReceipt},ReconcileHandoffCharge{receipt:super::routing_adapter::ChargeOnlyReceipt},RoutingCycle{limit:usize},
     RecordCost{task:Id,generation:u64,elapsed_ms:u64},SetPolicy{policy:SchedulingPolicy},
     PrepareEffect{task:Id,generation:u64,key:Id,payload:Value,oracle:Oracle},
     EffectUnknown{effect:Id,reason:String},ResolveEffect{effect:Id,outcome:EffectPhase,receipt:Value},
@@ -93,6 +94,25 @@ impl World {
         let tasks:Vec<_>=self.tasks.values().filter(|t|t.phase==TaskPhase::Running&&t.lease.as_ref().is_some_and(|l|l.worker==key)).map(|t|t.spec.id.clone()).collect();
         for t in tasks{self.release(&t,reason)?;}Ok(())
     }
+    /// Fail-fast hierarchy policy. An automatically failed parent fences all
+    /// still-open descendants, preserving verified artifacts and effect receipts.
+    fn terminate_subtree(&mut self,root:&str,phase:GoalPhase,reason:&str)->Result<()>{
+        let mut todo=vec![(root.to_owned(),phase)];
+        while let Some((g,phase))=todo.pop(){
+            if self.goals.get(&g).is_none_or(|x|x.phase!=GoalPhase::Open){continue;}
+            todo.extend(self.goals.values().filter(|x|x.parent.as_deref()==Some(g.as_str())&&x.phase==GoalPhase::Open).map(|x|(x.id.clone(),GoalPhase::Cancelled)));
+            self.goals.get_mut(&g).unwrap().phase=phase.clone();
+            let tasks:Vec<_>=self.tasks.values().filter(|t|t.spec.goal==g&&!matches!(t.phase,TaskPhase::Verified|TaskPhase::Blocked|TaskPhase::Exhausted|TaskPhase::Cancelled)).map(|t|t.spec.id.clone()).collect();
+            for key in tasks{
+                self.mark_prepared_unknown(&key,reason);self.end_attempt(&key,reason)?;
+                let t=self.tasks.get_mut(&key).unwrap();
+                t.phase=match phase{GoalPhase::Exhausted=>TaskPhase::Exhausted,GoalPhase::Blocked=>TaskPhase::Blocked,_=>TaskPhase::Cancelled};
+                t.lease=None;t.proposal=None;t.reason=Some(reason.into());
+            }
+            let agents:Vec<_>=self.agents.values().filter(|a|a.goal==g&&a.phase!=AgentPhase::Archived).map(|a|a.id.clone()).collect();
+            for a in agents{self.end_agent(&a,reason,true)?;}
+        }Ok(())
+    }
     fn settle(&mut self)->Result<()>{
         // Fixed point propagates terminal failures through task and goal dependencies.
         loop {
@@ -115,6 +135,8 @@ impl World {
                 }
             }
             for (key,phase) in outcomes{
+                if self.goals[&key].phase!=GoalPhase::Open{continue;}
+                if phase!=GoalPhase::Complete{self.terminate_subtree(&key,phase,"goal terminal")?;changed=true;continue;}
                 self.goals.get_mut(&key).unwrap().phase=phase.clone();
                 for t in self.tasks.values_mut().filter(|t|t.spec.goal==key&&t.phase==TaskPhase::Pending){
                     t.phase=if phase==GoalPhase::Exhausted{TaskPhase::Exhausted}else{TaskPhase::Blocked};
@@ -152,13 +174,14 @@ impl World {
         if let Action::Submit{..}=&action{if let Actor::Worker{id,..}=actor{
             ensure(!self.agents.get(id).and_then(|a|a.incarnations.last()).is_some_and(|i|i.executor.starts_with("routed:")),"routed result requires host adapter receipt")?;
         }}
-        let mut next=self.clone();let output=next.apply_inner(actor,action)?;next.reconcile_prepared()?;next.settle()?;next.reconcile_inference();next.refresh_handoffs();next.refresh_frontier_demand()?;
+        let mut next=self.clone();let output=next.apply_inner(actor,action)?;next.reconcile_prepared()?;next.reconcile_inference();next.refresh_routing_waits()?;next.settle()?;next.reconcile_inference();next.refresh_routing_waits()?;next.refresh_handoffs();next.refresh_frontier_demand()?;
         next.sequence=next.sequence.checked_add(1).ok_or("sequence overflow")?;*self=next;Ok(output)
     }
     pub(crate) fn apply_adapter_action(&mut self,actor:&Actor,action:Action)->Result<Value>{self.apply_inner(actor,action)}
     fn apply_inner(&mut self,actor:&Actor,action:Action)->Result<Value>{
         use Action::*;
         match action{
+            Genesis{manifest}=>{actor.host()?;return self.initialize_genesis(manifest);}
             Goal{id:key,parent,objective,claim_budget,predicate}=>{
                 actor.host()?;id(&key)?;ensure(!self.goals.contains_key(&key)&&!objective.trim().is_empty()&&claim_budget>0,"invalid goal")?;
                 if let Some(p)=&parent{ensure(!self.open_goal(p)?.sealed,"parent sealed")?;}
@@ -363,16 +386,7 @@ impl World {
                 a.wait_task=Some(task);a.phase=AgentPhase::WaitingDependency;
             }
             Cancel{goal}=>{
-                actor.host()?;self.open_goal(&goal)?;let mut todo=vec![goal];
-                while let Some(g)=todo.pop(){
-                    todo.extend(self.goals.values().filter(|x|x.parent.as_ref()==Some(&g)&&x.phase==GoalPhase::Open).map(|x|x.id.clone()));
-                    self.goals.get_mut(&g).unwrap().phase=GoalPhase::Cancelled;
-                    let affected:Vec<_>=self.tasks.values().filter(|t|t.spec.goal==g).map(|t|t.spec.id.clone()).collect();
-                    for t in affected{self.mark_prepared_unknown(&t,"goal cancelled");self.end_attempt(&t,"cancelled")?;}
-                    for t in self.tasks.values_mut().filter(|t|t.spec.goal==g&&t.phase!=TaskPhase::Verified){t.phase=TaskPhase::Cancelled;t.lease=None;t.proposal=None;}
-                    let agents:Vec<_>=self.agents.values().filter(|a|a.goal==g).map(|a|a.id.clone()).collect();
-                    for a in agents{self.end_agent(&a,"cancelled",true)?;}
-                }
+                actor.host()?;self.open_goal(&goal)?;self.terminate_subtree(&goal,GoalPhase::Cancelled,"goal cancelled")?;
             }
             AdmitCapability{capability}=>{actor.host()?;self.admit_capability(capability)?;}
             DisableCapability{capability}=>{
@@ -415,6 +429,7 @@ impl World {
             BindRoutingAdapter{binding}=>{actor.host()?;self.bind_routing_adapter(binding)?;}
             PrepareHandoff{reservation}=>{actor.host()?;return self.prepare_handoff(&reservation);}
             ClaimHandoff{handoff}=>{actor.host()?;return self.claim_handoff(&handoff);}
+            ReconcileHandoffCharge{receipt}=>{actor.host()?;return self.reconcile_handoff_charge(receipt);}
             FinishHandoff{receipt}=>{actor.host()?;return self.finish_handoff(receipt);}
             RoutingCycle{limit}=>{actor.host()?;return self.routing_cycle(limit);}
             RecordCost{task,generation,elapsed_ms}=>{actor.host()?;self.record_cost(&task,generation,elapsed_ms)?;}

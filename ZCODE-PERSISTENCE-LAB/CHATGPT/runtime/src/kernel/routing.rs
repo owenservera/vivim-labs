@@ -92,6 +92,7 @@ pub struct Demand{
     pub allowed_profiles:BTreeSet<Id>,pub allowed_providers:BTreeSet<Id>,
     #[serde(default)] pub excluded_providers:BTreeSet<Id>,
     pub allow_frontier:bool,pub independent_review:bool,
+    #[serde(default,skip_serializing_if="Option::is_none")] pub review_evidence:Option<Id>,
     #[serde(default="default_true")] pub prefer_native:bool,
     /// Optional extra pools for experiment/goal/task caps.
     pub extra_pools:BTreeSet<Id>,
@@ -116,6 +117,7 @@ pub struct Reservation{
     pub task_generation:Option<u64>,pub agent:Option<Id>,pub incarnation:Option<u64>,
     #[serde(default,skip_serializing_if="Option::is_none")] pub verified_ms:Option<u64>,
     #[serde(default,skip_serializing_if="Option::is_none")] pub batch_policy_version:Option<u64>,
+    #[serde(default,skip_serializing_if="Option::is_none")] pub not_evaluated_reason:Option<String>,
 }
 #[derive(Clone,Debug,Serialize,Deserialize,Default)]
 pub struct Performance{pub verified:u64,pub passed:u64,pub latency_sum_ms:u64,pub failures:u64}
@@ -136,6 +138,7 @@ pub struct Router{
     #[serde(default)] pub adapters:super::routing_adapter::AdapterState,
     #[serde(default)] pub batch_policy:super::routing_optimizer::BatchPolicy,
     #[serde(default)] pub evolution:super::routing_evolution::Evolution,
+    #[serde(default,skip_serializing_if="BTreeMap::is_empty")] pub waits:BTreeMap<Id,super::routing_wait::WaitRecord>,
 }
 fn active(r:&Reservation)->bool{matches!(r.status,Status::Reserved|Status::Dispatched|Status::Unknown)}
 fn bps(v:u64,b:u16)->u64{(u128::from(v)*u128::from(b)/10_000) as u64}
@@ -279,7 +282,7 @@ impl Router{
         let c=self.config()?;let d=self.demands.get(key).ok_or("routing demand missing")?;
         if !self.trial_allows(key){return Ok(Recommendation{chosen:None,eligible:vec![],excluded:BTreeMap::new(),reason:"outside active trial arm".into()});}
         let history:Vec<_>=self.reservations.values().filter(|r|r.demand==key).collect();
-        if history.iter().any(|r|active(r)||r.verified==Some(true)||(r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none())){
+        if history.iter().any(|r|active(r)||r.verified==Some(true)||(r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none()&&r.not_evaluated_reason.is_none())){
             return Ok(Recommendation{chosen:None,eligible:vec![],excluded:BTreeMap::new(),reason:"active, uncertain or already verified demand".into()});
         }
         if history.iter().filter(|r|r.status!=Status::Released).count()>=c.policy.max_attempts as usize||d.deadline_ms.is_some_and(|t|t<=self.clock_ms){
@@ -343,7 +346,7 @@ impl Router{
         let c=self.config()?;let p=c.profiles[&choice.profile].clone();let d=self.demands[demand].clone();
         let version=c.policy.version;
         let ceiling=d.usage_for(&p);
-        self.reservations.insert(key.clone(),Reservation{id:key.clone(),demand:demand.into(),goal:d.goal,task:d.task,family:d.family,profile:p,policy_version:version,created_ms:self.clock_ms,started_ms:None,ended_ms:None,status:Status::Reserved,ceiling,holds:choice.holds,actual:BTreeMap::new(),outcome:None,receipt:None,latency_ms:None,verified:None,evidence:None,estimated_success_bps:choice.expected_success_bps,task_generation:None,agent:None,incarnation:None,verified_ms:None,batch_policy_version:Some(self.batch_policy.version)});
+        self.reservations.insert(key.clone(),Reservation{id:key.clone(),demand:demand.into(),goal:d.goal,task:d.task,family:d.family,profile:p,policy_version:version,created_ms:self.clock_ms,started_ms:None,ended_ms:None,status:Status::Reserved,ceiling,holds:choice.holds,actual:BTreeMap::new(),outcome:None,receipt:None,latency_ms:None,verified:None,evidence:None,estimated_success_bps:choice.expected_success_bps,task_generation:None,agent:None,incarnation:None,verified_ms:None,batch_policy_version:Some(self.batch_policy.version),not_evaluated_reason:None});
         self.enroll_reservation(&key,demand)?;
         self.decisions.insert(key.clone(),rec.clone());
         Ok(json!({"reserved":true,"reservation":key,"decision":rec}))
@@ -412,13 +415,13 @@ impl Router{
     }
     pub fn reject_unusable_output(&mut self,key:&str)->Result<()>{
         let r=self.reservations.get_mut(key).ok_or("reservation missing")?;
-        ensure(r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none(),"not a completed unverified result")?;
+        ensure(r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none()&&r.not_evaluated_reason.is_none(),"not a completed unverified result")?;
         r.outcome=Some(Outcome::Rejected);
         let p=self.performance.entry(r.profile.id.clone()).or_default().entry(r.family.clone()).or_default();p.failures=p.failures.saturating_add(1);Ok(())
     }
     pub fn record_verified(&mut self,key:&str,accepted:bool,evidence:Id)->Result<()>{
         let r=self.reservations.get_mut(key).ok_or("reservation missing")?;
-        ensure(r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none(),"not eligible for verified feedback")?;
+        ensure(r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none()&&r.not_evaluated_reason.is_none(),"not eligible for verified feedback")?;
         r.verified=Some(accepted);r.evidence=Some(evidence);r.verified_ms=Some(self.clock_ms);
         let p=self.performance.entry(r.profile.id.clone()).or_default().entry(r.family.clone()).or_default();
         p.verified=p.verified.saturating_add(1);if accepted{p.passed=p.passed.saturating_add(1);}
@@ -427,6 +430,11 @@ impl Router{
     pub fn reconcile_stale(&mut self,live:&BTreeSet<(Id,u64)>){
         for r in self.reservations.values_mut().filter(|r|r.status==Status::Dispatched){
             if !r.task_generation.is_some_and(|g|live.contains(&(r.task.clone(),g))){r.status=Status::Unknown;}
+        }
+    }
+    pub fn discard_unverified(&mut self,live:&BTreeSet<(Id,u64)>){
+        for r in self.reservations.values_mut().filter(|r|r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none()&&r.not_evaluated_reason.is_none()){
+            if !r.task_generation.is_some_and(|g|live.contains(&(r.task.clone(),g))){r.not_evaluated_reason=Some("task generation no longer eligible for verification".into());}
         }
     }
     pub fn cancel_goal(&mut self,goal:&str){

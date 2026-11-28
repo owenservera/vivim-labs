@@ -45,7 +45,7 @@ pub struct Promotion{
 }
 fn outstanding(r:&super::routing::Reservation)->bool{
     matches!(r.status,Status::Reserved|Status::Dispatched|Status::Unknown)
-    ||r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none()
+    ||r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none()&&r.not_evaluated_reason.is_none()
 }
 fn signature(d:&super::routing::Demand)->Result<String>{
     let mut v=serde_json::to_value(d).map_err(|e|e.to_string())?;

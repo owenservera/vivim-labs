@@ -91,6 +91,11 @@ fn kernel_cli(args:&[String])->Result<(),String>{
         "anchor"=>serde_json::to_value(store.anchor()?).map_err(|e|e.to_string())?,
         "verify-anchor"=>{let anchor:Anchor=read_json(required(args,3,"anchor file")?)?;store.verify_anchor(&anchor)?;serde_json::json!({"verified":true})}
         "apply"=>{let request:Request=read_json(required(args,3,"request JSON file or -")?)?;store.apply(request)?}
+        "genesis"=>{
+            let manifest=read_json(required(args,3,"genesis manifest")?)?;
+            store.apply(Request{id:required(args,4,"request ID")?.into(),actor:Actor::Host,action:Action::Genesis{manifest}})?
+        }
+        "routing-waits"=>serde_json::to_value(store.inspect()?.router.waits).map_err(|e|e.to_string())?,
         "bootstrap"=>{
             let mut receipts=Vec::new();
             for contract in persistent_intelligence_runtime::kernel::native_operator_contracts()?{

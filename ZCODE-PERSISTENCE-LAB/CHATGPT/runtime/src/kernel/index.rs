@@ -9,6 +9,7 @@ use std::{collections::{BTreeMap,BTreeSet},fs,path::{Path,PathBuf},io::Write,tim
 
 fn err(e:impl std::fmt::Display)->String{e.to_string()}
 const PAGE_LIMIT:usize=64*1024*1024;
+const NESTED:&[&str]=&["router.demands","router.reservations","router.observations","router.performance","router.cooldowns","router.provider_cooldowns","router.decisions","router.waits","router.adapters.bindings","router.adapters.handoffs","router.adapters.receipts","router.adapters.quota_receipts","router.planning.forecasts","router.planning.pending_critical","router.evolution.trials","router.evolution.promotions","router.config.pools","router.config.profiles"];
 const MAPS:&[&str]=&["goals","tasks","agents","contexts","operators","classes","artifacts","evidence","blobs","checkpoints","messages","capabilities","learning_plans","learning_attempts","knowledge","run_costs","goal_versions","task_versions","effects","receipts","delivery","rollback_history","attempt_history","learning_costs","knowledge_rules","knowledge_publications","cohorts","frozen_candidates","custody_receipts"];
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct IndexRoot{
@@ -50,14 +51,18 @@ impl Index{
         let v:Value=serde_json::from_slice(&fs::read(p).map_err(err)?).map_err(err)?;
         ensure(digest(&v)==hash,"index object digest mismatch")?;Ok(v)
     }
-    fn bucket(key:&str)->String{digest(&Value::String(key.into()))[..2].to_owned()}
+    fn bucket(key:&str,schema:u32)->String{digest(&Value::String(key.into()))[..if schema==1{2}else{4}].to_owned()}
+    fn table_parent<'a>(object:&'a mut Map<String,Value>,name:&str)->Option<(&'a mut Map<String,Value>,String)>{
+        let mut parts=name.split('.').peekable();let mut parent=object;
+        while let Some(part)=parts.next(){if parts.peek().is_none(){return Some((parent,part.into()));}parent=parent.get_mut(part)?.as_object_mut()?;}None
+    }
     pub fn manifest(&self,hash:&str)->Result<IndexRoot>{
         let root:IndexRoot=serde_json::from_value(self.get(hash)?).map_err(err)?;
-        ensure(root.schema==1&&hash_id(&root.scalar)&&hash_id(&root.state_digest),"invalid index root")?;
+        ensure((root.schema==1||root.schema==2)&&hash_id(&root.scalar)&&hash_id(&root.state_digest),"invalid index root")?;
         for (table,buckets) in &root.tables{
-            ensure(MAPS.contains(&table.as_str()),"unknown index table")?;
+            ensure((MAPS.contains(&table.as_str())||root.schema==2&&NESTED.contains(&table.as_str())),"unknown index table")?;
             for (key,hash) in buckets{
-                ensure(key.len()==2&&key.bytes().all(|b|b.is_ascii_digit()||(b'a'..=b'f').contains(&b))&&hash_id(hash),"invalid bucket")?;
+                ensure(key.len()==(if root.schema==1{2}else{4})&&key.bytes().all(|b|b.is_ascii_digit()||(b'a'..=b'f').contains(&b))&&hash_id(hash),"invalid bucket")?;
             }
         }Ok(root)
     }
@@ -72,11 +77,12 @@ impl Index{
         let object=state.as_object_mut().unwrap();
         let old=previous.map(|x|self.manifest(x)).transpose()?;
         let mut tables=BTreeMap::new();
-        for &name in MAPS{
-            let Some(table)=object.remove(name) else{continue;};
+        for &name in MAPS.iter().chain(NESTED.iter()){
+            let Some((parent,key))=Self::table_parent(object,name) else{continue;};
+            let Some(table)=parent.remove(&key) else{continue;};
             let table=table.as_object().ok_or("index table must be map")?;
             let mut pages:BTreeMap<String,Map<String,Value>>=BTreeMap::new();
-            for (key,val) in table{pages.entry(Self::bucket(key)).or_default().insert(key.clone(),val.clone());}
+            for (key,val) in table{pages.entry(Self::bucket(key,2)).or_default().insert(key.clone(),val.clone());}
             let mut refs=BTreeMap::new();
             for (bucket,page) in pages{
                 let v=Value::Object(page);let hash=digest(&v);
@@ -87,32 +93,34 @@ impl Index{
             tables.insert(name.into(),refs);
         }
         let scalar=self.put(&state)?;
-        let root=IndexRoot{schema:1,revision,state_digest,scalar,tables};
+        let root=IndexRoot{schema:2,revision,state_digest,scalar,tables};
         self.put(&serde_json::to_value(root).map_err(err)?)
     }
     pub fn load(&self,hash:&str,revision:u64)->Result<(World,BTreeMap<Id,Receipt>)>{
         let root=self.manifest(hash)?;ensure(root.revision==revision,"index revision mismatch")?;
         let mut state=self.get(&root.scalar)?;
         let object=state.as_object_mut().ok_or("scalar state not object")?;
+        let schema=root.schema;
         for (name,refs) in root.tables{
             let mut table=Map::new();
             for (bucket,hash) in refs{
                 let page=self.get(&hash)?;
                 for (key,val) in page.as_object().ok_or("invalid index page")?{
-                    ensure(Self::bucket(key)==bucket,"index key in wrong bucket")?;
+                    ensure(Self::bucket(key,schema)==bucket,"index key in wrong bucket")?;
                     ensure(table.insert(key.clone(),val.clone()).is_none(),"duplicate index key")?;
                 }
             }
-            ensure(object.insert(name,Value::Object(table)).is_none(),"duplicate scalar/table")?;
+            let (parent,key)=Self::table_parent(object,&name).ok_or("missing nested table parent")?;
+            ensure(parent.insert(key,Value::Object(table)).is_none(),"duplicate scalar/table")?;
         }
         ensure(digest(&state)==root.state_digest,"index state digest mismatch")?;
         let receipts=state.as_object_mut().unwrap().remove("receipts").ok_or("receipt index missing")?;
         Ok((serde_json::from_value(state).map_err(err)?,serde_json::from_value(receipts).map_err(err)?))
     }
     pub fn lookup(&self,hash:&str,revision:u64,table:&str,key:&str)->Result<Option<Value>>{
-        ensure(MAPS.contains(&table),"unknown entity table")?;
+        ensure(MAPS.contains(&table)||NESTED.contains(&table),"unknown entity table")?;
         let root=self.manifest(hash)?;ensure(root.revision==revision,"index revision mismatch")?;
-        let Some(page)=root.tables.get(table).and_then(|t|t.get(&Self::bucket(key))) else{return Ok(None);};
+        let Some(page)=root.tables.get(table).and_then(|t|t.get(&Self::bucket(key,root.schema))) else{return Ok(None);};
         let v=self.get(page)?;
         Ok(v.as_object().ok_or("invalid index page")?.get(key).cloned())
     }

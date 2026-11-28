@@ -17,13 +17,15 @@ pub enum Action {
     Agent{id:Id,goal:Id,parent:Option<Id>,class:Id,context:Id},
     Activate{agent:Id,executor:String},BindExecutor{agent:Id,incarnation:u64,process_ref:String},
     MigrateAgent{agent:Id,class:Id,context:Id},Retire{agent:Id,reason:String},
-    Task{spec:TaskSpec},Refine{spec:TaskSpec},Seal{goal:Id},Slots{count:usize},
+    Task{spec:TaskSpec},Refine{spec:TaskSpec},RefineGraph{goal:Id,additions:Vec<TaskSpec>,revisions:Vec<TaskSpec>},Seal{goal:Id},Slots{count:usize},
     Claim{task:Id,agent:Id,ttl_ms:u64},Renew{task:Id,generation:u64,ttl_ms:u64},
     Checkpoint{task:Id,generation:u64,data:Value},
     Submit{task:Id,generation:u64,output:Value},Fail{task:Id,generation:u64,reason:String},
     Verify{task:Id},Tick{now_ms:u64},Send{id:Id,recipient:Id,body:Value},Ack{id:Id},
     WaitMessage{agent:Id},WaitDependency{agent:Id,task:Id},Cancel{goal:Id},
     AdmitCapability{capability:Capability},DisableCapability{capability:Id},
+    ConfigureLearning{plan:LearningPlan},LearnPlan{plan:Id},PublishKnowledge{knowledge:Knowledge},DisableKnowledge{knowledge:Id},
+    RecordCost{task:Id,generation:u64,elapsed_ms:u64},SetPolicy{policy:SchedulingPolicy},
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct Request {pub id:Id,pub actor:Actor,pub action:Action}
@@ -54,20 +56,15 @@ impl World {
         let mut v:Vec<_>=self.tasks.values().filter(|t|t.phase==TaskPhase::Pending&&t.attempts<t.spec.max_attempts
             &&self.goals.get(&t.spec.goal).is_some_and(|g|g.phase==GoalPhase::Open&&g.claims<g.claim_budget)
             &&t.spec.dependencies.iter().all(|d|self.tasks.get(d).is_some_and(|x|x.phase==TaskPhase::Verified))).collect();
-        v.sort_by_key(|t|{
-            let mut reached=BTreeSet::new();let mut todo=vec![t.spec.id.clone()];
-            while let Some(x)=todo.pop(){for s in self.tasks.values().filter(|s|s.phase==TaskPhase::Pending&&s.spec.dependencies.contains(&x)){
-                if reached.insert(s.spec.id.clone()){todo.push(s.spec.id.clone());}
-            }}
-            let score=i128::from(t.spec.priority)*1000+(reached.len() as i128)*100+i128::from(t.spec.uncertainty)*10-i128::from(t.spec.expected_cost);
-            (std::cmp::Reverse(score),t.spec.id.clone())
-        });v.into_iter().map(|t|t.spec.id.clone()).collect()
+        let scores=self.schedule_scores();
+        v.sort_by_key(|t|(std::cmp::Reverse(scores.get(&t.spec.id).copied().unwrap_or(0)),t.spec.id.clone()));
+        v.into_iter().map(|t|t.spec.id.clone()).collect()
     }
     fn release(&mut self,task:&str,reason:&str)->Result<()>{
         let t=self.tasks.get_mut(task).ok_or("task missing")?;
-        let worker=t.lease.take().map(|l|l.worker);t.proposal=None;t.reason=Some(reason.into());
+        let was_running=t.phase==TaskPhase::Running;let worker=t.lease.take().map(|l|l.worker);t.proposal=None;t.reason=Some(reason.into());
         t.phase=if t.attempts>=t.spec.max_attempts{TaskPhase::Exhausted}else{TaskPhase::Pending};
-        if let Some(w)=worker{if let Some(a)=self.agents.get_mut(&w){
+        if let Some(w)=worker.filter(|_|was_running){if let Some(a)=self.agents.get_mut(&w){
             if a.phase!=AgentPhase::Archived{a.phase=AgentPhase::Recovering;}
         }}
         self.metrics.failures=self.metrics.failures.saturating_add(1);Ok(())
@@ -140,6 +137,7 @@ impl World {
             ReviseGoal{goal,objective,predicate}=>{
                 actor.host()?;let g=self.open_goal(&goal)?;ensure(!g.sealed&&!objective.trim().is_empty(),"sealed or empty goal")?;
                 if let Some(o)=&predicate{o.validate(0)?;}
+                let prior=self.goals[&goal].clone();self.goal_versions.entry(goal.clone()).or_default().push(prior);
                 let g=self.goals.get_mut(&goal).unwrap();g.version=g.version.checked_add(1).ok_or("version overflow")?;g.objective=objective;g.predicate=predicate;
             }
             Operator{contract}=>{
@@ -193,7 +191,21 @@ impl World {
                 actor.host()?;let t=self.tasks.get(&spec.id).ok_or("task missing")?;
                 ensure(t.phase==TaskPhase::Pending&&t.attempts==0&&t.spec.goal==spec.goal,"only unstarted task may be refined")?;
                 ensure(t.spec.output==spec.output,"refinement changes downstream output contract")?;self.validate_task(&spec,true)?;
+                let prior=self.tasks[&spec.id].spec.clone();self.task_versions.entry(spec.id.clone()).or_default().push(prior);
                 let t=self.tasks.get_mut(&spec.id).unwrap();t.version=t.version.checked_add(1).ok_or("version overflow")?;t.spec=spec;
+            }
+            RefineGraph{goal,additions,revisions}=>{
+                actor.host()?;self.open_goal(&goal)?;
+                ensure(additions.len()+revisions.len()<=MAX_GRAPH_NODES,"graph refinement budget")?;
+                for spec in additions {
+                    ensure(spec.goal==goal&&!self.tasks.contains_key(&spec.id),"invalid graph addition")?;
+                    self.validate_task(&spec,true)?;
+                    self.tasks.insert(spec.id.clone(),super::model::Task{spec,version:1,phase:TaskPhase::Pending,attempts:0,generation:0,lease:None,input:None,proposal:None,artifact:None,reason:None,assigned_class:None,assigned_context:None});
+                }
+                for spec in revisions {
+                    ensure(spec.goal==goal,"cross-goal refinement")?;
+                    self.apply_inner(actor,Refine{spec})?;
+                }
             }
             Seal{goal}=>{
                 actor.host()?;self.open_goal(&goal)?;
@@ -204,9 +216,10 @@ impl World {
             Claim{task,agent,ttl_ms}=>{
                 actor.host()?;ensure(ttl_ms>0&&self.running()<self.slots&&self.ready().contains(&task),"no ready slot")?;
                 let t=&self.tasks[&task];let a=self.agents.get(&agent).ok_or("agent missing")?;
-                ensure(a.goal==t.spec.goal&&!matches!(a.phase,AgentPhase::Running|AgentPhase::WaitingMessage|AgentPhase::Archived),"agent not eligible")?;
+                ensure(a.goal==t.spec.goal&&matches!(a.phase,AgentPhase::Dormant|AgentPhase::Recovering),"agent not eligible")?;
                 let incarnation=self.current_incarnation(&agent)?;
                 if let Some(class)=self.match_class(&t.spec){ensure(class==a.class,"class not eligible")?;}
+                else{ensure(t.spec.class.is_none(),"explicit class disabled")?;}
                 if let Some(context)=&t.spec.context{ensure(context==&a.context,"context not authorized for task")?;}
                 let assigned_class=a.class.clone();let assigned_context=a.context.clone();
                 let c=self.contexts.get(&a.context).ok_or("context missing")?;
@@ -254,9 +267,10 @@ impl World {
                     self.artifacts.insert(task.clone(),Artifact{id:task.clone(),version:t.version,payload:candidate,task:task.clone(),generation:t.generation,inputs:parents,evidence:evidence_id});
                     let x=self.tasks.get_mut(&task).unwrap();x.artifact=Some(task.clone());x.phase=TaskPhase::Verified;x.lease=None;x.proposal=None;
                     self.metrics.accepted=self.metrics.accepted.saturating_add(1);
-                    if t.assigned_class.is_some(){self.metrics.deterministic_runs=self.metrics.deterministic_runs.saturating_add(1);}
-                    if t.spec.class.is_none()&&t.spec.family.is_some()&&t.assigned_class.is_some(){self.metrics.reused=self.metrics.reused.saturating_add(1);}
-                }else{self.metrics.rejected=self.metrics.rejected.saturating_add(1);self.release(&task,"oracle rejected")?;}
+                    let native=self.run_costs.contains_key(&format!("{task}-{}",t.generation));
+                    if native{self.metrics.deterministic_runs=self.metrics.deterministic_runs.saturating_add(1);}
+                    if native&&t.spec.class.is_none()&&t.spec.family.is_some()&&t.assigned_class.is_some(){self.metrics.reused=self.metrics.reused.saturating_add(1);}
+                }else{self.metrics.rejected=self.metrics.rejected.saturating_add(1);self.metrics.verification_rejections=self.metrics.verification_rejections.saturating_add(1);self.release(&task,"oracle rejected")?;}
                 return Ok(json!({"accepted":accepted,"task":task}));
             }
             Tick{now_ms}=>{
@@ -295,7 +309,22 @@ impl World {
                 }
             }
             AdmitCapability{capability}=>{actor.host()?;self.admit_capability(capability)?;}
-            DisableCapability{capability}=>{actor.host()?;self.capabilities.get_mut(&capability).ok_or("capability missing")?.enabled=false;}
+            DisableCapability{capability}=>{
+                actor.host()?;let c=self.capabilities.get_mut(&capability).ok_or("capability missing")?;c.enabled=false;
+                let class=c.class.clone();if !self.capabilities.values().any(|x|x.enabled&&x.class==class){
+                    for k in self.knowledge.values_mut().filter(|k|k.class.as_ref()==Some(&class)){k.enabled=false;}
+                }
+            }
+            ConfigureLearning{plan}=>{actor.host()?;let k=self.configure_learning(plan)?;return Ok(json!({"plan":k}));}
+            LearnPlan{plan}=>{actor.host()?;return self.run_learning(&plan);}
+            PublishKnowledge{knowledge}=>{actor.host()?;let key=self.publish_knowledge(knowledge)?;return Ok(json!({"knowledge":key}));}
+            DisableKnowledge{knowledge}=>{actor.host()?;self.knowledge.get_mut(&knowledge).ok_or("knowledge missing")?.enabled=false;}
+            RecordCost{task,generation,elapsed_ms}=>{actor.host()?;self.record_cost(&task,generation,elapsed_ms)?;}
+            SetPolicy{policy}=>{
+                actor.host()?;ensure(policy.version>self.policy.version,"policy version must increase")?;
+                ensure([policy.priority_weight,policy.critical_weight,policy.uncertainty_weight,policy.information_weight,policy.cost_weight].iter().all(|w|*w<=100_000),"policy weights exceed budget")?;
+                self.policy=policy;
+            }
         }
         Ok(json!({"ok":true}))
     }

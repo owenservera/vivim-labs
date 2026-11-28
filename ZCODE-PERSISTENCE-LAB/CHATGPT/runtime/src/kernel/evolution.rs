@@ -102,7 +102,7 @@ pub struct SearchReceipt{
 /// is finite: projections (including nested fields), constants, hash,
 /// arithmetic, equality, concatenation, arrays and conditionals. A strict
 /// candidate/retained-term budget bounds the enumeration.
-fn synthesize(input:&Shape,output:&Shape,train:&[(Value,Value)],limit:u64,receipt:&mut SearchReceipt)->Result<Expr>{
+pub(crate) fn synthesize(input:&Shape,output:&Shape,train:&[(Value,Value)],limit:u64,receipt:&mut SearchReceipt)->Result<Expr>{
     const MAX_TERMS:usize=128;
     const MAX_ROUNDS:usize=4;
     fn fields(shape:&Shape,source:&Expr,depth:usize,terms:&mut Vec<Expr>){

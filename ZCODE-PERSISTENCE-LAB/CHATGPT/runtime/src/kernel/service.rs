@@ -47,7 +47,7 @@ pub fn serve(store:&Path,workspace:&Path,ledger:&Path,config:ServiceConfig)->Res
     let epoch=m["start_ms"].as_u64().ok_or("missing service epoch")?;
     let wall=now()?;ensure(wall>=epoch,"clock reversed across service restart; operator review required")?;
     let start=Instant::now();
-    let mut starts=0u32;let mut jobs=0u64;let mut learning=0u64;
+    let mut starts=0u32;let mut jobs=0u64;let mut learning=0u64;let mut completed=false;
     // Reservations are immutable and survive a crash before spawn or receipt.
     loop{
         let path=ledger.join(format!("start-{:04}.json",starts+1));
@@ -59,14 +59,14 @@ pub fn serve(store:&Path,workspace:&Path,ledger:&Path,config:ServiceConfig)->Res
         starts+=1;
         if !ledger.join(format!("exit-{starts:04}.json")).exists(){
             write(&ledger.join(format!("exit-{starts:04}.json")),&json!({"ordinal":starts,"outcome":"unknown_after_service_restart","charged":true}))?;
-        }
+        }else if read(&ledger.join(format!("exit-{starts:04}.json")))?["result"]["success"]==true{completed=true;}
     }
     ensure(starts<=config.max_starts&&jobs<=config.max_reserved_jobs&&learning<=config.max_reserved_learning,"service budget exceeded")?;
     let elapsed=||wall.saturating_sub(epoch).saturating_add(start.elapsed().as_millis().min(u128::from(u64::MAX)) as u64);
     let stop=||ledger.join("STOP").exists()||workspace.join("STOP").exists();
     let exe=std::env::current_exe().map_err(err)?;
-    let mut reason="budget";
-    while starts<config.max_starts&&jobs<config.max_reserved_jobs&&elapsed()<config.duration_ms&&!stop(){
+    let mut reason=if completed{"controller_completed"}else{"budget"};
+    while !completed&&starts<config.max_starts&&jobs<config.max_reserved_jobs&&elapsed()<config.duration_ms&&!stop(){
         let mut run=config.controller.clone();
         run.duration_ms=run.duration_ms.min(config.duration_ms.saturating_sub(elapsed()));
         run.max_jobs=run.max_jobs.min(config.max_reserved_jobs-jobs);
@@ -74,8 +74,8 @@ pub fn serve(store:&Path,workspace:&Path,ledger:&Path,config:ServiceConfig)->Res
         if run.duration_ms==0||run.max_jobs==0{break;}
         starts+=1;jobs+=run.max_jobs;learning+=run.max_learning_plans;
         let runfile=ledger.join(format!("config-{starts:04}.json"));
-        write(&runfile,&serde_json::to_value(&run).map_err(err)?)?;
         write(&ledger.join(format!("start-{starts:04}.json")),&json!({"ordinal":starts,"config":pin,"jobs":run.max_jobs,"learning":run.max_learning_plans,"started_ms":now()?}))?;
+        write(&runfile,&serde_json::to_value(&run).map_err(err)?)?;
         let output=OpenOptions::new().create_new(true).write(true).open(ledger.join(format!("stdout-{starts:04}.json"))).map_err(err)?;
         let errors=OpenOptions::new().create_new(true).write(true).open(ledger.join(format!("stderr-{starts:04}.log"))).map_err(err)?;
         let child=Command::new(&exe).arg("kernel-controller").arg(&store).arg(&workspace).arg(&runfile)

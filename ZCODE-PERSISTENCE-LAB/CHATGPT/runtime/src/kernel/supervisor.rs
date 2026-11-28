@@ -56,11 +56,11 @@ impl RunConfig{
 }
 fn suitable(w:&World,task:&Task,class:&str)->Option<Id>{
     w.agents.values().filter(|a|a.goal==task.spec.goal&&a.class==class&&matches!(a.phase,AgentPhase::Dormant|AgentPhase::Recovering|AgentPhase::WaitingDependency))
-        .filter(|a|w.contexts.get(&a.context).is_some_and(|c|w.assemble(&task.spec,c).is_ok()))
+        .filter(|a|task.spec.context.as_ref().is_none_or(|c|c==&a.context)&&w.contexts.get(&a.context).is_some_and(|c|w.assemble(&task.spec,c).is_ok()))
         .min_by_key(|a|(a.incarnations.len(),a.id.clone())).map(|a|a.id.clone())
 }
 fn genesis(store:&KernelStore,w:&World,task:&Task,class:&str)->Result<Id>{
-    let context=w.contexts.iter().find(|(_,c)|w.assemble(&task.spec,c).is_ok()).map(|(k,_)|k.clone());
+    let context=task.spec.context.clone();
     let context=match context{Some(c)=>c,None=>{
         let key="native-empty@1".to_string();
         let c=Context{id:"native-empty".into(),version:1,entries:BTreeMap::new(),artifacts:BTreeMap::new(),byte_budget:MAX_VALUE_BYTES};
@@ -75,6 +75,7 @@ fn genesis(store:&KernelStore,w:&World,task:&Task,class:&str)->Result<Id>{
 /// old workers have no store access and late results are fenced by lease generation.
 pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Value>{
     config.validate()?;
+    let _controller=store.controller_lock()?;
     fs::create_dir_all(workspace).map_err(error)?;
     let workspace=workspace.canonicalize().map_err(error)?;
     let exe=std::env::current_exe().map_err(error)?;
@@ -127,7 +128,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             for key in w.ready(){
                 let t=&w.tasks[&key];
                 if let Some(class)=w.match_class(&t.spec){
-                    if suitable(&w,t,&class).is_some()||w.contexts.values().any(|c|w.assemble(&t.spec,c).is_ok())||!t.spec.inputs.values().any(|p|matches!(&p.binding,Binding::Context{..})){
+                    if suitable(&w,t,&class).is_some()||t.spec.context.as_ref().and_then(|k|w.contexts.get(k)).is_some_and(|c|w.assemble(&t.spec,c).is_ok())||!t.spec.inputs.values().any(|p|matches!(&p.binding,Binding::Context{..})){
                         choice=Some((key,class));break;
                     }
                 }
@@ -148,7 +149,9 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
                 let input=attempt.join("work.json");let output=attempt.join("output.json");
                 fs::write(&input,serde_json::to_vec(&work).map_err(error)?).map_err(error)?;
                 let child=Command::new(&exe).arg("kernel-compute").arg(&input).arg(&output).current_dir(&attempt).stdin(Stdio::null()).stdout(Stdio::null()).stderr(Stdio::null()).spawn().map_err(error)?;
-                Ok(Job{child,task:task.clone(),worker:worker.clone(),incarnation:lease.incarnation,generation:lease.generation,output,started:Instant::now()})
+                let job=Job{child,task:task.clone(),worker:worker.clone(),incarnation:lease.incarnation,generation:lease.generation,output,started:Instant::now()};
+                host(store,Action::BindExecutor{agent:worker.clone(),incarnation:lease.incarnation,process_ref:format!("native-pid-{}",job.child.id())})?;
+                Ok(job)
             })();
             launched+=1;progress=true;
             match launch{Ok(job)=>jobs.push(job),Err(reason)=>{apply(store,actor,Action::Fail{task,generation:lease.generation,reason})?;failures+=1;}}

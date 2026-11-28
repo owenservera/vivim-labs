@@ -99,7 +99,7 @@ function parse(provider,r){
  const sessions=[...new Set(f.filter(x=>x.event==='init').map(x=>x.conversation_id).filter(Boolean))];
  const result=f.filter(x=>x.event==='result').at(-1)?.result;
  const init=f.find(x=>x.event==='init')?.init;
- const tools=f.filter(x=>x.event==='step_update').map(x=>x.step_update?.step_type).filter(x=>x&&!['user_input','agent_response','thinking','reasoning'].includes(x));
+ const tools=f.filter(x=>x.event==='step_update').map(x=>x.step_update?.step_type).filter(x=>x&&!['user_input','agent_response','thinking','reasoning','system_message'].includes(x));
  return {session:sessions.length===1?sessions[0]:null,terminal:result?.status==='SUCCESS'&&result?.conversation_id===sessions[0],answer:result?.response,tools:[...new Set(tools)],cwd:init?.cwd,permission_mode:init?.permission_mode,usage:result?.usage??null};
 }
 function argsFor(provider,workspace,prompt,session){
@@ -107,7 +107,7 @@ function argsFor(provider,workspace,prompt,session){
   const flags=['--json','--skip-git-repo-check','--ignore-user-config','-c','approval_policy="never"','-c','sandbox_workspace_write.network_access=false'];
   return session?{args:['exec','resume',...flags,'-c','sandbox_mode="read-only"',session,'-'],input:prompt}:{args:['exec',...flags,'--sandbox','read-only','--cd',workspace,'-'],input:prompt};
  }
- const flags=['--sandbox','--disable-slash-commands','--mode','plan','--print-timeout','75s','--output-format','stream-json'];
+ const flags=['--sandbox','--disable-slash-commands','--print-timeout','75s','--output-format','stream-json'];
  return {args:[...flags,...(session?['--conversation',session]:[]),'--print',prompt],input:null};
 }
 async function smokeLane(root,id,provider){
@@ -142,7 +142,11 @@ async function smoke(){
  json(path.join(root,'summary.json'),{scope:'transport only',root,passed,rows,campaign_started:false});
  console.log(JSON.stringify({root,passed,rows}));if(!passed)process.exitCode=2;
 }
+async function smokeSingle(id){
+ if(!lanes[id])fail('invalid lane');const root=newRoot('smoke-single');checkOutside(root);console.log(JSON.stringify({root,lane:id,status:'STARTED_SYNTHETIC_ONLY'}));const result=await smokeLane(root,id,lanes[id]);json(path.join(root,'summary.json'),{scope:'transport only',root,passed:result.pass,rows:[result],campaign_started:false});console.log(JSON.stringify(result));if(!result.pass)process.exitCode=2;
+}
 const action=process.argv[2];
 if(action==='prepare')prepare();
 else if(action==='smoke')await smoke();
-else fail('usage: node CLI-SETUP.mjs prepare|smoke; no campaign command is provided');
+else if(action==='smoke-single')await smokeSingle(process.argv[3]);
+else fail('usage: node CLI-SETUP.mjs prepare|smoke|smoke-single <lane>; no campaign command is provided');

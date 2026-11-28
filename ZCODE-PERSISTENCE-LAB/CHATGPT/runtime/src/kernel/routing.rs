@@ -143,6 +143,7 @@ fn amount(pool:&Pool,p:&Profile,u:&Usage)->Result<u64>{
     }
 }
 impl Router{
+    pub fn is_empty(&self)->bool{self.config.is_none()&&self.demands.is_empty()&&self.reservations.is_empty()}
     fn config(&self)->Result<&Config>{self.config.as_ref().ok_or("routing not configured".into())}
     pub fn configure(&mut self,c:Config)->Result<()>{
         ensure(c.policy.version>0&&c.policy.max_attempts>0&&c.policy.max_attempts<=64,"invalid routing policy")?;

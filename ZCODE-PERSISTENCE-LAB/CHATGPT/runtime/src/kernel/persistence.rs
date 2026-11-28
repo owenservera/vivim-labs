@@ -190,6 +190,24 @@ impl KernelStore{
         if !loaded.receipts.contains_key(command.id()){authority.authorize(&signed,&loaded.world,now_ms)?;}
         self.commit_loaded(command,loaded)
     }
+    /// Explicit trusted-host action. Unknown effects can only be observed, not
+    /// executed. A publication and its receipt can be separated by a crash;
+    /// the next observation proves the existing immutable object.
+    pub fn local_effect(&self,effect:&str,publish:bool)->Result<Value>{
+        id(effect)?;
+        let _guard=self.lock()?;let loaded=self.load()?;
+        let e=loaded.world.effects.get(effect).ok_or("effect missing")?.clone();
+        if e.phase==EffectPhase::Committed{return Ok(json!({"effect":effect,"phase":"committed","receipt":e.receipt}));}
+        ensure(matches!(e.phase,EffectPhase::Prepared|EffectPhase::Unknown),"effect is not reconcilable")?;
+        if publish{
+            let t=loaded.world.tasks.get(&e.task).ok_or("effect task missing")?;
+            ensure(e.phase==EffectPhase::Prepared&&t.phase==TaskPhase::Running&&t.generation==e.generation&&t.lease.as_ref().is_some_and(|l|loaded.world.clock_ms<l.deadline_ms)&&loaded.world.goals.get(&t.spec.goal).is_some_and(|g|g.phase==GoalPhase::Open),"publication no longer authorized")?;
+        }
+        let payload=loaded.world.payload(&e.payload)?;
+        let (outcome,receipt)=super::local_effect::observe(&self.root,&e,payload,publish)?;
+        let request= Request{id:format!("local-{}",digest(&json!([effect,e.generation,&receipt]))),actor:Actor::Host,action:Action::ResolveEffect{effect:effect.into(),outcome,receipt}};
+        self.commit_loaded(Transaction::Command{request},loaded)
+    }
     fn commit(&self,command:Transaction)->Result<Value>{
         let _guard=self.lock()?;let loaded=self.load()?;self.commit_loaded(command,loaded)
     }

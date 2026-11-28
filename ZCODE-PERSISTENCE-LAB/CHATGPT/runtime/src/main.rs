@@ -20,6 +20,12 @@ fn kernel_cli(args:&[String])->Result<(),String>{
         "lookup"=>store.lookup(required(args,3,"table")?,required(args,4,"entity ID")?)?.unwrap_or(Value::Null),
         "collect"=>serde_json::json!({"objects_removed":store.collect_garbage()?}),
         "population"=>store.inspect()?.audit_population(),
+        "routing-adapter-queue"=>store.inspect()?.adapter_queue(required(args,3,"adapter ID")?)?,
+        "routing-refresh-plan"=>store.inspect()?.router.quota_refresh_plan()?,
+        "routing-cycle"=>{
+            let limit=required(args,3,"reservation limit")?.parse::<usize>().map_err(|e|e.to_string())?;
+            store.apply(Request{id:required(args,4,"request ID")?.into(),actor:Actor::Host,action:Action::RoutingCycle{limit}})?
+        },
         "routing-budget"=>store.inspect()?.router.budget_report()?,
         "routing-plan"=>store.inspect()?.inference_plan()?,
         "routing-recommend"=>serde_json::to_value(store.inspect()?.router.recommend(required(args,3,"demand ID")?)?).map_err(|e|e.to_string())?,

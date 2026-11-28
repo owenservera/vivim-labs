@@ -1,4 +1,5 @@
 //! Durable provider-neutral runtime. No external effects or AI adapters.
+pub mod kernel;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use sha2::{Digest, Sha256};
@@ -57,7 +58,8 @@ pub enum Expr {
     Array { items: Vec<Expr> }, Add { left: Box<Expr>, right: Box<Expr> },
     Multiply { left: Box<Expr>, right: Box<Expr> }, Concat { items: Vec<Expr> },
     Equal { left: Box<Expr>, right: Box<Expr> }, Sha256 { value: Box<Expr> },
-    If { condition: Box<Expr>, yes: Box<Expr>, no: Box<Expr> }
+    If { condition: Box<Expr>, yes: Box<Expr>, no: Box<Expr> },
+    Behavior { operator: Operator, source: Box<Expr> }
 }
 impl Expr {
     pub fn eval(&self, input: &Value) -> Result<Value> {
@@ -81,6 +83,7 @@ impl Expr {
                 }
                 Expr::Equal {left,right} => Value::Bool(run(left,input,fuel,depth+1)?==run(right,input,fuel,depth+1)?),
                 Expr::Sha256 {value} => Value::String(digest(&run(value,input,fuel,depth+1)?)),
+                Expr::Behavior {operator,source} => kernel::behavior::evaluate(operator,&run(source,input,fuel,depth+1)?)?,
                 Expr::If {condition,yes,no} => {
                     let b=run(condition,input,fuel,depth+1)?.as_bool().ok_or("expected boolean")?;
                     run(if b {yes} else {no},input,fuel,depth+1)?

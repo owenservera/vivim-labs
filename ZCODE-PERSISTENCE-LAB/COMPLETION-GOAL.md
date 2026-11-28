@@ -12,9 +12,9 @@ A candidate is complete only when the frozen mandatory contract is satisfied by 
 
 Work only within your assigned workspace. Do not access unrelated files, services or other conversations. No deployment, purchases, network or privileged actions unless separately authorized by the controller.
 
-## Common system goals — R012
+## Common system goals — R013
 
-These outcomes are mandatory for this release, not a prescribed architecture. The external experiment controller owns actual inference admission, but the system you build must independently implement and demonstrate its own routing and resource allocation capabilities. Do not assume the controller's existing policy is your solution. G01 is the first explicit system goal; prioritize dependencies as necessary. Interpret optimality relative to a bounded workload, measured baselines and declared constraints, not universal optimality.
+These are mandatory outcomes, not architecture prescriptions. The external controller owns actual admission and independent verification; you must implement the capabilities in your own system. G01 is the first explicit goal. Prioritize dependencies as needed. Optimality is conditional on a declared workload, evidence and constraints.
 
 ### G01 — Optimal model router
 Select the least sufficient authorized intelligence for each task, including no inference when deterministic execution suffices; adapt model, reasoning effort and escalation to actual task needs.
@@ -27,9 +27,9 @@ Convert live subscription limits, user-defined budgets, resource availability an
 Demonstrate: Execute controlled budget and contention traces, including stale observations, exhaustion, failure, reset, unknown costs and concurrent requests. Never silently overspend, borrow reserved allocations or purchase capacity; show measured progress per resource unit.
 
 ### G03 — Autonomous goal management
-Infer a finite, defensible definition of completeness from objectives; discover missing obligations, organize dependencies and prioritize the most valuable unfinished work.
+Maintain persistent objectives, discover missing obligations, organize dependencies, choose next actions and preserve outstanding work independently of execution resources.
 
-Demonstrate: Derive and freeze a contract on a bounded novel objective, detect omitted essential behavior, revise transparently, track obligations and distinguish candidate completion, budget pause and verified completion.
+Demonstrate: Track a bounded novel objective through decomposition, dependencies, interruptions, changed conditions and reprioritization; keep budget suspension distinct from success.
 
 ### G04 — Persistent execution
 Preserve goals, knowledge, work, identity and outstanding obligations independently of workers, provider conversations and controller lifetimes.
@@ -56,4 +56,15 @@ Learn from verified outcomes, resource consumption and failures to improve the s
 
 Demonstrate: On held-out workloads compare a versioned improved policy to its baseline, bound exploration, account for its cost, retain regressions and permit rollback when evidence does not support improvement.
 
-Map every mandatory contract criterion to one or more goal IDs using a goal_ids array. Every G01–G08 must have substantive acceptance coverage. Joint criteria may cover multiple goals when the evidence really supports them. Do not replace implementation with a design document. Define the smallest meaningful release that satisfies every goal, and treat optional extensions as future work.
+### G09 — Autonomous sufficiency and evolution
+Determine what is enough for a specific purpose, operating envelope and evidence standard. Separate essential unmet obligations from optional improvements; distinguish verified functional sufficiency, economically justified optimization, resource suspension and invalidated sufficiency.
+
+Demonstrate: For at least two materially different bounded objectives, derive and defend a finite release contract before implementation. Demonstrate rejection of unsupported completion and disguised scope reduction, acceptance of an adequate release with a nonempty optional backlog, a justified decision to continue or defer optional work under uncertainty, and targeted reopening when assumptions, evidence or purpose change. Persist historical release judgments and explain the reason for each transition. No universal optimality or permanent finality claim.
+
+## Sufficiency, not finality
+
+A release is sufficient relative to a versioned purpose, operating envelope, acceptance standard, candidate and evidence. Define all five explicitly. Distinguish essential obligations from optional opportunities. A nonempty opportunity backlog does not prevent functional sufficiency. Resource exhaustion does not make an essential obligation optional. Unknown evidence is not positive evidence. A claimed economically unjustified optimization must identify its expected benefit, incremental cost, uncertainty, and decision threshold; lack of budget is a separate condition, not proof of diminishing returns. Do not claim universal optimality.
+
+Persist the sufficiency judgment and conditions that invalidate it. Reopen only affected obligations when purpose, operating assumptions, requirements, candidate or evidence changes, with a reason and review of dependencies; retain past judgments as historical facts. A completed release remains a versioned accomplishment even when future releases are needed. Independently verify all mandatory criteria on the same candidate before release acceptance. No perpetual improvement loop is required. The system must demonstrate these decisions on at least two bounded objectives, not just describe its own development process.
+
+Map each mandatory criterion to one or more goal IDs using goal_ids. All G01–G09 must receive substantive coverage. In the completion proposal include purpose, operating_envelope, evidence_standard, reopening_triggers, optional_backlog (may be empty), release_boundary and out_of_scope. Optional backlog entries should identify expected benefit, incremental cost, uncertainty and intended decision criterion. These fields describe the release boundary, not a prescribed architecture.

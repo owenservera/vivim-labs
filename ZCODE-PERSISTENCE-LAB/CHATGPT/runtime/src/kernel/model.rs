@@ -24,7 +24,7 @@ pub fn hash_id(s: &str) -> bool {
 #[serde(tag="kind",rename_all="snake_case")]
 pub enum Shape {
     Any, Null, Bool, Integer, String, Array { item: Box<Shape> },
-    Record { fields: BTreeMap<String, Shape> }
+    Record { fields: BTreeMap<String, Shape> }, Map { value:Box<Shape> }, OneOf { choices:Vec<Shape> }
 }
 impl Shape {
     pub fn accepts(&self, v: &Value) -> bool {
@@ -32,6 +32,8 @@ impl Shape {
             Self::Any => true, Self::Null => v.is_null(), Self::Bool => v.is_boolean(),
             Self::Integer => v.as_i64().is_some(), Self::String => v.is_string(),
             Self::Array{item} => v.as_array().is_some_and(|a| a.iter().all(|x|item.accepts(x))),
+            Self::Map{value}=>v.as_object().is_some_and(|o|o.values().all(|x|value.accepts(x))),
+            Self::OneOf{choices}=>choices.iter().any(|s|s.accepts(v)),
             Self::Record{fields} => v.as_object().is_some_and(|o| o.len()==fields.len() &&
                 fields.iter().all(|(k,s)|o.get(k).is_some_and(|x|s.accepts(x))))
         }
@@ -40,6 +42,10 @@ impl Shape {
     pub fn admits(&self, source:&Shape)->bool {
         if self==&Self::Any || self==source { return true; }
         match (self,source) {
+            (_,Self::OneOf{choices})=>choices.iter().all(|s|self.admits(s)),
+            (Self::OneOf{choices},_)=>choices.iter().any(|s|s.admits(source)),
+            (Self::Map{value:a},Self::Map{value:b})=>a.admits(b),
+            (Self::Map{value:a},Self::Record{fields})=>fields.values().all(|s|a.admits(s)),
             (Self::Array{item:a},Self::Array{item:b})=>a.admits(b),
             (Self::Record{fields:a},Self::Record{fields:b})=>a.len()==b.len()&&a.iter().all(|(k,s)|b.get(k).is_some_and(|x|s.admits(x))),
             _=>false
@@ -152,7 +158,7 @@ pub struct OperatorContract {
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(tag="source",rename_all="snake_case")]
-pub enum Wire { Input, Node { id:Id } }
+pub enum Wire { Input, Node { id:Id }, Field { source:Box<Wire>, key:String }, Record { fields:BTreeMap<String,Wire> }, Array { items:Vec<Wire> }, Literal { value:Value, shape:Shape } }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Node { pub id:Id, pub operator:Id, pub input:Wire }
 #[derive(Clone, Debug, Serialize, Deserialize)]

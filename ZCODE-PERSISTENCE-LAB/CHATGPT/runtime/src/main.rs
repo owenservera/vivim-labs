@@ -18,6 +18,14 @@ fn kernel_cli(args:&[String])->Result<(),String>{
         "inspect"=>serde_json::to_value(store.inspect()?).map_err(|e|e.to_string())?,
         "ready"=>serde_json::json!(store.inspect()?.ready()),
         "lookup"=>store.lookup(required(args,3,"table")?,required(args,4,"entity ID")?)?.unwrap_or(Value::Null),
+        "scan"=>{
+            let table=required(args,3,"table")?;
+            let limit=required(args,4,"entry limit")?.parse::<usize>().map_err(|e|e.to_string())?;
+            let pages=required(args,5,"page limit")?.parse::<usize>().map_err(|e|e.to_string())?;
+            let bytes=required(args,6,"byte budget")?.parse::<usize>().map_err(|e|e.to_string())?;
+            let cursor=args.get(7).map(|p|read_json(p)).transpose()?;
+            store.scan(table,cursor,limit,pages,bytes)?
+        },
         "collect"=>serde_json::json!({"objects_removed":store.collect_garbage()?}),
         "population"=>store.inspect()?.audit_population(),
         "resources"=>store.inspect()?.resource_report(),

@@ -86,3 +86,28 @@ fn native_attempt_accounting_is_atomic_and_host_owned(){
     assert!(w.transition(&host,Action::RecordAttemptAccounting{receipt:r}).is_err());
     assert_eq!(w.metrics.worker_elapsed_ms,17);
 }
+#[test]
+fn initialization_batch_is_atomic_and_scan_is_revision_fenced(){
+    use persistent_intelligence_runtime::kernel::{persistence::KernelStore,transition::Request,index::ScanCursor};
+    let temp=Temp::new();let store=KernelStore::open(&temp.0).unwrap();
+    let goal=|key:&str|Action::Goal{id:key.into(),parent:None,objective:"batch fixture".into(),claim_budget:2,predicate:None};
+    let apply=|key:&str,action:Action|store.apply(Request{id:key.into(),actor:Actor::Host,action});
+    assert!(apply("bad",Action::InitializeBatch{actions:vec![goal("a"),goal("a")]}).is_err());
+    assert_eq!(store.anchor().unwrap().revision,0);assert!(store.inspect().unwrap().goals.is_empty());
+    assert!(apply("forbidden",Action::InitializeBatch{actions:vec![goal("a"),Action::Tick{now_ms:1}]}).is_err());
+    let action=Action::InitializeBatch{actions:(0..7).map(|i|goal(&format!("g-{i}"))).collect()};
+    let receipt=apply("good",action.clone()).unwrap();assert_eq!(receipt["initialized"],7);
+    assert_eq!(receipt,apply("good",action).unwrap());assert_eq!(store.anchor().unwrap().revision,1);
+    let mut cursor=None;let mut seen=BTreeSet::new();
+    loop{
+        let v=store.scan("goals",cursor,2,2,64*1024).unwrap();
+        for row in v["page"]["entries"].as_array().unwrap(){assert!(seen.insert(row[0].as_str().unwrap().to_owned()));}
+        cursor=serde_json::from_value::<Option<ScanCursor>>(v["page"]["next"].clone()).unwrap();
+        if cursor.is_none(){break;}
+    }
+    assert_eq!(seen.len(),7);
+    let v=store.scan("goals",None,1,1,64*1024).unwrap();
+    let cursor:Option<ScanCursor>=serde_json::from_value(v["page"]["next"].clone()).unwrap();assert!(cursor.is_some());
+    apply("new",goal("new")).unwrap();
+    assert!(store.scan("goals",cursor,2,2,64*1024).is_err());
+}

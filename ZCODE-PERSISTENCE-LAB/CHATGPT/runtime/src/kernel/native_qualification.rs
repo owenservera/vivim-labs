@@ -65,8 +65,8 @@ impl Plan{
 struct Owned(Child);
 impl Drop for Owned{fn drop(&mut self){if self.0.try_wait().ok().flatten().is_none(){let _=self.0.kill();let _=self.0.wait();}}}
 fn seed(store:&KernelStore,p:&Plan,expected:&BTreeMap<Id,Value>)->Result<()>{
-    let mut n=0u64;let mut apply=|action|{
-        n+=1;store.apply(Request{id:format!("qualify-seed-{n}"),actor:Actor::Host,action}).map(|_|())
+    let mut actions=Vec::new();let mut apply=|action|{
+        actions.push(action);Ok::<(),String>(())
     };
     let shape=Shape::Record{fields:BTreeMap::from([("x".into(),Shape::Integer)])};
     apply(Action::Goal{id:"qualification".into(),parent:None,objective:"independent native workload".into(),claim_budget:p.total_job_budget,predicate:Some(Oracle::Digest{expected:digest(&value(expected)?)})})?;
@@ -89,6 +89,12 @@ fn seed(store:&KernelStore,p:&Plan,expected:&BTreeMap<Id,Value>)->Result<()>{
         apply(Action::Agent{id:format!("qualification-agent-{i}"),goal:"qualification".into(),parent:None,class:"qualification-class@1".into(),context:"qualification-context@1".into()})?;
     }
     apply(Action::Seal{goal:"qualification".into()})?;
+    drop(apply);
+    // One durable revision per bounded batch, not per declaration. Seed
+    // remains isolated; a failed later batch leaves an explicitly incomplete run.
+    for (n,batch) in actions.chunks(32).enumerate(){
+        store.apply(Request{id:format!("qualify-seed-{n}"),actor:Actor::Host,action:Action::InitializeBatch{actions:batch.to_vec()}})?;
+    }
     Ok(())
 }
 #[derive(Clone,Debug,Serialize)]

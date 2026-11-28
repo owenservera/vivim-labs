@@ -12,6 +12,7 @@ pub enum Actor {Host,Worker{id:Id,incarnation:u64},Verifier{id:Id},Adapter{id:Id
 #[serde(tag="action",rename_all="snake_case")]
 pub enum Action {
     Genesis{manifest:super::genesis::Manifest},
+    InitializeBatch{actions:Vec<Action>},
     Goal{id:Id,parent:Option<Id>,objective:String,claim_budget:u64,predicate:Option<Oracle>},
     ReviseGoal{goal:Id,objective:String,predicate:Option<Oracle>},
     Operator{contract:OperatorContract},Class{class:Class},Context{context:Context},
@@ -188,6 +189,17 @@ impl World {
         use Action::*;
         match action{
             Genesis{manifest}=>{actor.host()?;return self.initialize_genesis(manifest);}
+            InitializeBatch{actions}=>{
+                actor.host()?;
+                ensure((1..=256).contains(&actions.len()),"invalid initialization batch length")?;
+                let v=serde_json::to_value(&actions).map_err(|e|e.to_string())?;bounded(&v)?;
+                // No nested batch, leases, inference, verification, external effects,
+                // or one-shot send authority can be hidden inside an aggregate receipt.
+                ensure(actions.iter().all(|a|matches!(a,Goal{..}|Operator{..}|Class{..}|Context{..}|Agent{..}|Task{..}|Slots{..}|Seal{..})),"initialization action not permitted")?;
+                let mut results=Vec::with_capacity(actions.len());
+                for a in actions{results.push(self.apply_inner(actor,a)?);}
+                return Ok(json!({"initialized":results.len(),"results":results,"atomic":true}));
+            }
             Goal{id:key,parent,objective,claim_budget,predicate}=>{
                 actor.host()?;id(&key)?;ensure(!self.goals.contains_key(&key)&&!objective.trim().is_empty()&&claim_budget>0,"invalid goal")?;
                 if let Some(p)=&parent{ensure(!self.open_goal(p)?.sealed,"parent sealed")?;}

@@ -168,6 +168,15 @@ impl KernelStore{
         if table=="receipts"{return loaded.receipts.get(key).map(|r|serde_json::to_value(r).map_err(error)).transpose();}
         let v=serde_json::to_value(loaded.world).map_err(error)?;let mut node=&v;for part in table.split('.'){let Some(next)=node.get(part) else{return Ok(None);};node=next;}Ok(node.get(key).cloned())
     }
+    pub fn scan(&self,table:&str,cursor:Option<super::index::ScanCursor>,limit:usize,max_pages:usize,max_bytes:usize)->Result<Value>{
+        let _guard=self.lock()?;
+        let head=self.latest_head()?.ok_or("scan requires committed indexed state")?;
+        let root=head.index.as_ref().ok_or("legacy store requires migration before paged scan")?;
+        let last:Envelope<Record>=read(&self.path("record",head.revision))?;last.check()?;
+        ensure(last.body.revision==head.revision&&last.body.index==head.index&&last.checksum==head.record,"scan index record mismatch")?;
+        let page=super::index::Index::open(&self.root)?.scan(root,head.revision,table,cursor,limit,max_pages,max_bytes)?;
+        Ok(json!({"anchor":Anchor{revision:head.revision,digest:checksum(&head)?},"page":page,"integrity":"visited_pages_and_current_head_only"}))
+    }
     pub fn inspect(&self)->Result<World>{let _guard=self.lock()?;Ok(self.load()?.world)}
     /// A consistent observation, rather than two separately acquired snapshots.
     pub fn inspect_with_anchor(&self)->Result<(World,Anchor)>{

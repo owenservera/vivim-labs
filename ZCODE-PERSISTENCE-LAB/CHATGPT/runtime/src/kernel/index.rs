@@ -18,6 +18,13 @@ pub struct IndexRoot{
     pub scalar:String,pub tables:BTreeMap<String,BTreeMap<String,String>>,
     #[serde(default,skip_serializing_if="BTreeMap::is_empty")] pub directories:BTreeMap<String,String>,
 }
+/// Opaque continuation bound to an immutable index root. An updated store
+/// rejects the old cursor rather than silently mixing two revisions.
+#[derive(Clone,Debug,Serialize,Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ScanCursor{pub root:Digest,pub table:String,pub bucket:String,pub after_key:Option<String>}
+#[derive(Clone,Debug,Serialize,Deserialize)]
+pub struct ScanPage{pub revision:u64,pub root:Digest,pub entries:Vec<(String,Value)>,pub pages_read:usize,pub next:Option<ScanCursor>}
 pub struct Index{root:PathBuf}
 impl Index{
     pub fn open(root:&Path)->Result<Self>{
@@ -160,6 +167,42 @@ impl Index{
         };
         let v=self.get(page)?;
         Ok(v.as_object().ok_or("invalid index page")?.get(key).cloned())
+    }
+    /// Bounded hash-bucket order scan; verifies every visited page and its key
+    /// placement without materializing the World. This is not a full-store audit.
+    pub fn scan(&self,hash:&str,revision:u64,table:&str,cursor:Option<ScanCursor>,limit:usize,max_pages:usize,max_bytes:usize)->Result<ScanPage>{
+        ensure(Self::valid_table(table),"unknown entity table")?;
+        ensure((1..=1024).contains(&limit)&&(1..=64).contains(&max_pages)&&(1..=PAGE_LIMIT).contains(&max_bytes),"invalid index scan budget")?;
+        let root=self.manifest(hash)?;ensure(root.revision==revision,"index revision mismatch")?;
+        ensure(!(root.schema==1&&NESTED.contains(&table)),"legacy nested table requires migration before paged scan")?;
+        let refs=self.directory(&root,table)?;
+        if let Some(c)=&cursor{
+            ensure(c.root==hash&&c.table==table&&refs.contains_key(&c.bucket),"stale or invalid scan cursor")?;
+        }
+        let mut entries=Vec::new();let mut pages_read=0usize;let mut bytes=0usize;
+        let mut next=None;
+        'pages: for (bucket,page_hash) in &refs{
+            if cursor.as_ref().is_some_and(|c|bucket<&c.bucket){continue;}
+            let resume=cursor.as_ref().filter(|c|c.bucket.as_str()==bucket.as_str()).and_then(|c|c.after_key.as_deref());
+            if pages_read>=max_pages{
+                next=Some(ScanCursor{root:hash.into(),table:table.into(),bucket:bucket.clone(),after_key:None});break;
+            }
+            let page=self.get(page_hash)?;pages_read+=1;
+            let map=page.as_object().ok_or("invalid scan page")?;
+            if let Some(k)=resume{ensure(map.contains_key(k),"scan cursor key not present")?;}
+            let mut last=resume.map(str::to_owned);
+            for (key,val) in map{
+                ensure(if root.schema==3{digest(&Value::String(key.clone())).starts_with(bucket)}else{Self::bucket(key,root.schema).as_str()==bucket.as_str()},"scan key in wrong bucket")?;
+                if resume.is_some_and(|k|key.as_str()<=k){continue;}
+                let size=serde_json::to_vec(&(key,val)).map_err(err)?.len();
+                if entries.len()>=limit||bytes.checked_add(size).is_none_or(|n|n>max_bytes){
+                    ensure(!entries.is_empty()||size<=max_bytes,"entity exceeds scan response budget; use point lookup or larger budget")?;
+                    next=Some(ScanCursor{root:hash.into(),table:table.into(),bucket:bucket.clone(),after_key:last});break 'pages;
+                }
+                bytes+=size;entries.push((key.clone(),val.clone()));last=Some(key.clone());
+            }
+        }
+        Ok(ScanPage{revision,root:hash.into(),entries,pages_read,next})
     }
     /// Caller holds writer lock and supplies every retained committed root.
     /// A crash can leave unreachable objects, but not delete a reachable one.

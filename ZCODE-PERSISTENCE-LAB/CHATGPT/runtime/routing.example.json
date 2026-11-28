@@ -1,0 +1,222 @@
+{
+  "policy": {
+    "version": 1,
+    "max_attempts": 4,
+    "quality_weight": 100,
+    "latency_weight": 1,
+    "scarcity_weight": 10,
+    "price_weight": 1,
+    "diversity_bonus": 1000,
+    "failure_cooldown_ms": 60000,
+    "quota_cooldown_ms": 300000,
+    "reservation_ttl_ms": 300000
+  },
+  "pools": {
+    "global-daily-money": {
+      "id": "global-daily-money",
+      "unit": "micro_currency",
+      "limit": 5000000,
+      "window": {
+        "kind": "fixed",
+        "period_ms": 86400000,
+        "anchor_ms": 0
+      },
+      "frontier": null,
+      "require_observation": false,
+      "observation_ttl_ms": 300000,
+      "currency": "USD"
+    },
+    "account-a-daily": {
+      "id": "account-a-daily",
+      "unit": "requests",
+      "limit": 100,
+      "window": {
+        "kind": "fixed",
+        "period_ms": 86400000,
+        "anchor_ms": 0
+      },
+      "frontier": null,
+      "require_observation": false,
+      "observation_ttl_ms": 300000,
+      "currency": null
+    },
+    "account-a-rolling": {
+      "id": "account-a-rolling",
+      "unit": "requests",
+      "limit": 12,
+      "window": {
+        "kind": "rolling",
+        "period_ms": 3600000
+      },
+      "frontier": null,
+      "require_observation": false,
+      "observation_ttl_ms": 300000,
+      "currency": null
+    },
+    "account-a-frontier-daily": {
+      "id": "account-a-frontier-daily",
+      "unit": "requests",
+      "limit": 20,
+      "window": {
+        "kind": "fixed",
+        "period_ms": 86400000,
+        "anchor_ms": 0
+      },
+      "frontier": {
+        "emergency_bps": 2500,
+        "opening_bps": 2000,
+        "critical_priority": 900,
+        "minimum_uplift_bps": 1000,
+        "per_goal_bps": 4000
+      },
+      "require_observation": false,
+      "observation_ttl_ms": 300000,
+      "currency": null
+    },
+    "account-b-daily": {
+      "id": "account-b-daily",
+      "unit": "requests",
+      "limit": 100,
+      "window": {
+        "kind": "fixed",
+        "period_ms": 86400000,
+        "anchor_ms": 0
+      },
+      "frontier": null,
+      "require_observation": false,
+      "observation_ttl_ms": 300000,
+      "currency": null
+    },
+    "account-a-high-thinking": {
+      "id": "account-a-high-thinking",
+      "unit": "reasoning_tokens",
+      "limit": 50000,
+      "window": {
+        "kind": "fixed",
+        "period_ms": 86400000,
+        "anchor_ms": 0
+      },
+      "frontier": null,
+      "require_observation": false,
+      "observation_ttl_ms": 300000,
+      "currency": null
+    },
+    "goal-example-cap": {
+      "id": "goal-example-cap",
+      "unit": "requests",
+      "limit": 20,
+      "window": {
+        "kind": "lifetime"
+      },
+      "frontier": null,
+      "require_observation": false,
+      "observation_ttl_ms": 300000,
+      "currency": null
+    }
+  },
+  "profiles": {
+    "a-standard-low": {
+      "id": "a-standard-low",
+      "provider": "provider-a",
+      "account": "account-a",
+      "model": "example-standard",
+      "thinking": "low",
+      "adapter": "future-adapter",
+      "enabled": false,
+      "frontier": false,
+      "capabilities": [
+        "code",
+        "reason",
+        "text"
+      ],
+      "pools": [
+        "global-daily-money",
+        "account-a-daily",
+        "account-a-rolling"
+      ],
+      "max_context": 128000,
+      "max_output": 16000,
+      "max_reasoning": 2000,
+      "credit_ceiling": 1,
+      "tariff": {
+        "currency": "USD",
+        "per_request_micro": 0,
+        "input_per_million_micro": 100000,
+        "output_per_million_micro": 400000,
+        "reasoning_per_million_micro": 400000
+      },
+      "prior_success_bps": 6500,
+      "prior_latency_ms": 3000,
+      "max_parallel": 2
+    },
+    "a-frontier-high": {
+      "id": "a-frontier-high",
+      "provider": "provider-a",
+      "account": "account-a",
+      "model": "example-frontier",
+      "thinking": "high",
+      "adapter": "future-adapter",
+      "enabled": false,
+      "frontier": true,
+      "capabilities": [
+        "code",
+        "reason",
+        "text"
+      ],
+      "pools": [
+        "global-daily-money",
+        "account-a-daily",
+        "account-a-rolling",
+        "account-a-frontier-daily",
+        "account-a-high-thinking"
+      ],
+      "max_context": 128000,
+      "max_output": 16000,
+      "max_reasoning": 16000,
+      "credit_ceiling": 1,
+      "tariff": {
+        "currency": "USD",
+        "per_request_micro": 0,
+        "input_per_million_micro": 2000000,
+        "output_per_million_micro": 8000000,
+        "reasoning_per_million_micro": 8000000
+      },
+      "prior_success_bps": 9000,
+      "prior_latency_ms": 15000,
+      "max_parallel": 2
+    },
+    "b-standard-medium": {
+      "id": "b-standard-medium",
+      "provider": "provider-b",
+      "account": "account-b",
+      "model": "example-standard-b",
+      "thinking": "medium",
+      "adapter": "future-adapter",
+      "enabled": false,
+      "frontier": false,
+      "capabilities": [
+        "code",
+        "reason",
+        "text"
+      ],
+      "pools": [
+        "global-daily-money",
+        "account-b-daily"
+      ],
+      "max_context": 128000,
+      "max_output": 16000,
+      "max_reasoning": 4000,
+      "credit_ceiling": 1,
+      "tariff": {
+        "currency": "USD",
+        "per_request_micro": 0,
+        "input_per_million_micro": 200000,
+        "output_per_million_micro": 800000,
+        "reasoning_per_million_micro": 800000
+      },
+      "prior_success_bps": 7000,
+      "prior_latency_ms": 4000,
+      "max_parallel": 2
+    }
+  }
+}

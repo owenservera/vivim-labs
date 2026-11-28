@@ -1,0 +1,64 @@
+{
+  "schema": "vivim.dogfood.system-goals/1",
+  "revision": "R012",
+  "scope": "Common agent-facing outcomes, not architecture prescriptions. All four knowledge seeds receive the same charter through the controller; seed bytes and primary build remain unchanged.",
+  "first_explicit_goal": "G01",
+  "release_boundary": "An executable, generalizable release that demonstrates each mandatory goal on a finite declared workload and fault envelope. No requirement to implement every conceivable future capability or prove universal optimality.",
+  "constraints": [
+    "Subscription-only execution; obey assigned provider and local limits. Native computation preferred when sufficient.",
+    "No hidden paid overflow, quota bypass, unauthorized external access or cross-lane knowledge.",
+    "Evidence must be reproducible, tied to a candidate digest, independently checked. Worker-generated tests alone are insufficient.",
+    "A goal may be decomposed or jointly satisfied, but cannot be silently omitted, weakened or declared complete because of budget exhaustion.",
+    "The experimental system's router and resource allocator are deliverables. The external campaign controller supplies actual authorized resource limits and verifies claims; its own routing policy is not the experimental implementation."
+  ],
+  "goals": [
+    {
+      "id": "G01",
+      "name": "Optimal model router",
+      "objective": "Select the least sufficient authorized intelligence for each task, including no inference when deterministic execution suffices; adapt model, reasoning effort and escalation to actual task needs.",
+      "demonstrate": "Executable routing on a bounded varied workload; compare against fixed-model and fixed-effort baselines with verified outcomes, resource use and failure rates. Report uncertainty, tradeoffs and cases where routing is worse. Optimal means best demonstrated under declared workload and constraints, not universal optimality."
+    },
+    {
+      "id": "G02",
+      "name": "Intelligent resource allocation",
+      "objective": "Convert live subscription limits, user-defined budgets, resource availability and priorities into safe allocations while preserving work when capacity runs out.",
+      "demonstrate": "Execute controlled budget and contention traces, including stale observations, exhaustion, failure, reset, unknown costs and concurrent requests. Never silently overspend, borrow reserved allocations or purchase capacity; show measured progress per resource unit."
+    },
+    {
+      "id": "G03",
+      "name": "Autonomous goal management",
+      "objective": "Infer a finite, defensible definition of completeness from objectives; discover missing obligations, organize dependencies and prioritize the most valuable unfinished work.",
+      "demonstrate": "Derive and freeze a contract on a bounded novel objective, detect omitted essential behavior, revise transparently, track obligations and distinguish candidate completion, budget pause and verified completion."
+    },
+    {
+      "id": "G04",
+      "name": "Persistent execution",
+      "objective": "Preserve goals, knowledge, work, identity and outstanding obligations independently of workers, provider conversations and controller lifetimes.",
+      "demonstrate": "Interrupt and replace executing components at multiple lifecycle points, recover from persisted state and continue without duplicate effects, lost verified work or reliance on the original conversation."
+    },
+    {
+      "id": "G05",
+      "name": "Dynamic orchestration",
+      "objective": "Allocate, coordinate, communicate with and retire execution resources according to dependencies, capability, expected value and availability.",
+      "demonstrate": "Run bounded parallel/dependent work, prove correct admission, cancellation, replacement, communication and convergence with failures and constrained resource slots."
+    },
+    {
+      "id": "G06",
+      "name": "Independent verification",
+      "objective": "Establish reliable evidence for correctness, provenance, permitted effects and completion; never substitute a worker assertion for verification.",
+      "demonstrate": "Use independent executable oracles, adversarial false claims, regression and failure tests on a common candidate version; reject invalid or stale evidence and reconcile uncertain effects."
+    },
+    {
+      "id": "G07",
+      "name": "Computational assimilation",
+      "objective": "Turn repeated verified discoveries into reprogrammable reusable computation, reducing future reasoning demand without losing correctness.",
+      "demonstrate": "Solve related fresh problems using previously acquired capability, show a verified reduction in inference demand versus an appropriate baseline, reject incorrect generalizations and support invalidation or replacement."
+    },
+    {
+      "id": "G08",
+      "name": "Self-optimization",
+      "objective": "Learn from verified outcomes, resource consumption and failures to improve the system's own decisions without undermining safety, correctness or reproducibility.",
+      "demonstrate": "On held-out workloads compare a versioned improved policy to its baseline, bound exploration, account for its cost, retain regressions and permit rollback when evidence does not support improvement."
+    }
+  ]
+}

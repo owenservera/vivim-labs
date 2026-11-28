@@ -54,7 +54,7 @@ impl Shape {
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(tag="source",rename_all="snake_case")]
-pub enum Binding { Literal{value:Value}, Predecessor{task:Id}, Context{key:String}, Knowledge{version:Id} }
+pub enum Binding { Literal{value:Value}, Predecessor{task:Id}, Context{key:String}, Knowledge{version:Id}, SelectKnowledge{kind:KnowledgeKind} }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Port { pub shape:Shape, pub binding:Binding }
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -225,6 +225,15 @@ pub struct Knowledge {
     pub supersedes:Option<Id>,pub enabled:bool,
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct KnowledgeRule {
+    pub id:Id,pub version:u64,pub family:Id,pub kind:KnowledgeKind,pub output:Shape,
+    pub minimum_examples:usize,pub max_publications:usize,
+}
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct KnowledgePublication {
+    pub rule:Id,pub knowledge:Id,pub payload:Digest,pub examples:Vec<Id>,pub sequence:u64,
+}
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct RunCost {
     pub task:Id,pub generation:u64,pub elapsed_ms:u64,pub family:Option<Id>,pub class:Option<Id>,
 }
@@ -260,11 +269,13 @@ pub struct World {
     #[serde(default)] pub rollback_history:BTreeMap<Id,Rollback>,
     #[serde(default)] pub attempt_history:BTreeMap<Id,AttemptRecord>,
     #[serde(default)] pub learning_costs:BTreeMap<Id,LearningCost>,
+    #[serde(default)] pub knowledge_rules:BTreeMap<Id,KnowledgeRule>,
+    #[serde(default)] pub knowledge_publications:BTreeMap<Id,KnowledgePublication>,
     pub legacy_import:Option<super::migration::LegacyArchive>,
 }
 impl Default for World {
     fn default()->Self {
-        Self{clock_ms:0,slots:4,sequence:0,goals:BTreeMap::new(),tasks:BTreeMap::new(),agents:BTreeMap::new(),contexts:BTreeMap::new(),operators:BTreeMap::new(),classes:BTreeMap::new(),artifacts:BTreeMap::new(),evidence:BTreeMap::new(),blobs:BTreeMap::new(),checkpoints:BTreeMap::new(),messages:BTreeMap::new(),capabilities:BTreeMap::new(),metrics:Metrics::default(),learning_plans:BTreeMap::new(),learning_attempts:BTreeMap::new(),knowledge:BTreeMap::new(),run_costs:BTreeMap::new(),policy:SchedulingPolicy::default(),goal_versions:BTreeMap::new(),task_versions:BTreeMap::new(),effects:BTreeMap::new(),delivery:BTreeMap::new(),rollback_history:BTreeMap::new(),attempt_history:BTreeMap::new(),learning_costs:BTreeMap::new(),legacy_import:None}
+        Self{clock_ms:0,slots:4,sequence:0,goals:BTreeMap::new(),tasks:BTreeMap::new(),agents:BTreeMap::new(),contexts:BTreeMap::new(),operators:BTreeMap::new(),classes:BTreeMap::new(),artifacts:BTreeMap::new(),evidence:BTreeMap::new(),blobs:BTreeMap::new(),checkpoints:BTreeMap::new(),messages:BTreeMap::new(),capabilities:BTreeMap::new(),metrics:Metrics::default(),learning_plans:BTreeMap::new(),learning_attempts:BTreeMap::new(),knowledge:BTreeMap::new(),run_costs:BTreeMap::new(),policy:SchedulingPolicy::default(),goal_versions:BTreeMap::new(),task_versions:BTreeMap::new(),effects:BTreeMap::new(),delivery:BTreeMap::new(),rollback_history:BTreeMap::new(),attempt_history:BTreeMap::new(),learning_costs:BTreeMap::new(),knowledge_rules:BTreeMap::new(),knowledge_publications:BTreeMap::new(),legacy_import:None}
     }
 }
 pub fn version_key(name:&str,version:u64)->Result<Id>{

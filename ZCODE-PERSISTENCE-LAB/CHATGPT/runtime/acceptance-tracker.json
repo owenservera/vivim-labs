@@ -74,12 +74,13 @@
       "evidence": [],
       "outstanding": "No qualifying evidence",
       "r004": {
-        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "status": "PARTIAL_SOURCE",
         "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/transition.rs"
         ],
-        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+        "remaining": "Parent terminal propagation does not recursively settle or cancel still-open child goals; settle() checks only parent-local active tasks.",
+        "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53"
       }
     },
     {
@@ -674,14 +675,15 @@
       "evidence": [],
       "outstanding": "No qualifying evidence",
       "r004": {
-        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "status": "PARTIAL_SOURCE",
         "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/index.rs",
           "src/kernel/persistence.rs",
           "src/kernel/migration.rs"
         ],
-        "remaining": "Canonical content-addressed 256-bucket-per-table index, direct point lookup, immutable page reuse, bounded retained journal chain, reachability GC and R003 import. Transitions still load and clone full World; per-page and aggregate scale need qualification."
+        "remaining": "Routing history is serialized in the unsharded scalar index object, which has a hard 64 MiB ceiling. Full-world materialization and schema/version compatibility need explicit remediation.",
+        "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53"
       }
     },
     {
@@ -1018,8 +1020,8 @@
     "candidate_verified_score": 0,
     "scope": "CHATGPT/runtime only; R003 baseline preserved separately; no acceptance uplift for source changes",
     "counts": {
-      "SOURCE_IMPLEMENTED_UNVERIFIED": 40,
-      "PARTIAL_SOURCE": 6,
+      "SOURCE_IMPLEMENTED_UNVERIFIED": 38,
+      "PARTIAL_SOURCE": 8,
       "DEFERRED": 4
     }
   },
@@ -1050,7 +1052,9 @@
       {
         "id": "R03",
         "criterion": "Atomic reservation, settlement, unknown usage and reset-safe accounting",
-        "status": "SOURCE_IMPLEMENTED_UNVERIFIED"
+        "status": "PARTIAL_SOURCE",
+        "remaining": "Cancel after successful receipt but before Verify leaves completed/unverified reservation outstanding; trial closure and future trial startup can remain blocked. Mismatched provider identity requires explicit charge-only reconciliation path.",
+        "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53"
       },
       {
         "id": "R04",
@@ -1067,13 +1071,16 @@
       {
         "id": "R06",
         "criterion": "Native-first task selection and incarnation-bound dispatch contract",
-        "status": "SOURCE_IMPLEMENTED_UNVERIFIED"
+        "status": "PARTIAL_SOURCE",
+        "remaining": "Routing exhaustion can strand pending tasks; no durable wait/reset/terminal outcome or automated demand generation for agent objectives.",
+        "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53"
       },
       {
         "id": "R07",
         "criterion": "Independent evidence-linked model performance feedback",
-        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "remaining": "Independent evidence attribution now includes verification time and batch-policy revision for observed cohort evaluation."
+        "status": "PARTIAL_SOURCE",
+        "remaining": "Independent-review flag only excludes previous providers on the same demand, not the origin provider on a separate review task. Evidence attribution on cancellation needs terminal disposition.",
+        "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53"
       },
       {
         "id": "R08",
@@ -1094,5 +1101,20 @@
         "remaining": "Ten authored routing qualification fixtures, including three synthetic accounting/policy guard cases. None compiled or executed."
       }
     ]
+  },
+  "review": {
+    "revision": "STATIC-REVIEW-001",
+    "source_pin": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
+    "method": "Targeted static source review; no compile, execution or tests",
+    "document": "STATIC-REVIEW-001.md",
+    "original_counts": {
+      "SOURCE_IMPLEMENTED_UNVERIFIED": 38,
+      "PARTIAL_SOURCE": 8,
+      "DEFERRED": 4
+    },
+    "routing_counts": {
+      "SOURCE_IMPLEMENTED_UNVERIFIED": 4,
+      "PARTIAL_SOURCE": 6
+    }
   }
 }

@@ -94,3 +94,7 @@ Source pin 1b3af7066b4b5cb2a10408031fb0163e379ffb8f. [MODEL-ROUTING-R003.md](MOD
 ## Supplemental model routing R004
 
 Source pin 8fa44485e12c178655cca3c5c7e092526137017b. [MODEL-ROUTING-R004.md](MODEL-ROUTING-R004.md). Seven source-implemented/unverified and three partial source gates; ten authored, unexecuted fixtures. Explicitly authorized policy trials, bounded candidate generation, separate resource caps, comparable starting quota, evidence-linked observed yield, optional automatic promotion and versioned rollback. Original 50 gates and verified scores unchanged. No builds, compilation, tests or provider requests.
+
+## Static review 001
+
+Reviewed 02d3e8f737cfb750b164b1cd6a3ac10e44760b53. See [STATIC-REVIEW-001.md](STATIC-REVIEW-001.md). E03/E33 and R03/R06/R07 downgraded to partial source based on specific source gaps. Original and routing verified scores unchanged; no builds/tests. Genesis launch not ready.

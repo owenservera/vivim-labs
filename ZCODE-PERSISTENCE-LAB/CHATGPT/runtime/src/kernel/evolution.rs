@@ -52,52 +52,26 @@ impl World {
         }
         self.capabilities.insert(key,c);self.metrics.learned=self.metrics.learned.saturating_add(1);Ok(())
     }
-    /// Discover one expression from verified examples, then validate a disjoint holdout
-    /// only once. Failed holdouts do not drive a further search.
+    /// Public compatibility wrapper; the host retains a measured receipt even
+    /// when synthesis or independent evaluation fails.
     pub fn discover(&self,family:&str,training:Vec<Id>,holdouts:Vec<Id>,input:Shape,output:Shape,limit:u64)->Result<Discovery>{
-        ensure((1..=100_000).contains(&limit),"invalid discovery budget")?;
-        let (train,holdout)=self.examples(family,&training,&holdouts,&input,&output)?;
-        let mut terms=vec![Expr::Input];
-        if let Shape::Record{fields}=&input{
-            for key in fields.keys(){terms.push(Expr::Field{source:Box::new(Expr::Input),key:key.clone()});}
-        }
-        let mut n=0u64;
-        let mut candidate=|program:Expr|->Result<Option<Expr>>{
-            if n>=limit{return Ok(None)}n+=1;
-            if train.iter().all(|(x,y)|program.eval(x).is_ok_and(|v|v==*y)){Ok(Some(program))}else{Ok(None)}
-        };
-        let mut found=None;
-        for t in &terms{if let Some(p)=candidate(t.clone())?{found=Some(p);break;}}
-        if found.is_none(){found=candidate(Expr::Const{value:train[0].1.clone()})?;}
-        // Infer exact integer affine coefficients from two distinct observed x values.
-        if found.is_none(){
-            'outer:for t in &terms{
-                let Ok(a)=t.eval(&train[0].0) else{continue};
-                let (Some(x0),Some(y0))=(a.as_i64(),train[0].1.as_i64()) else{continue};
-                for (x,y) in train.iter().skip(1){
-                    let Ok(v)=t.eval(x) else{continue};
-                    let (Some(x1),Some(y1))=(v.as_i64(),y.as_i64()) else{continue};
-                    let dx=i128::from(x1)-i128::from(x0);let dy=i128::from(y1)-i128::from(y0);
-                    if dx==0||dy%dx!=0{continue}
-                    let slope=dy/dx;let Some(offset)=slope.checked_mul(i128::from(x0)).and_then(|v|i128::from(y0).checked_sub(v)) else{continue};
-                    let (Ok(m),Ok(b))=(i64::try_from(slope),i64::try_from(offset)) else{continue};
-                    let p=Expr::Add{left:Box::new(Expr::Multiply{left:Box::new(t.clone()),right:Box::new(Expr::Const{value:json!(m)})}),right:Box::new(Expr::Const{value:json!(b)})};
-                    if let Some(p)=candidate(p)?{found=Some(p);break 'outer;}
-                }
+        self.discover_measured(family,training,holdouts,input,output,limit).0
+    }
+    pub fn discover_measured(&self,family:&str,training:Vec<Id>,holdouts:Vec<Id>,input:Shape,output:Shape,limit:u64)->(Result<Discovery>,SearchReceipt){
+        let mut receipt=SearchReceipt::default();
+        let result=(||->Result<Discovery>{
+            ensure((1..=100_000).contains(&limit),"invalid discovery budget")?;
+            let (train,holdout)=self.examples(family,&training,&holdouts,&input,&output)?;
+            // The synthesis engine receives training only. Holdouts enter the
+            // evaluator once, after the candidate has been irrevocably selected.
+            let program=synthesize(&input,&output,&train,limit,&mut receipt)?;
+            for (x,y) in &holdout{
+                receipt.holdout_evaluations+=1;
+                ensure(program.eval(x).is_ok_and(|v|v==*y),"candidate failed independent holdout")?;
             }
-        }
-        if found.is_none(){
-            'outer:for a in &terms{for b in &terms{
-                for p in [Expr::Add{left:Box::new(a.clone()),right:Box::new(b.clone())},Expr::Multiply{left:Box::new(a.clone()),right:Box::new(b.clone())},Expr::Equal{left:Box::new(a.clone()),right:Box::new(b.clone())},Expr::Concat{items:vec![a.clone(),b.clone()]}]{
-                    if let Some(p)=candidate(p)?{found=Some(p);break 'outer;}
-                }
-            }}
-        }
-        let program=found.ok_or("no program in bounded discovery grammar")?;
-        // Release the closure's mutable borrow of the counter before returning it.
-        drop(candidate);
-        ensure(holdout.iter().all(|(x,y)|program.eval(x).is_ok_and(|v|v==*y)),"candidate failed independent holdout")?;
-        Ok(Discovery{family:family.into(),training,holdouts,candidates_evaluated:n,program,input,output})
+            Ok(Discovery{family:family.into(),training,holdouts,candidates_evaluated:receipt.candidates_evaluated,program,input,output})
+        })();
+        (result,receipt)
     }
     /// Atomically generate a verified class and capability from a bounded discovery.
     /// A failed validation changes nothing.
@@ -116,4 +90,97 @@ impl World {
         next.publish_knowledge(Knowledge{id:id_.into(),version,kind:KnowledgeKind::ComputationalOperator,family:Some(c.family),artifacts,class:Some(k.clone()),evidence,supersedes,enabled:true})?;
         *self=next;Ok(k)
     }
+}
+
+
+#[derive(Clone,Debug,Serialize,Deserialize,Default)]
+pub struct SearchReceipt{
+    pub candidates_evaluated:u64,pub training_evaluations:u64,pub holdout_evaluations:u64,
+}
+/// Observational equivalence pruning across the training cohort. The grammar
+/// is finite: projections (including nested fields), constants, hash,
+/// arithmetic, equality, concatenation, arrays and conditionals. A strict
+/// candidate/retained-term budget bounds the enumeration.
+fn synthesize(input:&Shape,output:&Shape,train:&[(Value,Value)],limit:u64,receipt:&mut SearchReceipt)->Result<Expr>{
+    const MAX_TERMS:usize=128;
+    const MAX_ROUNDS:usize=4;
+    fn fields(shape:&Shape,source:&Expr,depth:usize,terms:&mut Vec<Expr>){
+        if depth>=4||terms.len()>=MAX_TERMS{return;}
+        if let Shape::Record{fields:items}=shape{
+            for (key,shape) in items{
+                if terms.len()>=MAX_TERMS{break;}
+                let field=Expr::Field{source:Box::new(source.clone()),key:key.clone()};
+                terms.push(field.clone());fields(shape,&field,depth+1,terms);
+            }
+        }
+    }
+    fn candidate(p:Expr,train:&[(Value,Value)],output:&Shape,limit:u64,receipt:&mut SearchReceipt,
+        seen:&mut BTreeSet<String>,pool:&mut Vec<Expr>)->Result<Option<Expr>>{
+        if receipt.candidates_evaluated>=limit{return Ok(None);}
+        receipt.candidates_evaluated+=1;
+        let mut values=Vec::with_capacity(train.len());let mut exact=true;
+        for (x,y) in train{
+            receipt.training_evaluations+=1;
+            let Ok(v)=p.eval(x) else{return Ok(None);};
+            exact &= output.accepts(&v)&&v==*y;values.push(v);
+        }
+        if exact{return Ok(Some(p));}
+        // A fingerprint is only a search pruning heuristic, not proof that two
+        // expressions are equivalent outside the training cohort.
+        let fingerprint=digest(&Value::Array(values));
+        if pool.len()<MAX_TERMS&&seen.insert(fingerprint){pool.push(p);}
+        Ok(None)
+    }
+    let mut initial=vec![Expr::Input];fields(input,&Expr::Input,0,&mut initial);
+    for n in [-2,-1,0,1,2,3,10]{initial.push(Expr::Const{value:json!(n)});}
+    initial.push(Expr::Const{value:json!(false)});initial.push(Expr::Const{value:json!(true)});
+    initial.push(Expr::Const{value:json!("")});initial.push(Expr::Const{value:Value::Null});
+    initial.push(Expr::Const{value:train[0].1.clone()});
+    let mut pool=Vec::new();let mut seen=BTreeSet::new();
+    macro_rules! consider{($p:expr)=>{{
+        if receipt.candidates_evaluated>=limit{return Err("discovery candidate budget exhausted".into());}
+        if let Some(p)=candidate($p,train,output,limit,receipt,&mut seen,&mut pool)?{return Ok(p);}
+    }}}
+    for p in initial{consider!(p);}
+    // Exact affine coefficient inference is prioritized before generic search.
+    for term in pool.clone(){
+        let Ok(v)=term.eval(&train[0].0) else{continue;};
+        let (Some(x0),Some(y0))=(v.as_i64(),train[0].1.as_i64()) else{continue;};
+        for (input,output) in train.iter().skip(1){
+            let Ok(v)=term.eval(input) else{continue;};
+            let (Some(x1),Some(y1))=(v.as_i64(),output.as_i64()) else{continue;};
+            let dx=i128::from(x1)-i128::from(x0);let dy=i128::from(y1)-i128::from(y0);
+            if dx==0||dy%dx!=0{continue;}
+            let m=dy/dx;
+            let Some(b)=m.checked_mul(i128::from(x0)).and_then(|v|i128::from(y0).checked_sub(v)) else{continue;};
+            let (Ok(m),Ok(b))=(i64::try_from(m),i64::try_from(b)) else{continue;};
+            consider!(Expr::Add{left:Box::new(Expr::Multiply{left:Box::new(term.clone()),right:Box::new(Expr::Const{value:json!(m)})}),right:Box::new(Expr::Const{value:json!(b)})});
+        }
+    }
+    let mut previous=0;
+    for _ in 0..MAX_ROUNDS{
+        let terms=pool.clone();let len=terms.len();
+        if len==previous{break;}
+        for (i,a) in terms.iter().enumerate().skip(previous){
+            consider!(Expr::Sha256{value:Box::new(a.clone())});
+            consider!(Expr::Array{items:vec![a.clone()]});
+            for (j,b) in terms.iter().enumerate(){
+                if j>=previous&&j>i{continue;}
+                consider!(Expr::Add{left:Box::new(a.clone()),right:Box::new(b.clone())});
+                consider!(Expr::Multiply{left:Box::new(a.clone()),right:Box::new(b.clone())});
+                consider!(Expr::Equal{left:Box::new(a.clone()),right:Box::new(b.clone())});
+                consider!(Expr::Concat{items:vec![a.clone(),b.clone()]});
+                consider!(Expr::Concat{items:vec![b.clone(),a.clone()]});
+                consider!(Expr::Array{items:vec![a.clone(),b.clone()]});
+                consider!(Expr::Array{items:vec![b.clone(),a.clone()]});
+            }
+        }
+        // Small conditional grammar; avoid cubic enumeration across the full pool.
+        let conditions:Vec<_>=terms.iter().filter(|p|train.iter().all(|(x,_)|p.eval(x).is_ok_and(|v|v.is_boolean()))).take(8).collect();
+        for cond in conditions{for yes in terms.iter().take(12){for no in terms.iter().take(12){
+            consider!(Expr::If{condition:Box::new(cond.clone()),yes:Box::new(yes.clone()),no:Box::new(no.clone())});
+        }}}
+        previous=len;
+    }
+    Err("no solution in bounded discovery grammar".into())
 }

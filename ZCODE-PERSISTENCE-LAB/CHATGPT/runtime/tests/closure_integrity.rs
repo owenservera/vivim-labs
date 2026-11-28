@@ -52,3 +52,37 @@ fn cancelled_output_preserves_charge_and_no_success_credit(){
     assert!(r.record_verified("hold",true,"late-evidence".into()).is_err());
     assert_eq!(r.reservations["hold"].verified,None);
 }
+
+#[test]
+fn native_attempt_accounting_is_atomic_and_host_owned(){
+    use persistent_intelligence_runtime::{Expr,Operator,kernel::resource::{Receipt as ResourceReceipt,Counters}};
+    let mut w=World::default();
+    let host=Actor::Host;
+    let mut run=|action:Action|w.transition(&host,action).unwrap();
+    run(Action::Goal{id:"accounting".into(),parent:None,objective:"atomic measured attempt".into(),claim_budget:2,predicate:None});
+    run(Action::Slots{count:1});
+    run(Action::Context{context:Context{id:"context".into(),version:1,entries:BTreeMap::new(),artifacts:BTreeMap::new(),byte_budget:MAX_VALUE_BYTES}});
+    let shape=Shape::Record{fields:BTreeMap::from([("x".into(),Shape::Integer)])};
+    run(Action::Operator{contract:OperatorContract{id:"identity".into(),version:1,behavior:Operator::Execute,input:shape.clone(),output:Shape::Integer,program:Expr::Field{source:Box::new(Expr::Input),key:"x".into()}}});
+    run(Action::Class{class:Class{id:"class".into(),version:1,input:shape,output:Shape::Integer,nodes:vec![Node{id:"n".into(),operator:"identity@1".into(),input:Wire::Input}],result:Wire::Node{id:"n".into()},lineage:vec![]}});
+    run(Action::Agent{id:"worker".into(),goal:"accounting".into(),parent:None,class:"class@1".into(),context:"context@1".into()});
+    run(Action::Task{spec:TaskSpec{id:"t".into(),goal:"accounting".into(),objective:"identity".into(),dependencies:BTreeSet::new(),inputs:BTreeMap::from([("x".into(),Port{shape:Shape::Integer,binding:Binding::Literal{value:json!(42)}})]),output:Shape::Integer,oracle:Oracle::Digest{expected:digest(&json!(42))},class:Some("class@1".into()),family:None,context:Some("context@1".into()),max_attempts:1,priority:0,uncertainty:0,information_gain:0,expected_cost:1}});
+    run(Action::Activate{agent:"worker".into(),executor:"native-pure-process".into()});
+    run(Action::Claim{task:"t".into(),agent:"worker".into(),ttl_ms:1000});
+    run(Action::BindExecutor{agent:"worker".into(),incarnation:1,process_ref:"native-pid-123".into()});
+    drop(run);
+    let r=ResourceReceipt{task:"t".into(),generation:1,process_ref:"native-pid-123".into(),elapsed_ms:17,counters:Counters::default()};
+    let worker=Actor::Worker{id:"worker".into(),incarnation:1};
+    assert!(w.transition(&worker,Action::RecordAttemptAccounting{receipt:r.clone()}).is_err());
+    let mut wrong=r.clone();wrong.process_ref="native-pid-999".into();
+    assert!(w.transition(&host,Action::RecordAttemptAccounting{receipt:wrong}).is_err());
+    assert!(w.run_costs.is_empty());assert!(w.resource_receipts.is_empty());
+    assert_eq!(w.metrics.worker_elapsed_ms,0);
+    w.transition(&host,Action::RecordAttemptAccounting{receipt:r.clone()}).unwrap();
+    assert_eq!(w.run_costs["t-1"].elapsed_ms,17);
+    assert_eq!(w.resource_receipts["t-1"].elapsed_ms,17);
+    assert_eq!(w.attempt_history["t-1"].measured_ms,Some(17));
+    assert_eq!(w.metrics.worker_elapsed_ms,17);
+    assert!(w.transition(&host,Action::RecordAttemptAccounting{receipt:r}).is_err());
+    assert_eq!(w.metrics.worker_elapsed_ms,17);
+}

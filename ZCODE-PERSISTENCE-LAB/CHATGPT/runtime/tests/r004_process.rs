@@ -7,6 +7,61 @@ impl Root{fn new()->Self{let p=std::env::temp_dir().join(format!("vivim-r004-pro
 impl Drop for Root{fn drop(&mut self){let _=fs::remove_dir_all(&self.0);}}
 struct Owned(Child);
 impl Drop for Owned{fn drop(&mut self){if self.0.try_wait().ok().flatten().is_none(){let _=self.0.kill();let _=self.0.wait();}}}
+#[cfg(windows)]
+mod observation {
+    use std::{ffi::c_void,mem::size_of,ptr};
+    type Handle=*mut c_void;
+    #[repr(C)]
+    struct Entry{
+        size:u32,usage:u32,pid:u32,heap:usize,module:u32,threads:u32,parent:u32,priority:i32,flags:u32,exe:[u16;260],
+    }
+    #[link(name="kernel32")]
+    unsafe extern "system" {
+        fn CreateToolhelp32Snapshot(flags:u32,pid:u32)->Handle;
+        fn Process32FirstW(snapshot:Handle,entry:*mut Entry)->i32;
+        fn Process32NextW(snapshot:Handle,entry:*mut Entry)->i32;
+        fn OpenProcess(access:u32,inherit:i32,pid:u32)->Handle;
+        fn WaitForSingleObject(handle:Handle,ms:u32)->u32;
+        fn GetExitCodeProcess(handle:Handle,code:*mut u32)->i32;
+        fn CloseHandle(handle:Handle)->i32;
+        fn GetLastError()->u32;
+    }
+    struct OwnedHandle(Handle);
+    impl Drop for OwnedHandle{fn drop(&mut self){unsafe{CloseHandle(self.0);}}}
+    pub struct Worker{pub pid:u32,handle:OwnedHandle}
+    impl Worker{
+        pub fn alive(&self)->bool{match unsafe{WaitForSingleObject(self.handle.0,0)}{258=>true,0=>false,n=>panic!("unexpected process wait {n}")}}
+        pub fn wait_exit(&self)->u32{
+            assert_eq!(unsafe{WaitForSingleObject(self.handle.0,10_000)},0,"owned worker {} survived controller death",self.pid);
+            let mut code=0;assert_ne!(unsafe{GetExitCodeProcess(self.handle.0,&mut code)},0);code
+        }
+    }
+    pub fn children(parent:u32)->Vec<Worker>{
+        let snapshot=unsafe{CreateToolhelp32Snapshot(2,0)};
+        assert_ne!(snapshot as isize,-1,"process snapshot failed");
+        let snapshot=OwnedHandle(snapshot);
+        let mut entry:Entry=unsafe{std::mem::zeroed()};
+        entry.size=size_of::<Entry>() as u32;
+        let mut ok=unsafe{Process32FirstW(snapshot.0,&mut entry)};
+        assert_ne!(ok,0,"process enumeration failed");
+        let mut workers=vec![];
+        while ok!=0{
+            if entry.parent==parent{
+                let handle=unsafe{OpenProcess(0x0010_0000|0x1000,0,entry.pid)};
+                if handle!=ptr::null_mut(){
+                    let worker=Worker{pid:entry.pid,handle:OwnedHandle(handle)};
+                    if worker.alive(){workers.push(worker);}
+                } else {
+                    let error=unsafe{GetLastError()};
+                    assert_eq!(error,87,"cannot establish child process identity for PID {}",entry.pid);
+                }
+            }
+            ok=unsafe{Process32NextW(snapshot.0,&mut entry)};
+        }
+        assert_eq!(unsafe{GetLastError()},18,"process enumeration did not reach its end");
+        workers
+    }
+}
 fn host(store:&KernelStore,n:&mut u64,action:Action){*n+=1;store.apply(Request{id:format!("seed-{n}"),actor:Actor::Host,action}).unwrap();}
 #[test]
 #[ignore="explicit real process qualification; do not run until qualification is authorized"]
@@ -41,7 +96,23 @@ fn actual_controller_death_restarts_durable_goal(){
         assert!(timer.elapsed()<Duration::from_secs(45),"no observable live worker");
         thread::sleep(Duration::from_millis(5));
     };
+    #[cfg(windows)]
+    let observed={
+        let pid=store.inspect().unwrap().agents[&killed.1.worker].incarnations.iter()
+            .find(|i|i.number==killed.1.incarnation).unwrap().process_ref.as_ref().unwrap()
+            .strip_prefix("native-pid-").unwrap().parse::<u32>().unwrap();
+        let workers=observation::children(first.0.id());
+        assert!(workers.iter().any(|w|w.pid==pid&&w.alive()),"durable lease alone does not establish an active OS worker");
+        workers
+    };
     first.0.kill().unwrap();first.0.wait().unwrap();
+    #[cfg(windows)]
+    {
+        let exits:Vec<_>=observed.iter().map(|w|(w.pid,w.wait_exit())).collect();
+        assert!(exits.iter().any(|(_,code)|*code==75),"no observed worker exited via the parent-death watchdog: {exits:?}");
+        assert!(observation::children(first.0.id()).is_empty(),"controller left a live child");
+        eprintln!("controller={} independently observed worker exits={exits:?}",first.0.id());
+    }
     let mut second=launch();let timer=Instant::now();
     loop{
         if let Some(status)=second.0.try_wait().unwrap(){assert!(status.success(),"replacement controller failed");break;}

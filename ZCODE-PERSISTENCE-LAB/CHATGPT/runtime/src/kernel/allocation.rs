@@ -1,6 +1,6 @@
 //! Integration between the objective/task kernel and model routing. A selection
 //! is a reservation, not permission to send a request outside the Host.
-use super::{model::*,routing::{Demand,Status,Outcome}};
+use super::{model::*,routing::{Demand,Status,Outcome},routing_adapter::HandoffPhase};
 use crate::{digest,Result};
 use serde_json::{Value,json};
 use std::collections::BTreeSet;
@@ -66,5 +66,71 @@ impl World{
         self.router.reconcile_stale(&live);
         let terminal:Vec<_>=self.goals.values().filter(|g|g.phase!=GoalPhase::Open).map(|g|g.id.clone()).collect();
         for g in terminal{self.router.cancel_goal(&g);}
+    }
+}
+
+impl World{
+    fn bound_profiles(&self,d:&Demand)->BTreeSet<Id>{
+        let Some(c)=&self.router.config else{return BTreeSet::new();};
+        let Some(t)=self.tasks.get(&d.task) else{return BTreeSet::new();};
+        c.profiles.values().filter(|p|p.enabled&&(d.allowed_profiles.is_empty()||d.allowed_profiles.contains(&p.id)))
+            .filter(|p|{
+                let Some(b)=self.router.adapters.bindings.get(&p.adapter) else{return false;};
+                if !b.enabled||!self.class_available(&b.class)||t.spec.context.as_ref().is_some_and(|x|x!=&b.context){return false;}
+                if let Some(class)=self.match_class(&t.spec){if class!=b.class{return false;}}
+                else if t.spec.class.is_some(){return false;}
+                self.classes.get(&b.class).is_some_and(|c|c.input.admits(&Self::input_shape(&t.spec))&&t.spec.output.admits(&c.output))
+                    &&self.contexts.get(&b.context).is_some_and(|c|self.assemble(&t.spec,c).is_ok())
+            }).map(|p|p.id.clone()).collect()
+    }
+    fn bound_plan(&self)->Result<Vec<super::frontier::RankedDemand>>{
+        if self.router.config.is_none(){return Ok(vec![]);}
+        let mut router=self.router.clone();
+        let ready:BTreeSet<_>=self.ready().into_iter().collect();
+        let mut allowed=BTreeSet::new();
+        for d in self.router.demands.values().filter(|d|ready.contains(&d.task)&&self.inference_needed(d)){
+            let profiles=self.bound_profiles(d);
+            if !profiles.is_empty(){router.demands.get_mut(&d.id).unwrap().allowed_profiles=profiles;allowed.insert(d.id.clone());}
+        }
+        super::frontier::rank(&router,&allowed)
+    }
+    pub fn routing_cycle_needed(&self)->bool{
+        self.router.config.is_some()&&self.running()<self.slots&&self.bound_plan().is_ok_and(|v|!v.is_empty())
+    }
+    /// Atomic autonomous preparation. An enabled adapter binding is mandatory.
+    /// No provider is called; an outbox item is made available to the adapter.
+    pub fn routing_cycle(&mut self,limit:usize)->Result<Value>{
+        ensure((1..=128).contains(&limit),"invalid routing cycle limit")?;
+        let mut prepared=Vec::new();self.refresh_frontier_demand()?;
+        for n in 0..limit.min(self.slots.saturating_sub(self.running())){
+            let Some(next)=self.bound_plan()?.into_iter().next() else{break;};
+            let original=self.router.demands[&next.demand].allowed_profiles.clone();
+            let profiles=self.bound_profiles(&self.router.demands[&next.demand]);
+            let key=format!("route-{}",digest(&json!([self.sequence+1,n,&next.demand,"auto"])));
+            self.router.demands.get_mut(&next.demand).unwrap().allowed_profiles=profiles;
+            let reserved=self.router.reserve(key.clone(),&next.demand)?;
+            self.router.demands.get_mut(&next.demand).unwrap().allowed_profiles=original;
+            if reserved["reserved"]!=true{break;}
+            prepared.push(self.prepare_handoff(&key)?);
+            self.refresh_frontier_demand()?;
+        }
+        Ok(json!({"prepared":prepared,"provider_calls":0}))
+    }
+    pub fn reconcile_prepared(&mut self)->Result<()>{
+        let mut invalidate=vec![];
+        let stale:Vec<_>=self.router.adapters.handoffs.values().filter(|e|e.phase==HandoffPhase::Prepared)
+            .filter(|e|{
+                let live=self.tasks.get(&e.task).is_some_and(|t|t.phase==TaskPhase::Running&&t.lease.as_ref().is_some_and(|l|l.generation==e.generation&&l.worker==e.worker&&l.incarnation==e.incarnation&&self.clock_ms<l.deadline_ms));
+                let reserved=self.router.reservations.get(&e.reservation).is_some_and(|r|r.status==Status::Reserved&&self.router.config.as_ref().is_some_and(|c|c.policy.version==r.policy_version));
+                let binding=self.router.adapters.bindings.get(&e.adapter).is_some_and(|b|b.enabled&&b.version==e.binding_version);
+                !live||!reserved||!binding
+            }).cloned().collect();
+        for e in stale{
+            if self.router.reservations.get(&e.reservation).is_some_and(|r|r.status==Status::Reserved){self.router.release_unsent(&e.reservation)?;}
+            self.router.adapters.handoffs.get_mut(&e.id).unwrap().phase=HandoffPhase::Released;
+            if self.tasks.get(&e.task).is_some_and(|t|t.phase==TaskPhase::Running&&t.generation==e.generation){invalidate.push(e.task);}
+        }
+        for t in invalidate{self.invalidate_attempt(&t,"undispatched routing handoff expired or revoked")?;}
+        Ok(())
     }
 }

@@ -1,6 +1,6 @@
 {
   "schema": "vivim.dogfood.routing-experiments/1",
-  "revision": "R009",
+  "revision": "R010",
   "scope": "controller-only; do not copy into agent knowledge seeds",
   "baseline": "MODEL-BUDGET-POLICY.json",
   "lanes": {
@@ -37,7 +37,7 @@
     "confidence_z": 1.28
   },
   "common": [
-    "Gemini-only explicit model, authorized subscription route, no paid overflow",
+    "Explicit authorized native OpenAI GPT on Codex and Gemini on Antigravity; subscription only, no paid overflow",
     "All applicable windows and fresh quota, global account reservation and owner-defined local ceilings",
     "Deterministic native bypass for already solved work",
     "Identical verification oracle, workload and telemetry; no policy may weaken common floor",
@@ -45,7 +45,7 @@
   ],
   "evaluation": {
     "phase1": "Offline same trace and identical task inputs, each simulated account starts from identical quota. Synthetic or historical traces cannot establish actual model quality.",
-    "phase2": "Live shared-account serialized paired runs; same model catalogue and workload, same hard caps, rotate policies across lanes/cohorts to separate knowledge seed, provider, and optimization effects.",
+    "phase2": "Two independent subscription pools, one active lane per provider; reserve the other half of each daily pool. Later rotate seed, policy and provider assignments for causal comparison.",
     "metrics": [
       "verified task value per observed quota percentage point, separately per window",
       "accepted tasks and failed tasks, latency, retries, tokens, native reuse",
@@ -54,5 +54,5 @@
     ],
     "accounting": "Provider percentages may be rounded; zero observed delta is censored, not free. Attribute consumption only where no overlapping external usage and same window identity; otherwise mark ambiguous. Compare effective verified work, not model-reported completion."
   },
-  "status": "POLICIES_CONFIGURED; live launch remains held until route, billing, isolation and atomic reservation qualified"
+  "status": "R010 selected 01 and 04; inactive 02 and 03 reserved; live qualification pending"
 }

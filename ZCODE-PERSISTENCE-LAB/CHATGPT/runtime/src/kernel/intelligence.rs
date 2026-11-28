@@ -51,7 +51,7 @@ impl World {
     pub fn publish_knowledge(&mut self,k:Knowledge)->Result<Id>{
         let key=version_key(&k.id,k.version)?;
         ensure(k.enabled&&!self.knowledge.contains_key(&key)&&!k.artifacts.is_empty()&&!k.evidence.is_empty(),"invalid knowledge record")?;
-        let evidence:BTreeSet<_>=k.evidence.iter().collect();
+        let evidence:BTreeSet<_>=k.evidence.iter().cloned().collect();
         for e in &k.evidence{
             ensure(self.evidence.get(e).is_some_and(|x|x.accepted),"knowledge evidence not accepted")?;
         }

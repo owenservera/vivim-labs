@@ -83,16 +83,19 @@ impl World{
         ensure(r.provider==e.provider&&r.account==e.account&&r.model==e.model&&r.thinking==e.thinking,"actual provider/model/thinking identity mismatch; reconcile usage separately")?;
         ensure(!self.router.adapters.receipts.values().any(|x|x.provider==r.provider&&x.account==r.account&&x.request_id==r.request_id),"duplicate provider request receipt")?;
         ensure((r.outcome==Outcome::Completed)==r.output.is_some(),"output/outcome mismatch")?;
-        if let Some(v)=&r.output{bounded(v)?;}
+        // Account for provider usage even when its output is too large or invalid.
+        let usable=r.output.as_ref().is_some_and(|v|bounded(v).is_ok());
         let charge=self.router.settle(&r.handoff,r.usage.clone(),r.outcome.clone(),r.provider_receipt.clone(),r.latency_ms)?;
         let live=self.tasks.get(&e.task).is_some_and(|t|t.phase==TaskPhase::Running&&t.lease.as_ref().is_some_and(|l|l.generation==e.generation&&l.worker==e.worker&&l.incarnation==e.incarnation&&self.clock_ms<l.deadline_ms));
         let mut submitted=false;
         if live{
             use super::transition::{Actor,Action};
             let worker=Actor::Worker{id:e.worker.clone(),incarnation:e.incarnation};
-            let shape_ok=r.output.as_ref().is_some_and(|v|self.tasks[&e.task].spec.output.accepts(v));
+            let shape_ok=usable&&r.output.as_ref().is_some_and(|v|self.tasks[&e.task].spec.output.accepts(v));
             if r.outcome==Outcome::Completed&&shape_ok{
-                self.apply_adapter_action(&worker,Action::Submit{task:e.task.clone(),generation:e.generation,output:r.output.clone().unwrap()})?;submitted=true;
+                let mut staged=self.clone();
+                if staged.apply_adapter_action(&worker,Action::Submit{task:e.task.clone(),generation:e.generation,output:r.output.clone().unwrap()}).is_ok(){*self=staged;submitted=true;}
+                else{self.invalidate_attempt(&e.task,"adapter output could not be admitted")?;}
             }else{
                 self.apply_adapter_action(&worker,Action::Fail{task:e.task.clone(),generation:e.generation,reason:"adapter failed or invalid output".into()})?;
             }
@@ -100,8 +103,8 @@ impl World{
         if r.outcome==Outcome::Completed&&!submitted{self.router.reject_unusable_output(&r.handoff)?;}
         let hash=digest(&serde_json::to_value(&r).map_err(|e|e.to_string())?);
         let x=self.router.adapters.handoffs.get_mut(&r.handoff).unwrap();x.phase=HandoffPhase::Completed;x.receipt=Some(hash);
-        // Store receipt metadata, not a second copy of the model output.
-        self.router.adapters.receipts.insert(r.handoff.clone(),r);
+        let mut metadata=r;metadata.output=None;
+        self.router.adapters.receipts.insert(metadata.handoff.clone(),metadata);
         Ok(json!({"usage":charge,"submitted":submitted,"stale_output_discarded":!live}))
     }
     pub fn refresh_handoffs(&mut self){

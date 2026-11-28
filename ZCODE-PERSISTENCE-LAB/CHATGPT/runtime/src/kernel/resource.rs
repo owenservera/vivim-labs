@@ -76,6 +76,19 @@ impl World{
             json!({"sum":if measured==0{None}else{Some(total)},"measured_attempts":measured,"missing_attempts":self.attempt_history.len().saturating_sub(measured)})
         };
         let peak=self.resource_receipts.values().filter_map(|r|r.counters.peak_working_set_bytes).max();
-        json!({"attempts":self.attempt_history.len(),"resource_receipts":n,"cpu_100ns":sum(|c|c.cpu_100ns),"os_read_bytes":sum(|c|c.os_read_bytes),"os_write_bytes":sum(|c|c.os_write_bytes),"work_bytes":sum(|c|c.work_bytes),"output_bytes":sum(|c|c.output_bytes),"checkpoint_bytes":sum(|c|c.checkpoint_bytes),"peak_working_set_bytes":peak,"search_costs":self.learning_costs,"router_usage_records":self.router.reservations.len()})
+        json!({"attempts":self.attempt_history.len(),"resource_receipts":n,"cpu_100ns":sum(|c|c.cpu_100ns),"os_read_bytes":sum(|c|c.os_read_bytes),"os_write_bytes":sum(|c|c.os_write_bytes),"work_bytes":sum(|c|c.work_bytes),"output_bytes":sum(|c|c.output_bytes),"checkpoint_bytes":sum(|c|c.checkpoint_bytes),"peak_working_set_bytes":peak,"search_costs":self.learning_costs,"host_operations":self.host_costs,"router_usage_records":self.router.reservations.len()})
+    }
+}
+
+
+/// Measured host wall duration; does not conflate wall time with CPU or
+/// model tokens. If the source mutation fails, result_digest remains absent.
+#[derive(Clone,Debug,Serialize,Deserialize)]
+pub struct HostCost{pub request:Id,pub operation:String,pub elapsed_ms:u64,pub result_digest:Option<Digest>}
+impl World{
+    pub fn record_host_cost(&mut self,r:HostCost)->Result<()>{
+        id(&r.request)?;ensure(matches!(r.operation.as_str(),"learning"|"knowledge"|"recipe"|"repair"|"verify"|"routing"|"trial"),"unsupported metered operation")?;
+        ensure(r.elapsed_ms<=259_200_000&&r.result_digest.as_ref().is_none_or(|h|hash_id(h))&&!self.host_costs.contains_key(&r.request),"invalid host cost receipt")?;
+        self.host_costs.insert(r.request.clone(),r);Ok(())
     }
 }

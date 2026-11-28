@@ -79,7 +79,7 @@ impl World{
     }
     pub fn discover_recipes(&mut self,family:&str)->Result<Value>{
         let p=self.recipe_policies.get(family).ok_or("recipe policy missing")?.clone();
-        let goals:Vec<_>=self.goals.values().filter(|g|g.phase==GoalPhase::Complete).take(p.max_goals).map(|g|g.id.clone()).collect();
+        let goals:Vec<_>=self.goals.values().filter(|g|g.phase==GoalPhase::Complete&&self.tasks.values().any(|t|t.spec.goal==g.id&&t.spec.family.as_ref()==Some(&p.family))).take(p.max_goals).map(|g|g.id.clone()).collect();
         let mut groups:BTreeMap<Digest,(Vec<Step>,Vec<Example>)>=BTreeMap::new();
         let mut rejected=0u64;
         for g in &goals{
@@ -99,8 +99,9 @@ impl World{
             self.recipes.insert(key.clone(),Recipe{id:key.clone(),family:family.into(),steps,examples,enabled:true,sequence:self.sequence.saturating_add(1)});
             added.push(key);
         }
+        let repairs=self.discover_verified_repairs(family,&p,&goals)?;
         self.recipe_scans.insert(family.into(),self.metrics.accepted);
-        Ok(json!({"family":family,"scanned_goals":goals.len(),"rejected_traces":rejected,"published":added}))
+        Ok(json!({"family":family,"scanned_goals":goals.len(),"rejected_traces":rejected,"published":added,"repairs":repairs}))
     }
     pub fn ready_recipe_scans(&self)->Vec<Id>{
         self.recipe_policies.keys().filter(|k|self.metrics.accepted>self.recipe_scans.get(*k).copied().unwrap_or(0)).cloned().collect()
@@ -127,5 +128,73 @@ impl World{
         }
         self.apply_adapter_action(&actor,Action::Seal{goal:r.goal.clone()})?;
         Ok(json!({"goal":r.goal,"recipe":recipe.id,"tasks":keys,"execution":"not_started"}))
+    }
+}
+
+
+/// A repair is a demonstrated substitution, not a reason inferred merely
+/// from a retry count. Both candidate outputs are reproduced against the
+/// same original input and oracle before a pair can support the pattern.
+#[derive(Clone,Debug,Serialize,Deserialize)]
+pub struct RepairPair{pub goal:Id,pub task:Id,pub rejected:Id,pub accepted:Id,pub input:Digest}
+#[derive(Clone,Debug,Serialize,Deserialize)]
+pub struct VerifiedRepair{
+    pub id:Id,pub family:Id,pub from_class:Id,pub to_class:Id,pub context:Id,
+    pub input_shape:Shape,pub output_shape:Shape,pub examples:Vec<RepairPair>,pub enabled:bool,
+}
+impl World{
+    fn discover_verified_repairs(&mut self,family:&str,p:&Policy,goals:&[Id])->Result<Vec<Id>>{
+        let mut found:BTreeMap<Id,VerifiedRepair>=BTreeMap::new();
+        for goal in goals{
+            for t in self.tasks.values().filter(|t|t.spec.goal==*goal&&t.phase==TaskPhase::Verified&&t.spec.family.as_deref()==Some(family)){
+                if self.effects.values().any(|e|e.task==t.spec.id){continue;}
+                let Some(input)=t.input.as_ref() else{continue;};
+                let Some(a)=t.artifact.as_ref().and_then(|a|self.artifacts.get(a)) else{continue;};
+                let Some(good)=self.evidence.get(&a.evidence) else{continue;};
+                let (Some(to),Some(context))=(&good.class,&good.context) else{continue;};
+                let Some(target)=self.classes.get(to) else{continue;};
+                let Ok(output)=self.payload(&a.payload) else{continue;};
+                if !good.accepted||good.input!=digest(input)||!self.class_available(to)||!t.spec.oracle.evaluate(input,output).unwrap_or(false)||!self.run_class(to,input).is_ok_and(|v|v==*output){continue;}
+                for bad in self.evidence.values().filter(|e|e.task==t.spec.id&&!e.accepted&&e.generation<good.generation&&e.input==good.input&&e.context==good.context){
+                    let Some(from)=&bad.class else{continue;};
+                    if from==to||digest(&serde_json::to_value(&bad.oracle).map_err(|e|e.to_string())?)!=digest(&serde_json::to_value(&good.oracle).map_err(|e|e.to_string())?){continue;}
+                    let Ok(rejected)=self.payload(&bad.candidate) else{continue;};
+                    if !bad.oracle.evaluate(input,rejected).is_ok_and(|v|!v)||!self.run_class(from,input).is_ok_and(|v|v==*rejected){continue;}
+                    let shape=Self::input_shape(&t.spec);
+                    if !target.input.admits(&shape)||!t.spec.output.admits(&target.output){continue;}
+                    let key=format!("repair-{}",digest(&json!([family,from,to,context,&shape,&t.spec.output])));
+                    let rule=found.entry(key.clone()).or_insert_with(||VerifiedRepair{id:key,family:family.into(),from_class:from.clone(),to_class:to.clone(),context:context.clone(),input_shape:shape,output_shape:t.spec.output.clone(),examples:vec![],enabled:true});
+                    if !rule.examples.iter().any(|e|e.goal==*goal||e.input==good.input){
+                        rule.examples.push(RepairPair{goal:goal.clone(),task:t.spec.id.clone(),rejected:bad.id.clone(),accepted:good.id.clone(),input:good.input.clone()});
+                    }
+                }
+            }
+        }
+        let mut added=vec![];
+        let existing=self.recipe_repairs.values().filter(|r|r.family==family).count();
+        for (key,r) in found{
+            if r.examples.len()<p.minimum_goals||existing+added.len()>=p.max_recipes||self.recipe_repairs.contains_key(&key){continue;}
+            self.recipe_repairs.insert(key.clone(),r);added.push(key);
+        }Ok(added)
+    }
+    pub fn learned_repair_for(&self,task:&str)->Option<Id>{
+        let t=self.tasks.get(task)?;
+        if t.phase!=TaskPhase::Pending||t.attempts>=t.spec.max_attempts||self.has_uncertain_effect(task)||self.effects.values().any(|e|e.task==task)||self.router.demands.values().any(|d|d.task==task){return None;}
+        let input=t.input.as_ref()?;let from=t.assigned_class.as_ref()?;let context=t.assigned_context.as_ref()?;
+        let rejected=self.evidence.values().any(|e|e.task==task&&e.generation==t.generation&&!e.accepted&&e.class.as_ref()==Some(from)&&e.context.as_ref()==Some(context)&&e.input==digest(input));
+        if !rejected{return None;}
+        let mut choices=self.recipe_repairs.values().filter(|r|r.enabled&&t.spec.family.as_ref()==Some(&r.family)&&&r.from_class==from&&&r.context==context&&r.input_shape==Self::input_shape(&t.spec)&&r.output_shape==t.spec.output&&self.class_available(&r.to_class))
+            .filter(|r|!self.evidence.values().any(|e|e.task==task&&!e.accepted&&e.class.as_ref()==Some(&r.to_class)&&e.input==digest(input)));
+        let first=choices.next()?;
+        if choices.any(|r|r.to_class!=first.to_class){return None;}
+        Some(first.id.clone())
+    }
+    pub fn apply_learned_repair(&mut self,task:&str,repair:&str)->Result<Value>{
+        ensure(self.learned_repair_for(task).as_deref()==Some(repair),"repair not applicable or ambiguous")?;
+        let r=self.recipe_repairs[repair].clone();
+        // Rebind preserves task objective, dependency graph and independent
+        // oracle. The next attempt still has to pass the original oracle.
+        self.apply_adapter_action(&Actor::Host,Action::RebindTask{task:task.into(),class:Some(r.to_class.clone()),context:Some(r.context)})?;
+        Ok(json!({"task":task,"repair":repair,"new_class":r.to_class,"verified":false}))
     }
 }

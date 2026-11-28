@@ -12,6 +12,12 @@ fn wall_ms()->Result<u64>{u64::try_from(SystemTime::now().duration_since(UNIX_EP
 fn request_id()->Result<Id>{Ok(format!("r-{}-{}-{}",std::process::id(),SystemTime::now().duration_since(UNIX_EPOCH).map_err(error)?.as_nanos(),NEXT.fetch_add(1,Ordering::Relaxed)))}
 fn apply(store:&KernelStore,actor:Actor,action:Action)->Result<Value>{store.apply(Request{id:request_id()?,actor,action})}
 fn host(store:&KernelStore,action:Action)->Result<Value>{apply(store,Actor::Host,action)}
+fn metered_host(store:&KernelStore,operation:&str,action:Action)->Result<Value>{
+    let request=request_id()?;let start=Instant::now();
+    let result=store.apply(Request{id:request.clone(),actor:Actor::Host,action});
+    let receipt=super::resource::HostCost{request,operation:operation.into(),elapsed_ms:start.elapsed().as_millis().min(259_200_000) as u64,result_digest:result.as_ref().ok().map(crate::digest)};
+    host(store,Action::RecordHostCost{receipt})?;result
+}
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct Work {pub class:Class,pub operators:BTreeMap<Id,OperatorContract>,pub input:Value,#[serde(default)] pub resume:Option<Value>}
 impl Work{
@@ -171,27 +177,32 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
         let mut progress=false;
         if learning_runs.saturating_add(knowledge_runs)<config.max_learning_plans{
             if let Some(action)=store.inspect()?.router.trial_auto_action(){
-                host(store,action)?;learning_runs+=1;progress=true;
+                metered_host(store,"trial",action)?;learning_runs+=1;progress=true;
             }
         }
         while learning_runs.saturating_add(knowledge_runs)<config.max_learning_plans{
             let w=store.inspect()?;
             let Some(plan)=w.ready_learning().into_iter().next() else{break;};
-            host(store,Action::LearnPlan{plan})?;
+            metered_host(store,"learning",Action::LearnPlan{plan})?;
             learning_runs+=1;progress=true;
         }
         while learning_runs.saturating_add(knowledge_runs)<config.max_learning_plans{
             let w=store.inspect()?;
             let Some((rule,payload))=w.ready_knowledge().into_iter().next() else{break;};
-            host(store,Action::AssimilateRecurring{rule,payload})?;
+            metered_host(store,"knowledge",Action::AssimilateRecurring{rule,payload})?;
             knowledge_runs+=1;progress=true;
         }
         while learning_runs.saturating_add(knowledge_runs)<config.max_learning_plans{
             let w=store.inspect()?;let Some(family)=w.ready_recipe_scans().into_iter().next() else{break;};
-            host(store,Action::DiscoverRecipes{family})?;knowledge_runs+=1;progress=true;
+            metered_host(store,"recipe",Action::DiscoverRecipes{family})?;knowledge_runs+=1;progress=true;
+        }
+        while learning_runs.saturating_add(knowledge_runs)<config.max_learning_plans{
+            let w=store.inspect()?;
+            let Some((task,repair))=w.ready().into_iter().find_map(|task|w.learned_repair_for(&task).map(|r|(task,r))) else{break;};
+            metered_host(store,"repair",Action::ApplyLearnedRepair{task,repair})?;knowledge_runs+=1;progress=true;
         }
         if launched<config.max_jobs&&store.inspect()?.routing_cycle_needed(){
-            let routing=host(store,Action::RoutingCycle{limit:(config.max_jobs-launched).min(4) as usize})?;
+            let routing=metered_host(store,"routing",Action::RoutingCycle{limit:(config.max_jobs-launched).min(4) as usize})?;
             let count=routing["prepared"].as_array().map_or(0,|a|a.len()) as u64;
             launched=launched.saturating_add(count);progress|=count>0;
         }

@@ -33,7 +33,7 @@ pub enum Action {
     BeginRoutingTrial{spec:super::routing_evolution::TrialSpec},CloseRoutingArm,StartRoutingCandidate,AbortRoutingTrial{reason:String},PromoteRoutingTrial{trial:Id},RollbackRoutingTrial{trial:Id},
     SetFrontierGuard{guard:super::routing_planning::FrontierGuard},SetFrontierForecast{forecast:super::routing_planning::Forecast},
     BindRoutingAdapter{binding:super::routing_adapter::AdapterBinding},ObserveAdapterQuota{receipt:super::routing_adapter::QuotaReceipt},PrepareHandoff{reservation:Id},ClaimHandoff{handoff:Id},FinishHandoff{receipt:super::routing_adapter::AdapterReceipt},ReconcileHandoffCharge{receipt:super::routing_adapter::ChargeOnlyReceipt},RoutingCycle{limit:usize},
-    ConfigureRecipePolicy{policy:super::recipes::Policy},DiscoverRecipes{family:Id},InstantiateRecipe{request:super::recipes::Instantiate},DisableRecipe{recipe:Id},RecordResources{receipt:super::resource::Receipt},
+    ConfigureRecipePolicy{policy:super::recipes::Policy},DiscoverRecipes{family:Id},InstantiateRecipe{request:super::recipes::Instantiate},DisableRecipe{recipe:Id},ApplyLearnedRepair{task:Id,repair:Id},RecordHostCost{receipt:super::resource::HostCost},RecordResources{receipt:super::resource::Receipt},
     RecordCost{task:Id,generation:u64,elapsed_ms:u64},SetPolicy{policy:SchedulingPolicy},
     PrepareEffect{task:Id,generation:u64,key:Id,payload:Value,oracle:Oracle},
     EffectUnknown{effect:Id,reason:String},ResolveEffect{effect:Id,outcome:EffectPhase,receipt:Value},
@@ -441,6 +441,8 @@ impl World {
             DiscoverRecipes{family}=>{actor.host()?;return self.discover_recipes(&family);}
             InstantiateRecipe{request}=>{actor.host()?;return self.instantiate_recipe(request);}
             DisableRecipe{recipe}=>{actor.host()?;self.recipes.get_mut(&recipe).ok_or("recipe missing")?.enabled=false;}
+            ApplyLearnedRepair{task,repair}=>{actor.host()?;return self.apply_learned_repair(&task,&repair);}
+            RecordHostCost{receipt}=>{actor.host()?;self.record_host_cost(receipt)?;}
             RecordResources{receipt}=>{actor.host()?;self.record_resources(receipt)?;}
             RecordCost{task,generation,elapsed_ms}=>{actor.host()?;self.record_cost(&task,generation,elapsed_ms)?;}
             PrepareEffect{task,generation,key,payload,oracle}=>{actor.host()?;return self.prepare_effect(&task,generation,key,payload,oracle);}

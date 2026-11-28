@@ -29,6 +29,11 @@ impl Work{
         w.validate_class(&c)?;w.classes.insert(key.clone(),c);w.run_class_resumable(&key,&self.input,self.resume.as_ref(),emit)
     }
 }
+pub fn watch_parent(){
+    // A controller owns the write end of stdin. EOF means that it exited or
+    // explicitly closed the pipe. This child executes only pure computations.
+    thread::spawn(||{use std::io::Read;let mut byte=[0u8;1];loop{match std::io::stdin().read(&mut byte){Ok(0)|Err(_)=>std::process::exit(75),Ok(_)=>{}}}});
+}
 pub fn compute_file(input:&Path,output:&Path)->Result<()>{
     let bytes=fs::read(input).map_err(error)?;
     ensure(bytes.len()<=16*MAX_VALUE_BYTES,"work package exceeds budget")?;
@@ -105,6 +110,12 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
     let started=Instant::now();let mut jobs:Vec<Job>=vec![];let mut launched=0u64;let mut completed=0u64;let mut failures=0u64;let mut learning_runs=0u64;
     let before=store.inspect()?;
     let base_clock=before.clock_ms.max(wall_ms()?);
+    // Exclusive controller lock proves no previous cooperating supervisor owns
+    // the store. Pure children are parent-pipe bound; stale results are fenced.
+    host(store,Action::Tick{now_ms:base_clock})?;
+    if before.agents.values().any(|a|a.incarnations.last().is_some_and(|i|i.ended_ms.is_none()&&i.executor=="native-pure-process")){
+        host(store,Action::RecoverNative{reason:"native controller replacement".into()})?;
+    }
     let mut stop_reason="duration_limit";
     while started.elapsed()<Duration::from_millis(config.duration_ms){
         if workspace.join("STOP").exists(){stop_reason="operator_stop";break;}
@@ -187,7 +198,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
                 fs::create_dir(&attempt).map_err(error)?;
                 let input=attempt.join("work.json");let output=attempt.join("output.json");
                 fs::write(&input,serde_json::to_vec(&work).map_err(error)?).map_err(error)?;
-                let child=Command::new(&exe).arg("kernel-compute").arg(&input).arg(&output).current_dir(&attempt).stdin(Stdio::null()).stdout(Stdio::null()).stderr(Stdio::null()).spawn().map_err(error)?;
+                let child=Command::new(&exe).arg("kernel-compute").arg(&input).arg(&output).arg("--watch-parent").current_dir(&attempt).stdin(Stdio::piped()).stdout(Stdio::null()).stderr(Stdio::null()).spawn().map_err(error)?;
                 let job=Job{child,task:task.clone(),worker:worker.clone(),incarnation:lease.incarnation,generation:lease.generation,output,started:Instant::now(),last_checkpoint};
                 host(store,Action::BindExecutor{agent:worker.clone(),incarnation:lease.incarnation,process_ref:format!("native-pid-{}",job.child.id())})?;
                 Ok(job)

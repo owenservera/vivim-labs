@@ -5,7 +5,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import {openDay,rollDay,reserve,settle,transact} from './CAMPAIGN-BUDGET.mjs';
 import {route} from './MODEL-BUDGET.mjs';
-import {assess} from './COMPLETION-CHECK.mjs';
+import {judge,contextDigest,reopen} from './SUFFICIENCY.mjs';
 const campaign=JSON.parse(fs.readFileSync(new URL('./CAMPAIGN-R010.json',import.meta.url),'utf8'));
 const goal=fs.readFileSync(new URL('./COMPLETION-GOAL.md',import.meta.url),'utf8');
 const charter=JSON.parse(fs.readFileSync(new URL('./SYSTEM-GOALS-R013.json',import.meta.url),'utf8'));
@@ -46,7 +46,7 @@ export function normalizedContract(p){
 export function createRun(ledger,{lane,run_id,seed_digest,workspace_digest}){
  checkedLane(lane,ledger.provider);
  if(ledger.controller||!str(run_id)||!hex(seed_digest)||!hex(workspace_digest))fail('INVALID_RUN_IDENTITY');
- const c={schema:'vivim.campaign.controller/1',lane,run_id,seed_digest,goal_charter_digest:hash(charter),candidate_digest:workspace_digest,phase:'DISCOVER_COMPLETENESS',status:'READY',contract:null,obligations:{},discovery_attempts:0,session:null,incarnation:0,turns:0,stats:{},pending:null,last_checkpoint:null,last_result:null};
+ const c={schema:'vivim.campaign.controller/1',lane,run_id,seed_digest,goal_charter_digest:hash(charter),candidate_digest:workspace_digest,phase:'DISCOVER_COMPLETENESS',status:'READY',contract:null,obligations:{},discovery_attempts:0,session:null,incarnation:0,turns:0,stats:{},pending:null,last_checkpoint:null,last_result:null,sufficiency:null,historical_sufficiency:[]};
  return advance(ledger,c);
 }
 function ready(c){
@@ -139,11 +139,12 @@ export async function runOne({dir,lane,identity,adapter,forecast,caps,clock=Date
  if(n.kind==='QUALIFY'){
   // Independent native tests only. No model turn and no quota reservation.
   const receipt=await adapter.qualify({contract:c.contract,candidate_digest:c.candidate_digest,run_id:c.run_id});
-  const verdict=receipt?.candidate_digest===c.candidate_digest?assess({contract:c.contract,receipt,status:'CANDIDATE_COMPLETE'}):{decision:'NOT_COMPLETE',reason:'CANDIDATE_DRIFT'};
+  const verdict=receipt?.candidate_digest===c.candidate_digest?judge({contract:c.contract,receipt,status:'CANDIDATE_COMPLETE',context:receipt.context,observed_at:new Date(clock()).toISOString()}):{state:'UNVERIFIED',reason:'CANDIDATE_DRIFT'};
   const x=transact(dir,prior=>{
    if(prior.revision!==result.revision||prior.pending)fail('CONCURRENT_STATE_CHANGE');
    const z=structuredClone(prior.controller);z.last_result=verdict;
-   z.status=verdict.decision==='COMPLETE_VERIFIED'?'COMPLETE_VERIFIED':'WAITING_RECONCILIATION';
+   z.status=verdict.state==='FUNCTIONALLY_SUFFICIENT'?'COMPLETE_VERIFIED':'WAITING_RECONCILIATION';
+   if(verdict.state==='FUNCTIONALLY_SUFFICIENT')z.sufficiency=verdict;
    return advance(prior,z);
   });
   return {status:x.controller.status,verdict};
@@ -171,4 +172,32 @@ export async function runOne({dir,lane,identity,adapter,forecast,caps,clock=Date
  // If process dies before this commit, durable pending intent prevents replay.
  const settled=transact(dir,prior=>finish(prior,transport,verification,after,clock()));
  return {status:settled.controller.status,controller:settled.controller,decision};
+}
+
+// A controller-reviewed change creates a new evaluation episode, preserving the old release.
+// Purpose/contract changes demand a newly reviewed contract; same-contract invalidations
+// reopen impacted obligations. Final qualification always rechecks every criterion.
+export function reopenRun(dir,change){
+ return transact(dir,prior=>{
+  if(prior.pending||prior.blocked||prior.controller?.pending)fail('RECONCILIATION_REQUIRED');
+  const c=structuredClone(prior.controller);
+  if(c.status!=='COMPLETE_VERIFIED'||!c.sufficiency)fail('NO_VERIFIED_RELEASE');
+  const outcome=reopen({judgment:c.sufficiency,contract:c.contract,change});
+  if(outcome.state==='FUNCTIONALLY_SUFFICIENT'){
+   c.last_result={kind:'OPTIONAL_ONLY',reason:change.reason};return advance(prior,c);
+  }
+  c.historical_sufficiency.push(c.sufficiency);c.sufficiency=null;
+  c.last_result=outcome;c.status='READY';c.session=null;
+  if(['PURPOSE','ENVELOPE','ASSUMPTIONS'].includes(change.kind)){
+   c.prior_contracts=[...(c.prior_contracts??[]),c.contract];c.contract=null;c.obligations={};c.discovery_attempts=0;c.phase='DISCOVER_COMPLETENESS';
+  }else{
+   if(change.kind==='CANDIDATE'){
+    if(!hex(change.candidate_digest))fail('NEW_CANDIDATE_UNVERIFIED');
+    c.candidate_digest=change.candidate_digest;
+   }
+   for(const id of outcome.affected)c.obligations[id]={state:'OPEN',attempts:0,last_evidence:null};
+   c.phase='BUILD';
+  }
+  return advance(prior,c);
+ });
 }

@@ -1,8 +1,9 @@
 {
-  "schema": "vivim.labs.zcode-persistence/1",
+  "schema": "vivim.labs.zcode-persistence/2",
+  "revision": "R002",
   "status": "DESIGN_NOT_RUN",
   "top_level_parallelism": 4,
-  "child_parallelism": 4,
+  "child_parallelism_per_lane": 1,
   "total_parallelism": 8,
   "launch": {
     "adapter": "UNVERIFIED",
@@ -11,67 +12,100 @@
   "lanes": [
     {
       "id": "01",
-      "name": "session",
-      "faults": [
-        "premature_finish",
-        "inference_interrupt",
-        "worker_termination",
-        "acp_disconnect",
-        "parent_termination",
-        "controller_restart"
+      "name": "persistent_session",
+      "authority": [
+        "native_session"
+      ],
+      "forbid_reconstruction": [
+        "agent",
+        "goal",
+        "knowledge"
       ]
     },
     {
       "id": "02",
-      "name": "operations",
-      "faults": [
-        "invalid_command",
-        "command_timeout",
-        "missing_dependency",
-        "unavailable_tool",
-        "simulated_write_failure",
-        "simulated_provider_outage"
+      "name": "persistent_agent",
+      "authority": [
+        "agent_identity",
+        "agent_checkpoint"
+      ],
+      "forbid_reconstruction": [
+        "external_goal",
+        "cross_task_capability_store"
       ]
     },
     {
       "id": "03",
-      "name": "context",
-      "faults": [
-        "long_conversation",
-        "context_compaction",
-        "fresh_conversation",
-        "working_memory_loss",
-        "checkpoint_corruption",
-        "replacement_model"
+      "name": "persistent_goal",
+      "authority": [
+        "goal",
+        "task_dag",
+        "artifacts",
+        "evidence",
+        "agent_registry"
+      ],
+      "forbid_reconstruction": [
+        "cross_task_capability_store"
       ]
     },
     {
       "id": "04",
-      "name": "orchestration",
-      "faults": [
-        "spawn_four_subagents",
-        "subagent_failure",
-        "subagent_unresponsive",
-        "conflicting_results",
-        "duplicate_task",
-        "coordinator_termination"
+      "name": "persistent_intelligence",
+      "authority": [
+        "goal",
+        "task_dag",
+        "artifacts",
+        "evidence",
+        "agent_registry",
+        "versioned_classes",
+        "operators",
+        "capabilities",
+        "verified_repair_store"
       ]
     }
   ],
+  "common_fault_schedule": [
+    "premature_finish",
+    "inference_interrupt",
+    "worker_termination",
+    "acp_disconnect",
+    "parent_termination",
+    "controller_restart",
+    "invalid_command",
+    "command_timeout",
+    "missing_dependency",
+    "unavailable_tool",
+    "simulated_write_failure",
+    "simulated_provider_outage",
+    "long_conversation",
+    "context_compaction",
+    "fresh_conversation",
+    "working_memory_loss",
+    "checkpoint_corruption",
+    "replacement_model",
+    "spawn_subagents",
+    "subagent_failure",
+    "subagent_unresponsive",
+    "conflicting_results",
+    "duplicate_task",
+    "coordinator_termination"
+  ],
   "phases": [
     "native_baseline",
-    "minimal_repair",
-    "same_fault_replay"
-  ],
-  "class_experiment": [
-    "runtime_brief",
-    "fixed_role_template",
-    "hybrid"
+    "cold_start",
+    "common_fault_trials",
+    "recurrent_work",
+    "novel_variants",
+    "total_restart",
+    "endurance"
   ],
   "workload": {
+    "seed": 42,
     "artifact": "deterministic numbered artifact",
     "receipt": "sha256",
-    "round_target": 10
+    "round_target": 10,
+    "repeat_trials": 3,
+    "matched_resource_ceiling": true
   },
   "qualification": {
     "hours": [
@@ -85,12 +119,31 @@
     "target_recovery_seconds": 60,
     "target_fault_recognition": 1
   },
+  "metrics": [
+    "verified_yield",
+    "time_to_first_progress",
+    "productive_wall_time",
+    "recovery_latency",
+    "human_interventions",
+    "lost_work",
+    "duplicate_effects",
+    "unique_agents",
+    "incarnations",
+    "peak_concurrency",
+    "inference_tokens",
+    "inference_cost",
+    "assimilation_cost",
+    "deterministic_reuse_rate",
+    "cold_vs_warm_cost",
+    "novel_variant_pass_rate"
+  ],
   "guardrails": {
     "owned_processes_only": true,
     "simulated_dependencies_only": true,
     "max_retries_per_fault": 3,
     "explicit_run_budget_required": true,
     "respect_cancellation": true,
-    "publish_sanitized_evidence_only": true
+    "publish_sanitized_evidence_only": true,
+    "no_cross_lane_learning": true
   }
 }

@@ -9,7 +9,7 @@ import {spawn,spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 const lab=path.dirname(fileURLToPath(import.meta.url));
 const pin='3b1d7e173071710e6795c09427162292f774030e';
-const lanes={'01':'codex','02':'agy','03':'agy','04':'codex'};
+const lanes={'01':'codex','02':'agy','03':'codex','04':'agy'};
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 const json=(p,v)=>fs.writeFileSync(p,JSON.stringify(v,null,2)+'\n',{flag:'wx'});
 const mkdir=p=>fs.mkdirSync(p,{recursive:true});
@@ -147,5 +147,5 @@ async function smokeSingle(id){
 }
 const action=process.argv[2];
 if(action==='prepare')prepare();
-else if(action==='smoke'||action==='smoke-single')fail('R008: historical smoke launcher disabled; Gemini-only budget admission and reservation required before inference');
+else if(action==='smoke'||action==='smoke-single')fail('R010: historical smoke launcher disabled; selected provider policy, budget reservation and isolation required before inference');
 else fail('usage: node CLI-SETUP.mjs prepare|smoke|smoke-single <lane>; no campaign command is provided');

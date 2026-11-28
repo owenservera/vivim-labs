@@ -29,14 +29,19 @@ export function openDay(snapshot,now=Date.now()){
  const ws=windows(snapshot,now),allocations={};
  for(const [id,lane] of Object.entries(campaign.lanes)){
   if(lane.provider!==snapshot.provider)continue;
-  allocations[id]={selected:lane.selected,limit:{},spent:{},reserved:{},turns:0};
+  allocations[id]={selected:lane.selected,limit:{},spent:{},reserved:{},forecast_total:{},observed_decrease:{},segments:{},token_spent:0,turns:0};
   for(const [k,w] of Object.entries(ws)){
    const days=Number(k)>1440?Math.max(1,Math.ceil((Date.parse(w.reset)-now)/86400000)):1;
    allocations[id].limit[k]=Math.max(0,w.remaining-campaign.budget.provider_reserve_pp)/days*lane.pool_share;
-   allocations[id].spent[k]=0;allocations[id].reserved[k]=0;
+   allocations[id].spent[k]=0;allocations[id].reserved[k]=0;allocations[id].forecast_total[k]=0;allocations[id].observed_decrease[k]=0;allocations[id].segments[k]=[];
   }
  }
  return {schema:'vivim.daily-quota-ledger/1',day:dayOf(now),provider:snapshot.provider,account_key:snapshot.account_key,opening_observed_at:snapshot.observed_at,opening_windows:ws,allocations,pending:null,blocked:false,revision:0,history:[]};
+}
+export function rollDay(ledger,snapshot,now=Date.now()){
+ if(ledger.pending||ledger.blocked)fail('RECONCILE_BEFORE_ROLLOVER');
+ if(ledger.account_key!==snapshot.account_key||ledger.provider!==snapshot.provider||dayOf(now)<=ledger.day)fail('INVALID_ROLLOVER');
+ const x=openDay(snapshot,now);x.revision=ledger.revision+1;x.history=structuredClone(ledger.history);x.prior_days=[...(ledger.prior_days??[]),{day:ledger.day,allocations:ledger.allocations,opening_observed_at:ledger.opening_observed_at}];return x;
 }
 export function reserve(ledger,{lane,request_id,forecast,model,reasoning_effort,local_caps,task_id},snapshot,now=Date.now()){
  const x=structuredClone(ledger),ws=windows(snapshot,now),l=campaign.lanes[lane],a=x.allocations[lane];
@@ -48,7 +53,7 @@ export function reserve(ledger,{lane,request_id,forecast,model,reasoning_effort,
  if(x.provider==='codex'&&!snapshot.model_efforts?.[model]?.includes(reasoning_effort))fail('EFFORT_NOT_ENTITLED');
  const group=x.provider==='agy'?'Gemini Models':'codex';
  if(snapshot.model_groups?.[model]!==group)fail('MODEL_GROUP_UNKNOWN');
- if(!local_caps||!nonneg(local_caps.daily_tokens)||!nonneg(local_caps.token_ceiling)||!nonneg(local_caps.predicted_tokens)||local_caps.predicted_tokens===0||!Number.isInteger(local_caps.turn_ceiling)||local_caps.turn_ceiling<1||a.turns>=local_caps.turn_ceiling||local_caps.daily_tokens+local_caps.predicted_tokens>local_caps.token_ceiling)fail('LOCAL_CAP_UNCONFIGURED_OR_EXHAUSTED');
+ if(!local_caps||!nonneg(local_caps.daily_tokens)||!nonneg(local_caps.token_ceiling)||!nonneg(local_caps.predicted_tokens)||local_caps.predicted_tokens===0||!Number.isInteger(local_caps.turn_ceiling)||local_caps.turn_ceiling<1||a.turns>=local_caps.turn_ceiling||Math.max(local_caps.daily_tokens,a.token_spent)+local_caps.predicted_tokens>local_caps.token_ceiling)fail('LOCAL_CAP_UNCONFIGURED_OR_EXHAUSTED');
  if(Object.keys(ws).length!==Object.keys(a.limit).length)fail('WINDOW_SHAPE_CHANGED');
  for(const [k,w] of Object.entries(ws)){
   const cost=forecast?.[k];if(!num(cost)||cost<=0||!nonneg(a.limit[k]))fail('UNKNOWN_FORECAST');
@@ -56,10 +61,10 @@ export function reserve(ledger,{lane,request_id,forecast,model,reasoning_effort,
   if(a.spent[k]+a.reserved[k]+cost>a.limit[k]+1e-9)fail('LANE_DAILY_SHARE_EXHAUSTED');
   a.reserved[k]+=cost;
  }
- x.pending={request_id,task_id,lane,model,reasoning_effort:reasoning_effort??null,forecast:structuredClone(forecast),before:ws,reserved_at:new Date(now).toISOString(),status:'RESERVED'};
+ x.pending={request_id,task_id,lane,model,reasoning_effort:reasoning_effort??null,forecast:structuredClone(forecast),predicted_tokens:local_caps.predicted_tokens,before:ws,reserved_at:new Date(now).toISOString(),status:'RESERVED'};
  x.revision++;return x;
 }
-export function settle(ledger,{request_id,outcome,attribution_confirmed},snapshot,now=Date.now()){
+export function settle(ledger,{request_id,outcome,attribution_confirmed,actual_tokens},snapshot,now=Date.now()){
  const x=structuredClone(ledger),p=x.pending;
  if(!p||p.request_id!==request_id)fail('UNKNOWN_INTENT');
  if(!['VERIFIED','FAILED','CANCELLED','UNKNOWN'].includes(outcome))fail('INVALID_OUTCOME');
@@ -69,11 +74,15 @@ export function settle(ledger,{request_id,outcome,attribution_confirmed},snapsho
  for(const [k,b] of Object.entries(p.before)){
   const same=after?.[k]?.reset===b.reset;
   if(!same)ambiguous=true;
-  const delta=same?Math.max(0,b.remaining-after[k].remaining)+1:0;
-  charged[k]=Math.max(p.forecast[k],delta);a.reserved[k]=0;a.spent[k]+=charged[k];
+  const delta=same?Math.max(0,b.remaining-after[k].remaining):0;
+  a.forecast_total[k]+=p.forecast[k];a.observed_decrease[k]+=delta;
+  if(same&&!a.segments[k].includes(b.reset))a.segments[k].push(b.reset);
+  // One rounding allowance per lane/window identity, not per reasoning turn.
+  const total=Math.max(a.forecast_total[k],a.observed_decrease[k]+a.segments[k].length);
+  charged[k]=Math.max(0,total-a.spent[k]);a.reserved[k]=0;a.spent[k]=total;
  }
- a.turns++;
- x.history.push({...p,outcome,charged,settled_at:new Date(now).toISOString(),ambiguous});
+ a.turns++;a.token_spent+=Math.max(p.predicted_tokens,nonneg(actual_tokens)?actual_tokens:0);
+ x.history.push({...p,outcome,charged,actual_tokens:nonneg(actual_tokens)?actual_tokens:null,settled_at:new Date(now).toISOString(),ambiguous});
  x.pending=null;x.blocked=ambiguous;x.revision++;return x;
 }
 // Atomic immutable revision publication under exclusive account lock.

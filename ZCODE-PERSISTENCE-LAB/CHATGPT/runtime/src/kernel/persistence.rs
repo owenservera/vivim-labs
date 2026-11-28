@@ -129,6 +129,8 @@ impl KernelStore{
                 previous=rec.checksum;
             }
             ensure(previous==top.body.record&&world.sequence==latest,"indexed tail mismatch")?;
+            let last:Envelope<Record>=read(&self.path("record",latest))?;last.check()?;
+            ensure(last.body.index==top.body.index&&last.checksum==top.body.record,"latest index record mismatch")?;
             return Ok(Loaded{world,receipts,head:top.body});
         }
         let mut world=World::default();let mut receipts=BTreeMap::new();let mut previous="genesis".to_string();
@@ -160,7 +162,7 @@ impl KernelStore{
         if let Some(root)=head.index.as_ref(){return super::index::Index::open(&self.root)?.lookup(root,head.revision,table,key);}
         let loaded=self.load()?;
         if table=="receipts"{return loaded.receipts.get(key).map(|r|serde_json::to_value(r).map_err(error)).transpose();}
-        let v=serde_json::to_value(loaded.world).map_err(error)?;Ok(v.get(table).and_then(|t|t.get(key)).cloned())
+        let v=serde_json::to_value(loaded.world).map_err(error)?;let mut node=&v;for part in table.split('.'){let Some(next)=node.get(part) else{return Ok(None);};node=next;}Ok(node.get(key).cloned())
     }
     pub fn inspect(&self)->Result<World>{let _guard=self.lock()?;Ok(self.load()?.world)}
     pub fn anchor(&self)->Result<Anchor>{

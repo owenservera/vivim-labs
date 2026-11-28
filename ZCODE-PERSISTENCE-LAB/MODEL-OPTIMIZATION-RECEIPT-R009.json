@@ -1,0 +1,25 @@
+{
+  "revision": "R009",
+  "source_pin": "b5a6f93b4295a566ace29eae46979a4cd1cb999f",
+  "native_receipt": "ctl-18443af6ce2de417",
+  "test_command": "node ZCODE-PERSISTENCE-LAB/MODEL-BUDGET.test.mjs",
+  "exit_code": 0,
+  "checks_passed": 28,
+  "scope": "Synthetic selector/parser tests; no inference or quota consumed",
+  "observed_discrimination": {
+    "lane_01": "stable priority selects Neon High",
+    "lane_02": "lower estimated normalized quota cost selects Hydrogen High; early-window envelope can deny all",
+    "lane_03": "Neon High first; Hydrogen High only after verified failed attempt; stops on exhausted attempt budget or unverified outcome",
+    "lane_04": "cold-start reference, then verified-success lower-confidence bound per predicted quota cost or bounded exploration"
+  },
+  "limitations": [
+    "No actual comparative efficiency established; synthetic forecast and success inputs are fixtures.",
+    "R009 policies use the same underlying hard gates and different selection/gating rules; caller must persist evidence and forecasts and atomically reserve quota.",
+    "Codex lanes 01 and 04 remain held for live Gemini-only routing; simulation cannot authorize inference.",
+    "Time pacing assumes provider reset timestamp corresponds to the reported window duration. Unknown or stale observations require refresh.",
+    "Quota percentages are rounded and shared with other account activity, so attribution can be censored or ambiguous.",
+    "Provider, seed knowledge and optimization policy vary together; use offline identical traces and a later rotated live cohort to separate them.",
+    "No actual campaign or worker launched; primary CHATGPT build not edited."
+  ],
+  "campaign_started": false
+}

@@ -21,7 +21,7 @@ pub enum Action {
     Claim{task:Id,agent:Id,ttl_ms:u64},Renew{task:Id,generation:u64,ttl_ms:u64},
     Checkpoint{task:Id,generation:u64,data:Value},
     Submit{task:Id,generation:u64,output:Value},Fail{task:Id,generation:u64,reason:String},
-    Verify{task:Id},Tick{now_ms:u64},Send{id:Id,recipient:Id,body:Value},Ack{id:Id},
+    Verify{task:Id},Tick{now_ms:u64},RecoverNative{reason:String},Send{id:Id,recipient:Id,body:Value},Ack{id:Id},
     Receive{limit:usize,ttl_ms:u64},WaitMessage{agent:Id},WaitDependency{agent:Id,task:Id},Cancel{goal:Id},
     AdmitCapability{capability:Capability},DisableCapability{capability:Id},RollbackCapability{capability:Id,reason:String},
     ConfigureLearning{plan:LearningPlan},LearnPlan{plan:Id},PublishKnowledge{knowledge:Knowledge},DisableKnowledge{knowledge:Id},
@@ -293,9 +293,9 @@ impl World {
                 ensure(t.phase==TaskPhase::Submitted,"no submission")?;self.open_goal(&t.spec.goal)?;
                 let input=t.input.as_ref().ok_or("input missing")?;let candidate=t.proposal.clone().ok_or("proposal missing")?;
                 let output=self.payload(&candidate)?;
-                let confirmed_bad_class=t.assigned_class.as_ref().is_some_and(|k|self.capabilities.values().any(|c|c.enabled&&&c.class==k)&&self.run_class(k,input).is_ok_and(|v|v==*output));
                 let oracle=t.spec.oracle.evaluate(input,output);
                 let accepted=t.spec.output.accepts(output)&&oracle.as_ref().is_ok_and(|v|*v);
+                let confirmed_bad_class=!accepted&&t.assigned_class.as_ref().is_some_and(|k|self.capabilities.values().any(|c|c.enabled&&&c.class==k)&&self.run_class(k,input).is_ok_and(|v|v==*output));
                 let rejection_reason=oracle.err().unwrap_or_else(||"oracle rejected".into());
                 let input_digest=self.put_payload(input.clone())?;
                 let parents:Vec<_>=t.spec.dependencies.iter().map(|d|self.tasks[d].artifact.clone().ok_or("dependency artifact missing")).collect::<std::result::Result<_,_>>()?;
@@ -314,6 +314,12 @@ impl World {
                 }else{self.metrics.rejected=self.metrics.rejected.saturating_add(1);self.metrics.verification_rejections=self.metrics.verification_rejections.saturating_add(1);self.release(&task,&rejection_reason)?;
                     if rejection_reason=="oracle rejected"&&confirmed_bad_class { self.reject_learned_class(t.assigned_class.as_deref())?; }}
                 return Ok(json!({"accepted":accepted,"task":task}));
+            }
+            RecoverNative{reason}=>{
+                actor.host()?;ensure(!reason.trim().is_empty(),"recovery reason required")?;
+                let workers:Vec<_>=self.agents.values().filter(|a|a.incarnations.last().is_some_and(|i|i.ended_ms.is_none()&&i.executor=="native-pure-process")).map(|a|a.id.clone()).collect();
+                for worker in &workers{self.end_agent(worker,&reason,false)?;}
+                return Ok(json!({"fenced_native_incarnations":workers}));
             }
             Tick{now_ms}=>{
                 actor.host()?;ensure(now_ms>=self.clock_ms,"clock reversed")?;self.clock_ms=now_ms;

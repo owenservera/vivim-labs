@@ -17,6 +17,7 @@ fn kernel_cli(args:&[String])->Result<(),String>{
     let output=match action{
         "inspect"=>serde_json::to_value(store.inspect()?).map_err(|e|e.to_string())?,
         "ready"=>serde_json::json!(store.inspect()?.ready()),
+        "import-r003"=>store.import_r003(required(args,4,"migration request ID")?.to_owned(),Path::new(required(args,3,"legacy store")?))?,
         "anchor"=>serde_json::to_value(store.anchor()?).map_err(|e|e.to_string())?,
         "verify-anchor"=>{let anchor:Anchor=read_json(required(args,3,"anchor file")?)?;store.verify_anchor(&anchor)?;serde_json::json!({"verified":true})}
         "apply"=>{let request:Request=read_json(required(args,3,"request JSON file or -")?)?;store.apply(request)?}
@@ -52,7 +53,7 @@ fn kernel_cli(args:&[String])->Result<(),String>{
             let workspace=Path::new(required(args,4,"projection root")?);
             serde_json::json!({"path":store.project_agent(agent,workspace)?})
         }
-        _=>return Err("unknown kernel action; inspect|ready|anchor|verify-anchor|apply|bootstrap|discover|assimilate|run|project".into()),
+        _=>return Err("unknown kernel action; inspect|ready|import-r003|anchor|verify-anchor|apply|bootstrap|discover|assimilate|run|project".into()),
     };
     println!("{}",serde_json::to_string_pretty(&output).map_err(|e|e.to_string())?);
     Ok(())

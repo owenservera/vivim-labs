@@ -100,7 +100,16 @@ impl ArchivedRevision{
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct HistoricalPin{pub name:Id,pub revision:u64,pub anchor:Anchor,pub index:Digest}
-struct Loaded {world:World,receipts:BTreeMap<Id,Receipt>,head:Head}
+struct Loaded {world:World,receipts:BTreeMap<Id,Receipt>,head:Head,lazy_receipts:bool}
+impl Loaded{
+    fn receipt(&self,index:&super::index::Index,key:&str)->Result<Option<Receipt>>{
+        if self.lazy_receipts{
+            let root=self.head.index.as_ref().ok_or("lazy receipt root missing")?;
+            index.lookup(root,self.head.revision,"receipts",key)?
+                .map(|v|serde_json::from_value(v).map_err(error)).transpose()
+        }else{Ok(self.receipts.get(key).cloned())}
+    }
+}
 pub struct KernelStore {root:PathBuf}
 const SNAP_INTERVAL:u64=64;
 impl KernelStore{
@@ -136,13 +145,20 @@ impl KernelStore{
     fn load(&self)->Result<Loaded>{
         let heads=self.heads()?;
         let Some(&latest)=heads.last() else{
-            return Ok(Loaded{world:World::default(),receipts:BTreeMap::new(),head:Head{schema:1,revision:0,record:"genesis".into(),snapshot:0,snapshot_digest:None,index:None}})
+            return Ok(Loaded{world:World::default(),receipts:BTreeMap::new(),head:Head{schema:1,revision:0,record:"genesis".into(),snapshot:0,snapshot_digest:None,index:None},lazy_receipts:false})
         };
         let top:Envelope<Head>=read(&self.path("head",latest))?;top.check()?;
         ensure(top.body.schema==1&&top.body.revision==latest&&top.body.snapshot<=latest,"invalid head")?;
         if let Some(root)=&top.body.index{
             let index=super::index::Index::open(&self.root)?;
-            let (world,receipts)=index.load(root,latest)?;
+            let lazy_receipts=index.manifest(root)?.schema==4;
+            let (world,receipts)=if lazy_receipts{(index.load_world(root,latest)?,BTreeMap::new())}else{index.load(root,latest)?};
+            let lookup_receipt=|key:&str|->Result<Receipt>{
+                if lazy_receipts{
+                    let v=index.lookup(root,latest,"receipts",key)?.ok_or("indexed receipt missing")?;
+                    serde_json::from_value(v).map_err(error)
+                }else{receipts.get(key).cloned().ok_or("indexed receipt missing".into())}
+            };
             // Verify the bounded chain without re-running potentially expensive
             // learning/computation commands. Each retained marker names its index.
             let start=top.body.snapshot;
@@ -151,6 +167,8 @@ impl KernelStore{
                 ensure(marker.body.revision==start&&marker.body.index==marker.body.snapshot_digest&&marker.body.snapshot==start&&marker.body.index==top.body.snapshot_digest,"checkpoint head mismatch")?;
                 let rec:Envelope<Record>=read(&self.path("record",start))?;rec.check()?;
                 ensure(rec.body.revision==start&&rec.body.index==marker.body.index&&rec.checksum==marker.body.record,"checkpoint record mismatch")?;
+                let receipt=lookup_receipt(rec.body.command.id())?;
+                ensure(receipt.revision==start&&receipt.request_digest==checksum(&rec.body.command)?&&receipt.response==rec.body.response,"checkpoint receipt mismatch")?;
                 rec.body.verify_measurement(&world)?;
                 marker.body.record
             };
@@ -158,7 +176,7 @@ impl KernelStore{
                 let marker:Envelope<Head>=read(&self.path("head",rev))?;marker.check()?;
                 let rec:Envelope<Record>=read(&self.path("record",rev))?;rec.check()?;
                 ensure(marker.body.revision==rev&&marker.body.record==rec.checksum&&rec.body.revision==rev&&rec.body.previous==previous&&rec.body.index==marker.body.index,"indexed journal chain mismatch")?;
-                let receipt=receipts.get(rec.body.command.id()).ok_or("indexed receipt missing")?;
+                let receipt=lookup_receipt(rec.body.command.id())?;
                 ensure(receipt.revision==rev&&receipt.request_digest==checksum(&rec.body.command)?&&receipt.response==rec.body.response,"indexed receipt mismatch")?;
                 rec.body.verify_measurement(&world)?;
                 previous=rec.checksum;
@@ -166,7 +184,7 @@ impl KernelStore{
             ensure(previous==top.body.record&&world.sequence==latest,"indexed tail mismatch")?;
             let last:Envelope<Record>=read(&self.path("record",latest))?;last.check()?;
             ensure(last.body.index==top.body.index&&last.checksum==top.body.record,"latest index record mismatch")?;
-            return Ok(Loaded{world,receipts,head:top.body});
+            return Ok(Loaded{world,receipts,head:top.body,lazy_receipts});
         }
         let mut world=World::default();let mut receipts=BTreeMap::new();let mut previous="genesis".to_string();
         let start=top.body.snapshot;
@@ -190,7 +208,7 @@ impl KernelStore{
             previous=rec.checksum;
         }
         ensure(previous==top.body.record,"tail digest mismatch")?;
-        Ok(Loaded{world,receipts,head:top.body})
+        Ok(Loaded{world,receipts,head:top.body,lazy_receipts:false})
     }
     pub fn lookup(&self,table:&str,key:&str)->Result<Option<Value>>{
         let _guard=self.lock()?;
@@ -252,7 +270,7 @@ impl KernelStore{
         authority.authenticate(&signed,now_ms)?;
         let _guard=self.lock()?;let loaded=self.load()?;
         let command=Transaction::Command{request:signed.request.clone()};
-        if loaded.receipts.contains_key(command.id()){authority.authorize_replay(&signed,&loaded.world,now_ms)?;}else{authority.authorize(&signed,&loaded.world,now_ms)?;}
+        if loaded.receipt(&super::index::Index::open(&self.root)?,command.id())?.is_some(){authority.authorize_replay(&signed,&loaded.world,now_ms)?;}else{authority.authorize(&signed,&loaded.world,now_ms)?;}
         self.commit_loaded(command,loaded)
     }
     /// Explicit trusted-host action. Unknown effects can only be observed, not
@@ -287,7 +305,8 @@ impl KernelStore{
     fn commit_loaded_metered(&self,command:Transaction,mut loaded:Loaded,operation:Option<&str>)->Result<Value>{
         id(command.id())?;
         let request_digest=checksum(&command)?;
-        if let Some(receipt)=loaded.receipts.get(command.id()){
+        let index=super::index::Index::open(&self.root)?;
+        if let Some(receipt)=loaded.receipt(&index,command.id())?{
             ensure(receipt.request_digest==request_digest,"request ID conflict")?;
             if let Some(operation)=operation{
                 ensure(loaded.world.host_costs.get(command.id()).is_some_and(|m|m.operation==format!("transition-{operation}")&&m.result_digest.as_ref()==Some(&digest(&receipt.response))),"existing receipt has no matching atomic measurement")?;
@@ -308,9 +327,8 @@ impl KernelStore{
         // Record/snapshot without head are orphan preparations from a prior interrupted commit.
         for kind in ["record","snapshot"]{let p=self.path(kind,rev);if p.exists(){fs::remove_file(p).map_err(error)?;}}
         let request_id=command.id().to_string();
-        loaded.receipts.insert(request_id,Receipt{request_digest,response:response.clone(),revision:rev});
-        let index=super::index::Index::open(&self.root)?;
-        let index_root=index.write(rev,&loaded.world,&loaded.receipts,loaded.head.index.as_deref())?;
+        let receipt=Receipt{request_digest,response:response.clone(),revision:rev};
+        let index_root=index.write_incremental(rev,&loaded.world,&loaded.receipts,&request_id,&receipt,loaded.head.index.as_deref())?;
         let rec=Envelope::new(Record{schema:1,revision:rev,previous:loaded.head.record.clone(),command,response:response.clone(),index:Some(index_root.clone()),host_measurement})?;
         write_new(&self.root,&Self::name("record",rev),&rec)?;
         #[cfg(test)] super::qualification::pause_at(&self.root,"before_head")?;
@@ -439,6 +457,23 @@ impl KernelStore{
         for rev in self.heads()?{let h:Envelope<Head>=read(&self.path("head",rev))?;h.check()?;if let Some(index)=h.body.index{roots.insert(index);}}
         for p in self.retained_pins()?{roots.insert(p.index);}
         super::index::Index::open(&self.root)?.collect(&roots)
+    }
+    /// Explicit complete current-index audit. Normal transactions only read
+    /// historical receipt pages required for the retained journal and replay.
+    pub fn audit_index(&self)->Result<Value>{
+        let _guard=self.lock()?;let loaded=self.load()?;
+        let root=loaded.head.index.as_ref().ok_or("audit requires indexed state")?;
+        let index=super::index::Index::open(&self.root)?;
+        let (world,receipts)=index.load(root,loaded.head.revision)?;
+        ensure(encode(&world)?==encode(&loaded.world)?,"audit world mismatch")?;
+        ensure(receipts.len() as u64==loaded.head.revision,"receipt count differs from committed revision")?;
+        let mut seen=BTreeSet::new();
+        for (id,r) in &receipts{
+            super::model::id(id)?;
+            ensure(r.revision>0&&r.revision<=loaded.head.revision&&hash_id(&r.request_digest)&&seen.insert(r.revision),"invalid receipt coverage")?;
+        }
+        Ok(json!({"revision":loaded.head.revision,"schema":index.manifest(root)?.schema,"receipts":receipts.len(),
+            "root":root,"scope":"current_index_objects_and_receipt_coverage_not_full_archived_chain"}))
     }
     pub fn collect_garbage(&self)->Result<usize>{
         let _guard=self.lock()?;let loaded=self.load()?;

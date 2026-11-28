@@ -150,3 +150,30 @@ fn retired_journal_and_pinned_state_survive_checkpoint_collection(){
     let reopened=KernelStore::open(&temp.0).unwrap();assert_eq!(reopened.historical_record(1).unwrap(),old);
     assert_eq!(reopened.anchor().unwrap().revision,66);
 }
+
+#[test]
+fn incremental_receipt_pages_keep_replay_and_legacy_root_compatible(){
+    use persistent_intelligence_runtime::kernel::{persistence::KernelStore,transition::Request};
+    let temp=Temp::new();let store=KernelStore::open(&temp.0).unwrap();
+    let r=Request{id:"first".into(),actor:Actor::Host,action:Action::Goal{id:"g".into(),parent:None,objective:"receipt fixture".into(),claim_budget:2,predicate:None}};
+    let original=store.apply(r.clone()).unwrap();
+    let first=store.pin_history("first").unwrap();
+    for n in 2..=12{store.apply(Request{id:format!("tick-{n}"),actor:Actor::Host,action:Action::Tick{now_ms:n}}).unwrap();}
+    assert_eq!(store.apply(r.clone()).unwrap(),original);
+    assert_eq!(store.anchor().unwrap().revision,12);
+    assert_eq!(store.audit_index().unwrap()["schema"],4);
+    assert_eq!(store.audit_index().unwrap()["receipts"],12);
+    let mut conflict=r;conflict.action=Action::Tick{now_ms:20};
+    assert!(store.apply(conflict).is_err());
+    assert!(store.historical_lookup("first","receipts","tick-12").unwrap().is_none());
+    assert_eq!(store.historical_lookup("first","receipts","first").unwrap().unwrap()["revision"],1);
+    let index=Index::open(&temp.0).unwrap();assert_eq!(index.manifest(&first.index).unwrap().schema,4);
+    // Explicit legacy writer remains usable for older root qualification.
+    let world=World::default();let old=index.write(0,&world,&BTreeMap::new(),None).unwrap();
+    assert_eq!(index.manifest(&old).unwrap().schema,3);
+    let mut next=world;next.sequence=1;
+    let receipt=Receipt{revision:1,request_digest:digest(&json!("request")),response:json!(1)};
+    let root=index.write_incremental(1,&next,&BTreeMap::new(),"first",&receipt,Some(&old)).unwrap();
+    assert_eq!(index.load_world(&root,1).unwrap().sequence,1);
+    let (_,receipts)=index.load(&root,1).unwrap();assert_eq!(receipts["first"].revision,1);
+}

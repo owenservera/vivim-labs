@@ -32,6 +32,7 @@ fn kernel_cli(args:&[String])->Result<(),String>{
         "history-lookup"=>store.historical_lookup(required(args,3,"pin name")?,required(args,4,"table")?,required(args,5,"entity key")?)?.unwrap_or(Value::Null),
         "history-record"=>store.historical_record(required(args,3,"revision")?.parse::<u64>().map_err(|e|e.to_string())?)?,
         "receipt-status"=>store.receipt_status(required(args,3,"request ID")?)?,
+        "audit-index"=>store.audit_index()?,
         "population"=>store.inspect()?.audit_population(),
         "resources"=>store.inspect()?.resource_report(),
         "provider-accounting"=>store.inspect()?.provider_accounting(),

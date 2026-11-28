@@ -153,3 +153,5 @@ Prospective matched reuse execution comparison and cost-coverage gating authored
 
 ## Source closure 010 (unqualified)
 Archive-before-prune, explicit historical root retention and direct receipt observation authored. Trace attestation now requires signed durable ingress. E33 remains partial; no score change. No compilation/test execution.
+
+Schema 4 source addition: incremental receipt page insertion and lazy old receipt loading with explicit complete current-index audit. Existing schema 1–3 readers retained. World mutation remains full-state; E33 partial. See INCREMENTAL-RECEIPTS-001.md.

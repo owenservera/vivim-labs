@@ -678,16 +678,16 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "287ff49f369338a20e80e0d4b5b9f6e6636e2d8b",
+        "source_pin": "2ebb1342b94be6851d33c512002da99f6ca558b2",
         "files": [
           "src/kernel/index.rs",
           "src/kernel/persistence.rs",
           "tests/closure_integrity.rs",
           "src/kernel/transition.rs"
         ],
-        "remaining": "Retirement archives verified head/command pairs before deletion; durable historical root pins survive index collection; bounded direct historical record/entity and receipt status access authored. Earlier pruned records are not recoverable here. Full-world mutation and receipt materialization, archive capacity policy, external anchor custody and actual crash/scaling qualification remain.",
+        "remaining": "Archive-before-prune, pinned historical roots and schema-4 incremental single-receipt page mutation with lazy receipt materialization and explicit full index audit authored. World tables still fully load/serialize and receipt directory rewrite scales with page count. Legacy migration, full-world mutation, archive limits and empirical qualification remain.",
         "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
-        "checkpoint": "HISTORICAL-RETENTION-001"
+        "checkpoint": "INCREMENTAL-RECEIPTS-001"
       }
     },
     {
@@ -1380,6 +1380,10 @@
     "baseline": "287ff49f369338a20e80e0d4b5b9f6e6636e2d8b",
     "document": "HISTORICAL-RETENTION-001.md",
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
-    "verified_credit": 0
+    "verified_credit": 0,
+    "documents": [
+      "HISTORICAL-RETENTION-001.md",
+      "INCREMENTAL-RECEIPTS-001.md"
+    ]
   }
 }

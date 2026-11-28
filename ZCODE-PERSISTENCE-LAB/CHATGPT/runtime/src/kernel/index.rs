@@ -96,9 +96,12 @@ impl Index{
     }
     pub fn manifest(&self,hash:&str)->Result<IndexRoot>{
         let root:IndexRoot=serde_json::from_value(self.get(hash)?).map_err(err)?;
-        ensure((1..=3).contains(&root.schema)&&hash_id(&root.scalar)&&hash_id(&root.state_digest),"invalid index root")?;
-        if root.schema==3{ensure(root.tables.is_empty(),"schema 3 cannot use inline tables")?;for (name,hash) in &root.directories{ensure(Self::valid_table(name)&&hash_id(hash),"invalid index directory")?;}}
+        ensure((1..=4).contains(&root.schema)&&hash_id(&root.scalar)&&hash_id(&root.state_digest),"invalid index root")?;
+        if root.schema>=3{ensure(root.tables.is_empty(),"schema 3 cannot use inline tables")?;for (name,hash) in &root.directories{ensure(Self::valid_table(name)&&hash_id(hash),"invalid index directory")?;}}
         else{ensure(root.directories.is_empty(),"legacy index cannot have adaptive directories")?;}
+        if root.schema==4{
+            ensure(root.state_digest==Self::tree_digest(&root.scalar,&root.directories),"incremental root commitment mismatch")?;
+        }
         for (table,buckets) in &root.tables{
             ensure((MAPS.contains(&table.as_str())||root.schema==2&&NESTED.contains(&table.as_str())),"unknown index table")?;
             for (key,hash) in buckets{
@@ -132,27 +135,105 @@ impl Index{
         let root=IndexRoot{schema:3,revision,state_digest,scalar,tables:BTreeMap::new(),directories};
         self.put(&serde_json::to_value(root).map_err(err)?)
     }
+    fn tree_digest(scalar:&str,dirs:&BTreeMap<String,String>)->Digest{
+        digest(&serde_json::json!({"schema":4,"scalar":scalar,"directories":dirs}))
+    }
+    fn write_table(&self,table:&Map<String,Value>,prior:&BTreeMap<String,String>)->Result<Digest>{
+        let mut pages=BTreeMap::<String,Map<String,Value>>::new();
+        for (key,val) in table{pages.entry(Self::bucket(key,1)).or_default().insert(key.clone(),val.clone());}
+        let mut refs=BTreeMap::new();
+        for (bucket,page) in pages{self.leaf(&bucket,page,&mut refs,prior)?;}
+        self.put(&serde_json::to_value(refs).map_err(err)?)
+    }
+    /// Update one receipt in its existing adaptive page, preserving all other
+    /// leaf hashes. Directory rewriting is still proportional to page count.
+    fn insert_receipt(&self,mut refs:BTreeMap<String,String>,key:&str,receipt:&Receipt)->Result<Digest>{
+        let key_hash=digest(&Value::String(key.into()));
+        let existing=(2..=64).step_by(2).find_map(|n|refs.get(&key_hash[..n]).map(|h|(key_hash[..n].to_owned(),h.clone())));
+        let (prefix,mut page)=if let Some((prefix,h))=existing{
+            let v=self.get(&h)?;
+            let m=v.as_object().ok_or("invalid receipt page")?.clone();
+            for k in m.keys(){ensure(digest(&Value::String(k.clone())).starts_with(&prefix),"receipt in wrong bucket")?;}
+            (prefix,m)
+        }else{
+            // When siblings have split, never create a parent overlapping an
+            // existing descendant. Choose the shortest unused non-overlapping prefix.
+            let prefix=(2..=64).step_by(2).map(|n|&key_hash[..n]).find(|p|!refs.keys().any(|k|k.starts_with(*p)))
+                .ok_or("no receipt partition available")?.to_owned();
+            (prefix,Map::new())
+        };
+        ensure(!page.contains_key(key),"duplicate receipt insertion")?;
+        page.insert(key.into(),serde_json::to_value(receipt).map_err(err)?);
+        let old=refs.clone();refs.remove(&prefix);
+        self.leaf(&prefix,page,&mut refs,&old)?;
+        self.put(&serde_json::to_value(refs).map_err(err)?)
+    }
+    /// World tables still materialize; receipt history does not. Legacy roots
+    /// must have been fully loaded and checked before conversion.
+    pub fn write_incremental(&self,revision:u64,world:&World,legacy_receipts:&BTreeMap<Id,Receipt>,key:&str,receipt:&Receipt,previous:Option<&str>)->Result<Digest>{
+        ensure(receipt.revision==revision&&world.sequence==revision,"incremental revision mismatch")?;
+        let old=previous.map(|h|self.manifest(h)).transpose()?;
+        let mut state=serde_json::to_value(world).map_err(err)?;
+        let object=state.as_object_mut().ok_or("world not record")?;
+        let mut directories=BTreeMap::new();
+        for &name in MAPS.iter().chain(NESTED.iter()){
+            if name=="receipts"{continue;}
+            let Some((parent,key))=Self::table_parent(object,name) else{continue;};
+            let Some(table)=parent.remove(&key) else{continue;};
+            let table=table.as_object().ok_or("index table must be map")?;
+            let prior=match &old{Some(r)=>self.directory(r,name)?,None=>BTreeMap::new()};
+            directories.insert(name.into(),self.write_table(table,&prior)?);
+        }
+        let receipt_root=if let Some(r)=old.as_ref().filter(|r|r.schema>=3){
+            ensure(r.directories.contains_key("receipts"),"receipt directory missing")?;
+            self.insert_receipt(self.directory(r,"receipts")?,key,receipt)?
+        }else{
+            let mut all=serde_json::to_value(legacy_receipts).map_err(err)?.as_object().ok_or("legacy receipts not map")?.clone();
+            ensure(all.insert(key.into(),serde_json::to_value(receipt).map_err(err)?).is_none(),"duplicate legacy receipt")?;
+            self.write_table(&all,&BTreeMap::new())?
+        };
+        directories.insert("receipts".into(),receipt_root);
+        let scalar=self.put(&state)?;
+        let state_digest=Self::tree_digest(&scalar,&directories);
+        self.put(&serde_json::to_value(IndexRoot{schema:4,revision,state_digest,scalar,tables:BTreeMap::new(),directories}).map_err(err)?)
+    }
+    pub fn load_world(&self,hash:&str,revision:u64)->Result<World>{
+        let root=self.manifest(hash)?;
+        ensure(root.schema==4,"lazy receipt loading requires schema 4")?;
+        Ok(self.load_inner(root,revision,false)?.0)
+    }
     pub fn load(&self,hash:&str,revision:u64)->Result<(World,BTreeMap<Id,Receipt>)>{
-        let root=self.manifest(hash)?;ensure(root.revision==revision,"index revision mismatch")?;
+        let root=self.manifest(hash)?;
+        self.load_inner(root,revision,true)
+    }
+    fn load_inner(&self,root:IndexRoot,revision:u64,include_receipts:bool)->Result<(World,BTreeMap<Id,Receipt>)>{
+        ensure(root.revision==revision,"index revision mismatch")?;
+        ensure(include_receipts||root.schema==4,"legacy root requires full load")?;
         let mut state=self.get(&root.scalar)?;
         let object=state.as_object_mut().ok_or("scalar state not object")?;
         let schema=root.schema;
-        let names:Vec<_>=if schema==3{root.directories.keys().cloned().collect()}else{root.tables.keys().cloned().collect()};
+        let names:Vec<_>=if schema>=3{root.directories.keys().cloned().collect()}else{root.tables.keys().cloned().collect()};
         for name in names{
+            if !include_receipts&&name=="receipts"{continue;}
             let refs=self.directory(&root,&name)?;
             let mut table=Map::new();
             for (bucket,hash) in refs{
                 let page=self.get(&hash)?;
                 for (key,val) in page.as_object().ok_or("invalid index page")?{
-                    ensure(if schema==3{digest(&Value::String(key.clone())).starts_with(&bucket)}else{Self::bucket(key,schema)==bucket},"index key in wrong bucket")?;
+                    ensure(if schema>=3{digest(&Value::String(key.clone())).starts_with(&bucket)}else{Self::bucket(key,schema)==bucket},"index key in wrong bucket")?;
                     ensure(table.insert(key.clone(),val.clone()).is_none(),"duplicate index key")?;
                 }
             }
             let (parent,key)=Self::table_parent(object,&name).ok_or("missing nested table parent")?;
             ensure(parent.insert(key,Value::Object(table)).is_none(),"duplicate scalar/table")?;
         }
-        ensure(digest(&state)==root.state_digest,"index state digest mismatch")?;
-        let receipts=state.as_object_mut().unwrap().remove("receipts").ok_or("receipt index missing")?;
+        if schema<4{ensure(digest(&state)==root.state_digest,"index state digest mismatch")?;}
+        let receipts=if include_receipts{
+            state.as_object_mut().unwrap().remove("receipts").ok_or("receipt index missing")?
+        }else{
+            ensure(root.directories.contains_key("receipts")&&!state.as_object().unwrap().contains_key("receipts"),"invalid lazy receipt directory")?;
+            serde_json::json!({})
+        };
         Ok((serde_json::from_value(state).map_err(err)?,serde_json::from_value(receipts).map_err(err)?))
     }
     pub fn lookup(&self,hash:&str,revision:u64,table:&str,key:&str)->Result<Option<Value>>{
@@ -160,7 +241,7 @@ impl Index{
         let root=self.manifest(hash)?;ensure(root.revision==revision,"index revision mismatch")?;
         let refs=self.directory(&root,table)?;
         let key_hash=digest(&Value::String(key.into()));
-        let page=if root.schema==3{(2..=64).step_by(2).find_map(|n|refs.get(&key_hash[..n]))}else{refs.get(&Self::bucket(key,root.schema))};
+        let page=if root.schema>=3{(2..=64).step_by(2).find_map(|n|refs.get(&key_hash[..n]))}else{refs.get(&Self::bucket(key,root.schema))};
         let Some(page)=page else{
             if root.schema==1&&NESTED.contains(&table){let scalar=self.get(&root.scalar)?;let mut v=&scalar;for p in table.split('.'){let Some(next)=v.get(p) else{return Ok(None);};v=next;}return Ok(v.get(key).cloned());}
             return Ok(None);
@@ -192,7 +273,7 @@ impl Index{
             if let Some(k)=resume{ensure(map.contains_key(k),"scan cursor key not present")?;}
             let mut last=resume.map(str::to_owned);
             for (key,val) in map{
-                ensure(if root.schema==3{digest(&Value::String(key.clone())).starts_with(bucket)}else{Self::bucket(key,root.schema).as_str()==bucket.as_str()},"scan key in wrong bucket")?;
+                ensure(if root.schema>=3{digest(&Value::String(key.clone())).starts_with(bucket)}else{Self::bucket(key,root.schema).as_str()==bucket.as_str()},"scan key in wrong bucket")?;
                 if resume.is_some_and(|k|key.as_str()<=k){continue;}
                 let size=serde_json::to_vec(&(key,val)).map_err(err)?.len();
                 if entries.len()>=limit||bytes.checked_add(size).is_none_or(|n|n>max_bytes){
@@ -211,7 +292,7 @@ impl Index{
         for hash in roots{
             let manifest=self.manifest(hash)?;
             keep.insert(manifest.scalar.clone());
-            if manifest.schema==3{
+            if manifest.schema>=3{
                 for (table,hash) in &manifest.directories{keep.insert(hash.clone());for page in self.directory(&manifest,table)?.values(){keep.insert(page.clone());}}
             }else{for page in manifest.tables.values().flat_map(|t|t.values()){keep.insert(page.clone());}}
         }

@@ -107,7 +107,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
     fs::create_dir_all(workspace).map_err(error)?;
     let workspace=workspace.canonicalize().map_err(error)?;
     let exe=std::env::current_exe().map_err(error)?;
-    let started=Instant::now();let mut jobs:Vec<Job>=vec![];let mut launched=0u64;let mut completed=0u64;let mut failures=0u64;let mut learning_runs=0u64;
+    let started=Instant::now();let mut jobs:Vec<Job>=vec![];let mut launched=0u64;let mut completed=0u64;let mut failures=0u64;let mut learning_runs=0u64;let mut knowledge_runs=0u64;
     let before=store.inspect()?;
     let base_clock=before.clock_ms.max(wall_ms()?);
     // Exclusive controller lock proves no previous cooperating supervisor owns
@@ -162,11 +162,17 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             if host(store,Action::Verify{task:t.spec.id.clone()})?["accepted"]==true{completed+=1;}else{failures+=1;}
         }
         let mut progress=false;
-        while learning_runs<config.max_learning_plans{
+        while learning_runs.saturating_add(knowledge_runs)<config.max_learning_plans{
             let w=store.inspect()?;
             let Some(plan)=w.ready_learning().into_iter().next() else{break;};
             host(store,Action::LearnPlan{plan})?;
             learning_runs+=1;progress=true;
+        }
+        while learning_runs.saturating_add(knowledge_runs)<config.max_learning_plans{
+            let w=store.inspect()?;
+            let Some((rule,payload))=w.ready_knowledge().into_iter().next() else{break;};
+            host(store,Action::AssimilateRecurring{rule,payload})?;
+            knowledge_runs+=1;progress=true;
         }
         while launched<config.max_jobs{
             let w=store.inspect()?;
@@ -175,7 +181,8 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             for key in w.ready(){
                 let t=&w.tasks[&key];
                 if let Some(class)=w.match_class(&t.spec){
-                    if suitable(&w,t,&class).is_some()||t.spec.context.as_ref().and_then(|k|w.contexts.get(k)).is_some_and(|c|w.assemble(&t.spec,c).is_ok())||!t.spec.inputs.values().any(|p|matches!(&p.binding,Binding::Context{..})){
+                    let empty=Context{id:"native-empty".into(),version:1,entries:BTreeMap::new(),artifacts:BTreeMap::new(),byte_budget:MAX_VALUE_BYTES};
+                    if suitable(&w,t,&class).is_some()||match &t.spec.context{Some(k)=>w.contexts.get(k).is_some_and(|c|w.assemble(&t.spec,c).is_ok()),None=>w.assemble(&t.spec,&empty).is_ok()}{
                         choice=Some((key,class));break;
                     }
                 }
@@ -220,5 +227,5 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
         drop(job);
     }
     let after=store.inspect()?;
-    Ok(json!({"reason":stop_reason,"launched":launched,"completed":completed,"failures":failures,"learning_runs":learning_runs,"elapsed_ms":started.elapsed().as_millis() as u64,"metrics_before":before.metrics,"metrics_after":after.metrics}))
+    Ok(json!({"reason":stop_reason,"launched":launched,"completed":completed,"failures":failures,"learning_runs":learning_runs,"knowledge_runs":knowledge_runs,"elapsed_ms":started.elapsed().as_millis() as u64,"metrics_before":before.metrics,"metrics_after":after.metrics}))
 }

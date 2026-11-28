@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-source-checkpoint-001",
+  "revision": "R004-source-checkpoint-002",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -34,7 +34,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/persistence.rs",
           "src/kernel/model.rs"
@@ -58,7 +58,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/transition.rs"
         ],
@@ -75,7 +75,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/transition.rs"
         ],
@@ -92,7 +92,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/model.rs",
           "src/kernel/transition.rs"
@@ -110,7 +110,7 @@
       "outstanding": "Dependency gating tested; cycle rejection needs explicit native negative test. Criterion unchanged.",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/composition.rs",
           "src/kernel/transition.rs"
@@ -128,7 +128,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/composition.rs",
           "src/kernel/transition.rs"
@@ -152,7 +152,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/model.rs",
           "src/kernel/evolution.rs"
@@ -170,7 +170,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/behavior.rs",
           "src/kernel/mod.rs"
@@ -188,7 +188,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/composition.rs"
         ],
@@ -205,7 +205,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/evolution.rs",
           "src/kernel/intelligence.rs",
@@ -230,7 +230,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/transition.rs",
           "src/kernel/model.rs"
@@ -248,7 +248,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/supervisor.rs",
           "src/kernel/transition.rs",
@@ -267,7 +267,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/supervisor.rs"
         ],
@@ -284,7 +284,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/model.rs",
           "src/kernel/transition.rs"
@@ -301,13 +301,14 @@
       "evidence": [],
       "outstanding": "No qualifying evidence",
       "r004": {
-        "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
+          "src/kernel/projection.rs",
           "src/kernel/persistence.rs",
           "src/kernel/supervisor.rs"
         ],
-        "remaining": "Workspace and incarnation files plus immutable projection snapshots; full per-agent directory projection and lifecycle not complete."
+        "remaining": "Complete host-side content-addressed 14-part agent projection with independent read model and workspace separation; native qualification and OS isolation remain."
       }
     },
     {
@@ -320,7 +321,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/model.rs",
           "src/kernel/composition.rs",
@@ -339,7 +340,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/composition.rs"
         ],
@@ -356,7 +357,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/model.rs",
           "src/kernel/transition.rs",
@@ -381,7 +382,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/transition.rs",
           "src/kernel/persistence.rs"
@@ -405,7 +406,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/model.rs",
           "src/kernel/transition.rs"
@@ -422,13 +423,14 @@
       "evidence": [],
       "outstanding": "No qualifying evidence",
       "r004": {
-        "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
-          "src/kernel/model.rs",
-          "src/kernel/transition.rs"
+          "src/kernel/authority.rs",
+          "src/kernel/transition.rs",
+          "src/kernel/model.rs"
         ],
-        "remaining": "Predicate/digest/all oracles and host verification, evidence lineage. External identity authentication not implemented."
+        "remaining": "Separate verifier actor, scoped signed admission, oracle and evidence lineage; validate signature and role rejection, independent oracle receipts."
       }
     },
     {
@@ -447,7 +449,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/model.rs",
           "src/kernel/transition.rs"
@@ -464,13 +466,14 @@
       "evidence": [],
       "outstanding": "No qualifying evidence",
       "r004": {
-        "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
+          "src/kernel/lifecycle.rs",
           "src/kernel/transition.rs",
-          "src/kernel/supervisor.rs"
+          "src/kernel/authority.rs"
         ],
-        "remaining": "Mailbox state and wake transitions exist; no independent event-delivery service or message execution adapter."
+        "remaining": "Durable ordered pull delivery, incarnation-bound delivery leases and ack, wake transitions; verify redelivery after restart. No general-purpose message-driven executor adapter yet."
       }
     },
     {
@@ -489,7 +492,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/transition.rs"
         ],
@@ -506,7 +509,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/transition.rs",
           "src/kernel/supervisor.rs"
@@ -524,11 +527,12 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
-          "src/kernel/supervisor.rs"
+          "src/kernel/supervisor.rs",
+          "src/kernel/transition.rs"
         ],
-        "remaining": "Bounded host supervisor with wall/monotonic clock and lease expiry; service manager and clock discontinuity qualification outstanding."
+        "remaining": "Exclusive controller ownership, monotonic host clock, parent-pipe worker lifetime, immediate native restart fencing. Independent service manager/restart policy and clock discontinuity qualification remain."
       }
     },
     {
@@ -541,7 +545,7 @@
       "outstanding": "Checkpoint retention and stale submission rejection tested; explicit stale checkpoint write rejection not tested.",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/transition.rs",
           "src/kernel/supervisor.rs"
@@ -559,7 +563,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/transition.rs",
           "src/kernel/composition.rs",
@@ -584,7 +588,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/transition.rs",
           "src/kernel/supervisor.rs"
@@ -608,7 +612,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/persistence.rs"
         ],
@@ -625,12 +629,14 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
+          "src/kernel/authority.rs",
+          "src/kernel/effects.rs",
           "src/kernel/transition.rs",
-          "src/kernel/effects.rs"
+          "src/kernel/persistence.rs"
         ],
-        "remaining": "Host/worker role separation and durable effect intent/receipt reconciliation; trusted local CLI only, no authenticated remote actor or external effect adapter."
+        "remaining": "HMAC signed request ingress, per-principal roles/goals/incarnation/expiry, atomic admission and reconciliation. Trusted local CLI and authority file require OS protection; external effect adapters and hardened transport remain."
       }
     },
     {
@@ -649,7 +655,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/persistence.rs"
         ],
@@ -665,13 +671,14 @@
       "evidence": [],
       "outstanding": "No qualifying evidence",
       "r004": {
-        "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
+          "src/kernel/index.rs",
           "src/kernel/persistence.rs",
           "src/kernel/migration.rs"
         ],
-        "remaining": "In-memory indexed maps, checkpointed replay and conservative legacy import; no disk-indexed entity store, snapshot/receipt growth remains."
+        "remaining": "Canonical content-addressed 256-bucket-per-table index, direct point lookup, immutable page reuse, bounded retained journal chain, reachability GC and R003 import. Transitions still load and clone full World; per-page and aggregate scale need qualification."
       }
     },
     {
@@ -684,11 +691,12 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
-          "src/kernel/persistence.rs"
+          "src/kernel/persistence.rs",
+          "src/kernel/index.rs"
         ],
-        "remaining": "OS writer lock, immutable commits and anchor checks implemented; crash-during-write and concurrency qualification outstanding."
+        "remaining": "Writer lock, commit-marker chain bound to index roots, retained checkpoint record, exported head anchor and GC. Actual concurrent writer/crash-during-write/tail-integrity runs remain deferred."
       }
     },
     {
@@ -707,7 +715,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/composition.rs",
           "src/kernel/evolution.rs",
@@ -725,13 +733,14 @@
       "evidence": [],
       "outstanding": "native disable only; full gate open",
       "r004": {
-        "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
+          "src/kernel/lifecycle.rs",
           "src/kernel/evolution.rs",
           "src/kernel/transition.rs"
         ],
-        "remaining": "Disable and fallback matching, prior-example regression and version lineage; no complete automatic migration/rollback campaign."
+        "remaining": "Versioned rollback receipts, independently reproduced oracle rejection disables learned revision, compatible predecessor fallback for pending explicit tasks and fences running attempts; qualification required."
       }
     },
     {
@@ -743,13 +752,13 @@
       "evidence": [],
       "outstanding": "No qualifying evidence",
       "r004": {
-        "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/evolution.rs",
           "src/kernel/intelligence.rs"
         ],
-        "remaining": "Bounded expression grammar discovery, not arbitrary program synthesis."
+        "remaining": "Bounded multi-round typed expression synthesis with nested fields, affine inference, arithmetic, hash, conditional, array and concat candidates plus observational equivalence pruning. Not unrestricted program discovery."
       }
     },
     {
@@ -762,12 +771,13 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/evolution.rs",
-          "src/kernel/intelligence.rs"
+          "src/kernel/intelligence.rs",
+          "src/kernel/authority.rs"
         ],
-        "remaining": "Disjoint held-outs and typed applicability in a declared plan; stronger independent holdout custody and generalized applicability remain."
+        "remaining": "Synthesis receives training only; one selected candidate evaluated on disjoint holdouts, consumed holdout tracking and typed applicability. Independently administered holdout vault/custody and admission-path enforcement remain."
       }
     },
     {
@@ -780,7 +790,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/composition.rs",
           "src/kernel/supervisor.rs"
@@ -804,7 +814,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/persistence.rs",
           "src/kernel/supervisor.rs",
@@ -823,12 +833,15 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
+          "src/kernel/knowledge.rs",
           "src/kernel/intelligence.rs",
-          "src/kernel/evolution.rs"
+          "src/kernel/evolution.rs",
+          "src/kernel/composition.rs",
+          "src/kernel/supervisor.rs"
         ],
-        "remaining": "Versioned knowledge admission and automatic computational-operator assimilation; automatic procedure/repair/coordination/context synthesis not implemented."
+        "remaining": "Host-defined typed recurring-artifact rules automatically publish independently verified knowledge, reject ambiguous reuse and feed future task inputs; learned computational classes retained. General autonomous semantic rule/repair/procedure discovery still incomplete."
       }
     },
     {
@@ -841,12 +854,14 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
+          "src/kernel/lifecycle.rs",
           "src/kernel/intelligence.rs",
+          "src/kernel/evolution.rs",
           "src/kernel/supervisor.rs"
         ],
-        "remaining": "Observed native worker duration, counts and scheduler feedback; unsuccessful attempt and search-cost accounting incomplete."
+        "remaining": "Attempt begin/end and measured durations including timeout/stopped jobs, successful and failed search candidate/evaluation counts, yield and observed cost feedback. Full resource and admission/regression evaluation accounting remain."
       }
     },
     {
@@ -858,13 +873,13 @@
       "evidence": [],
       "outstanding": "No qualifying evidence",
       "r004": {
-        "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/intelligence.rs",
           "src/kernel/transition.rs"
         ],
-        "remaining": "Critical path and declared uncertainty/information-gain/cost weights, observed cost feedback; information gain is supplied, not inferred."
+        "remaining": "Weighted critical path, observed cost, Laplace-smoothed outcome uncertainty and empirical novelty estimate with declared information-gain hints. Heuristic, not mathematically exact information gain."
       }
     },
     {
@@ -877,12 +892,13 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
+          "src/kernel/lifecycle.rs",
           "src/kernel/supervisor.rs",
           "src/kernel/transition.rs"
         ],
-        "remaining": "Slot enforcement and dormant population representation; actual 60-agent run not performed."
+        "remaining": "Durable population audit, global lease slots and bounded native process ownership. Actual 60-agent/four-slot qualification not run."
       }
     },
     {
@@ -895,7 +911,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "DEFERRED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [],
         "remaining": "Separate comparative persistence-policy implementation and experimental cohort; this turn did not alter experiment folders."
       }
@@ -910,7 +926,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "DEFERRED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [],
         "remaining": "Common fault protocol retained; actual four-arm execution remains deferred."
       }
@@ -925,12 +941,13 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/supervisor.rs",
-          "src/kernel/persistence.rs"
+          "src/kernel/persistence.rs",
+          "src/kernel/transition.rs"
         ],
-        "remaining": "Recovery substrate present; actual simultaneous process destruction and autonomous recovery not performed."
+        "remaining": "Parent-death EOF watchdog and replacement-controller fencing with durable graph/checkpoint recovery; actual simultaneous worker/controller death and restart not executed."
       }
     },
     {
@@ -943,7 +960,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "DEFERRED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [],
         "remaining": "36 hours of actual elapsed qualification required."
       }
@@ -958,7 +975,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "DEFERRED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [],
         "remaining": "72 hours of actual elapsed repeated-fault qualification required."
       }
@@ -979,7 +996,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
         "files": [
           "src/kernel/supervisor.rs",
           "src/kernel/composition.rs",
@@ -990,14 +1007,14 @@
     }
   ],
   "candidate": {
-    "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+    "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
     "verification": "NOT_COMPILED_NOT_TESTED",
     "historical_verified_score": 28,
     "candidate_verified_score": 0,
     "scope": "CHATGPT/runtime only; R003 baseline preserved separately; no acceptance uplift for source changes",
     "counts": {
-      "SOURCE_IMPLEMENTED_UNVERIFIED": 31,
-      "PARTIAL_SOURCE": 15,
+      "SOURCE_IMPLEMENTED_UNVERIFIED": 38,
+      "PARTIAL_SOURCE": 8,
       "DEFERRED": 4
     }
   }

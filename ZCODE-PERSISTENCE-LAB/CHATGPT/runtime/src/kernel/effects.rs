@@ -6,6 +6,7 @@ use crate::{digest,Result};
 use serde_json::{Value,json};
 
 impl World {
+    pub fn has_abandoned_effect(&self,task:&str)->bool{self.effects.values().any(|e|e.task==task&&e.phase==EffectPhase::Abandoned)}
     pub fn has_uncertain_effect(&self,task:&str)->bool{
         self.effects.values().any(|e|e.task==task&&matches!(e.phase,EffectPhase::Prepared|EffectPhase::Unknown))
     }
@@ -35,7 +36,7 @@ impl World {
         let e=self.effects.entry(effect_id.clone()).or_insert_with(||Effect{id:effect_id.clone(),task:task.into(),generation,key,payload:payload.clone(),phase:EffectPhase::Proposed,oracle,receipt:None,sequence,history:vec![]});
         e.generation=generation;e.phase=EffectPhase::Prepared;e.receipt=None;
         e.history.push(EffectEvent{phase:EffectPhase::Prepared,sequence,reason:"host admitted effect intent".into(),receipt:None});
-        Ok(json!({"effect":effect_id,"phase":"prepared","execute":true}))
+        Ok(json!({"effect":effect_id,"phase":"prepared","intent_only":true,"execute":false}))
     }
     pub fn effect_unknown(&mut self,effect:&str,reason:String)->Result<()>{
         ensure(!reason.trim().is_empty(),"reason required")?;
@@ -51,6 +52,7 @@ impl World {
         ensure(matches!(e.phase,EffectPhase::Prepared|EffectPhase::Unknown),"effect not outstanding")?;
         let payload=self.payload(&e.payload)?;
         let input=json!({"effect":effect,"task":e.task,"generation":e.generation,"payload":payload,"outcome":outcome});
+        ensure(receipt.get("effect").and_then(Value::as_str)==Some(effect)&&receipt.get("outcome")==Some(&serde_json::to_value(&outcome).map_err(|e|e.to_string())?),"receipt scope or outcome mismatch")?;
         ensure(e.oracle.evaluate(&input,&receipt)?,"effect receipt rejected")?;
         let receipt=self.put_payload(receipt)?;let x=self.effects.get_mut(effect).unwrap();
         x.phase=outcome.clone();x.receipt=Some(receipt.clone());

@@ -251,6 +251,7 @@ impl World {
                 if let Some(class)=self.match_class(&t.spec){ensure(class==a.class,"class not eligible")?;}
                 else{ensure(t.spec.class.is_none(),"explicit class disabled")?;}
                 if let Some(context)=&t.spec.context{ensure(context==&a.context,"context not authorized for task")?;}
+                ensure(self.class_available(&a.class),"agent class is frozen or disabled")?;
                 let contract=self.classes.get(&a.class).ok_or("agent class missing")?;
                 ensure(contract.input.admits(&Self::input_shape(&t.spec))&&t.spec.output.admits(&contract.output),"agent class contract mismatch")?;
                 let assigned_class=a.class.clone();let assigned_context=a.context.clone();

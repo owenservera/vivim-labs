@@ -1,0 +1,72 @@
+{
+  "revision": "R010",
+  "source_pin": "3291e76255cab0608ab90ecc7e5214cd03e93345",
+  "status": "PREPARED_NOT_LAUNCHED",
+  "selected_lanes": [
+    "01",
+    "04"
+  ],
+  "held_lanes": [
+    "02",
+    "03"
+  ],
+  "assignment": {
+    "codex": [
+      "01",
+      "03"
+    ],
+    "agy": [
+      "02",
+      "04"
+    ]
+  },
+  "native_receipts": {
+    "quota_probe": "ctl-e5fd709e4c2ceee7",
+    "tests_and_codex_observer": "ctl-0e03d00362f5c60e",
+    "seed_materialization_and_gemini_observer": "ctl-f836daf0046d9348"
+  },
+  "tests": {
+    "legacy_routing": "28 synthetic selector/parser checks passed",
+    "campaign": "daily allocation, lane admission, model and effort, reservation, settlement, replay, journal lock, rounding, token accounting, rollover passed",
+    "completion": "8 synthetic contract checks passed"
+  },
+  "seed_pin": "3b1d7e173071710e6795c09427162292f774030e",
+  "local_preparation_root_relative_to_localappdata": "VIVIM/CLI-Dogfood-Setup/seed-iJjQSc",
+  "quota_observation": {
+    "codex": {
+      "utc": "2026-11-28T15:10:54.974Z",
+      "five_hour_remaining_pct": 99,
+      "weekly_remaining_pct": 79,
+      "weekly_reset_utc": "2026-12-02T10:11:06Z",
+      "ordinary_usage_allowed": true,
+      "plan": "plus"
+    },
+    "gemini": {
+      "utc": "2026-11-28T15:11:38.287Z",
+      "five_hour_remaining_pct": 99,
+      "weekly_remaining_pct": 94,
+      "weekly_reset_utc": "2026-12-03T17:18:45Z"
+    }
+  },
+  "provisional_daily_share_pp": {
+    "codex_per_lane": {
+      "300": 42,
+      "10080": 8
+    },
+    "gemini_per_lane": {
+      "300": 42,
+      "10080": 6.583333333333333
+    },
+    "note": "Illustrative based on observed snapshot and 15pp reserve; actual opening requires fresh authorized snapshot. Provider units are not interchangeable."
+  },
+  "remaining": [
+    "Independent billing/paid overflow confirmation and authenticated lane profiles",
+    "Proven access isolation and scoped write qualification",
+    "Explicit local token and turn ceilings and calibrated positive quota forecasts",
+    "Integrate durable reservation into actual campaign driver; controller independently executes and authenticates completion receipts",
+    "Daily rollover and lock recovery qualified synthetically only; live fault recovery still open"
+  ],
+  "campaign_started": false,
+  "worker_count": 0,
+  "primary_modified_by_this_fork": false
+}

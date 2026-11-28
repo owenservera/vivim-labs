@@ -1124,9 +1124,9 @@
         "id": "R08",
         "criterion": "Live provider observations, actual model/thinking receipt and adapter execution",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Durable manifest-bound asynchronous external adapter mailbox, one-shot take, immutable identity-bound actual receipts, late reconciliation and disabled-adapter visibility authored. No real external adapter wired or qualified; host custody must be provisioned.",
-        "source_pin": "0a3b982e4e3b26f78504e0b99f513bbd7ab22f7a",
-        "checkpoint": "ADAPTER-MAILBOX-001"
+        "remaining": "Durable manifest-bound asynchronous external adapter mailbox, kernel-committed single-use mailbox take, immutable identity-bound actual receipts, late reconciliation and disabled-adapter visibility authored. No real external adapter wired or qualified; host custody must be provisioned.",
+        "source_pin": "26deab535cb57d48e1b2b27a495e3e10a965e5a0",
+        "checkpoint": "ADAPTER-MAILBOX-002"
       },
       {
         "id": "R09",
@@ -1352,7 +1352,8 @@
     "documents": [
       "ADAPTER-MAILBOX-001.md",
       "NATIVE-OBSERVATION-001.md",
-      "ATOMIC-METERING-001.md"
+      "ATOMIC-METERING-001.md",
+      "ADAPTER-MAILBOX-002.md"
     ],
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "verified_credit": 0

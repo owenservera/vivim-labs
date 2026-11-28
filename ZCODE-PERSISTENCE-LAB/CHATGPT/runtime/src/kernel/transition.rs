@@ -34,7 +34,7 @@ pub enum Action {
     SetRoutingBatchPolicy{policy:super::routing_optimizer::BatchPolicy},
     BeginRoutingTrial{spec:super::routing_evolution::TrialSpec},CloseRoutingArm,StartRoutingCandidate,AbortRoutingTrial{reason:String},PromoteRoutingTrial{trial:Id},RollbackRoutingTrial{trial:Id},
     SetFrontierGuard{guard:super::routing_planning::FrontierGuard},SetFrontierForecast{forecast:super::routing_planning::Forecast},
-    BindRoutingAdapter{binding:super::routing_adapter::AdapterBinding},ObserveAdapterQuota{receipt:super::routing_adapter::QuotaReceipt},PrepareHandoff{reservation:Id},ClaimHandoff{handoff:Id},FinishHandoff{receipt:super::routing_adapter::AdapterReceipt},ReconcileHandoffCharge{receipt:super::routing_adapter::ChargeOnlyReceipt},RoutingCycle{limit:usize},
+    BindRoutingAdapter{binding:super::routing_adapter::AdapterBinding},ObserveAdapterQuota{receipt:super::routing_adapter::QuotaReceipt},PrepareHandoff{reservation:Id},ClaimHandoff{handoff:Id},AuthorizeMailboxTake{handoff:Id,manifest_digest:Digest,packet_digest:Digest,binding_version:u64,input_digest:Digest},FinishHandoff{receipt:super::routing_adapter::AdapterReceipt},ReconcileHandoffCharge{receipt:super::routing_adapter::ChargeOnlyReceipt},RoutingCycle{limit:usize},
     ConfigureRecipePolicy{policy:super::recipes::Policy},DiscoverRecipes{family:Id},InstantiateRecipe{request:super::recipes::Instantiate},DisableRecipe{recipe:Id},ApplyLearnedRepair{task:Id,repair:Id},RecordHostCost{receipt:super::resource::HostCost},RecordResources{receipt:super::resource::Receipt},RecordAttemptAccounting{receipt:super::resource::Receipt},
     RecordCost{task:Id,generation:u64,elapsed_ms:u64},SetPolicy{policy:SchedulingPolicy},
     PrepareEffect{task:Id,generation:u64,key:Id,payload:Value,oracle:Oracle},
@@ -449,6 +449,7 @@ impl World {
             BindRoutingAdapter{binding}=>{actor.host()?;self.bind_routing_adapter(binding)?;}
             PrepareHandoff{reservation}=>{actor.host()?;return self.prepare_handoff(&reservation);}
             ClaimHandoff{handoff}=>{actor.host()?;return self.claim_handoff(&handoff);}
+            AuthorizeMailboxTake{handoff,manifest_digest,packet_digest,binding_version,input_digest}=>{actor.host()?;return self.authorize_mailbox_take(&handoff,manifest_digest,packet_digest,binding_version,input_digest);}
             ReconcileHandoffCharge{receipt}=>{actor.host()?;return self.reconcile_handoff_charge(receipt);}
             FinishHandoff{receipt}=>{actor.host()?;return self.finish_handoff(receipt);}
             RoutingCycle{limit}=>{actor.host()?;return self.routing_cycle(limit);}

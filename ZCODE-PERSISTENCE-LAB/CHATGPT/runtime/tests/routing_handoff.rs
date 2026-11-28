@@ -29,6 +29,14 @@ fn one_shot_handoff_and_evidence_feedback_survive_reopen(){
     let replay=reopened.apply(Request{id:"claim".into(),actor:Actor::Host,action:Action::ClaimHandoff{handoff:handoff.clone()}}).unwrap();
     assert_eq!(replay["send_authority"],"none_reconcile_only");
     assert!(reopened.apply(Request{id:"different-claim".into(),actor:Actor::Host,action:Action::ClaimHandoff{handoff:handoff.clone()}}).is_err());
+    // A second-stage mailbox authority is committed only once in the kernel.
+    let mailbox_take=Action::AuthorizeMailboxTake{handoff:handoff.clone(),manifest_digest:digest(&json!("manifest")),
+        packet_digest:digest(&json!("packet")),binding_version:1,input_digest:first["handoff"]["input_digest"].as_str().unwrap().to_owned()};
+    let taken=host("mailbox-take",mailbox_take.clone());assert_eq!(taken["send_authority"],"single_attempt_only");
+    let replay=reopened.apply(Request{id:"mailbox-take".into(),actor:Actor::Host,action:mailbox_take.clone()}).unwrap();
+    assert_eq!(replay["send_authority"],"none_reconcile_only");
+    assert!(reopened.apply(Request{id:"alternate-mailbox".into(),actor:Actor::Host,action:mailbox_take}).is_err());
+    assert!(reopened.inspect().unwrap().router.adapters.mailbox_takes.contains_key(&handoff));
     // Synthetic receipt, never a real provider call.
     let receipt=AdapterReceipt{handoff:handoff.clone(),request_id:"synthetic-receipt".into(),provider:"provider-a".into(),account:"account-a".into(),model:"example-standard".into(),thinking:"low".into(),usage:Usage{requests:1,input:10,output:1,reasoning:0,credits:1},outcome:Outcome::Completed,provider_receipt:"fixture-only".into(),latency_ms:10,output:Some(json!(42))};
     assert_eq!(host("finish",Action::FinishHandoff{receipt})["submitted"],true);

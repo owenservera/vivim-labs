@@ -1,7 +1,7 @@
 //! Durable host-to-external-adapter transport. No provider calls occur here.
 //! The caller must be a trusted local host bridge, not an untrusted worker.
 //! A claim is single-attempt authority, never permission to retry on uncertainty.
-use super::{model::{ensure,id,hash_id,Id,MAX_VALUE_BYTES},persistence::KernelStore,routing_adapter::{AdapterReceipt,Envelope,HandoffPhase},routing_driver::{Backend,advance_clock},routing::{Outcome,Status}};
+use super::{model::{ensure,id,hash_id,Id,MAX_VALUE_BYTES},persistence::KernelStore,routing_adapter::{AdapterReceipt,Envelope,HandoffPhase},routing_driver::{Backend,advance_clock},routing::{Outcome,Status},transition::{Actor,Action,Request}};
 use crate::{digest,Result};
 use serde::{Deserialize,Serialize};
 use serde_json::{json,Value};
@@ -173,9 +173,21 @@ impl Mailbox{
         let t=w.tasks.get(&e.task).ok_or("mailbox task missing")?;
         ensure(t.phase==super::model::TaskPhase::Running&&t.lease.as_ref().is_some_and(|l|l.generation==e.generation&&l.incarnation==e.incarnation&&l.worker==e.worker)
             &&w.goals.get(&t.spec.goal).is_some_and(|g|g.phase==super::model::GoalPhase::Open),"task authorization expired")?;
-        let taken=Taken{manifest:self.manifest_pin.clone(),packet:pin(&p)?,handoff:key.into(),at_ms:w.clock_ms};
+        let packet_digest=pin(&p)?;
+        // The kernel, not a mailbox directory, is the authoritative one-shot
+        // fence. A crash between this commit and the local marker consumes
+        // authorization and cannot silently grant a second transmission.
+        let authorization=store.apply(Request{id:format!("mailbox-take-{}",digest(&json!(key))),actor:Actor::Host,
+            action:Action::AuthorizeMailboxTake{handoff:key.into(),manifest_digest:self.manifest_pin.clone(),packet_digest:packet_digest.clone(),
+                binding_version:a.binding_version,input_digest:a.input_digest.clone()}})?;
+        if authorization["send_authority"]!="single_attempt_only"{
+            return Ok(json!({"handoff":key,"send_authority":"none_reconcile_only","reason":"kernel_authorization_already_consumed"}));
+        }
+        let at_ms=authorization["take"]["authorized_ms"].as_u64().ok_or("missing committed mailbox timestamp")?;
+        let expires_ms=authorization["take"]["deadline_ms"].as_u64().ok_or("missing committed mailbox deadline")?;
+        let taken=Taken{manifest:self.manifest_pin.clone(),packet:packet_digest,handoff:key.into(),at_ms};
         write(&self.root.join("taken"),&Self::name(key)?,&Entry::new(taken)?)?;
-        Ok(json!({"handoff":p.envelope,"input":p.input,"send_authority":"single_attempt_only","expires_ms":e.deadline_ms}))
+        Ok(json!({"handoff":p.envelope,"input":p.input,"send_authority":"single_attempt_only","expires_ms":expires_ms}))
     }
     pub fn submit(&self,r:AdapterReceipt)->Result<Value>{
         let _lock=self.lock()?;let p=self.packet(&r.handoff)?;

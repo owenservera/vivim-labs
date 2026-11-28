@@ -39,6 +39,14 @@ pub struct AdapterState{
     #[serde(default)] pub quota_receipts:BTreeMap<Id,QuotaReceipt>,
     pub bindings:BTreeMap<Id,AdapterBinding>,pub handoffs:BTreeMap<Id,Envelope>,
     pub receipts:BTreeMap<Id,AdapterReceipt>,
+    #[serde(default,skip_serializing_if="BTreeMap::is_empty")] pub mailbox_takes:BTreeMap<Id,MailboxTake>,
+}
+/// Persistent, non-renewable transfer of an already claimed handoff to the
+/// trusted asynchronous mailbox bridge. Not a provider receipt.
+#[derive(Clone,Debug,Serialize,Deserialize)]
+pub struct MailboxTake{
+    pub handoff:Id,pub manifest_digest:Digest,pub packet_digest:Digest,
+    pub binding_version:u64,pub input_digest:Digest,pub authorized_ms:u64,pub deadline_ms:u64,
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct ChargeOnlyReceipt{
@@ -138,6 +146,24 @@ impl World{
         self.dispatch_inference(key)?;
         let x=self.router.adapters.handoffs.get_mut(key).unwrap();x.phase=HandoffPhase::Claimed;x.claimed_ms=Some(self.clock_ms);
         Ok(json!({"handoff":x,"input":input,"send_authority":"single_attempt_only"}))
+    }
+    /// Atomically fence mailbox transmission across cloned/restored mailbox
+    /// directories and concurrent cooperating host bridges.
+    pub fn authorize_mailbox_take(&mut self,key:&str,manifest:Digest,packet:Digest,binding_version:u64,input:Digest)->Result<Value>{
+        id(key)?;
+        ensure(hash_id(&manifest)&&hash_id(&packet)&&hash_id(&input),"mailbox take requires content digests")?;
+        ensure(!self.router.adapters.mailbox_takes.contains_key(key),"mailbox transmission already authorized; reconcile only")?;
+        let e=self.router.adapters.handoffs.get(key).ok_or("mailbox handoff missing")?;
+        let r=self.router.reservations.get(key).ok_or("mailbox reservation missing")?;
+        ensure(matches!(e.phase,HandoffPhase::Claimed|HandoffPhase::Unknown)&&matches!(r.status,Status::Dispatched|Status::Unknown)
+            &&e.binding_version==binding_version&&e.input_digest==input&&self.clock_ms<e.deadline_ms,"mailbox handoff not eligible")?;
+        ensure(self.router.adapters.bindings.get(&e.adapter).is_some_and(|b|b.enabled&&b.version==binding_version),"mailbox adapter binding revoked")?;
+        let t=self.tasks.get(&e.task).ok_or("mailbox task missing")?;
+        ensure(t.phase==TaskPhase::Running&&t.lease.as_ref().is_some_and(|l|l.generation==e.generation&&l.worker==e.worker&&l.incarnation==e.incarnation&&self.clock_ms<l.deadline_ms)
+            &&self.goals.get(&t.spec.goal).is_some_and(|g|g.phase==GoalPhase::Open),"mailbox task no longer authorized")?;
+        let take=MailboxTake{handoff:key.into(),manifest_digest:manifest,packet_digest:packet,binding_version,input_digest:input,authorized_ms:self.clock_ms,deadline_ms:e.deadline_ms};
+        self.router.adapters.mailbox_takes.insert(key.into(),take.clone());
+        Ok(json!({"take":take,"send_authority":"single_attempt_only"}))
     }
     pub fn finish_handoff(&mut self,r:AdapterReceipt)->Result<Value>{
         id(&r.request_id)?;

@@ -298,7 +298,7 @@ impl State {
                     let result=self.transition(Verify{task:task.clone()})?;
                     return Ok(serde_json::json!({"action":"computed","task":task,"result":result}));
                 }
-                Ok(serde_json::json!({"action":"idle","reason":"no eligible deterministic work"}))
+                return Ok(serde_json::json!({"action":"idle","reason":"no eligible deterministic work"}));
             }
             Send{id,from,to,body}=>{
                 valid_id(&id)?; require(self.agents.get(&from).zip(self.agents.get(&to)).is_some_and(|(a,b)|a.goal==b.goal),"invalid mailbox endpoints")?;

@@ -36,7 +36,7 @@ pub struct AdapterState{
 }
 impl World{
     pub fn bind_routing_adapter(&mut self,b:AdapterBinding)->Result<()>{
-        id(&b.id)?;id(&b.adapter)?;
+        id(&b.id)?;id(&b.adapter)?;ensure(self.router.config.is_some(),"router not configured")?;
         ensure(b.id==b.adapter&&b.version>self.router.adapters.bindings.get(&b.id).map_or(0,|x|x.version)&&(100..=3_600_000).contains(&b.lease_ms),"invalid adapter binding")?;
         ensure(self.classes.contains_key(&b.class)&&self.contexts.contains_key(&b.context),"adapter class/context missing")?;
         self.router.adapters.bindings.insert(b.id.clone(),b);Ok(())
@@ -50,13 +50,14 @@ impl World{
         let t=self.tasks.get(&r.task).ok_or("task missing")?.clone();
         ensure(t.phase==TaskPhase::Pending&&self.ready().contains(&r.task),"task no longer ready")?;
         ensure(t.spec.context.as_ref().is_none_or(|x|x==&b.context),"adapter context not authorized")?;
-        // One logical agent per goal+adapter class/context, reused across attempts.
+        // One logical agent per goal/task/adapter class/context, reused across attempts.
         let worker=format!("routed-{}",digest(&json!([r.goal,r.task,b.adapter,b.class,b.context])));
         let actor=super::transition::Actor::Host;
         use super::transition::Action;
         if !self.agents.contains_key(&worker){
             self.apply_adapter_action(&actor,Action::Agent{id:worker.clone(),goal:r.goal.clone(),parent:None,class:b.class.clone(),context:b.context.clone()})?;
         }
+        if self.current_incarnation(&worker).is_ok(){ensure(self.agents[&worker].incarnations.last().is_some_and(|i|i.executor==format!("routed:{}",b.adapter)),"unexpected worker executor")?;}
         if self.current_incarnation(&worker).is_err(){
             self.apply_adapter_action(&actor,Action::Activate{agent:worker.clone(),executor:format!("routed:{}",b.adapter)})?;
         }

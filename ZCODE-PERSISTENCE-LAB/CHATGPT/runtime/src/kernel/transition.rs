@@ -24,7 +24,7 @@ pub enum Action {
     Verify{task:Id},Tick{now_ms:u64},RecoverNative{reason:String},Send{id:Id,recipient:Id,body:Value},Ack{id:Id},
     Receive{limit:usize,ttl_ms:u64},WaitMessage{agent:Id},WaitDependency{agent:Id,task:Id},Cancel{goal:Id},
     AdmitCapability{capability:Capability},DisableCapability{capability:Id},RollbackCapability{capability:Id,reason:String},
-    ConfigureLearning{plan:LearningPlan},LearnPlan{plan:Id},PublishKnowledge{knowledge:Knowledge},DisableKnowledge{knowledge:Id},
+    ConfigureLearning{plan:LearningPlan},LearnPlan{plan:Id},RegisterKnowledgeRule{rule:KnowledgeRule},AssimilateRecurring{rule:Id,payload:Digest},PublishKnowledge{knowledge:Knowledge},DisableKnowledge{knowledge:Id},
     RecordCost{task:Id,generation:u64,elapsed_ms:u64},SetPolicy{policy:SchedulingPolicy},
     PrepareEffect{task:Id,generation:u64,key:Id,payload:Value,oracle:Oracle},
     EffectUnknown{effect:Id,reason:String},ResolveEffect{effect:Id,outcome:EffectPhase,receipt:Value},
@@ -369,6 +369,8 @@ impl World {
             RollbackCapability{capability,reason}=>{actor.host()?;return Ok(json!(self.rollback_capability(&capability,&reason)?));}
             ConfigureLearning{plan}=>{actor.host()?;let k=self.configure_learning(plan)?;return Ok(json!({"plan":k}));}
             LearnPlan{plan}=>{actor.host()?;return self.run_learning(&plan);}
+            RegisterKnowledgeRule{rule}=>{actor.host()?;let key=self.register_knowledge_rule(rule)?;return Ok(json!({"rule":key}));}
+            AssimilateRecurring{rule,payload}=>{actor.host()?;return self.assimilate_recurring(&rule,&payload);}
             PublishKnowledge{knowledge}=>{actor.host()?;let key=self.publish_knowledge(knowledge)?;return Ok(json!({"knowledge":key}));}
             DisableKnowledge{knowledge}=>{actor.host()?;self.knowledge.get_mut(&knowledge).ok_or("knowledge missing")?.enabled=false;}
             RecordCost{task,generation,elapsed_ms}=>{actor.host()?;self.record_cost(&task,generation,elapsed_ms)?;}

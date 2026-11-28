@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-source-checkpoint-003-routing-R001",
+  "revision": "R004-source-checkpoint-003-routing-R002",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -1024,8 +1024,8 @@
     }
   },
   "routing_workstream": {
-    "revision": "R001",
-    "source_pin": "f732d7648c729910a1dfe5ad412e409cb6cc3d58",
+    "revision": "R002",
+    "source_pin": "0f05cb749b5b42986988cbba32d1af1f3b97b740",
     "verification": "NOT_COMPILED_NOT_TESTED",
     "related_original_gates": [
       "E12",
@@ -1075,17 +1075,20 @@
       {
         "id": "R08",
         "criterion": "Live provider observations, actual model/thinking receipt and adapter execution",
-        "status": "DEFERRED"
+        "status": "PARTIAL_SOURCE",
+        "remaining": "Scoped quota receipts, refresh plan, versioned adapter binding, actual identity and usage receipt protocol; no real provider adapter or live observation."
       },
       {
         "id": "R09",
         "criterion": "Autonomous provider dispatch/reconciliation and empirical budget optimization",
-        "status": "DEFERRED"
+        "status": "PARTIAL_SOURCE",
+        "remaining": "Automatic preparation in native supervisor, one-shot handoff, expiry and unknown reconciliation contracts, pending/empirical frontier forecast; live send/poll/reconciliation and empirical optimization not implemented."
       },
       {
         "id": "R10",
         "criterion": "Native quota, fallback, frontier and concurrency qualification",
-        "status": "DEFERRED"
+        "status": "PARTIAL_SOURCE",
+        "remaining": "Five source-only qualification fixtures authored; none compiled or executed."
       }
     ]
   }

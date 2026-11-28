@@ -9,7 +9,7 @@ use std::{collections::{BTreeMap,BTreeSet},fs,path::{Path,PathBuf},io::Write,tim
 
 fn err(e:impl std::fmt::Display)->String{e.to_string()}
 const PAGE_LIMIT:usize=64*1024*1024;
-const MAPS:&[&str]=&["goals","tasks","agents","contexts","operators","classes","artifacts","evidence","blobs","checkpoints","messages","capabilities","learning_plans","learning_attempts","knowledge","run_costs","goal_versions","task_versions","effects","receipts","delivery","rollback_history","attempt_history","learning_costs"];
+const MAPS:&[&str]=&["goals","tasks","agents","contexts","operators","classes","artifacts","evidence","blobs","checkpoints","messages","capabilities","learning_plans","learning_attempts","knowledge","run_costs","goal_versions","task_versions","effects","receipts","delivery","rollback_history","attempt_history","learning_costs","knowledge_rules","knowledge_publications"];
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct IndexRoot{
     pub schema:u32,pub revision:u64,pub state_digest:String,

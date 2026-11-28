@@ -1,11 +1,11 @@
 //! Durable host adapter handoff. This protocol never performs network I/O.
 //! The trusted adapter claims a specific work envelope once, then either
 //! supplies a receipt or leaves its charge reserved for reconciliation.
-use super::{model::*,routing::{Router,Status,Usage,Outcome}};
+use super::{model::*,routing::{Status,Usage,Outcome}};
 use crate::{digest,Result};
 use serde::{Serialize,Deserialize};
 use serde_json::{Value,json};
-use std::collections::{BTreeMap,BTreeSet};
+use std::collections::BTreeMap;
 
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct AdapterBinding{
@@ -51,7 +51,7 @@ impl World{
         ensure(t.phase==TaskPhase::Pending&&self.ready().contains(&r.task),"task no longer ready")?;
         ensure(t.spec.context.as_ref().is_none_or(|x|x==&b.context),"adapter context not authorized")?;
         // One logical agent per goal+adapter class/context, reused across attempts.
-        let worker=format!("routed-{}",digest(&json!([r.goal,b.adapter,b.class,b.context])));
+        let worker=format!("routed-{}",digest(&json!([r.goal,r.task,b.adapter,b.class,b.context])));
         let actor=super::transition::Actor::Host;
         use super::transition::Action;
         if !self.agents.contains_key(&worker){
@@ -97,8 +97,10 @@ impl World{
                 self.apply_adapter_action(&worker,Action::Fail{task:e.task.clone(),generation:e.generation,reason:"adapter failed or invalid output".into()})?;
             }
         }
+        if r.outcome==Outcome::Completed&&!submitted{self.router.reject_unusable_output(&r.handoff)?;}
         let hash=digest(&serde_json::to_value(&r).map_err(|e|e.to_string())?);
         let x=self.router.adapters.handoffs.get_mut(&r.handoff).unwrap();x.phase=HandoffPhase::Completed;x.receipt=Some(hash);
+        // Store receipt metadata, not a second copy of the model output.
         self.router.adapters.receipts.insert(r.handoff.clone(),r);
         Ok(json!({"usage":charge,"submitted":submitted,"stale_output_discarded":!live}))
     }

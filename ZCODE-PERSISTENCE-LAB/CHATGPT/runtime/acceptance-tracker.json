@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-tracker-001",
+  "revision": "R004-source-checkpoint-001",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -31,7 +31,16 @@
           "detail": "native actual_separate_processes_recover"
         }
       ],
-      "outstanding": null
+      "outstanding": null,
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/persistence.rs",
+          "src/kernel/model.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E02",
@@ -46,7 +55,15 @@
           "detail": "native restart_fences_old_worker_and_keeps_checkpoint"
         }
       ],
-      "outstanding": null
+      "outstanding": null,
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E03",
@@ -55,7 +72,15 @@
       "weight": 2,
       "priority": "P0",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E04",
@@ -64,7 +89,16 @@
       "weight": 2,
       "priority": "P0",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/model.rs",
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E05",
@@ -73,7 +107,16 @@
       "weight": 2,
       "priority": "P1",
       "evidence": [],
-      "outstanding": "Dependency gating tested; cycle rejection needs explicit native negative test. Criterion unchanged."
+      "outstanding": "Dependency gating tested; cycle rejection needs explicit native negative test. Criterion unchanged.",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/composition.rs",
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E06",
@@ -82,7 +125,16 @@
       "weight": 2,
       "priority": "P1",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/composition.rs",
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E07",
@@ -97,7 +149,16 @@
           "detail": "native promote_then_reuse_and_disable"
         }
       ],
-      "outstanding": null
+      "outstanding": null,
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/model.rs",
+          "src/kernel/evolution.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E08",
@@ -106,7 +167,16 @@
       "weight": 2,
       "priority": "P1",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/behavior.rs",
+          "src/kernel/mod.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E09",
@@ -115,7 +185,15 @@
       "weight": 2,
       "priority": "P1",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/composition.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E10",
@@ -124,7 +202,17 @@
       "weight": 2,
       "priority": "P3",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/evolution.rs",
+          "src/kernel/intelligence.rs",
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E11",
@@ -139,7 +227,16 @@
           "detail": "native incarnation_mailbox_request_replay_cancel"
         }
       ],
-      "outstanding": null
+      "outstanding": null,
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/transition.rs",
+          "src/kernel/model.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E12",
@@ -148,7 +245,17 @@
       "weight": 2,
       "priority": "P2",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/supervisor.rs",
+          "src/kernel/transition.rs",
+          "src/kernel/model.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E13",
@@ -157,7 +264,15 @@
       "weight": 2,
       "priority": "P2",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/supervisor.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E14",
@@ -166,7 +281,16 @@
       "weight": 2,
       "priority": "P2",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/model.rs",
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E15",
@@ -175,7 +299,16 @@
       "weight": 2,
       "priority": "P2",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/persistence.rs",
+          "src/kernel/supervisor.rs"
+        ],
+        "remaining": "Workspace and incarnation files plus immutable projection snapshots; full per-agent directory projection and lifecycle not complete."
+      }
     },
     {
       "id": "E16",
@@ -184,7 +317,17 @@
       "weight": 2,
       "priority": "P1",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/model.rs",
+          "src/kernel/composition.rs",
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E17",
@@ -193,7 +336,15 @@
       "weight": 2,
       "priority": "P1",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/composition.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E18",
@@ -202,7 +353,17 @@
       "weight": 2,
       "priority": "P0",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/model.rs",
+          "src/kernel/transition.rs",
+          "src/kernel/composition.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E19",
@@ -217,7 +378,16 @@
           "detail": "native restart_fences_old_worker_and_keeps_checkpoint"
         }
       ],
-      "outstanding": null
+      "outstanding": null,
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/transition.rs",
+          "src/kernel/persistence.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E20",
@@ -232,7 +402,16 @@
           "detail": "native restart_fences_old_worker_and_keeps_checkpoint"
         }
       ],
-      "outstanding": null
+      "outstanding": null,
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/model.rs",
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E21",
@@ -241,7 +420,16 @@
       "weight": 2,
       "priority": "P1",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/model.rs",
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Predicate/digest/all oracles and host verification, evidence lineage. External identity authentication not implemented."
+      }
     },
     {
       "id": "E22",
@@ -256,7 +444,16 @@
           "detail": "native incarnation_mailbox_request_replay_cancel"
         }
       ],
-      "outstanding": null
+      "outstanding": null,
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/model.rs",
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E23",
@@ -265,7 +462,16 @@
       "weight": 2,
       "priority": "P2",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/transition.rs",
+          "src/kernel/supervisor.rs"
+        ],
+        "remaining": "Mailbox state and wake transitions exist; no independent event-delivery service or message execution adapter."
+      }
     },
     {
       "id": "E24",
@@ -280,7 +486,15 @@
           "detail": "native busy_agent_cannot_hold_multiple_running_leases; restart_fences_old_worker_and_keeps_checkpoint"
         }
       ],
-      "outstanding": null
+      "outstanding": null,
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E25",
@@ -289,7 +503,16 @@
       "weight": 2,
       "priority": "P2",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/transition.rs",
+          "src/kernel/supervisor.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E26",
@@ -298,7 +521,15 @@
       "weight": 2,
       "priority": "P2",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/supervisor.rs"
+        ],
+        "remaining": "Bounded host supervisor with wall/monotonic clock and lease expiry; service manager and clock discontinuity qualification outstanding."
+      }
     },
     {
       "id": "E27",
@@ -307,7 +538,16 @@
       "weight": 2,
       "priority": "P0",
       "evidence": [],
-      "outstanding": "Checkpoint retention and stale submission rejection tested; explicit stale checkpoint write rejection not tested."
+      "outstanding": "Checkpoint retention and stale submission rejection tested; explicit stale checkpoint write rejection not tested.",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/transition.rs",
+          "src/kernel/supervisor.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E28",
@@ -316,7 +556,17 @@
       "weight": 2,
       "priority": "P0",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/transition.rs",
+          "src/kernel/composition.rs",
+          "src/kernel/supervisor.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E29",
@@ -331,7 +581,16 @@
           "detail": "native budget_exhaustion_and_explicit_failure; incarnation_mailbox_request_replay_cancel"
         }
       ],
-      "outstanding": null
+      "outstanding": null,
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/transition.rs",
+          "src/kernel/supervisor.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E30",
@@ -346,7 +605,15 @@
           "detail": "native actual_separate_processes_recover"
         }
       ],
-      "outstanding": null
+      "outstanding": null,
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/persistence.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E31",
@@ -355,7 +622,16 @@
       "weight": 2,
       "priority": "P0",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/transition.rs",
+          "src/kernel/effects.rs"
+        ],
+        "remaining": "Host/worker role separation and durable effect intent/receipt reconciliation; trusted local CLI only, no authenticated remote actor or external effect adapter."
+      }
     },
     {
       "id": "E32",
@@ -370,7 +646,15 @@
           "detail": "native corruption_fails_closed_and_uncommitted_temp_is_ignored"
         }
       ],
-      "outstanding": null
+      "outstanding": null,
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/persistence.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E33",
@@ -379,7 +663,16 @@
       "weight": 2,
       "priority": "P0",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/persistence.rs",
+          "src/kernel/migration.rs"
+        ],
+        "remaining": "In-memory indexed maps, checkpointed replay and conservative legacy import; no disk-indexed entity store, snapshot/receipt growth remains."
+      }
     },
     {
       "id": "E34",
@@ -388,7 +681,15 @@
       "weight": 2,
       "priority": "P0",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/persistence.rs"
+        ],
+        "remaining": "OS writer lock, immutable commits and anchor checks implemented; crash-during-write and concurrency qualification outstanding."
+      }
     },
     {
       "id": "E35",
@@ -403,7 +704,17 @@
           "detail": "native promote_then_reuse_and_disable"
         }
       ],
-      "outstanding": null
+      "outstanding": null,
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/composition.rs",
+          "src/kernel/evolution.rs",
+          "src/kernel/behavior.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E36",
@@ -412,7 +723,16 @@
       "weight": 2,
       "priority": "P3",
       "evidence": [],
-      "outstanding": "native disable only; full gate open"
+      "outstanding": "native disable only; full gate open",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/evolution.rs",
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Disable and fallback matching, prior-example regression and version lineage; no complete automatic migration/rollback campaign."
+      }
     },
     {
       "id": "E37",
@@ -421,7 +741,16 @@
       "weight": 2,
       "priority": "P3",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/evolution.rs",
+          "src/kernel/intelligence.rs"
+        ],
+        "remaining": "Bounded expression grammar discovery, not arbitrary program synthesis."
+      }
     },
     {
       "id": "E38",
@@ -430,7 +759,16 @@
       "weight": 2,
       "priority": "P3",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/evolution.rs",
+          "src/kernel/intelligence.rs"
+        ],
+        "remaining": "Disjoint held-outs and typed applicability in a declared plan; stronger independent holdout custody and generalized applicability remain."
+      }
     },
     {
       "id": "E39",
@@ -439,7 +777,16 @@
       "weight": 2,
       "priority": "P3",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/composition.rs",
+          "src/kernel/supervisor.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E40",
@@ -454,7 +801,17 @@
           "detail": "native autonomous_scheduler_reuses_capability_across_goals"
         }
       ],
-      "outstanding": null
+      "outstanding": null,
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/persistence.rs",
+          "src/kernel/supervisor.rs",
+          "src/kernel/evolution.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     },
     {
       "id": "E41",
@@ -463,7 +820,16 @@
       "weight": 2,
       "priority": "P3",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/intelligence.rs",
+          "src/kernel/evolution.rs"
+        ],
+        "remaining": "Versioned knowledge admission and automatic computational-operator assimilation; automatic procedure/repair/coordination/context synthesis not implemented."
+      }
     },
     {
       "id": "E42",
@@ -472,7 +838,16 @@
       "weight": 2,
       "priority": "P3",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/intelligence.rs",
+          "src/kernel/supervisor.rs"
+        ],
+        "remaining": "Observed native worker duration, counts and scheduler feedback; unsuccessful attempt and search-cost accounting incomplete."
+      }
     },
     {
       "id": "E43",
@@ -481,7 +856,16 @@
       "weight": 2,
       "priority": "P2",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/intelligence.rs",
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Critical path and declared uncertainty/information-gain/cost weights, observed cost feedback; information gain is supplied, not inferred."
+      }
     },
     {
       "id": "E44",
@@ -490,7 +874,16 @@
       "weight": 2,
       "priority": "P2",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/supervisor.rs",
+          "src/kernel/transition.rs"
+        ],
+        "remaining": "Slot enforcement and dormant population representation; actual 60-agent run not performed."
+      }
     },
     {
       "id": "E45",
@@ -499,7 +892,13 @@
       "weight": 2,
       "priority": "P4",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "DEFERRED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [],
+        "remaining": "Separate comparative persistence-policy implementation and experimental cohort; this turn did not alter experiment folders."
+      }
     },
     {
       "id": "E46",
@@ -508,7 +907,13 @@
       "weight": 2,
       "priority": "P4",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "DEFERRED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [],
+        "remaining": "Common fault protocol retained; actual four-arm execution remains deferred."
+      }
     },
     {
       "id": "E47",
@@ -517,7 +922,16 @@
       "weight": 2,
       "priority": "P4",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/supervisor.rs",
+          "src/kernel/persistence.rs"
+        ],
+        "remaining": "Recovery substrate present; actual simultaneous process destruction and autonomous recovery not performed."
+      }
     },
     {
       "id": "E48",
@@ -526,7 +940,13 @@
       "weight": 2,
       "priority": "P4",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "DEFERRED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [],
+        "remaining": "36 hours of actual elapsed qualification required."
+      }
     },
     {
       "id": "E49",
@@ -535,7 +955,13 @@
       "weight": 2,
       "priority": "P4",
       "evidence": [],
-      "outstanding": "No qualifying evidence"
+      "outstanding": "No qualifying evidence",
+      "r004": {
+        "status": "DEFERRED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [],
+        "remaining": "72 hours of actual elapsed repeated-fault qualification required."
+      }
     },
     {
       "id": "E50",
@@ -550,7 +976,29 @@
           "detail": "native 8 integration tests; no AI adapter in source"
         }
       ],
-      "outstanding": null
+      "outstanding": null,
+      "r004": {
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+        "files": [
+          "src/kernel/supervisor.rs",
+          "src/kernel/composition.rs",
+          "src/kernel/behavior.rs"
+        ],
+        "remaining": "Compile and independently qualify the complete gate; source inspection is not execution evidence."
+      }
     }
-  ]
+  ],
+  "candidate": {
+    "source_pin": "4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd",
+    "verification": "NOT_COMPILED_NOT_TESTED",
+    "historical_verified_score": 28,
+    "candidate_verified_score": 0,
+    "scope": "CHATGPT/runtime only; R003 baseline preserved separately; no acceptance uplift for source changes",
+    "counts": {
+      "SOURCE_IMPLEMENTED_UNVERIFIED": 31,
+      "PARTIAL_SOURCE": 15,
+      "DEFERRED": 4
+    }
+  }
 }

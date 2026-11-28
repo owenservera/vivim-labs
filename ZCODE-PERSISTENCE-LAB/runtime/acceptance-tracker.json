@@ -1,0 +1,556 @@
+{
+  "schema": "vivim.acceptance/1",
+  "revision": "R004-tracker-001",
+  "architecture": "../OWNER-DESIGN-R002.md",
+  "audit": "ARCHITECTURE-AUDIT-R003.md",
+  "policy": {
+    "target": 100,
+    "scoring": "sum weights of PASS only",
+    "statuses": [
+      "OPEN",
+      "PARTIAL",
+      "PASS",
+      "FAIL",
+      "BLOCKED"
+    ],
+    "pass_requires": "Pinned source, explicit criterion coverage, actual native receipt and test names; no source-only runtime pass.",
+    "regression": "Reopen affected gates after failure or material unverified implementation change.",
+    "scope": "No AI wiring; actual endurance only; fixed gate IDs and weights; no silent narrowing."
+  },
+  "gates": [
+    {
+      "id": "E01",
+      "criterion": "Goal identity survives fresh process",
+      "status": "PASS",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [
+        {
+          "source": "VALIDATION-R003.md",
+          "source_pin": "f837042b76e2bd438f107a6b93360306da6d98ef",
+          "detail": "native actual_separate_processes_recover"
+        }
+      ],
+      "outstanding": null
+    },
+    {
+      "id": "E02",
+      "criterion": "Goal completes only when sealed and all tasks verified",
+      "status": "PASS",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [
+        {
+          "source": "VALIDATION-R003.md",
+          "source_pin": "f837042b76e2bd438f107a6b93360306da6d98ef",
+          "detail": "native restart_fences_old_worker_and_keeps_checkpoint"
+        }
+      ],
+      "outstanding": null
+    },
+    {
+      "id": "E03",
+      "criterion": "Explicit terminal blocked/exhausted outcomes and dependency propagation",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E04",
+      "criterion": "Goal hierarchy and versioned success predicates",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E05",
+      "criterion": "Task DAG dependency gating and cycle prevention",
+      "status": "PARTIAL",
+      "weight": 2,
+      "priority": "P1",
+      "evidence": [],
+      "outstanding": "Dependency gating tested; cycle rejection needs explicit native negative test. Criterion unchanged."
+    },
+    {
+      "id": "E06",
+      "criterion": "Typed predecessor output binding and dynamic graph refinement",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P1",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E07",
+      "criterion": "Versioned class and capability association",
+      "status": "PASS",
+      "weight": 2,
+      "priority": "P1",
+      "evidence": [
+        {
+          "source": "VALIDATION-R003.md",
+          "source_pin": "f837042b76e2bd438f107a6b93360306da6d98ef",
+          "detail": "native promote_then_reuse_and_disable"
+        }
+      ],
+      "outstanding": null
+    },
+    {
+      "id": "E08",
+      "criterion": "All 15 behavioral operators have executable contracts and semantics",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P1",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E09",
+      "criterion": "Class composition validation and execution graph",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P1",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E10",
+      "criterion": "Class generation, admission and migration from evidence",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P3",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E11",
+      "criterion": "Logical agent identity survives reincarnation",
+      "status": "PASS",
+      "weight": 2,
+      "priority": "P2",
+      "evidence": [
+        {
+          "source": "VALIDATION-R003.md",
+          "source_pin": "f837042b76e2bd438f107a6b93360306da6d98ef",
+          "detail": "native incarnation_mailbox_request_replay_cancel"
+        }
+      ],
+      "outstanding": null
+    },
+    {
+      "id": "E12",
+      "criterion": "Complete incarnation records with executor binding and lineage",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P2",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E13",
+      "criterion": "Autonomous genesis and replacement after failure",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P2",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E14",
+      "criterion": "Agent states dormant/waiting/running/recovering/archived",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P2",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E15",
+      "criterion": "Per-agent workspace and durable projections",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P2",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E16",
+      "criterion": "Context references validated and independently persisted",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P1",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E17",
+      "criterion": "Context assembly, typed input binding and budgeted selection",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P1",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E18",
+      "criterion": "Versioned artifact payloads and provenance",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E19",
+      "criterion": "Verified artifact persists and duplicate admission rejected",
+      "status": "PASS",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [
+        {
+          "source": "VALIDATION-R003.md",
+          "source_pin": "f837042b76e2bd438f107a6b93360306da6d98ef",
+          "detail": "native restart_fences_old_worker_and_keeps_checkpoint"
+        }
+      ],
+      "outstanding": null
+    },
+    {
+      "id": "E20",
+      "criterion": "Independent deterministic output oracle rejects wrong result",
+      "status": "PASS",
+      "weight": 2,
+      "priority": "P1",
+      "evidence": [
+        {
+          "source": "VALIDATION-R003.md",
+          "source_pin": "f837042b76e2bd438f107a6b93360306da6d98ef",
+          "detail": "native restart_fences_old_worker_and_keeps_checkpoint"
+        }
+      ],
+      "outstanding": null
+    },
+    {
+      "id": "E21",
+      "criterion": "Composable evidence, independent verifier authority and predicate oracles",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P1",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E22",
+      "criterion": "Durable mailbox deduplication and recipient acknowledgment",
+      "status": "PASS",
+      "weight": 2,
+      "priority": "P2",
+      "evidence": [
+        {
+          "source": "VALIDATION-R003.md",
+          "source_pin": "f837042b76e2bd438f107a6b93360306da6d98ef",
+          "detail": "native incarnation_mailbox_request_replay_cancel"
+        }
+      ],
+      "outstanding": null
+    },
+    {
+      "id": "E23",
+      "criterion": "Mailbox wakeups and durable event delivery",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P2",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E24",
+      "criterion": "One active lease per worker and generation fencing",
+      "status": "PASS",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [
+        {
+          "source": "VALIDATION-R003.md",
+          "source_pin": "f837042b76e2bd438f107a6b93360306da6d98ef",
+          "detail": "native busy_agent_cannot_hold_multiple_running_leases; restart_fences_old_worker_and_keeps_checkpoint"
+        }
+      ],
+      "outstanding": null
+    },
+    {
+      "id": "E25",
+      "criterion": "Global resource slots enforced across independent processes",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P2",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E26",
+      "criterion": "Host monotonic/wall-clock supervision and recovery",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P2",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E27",
+      "criterion": "Durable checkpoint with stale-attempt rejection",
+      "status": "PARTIAL",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [],
+      "outstanding": "Checkpoint retention and stale submission rejection tested; explicit stale checkpoint write rejection not tested."
+    },
+    {
+      "id": "E28",
+      "criterion": "Versioned checkpoint validation and fallback",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E29",
+      "criterion": "Bounded retry and cancellation",
+      "status": "PASS",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [
+        {
+          "source": "VALIDATION-R003.md",
+          "source_pin": "f837042b76e2bd438f107a6b93360306da6d98ef",
+          "detail": "native budget_exhaustion_and_explicit_failure; incarnation_mailbox_request_replay_cancel"
+        }
+      ],
+      "outstanding": null
+    },
+    {
+      "id": "E30",
+      "criterion": "Idempotent request replay across process boundaries",
+      "status": "PASS",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [
+        {
+          "source": "VALIDATION-R003.md",
+          "source_pin": "f837042b76e2bd438f107a6b93360306da6d98ef",
+          "detail": "native actual_separate_processes_recover"
+        }
+      ],
+      "outstanding": null
+    },
+    {
+      "id": "E31",
+      "criterion": "Trusted host admission with actor authorization and effect reconciliation",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E32",
+      "criterion": "Journal corruption detected and uncommitted temp ignored",
+      "status": "PASS",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [
+        {
+          "source": "VALIDATION-R003.md",
+          "source_pin": "f837042b76e2bd438f107a6b93360306da6d98ef",
+          "detail": "native corruption_fails_closed_and_uncommitted_temp_is_ignored"
+        }
+      ],
+      "outstanding": null
+    },
+    {
+      "id": "E33",
+      "criterion": "Indexed incremental persistence, bounded journal growth and migration",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E34",
+      "criterion": "Concurrent writers, crash-during-write and tail-integrity qualification",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P0",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E35",
+      "criterion": "Bounded deterministic program evaluation and reusable capability admission",
+      "status": "PASS",
+      "weight": 2,
+      "priority": "P1",
+      "evidence": [
+        {
+          "source": "VALIDATION-R003.md",
+          "source_pin": "f837042b76e2bd438f107a6b93360306da6d98ef",
+          "detail": "native promote_then_reuse_and_disable"
+        }
+      ],
+      "outstanding": null
+    },
+    {
+      "id": "E36",
+      "criterion": "Versioned capability disable and regression/rollback",
+      "status": "PARTIAL",
+      "weight": 2,
+      "priority": "P3",
+      "evidence": [],
+      "outstanding": "native disable only; full gate open"
+    },
+    {
+      "id": "E37",
+      "criterion": "Automatic candidate synthesis from verified examples",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P3",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E38",
+      "criterion": "Disjoint held-out validation and applicability constraints",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P3",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E39",
+      "criterion": "Automatic capability matching and reuse without manual per-task assignment",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P3",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E40",
+      "criterion": "Cross-goal deterministic reuse in fresh executable",
+      "status": "PASS",
+      "weight": 2,
+      "priority": "P3",
+      "evidence": [
+        {
+          "source": "VALIDATION-R003.md",
+          "source_pin": "f837042b76e2bd438f107a6b93360306da6d98ef",
+          "detail": "native autonomous_scheduler_reuses_capability_across_goals"
+        }
+      ],
+      "outstanding": null
+    },
+    {
+      "id": "E41",
+      "criterion": "Learned procedure/repair/class/coordination/context artifacts with provenance",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P3",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E42",
+      "criterion": "Cost and verified yield measurement and policy feedback",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P3",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E43",
+      "criterion": "Critical-path, uncertainty, information gain and cost scheduling",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P2",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E44",
+      "criterion": "60 logical agents with four active slots and dormant workers without inference",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P2",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E45",
+      "criterion": "Four isolated architecture policies enforce allowed persistence",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P4",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E46",
+      "criterion": "Common fault schedule and repeatable oracle across four arms",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P4",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E47",
+      "criterion": "Real simultaneous worker/controller death and autonomous recovery",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P4",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E48",
+      "criterion": "36h continuous real lifecycle qualification",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P4",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E49",
+      "criterion": "72h repeated fault endurance qualification",
+      "status": "OPEN",
+      "weight": 2,
+      "priority": "P4",
+      "evidence": [],
+      "outstanding": "No qualifying evidence"
+    },
+    {
+      "id": "E50",
+      "criterion": "No AI/provider execution dependency in native lifecycle",
+      "status": "PASS",
+      "weight": 2,
+      "priority": "P2",
+      "evidence": [
+        {
+          "source": "VALIDATION-R003.md",
+          "source_pin": "f837042b76e2bd438f107a6b93360306da6d98ef",
+          "detail": "native 8 integration tests; no AI adapter in source"
+        }
+      ],
+      "outstanding": null
+    }
+  ]
+}

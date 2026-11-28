@@ -1,6 +1,6 @@
 {
   "schema": "vivim.dogfood.cli-recipe/1",
-  "revision": "R008",
+  "revision": "R009",
   "scope": "EXPERIMENTS_ONLY",
   "seed_commit": "3b1d7e173071710e6795c09427162292f774030e",
   "status": "HOLD_QUOTA_ISOLATION_AND_ADMISSION",
@@ -352,6 +352,9 @@
     "note": "Selector does not fetch quota or reserve by itself. No default model or silent fallback.",
     "collector": "MODEL-QUOTA.mjs",
     "quota_evidence": "Native headless /usage report verified on workstation; Gemini Models group 99% five-hour and 94% weekly at probe. Refresh actual data before use.",
-    "requires": "Atomic durable account reservation, independently verified billing entitlement and isolation before inference."
+    "requires": "Atomic durable account reservation, independently verified billing entitlement and isolation before inference.",
+    "optimization_variants": "MODEL-OPTIMIZATION-EXPERIMENTS.json",
+    "simulation": "MODEL-BUDGET.mjs simulate produces SIMULATED_CANDIDATE only; never use simulation output to launch inference.",
+    "live": "MODEL-BUDGET.mjs live route requires verified provider entitlement; no automatic fallback or paid overflow."
   }
 }

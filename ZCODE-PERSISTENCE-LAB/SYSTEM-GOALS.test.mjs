@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {normalizedContract} from './CAMPAIGN-CONTROLLER.mjs';
+const charter=JSON.parse(fs.readFileSync(new URL('./SYSTEM-GOALS-R012.json',import.meta.url),'utf8'));
+const base={id:'release',release_boundary:'bounded synthetic release',out_of_scope:'future enhancements',mandatory:charter.goals.map((g,i)=>({id:'O'+i,behavior:g.name,oracle:'independent test '+i,falsifier:'failure '+i,task:'implementation',priority:50,depends_on:[],goal_ids:[g.id]}))};
+const c=normalizedContract(base);
+assert.equal(c.mandatory.length,8);
+assert.equal(c.frozen,true);
+assert.match(c.goal_charter_digest,/^[0-9a-f]{64}$/);
+assert.equal(normalizedContract({...base,mandatory:[...base.mandatory].reverse()}).digest,c.digest);
+assert.throws(()=>normalizedContract({...base,mandatory:base.mandatory.slice(1)}),/MANDATORY_GOAL_OMITTED:G01/);
+assert.throws(()=>normalizedContract({...base,mandatory:base.mandatory.map((x,i)=>i?x:{...x,goal_ids:['G99']})}),/INVALID_GOAL_COVERAGE/);
+assert.throws(()=>normalizedContract({...base,mandatory:base.mandatory.map((x,i)=>i?x:{...x,goal_ids:[]})}),/INVALID_GOAL_COVERAGE/);
+assert.throws(()=>normalizedContract({...base,mandatory:base.mandatory.map((x,i)=>i?x:{...x,depends_on:['O0']})}),/CONTRACT_CYCLE/);
+console.log('R012: 8 goal-coverage and contract integrity checks passed. No inference.');

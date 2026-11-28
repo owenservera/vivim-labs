@@ -4,6 +4,47 @@ use crate::{digest, Result};
 use serde_json::{Map, Value};
 use std::collections::{BTreeMap, BTreeSet};
 
+fn wire_shape(wire:&Wire,input:&Shape,outputs:&BTreeMap<Id,Shape>,depth:usize)->Result<Shape>{
+    ensure(depth<32,"wire depth exceeded")?;
+    match wire{
+        Wire::Input=>Ok(input.clone()),
+        Wire::Node{id}=>outputs.get(id).cloned().ok_or("forward reference or cycle".into()),
+        Wire::Field{source,key}=>{
+            match wire_shape(source,input,outputs,depth+1)?{
+                Shape::Record{fields}=>fields.get(key).cloned().ok_or("unknown field".into()),
+                Shape::Map{value}=>Ok(*value),
+                Shape::Any=>Ok(Shape::Any),
+                _=>Err("field source not record".into())
+            }
+        }
+        Wire::Record{fields}=>{
+            ensure(fields.len()<=MAX_GRAPH_NODES,"wire field limit")?;
+            Ok(Shape::Record{fields:fields.iter().map(|(k,w)|{id(k)?;Ok((k.clone(),wire_shape(w,input,outputs,depth+1)?))}).collect::<Result<_>>()?})
+        }
+        Wire::Array{items}=>{
+            ensure(items.len()<=MAX_GRAPH_NODES,"wire array limit")?;
+            let mut choices=vec![];
+            for w in items{let shape=wire_shape(w,input,outputs,depth+1)?;if !choices.contains(&shape){choices.push(shape);}}
+            let item=if choices.len()==1{choices.remove(0)}else if choices.is_empty(){Shape::Any}else{Shape::OneOf{choices}};
+            Ok(Shape::Array{item:Box::new(item)})
+        }
+        Wire::Literal{value,shape}=>{bounded(value)?;ensure(shape.accepts(value),"literal wire shape mismatch")?;Ok(shape.clone())}
+    }
+}
+fn resolve_wire(wire:&Wire,input:&Value,outputs:&BTreeMap<Id,Value>,depth:usize)->Result<Value>{
+    ensure(depth<32,"wire depth exceeded")?;
+    let value=match wire{
+        Wire::Input=>input.clone(),
+        Wire::Node{id}=>outputs.get(id).cloned().ok_or("node unavailable")?,
+        Wire::Field{source,key}=>resolve_wire(source,input,outputs,depth+1)?.get(key).cloned().ok_or("field unavailable")?,
+        Wire::Record{fields}=>Value::Object(fields.iter().map(|(k,w)|Ok((k.clone(),resolve_wire(w,input,outputs,depth+1)?))).collect::<Result<Map<_,_>>>()?),
+        Wire::Array{items}=>Value::Array(items.iter().map(|w|resolve_wire(w,input,outputs,depth+1)).collect::<Result<Vec<_>>>()?),
+        Wire::Literal{value,..}=>value.clone(),
+    };
+    bounded(&value)?;Ok(value)
+}
+
+
 impl World {
     pub fn payload(&self, key:&str)->Result<&Value>{
         let value=self.blobs.get(key).ok_or("payload missing")?;
@@ -25,12 +66,12 @@ impl World {
         for node in &class.nodes{
             id(&node.id)?;ensure(!outputs.contains_key(&node.id),"duplicate node")?;
             let op=self.operators.get(&node.operator).ok_or("operator missing")?;
-            let source=match &node.input{Wire::Input=>&class.input,Wire::Node{id}=>outputs.get(id).ok_or("forward reference or cycle")?};
-            ensure(op.input.admits(source),"incompatible operator input")?;
+            let source=wire_shape(&node.input,&class.input,&outputs,0)?;
+            ensure(op.input.admits(&source),"incompatible operator input")?;
             outputs.insert(node.id.clone(),op.output.clone());
         }
-        let result=match &class.result{Wire::Input=>&class.input,Wire::Node{id}=>outputs.get(id).ok_or("result node missing")?};
-        ensure(class.output.admits(result),"incompatible class output")?;
+        let result=wire_shape(&class.result,&class.input,&outputs,0)?;
+        ensure(class.output.admits(&result),"incompatible class output")?;
         ensure(class.lineage.iter().all(|k|self.classes.contains_key(k)),"class ancestor missing")
     }
     pub fn run_class(&self,key:&str,input:&Value)->Result<Value>{
@@ -42,15 +83,15 @@ impl World {
         let mut total_bytes=0usize;
         for n in &class.nodes{
             let op=&self.operators[&n.operator];
-            let x=match &n.input{Wire::Input=>input,Wire::Node{id}=>values.get(id).ok_or("node unavailable")?};
-            ensure(op.input.accepts(x),"operator input shape mismatch")?;
-            let y=op.program.eval(x)?;
+            let x=resolve_wire(&n.input,input,&values,0)?;
+            ensure(op.input.accepts(&x),"operator input shape mismatch")?;
+            let y=op.program.eval(&x)?;
             bounded(&y)?;ensure(op.output.accepts(&y),"operator output shape mismatch")?;
             total_bytes=total_bytes.checked_add(serde_json::to_vec(&y).map_err(|e|e.to_string())?.len()).ok_or("class memory overflow")?;
             ensure(total_bytes<=8*MAX_VALUE_BYTES,"class intermediate budget exceeded")?;
             values.insert(n.id.clone(),y);
         }
-        let result=match &class.result{Wire::Input=>input.clone(),Wire::Node{id}=>values.remove(id).ok_or("result unavailable")?};
+        let result=resolve_wire(&class.result,input,&values,0)?;
         ensure(class.output.accepts(&result),"class output shape mismatch")?;
         Ok(result)
     }

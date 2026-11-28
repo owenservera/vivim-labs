@@ -17,7 +17,7 @@ pub enum Action {
     Agent{id:Id,goal:Id,parent:Option<Id>,class:Id,context:Id},
     Activate{agent:Id,executor:String},BindExecutor{agent:Id,incarnation:u64,process_ref:String},
     MigrateAgent{agent:Id,class:Id,context:Id},Retire{agent:Id,reason:String},
-    Task{spec:TaskSpec},Refine{spec:TaskSpec},RefineGraph{goal:Id,additions:Vec<TaskSpec>,revisions:Vec<TaskSpec>},Seal{goal:Id},Slots{count:usize},
+    Task{spec:TaskSpec},Refine{spec:TaskSpec},RebindTask{task:Id,class:Option<Id>,context:Option<Id>},RefineGraph{goal:Id,additions:Vec<TaskSpec>,revisions:Vec<TaskSpec>},Seal{goal:Id},Slots{count:usize},
     Claim{task:Id,agent:Id,ttl_ms:u64},Renew{task:Id,generation:u64,ttl_ms:u64},
     Checkpoint{task:Id,generation:u64,data:Value},
     Submit{task:Id,generation:u64,output:Value},Fail{task:Id,generation:u64,reason:String},
@@ -208,6 +208,15 @@ impl World {
                 ensure(t.spec.output==spec.output,"refinement changes downstream output contract")?;self.validate_task(&spec,true)?;
                 let prior=self.tasks[&spec.id].spec.clone();self.task_versions.entry(spec.id.clone()).or_default().push(prior);
                 let t=self.tasks.get_mut(&spec.id).unwrap();t.version=t.version.checked_add(1).ok_or("version overflow")?;t.spec=spec;
+            }
+            RebindTask{task,class,context}=>{
+                actor.host()?;let t=self.tasks.get(&task).ok_or("task missing")?;
+                ensure(t.phase==TaskPhase::Pending&&!self.has_uncertain_effect(&task),"only pending reconciled tasks may be rebound")?;
+                let mut spec=t.spec.clone();spec.class=class;spec.context=context;
+                self.validate_task(&spec,true)?;
+                let prior=self.tasks[&task].spec.clone();self.task_versions.entry(task.clone()).or_default().push(prior);
+                let t=self.tasks.get_mut(&task).unwrap();t.version=t.version.checked_add(1).ok_or("version overflow")?;
+                t.spec=spec;t.input=None;t.assigned_class=None;t.assigned_context=None;
             }
             RefineGraph{goal,additions,revisions}=>{
                 actor.host()?;self.open_goal(&goal)?;

@@ -1,46 +1,29 @@
-# ZCode persistence laboratory — R001
+# Persistent intelligence laboratory — R002 (canonical)
+Status: DESIGN / NOT RUN. Supersedes R001's four different fault lanes; R001 remains in Git history (30a971d711091f6e5c9f9ad1d10629d33312f98c). Owner approved the independent conceptual design and requested experimentation around it. No external research used for this architecture.
 
-Status: DESIGN / NOT RUN. Owner direction: start with four blank subfolders and four independent parallel ZCode instances; expose different operational failures repeatedly until a persistent lifecycle is demonstrated. Design before execution.
+## ERA I — Fundamental architecture
+Build around persistent objectives, evolving knowledge and disposable intelligence, not agents. An agent is a temporary allocation of reasoning capacity; it does not own goals, knowledge or committed effects.
 
-## ERA I — The laboratory
+Seven persistent entities: Goal (what must be accomplished), Task (decomposable work), Class (reprogrammable behavioral contract), Agent (logical allocation of intelligence), Context (selected relevant knowledge), Artifact (materialized work/discovery), Evidence (proof of occurrence/correctness). Identity, version, dependencies and provenance connect entities. The system should survive simultaneous loss of every active AI agent without losing verified intelligence or the ability to continue.
 
-A new run contains four completely blank agent working directories 01, 02, 03, 04. No pre-populated project instructions, shared agent state, or preinstalled recovery solutions. Initial objectives are delivered via sessions. Controller metadata, logs, prompts and receipts live outside the four directories. Initially the controller observes and injects failures, not silently solving every problem. Baseline native ZCode behavior before adding recovery mechanisms. Four distinct instance/session identities; run concurrently, with isolated working directories. Shared provider credentials remain under their existing configuration; never copy or log them.
+## ERA II — Agent civilization
+One general-purpose base agent class, composed from operators: Observe, Discover, Reason, Decompose, Plan, Construct, Execute, Experiment, Challenge, Verify, Repair, Synthesize, Optimize, Delegate, Learn. Compose with objective, context, tools, constraints and acceptance. Examples: researcher = Discover + Reason + Experiment; reviewer = Challenge + Reason + Verify; engineer = Plan + Construct + Execute + Verify; coordinator = Observe + Decompose + Delegate + Repair. Operators are behavior contracts, not claims of deterministic implementation. Successful specializations may become versioned classes after verification.
 
-## ERA II — Four lanes
+An agent has immutable logical identity, lineage, class version, objective, capabilities, constraints, context, state, mailbox, workspace, discoveries, checkpoints, evidence and incarnations. An incarnation is one model/process/session; it can be replaced without changing logical identity. New agents get new isolated workspaces; new incarnations of the same agent retain identity and use a new attempt directory. Filesystem is a projection of canonical state, not a shared mutable database.
 
-| Round | 01 Session immortality | 02 Operational resilience | 03 Context immortality | 04 Orchestration immortality |
-|---|---|---|---|---|
-| 1 | Premature voluntary finish | Invalid command | Long conversation | Spawn four subagents |
-| 2 | Interrupted inference | Command timeout | Context compaction | One subagent fails |
-| 3 | Worker process terminated | Missing dependency | Fresh conversation | Unresponsive subagent |
-| 4 | ACP disconnected | Unavailable tool | Working memory loss | Conflicting results |
-| 5 | Parent session terminated | Simulated write failure | Partial checkpoint corruption | Duplicate task execution |
-| 6 | Controller restarted | Simulated provider outage | Replacement model | Coordinator terminated |
+Lifecycle: Necessity → Genesis → Activation → Operation → Evaluation → Evolution → Assimilation → Retirement. Evolution can resume, repair, replace or reproduce; assimilation turns verified work into reusable knowledge. Dormant, dependency-waiting, message-waiting and archived agents need no active inference; deterministic execution should not require a model. Active reasoning and recovery allocate inference only when necessary. Task graph replaces permanent AI orchestrator; runtime owns scheduling, dependencies, messages, leases, checkpointing, fault detection, effect reconciliation/deduplication, verification, authorization, budgets and cancellation. AI handles uncertain decisions. Scheduler should prioritize critical dependencies, expected information gain, uncertainty, cost and evidence of progress; test rather than assume benefit.
 
-01: recover original objective and last verified checkpoint, not restart work. 02: recognize failure, find alternative, verify repair and retain reusable knowledge. 03: preserve goals, discoveries, decisions, pending work and operational knowledge without replaying all history. 04: retain task graph, recover incomplete assignments and avoid duplicate effects.
+## ERA III — Accumulating intelligence
+Unknown problem → AI reasoning → verified solution → generalized algorithm → reprogrammable computational capability → deterministic reuse. Convert successful command sequences into procedures, reasoning patterns into operators, failure resolutions into recovery capabilities, mathematical discoveries into verified engines, successful behavior into classes, coordination into algorithms, relevant information into indexed knowledge, context selection into generation strategies. Promote only after independent verification, scope checks, regression and versioning; permit rollback. Familiar problems should consume progressively less inference without sacrificing correctness; this is a hypothesis, not a measured result.
 
-Common task: maintain a monotonically advancing, deterministic sequence of numbered artifacts and verifiable receipts, with a finite target per round and a longer endurance campaign. Use equivalent workloads to permit comparison. Lane 04 partitions the workload into independent assignments and reconciles their results. Each round records an unmodified baseline attempt, then one minimal repair and a replay of the same fault; failed repairs are retained as evidence.
+## Four architectures, identical trials
+| Lane | Persistence authority | Recovery boundary |
+|---|---|---|
+| 01 | Session | Retain/reattach native ZCode session; no external goal/agent reconstruction |
+| 02 | Agent | Replace session/incarnation, preserve logical agent and its checkpoint |
+| 03 | Goal | Replace entire agents and coordinator; durable goal, task DAG and verified evidence |
+| 04 | Intelligence | Everything in 03 plus reusable verified classes, operators, repairs and deterministic capabilities |
+All use same objectives, seeds, provider/model where feasible, concurrency and resource ceilings, fault schedule and independent oracle. Lane 04 may spend budget on assimilation; count that cost. No cross-lane knowledge leakage; external observer logs cannot become recovery inputs except through each architecture's admitted substrate. Measure cold start, recurrent tasks and novel variants. The prior 24 faults are now common treatments, not lane definitions. Four initially blank workspaces and separate controller metadata; top-level sessions launch in parallel. Each lane receives the same subagent opportunity, bounded to one concurrent child per lane initially (eight total); larger equal limits in subsequent trials. See PROTOCOL.md and SUBAGENT-LIFECYCLE.md.
 
-## ERA III — Evolution
-
-L0 native ZCode, L1 session recovery, L2 durable goals, L3 operational recovery, L4 replaceable orchestration, L5 persistent lifecycle independent of process, context and model. Inject → observe → repair → repeat. Do not add persistence layers before the baseline fails. Process disposable; agent recoverable and replaceable; goal persistent until verified completion or explicit cancellation.
-
-Acceptance gates:
-- Four independent parallel instances operational.
-- Automatic recovery following worker termination.
-- Goal survives complete context replacement.
-- Operational failures automatically remediated.
-- Zero duplicate committed effects.
-- Coordinator successfully replaced.
-- 36 hours continuous goal execution.
-- 72 hours with repeated fault injection.
-
-Targets: zero goal loss, lost committed work, duplicate committed effects or human recovery interventions; 100% injected failure recognition; recovery under 60 seconds where feasible; progressively declining context and recovery token cost. Report actual distributions and exceptions, not invented measurements. A 36h/72h run is wall-clock measured; do not substitute simulated time. Provider outages may exceed the recovery target; record detection and wait/recovery separately.
-
-Final test: terminate all four owned ZCode workers and their coordinator, restart controller and demonstrate continuation of all four goals from verified durable state. Explicit cancellation must be respected; never defeat a user stop, provider policy, access boundary or budget. All injected faults restricted to lab-owned processes, files and simulated dependencies. No global network changes, machine-wide process kills, credential changes or interference with other sessions. A watchdog must not be mistaken for proof of native ZCode recovery.
-
-## Execution and evidence
-
-See experiment.json and PROTOCOL.md. Initialize a new local run using Initialize-Lab.ps1; the four workspaces are empty at creation. Do not launch from this repository or store raw private transcripts in this public repository. Commit only reviewed, sanitized results. No real experiments executed at R001. ASDF transport status and grant reporting were inconsistent at design time; reconcile before launch. The actual installed ZCode CLI/ACP flags, session persistence and launch/reconnect behavior must be verified in a harmless preflight, not assumed. Git cannot track truly empty directories: create them at runtime instead of .gitkeep.
-
-The eventual product handoff is experimentally validated primitives for a native, provider-independent Rust Harness, not a dependency on an immortal AI conversation.
+## Core hypothesis
+A computational system should improve as replaceable agents leave verified reusable knowledge behind. 04 is expected to outperform on repeated and related workloads, but 01–03 are legitimate controls and may outperform it on short tasks. No claim until measured. The 36/72-hour qualification is real wall time, not simulation. No live launch, native CLI/ACP verification, implementation or qualification yet. Do not overwrite the public repo with private transcripts. Git cannot track empty directories; initialize them locally. Only lab-owned processes/files, simulated dependency faults, explicit finite budgets, respect stop and provider limits. ASDF grant/profile discrepancy must be reconciled before launch.

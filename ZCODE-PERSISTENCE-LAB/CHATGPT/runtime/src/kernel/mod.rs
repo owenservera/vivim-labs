@@ -11,6 +11,8 @@ pub mod intelligence;
 pub mod effects;
 pub mod migration;
 pub mod index;
+pub mod authority;
+pub mod lifecycle;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

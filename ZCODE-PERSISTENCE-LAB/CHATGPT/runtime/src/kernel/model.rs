@@ -153,6 +153,25 @@ pub struct Message {
     pub sequence:u64, pub acknowledged:bool,
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct Delivery {
+    pub message:Id,pub recipient:Id,pub attempts:u32,pub last_incarnation:Option<u64>,
+    pub lease_until_ms:u64,pub acknowledged_ms:Option<u64>,
+}
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct Rollback {
+    pub capability:Id,pub reason:String,pub fallback:Option<Id>,pub sequence:u64,pub affected_tasks:Vec<Id>,
+}
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct AttemptRecord {
+    pub task:Id,pub generation:u64,pub agent:Id,pub incarnation:u64,pub class:Id,
+    pub started_ms:u64,pub ended_ms:Option<u64>,pub outcome:Option<String>,
+    pub measured_ms:Option<u64>,
+}
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct LearningCost {
+    pub plan:Id,pub evaluated:u64,pub training_evaluations:u64,pub holdout_evaluations:u64,pub accepted:bool,
+}
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct OperatorContract {
     pub id:Id, pub version:u64, pub behavior:Operator,
     pub input:Shape, pub output:Shape, pub program:Expr,
@@ -237,11 +256,15 @@ pub struct World {
     pub knowledge:BTreeMap<Id,Knowledge>,pub run_costs:BTreeMap<Id,RunCost>,pub policy:SchedulingPolicy,
     pub goal_versions:BTreeMap<Id,Vec<Goal>>,pub task_versions:BTreeMap<Id,Vec<TaskSpec>>,
     pub effects:BTreeMap<Id,Effect>,
+    #[serde(default)] pub delivery:BTreeMap<Id,Delivery>,
+    #[serde(default)] pub rollback_history:BTreeMap<Id,Rollback>,
+    #[serde(default)] pub attempt_history:BTreeMap<Id,AttemptRecord>,
+    #[serde(default)] pub learning_costs:BTreeMap<Id,LearningCost>,
     pub legacy_import:Option<super::migration::LegacyArchive>,
 }
 impl Default for World {
     fn default()->Self {
-        Self{clock_ms:0,slots:4,sequence:0,goals:BTreeMap::new(),tasks:BTreeMap::new(),agents:BTreeMap::new(),contexts:BTreeMap::new(),operators:BTreeMap::new(),classes:BTreeMap::new(),artifacts:BTreeMap::new(),evidence:BTreeMap::new(),blobs:BTreeMap::new(),checkpoints:BTreeMap::new(),messages:BTreeMap::new(),capabilities:BTreeMap::new(),metrics:Metrics::default(),learning_plans:BTreeMap::new(),learning_attempts:BTreeMap::new(),knowledge:BTreeMap::new(),run_costs:BTreeMap::new(),policy:SchedulingPolicy::default(),goal_versions:BTreeMap::new(),task_versions:BTreeMap::new(),effects:BTreeMap::new(),legacy_import:None}
+        Self{clock_ms:0,slots:4,sequence:0,goals:BTreeMap::new(),tasks:BTreeMap::new(),agents:BTreeMap::new(),contexts:BTreeMap::new(),operators:BTreeMap::new(),classes:BTreeMap::new(),artifacts:BTreeMap::new(),evidence:BTreeMap::new(),blobs:BTreeMap::new(),checkpoints:BTreeMap::new(),messages:BTreeMap::new(),capabilities:BTreeMap::new(),metrics:Metrics::default(),learning_plans:BTreeMap::new(),learning_attempts:BTreeMap::new(),knowledge:BTreeMap::new(),run_costs:BTreeMap::new(),policy:SchedulingPolicy::default(),goal_versions:BTreeMap::new(),task_versions:BTreeMap::new(),effects:BTreeMap::new(),delivery:BTreeMap::new(),rollback_history:BTreeMap::new(),attempt_history:BTreeMap::new(),learning_costs:BTreeMap::new(),legacy_import:None}
     }
 }
 pub fn version_key(name:&str,version:u64)->Result<Id>{

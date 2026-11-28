@@ -21,6 +21,20 @@ fn kernel_cli(args:&[String])->Result<(),String>{
         "collect"=>serde_json::json!({"objects_removed":store.collect_garbage()?}),
         "population"=>store.inspect()?.audit_population(),
         "project-host"=>serde_json::json!({"path":store.project_host_agent(required(args,3,"agent ID")?)?}),
+        "ingress"=>{
+            let authority=persistent_intelligence_runtime::kernel::authority::Authority::load(Path::new(required(args,3,"trusted host authority file")?))?;
+            let limit=required(args,4,"request limit")?.parse::<u64>().map_err(|e|e.to_string())?;
+            persistent_intelligence_runtime::kernel::ingress::serve(&store,&authority,io::stdin().lock(),io::stdout().lock(),limit)?;return Ok(());
+        }
+        "local-effect"=>{
+            let effect=required(args,3,"effect ID")?;
+            let publish=match required(args,4,"publish or reconcile")?{"publish"=>true,"reconcile"=>false,_=>return Err("invalid effect mode".into())};
+            store.local_effect(effect,publish)?
+        }
+        "private-evaluate"=>{
+            let private:persistent_intelligence_runtime::kernel::custody::PrivateCohort=read_json(required(args,4,"private cohort file")?)?;
+            serde_json::to_value(private.evaluate(&store.inspect()?,required(args,3,"candidate ID")?)?).map_err(|e|e.to_string())?
+        }
         "apply-signed"=>{
             let authority=persistent_intelligence_runtime::kernel::authority::Authority::load(Path::new(required(args,3,"host authority file")?))?;
             let signed=read_json(required(args,4,"signed request file or -")?)?;

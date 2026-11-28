@@ -1428,5 +1428,20 @@
     ],
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "verified_credit": 0
+  },
+  "latest_build_qualification": {
+    "source_revision": "a9cecb2695cacd9fe514b877a48b5f325cae46e0",
+    "build": "PASS",
+    "warnings": 11,
+    "tests": "UNCONFIRMED",
+    "evidence": "BUILD-REPAIR-R001.json",
+    "verified_credit": 0
+  },
+  "owner_test_policy": {
+    "max_concurrent_inference_lanes": 10,
+    "free_only": true,
+    "paid_fallback": false,
+    "canonical_branch": "main",
+    "worker_proposals_only": true
   }
 }

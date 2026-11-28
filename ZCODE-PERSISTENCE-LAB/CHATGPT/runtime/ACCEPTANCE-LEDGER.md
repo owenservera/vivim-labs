@@ -180,3 +180,6 @@ Transport selection now committed with claim; mailbox publication distinct from 
 Executable bridge source: explicit pinned executable, one-shot job intent, bounded direct-child execution and receipt-only reconciliation. No provider invocation or qualification.
 
 Executable cycle source: bounded explicit host command, fair visit cursor, independent publication/launch accounting, no automatic uncertain resend and protected directory separation checks. No live provider execution or score change.
+
+## Build and repair R001
+Windows cargo build --locked passed at a9cecb2695cacd9fe514b877a48b5f325cae46e0 (11 warnings; 2m26s). First build had 10 diagnostics from two corrected root causes. Full test command accepted; receipt reads subsequently denied/uncertain. Eight bounded free-model proposal lanes launched, including native quota failures and one observed successful OpenRouter exit. See BUILD-REPAIR-R001.json. Build success is not gate acceptance; no new verified points.

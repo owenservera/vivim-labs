@@ -1,0 +1,104 @@
+{
+  "schema": "vivim.runtime.build-and-repair/1",
+  "source_revision": "a9cecb2695cacd9fe514b877a48b5f325cae46e0",
+  "tooling_reference": {
+    "repository": "owenservera/vivim-product",
+    "revision": "ff8f3258a717d442d2e49093a3d207678031755f",
+    "files": [
+      "CODING-HARNESSES/OPENCODE/CAMPAIGN-R007/run-lane.ps1",
+      "CODING-HARNESSES/OPENCODE/CAMPAIGN-R009/run-lane.ps1",
+      "CODING-HARNESSES/SHARED/MODEL-REGISTRY/DAILY-DISCOVERY-AND-CREDENTIALS-R004.md",
+      "HARNESS/AGENTS.md"
+    ]
+  },
+  "owner_policy": {
+    "max_concurrent_inference_lanes": 10,
+    "free_only": true,
+    "paid_fallback": false,
+    "canonical_branch": "main",
+    "worker_proposals_only": true
+  },
+  "baseline": {
+    "revision": "a2ca84b3acc2848a161aa279ebbf8137c4385206",
+    "session": "ctl-467fc0e6f91335fd",
+    "compiler_errors": 10,
+    "root_causes": [
+      "Wire serde internal tag conflict",
+      "owned transition branch unit versus Value"
+    ]
+  },
+  "build": {
+    "session": "ctl-e696e05b5f0246fd",
+    "cargo_report": "Finished dev profile in 2m 26s",
+    "exit_report": 0,
+    "warnings": 11,
+    "local_log": "%TEMP%/vivim-r004-build-a9cecb26.log",
+    "source_revision": "a9cecb2695cacd9fe514b877a48b5f325cae46e0",
+    "compiled": true
+  },
+  "test": {
+    "session": "ctl-868034b89be3dac4",
+    "command": "cargo test --locked --no-fail-fast -- --test-threads=4",
+    "state": "launch accepted; later receipt reads denied or uncertain",
+    "local_log": "%TEMP%/vivim-r004-test-a9cecb26.log",
+    "pass_count": null,
+    "fail_count": null
+  },
+  "lanes": [
+    {
+      "id": "wire",
+      "model": "opencode/nemotron-3.5-super-vl-free",
+      "session": "ctl-8223613cb4d273e6",
+      "state": "exit_1_free_limit_429",
+      "output_bytes": 779
+    },
+    {
+      "id": "transition",
+      "model": "openrouter/nvidia/nemotron-3.5-super-vl:free",
+      "session": "ctl-0879e3ba4fdf6eb1",
+      "state": "timed_out"
+    },
+    {
+      "id": "storage",
+      "model": "opencode/nemotron-3.5-lightning-free",
+      "session": "ctl-c41c7f353baacc20",
+      "state": "exit_1_free_limit_429",
+      "output_bytes": 779
+    },
+    {
+      "id": "derived",
+      "model": "opencode/deepseek-v4.1-flash-free",
+      "session": "ctl-247581e5149f3610",
+      "state": "exit_1_free_limit_429",
+      "output_bytes": 779
+    },
+    {
+      "id": "routing-fence",
+      "model": "openrouter/nvidia/nemotron-3.5-lightning:free",
+      "session": "ctl-0e3f04a4ff4c92aa",
+      "state": "launch accepted; terminal status unread"
+    },
+    {
+      "id": "bridge-recovery",
+      "model": "openrouter/nvidia/nemotron-3.5-super-vl:free",
+      "session": "ctl-4e3b846f98cc7be8",
+      "state": "launch accepted; terminal status unread"
+    },
+    {
+      "id": "test-fixtures",
+      "model": "openrouter/nvidia/nemotron-3.5-lightning:free",
+      "session": "ctl-aed20257eb1a68ac",
+      "state": "launch accepted; terminal status unread"
+    },
+    {
+      "id": "assimilation-tests",
+      "model": "openrouter/nvidia/nemotron-3.5-super-vl:free",
+      "session": "ctl-97df22e7ea1a3e46",
+      "state": "exit_0",
+      "output_bytes": 1775,
+      "proposals": "unread"
+    }
+  ],
+  "accounting": "No paid model selected; actual costs unknown without settled usage receipts. Direct NVIDIA NIM free entitlement not qualified; OpenRouter NVIDIA models are not direct NIM.",
+  "next": "Reconcile existing sessions and test log before any new run, qualify exact failures, integrate minimal fixes under compare-and-swap, rerun tests."
+}

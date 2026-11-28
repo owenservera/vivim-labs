@@ -1,9 +1,9 @@
 {
   "schema": "vivim.dogfood.cli-recipe/1",
-  "revision": "R006.3",
+  "revision": "R008",
   "scope": "EXPERIMENTS_ONLY",
   "seed_commit": "3b1d7e173071710e6795c09427162292f774030e",
-  "status": "CONTRACT_CONFIGURED_LIVE_WIRING_PENDING",
+  "status": "HOLD_GEMINI_ONLY_NO_VERIFIED_ROUTE",
   "branch": "main",
   "variables": {
     "run_id": "Unique externally generated opaque ID; never use a sibling experiment name in worker prompts.",
@@ -12,7 +12,7 @@
     "controller_dir": "Private controller directory, inaccessible to agent",
     "session_id": "Provider ID obtained from owned init event, never guessed",
     "prompt": "UTF-8 task prompt from controller; no evaluator data",
-    "model": "Explicit locally supported model selected and recorded before comparative run",
+    "model": "Exact Gemini slug selected by admission and verified in live catalogue.",
     "settings_file": "Controller-generated provider settings file inside authorized provider profile; not tracked",
     "stdout_log": "Controller-private NDJSON path",
     "stderr_log": "Controller-private diagnostic path",
@@ -319,5 +319,13 @@
     "--dangerously-bypass-hook-trust",
     "--ignore-rules",
     "global install/uninstall or upgrade"
-  ]
+  ],
+  "model_budget": {
+    "policy": "MODEL-BUDGET-POLICY.json",
+    "selector": "MODEL-BUDGET.mjs",
+    "required_before_every_inference": true,
+    "mode": "Gemini only; subscription only; no paid overflow",
+    "admission": "Blocked pending verified authorized Gemini route. Preserve assignment.",
+    "note": "Selector does not fetch quota or reserve by itself. No default model or silent fallback."
+  }
 }

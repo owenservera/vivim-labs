@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-source-checkpoint-003-routing-R002",
+  "revision": "R004-source-checkpoint-003-routing-R003",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -1024,8 +1024,8 @@
     }
   },
   "routing_workstream": {
-    "revision": "R002",
-    "source_pin": "0f05cb749b5b42986988cbba32d1af1f3b97b740",
+    "revision": "R003",
+    "source_pin": "1b3af7066b4b5cb2a10408031fb0163e379ffb8f",
     "verification": "NOT_COMPILED_NOT_TESTED",
     "related_original_gates": [
       "E12",
@@ -1055,12 +1055,14 @@
       {
         "id": "R04",
         "criterion": "Frontier pacing, emergency reserve, per-goal cap and priority allocation",
-        "status": "SOURCE_IMPLEMENTED_UNVERIFIED"
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "remaining": "Frontier pacing, forecast protection and joint competing-demand assignment under shared reservation constraints; unqualified."
       },
       {
         "id": "R05",
         "criterion": "Quality/context/deadline/cost-aware fallback ranking",
-        "status": "SOURCE_IMPLEMENTED_UNVERIFIED"
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "remaining": "Profile ranking plus optional bounded joint beam search, profile-specific revalidation and read-only shadow policy comparison; unqualified."
       },
       {
         "id": "R06",
@@ -1076,19 +1078,19 @@
         "id": "R08",
         "criterion": "Live provider observations, actual model/thinking receipt and adapter execution",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Scoped quota receipts, refresh plan, versioned adapter binding, actual identity and usage receipt protocol; no real provider adapter or live observation."
+        "remaining": "Versioned handoff/observations plus trusted backend interface and synthetic-only implementation. Live provider polling, real adapters and usage verification remain absent."
       },
       {
         "id": "R09",
         "criterion": "Autonomous provider dispatch/reconciliation and empirical budget optimization",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Automatic preparation in native supervisor, one-shot handoff, expiry and unknown reconciliation contracts, pending/empirical frontier forecast; live send/poll/reconciliation and empirical optimization not implemented."
+        "remaining": "Autonomous preparation, configurable joint allocation, bounded synthetic dispatch/reconciliation/verification and shadow comparison. Real-provider dispatch, automatic polling and empirically validated policy optimization remain outstanding."
       },
       {
         "id": "R10",
         "criterion": "Native quota, fallback, frontier and concurrency qualification",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Five source-only qualification fixtures authored; none compiled or executed."
+        "remaining": "Seven source-only fixtures across routing_r002.rs, routing_handoff.rs, routing_optimizer.rs and routing_synthetic.rs. None compiled or executed."
       }
     ]
   }

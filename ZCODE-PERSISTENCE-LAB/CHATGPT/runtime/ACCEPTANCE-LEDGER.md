@@ -86,3 +86,7 @@ See [MODEL-ROUTING-R001.md](MODEL-ROUTING-R001.md) and [routing.example.json](ro
 ## Supplemental model routing R002
 
 Source pin 0f05cb749b5b42986988cbba32d1af1f3b97b740. See [MODEL-ROUTING-R002.md](MODEL-ROUTING-R002.md). Seven implemented/unverified and three partial source; five authored but unexecuted qualification fixtures. Original 50-gate tracker and verified scores unchanged. No real provider adapter, calls, builds or tests.
+
+## Supplemental model routing R003
+
+Source pin 1b3af7066b4b5cb2a10408031fb0163e379ffb8f. [MODEL-ROUTING-R003.md](MODEL-ROUTING-R003.md). Seven source-implemented/unverified, three partial source, seven authored and unexecuted qualification fixtures. Bounded joint assignment, shadow comparison, and an explicitly synthetic-only backend/driver are integrated. Original 50-gate criteria, weights and verified scores unchanged; no live provider calls or native execution.

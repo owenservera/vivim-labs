@@ -1,0 +1,58 @@
+{
+  "schema": "vivim.dogfood.routing-experiments/1",
+  "revision": "R009",
+  "scope": "controller-only; do not copy into agent knowledge seeds",
+  "baseline": "MODEL-BUDGET-POLICY.json",
+  "lanes": {
+    "01": {
+      "id": "guarded_reference",
+      "gate": "fixed headroom; worst applicable window; explicit forecast",
+      "selection": "first eligible task-specific model in stable priority list",
+      "hypothesis": "Conservative predictable operation with low routing overhead."
+    },
+    "02": {
+      "id": "paced_allocation",
+      "gate": "fixed reserve plus proportional remaining-window envelope with 10% burst allowance",
+      "selection": "minimize predicted normalized quota consumption across both windows; stable task preference breaks ties",
+      "hypothesis": "Time-aware pacing prevents premature exhaustion and improves sustained yield."
+    },
+    "03": {
+      "id": "verification_cascade",
+      "gate": "fixed reserve plus bounded attempts and escalation only on verified failure",
+      "selection": "start with first eligible task-appropriate model; escalate one level after failed independent oracle; no downgrade on failed gate",
+      "hypothesis": "Cheap-first solving with verified escalation reduces consumption without reducing accepted quality."
+    },
+    "04": {
+      "id": "evidence_adaptive",
+      "gate": "fixed reserve plus conservative forecast; bounded exploration; unmeasured costs never free",
+      "selection": "maximize lower confidence bound of verified utility per worst-window predicted quota cost; deterministic bounded exploration of eligible alternatives",
+      "hypothesis": "Learn task-specific comparative efficiency over repeated workloads."
+    }
+  },
+  "constants": {
+    "burst_fraction": 0.1,
+    "max_attempts_per_task": 3,
+    "exploration_every": 10,
+    "min_samples": 3,
+    "confidence_z": 1.28
+  },
+  "common": [
+    "Gemini-only explicit model, authorized subscription route, no paid overflow",
+    "All applicable windows and fresh quota, global account reservation and owner-defined local ceilings",
+    "Deterministic native bypass for already solved work",
+    "Identical verification oracle, workload and telemetry; no policy may weaken common floor",
+    "Models share a quota group; do not treat models/lanes as separate pools"
+  ],
+  "evaluation": {
+    "phase1": "Offline same trace and identical task inputs, each simulated account starts from identical quota. Synthetic or historical traces cannot establish actual model quality.",
+    "phase2": "Live shared-account serialized paired runs; same model catalogue and workload, same hard caps, rotate policies across lanes/cohorts to separate knowledge seed, provider, and optimization effects.",
+    "metrics": [
+      "verified task value per observed quota percentage point, separately per window",
+      "accepted tasks and failed tasks, latency, retries, tokens, native reuse",
+      "time blocked, quota reserve violations, unused quota at reset",
+      "switching and context reconstruction overhead, exploration cost"
+    ],
+    "accounting": "Provider percentages may be rounded; zero observed delta is censored, not free. Attribute consumption only where no overlapping external usage and same window identity; otherwise mark ambiguous. Compare effective verified work, not model-reported completion."
+  },
+  "status": "POLICIES_CONFIGURED; live launch remains held until route, billing, isolation and atomic reservation qualified"
+}

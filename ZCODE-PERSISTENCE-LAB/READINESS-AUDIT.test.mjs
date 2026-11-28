@@ -34,6 +34,11 @@ for(const [provider,lane] of [['codex','01'],['agy','04']]){
   assert.equal((await runOne(x.args)).status,'WAITING_AUTHORIZATION');assert.equal(x.state.executions,0);
   x.state.failBoundary=false;
   assert.equal((await runOne({...x.args,forecast:{}})).status,'WAITING_BUDGET');assert.equal(x.state.executions,0);
+  if(provider==='agy'){
+   const withoutCarbon=Object.fromEntries(Object.entries(x.args.forecast).filter(([k])=>k!=='gemini-4-carbon-high'));
+   assert.equal((await runOne({...x.args,forecast:withoutCarbon})).status,'WAITING_BUDGET');
+   assert.equal(x.state.executions,0);
+  }
   let r=await runOne(x.args);assert.equal(r.status,'READY');assert.equal(r.controller.phase,'BUILD');if(provider==='agy')assert.equal(x.state.firstModel,'gemini-4-carbon-high');
   for(let i=0;i<9;i++){r=await runOne(x.args);assert.equal(r.status,'READY');}
   assert.equal(r.controller.phase,'QUALIFY');assert.equal(x.state.executions,10);

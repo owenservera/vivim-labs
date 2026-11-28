@@ -172,22 +172,33 @@ impl Index{
     /// Each old leaf is verified before changing it. Deleting its last entity
     /// drops the reference but never destroys historical immutable objects.
     fn patch_table<V:Serialize>(&self,mut refs:BTreeMap<String,String>,table:&super::shared_map::SharedMap<V>,keys:&BTreeSet<String>)->Result<Digest>{
+        // Group against the original prefix-free directory. All writes for
+        // one old page are applied together before a possible adaptive split.
+        let mut groups=BTreeMap::<String,Vec<&String>>::new();
         for key in keys{
-            let key_hash=digest(&Value::String(key.clone()));
-            let existing=(2..=64).step_by(2).find_map(|n|refs.get(&key_hash[..n]).map(|h|(key_hash[..n].to_owned(),h.clone())));
-            let (prefix,mut page)=if let Some((prefix,h))=existing{
-                let v=self.get(&h)?;
-                let m=v.as_object().ok_or("invalid tracked page")?.clone();
-                for k in m.keys(){ensure(digest(&Value::String(k.clone())).starts_with(&prefix),"tracked key in wrong bucket")?;}
-                (prefix,m)
+            let hash=digest(&Value::String(key.clone()));
+            let prefix=if let Some(p)=(2..=64).step_by(2).map(|n|&hash[..n]).find(|p|refs.contains_key(*p)){
+                p
             }else{
                 if !table.contains_key(key){continue;}
-                let prefix=(2..=64).step_by(2).map(|n|&key_hash[..n]).find(|p|!refs.keys().any(|k|k.starts_with(*p))).ok_or("no tracked partition available")?.to_owned();
-                (prefix,Map::new())
+                (2..=64).step_by(2).map(|n|&hash[..n])
+                    .find(|p|!refs.range((*p).to_owned()..).next().is_some_and(|(k,_)|k.starts_with(*p)))
+                    .ok_or("no tracked partition available")?
             };
-            if let Some(v)=table.get(key){page.insert(key.clone(),serde_json::to_value(v).map_err(err)?);}
-            else{page.remove(key);}
+            groups.entry(prefix.to_owned()).or_default().push(key);
+        }
+        for (prefix,keys) in groups{
             let old=refs.remove(&prefix);
+            let mut page=if let Some(h)=&old{
+                let v=self.get(h)?;
+                let m=v.as_object().ok_or("invalid tracked page")?.clone();
+                for k in m.keys(){ensure(digest(&Value::String(k.clone())).starts_with(&prefix),"tracked key in wrong bucket")?;}
+                m
+            }else{Map::new()};
+            for key in keys{
+                if let Some(v)=table.get(key){page.insert(key.clone(),serde_json::to_value(v).map_err(err)?);}
+                else{page.remove(key);}
+            }
             if !page.is_empty(){
                 let prior=old.map(|h|BTreeMap::from([(prefix.clone(),h)])).unwrap_or_default();
                 self.leaf(&prefix,page,&mut refs,&prior)?;
@@ -223,6 +234,9 @@ impl Index{
         let mut stripped;
         let mut state=if tracked{
             stripped=world.clone();
+            stripped.goals=Default::default();
+            stripped.tasks=Default::default();
+            stripped.agents=Default::default();
             stripped.blobs=Default::default();
             stripped.artifacts=Default::default();
             stripped.evidence=Default::default();
@@ -247,6 +261,9 @@ impl Index{
                     }}
                 }
                 match name{
+                    "goals"=>track!(goals,false),
+                    "tasks"=>track!(tasks,false),
+                    "agents"=>track!(agents,false),
                     "blobs"=>track!(blobs,false),
                     "artifacts"=>track!(artifacts,false),
                     "evidence"=>track!(evidence,false),
@@ -389,5 +406,37 @@ impl Index{
             }
             Self::sync_dir(&prefix.path())?;
         }Ok(removed)
+    }
+}
+
+#[cfg(test)]
+mod tracked_qualification{
+    use super::*;
+    use serde_json::json;
+    #[test]
+    fn grouped_tracked_write_matches_full_state_without_touching_unrelated_page(){
+        let path=std::env::temp_dir().join(format!("vivim-tracked-{}-{}",std::process::id(),SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos()));
+        let index=Index::open(&path).unwrap();let mut w=World::default();let mut groups=BTreeMap::<String,Vec<String>>::new();
+        for i in 0..2048{
+            let k=format!("key-{i}");let group=groups.entry(Index::bucket(&k,1)).or_default();group.push(k.clone());w.blobs.insert(k,json!(i));
+        }
+        let group=groups.values().find(|v|v.len()>=3).unwrap().clone();
+        let unrelated=groups.iter().find(|(_,v)|v[0]!=group[0]&&Index::bucket(&v[0],1)!=Index::bucket(&group[0],1)).unwrap().0.clone();
+        w.sequence=1;let r=Receipt{request_digest:digest(&json!(1)),response:json!(1),revision:1};
+        let first=index.write_incremental(1,&w,&BTreeMap::new(),"first",&r,None).unwrap();
+        let prior=index.manifest(&first).unwrap();
+        let old_refs=index.directory(&prior,"blobs").unwrap();
+        w=index.load_world(&first,1).unwrap();w.blobs.insert(group[0].clone(),json!("changed"));w.blobs.remove(&group[1]);w.sequence=2;
+        let r=Receipt{request_digest:digest(&json!(2)),response:json!(2),revision:2};
+        let tracked=index.write_tracked(2,&w,&BTreeMap::new(),"second",&r,Some(&first)).unwrap();
+        let full=index.write_incremental(2,&w,&BTreeMap::new(),"second",&r,Some(&first)).unwrap();
+        let (a,ar)=index.load(&tracked,2).unwrap();let (b,br)=index.load(&full,2).unwrap();
+        assert_eq!(serde_json::to_value(a).unwrap(),serde_json::to_value(b).unwrap());
+        assert_eq!(serde_json::to_value(ar).unwrap(),serde_json::to_value(br).unwrap());
+        let new_refs=index.directory(&index.manifest(&tracked).unwrap(),"blobs").unwrap();
+        assert_eq!(old_refs[&unrelated],new_refs[&unrelated]);
+        assert!(index.lookup(&tracked,2,"blobs",&group[1]).unwrap().is_none());
+        assert!(index.lookup(&first,1,"blobs",&group[1]).unwrap().is_some());
+        fs::remove_dir_all(path).unwrap();
     }
 }

@@ -254,8 +254,8 @@ pub struct Metrics {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct World {
     pub clock_ms:u64, pub slots:usize, pub sequence:u64,
-    pub goals:BTreeMap<Id,Goal>, pub tasks:BTreeMap<Id,Task>,
-    pub agents:BTreeMap<Id,Agent>, pub contexts:BTreeMap<Id,Context>,
+    pub goals:super::shared_map::SharedMap<Goal>, pub tasks:super::shared_map::SharedMap<Task>,
+    pub agents:super::shared_map::SharedMap<Agent>, pub contexts:BTreeMap<Id,Context>,
     pub operators:BTreeMap<Id,OperatorContract>, pub classes:BTreeMap<Id,Class>,
     pub artifacts:super::shared_map::SharedMap<Artifact>, pub evidence:super::shared_map::SharedMap<Evidence>,
     pub blobs:super::shared_map::SharedMap<Value>, pub checkpoints:BTreeMap<Id,Vec<Checkpoint>>,
@@ -289,6 +289,7 @@ pub struct World {
 impl World{
     /// Reset dirty keys only after a successfully committed index root.
     pub(crate) fn mark_history_clean(&mut self){
+        self.goals.mark_clean();self.tasks.mark_clean();self.agents.mark_clean();
         self.blobs.mark_clean();self.artifacts.mark_clean();self.evidence.mark_clean();
         self.attempt_history.mark_clean();self.run_costs.mark_clean();
         self.resource_receipts.mark_clean();self.host_costs.mark_clean();
@@ -296,7 +297,7 @@ impl World{
 }
 impl Default for World {
     fn default()->Self {
-        Self{clock_ms:0,slots:4,sequence:0,goals:BTreeMap::new(),tasks:BTreeMap::new(),agents:BTreeMap::new(),contexts:BTreeMap::new(),operators:BTreeMap::new(),classes:BTreeMap::new(),artifacts:super::shared_map::SharedMap::default(),evidence:super::shared_map::SharedMap::default(),blobs:super::shared_map::SharedMap::default(),checkpoints:BTreeMap::new(),messages:BTreeMap::new(),capabilities:BTreeMap::new(),metrics:Metrics::default(),learning_plans:BTreeMap::new(),learning_attempts:BTreeMap::new(),knowledge:BTreeMap::new(),run_costs:super::shared_map::SharedMap::default(),policy:SchedulingPolicy::default(),goal_versions:BTreeMap::new(),task_versions:BTreeMap::new(),effects:BTreeMap::new(),delivery:BTreeMap::new(),rollback_history:BTreeMap::new(),attempt_history:super::shared_map::SharedMap::default(),learning_costs:BTreeMap::new(),knowledge_rules:BTreeMap::new(),knowledge_publications:BTreeMap::new(),custody_families:BTreeSet::new(),cohorts:BTreeMap::new(),frozen_candidates:BTreeMap::new(),custody_receipts:BTreeMap::new(),router:super::routing::Router::default(),recipe_policies:BTreeMap::new(),recipes:BTreeMap::new(),recipe_scans:BTreeMap::new(),resource_receipts:super::shared_map::SharedMap::default(),recipe_repairs:BTreeMap::new(),host_costs:super::shared_map::SharedMap::default(),assimilation:super::assimilation::Registry::default(),reuse_economics:super::reuse_economics::Registry::default(),legacy_import:None}
+        Self{clock_ms:0,slots:4,sequence:0,goals:super::shared_map::SharedMap::default(),tasks:super::shared_map::SharedMap::default(),agents:super::shared_map::SharedMap::default(),contexts:BTreeMap::new(),operators:BTreeMap::new(),classes:BTreeMap::new(),artifacts:super::shared_map::SharedMap::default(),evidence:super::shared_map::SharedMap::default(),blobs:super::shared_map::SharedMap::default(),checkpoints:BTreeMap::new(),messages:BTreeMap::new(),capabilities:BTreeMap::new(),metrics:Metrics::default(),learning_plans:BTreeMap::new(),learning_attempts:BTreeMap::new(),knowledge:BTreeMap::new(),run_costs:super::shared_map::SharedMap::default(),policy:SchedulingPolicy::default(),goal_versions:BTreeMap::new(),task_versions:BTreeMap::new(),effects:BTreeMap::new(),delivery:BTreeMap::new(),rollback_history:BTreeMap::new(),attempt_history:super::shared_map::SharedMap::default(),learning_costs:BTreeMap::new(),knowledge_rules:BTreeMap::new(),knowledge_publications:BTreeMap::new(),custody_families:BTreeSet::new(),cohorts:BTreeMap::new(),frozen_candidates:BTreeMap::new(),custody_receipts:BTreeMap::new(),router:super::routing::Router::default(),recipe_policies:BTreeMap::new(),recipes:BTreeMap::new(),recipe_scans:BTreeMap::new(),resource_receipts:super::shared_map::SharedMap::default(),recipe_repairs:BTreeMap::new(),host_costs:super::shared_map::SharedMap::default(),assimilation:super::assimilation::Registry::default(),reuse_economics:super::reuse_economics::Registry::default(),legacy_import:None}
     }
 }
 pub fn version_key(name:&str,version:u64)->Result<Id>{

@@ -67,14 +67,21 @@ impl World {
         ensure(t.phase==TaskPhase::Running&&l.worker==who&&l.incarnation==n&&l.generation==generation&&self.clock_ms<l.deadline_ms,"stale or expired lease")?;Ok(t)
     }
     pub fn running(&self)->usize{self.tasks.values().filter(|t|t.phase==TaskPhase::Running).count()}
-    pub fn ready(&self)->Vec<Id>{
-        let mut v:Vec<_>=self.tasks.values().filter(|t|t.phase==TaskPhase::Pending&&t.attempts<t.spec.max_attempts
+    fn ready_keys(&self)->Vec<Id>{
+        let fenced:BTreeSet<_>=self.effects.values().filter(|e|matches!(e.phase,EffectPhase::Prepared|EffectPhase::Unknown|EffectPhase::Abandoned)).map(|e|e.task.as_str()).collect();
+        self.tasks.values().filter(|t|t.phase==TaskPhase::Pending&&t.attempts<t.spec.max_attempts
             &&self.goals.get(&t.spec.goal).is_some_and(|g|g.phase==GoalPhase::Open&&g.claims<g.claim_budget)
-            &&!self.has_uncertain_effect(&t.spec.id)&&!self.has_abandoned_effect(&t.spec.id)
-            &&t.spec.dependencies.iter().all(|d|self.tasks.get(d).is_some_and(|x|x.phase==TaskPhase::Verified))).collect();
-        let scores=self.schedule_scores();
-        v.sort_by_key(|t|(std::cmp::Reverse(scores.get(&t.spec.id).copied().unwrap_or(0)),t.spec.id.clone()));
-        v.into_iter().map(|t|t.spec.id.clone()).collect()
+            &&!fenced.contains(t.spec.id.as_str())
+            &&t.spec.dependencies.iter().all(|d|self.tasks.get(d).is_some_and(|x|x.phase==TaskPhase::Verified)))
+            .map(|t|t.spec.id.clone()).collect()
+    }
+    pub fn ready(&self)->Vec<Id>{
+        let mut v=self.ready_keys();
+        if v.len()>1{
+            let scores=self.schedule_scores();
+            v.sort_by_key(|t|(std::cmp::Reverse(scores.get(t).copied().unwrap_or(0)),t.clone()));
+        }
+        v
     }
     pub(crate) fn invalidate_attempt(&mut self,task:&str,reason:&str)->Result<()>{
         let worker=self.tasks.get(task).and_then(|t|t.lease.as_ref()).map(|l|l.worker.clone());
@@ -93,41 +100,56 @@ impl World {
         self.metrics.failures=self.metrics.failures.saturating_add(1);Ok(())
     }
     fn end_agent(&mut self,key:&str,reason:&str,archive:bool)->Result<()>{
+        let tasks:Vec<_>=self.tasks.values().filter(|t|t.phase==TaskPhase::Running&&t.lease.as_ref().is_some_and(|l|l.worker==key)).map(|t|t.spec.id.clone()).collect();
+        self.end_agent_indexed(key,reason,archive,&tasks)
+    }
+    fn end_agent_indexed(&mut self,key:&str,reason:&str,archive:bool,tasks:&[Id])->Result<()>{
         let a=self.agents.get_mut(key).ok_or("agent missing")?;
         if let Some(i)=a.incarnations.last_mut(){if i.ended_ms.is_none(){i.ended_ms=Some(self.clock_ms);i.reason=Some(reason.into());}}
         a.phase=if archive{AgentPhase::Archived}else{AgentPhase::Recovering};
-        let tasks:Vec<_>=self.tasks.values().filter(|t|t.phase==TaskPhase::Running&&t.lease.as_ref().is_some_and(|l|l.worker==key)).map(|t|t.spec.id.clone()).collect();
-        for t in tasks{self.release(&t,reason)?;}Ok(())
+        for t in tasks{
+            // Static lease membership may contain stale entries after a prior
+            // release in this same settlement; recheck live lease authority.
+            if self.tasks.get(t).is_some_and(|t|t.phase==TaskPhase::Running&&t.lease.as_ref().is_some_and(|l|l.worker==key)){
+                self.release(t,reason)?;
+            }
+        }Ok(())
     }
     /// Fail-fast hierarchy policy. An automatically failed parent fences all
     /// still-open descendants, preserving verified artifacts and effect receipts.
     fn terminate_subtree(&mut self,root:&str,phase:GoalPhase,reason:&str)->Result<()>{
+        let topology=super::topology::Topology::build(self);
+        self.terminate_subtree_indexed(root,phase,reason,&topology)
+    }
+    fn terminate_subtree_indexed(&mut self,root:&str,phase:GoalPhase,reason:&str,topology:&super::topology::Topology)->Result<()>{
         let mut todo=vec![(root.to_owned(),phase)];
         while let Some((g,phase))=todo.pop(){
             if self.goals.get(&g).is_none_or(|x|x.phase!=GoalPhase::Open){continue;}
-            todo.extend(self.goals.values().filter(|x|x.parent.as_deref()==Some(g.as_str())&&x.phase==GoalPhase::Open).map(|x|(x.id.clone(),GoalPhase::Cancelled)));
+            todo.extend(topology.children(&g).iter().filter(|k|self.goals.get(*k).is_some_and(|x|x.phase==GoalPhase::Open)).map(|k|(k.clone(),GoalPhase::Cancelled)));
             self.goals.get_mut(&g).unwrap().phase=phase.clone();
-            let tasks:Vec<_>=self.tasks.values().filter(|t|t.spec.goal==g&&!matches!(t.phase,TaskPhase::Verified|TaskPhase::Blocked|TaskPhase::Exhausted|TaskPhase::Cancelled)).map(|t|t.spec.id.clone()).collect();
+            let tasks:Vec<_>=topology.tasks(&g).iter().filter(|k|self.tasks.get(*k).is_some_and(|t|!matches!(t.phase,TaskPhase::Verified|TaskPhase::Blocked|TaskPhase::Exhausted|TaskPhase::Cancelled))).cloned().collect();
             for key in tasks{
                 self.mark_prepared_unknown(&key,reason);self.end_attempt(&key,reason)?;
                 let t=self.tasks.get_mut(&key).unwrap();
                 t.phase=match phase{GoalPhase::Exhausted=>TaskPhase::Exhausted,GoalPhase::Blocked=>TaskPhase::Blocked,_=>TaskPhase::Cancelled};
                 t.lease=None;t.proposal=None;t.reason=Some(reason.into());
             }
-            let agents:Vec<_>=self.agents.values().filter(|a|a.goal==g&&a.phase!=AgentPhase::Archived).map(|a|a.id.clone()).collect();
-            for a in agents{self.end_agent(&a,reason,true)?;}
+            let agents:Vec<_>=topology.agents(&g).iter().filter(|k|self.agents.get(*k).is_some_and(|a|a.phase!=AgentPhase::Archived)).cloned().collect();
+            for a in agents{self.end_agent_indexed(&a,reason,true,topology.leases(&a))?;}
         }Ok(())
     }
     fn settle(&mut self)->Result<()>{
-        // Fixed point propagates terminal failures through task and goal dependencies.
+        // The graph's identities/edges do not change during settlement.
+        // Reuse ownership and reverse dependencies while checking live phases.
+        let topology=super::topology::Topology::build(self);
         loop {
             let mut changed=false;
-            let blocked:Vec<_>=self.tasks.values().filter(|t|t.phase==TaskPhase::Pending&&t.spec.dependencies.iter().any(|d|self.tasks.get(d).is_some_and(|p|matches!(p.phase,TaskPhase::Blocked|TaskPhase::Exhausted|TaskPhase::Cancelled)))).map(|t|t.spec.id.clone()).collect();
+            let blocked=topology.terminal_dependents(self);
             for key in blocked{let t=self.tasks.get_mut(&key).unwrap();t.phase=TaskPhase::Blocked;t.reason=Some("predecessor terminal".into());changed=true;}
             let mut outcomes=Vec::new();
             for g in self.goals.values().filter(|g|g.phase==GoalPhase::Open){
-                let tasks:Vec<_>=self.tasks.values().filter(|t|t.spec.goal==g.id).collect();
-                let children:Vec<_>=self.goals.values().filter(|x|x.parent.as_ref()==Some(&g.id)).collect();
+                let tasks:Vec<_>=topology.tasks(&g.id).iter().map(|k|&self.tasks[k]).collect();
+                let children:Vec<_>=topology.children(&g.id).iter().map(|k|&self.goals[k]).collect();
                 let active=tasks.iter().any(|t|matches!(t.phase,TaskPhase::Running|TaskPhase::Submitted|TaskPhase::Reconciling));
                 let failed=tasks.iter().any(|t|matches!(t.phase,TaskPhase::Exhausted|TaskPhase::Blocked|TaskPhase::Cancelled))||children.iter().any(|c|matches!(c.phase,GoalPhase::Exhausted|GoalPhase::Blocked|GoalPhase::Cancelled));
                 if failed&&!active{outcomes.push((g.id.clone(),GoalPhase::Blocked));continue;}
@@ -141,21 +163,27 @@ impl World {
             }
             for (key,phase) in outcomes{
                 if self.goals[&key].phase!=GoalPhase::Open{continue;}
-                if phase!=GoalPhase::Complete{self.terminate_subtree(&key,phase,"goal terminal")?;changed=true;continue;}
+                if phase!=GoalPhase::Complete{self.terminate_subtree_indexed(&key,phase,"goal terminal",&topology)?;changed=true;continue;}
                 self.goals.get_mut(&key).unwrap().phase=phase.clone();
-                for t in self.tasks.values_mut().filter(|t|t.spec.goal==key&&t.phase==TaskPhase::Pending){
-                    t.phase=if phase==GoalPhase::Exhausted{TaskPhase::Exhausted}else{TaskPhase::Blocked};
-                    t.reason=Some("goal terminal".into());
+                for task in topology.tasks(&key){
+                    if self.tasks[task].phase==TaskPhase::Pending{
+                        let t=self.tasks.get_mut(task).unwrap();
+                        t.phase=if phase==GoalPhase::Exhausted{TaskPhase::Exhausted}else{TaskPhase::Blocked};
+                        t.reason=Some("goal terminal".into());
+                    }
                 }
-                let agents:Vec<_>=self.agents.values().filter(|a|a.goal==key&&a.phase!=AgentPhase::Archived).map(|a|a.id.clone()).collect();
-                for a in agents{self.end_agent(&a,"goal terminal",true)?;}
+                let agents:Vec<_>=topology.agents(&key).iter().filter(|k|self.agents.get(*k).is_some_and(|a|a.phase!=AgentPhase::Archived)).cloned().collect();
+                for a in agents{self.end_agent_indexed(&a,"goal terminal",true,topology.leases(&a))?;}
                 changed=true;
             }
             if !changed{break;}
         }
-        let ready:BTreeSet<_>=self.ready().into_iter().collect();
-        for a in self.agents.values_mut().filter(|a|a.phase==AgentPhase::WaitingDependency){
-            if a.wait_task.as_ref().is_some_and(|t|ready.contains(t)||self.tasks.get(t).is_some_and(|x|matches!(x.phase,TaskPhase::Verified|TaskPhase::Blocked|TaskPhase::Exhausted|TaskPhase::Cancelled))){a.phase=AgentPhase::Dormant;a.wait_task=None;}
+        if self.agents.values().any(|a|a.phase==AgentPhase::WaitingDependency){
+            let ready:BTreeSet<_>=self.ready_keys().into_iter().collect();
+            let wake:Vec<_>=self.agents.iter().filter(|(_,a)|a.phase==AgentPhase::WaitingDependency
+                &&a.wait_task.as_ref().is_some_and(|t|ready.contains(t)||self.tasks.get(t).is_some_and(|x|matches!(x.phase,TaskPhase::Verified|TaskPhase::Blocked|TaskPhase::Exhausted|TaskPhase::Cancelled))))
+                .map(|(key,_)|key.clone()).collect();
+            for key in wake{let a=self.agents.get_mut(&key).unwrap();a.phase=AgentPhase::Dormant;a.wait_task=None;}
         }
         Ok(())
     }

@@ -678,18 +678,19 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "39154083fe57d6889b25152682b8b639f47a367c",
+        "source_pin": "c4a070eb824d848ee7f5b13757691b9e5a2872fe",
         "files": [
           "src/kernel/index.rs",
           "src/kernel/persistence.rs",
           "tests/closure_integrity.rs",
           "src/kernel/transition.rs",
           "src/kernel/shared_map.rs",
-          "src/main.rs"
+          "src/main.rs",
+          "src/kernel/topology.rs"
         ],
-        "remaining": "Schema-4 tracked history page updates, lazy receipts and opt-in bounded resident-state controller with external-head fencing, strict audit fallback and disposable owned transitions authored. Remaining world tables and reconciliation materialize; per-key RAM structure, retention budget and empirical qualification remain.",
+        "remaining": "Ten tracked world tables including active goals/tasks/agents, grouped adaptive page updates, bounded resident cache, derived reverse dependency and ownership graph used by settlement, and bounded impact preview authored. Remaining world registries serialize fully, map mutation can copy a shared RAM map, topology rebuilt at settlement, archive capacity and empirical qualification remain.",
         "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
-        "checkpoint": "RESIDENT-WORLD-001"
+        "checkpoint": "DEPENDENCY-INDEX-001"
       }
     },
     {
@@ -1392,7 +1393,8 @@
     "baseline": "50d74edcbd5febe62b064923d5924f85baca3cea",
     "documents": [
       "TRACKED-WORLD-001.md",
-      "RESIDENT-WORLD-001.md"
+      "RESIDENT-WORLD-001.md",
+      "DEPENDENCY-INDEX-001.md"
     ],
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "verified_credit": 0

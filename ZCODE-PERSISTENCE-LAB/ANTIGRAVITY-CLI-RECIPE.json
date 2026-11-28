@@ -1,6 +1,6 @@
 {
   "schema": "vivim.dogfood.cli-recipe/1",
-  "revision": "R006.2",
+  "revision": "R006.3",
   "scope": "EXPERIMENTS_ONLY",
   "seed_commit": "3b1d7e173071710e6795c09427162292f774030e",
   "status": "CONTRACT_CONFIGURED_LIVE_WIRING_PENDING",
@@ -15,7 +15,9 @@
     "model": "Explicit locally supported model selected and recorded before comparative run",
     "settings_file": "Controller-generated provider settings file inside authorized provider profile; not tracked",
     "stdout_log": "Controller-private NDJSON path",
-    "stderr_log": "Controller-private diagnostic path"
+    "stderr_log": "Controller-private diagnostic path",
+    "lane_profile": "Absolute provider profile path inside the dedicated OS account/VM; cannot reuse the shared user profile.",
+    "agy_exe": "Resolve LOCALAPPDATA in lane account to installed agy/bin/agy.exe; record resolved path and SHA256."
   },
   "assignment_policy": {
     "knowledge_levels_balanced": true,

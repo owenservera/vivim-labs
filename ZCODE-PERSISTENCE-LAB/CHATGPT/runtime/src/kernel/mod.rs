@@ -15,6 +15,8 @@ pub mod authority;
 pub mod lifecycle;
 pub mod projection;
 pub mod knowledge;
+pub mod service;
+pub mod custody;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

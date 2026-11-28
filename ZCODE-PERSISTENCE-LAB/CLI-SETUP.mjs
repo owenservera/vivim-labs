@@ -147,6 +147,5 @@ async function smokeSingle(id){
 }
 const action=process.argv[2];
 if(action==='prepare')prepare();
-else if(action==='smoke')await smoke();
-else if(action==='smoke-single')await smokeSingle(process.argv[3]);
+else if(action==='smoke'||action==='smoke-single')fail('R008: historical smoke launcher disabled; Gemini-only budget admission and reservation required before inference');
 else fail('usage: node CLI-SETUP.mjs prepare|smoke|smoke-single <lane>; no campaign command is provided');

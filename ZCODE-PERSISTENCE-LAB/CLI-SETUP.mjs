@@ -16,7 +16,7 @@ const mkdir=p=>fs.mkdirSync(p,{recursive:true});
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const utc=()=>new Date().toISOString();
 const fail=m=>{throw new Error(m)};
-const git=(args)=>{const p=spawnSync('git',['-C',lab,...args],{encoding:null,maxBuffer:32*1024*1024,windowsHide:true});if(p.status!==0)fail('git '+args[0]+' failed: '+p.stderr);return p.stdout;};
+const git=(args)=>{const p=spawnSync('git',['-C',path.dirname(lab),...args],{encoding:null,maxBuffer:32*1024*1024,windowsHide:true});if(p.status!==0)fail('git '+args[0]+' failed: '+p.stderr);return p.stdout;};
 const local=process.env.LOCALAPPDATA||os.tmpdir();
 const base=path.join(local,'VIVIM','CLI-Dogfood-Setup');
 function newRoot(kind){mkdir(base);return fs.mkdtempSync(path.join(base,kind+'-'));}

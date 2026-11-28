@@ -220,7 +220,11 @@ impl KernelStore{
         id(command.id())?;
         let request_digest=checksum(&command)?;
         if let Some(receipt)=loaded.receipts.get(command.id()){
-            ensure(receipt.request_digest==request_digest,"request ID conflict")?;return Ok(receipt.response.clone())
+            ensure(receipt.request_digest==request_digest,"request ID conflict")?;
+            if let Transaction::Command{request}= &command{
+                if let Action::ClaimHandoff{handoff}=&request.action{return Ok(json!({"handoff_id":handoff,"replayed":true,"send_authority":"none_reconcile_only"}));}
+            }
+            return Ok(receipt.response.clone())
         }
         let response=command.run(&mut loaded.world)?;
         let rev=loaded.head.revision.checked_add(1).ok_or("revision overflow")?;

@@ -12,7 +12,7 @@ fn default_true()->bool{true}
 #[serde(tag="kind",rename_all="snake_case")]
 pub enum Window {Fixed{period_ms:u64,anchor_ms:u64},Rolling{period_ms:u64},Lifetime}
 impl Window {
-    fn bounds(&self,now:u64)->Result<(u64,Option<u64>)>{
+    pub(crate) fn bounds(&self,now:u64)->Result<(u64,Option<u64>)>{
         match *self{
             Self::Lifetime=>Ok((0,None)),
             Self::Rolling{period_ms}=>{ensure(period_ms>0,"invalid rolling period")?;Ok((now.saturating_sub(period_ms-1),None))}
@@ -128,6 +128,8 @@ pub struct Router{
     pub reservations:BTreeMap<Id,Reservation>,pub observations:BTreeMap<Id,Observation>,
     pub performance:BTreeMap<Id,BTreeMap<Id,Performance>>,pub cooldowns:BTreeMap<Id,u64>,
     pub provider_cooldowns:BTreeMap<Id,u64>,pub decisions:BTreeMap<Id,Recommendation>,
+    #[serde(default)] pub planning:super::routing_planning::Planning,
+    #[serde(default)] pub adapters:super::routing_adapter::AdapterState,
 }
 fn active(r:&Reservation)->bool{matches!(r.status,Status::Reserved|Status::Dispatched|Status::Unknown)}
 fn bps(v:u64,b:u16)->u64{(u128::from(v)*u128::from(b)/10_000) as u64}
@@ -295,13 +297,13 @@ impl Router{
             if q<d.minimum_success_bps{excluded.insert(key.clone(),"quality floor".into());continue;}
             let uplift=q.saturating_sub(ordinary);
             let gate=(||->Result<()>{
-                for (pool,charge) in &h{self.frontier_check(&c.pools[pool],d,*charge,uplift)?;}Ok(())
+                for (pool,charge) in &h{self.frontier_check(&c.pools[pool],d,*charge,uplift)?;self.forecast_gate(d,pool,*charge)?;}Ok(())
             })();
             if let Err(e)=gate{excluded.insert(key.clone(),e);continue;}
-            let mut scarcity=0i128;
+            let mut scarcity=0i128;let mut opportunity=0i128;
             for (pool,charge) in &h{
                 let avail=self.available(pool)?.max(1);
-                scarcity+=i128::from(*charge)*10_000/i128::from(avail);
+                scarcity+=i128::from(*charge)*10_000/i128::from(avail);opportunity+=self.opportunity_penalty(d,pool,*charge)?;
             }
             let price=p.tariff.charge(&usage_for(p))?;
             let diversity=if history.iter().any(|r|r.profile.provider==p.provider){0}else{c.policy.diversity_bonus};
@@ -309,7 +311,7 @@ impl Router{
             // Price is only comparable within a common currency. The configured
             // pool scarcity is the cross-currency signal; price weight is optional.
             let score=value*i128::from(c.policy.quality_weight)/1000-i128::from(l)*i128::from(c.policy.latency_weight)
-                -scarcity*i128::from(c.policy.scarcity_weight)-i128::from(price)*i128::from(c.policy.price_weight)+i128::from(diversity);
+                -scarcity*i128::from(c.policy.scarcity_weight)-i128::from(price)*i128::from(c.policy.price_weight)+i128::from(diversity)-opportunity;
             eligible.push(Decision{profile:key.clone(),expected_success_bps:q,expected_latency_ms:l,holds:h,score,uplift_bps:uplift});
         }
         eligible.sort_by(|a,b|b.score.cmp(&a.score).then_with(||a.profile.cmp(&b.profile)));
@@ -334,7 +336,7 @@ impl Router{
         let c=self.config()?;
         let p=c.profiles.get(&r.profile.id).ok_or("profile removed")?;
         ensure(p.enabled&&c.policy.version==r.policy_version,"reservation policy changed; release and reroute")?;
-        ensure(self.cooldowns.get(&p.id).copied().unwrap_or(0)<=self.clock_ms&&self.provider_cooldowns.get(&p.account).copied().unwrap_or(0)<=self.clock_ms,"profile or account cooling down")?;
+        ensure(self.cooldowns.get(&p.id).copied().unwrap_or(0)<=self.clock_ms&&self.provider_cooldowns.get(&format!("{}:{}",p.provider,p.account)).copied().unwrap_or(0)<=self.clock_ms,"profile or account cooling down")?;
         for pool in r.holds.keys(){
             let (spent,held)=self.totals(&c.pools[pool],None)?;
             if matches!(c.pools[pool].window,Window::Fixed{..}){ensure(c.pools[pool].window.bounds(r.created_ms)?.0==c.pools[pool].window.bounds(self.clock_ms)?.0,"quota reset; release and reroute")?;}
@@ -379,6 +381,12 @@ impl Router{
         if outcome!=Outcome::Completed{p.failures=p.failures.saturating_add(1);}
         Ok(json!({"settled":key,"overrun_pools":overrun}))
     }
+    pub fn reject_unusable_output(&mut self,key:&str)->Result<()>{
+        let r=self.reservations.get_mut(key).ok_or("reservation missing")?;
+        ensure(r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none(),"not a completed unverified result")?;
+        r.outcome=Some(Outcome::Rejected);
+        let p=self.performance.entry(r.profile.id.clone()).or_default().entry(r.family.clone()).or_default();p.failures=p.failures.saturating_add(1);Ok(())
+    }
     pub fn record_verified(&mut self,key:&str,accepted:bool,evidence:Id)->Result<()>{
         let r=self.reservations.get_mut(key).ok_or("reservation missing")?;
         ensure(r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none(),"not eligible for verified feedback")?;
@@ -402,7 +410,7 @@ impl Router{
         let c=self.config()?;let mut pools=BTreeMap::new();
         for (key,p) in &c.pools{
             let (spent,held)=self.totals(p,None)?;let (start,end)=p.window.bounds(self.clock_ms)?;
-            pools.insert(key,json!({"unit":p.unit,"currency":p.currency,"limit":p.limit,"spent":spent,"reserved_or_unknown":held,"available":self.available(key)?,"window_start_ms":start,"reset_ms":end,"observed":self.observations.get(key),"frontier":p.frontier}));
+            pools.insert(key,json!({"unit":p.unit,"currency":p.currency,"limit":p.limit,"spent":spent,"reserved_or_unknown":held,"available":self.available(key)?,"window_start_ms":start,"reset_ms":end,"observed":self.observations.get(key),"frontier":p.frontier,"forecast_protected":self.forecast_protection(key)?}));
         }
         Ok(json!({"clock_ms":self.clock_ms,"policy_version":c.policy.version,"pools":pools}))
     }

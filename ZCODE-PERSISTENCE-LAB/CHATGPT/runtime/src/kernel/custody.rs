@@ -113,6 +113,7 @@ impl World{
         ensure(!self.custody_receipts.contains_key(&c.id)&&verdict.evaluations==c.input_fingerprints.len() as u64,"cohort already consumed or incomplete evaluation")?;
         ensure(self.class_fingerprint(&f.capability.class)?==f.class_digest,"frozen class changed")?;
         let accepted=verdict.accepted;
+        if let Some(cost)=self.learning_costs.get_mut(&f.id){cost.holdout_evaluations=verdict.evaluations;cost.accepted=accepted;}
         self.custody_receipts.insert(c.id.clone(),CustodyReceipt{verifier:verifier.into(),verdict,sequence:self.sequence.checked_add(1).ok_or("sequence overflow")?});
         Ok(json!({"cohort":c.id,"accepted":accepted}))
     }

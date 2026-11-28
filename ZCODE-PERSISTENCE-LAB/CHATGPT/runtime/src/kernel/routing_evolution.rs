@@ -101,7 +101,7 @@ impl Router{
     }
     pub fn trial_auto_action(&self)->Option<super::transition::Action>{
         let t=self.trial()?;if !t.spec.auto_advance{return None;}
-        if t.phase==Phase::Between{return Some(super::transition::Action::StartRoutingCandidate);}
+        if t.phase==Phase::Between{return if self.candidate_capacity_ready(t).unwrap_or(false){Some(super::transition::Action::StartRoutingCandidate)}else{None};}
         let a=t.arm.as_ref()?;
         if self.clock_ms>=a.end_ms&&a.reservation_ids.iter().all(|k|self.reservations.get(k).is_some_and(|r|!outstanding(r))){Some(super::transition::Action::CloseRoutingArm)}else{None}
     }
@@ -132,7 +132,7 @@ impl Router{
         for key in &a.reservation_ids{
             let r=self.reservations.get(key).ok_or("trial reservation missing")?;
             ensure(!outstanding(r),"unreconciled or unverified trial attempt")?;
-            ensure(a.demands.contains(&r.demand),"trial membership corrupted")?;
+            ensure(a.demands.contains(&r.demand)&&r.batch_policy_version==Some(a.policy.version),"trial membership or policy attribution corrupted")?;
             if r.status==Status::Settled{
                 requests+=1;attempted.insert(r.demand.clone());
                 for (pool,charge) in &r.actual{let n=spent.entry(pool.clone()).or_default();*n=n.checked_add(*charge).ok_or("trial charge overflow")?;}
@@ -176,10 +176,16 @@ impl Router{
         }
         self.evolution.trials.insert(key.clone(),t.clone());Ok(json!({"trial":key,"phase":t.phase,"report":report,"recommendation":t.recommendation,"promoted":t.promoted}))
     }
+    fn candidate_capacity_ready(&self,t:&Trial)->Result<bool>{
+        let baseline=t.baseline_report.as_ref().ok_or("baseline missing")?;
+        let available=self.trial_availability()?;
+        Ok(t.spec.caps.iter().all(|(k,cap)|baseline.arm.initial_available.get(k).copied().unwrap_or(0).min(*cap)==available.get(k).copied().unwrap_or(0).min(*cap)))
+    }
     pub fn start_candidate_arm(&mut self)->Result<()>{
         let key=self.evolution.current.clone().ok_or("no active trial")?;
         let mut t=self.evolution.trials[&key].clone();
         ensure(t.phase==Phase::Between&&self.config_fingerprint()?==t.config_digest&&!self.reservations.values().any(outstanding),"candidate arm not ready")?;
+        ensure(self.candidate_capacity_ready(&t)?,"wait for comparable starting quota or abort trial")?;
         let end=self.clock_ms.checked_add(t.spec.duration_ms).ok_or("trial deadline overflow")?;
         self.batch_policy=t.spec.candidate.clone();t.phase=Phase::Candidate;
         t.arm=Some(Arm{start_ms:self.clock_ms,end_ms:end,policy:self.batch_policy.clone(),demands:t.spec.candidate_demands.clone(),reservation_ids:BTreeSet::new(),initial_available:self.trial_availability()?});
@@ -190,7 +196,15 @@ impl Router{
         let key=self.evolution.current.take().ok_or("no active trial")?;
         let t=self.evolution.trials.get_mut(&key).unwrap();
         self.batch_policy=t.baseline.clone();t.phase=Phase::Aborted;t.reason=Some(reason);
-        // Existing holds are deliberately not released. They still need receipts.
+        let ids=t.arm.as_ref().map(|a|a.reservation_ids.clone()).unwrap_or_default();
+        for key in ids{
+            match self.reservations.get(&key).map(|r|r.status.clone()){
+                Some(Status::Reserved)=>self.release_unsent(&key)?,
+                Some(Status::Dispatched)=>self.unknown(&key)?,
+                _=>{}
+            }
+        }
+        // Dispatched/unknown charges remain held pending reconciliation.
         Ok(())
     }
     pub fn promote_trial(&mut self,key:&str)->Result<()>{

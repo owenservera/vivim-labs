@@ -115,6 +115,7 @@ pub struct Reservation{
     pub verified:Option<bool>,pub evidence:Option<Id>,pub estimated_success_bps:u16,
     pub task_generation:Option<u64>,pub agent:Option<Id>,pub incarnation:Option<u64>,
     #[serde(default,skip_serializing_if="Option::is_none")] pub verified_ms:Option<u64>,
+    #[serde(default,skip_serializing_if="Option::is_none")] pub batch_policy_version:Option<u64>,
 }
 #[derive(Clone,Debug,Serialize,Deserialize,Default)]
 pub struct Performance{pub verified:u64,pub passed:u64,pub latency_sum_ms:u64,pub failures:u64}
@@ -342,7 +343,7 @@ impl Router{
         let c=self.config()?;let p=c.profiles[&choice.profile].clone();let d=self.demands[demand].clone();
         let version=c.policy.version;
         let ceiling=d.usage_for(&p);
-        self.reservations.insert(key.clone(),Reservation{id:key.clone(),demand:demand.into(),goal:d.goal,task:d.task,family:d.family,profile:p,policy_version:version,created_ms:self.clock_ms,started_ms:None,ended_ms:None,status:Status::Reserved,ceiling,holds:choice.holds,actual:BTreeMap::new(),outcome:None,receipt:None,latency_ms:None,verified:None,evidence:None,estimated_success_bps:choice.expected_success_bps,task_generation:None,agent:None,incarnation:None,verified_ms:None});
+        self.reservations.insert(key.clone(),Reservation{id:key.clone(),demand:demand.into(),goal:d.goal,task:d.task,family:d.family,profile:p,policy_version:version,created_ms:self.clock_ms,started_ms:None,ended_ms:None,status:Status::Reserved,ceiling,holds:choice.holds,actual:BTreeMap::new(),outcome:None,receipt:None,latency_ms:None,verified:None,evidence:None,estimated_success_bps:choice.expected_success_bps,task_generation:None,agent:None,incarnation:None,verified_ms:None,batch_policy_version:Some(self.batch_policy.version)});
         self.enroll_reservation(&key,demand)?;
         self.decisions.insert(key.clone(),rec.clone());
         Ok(json!({"reserved":true,"reservation":key,"decision":rec}))

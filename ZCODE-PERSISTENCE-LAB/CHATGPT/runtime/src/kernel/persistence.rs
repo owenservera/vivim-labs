@@ -40,12 +40,18 @@ impl<T:Serialize> Envelope<T>{
 pub enum Transaction {
     Command{request:Request},
     Assimilate{id:Id,name:Id,version:u64,discovery:Discovery},
+    ImportLegacy{id:Id,state:crate::State},
 }
 impl Transaction{
-    fn id(&self)->&str{match self{Self::Command{request}=>&request.id,Self::Assimilate{id,..}=>id}}
+    fn id(&self)->&str{match self{Self::Command{request}=>&request.id,Self::Assimilate{id,..}|Self::ImportLegacy{id,..}=>id}}
     fn run(&self,w:&mut World)->Result<Value>{
         match self{
             Self::Command{request}=>w.transition(&request.actor,request.action.clone()),
+            Self::ImportLegacy{state,..}=>{
+                ensure(w.sequence==0,"migration requires a fresh kernel store")?;
+                let (imported,report)=super::migration::import(state)?;*w=imported;
+                serde_json::to_value(report).map_err(error)
+            }
             Self::Assimilate{name,version,discovery,..}=>{
                 let key=w.assimilate(name,*version,discovery.clone())?;
                 w.sequence=w.sequence.checked_add(1).ok_or("sequence overflow")?;
@@ -129,6 +135,12 @@ impl KernelStore{
     pub fn apply(&self,request:Request)->Result<Value>{self.commit(Transaction::Command{request})}
     pub fn assimilate(&self,request_id:Id,name:Id,version:u64,discovery:Discovery)->Result<Value>{
         self.commit(Transaction::Assimilate{id:request_id,name,version,discovery})
+    }
+    pub fn import_r003(&self,request_id:Id,source:&Path)->Result<Value>{
+        ensure(source.is_dir(),"legacy source store missing")?;
+        ensure(source.canonicalize().map_err(error)?!=self.root.canonicalize().map_err(error)?,"source and destination must differ")?;
+        let old=crate::Store::open(source)?;let state=old.inspect()?;
+        self.commit(Transaction::ImportLegacy{id:request_id,state})
     }
     fn commit(&self,command:Transaction)->Result<Value>{
         id(command.id())?;

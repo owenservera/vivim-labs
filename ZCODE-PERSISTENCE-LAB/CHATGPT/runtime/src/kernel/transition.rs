@@ -7,7 +7,7 @@ use std::collections::BTreeSet;
 
 #[derive(Clone,Debug,Serialize,Deserialize,PartialEq,Eq)]
 #[serde(tag="kind",rename_all="snake_case")]
-pub enum Actor {Host,Worker{id:Id,incarnation:u64}}
+pub enum Actor {Host,Worker{id:Id,incarnation:u64},Verifier{id:Id}}
 #[derive(Clone,Debug,Serialize,Deserialize)]
 #[serde(tag="action",rename_all="snake_case")]
 pub enum Action {
@@ -22,8 +22,8 @@ pub enum Action {
     Checkpoint{task:Id,generation:u64,data:Value},
     Submit{task:Id,generation:u64,output:Value},Fail{task:Id,generation:u64,reason:String},
     Verify{task:Id},Tick{now_ms:u64},Send{id:Id,recipient:Id,body:Value},Ack{id:Id},
-    WaitMessage{agent:Id},WaitDependency{agent:Id,task:Id},Cancel{goal:Id},
-    AdmitCapability{capability:Capability},DisableCapability{capability:Id},
+    Receive{limit:usize,ttl_ms:u64},WaitMessage{agent:Id},WaitDependency{agent:Id,task:Id},Cancel{goal:Id},
+    AdmitCapability{capability:Capability},DisableCapability{capability:Id},RollbackCapability{capability:Id,reason:String},
     ConfigureLearning{plan:LearningPlan},LearnPlan{plan:Id},PublishKnowledge{knowledge:Knowledge},DisableKnowledge{knowledge:Id},
     RecordCost{task:Id,generation:u64,elapsed_ms:u64},SetPolicy{policy:SchedulingPolicy},
     PrepareEffect{task:Id,generation:u64,key:Id,payload:Value,oracle:Oracle},
@@ -63,7 +63,12 @@ impl World {
         v.sort_by_key(|t|(std::cmp::Reverse(scores.get(&t.spec.id).copied().unwrap_or(0)),t.spec.id.clone()));
         v.into_iter().map(|t|t.spec.id.clone()).collect()
     }
+    pub(crate) fn invalidate_attempt(&mut self,task:&str,reason:&str)->Result<()>{
+        let worker=self.tasks.get(task).and_then(|t|t.lease.as_ref()).map(|l|l.worker.clone());
+        if let Some(w)=worker{self.end_agent(&w,reason,false)}else{self.release(task,reason)}
+    }
     fn release(&mut self,task:&str,reason:&str)->Result<()>{
+        self.end_attempt(task,reason)?;
         self.mark_prepared_unknown(task,reason);
         let uncertain=self.has_uncertain_effect(task);
         let t=self.tasks.get_mut(task).ok_or("task missing")?;
@@ -256,6 +261,7 @@ impl World {
                 t.lease=Some(l.clone());t.input=Some(input.clone());t.phase=TaskPhase::Running;t.reason=None;t.assigned_class=Some(assigned_class);t.assigned_context=Some(assigned_context);
                 self.goals.get_mut(&t.spec.goal).unwrap().claims+=1;self.agents.get_mut(&agent).unwrap().phase=AgentPhase::Running;
                 self.metrics.claims=self.metrics.claims.saturating_add(1);
+                self.begin_attempt(&task)?;
                 return Ok(json!({"lease":l,"input":input,"checkpoint":self.checkpoint_value(&task)}));
             }
             Renew{task,generation,ttl_ms}=>{
@@ -280,7 +286,9 @@ impl World {
             }
             Fail{task,generation,reason}=>{let t=self.check_lease(actor,&task,generation)?;let worker=t.lease.as_ref().unwrap().worker.clone();ensure(!reason.trim().is_empty(),"reason required")?;self.end_agent(&worker,&reason,false)?;}
             Verify{task}=>{
-                actor.host()?;let t=self.tasks.get(&task).ok_or("task missing")?.clone();
+                let verifier=match actor{Actor::Host=>"host".to_string(),Actor::Verifier{id:who}=>{id(who)?;who.clone()},_=>return Err("independent verifier required".into())};
+                let t=self.tasks.get(&task).ok_or("task missing")?.clone();
+                ensure(t.lease.as_ref().is_none_or(|l|l.worker!=verifier),"submitting worker cannot verify")?;
                 ensure(!self.has_uncertain_effect(&task),"effect reconciliation required")?;
                 ensure(t.phase==TaskPhase::Submitted,"no submission")?;self.open_goal(&t.spec.goal)?;
                 let input=t.input.as_ref().ok_or("input missing")?;let candidate=t.proposal.clone().ok_or("proposal missing")?;
@@ -291,16 +299,18 @@ impl World {
                 let parents:Vec<_>=t.spec.dependencies.iter().map(|d|self.tasks[d].artifact.clone().ok_or("dependency artifact missing")).collect::<std::result::Result<_,_>>()?;
                 let evidence_id=format!("{}-{}",task,t.generation);ensure(!self.evidence.contains_key(&evidence_id),"evidence already exists")?;
                 let parent_evidence=parents.iter().map(|p|self.artifacts[p].evidence.clone()).collect();
-                self.evidence.insert(evidence_id.clone(),super::model::Evidence{id:evidence_id.clone(),task:task.clone(),generation:t.generation,oracle:t.spec.oracle.clone(),input:input_digest,candidate:candidate.clone(),accepted,verifier:"host".into(),parents:parent_evidence,clock_ms:self.clock_ms,class:t.assigned_class.clone(),context:t.assigned_context.clone()});
+                self.evidence.insert(evidence_id.clone(),super::model::Evidence{id:evidence_id.clone(),task:task.clone(),generation:t.generation,oracle:t.spec.oracle.clone(),input:input_digest,candidate:candidate.clone(),accepted,verifier,parents:parent_evidence,clock_ms:self.clock_ms,class:t.assigned_class.clone(),context:t.assigned_context.clone()});
                 if accepted{
                     ensure(!self.artifacts.contains_key(&task),"duplicate admission")?;
                     self.artifacts.insert(task.clone(),Artifact{id:task.clone(),version:t.version,payload:candidate,task:task.clone(),generation:t.generation,inputs:parents,evidence:evidence_id});
                     let x=self.tasks.get_mut(&task).unwrap();x.artifact=Some(task.clone());x.phase=TaskPhase::Verified;x.lease=None;x.proposal=None;
+                    self.end_attempt(&task,"verified")?;
                     self.metrics.accepted=self.metrics.accepted.saturating_add(1);
                     let native=self.run_costs.contains_key(&format!("{task}-{}",t.generation));
                     if native{self.metrics.deterministic_runs=self.metrics.deterministic_runs.saturating_add(1);}
                     if native&&t.spec.class.is_none()&&t.spec.family.is_some()&&t.assigned_class.is_some(){self.metrics.reused=self.metrics.reused.saturating_add(1);}
-                }else{self.metrics.rejected=self.metrics.rejected.saturating_add(1);self.metrics.verification_rejections=self.metrics.verification_rejections.saturating_add(1);self.release(&task,&rejection_reason)?;}
+                }else{self.metrics.rejected=self.metrics.rejected.saturating_add(1);self.metrics.verification_rejections=self.metrics.verification_rejections.saturating_add(1);self.release(&task,&rejection_reason)?;
+                    if rejection_reason=="oracle rejected" { self.reject_learned_class(t.assigned_class.as_deref())?; }}
                 return Ok(json!({"accepted":accepted,"task":task}));
             }
             Tick{now_ms}=>{
@@ -316,7 +326,8 @@ impl World {
                 else{self.messages.insert(key.clone(),Message{id:key,sender:sender.into(),recipient:recipient.clone(),body:payload,sequence:self.sequence+1,acknowledged:false});}
                 let r=self.agents.get_mut(&recipient).unwrap();if r.phase==AgentPhase::WaitingMessage{r.phase=AgentPhase::Dormant;}
             }
-            Ack{id:key}=>{let (who,_)=self.worker_identity(actor)?;let m=self.messages.get_mut(&key).ok_or("message missing")?;ensure(m.recipient==who,"wrong recipient")?;m.acknowledged=true;}
+            Receive{limit,ttl_ms}=>{let (who,n)=self.worker_identity(actor)?;return self.receive(who,n,limit,ttl_ms);}
+            Ack{id:key}=>{let (who,n)=self.worker_identity(actor)?;self.acknowledge(who,n,&key)?;}
             WaitMessage{agent}=>{
                 let (who,_)=self.worker_identity(actor)?;ensure(who==agent,"wrong worker")?;
                 let a=self.agents.get_mut(&agent).unwrap();ensure(a.phase!=AgentPhase::Running,"worker busy")?;
@@ -334,7 +345,7 @@ impl World {
                     todo.extend(self.goals.values().filter(|x|x.parent.as_ref()==Some(&g)&&x.phase==GoalPhase::Open).map(|x|x.id.clone()));
                     self.goals.get_mut(&g).unwrap().phase=GoalPhase::Cancelled;
                     let affected:Vec<_>=self.tasks.values().filter(|t|t.spec.goal==g).map(|t|t.spec.id.clone()).collect();
-                    for t in affected{self.mark_prepared_unknown(&t,"goal cancelled");}
+                    for t in affected{self.mark_prepared_unknown(&t,"goal cancelled");self.end_attempt(&t,"cancelled")?;}
                     for t in self.tasks.values_mut().filter(|t|t.spec.goal==g&&t.phase!=TaskPhase::Verified){t.phase=TaskPhase::Cancelled;t.lease=None;t.proposal=None;}
                     let agents:Vec<_>=self.agents.values().filter(|a|a.goal==g).map(|a|a.id.clone()).collect();
                     for a in agents{self.end_agent(&a,"cancelled",true)?;}
@@ -347,6 +358,7 @@ impl World {
                     for k in self.knowledge.values_mut().filter(|k|k.class.as_ref()==Some(&class)){k.enabled=false;}
                 }
             }
+            RollbackCapability{capability,reason}=>{actor.host()?;return Ok(json!(self.rollback_capability(&capability,&reason)?));}
             ConfigureLearning{plan}=>{actor.host()?;let k=self.configure_learning(plan)?;return Ok(json!({"plan":k}));}
             LearnPlan{plan}=>{actor.host()?;return self.run_learning(&plan);}
             PublishKnowledge{knowledge}=>{actor.host()?;let key=self.publish_knowledge(knowledge)?;return Ok(json!({"knowledge":key}));}

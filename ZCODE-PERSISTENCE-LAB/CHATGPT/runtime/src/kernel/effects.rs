@@ -57,6 +57,17 @@ impl World {
         let receipt=self.put_payload(receipt)?;let x=self.effects.get_mut(effect).unwrap();
         x.phase=outcome.clone();x.receipt=Some(receipt.clone());
         x.history.push(EffectEvent{phase:outcome.clone(),sequence:self.sequence.saturating_add(1),reason:"host reconciled receipt".into(),receipt:Some(receipt.clone())});
+        if outcome==EffectPhase::Abandoned{
+            self.mark_prepared_unknown(&e.task,"effect abandoned");
+            let t=self.tasks.get_mut(&e.task).ok_or("task missing")?;
+            if t.phase==TaskPhase::Running{
+                if let Some(l)=t.lease.take(){if let Some(a)=self.agents.get_mut(&l.worker){
+                    if let Some(i)=a.incarnations.last_mut(){if i.number==l.incarnation&&i.ended_ms.is_none(){i.ended_ms=Some(self.clock_ms);i.reason=Some("effect abandoned".into());}}
+                    if a.phase!=AgentPhase::Archived{a.phase=AgentPhase::Recovering;}
+                }}
+                t.phase=TaskPhase::Reconciling;
+            }
+        }
         if !self.has_uncertain_effect(&e.task){
             let abandoned=self.effects.values().any(|x|x.task==e.task&&x.phase==EffectPhase::Abandoned);
             let t=self.tasks.get_mut(&e.task).ok_or("task missing")?;

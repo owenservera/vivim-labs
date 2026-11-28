@@ -29,12 +29,27 @@ pub struct AdapterReceipt{
     pub usage:Usage,pub outcome:Outcome,pub provider_receipt:String,pub latency_ms:u64,
     pub output:Option<Value>,
 }
+#[derive(Clone,Debug,Serialize,Deserialize)]
+pub struct QuotaReceipt{
+    pub id:Id,pub adapter:Id,pub provider:Id,pub account:Id,
+    pub observation:super::routing::Observation,pub source_receipt:String,
+}
 #[derive(Clone,Debug,Serialize,Deserialize,Default)]
 pub struct AdapterState{
+    #[serde(default)] pub quota_receipts:BTreeMap<Id,QuotaReceipt>,
     pub bindings:BTreeMap<Id,AdapterBinding>,pub handoffs:BTreeMap<Id,Envelope>,
     pub receipts:BTreeMap<Id,AdapterReceipt>,
 }
 impl World{
+    pub fn observe_adapter_quota(&mut self,r:QuotaReceipt)->Result<()>{
+        id(&r.id)?;ensure(!r.source_receipt.trim().is_empty()&&r.source_receipt.len()<=4096,"quota source receipt required")?;
+        ensure(!self.router.adapters.quota_receipts.contains_key(&r.id),"quota receipt exists")?;
+        ensure(self.router.adapters.bindings.get(&r.adapter).is_some_and(|b|b.enabled),"adapter not enabled")?;
+        let c=self.router.config.as_ref().ok_or("routing not configured")?;
+        ensure(c.profiles.values().any(|p|p.enabled&&p.adapter==r.adapter&&p.provider==r.provider&&p.account==r.account&&p.pools.contains(&r.observation.pool)),"quota receipt outside adapter scope")?;
+        self.router.observe(r.observation.clone())?;
+        self.router.adapters.quota_receipts.insert(r.id.clone(),r);Ok(())
+    }
     pub fn bind_routing_adapter(&mut self,b:AdapterBinding)->Result<()>{
         id(&b.id)?;id(&b.adapter)?;ensure(self.router.config.is_some(),"router not configured")?;
         ensure(b.id==b.adapter&&b.version>self.router.adapters.bindings.get(&b.id).map_or(0,|x|x.version)&&(100..=3_600_000).contains(&b.lease_ms),"invalid adapter binding")?;

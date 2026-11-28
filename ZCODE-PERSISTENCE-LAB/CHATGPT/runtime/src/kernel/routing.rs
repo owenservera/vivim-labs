@@ -134,7 +134,7 @@ pub struct Router{
 fn active(r:&Reservation)->bool{matches!(r.status,Status::Reserved|Status::Dispatched|Status::Unknown)}
 fn bps(v:u64,b:u16)->u64{(u128::from(v)*u128::from(b)/10_000) as u64}
 fn sum(a:u64,b:u64)->Result<u64>{a.checked_add(b).ok_or("budget sum overflow".into())}
-fn amount(pool:&Pool,p:&Profile,u:&Usage)->Result<u64>{
+pub(crate) fn amount(pool:&Pool,p:&Profile,u:&Usage)->Result<u64>{
     match pool.unit{
         Unit::Requests=>Ok(u.requests),Unit::InputTokens=>Ok(u.input),Unit::OutputTokens=>Ok(u.output),
         Unit::ReasoningTokens=>Ok(u.reasoning),Unit::TotalTokens=>sum(sum(u.input,u.output)?,u.reasoning),

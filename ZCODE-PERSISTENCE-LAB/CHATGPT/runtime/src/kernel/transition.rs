@@ -147,6 +147,9 @@ impl World {
     }
     pub fn transition(&mut self,actor:&Actor,action:Action)->Result<Value>{
         // Public transitions are atomic even for callers not using the durable store.
+        if let Action::Submit{..}=&action{if let Actor::Worker{id,..}=actor{
+            ensure(!self.agents.get(id).and_then(|a|a.incarnations.last()).is_some_and(|i|i.executor.starts_with("routed:")),"routed result requires host adapter receipt")?;
+        }}
         let mut next=self.clone();let output=next.apply_inner(actor,action)?;next.reconcile_prepared()?;next.settle()?;next.reconcile_inference();next.refresh_handoffs();next.refresh_frontier_demand()?;
         next.sequence=next.sequence.checked_add(1).ok_or("sequence overflow")?;*self=next;Ok(output)
     }
@@ -392,10 +395,10 @@ impl World {
             ObserveQuota{observation}=>{actor.host()?;self.router.observe(observation)?;}
             QueueInference{demand}=>{actor.host()?;self.queue_inference(demand)?;}
             AllocateInference{limit}=>{actor.host()?;return self.allocate_inference(limit);}
-            DispatchInference{reservation}=>{actor.host()?;self.dispatch_inference(&reservation)?;}
+            DispatchInference{reservation}=>{actor.host()?;ensure(!self.router.adapters.handoffs.contains_key(&reservation),"managed handoff requires ClaimHandoff")?;self.dispatch_inference(&reservation)?;}
             InferenceUnknown{reservation}=>{actor.host()?;self.router.unknown(&reservation)?;}
             ReleaseInference{reservation}=>{actor.host()?;self.router.release_unsent(&reservation)?;}
-            SettleInference{reservation,usage,outcome,receipt,latency_ms}=>{actor.host()?;return self.router.settle(&reservation,usage,outcome,receipt,latency_ms);}
+            SettleInference{reservation,usage,outcome,receipt,latency_ms}=>{actor.host()?;ensure(!self.router.adapters.handoffs.contains_key(&reservation),"managed handoff requires FinishHandoff")?;return self.router.settle(&reservation,usage,outcome,receipt,latency_ms);}
             VerifyInference{reservation,evidence}=>{actor.host()?;self.verify_inference_feedback(&reservation,&evidence)?;}
             SetFrontierGuard{guard}=>{actor.host()?;self.router.set_frontier_guard(guard)?;}
             SetFrontierForecast{forecast}=>{actor.host()?;self.router.set_forecast(forecast)?;}

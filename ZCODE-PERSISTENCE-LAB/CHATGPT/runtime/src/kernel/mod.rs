@@ -22,6 +22,8 @@ pub mod ingress;
 pub mod routing;
 pub mod frontier;
 pub mod allocation;
+pub mod routing_planning;
+pub mod routing_adapter;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

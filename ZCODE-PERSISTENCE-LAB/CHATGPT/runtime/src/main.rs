@@ -53,6 +53,12 @@ fn kernel_cli(args:&[String])->Result<(),String>{
             let discovery=read_json(required(args,6,"discovery file")?)?;
             store.assimilate(request_id,name,version,discovery)?
         }
+        "serve"=>{
+            let workspace=Path::new(required(args,3,"workspace")?);
+            let ledger=Path::new(required(args,4,"service ledger")?);
+            let config=read_json(required(args,5,"service configuration")?)?;
+            persistent_intelligence_runtime::kernel::service::serve(store.root(),workspace,ledger,config)?
+        }
         "run"=>{
             let workspace=Path::new(required(args,3,"workspace")?);
             let config:RunConfig=read_json(required(args,4,"run config")?)?;
@@ -70,6 +76,14 @@ fn kernel_cli(args:&[String])->Result<(),String>{
 }
 fn run()->Result<(),String>{
     let args:Vec<_>=env::args().skip(1).collect();
+    if args.first().is_some_and(|x|x=="kernel-controller"){
+        use persistent_intelligence_runtime::kernel::{persistence::KernelStore,supervisor::{watch_parent,supervise,RunConfig}};
+        use std::path::Path;
+        let root=required(&args,1,"kernel store")?;let workspace=required(&args,2,"workspace")?;
+        let config:RunConfig=read_json(required(&args,3,"controller configuration")?)?;
+        watch_parent();let store=KernelStore::open(root)?;
+        println!("{}",serde_json::to_string_pretty(&supervise(&store,Path::new(workspace),config)?).map_err(|e|e.to_string())?);return Ok(());
+    }
     if args.first().is_some_and(|x|x=="kernel-compute"){
         if args.get(3).is_some_and(|x|x=="--watch-parent"){persistent_intelligence_runtime::kernel::supervisor::watch_parent();}
         return persistent_intelligence_runtime::kernel::supervisor::compute_file(

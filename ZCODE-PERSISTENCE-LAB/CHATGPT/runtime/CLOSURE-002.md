@@ -1,0 +1,20 @@
+# Closure 002 — return to original plan
+
+Source pin: 0e36d605c6297d53e0c79634b8ed73ff890cc881. Initial main readback: 6f64f967c76264c91b800ea15d4a79f3591662fe. Scope: canonical CHATGPT/runtime; no experiment folders edited, no builds, tests, real or synthetic execution, no workstation sync.
+
+## Recovered existing source on main
+At the start of this iteration main already contained subtree termination, charged-but-unverified cancellation, charge-only handoff reconciliation, origin-evidence provider exclusion, durable routing waits, nested router index schema 2, deterministic two-step Genesis initialization, pure goal-trace recipes and Windows/native resource receipts. These are not new changes authored in this iteration. They were read and integrated, preserving concurrent main updates.
+
+## New committed closure work
+- E33: adaptive index schema 3; 1 MiB target pages split on hashed key prefixes, per-table content-addressed directories, legacy schema 1/2 readers, unchanged-page reuse, nested lookup and explicit root/record integrity, GC reachability. Single entity and directory object bounds and full World materialization remain.
+- E31/R08: signed adapter principal can claim/finish/mark unknown only own handoffs and allowed goal; raw adapter requests denied. Host retains quota/configuration/effect authority. Charge-only identity mismatch reconciliation rejects duplicate receipt. Windows launch preflight validates protected root and existing descendants for owner/DACL/reparse checks, no ACL modifications/elevation/credentials. This is not effective-access proof; parent ACLs, administrator membership and actual separate user boundary need verification.
+- Genesis: launch/Prepare-Genesis.ps1 hashes actual 50+10 gate tracker bytes and writes a new manifest. Native two-step goal has one slot and independent task/goal digest oracles. Example digest is a placeholder, not a real tracker pin. No launch.
+- E41: native trace learner discovers repeated verified class substitution repairs; exact same input and oracle, reproduced failed/successful outputs, distinct goals/inputs, provenance and unambiguous applicability. Rebind preserves oracle and effects restrictions; supervisor uses existing learning budget. No general semantic proof or arbitrary effect learning.
+- E42: supervisor measures host learning, knowledge, recipe, repair, routing, trial and verification wall duration separately from native CPU/I/O. Receipts may be missing after a crash between operation and accounting. Population report distinguishes confirmed real-provider requests, synthetic requests and unknown/missing receipts instead of hardcoded zero.
+- R09: adapter bindings frozen during policy trials; configuration fingerprint includes bindings and frontier policy/forecasts.
+- Authored qualification: tests/closure_native.rs native Genesis and 60-agent population; tests/closure_integrity.rs adaptive split/reopen/GC, hierarchy cancellation, charged-but-unverified output; authority.rs standard HMAC vector and rejected adapter privilege escalation. All uncompiled/unexecuted.
+
+## Truth tracker
+Original source labels: 39 implemented/unverified, 7 partial, 4 deferred. Routing: 6 implemented/unverified, 4 partial. Historical R003 28/100; current R004 verified 0/100. E03, R03, R07 restored to provisional source-implemented after specific repairs read on main; remaining partial criteria are not closed merely by writing fixtures. Original criteria and weights retained.
+
+Remaining: E31 effective OS boundary; E33 full-state scaling and legacy migration qualification; E34 actual crash/concurrent writer qualification; E41 generalized learning/qualification; E42 complete measured cost coverage; E44 real population qualification; E47 independently observed total worker/controller death; E45/46 isolated comparative fault runs; E48/49 actual elapsed 36/72-hour runs; R06 autonomous demand generation, R08 real provider transport, R09 repeated empirical policy trials, R10 native qualification. Do not claim 100% without receipts. The source remains uncompiled and may have compile or logic defects.

@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-TRUTH-TRACKER-001",
+  "revision": "R004-TRUTH-TRACKER-CLOSURE-002",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -74,12 +74,13 @@
       "evidence": [],
       "outstanding": "No qualifying evidence",
       "r004": {
-        "status": "PARTIAL_SOURCE",
-        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
         "files": [
-          "src/kernel/transition.rs"
+          "src/kernel/transition.rs",
+          "tests/closure_integrity.rs"
         ],
-        "remaining": "Parent terminal propagation does not recursively settle or cancel still-open child goals; settle() checks only parent-local active tasks.",
+        "remaining": "Current source has subtree terminal fencing, dependent-task fixed-point propagation and a hierarchy cancellation fixture. Automatic failure and outstanding-effect reconciliation require native negative qualification.",
         "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53"
       }
     },
@@ -632,15 +633,16 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
+        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
         "files": [
-          "src/kernel/ingress.rs",
           "src/kernel/authority.rs",
-          "src/kernel/local_effect.rs",
+          "src/kernel/routing_adapter.rs",
+          "src/kernel/ingress.rs",
           "src/kernel/persistence.rs",
-          "src/kernel/effects.rs"
+          "src/kernel/local_effect.rs",
+          "launch/Start-ProtectedBroker.ps1"
         ],
-        "remaining": "Fixed-authority bounded framed broker, scope-checked signed replay, and host-only idempotent local JSON publication/reconciliation. OS boundary and protected launcher not provisioned; arbitrary external effects not supported; crypto/adapter qualification outstanding."
+        "remaining": "Signed adapter role restricted to own handoffs and scoped goals; host-only configuration and charge reconciliation; Windows dedicated-host ACL preflight authored. Effective access, ancestor protection, separate worker identity, actual broker deployment and native signature/effect qualification remain."
       }
     },
     {
@@ -676,13 +678,13 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
+        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
         "files": [
           "src/kernel/index.rs",
           "src/kernel/persistence.rs",
-          "src/kernel/migration.rs"
+          "tests/closure_integrity.rs"
         ],
-        "remaining": "Routing history is serialized in the unsharded scalar index object, which has a hard 64 MiB ceiling. Full-world materialization and schema/version compatibility need explicit remediation.",
+        "remaining": "Nested router maps sharded; schema 3 adaptive pages and per-table directories, page reuse, root/record binding, readers for schema 1/2, GC traversal and collision fixture. Full-world load/clone, potentially large individual entities/directories/legacy archive and actual migration/scaling qualification remain.",
         "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53"
       }
     },
@@ -842,13 +844,14 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
+        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
         "files": [
+          "src/kernel/recipes.rs",
           "src/kernel/knowledge.rs",
           "src/kernel/custody.rs",
-          "src/kernel/evolution.rs"
+          "src/kernel/supervisor.rs"
         ],
-        "remaining": "Private-admitted programs now publish evidence-backed computational knowledge, complementing recurring typed artifact rules. General autonomous semantic rule/repair/procedure discovery still incomplete."
+        "remaining": "Verified pure goal-trace recipes reconstruct parameterized DAG coordination and context bindings; repeated exact-input rejected/accepted class substitutions are independently replayed before learned repair publication; unambiguous pure-task rebind preserves oracle. Generalized class/semantic/context discovery and independent cross-goal qualification remain."
       }
     },
     {
@@ -861,14 +864,14 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
+        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
         "files": [
-          "src/kernel/custody.rs",
-          "src/kernel/service.rs",
+          "src/kernel/resource.rs",
           "src/kernel/lifecycle.rs",
+          "src/kernel/supervisor.rs",
           "src/kernel/intelligence.rs"
         ],
-        "remaining": "Durable reserved controller budgets and private training/holdout evaluation counts added to prior attempt and failed-search accounting. Complete CPU/memory/I/O and regression/admission accounting remain."
+        "remaining": "Native Windows process counters and artifact/checkpoint bytes, host-measured learning/recipe/repair/verification/routing/trial wall durations and explicit unknown provider counts. No invented CPU or token counts; Linux counters, complete admission/search accounting, measurement-to-receipt atomicity and qualification remain."
       }
     },
     {
@@ -899,13 +902,13 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
+        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
         "files": [
-          "src/kernel/qualification.rs",
           "src/kernel/supervisor.rs",
-          "src/kernel/lifecycle.rs"
+          "src/kernel/qualification.rs",
+          "tests/closure_native.rs"
         ],
-        "remaining": "60-agent/four-lease-slot unit fixture authored (not executed); full independent native process population qualification still required."
+        "remaining": "Real executable subprocess fixture authored for 60 logical identities, 60 verified tasks, at most four sampled active leases and no routed inference. Not executed; sampled concurrency is not proof of all-process peak."
       }
     },
     {
@@ -1014,20 +1017,20 @@
     }
   ],
   "candidate": {
-    "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
+    "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
     "verification": "NOT_COMPILED_NOT_TESTED",
     "historical_verified_score": 28,
     "candidate_verified_score": 0,
     "scope": "CHATGPT/runtime only; R003 baseline preserved separately; no acceptance uplift for source changes",
     "counts": {
-      "SOURCE_IMPLEMENTED_UNVERIFIED": 38,
-      "PARTIAL_SOURCE": 8,
+      "SOURCE_IMPLEMENTED_UNVERIFIED": 39,
+      "PARTIAL_SOURCE": 7,
       "DEFERRED": 4
     }
   },
   "routing_workstream": {
     "revision": "R004",
-    "source_pin": "8fa44485e12c178655cca3c5c7e092526137017b",
+    "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
     "verification": "NOT_COMPILED_NOT_TESTED",
     "related_original_gates": [
       "E12",
@@ -1052,9 +1055,10 @@
       {
         "id": "R03",
         "criterion": "Atomic reservation, settlement, unknown usage and reset-safe accounting",
-        "status": "PARTIAL_SOURCE",
-        "remaining": "Cancel after successful receipt but before Verify leaves completed/unverified reservation outstanding; trial closure and future trial startup can remain blocked. Mismatched provider identity requires explicit charge-only reconciliation path.",
-        "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53"
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "remaining": "Charged-but-not-evaluated disposition on stale/cancelled results, trial closure recognizes it, explicit host charge-only identity mismatch settlement, duplicate receipt check. Cross-account actual charges require trusted observation and native qualification.",
+        "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
+        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881"
       },
       {
         "id": "R04",
@@ -1072,33 +1076,38 @@
         "id": "R06",
         "criterion": "Native-first task selection and incarnation-bound dispatch contract",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Routing exhaustion can strand pending tasks; no durable wait/reset/terminal outcome or automated demand generation for agent objectives.",
-        "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53"
+        "remaining": "Durable routing wait reason/reset hint, attempt/deadline exhaustion and native-first matching. Missing automatically derived real-agent inference demand, real adapter and wake/qualification evidence.",
+        "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
+        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881"
       },
       {
         "id": "R07",
         "criterion": "Independent evidence-linked model performance feedback",
-        "status": "PARTIAL_SOURCE",
-        "remaining": "Independent-review flag only excludes previous providers on the same demand, not the origin provider on a separate review task. Evidence attribution on cancellation needs terminal disposition.",
-        "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53"
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "remaining": "Independent review demand must reference accepted origin evidence and depend on origin task; originating provider excluded using attributable reservation. Cancelled outputs get no success credit. Native/independent review lineage qualification pending.",
+        "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
+        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881"
       },
       {
         "id": "R08",
         "criterion": "Live provider observations, actual model/thinking receipt and adapter execution",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Versioned handoff/observations plus trusted backend interface and synthetic-only implementation. Live provider polling, real adapters and usage verification remain absent."
+        "remaining": "Signed goal-scoped adapter handoff authority, quota receipt contracts, protected-host preflight. Real provider transport, actual observations and OS isolation not deployed.",
+        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881"
       },
       {
         "id": "R09",
         "criterion": "Autonomous provider dispatch/reconciliation and empirical budget optimization",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Bounded candidate generation, matched sequential policy cohorts, opt-in automatic arm progression and promotion, versioned rollback. Live provider transport and empirical optimization qualification remain absent."
+        "remaining": "Frozen trial bindings and configuration fingerprint; existing bounded policy evolution preserved. Actual repeated randomized provider comparisons, regression watch and real execution remain.",
+        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881"
       },
       {
         "id": "R10",
         "criterion": "Native quota, fallback, frontier and concurrency qualification",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Ten authored routing qualification fixtures, including three synthetic accounting/policy guard cases. None compiled or executed."
+        "remaining": "Prior source-only fixtures plus closure_integrity.rs cancellation case and authority fixtures. None compiled or executed.",
+        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881"
       }
     ]
   },
@@ -1118,22 +1127,22 @@
     }
   },
   "completion_dashboard": {
-    "revision": "TRUTH-TRACKER-001",
+    "revision": "TRUTH-TRACKER-CLOSURE-002",
     "tracker_input_commit": "d05e332f884a11ef3bcbc69658a4de308adc812a",
-    "reviewed_runtime_source": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
-    "source_status_meaning": "Provisional static source coverage, not demonstrated operation; source-implemented labels are not acceptance passes and may be downgraded by later review.",
+    "reviewed_runtime_source": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
+    "source_status_meaning": "Provisional source labels after targeted readback and integration; not a complete compiler or invariant audit, not verified operation.",
     "original": {
       "total": 50,
       "counts": {
-        "SOURCE_IMPLEMENTED_UNVERIFIED": 38,
-        "PARTIAL_SOURCE": 8,
+        "SOURCE_IMPLEMENTED_UNVERIFIED": 39,
+        "PARTIAL_SOURCE": 7,
         "DEFERRED": 4
       },
       "phases": {
         "P0": {
           "total": 15,
-          "SOURCE_IMPLEMENTED_UNVERIFIED": 11,
-          "PARTIAL_SOURCE": 4
+          "SOURCE_IMPLEMENTED_UNVERIFIED": 12,
+          "PARTIAL_SOURCE": 3
         },
         "P1": {
           "total": 10,
@@ -1155,27 +1164,27 @@
           "PARTIAL_SOURCE": 1
         }
       },
-      "source_coverage_percent": 76,
+      "source_coverage_percent": 78,
       "current_verified_gates": 0,
       "current_verified_score": 0
     },
     "routing": {
       "total": 10,
       "counts": {
-        "SOURCE_IMPLEMENTED_UNVERIFIED": 4,
-        "PARTIAL_SOURCE": 6
+        "SOURCE_IMPLEMENTED_UNVERIFIED": 6,
+        "PARTIAL_SOURCE": 4
       },
-      "source_coverage_percent": 40,
+      "source_coverage_percent": 60,
       "current_verified_gates": 0
     },
     "combined_inventory": {
       "total": 60,
-      "source_implemented_unverified": 42,
-      "partial_source": 14,
+      "source_implemented_unverified": 45,
+      "partial_source": 11,
       "deferred": 4,
       "verified_current": 0,
-      "source_coverage_percent": 70,
-      "meaning": "Unweighted inventory across both registers, not the original acceptance score."
+      "source_coverage_percent": 75,
+      "meaning": "Unweighted inventory; not original weighted acceptance."
     },
     "historical_r003": {
       "counts": {
@@ -1188,11 +1197,12 @@
     },
     "launch": {
       "status": "NOT_READY",
-      "genesis_manifest": "NOT_IMPLEMENTED_IN_REVIEWED_LAUNCH_PATH",
+      "genesis_manifest": "SOURCE_IMPLEMENTED_UNVERIFIED_NATIVE_ONLY",
       "build": "NOT_ATTEMPTED",
       "tests": "NOT_EXECUTED",
       "provider_execution": "NOT_WIRED",
-      "actual_models_and_budgets": "NOT_CONFIGURED"
+      "actual_models_and_budgets": "NOT_CONFIGURED",
+      "protected_host": "PREFLIGHT_SOURCE_ONLY"
     },
     "closure_queue": [
       {
@@ -1262,5 +1272,11 @@
       }
     ],
     "rule": "Prioritize original acceptance closure and integration defects over new architectural expansion. Verified credit requires actual matching native evidence at a pinned source. Retain all original gate IDs, weights, criteria and historical evidence."
+  },
+  "closure_checkpoint": {
+    "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
+    "initial_readback": "6f64f967c76264c91b800ea15d4a79f3591662fe",
+    "method": "Source-only coding and targeted readback; no runtime execution",
+    "document": "CLOSURE-002.md"
   }
 }

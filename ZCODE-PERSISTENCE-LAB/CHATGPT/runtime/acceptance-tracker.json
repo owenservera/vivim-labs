@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-SOURCE-CLOSURE-010",
+  "revision": "R004-SOURCE-CLOSURE-011",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -678,16 +678,17 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "2ebb1342b94be6851d33c512002da99f6ca558b2",
+        "source_pin": "50d74edcbd5febe62b064923d5924f85baca3cea",
         "files": [
           "src/kernel/index.rs",
           "src/kernel/persistence.rs",
           "tests/closure_integrity.rs",
-          "src/kernel/transition.rs"
+          "src/kernel/transition.rs",
+          "src/kernel/shared_map.rs"
         ],
-        "remaining": "Archive-before-prune, pinned historical roots and schema-4 incremental single-receipt page mutation with lazy receipt materialization and explicit full index audit authored. World tables still fully load/serialize and receipt directory rewrite scales with page count. Legacy migration, full-world mutation, archive limits and empirical qualification remain.",
+        "remaining": "Schema-4 lazy receipt pages plus copy-on-write history maps and exact-key adaptive mutation for seven heavy history tables authored; untouched table directories retained. Changed map copy cost, remaining world serialization/reconciliation, bounded hot caching, retention policy and real qualification remain.",
         "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
-        "checkpoint": "INCREMENTAL-RECEIPTS-001"
+        "checkpoint": "TRACKED-WORLD-001"
       }
     },
     {
@@ -1166,7 +1167,7 @@
     }
   },
   "completion_dashboard": {
-    "revision": "R004-SOURCE-CLOSURE-010",
+    "revision": "R004-SOURCE-CLOSURE-011",
     "tracker_input_commit": "d05e332f884a11ef3bcbc69658a4de308adc812a",
     "reviewed_runtime_source": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
     "source_status_meaning": "Provisional source labels after targeted readback and integration; not a complete compiler or invariant audit, not verified operation.",
@@ -1385,5 +1386,13 @@
       "HISTORICAL-RETENTION-001.md",
       "INCREMENTAL-RECEIPTS-001.md"
     ]
+  },
+  "source_closure_011": {
+    "baseline": "50d74edcbd5febe62b064923d5924f85baca3cea",
+    "documents": [
+      "TRACKED-WORLD-001.md"
+    ],
+    "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
+    "verified_credit": 0
   }
 }

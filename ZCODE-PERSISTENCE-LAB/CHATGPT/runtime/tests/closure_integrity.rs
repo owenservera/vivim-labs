@@ -177,3 +177,21 @@ fn incremental_receipt_pages_keep_replay_and_legacy_root_compatible(){
     assert_eq!(index.load_world(&root,1).unwrap().sequence,1);
     let (_,receipts)=index.load(&root,1).unwrap();assert_eq!(receipts["first"].revision,1);
 }
+
+#[test]
+fn tracked_world_pages_retain_untouched_history_and_match_full_writer(){
+    let temp=Temp::new();let index=Index::open(&temp.0).unwrap();let mut w=World::default();
+    for i in 0..100{w.blobs.insert(format!("blob-{i}"),json!({"n":i}));}
+    w.sequence=1;
+    let r=Receipt{request_digest:digest(&json!(1)),response:json!(1),revision:1};
+    let first=index.write_incremental(1,&w,&BTreeMap::new(),"r-1",&r,None).unwrap();
+    let mut w=index.load_world(&first,1).unwrap();
+    // Public API remains independent of dirty-tracking internals.
+    w.blobs.insert("blob-5".into(),json!({"n":55}));
+    w.blobs.remove("blob-6");w.sequence=2;
+    let r2=Receipt{request_digest:digest(&json!(2)),response:json!(2),revision:2};
+    let next=index.write_incremental(2,&w,&BTreeMap::new(),"r-2",&r2,Some(&first)).unwrap();
+    let (restored,receipts)=index.load(&next,2).unwrap();
+    assert_eq!(restored.blobs,w.blobs);assert_eq!(receipts.len(),2);
+    assert_eq!(index.lookup(&first,1,"blobs","blob-5").unwrap(),Some(json!({"n":5})));
+}

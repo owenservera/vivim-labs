@@ -168,16 +168,95 @@ impl Index{
         self.leaf(&prefix,page,&mut refs,&old)?;
         self.put(&serde_json::to_value(refs).map_err(err)?)
     }
+    /// Apply a bounded exact-key mutation set to the adaptive directory.
+    /// Each old leaf is verified before changing it. Deleting its last entity
+    /// drops the reference but never destroys historical immutable objects.
+    fn patch_table<V:Serialize>(&self,mut refs:BTreeMap<String,String>,table:&super::shared_map::SharedMap<V>,keys:&BTreeSet<String>)->Result<Digest>{
+        for key in keys{
+            let key_hash=digest(&Value::String(key.clone()));
+            let existing=(2..=64).step_by(2).find_map(|n|refs.get(&key_hash[..n]).map(|h|(key_hash[..n].to_owned(),h.clone())));
+            let (prefix,mut page)=if let Some((prefix,h))=existing{
+                let v=self.get(&h)?;
+                let m=v.as_object().ok_or("invalid tracked page")?.clone();
+                for k in m.keys(){ensure(digest(&Value::String(k.clone())).starts_with(&prefix),"tracked key in wrong bucket")?;}
+                (prefix,m)
+            }else{
+                if !table.contains_key(key){continue;}
+                let prefix=(2..=64).step_by(2).map(|n|&key_hash[..n]).find(|p|!refs.keys().any(|k|k.starts_with(*p))).ok_or("no tracked partition available")?.to_owned();
+                (prefix,Map::new())
+            };
+            if let Some(v)=table.get(key){page.insert(key.clone(),serde_json::to_value(v).map_err(err)?);}
+            else{page.remove(key);}
+            let old=refs.remove(&prefix);
+            if !page.is_empty(){
+                let prior=old.map(|h|BTreeMap::from([(prefix.clone(),h)])).unwrap_or_default();
+                self.leaf(&prefix,page,&mut refs,&prior)?;
+            }
+        }
+        self.put(&serde_json::to_value(refs).map_err(err)?)
+    }
+    fn tracked_table<V:Serialize>(&self,old:Option<&IndexRoot>,name:&str,table:&super::shared_map::SharedMap<V>)->Result<Digest>{
+        if let Some(root)=old.filter(|r|r.schema==4){
+            if let Some(directory)=root.directories.get(name){
+                if let super::shared_map::Changes::Keys(keys)=table.changes(){
+                    if keys.is_empty(){ensure(self.object(directory)?.is_file(),"unchanged tracked directory missing")?;return Ok(directory.clone());}
+                    return self.patch_table(self.directory(root,name)?,table,keys);
+                }
+            }
+        }
+        let v=serde_json::to_value(table).map_err(err)?;
+        self.write_table(v.as_object().ok_or("tracked table not a map")?,&BTreeMap::new())
+    }
     /// World tables still materialize; receipt history does not. Legacy roots
     /// must have been fully loaded and checked before conversion.
     pub fn write_incremental(&self,revision:u64,world:&World,legacy_receipts:&BTreeMap<Id,Receipt>,key:&str,receipt:&Receipt,previous:Option<&str>)->Result<Digest>{
+        self.write_incremental_inner(revision,world,legacy_receipts,key,receipt,previous,false)
+    }
+    /// Trusted store path: dirty keys derive only from the owned, loaded World.
+    /// Public index callers retain full-write semantics.
+    pub(crate) fn write_tracked(&self,revision:u64,world:&World,legacy_receipts:&BTreeMap<Id,Receipt>,key:&str,receipt:&Receipt,previous:Option<&str>)->Result<Digest>{
+        self.write_incremental_inner(revision,world,legacy_receipts,key,receipt,previous,true)
+    }
+    fn write_incremental_inner(&self,revision:u64,world:&World,legacy_receipts:&BTreeMap<Id,Receipt>,key:&str,receipt:&Receipt,previous:Option<&str>,tracked:bool)->Result<Digest>{
         ensure(receipt.revision==revision&&world.sequence==revision,"incremental revision mismatch")?;
         let old=previous.map(|h|self.manifest(h)).transpose()?;
-        let mut state=serde_json::to_value(world).map_err(err)?;
+        let mut stripped;
+        let mut state=if tracked{
+            stripped=world.clone();
+            stripped.blobs=Default::default();
+            stripped.artifacts=Default::default();
+            stripped.evidence=Default::default();
+            stripped.run_costs=Default::default();
+            stripped.attempt_history=Default::default();
+            stripped.resource_receipts=Default::default();
+            stripped.host_costs=Default::default();
+            serde_json::to_value(&stripped).map_err(err)?
+        }else{serde_json::to_value(world).map_err(err)?};
         let object=state.as_object_mut().ok_or("world not record")?;
         let mut directories=BTreeMap::new();
         for &name in MAPS.iter().chain(NESTED.iter()){
             if name=="receipts"{continue;}
+            if tracked{
+                macro_rules! track{
+                    ($field:ident,$optional:expr)=>{{
+                        object.remove(name);
+                        if !$optional||!world.$field.is_empty(){
+                            directories.insert(name.into(),self.tracked_table(old.as_ref(),name,&world.$field)?);
+                        }
+                        continue;
+                    }}
+                }
+                match name{
+                    "blobs"=>track!(blobs,false),
+                    "artifacts"=>track!(artifacts,false),
+                    "evidence"=>track!(evidence,false),
+                    "run_costs"=>track!(run_costs,false),
+                    "attempt_history"=>track!(attempt_history,false),
+                    "resource_receipts"=>track!(resource_receipts,true),
+                    "host_costs"=>track!(host_costs,true),
+                    _=>{}
+                }
+            }
             let Some((parent,key))=Self::table_parent(object,name) else{continue;};
             let Some(table)=parent.remove(&key) else{continue;};
             let table=table.as_object().ok_or("index table must be map")?;

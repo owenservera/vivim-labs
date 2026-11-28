@@ -328,7 +328,7 @@ impl KernelStore{
         for kind in ["record","snapshot"]{let p=self.path(kind,rev);if p.exists(){fs::remove_file(p).map_err(error)?;}}
         let request_id=command.id().to_string();
         let receipt=Receipt{request_digest,response:response.clone(),revision:rev};
-        let index_root=index.write_incremental(rev,&loaded.world,&loaded.receipts,&request_id,&receipt,loaded.head.index.as_deref())?;
+        let index_root=index.write_tracked(rev,&loaded.world,&loaded.receipts,&request_id,&receipt,loaded.head.index.as_deref())?;
         let rec=Envelope::new(Record{schema:1,revision:rev,previous:loaded.head.record.clone(),command,response:response.clone(),index:Some(index_root.clone()),host_measurement})?;
         write_new(&self.root,&Self::name("record",rev),&rec)?;
         #[cfg(test)] super::qualification::pause_at(&self.root,"before_head")?;

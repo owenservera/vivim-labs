@@ -40,6 +40,7 @@ pub mod adapter_mailbox;
 pub mod process_observation;
 pub mod assimilation;
 pub mod reuse_economics;
+pub mod shared_map;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

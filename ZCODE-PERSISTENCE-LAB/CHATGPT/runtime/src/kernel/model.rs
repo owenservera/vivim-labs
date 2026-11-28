@@ -257,17 +257,17 @@ pub struct World {
     pub goals:BTreeMap<Id,Goal>, pub tasks:BTreeMap<Id,Task>,
     pub agents:BTreeMap<Id,Agent>, pub contexts:BTreeMap<Id,Context>,
     pub operators:BTreeMap<Id,OperatorContract>, pub classes:BTreeMap<Id,Class>,
-    pub artifacts:BTreeMap<Id,Artifact>, pub evidence:BTreeMap<Id,Evidence>,
-    pub blobs:BTreeMap<Digest,Value>, pub checkpoints:BTreeMap<Id,Vec<Checkpoint>>,
+    pub artifacts:super::shared_map::SharedMap<Artifact>, pub evidence:super::shared_map::SharedMap<Evidence>,
+    pub blobs:super::shared_map::SharedMap<Value>, pub checkpoints:BTreeMap<Id,Vec<Checkpoint>>,
     pub messages:BTreeMap<Id,Message>, pub capabilities:BTreeMap<Id,Capability>,
     pub metrics:Metrics,
     pub learning_plans:BTreeMap<Id,LearningPlan>,pub learning_attempts:BTreeMap<Id,LearningAttempt>,
-    pub knowledge:BTreeMap<Id,Knowledge>,pub run_costs:BTreeMap<Id,RunCost>,pub policy:SchedulingPolicy,
+    pub knowledge:BTreeMap<Id,Knowledge>,pub run_costs:super::shared_map::SharedMap<RunCost>,pub policy:SchedulingPolicy,
     pub goal_versions:BTreeMap<Id,Vec<Goal>>,pub task_versions:BTreeMap<Id,Vec<TaskSpec>>,
     pub effects:BTreeMap<Id,Effect>,
     #[serde(default)] pub delivery:BTreeMap<Id,Delivery>,
     #[serde(default)] pub rollback_history:BTreeMap<Id,Rollback>,
-    #[serde(default)] pub attempt_history:BTreeMap<Id,AttemptRecord>,
+    #[serde(default)] pub attempt_history:super::shared_map::SharedMap<AttemptRecord>,
     #[serde(default)] pub learning_costs:BTreeMap<Id,LearningCost>,
     #[serde(default)] pub knowledge_rules:BTreeMap<Id,KnowledgeRule>,
     #[serde(default)] pub knowledge_publications:BTreeMap<Id,KnowledgePublication>,
@@ -279,16 +279,16 @@ pub struct World {
     #[serde(default,skip_serializing_if="BTreeMap::is_empty")] pub recipe_policies:BTreeMap<Id,super::recipes::Policy>,
     #[serde(default,skip_serializing_if="BTreeMap::is_empty")] pub recipes:BTreeMap<Id,super::recipes::Recipe>,
     #[serde(default,skip_serializing_if="BTreeMap::is_empty")] pub recipe_scans:BTreeMap<Id,u64>,
-    #[serde(default,skip_serializing_if="BTreeMap::is_empty")] pub resource_receipts:BTreeMap<Id,super::resource::Receipt>,
+    #[serde(default,skip_serializing_if="super::shared_map::SharedMap::is_empty")] pub resource_receipts:super::shared_map::SharedMap<super::resource::Receipt>,
     #[serde(default,skip_serializing_if="BTreeMap::is_empty")] pub recipe_repairs:BTreeMap<Id,super::recipes::VerifiedRepair>,
-    #[serde(default,skip_serializing_if="BTreeMap::is_empty")] pub host_costs:BTreeMap<Id,super::resource::HostCost>,
+    #[serde(default,skip_serializing_if="super::shared_map::SharedMap::is_empty")] pub host_costs:super::shared_map::SharedMap<super::resource::HostCost>,
     #[serde(default,skip_serializing_if="super::assimilation::Registry::is_empty")] pub assimilation:super::assimilation::Registry,
     #[serde(default,skip_serializing_if="super::reuse_economics::Registry::is_empty")] pub reuse_economics:super::reuse_economics::Registry,
     pub legacy_import:Option<super::migration::LegacyArchive>,
 }
 impl Default for World {
     fn default()->Self {
-        Self{clock_ms:0,slots:4,sequence:0,goals:BTreeMap::new(),tasks:BTreeMap::new(),agents:BTreeMap::new(),contexts:BTreeMap::new(),operators:BTreeMap::new(),classes:BTreeMap::new(),artifacts:BTreeMap::new(),evidence:BTreeMap::new(),blobs:BTreeMap::new(),checkpoints:BTreeMap::new(),messages:BTreeMap::new(),capabilities:BTreeMap::new(),metrics:Metrics::default(),learning_plans:BTreeMap::new(),learning_attempts:BTreeMap::new(),knowledge:BTreeMap::new(),run_costs:BTreeMap::new(),policy:SchedulingPolicy::default(),goal_versions:BTreeMap::new(),task_versions:BTreeMap::new(),effects:BTreeMap::new(),delivery:BTreeMap::new(),rollback_history:BTreeMap::new(),attempt_history:BTreeMap::new(),learning_costs:BTreeMap::new(),knowledge_rules:BTreeMap::new(),knowledge_publications:BTreeMap::new(),custody_families:BTreeSet::new(),cohorts:BTreeMap::new(),frozen_candidates:BTreeMap::new(),custody_receipts:BTreeMap::new(),router:super::routing::Router::default(),recipe_policies:BTreeMap::new(),recipes:BTreeMap::new(),recipe_scans:BTreeMap::new(),resource_receipts:BTreeMap::new(),recipe_repairs:BTreeMap::new(),host_costs:BTreeMap::new(),assimilation:super::assimilation::Registry::default(),reuse_economics:super::reuse_economics::Registry::default(),legacy_import:None}
+        Self{clock_ms:0,slots:4,sequence:0,goals:BTreeMap::new(),tasks:BTreeMap::new(),agents:BTreeMap::new(),contexts:BTreeMap::new(),operators:BTreeMap::new(),classes:BTreeMap::new(),artifacts:super::shared_map::SharedMap::default(),evidence:super::shared_map::SharedMap::default(),blobs:super::shared_map::SharedMap::default(),checkpoints:BTreeMap::new(),messages:BTreeMap::new(),capabilities:BTreeMap::new(),metrics:Metrics::default(),learning_plans:BTreeMap::new(),learning_attempts:BTreeMap::new(),knowledge:BTreeMap::new(),run_costs:super::shared_map::SharedMap::default(),policy:SchedulingPolicy::default(),goal_versions:BTreeMap::new(),task_versions:BTreeMap::new(),effects:BTreeMap::new(),delivery:BTreeMap::new(),rollback_history:BTreeMap::new(),attempt_history:super::shared_map::SharedMap::default(),learning_costs:BTreeMap::new(),knowledge_rules:BTreeMap::new(),knowledge_publications:BTreeMap::new(),custody_families:BTreeSet::new(),cohorts:BTreeMap::new(),frozen_candidates:BTreeMap::new(),custody_receipts:BTreeMap::new(),router:super::routing::Router::default(),recipe_policies:BTreeMap::new(),recipes:BTreeMap::new(),recipe_scans:BTreeMap::new(),resource_receipts:super::shared_map::SharedMap::default(),recipe_repairs:BTreeMap::new(),host_costs:super::shared_map::SharedMap::default(),assimilation:super::assimilation::Registry::default(),reuse_economics:super::reuse_economics::Registry::default(),legacy_import:None}
     }
 }
 pub fn version_key(name:&str,version:u64)->Result<Id>{

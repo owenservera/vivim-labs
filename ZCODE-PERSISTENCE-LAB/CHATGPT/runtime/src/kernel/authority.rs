@@ -97,7 +97,11 @@ impl Authority{
                 ensure(matches!(&signed.request.action,Action::Renew{..}|Action::Checkpoint{..}|Action::Submit{..}|Action::Fail{..}|Action::Send{..}|Action::Ack{..}|Action::WaitMessage{..}|Action::WaitDependency{..}|Action::Receive{..}),"worker action not authorized")
             }
             Role::Verifier=>{
-                let Action::Verify{task}= &signed.request.action else{return Err("verifier may only verify".into());};
+                if let Action::AttestCandidate{verdict}=&signed.request.action{
+                    let c=world.cohorts.get(&verdict.cohort).ok_or("cohort missing")?;
+                    return ensure(c.verifier==p.subject&&p.goals.contains(&c.goal),"custody scope denied");
+                }
+                let Action::Verify{task}= &signed.request.action else{return Err("verifier may only verify or attest a cohort".into());};
                 let t=world.tasks.get(task).ok_or("verification task missing")?;
                 ensure(p.goals.contains(&t.spec.goal),"verifier goal not authorized")?;
                 ensure(t.lease.as_ref().is_none_or(|l|l.worker!=p.subject),"verifier cannot be submitting worker")

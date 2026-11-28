@@ -29,6 +29,7 @@ fn kernel_cli(args:&[String])->Result<(),String>{
         "collect"=>serde_json::json!({"objects_removed":store.collect_garbage()?}),
         "population"=>store.inspect()?.audit_population(),
         "resources"=>store.inspect()?.resource_report(),
+        "provider-accounting"=>store.inspect()?.provider_accounting(),
         "endurance-evaluate"=>{
             use persistent_intelligence_runtime::kernel::endurance::{Policy,Observation};
             let policy:Policy=read_json(required(args,3,"endurance policy file")?)?;

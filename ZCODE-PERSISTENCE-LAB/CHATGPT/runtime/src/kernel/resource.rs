@@ -4,7 +4,7 @@ use super::model::*;
 use crate::Result;
 use serde::{Serialize,Deserialize};
 use serde_json::{Value,json};
-use std::{fs,path::Path,process::Child};
+use std::{collections::BTreeMap,fs,path::Path,process::Child};
 #[derive(Clone,Debug,Serialize,Deserialize,Default)]
 pub struct Counters{
     pub cpu_100ns:Option<u64>,pub peak_working_set_bytes:Option<u64>,
@@ -70,25 +70,93 @@ impl World{
     }
     pub fn resource_report(&self)->Value{
         let n=self.resource_receipts.len();
+        let native_attempts=self.attempt_history.values().filter(|a|self.agents.get(&a.agent).is_some_and(|agent|agent.incarnations.iter().any(|i|i.number==a.incarnation&&i.executor=="native-pure-process"))).count();
         let sum=|f:fn(&Counters)->Option<u64>|{
-            let mut total=0u64;let mut measured=0usize;
-            for r in self.resource_receipts.values(){if let Some(v)=f(&r.counters){total=total.saturating_add(v);measured+=1;}}
-            json!({"sum":if measured==0{None}else{Some(total)},"measured_attempts":measured,"missing_attempts":self.attempt_history.len().saturating_sub(measured)})
+            let mut total=Some(0u64);let mut measured=0usize;
+            for r in self.resource_receipts.values(){if let Some(v)=f(&r.counters){total=total.and_then(|n|n.checked_add(v));measured+=1;}}
+            json!({"sum":if measured==0{None}else{total},"overflow":total.is_none(),"measured_attempts":measured,"missing_native_attempts":native_attempts.saturating_sub(measured)})
         };
         let peak=self.resource_receipts.values().filter_map(|r|r.counters.peak_working_set_bytes).max();
-        json!({"attempts":self.attempt_history.len(),"resource_receipts":n,"cpu_100ns":sum(|c|c.cpu_100ns),"os_read_bytes":sum(|c|c.os_read_bytes),"os_write_bytes":sum(|c|c.os_write_bytes),"work_bytes":sum(|c|c.work_bytes),"output_bytes":sum(|c|c.output_bytes),"checkpoint_bytes":sum(|c|c.checkpoint_bytes),"peak_working_set_bytes":peak,"search_costs":self.learning_costs,"host_operations":self.host_costs,"router_usage_records":self.router.reservations.len()})
+        json!({"attempts":self.attempt_history.len(),"native_attempts":native_attempts,"resource_receipts":n,"cpu_100ns":sum(|c|c.cpu_100ns),"os_read_bytes":sum(|c|c.os_read_bytes),"os_write_bytes":sum(|c|c.os_write_bytes),"work_bytes":sum(|c|c.work_bytes),"output_bytes":sum(|c|c.output_bytes),"checkpoint_bytes":sum(|c|c.checkpoint_bytes),"peak_working_set_bytes":peak,"search_costs":self.learning_costs,"host_operations":self.host_costs,"router_usage_records":self.router.reservations.len(),"provider_accounting":self.provider_accounting()})
     }
 }
 
 
-/// Measured host wall duration; does not conflate wall time with CPU or
-/// model tokens. If the source mutation fails, result_digest remains absent.
+/// Legacy operation labels denote end-to-end host wall duration; transition-*
+/// labels denote atomic pre-persistence transition wall duration. Never combine
+/// the two as an exact total, or infer failed/uncertain action cost from absence.
+pub(crate) fn measured_operation(action:&super::transition::Action)->Option<&'static str>{
+    use super::transition::Action::*;
+    match action{
+        LearnPlan{..}=>Some("learning"),
+        AssimilateRecurring{..}=>Some("knowledge"),
+        DiscoverRecipes{..}=>Some("recipe"),
+        ApplyLearnedRepair{..}=>Some("repair"),
+        Verify{..}=>Some("verify"),
+        RoutingCycle{..}|GenerateDemands{..}=>Some("routing"),
+        CloseRoutingArm|StartRoutingCandidate|AbortRoutingTrial{..}|PromoteRoutingTrial{..}|RollbackRoutingTrial{..}|BeginRoutingTrial{..}=>Some("trial"),
+        _=>None,
+    }
+}
+/// Measured host wall duration; does not conflate wall time with CPU or tokens.
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct HostCost{pub request:Id,pub operation:String,pub elapsed_ms:u64,pub result_digest:Option<Digest>}
 impl World{
     pub fn record_host_cost(&mut self,r:HostCost)->Result<()>{
-        id(&r.request)?;ensure(matches!(r.operation.as_str(),"learning"|"knowledge"|"recipe"|"repair"|"verify"|"routing"|"trial"),"unsupported metered operation")?;
+        id(&r.request)?;let label=r.operation.strip_prefix("transition-").unwrap_or(&r.operation);
+        ensure(matches!(label,"learning"|"knowledge"|"recipe"|"repair"|"verify"|"routing"|"trial"),"unsupported metered operation")?;
         ensure(r.result_digest.as_ref().is_none_or(|h|hash_id(h))&&!self.host_costs.contains_key(&r.request),"invalid host cost receipt")?;
         self.host_costs.insert(r.request.clone(),r);Ok(())
+    }
+}
+
+#[derive(Default,Serialize)]
+struct UsageAggregate{
+    receipts:u64,verified:u64,requests:Option<u64>,input:Option<u64>,output:Option<u64>,reasoning:Option<u64>,credits:Option<u64>,
+}
+impl UsageAggregate{
+    fn new()->Self{Self{receipts:0,verified:0,requests:Some(0),input:Some(0),output:Some(0),reasoning:Some(0),credits:Some(0)}}
+    fn add(&mut self,r:&super::routing_adapter::AdapterReceipt,verified:bool){
+        let plus=|v:Option<u64>,n:u64|v.and_then(|v|v.checked_add(n));
+        self.receipts=self.receipts.saturating_add(1);self.verified=self.verified.saturating_add(u64::from(verified));
+        self.requests=plus(self.requests,r.usage.requests);self.input=plus(self.input,r.usage.input);
+        self.output=plus(self.output,r.usage.output);self.reasoning=plus(self.reasoning,r.usage.reasoning);self.credits=plus(self.credits,r.usage.credits);
+    }
+}
+impl World{
+    pub fn provider_accounting(&self)->Value{
+        use super::routing::Status;
+        let mut real=UsageAggregate::new();let mut synthetic=UsageAggregate::new();
+        let mut profiles=BTreeMap::<Id,UsageAggregate>::new();
+        let mut uncovered=vec![];let mut charge_only=vec![];
+        let mut pools=BTreeMap::<Id,Option<u64>>::new();let mut holds=BTreeMap::<Id,Option<u64>>::new();
+        for r in self.router.reservations.values(){
+            if matches!(r.status,Status::Reserved|Status::Dispatched|Status::Unknown){
+                for (key,n) in &r.holds{let v=holds.entry(key.clone()).or_insert(Some(0));*v=v.and_then(|v|v.checked_add(*n));}
+            }
+            if r.status==Status::Settled{
+                for (key,n) in &r.actual{let v=pools.entry(key.clone()).or_insert(Some(0));*v=v.and_then(|v|v.checked_add(*n));}
+            }
+            if r.started_ms.is_none(){continue;}
+            if let Some(receipt)=self.router.adapters.receipts.get(&r.id){
+                let a=if receipt.provider.starts_with("synthetic-"){&mut synthetic}else{&mut real};
+                a.add(receipt,r.verified==Some(true));
+                profiles.entry(r.profile.id.clone()).or_insert_with(UsageAggregate::new).add(receipt,r.verified==Some(true));
+            }else{
+                uncovered.push(r.id.clone());
+                // Previous charge-only records were stored by content digest, not
+                // in the raw usage receipt map. Recover their scope without inventing tokens.
+                let evidence=self.router.adapters.handoffs.get(&r.id).and_then(|e|e.receipt.as_ref()).and_then(|h|self.blobs.get(h));
+                if let Some(c)=evidence.and_then(|v|serde_json::from_value::<super::routing_adapter::ChargeOnlyReceipt>(v.clone()).ok()){
+                    if c.handoff==r.id&&c.actual_by_reserved_pool==r.actual&&r.receipt.as_deref()==Some(c.provider_receipt.as_str()){
+                        charge_only.push(c);
+                    }
+                }
+            }
+        }
+        json!({"confirmed_real":real,"confirmed_synthetic":synthetic,"confirmed_by_profile":profiles,
+            "uncovered_dispatch_ids":uncovered,"all_raw_usage_covered":uncovered.is_empty(),"charge_only_receipts":charge_only,
+            "lifetime_settled_by_pool":pools,"active_holds_by_pool":holds,
+            "pool_totals_are_overlapping_not_additive":true,"null_total_means_overflow":true})
     }
 }

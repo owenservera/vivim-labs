@@ -13,10 +13,7 @@ fn request_id()->Result<Id>{Ok(format!("r-{}-{}-{}",std::process::id(),SystemTim
 fn apply(store:&KernelStore,actor:Actor,action:Action)->Result<Value>{store.apply(Request{id:request_id()?,actor,action})}
 fn host(store:&KernelStore,action:Action)->Result<Value>{apply(store,Actor::Host,action)}
 fn metered_host(store:&KernelStore,operation:&str,action:Action)->Result<Value>{
-    let request=request_id()?;let start=Instant::now();
-    let result=store.apply(Request{id:request.clone(),actor:Actor::Host,action});
-    let receipt=super::resource::HostCost{request,operation:operation.into(),elapsed_ms:u64::try_from(start.elapsed().as_millis()).unwrap_or(u64::MAX),result_digest:result.as_ref().ok().map(crate::digest)};
-    host(store,Action::RecordHostCost{receipt})?;result
+    store.apply_metered(Request{id:request_id()?,actor:Actor::Host,action},operation)
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct Work {pub class:Class,pub operators:BTreeMap<Id,OperatorContract>,pub input:Value,#[serde(default)] pub resume:Option<Value>}

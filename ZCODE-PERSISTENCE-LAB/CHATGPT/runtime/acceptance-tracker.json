@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-SOURCE-CLOSURE-006",
+  "revision": "R004-SOURCE-CLOSURE-007",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -867,14 +867,17 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
+        "source_pin": "0a3b982e4e3b26f78504e0b99f513bbd7ab22f7a",
         "files": [
           "src/kernel/resource.rs",
           "src/kernel/lifecycle.rs",
           "src/kernel/supervisor.rs",
-          "src/kernel/intelligence.rs"
+          "src/kernel/intelligence.rs",
+          "src/kernel/persistence.rs",
+          "tests/closure_integrity.rs"
         ],
-        "remaining": "Native Windows process counters and artifact/checkpoint bytes, host-measured learning/recipe/repair/verification/routing/trial wall durations and explicit unknown provider counts. No invented CPU or token counts; Linux counters, complete admission/search accounting, measurement-to-receipt atomicity and qualification remain."
+        "remaining": "Atomic successful host transition measurements and prior atomic worker receipts, separate logical/measured durations, actual provider raw usage versus charge-only evidence, per-pool non-additive totals and explicit uncovered dispatches. Failed/uncertain actions, lock/load/write latency, Linux counters and empirical qualification remain.",
+        "checkpoint": "ATOMIC-METERING-001"
       }
     },
     {
@@ -905,13 +908,16 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
+        "source_pin": "0a3b982e4e3b26f78504e0b99f513bbd7ab22f7a",
         "files": [
           "src/kernel/supervisor.rs",
           "src/kernel/qualification.rs",
-          "tests/closure_native.rs"
+          "tests/closure_native.rs",
+          "src/kernel/native_qualification.rs",
+          "src/kernel/process_observation.rs"
         ],
-        "remaining": "Real executable subprocess fixture authored for 60 logical identities, 60 verified tasks, at most four sampled active leases and no routed inference. Not executed; sampled concurrency is not proof of all-process peak."
+        "remaining": "Native qualification configurable logical population independently of four slots, sampled OS direct-child concurrency and lease concurrency. Actual 60-agent execution and all-process containment qualification remain.",
+        "checkpoint": "NATIVE-OBSERVATION-001"
       }
     },
     {
@@ -962,13 +968,16 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
+        "source_pin": "0a3b982e4e3b26f78504e0b99f513bbd7ab22f7a",
         "files": [
           "src/kernel/service.rs",
           "src/kernel/supervisor.rs",
-          "tests/r004_process.rs"
+          "tests/r004_process.rs",
+          "src/kernel/native_qualification.rs",
+          "src/kernel/process_observation.rs"
         ],
-        "remaining": "Outer controller restart service, parent EOF watchdog and real-controller-kill/restart fixture authored. Not executed; fixture observes a bound worker but does not independently prove simultaneous OS worker death."
+        "remaining": "Native runner optionally requires independently observed owned direct-child process handles before controller interruption, confirms expected watchdog exit and all sampled exits within programmable budget; generation-fenced artifact recovery. Actual execution, unobserved spawn races and full process containment remain.",
+        "checkpoint": "NATIVE-OBSERVATION-001"
       }
     },
     {
@@ -1001,14 +1010,15 @@
       "outstanding": "Actual policy-pinned independent execution evidence required; no default minimum wall-clock duration.",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "110b08448c6486d850b60c9034c815931f6693e3",
+        "source_pin": "0a3b982e4e3b26f78504e0b99f513bbd7ab22f7a",
         "files": [
           "src/kernel/endurance.rs",
           "src/kernel/native_qualification.rs",
-          "src/main.rs"
+          "src/main.rs",
+          "src/kernel/process_observation.rs"
         ],
-        "remaining": "Native controller fault scheduling, durable intent/exit/recovery receipts and independent artifact oracle authored; real repeated fault run, independent worker death and four-arm qualification remain.",
-        "checkpoint": "SOURCE-CLOSURE-005"
+        "remaining": "Programmable controller-fault schedule, sampled real worker-handle evidence and independent artifact oracle authored. Full simultaneous containment and real comparative run remain.",
+        "checkpoint": "NATIVE-OBSERVATION-001"
       }
     },
     {
@@ -1097,10 +1107,10 @@
         "id": "R06",
         "criterion": "Native-first task selection and incarnation-bound dispatch contract",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Host-programmable bounded demand generation and negative scope/native-first fixture authored; live adapter wiring and qualification remain. Profile allowlist freezes per demand; registry changes need new policy/demand lifecycle handling.",
+        "remaining": "Host demand generation and routing-wait deadline wake authored; profile refresh, actual adapter integration and qualification remain.",
         "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
-        "source_pin": "110b08448c6486d850b60c9034c815931f6693e3",
-        "checkpoint": "DEMAND-GENERATION-001"
+        "source_pin": "0a3b982e4e3b26f78504e0b99f513bbd7ab22f7a",
+        "checkpoint": "NATIVE-OBSERVATION-001"
       },
       {
         "id": "R07",
@@ -1114,15 +1124,17 @@
         "id": "R08",
         "criterion": "Live provider observations, actual model/thinking receipt and adapter execution",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Signed goal-scoped adapter handoff authority, quota receipt contracts, protected-host preflight. Real provider transport, actual observations and OS isolation not deployed.",
-        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881"
+        "remaining": "Durable manifest-bound asynchronous external adapter mailbox, one-shot take, immutable identity-bound actual receipts, late reconciliation and disabled-adapter visibility authored. No real external adapter wired or qualified; host custody must be provisioned.",
+        "source_pin": "0a3b982e4e3b26f78504e0b99f513bbd7ab22f7a",
+        "checkpoint": "ADAPTER-MAILBOX-001"
       },
       {
         "id": "R09",
         "criterion": "Autonomous provider dispatch/reconciliation and empirical budget optimization",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Frozen trial bindings and configuration fingerprint; existing bounded policy evolution preserved. Actual repeated randomized provider comparisons, regression watch and real execution remain.",
-        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881"
+        "remaining": "Fair persisted advisory cursor across supported handoffs, asynchronous mailbox publication and observation-only reconciliation; no live adapter, empirical policy trial, or automatic uncertainty resolution.",
+        "source_pin": "0a3b982e4e3b26f78504e0b99f513bbd7ab22f7a",
+        "checkpoint": "ADAPTER-MAILBOX-001"
       },
       {
         "id": "R10",
@@ -1149,7 +1161,7 @@
     }
   },
   "completion_dashboard": {
-    "revision": "R004-SOURCE-CLOSURE-006",
+    "revision": "R004-SOURCE-CLOSURE-007",
     "tracker_input_commit": "d05e332f884a11ef3bcbc69658a4de308adc812a",
     "reviewed_runtime_source": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
     "source_status_meaning": "Provisional source labels after targeted readback and integration; not a complete compiler or invariant audit, not verified operation.",
@@ -1331,6 +1343,16 @@
     "documents": [
       "STORAGE-BATCH-SCAN-001.md",
       "EXPERIMENT-VAULT-001.md"
+    ],
+    "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
+    "verified_credit": 0
+  },
+  "source_closure_007": {
+    "baseline": "32ff11ad1fed1b5ef8131218c060d4fc6eeda46e",
+    "documents": [
+      "ADAPTER-MAILBOX-001.md",
+      "NATIVE-OBSERVATION-001.md",
+      "ATOMIC-METERING-001.md"
     ],
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "verified_credit": 0

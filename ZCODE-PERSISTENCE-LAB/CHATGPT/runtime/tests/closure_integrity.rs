@@ -111,3 +111,21 @@ fn initialization_batch_is_atomic_and_scan_is_revision_fenced(){
     apply("new",goal("new")).unwrap();
     assert!(store.scan("goals",cursor,2,2,64*1024).is_err());
 }
+
+#[test]
+fn atomic_host_measurement_replays_without_second_revision(){
+    use persistent_intelligence_runtime::kernel::{persistence::KernelStore,transition::Request};
+    let temp=Temp::new();let store=KernelStore::open(&temp.0).unwrap();
+    let r=Request{id:"metered".into(),actor:Actor::Host,action:Action::GenerateDemands{limit:1}};
+    let response=store.apply_metered(r.clone(),"routing").unwrap();
+    assert_eq!(store.anchor().unwrap().revision,1);
+    let w=store.inspect().unwrap();
+    let m=&w.host_costs["metered"];assert_eq!(m.operation,"transition-routing");assert_eq!(m.result_digest.as_ref(),Some(&digest(&response)));
+    let reopened=KernelStore::open(&temp.0).unwrap();
+    assert_eq!(reopened.apply_metered(r.clone(),"routing").unwrap(),response);
+    assert_eq!(reopened.anchor().unwrap().revision,1);
+    assert!(reopened.apply_metered(r,"learning").is_err());
+    let bad=Request{id:"denied".into(),actor:Actor::Host,action:Action::Tick{now_ms:2}};
+    assert!(reopened.apply_metered(bad,"routing").is_err());
+    assert_eq!(reopened.anchor().unwrap().revision,1);
+}

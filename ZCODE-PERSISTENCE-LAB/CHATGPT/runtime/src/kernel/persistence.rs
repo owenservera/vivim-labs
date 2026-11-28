@@ -4,7 +4,7 @@ use super::{model::*,transition::{Action,Actor,Request},evolution::Discovery};
 use crate::{digest,Result};
 use serde::{Serialize,Deserialize};
 use serde_json::{Value,json};
-use std::{collections::{BTreeMap,BTreeSet},fs::{self,File,OpenOptions},io::Write,path::{Path,PathBuf},time::{SystemTime,UNIX_EPOCH}};
+use std::{collections::{BTreeMap,BTreeSet},fs::{self,File,OpenOptions},io::Write,path::{Path,PathBuf},time::{SystemTime,UNIX_EPOCH,Instant}};
 
 fn error(e:impl std::fmt::Display)->String{e.to_string()}
 fn encode<T:Serialize>(x:&T)->Result<Vec<u8>>{serde_json::to_vec(x).map_err(error)}
@@ -28,7 +28,20 @@ pub struct Receipt {pub request_digest:String,pub response:Value,pub revision:u6
 #[derive(Clone,Debug,Serialize,Deserialize)]
 struct Snapshot {schema:u32,revision:u64,previous:String,world:World,receipts:BTreeMap<Id,Receipt>}
 #[derive(Clone,Debug,Serialize,Deserialize)]
-struct Record {schema:u32,revision:u64,previous:String,command:Transaction,response:Value,#[serde(default,skip_serializing_if="Option::is_none")] index:Option<String>}
+struct Record {schema:u32,revision:u64,previous:String,command:Transaction,response:Value,#[serde(default,skip_serializing_if="Option::is_none")] index:Option<String>,#[serde(default,skip_serializing_if="Option::is_none")] host_measurement:Option<super::resource::HostCost>}
+impl Record{
+    fn verify_measurement(&self,w:&World)->Result<()>{
+        if let Some(m)=&self.host_measurement{
+            let Transaction::Command{request}=&self.command else{return Err("measurement requires host command".into());};
+            let operation=super::resource::measured_operation(&request.action).ok_or("unsupported measured action")?;
+            ensure(request.actor==Actor::Host&&m.request==request.id&&m.operation==format!("transition-{operation}")
+                &&m.result_digest.as_ref()==Some(&digest(&self.response)),"measurement receipt identity mismatch")?;
+            let stored=w.host_costs.get(&m.request).ok_or("indexed host measurement missing")?;
+            ensure(encode(stored)?==encode(m)?,"indexed host measurement mismatch")?;
+        }
+        Ok(())
+    }
+}
 #[derive(Clone,Debug,Serialize,Deserialize)]
 struct Envelope<T>{checksum:String,body:T}
 impl<T:Serialize> Envelope<T>{
@@ -118,6 +131,7 @@ impl KernelStore{
                 ensure(marker.body.revision==start&&marker.body.index==marker.body.snapshot_digest&&marker.body.snapshot==start&&marker.body.index==top.body.snapshot_digest,"checkpoint head mismatch")?;
                 let rec:Envelope<Record>=read(&self.path("record",start))?;rec.check()?;
                 ensure(rec.body.revision==start&&rec.body.index==marker.body.index&&rec.checksum==marker.body.record,"checkpoint record mismatch")?;
+                rec.body.verify_measurement(&world)?;
                 marker.body.record
             };
             for rev in (start+1)..=latest{
@@ -126,6 +140,7 @@ impl KernelStore{
                 ensure(marker.body.revision==rev&&marker.body.record==rec.checksum&&rec.body.revision==rev&&rec.body.previous==previous&&rec.body.index==marker.body.index,"indexed journal chain mismatch")?;
                 let receipt=receipts.get(rec.body.command.id()).ok_or("indexed receipt missing")?;
                 ensure(receipt.revision==rev&&receipt.request_digest==checksum(&rec.body.command)?&&receipt.response==rec.body.response,"indexed receipt mismatch")?;
+                rec.body.verify_measurement(&world)?;
                 previous=rec.checksum;
             }
             ensure(previous==top.body.record&&world.sequence==latest,"indexed tail mismatch")?;
@@ -149,6 +164,7 @@ impl KernelStore{
             ensure(rec.body.schema==1&&rec.body.revision==rev&&rec.body.previous==previous,"record chain mismatch")?;
             let result=rec.body.command.run(&mut world)?;
             ensure(result==rec.body.response,"replay response mismatch")?;
+            if let Some(m)=&rec.body.host_measurement{world.record_host_cost(m.clone())?;rec.body.verify_measurement(&world)?;}
             let req=rec.body.command.id().to_string();
             ensure(receipts.insert(req,Receipt{request_digest:checksum(&rec.body.command)?,response:result,revision:rev}).is_none(),"duplicate request")?;
             previous=rec.checksum;
@@ -195,6 +211,14 @@ impl KernelStore{
         ensure(!matches!(&request.action,Action::AttestCandidate{..})&&!matches!(&request.actor,Actor::Adapter{..}),"custody and adapter actions require signed ingress")?;
         self.commit(Transaction::Command{request})
     }
+    /// Meter only a whitelisted successful deterministic transition, before
+    /// serializing its state. The same head commits both action and receipt.
+    /// Lock/load/write latency and failed/uncertain actions are not measured here.
+    pub fn apply_metered(&self,request:Request,operation:&str)->Result<Value>{
+        ensure(request.actor==Actor::Host&&super::resource::measured_operation(&request.action)==Some(operation),"unsupported metered host operation")?;
+        let _guard=self.lock()?;let loaded=self.load()?;
+        self.commit_loaded_metered(Transaction::Command{request},loaded,Some(operation))
+    }
     pub fn assimilate(&self,request_id:Id,name:Id,version:u64,discovery:Discovery)->Result<Value>{
         self.commit(Transaction::Assimilate{id:request_id,name,version,discovery})
     }
@@ -237,17 +261,29 @@ impl KernelStore{
     fn commit(&self,command:Transaction)->Result<Value>{
         let _guard=self.lock()?;let loaded=self.load()?;self.commit_loaded(command,loaded)
     }
-    fn commit_loaded(&self,command:Transaction,mut loaded:Loaded)->Result<Value>{
+    fn commit_loaded(&self,command:Transaction,loaded:Loaded)->Result<Value>{
+        self.commit_loaded_metered(command,loaded,None)
+    }
+    fn commit_loaded_metered(&self,command:Transaction,mut loaded:Loaded,operation:Option<&str>)->Result<Value>{
         id(command.id())?;
         let request_digest=checksum(&command)?;
         if let Some(receipt)=loaded.receipts.get(command.id()){
             ensure(receipt.request_digest==request_digest,"request ID conflict")?;
+            if let Some(operation)=operation{
+                ensure(loaded.world.host_costs.get(command.id()).is_some_and(|m|m.operation==format!("transition-{operation}")&&m.result_digest.as_ref()==Some(&digest(&receipt.response))),"existing receipt has no matching atomic measurement")?;
+            }
             if let Transaction::Command{request}= &command{
                 if let Action::ClaimHandoff{handoff}=&request.action{return Ok(json!({"handoff_id":handoff,"replayed":true,"send_authority":"none_reconcile_only"}));}
             }
             return Ok(receipt.response.clone())
         }
+        let start=Instant::now();
         let response=command.run(&mut loaded.world)?;
+        let host_measurement=if let Some(operation)=operation{
+            let m=super::resource::HostCost{request:command.id().into(),operation:format!("transition-{operation}"),
+                elapsed_ms:u64::try_from(start.elapsed().as_millis()).unwrap_or(u64::MAX),result_digest:Some(digest(&response))};
+            loaded.world.record_host_cost(m.clone())?;Some(m)
+        }else{None};
         let rev=loaded.head.revision.checked_add(1).ok_or("revision overflow")?;
         // Record/snapshot without head are orphan preparations from a prior interrupted commit.
         for kind in ["record","snapshot"]{let p=self.path(kind,rev);if p.exists(){fs::remove_file(p).map_err(error)?;}}
@@ -255,7 +291,7 @@ impl KernelStore{
         loaded.receipts.insert(request_id,Receipt{request_digest,response:response.clone(),revision:rev});
         let index=super::index::Index::open(&self.root)?;
         let index_root=index.write(rev,&loaded.world,&loaded.receipts,loaded.head.index.as_deref())?;
-        let rec=Envelope::new(Record{schema:1,revision:rev,previous:loaded.head.record.clone(),command,response:response.clone(),index:Some(index_root.clone())})?;
+        let rec=Envelope::new(Record{schema:1,revision:rev,previous:loaded.head.record.clone(),command,response:response.clone(),index:Some(index_root.clone()),host_measurement})?;
         write_new(&self.root,&Self::name("record",rev),&rec)?;
         #[cfg(test)] super::qualification::pause_at(&self.root,"before_head")?;
         let (snapshot,snapshot_digest)=if rev%SNAP_INTERVAL==0||loaded.head.index.is_none(){

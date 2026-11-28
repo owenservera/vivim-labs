@@ -141,3 +141,6 @@ Native programmable qualification runner and matched four-arm planning source au
 
 ## Source closure 006 (unqualified)
 Host-only static declaration batches, bounded pinned index scans and a separate manifest-bound comparative persistence vault authored. E33/E45 remain partial. Original gate weights and verified scores unchanged. See STORAGE-BATCH-SCAN-001.md and EXPERIMENT-VAULT-001.md.
+
+## Source closure 007 (unqualified)
+External adapter mailbox and fair reconciliation, optional independent Windows worker-handle observations, programmable logical population and atomic successful host transition accounting authored. E42/E44/E47/E49 and R06/R08/R09 remain partial. Source and verified scores unchanged. No provider calls or qualification executed. See ADAPTER-MAILBOX-001.md, NATIVE-OBSERVATION-001.md and ATOMIC-METERING-001.md.

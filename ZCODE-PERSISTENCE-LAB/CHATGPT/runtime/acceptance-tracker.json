@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-SOURCE-CLOSURE-008",
+  "revision": "R004-SOURCE-CLOSURE-009",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -871,17 +871,19 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "0a3b982e4e3b26f78504e0b99f513bbd7ab22f7a",
+        "source_pin": "095e5585c1d612c95a09bac6961e80bad8de4be3",
         "files": [
           "src/kernel/resource.rs",
           "src/kernel/lifecycle.rs",
           "src/kernel/supervisor.rs",
           "src/kernel/intelligence.rs",
           "src/kernel/persistence.rs",
-          "tests/closure_integrity.rs"
+          "tests/closure_integrity.rs",
+          "src/kernel/reuse_economics.rs",
+          "tests/assimilation.rs"
         ],
-        "remaining": "Atomic successful host transition measurements and prior atomic worker receipts, separate logical/measured durations, actual provider raw usage versus charge-only evidence, per-pool non-additive totals and explicit uncovered dispatches. Failed/uncertain actions, lock/load/write latency, Linux counters and empirical qualification remain.",
-        "checkpoint": "ATOMIC-METERING-001"
+        "remaining": "Atomic successful host transition measurements and prior atomic worker receipts, separate logical/measured durations, actual provider raw usage versus charge-only evidence, per-pool non-additive totals and explicit uncovered dispatches. Failed/uncertain actions, lock/load/write latency, Linux counters and empirical qualification remain. Prospective matched reuse execution comparison, complete-pair evidence gating and advisory metric threshold authored; isolated randomized trials, preparation/training attribution and native qualification remain.",
+        "checkpoint": "REUSE-ECONOMICS-001"
       }
     },
     {
@@ -1165,7 +1167,7 @@
     }
   },
   "completion_dashboard": {
-    "revision": "R004-SOURCE-CLOSURE-008",
+    "revision": "R004-SOURCE-CLOSURE-009",
     "tracker_input_commit": "d05e332f884a11ef3bcbc69658a4de308adc812a",
     "reviewed_runtime_source": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
     "source_status_meaning": "Provisional source labels after targeted readback and integration; not a complete compiler or invariant audit, not verified operation.",
@@ -1367,5 +1369,12 @@
     "document": "ASSIMILATION-001.md",
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "verified_credit": 0
+  },
+  "source_closure_009": {
+    "baseline": "095e5585c1d612c95a09bac6961e80bad8de4be3",
+    "document": "REUSE-ECONOMICS-001.md",
+    "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
+    "verified_credit": 0,
+    "reconciled_parent": "4cb723ebc9ecd14492bb4286b6d7aba33ef41267"
   }
 }

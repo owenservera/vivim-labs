@@ -39,6 +39,7 @@ pub mod experiment_vault;
 pub mod adapter_mailbox;
 pub mod process_observation;
 pub mod assimilation;
+pub mod reuse_economics;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

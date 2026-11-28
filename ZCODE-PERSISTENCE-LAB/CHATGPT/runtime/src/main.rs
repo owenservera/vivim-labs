@@ -38,6 +38,7 @@ fn kernel_cli(args:&[String])->Result<(),String>{
         },
         "recipes"=>serde_json::to_value(store.inspect()?.recipes).map_err(|e|e.to_string())?,
         "assimilation"=>store.inspect()?.assimilation_report()?,
+        "reuse-economics"=>store.inspect()?.reuse_comparison_report(required(args,3,"comparison ID")?)?,
         "assimilation-review"=>serde_json::to_value(store.inspect()?.evaluate_trace_pattern(required(args,3,"frozen candidate")?)?).map_err(|e|e.to_string())?,
         "assimilation-plan"=>store.inspect()?.trace_reuse_plan(required(args,3,"family")?)?,
         "repairs"=>serde_json::to_value(store.inspect()?.recipe_repairs).map_err(|e|e.to_string())?,

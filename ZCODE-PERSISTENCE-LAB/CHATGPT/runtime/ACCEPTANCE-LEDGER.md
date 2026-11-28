@@ -147,3 +147,6 @@ External adapter mailbox and fair reconciliation, optional independent Windows w
 
 ## Source closure 008 (unqualified)
 Generalized cross-goal structural assimilation, independent review and explicit fresh-oracle reuse, rollback and yield reporting authored. E41 remains partial; no source or verified score change. See ASSIMILATION-001.md and tests/assimilation.rs. No build/test execution.
+
+## Source closure 009 (unqualified)
+Prospective matched reuse execution comparison and cost-coverage gating authored. E42 remains partial. No new source/verified score. See REUSE-ECONOMICS-001.md. No build or test execution.

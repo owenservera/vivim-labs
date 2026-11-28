@@ -89,3 +89,67 @@ fn cross_goal_freeze_review_reuse_and_disable(){
     assert!(recovered.transition(&Actor::Host,Action::InstantiateTracePattern{request:next}).is_err());
     assert_eq!(recovered.goals["reuse"].phase,GoalPhase::Complete);
 }
+
+#[test]
+fn prospective_reuse_comparison_requires_complete_matched_cost_evidence(){
+    use persistent_intelligence_runtime::kernel::reuse_economics::{Plan,Pair,Metric};
+    let mut w=World::default();
+    let seeds:Vec<_>=(1..=4).map(|n|seed(&mut w,n)).collect();
+    goal(&mut w,"review");
+    host(&mut w,Action::ConfigureAssimilation{policy:Policy{family:"increment".into(),version:1,enabled:true,min_training_goals:2,min_holdout_goals:2,max_steps:4,max_cohorts:4,auto_promote:false}});
+    host(&mut w,Action::RegisterTraceCohort{cohort:Cohort{id:"cohort".into(),family:"increment".into(),policy_version:1,review_goal:"review".into(),verifier:"verifier".into(),
+        training_goals:vec![seeds[0].0.clone(),seeds[1].0.clone()],holdout_goals:vec![seeds[2].0.clone(),seeds[3].0.clone()]}});
+    for (i,(g,c,x)) in seeds.iter().take(2).enumerate(){finish(&mut w,g,c,x,&[format!("{g}-t-0"),format!("{g}-t-1")],i as i64+1);}
+    let frozen=host(&mut w,Action::FreezeTracePattern{cohort:"cohort".into()});
+    let candidate=frozen["id"].as_str().unwrap().to_owned();
+    for (i,(g,c,x)) in seeds.iter().enumerate().skip(2){finish(&mut w,g,c,x,&[format!("{g}-t-0"),format!("{g}-t-1")],i as i64+1);}
+    let verdict=w.evaluate_trace_pattern(&candidate).unwrap();
+    w.transition(&Actor::Verifier{id:"verifier".into()},Action::AttestTracePattern{verdict}).unwrap();
+    host(&mut w,Action::PromoteTracePattern{candidate:candidate.clone()});
+    let mut pairs=vec![];let mut runs=vec![];
+    for n in 5..=6{
+        let (g,c,x)=seed(&mut w,n);
+        let reuse=format!("reuse-{n}");
+        host(&mut w,Action::InstantiateTracePattern{request:Instantiate{candidate:candidate.clone(),goal:reuse.clone(),objective:"matched reuse fixture".into(),parameters:BTreeMap::new(),
+            classes:vec![c.clone(),c.clone()],contexts:vec![x.clone(),x.clone()],oracles:vec![Oracle::Digest{expected:digest(&json!(n+1))},Oracle::Digest{expected:digest(&json!(n+2))}],claim_budget:16}});
+        let baseline_tasks=vec![format!("{g}-t-0"),format!("{g}-t-1")];
+        pairs.push(Pair{baseline:g.clone(),reuse:reuse.clone(),baseline_tasks:baseline_tasks.clone()});
+        runs.push((g.clone(),c.clone(),x.clone(),baseline_tasks,40u64));
+        runs.push((reuse.clone(),c,x,vec![format!("{reuse}-step-0"),format!("{reuse}-step-1")],30u64));
+    }
+    let plan=Plan{id:"comparison".into(),candidate,pairs,metric:Metric::NativeWorkerMs,min_pairs:2,min_reduction_bps:2000};
+    let mut mismatched=plan.clone();mismatched.pairs[0].baseline_tasks.reverse();
+    assert!(w.transition(&Actor::Host,Action::RegisterReuseComparison{plan:mismatched}).is_err());
+    host(&mut w,Action::RegisterReuseComparison{plan:plan.clone()});
+    let mut duplicate=plan;duplicate.id="duplicate".into();
+    assert!(w.transition(&Actor::Host,Action::RegisterReuseComparison{plan:duplicate}).is_err());
+    assert!(w.transition(&Actor::Host,Action::CloseReuseComparison{comparison:"comparison".into()}).is_err());
+    let mut missing=None;
+    for (g,c,x,tasks,elapsed) in runs{
+        for (i,task) in tasks.iter().enumerate(){
+            let agent=format!("cost-agent-{g}-{i}");
+            host(&mut w,Action::Agent{id:agent.clone(),goal:g.clone(),parent:None,class:c.clone(),context:x.clone()});
+            host(&mut w,Action::Activate{agent:agent.clone(),executor:"native-pure-process".into()});
+            let claim=host(&mut w,Action::Claim{task:task.clone(),agent:agent.clone(),ttl_ms:1000});
+            let output=w.run_class(&c,&claim["input"]).unwrap();
+            w.transition(&Actor::Worker{id:agent,incarnation:1},Action::Submit{task:task.clone(),generation:1,output}).unwrap();
+            host(&mut w,Action::Verify{task:task.clone()});
+            if g=="reuse-6"&&i==1{missing=Some(task.clone());}else{
+                host(&mut w,Action::RecordCost{task:task.clone(),generation:1,elapsed_ms:elapsed});
+            }
+        }
+    }
+    let incomplete=w.reuse_comparison_report("comparison").unwrap();
+    assert_eq!(incomplete["all_terminal"],true);
+    assert!(incomplete["observed_reduction_bps"].is_null());
+    host(&mut w,Action::RecordCost{task:missing.unwrap(),generation:1,elapsed_ms:30});
+    let complete=w.reuse_comparison_report("comparison").unwrap();
+    assert_eq!(complete["eligible_pairs"],2);assert_eq!(complete["baseline_total"],160);assert_eq!(complete["reuse_total"],120);
+    assert_eq!(complete["observed_reduction_bps"],2500);assert_eq!(complete["policy_mutated"],false);
+    let closed=host(&mut w,Action::CloseReuseComparison{comparison:"comparison".into()});
+    assert_eq!(closed["closed"],true);assert_eq!(w.reuse_comparison_report("comparison").unwrap(),closed);
+    let temp=Temp::new();let index=Index::open(&temp.0).unwrap();
+    let root=index.write(w.sequence,&w,&BTreeMap::<Id,Receipt>::new(),None).unwrap();
+    let (restored,_)=index.load(&root,w.sequence).unwrap();
+    assert_eq!(restored.reuse_comparison_report("comparison").unwrap(),closed);
+}

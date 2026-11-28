@@ -139,6 +139,7 @@ impl World {
                     self.artifact_value(predecessor.artifact.as_deref().ok_or("predecessor artifact missing")?)?
                 }
                 Binding::Knowledge{version}=>self.knowledge_value(version,task.family.as_deref())?,
+                Binding::SelectKnowledge{kind}=>self.select_knowledge(task.family.as_deref(),kind,&port.shape)?,
                 Binding::Context{key}=>{
                     let v=if let Some(v)=context.entries.get(key){v}
                     else{self.artifact_value(context.artifacts.get(key).ok_or("context key missing")?)?};
@@ -185,6 +186,7 @@ impl World {
                 }
                 Binding::Context{key}=>id(key)?,
                 Binding::Knowledge{version}=>{let v=self.knowledge_value(version,spec.family.as_deref())?;ensure(port.shape.accepts(v),"knowledge shape mismatch")?;}
+                Binding::SelectKnowledge{..}=>ensure(spec.family.is_some(),"automatic knowledge selection requires family")?,
             }
         }
         if let Some(key)=&spec.class{

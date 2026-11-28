@@ -32,6 +32,7 @@ pub mod genesis;
 pub mod recipes;
 pub mod resource;
 pub mod endurance;
+pub mod demand_policy;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

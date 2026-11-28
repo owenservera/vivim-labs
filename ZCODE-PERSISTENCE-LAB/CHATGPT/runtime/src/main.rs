@@ -105,6 +105,15 @@ fn kernel_cli(args:&[String])->Result<(),String>{
             store.apply(Request{id:required(args,4,"request ID")?.into(),actor:Actor::Host,action:Action::Genesis{manifest}})?
         }
         "routing-waits"=>serde_json::to_value(store.inspect()?.router.waits).map_err(|e|e.to_string())?,
+        "routing-demand-plan"=>store.inspect()?.demand_generation_plan(128)?,
+        "routing-demand-configure"=>{
+            let policy=read_json(required(args,3,"demand policy file")?)?;
+            store.apply(Request{id:required(args,4,"request ID")?.into(),actor:Actor::Host,action:Action::ConfigureDemandPolicy{policy}})?
+        },
+        "routing-demand-generate"=>{
+            let limit=required(args,3,"generation limit")?.parse::<usize>().map_err(|e|e.to_string())?;
+            store.apply(Request{id:required(args,4,"request ID")?.into(),actor:Actor::Host,action:Action::GenerateDemands{limit}})?
+        },
         "bootstrap"=>{
             let mut receipts=Vec::new();
             for contract in persistent_intelligence_runtime::kernel::native_operator_contracts()?{

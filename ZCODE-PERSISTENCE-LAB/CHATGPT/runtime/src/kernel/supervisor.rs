@@ -201,6 +201,10 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             let Some((task,repair))=w.ready().into_iter().find_map(|task|w.learned_repair_for(&task).map(|r|(task,r))) else{break;};
             metered_host(store,"repair",Action::ApplyLearnedRepair{task,repair})?;knowledge_runs+=1;progress=true;
         }
+        if launched<config.max_jobs&&store.inspect()?.demand_generation_needed(){
+            let generated=metered_host(store,"routing",Action::GenerateDemands{limit:(config.max_jobs-launched).min(128) as usize})?;
+            progress|=generated["created"].as_array().is_some_and(|a|!a.is_empty());
+        }
         if launched<config.max_jobs&&store.inspect()?.routing_cycle_needed(){
             let routing=metered_host(store,"routing",Action::RoutingCycle{limit:(config.max_jobs-launched).min(4) as usize})?;
             let count=routing["prepared"].as_array().map_or(0,|a|a.len()) as u64;

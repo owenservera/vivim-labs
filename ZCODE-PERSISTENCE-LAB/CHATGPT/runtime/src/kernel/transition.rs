@@ -27,6 +27,7 @@ pub enum Action {
     AdmitCapability{capability:Capability},DisableCapability{capability:Id},RollbackCapability{capability:Id,reason:String},
     ConfigureLearning{plan:LearningPlan},LearnPlan{plan:Id},RegisterKnowledgeRule{rule:KnowledgeRule},AssimilateRecurring{rule:Id,payload:Digest},PublishKnowledge{knowledge:Knowledge},DisableKnowledge{knowledge:Id},
     RegisterCohort{cohort:super::custody::Cohort},FreezeCandidate{id:Id,capability:Capability,cohort:Id},FreezeLearned{id:Id,name:Id,version:u64,cohort:Id,training:Vec<Id>,input:Shape,output:Shape,limit:u64},AttestCandidate{verdict:super::custody::Verdict},AdmitFrozen{candidate:Id},
+    ConfigureDemandPolicy{policy:super::demand_policy::Policy},GenerateDemands{limit:usize},
     ConfigureRouter{config:super::routing::Config},ObserveQuota{observation:super::routing::Observation},QueueInference{demand:super::routing::Demand},AllocateInference{limit:usize},
     DispatchInference{reservation:Id},InferenceUnknown{reservation:Id},ReleaseInference{reservation:Id},SettleInference{reservation:Id,usage:super::routing::Usage,outcome:super::routing::Outcome,receipt:String,latency_ms:u64},VerifyInference{reservation:Id,evidence:Id},
     SetRoutingBatchPolicy{policy:super::routing_optimizer::BatchPolicy},
@@ -412,6 +413,8 @@ impl World {
             AssimilateRecurring{rule,payload}=>{actor.host()?;return self.assimilate_recurring(&rule,&payload);}
             PublishKnowledge{knowledge}=>{actor.host()?;let key=self.publish_knowledge(knowledge)?;return Ok(json!({"knowledge":key}));}
             DisableKnowledge{knowledge}=>{actor.host()?;self.knowledge.get_mut(&knowledge).ok_or("knowledge missing")?.enabled=false;}
+            ConfigureDemandPolicy{policy}=>{actor.host()?;self.configure_demand_policy(policy)?;}
+            GenerateDemands{limit}=>{actor.host()?;return self.generate_demands(limit);}
             ConfigureRouter{config}=>{actor.host()?;self.router.configure(config)?;self.router.tick(self.clock_ms)?;}
             ObserveQuota{observation}=>{actor.host()?;self.router.observe(observation)?;}
             QueueInference{demand}=>{actor.host()?;self.queue_inference(demand)?;}

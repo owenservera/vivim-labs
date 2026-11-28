@@ -138,6 +138,7 @@ pub struct Router{
     #[serde(default)] pub adapters:super::routing_adapter::AdapterState,
     #[serde(default)] pub batch_policy:super::routing_optimizer::BatchPolicy,
     #[serde(default)] pub evolution:super::routing_evolution::Evolution,
+    #[serde(default,skip_serializing_if="Option::is_none")] pub demand_policy:Option<super::demand_policy::Policy>,
     #[serde(default,skip_serializing_if="BTreeMap::is_empty")] pub waits:BTreeMap<Id,super::routing_wait::WaitRecord>,
 }
 fn active(r:&Reservation)->bool{matches!(r.status,Status::Reserved|Status::Dispatched|Status::Unknown)}
@@ -159,7 +160,7 @@ impl Demand{
     }
 }
 impl Router{
-    pub fn is_empty(&self)->bool{self.config.is_none()&&self.demands.is_empty()&&self.reservations.is_empty()&&self.adapters.bindings.is_empty()&&self.planning.guard.is_none()}
+    pub fn is_empty(&self)->bool{self.config.is_none()&&self.demands.is_empty()&&self.reservations.is_empty()&&self.adapters.bindings.is_empty()&&self.planning.guard.is_none()&&self.demand_policy.is_none()}
     fn config(&self)->Result<&Config>{self.config.as_ref().ok_or("routing not configured".into())}
     pub fn configure(&mut self,c:Config)->Result<()>{
         ensure(!self.trial_active(),"configuration frozen during routing trial")?;

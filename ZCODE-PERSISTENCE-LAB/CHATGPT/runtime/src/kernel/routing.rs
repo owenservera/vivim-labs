@@ -75,7 +75,7 @@ pub struct Profile{
 pub struct Policy{
     pub version:u64,pub max_attempts:u32,pub quality_weight:u32,pub latency_weight:u32,
     pub scarcity_weight:u32,pub price_weight:u32,pub diversity_bonus:u32,
-    pub failure_cooldown_ms:u64,pub quota_cooldown_ms:u64,
+    pub failure_cooldown_ms:u64,pub quota_cooldown_ms:u64,pub reservation_ttl_ms:u64,
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct Config{
@@ -88,6 +88,7 @@ pub struct Demand{
     pub priority:u16,pub uncertainty_bps:u16,pub information_gain_bps:u16,
     pub minimum_success_bps:u16,pub deadline_ms:Option<u64>,
     pub allowed_profiles:BTreeSet<Id>,pub allowed_providers:BTreeSet<Id>,
+    #[serde(default)] pub excluded_providers:BTreeSet<Id>,
     pub allow_frontier:bool,pub independent_review:bool,
     #[serde(default="default_true")] pub prefer_native:bool,
     /// Optional extra pools for experiment/goal/task caps.
@@ -145,7 +146,7 @@ impl Router{
     fn config(&self)->Result<&Config>{self.config.as_ref().ok_or("routing not configured".into())}
     pub fn configure(&mut self,c:Config)->Result<()>{
         ensure(c.policy.version>0&&c.policy.max_attempts>0&&c.policy.max_attempts<=64,"invalid routing policy")?;
-        ensure(c.policy.failure_cooldown_ms<=DAY_MS&&c.policy.quota_cooldown_ms<=7*DAY_MS,"invalid cooldown")?;
+        ensure(c.policy.failure_cooldown_ms<=DAY_MS&&c.policy.quota_cooldown_ms<=7*DAY_MS&&(1..=DAY_MS).contains(&c.policy.reservation_ttl_ms),"invalid cooldown or reservation expiry")?;
         ensure(!c.pools.is_empty()&&!c.profiles.is_empty()&&c.pools.len()<=4096&&c.profiles.len()<=4096,"invalid registry size")?;
         if let Some(old)=&self.config{
             ensure(c.policy.version>old.policy.version,"policy version must increase")?;
@@ -184,7 +185,8 @@ impl Router{
         self.config=Some(c);Ok(())
     }
     pub fn tick(&mut self,now:u64)->Result<()>{
-        ensure(now>=self.clock_ms,"routing clock reversed")?;self.clock_ms=now;Ok(())
+        ensure(now>=self.clock_ms,"routing clock reversed")?;self.clock_ms=now;
+        if let Some(c)=&self.config{for r in self.reservations.values_mut().filter(|r|r.status==Status::Reserved){if now.saturating_sub(r.created_ms)>=c.policy.reservation_ttl_ms{r.status=Status::Released;r.outcome=Some(Outcome::NotSent);r.ended_ms=Some(now);}}}Ok(())
     }
     pub fn observe(&mut self,o:Observation)->Result<()>{
         let p=self.config()?.pools.get(&o.pool).ok_or("pool missing")?;
@@ -197,6 +199,7 @@ impl Router{
         id(&d.id)?;id(&d.goal)?;id(&d.task)?;id(&d.family)?;
         ensure(!self.demands.contains_key(&d.id)&&d.priority<=1000&&d.uncertainty_bps<=10_000&&d.information_gain_bps<=10_000&&d.minimum_success_bps<=10_000&&d.output_tokens>0,"invalid demand")?;
         ensure(d.extra_pools.iter().all(|k|c.pools.contains_key(k)),"unknown demand quota pool")?;
+        ensure(d.extra_pools.iter().all(|k|c.pools[k].frontier.is_none()),"frontier pools must be attached to frontier profiles")?;
         ensure(d.allowed_profiles.iter().all(|k|c.profiles.contains_key(k)),"unknown allowed profile")?;
         ensure(!self.demands.values().any(|x|x.task==d.task),"task already has routing demand")?;
         self.demands.insert(d.id.clone(),d);Ok(())
@@ -261,7 +264,7 @@ impl Router{
         if history.iter().any(|r|active(r)||r.verified==Some(true)||(r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none())){
             return Ok(Recommendation{chosen:None,eligible:vec![],excluded:BTreeMap::new(),reason:"active, uncertain or already verified demand".into()});
         }
-        if history.len()>=c.policy.max_attempts as usize||d.deadline_ms.is_some_and(|t|t<=self.clock_ms){
+        if history.iter().filter(|r|r.status!=Status::Released).count()>=c.policy.max_attempts as usize||d.deadline_ms.is_some_and(|t|t<=self.clock_ms){
             return Ok(Recommendation{chosen:None,eligible:vec![],excluded:BTreeMap::new(),reason:"attempt budget or deadline exhausted".into()});
         }
         let usage_for=|p:&Profile|Usage{requests:1,input:d.input_tokens,output:d.output_tokens,reasoning:d.reasoning_tokens,credits:p.credit_ceiling};
@@ -270,10 +273,10 @@ impl Router{
             let result=(||->Result<(u16,u64,BTreeMap<Id,u64>)>{
                 ensure(p.enabled&&(!p.frontier||d.allow_frontier),"profile disabled or frontier not allowed")?;
                 ensure(d.allowed_profiles.is_empty()||d.allowed_profiles.contains(key),"profile not allowed")?;
-                ensure(d.allowed_providers.is_empty()||d.allowed_providers.contains(&p.provider),"provider not allowed")?;
+                ensure((d.allowed_providers.is_empty()||d.allowed_providers.contains(&p.provider))&&!d.excluded_providers.contains(&p.provider),"provider not allowed")?;
                 ensure(d.capabilities.is_subset(&p.capabilities),"missing capability")?;
                 ensure(sum(sum(d.input_tokens,d.output_tokens)?,d.reasoning_tokens)?<=p.max_context&&d.output_tokens<=p.max_output&&d.reasoning_tokens<=p.max_reasoning,"context or generation limit")?;
-                ensure(self.cooldowns.get(key).copied().unwrap_or(0)<=self.clock_ms&&self.provider_cooldowns.get(&p.account).copied().unwrap_or(0)<=self.clock_ms,"profile or account cooling down")?;
+                ensure(self.cooldowns.get(key).copied().unwrap_or(0)<=self.clock_ms&&self.provider_cooldowns.get(&format!("{}:{}",p.provider,p.account)).copied().unwrap_or(0)<=self.clock_ms,"profile or account cooling down")?;
                 ensure(self.reservations.values().filter(|r|active(r)&&r.profile.id==*key).count()<p.max_parallel as usize,"profile concurrency limit")?;
                 ensure(!history.iter().any(|r|r.profile.id==*key&&(r.verified==Some(false)||r.outcome==Some(Outcome::Rejected))),"previous verified rejection; use different profile")?;
                 if d.independent_review{ensure(!history.iter().any(|r|r.profile.provider==p.provider),"review requires different provider")?;}
@@ -312,7 +315,7 @@ impl Router{
         Ok(Recommendation{chosen:eligible.first().cloned(),reason:if eligible.is_empty(){"wait_or_require_policy_review"}else{"ranked_feasible_profiles"}.into(),eligible,excluded})
     }
     pub fn reserve(&mut self,key:Id,demand:&str)->Result<Value>{
-        id(&key)?;ensure(!self.reservations.contains_key(&key),"reservation exists")?;
+        id(&key)?;ensure(!self.reservations.contains_key(&key)&&!self.decisions.contains_key(&key),"reservation or decision exists")?;
         let rec=self.recommend(demand)?;
         let Some(choice)=rec.chosen.clone() else{self.decisions.insert(key,rec.clone());return Ok(json!({"reserved":false,"decision":rec}));};
         let c=self.config()?;let p=c.profiles[&choice.profile].clone();let d=self.demands[demand].clone();
@@ -333,6 +336,7 @@ impl Router{
         ensure(self.cooldowns.get(&p.id).copied().unwrap_or(0)<=self.clock_ms&&self.provider_cooldowns.get(&p.account).copied().unwrap_or(0)<=self.clock_ms,"profile or account cooling down")?;
         for pool in r.holds.keys(){
             let (spent,held)=self.totals(&c.pools[pool],None)?;
+            if matches!(c.pools[pool].window,Window::Fixed{..}){ensure(c.pools[pool].window.bounds(r.created_ms)?.0==c.pools[pool].window.bounds(self.clock_ms)?.0,"quota reset; release and reroute")?;}
             ensure(spent.saturating_add(held)<=c.pools[pool].limit,"budget reduced below reservations")?;
             if c.pools[pool].require_observation{
                 let p=&c.pools[pool];let o=self.observations.get(pool).ok_or("quota observation missing")?;
@@ -367,7 +371,7 @@ impl Router{
         }
         let failure=c.policy.failure_cooldown_ms;let quota=c.policy.quota_cooldown_ms;
         let r=self.reservations.get_mut(key).unwrap();r.actual=actual;r.status=Status::Settled;r.outcome=Some(outcome.clone());r.receipt=Some(receipt);r.latency_ms=Some(latency_ms);r.ended_ms=Some(self.clock_ms);
-        if outcome==Outcome::RateLimited{self.provider_cooldowns.insert(r.profile.account.clone(),self.clock_ms.saturating_add(quota));}
+        if outcome==Outcome::RateLimited{self.provider_cooldowns.insert(format!("{}:{}",r.profile.provider,r.profile.account),self.clock_ms.saturating_add(quota));}
         if matches!(outcome,Outcome::Unavailable|Outcome::Timeout){self.cooldowns.insert(r.profile.id.clone(),self.clock_ms.saturating_add(failure));}
         if !overrun.is_empty(){self.cooldowns.insert(r.profile.id.clone(),self.clock_ms.saturating_add(quota));}
         let p=self.performance.entry(r.profile.id.clone()).or_default().entry(r.family.clone()).or_default();

@@ -1,0 +1,10 @@
+# Shared model registry adoption — R001
+2026-11-28 | Design handoff only. This is a pointer to Product's canonical owner contract, not a second implementation or budget ledger.
+Product design (pinned): https://github.com/owenservera/vivim-product/tree/656a94cdf96606863db61359f938fc83b531c752/CODING-HARNESSES/SHARED/MODEL-REGISTRY
+Labs source review pin: 423982c9388bc085d2b94d4a0cf86cda01ac7f62.
+
+CHATGPT runtime: preserve existing goal/task/agent world, Router policy/trials, and routing_adapter envelope identity. Translate profile to Product route_id, demand to quote/reserve, Envelope to shared reservation+Host handoff reference, AdapterReceipt/QuotaReceipt to trusted shared evidence; local quota view is a projection, not another spend authority. Keep independent verification and policy promotion local. Maintain original generation/incarnation and digest guards. Existing per-arm caps become delegated scoped pool constraints. 
+
+EXPERIMENT-01 guarded_reference, 02 paced_allocation, 03 verification_cascade, 04 evidence_adaptive: retain exact experiment policies, provider assignments, seed and controller goals. Existing model budget and campaign budget interfaces become adapters to Product snapshot/quote/reserve/settle/reconcile. Use identical shared physical account pool IDs for all lanes; only consumer-level suballocations may differ. Native Codex and AGY metadata parsers are donor evidence, not proof of current entitlement. No paid overflow; preserve local day and ceilings. Do not launch previously reserved lanes or change provider assignments. R014 live qualification gates remain open.
+
+Migration: compare current registry/ledger read-only with new projections; qualify adapter, establish one account authority, drain/reconcile old holds, transfer exact prior charged/unknown state with evidence, switch ownership atomically, verify concurrent reserve/restart/receipt invariants; only then activate live customers. If Product unavailable, cached read-only inspection and isolated fixtures are allowed; no independent live spending. No experiment code, seeds, tracker states, billing configuration, or running processes changed by this handoff. 

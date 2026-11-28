@@ -179,6 +179,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             if w.running()>=w.slots{break;}
             let mut choice=None;
             for key in w.ready(){
+                if !w.native_allowed(&key){continue;}
                 let t=&w.tasks[&key];
                 if let Some(class)=w.match_class(&t.spec){
                     let empty=Context{id:"native-empty".into(),version:1,entries:BTreeMap::new(),artifacts:BTreeMap::new(),byte_budget:MAX_VALUE_BYTES};

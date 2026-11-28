@@ -120,6 +120,7 @@ pub enum Command {
     Verify {task:String},
     Execute {task:String, agent:String, generation:u64},
     Tick {now:u64},
+    Step {goal:String, ttl:u64},
     Send {id:String, from:String, to:String, body:Value},
     Ack {id:String, agent:String},
     Promote {id:String, version:u64, program:Expr, examples:Vec<String>},
@@ -136,6 +137,9 @@ impl State {
             && self.goals.get(&t.goal).is_some_and(|g|g.status==GoalStatus::Open && g.claims<g.claim_budget)
             && t.depends.iter().all(|d| self.tasks.get(d).is_some_and(|x|x.status==TaskStatus::Committed)))
             .map(|t|t.id.clone()).collect()
+    }
+    fn free(&self,agent:&str)->bool {
+        !self.tasks.values().any(|t|t.status==TaskStatus::Running&&t.lease.as_ref().is_some_and(|l|l.agent==agent))
     }
     fn checked_lease(&self, task:&str, agent:&str, generation:u64)->Result<&Task> {
         let t=self.tasks.get(task).ok_or("task missing")?; self.open_goal(&t.goal)?;
@@ -206,7 +210,7 @@ impl State {
             Claim{task,agent,ttl}=>{
                 require(ttl>0,"invalid ttl")?; require(self.ready().contains(&task),"task not ready")?;
                 let t=self.tasks.get(&task).unwrap(); let a=self.agents.get(&agent).ok_or("agent missing")?;
-                require(a.active&&a.goal==t.goal,"agent not eligible")?;
+                require(a.active&&a.goal==t.goal&&self.free(&agent),"agent not eligible or busy")?;
                 let c=self.classes.get(&a.class).ok_or("class missing")?;
                 require(c.operators.contains(&Operator::Execute),"class lacks execute")?;
                 require(t.capability.as_ref().is_none_or(|k|c.capabilities.contains(k)&&self.capabilities.get(k).is_some_and(|x|x.active)),"class lacks active capability")?;
@@ -264,6 +268,37 @@ impl State {
             Tick{now}=>{
                 require(now>=self.clock,"clock cannot reverse")?; self.clock=now;
                 for t in self.tasks.values_mut().filter(|t|t.status==TaskStatus::Running&&t.lease.as_ref().is_some_and(|l|l.expires<=now)) { Self::release(t); }
+            }
+            Step{goal,ttl}=>{
+                require(ttl>0,"invalid ttl")?;
+                let g=self.goals.get(&goal).ok_or("goal missing")?;
+                if g.status!=GoalStatus::Open { return Ok(serde_json::json!({"action":"idle","reason":"goal closed"})); }
+                if let Some(task)=self.tasks.values().find(|t|t.goal==goal&&t.status==TaskStatus::Submitted).map(|t|t.id.clone()){
+                    let result=self.transition(Verify{task:task.clone()})?;
+                    return Ok(serde_json::json!({"action":"verified","task":task,"result":result}));
+                }
+                let mut ready=self.ready();
+                // Prefer tasks that unlock more pending dependents; stable ID tie break.
+                ready.sort_by_key(|id|(std::cmp::Reverse(self.tasks.values().filter(|t|t.status==TaskStatus::Pending&&t.depends.contains(id)).count()),id.clone()));
+                for task in ready {
+                    let t=&self.tasks[&task];
+                    if t.goal!=goal {continue;}
+                    let Some(cap)=&t.capability else {continue;};
+                    if !self.capabilities.get(cap).is_some_and(|c|c.active){continue;}
+                    let Some(agent)=self.agents.values().filter(|a|a.goal==goal&&(a.active||a.incarnation==0)&&self.free(&a.id))
+                        .filter(|a|self.classes.get(&a.class).is_some_and(|c|c.operators.contains(&Operator::Execute)&&c.capabilities.contains(cap)))
+                        .min_by_key(|a|(!a.active,a.id.clone())).map(|a|a.id.clone()) else {continue;};
+                    if !self.agents[&agent].active {self.transition(Activate{agent:agent.clone()})?;}
+                    let l=self.transition(Claim{task:task.clone(),agent:agent.clone(),ttl})?;
+                    let generation=l["generation"].as_u64().ok_or("lease missing generation")?;
+                    if let Err(reason)=self.transition(Execute{task:task.clone(),agent:agent.clone(),generation}){
+                        self.transition(Fail{task:task.clone(),agent,generation,reason:reason.clone()})?;
+                        return Ok(serde_json::json!({"action":"failed","task":task,"reason":reason}));
+                    }
+                    let result=self.transition(Verify{task:task.clone()})?;
+                    return Ok(serde_json::json!({"action":"computed","task":task,"result":result}));
+                }
+                Ok(serde_json::json!({"action":"idle","reason":"no eligible deterministic work"}))
             }
             Send{id,from,to,body}=>{
                 valid_id(&id)?; require(self.agents.get(&from).zip(self.agents.get(&to)).is_some_and(|(a,b)|a.goal==b.goal),"invalid mailbox endpoints")?;

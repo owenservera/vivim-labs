@@ -198,10 +198,13 @@ impl World {
         else {ensure(!spec.inputs.values().any(|p|matches!(&p.binding,Binding::Context{..})),"context input requires explicit context version")?;}
         Ok(())
     }
+    pub fn class_available(&self,key:&str)->bool{
+        let learned=self.capabilities.values().any(|c|c.class==key)||self.frozen_candidates.values().any(|c|c.capability.class==key);
+        !learned||self.capabilities.values().any(|c|c.class==key&&c.enabled)
+    }
     pub fn match_class(&self,spec:&TaskSpec)->Option<Id>{
         if let Some(c)=&spec.class{
-            let learned=self.capabilities.values().any(|k|&k.class==c);
-            return if !learned||self.capabilities.values().any(|k|&k.class==c&&k.enabled){Some(c.clone())}else{None};
+            return if self.class_available(c){Some(c.clone())}else{None};
         }
         let family=spec.family.as_ref()?;
         self.capabilities.values().filter(|c|c.enabled&&&c.family==family)

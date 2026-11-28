@@ -78,3 +78,7 @@ Source pin: 4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e. 38 source-implemented/unve
 ## R004 source checkpoint 003 (unqualified)
 
 Source pin: 3496f0b829b652488cdfdc2ed39da996c2c6e425. 40 source-implemented/unverified, 6 partial source, 4 deferred. Historical R003 28/100; R004 verified 0/100. See [IMPLEMENTATION-R004-003.md](IMPLEMENTATION-R004-003.md). Native qualification source was authored but never executed. Original criteria, weights, priorities and historical evidence unchanged.
+
+## Supplemental model routing R001
+
+See [MODEL-ROUTING-R001.md](MODEL-ROUTING-R001.md) and [routing.example.json](routing.example.json). Source pin f732d7648c729910a1dfe5ad412e409cb6cc3d58. Seven of ten supplemental routing gates have source implementation; three deferred for live provider adapters, automation and qualification. The original 50-gate source count (40 implemented, 6 partial, 4 deferred) and verification scores remain unchanged. No model calls, builds, tests or experimental folder changes.

@@ -173,7 +173,7 @@ impl KernelStore{
         ensure(current.revision==anchor.revision&&current.digest==anchor.digest,"external anchor mismatch")
     }
     pub fn apply(&self,request:Request)->Result<Value>{
-        ensure(!matches!(&request.action,Action::AttestCandidate{..}),"custody verdict requires signed ingress")?;
+        ensure(!matches!(&request.action,Action::AttestCandidate{..})&&!matches!(&request.actor,Actor::Adapter{..}),"custody and adapter actions require signed ingress")?;
         self.commit(Transaction::Command{request})
     }
     pub fn assimilate(&self,request_id:Id,name:Id,version:u64,discovery:Discovery)->Result<Value>{

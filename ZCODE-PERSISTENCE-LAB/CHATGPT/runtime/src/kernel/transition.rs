@@ -7,7 +7,7 @@ use std::collections::BTreeSet;
 
 #[derive(Clone,Debug,Serialize,Deserialize,PartialEq,Eq)]
 #[serde(tag="kind",rename_all="snake_case")]
-pub enum Actor {Host,Worker{id:Id,incarnation:u64},Verifier{id:Id}}
+pub enum Actor {Host,Worker{id:Id,incarnation:u64},Verifier{id:Id},Adapter{id:Id}}
 #[derive(Clone,Debug,Serialize,Deserialize)]
 #[serde(tag="action",rename_all="snake_case")]
 pub enum Action {
@@ -175,7 +175,11 @@ impl World {
         if let Action::Submit{..}=&action{if let Actor::Worker{id,..}=actor{
             ensure(!self.agents.get(id).and_then(|a|a.incarnations.last()).is_some_and(|i|i.executor.starts_with("routed:")),"routed result requires host adapter receipt")?;
         }}
-        let mut next=self.clone();let output=next.apply_inner(actor,action)?;next.reconcile_prepared()?;next.reconcile_inference();next.refresh_routing_waits()?;next.settle()?;next.reconcile_inference();next.refresh_routing_waits()?;next.refresh_handoffs();next.refresh_frontier_demand()?;
+        let mut next=self.clone();
+        let output=if let Actor::Adapter{id:adapter}=actor{
+            next.authorize_adapter_action(adapter,&action)?;
+            next.apply_inner(&Actor::Host,action)?
+        }else{next.apply_inner(actor,action)?;};next.reconcile_prepared()?;next.reconcile_inference();next.refresh_routing_waits()?;next.settle()?;next.reconcile_inference();next.refresh_routing_waits()?;next.refresh_handoffs();next.refresh_frontier_demand()?;
         next.sequence=next.sequence.checked_add(1).ok_or("sequence overflow")?;*self=next;Ok(output)
     }
     pub(crate) fn apply_adapter_action(&mut self,actor:&Actor,action:Action)->Result<Value>{self.apply_inner(actor,action)}

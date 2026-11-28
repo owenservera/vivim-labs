@@ -9,7 +9,7 @@ use std::{collections::{BTreeMap,BTreeSet},path::Path};
 
 #[derive(Clone,Debug,Serialize,Deserialize,PartialEq,Eq)]
 #[serde(rename_all="snake_case")]
-pub enum Role {Host,Worker,Verifier}
+pub enum Role {Host,Worker,Verifier,Adapter}
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct Principal{
     pub role:Role,pub subject:Id,pub secret_hex:String,pub incarnation:Option<u64>,
@@ -82,6 +82,7 @@ impl Authority{
             (Role::Host,Actor::Host)=>{},
             (Role::Worker,Actor::Worker{id,incarnation})=>ensure(id==&p.subject&&Some(*incarnation)==p.incarnation,"worker scope mismatch")?,
             (Role::Verifier,Actor::Verifier{id})=>ensure(id==&p.subject,"verifier scope mismatch")?,
+            (Role::Adapter,Actor::Adapter{id})=>ensure(id==&p.subject,"adapter scope mismatch")?,
             _=>return Err("actor role mismatch".into()),
         }
         Ok(p)
@@ -91,7 +92,7 @@ impl Authority{
         match p.role{
             Role::Host=>Ok(()),
             Role::Worker=>{let a=world.agents.get(&p.subject).ok_or("worker missing")?;ensure(p.goals.contains(&a.goal),"worker goal not authorized")?;ensure(a.incarnations.last().is_some_and(|i|Some(i.number)==p.incarnation),"superseded worker")},
-            Role::Verifier=>self.authorize(signed,world,now_ms),
+            Role::Verifier|Role::Adapter=>self.authorize(signed,world,now_ms),
         }
     }
     pub fn authorize(&self,signed:&SignedRequest,world:&World,now_ms:u64)->Result<()>{
@@ -103,6 +104,11 @@ impl Authority{
                 ensure(p.goals.contains(&a.goal),"worker goal not authorized")?;
                 ensure(world.current_incarnation(&p.subject)?==p.incarnation.ok_or("incarnation missing")?,"stale worker principal")?;
                 ensure(matches!(&signed.request.action,Action::Renew{..}|Action::Checkpoint{..}|Action::Submit{..}|Action::Fail{..}|Action::Send{..}|Action::Ack{..}|Action::WaitMessage{..}|Action::WaitDependency{..}|Action::Receive{..}),"worker action not authorized")
+            }
+            Role::Adapter=>{
+                let envelope=world.authorize_adapter_action(&p.subject,&signed.request.action)?;
+                let task=world.tasks.get(&envelope.task).ok_or("adapter task missing")?;
+                ensure(p.goals.contains(&task.spec.goal),"adapter goal outside signed scope")
             }
             Role::Verifier=>{
                 if let Action::AttestCandidate{verdict}=&signed.request.action{

@@ -47,12 +47,31 @@ pub struct ChargeOnlyReceipt{
     pub reason:String,
 }
 impl World{
+    /// A transport may hold only its own handoff authority. Configuration,
+    /// quotas, charge-only reconciliation and all other host mutations remain
+    /// host-only; late settlement is permitted after adapter disable.
+    pub(crate) fn authorize_adapter_action(&self,adapter:&str,action:&super::transition::Action)->Result<&Envelope>{
+        use super::transition::Action;
+        id(adapter)?;
+        let key=match action{
+            Action::ClaimHandoff{handoff}=>handoff,
+            Action::FinishHandoff{receipt}=>&receipt.handoff,
+            Action::InferenceUnknown{reservation}=>reservation,
+            _=>return Err("adapter action not authorized".into()),
+        };
+        let envelope=self.router.adapters.handoffs.get(key).ok_or("adapter handoff missing")?;
+        ensure(envelope.adapter==adapter,"handoff belongs to another adapter")?;
+        Ok(envelope)
+    }
     /// Explicit host reconciliation of an identity mismatch. Exact observed
     /// charges for every original pool are required; no fabricated model credit.
     pub fn reconcile_handoff_charge(&mut self,r:ChargeOnlyReceipt)->Result<Value>{
         let e=self.router.adapters.handoffs.get(&r.handoff).ok_or("handoff missing")?.clone();
         ensure(matches!(e.phase,HandoffPhase::Claimed|HandoffPhase::Unknown),"handoff not outstanding")?;
         ensure(!r.provider_receipt.trim().is_empty()&&r.provider_receipt.len()<=4096&&!r.reason.trim().is_empty(),"charge reconciliation evidence required")?;
+        id(&r.actual_provider)?;id(&r.actual_account)?;
+        ensure(!r.actual_model.trim().is_empty()&&!r.actual_thinking.trim().is_empty(),"actual model identity required")?;
+        ensure(!self.router.reservations.values().any(|x|x.id!=r.handoff&&x.receipt.as_deref()==Some(r.provider_receipt.as_str())),"charge receipt already attributed")?;
         let reservation=self.router.reservations.get_mut(&r.handoff).ok_or("reservation missing")?;
         ensure(matches!(reservation.status,Status::Dispatched|Status::Unknown)&&reservation.holds.keys().eq(r.actual_by_reserved_pool.keys()),"charge pool mismatch")?;
         let evidence=serde_json::to_value(&r).map_err(|e|e.to_string())?;

@@ -31,7 +31,10 @@ impl World {
             fingerprints.push(digest(task.input.as_ref().ok_or("sample input missing")?));
         }
         let previous:BTreeSet<_>=self.learning_attempts.values().flat_map(|a|a.holdout_inputs.iter().cloned()).collect();
-        ensure(fingerprints.iter().all(|d|!previous.contains(d)),"holdout already consumed")?;
+        if fingerprints.iter().any(|d|previous.contains(d)){
+            let attempt=LearningAttempt{plan:key.into(),accepted:false,capability:None,reason:Some("holdout already consumed".into()),evaluated:None,holdout_inputs:vec![],clock_ms:self.clock_ms};
+            self.learning_attempts.insert(key.into(),attempt.clone());return Ok(json!(attempt));
+        }
         // A rejected cohort cannot be repeatedly tuned against the same holdout.
         let mut attempt=LearningAttempt{plan:key.into(),accepted:false,capability:None,reason:None,evaluated:None,holdout_inputs:fingerprints,clock_ms:self.clock_ms};
         match self.discover(&p.family,p.training.clone(),p.holdouts.clone(),p.input,p.output,p.search_limit){

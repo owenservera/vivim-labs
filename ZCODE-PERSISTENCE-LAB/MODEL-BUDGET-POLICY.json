@@ -1,7 +1,7 @@
 {
   "schema": "vivim.dogfood.budget/1",
-  "revision": "R009",
-  "owner_policy": "GEMINI_ONLY",
+  "revision": "R010",
+  "owner_policy": "NATIVE_CODEX_GPT_AND_ANTIGRAVITY_GEMINI_ONLY",
   "mode": "subscription_only_no_paid_overflow",
   "scope": "experiments only",
   "sources": [
@@ -28,42 +28,46 @@
   "lanes": {
     "01": {
       "cli": "codex",
-      "admission": "HOLD_UNVERIFIED_GEMINI_ROUTE",
-      "optimization": "guarded_reference"
+      "admission": "PENDING_BILLING_ISOLATION_AND_RESERVATION",
+      "optimization": "guarded_reference",
+      "selected": true
     },
     "02": {
       "cli": "agy",
-      "admission": "PENDING_QUOTA_AND_ISOLATION",
-      "optimization": "paced_allocation"
+      "admission": "RESERVED",
+      "optimization": "paced_allocation",
+      "selected": false
     },
     "03": {
-      "cli": "agy",
-      "admission": "PENDING_QUOTA_AND_ISOLATION",
-      "optimization": "verification_cascade"
+      "cli": "codex",
+      "admission": "RESERVED",
+      "optimization": "verification_cascade",
+      "selected": false
     },
     "04": {
-      "cli": "codex",
-      "admission": "HOLD_UNVERIFIED_GEMINI_ROUTE",
-      "optimization": "evidence_adaptive"
+      "cli": "agy",
+      "admission": "PENDING_BILLING_ISOLATION_AND_RESERVATION",
+      "optimization": "evidence_adaptive",
+      "selected": true
     }
   },
   "rules": {
     "max_snapshot_age_seconds": 300,
     "reserve_percent": 15,
-    "critical_reserve_percent": 5,
+    "critical_reserve_percent": 15,
     "require_all_observed_windows": true,
     "require_explicit_group_mapping": true,
     "max_inflight_per_account": 1,
     "unknown_quota": "WAIT",
     "quota_exhausted": "WAIT_UNTIL_REFRESH_CONFIRMS_ENTITLEMENT",
     "paid_overflow": false,
-    "allow_non_gemini": false,
+    "allow_non_gemini": "Only native OpenAI GPT models on Codex assignments; Antigravity remains Gemini only.",
     "allow_provider_switch_without_new_authorization": false,
     "allow_automatic_retry_after_limit": false,
     "local_daily_token_ceiling": null,
     "local_daily_turn_ceiling": null,
     "local_day_timezone": "Europe/Madrid",
-    "note": "Local daily ceilings require owner-configured numbers; do not invent subscription entitlements. A shared account is one budget, never four independent quotas."
+    "note": "Campaign daily allocation is calculated from verified opening quotas; explicit token and turn ceilings additionally required. One subscription account, one durable reservation ledger."
   },
   "tasks": {
     "deterministic": {
@@ -118,7 +122,7 @@
       "description": "Explicitly classified high-impact failure recovery or design; may use reserved headroom."
     }
   },
-  "routing_note": "Order is an initial heuristic, not proven ranking or token price. Candidate must appear in live authenticated model list, map to observed shared quota group, and satisfy every applicable window. No orchestrator aliases until underlying model family and billing are verified. Switch models at task boundaries; preserve verified context and explicit session bindings; verify effective model on resume or start new bounded incarnation. Log decision, predicted/actual consumption, success, retries, context overhead and model drift. Learn measured verified yield per quota delta; do not equate tokens with plan quota. Compare paired seeds with same scheduler and shared-account fairness, record route mix; later fixed-model control.",
+  "routing_note": "Order is an initial heuristic, not proven ranking or token price. Candidate must appear in live authenticated model list, map to observed shared quota group, and satisfy every applicable window. No orchestrator aliases until underlying model family and billing are verified. Switch models at task boundaries; preserve verified context and explicit session bindings; verify effective model on resume or start new bounded incarnation. Log decision, predicted/actual consumption, success, retries, context overhead and model drift. Learn measured verified yield per quota delta; do not equate tokens with plan quota. Compare paired seeds with same scheduler and shared-account fairness, record route mix; later fixed-model control. R010: native Codex candidates use model@effort keys for forecasts; Gemini uses model slug. No fallback across CLI providers. Live selector requires daily ledger share. R009 simulate remains Gemini-only offline comparator.",
   "observer": {
     "module": "MODEL-QUOTA.mjs",
     "commands": [
@@ -129,5 +133,32 @@
     "billing": "Quota metadata does not prove paid overflow disabled. Separate verified account setting or owner attestation required.",
     "observed": "2026-11-28T14:00Z session-relative report: 99% five-hour, 94% weekly; historical observation only, not reusable as current admission evidence."
   },
-  "optimization_experiments": "MODEL-OPTIMIZATION-EXPERIMENTS.json"
+  "optimization_experiments": "MODEL-OPTIMIZATION-EXPERIMENTS.json",
+  "campaign": "CAMPAIGN-R010.json",
+  "codex_tasks": {
+    "extract": [
+      "gpt-6.2-sol@low",
+      "gpt-6.1-sol@low"
+    ],
+    "routine": [
+      "gpt-6.2-sol@medium",
+      "gpt-6.1-sol@medium"
+    ],
+    "implementation": [
+      "gpt-6.2-sol@high",
+      "gpt-6.1-terra@high"
+    ],
+    "debug": [
+      "gpt-6.2-sol@high",
+      "gpt-6.2-astra@high"
+    ],
+    "architecture": [
+      "gpt-6.2-sol@high",
+      "gpt-6.2-astra@xhigh"
+    ],
+    "critical": [
+      "gpt-6.2-astra@xhigh",
+      "gpt-6.2-sol@xhigh"
+    ]
+  }
 }

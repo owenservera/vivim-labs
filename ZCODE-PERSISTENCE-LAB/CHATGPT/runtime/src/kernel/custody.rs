@@ -63,6 +63,7 @@ impl World{
         ensure((2..=128).contains(&c.minimum_cases)&&c.input_fingerprints.len()>=c.minimum_cases&&c.input_fingerprints.len()<=128&&c.input_fingerprints.iter().all(|x|hash_id(x)),"invalid cohort commitments")?;
         ensure(self.cohorts.values().all(|old|old.commitment!=c.commitment&&old.input_fingerprints.is_disjoint(&c.input_fingerprints)),"cohort overlap")?;
         // Registering a cohort makes independent custody mandatory for that family.
+        ensure(!self.capabilities.values().any(|p|p.family==c.family&&p.enabled&&!self.custody_receipts.values().any(|r|r.verdict.accepted&&self.frozen_candidates.get(&r.verdict.candidate).is_some_and(|f|f.capability.id==p.id&&f.capability.version==p.version))),"disable legacy admissions before enabling independent custody")?;
         self.custody_families.insert(c.family.clone());self.cohorts.insert(c.id.clone(),c);Ok(())
     }
     pub fn freeze_learned(&mut self,key:Id,name:Id,version:u64,cohort:Id,training:Vec<Id>,input:Shape,output:Shape,limit:u64)->Result<Value>{
@@ -94,6 +95,7 @@ impl World{
         let c=self.cohorts.get(&cohort).ok_or("cohort missing")?;
         ensure(capability.enabled&&capability.family==c.family&&capability.holdouts.is_empty()&&!self.capabilities.contains_key(&capkey)&&!self.frozen_candidates.contains_key(&key),"invalid frozen candidate")?;
         ensure(!self.frozen_candidates.values().any(|x|x.cohort==cohort||version_key(&x.capability.id,x.capability.version).ok().as_ref()==Some(&capkey)),"cohort or revision already frozen")?;
+        ensure(!self.tasks.values().any(|t|t.assigned_class.as_ref()==Some(&capability.class)&&matches!(t.phase,TaskPhase::Running|TaskPhase::Submitted)),"candidate class has in-flight work")?;
         let class=self.classes.get(&capability.class).ok_or("class missing")?;
         ensure((2..=128).contains(&capability.training.len()),"invalid training cohort")?;
         let mut fingerprints=BTreeSet::new();

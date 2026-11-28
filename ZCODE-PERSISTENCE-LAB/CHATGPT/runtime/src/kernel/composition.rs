@@ -118,6 +118,8 @@ impl World {
             ensure(class.input.admits(&Self::input_shape(spec))&&spec.output.admits(&class.output),"task/class signature mismatch")?;
         }
         if let Some(family)=&spec.family{id(family)?;}
+        if let Some(context)=&spec.context{ensure(self.contexts.contains_key(context),"context version missing")?;}
+        else {ensure(!spec.inputs.values().any(|p|matches!(&p.binding,Binding::Context{..})),"context input requires explicit context version")?;}
         Ok(())
     }
     pub fn match_class(&self,spec:&TaskSpec)->Option<Id>{

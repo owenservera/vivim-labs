@@ -107,19 +107,15 @@
     },
     "architecture": {
       "preferred": [
-        "gemini-4-carbon-high",
-        "gemini-4-argon-high",
-        "gemini-4-neon-xhigh",
         "gemini-4-neon-high",
-        "gemini-4-hydrogen-xhigh",
-        "gemini-4-hydrogen-high"
+        "gemini-4-hydrogen-high",
+        "gemini-4-neon-xhigh",
+        "gemini-4-hydrogen-xhigh"
       ],
       "description": "Novel system design and high-uncertainty work."
     },
     "critical": {
       "preferred": [
-        "gemini-4-carbon-high",
-        "gemini-4-argon-high",
         "gemini-4-neon-xhigh",
         "gemini-4-hydrogen-xhigh"
       ],
@@ -174,5 +170,21 @@
       "reason": "Owner requested top tier first agent; Google positions Carbon for deepest long-horizon tasks. Explicit pin before adaptive routing; no silent downgrade.",
       "source": "https://antigravity.google/blog/gemini-4-neon-in-google-antigravity/"
     }
+  },
+  "live_gemini_tasks": {
+    "architecture": [
+      "gemini-4-carbon-high",
+      "gemini-4-argon-high",
+      "gemini-4-neon-xhigh",
+      "gemini-4-neon-high",
+      "gemini-4-hydrogen-xhigh",
+      "gemini-4-hydrogen-high"
+    ],
+    "critical": [
+      "gemini-4-carbon-high",
+      "gemini-4-argon-high",
+      "gemini-4-neon-xhigh",
+      "gemini-4-hydrogen-xhigh"
+    ]
   }
 }

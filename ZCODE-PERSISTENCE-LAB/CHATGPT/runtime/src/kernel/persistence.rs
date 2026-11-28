@@ -170,7 +170,10 @@ impl KernelStore{
         let current=self.anchor()?;
         ensure(current.revision==anchor.revision&&current.digest==anchor.digest,"external anchor mismatch")
     }
-    pub fn apply(&self,request:Request)->Result<Value>{self.commit(Transaction::Command{request})}
+    pub fn apply(&self,request:Request)->Result<Value>{
+        ensure(!matches!(&request.action,Action::AttestCandidate{..}),"custody verdict requires signed ingress")?;
+        self.commit(Transaction::Command{request})
+    }
     pub fn assimilate(&self,request_id:Id,name:Id,version:u64,discovery:Discovery)->Result<Value>{
         self.commit(Transaction::Assimilate{id:request_id,name,version,discovery})
     }

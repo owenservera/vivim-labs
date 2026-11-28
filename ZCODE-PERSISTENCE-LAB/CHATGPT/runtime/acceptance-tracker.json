@@ -678,7 +678,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "c4a070eb824d848ee7f5b13757691b9e5a2872fe",
+        "source_pin": "e81c70f531cef9875ab88a01edf00205389c7ed7",
         "files": [
           "src/kernel/index.rs",
           "src/kernel/persistence.rs",
@@ -688,9 +688,9 @@
           "src/main.rs",
           "src/kernel/topology.rs"
         ],
-        "remaining": "Ten tracked world tables including active goals/tasks/agents, grouped adaptive page updates, bounded resident cache, derived reverse dependency and ownership graph used by settlement, and bounded impact preview authored. Remaining world registries serialize fully, map mutation can copy a shared RAM map, topology rebuilt at settlement, archive capacity and empirical qualification remain.",
+        "remaining": "Ten tracked world tables, grouped leaf patches, bounded resident state, dependency-indexed settlement, archive-before-prune, historical pins, bounded chain/receipt audits and non-destructive programmable capacity reporting authored. Remaining world registries serialize fully, map mutations can copy shared maps, topology rebuilds and archive export/expiry policy and empirical qualification remain.",
         "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
-        "checkpoint": "DEPENDENCY-INDEX-001"
+        "checkpoint": "RETENTION-AUDIT-001"
       }
     },
     {
@@ -1394,7 +1394,8 @@
     "documents": [
       "TRACKED-WORLD-001.md",
       "RESIDENT-WORLD-001.md",
-      "DEPENDENCY-INDEX-001.md"
+      "DEPENDENCY-INDEX-001.md",
+      "RETENTION-AUDIT-001.md"
     ],
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "verified_credit": 0

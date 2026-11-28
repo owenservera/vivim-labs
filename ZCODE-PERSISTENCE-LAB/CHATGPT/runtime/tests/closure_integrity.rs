@@ -221,3 +221,25 @@ fn resident_state_is_fenced_by_external_commits_and_failed_transitions(){
     assert_eq!(cold.audit_index().unwrap()["receipts"],3);
     assert_eq!(hot.anchor().unwrap().digest,cold.anchor().unwrap().digest);
 }
+
+#[test]
+fn history_audit_fences_pages_and_retention_does_not_delete_evidence(){
+    use persistent_intelligence_runtime::kernel::{persistence::{KernelStore,RetentionPolicy},transition::Request};
+    let temp=Temp::new();let store=KernelStore::open(&temp.0).unwrap();
+    for n in 1..=66{
+        store.apply(Request{id:format!("tick-{n}"),actor:Actor::Host,action:Action::Tick{now_ms:n}}).unwrap();
+        if n==1{store.pin_history("first").unwrap();}
+    }
+    let anchor=store.anchor().unwrap();
+    let a=store.audit_history(1,32,Some(&anchor)).unwrap();assert_eq!(a["window_complete"],true);assert_eq!(a["next_start"],33);
+    let b=store.audit_history(33,34,Some(&anchor)).unwrap();assert_eq!(b["window_complete"],true);assert!(b["next_start"].is_null());
+    let policy=RetentionPolicy{entry_budget_per_area:1,max_archive_bytes:Some(0),max_index_bytes:Some(0),max_pin_files:Some(0)};
+    let report=store.retention_report(policy).unwrap();assert_eq!(report["deletion_authorized"],false);assert_eq!(report["pins"]["status"],"over_limit");
+    assert!(store.history_pins().unwrap().iter().any(|p|p.name=="first"));
+    store.apply(Request{id:"next".into(),actor:Actor::Host,action:Action::Tick{now_ms:67}}).unwrap();
+    assert!(store.audit_history(1,32,Some(&anchor)).is_err());
+    // Missing pre-checkpoint history is reported, never certified as valid.
+    let old=temp.0.join("journal-archive").join("0000000000000000").join("00000000000000000001.archive.json");
+    fs::remove_file(old).unwrap();
+    let gap=store.audit_history(1,2,None).unwrap();assert_eq!(gap["missing"],1);assert_eq!(gap["window_complete"],false);
+}

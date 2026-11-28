@@ -1,0 +1,6 @@
+{
+  "entry_budget_per_area": 10000,
+  "max_archive_bytes": 10737418240,
+  "max_index_bytes": 21474836480,
+  "max_pin_files": 128
+}

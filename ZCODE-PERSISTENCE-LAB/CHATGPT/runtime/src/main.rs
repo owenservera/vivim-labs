@@ -36,6 +36,16 @@ fn kernel_cli(args:&[String])->Result<(),String>{
         "history-pins"=>serde_json::to_value(store.history_pins()?).map_err(|e|e.to_string())?,
         "history-lookup"=>store.historical_lookup(required(args,3,"pin name")?,required(args,4,"table")?,required(args,5,"entity key")?)?.unwrap_or(Value::Null),
         "history-record"=>store.historical_record(required(args,3,"revision")?.parse::<u64>().map_err(|e|e.to_string())?)?,
+        "history-audit"=>{
+            let start=required(args,3,"start revision")?.parse::<u64>().map_err(|e|e.to_string())?;
+            let limit=required(args,4,"revision limit")?.parse::<usize>().map_err(|e|e.to_string())?;
+            let anchor:Option<Anchor>=args.get(5).map(|file|read_json(file)).transpose()?;
+            store.audit_history(start,limit,anchor.as_ref())?
+        },
+        "retention-report"=>{
+            let policy:persistent_intelligence_runtime::kernel::persistence::RetentionPolicy=read_json(required(args,3,"retention policy")?)?;
+            store.retention_report(policy)?
+        },
         "receipt-status"=>store.receipt_status(required(args,3,"request ID")?)?,
         "audit-index"=>store.audit_index()?,
         "run-hot"=>{

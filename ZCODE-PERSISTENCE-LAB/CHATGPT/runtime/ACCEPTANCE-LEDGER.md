@@ -162,3 +162,5 @@ Copy-on-write historical tables and exact-key adaptive page mutations authored. 
 Resident mode source addition: explicit bounded hot policy, head/tail/receipt validation, strict independent observation, and private disposable transaction state. No runtime performance or integrity claims beyond authored source. See RESIDENT-WORLD-001.md.
 
 Dependency closure: goals/tasks/agents tracked, dirty mutations grouped by leaf, settlement uses derived ownership and reverse dependencies, readiness avoids redundant effect scans and scoring. No empirical qualification. See DEPENDENCY-INDEX-001.md.
+
+Retention closure: anchor-fenced bounded history chain and receipt audit, explicit missing ranges and programmable non-destructive capacity inventory. See RETENTION-AUDIT-001.md. E33 remains partial.

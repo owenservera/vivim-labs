@@ -100,6 +100,44 @@ impl ArchivedRevision{
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct HistoricalPin{pub name:Id,pub revision:u64,pub anchor:Anchor,pub index:Digest}
+#[derive(Clone,Debug,Serialize,Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct RetentionPolicy{
+    pub entry_budget_per_area:usize,
+    pub max_archive_bytes:Option<u64>,
+    pub max_index_bytes:Option<u64>,
+    pub max_pin_files:Option<u64>,
+}
+#[derive(Default,Serialize)]
+struct Inventory{
+    files:u64,bytes:u64,visited:usize,complete:bool,
+}
+impl Inventory{
+    fn scan(root:&Path,budget:usize)->Result<Self>{
+        if !root.exists(){return Ok(Self{complete:true,..Self::default()});}
+        ensure(fs::symlink_metadata(root).map_err(error)?.file_type().is_dir(),"retention area not regular directory")?;
+        // Stack of lazy directory iterators avoids collecting all paths into RAM.
+        let mut stack=vec![fs::read_dir(root).map_err(error)?];
+        let mut out=Self::default();
+        while let Some(iter)=stack.last_mut(){
+            let Some(item)=iter.next() else{stack.pop();continue;};
+            if out.visited>=budget{return Ok(out);}
+            out.visited+=1;
+            let item=item.map_err(error)?;let ty=item.file_type().map_err(error)?;
+            if ty.is_dir(){
+                ensure(stack.len()<16,"retention directory depth exceeded")?;
+                stack.push(fs::read_dir(item.path()).map_err(error)?);
+            }else if ty.is_file(){
+                out.files=out.files.checked_add(1).ok_or("inventory file count overflow")?;
+                out.bytes=out.bytes.checked_add(item.metadata().map_err(error)?.len()).ok_or("inventory byte count overflow")?;
+            }else{return Err("nonregular entry in retention area; no traversal".into());}
+        }
+        out.complete=true;Ok(out)
+    }
+    fn status(&self,value:u64,limit:Option<u64>)->&'static str{
+        match limit{None=>"not_configured",Some(n) if value>n=>"over_limit",Some(_) if self.complete=>"within_limit",_=>"unknown_incomplete_inventory"}
+    }
+}
 #[derive(Clone)]
 struct Loaded {world:World,receipts:BTreeMap<Id,Receipt>,head:Head,lazy_receipts:bool}
 /// Explicit acceleration for a trusted cooperating local host. Does not
@@ -503,6 +541,85 @@ impl KernelStore{
         else{return Ok(json!({"revision":rev,"available":false,"reason":"historical_record_unavailable_in_existing_store"}));};
         Ok(json!({"revision":rev,"available":true,"source":source,"anchor":Anchor{revision:rev,digest:h.checksum.clone()},
             "head":h,"record":r,"send_authority":"none_historical_record_only","integrity":"individual_record_and_head_not_full_chain"}))
+    }
+    /// Verify a single historical revision, comparing all surviving active
+    /// components to its archived counterpart. Missing older records are
+    /// distinguishable from malformed files but cannot be presumed legitimate.
+    fn audit_record(&self,rev:u64)->Result<Option<ArchivedRevision>>{
+        let archived=self.read_archive(rev)?;
+        let has_head=self.path("head",rev).exists();let has_record=self.path("record",rev).exists();
+        if let Some(a)=archived{
+            if has_head{
+                let h:Envelope<Head>=read(&self.path("head",rev))?;h.check()?;
+                ensure(h.checksum==a.head.checksum,"active/archive head disagreement")?;
+            }
+            if has_record{
+                let r:Envelope<Record>=read(&self.path("record",rev))?;r.check()?;
+                ensure(r.checksum==a.record.checksum,"active/archive command disagreement")?;
+            }
+            return Ok(Some(a));
+        }
+        ensure(has_head==has_record,"partial active revision lacks archive")?;
+        if !has_head{return Ok(None);}
+        let h=read(&self.path("head",rev))?;let r=read(&self.path("record",rev))?;
+        let snapshot=if self.path("snapshot",rev).exists(){Some(read(&self.path("snapshot",rev))?)}else{None};
+        let a=ArchivedRevision{head:h,record:r,snapshot};a.check(rev)?;Ok(Some(a))
+    }
+    /// Audits bounded windows; never silently bridges a missing revision.
+    /// A previous page's anchor may be supplied to fence a multi-page audit.
+    pub fn audit_history(&self,start:u64,limit:usize,expected:Option<&Anchor>)->Result<Value>{
+        ensure(start>0&&(1..=256).contains(&limit),"invalid history audit window")?;
+        let _guard=self.lock()?;
+        let h=self.latest_head()?.ok_or("store has no committed history")?;
+        let anchor=Anchor{revision:h.revision,digest:checksum(&h)?};
+        if let Some(e)=expected{ensure(e.revision==anchor.revision&&e.digest==anchor.digest,"history audit head changed")?;}
+        ensure(start<=h.revision,"history audit start exceeds current head")?;
+        let end=start.saturating_add(limit as u64-1).min(h.revision);
+        let index=super::index::Index::open(&self.root)?;
+        let root=h.index.as_ref();
+        let mut previous=if start==1{Some("genesis".to_string())}
+            else{self.audit_record(start-1)?.map(|r|r.record.checksum)};
+        let mut records=vec![];let mut available=0usize;let mut missing=0usize;
+        let mut link_verified=0usize;let mut unknown_links=0usize;let mut receipts_verified=0usize;
+        for rev in start..=end{
+            let Some(a)=self.audit_record(rev)? else{
+                ensure(rev<h.snapshot,"missing retained committed revision")?;
+                previous=None;missing+=1;
+                records.push(json!({"revision":rev,"status":"missing_history","link":"unknown","receipt":"not_compared"}));continue;
+            };
+            let link=if let Some(p)=&previous{
+                ensure(a.record.body.previous==*p,"historical record chain mismatch")?;
+                link_verified+=1;"verified"
+            }else{unknown_links+=1;"unknown_predecessor"};
+            let receipt=if let Some(root)=root{
+                let v=index.lookup(root,h.revision,"receipts",a.record.body.command.id())?.ok_or("historical receipt missing from current index")?;
+                let r:Receipt=serde_json::from_value(v).map_err(error)?;
+                ensure(r.revision==rev&&r.request_digest==checksum(&a.record.body.command)?&&r.response==a.record.body.response,"historical receipt mismatch")?;
+                receipts_verified+=1;"verified_current_index"
+            }else{"legacy_not_compared"};
+            if rev==h.revision{ensure(a.head.checksum==anchor.digest,"history tail anchor mismatch")?;}
+            available+=1;previous=Some(a.record.checksum.clone());
+            records.push(json!({"revision":rev,"status":"available","link":link,"receipt":receipt,"record_digest":a.record.checksum,"head_digest":a.head.checksum}));
+        }
+        Ok(json!({"anchor":anchor,"start":start,"end":end,"records":records,"available":available,"missing":missing,
+            "links_verified":link_verified,"links_unknown":unknown_links,"receipts_verified":receipts_verified,
+            "window_complete":missing==0&&unknown_links==0&&receipts_verified==available,
+            "next_start":if end<h.revision{Some(end+1)}else{None},
+            "scope":"bounded_window_not_global_or_external_custody_proof","external_anchor_supplied":expected.is_some()}))
+    }
+    /// Non-destructive capacity feedback. Truncated inventories report lower
+    /// bounds; over-limit is actionable, within-limit requires a complete scan.
+    pub fn retention_report(&self,policy:RetentionPolicy)->Result<Value>{
+        ensure((1..=1_000_000).contains(&policy.entry_budget_per_area),"invalid retention inventory budget")?;
+        let _guard=self.lock()?;
+        let archive=Inventory::scan(&self.archive_root(),policy.entry_budget_per_area)?;
+        let index=Inventory::scan(&self.root.join("entity-index").join("objects"),policy.entry_budget_per_area)?;
+        let pins=Inventory::scan(&self.pin_root(),policy.entry_budget_per_area)?;
+        Ok(json!({"policy":policy,"archive":{"inventory":archive,"status":archive.status(archive.bytes,policy.max_archive_bytes)},
+            "index":{"inventory":index,"status":index.status(index.bytes,policy.max_index_bytes)},
+            "pins":{"inventory":pins,"status":pins.status(pins.files,policy.max_pin_files)},
+            "scope":"local_regular_file_bytes_not_allocated_disk_bytes","deletion_authorized":false,
+            "recommendation":"review_capacity_or_export_evidence_without_destroying_pins"}))
     }
     /// Point receipt inspection is deliberately not an execution/replay path.
     /// One-shot response bodies are never returned through this interface.

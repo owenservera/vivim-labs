@@ -17,6 +17,8 @@ pub mod projection;
 pub mod knowledge;
 pub mod service;
 pub mod custody;
+pub mod local_effect;
+pub mod ingress;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

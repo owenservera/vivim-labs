@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {openDay,reserve,settle,transact} from './CAMPAIGN-BUDGET.mjs';
+import {openDay,reserve,settle,rollDay,transact} from './CAMPAIGN-BUDGET.mjs';
 import {route} from './MODEL-BUDGET.mjs';
 const now=Date.parse('2026-11-28T14:00:00Z'),stamp=new Date(now).toISOString();
 const day=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(now));
@@ -44,3 +44,14 @@ assert.equal(route({lane:'02',task:'architecture',snapshot:g,local:agyLocal,ledg
 const d=fs.mkdtempSync(path.join(os.tmpdir(),'vivim-ledger-test-'));
 try{transact(d,prior=>{assert.equal(prior,null);return a;});transact(d,prior=>reserve(prior,intent,o,now));assert.throws(()=>transact(d,prior=>reserve(prior,intent,o,now)),/ACCOUNT_BUSY/);transact(d,prior=>settle(prior,{request_id:'request1',outcome:'FAILED',attribution_confirmed:true},later,now));assert.equal(fs.readdirSync(d).filter(n=>n.endsWith('.json')).length,3);fs.mkdirSync(path.join(d,'writer.lock'));assert.throws(()=>transact(d,()=>a),/EEXIST/);}finally{fs.rmSync(d,{recursive:true,force:true});}
 console.log('R010 campaign checks passed: four shares, selected lanes, native model/effort, reservation, failed-work charge, reset ambiguity, replay and exclusive journal.');
+
+const tiny={...intent,request_id:'tiny1',forecast:{'300':0.2,'10080':0.2}};
+const tinyFirst=settle(reserve(a,tiny,o,now),{request_id:'tiny1',outcome:'VERIFIED',attribution_confirmed:true,actual_tokens:1200},o,now);
+const tinySecond=settle(reserve(tinyFirst,{...tiny,request_id:'tiny2'},o,now),{request_id:'tiny2',outcome:'VERIFIED',attribution_confirmed:true,actual_tokens:1300},o,now);
+assert.equal(tinySecond.allocations['01'].spent['300'],1);
+assert.equal(tinySecond.allocations['01'].token_spent,2500);
+const next=now+86400000, fresh=structuredClone(o);fresh.observed_at=new Date(next).toISOString();fresh.groups.codex.windows[0].resets_at=new Date(next+4*3600000).toISOString();
+const rolled=rollDay(tinySecond,fresh,next);assert.equal(rolled.history.length,2);assert.equal(rolled.prior_days.length,1);assert.equal(rolled.allocations['01'].spent['300'],0);
+assert.throws(()=>rollDay(r,fresh,next),/RECONCILE_BEFORE_ROLLOVER/);
+assert.throws(()=>rollDay(a,o,now),/INVALID_ROLLOVER/);
+console.log('R010 cumulative rounding, token charge and next-day rollover checks passed.');

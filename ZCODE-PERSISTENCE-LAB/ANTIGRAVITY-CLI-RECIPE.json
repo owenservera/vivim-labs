@@ -1,9 +1,9 @@
 {
   "schema": "vivim.dogfood.cli-recipe/1",
-  "revision": "R009",
+  "revision": "R010",
   "scope": "EXPERIMENTS_ONLY",
   "seed_commit": "3b1d7e173071710e6795c09427162292f774030e",
-  "status": "HOLD_QUOTA_ISOLATION_AND_ADMISSION",
+  "status": "SELECTED_LANE_PENDING_LIVE_QUALIFICATION",
   "branch": "main",
   "variables": {
     "run_id": "Unique externally generated opaque ID; never use a sibling experiment name in worker prompts.",
@@ -12,7 +12,7 @@
     "controller_dir": "Private controller directory, inaccessible to agent",
     "session_id": "Provider ID obtained from owned init event, never guessed",
     "prompt": "UTF-8 task prompt from controller; no evaluator data",
-    "model": "Exact Gemini slug selected by admission and verified in live catalogue.",
+    "model": "Exact Gemini slug selected by live admission and verified in authenticated catalogue.",
     "settings_file": "Controller-generated provider settings file inside authorized provider profile; not tracked",
     "stdout_log": "Controller-private NDJSON path",
     "stderr_log": "Controller-private diagnostic path",
@@ -159,11 +159,11 @@
   "provider": "antigravity_cli",
   "assignments": [
     "EXPERIMENT-02",
-    "EXPERIMENT-03"
+    "EXPERIMENT-04"
   ],
   "crossover_assignments": [
     "EXPERIMENT-01",
-    "EXPERIMENT-04"
+    "EXPERIMENT-03"
   ],
   "context7": {
     "library_id": "/websites/antigravity_google_cli",
@@ -348,13 +348,16 @@
     "selector": "MODEL-BUDGET.mjs",
     "required_before_every_inference": true,
     "mode": "Gemini only; subscription only; no paid overflow",
-    "admission": "Requires fresh observed quota, explicit group mapping, local budget and atomic reservation before spawn.",
+    "admission": "Fresh provider entitlement, explicit task model, daily lane share, durable account reservation, isolation and independently verified no-paid-overflow setting required.",
     "note": "Selector does not fetch quota or reserve by itself. No default model or silent fallback.",
     "collector": "MODEL-QUOTA.mjs",
     "quota_evidence": "Native headless /usage report verified on workstation; Gemini Models group 99% five-hour and 94% weekly at probe. Refresh actual data before use.",
     "requires": "Atomic durable account reservation, independently verified billing entitlement and isolation before inference.",
     "optimization_variants": "MODEL-OPTIMIZATION-EXPERIMENTS.json",
     "simulation": "MODEL-BUDGET.mjs simulate produces SIMULATED_CANDIDATE only; never use simulation output to launch inference.",
-    "live": "MODEL-BUDGET.mjs live route requires verified provider entitlement; no automatic fallback or paid overflow."
-  }
+    "live": "Only selected lanes 01 and 04; inactive lanes held; no default model or silent fallback. Admission candidate is not permission to execute without atomic reservation.",
+    "campaign": "CAMPAIGN-R010.json",
+    "daily_ledger": "CAMPAIGN-BUDGET.mjs"
+  },
+  "completion_goal": "COMPLETION-GOAL.md"
 }

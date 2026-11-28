@@ -275,11 +275,12 @@ pub struct World {
     #[serde(default)] pub cohorts:BTreeMap<Id,super::custody::Cohort>,
     #[serde(default)] pub frozen_candidates:BTreeMap<Id,super::custody::FrozenCandidate>,
     #[serde(default)] pub custody_receipts:BTreeMap<Id,super::custody::CustodyReceipt>,
+    #[serde(default,skip_serializing_if="super::routing::Router::is_empty")] pub router:super::routing::Router,
     pub legacy_import:Option<super::migration::LegacyArchive>,
 }
 impl Default for World {
     fn default()->Self {
-        Self{clock_ms:0,slots:4,sequence:0,goals:BTreeMap::new(),tasks:BTreeMap::new(),agents:BTreeMap::new(),contexts:BTreeMap::new(),operators:BTreeMap::new(),classes:BTreeMap::new(),artifacts:BTreeMap::new(),evidence:BTreeMap::new(),blobs:BTreeMap::new(),checkpoints:BTreeMap::new(),messages:BTreeMap::new(),capabilities:BTreeMap::new(),metrics:Metrics::default(),learning_plans:BTreeMap::new(),learning_attempts:BTreeMap::new(),knowledge:BTreeMap::new(),run_costs:BTreeMap::new(),policy:SchedulingPolicy::default(),goal_versions:BTreeMap::new(),task_versions:BTreeMap::new(),effects:BTreeMap::new(),delivery:BTreeMap::new(),rollback_history:BTreeMap::new(),attempt_history:BTreeMap::new(),learning_costs:BTreeMap::new(),knowledge_rules:BTreeMap::new(),knowledge_publications:BTreeMap::new(),custody_families:BTreeSet::new(),cohorts:BTreeMap::new(),frozen_candidates:BTreeMap::new(),custody_receipts:BTreeMap::new(),legacy_import:None}
+        Self{clock_ms:0,slots:4,sequence:0,goals:BTreeMap::new(),tasks:BTreeMap::new(),agents:BTreeMap::new(),contexts:BTreeMap::new(),operators:BTreeMap::new(),classes:BTreeMap::new(),artifacts:BTreeMap::new(),evidence:BTreeMap::new(),blobs:BTreeMap::new(),checkpoints:BTreeMap::new(),messages:BTreeMap::new(),capabilities:BTreeMap::new(),metrics:Metrics::default(),learning_plans:BTreeMap::new(),learning_attempts:BTreeMap::new(),knowledge:BTreeMap::new(),run_costs:BTreeMap::new(),policy:SchedulingPolicy::default(),goal_versions:BTreeMap::new(),task_versions:BTreeMap::new(),effects:BTreeMap::new(),delivery:BTreeMap::new(),rollback_history:BTreeMap::new(),attempt_history:BTreeMap::new(),learning_costs:BTreeMap::new(),knowledge_rules:BTreeMap::new(),knowledge_publications:BTreeMap::new(),custody_families:BTreeSet::new(),cohorts:BTreeMap::new(),frozen_candidates:BTreeMap::new(),custody_receipts:BTreeMap::new(),router:super::routing::Router::default(),legacy_import:None}
     }
 }
 pub fn version_key(name:&str,version:u64)->Result<Id>{

@@ -174,9 +174,10 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             host(store,Action::AssimilateRecurring{rule,payload})?;
             knowledge_runs+=1;progress=true;
         }
-        if store.inspect()?.routing_cycle_needed(){
-            let routing=host(store,Action::RoutingCycle{limit:4})?;
-            progress|=routing["prepared"].as_array().is_some_and(|a|!a.is_empty());
+        if launched<config.max_jobs&&store.inspect()?.routing_cycle_needed(){
+            let routing=host(store,Action::RoutingCycle{limit:(config.max_jobs-launched).min(4) as usize})?;
+            let count=routing["prepared"].as_array().map_or(0,|a|a.len()) as u64;
+            launched=launched.saturating_add(count);progress|=count>0;
         }
         while launched<config.max_jobs{
             let w=store.inspect()?;

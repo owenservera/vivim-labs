@@ -1,6 +1,6 @@
 {
   "schema": "vivim.dogfood.budget/1",
-  "revision": "R008",
+  "revision": "R009",
   "owner_policy": "GEMINI_ONLY",
   "mode": "subscription_only_no_paid_overflow",
   "scope": "experiments only",
@@ -28,19 +28,23 @@
   "lanes": {
     "01": {
       "cli": "codex",
-      "admission": "HOLD_UNVERIFIED_GEMINI_ROUTE"
+      "admission": "HOLD_UNVERIFIED_GEMINI_ROUTE",
+      "optimization": "guarded_reference"
     },
     "02": {
       "cli": "agy",
-      "admission": "PENDING_QUOTA_AND_ISOLATION"
+      "admission": "PENDING_QUOTA_AND_ISOLATION",
+      "optimization": "paced_allocation"
     },
     "03": {
       "cli": "agy",
-      "admission": "PENDING_QUOTA_AND_ISOLATION"
+      "admission": "PENDING_QUOTA_AND_ISOLATION",
+      "optimization": "verification_cascade"
     },
     "04": {
       "cli": "codex",
-      "admission": "HOLD_UNVERIFIED_GEMINI_ROUTE"
+      "admission": "HOLD_UNVERIFIED_GEMINI_ROUTE",
+      "optimization": "evidence_adaptive"
     }
   },
   "rules": {
@@ -124,5 +128,6 @@
     "refresh": "Before each admission and after each completed turn, subject to reasonable metadata polling cadence; never infer reset or recovery solely from wall clock.",
     "billing": "Quota metadata does not prove paid overflow disabled. Separate verified account setting or owner attestation required.",
     "observed": "2026-11-28T14:00Z session-relative report: 99% five-hour, 94% weekly; historical observation only, not reusable as current admission evidence."
-  }
+  },
+  "optimization_experiments": "MODEL-OPTIMIZATION-EXPERIMENTS.json"
 }

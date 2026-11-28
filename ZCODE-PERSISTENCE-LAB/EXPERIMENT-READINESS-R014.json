@@ -1,0 +1,110 @@
+{
+  "revision": "R014",
+  "assessment": "GO_FOR_SYNTHETIC_CONTROLLED_TESTING; NO_GO_FOR_UNATTENDED_LIVE_CAMPAIGN",
+  "source_pin": "b4ff2268543870d16f1c2fdf5dd45bd449c18693",
+  "selected": [
+    "01",
+    "04"
+  ],
+  "reserved": [
+    "02",
+    "03"
+  ],
+  "gold_seed": "3b1d7e173071710e6795c09427162292f774030e",
+  "readiness_gates": [
+    {
+      "id": "P01",
+      "status": "PASS",
+      "scope": "Frozen gold seed and current charter; all four manifests match current completion-goal hash."
+    },
+    {
+      "id": "P02",
+      "status": "PASS",
+      "scope": "Provider assignments and native model catalogues; 10 Codex, 17 Gemini configurations."
+    },
+    {
+      "id": "P03",
+      "status": "PASS",
+      "scope": "Live quota metadata collection, not billing authorization."
+    },
+    {
+      "id": "P04",
+      "status": "PASS",
+      "scope": "Synthetic admission, daily shares, reservation, settlement, rollover and replay rejection."
+    },
+    {
+      "id": "P05",
+      "status": "PASS",
+      "scope": "Both selected lanes passed integrated mock controller from discovery to nine obligations, final qualification and targeted reopening; no real inference."
+    },
+    {
+      "id": "P06",
+      "status": "PASS",
+      "scope": "Synthetic sufficiency, optional economics and contract coverage."
+    },
+    {
+      "id": "P07",
+      "status": "OPEN",
+      "scope": "Verify actual account identity, subscription and no paid overflow, particularly Gemini ordinary usage entitlement."
+    },
+    {
+      "id": "P08",
+      "status": "OPEN",
+      "scope": "Externally enforced lane filesystem, process and network isolation. Shared folders are not isolation. No Docker/Podman/Windows Sandbox command discovered; non-admin token; WSL present."
+    },
+    {
+      "id": "P09",
+      "status": "OPEN",
+      "scope": "Real bounded provider adapter integrated with durable reservation and process containment; effective model/effort, resume, write and cancellation receipts."
+    },
+    {
+      "id": "P10",
+      "status": "OPEN",
+      "scope": "Independent evaluator running actual oracle commands within controlled environment, independent scope review and evidence custody."
+    },
+    {
+      "id": "P11",
+      "status": "OPEN",
+      "scope": "Explicit local turn/token caps, positive conservative cost forecasts and calibration; no exact provider quota precharge guarantee."
+    },
+    {
+      "id": "P12",
+      "status": "OPEN",
+      "scope": "Real interruption and restart, trusted reconciliation/recovery for unknown effects, fault injection and bounded two-lane launch qualification."
+    }
+  ],
+  "native_receipts": {
+    "regression": "ctl-4dcba676d057b27a",
+    "environment": "ctl-8fda20a41c290dc0",
+    "integrated_fixtures": "ctl-df88525a783adbaa",
+    "fresh_seed_and_quotas": "ctl-12c76414d0bc0480",
+    "metadata_cleanup": "ctl-25560b616975ef46"
+  },
+  "prepared_root_relative_to_localappdata": "VIVIM/CLI-Dogfood-Setup/seed-odhDgp",
+  "goal_copy_match": true,
+  "quota_observations": {
+    "codex": {
+      "observed_at": "2026-11-28T15:46:23.566Z",
+      "five_hour_remaining": 99,
+      "weekly_remaining": 79,
+      "ordinary_usage_allowed": true,
+      "billing_verified": false
+    },
+    "gemini": {
+      "observed_at": "2026-11-28T15:46:37.979Z",
+      "five_hour_remaining": 99,
+      "weekly_remaining": 94,
+      "ordinary_usage_allowed": null,
+      "billing_verified": false
+    }
+  },
+  "limitations": [
+    "Readiness gates are a defined checklist, not a time or effort estimate. PASS is scoped to observed evidence.",
+    "Fixture adapters assert synthetic boundary and evaluator receipts; they prove controller behavior, not actual containment or correctness.",
+    "Current campaign controller stops on unknown effect; live reconciliation adapter is not implemented. A qualification failure needs a bounded repair/review path.",
+    "Provider choice, optimization policy and seed knowledge are confounded in current two-lane cohort; exploratory dogfood only, causal attribution requires rotation.",
+    "The metadata command produced complete expected observations then lingered; owned session cancelled, scratch cleanup EPERM noted.",
+    "No inference, campaign or background worker launched by audit."
+  ],
+  "next": "Qualify real execution boundary and billing, integrate live one-turn adapters and independent evaluator, set bounded calibration caps, prove one safe turn per selected lane then recovery and controlled campaign."
+}

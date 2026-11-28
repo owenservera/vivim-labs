@@ -349,6 +349,9 @@
     "required_before_every_inference": true,
     "mode": "Gemini only; subscription only; no paid overflow",
     "admission": "Requires fresh observed quota, explicit group mapping, local budget and atomic reservation before spawn.",
-    "note": "Selector does not fetch quota or reserve by itself. No default model or silent fallback."
+    "note": "Selector does not fetch quota or reserve by itself. No default model or silent fallback.",
+    "collector": "MODEL-QUOTA.mjs",
+    "quota_evidence": "Native headless /usage report verified on workstation; Gemini Models group 99% five-hour and 94% weekly at probe. Refresh actual data before use.",
+    "requires": "Atomic durable account reservation, independently verified billing entitlement and isolation before inference."
   }
 }

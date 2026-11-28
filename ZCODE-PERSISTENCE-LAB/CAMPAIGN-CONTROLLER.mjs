@@ -154,7 +154,7 @@ export async function runOne({dir,lane,identity,adapter,forecast,caps,clock=Date
   const reserved=transact(dir,prior=>{
    if(prior.revision!==result.revision||prior.pending)fail('CONCURRENT_STATE_CHANGE');
    const a=prior.allocations[lane],z=structuredClone(prior.controller);
-   const local={account_key:snapshot.account_key,day:prior.day,inflight:0,daily_turn_limit:caps.turn_ceiling,daily_token_limit:caps.token_ceiling,daily_turns:a.turns,daily_tokens:a.token_spent,predicted_tokens:caps.predicted_tokens,predicted_quota_pp:forecast,verified_model_stats:z.stats,adaptive_decisions:z.turns};
+   const local={account_key:snapshot.account_key,day:prior.day,inflight:0,daily_turn_limit:caps.turn_ceiling,daily_token_limit:caps.token_ceiling,daily_turns:a.turns,daily_tokens:a.token_spent,predicted_tokens:caps.predicted_tokens,predicted_quota_pp:forecast,verified_model_stats:z.stats,adaptive_decisions:z.turns,task_id:n.task_id};
    decision=route({lane,task:n.task,snapshot,local,ledger:prior},clock());
    if(decision.decision!=='ADMIT_CANDIDATE')return hold(prior,'WAITING_BUDGET');
    const prompt=promptFor(z,n);

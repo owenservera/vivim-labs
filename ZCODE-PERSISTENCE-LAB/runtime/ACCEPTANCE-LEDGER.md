@@ -1,0 +1,62 @@
+# R004 architecture acceptance ledger — 100 points
+Canonical source: ../OWNER-DESIGN-R002.md and ARCHITECTURE-AUDIT-R003.md. Owner directive: iterate toward 100, atomize, track, implement, verify, then real ASDF lifecycle experiments. No AI wiring. Score = 2 points for each fully verified gate, 0 otherwise; partial work recorded but not credited. The prior qualitative percentages are not measured and are not directly comparable to this evidence score. Gate descriptions stay fixed; change requires explicit revision and rationale. A failed regression reopens the gate. Source review alone cannot pass runtime gates. 36/72h require actual elapsed time; no extrapolation.
+Baseline R003: 15/50 = 30/100, pinned f837042b76e2bd438f107a6b93360306da6d98ef, receipt VALIDATION-R003.md.
+| ID | Acceptance criterion | Status | Evidence / outstanding |
+|---|---|---|---|
+| E01 | Goal identity survives fresh process | PASS | native actual_separate_processes_recover |
+| E02 | Goal completes only when sealed and all tasks verified | PASS | native restart_fences_old_worker_and_keeps_checkpoint |
+| E03 | Explicit terminal blocked/exhausted outcomes and dependency propagation | OPEN | No qualifying evidence |
+| E04 | Goal hierarchy and versioned success predicates | OPEN | No qualifying evidence |
+| E05 | Task DAG dependency gating and cycle prevention | OPEN | native dependency gating; cycle prevention source-only; gate narrowed to gating |
+| E06 | Typed predecessor output binding and dynamic graph refinement | OPEN | No qualifying evidence |
+| E07 | Versioned class and capability association | PASS | native promote_then_reuse_and_disable |
+| E08 | All 15 behavioral operators have executable contracts and semantics | OPEN | No qualifying evidence |
+| E09 | Class composition validation and execution graph | OPEN | No qualifying evidence |
+| E10 | Class generation, admission and migration from evidence | OPEN | No qualifying evidence |
+| E11 | Logical agent identity survives reincarnation | PASS | native incarnation_mailbox_request_replay_cancel |
+| E12 | Complete incarnation records with executor binding and lineage | OPEN | No qualifying evidence |
+| E13 | Autonomous genesis and replacement after failure | OPEN | No qualifying evidence |
+| E14 | Agent states dormant/waiting/running/recovering/archived | OPEN | No qualifying evidence |
+| E15 | Per-agent workspace and durable projections | OPEN | No qualifying evidence |
+| E16 | Context references validated and independently persisted | OPEN | No qualifying evidence |
+| E17 | Context assembly, typed input binding and budgeted selection | OPEN | No qualifying evidence |
+| E18 | Versioned artifact payloads and provenance | OPEN | No qualifying evidence |
+| E19 | Verified artifact persists and duplicate admission rejected | PASS | native restart_fences_old_worker_and_keeps_checkpoint |
+| E20 | Independent deterministic output oracle rejects wrong result | PASS | native restart_fences_old_worker_and_keeps_checkpoint |
+| E21 | Composable evidence, independent verifier authority and predicate oracles | OPEN | No qualifying evidence |
+| E22 | Durable mailbox deduplication and recipient acknowledgment | PASS | native incarnation_mailbox_request_replay_cancel |
+| E23 | Mailbox wakeups and durable event delivery | OPEN | No qualifying evidence |
+| E24 | One active lease per worker and generation fencing | PASS | native busy_agent_cannot_hold_multiple_running_leases; restart_fences_old_worker_and_keeps_checkpoint |
+| E25 | Global resource slots enforced across independent processes | OPEN | No qualifying evidence |
+| E26 | Host monotonic/wall-clock supervision and recovery | OPEN | No qualifying evidence |
+| E27 | Durable checkpoint with stale-attempt rejection | PASS | native restart_fences_old_worker_and_keeps_checkpoint |
+| E28 | Versioned checkpoint validation and fallback | OPEN | No qualifying evidence |
+| E29 | Bounded retry and cancellation | PASS | native budget_exhaustion_and_explicit_failure; incarnation_mailbox_request_replay_cancel |
+| E30 | Idempotent request replay across process boundaries | PASS | native actual_separate_processes_recover |
+| E31 | Trusted host admission with actor authorization and effect reconciliation | OPEN | No qualifying evidence |
+| E32 | Journal corruption detected and uncommitted temp ignored | PASS | native corruption_fails_closed_and_uncommitted_temp_is_ignored |
+| E33 | Indexed incremental persistence, bounded journal growth and migration | OPEN | No qualifying evidence |
+| E34 | Concurrent writers, crash-during-write and tail-integrity qualification | OPEN | No qualifying evidence |
+| E35 | Bounded deterministic program evaluation and reusable capability admission | PASS | native promote_then_reuse_and_disable |
+| E36 | Versioned capability disable and regression/rollback | OPEN | native disable only; full gate open |
+| E37 | Automatic candidate synthesis from verified examples | OPEN | No qualifying evidence |
+| E38 | Disjoint held-out validation and applicability constraints | OPEN | No qualifying evidence |
+| E39 | Automatic capability matching and reuse without manual per-task assignment | OPEN | No qualifying evidence |
+| E40 | Cross-goal deterministic reuse in fresh executable | PASS | native autonomous_scheduler_reuses_capability_across_goals |
+| E41 | Learned procedure/repair/class/coordination/context artifacts with provenance | OPEN | No qualifying evidence |
+| E42 | Cost and verified yield measurement and policy feedback | OPEN | No qualifying evidence |
+| E43 | Critical-path, uncertainty, information gain and cost scheduling | OPEN | No qualifying evidence |
+| E44 | 60 logical agents with four active slots and dormant workers without inference | OPEN | No qualifying evidence |
+| E45 | Four isolated architecture policies enforce allowed persistence | OPEN | No qualifying evidence |
+| E46 | Common fault schedule and repeatable oracle across four arms | OPEN | No qualifying evidence |
+| E47 | Real simultaneous worker/controller death and autonomous recovery | OPEN | No qualifying evidence |
+| E48 | 36h continuous real lifecycle qualification | OPEN | No qualifying evidence |
+| E49 | 72h repeated fault endurance qualification | OPEN | No qualifying evidence |
+| E50 | No AI/provider execution dependency in native lifecycle | PASS | native 8 integration tests; no AI adapter in source |
+## Iteration plan
+1. P0 integrity and lifecycle terminal states; immutable history and validated checkpoints; indexed storage with migration and actor admission.
+2. P1 executable behavior: typed graph/dataflow, operator contracts, class composition and evidence; context binding.
+3. P2 runtime lifecycle: real native processes, leases/clock, durable activation, resource slots, replacement, mailbox and projections.
+4. P3 evolution: bounded synthesis, disjoint holdouts, typed matching, provenance, disable/regression, cost feedback.
+5. P4 experiment: policy-isolated session/agent/goal/intelligence arms, same workload and fault schedule, actual crash and fan-out, 36h then 72h.
+Record source pin, tests, execution receipts and remaining limitations for each revision. Never mark an unrun or simulated gate PASS. No external effects or provider calls until the native architecture is qualified.

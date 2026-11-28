@@ -44,9 +44,10 @@
     "local_day": "Europe/Madrid",
     "opening": "One account-level opening snapshot per local day. For each short window, distributable daily envelope = remaining percentage points minus 15 point shared reserve. For each longer window, divide remaining minus reserve by ceil(days until observed reset), at least one. Conservative one short-window envelope per local day; fresh reset does not replenish local daily cap. Each assigned lane gets half of each envelope; inactive shares held; no borrowing or automatic reassignment.",
     "provider_reserve_pp": 15,
-    "unknown_delta": "Retain reservation until reconciled; do not treat rounded zero as free; charge max(forecast, observed nonnegative decrease + 1pp) for unchanged window identity; if reset/attribution ambiguous charge at least forecast and block further admission until reconciled.",
+    "unknown_delta": "Aggregate forecast and observed decreases separately; charge maximum cumulative total with one percentage-point rounding allowance per observed unchanged window identity, not per turn. If attribution/reset ambiguous, charge forecast at minimum and block further admission until reconciliation. Daily rollover preserves prior days and request history; unresolved effects block rollover.",
     "local_caps": "Daily token and turn ceiling additionally mandatory, specified by owner/controller, not provider entitlement. Both provider hard windows and local share must pass. Reserve under account-wide single writer before inference; charge failed work too. Pause when either exhausted, persist checkpoint, resume only after fresh backend entitlement, new available local allocation and reconciliation.",
-    "fairness": "No credit shifting between providers, no paid spillover, no automatic consumption of reserved lanes. One in-flight turn per subscription account; two independent accounts can run simultaneously."
+    "fairness": "No credit shifting between providers, no paid spillover, no automatic consumption of reserved lanes. One in-flight turn per subscription account; two independent accounts can run simultaneously.",
+    "ledger": "CAMPAIGN-BUDGET.mjs"
   },
   "completion": {
     "common_instruction": "COMPLETION-GOAL.md",
@@ -69,7 +70,9 @@
       "CHECKPOINT",
       "CANDIDATE_COMPLETE"
     ],
-    "no_false_completion": "Quota exhaustion, a polished README, task count, passing self-authored trivial tests, agent assertion, lack of ideas, or partial progress never constitutes completion."
+    "no_false_completion": "Quota exhaustion, a polished README, task count, passing self-authored trivial tests, agent assertion, lack of ideas, or partial progress never constitutes completion.",
+    "controller_gate": "COMPLETION-CHECK.mjs",
+    "controller_gate_limit": "Structural gate for independently controlled receipts only; does not execute or authenticate tests. External canonical tracker is separately scored; a lane's release contract does not imply all 50 program-wide gates passed."
   },
   "status": "SETUP_ONLY; do not launch until isolated execution, account and billing verification, atomic reservation integration, model pin and scoped-write qualification are complete"
 }

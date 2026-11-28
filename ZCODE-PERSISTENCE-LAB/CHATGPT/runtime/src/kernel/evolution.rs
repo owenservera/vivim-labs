@@ -11,7 +11,7 @@ pub struct Discovery {
     pub candidates_evaluated:u64,pub program:Expr,pub input:Shape,pub output:Shape,
 }
 impl World {
-    fn example(&self,key:&str,family:&str,input_shape:&Shape,output_shape:&Shape)->Result<(Value,Value)>{
+    pub(crate) fn example(&self,key:&str,family:&str,input_shape:&Shape,output_shape:&Shape)->Result<(Value,Value)>{
         let t=self.tasks.get(key).ok_or("example task missing")?;
         ensure(t.phase==TaskPhase::Verified&&t.spec.family.as_deref()==Some(family),"example not verified in family")?;
         let a=self.artifacts.get(t.artifact.as_deref().ok_or("artifact missing")?).ok_or("artifact missing")?;
@@ -33,7 +33,7 @@ impl World {
         let a=read(training)?;let b=read(holdouts)?;Ok((a,b))
     }
     pub fn admit_capability(&mut self,c:Capability)->Result<()>{
-        id(&c.family)?;let key=version_key(&c.id,c.version)?;
+        id(&c.family)?;ensure(!self.custody_families.contains(&c.family),"independent custody admission required")?;let key=version_key(&c.id,c.version)?;
         ensure(c.enabled&&!self.capabilities.contains_key(&key),"invalid capability version")?;
         let class=self.classes.get(&c.class).ok_or("class missing")?;
         let (train,holdout)=self.examples(&c.family,&c.training,&c.holdouts,&class.input,&class.output)?;
@@ -60,6 +60,7 @@ impl World {
     pub fn discover_measured(&self,family:&str,training:Vec<Id>,holdouts:Vec<Id>,input:Shape,output:Shape,limit:u64)->(Result<Discovery>,SearchReceipt){
         let mut receipt=SearchReceipt::default();
         let result=(||->Result<Discovery>{
+            ensure(!self.custody_families.contains(family),"independent custody discovery required")?;
             ensure((1..=100_000).contains(&limit),"invalid discovery budget")?;
             let (train,holdout)=self.examples(family,&training,&holdouts,&input,&output)?;
             // The synthesis engine receives training only. Holdouts enter the

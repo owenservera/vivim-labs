@@ -57,7 +57,7 @@ impl World {
     pub fn ready(&self)->Vec<Id>{
         let mut v:Vec<_>=self.tasks.values().filter(|t|t.phase==TaskPhase::Pending&&t.attempts<t.spec.max_attempts
             &&self.goals.get(&t.spec.goal).is_some_and(|g|g.phase==GoalPhase::Open&&g.claims<g.claim_budget)
-            &&!self.has_uncertain_effect(&t.spec.id)
+            &&!self.has_uncertain_effect(&t.spec.id)&&!self.has_abandoned_effect(&t.spec.id)
             &&t.spec.dependencies.iter().all(|d|self.tasks.get(d).is_some_and(|x|x.phase==TaskPhase::Verified))).collect();
         let scores=self.schedule_scores();
         v.sort_by_key(|t|(std::cmp::Reverse(scores.get(&t.spec.id).copied().unwrap_or(0)),t.spec.id.clone()));
@@ -98,7 +98,7 @@ impl World {
                 if g.sealed&&(!tasks.is_empty()||!children.is_empty())&&tasks.iter().all(|t|t.phase==TaskPhase::Verified)&&children.iter().all(|c|c.phase==GoalPhase::Complete){
                     let mut values=serde_json::Map::new();
                     for t in tasks{values.insert(t.spec.id.clone(),self.artifact_value(t.artifact.as_deref().ok_or("artifact missing")?)?.clone());}
-                    let accepted=match &g.predicate{Some(o)=>o.evaluate(&Value::Null,&Value::Object(values))?,None=>true};
+                    let accepted=match &g.predicate{Some(o)=>o.evaluate(&Value::Null,&Value::Object(values)).unwrap_or(false),None=>true};
                     outcomes.push((g.id.clone(),if accepted{GoalPhase::Complete}else{GoalPhase::Blocked}));
                 }
             }
@@ -271,7 +271,7 @@ impl World {
                 history.push(super::model::Checkpoint{version,generation,worker:l.worker,incarnation:l.incarnation,payload,previous,input,task_version,class,context});
             }
             Submit{task,generation,output}=>{
-                let t=self.check_lease(actor,&task,generation)?;ensure(!self.has_uncertain_effect(&task),"effect reconciliation required")?;ensure(t.spec.output.accepts(&output),"output shape mismatch")?;
+                let t=self.check_lease(actor,&task,generation)?;ensure(!self.has_uncertain_effect(&task)&&!self.has_abandoned_effect(&task),"effect reconciliation required or abandoned")?;ensure(t.spec.output.accepts(&output),"output shape mismatch")?;
                 let payload=self.put_payload(output)?;let t=self.tasks.get_mut(&task).unwrap();t.proposal=Some(payload);t.phase=TaskPhase::Submitted;
                 let worker=t.lease.as_ref().unwrap().worker.clone();
                 let a=self.agents.get_mut(&worker).unwrap();
@@ -284,7 +284,9 @@ impl World {
                 ensure(!self.has_uncertain_effect(&task),"effect reconciliation required")?;
                 ensure(t.phase==TaskPhase::Submitted,"no submission")?;self.open_goal(&t.spec.goal)?;
                 let input=t.input.as_ref().ok_or("input missing")?;let candidate=t.proposal.clone().ok_or("proposal missing")?;
-                let output=self.payload(&candidate)?;let accepted=t.spec.output.accepts(output)&&t.spec.oracle.evaluate(input,output)?;
+                let output=self.payload(&candidate)?;let oracle=t.spec.oracle.evaluate(input,output);
+                let accepted=t.spec.output.accepts(output)&&oracle.as_ref().is_ok_and(|v|*v);
+                let rejection_reason=oracle.err().unwrap_or_else(||"oracle rejected".into());
                 let input_digest=self.put_payload(input.clone())?;
                 let parents:Vec<_>=t.spec.dependencies.iter().map(|d|self.tasks[d].artifact.clone().ok_or("dependency artifact missing")).collect::<std::result::Result<_,_>>()?;
                 let evidence_id=format!("{}-{}",task,t.generation);ensure(!self.evidence.contains_key(&evidence_id),"evidence already exists")?;
@@ -298,7 +300,7 @@ impl World {
                     let native=self.run_costs.contains_key(&format!("{task}-{}",t.generation));
                     if native{self.metrics.deterministic_runs=self.metrics.deterministic_runs.saturating_add(1);}
                     if native&&t.spec.class.is_none()&&t.spec.family.is_some()&&t.assigned_class.is_some(){self.metrics.reused=self.metrics.reused.saturating_add(1);}
-                }else{self.metrics.rejected=self.metrics.rejected.saturating_add(1);self.metrics.verification_rejections=self.metrics.verification_rejections.saturating_add(1);self.release(&task,"oracle rejected")?;}
+                }else{self.metrics.rejected=self.metrics.rejected.saturating_add(1);self.metrics.verification_rejections=self.metrics.verification_rejections.saturating_add(1);self.release(&task,&rejection_reason)?;}
                 return Ok(json!({"accepted":accepted,"task":task}));
             }
             Tick{now_ms}=>{

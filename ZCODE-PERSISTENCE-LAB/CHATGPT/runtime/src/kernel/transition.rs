@@ -26,6 +26,8 @@ pub enum Action {
     AdmitCapability{capability:Capability},DisableCapability{capability:Id},RollbackCapability{capability:Id,reason:String},
     ConfigureLearning{plan:LearningPlan},LearnPlan{plan:Id},RegisterKnowledgeRule{rule:KnowledgeRule},AssimilateRecurring{rule:Id,payload:Digest},PublishKnowledge{knowledge:Knowledge},DisableKnowledge{knowledge:Id},
     RegisterCohort{cohort:super::custody::Cohort},FreezeCandidate{id:Id,capability:Capability,cohort:Id},FreezeLearned{id:Id,name:Id,version:u64,cohort:Id,training:Vec<Id>,input:Shape,output:Shape,limit:u64},AttestCandidate{verdict:super::custody::Verdict},AdmitFrozen{candidate:Id},
+    ConfigureRouter{config:super::routing::Config},ObserveQuota{observation:super::routing::Observation},QueueInference{demand:super::routing::Demand},AllocateInference{limit:usize},
+    DispatchInference{reservation:Id},InferenceUnknown{reservation:Id},ReleaseInference{reservation:Id},SettleInference{reservation:Id,usage:super::routing::Usage,outcome:super::routing::Outcome,receipt:String,latency_ms:u64},VerifyInference{reservation:Id,evidence:Id},
     RecordCost{task:Id,generation:u64,elapsed_ms:u64},SetPolicy{policy:SchedulingPolicy},
     PrepareEffect{task:Id,generation:u64,key:Id,payload:Value,oracle:Oracle},
     EffectUnknown{effect:Id,reason:String},ResolveEffect{effect:Id,outcome:EffectPhase,receipt:Value},
@@ -143,7 +145,7 @@ impl World {
     }
     pub fn transition(&mut self,actor:&Actor,action:Action)->Result<Value>{
         // Public transitions are atomic even for callers not using the durable store.
-        let mut next=self.clone();let output=next.apply_inner(actor,action)?;next.settle()?;
+        let mut next=self.clone();let output=next.apply_inner(actor,action)?;next.settle()?;next.reconcile_inference();
         next.sequence=next.sequence.checked_add(1).ok_or("sequence overflow")?;*self=next;Ok(output)
     }
     fn apply_inner(&mut self,actor:&Actor,action:Action)->Result<Value>{
@@ -325,6 +327,7 @@ impl World {
             }
             Tick{now_ms}=>{
                 actor.host()?;ensure(now_ms>=self.clock_ms,"clock reversed")?;self.clock_ms=now_ms;
+                if self.router.config.is_some(){self.router.tick(now_ms)?;}
                 let workers:BTreeSet<_>=self.tasks.values().filter(|t|t.phase==TaskPhase::Running).filter_map(|t|t.lease.as_ref()).filter(|l|l.deadline_ms<=now_ms).map(|l|l.worker.clone()).collect();
                 for w in workers{self.end_agent(&w,"lease expired",false)?;}
             }
@@ -380,6 +383,15 @@ impl World {
             AssimilateRecurring{rule,payload}=>{actor.host()?;return self.assimilate_recurring(&rule,&payload);}
             PublishKnowledge{knowledge}=>{actor.host()?;let key=self.publish_knowledge(knowledge)?;return Ok(json!({"knowledge":key}));}
             DisableKnowledge{knowledge}=>{actor.host()?;self.knowledge.get_mut(&knowledge).ok_or("knowledge missing")?.enabled=false;}
+            ConfigureRouter{config}=>{actor.host()?;self.router.configure(config)?;self.router.tick(self.clock_ms)?;}
+            ObserveQuota{observation}=>{actor.host()?;self.router.observe(observation)?;}
+            QueueInference{demand}=>{actor.host()?;self.queue_inference(demand)?;}
+            AllocateInference{limit}=>{actor.host()?;return self.allocate_inference(limit);}
+            DispatchInference{reservation}=>{actor.host()?;self.dispatch_inference(&reservation)?;}
+            InferenceUnknown{reservation}=>{actor.host()?;self.router.unknown(&reservation)?;}
+            ReleaseInference{reservation}=>{actor.host()?;self.router.release_unsent(&reservation)?;}
+            SettleInference{reservation,usage,outcome,receipt,latency_ms}=>{actor.host()?;return self.router.settle(&reservation,usage,outcome,receipt,latency_ms);}
+            VerifyInference{reservation,evidence}=>{actor.host()?;self.verify_inference_feedback(&reservation,&evidence)?;}
             RecordCost{task,generation,elapsed_ms}=>{actor.host()?;self.record_cost(&task,generation,elapsed_ms)?;}
             PrepareEffect{task,generation,key,payload,oracle}=>{actor.host()?;return self.prepare_effect(&task,generation,key,payload,oracle);}
             EffectUnknown{effect,reason}=>{actor.host()?;self.effect_unknown(&effect,reason)?;}

@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';import {assess} from './COMPLETION-CHECK.mjs';
+const d='a'.repeat(64),e='b'.repeat(64);
+const c={id:'contract',version:1,frozen:true,digest:d,mandatory:[{id:'A',behavior:'recover',oracle:'independent executable test',falsifier:'lost result'}]};
+const r={authority:'controller-independent-evaluator',contract_digest:d,candidate_digest:e,scope_review:'PASS',regressions:'PASS',failure_cases:'PASS',unresolved_mandatory:0,unknown_effects:0,criteria:[{id:'A',result:'PASS',candidate_digest:e,evidence_digest:d,reproduction_command:'test'}]};
+const x={contract:c,receipt:r,status:'CANDIDATE_COMPLETE'};
+assert.equal(assess(x).decision,'COMPLETE_VERIFIED');
+assert.equal(assess({...x,status:'WAITING_BUDGET'}).decision,'NOT_COMPLETE');
+assert.equal(assess({...x,receipt:{...r,authority:'worker'}}).decision,'NOT_COMPLETE');
+assert.equal(assess({...x,receipt:{...r,criteria:[]}}).decision,'NOT_COMPLETE');
+assert.equal(assess({...x,receipt:{...r,unknown_effects:1}}).decision,'NOT_COMPLETE');
+assert.equal(assess({...x,receipt:{...r,contract_digest:e}}).decision,'NOT_COMPLETE');
+assert.equal(assess({...x,contract:{...c,frozen:false}}).decision,'NOT_COMPLETE');
+assert.equal(assess({...x,receipt:{...r,scope_review:'FAIL'}}).decision,'NOT_COMPLETE');
+console.log('8 completion contract checks passed (synthetic trusted receipts, not actual acceptance).');

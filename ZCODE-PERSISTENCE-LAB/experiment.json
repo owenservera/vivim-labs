@@ -1,0 +1,96 @@
+{
+  "schema": "vivim.labs.zcode-persistence/1",
+  "status": "DESIGN_NOT_RUN",
+  "top_level_parallelism": 4,
+  "child_parallelism": 4,
+  "total_parallelism": 8,
+  "launch": {
+    "adapter": "UNVERIFIED",
+    "auto_start": false
+  },
+  "lanes": [
+    {
+      "id": "01",
+      "name": "session",
+      "faults": [
+        "premature_finish",
+        "inference_interrupt",
+        "worker_termination",
+        "acp_disconnect",
+        "parent_termination",
+        "controller_restart"
+      ]
+    },
+    {
+      "id": "02",
+      "name": "operations",
+      "faults": [
+        "invalid_command",
+        "command_timeout",
+        "missing_dependency",
+        "unavailable_tool",
+        "simulated_write_failure",
+        "simulated_provider_outage"
+      ]
+    },
+    {
+      "id": "03",
+      "name": "context",
+      "faults": [
+        "long_conversation",
+        "context_compaction",
+        "fresh_conversation",
+        "working_memory_loss",
+        "checkpoint_corruption",
+        "replacement_model"
+      ]
+    },
+    {
+      "id": "04",
+      "name": "orchestration",
+      "faults": [
+        "spawn_four_subagents",
+        "subagent_failure",
+        "subagent_unresponsive",
+        "conflicting_results",
+        "duplicate_task",
+        "coordinator_termination"
+      ]
+    }
+  ],
+  "phases": [
+    "native_baseline",
+    "minimal_repair",
+    "same_fault_replay"
+  ],
+  "class_experiment": [
+    "runtime_brief",
+    "fixed_role_template",
+    "hybrid"
+  ],
+  "workload": {
+    "artifact": "deterministic numbered artifact",
+    "receipt": "sha256",
+    "round_target": 10
+  },
+  "qualification": {
+    "hours": [
+      36,
+      72
+    ],
+    "max_goal_loss": 0,
+    "max_committed_work_loss": 0,
+    "max_duplicate_effects": 0,
+    "max_human_recoveries": 0,
+    "target_recovery_seconds": 60,
+    "target_fault_recognition": 1
+  },
+  "guardrails": {
+    "owned_processes_only": true,
+    "simulated_dependencies_only": true,
+    "max_retries_per_fault": 3,
+    "explicit_run_budget_required": true,
+    "respect_cancellation": true,
+    "publish_sanitized_evidence_only": true
+  }
+}

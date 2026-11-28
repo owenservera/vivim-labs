@@ -646,6 +646,26 @@ impl KernelStore{
     }
     /// Explicit complete current-index audit. Normal transactions only read
     /// historical receipt pages required for the retained journal and replay.
+    /// Inspect the checkpoint at a committed pinned revision. Independently
+    /// reconstruct it before reporting equivalence; never grants authority.
+    pub fn derived_checkpoint_report(&self)->Result<Value>{
+        let _guard=self.lock()?;
+        let head=self.latest_head()?.ok_or("store has no committed state")?;
+        let rev=head.snapshot;
+        let checkpoint=self.audit_record(rev)?.ok_or("committed checkpoint missing")?;
+        let Some(root)=checkpoint.head.body.index.as_ref() else{
+            return Ok(json!({"revision":rev,"available":false,"reason":"legacy_checkpoint"}));
+        };
+        let index=super::index::Index::open(&self.root)?;
+        let Some(stored)=index.derived_checkpoint(root,rev)? else{
+            return Ok(json!({"revision":rev,"available":false,"reason":"checkpoint_projection_not_present_or_oversized"}));
+        };
+        let world=index.load_world(root,rev)?;
+        let actual=super::derived::Derived::build(&world).projection();
+        ensure(actual==stored,"checkpoint derived projection mismatch")?;
+        Ok(json!({"revision":rev,"root":root,"projection_digest":digest(&stored),
+            "available":true,"equivalent":true,"scope":"checkpoint_projection_vs_checkpoint_world_not_current_state"}))
+    }
     pub fn audit_index(&self)->Result<Value>{
         let _guard=self.lock()?;let loaded=self.load_uncached()?;
         let root=loaded.head.index.as_ref().ok_or("audit requires indexed state")?;

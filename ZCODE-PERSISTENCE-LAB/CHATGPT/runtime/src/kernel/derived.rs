@@ -193,3 +193,78 @@ mod tests{
         assert_eq!(w.derived_audit()["equivalent"],true);
     }
 }
+
+#[cfg(test)]
+mod scheduler_equivalence{
+    use super::*;
+    use crate::kernel::transition::{Action,Actor};
+    use serde_json::json;
+    fn host(w:&mut World,a:Action){w.transition(&Actor::Host,a).unwrap();}
+    fn task(w:&mut World,key:&str,goal:&str,parents:&[&str],family:&str){
+        host(w,Action::Task{spec:TaskSpec{id:key.into(),goal:goal.into(),objective:"scheduler qualification".into(),
+            dependencies:parents.iter().map(|p|p.to_string()).collect(),inputs:BTreeMap::new(),output:Shape::Integer,
+            oracle:Oracle::Digest{expected:crate::digest(&json!(1))},class:None,family:Some(family.into()),context:None,
+            max_attempts:2,priority:1,uncertainty:1,information_gain:1,expected_cost:10}});
+    }
+    // Reference reconstruction intentionally does not consult derived cache.
+    fn reference(w:&World)->BTreeMap<Id,i128>{
+        let mut observations:BTreeMap<Id,(u128,u128)>=BTreeMap::new();
+        for r in w.run_costs.values(){if let Some(f)=&r.family{let e=observations.entry(f.clone()).or_default();e.0=e.0.saturating_add(u128::from(r.elapsed_ms));e.1=e.1.saturating_add(1);}}
+        let live=|t:&Task|matches!(t.phase,TaskPhase::Pending|TaskPhase::Running|TaskPhase::Submitted|TaskPhase::Reconciling);
+        let costs:BTreeMap<_,u64>=w.tasks.values().filter(|t|live(t)).map(|t|{
+            let cost=t.spec.family.as_ref().and_then(|f|observations.get(f)).map(|(sum,n)|u64::try_from((sum/n).max(1)).unwrap_or(u64::MAX)).unwrap_or(u64::from(t.spec.expected_cost));
+            (t.spec.id.clone(),cost)
+        }).collect();
+        let mut successors:BTreeMap<Id,Vec<Id>>=costs.keys().map(|k|(k.clone(),vec![])).collect();
+        let mut degree:BTreeMap<Id,usize>=costs.keys().map(|k|(k.clone(),0)).collect();
+        for t in w.tasks.values().filter(|t|live(t)){
+            for p in &t.spec.dependencies{if let Some(s)=successors.get_mut(p){s.push(t.spec.id.clone());*degree.get_mut(&t.spec.id).unwrap()+=1;}}
+        }
+        let mut queue:BTreeSet<_>=degree.iter().filter(|(_,d)|**d==0).map(|(k,_)|k.clone()).collect();
+        let mut order=vec![];
+        while let Some(k)=queue.pop_first(){order.push(k.clone());for s in &successors[&k]{let n=degree.get_mut(s).unwrap();*n-=1;if *n==0{queue.insert(s.clone());}}}
+        let mut path:BTreeMap<Id,u64>=BTreeMap::new();
+        for k in order.into_iter().rev(){let tail=successors[&k].iter().filter_map(|s|path.get(s)).copied().max().unwrap_or(0);path.insert(k.clone(),costs[&k].saturating_add(tail));}
+        let mut outcomes:BTreeMap<Id,(u64,u64)>=BTreeMap::new();
+        for a in w.attempt_history.values().filter(|a|a.ended_ms.is_some()){
+            if let Some(f)=w.tasks.get(&a.task).and_then(|t|t.spec.family.as_ref()){
+                let e=outcomes.entry(f.clone()).or_default();e.0=e.0.saturating_add(1);
+                if a.outcome.as_deref()==Some("verified"){e.1=e.1.saturating_add(1);}
+            }
+        }
+        let p=&w.policy;
+        w.tasks.values().filter(|t|live(t)).map(|t|{
+            let (attempts,successes)=t.spec.family.as_ref().and_then(|f|outcomes.get(f)).copied().unwrap_or((0,0));
+            let failure=1000u128*(u128::from(attempts.saturating_sub(successes))+1)/(u128::from(attempts)+2);
+            let novelty=1000u64/(attempts.saturating_add(1));
+            let score=i128::from(t.spec.priority)*i128::from(p.priority_weight)
+                +i128::from(path.get(&t.spec.id).copied().unwrap_or(0))*i128::from(p.critical_weight)
+                +(i128::from(t.spec.uncertainty)+failure as i128)*i128::from(p.uncertainty_weight)
+                +(i128::from(t.spec.information_gain)+i128::from(novelty))*i128::from(p.information_weight)
+                -i128::from(costs[&t.spec.id])*i128::from(p.cost_weight);
+            (t.spec.id.clone(),score)
+        }).collect()
+    }
+    #[test]
+    fn graph_rewire_family_cost_outcome_and_branch_match_reference(){
+        let mut w=World::default();
+        for goal in ["g1","g2"]{host(&mut w,Action::Goal{id:goal.into(),parent:None,objective:"fixture".into(),claim_budget:32,predicate:None});}
+        task(&mut w,"a","g1",&[],"f");task(&mut w,"b","g1",&["a"],"f");
+        task(&mut w,"c","g1",&["b"],"h");task(&mut w,"x","g2",&[],"f");task(&mut w,"y","g2",&["x"],"h");
+        let check=|w:&World|{assert_eq!(w.schedule_scores(),reference(w));assert_eq!(w.derived_audit()["equivalent"],true);};
+        check(&w);
+        // Direct fixture mutations deliberately exercise changes unavailable
+        // in normal admission, including deletion and graph branch divergence.
+        w.run_costs.insert("r".into(),RunCost{task:"a".into(),generation:1,elapsed_ms:71,family:Some("f".into()),class:None});check(&w);
+        w.attempt_history.insert("a-1".into(),AttemptRecord{task:"a".into(),generation:1,agent:"agent".into(),incarnation:1,class:"class".into(),started_ms:0,ended_ms:Some(1),outcome:Some("verified".into()),measured_ms:None});check(&w);
+        let mut branch=w.clone();
+        w.tasks.get_mut("b").unwrap().spec.dependencies.clear();check(&w);
+        w.tasks.get_mut("a").unwrap().spec.family=Some("h".into());check(&w);
+        branch.tasks.get_mut("a").unwrap().phase=TaskPhase::Verified;check(&branch);check(&w);
+        w.attempt_history.get_mut("a-1").unwrap().outcome=Some("failed".into());check(&w);
+        w.run_costs.remove("r");check(&w);
+        w.tasks.remove("c");check(&w);
+        w.attempt_history.clear();check(&w);
+        w.tasks.retain(|k,_|k!="b");check(&w);
+    }
+}

@@ -17,6 +17,9 @@ pub struct IndexRoot{
     pub schema:u32,pub revision:u64,pub state_digest:String,
     pub scalar:String,pub tables:BTreeMap<String,BTreeMap<String,String>>,
     #[serde(default,skip_serializing_if="BTreeMap::is_empty")] pub directories:BTreeMap<String,String>,
+    /// Derived cache checkpoint, covered by the root object's content hash.
+    /// Older readers can still reconstruct the world without this projection.
+    #[serde(default,skip_serializing_if="Option::is_none")] pub derived_checkpoint:Option<Digest>,
 }
 /// Opaque continuation bound to an immutable index root. An updated store
 /// rejects the old cursor rather than silently mixing two revisions.
@@ -102,6 +105,7 @@ impl Index{
         if root.schema==4{
             ensure(root.state_digest==Self::tree_digest(&root.scalar,&root.directories),"incremental root commitment mismatch")?;
         }
+        if let Some(pin)=&root.derived_checkpoint{ensure(root.schema==4&&hash_id(pin),"invalid derived checkpoint pin")?;}
         for (table,buckets) in &root.tables{
             ensure((MAPS.contains(&table.as_str())||root.schema==2&&NESTED.contains(&table.as_str())),"unknown index table")?;
             for (key,hash) in buckets{
@@ -132,7 +136,7 @@ impl Index{
             directories.insert(name.into(),self.put(&serde_json::to_value(refs).map_err(err)?)?);
         }
         let scalar=self.put(&state)?;
-        let root=IndexRoot{schema:3,revision,state_digest,scalar,tables:BTreeMap::new(),directories};
+        let root=IndexRoot{schema:3,revision,state_digest,scalar,tables:BTreeMap::new(),directories,derived_checkpoint:None};
         self.put(&serde_json::to_value(root).map_err(err)?)
     }
     fn tree_digest(scalar:&str,dirs:&BTreeMap<String,String>)->Digest{
@@ -291,7 +295,14 @@ impl Index{
         directories.insert("receipts".into(),receipt_root);
         let scalar=self.put(&state)?;
         let state_digest=Self::tree_digest(&scalar,&directories);
-        self.put(&serde_json::to_value(IndexRoot{schema:4,revision,state_digest,scalar,tables:BTreeMap::new(),directories}).map_err(err)?)
+        // Materialize a derived checkpoint only at a journal checkpoint or
+        // first indexed revision. The ordinary hot path does not serialize
+        // the entire graph on each transaction. Omit oversized projections.
+        let derived_checkpoint=if tracked&&(revision%64==0||previous.is_none()){
+            let projection=world.derived_snapshot().projection();
+            if serde_json::to_vec(&projection).map_err(err)?.len()<=PAGE_LIMIT{Some(self.put(&projection)?)}else{None}
+        }else{None};
+        self.put(&serde_json::to_value(IndexRoot{schema:4,revision,state_digest,scalar,tables:BTreeMap::new(),directories,derived_checkpoint}).map_err(err)?)
     }
     pub fn load_world(&self,hash:&str,revision:u64)->Result<World>{
         let root=self.manifest(hash)?;
@@ -330,7 +341,19 @@ impl Index{
             ensure(root.directories.contains_key("receipts")&&!state.as_object().unwrap().contains_key("receipts"),"invalid lazy receipt directory")?;
             serde_json::json!({})
         };
-        Ok((serde_json::from_value(state).map_err(err)?,serde_json::from_value(receipts).map_err(err)?))
+        let world:World=serde_json::from_value(state).map_err(err)?;
+        if let Some(pin)=&root.derived_checkpoint{
+            // Derivation is validated against the reconstructed authoritative
+            // world, not accepted merely because its object hash matches.
+            let stored=self.get(pin)?;
+            ensure(stored==world.derived_snapshot().projection(),"derived checkpoint disagrees with reconstructed world")?;
+        }
+        Ok((world,serde_json::from_value(receipts).map_err(err)?))
+    }
+    pub(crate) fn derived_checkpoint(&self,hash:&str,revision:u64)->Result<Option<Value>>{
+        let root=self.manifest(hash)?;
+        ensure(root.revision==revision,"derived checkpoint revision mismatch")?;
+        root.derived_checkpoint.as_deref().map(|pin|self.get(pin)).transpose()
     }
     pub fn lookup(&self,hash:&str,revision:u64,table:&str,key:&str)->Result<Option<Value>>{
         ensure(MAPS.contains(&table)||NESTED.contains(&table),"unknown entity table")?;
@@ -388,6 +411,7 @@ impl Index{
         for hash in roots{
             let manifest=self.manifest(hash)?;
             keep.insert(manifest.scalar.clone());
+            if let Some(pin)=&manifest.derived_checkpoint{keep.insert(pin.clone());}
             if manifest.schema>=3{
                 for (table,hash) in &manifest.directories{keep.insert(hash.clone());for page in self.directory(&manifest,table)?.values(){keep.insert(page.clone());}}
             }else{for page in manifest.tables.values().flat_map(|t|t.values()){keep.insert(page.clone());}}

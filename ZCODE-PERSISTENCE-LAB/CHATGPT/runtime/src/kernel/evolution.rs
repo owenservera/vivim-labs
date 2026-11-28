@@ -109,6 +109,11 @@ impl World {
         let class=Class{id:id_.into(),version,input:d.input,output:d.output,nodes:vec![Node{id:"learned".into(),operator:k.clone(),input:Wire::Input}],result:Wire::Node{id:"learned".into()},lineage:parent.into_iter().collect()};
         next.validate_class(&class)?;next.classes.insert(k.clone(),class);
         next.admit_capability(Capability{id:id_.into(),version,family:d.family,class:k.clone(),training:d.training,holdouts:d.holdouts,enabled:true})?;
+        let c=next.capabilities[&k].clone();
+        let artifacts:Vec<_>=c.training.iter().chain(c.holdouts.iter()).map(|t|next.tasks[t].artifact.clone().ok_or("artifact missing")).collect::<std::result::Result<_,_>>()?;
+        let evidence=artifacts.iter().map(|a|next.artifacts[a].evidence.clone()).collect();
+        let supersedes=next.knowledge.values().filter(|x|x.id==id_&&x.version<version&&x.kind==KnowledgeKind::ComputationalOperator).max_by_key(|x|x.version).map(|x|format!("{}@{}",x.id,x.version));
+        next.publish_knowledge(Knowledge{id:id_.into(),version,kind:KnowledgeKind::ComputationalOperator,family:Some(c.family),artifacts,class:Some(k.clone()),evidence,supersedes,enabled:true})?;
         *self=next;Ok(k)
     }
 }

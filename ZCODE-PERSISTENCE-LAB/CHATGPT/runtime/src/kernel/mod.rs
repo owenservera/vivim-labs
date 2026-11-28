@@ -38,6 +38,7 @@ pub mod comparative;
 pub mod experiment_vault;
 pub mod adapter_mailbox;
 pub mod process_observation;
+pub mod assimilation;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

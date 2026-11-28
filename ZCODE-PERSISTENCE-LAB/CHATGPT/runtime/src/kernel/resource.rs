@@ -90,7 +90,7 @@ pub(crate) fn measured_operation(action:&super::transition::Action)->Option<&'st
     match action{
         LearnPlan{..}=>Some("learning"),
         AssimilateRecurring{..}=>Some("knowledge"),
-        DiscoverRecipes{..}=>Some("recipe"),
+        DiscoverRecipes{..}|FreezeTracePattern{..}|PromoteTracePattern{..}=>Some("recipe"),
         ApplyLearnedRepair{..}=>Some("repair"),
         Verify{..}=>Some("verify"),
         RoutingCycle{..}|GenerateDemands{..}=>Some("routing"),

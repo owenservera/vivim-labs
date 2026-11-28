@@ -35,6 +35,7 @@ pub enum Action {
     BeginRoutingTrial{spec:super::routing_evolution::TrialSpec},CloseRoutingArm,StartRoutingCandidate,AbortRoutingTrial{reason:String},PromoteRoutingTrial{trial:Id},RollbackRoutingTrial{trial:Id},
     SetFrontierGuard{guard:super::routing_planning::FrontierGuard},SetFrontierForecast{forecast:super::routing_planning::Forecast},
     BindRoutingAdapter{binding:super::routing_adapter::AdapterBinding},ObserveAdapterQuota{receipt:super::routing_adapter::QuotaReceipt},PrepareHandoff{reservation:Id},ClaimHandoff{handoff:Id},AuthorizeMailboxTake{handoff:Id,manifest_digest:Digest,packet_digest:Digest,binding_version:u64,input_digest:Digest},FinishHandoff{receipt:super::routing_adapter::AdapterReceipt},ReconcileHandoffCharge{receipt:super::routing_adapter::ChargeOnlyReceipt},RoutingCycle{limit:usize},
+    ConfigureAssimilation{policy:super::assimilation::Policy},RegisterTraceCohort{cohort:super::assimilation::Cohort},FreezeTracePattern{cohort:Id},AttestTracePattern{verdict:super::assimilation::Verdict},PromoteTracePattern{candidate:Id},DisableTracePattern{candidate:Id,reason:String},InstantiateTracePattern{request:super::assimilation::Instantiate},
     ConfigureRecipePolicy{policy:super::recipes::Policy},DiscoverRecipes{family:Id},InstantiateRecipe{request:super::recipes::Instantiate},DisableRecipe{recipe:Id},ApplyLearnedRepair{task:Id,repair:Id},RecordHostCost{receipt:super::resource::HostCost},RecordResources{receipt:super::resource::Receipt},RecordAttemptAccounting{receipt:super::resource::Receipt},
     RecordCost{task:Id,generation:u64,elapsed_ms:u64},SetPolicy{policy:SchedulingPolicy},
     PrepareEffect{task:Id,generation:u64,key:Id,payload:Value,oracle:Oracle},
@@ -453,6 +454,13 @@ impl World {
             ReconcileHandoffCharge{receipt}=>{actor.host()?;return self.reconcile_handoff_charge(receipt);}
             FinishHandoff{receipt}=>{actor.host()?;return self.finish_handoff(receipt);}
             RoutingCycle{limit}=>{actor.host()?;return self.routing_cycle(limit);}
+            ConfigureAssimilation{policy}=>{actor.host()?;self.configure_assimilation(policy)?;}
+            RegisterTraceCohort{cohort}=>{actor.host()?;self.register_trace_cohort(cohort)?;}
+            FreezeTracePattern{cohort}=>{actor.host()?;return self.freeze_trace_pattern(&cohort);}
+            AttestTracePattern{verdict}=>{let Actor::Verifier{id:who}=actor else{return Err("independent trace verifier required".into());};return self.attest_trace_pattern(who,verdict);}
+            PromoteTracePattern{candidate}=>{actor.host()?;return self.promote_trace_pattern(&candidate);}
+            DisableTracePattern{candidate,reason}=>{actor.host()?;return self.disable_trace_pattern(&candidate,reason);}
+            InstantiateTracePattern{request}=>{actor.host()?;return self.instantiate_trace_pattern(request);}
             ConfigureRecipePolicy{policy}=>{actor.host()?;self.configure_recipe_policy(policy)?;}
             DiscoverRecipes{family}=>{actor.host()?;return self.discover_recipes(&family);}
             InstantiateRecipe{request}=>{actor.host()?;return self.instantiate_recipe(request);}

@@ -111,6 +111,10 @@ impl Authority{
                 ensure(p.goals.contains(&task.spec.goal),"adapter goal outside signed scope")
             }
             Role::Verifier=>{
+                if let Action::AttestTracePattern{verdict}=&signed.request.action{
+                    let c=world.assimilation.cohorts.get(&verdict.cohort).ok_or("trace cohort missing")?;
+                    return ensure(c.verifier==p.subject&&p.goals.contains(&c.review_goal),"trace custody scope denied");
+                }
                 if let Action::AttestCandidate{verdict}=&signed.request.action{
                     let c=world.cohorts.get(&verdict.cohort).ok_or("cohort missing")?;
                     return ensure(c.verifier==p.subject&&p.goals.contains(&c.goal),"custody scope denied");

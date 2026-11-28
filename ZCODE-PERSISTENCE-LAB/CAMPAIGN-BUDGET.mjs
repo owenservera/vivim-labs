@@ -82,7 +82,7 @@ export function settle(ledger,{request_id,outcome,attribution_confirmed},snapsho
 // returned reservation before spawning. No automatic recovery or provider invocation.
 export function transact(dir,fn){
  fs.mkdirSync(dir,{recursive:true});const lock=path.join(dir,'writer.lock');fs.mkdirSync(lock);
- let published=false;
+ let published=false,writing=false;
  try{
   const names=fs.readdirSync(dir).filter(x=>/^\d{12}\.json$/.test(x)).sort();
   let prior=null;
@@ -97,11 +97,11 @@ export function transact(dir,fn){
   const body={previous_hash:prior?.hash??null,state},record={...body,hash:hash(body)};
   const target=path.join(dir,String(state.revision).padStart(12,'0')+'.json');
   const temp=path.join(dir,'.'+crypto.randomUUID()+'.tmp');
-  const fd=fs.openSync(temp,'wx');try{fs.writeFileSync(fd,JSON.stringify(record,null,2));fs.fsyncSync(fd);}finally{fs.closeSync(fd);}
+  writing=true;const fd=fs.openSync(temp,'wx');try{fs.writeFileSync(fd,JSON.stringify(record,null,2));fs.fsyncSync(fd);}finally{fs.closeSync(fd);}
   if(fs.existsSync(target))fail('REVISION_ALREADY_EXISTS');
   fs.renameSync(temp,target);published=true;
   return state;
- }finally{if(published)fs.rmdirSync(lock);else{ /* fail closed; controller must investigate lock */ }}
+ }finally{if(published||!writing)fs.rmdirSync(lock);else{ /* ambiguous publication; controller must investigate lock */ }}
 }
 if(process.argv[1]===fileURLToPath(import.meta.url)){
  const i=JSON.parse(fs.readFileSync(0,'utf8'));

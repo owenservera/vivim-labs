@@ -34,7 +34,7 @@ pub enum Action {
     SetRoutingBatchPolicy{policy:super::routing_optimizer::BatchPolicy},
     BeginRoutingTrial{spec:super::routing_evolution::TrialSpec},CloseRoutingArm,StartRoutingCandidate,AbortRoutingTrial{reason:String},PromoteRoutingTrial{trial:Id},RollbackRoutingTrial{trial:Id},
     SetFrontierGuard{guard:super::routing_planning::FrontierGuard},SetFrontierForecast{forecast:super::routing_planning::Forecast},
-    BindRoutingAdapter{binding:super::routing_adapter::AdapterBinding},ObserveAdapterQuota{receipt:super::routing_adapter::QuotaReceipt},PrepareHandoff{reservation:Id},ClaimHandoff{handoff:Id},AuthorizeMailboxTake{handoff:Id,manifest_digest:Digest,packet_digest:Digest,binding_version:u64,input_digest:Digest},FinishHandoff{receipt:super::routing_adapter::AdapterReceipt},ReconcileHandoffCharge{receipt:super::routing_adapter::ChargeOnlyReceipt},RoutingCycle{limit:usize},
+    BindRoutingAdapter{binding:super::routing_adapter::AdapterBinding},ObserveAdapterQuota{receipt:super::routing_adapter::QuotaReceipt},PrepareHandoff{reservation:Id},ClaimHandoff{handoff:Id},ClaimTransportHandoff{handoff:Id,transport:super::routing_adapter::Transport},FinishMailboxHandoff{receipt:super::routing_adapter::AdapterReceipt,manifest_digest:Digest,packet_digest:Digest},AuthorizeMailboxTake{handoff:Id,manifest_digest:Digest,packet_digest:Digest,binding_version:u64,input_digest:Digest},FinishHandoff{receipt:super::routing_adapter::AdapterReceipt},ReconcileHandoffCharge{receipt:super::routing_adapter::ChargeOnlyReceipt},RoutingCycle{limit:usize},
     RegisterReuseComparison{plan:super::reuse_economics::Plan},CloseReuseComparison{comparison:Id},
     ConfigureAssimilation{policy:super::assimilation::Policy},RegisterTraceCohort{cohort:super::assimilation::Cohort},FreezeTracePattern{cohort:Id},AttestTracePattern{verdict:super::assimilation::Verdict},PromoteTracePattern{candidate:Id},DisableTracePattern{candidate:Id,reason:String},InstantiateTracePattern{request:super::assimilation::Instantiate},
     ConfigureRecipePolicy{policy:super::recipes::Policy},DiscoverRecipes{family:Id},InstantiateRecipe{request:super::recipes::Instantiate},DisableRecipe{recipe:Id},ApplyLearnedRepair{task:Id,repair:Id},RecordHostCost{receipt:super::resource::HostCost},RecordResources{receipt:super::resource::Receipt},RecordAttemptAccounting{receipt:super::resource::Receipt},
@@ -486,6 +486,8 @@ impl World {
             BindRoutingAdapter{binding}=>{actor.host()?;self.bind_routing_adapter(binding)?;}
             PrepareHandoff{reservation}=>{actor.host()?;return self.prepare_handoff(&reservation);}
             ClaimHandoff{handoff}=>{actor.host()?;return self.claim_handoff(&handoff);}
+            ClaimTransportHandoff{handoff,transport}=>{actor.host()?;return self.claim_transport_handoff(&handoff,transport);}
+            FinishMailboxHandoff{receipt,manifest_digest,packet_digest}=>{actor.host()?;return self.finish_mailbox_handoff(receipt,manifest_digest,packet_digest);}
             AuthorizeMailboxTake{handoff,manifest_digest,packet_digest,binding_version,input_digest}=>{actor.host()?;return self.authorize_mailbox_take(&handoff,manifest_digest,packet_digest,binding_version,input_digest);}
             ReconcileHandoffCharge{receipt}=>{actor.host()?;return self.reconcile_handoff_charge(receipt);}
             FinishHandoff{receipt}=>{actor.host()?;return self.finish_handoff(receipt);}

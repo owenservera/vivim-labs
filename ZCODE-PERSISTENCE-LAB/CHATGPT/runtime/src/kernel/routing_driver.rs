@@ -1,6 +1,6 @@
 //! Trusted adapter driver. Synthetic and external mailbox transports are local.
 //! External executors remain separately provisioned; no implicit network calls.
-use super::{model::{Id,ensure,id,bounded,MAX_VALUE_BYTES},persistence::KernelStore,transition::{Actor,Action,Request},routing::{Usage,Outcome},routing_adapter::{Envelope,AdapterReceipt,HandoffPhase}};
+use super::{model::{Id,ensure,id,bounded,MAX_VALUE_BYTES},persistence::KernelStore,transition::{Actor,Action,Request},routing::{Usage,Outcome},routing_adapter::{Envelope,AdapterReceipt,HandoffPhase,Transport}};
 use crate::{Expr,digest,Result};
 use serde::{Serialize,Deserialize};
 use serde_json::{Value,json};
@@ -19,6 +19,8 @@ pub(crate) fn advance_clock(store:&KernelStore)->Result<()>{
 }
 pub trait Backend {
     fn supports(&self,envelope:&Envelope)->bool;
+    fn transport(&self)->Transport{Transport::Direct}
+    fn finish_action(&self,receipt:AdapterReceipt)->Result<Action>{Ok(Action::FinishHandoff{receipt})}
     /// Called only after a new committed claim. Err means uncertain outcome.
     fn send(&mut self,envelope:&Envelope,input:&Value)->Result<AdapterReceipt>;
     /// Asynchronous transports may durably publish work and return None.
@@ -33,11 +35,12 @@ pub fn step<B:Backend>(store:&KernelStore,adapter:&str,backend:&mut B,limit:usiz
     let mut lock=OpenOptions::new().create(true).truncate(false).read(true).write(true).open(store.root().join(format!("adapter-{adapter}.lock"))).map_err(error)?;
     lock.try_lock().map_err(|e|format!("adapter driver already owned: {e:?}"))?;
     let state=store.inspect()?;
+    let transport=backend.transport();transport.validate()?;
     let mut queue:Vec<_>=state.router.adapters.handoffs.values().filter(|e|e.adapter==adapter&&matches!(e.phase,HandoffPhase::Prepared|HandoffPhase::Claimed|HandoffPhase::Unknown)).cloned().collect();
     // Unsupported entries must not consume the operation budget. Rotate the
     // stable order after the last visited item, including unknown outcomes.
     // Cursor is advisory only; losing it never grants new send authority.
-    queue.retain(|e|backend.supports(e));
+    queue.retain(|e|backend.supports(e)&&state.router.adapters.transport_claims.get(&e.id).is_none_or(|t|t==&transport));
     queue.sort_by_key(|e|e.id.clone());
     let mut cursor=String::new();
     if lock.metadata().map_err(error)?.len()<=100{
@@ -56,11 +59,12 @@ pub fn step<B:Backend>(store:&KernelStore,adapter:&str,backend:&mut B,limit:usiz
         advance_clock(store)?;
         let state=store.inspect()?;
         let Some(e)=state.router.adapters.handoffs.get(&e.id).cloned() else{continue;};
-        if !backend.supports(&e){continue;}
+        if !backend.supports(&e)||state.router.adapters.transport_claims.get(&e.id).is_some_and(|t|t!=&transport){continue;}
         let result=match e.phase{
             HandoffPhase::Prepared=>{
-                match apply(store,key("claim",&e.id),Action::ClaimHandoff{handoff:e.id.clone()}){
-                    Ok(v) if v["send_authority"]=="single_attempt_only"=>{
+                match apply(store,key("claim",&e.id),Action::ClaimTransportHandoff{handoff:e.id.clone(),transport:transport.clone()}){
+                    Ok(v) if (transport==Transport::Direct&&v["send_authority"]=="single_attempt_only")
+                        ||(matches!(&transport,Transport::Mailbox{..})&&v["send_authority"]=="publish_only")=>{
                         let claimed:Envelope=serde_json::from_value(v["handoff"].clone()).map_err(error)?;
                         sent+=1;backend.begin(&claimed,&v["input"])
                     }
@@ -78,7 +82,7 @@ pub fn step<B:Backend>(store:&KernelStore,adapter:&str,backend:&mut B,limit:usiz
             Ok(Some(receipt))=>{
                 if receipt.handoff!=e.id{unknown+=1;let _=apply(store,key("unknown",&e.id),Action::InferenceUnknown{reservation:e.id.clone()});errors.push(json!({"handoff":e.id,"stage":"receipt","reason":"wrong handoff"}));continue;}
                 let request=key("finish",&e.id);
-                match apply(store,request,Action::FinishHandoff{receipt}){
+                match backend.finish_action(receipt).and_then(|action|apply(store,request,action)){
                     Ok(_)=>reconciled+=1,
                     Err(reason)=>{unknown+=1;let _=apply(store,key("unknown",&e.id),Action::InferenceUnknown{reservation:e.id.clone()});errors.push(json!({"handoff":e.id,"stage":"finish","reason":reason}));}
                 }

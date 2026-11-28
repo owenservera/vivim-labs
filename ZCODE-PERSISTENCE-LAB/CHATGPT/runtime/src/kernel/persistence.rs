@@ -408,7 +408,7 @@ impl KernelStore{
                 ensure(loaded.world.host_costs.get(command.id()).is_some_and(|m|m.operation==format!("transition-{operation}")&&m.result_digest.as_ref()==Some(&digest(&receipt.response))),"existing receipt has no matching atomic measurement")?;
             }
             if let Transaction::Command{request}= &command{
-                if let Action::ClaimHandoff{handoff}|Action::AuthorizeMailboxTake{handoff,..}=&request.action{return Ok(json!({"handoff_id":handoff,"replayed":true,"send_authority":"none_reconcile_only"}));}
+                if let Action::ClaimHandoff{handoff}|Action::ClaimTransportHandoff{handoff,..}|Action::AuthorizeMailboxTake{handoff,..}=&request.action{return Ok(json!({"handoff_id":handoff,"replayed":true,"send_authority":"none_reconcile_only"}));}
             }
             let replay_response=receipt.response.clone();
             // A replay consumes no new durable revision. Keep the old

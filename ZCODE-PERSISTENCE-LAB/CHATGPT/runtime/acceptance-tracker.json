@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-SOURCE-CLOSURE-012",
+  "revision": "R004-SOURCE-CLOSURE-013",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -633,16 +633,20 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
+        "source_pin": "bf8093e71f8eb008520e973db55391420fe3f1f9",
         "files": [
           "src/kernel/authority.rs",
           "src/kernel/routing_adapter.rs",
           "src/kernel/ingress.rs",
           "src/kernel/persistence.rs",
           "src/kernel/local_effect.rs",
-          "launch/Start-ProtectedBroker.ps1"
+          "launch/Start-ProtectedBroker.ps1",
+          "src/kernel/adapter_mailbox.rs",
+          "src/kernel/routing_driver.rs",
+          "tests/routing_handoff.rs"
         ],
-        "remaining": "Signed adapter role restricted to own handoffs and scoped goals; host-only configuration and charge reconciliation; Windows dedicated-host ACL preflight authored. Effective access, ancestor protection, separate worker identity, actual broker deployment and native signature/effect qualification remain."
+        "remaining": "Signed adapter role restricted to own handoffs and scoped goals; host-only configuration and charge reconciliation; Windows dedicated-host ACL preflight authored. Effective access, ancestor protection, separate worker identity, actual broker deployment and native signature/effect qualification remain. Explicit transport-bound dispatch and mailbox receipt admission authored; legacy implicit claims retain compatibility.",
+        "checkpoint": "TRANSPORT-FENCE-001"
       }
     },
     {
@@ -1171,7 +1175,7 @@
     }
   },
   "completion_dashboard": {
-    "revision": "R004-SOURCE-CLOSURE-012",
+    "revision": "R004-SOURCE-CLOSURE-013",
     "tracker_input_commit": "d05e332f884a11ef3bcbc69658a4de308adc812a",
     "reviewed_runtime_source": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
     "source_status_meaning": "Provisional source labels after targeted readback and integration; not a complete compiler or invariant audit, not verified operation.",
@@ -1409,6 +1413,14 @@
       "CRITICAL-PATH-001.md",
       "DERIVED-CHECKPOINT-001.md",
       "ACTIVE-FRONTIER-001.md"
+    ],
+    "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
+    "verified_credit": 0
+  },
+  "source_closure_013": {
+    "baseline": "bf8093e71f8eb008520e973db55391420fe3f1f9",
+    "documents": [
+      "TRANSPORT-FENCE-001.md"
     ],
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "verified_credit": 0

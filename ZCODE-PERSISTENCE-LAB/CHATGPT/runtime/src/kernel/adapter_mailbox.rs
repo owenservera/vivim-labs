@@ -1,7 +1,7 @@
 //! Durable host-to-external-adapter transport. No provider calls occur here.
 //! The caller must be a trusted local host bridge, not an untrusted worker.
 //! A claim is single-attempt authority, never permission to retry on uncertainty.
-use super::{model::{ensure,id,hash_id,Id,MAX_VALUE_BYTES},persistence::KernelStore,routing_adapter::{AdapterReceipt,Envelope,HandoffPhase},routing_driver::{Backend,advance_clock},routing::{Outcome,Status},transition::{Actor,Action,Request}};
+use super::{model::{ensure,id,hash_id,Id,MAX_VALUE_BYTES},persistence::KernelStore,routing_adapter::{AdapterReceipt,Envelope,HandoffPhase,Transport},routing_driver::{Backend,advance_clock},routing::{Outcome,Status},transition::{Actor,Action,Request}};
 use crate::{digest,Result};
 use serde::{Deserialize,Serialize};
 use serde_json::{json,Value};
@@ -203,6 +203,13 @@ impl Mailbox{
     }
 }
 impl Backend for Mailbox{
+    fn transport(&self)->Transport{Transport::Mailbox{manifest_digest:self.manifest_pin.clone()}}
+    fn finish_action(&self,r:AdapterReceipt)->Result<Action>{
+        let _lock=self.lock()?;let p=self.packet(&r.handoff)?;
+        let stored=self.response(&r.handoff,&p)?.ok_or("mailbox receipt missing")?;
+        ensure(pin(&stored)?==pin(&r)?,"mailbox receipt differs from stored response")?;
+        Ok(Action::FinishMailboxHandoff{receipt:r,manifest_digest:self.manifest_pin.clone(),packet_digest:pin(&p)?})
+    }
     fn supports(&self,e:&Envelope)->bool{
         e.adapter==self.manifest.config.adapter&&e.provider==self.manifest.config.provider&&e.account==self.manifest.config.account
     }

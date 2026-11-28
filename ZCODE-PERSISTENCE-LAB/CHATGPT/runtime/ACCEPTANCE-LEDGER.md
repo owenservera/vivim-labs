@@ -173,3 +173,6 @@ Critical path source addition: recalculate old/new affected dependency component
 Derived checkpoints: content-addressed projection attached to checkpoint roots, validated by independent reconstruction; GC retains projection objects. Scheduler fixture compares reference implementation under rewiring, changes and divergent clones. No execution. See DERIVED-CHECKPOINT-001.md.
 
 Active frontier source: indexed pending/running/active task, open goal and dependency waiter membership; score only readiness candidates and check live phase/dependencies. Schema-two projection supports comparison of previous schema-one checkpoints. No execution or score credit.
+
+## Source closure 013 (unqualified)
+Transport selection now committed with claim; mailbox publication distinct from transmission and settlement tied to take. Source-only fixture; no score change.

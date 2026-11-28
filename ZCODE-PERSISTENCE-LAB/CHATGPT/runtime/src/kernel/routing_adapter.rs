@@ -40,6 +40,15 @@ pub struct AdapterState{
     pub bindings:BTreeMap<Id,AdapterBinding>,pub handoffs:BTreeMap<Id,Envelope>,
     pub receipts:BTreeMap<Id,AdapterReceipt>,
     #[serde(default,skip_serializing_if="BTreeMap::is_empty")] pub mailbox_takes:BTreeMap<Id,MailboxTake>,
+    #[serde(default,skip_serializing_if="BTreeMap::is_empty")] pub transport_claims:BTreeMap<Id,Transport>,
+}
+#[derive(Clone,Debug,Serialize,Deserialize,PartialEq,Eq)]
+#[serde(tag="kind",rename_all="snake_case")]
+pub enum Transport{Direct,Mailbox{manifest_digest:Digest}}
+impl Transport{
+    pub fn validate(&self)->Result<()>{
+        if let Self::Mailbox{manifest_digest}=self{ensure(hash_id(manifest_digest),"invalid mailbox manifest digest")?;}Ok(())
+    }
 }
 /// Persistent, non-renewable transfer of an already claimed handoff to the
 /// trusted asynchronous mailbox bridge. Not a provider receipt.
@@ -147,12 +156,25 @@ impl World{
         let x=self.router.adapters.handoffs.get_mut(key).unwrap();x.phase=HandoffPhase::Claimed;x.claimed_ms=Some(self.clock_ms);
         Ok(json!({"handoff":x,"input":input,"send_authority":"single_attempt_only"}))
     }
+    /// Explicit transport selection is committed in the same transaction as
+    /// the dispatch claim. A mailbox claim authorizes publication, not send.
+    pub fn claim_transport_handoff(&mut self,key:&str,transport:Transport)->Result<Value>{
+        transport.validate()?;
+        ensure(!self.router.adapters.transport_claims.contains_key(key),"transport already selected")?;
+        let mut out=self.claim_handoff(key)?;
+        if matches!(&transport,Transport::Mailbox{..}){out["send_authority"]=json!("publish_only");}
+        self.router.adapters.transport_claims.insert(key.into(),transport);
+        Ok(out)
+    }
     /// Atomically fence mailbox transmission across cloned/restored mailbox
     /// directories and concurrent cooperating host bridges.
     pub fn authorize_mailbox_take(&mut self,key:&str,manifest:Digest,packet:Digest,binding_version:u64,input:Digest)->Result<Value>{
         id(key)?;
         ensure(hash_id(&manifest)&&hash_id(&packet)&&hash_id(&input),"mailbox take requires content digests")?;
         ensure(!self.router.adapters.mailbox_takes.contains_key(key),"mailbox transmission already authorized; reconcile only")?;
+        if let Some(mode)=self.router.adapters.transport_claims.get(key){
+            ensure(mode==&Transport::Mailbox{manifest_digest:manifest.clone()},"handoff belongs to another transport")?;
+        }
         let e=self.router.adapters.handoffs.get(key).ok_or("mailbox handoff missing")?;
         let r=self.router.reservations.get(key).ok_or("mailbox reservation missing")?;
         ensure(matches!(e.phase,HandoffPhase::Claimed|HandoffPhase::Unknown)&&matches!(r.status,Status::Dispatched|Status::Unknown)
@@ -166,6 +188,19 @@ impl World{
         Ok(json!({"take":take,"send_authority":"single_attempt_only"}))
     }
     pub fn finish_handoff(&mut self,r:AdapterReceipt)->Result<Value>{
+        ensure(!matches!(self.router.adapters.transport_claims.get(&r.handoff),Some(Transport::Mailbox{..})),"mailbox settlement requires bound take")?;
+        // Legacy implicit claims retain the historical API for compatibility.
+        self.finish_handoff_inner(r)
+    }
+    pub fn finish_mailbox_handoff(&mut self,r:AdapterReceipt,manifest:Digest,packet:Digest)->Result<Value>{
+        let take=self.router.adapters.mailbox_takes.get(&r.handoff).ok_or("mailbox take missing")?;
+        ensure(take.manifest_digest==manifest&&take.packet_digest==packet,"mailbox receipt transport identity mismatch")?;
+        if let Some(mode)=self.router.adapters.transport_claims.get(&r.handoff){
+            ensure(mode==&Transport::Mailbox{manifest_digest:manifest},"mailbox settlement transport mismatch")?;
+        }
+        self.finish_handoff_inner(r)
+    }
+    fn finish_handoff_inner(&mut self,r:AdapterReceipt)->Result<Value>{
         id(&r.request_id)?;
         let e=self.router.adapters.handoffs.get(&r.handoff).ok_or("handoff missing")?.clone();
         ensure(matches!(e.phase,HandoffPhase::Claimed|HandoffPhase::Unknown),"handoff not outstanding")?;

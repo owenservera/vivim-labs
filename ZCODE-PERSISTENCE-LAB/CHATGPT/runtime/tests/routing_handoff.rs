@@ -24,9 +24,11 @@ fn one_shot_handoff_and_evidence_feedback_survive_reopen(){
     host("demand",Action::QueueInference{demand});
     let result=host("cycle",Action::RoutingCycle{limit:1});
     let handoff=result["prepared"][0]["handoff"]["id"].as_str().unwrap().to_owned();
-    let first=host("claim",Action::ClaimHandoff{handoff:handoff.clone()});assert_eq!(first["send_authority"],"single_attempt_only");
+    let manifest=digest(&json!("manifest"));let packet=digest(&json!("packet"));
+    let claim=Action::ClaimTransportHandoff{handoff:handoff.clone(),transport:persistent_intelligence_runtime::kernel::routing_adapter::Transport::Mailbox{manifest_digest:manifest.clone()}};
+    let first=host("claim",claim.clone());assert_eq!(first["send_authority"],"publish_only");
     let reopened=KernelStore::open(&temp.0).unwrap();
-    let replay=reopened.apply(Request{id:"claim".into(),actor:Actor::Host,action:Action::ClaimHandoff{handoff:handoff.clone()}}).unwrap();
+    let replay=reopened.apply(Request{id:"claim".into(),actor:Actor::Host,action:claim}).unwrap();
     assert_eq!(replay["send_authority"],"none_reconcile_only");
     assert!(reopened.apply(Request{id:"different-claim".into(),actor:Actor::Host,action:Action::ClaimHandoff{handoff:handoff.clone()}}).is_err());
     // A second-stage mailbox authority is committed only once in the kernel.
@@ -39,7 +41,9 @@ fn one_shot_handoff_and_evidence_feedback_survive_reopen(){
     assert!(reopened.inspect().unwrap().router.adapters.mailbox_takes.contains_key(&handoff));
     // Synthetic receipt, never a real provider call.
     let receipt=AdapterReceipt{handoff:handoff.clone(),request_id:"synthetic-receipt".into(),provider:"provider-a".into(),account:"account-a".into(),model:"example-standard".into(),thinking:"low".into(),usage:Usage{requests:1,input:10,output:1,reasoning:0,credits:1},outcome:Outcome::Completed,provider_receipt:"fixture-only".into(),latency_ms:10,output:Some(json!(42))};
-    assert_eq!(host("finish",Action::FinishHandoff{receipt})["submitted"],true);
+    assert!(reopened.apply(Request{id:"direct-finish".into(),actor:Actor::Host,action:Action::FinishHandoff{receipt:receipt.clone()}}).is_err());
+    assert!(reopened.apply(Request{id:"wrong-packet".into(),actor:Actor::Host,action:Action::FinishMailboxHandoff{receipt:receipt.clone(),manifest_digest:manifest.clone(),packet_digest:digest(&json!("wrong"))}}).is_err());
+    assert_eq!(host("finish",Action::FinishMailboxHandoff{receipt,manifest_digest:manifest,packet_digest:packet})["submitted"],true);
     host("verify",Action::Verify{task:"task".into()});
     let state=reopened.inspect().unwrap();
     assert_eq!(state.goals["goal"].phase,GoalPhase::Complete);

@@ -292,7 +292,9 @@ impl World {
                 ensure(!self.has_uncertain_effect(&task),"effect reconciliation required")?;
                 ensure(t.phase==TaskPhase::Submitted,"no submission")?;self.open_goal(&t.spec.goal)?;
                 let input=t.input.as_ref().ok_or("input missing")?;let candidate=t.proposal.clone().ok_or("proposal missing")?;
-                let output=self.payload(&candidate)?;let oracle=t.spec.oracle.evaluate(input,output);
+                let output=self.payload(&candidate)?;
+                let confirmed_bad_class=t.assigned_class.as_ref().is_some_and(|k|self.capabilities.values().any(|c|c.enabled&&&c.class==k)&&self.run_class(k,input).is_ok_and(|v|v==*output));
+                let oracle=t.spec.oracle.evaluate(input,output);
                 let accepted=t.spec.output.accepts(output)&&oracle.as_ref().is_ok_and(|v|*v);
                 let rejection_reason=oracle.err().unwrap_or_else(||"oracle rejected".into());
                 let input_digest=self.put_payload(input.clone())?;
@@ -310,7 +312,7 @@ impl World {
                     if native{self.metrics.deterministic_runs=self.metrics.deterministic_runs.saturating_add(1);}
                     if native&&t.spec.class.is_none()&&t.spec.family.is_some()&&t.assigned_class.is_some(){self.metrics.reused=self.metrics.reused.saturating_add(1);}
                 }else{self.metrics.rejected=self.metrics.rejected.saturating_add(1);self.metrics.verification_rejections=self.metrics.verification_rejections.saturating_add(1);self.release(&task,&rejection_reason)?;
-                    if rejection_reason=="oracle rejected" { self.reject_learned_class(t.assigned_class.as_deref())?; }}
+                    if rejection_reason=="oracle rejected"&&confirmed_bad_class { self.reject_learned_class(t.assigned_class.as_deref())?; }}
                 return Ok(json!({"accepted":accepted,"task":task}));
             }
             Tick{now_ms}=>{

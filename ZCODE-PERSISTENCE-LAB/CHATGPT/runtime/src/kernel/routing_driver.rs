@@ -1,14 +1,14 @@
-//! Trusted adapter driver. The only built-in backend is synthetic and local.
-//! The host must supply a bounded real backend later; no credentials or network.
+//! Trusted adapter driver. Synthetic and external mailbox transports are local.
+//! External executors remain separately provisioned; no implicit network calls.
 use super::{model::{Id,ensure,id,bounded,MAX_VALUE_BYTES},persistence::KernelStore,transition::{Actor,Action,Request},routing::{Usage,Outcome},routing_adapter::{Envelope,AdapterReceipt,HandoffPhase}};
 use crate::{Expr,digest,Result};
 use serde::{Serialize,Deserialize};
 use serde_json::{Value,json};
-use std::{fs::{self,OpenOptions,File},io::Write,path::{Path,PathBuf},time::{SystemTime,UNIX_EPOCH}};
+use std::{fs::{self,OpenOptions,File},io::{Read,Seek,SeekFrom,Write},path::{Path,PathBuf},time::{SystemTime,UNIX_EPOCH}};
 fn error(e:impl std::fmt::Display)->String{e.to_string()}
 fn apply(store:&KernelStore,key:Id,action:Action)->Result<Value>{store.apply(Request{id:key,actor:Actor::Host,action})}
 fn key(kind:&str,id:&str)->Id{format!("{kind}-{}",digest(&json!(id)))}
-fn advance_clock(store:&KernelStore)->Result<()>{
+pub(crate) fn advance_clock(store:&KernelStore)->Result<()>{
     let state=store.inspect()?;
     let now=u64::try_from(SystemTime::now().duration_since(UNIX_EPOCH).map_err(error)?.as_millis()).map_err(error)?.max(state.clock_ms);
     if now>state.clock_ms{
@@ -21,6 +21,8 @@ pub trait Backend {
     fn supports(&self,envelope:&Envelope)->bool;
     /// Called only after a new committed claim. Err means uncertain outcome.
     fn send(&mut self,envelope:&Envelope,input:&Value)->Result<AdapterReceipt>;
+    /// Asynchronous transports may durably publish work and return None.
+    fn begin(&mut self,envelope:&Envelope,input:&Value)->Result<Option<AdapterReceipt>>{self.send(envelope,input).map(Some)}
     /// Observation only. None means unknown, not permission to resend.
     fn reconcile(&mut self,envelope:&Envelope)->Result<Option<AdapterReceipt>>;
 }
@@ -28,14 +30,29 @@ pub fn step<B:Backend>(store:&KernelStore,adapter:&str,backend:&mut B,limit:usiz
     id(adapter)?;ensure((1..=128).contains(&limit),"invalid driver operation budget")?;
     // Serialize all cooperating drivers for this adapter. Store transaction
     // fencing still protects claims independently of this lock.
-    let lock=OpenOptions::new().create(true).truncate(false).read(true).write(true).open(store.root().join(format!("adapter-{adapter}.lock"))).map_err(error)?;
+    let mut lock=OpenOptions::new().create(true).truncate(false).read(true).write(true).open(store.root().join(format!("adapter-{adapter}.lock"))).map_err(error)?;
     lock.try_lock().map_err(|e|format!("adapter driver already owned: {e:?}"))?;
     let state=store.inspect()?;
     let mut queue:Vec<_>=state.router.adapters.handoffs.values().filter(|e|e.adapter==adapter&&matches!(e.phase,HandoffPhase::Prepared|HandoffPhase::Claimed|HandoffPhase::Unknown)).cloned().collect();
-    // Reconcile old outcomes first, even if the binding is now disabled.
-    queue.sort_by_key(|e|(e.phase==HandoffPhase::Prepared,e.deadline_ms,e.id.clone()));
-    let mut sent=0;let mut reconciled=0;let mut unknown=0;let mut errors=vec![];
+    // Unsupported entries must not consume the operation budget. Rotate the
+    // stable order after the last visited item, including unknown outcomes.
+    // Cursor is advisory only; losing it never grants new send authority.
+    queue.retain(|e|backend.supports(e));
+    queue.sort_by_key(|e|e.id.clone());
+    let mut cursor=String::new();
+    if lock.metadata().map_err(error)?.len()<=100{
+        lock.seek(SeekFrom::Start(0)).map_err(error)?;
+        if (&mut lock).take(100).read_to_string(&mut cursor).is_err(){cursor.clear();}
+    }
+    if !queue.is_empty(){
+        let offset=queue.partition_point(|e|e.id.as_str()<=cursor.as_str())%queue.len();
+        queue.rotate_left(offset);
+    }
+    let mut sent=0;let mut reconciled=0;let mut unknown=0;let mut errors=vec![];let mut visited=0usize;
     for e in queue.into_iter().take(limit){
+        lock.seek(SeekFrom::Start(0)).map_err(error)?;lock.set_len(0).map_err(error)?;
+        lock.write_all(e.id.as_bytes()).map_err(error)?;lock.sync_data().map_err(error)?;
+        visited+=1;
         advance_clock(store)?;
         let state=store.inspect()?;
         let Some(e)=state.router.adapters.handoffs.get(&e.id).cloned() else{continue;};
@@ -44,7 +61,8 @@ pub fn step<B:Backend>(store:&KernelStore,adapter:&str,backend:&mut B,limit:usiz
             HandoffPhase::Prepared=>{
                 match apply(store,key("claim",&e.id),Action::ClaimHandoff{handoff:e.id.clone()}){
                     Ok(v) if v["send_authority"]=="single_attempt_only"=>{
-                        sent+=1;backend.send(&e,&v["input"]).map(Some)
+                        let claimed:Envelope=serde_json::from_value(v["handoff"].clone()).map_err(error)?;
+                        sent+=1;backend.begin(&claimed,&v["input"])
                     }
                     Ok(_)=>backend.reconcile(&e),
                     Err(reason)=>{errors.push(json!({"handoff":e.id,"stage":"claim","reason":reason}));continue;}
@@ -58,7 +76,7 @@ pub fn step<B:Backend>(store:&KernelStore,adapter:&str,backend:&mut B,limit:usiz
         advance_clock(store)?;
         match result{
             Ok(Some(receipt))=>{
-                if receipt.handoff!=e.id{unknown+=1;errors.push(json!({"handoff":e.id,"stage":"receipt","reason":"wrong handoff"}));continue;}
+                if receipt.handoff!=e.id{unknown+=1;let _=apply(store,key("unknown",&e.id),Action::InferenceUnknown{reservation:e.id.clone()});errors.push(json!({"handoff":e.id,"stage":"receipt","reason":"wrong handoff"}));continue;}
                 let request=key("finish",&e.id);
                 match apply(store,request,Action::FinishHandoff{receipt}){
                     Ok(_)=>reconciled+=1,
@@ -69,7 +87,7 @@ pub fn step<B:Backend>(store:&KernelStore,adapter:&str,backend:&mut B,limit:usiz
             Err(reason)=>{unknown+=1;let _=apply(store,key("unknown",&e.id),Action::InferenceUnknown{reservation:e.id.clone()});errors.push(json!({"handoff":e.id,"stage":"backend","reason":reason}));}
         }
     }
-    Ok(json!({"adapter":adapter,"send_attempts":sent,"settled":reconciled,"unknown":unknown,"errors":errors}))
+    Ok(json!({"adapter":adapter,"send_attempts":sent,"settled":reconciled,"visited":visited,"unknown":unknown,"errors":errors}))
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct SyntheticConfig{

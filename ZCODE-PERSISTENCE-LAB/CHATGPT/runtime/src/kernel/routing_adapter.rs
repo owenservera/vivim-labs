@@ -181,8 +181,9 @@ impl World{
         }
     }
     pub fn adapter_queue(&self,adapter:&str)->Result<Value>{
-        ensure(self.router.adapters.bindings.get(adapter).is_some_and(|b|b.enabled),"adapter not enabled")?;
-        let items:Vec<_>=self.router.adapters.handoffs.values().filter(|e|e.adapter==adapter&&matches!(e.phase,HandoffPhase::Prepared|HandoffPhase::Unknown)).collect();
+        ensure(self.router.adapters.bindings.contains_key(adapter),"adapter not registered")?;
+        let enabled=self.router.adapters.bindings[adapter].enabled;
+        let items:Vec<_>=self.router.adapters.handoffs.values().filter(|e|e.adapter==adapter&&matches!(e.phase,HandoffPhase::Claimed|HandoffPhase::Unknown)||e.adapter==adapter&&enabled&&e.phase==HandoffPhase::Prepared).collect();
         Ok(json!({"adapter":adapter,"handoffs":items}))
     }
 }

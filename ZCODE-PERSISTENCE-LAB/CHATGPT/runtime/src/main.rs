@@ -66,6 +66,24 @@ fn kernel_cli(args:&[String])->Result<(),String>{
             let mut backend=Synthetic::open(ledger,config)?;
             step(&store,&adapter,&mut backend,limit)?
         },
+        "routing-mailbox"=>{
+            use persistent_intelligence_runtime::kernel::{adapter_mailbox::{Mailbox,Config},routing_adapter::AdapterReceipt,routing_driver::step};
+            let op=required(args,3,"mailbox operation")?;
+            let root=Path::new(required(args,4,"mailbox root")?);
+            if op=="create"{
+                let config:Config=read_json(required(args,5,"mailbox config")?)?;
+                Mailbox::create(root,&store,config)?.inspect()
+            }else{
+                let mut mailbox=Mailbox::open(root,&store)?;
+                match op{
+                    "inspect"=>mailbox.inspect(),
+                    "step"=>{let adapter=mailbox.adapter().to_owned();let limit=required(args,5,"operation limit")?.parse::<usize>().map_err(|e|e.to_string())?;step(&store,&adapter,&mut mailbox,limit)},
+                    "take"=>mailbox.take(&store,required(args,5,"handoff ID")?),
+                    "submit"=>{let receipt:AdapterReceipt=read_json(required(args,5,"receipt file")?)?;mailbox.submit(receipt)},
+                    _=>Err("unknown mailbox operation".into()),
+                }
+            }?
+        },
         "routing-adapter-queue"=>store.inspect()?.adapter_queue(required(args,3,"adapter ID")?)?,
         "routing-refresh-plan"=>store.inspect()?.router.quota_refresh_plan()?,
         "routing-cycle"=>{

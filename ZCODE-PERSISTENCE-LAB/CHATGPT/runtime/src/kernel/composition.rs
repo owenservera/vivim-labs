@@ -75,13 +75,37 @@ impl World {
         ensure(class.lineage.iter().all(|k|self.classes.contains_key(k)),"class ancestor missing")
     }
     pub fn run_class(&self,key:&str,input:&Value)->Result<Value>{
+        self.run_class_resumable(key,input,None,|_|Ok(()))
+    }
+    /// Resume a pure graph from an integrity-checked prefix. Final output still
+    /// requires the host oracle. Invalid checkpoints restart from node zero.
+    pub fn run_class_resumable<F>(&self,key:&str,input:&Value,checkpoint:Option<&Value>,mut emit:F)->Result<Value>
+    where F:FnMut(Value)->Result<()>{
         bounded(input)?;
         let class=self.classes.get(key).ok_or("class missing")?;
         self.validate_class(class)?;
         ensure(class.input.accepts(input),"class input shape mismatch")?;
-        let mut values:BTreeMap<Id,Value>=BTreeMap::new();
+        let contracts:Vec<_>=class.nodes.iter().map(|n|&self.operators[&n.operator]).collect();
+        let graph=digest(&serde_json::json!({"class":class,"operators":contracts}));
+        let input_digest=digest(input);
+        let restored=checkpoint.and_then(|c|{
+            if c.get("graph")?.as_str()?!=graph||c.get("input")?.as_str()?!=input_digest{return None;}
+            let next=usize::try_from(c.get("next_node")?.as_u64()?).ok()?;
+            if next>class.nodes.len(){return None;}
+            let values:BTreeMap<Id,Value>=serde_json::from_value(c.get("outputs")?.clone()).ok()?;
+            if values.len()!=next||!class.nodes[..next].iter().all(|n|values.get(&n.id).is_some_and(|v|self.operators[&n.operator].output.accepts(v))){return None;}
+            let check=digest(&serde_json::to_value(&values).ok()?);
+            if c.get("output_digest")?.as_str()?!=check{return None;}
+            Some((next,values))
+        });
+        let (next,mut values)=restored.unwrap_or_default();
         let mut total_bytes=0usize;
-        for n in &class.nodes{
+        for y in values.values(){
+            bounded(y)?;
+            total_bytes=total_bytes.checked_add(serde_json::to_vec(y).map_err(|e|e.to_string())?.len()).ok_or("class memory overflow")?;
+        }
+        ensure(total_bytes<=8*MAX_VALUE_BYTES,"class intermediate budget exceeded")?;
+        for (i,n) in class.nodes.iter().enumerate().skip(next){
             let op=&self.operators[&n.operator];
             let x=resolve_wire(&n.input,input,&values,0)?;
             ensure(op.input.accepts(&x),"operator input shape mismatch")?;
@@ -90,6 +114,13 @@ impl World {
             total_bytes=total_bytes.checked_add(serde_json::to_vec(&y).map_err(|e|e.to_string())?.len()).ok_or("class memory overflow")?;
             ensure(total_bytes<=8*MAX_VALUE_BYTES,"class intermediate budget exceeded")?;
             values.insert(n.id.clone(),y);
+            // Checkpoints are optional optimization state. A large prefix is not
+            // persisted rather than exceeding the durable value ceiling.
+            if total_bytes<MAX_VALUE_BYTES/2{
+                let outputs=serde_json::to_value(&values).map_err(|e|e.to_string())?;
+                let c=serde_json::json!({"graph":graph,"input":input_digest,"next_node":i+1,"output_digest":digest(&outputs),"outputs":outputs});
+                if bounded(&c).is_ok(){emit(c)?;}
+            }
         }
         let result=resolve_wire(&class.result,input,&values,0)?;
         ensure(class.output.accepts(&result),"class output shape mismatch")?;

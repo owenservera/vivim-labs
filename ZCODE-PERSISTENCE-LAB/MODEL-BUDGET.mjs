@@ -16,10 +16,11 @@ function evaluate(input,now,simulation){
  const t=policy.tasks[task];
  if(!t)return stop('UNCLASSIFIED_TASK');
  if(t.route==='native')return {decision:'NATIVE',reason:'NO_INFERENCE_REQUIRED'};
- if(l.cli==='codex'&&!simulation)return stop('GEMINI_ROUTE_NOT_VERIFIED');
+ if(!simulation&&!l.selected)return stop('LANE_RESERVED');
+ const provider=simulation?'agy':l.cli;
  const variant=experiment.lanes[lane];
  if(!variant)return stop('NO_OPTIMIZATION_POLICY');
- if(!snapshot||snapshot.provider!=='agy'||!snapshot.account_key)return stop('NO_ACCOUNT_QUOTA');
+ if(!snapshot||snapshot.provider!==provider||!snapshot.account_key)return stop('NO_ACCOUNT_QUOTA');
  if(snapshot.subscription_only!==true||snapshot.paid_overflow_disabled!==true)return stop('BILLING_NOT_VERIFIED');
  if(snapshot.ordinary_usage_allowed!==true)return stop('ENTITLEMENT_NOT_CONFIRMED');
  const at=Date.parse(snapshot.observed_at);
@@ -35,30 +36,38 @@ function evaluate(input,now,simulation){
  if(!Number.isInteger(local.daily_turn_limit)||!Number.isInteger(local.daily_turns)||local.predicted_tokens<=0)return stop('INVALID_LOCAL_BUDGET');
  if(local.daily_turns+1>local.daily_turn_limit||local.daily_tokens+local.predicted_tokens>local.daily_token_limit)return stop('LOCAL_DAILY_CAP');
  const reserve=task==='critical'?policy.rules.critical_reserve_percent:policy.rules.reserve_percent;
+ const ledger=input.ledger,share=ledger?.allocations?.[lane];
+ if(!simulation&&(!ledger||ledger.provider!==provider||ledger.account_key!==snapshot.account_key||ledger.day!==day||!share?.selected||ledger.pending||ledger.blocked))return stop('DAILY_SHARE_NOT_READY');
  const rejects=[],eligible=[];
- let preferred=t.preferred;
+ const priorities=provider==='codex'?policy.codex_tasks?.[task]:t.preferred;
+ if(!Array.isArray(priorities)||!priorities.length)return stop('NO_TASK_MODEL_POLICY');
+ let preferred=priorities;
  if(variant.id==='verification_cascade'){
   const previous=local.task_attempts??[];
   if(!Array.isArray(previous)||previous.length>=experiment.constants.max_attempts_per_task)return stop('CASCADE_ATTEMPTS_EXHAUSTED');
   if(previous.some((a,i)=>a?.verified_failure!==true||a.model!==preferred[i]))return stop('CASCADE_RECONCILIATION_REQUIRED');
   preferred=preferred.slice(previous.length,previous.length+1);
  }
- for(const model of preferred){
-  if(!model.startsWith('gemini-')||!Array.isArray(snapshot.models)||!snapshot.models.includes(model)){rejects.push([model,'NOT_ENTITLED']);continue;}
+ for(const candidate of preferred){
+  const [model,effort]=candidate.split('@');
+  const familyAllowed=provider==='codex'?model.startsWith('gpt-')&&snapshot.model_efforts?.[model]?.includes(effort):model.startsWith('gemini-')&&!model.includes('orchestrator');
+  if(!familyAllowed||!Array.isArray(snapshot.models)||!snapshot.models.includes(model)){rejects.push([candidate,'NOT_ENTITLED']);continue;}
   const group=snapshot.model_groups?.[model];
   const g=group&&snapshot.groups?.[group];
-  if(!g||!Array.isArray(g.windows)||g.windows.length===0){rejects.push([model,'GROUP_UNKNOWN']);continue;}
+  if(group!==(provider==='codex'?'codex':'Gemini Models')||!g||!Array.isArray(g.windows)||g.windows.length===0){rejects.push([model,'GROUP_UNKNOWN']);continue;}
   const durations=new Set(g.windows.map(w=>w.duration_minutes));
   if(!durations.has(300)||!durations.has(10080)){rejects.push([model,'MISSING_QUOTA_WINDOWS']);continue;}
   // Costs are estimated in percentage points of each observed provider window,
   // never converted from tokens. Unknown costs cannot be treated as free.
   let reason=null,normalizedCost=0;
   for(const w of g.windows){
-   const delta=local.predicted_quota_pp?.[model]?.[String(w.duration_minutes)];
+   const delta=local.predicted_quota_pp?.[candidate]?.[String(w.duration_minutes)];
    if(!validNumber(w.remaining_percent)||w.remaining_percent<0||w.remaining_percent>100||!validNumber(delta)||delta<=0){reason='WINDOW_OR_COST_UNKNOWN';break;}
    const reset=Date.parse(w.resets_at);
    if(!validNumber(reset)||reset<=now){reason='WINDOW_NEEDS_REFRESH';break;}
    if(w.remaining_percent-delta<reserve){reason='RESERVE_PROTECTED';break;}
+   const k=String(w.duration_minutes);
+   if(!simulation&&(!validNumber(share.limit?.[k])||!validNumber(share.spent?.[k])||!validNumber(share.reserved?.[k])||share.spent[k]+share.reserved[k]+delta>share.limit[k]+1e-9)){reason='LANE_DAILY_SHARE';break;}
    normalizedCost=Math.max(normalizedCost,delta/Math.max(0.001,w.remaining_percent-reserve));
    if(variant.id==='paced_allocation'){
     const elapsed=Math.max(0,Math.min(1,1-(reset-now)/(w.duration_minutes*60000)));
@@ -67,9 +76,9 @@ function evaluate(input,now,simulation){
    }
   }
   if(reason){rejects.push([model,reason]);continue;}
-  eligible.push({model,group,normalizedCost,order:t.preferred.indexOf(model)});
+  eligible.push({model,effort,candidate,group,normalizedCost,order:priorities.indexOf(candidate)});
  }
- if(!eligible.length)return stop('NO_ELIGIBLE_GEMINI',{policy:variant.id,rejected_candidates:rejects});
+ if(!eligible.length)return stop(simulation||provider==='agy'?'NO_ELIGIBLE_GEMINI':'NO_ELIGIBLE_CODEX',{policy:variant.id,rejected_candidates:rejects});
  let chosen=eligible[0],selection_reason='STABLE_TASK_PRIORITY';
  if(variant.id==='paced_allocation'){
   chosen=[...eligible].sort((a,b)=>a.normalizedCost-b.normalizedCost||a.order-b.order)[0];
@@ -78,7 +87,7 @@ function evaluate(input,now,simulation){
   selection_reason='VERIFIED_FAILURE_STAGE_'+(1+(local.task_attempts?.length??0));
  }else if(variant.id==='evidence_adaptive'){
   const hist=local.verified_model_stats?.[task]??{};
-  const stats=x=>{const s=hist[x.model];return s&&Number.isInteger(s.attempts)&&Number.isInteger(s.successes)&&s.attempts>=0&&s.successes>=0&&s.successes<=s.attempts?s:{attempts:0,successes:0};};
+  const stats=x=>{const s=hist[x.candidate];return s&&Number.isInteger(s.attempts)&&Number.isInteger(s.successes)&&s.attempts>=0&&s.successes>=0&&s.successes<=s.attempts?s:{attempts:0,successes:0};};
   const total=eligible.reduce((n,x)=>n+stats(x).attempts,0);
   const exploration=Number.isInteger(local.adaptive_decisions)&&local.adaptive_decisions>=0&&local.adaptive_decisions%experiment.constants.exploration_every===0;
   const z=experiment.constants.confidence_z;
@@ -87,8 +96,8 @@ function evaluate(input,now,simulation){
   else if(total>=experiment.constants.min_samples&&eligible.some(x=>score(x)>=0)){chosen=[...eligible].sort((a,b)=>score(b)-score(a)||a.order-b.order)[0];selection_reason='VERIFIED_SUCCESS_LCB_PER_QUOTA';}
   else selection_reason='COLD_START_REFERENCE';
  }
- const {model,group}=chosen;
- return {decision:simulation?'SIMULATED_CANDIDATE':'ADMIT_CANDIDATE',lane,provider:'agy',policy:variant.id,model,group,selection_reason,reserve_percent:reserve,account_key:snapshot.account_key,snapshot_observed_at:snapshot.observed_at,local_day:day,estimated_tokens:local.predicted_tokens,estimated_quota_pp:local.predicted_quota_pp[model],requires_atomic_reservation:!simulation,rejected_candidates:rejects};
+ const {model,group,effort,candidate}=chosen;
+ return {decision:simulation?'SIMULATED_CANDIDATE':'ADMIT_CANDIDATE',lane,provider,policy:variant.id,model,reasoning_effort:effort??null,group,selection_reason,reserve_percent:reserve,account_key:snapshot.account_key,snapshot_observed_at:snapshot.observed_at,local_day:day,estimated_tokens:local.predicted_tokens,estimated_quota_pp:local.predicted_quota_pp[candidate],requires_atomic_reservation:!simulation,rejected_candidates:rejects};
 
 }
 if(process.argv[1]===fileURLToPath(import.meta.url)){

@@ -1,0 +1,23 @@
+{
+  "revision": "R013",
+  "source_pin": "16e4b44d865b7e6252c24154046352b4410c88be",
+  "native_receipt": "ctl-6fe181b18d21ea63",
+  "exit_code": 0,
+  "tests": {
+    "model_budget": "28 prior synthetic checks passed",
+    "campaign_budget": "daily allocation, reservation, rounding and rollover checks passed",
+    "completion": "8 prior contract checks passed",
+    "system_goals": "11 goal coverage and contract integrity checks passed",
+    "sufficiency": "15 contextual sufficiency, economics and invalidation checks passed"
+  },
+  "status": "CONTROLLER_PRIMITIVES_VERIFIED_SYNTHETICALLY",
+  "limitations": [
+    "Inputs and evaluator receipts in tests are synthetic; independent production evaluator, live runner and enforcement boundary remain unqualified.",
+    "No actual experimental system has demonstrated G09 yet.",
+    "Previously prepared local controller goal copies are stale; rematerialize before campaign launch.",
+    "Optional economics use externally supplied comparable intervals, not learned live value estimates.",
+    "Reopening and qualification controller journal integration needs end-to-end tests."
+  ],
+  "campaign_started": false,
+  "primary_modified_by_this_fork": false
+}

@@ -147,7 +147,7 @@ impl World {
     }
     pub fn transition(&mut self,actor:&Actor,action:Action)->Result<Value>{
         // Public transitions are atomic even for callers not using the durable store.
-        let mut next=self.clone();let output=next.apply_inner(actor,action)?;next.settle()?;next.reconcile_inference();next.refresh_handoffs();
+        let mut next=self.clone();let output=next.apply_inner(actor,action)?;next.reconcile_prepared()?;next.settle()?;next.reconcile_inference();next.refresh_handoffs();next.refresh_frontier_demand()?;
         next.sequence=next.sequence.checked_add(1).ok_or("sequence overflow")?;*self=next;Ok(output)
     }
     pub(crate) fn apply_adapter_action(&mut self,actor:&Actor,action:Action)->Result<Value>{self.apply_inner(actor,action)}
@@ -309,6 +309,8 @@ impl World {
                 let evidence_id=format!("{}-{}",task,t.generation);ensure(!self.evidence.contains_key(&evidence_id),"evidence already exists")?;
                 let parent_evidence=parents.iter().map(|p|self.artifacts[p].evidence.clone()).collect();
                 self.evidence.insert(evidence_id.clone(),super::model::Evidence{id:evidence_id.clone(),task:task.clone(),generation:t.generation,oracle:t.spec.oracle.clone(),input:input_digest,candidate:candidate.clone(),accepted,verifier,parents:parent_evidence,clock_ms:self.clock_ms,class:t.assigned_class.clone(),context:t.assigned_context.clone()});
+                let route=self.router.reservations.values().find(|r|r.task==task&&r.task_generation==Some(t.generation)&&r.status==super::routing::Status::Settled&&r.outcome==Some(super::routing::Outcome::Completed)&&r.verified.is_none()).map(|r|r.id.clone());
+                if let Some(key)=route{self.verify_inference_feedback(&key,&evidence_id)?;}
                 if accepted{
                     ensure(!self.artifacts.contains_key(&task),"duplicate admission")?;
                     self.artifacts.insert(task.clone(),Artifact{id:task.clone(),version:t.version,payload:candidate,task:task.clone(),generation:t.generation,inputs:parents,evidence:evidence_id});

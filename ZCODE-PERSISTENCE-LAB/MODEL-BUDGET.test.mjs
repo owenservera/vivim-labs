@@ -9,7 +9,7 @@ const check=(mutate,expected,model)=>{const x=structuredClone(base);mutate(x);co
 check(()=>{},'SIMULATED_CANDIDATE','gemini-3.8-flash-low');
 check(x=>x.task='architecture','SIMULATED_CANDIDATE','gemini-4-neon-high');
 check(x=>x.task='deterministic','NATIVE');
-assert.equal(route(base,now).reason,'GEMINI_ROUTE_NOT_VERIFIED');
+assert.equal(route(base,now).reason,'NO_ACCOUNT_QUOTA');
 check(x=>x.snapshot.observed_at='2026-11-27T00:00:00Z','STALE_OR_INVALID_QUOTA');
 check(x=>x.local.inflight=1,'ACCOUNT_BUSY');
 check(x=>x.local.daily_turns=10,'LOCAL_DAILY_CAP');
@@ -39,5 +39,5 @@ assert.equal(lane('04').model,'gemini-4-neon-high');
 assert.equal(lane('04',x=>{x.local.adaptive_decisions=1;x.local.verified_model_stats={architecture:{'gemini-4-neon-high':{attempts:10,successes:2},'gemini-4-hydrogen-high':{attempts:10,successes:9}}}}).model,'gemini-4-hydrogen-high');
 assert.equal(lane('04',x=>{x.local.adaptive_decisions=10;x.local.verified_model_stats={architecture:{'gemini-4-neon-high':{attempts:10,successes:9}}}}).selection_reason,'BOUNDED_EXPLORATION');
 assert.equal(lane('01',x=>{for(const m of Object.keys(x.local.predicted_quota_pp))x.local.predicted_quota_pp[m]={'300':0,'10080':0}}).reason,'NO_ELIGIBLE_GEMINI');
-assert.equal(route({...trace,lane:'04'},now).reason,'GEMINI_ROUTE_NOT_VERIFIED');
+assert.equal(route({...trace,lane:'04'},now).reason,'DAILY_SHARE_NOT_READY');
 console.log('R009: 28 synthetic selector/parser and variant checks passed; no inference.');

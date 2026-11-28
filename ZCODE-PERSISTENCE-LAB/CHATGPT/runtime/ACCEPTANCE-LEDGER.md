@@ -90,3 +90,7 @@ Source pin 0f05cb749b5b42986988cbba32d1af1f3b97b740. See [MODEL-ROUTING-R002.md]
 ## Supplemental model routing R003
 
 Source pin 1b3af7066b4b5cb2a10408031fb0163e379ffb8f. [MODEL-ROUTING-R003.md](MODEL-ROUTING-R003.md). Seven source-implemented/unverified, three partial source, seven authored and unexecuted qualification fixtures. Bounded joint assignment, shadow comparison, and an explicitly synthetic-only backend/driver are integrated. Original 50-gate criteria, weights and verified scores unchanged; no live provider calls or native execution.
+
+## Supplemental model routing R004
+
+Source pin 8fa44485e12c178655cca3c5c7e092526137017b. [MODEL-ROUTING-R004.md](MODEL-ROUTING-R004.md). Seven source-implemented/unverified and three partial source gates; ten authored, unexecuted fixtures. Explicitly authorized policy trials, bounded candidate generation, separate resource caps, comparable starting quota, evidence-linked observed yield, optional automatic promotion and versioned rollback. Original 50 gates and verified scores unchanged. No builds, compilation, tests or provider requests.

@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-source-checkpoint-003-routing-R003",
+  "revision": "R004-source-checkpoint-003-routing-R004",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -1024,8 +1024,8 @@
     }
   },
   "routing_workstream": {
-    "revision": "R003",
-    "source_pin": "1b3af7066b4b5cb2a10408031fb0163e379ffb8f",
+    "revision": "R004",
+    "source_pin": "8fa44485e12c178655cca3c5c7e092526137017b",
     "verification": "NOT_COMPILED_NOT_TESTED",
     "related_original_gates": [
       "E12",
@@ -1056,7 +1056,7 @@
         "id": "R04",
         "criterion": "Frontier pacing, emergency reserve, per-goal cap and priority allocation",
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "remaining": "Frontier pacing, forecast protection and joint competing-demand assignment under shared reservation constraints; unqualified."
+        "remaining": "Frontier pacing, future protection, constrained joint allocation and extra per-arm pool caps. Source only."
       },
       {
         "id": "R05",
@@ -1072,7 +1072,8 @@
       {
         "id": "R07",
         "criterion": "Independent evidence-linked model performance feedback",
-        "status": "SOURCE_IMPLEMENTED_UNVERIFIED"
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "remaining": "Independent evidence attribution now includes verification time and batch-policy revision for observed cohort evaluation."
       },
       {
         "id": "R08",
@@ -1084,13 +1085,13 @@
         "id": "R09",
         "criterion": "Autonomous provider dispatch/reconciliation and empirical budget optimization",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Autonomous preparation, configurable joint allocation, bounded synthetic dispatch/reconciliation/verification and shadow comparison. Real-provider dispatch, automatic polling and empirically validated policy optimization remain outstanding."
+        "remaining": "Bounded candidate generation, matched sequential policy cohorts, opt-in automatic arm progression and promotion, versioned rollback. Live provider transport and empirical optimization qualification remain absent."
       },
       {
         "id": "R10",
         "criterion": "Native quota, fallback, frontier and concurrency qualification",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Seven source-only fixtures across routing_r002.rs, routing_handoff.rs, routing_optimizer.rs and routing_synthetic.rs. None compiled or executed."
+        "remaining": "Ten authored routing qualification fixtures, including three synthetic accounting/policy guard cases. None compiled or executed."
       }
     ]
   }

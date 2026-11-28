@@ -25,6 +25,7 @@ pub enum Action {
     Receive{limit:usize,ttl_ms:u64},WaitMessage{agent:Id},WaitDependency{agent:Id,task:Id},Cancel{goal:Id},
     AdmitCapability{capability:Capability},DisableCapability{capability:Id},RollbackCapability{capability:Id,reason:String},
     ConfigureLearning{plan:LearningPlan},LearnPlan{plan:Id},RegisterKnowledgeRule{rule:KnowledgeRule},AssimilateRecurring{rule:Id,payload:Digest},PublishKnowledge{knowledge:Knowledge},DisableKnowledge{knowledge:Id},
+    RegisterCohort{cohort:super::custody::Cohort},FreezeCandidate{id:Id,capability:Capability,cohort:Id},AttestCandidate{verdict:super::custody::Verdict},AdmitFrozen{candidate:Id},
     RecordCost{task:Id,generation:u64,elapsed_ms:u64},SetPolicy{policy:SchedulingPolicy},
     PrepareEffect{task:Id,generation:u64,key:Id,payload:Value,oracle:Oracle},
     EffectUnknown{effect:Id,reason:String},ResolveEffect{effect:Id,outcome:EffectPhase,receipt:Value},
@@ -367,6 +368,10 @@ impl World {
                 }
             }
             RollbackCapability{capability,reason}=>{actor.host()?;return Ok(json!(self.rollback_capability(&capability,&reason)?));}
+            RegisterCohort{cohort}=>{actor.host()?;self.register_cohort(cohort)?;}
+            FreezeCandidate{id:key,capability,cohort}=>{actor.host()?;return self.freeze_candidate(key,capability,cohort);}
+            AttestCandidate{verdict}=>{let Actor::Verifier{id:who}=actor else{return Err("independent custody verifier required".into());};return self.attest_candidate(who,verdict);}
+            AdmitFrozen{candidate}=>{actor.host()?;return self.admit_frozen(&candidate);}
             ConfigureLearning{plan}=>{actor.host()?;let k=self.configure_learning(plan)?;return Ok(json!({"plan":k}));}
             LearnPlan{plan}=>{actor.host()?;return self.run_learning(&plan);}
             RegisterKnowledgeRule{rule}=>{actor.host()?;let key=self.register_knowledge_rule(rule)?;return Ok(json!({"rule":key}));}

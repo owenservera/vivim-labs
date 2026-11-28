@@ -1,0 +1,18 @@
+# R011 — Closed-loop campaign controller
+
+## Experiment boundary
+The gold seeds and CHATGPT primary are immutable inputs to this fork. R010 assigns 01 native Codex GPT, 04 Antigravity Gemini; 02 and 03 are reserved. A release is a finite internally proposed contract, independently reviewed against the original objective, not all possible future improvements. No agent sees the comparator, root tracker, other seed, or controller journal.
+
+## One durable loop
+Inspect objective -> propose finite contract -> independent scope review -> freeze contract -> choose highest priority unresolved mandatory obligation -> budget/model admission -> atomic reservation and intent -> isolated bounded execution -> independent verification -> reconcile quota and effect -> update checkpoint and evidence -> repeat or yield. Final qualification rechecks the whole frozen contract on one candidate digest. Changes invalidate claims until reverified. No agent or provider transcript controls the transition. Native deterministic checks do not consume inference.
+
+The daily quota journal is the transaction boundary for both reservation and campaign intent; there is no second mutable task ledger to reconcile. Each invocation executes at most one bounded turn. The controller may run native verification separately without inference. A pending reservation after controller failure is UNKNOWN; no retry or model switch until a trusted reconciliation proves the prior process/effects are fenced. Independent account journals permit the two selected lanes to overlap. Pause and terminal states are different.
+
+## Completion and productivity
+The agent proposes criteria, dependency edges, test/falsifier, task category and priority. Controller reviews coverage and rejects circular or vacuous criteria. Freeze the contract digest; revisions require reviewed reason and fresh evidence. The controller chooses ready obligations deterministically by critical downstream count then priority and ID. Bounded repair attempts prevent loops. Every accepted result has independent evidence; successful changes invalidate evidence for earlier candidate digests, not the obligation definition. Final independent qualification must rerun all criteria on a common digest, regressions and fault cases, not trust model-generated pass reports. Record complete contract, source digest and evidence. Release and program-wide canonical acceptance score are distinct.
+
+## Budget learning
+Use one account-level daily envelope and two reserved shares per provider. Never manufacture new quota by switching model or profile. Forecasts are quota percentage points per observed window; tokens and effort are separate metrics. Cold start is an explicitly approved conservative forecast, not a measured price. Learn only from matched before/after observations with same reset identity, verified attribution and bounded samples. Round-zero observations are censored. Fail closed for unknown costs, stale entitlement, daily cap, reserve or reconciliation. Preserve 15 pp shared headroom. Account and lane caps cannot be raised by workers.
+
+## Delivery
+R011 implements a controller library with injected trusted boundary/verification adapters. Its native/synthetic qualification is not evidence that Windows filesystem isolation, actual paid-overflow settings, or independent live evaluator authority are established. Do not attach an unconfined CLI directly. Live driver must use an externally enforced lane-only execution boundary, authenticated provider identity, and independent evaluator; verify actual effective model/effort. The historical smoke entrypoint stays disabled. No campaign is launched by this revision.

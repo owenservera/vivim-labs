@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-source-checkpoint-003",
+  "revision": "R004-source-checkpoint-003-routing-R001",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -1022,5 +1022,71 @@
       "PARTIAL_SOURCE": 6,
       "DEFERRED": 4
     }
+  },
+  "routing_workstream": {
+    "revision": "R001",
+    "source_pin": "f732d7648c729910a1dfe5ad412e409cb6cc3d58",
+    "verification": "NOT_COMPILED_NOT_TESTED",
+    "related_original_gates": [
+      "E12",
+      "E25",
+      "E31",
+      "E42",
+      "E43",
+      "E50"
+    ],
+    "score_policy": "Supplemental workstream; original 50 gates and weights unchanged. No verified credit.",
+    "gates": [
+      {
+        "id": "R01",
+        "criterion": "Configurable provider/account/model/thinking registry and tariff",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED"
+      },
+      {
+        "id": "R02",
+        "criterion": "Overlapping fixed, rolling and lifetime resource pools",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED"
+      },
+      {
+        "id": "R03",
+        "criterion": "Atomic reservation, settlement, unknown usage and reset-safe accounting",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED"
+      },
+      {
+        "id": "R04",
+        "criterion": "Frontier pacing, emergency reserve, per-goal cap and priority allocation",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED"
+      },
+      {
+        "id": "R05",
+        "criterion": "Quality/context/deadline/cost-aware fallback ranking",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED"
+      },
+      {
+        "id": "R06",
+        "criterion": "Native-first task selection and incarnation-bound dispatch contract",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED"
+      },
+      {
+        "id": "R07",
+        "criterion": "Independent evidence-linked model performance feedback",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED"
+      },
+      {
+        "id": "R08",
+        "criterion": "Live provider observations, actual model/thinking receipt and adapter execution",
+        "status": "DEFERRED"
+      },
+      {
+        "id": "R09",
+        "criterion": "Autonomous provider dispatch/reconciliation and empirical budget optimization",
+        "status": "DEFERRED"
+      },
+      {
+        "id": "R10",
+        "criterion": "Native quota, fallback, frontier and concurrency qualification",
+        "status": "DEFERRED"
+      }
+    ]
   }
 }

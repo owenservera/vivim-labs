@@ -121,6 +121,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             if valid{jobs[i].checkpoint(store)?;}
             if !valid||jobs[i].started.elapsed()>=Duration::from_millis(config.lease_ms){
                 let job=jobs.swap_remove(i);
+                let _=host(store,Action::RecordCost{task:job.task.clone(),generation:job.generation,elapsed_ms:job.started.elapsed().as_millis().min(3_600_000) as u64});
                 if valid{let _=apply(store,job.actor(),Action::Fail{task:job.task.clone(),generation:job.generation,reason:"native worker timeout".into()});}
                 failures+=1;drop(job);continue;
             }
@@ -142,6 +143,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
                 }
                 Err(e)=>{let _=apply(store,job.actor(),Action::Fail{task:job.task.clone(),generation:job.generation,reason:e});failures+=1;}
             }
+            store.project_host_agent(&job.worker)?;
         }
         // Recover durable submissions after controller replacement.
         let w=store.inspect()?;
@@ -179,6 +181,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
                 let mut work=Work::from_world(&snapshot,&class,claim["input"].clone())?;
                 work.resume=claim.get("checkpoint").filter(|v|!v.is_null()).cloned();
                 let last_checkpoint=work.resume.as_ref().and_then(|v|v.get("next_node")).and_then(Value::as_u64).unwrap_or(0);
+                store.project_host_agent(&worker)?;
                 let path=store.project_agent(&worker,&workspace)?;
                 let attempt=path.join("incarnations").join(format!("{}-{}-{}",task,lease.incarnation,lease.generation));
                 fs::create_dir(&attempt).map_err(error)?;
@@ -201,6 +204,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
     // Cancellation of this invocation is not cancellation of durable goals.
     // Fence its jobs and release their leases before terminating owned child processes.
     for job in jobs{
+        let _=host(store,Action::RecordCost{task:job.task.clone(),generation:job.generation,elapsed_ms:job.started.elapsed().as_millis().min(3_600_000) as u64});
         let _=apply(store,job.actor(),Action::Fail{task:job.task.clone(),generation:job.generation,reason:"supervisor stopped".into()});
         drop(job);
     }

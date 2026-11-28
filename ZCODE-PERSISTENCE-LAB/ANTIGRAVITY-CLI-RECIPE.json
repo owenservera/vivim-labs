@@ -1,0 +1,344 @@
+{
+  "schema": "vivim.dogfood.cli-recipe/1",
+  "revision": "R006.2",
+  "scope": "EXPERIMENTS_ONLY",
+  "seed_commit": "3b1d7e173071710e6795c09427162292f774030e",
+  "status": "CONTRACT_CONFIGURED_LIVE_WIRING_PENDING",
+  "branch": "main",
+  "variables": {
+    "run_id": "Unique externally generated opaque ID; never use a sibling experiment name in worker prompts.",
+    "seed_dir": "Exact assigned experiment source directory at seed_commit",
+    "workspace": "Fresh absolute path outside shared checkout; private to one lane",
+    "controller_dir": "Private controller directory, inaccessible to agent",
+    "session_id": "Provider ID obtained from owned init event, never guessed",
+    "prompt": "UTF-8 task prompt from controller; no evaluator data",
+    "model": "Explicit locally supported model selected and recorded before comparative run",
+    "settings_file": "Controller-generated provider settings file inside authorized provider profile; not tracked",
+    "stdout_log": "Controller-private NDJSON path",
+    "stderr_log": "Controller-private diagnostic path"
+  },
+  "assignment_policy": {
+    "knowledge_levels_balanced": true,
+    "hold_persistence_policy_constant": true,
+    "provider_confound": "Provider and knowledge are not independently identified in this first cohort. Repeat with crossover assignments on freshly materialized gold seeds before drawing causal conclusions. Never reuse prior agent history in crossover.",
+    "cohort_2": "Reverse provider assignments; use same seeds, prompts, budgets and acceptance oracle."
+  },
+  "materialize": {
+    "mode": "copy exact seed files, never launch from repository checkout",
+    "exclude": [
+      ".git",
+      "target",
+      "state",
+      "logs",
+      "provider histories",
+      "root README",
+      "CHATGPT",
+      "sibling experiments",
+      "controller-only tests"
+    ],
+    "verify": [
+      "Resolve real paths; reject reparse points/symlinks and paths outside selected seed/workspace.",
+      "Record SHA256 of every copied file and compare with pinned Git tree.",
+      "Verify workspace has no parent Git checkout or credentials.",
+      "Use isolated per-lane OS account/profile or VM with a dedicated authenticated CLI profile; block parent/sibling/controller/repository reads and writes, arbitrary network, external tools/MCP, inherited skills/instructions, and direct GitHub access.",
+      "Provider access only; do not copy tokens or expose secrets. Test boundary using harmless synthetic canaries before delivering actual seed.",
+      "If containment or authentication cannot be demonstrated, stop before inference. CLI sandbox and Windows job containment alone are insufficient."
+    ]
+  },
+  "budget": {
+    "smoke": {
+      "turn_limit": 2,
+      "parallel_per_lane": 1,
+      "wall_seconds_per_turn": 120,
+      "max_attempts": 1
+    },
+    "dogfood": {
+      "enabled": false,
+      "turn_limit": "must be set explicitly",
+      "wall_seconds": "must be set explicitly",
+      "token_or_cost_ceiling": "must be set explicitly",
+      "parallel_per_lane": 1,
+      "max_retries_per_fault": 3
+    },
+    "timeout_policy": "Host wall-clock deadline independent of provider; interrupt owned process, drain, terminate only owned job if necessary, reconcile effects. No unbounded retry."
+  },
+  "state_machine": [
+    "PRECHECK",
+    "ISOLATED",
+    "AUTH_READY",
+    "STARTING",
+    "RUNNING",
+    "SUBMITTED",
+    "VERIFYING",
+    "VERIFIED",
+    "CHECKPOINTED",
+    "WAITING",
+    "UNKNOWN",
+    "FAILED",
+    "CANCELLED",
+    "COMPLETE"
+  ],
+  "host_contract": {
+    "command_execution": "Spawn exact executable and argument array, no shell interpolation; normalize ordinary absolute Windows paths. Capture stdout/stderr independently with incremental UTF-8 decoding and line framing. Never pass controller secrets to worker.",
+    "write_ahead": "Durably record run/attempt ID, prompt digest, seed digest, generation, expected workspace and deadline before spawn; record owned process ID/job and actual CLI version on launch.",
+    "events": "Persist raw local stream before normalization, sequence events, deduplicate only by known event IDs or stream offsets, preserve unknown events; never infer completion from silence or text.",
+    "identity": "Bind run, lane, logical agent, incarnation, provider conversation, and task; one in-flight turn per conversation; verify returned session identity on resume; never use latest/global session selectors.",
+    "verify": "CLI exit zero or result success is transport evidence only. Independent controller verifies artifact bytes, expected output and permitted filesystem diff; commit effect by stable request ID after reconciliation.",
+    "resume": "Only after confirming prior owned process ended or is fenced, checking checkpoint and file diff, and confirming cancellation/budget status. Resume exact bound provider session; if unavailable record failure; fresh session only if experimental policy permits. No cross-lane history.",
+    "cancel": "Persist cancellation before signalling. No automatic restart after cancellation, denial or budget exhaustion.",
+    "receipt_fields": [
+      "run_id",
+      "lane_id",
+      "seed_commit",
+      "seed_manifest_sha256",
+      "provider",
+      "cli_version",
+      "binary_sha256",
+      "model",
+      "workspace",
+      "attempt_id",
+      "logical_agent_id",
+      "incarnation",
+      "generation",
+      "provider_session_id",
+      "provider_project_id_if_available",
+      "process_id",
+      "started_utc",
+      "ended_utc",
+      "exit_code",
+      "terminal_event",
+      "stdout_sha256",
+      "stderr_sha256",
+      "usage_if_reported",
+      "checkpoint_digest",
+      "artifact_digests",
+      "oracle_result",
+      "failure_class",
+      "recovery_action",
+      "cancellation_status"
+    ]
+  },
+  "acceptance": [
+    {
+      "id": "P0",
+      "gate": "Exact CLI version/help/launch path observed; no inference."
+    },
+    {
+      "id": "P1",
+      "gate": "Fresh isolated workspace, independent authenticated profile, harmless deny/read/write/network/MCP probes pass."
+    },
+    {
+      "id": "P2",
+      "gate": "One bounded prompt returns known nonce, captures valid provider conversation ID, terminal event, process exit; no external writes."
+    },
+    {
+      "id": "P3",
+      "gate": "Explicit same-session resume returns retained nonce, same identity, expected cwd; second lane has distinct ID and profile."
+    },
+    {
+      "id": "P4",
+      "gate": "Bounded scoped write and independent artifact verification; no sibling/evaluator access."
+    },
+    {
+      "id": "P5",
+      "gate": "Cancellation and transport failure receipt, no orphan process or unintended retry; reconcile on restart."
+    },
+    {
+      "id": "P6",
+      "gate": "Two assigned lanes run concurrently with independent state and matching workload/budget. Record overlap and compare only after crossover."
+    }
+  ],
+  "smoke_prompts": {
+    "first": "Remember the controller-provided nonce for a subsequent turn. Reply with exactly that nonce. Do not use tools or edit files.",
+    "resume": "Reply with exactly the nonce from the previous turn. Do not use tools or edit files.",
+    "artifact": "Create only the requested relative artifact in the assigned workspace with the controller-provided content. Do not access other paths or the network."
+  },
+  "publication": "Commit only recipes and sanitized receipts; never raw transcripts, credentials, profile files, controller-private oracle, or experimental runs. Do not modify CHATGPT/ or canonical tracker. No acceptance points for recipe creation.",
+  "provider": "antigravity_cli",
+  "assignments": [
+    "EXPERIMENT-02",
+    "EXPERIMENT-03"
+  ],
+  "crossover_assignments": [
+    "EXPERIMENT-01",
+    "EXPERIMENT-04"
+  ],
+  "context7": {
+    "library_id": "/websites/antigravity_google_cli",
+    "pull_date": "2026-11-28",
+    "sources": [
+      "https://antigravity.google/docs/cli/headless/",
+      "https://antigravity.google/docs/permissions?tab=cli",
+      "https://antigravity.google/docs/sandbox?tab=cli",
+      "https://antigravity.google/docs/cli/reference/",
+      "https://antigravity.google/docs/cli/projects/"
+    ],
+    "findings": [
+      "--print, --output-format stream-json, --input-format stream-json, --conversation, --sandbox, --print-timeout; init conversation_id/cwd/permission_mode; result status and usage; Windows sandbox may permit reading outside user profile; resume automatically selects associated project; session settings --settings observed locally."
+    ]
+  },
+  "local_preflight": {
+    "version": "1.5.18",
+    "preferred_program": "%LOCALAPPDATA%\\agy\\bin\\agy.exe",
+    "auth": "Not tested; no supported noninteractive auth status verified. Require authorized isolated profile and a bounded smoke after isolation.",
+    "receipts": [
+      "ctl-4a854e84a5d68373",
+      "ctl-4f16b12483c22ff0",
+      "ctl-fe8a485c1fd5aecd"
+    ],
+    "help_observed": [
+      "--print",
+      "--conversation",
+      "--output-format",
+      "--input-format",
+      "--sandbox",
+      "--settings",
+      "--print-timeout",
+      "--new-project",
+      "--project",
+      "acp"
+    ]
+  },
+  "provider_profile": {
+    "requirements": [
+      "Dedicated OS/VM profile per lane; native --sandbox does NOT guarantee read isolation on Windows.",
+      "Use --settings session-only configuration; never alter shared ~/.gemini/antigravity-cli/settings.json. Default request-review; deny or pause if a tool permission requires approval.",
+      "Generate exact scoped permission rules only after validating local settings schema and canary tests. Do not rely on broad allow patterns; deny sibling/controller/credentials and network outside provider at OS layer.",
+      "Avoid inherited global agents, skills, plugins, MCP, project data and remote control; verify init.tools and project scope. Resume must select same bound project."
+    ]
+  },
+  "settings_template": {
+    "permissions": {
+      "allow": [],
+      "deny": [],
+      "ask": [
+        "command(*)"
+      ]
+    },
+    "note": "Illustrative conservative rule fragment from documented syntax; do not pass note as config. Actual file must include validated explicit workspace-only write/read and command allowances as needed; no broad allow or permission bypass. Empty allow is not a security boundary."
+  },
+  "commands": {
+    "version": {
+      "program": "${agy_exe}",
+      "args": [
+        "--version"
+      ]
+    },
+    "help": {
+      "program": "${agy_exe}",
+      "args": [
+        "--help"
+      ]
+    },
+    "start": {
+      "program": "${agy_exe}",
+      "cwd": "${workspace}",
+      "args": [
+        "--sandbox",
+        "--settings",
+        "${settings_file}",
+        "--disable-slash-commands",
+        "--model",
+        "${model}",
+        "--print-timeout",
+        "120s",
+        "--output-format",
+        "stream-json",
+        "--print",
+        "${prompt}"
+      ],
+      "stdin": null,
+      "close_stdin": true
+    },
+    "resume": {
+      "program": "${agy_exe}",
+      "cwd": "${workspace}",
+      "args": [
+        "--sandbox",
+        "--settings",
+        "${settings_file}",
+        "--disable-slash-commands",
+        "--model",
+        "${model}",
+        "--print-timeout",
+        "120s",
+        "--output-format",
+        "stream-json",
+        "--conversation",
+        "${session_id}",
+        "--print",
+        "${prompt}"
+      ],
+      "stdin": null,
+      "close_stdin": true
+    },
+    "streaming_alternative": {
+      "enabled": false,
+      "program": "${agy_exe}",
+      "cwd": "${workspace}",
+      "args": [
+        "--sandbox",
+        "--settings",
+        "${settings_file}",
+        "--input-format",
+        "stream-json",
+        "--output-format",
+        "stream-json",
+        "--model",
+        "${model}"
+      ],
+      "stdin_line": {
+        "event": "user",
+        "message": {
+          "content": "${prompt}"
+        }
+      },
+      "note": "Documented continuous multi-turn input; only adopt after single-turn explicit-ID recovery proven. One prompt at a time; close input and drain on shutdown."
+    }
+  },
+  "stream": {
+    "encoding": "UTF-8 NDJSON",
+    "session": {
+      "event": "init",
+      "id_path": "conversation_id",
+      "verify": [
+        "init.cwd",
+        "init.permission_mode",
+        "init.tools"
+      ]
+    },
+    "progress": {
+      "event": "step_update",
+      "fields": [
+        "step_update.conversation_id",
+        "step_update.step_index",
+        "step_update.state",
+        "step_update.step_type",
+        "step_update.text_delta",
+        "step_update.usage"
+      ]
+    },
+    "terminal": {
+      "event": "result",
+      "id_path": "result.conversation_id",
+      "status_path": "result.status",
+      "success": "SUCCESS",
+      "failure": "ERROR",
+      "response_path": "result.response",
+      "usage_path": "result.usage"
+    },
+    "timeout": "CLI timeout may exit 3; host treats unknown side effects as UNKNOWN; verify observed local behavior.",
+    "note": "Context7 documented schema; verify actual local frames before marking P2."
+  },
+  "forbidden": [
+    "--continue",
+    "-c",
+    "--add-dir",
+    "--dangerously-skip-permissions",
+    "--remote-agent",
+    "--remote-control",
+    "shared global settings changes",
+    "unvalidated --mode auto",
+    "global install/uninstall or upgrade"
+  ]
+}

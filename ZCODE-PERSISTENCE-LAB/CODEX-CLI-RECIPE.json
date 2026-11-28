@@ -1,0 +1,321 @@
+{
+  "schema": "vivim.dogfood.cli-recipe/1",
+  "revision": "R006.2",
+  "scope": "EXPERIMENTS_ONLY",
+  "seed_commit": "3b1d7e173071710e6795c09427162292f774030e",
+  "status": "CONTRACT_CONFIGURED_LIVE_WIRING_PENDING",
+  "branch": "main",
+  "variables": {
+    "run_id": "Unique externally generated opaque ID; never use a sibling experiment name in worker prompts.",
+    "seed_dir": "Exact assigned experiment source directory at seed_commit",
+    "workspace": "Fresh absolute path outside shared checkout; private to one lane",
+    "controller_dir": "Private controller directory, inaccessible to agent",
+    "session_id": "Provider ID obtained from owned init event, never guessed",
+    "prompt": "UTF-8 task prompt from controller; no evaluator data",
+    "model": "Explicit locally supported model selected and recorded before comparative run",
+    "settings_file": "Controller-generated provider settings file inside authorized provider profile; not tracked",
+    "stdout_log": "Controller-private NDJSON path",
+    "stderr_log": "Controller-private diagnostic path"
+  },
+  "assignment_policy": {
+    "knowledge_levels_balanced": true,
+    "hold_persistence_policy_constant": true,
+    "provider_confound": "Provider and knowledge are not independently identified in this first cohort. Repeat with crossover assignments on freshly materialized gold seeds before drawing causal conclusions. Never reuse prior agent history in crossover.",
+    "cohort_2": "Reverse provider assignments; use same seeds, prompts, budgets and acceptance oracle."
+  },
+  "materialize": {
+    "mode": "copy exact seed files, never launch from repository checkout",
+    "exclude": [
+      ".git",
+      "target",
+      "state",
+      "logs",
+      "provider histories",
+      "root README",
+      "CHATGPT",
+      "sibling experiments",
+      "controller-only tests"
+    ],
+    "verify": [
+      "Resolve real paths; reject reparse points/symlinks and paths outside selected seed/workspace.",
+      "Record SHA256 of every copied file and compare with pinned Git tree.",
+      "Verify workspace has no parent Git checkout or credentials.",
+      "Use isolated per-lane OS account/profile or VM with a dedicated authenticated CLI profile; block parent/sibling/controller/repository reads and writes, arbitrary network, external tools/MCP, inherited skills/instructions, and direct GitHub access.",
+      "Provider access only; do not copy tokens or expose secrets. Test boundary using harmless synthetic canaries before delivering actual seed.",
+      "If containment or authentication cannot be demonstrated, stop before inference. CLI sandbox and Windows job containment alone are insufficient."
+    ]
+  },
+  "budget": {
+    "smoke": {
+      "turn_limit": 2,
+      "parallel_per_lane": 1,
+      "wall_seconds_per_turn": 120,
+      "max_attempts": 1
+    },
+    "dogfood": {
+      "enabled": false,
+      "turn_limit": "must be set explicitly",
+      "wall_seconds": "must be set explicitly",
+      "token_or_cost_ceiling": "must be set explicitly",
+      "parallel_per_lane": 1,
+      "max_retries_per_fault": 3
+    },
+    "timeout_policy": "Host wall-clock deadline independent of provider; interrupt owned process, drain, terminate only owned job if necessary, reconcile effects. No unbounded retry."
+  },
+  "state_machine": [
+    "PRECHECK",
+    "ISOLATED",
+    "AUTH_READY",
+    "STARTING",
+    "RUNNING",
+    "SUBMITTED",
+    "VERIFYING",
+    "VERIFIED",
+    "CHECKPOINTED",
+    "WAITING",
+    "UNKNOWN",
+    "FAILED",
+    "CANCELLED",
+    "COMPLETE"
+  ],
+  "host_contract": {
+    "command_execution": "Spawn exact executable and argument array, no shell interpolation; normalize ordinary absolute Windows paths. Capture stdout/stderr independently with incremental UTF-8 decoding and line framing. Never pass controller secrets to worker.",
+    "write_ahead": "Durably record run/attempt ID, prompt digest, seed digest, generation, expected workspace and deadline before spawn; record owned process ID/job and actual CLI version on launch.",
+    "events": "Persist raw local stream before normalization, sequence events, deduplicate only by known event IDs or stream offsets, preserve unknown events; never infer completion from silence or text.",
+    "identity": "Bind run, lane, logical agent, incarnation, provider conversation, and task; one in-flight turn per conversation; verify returned session identity on resume; never use latest/global session selectors.",
+    "verify": "CLI exit zero or result success is transport evidence only. Independent controller verifies artifact bytes, expected output and permitted filesystem diff; commit effect by stable request ID after reconciliation.",
+    "resume": "Only after confirming prior owned process ended or is fenced, checking checkpoint and file diff, and confirming cancellation/budget status. Resume exact bound provider session; if unavailable record failure; fresh session only if experimental policy permits. No cross-lane history.",
+    "cancel": "Persist cancellation before signalling. No automatic restart after cancellation, denial or budget exhaustion.",
+    "receipt_fields": [
+      "run_id",
+      "lane_id",
+      "seed_commit",
+      "seed_manifest_sha256",
+      "provider",
+      "cli_version",
+      "binary_sha256",
+      "model",
+      "workspace",
+      "attempt_id",
+      "logical_agent_id",
+      "incarnation",
+      "generation",
+      "provider_session_id",
+      "provider_project_id_if_available",
+      "process_id",
+      "started_utc",
+      "ended_utc",
+      "exit_code",
+      "terminal_event",
+      "stdout_sha256",
+      "stderr_sha256",
+      "usage_if_reported",
+      "checkpoint_digest",
+      "artifact_digests",
+      "oracle_result",
+      "failure_class",
+      "recovery_action",
+      "cancellation_status"
+    ]
+  },
+  "acceptance": [
+    {
+      "id": "P0",
+      "gate": "Exact CLI version/help/launch path observed; no inference."
+    },
+    {
+      "id": "P1",
+      "gate": "Fresh isolated workspace, independent authenticated profile, harmless deny/read/write/network/MCP probes pass."
+    },
+    {
+      "id": "P2",
+      "gate": "One bounded prompt returns known nonce, captures valid provider conversation ID, terminal event, process exit; no external writes."
+    },
+    {
+      "id": "P3",
+      "gate": "Explicit same-session resume returns retained nonce, same identity, expected cwd; second lane has distinct ID and profile."
+    },
+    {
+      "id": "P4",
+      "gate": "Bounded scoped write and independent artifact verification; no sibling/evaluator access."
+    },
+    {
+      "id": "P5",
+      "gate": "Cancellation and transport failure receipt, no orphan process or unintended retry; reconcile on restart."
+    },
+    {
+      "id": "P6",
+      "gate": "Two assigned lanes run concurrently with independent state and matching workload/budget. Record overlap and compare only after crossover."
+    }
+  ],
+  "smoke_prompts": {
+    "first": "Remember the controller-provided nonce for a subsequent turn. Reply with exactly that nonce. Do not use tools or edit files.",
+    "resume": "Reply with exactly the nonce from the previous turn. Do not use tools or edit files.",
+    "artifact": "Create only the requested relative artifact in the assigned workspace with the controller-provided content. Do not access other paths or the network."
+  },
+  "publication": "Commit only recipes and sanitized receipts; never raw transcripts, credentials, profile files, controller-private oracle, or experimental runs. Do not modify CHATGPT/ or canonical tracker. No acceptance points for recipe creation.",
+  "provider": "codex_cli",
+  "assignments": [
+    "EXPERIMENT-01",
+    "EXPERIMENT-04"
+  ],
+  "crossover_assignments": [
+    "EXPERIMENT-02",
+    "EXPERIMENT-03"
+  ],
+  "context7": {
+    "library_id": "/openai/codex",
+    "pull_date": "2026-11-28",
+    "sources": [
+      "https://github.com/openai/codex/blob/main/codex-rs/exec/src/cli.rs",
+      "https://github.com/openai/codex/blob/main/codex-rs/exec/src/lib.rs",
+      "https://developers.openai.com/cookbook/examples/codex/build_iterative_repair_loops_with_codex"
+    ],
+    "findings": [
+      "exec --json emits JSONL; explicit resume ID; stdin via -; skip git repo check; persistent session default; ignore-user-config skips base config but does not change auth home; fatal error/non-success turn can exit nonzero."
+    ]
+  },
+  "local_preflight": {
+    "version": "0.162.0",
+    "preferred_program": "node",
+    "entrypoint": "%APPDATA%\\npm\\node_modules\\@openai\\codex\\bin\\codex.js",
+    "auth": "Existing shared-profile login status returned Logged in using ChatGPT; isolated profile login NOT tested.",
+    "broken_path_launcher": "%USERPROFILE%\\node_modules\\.bin\\codex.exe: MODULE_NOT_FOUND",
+    "fallback": "%APPDATA%\\npm\\codex.cmd works for version but cmd.exe rejects extended-length cwd; direct Node preferred. Bun codex.exe is older 0.98.0, not interchangeable.",
+    "receipts": [
+      "ctl-4a854e84a5d68373",
+      "ctl-4f16b12483c22ff0",
+      "ctl-fe8a485c1fd5aecd"
+    ],
+    "help_observed": [
+      "exec --json --sandbox --cd --skip-git-repo-check --ignore-user-config",
+      "exec resume --json --skip-git-repo-check --ignore-user-config; resume help lacks --cd and --sandbox",
+      "login status"
+    ]
+  },
+  "provider_profile": {
+    "env": {
+      "CODEX_HOME": "${lane_profile}"
+    },
+    "requirements": [
+      "Dedicated authorized login per lane; no copied auth files; prove login status under that profile.",
+      "Use --ignore-user-config to avoid shared config; no project/global inherited instructions or tools; verify effective permissions.",
+      "For resume use -c sandbox_mode=\"workspace-write\" and explicit process cwd because installed resume help lacks --sandbox/--cd; verify actual enforcement before live resume. Set approval_policy=\"never\" to avoid interactive escalation, not bypass sandbox.",
+      "For initial and resume, set sandbox_workspace_write.network_access=false; external OS boundary remains mandatory."
+    ]
+  },
+  "commands": {
+    "version": {
+      "program": "node",
+      "args": [
+        "${entrypoint}",
+        "--version"
+      ]
+    },
+    "help": {
+      "program": "node",
+      "args": [
+        "${entrypoint}",
+        "exec",
+        "--help"
+      ]
+    },
+    "resume_help": {
+      "program": "node",
+      "args": [
+        "${entrypoint}",
+        "exec",
+        "resume",
+        "--help"
+      ]
+    },
+    "auth": {
+      "program": "node",
+      "args": [
+        "${entrypoint}",
+        "login",
+        "status"
+      ]
+    },
+    "start": {
+      "program": "node",
+      "cwd": "${workspace}",
+      "args": [
+        "${entrypoint}",
+        "exec",
+        "--json",
+        "--skip-git-repo-check",
+        "--ignore-user-config",
+        "--sandbox",
+        "workspace-write",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "sandbox_workspace_write.network_access=false",
+        "--cd",
+        "${workspace}",
+        "--model",
+        "${model}",
+        "-"
+      ],
+      "stdin": "${prompt}",
+      "close_stdin": true
+    },
+    "resume": {
+      "program": "node",
+      "cwd": "${workspace}",
+      "args": [
+        "${entrypoint}",
+        "exec",
+        "resume",
+        "--json",
+        "--skip-git-repo-check",
+        "--ignore-user-config",
+        "-c",
+        "sandbox_mode=\"workspace-write\"",
+        "-c",
+        "approval_policy=\"never\"",
+        "-c",
+        "sandbox_workspace_write.network_access=false",
+        "--model",
+        "${model}",
+        "${session_id}",
+        "-"
+      ],
+      "stdin": "${prompt}",
+      "close_stdin": true,
+      "validation": "Configured syntax; live resume/config acceptance remains unverified."
+    }
+  },
+  "stream": {
+    "encoding": "UTF-8 JSONL",
+    "session": {
+      "event_type": "thread.started",
+      "id_path": "thread_id"
+    },
+    "progress": [
+      "turn.started",
+      "item.started",
+      "item.updated",
+      "item.completed"
+    ],
+    "terminal_success": "turn.completed",
+    "terminal_failure": [
+      "turn.failed",
+      "error"
+    ],
+    "usage": "turn.completed.usage; retain raw counters",
+    "note": "Candidate event names based on Codex JSONL protocol; local stream schema must be verified via P2. Unknown terminal shape or identity -> UNKNOWN, not success."
+  },
+  "forbidden": [
+    "--last",
+    "--all",
+    "--ephemeral",
+    "--worktree",
+    "--add-dir",
+    "--dangerously-bypass-approvals-and-sandbox",
+    "--dangerously-bypass-hook-trust",
+    "--ignore-rules",
+    "global install/uninstall or upgrade"
+  ]
+}

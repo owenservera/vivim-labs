@@ -176,3 +176,5 @@ Active frontier source: indexed pending/running/active task, open goal and depen
 
 ## Source closure 013 (unqualified)
 Transport selection now committed with claim; mailbox publication distinct from transmission and settlement tied to take. Source-only fixture; no score change.
+
+Executable bridge source: explicit pinned executable, one-shot job intent, bounded direct-child execution and receipt-only reconciliation. No provider invocation or qualification.

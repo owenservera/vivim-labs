@@ -633,7 +633,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "bf8093e71f8eb008520e973db55391420fe3f1f9",
+        "source_pin": "74cb039a8bcef8821475239d996f0593d21e4d3b",
         "files": [
           "src/kernel/authority.rs",
           "src/kernel/routing_adapter.rs",
@@ -643,10 +643,12 @@
           "launch/Start-ProtectedBroker.ps1",
           "src/kernel/adapter_mailbox.rs",
           "src/kernel/routing_driver.rs",
-          "tests/routing_handoff.rs"
+          "tests/routing_handoff.rs",
+          "src/kernel/executable_bridge.rs",
+          "src/main.rs"
         ],
-        "remaining": "Signed adapter role restricted to own handoffs and scoped goals; host-only configuration and charge reconciliation; Windows dedicated-host ACL preflight authored. Effective access, ancestor protection, separate worker identity, actual broker deployment and native signature/effect qualification remain. Explicit transport-bound dispatch and mailbox receipt admission authored; legacy implicit claims retain compatibility.",
-        "checkpoint": "TRANSPORT-FENCE-001"
+        "remaining": "Signed adapter role restricted to own handoffs and scoped goals; host-only configuration and charge reconciliation; Windows dedicated-host ACL preflight authored. Effective access, ancestor protection, separate worker identity, actual broker deployment and native signature/effect qualification remain. Explicit transport-bound dispatch and mailbox receipt admission authored; legacy implicit claims retain compatibility. Trusted pinned local executable mailbox bridge with durable intent, single launch and receipt-only restart authored; specific provider/ACP implementation, protected process containment and actual qualification remain.",
+        "checkpoint": "EXECUTABLE-BRIDGE-001"
       }
     },
     {
@@ -1420,7 +1422,8 @@
   "source_closure_013": {
     "baseline": "bf8093e71f8eb008520e973db55391420fe3f1f9",
     "documents": [
-      "TRANSPORT-FENCE-001.md"
+      "TRANSPORT-FENCE-001.md",
+      "EXECUTABLE-BRIDGE-001.md"
     ],
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "verified_credit": 0

@@ -1,0 +1,12 @@
+{
+  "executable": "C:\\VIVIM\\adapters\\provider-bridge.exe",
+  "executable_sha256": "REPLACE_WITH_ACTUAL_EXECUTABLE_SHA256",
+  "args": [],
+  "inherit_environment": [
+    "SystemRoot",
+    "USERPROFILE"
+  ],
+  "max_runtime_ms": 60000,
+  "max_receipt_bytes": 262144,
+  "max_jobs": 1024
+}

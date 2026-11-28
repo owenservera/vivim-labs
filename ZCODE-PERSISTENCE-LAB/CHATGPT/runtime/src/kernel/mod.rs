@@ -37,6 +37,7 @@ pub mod native_qualification;
 pub mod comparative;
 pub mod experiment_vault;
 pub mod adapter_mailbox;
+pub mod executable_bridge;
 pub mod process_observation;
 pub mod assimilation;
 pub mod reuse_economics;

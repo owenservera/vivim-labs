@@ -81,6 +81,8 @@ impl Mailbox{
         Ok(Self{root,manifest,manifest_pin})
     }
     pub fn adapter(&self)->&str{&self.manifest.config.adapter}
+    pub(crate) fn identity(&self)->&str{&self.manifest_pin}
+    pub(crate) fn root(&self)->&Path{&self.root}
     fn lock(&self)->Result<File>{
         let f=OpenOptions::new().create(true).truncate(false).read(true).write(true).open(self.root.join("mailbox.lock")).map_err(err)?;
         f.lock().map_err(err)?;Ok(f)

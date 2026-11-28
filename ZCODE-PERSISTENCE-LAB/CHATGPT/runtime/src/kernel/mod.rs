@@ -62,3 +62,6 @@ pub fn native_operator_contracts()->Result<Vec<OperatorContract>>{
         program:Expr::Behavior{operator:behavior,source:Box::new(Expr::Input)}
     }}).collect())
 }
+
+#[cfg(test)]
+mod qualification;

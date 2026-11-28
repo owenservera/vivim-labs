@@ -26,6 +26,8 @@ pub enum Action {
     AdmitCapability{capability:Capability},DisableCapability{capability:Id},
     ConfigureLearning{plan:LearningPlan},LearnPlan{plan:Id},PublishKnowledge{knowledge:Knowledge},DisableKnowledge{knowledge:Id},
     RecordCost{task:Id,generation:u64,elapsed_ms:u64},SetPolicy{policy:SchedulingPolicy},
+    PrepareEffect{task:Id,generation:u64,key:Id,payload:Value,oracle:Oracle},
+    EffectUnknown{effect:Id,reason:String},ResolveEffect{effect:Id,outcome:EffectPhase,receipt:Value},
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct Request {pub id:Id,pub actor:Actor,pub action:Action}
@@ -55,15 +57,18 @@ impl World {
     pub fn ready(&self)->Vec<Id>{
         let mut v:Vec<_>=self.tasks.values().filter(|t|t.phase==TaskPhase::Pending&&t.attempts<t.spec.max_attempts
             &&self.goals.get(&t.spec.goal).is_some_and(|g|g.phase==GoalPhase::Open&&g.claims<g.claim_budget)
+            &&!self.has_uncertain_effect(&t.spec.id)
             &&t.spec.dependencies.iter().all(|d|self.tasks.get(d).is_some_and(|x|x.phase==TaskPhase::Verified))).collect();
         let scores=self.schedule_scores();
         v.sort_by_key(|t|(std::cmp::Reverse(scores.get(&t.spec.id).copied().unwrap_or(0)),t.spec.id.clone()));
         v.into_iter().map(|t|t.spec.id.clone()).collect()
     }
     fn release(&mut self,task:&str,reason:&str)->Result<()>{
+        self.mark_prepared_unknown(task,reason);
+        let uncertain=self.has_uncertain_effect(task);
         let t=self.tasks.get_mut(task).ok_or("task missing")?;
         let was_running=t.phase==TaskPhase::Running;let worker=t.lease.take().map(|l|l.worker);t.proposal=None;t.reason=Some(reason.into());
-        t.phase=if t.attempts>=t.spec.max_attempts{TaskPhase::Exhausted}else{TaskPhase::Pending};
+        t.phase=if uncertain{TaskPhase::Reconciling}else if t.attempts>=t.spec.max_attempts{TaskPhase::Exhausted}else{TaskPhase::Pending};
         if let Some(w)=worker.filter(|_|was_running){if let Some(a)=self.agents.get_mut(&w){
             if a.phase!=AgentPhase::Archived{a.phase=AgentPhase::Recovering;}
         }}
@@ -86,7 +91,7 @@ impl World {
             for g in self.goals.values().filter(|g|g.phase==GoalPhase::Open){
                 let tasks:Vec<_>=self.tasks.values().filter(|t|t.spec.goal==g.id).collect();
                 let children:Vec<_>=self.goals.values().filter(|x|x.parent.as_ref()==Some(&g.id)).collect();
-                let active=tasks.iter().any(|t|matches!(t.phase,TaskPhase::Running|TaskPhase::Submitted));
+                let active=tasks.iter().any(|t|matches!(t.phase,TaskPhase::Running|TaskPhase::Submitted|TaskPhase::Reconciling));
                 let failed=tasks.iter().any(|t|matches!(t.phase,TaskPhase::Exhausted|TaskPhase::Blocked|TaskPhase::Cancelled))||children.iter().any(|c|matches!(c.phase,GoalPhase::Exhausted|GoalPhase::Blocked|GoalPhase::Cancelled));
                 if failed&&!active{outcomes.push((g.id.clone(),GoalPhase::Blocked));continue;}
                 if g.claims>=g.claim_budget&&!active&&tasks.iter().any(|t|t.phase==TaskPhase::Pending){outcomes.push((g.id.clone(),GoalPhase::Exhausted));continue;}
@@ -118,7 +123,17 @@ impl World {
     pub fn checkpoint_value(&self,task:&str)->Option<&Value>{
         let t=self.tasks.get(task)?;
         let input=digest(t.input.as_ref()?);
-        self.checkpoints.get(task)?.iter().rev().filter(|c|c.input==input).find_map(|c|self.payload(&c.payload).ok())
+        let history=self.checkpoints.get(task)?;
+        let mut previous=None;
+        let mut valid=vec![];
+        for (i,c) in history.iter().enumerate(){
+            if c.version!=i as u64+1||c.previous.as_ref()!=previous{break;}
+            previous=Some(&c.payload);
+            if c.input==input&&c.task_version==t.version&&c.class==t.assigned_class&&c.context==t.assigned_context&&c.generation<=t.generation{
+                if let Ok(v)=self.payload(&c.payload){valid.push(v);}
+            }
+        }
+        valid.pop()
     }
     pub fn transition(&mut self,actor:&Actor,action:Action)->Result<Value>{
         // Public transitions are atomic even for callers not using the durable store.
@@ -221,6 +236,8 @@ impl World {
                 if let Some(class)=self.match_class(&t.spec){ensure(class==a.class,"class not eligible")?;}
                 else{ensure(t.spec.class.is_none(),"explicit class disabled")?;}
                 if let Some(context)=&t.spec.context{ensure(context==&a.context,"context not authorized for task")?;}
+                let contract=self.classes.get(&a.class).ok_or("agent class missing")?;
+                ensure(contract.input.admits(&Self::input_shape(&t.spec))&&t.spec.output.admits(&contract.output),"agent class contract mismatch")?;
                 let assigned_class=a.class.clone();let assigned_context=a.context.clone();
                 let c=self.contexts.get(&a.context).ok_or("context missing")?;
                 let input=self.assemble(&t.spec,c)?;
@@ -238,13 +255,14 @@ impl World {
             }
             Checkpoint{task,generation,data}=>{
                 let t=self.check_lease(actor,&task,generation)?;let l=t.lease.clone().unwrap();let input=digest(t.input.as_ref().ok_or("input missing")?);
+                let task_version=t.version;let class=t.assigned_class.clone();let context=t.assigned_context.clone();
                 let payload=self.put_payload(data)?;let history=self.checkpoints.entry(task).or_default();
                 let version=history.last().map_or(Ok(1),|c|c.version.checked_add(1).ok_or("checkpoint overflow"))?;
                 let previous=history.last().map(|c|c.payload.clone());
-                history.push(super::model::Checkpoint{version,generation,worker:l.worker,incarnation:l.incarnation,payload,previous,input});
+                history.push(super::model::Checkpoint{version,generation,worker:l.worker,incarnation:l.incarnation,payload,previous,input,task_version,class,context});
             }
             Submit{task,generation,output}=>{
-                let t=self.check_lease(actor,&task,generation)?;ensure(t.spec.output.accepts(&output),"output shape mismatch")?;
+                let t=self.check_lease(actor,&task,generation)?;ensure(!self.has_uncertain_effect(&task),"effect reconciliation required")?;ensure(t.spec.output.accepts(&output),"output shape mismatch")?;
                 let payload=self.put_payload(output)?;let t=self.tasks.get_mut(&task).unwrap();t.proposal=Some(payload);t.phase=TaskPhase::Submitted;
                 let worker=t.lease.as_ref().unwrap().worker.clone();
                 let a=self.agents.get_mut(&worker).unwrap();
@@ -254,6 +272,7 @@ impl World {
             Fail{task,generation,reason}=>{let t=self.check_lease(actor,&task,generation)?;let worker=t.lease.as_ref().unwrap().worker.clone();ensure(!reason.trim().is_empty(),"reason required")?;self.end_agent(&worker,&reason,false)?;}
             Verify{task}=>{
                 actor.host()?;let t=self.tasks.get(&task).ok_or("task missing")?.clone();
+                ensure(!self.has_uncertain_effect(&task),"effect reconciliation required")?;
                 ensure(t.phase==TaskPhase::Submitted,"no submission")?;self.open_goal(&t.spec.goal)?;
                 let input=t.input.as_ref().ok_or("input missing")?;let candidate=t.proposal.clone().ok_or("proposal missing")?;
                 let output=self.payload(&candidate)?;let accepted=t.spec.output.accepts(output)&&t.spec.oracle.evaluate(input,output)?;
@@ -303,6 +322,8 @@ impl World {
                 while let Some(g)=todo.pop(){
                     todo.extend(self.goals.values().filter(|x|x.parent.as_ref()==Some(&g)&&x.phase==GoalPhase::Open).map(|x|x.id.clone()));
                     self.goals.get_mut(&g).unwrap().phase=GoalPhase::Cancelled;
+                    let affected:Vec<_>=self.tasks.values().filter(|t|t.spec.goal==g).map(|t|t.spec.id.clone()).collect();
+                    for t in affected{self.mark_prepared_unknown(&t,"goal cancelled");}
                     for t in self.tasks.values_mut().filter(|t|t.spec.goal==g&&t.phase!=TaskPhase::Verified){t.phase=TaskPhase::Cancelled;t.lease=None;t.proposal=None;}
                     let agents:Vec<_>=self.agents.values().filter(|a|a.goal==g).map(|a|a.id.clone()).collect();
                     for a in agents{self.end_agent(&a,"cancelled",true)?;}
@@ -320,6 +341,9 @@ impl World {
             PublishKnowledge{knowledge}=>{actor.host()?;let key=self.publish_knowledge(knowledge)?;return Ok(json!({"knowledge":key}));}
             DisableKnowledge{knowledge}=>{actor.host()?;self.knowledge.get_mut(&knowledge).ok_or("knowledge missing")?.enabled=false;}
             RecordCost{task,generation,elapsed_ms}=>{actor.host()?;self.record_cost(&task,generation,elapsed_ms)?;}
+            PrepareEffect{task,generation,key,payload,oracle}=>{actor.host()?;return self.prepare_effect(&task,generation,key,payload,oracle);}
+            EffectUnknown{effect,reason}=>{actor.host()?;self.effect_unknown(&effect,reason)?;}
+            ResolveEffect{effect,outcome,receipt}=>{actor.host()?;return self.resolve_effect(&effect,outcome,receipt);}
             SetPolicy{policy}=>{
                 actor.host()?;ensure(policy.version>self.policy.version,"policy version must increase")?;
                 ensure([policy.priority_weight,policy.critical_weight,policy.uncertainty_weight,policy.information_weight,policy.cost_weight].iter().all(|w|*w<=100_000),"policy weights exceed budget")?;

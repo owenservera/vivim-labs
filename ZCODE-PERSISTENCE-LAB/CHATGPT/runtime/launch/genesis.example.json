@@ -1,0 +1,7 @@
+{
+  "id": "genesis-0001",
+  "objective": "Qualify native objective persistence, dependent execution and independent artifact verification",
+  "tracker_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "input": 42,
+  "claim_budget": 8
+}

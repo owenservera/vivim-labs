@@ -232,11 +232,13 @@ impl KernelStore{
         let index_root=index.write(rev,&loaded.world,&loaded.receipts,loaded.head.index.as_deref())?;
         let rec=Envelope::new(Record{schema:1,revision:rev,previous:loaded.head.record.clone(),command,response:response.clone(),index:Some(index_root.clone())})?;
         write_new(&self.root,&Self::name("record",rev),&rec)?;
+        #[cfg(test)] super::qualification::pause_at(&self.root,"before_head")?;
         let (snapshot,snapshot_digest)=if rev%SNAP_INTERVAL==0||loaded.head.index.is_none(){
             (rev,Some(index_root.clone()))
         }else{(loaded.head.snapshot,loaded.head.snapshot_digest)};
         let head=Envelope::new(Head{schema:1,revision:rev,record:rec.checksum,snapshot,snapshot_digest,index:Some(index_root)})?;
         write_new(&self.root,&Self::name("head",rev),&head)?;
+        #[cfg(test)] super::qualification::pause_at(&self.root,"after_head")?;
         // Keep the current checkpoint and its committed tail; pruning is retryable and
         // cannot invalidate the just-committed transaction.
         if snapshot>0{let _=self.prune(snapshot);}

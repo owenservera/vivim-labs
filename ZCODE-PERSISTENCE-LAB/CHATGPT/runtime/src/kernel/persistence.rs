@@ -231,6 +231,10 @@ impl KernelStore{
         }
         sync_directory(&self.root)
     }
+    pub fn project_host_agent(&self,agent:&str)->Result<PathBuf>{
+        let _guard=self.lock()?;let w=self.load()?.world;
+        super::projection::project(&w,agent,&self.root.join("projections"))
+    }
     pub fn project_agent(&self,agent:&str,root:&Path)->Result<PathBuf>{
         id(agent)?;let world=self.inspect()?;let a=world.agents.get(agent).ok_or("agent missing")?;
         let path=root.join(agent);fs::create_dir_all(path.join("workspace")).map_err(error)?;

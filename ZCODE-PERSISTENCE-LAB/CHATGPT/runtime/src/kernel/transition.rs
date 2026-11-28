@@ -29,7 +29,7 @@ pub enum Action {
     ConfigureRouter{config:super::routing::Config},ObserveQuota{observation:super::routing::Observation},QueueInference{demand:super::routing::Demand},AllocateInference{limit:usize},
     DispatchInference{reservation:Id},InferenceUnknown{reservation:Id},ReleaseInference{reservation:Id},SettleInference{reservation:Id,usage:super::routing::Usage,outcome:super::routing::Outcome,receipt:String,latency_ms:u64},VerifyInference{reservation:Id,evidence:Id},
     SetFrontierGuard{guard:super::routing_planning::FrontierGuard},SetFrontierForecast{forecast:super::routing_planning::Forecast},
-    BindRoutingAdapter{binding:super::routing_adapter::AdapterBinding},PrepareHandoff{reservation:Id},ClaimHandoff{handoff:Id},FinishHandoff{receipt:super::routing_adapter::AdapterReceipt},RoutingCycle{limit:usize},
+    BindRoutingAdapter{binding:super::routing_adapter::AdapterBinding},ObserveAdapterQuota{receipt:super::routing_adapter::QuotaReceipt},PrepareHandoff{reservation:Id},ClaimHandoff{handoff:Id},FinishHandoff{receipt:super::routing_adapter::AdapterReceipt},RoutingCycle{limit:usize},
     RecordCost{task:Id,generation:u64,elapsed_ms:u64},SetPolicy{policy:SchedulingPolicy},
     PrepareEffect{task:Id,generation:u64,key:Id,payload:Value,oracle:Oracle},
     EffectUnknown{effect:Id,reason:String},ResolveEffect{effect:Id,outcome:EffectPhase,receipt:Value},
@@ -402,6 +402,7 @@ impl World {
             VerifyInference{reservation,evidence}=>{actor.host()?;self.verify_inference_feedback(&reservation,&evidence)?;}
             SetFrontierGuard{guard}=>{actor.host()?;self.router.set_frontier_guard(guard)?;}
             SetFrontierForecast{forecast}=>{actor.host()?;self.router.set_forecast(forecast)?;}
+            ObserveAdapterQuota{receipt}=>{actor.host()?;self.observe_adapter_quota(receipt)?;}
             BindRoutingAdapter{binding}=>{actor.host()?;self.bind_routing_adapter(binding)?;}
             PrepareHandoff{reservation}=>{actor.host()?;return self.prepare_handoff(&reservation);}
             ClaimHandoff{handoff}=>{actor.host()?;return self.claim_handoff(&handoff);}

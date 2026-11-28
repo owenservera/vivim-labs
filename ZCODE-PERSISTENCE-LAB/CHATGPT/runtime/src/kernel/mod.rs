@@ -7,6 +7,7 @@ pub mod evolution;
 pub mod persistence;
 pub mod supervisor;
 pub mod behavior;
+pub mod intelligence;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

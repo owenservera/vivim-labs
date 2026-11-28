@@ -8,7 +8,7 @@ import {route} from './MODEL-BUDGET.mjs';
 import {assess} from './COMPLETION-CHECK.mjs';
 const campaign=JSON.parse(fs.readFileSync(new URL('./CAMPAIGN-R010.json',import.meta.url),'utf8'));
 const goal=fs.readFileSync(new URL('./COMPLETION-GOAL.md',import.meta.url),'utf8');
-const charter=JSON.parse(fs.readFileSync(new URL('./SYSTEM-GOALS-R012.json',import.meta.url),'utf8'));
+const charter=JSON.parse(fs.readFileSync(new URL('./SYSTEM-GOALS-R013.json',import.meta.url),'utf8'));
 const goalIds=new Set(charter.goals.map(g=>g.id));
 const hex=x=>typeof x==='string'&&/^[0-9a-f]{64}$/.test(x);
 const str=x=>typeof x==='string'&&x.length>0&&x.length<=65536;
@@ -23,6 +23,12 @@ function checkedLane(lane,provider){
 }
 export function normalizedContract(p){
  if(!p||!str(p.id)||!str(p.release_boundary)||!str(p.out_of_scope)||!Array.isArray(p.mandatory)||p.mandatory.length<1||p.mandatory.length>128)fail('INVALID_CONTRACT');
+ if(!str(p.purpose)||!str(p.operating_envelope)||!str(p.evidence_standard)||!Array.isArray(p.reopening_triggers)||!p.reopening_triggers.length||p.reopening_triggers.some(x=>!str(x))||!Array.isArray(p.optional_backlog)||p.optional_backlog.length>128)fail('INVALID_SUFFICIENCY_CONTEXT');
+ const optional=p.optional_backlog.map(o=>{
+  if(!o||!str(o.id)||!str(o.description)||!str(o.expected_benefit)||!str(o.incremental_cost)||!str(o.uncertainty)||!str(o.decision_criterion))fail('INVALID_OPTIONAL_OPPORTUNITY');
+  return {id:o.id,description:o.description,expected_benefit:o.expected_benefit,incremental_cost:o.incremental_cost,uncertainty:o.uncertainty,decision_criterion:o.decision_criterion};
+ }).sort((a,b)=>a.id.localeCompare(b.id));
+ if(new Set(optional.map(o=>o.id)).size!==optional.length)fail('DUPLICATE_OPTIONAL_OPPORTUNITY');
  const rows=p.mandatory.map(r=>{
   if(!str(r.id)||!str(r.behavior)||!str(r.oracle)||!str(r.falsifier)||!tasks.has(r.task)||!Array.isArray(r.depends_on)||r.depends_on.some(x=>!str(x))||!Number.isInteger(r.priority)||r.priority<0||r.priority>100)fail('INVALID_OBLIGATION');
   if(!Array.isArray(r.goal_ids)||!r.goal_ids.length||r.goal_ids.some(g=>!goalIds.has(g)))fail('INVALID_GOAL_COVERAGE');
@@ -33,7 +39,8 @@ export function normalizedContract(p){
  const active=new Set(),done=new Set();
  function visit(id){if(done.has(id))return;if(active.has(id)||!by.has(id))fail('CONTRACT_CYCLE_OR_MISSING_DEPENDENCY');active.add(id);for(const d of by.get(id).depends_on)visit(d);active.delete(id);done.add(id);}
  for(const r of rows)visit(r.id);
- const body={id:p.id,version:1,goal_charter_digest:hash(charter),release_boundary:p.release_boundary,out_of_scope:p.out_of_scope,mandatory:rows,frozen:true};
+ if(optional.some(o=>by.has(o.id)))fail('MANDATORY_OPTIONAL_OVERLAP');
+ const body={id:p.id,version:1,goal_charter_digest:hash(charter),purpose:p.purpose,operating_envelope:p.operating_envelope,evidence_standard:p.evidence_standard,reopening_triggers:[...new Set(p.reopening_triggers)].sort(),optional_backlog:optional,release_boundary:p.release_boundary,out_of_scope:p.out_of_scope,mandatory:rows,frozen:true};
  return {...body,digest:hash(body)};
 }
 export function createRun(ledger,{lane,run_id,seed_digest,workspace_digest}){
@@ -62,7 +69,7 @@ export function next(c){
 }
 function promptFor(c,n){
  const shared='Work only inside your assigned workspace. Return a bounded proposal/checkpoint; no completion claim is authoritative. Do not access controller or external files.';
- if(n.task_id==='discover-contract')return goal+'\n'+shared+'\nPropose JSON contract: {id,release_boundary,out_of_scope,mandatory:[{id,behavior,oracle,falsifier,task,priority,depends_on,goal_ids}]}. Task values: extract, routine, implementation, debug, architecture, critical. Priority 0-100. Inspect supplied objective and source. Do not implement yet.';
+ if(n.task_id==='discover-contract')return goal+'\n'+shared+'\nPropose JSON contract: {id,purpose,operating_envelope,evidence_standard,reopening_triggers:[string],optional_backlog:[{id,description,expected_benefit,incremental_cost,uncertainty,decision_criterion}],release_boundary,out_of_scope,mandatory:[{id,behavior,oracle,falsifier,task,priority,depends_on,goal_ids}]}. Task values: extract, routine, implementation, debug, architecture, critical. Priority 0-100. Inspect supplied objective and source. Do not implement yet.';
  return shared+'\nFrozen contract digest: '+c.contract.digest+'\nCurrent obligation: '+JSON.stringify(n.obligation)+'\nPrior independent result: '+JSON.stringify(c.obligations[n.task_id].last_evidence??null)+'\nImplement only the bounded obligation and verify it locally. Report actual changes, test evidence and remaining work. A trusted evaluator will determine acceptance.';
 }
 function checkBoundary(b,c,snapshot){

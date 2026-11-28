@@ -1,0 +1,6 @@
+{
+  "max_publications": 8,
+  "max_visits": 16,
+  "max_launch_intents": 2,
+  "max_cycle_ms": 120000
+}

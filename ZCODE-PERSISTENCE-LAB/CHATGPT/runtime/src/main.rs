@@ -120,15 +120,16 @@ fn kernel_cli(args:&[String])->Result<(),String>{
             }?
         },
         "routing-executable"=>{
-            use persistent_intelligence_runtime::kernel::{adapter_mailbox::Mailbox,executable_bridge::{Bridge,Config}};
+            use persistent_intelligence_runtime::kernel::{adapter_mailbox::Mailbox,executable_bridge::{Bridge,Config,CyclePolicy}};
             let op=required(args,3,"bridge operation")?;
-            let mailbox=Mailbox::open(Path::new(required(args,4,"mailbox root")?),&store)?;
+            let mut mailbox=Mailbox::open(Path::new(required(args,4,"mailbox root")?),&store)?;
             let root=Path::new(required(args,5,"bridge root")?);
             match op{
                 "create"=>Bridge::create(root,&mailbox,read_json::<Config>(required(args,6,"bridge configuration")?)?)?.inspect(),
                 "run"=>Bridge::open(root,&mailbox)?.run_once(&store,&mailbox,required(args,6,"handoff ID")?),
                 "reconcile"=>Bridge::open(root,&mailbox)?.reconcile(&store,&mailbox,required(args,6,"handoff ID")?),
                 "inspect"=>Bridge::open(root,&mailbox)?.inspect(),
+                "cycle"=>{let bridge=Bridge::open(root,&mailbox)?;bridge.cycle(&store,&mut mailbox,read_json::<CyclePolicy>(required(args,6,"cycle policy")?)?)},
                 _=>Err("unknown executable bridge operation".into()),
             }?
         },

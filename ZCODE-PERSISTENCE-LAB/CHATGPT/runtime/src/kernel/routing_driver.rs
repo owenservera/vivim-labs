@@ -51,7 +51,7 @@ pub fn step<B:Backend>(store:&KernelStore,adapter:&str,backend:&mut B,limit:usiz
         let offset=queue.partition_point(|e|e.id.as_str()<=cursor.as_str())%queue.len();
         queue.rotate_left(offset);
     }
-    let mut sent=0;let mut reconciled=0;let mut unknown=0;let mut errors=vec![];let mut visited=0usize;
+    let mut sent=0;let mut published=0;let mut reconciled=0;let mut unknown=0;let mut errors=vec![];let mut visited=0usize;
     for e in queue.into_iter().take(limit){
         lock.seek(SeekFrom::Start(0)).map_err(error)?;lock.set_len(0).map_err(error)?;
         lock.write_all(e.id.as_bytes()).map_err(error)?;lock.sync_data().map_err(error)?;
@@ -66,7 +66,8 @@ pub fn step<B:Backend>(store:&KernelStore,adapter:&str,backend:&mut B,limit:usiz
                     Ok(v) if (transport==Transport::Direct&&v["send_authority"]=="single_attempt_only")
                         ||(matches!(&transport,Transport::Mailbox{..})&&v["send_authority"]=="publish_only")=>{
                         let claimed:Envelope=serde_json::from_value(v["handoff"].clone()).map_err(error)?;
-                        sent+=1;backend.begin(&claimed,&v["input"])
+                        if matches!(&transport,Transport::Mailbox{..}){published+=1;}else{sent+=1;}
+                        backend.begin(&claimed,&v["input"])
                     }
                     Ok(_)=>backend.reconcile(&e),
                     Err(reason)=>{errors.push(json!({"handoff":e.id,"stage":"claim","reason":reason}));continue;}
@@ -91,7 +92,7 @@ pub fn step<B:Backend>(store:&KernelStore,adapter:&str,backend:&mut B,limit:usiz
             Err(reason)=>{unknown+=1;let _=apply(store,key("unknown",&e.id),Action::InferenceUnknown{reservation:e.id.clone()});errors.push(json!({"handoff":e.id,"stage":"backend","reason":reason}));}
         }
     }
-    Ok(json!({"adapter":adapter,"send_attempts":sent,"settled":reconciled,"visited":visited,"unknown":unknown,"errors":errors}))
+    Ok(json!({"adapter":adapter,"send_attempts":sent,"publication_intents":published,"settled":reconciled,"visited":visited,"unknown":unknown,"errors":errors}))
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct SyntheticConfig{

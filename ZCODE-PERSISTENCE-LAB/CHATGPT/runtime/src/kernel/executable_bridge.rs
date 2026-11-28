@@ -2,12 +2,12 @@
 //! request/receipt file protocol. This module is not a provider SDK and does
 //! not assume a particular CLI implements that protocol.
 use super::{adapter_mailbox::Mailbox,model::{ensure,id,hash_id,MAX_VALUE_BYTES},persistence::KernelStore,
-    routing_adapter::AdapterReceipt,routing_driver::{Backend,advance_clock},transition::{Actor,Request}};
+    routing_adapter::{AdapterReceipt,HandoffPhase},routing_driver::{Backend,advance_clock,step},transition::{Actor,Request}};
 use crate::{digest,Result};
 use serde::{Serialize,Deserialize};
 use serde_json::{json,Value};
 use sha2::{Digest,Sha256};
-use std::{fs::{self,File,OpenOptions},io::{Read,Write},path::{Path,PathBuf},
+use std::{fs::{self,File,OpenOptions},io::{Read,Write,Seek,SeekFrom},path::{Path,PathBuf},
     process::{Child,Command,Stdio},time::{Duration,Instant,SystemTime,UNIX_EPOCH},thread};
 fn err(e:impl std::fmt::Display)->String{e.to_string()}
 fn now_ms()->Result<u64>{u64::try_from(SystemTime::now().duration_since(UNIX_EPOCH).map_err(err)?.as_millis()).map_err(err)}
@@ -67,13 +67,23 @@ impl<T:Serialize> Entry<T>{
 struct Intent{manifest:String,handoff:String,created_ms:u64}
 struct Owned(Child);
 impl Drop for Owned{fn drop(&mut self){if self.0.try_wait().ok().flatten().is_none(){let _=self.0.kill();let _=self.0.wait();}}}
+#[derive(Clone,Debug,Serialize,Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CyclePolicy{pub max_publications:usize,pub max_visits:usize,pub max_launch_intents:usize,pub max_cycle_ms:u64}
+impl CyclePolicy{
+    fn validate(&self)->Result<()>{
+        ensure((1..=128).contains(&self.max_publications)&&(1..=128).contains(&self.max_visits)
+            &&self.max_launch_intents<=self.max_visits&&(100..=1_800_000).contains(&self.max_cycle_ms),"invalid bridge cycle budget")
+    }
+}
 pub struct Bridge{root:PathBuf,manifest:Manifest,identity:String}
 impl Bridge{
     pub fn create(root:&Path,mailbox:&Mailbox,config:Config)->Result<Self>{
         config.verify_executable()?;
         let parent=root.parent().ok_or("bridge parent missing")?.canonicalize().map_err(err)?;
         let root=parent.join(root.file_name().ok_or("bridge name missing")?);
-        ensure(!root.starts_with(mailbox.root())&&!mailbox.root().starts_with(&root),"bridge and mailbox must be separate")?;
+        ensure(!root.starts_with(mailbox.root())&&!mailbox.root().starts_with(&root)
+            &&!root.starts_with(mailbox.store_root())&&!mailbox.store_root().starts_with(&root),"bridge, mailbox and kernel store must be separate")?;
         fs::create_dir(&root).map_err(err)?;let root=root.canonicalize().map_err(err)?;
         fs::create_dir(root.join("jobs")).map_err(err)?;
         let manifest=Manifest{schema:1,mailbox:mailbox.identity().into(),mailbox_root:mailbox.root().into(),config};
@@ -85,6 +95,8 @@ impl Bridge{
         let manifest:Manifest=read::<Entry<Manifest>>(&root.join("manifest.json"),512*1024)?.checked()?;
         manifest.config.validate()?;
         ensure(manifest.schema==1&&manifest.mailbox==mailbox.identity()&&manifest.mailbox_root==mailbox.root(),"bridge/mailbox identity mismatch")?;
+        ensure(!root.starts_with(mailbox.root())&&!mailbox.root().starts_with(&root)
+            &&!root.starts_with(mailbox.store_root())&&!mailbox.store_root().starts_with(&root),"bridge directory overlaps protected state")?;
         ensure(fs::symlink_metadata(root.join("jobs")).map_err(err)?.file_type().is_dir(),"invalid jobs directory")?;
         let identity=pin(&manifest)?;Ok(Self{root,manifest,identity})
     }
@@ -137,7 +149,52 @@ impl Bridge{
     pub fn reconcile(&self,store:&KernelStore,mailbox:&Mailbox,key:&str)->Result<Value>{
         let _lock=self.lock()?;self.reconcile_locked(store,mailbox,key)
     }
+    /// Explicit host operation. Fair rotation is only a visit preference;
+    /// losing or corrupting the cursor cannot renew send authorization.
+    pub fn cycle(&self,store:&KernelStore,mailbox:&mut Mailbox,policy:CyclePolicy)->Result<Value>{
+        policy.validate()?;
+        let start=Instant::now();
+        let mut cursor=OpenOptions::new().create(true).truncate(false).read(true).write(true).open(self.root.join("cycle.lock")).map_err(err)?;
+        cursor.try_lock().map_err(|e|format!("bridge cycle already owned: {e:?}"))?;
+        let adapter=mailbox.adapter().to_owned();
+        let publication=step(store,&adapter,mailbox,policy.max_publications)?;
+        let inspection=mailbox.inspect()?;
+        let w=store.inspect()?;
+        let mut entries:Vec<_>=inspection["entries"].as_array().ok_or("mailbox entry list missing")?.iter()
+            .filter_map(|e|Some((e["handoff"].as_str()?.to_owned(),e["state"].as_str()?.to_owned())))
+            .filter(|(key,_)|w.router.adapters.handoffs.get(key).is_some_and(|e|matches!(e.phase,HandoffPhase::Claimed|HandoffPhase::Unknown)))
+            .collect();
+        entries.sort_by(|a,b|a.0.cmp(&b.0));drop(w);
+        let mut last=String::new();
+        if cursor.metadata().map_err(err)?.len()<=100{
+            cursor.seek(SeekFrom::Start(0)).map_err(err)?;
+            if (&mut cursor).take(100).read_to_string(&mut last).is_err(){last.clear();}
+        }
+        if !entries.is_empty(){let n=entries.partition_point(|(k,_)|k.as_str()<=last.as_str())%entries.len();entries.rotate_left(n);}
+        let mut visits=0usize;let mut launch_intents=0usize;let mut results=vec![];
+        for (key,state) in entries.into_iter().take(policy.max_visits){
+            let elapsed=u64::try_from(start.elapsed().as_millis()).unwrap_or(u64::MAX);
+            if elapsed>=policy.max_cycle_ms{break;}
+            visits+=1;
+            cursor.seek(SeekFrom::Start(0)).map_err(err)?;cursor.set_len(0).map_err(err)?;cursor.write_all(key.as_bytes()).map_err(err)?;cursor.sync_data().map_err(err)?;
+            let result=if self.job(&key)?.exists(){
+                self.reconcile(store,mailbox,&key)
+            }else if state=="awaiting_take"&&launch_intents<policy.max_launch_intents{
+                // Count intentions conservatively, even when a racing process
+                // already took the packet or authorization expired.
+                launch_intents+=1;
+                self.run_bounded(store,mailbox,&key,policy.max_cycle_ms.saturating_sub(elapsed))
+            }else{continue;};
+            match result{Ok(v)=>results.push(v),Err(reason)=>results.push(json!({"handoff":key,"state":"unresolved","reason":reason,"send_authority":"none"}))}
+        }
+        Ok(json!({"publication_and_reconciliation":publication,"visited":visits,"launch_intents":launch_intents,
+            "results":results,"elapsed_ms":u64::try_from(start.elapsed().as_millis()).unwrap_or(u64::MAX),
+            "budget":policy,"scope":"explicit_host_cycle_existing_prepared_handoffs_only"}))
+    }
     pub fn run_once(&self,store:&KernelStore,mailbox:&Mailbox,key:&str)->Result<Value>{
+        self.run_bounded(store,mailbox,key,self.manifest.config.max_runtime_ms)
+    }
+    fn run_bounded(&self,store:&KernelStore,mailbox:&Mailbox,key:&str,max_runtime_ms:u64)->Result<Value>{
         let _lock=self.lock()?;let dir=self.job(key)?;
         if dir.exists(){return self.reconcile_locked(store,mailbox,key);}
         self.manifest.config.verify_executable()?;
@@ -152,7 +209,7 @@ impl Bridge{
         let deadline=take["expires_ms"].as_u64().ok_or("missing mailbox deadline")?;
         let request=json!({"schema":1,"bridge_manifest":self.identity,"handoff":take["handoff"],"input":take["input"],"expires_ms":deadline});
         write(&dir,"request.json",&request)?;
-        let budget=self.manifest.config.max_runtime_ms.min(deadline.saturating_sub(now_ms()?));
+        let budget=self.manifest.config.max_runtime_ms.min(max_runtime_ms).min(deadline.saturating_sub(now_ms()?));
         if budget==0{return Ok(json!({"handoff":key,"state":"expired_before_launch","send_authority":"none"}));}
         let c=&self.manifest.config;
         let mut command=Command::new(&c.executable);

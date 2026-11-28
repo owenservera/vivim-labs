@@ -1140,17 +1140,17 @@
         "id": "R08",
         "criterion": "Live provider observations, actual model/thinking receipt and adapter execution",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Durable manifest-bound asynchronous external adapter mailbox, kernel-committed single-use mailbox take, immutable identity-bound actual receipts, late reconciliation and disabled-adapter visibility authored. No real external adapter wired or qualified; host custody must be provisioned.",
-        "source_pin": "26deab535cb57d48e1b2b27a495e3e10a965e5a0",
-        "checkpoint": "ADAPTER-MAILBOX-002"
+        "remaining": "Explicit transport-bound mailbox claims, pinned executable adapter contract, durable one-shot local launch, receipt-only recovery and bounded cycle authored. Specific real provider/ACP protocol adapter, real receipt source, process containment and qualification remain.",
+        "source_pin": "7767519ec0b255306473befb49c40a9f6f7cee10",
+        "checkpoint": "EXECUTABLE-CYCLE-001"
       },
       {
         "id": "R09",
         "criterion": "Autonomous provider dispatch/reconciliation and empirical budget optimization",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Fair persisted advisory cursor across supported handoffs, asynchronous mailbox publication and observation-only reconciliation; no live adapter, empirical policy trial, or automatic uncertainty resolution.",
-        "source_pin": "0a3b982e4e3b26f78504e0b99f513bbd7ab22f7a",
-        "checkpoint": "ADAPTER-MAILBOX-001"
+        "remaining": "Bounded explicit host bridge cycle with fair visit rotation, conservative launch intent limits, reconciliation-only recovery and separate publication/send counters authored. Continuous service integration, live adapter qualification and empirical policy trials remain.",
+        "source_pin": "7767519ec0b255306473befb49c40a9f6f7cee10",
+        "checkpoint": "EXECUTABLE-CYCLE-001"
       },
       {
         "id": "R10",
@@ -1423,7 +1423,8 @@
     "baseline": "bf8093e71f8eb008520e973db55391420fe3f1f9",
     "documents": [
       "TRANSPORT-FENCE-001.md",
-      "EXECUTABLE-BRIDGE-001.md"
+      "EXECUTABLE-BRIDGE-001.md",
+      "EXECUTABLE-CYCLE-001.md"
     ],
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "verified_credit": 0

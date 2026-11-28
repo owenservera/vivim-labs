@@ -6,6 +6,11 @@ use crate::{digest,Result};
 use serde_json::{Value,json};
 use std::{fs::{self,OpenOptions},io::Write,path::Path,time::{SystemTime,UNIX_EPOCH}};
 fn err(e:impl std::fmt::Display)->String{e.to_string()}
+pub fn receipt(effect:&Effect,payload:&Value,outcome:EffectPhase)->Result<Value>{
+    ensure(payload.get("adapter").and_then(Value::as_str)==Some("local-json-publication-v1"),"adapter not authorized")?;
+    let value=payload.get("value").ok_or("publication value missing")?;bounded(value)?;
+    Ok(json!({"effect":effect.id,"outcome":outcome,"adapter":"local-json-publication-v1","object":digest(value)}))
+}
 pub fn observe(root:&Path,effect:&Effect,payload:&Value,allow_publish:bool)->Result<(EffectPhase,Value)>{
     ensure(hash_id(&effect.payload)&&digest(payload)==effect.payload,"effect payload mismatch")?;
     ensure(payload.get("adapter").and_then(Value::as_str)==Some("local-json-publication-v1"),"adapter not authorized by intent")?;

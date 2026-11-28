@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-source-checkpoint-003-routing-R004",
+  "revision": "R004-TRUTH-TRACKER-001",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -1116,5 +1116,151 @@
       "SOURCE_IMPLEMENTED_UNVERIFIED": 4,
       "PARTIAL_SOURCE": 6
     }
+  },
+  "completion_dashboard": {
+    "revision": "TRUTH-TRACKER-001",
+    "tracker_input_commit": "d05e332f884a11ef3bcbc69658a4de308adc812a",
+    "reviewed_runtime_source": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
+    "source_status_meaning": "Provisional static source coverage, not demonstrated operation; source-implemented labels are not acceptance passes and may be downgraded by later review.",
+    "original": {
+      "total": 50,
+      "counts": {
+        "SOURCE_IMPLEMENTED_UNVERIFIED": 38,
+        "PARTIAL_SOURCE": 8,
+        "DEFERRED": 4
+      },
+      "phases": {
+        "P0": {
+          "total": 15,
+          "SOURCE_IMPLEMENTED_UNVERIFIED": 11,
+          "PARTIAL_SOURCE": 4
+        },
+        "P1": {
+          "total": 10,
+          "SOURCE_IMPLEMENTED_UNVERIFIED": 10
+        },
+        "P2": {
+          "total": 12,
+          "SOURCE_IMPLEMENTED_UNVERIFIED": 11,
+          "PARTIAL_SOURCE": 1
+        },
+        "P3": {
+          "total": 8,
+          "SOURCE_IMPLEMENTED_UNVERIFIED": 6,
+          "PARTIAL_SOURCE": 2
+        },
+        "P4": {
+          "total": 5,
+          "DEFERRED": 4,
+          "PARTIAL_SOURCE": 1
+        }
+      },
+      "source_coverage_percent": 76,
+      "current_verified_gates": 0,
+      "current_verified_score": 0
+    },
+    "routing": {
+      "total": 10,
+      "counts": {
+        "SOURCE_IMPLEMENTED_UNVERIFIED": 4,
+        "PARTIAL_SOURCE": 6
+      },
+      "source_coverage_percent": 40,
+      "current_verified_gates": 0
+    },
+    "combined_inventory": {
+      "total": 60,
+      "source_implemented_unverified": 42,
+      "partial_source": 14,
+      "deferred": 4,
+      "verified_current": 0,
+      "source_coverage_percent": 70,
+      "meaning": "Unweighted inventory across both registers, not the original acceptance score."
+    },
+    "historical_r003": {
+      "counts": {
+        "PASS": 14,
+        "OPEN": 33,
+        "PARTIAL": 3
+      },
+      "verified_score": 28,
+      "meaning": "Historical pinned evidence only; not transferable to R004."
+    },
+    "launch": {
+      "status": "NOT_READY",
+      "genesis_manifest": "NOT_IMPLEMENTED_IN_REVIEWED_LAUNCH_PATH",
+      "build": "NOT_ATTEMPTED",
+      "tests": "NOT_EXECUTED",
+      "provider_execution": "NOT_WIRED",
+      "actual_models_and_budgets": "NOT_CONFIGURED"
+    },
+    "closure_queue": [
+      {
+        "order": 1,
+        "work": "Core correctness and persistence",
+        "gates": [
+          "E03",
+          "E33",
+          "R03",
+          "R06",
+          "R07"
+        ],
+        "acceptance": "Repair hierarchy-wide terminal propagation; charged-but-unverified cancellation; durable blocked/reset/exhausted routing states; nested router storage growth; review origin-provider lineage. Author negative fixtures, then qualify at pinned source."
+      },
+      {
+        "order": 2,
+        "work": "Genesis preparation",
+        "gates": [
+          "E13",
+          "E26",
+          "E31",
+          "R06",
+          "R08"
+        ],
+        "acceptance": "Author executable bounded Genesis manifest, native first objective and independent completion oracle. Explicit model list and scope; no live provider activation before qualification. Genesis readiness is a separate launch condition, not another scored gate."
+      },
+      {
+        "order": 3,
+        "work": "Remaining original source implementation",
+        "gates": [
+          "E31",
+          "E41",
+          "E42"
+        ],
+        "acceptance": "Protected host admission/effect boundary, generalized evidence-backed learning, complete resource/cost feedback. Do not expand scope until these original requirements are addressed."
+      },
+      {
+        "order": 4,
+        "work": "Native build and qualification",
+        "gates": [
+          "E34",
+          "E44",
+          "E47",
+          "R10"
+        ],
+        "acceptance": "After explicit execution authorization, compile, repair defects, run pinned native and synthetic routing qualification including actual concurrency and process destruction; verify every other source-marked gate against its original criterion."
+      },
+      {
+        "order": 5,
+        "work": "One live adapter and routing qualification",
+        "gates": [
+          "R08",
+          "R09"
+        ],
+        "acceptance": "Real model registry and authorized budgets, verified live quota/usage receipts, bounded dispatch and recovery, controlled repeated policy comparisons; no provider calls before authorization."
+      },
+      {
+        "order": 6,
+        "work": "Comparative and endurance qualification",
+        "gates": [
+          "E45",
+          "E46",
+          "E48",
+          "E49"
+        ],
+        "acceptance": "Execute authorized isolated comparative fault schedule and actual 36/72-hour qualification. No simulated duration accepted."
+      }
+    ],
+    "rule": "Prioritize original acceptance closure and integration defects over new architectural expansion. Verified credit requires actual matching native evidence at a pinned source. Retain all original gate IDs, weights, criteria and historical evidence."
   }
 }

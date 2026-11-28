@@ -98,3 +98,36 @@ Source pin 8fa44485e12c178655cca3c5c7e092526137017b. [MODEL-ROUTING-R004.md](MOD
 ## Static review 001
 
 Reviewed 02d3e8f737cfb750b164b1cd6a3ac10e44760b53. See [STATIC-REVIEW-001.md](STATIC-REVIEW-001.md). E03/E33 and R03/R06/R07 downgraded to partial source based on specific source gaps. Original and routing verified scores unchanged; no builds/tests. Genesis launch not ready.
+
+## Truth tracker 001 — unified inventory and closure order
+
+Tracker input commit: d05e332f884a11ef3bcbc69658a4de308adc812a. Last reviewed runtime source: 02d3e8f737cfb750b164b1cd6a3ac10e44760b53. No runtime source changed in this update.
+
+| Register | Total | Source implemented, unverified | Partial | Deferred | Current verified |
+|---|---:|---:|---:|---:|---:|
+| Original architecture | 50 | 38 | 8 | 4 | 0 |
+| Supplemental routing | 10 | 4 | 6 | 0 | 0 |
+| Combined inventory (not weighted acceptance) | 60 | 42 | 14 | 4 | 0 |
+
+Original source coverage 76%; routing source coverage 40%; combined inventory 42/60 (70%). All figures are provisional source classifications. Historical R003 verified 28/100; current R004 verified 0/100. No new qualification evidence, no reclassification in this tracker-only update. The prior 80% source claim was corrected to 76% by static review of E03 and E33. Routing was corrected from 70% to 40% by review of R03, R06, R07.
+
+### Original phase breakdown
+
+| Phase | Source implemented / total | Partial | Deferred |
+|---|---:|---:|---:|
+| P0 | 11/15 | 4 | 0 |
+| P1 | 10/10 | 0 | 0 |
+| P2 | 11/12 | 1 | 0 |
+| P3 | 6/8 | 2 | 0 |
+| P4 | 0/5 | 1 | 4 |
+
+### Closure order
+
+1. **Core correctness and persistence** (E03, E33, R03, R06, R07): Repair hierarchy-wide terminal propagation; charged-but-unverified cancellation; durable blocked/reset/exhausted routing states; nested router storage growth; review origin-provider lineage. Author negative fixtures, then qualify at pinned source.
+2. **Genesis preparation** (E13, E26, E31, R06, R08): Author executable bounded Genesis manifest, native first objective and independent completion oracle. Explicit model list and scope; no live provider activation before qualification. Genesis readiness is a separate launch condition, not another scored gate.
+3. **Remaining original source implementation** (E31, E41, E42): Protected host admission/effect boundary, generalized evidence-backed learning, complete resource/cost feedback. Do not expand scope until these original requirements are addressed.
+4. **Native build and qualification** (E34, E44, E47, R10): After explicit execution authorization, compile, repair defects, run pinned native and synthetic routing qualification including actual concurrency and process destruction; verify every other source-marked gate against its original criterion.
+5. **One live adapter and routing qualification** (R08, R09): Real model registry and authorized budgets, verified live quota/usage receipts, bounded dispatch and recovery, controlled repeated policy comparisons; no provider calls before authorization.
+6. **Comparative and endurance qualification** (E45, E46, E48, E49): Execute authorized isolated comparative fault schedule and actual 36/72-hour qualification. No simulated duration accepted.
+
+Genesis is not launch-ready. No new gates or weights added; no builds, tests, provider calls or source repairs in this update. See completion_dashboard in acceptance-tracker.json and STATIC-REVIEW-001.md.

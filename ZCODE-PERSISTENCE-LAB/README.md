@@ -27,3 +27,6 @@ All use same objectives, seeds, provider/model where feasible, concurrency and r
 
 ## Core hypothesis
 A computational system should improve as replaceable agents leave verified reusable knowledge behind. 04 is expected to outperform on repeated and related workloads, but 01–03 are legitimate controls and may outperform it on short tasks. No claim until measured. The 36/72-hour qualification is real wall time, not simulation. No live launch, native CLI/ACP verification, implementation or qualification yet. Do not overwrite the public repo with private transcripts. Git cannot track empty directories; initialize them locally. Only lab-owned processes/files, simulated dependency faults, explicit finite budgets, respect stop and provider limits. ASDF grant/profile discrepancy must be reconciled before launch.
+
+## R003 executable substrate
+The standalone Rust implementation is now available in [runtime/](runtime/README.md). Native Windows validation: [8/8 integration tests passed](runtime/VALIDATION-R003.md), including deterministic cross-goal capability reuse. R002 remains the canonical experimental architecture; the four comparative lanes and endurance trials remain unexecuted. No AI wiring.

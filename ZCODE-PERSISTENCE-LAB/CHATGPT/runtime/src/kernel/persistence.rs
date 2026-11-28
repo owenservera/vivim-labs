@@ -159,7 +159,11 @@ impl KernelStore{
     pub fn lookup(&self,table:&str,key:&str)->Result<Option<Value>>{
         let _guard=self.lock()?;
         let Some(head)=self.latest_head()? else{return Ok(None);};
-        if let Some(root)=head.index.as_ref(){return super::index::Index::open(&self.root)?.lookup(root,head.revision,table,key);}
+        if let Some(root)=head.index.as_ref(){
+            let last:Envelope<Record>=read(&self.path("record",head.revision))?;last.check()?;
+            ensure(last.body.revision==head.revision&&last.body.index==head.index&&last.checksum==head.record,"lookup index record mismatch")?;
+            return super::index::Index::open(&self.root)?.lookup(root,head.revision,table,key);
+        }
         let loaded=self.load()?;
         if table=="receipts"{return loaded.receipts.get(key).map(|r|serde_json::to_value(r).map_err(error)).transpose();}
         let v=serde_json::to_value(loaded.world).map_err(error)?;let mut node=&v;for part in table.split('.'){let Some(next)=node.get(part) else{return Ok(None);};node=next;}Ok(node.get(key).cloned())

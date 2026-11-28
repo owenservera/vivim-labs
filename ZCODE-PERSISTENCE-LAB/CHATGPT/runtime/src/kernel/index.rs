@@ -71,18 +71,20 @@ impl Index{
         }
         Ok(refs)
     }
-    fn leaf(&self,prefix:&str,page:Map<String,Value>,refs:&mut BTreeMap<String,String>)->Result<()>{
+    fn leaf(&self,prefix:&str,page:Map<String,Value>,refs:&mut BTreeMap<String,String>,previous:&BTreeMap<String,String>)->Result<()>{
         let v=Value::Object(page);let bytes=serde_json::to_vec(&v).map_err(err)?.len();
         if bytes<=TARGET_PAGE||v.as_object().unwrap().len()<=1||prefix.len()==64{
             ensure(bytes<=PAGE_LIMIT,"single entity exceeds index object budget")?;
-            refs.insert(prefix.into(),self.put(&v)?);return Ok(());
+            let hash=digest(&v);
+            if previous.get(prefix)==Some(&hash){ensure(self.object(&hash)?.is_file(),"unchanged adaptive page missing")?;}else{self.put(&v)?;}
+            refs.insert(prefix.into(),hash);return Ok(());
         }
         let mut children:BTreeMap<String,Map<String,Value>>=BTreeMap::new();
         for (key,value) in v.as_object().unwrap(){
             let hash=digest(&Value::String(key.clone()));
             children.entry(hash[..prefix.len()+2].into()).or_default().insert(key.clone(),value.clone());
         }
-        for (key,page) in children{self.leaf(&key,page,refs)?;}
+        for (key,page) in children{self.leaf(&key,page,refs,previous)?;}
         Ok(())
     }
     pub fn manifest(&self,hash:&str)->Result<IndexRoot>{
@@ -106,7 +108,7 @@ impl Index{
         object.insert("receipts".into(),serde_json::to_value(receipts).map_err(err)?);
         let state_digest=digest(&state);
         let object=state.as_object_mut().unwrap();
-        let _old=previous.map(|x|self.manifest(x)).transpose()?;
+        let old=previous.map(|x|self.manifest(x)).transpose()?;
         let mut directories=BTreeMap::new();
         for &name in MAPS.iter().chain(NESTED.iter()){
             let Some((parent,key))=Self::table_parent(object,name) else{continue;};
@@ -115,7 +117,8 @@ impl Index{
             let mut pages:BTreeMap<String,Map<String,Value>>=BTreeMap::new();
             for (key,val) in table{pages.entry(Self::bucket(key,1)).or_default().insert(key.clone(),val.clone());}
             let mut refs=BTreeMap::new();
-            for (bucket,page) in pages{self.leaf(&bucket,page,&mut refs)?;}
+            let prior=match &old{Some(root)=>self.directory(root,name)?,None=>BTreeMap::new()};
+            for (bucket,page) in pages{self.leaf(&bucket,page,&mut refs,&prior)?;}
             directories.insert(name.into(),self.put(&serde_json::to_value(refs).map_err(err)?)?);
         }
         let scalar=self.put(&state)?;

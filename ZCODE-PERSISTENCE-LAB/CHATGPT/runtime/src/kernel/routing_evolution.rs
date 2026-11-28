@@ -56,7 +56,7 @@ fn signature(d:&super::routing::Demand)->Result<String>{
 impl Router{
     fn trial(&self)->Option<&Trial>{self.evolution.current.as_ref().and_then(|k|self.evolution.trials.get(k))}
     pub fn trial_active(&self)->bool{self.evolution.current.is_some()}
-    fn config_fingerprint(&self)->Result<String>{Ok(digest(&serde_json::to_value(self.config.as_ref().ok_or("router not configured")?).map_err(|e|e.to_string())?))}
+    fn config_fingerprint(&self)->Result<String>{Ok(digest(&json!({"config":self.config.as_ref().ok_or("router not configured")?,"bindings":self.adapters.bindings,"frontier_guard":self.planning.guard,"forecasts":self.planning.forecasts})))}
     /// Generate bounded alternatives without changing the active policy.
     pub fn policy_candidates(&self)->Result<Value>{
         let p=&self.batch_policy;let version=p.version.checked_add(1).ok_or("policy version overflow")?;

@@ -98,6 +98,7 @@ impl World{
     }
     pub fn bind_routing_adapter(&mut self,b:AdapterBinding)->Result<()>{
         id(&b.id)?;id(&b.adapter)?;ensure(self.router.config.is_some(),"router not configured")?;
+        ensure(!self.router.trial_active(),"adapter bindings frozen during routing trial")?;
         ensure(b.id==b.adapter&&b.version>self.router.adapters.bindings.get(&b.id).map_or(0,|x|x.version)&&(100..=3_600_000).contains(&b.lease_ms),"invalid adapter binding")?;
         ensure(self.classes.contains_key(&b.class)&&self.contexts.contains_key(&b.context),"adapter class/context missing")?;
         self.router.adapters.bindings.insert(b.id.clone(),b);Ok(())

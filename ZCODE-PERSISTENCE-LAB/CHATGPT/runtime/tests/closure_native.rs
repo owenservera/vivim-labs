@@ -1,5 +1,5 @@
 //! Authored native closure qualification; do not run until authorized.
-use persistent_intelligence_runtime::{Expr,Operator,digest,kernel::{model::*,transition::{Actor,Action,Request},persistence::KernelStore,supervisor::{RunConfig,supervise},genesis::Manifest}};
+use persistent_intelligence_runtime::{Expr,Operator,digest,kernel::{model::*,transition::{Actor,Action,Request},persistence::KernelStore,supervisor::RunConfig,genesis::Manifest}};
 use std::{collections::{BTreeMap,BTreeSet},fs,path::PathBuf,time::{SystemTime,UNIX_EPOCH},process::{Command,Stdio,Child},thread,time::{Duration,Instant}};
 use serde_json::json;
 struct Root(PathBuf);
@@ -15,7 +15,12 @@ fn genesis_manifest_executes_and_reopens(){
     let m=Manifest{id:"genesis".into(),objective:"native qualification".into(),tracker_digest:digest(&json!("fixture")),input:42,claim_budget:8};
     store.apply(Request{id:"initialize".into(),actor:Actor::Host,action:Action::Genesis{manifest:m}}).unwrap();
     let before=store.inspect().unwrap();assert_eq!(before.slots,1);assert_eq!(before.agents.len(),1);assert_eq!(before.tasks.len(),2);
-    supervise(&store,&root.0.join("workspace"),RunConfig{duration_ms:120_000,lease_ms:30_000,poll_ms:10,max_jobs:8,max_learning_plans:0,stop_when_idle:true}).unwrap();
+    let workspace=root.0.join("workspace");fs::create_dir(&workspace).unwrap();
+    let cfg=RunConfig{duration_ms:120_000,lease_ms:30_000,poll_ms:10,max_jobs:8,max_learning_plans:0,stop_when_idle:true};
+    let file=root.0.join("config.json");fs::write(&file,serde_json::to_vec(&cfg).unwrap()).unwrap();
+    let mut child=Owned(Command::new(env!("CARGO_BIN_EXE_persistent-intelligence-runtime")).arg("kernel-controller").arg(root.0.join("store")).arg(&workspace).arg(file).stdin(Stdio::piped()).stdout(Stdio::null()).stderr(Stdio::null()).spawn().unwrap());
+    let start=Instant::now();
+    loop{if let Some(status)=child.0.try_wait().unwrap(){assert!(status.success());break;}assert!(start.elapsed()<Duration::from_secs(125));thread::sleep(Duration::from_millis(10));}
     let reopened=KernelStore::open(root.0.join("store")).unwrap();let w=reopened.inspect().unwrap();
     assert_eq!(w.goals["genesis"].phase,GoalPhase::Complete);
     assert_eq!(*w.artifact_value("genesis-first").unwrap(),json!(43));

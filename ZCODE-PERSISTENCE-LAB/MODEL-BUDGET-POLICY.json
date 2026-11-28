@@ -1,0 +1,114 @@
+{
+  "schema": "vivim.dogfood.budget/1",
+  "revision": "R008",
+  "owner_policy": "GEMINI_ONLY",
+  "mode": "subscription_only_no_paid_overflow",
+  "scope": "experiments only",
+  "sources": [
+    {
+      "library": "/websites/antigravity_google_cli",
+      "url": "https://antigravity.google/docs/cli/commands/usage/",
+      "finding": "Interactive /usage or /quota refreshes shared model-group five-hour and weekly quota. No documented machine-readable quota endpoint found."
+    },
+    {
+      "library": "/websites/antigravity_google_cli",
+      "url": "https://antigravity.google/docs/cli/headless/",
+      "finding": "Explicit --model slug; --effort supported by model; unknown model errors; result usage provides consumption, not remaining entitlement."
+    },
+    {
+      "library": "/openai/codex",
+      "url": "https://github.com/openai/codex/blob/main/codex-rs/app-server-protocol/src/protocol/v2/account.rs",
+      "finding": "account/rateLimits/read, ordinaryUsageAllowed, shared windows usedPercent and resetsAt; applies to actual authenticated Codex account, not Gemini subscription."
+    }
+  ],
+  "lanes": {
+    "01": {
+      "cli": "codex",
+      "admission": "HOLD_UNVERIFIED_GEMINI_ROUTE"
+    },
+    "02": {
+      "cli": "agy",
+      "admission": "PENDING_QUOTA_AND_ISOLATION"
+    },
+    "03": {
+      "cli": "agy",
+      "admission": "PENDING_QUOTA_AND_ISOLATION"
+    },
+    "04": {
+      "cli": "codex",
+      "admission": "HOLD_UNVERIFIED_GEMINI_ROUTE"
+    }
+  },
+  "rules": {
+    "max_snapshot_age_seconds": 300,
+    "reserve_percent": 15,
+    "critical_reserve_percent": 5,
+    "require_all_observed_windows": true,
+    "require_explicit_group_mapping": true,
+    "max_inflight_per_account": 1,
+    "unknown_quota": "WAIT",
+    "quota_exhausted": "WAIT_UNTIL_REFRESH_CONFIRMS_ENTITLEMENT",
+    "paid_overflow": false,
+    "allow_non_gemini": false,
+    "allow_provider_switch_without_new_authorization": false,
+    "allow_automatic_retry_after_limit": false,
+    "local_daily_token_ceiling": null,
+    "local_daily_turn_ceiling": null,
+    "local_day_timezone": "Europe/Madrid",
+    "note": "Local daily ceilings require owner-configured numbers; do not invent subscription entitlements. A shared account is one budget, never four independent quotas."
+  },
+  "tasks": {
+    "deterministic": {
+      "route": "native",
+      "description": "No inference for hashing, checks, tests, replay, counters or known procedures."
+    },
+    "extract": {
+      "preferred": [
+        "gemini-3.8-flash-low",
+        "gemini-3.8-flash-medium"
+      ],
+      "description": "Bounded reading, extraction, summaries."
+    },
+    "routine": {
+      "preferred": [
+        "gemini-3.8-flash-medium",
+        "gemini-4-carbon-low",
+        "gemini-4-argon-low"
+      ],
+      "description": "Small well-defined changes, documentation, straightforward implementation."
+    },
+    "implementation": {
+      "preferred": [
+        "gemini-4-carbon-medium",
+        "gemini-4-argon-medium",
+        "gemini-4-neon-medium"
+      ],
+      "description": "Multi-file implementation; independently verify."
+    },
+    "debug": {
+      "preferred": [
+        "gemini-4-carbon-high",
+        "gemini-4-neon-high",
+        "gemini-4-hydrogen-high"
+      ],
+      "description": "Complex debugging after cheaper methods fail."
+    },
+    "architecture": {
+      "preferred": [
+        "gemini-4-neon-high",
+        "gemini-4-hydrogen-high",
+        "gemini-4-neon-xhigh",
+        "gemini-4-hydrogen-xhigh"
+      ],
+      "description": "Novel system design and high-uncertainty work."
+    },
+    "critical": {
+      "preferred": [
+        "gemini-4-neon-xhigh",
+        "gemini-4-hydrogen-xhigh"
+      ],
+      "description": "Explicitly classified high-impact failure recovery or design; may use reserved headroom."
+    }
+  },
+  "routing_note": "Order is an initial heuristic, not proven ranking or token price. Candidate must appear in live authenticated model list, map to observed shared quota group, and satisfy every applicable window. No orchestrator aliases until underlying model family and billing are verified. Switch models at task boundaries; preserve verified context and explicit session bindings; verify effective model on resume or start new bounded incarnation. Log decision, predicted/actual consumption, success, retries, context overhead and model drift. Learn measured verified yield per quota delta; do not equate tokens with plan quota. Compare paired seeds with same scheduler and shared-account fairness, record route mix; later fixed-model control."
+}

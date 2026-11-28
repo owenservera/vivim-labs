@@ -54,7 +54,7 @@ impl Shape {
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(tag="source",rename_all="snake_case")]
-pub enum Binding { Literal{value:Value}, Predecessor{task:Id}, Context{key:String} }
+pub enum Binding { Literal{value:Value}, Predecessor{task:Id}, Context{key:String}, Knowledge{version:Id} }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Port { pub shape:Shape, pub binding:Binding }
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -104,7 +104,7 @@ pub struct TaskSpec {
     pub id:Id, pub goal:Id, pub objective:String, pub dependencies:BTreeSet<Id>,
     pub inputs:BTreeMap<String,Port>, pub output:Shape, pub oracle:Oracle,
     pub class:Option<Id>, pub family:Option<Id>, #[serde(default)] pub context:Option<Id>, pub max_attempts:u32,
-    pub priority:i64, pub uncertainty:u32, pub expected_cost:u32,
+    pub priority:i64, pub uncertainty:u32, #[serde(default)] pub information_gain:u32, pub expected_cost:u32,
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Lease { pub worker:Id, pub incarnation:u64, pub generation:u64, pub deadline_ms:u64 }
@@ -171,6 +171,38 @@ pub struct Capability {
     pub id:Id, pub version:u64, pub family:Id, pub class:Id,
     pub training:Vec<Id>, pub holdouts:Vec<Id>, pub enabled:bool,
 }
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct LearningPlan {
+    pub id:Id,pub version:u64,pub family:Id,pub input:Shape,pub output:Shape,
+    pub training:Vec<Id>,pub holdouts:Vec<Id>,pub search_limit:u64,
+    pub capability:Id,pub capability_version:u64,
+}
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct LearningAttempt {
+    pub plan:Id,pub accepted:bool,pub capability:Option<Id>,pub reason:Option<String>,
+    pub evaluated:Option<u64>,pub holdout_inputs:Vec<Digest>,pub clock_ms:u64,
+}
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all="snake_case")]
+pub enum KnowledgeKind { Procedure, Repair, Class, Coordination, Context, Fact, Proof, ComputationalOperator }
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct Knowledge {
+    pub id:Id,pub version:u64,pub kind:KnowledgeKind,pub family:Option<Id>,
+    pub artifacts:Vec<Id>,pub class:Option<Id>,pub evidence:Vec<Id>,
+    pub supersedes:Option<Id>,pub enabled:bool,
+}
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct RunCost {
+    pub task:Id,pub generation:u64,pub elapsed_ms:u64,pub family:Option<Id>,pub class:Option<Id>,
+}
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct SchedulingPolicy {
+    pub version:u64,pub priority_weight:u32,pub critical_weight:u32,
+    pub uncertainty_weight:u32,pub information_weight:u32,pub cost_weight:u32,
+}
+impl Default for SchedulingPolicy {
+    fn default()->Self{Self{version:1,priority_weight:1000,critical_weight:100,uncertainty_weight:10,information_weight:20,cost_weight:1}}
+}
 #[derive(Clone, Debug, Serialize, Deserialize, Default)]
 pub struct Metrics {
     pub claims:u64, pub accepted:u64, pub rejected:u64, pub failures:u64,
@@ -187,10 +219,13 @@ pub struct World {
     pub blobs:BTreeMap<Digest,Value>, pub checkpoints:BTreeMap<Id,Vec<Checkpoint>>,
     pub messages:BTreeMap<Id,Message>, pub capabilities:BTreeMap<Id,Capability>,
     pub metrics:Metrics,
+    pub learning_plans:BTreeMap<Id,LearningPlan>,pub learning_attempts:BTreeMap<Id,LearningAttempt>,
+    pub knowledge:BTreeMap<Id,Knowledge>,pub run_costs:BTreeMap<Id,RunCost>,pub policy:SchedulingPolicy,
+    pub goal_versions:BTreeMap<Id,Vec<Goal>>,pub task_versions:BTreeMap<Id,Vec<TaskSpec>>,
 }
 impl Default for World {
     fn default()->Self {
-        Self{clock_ms:0,slots:4,sequence:0,goals:BTreeMap::new(),tasks:BTreeMap::new(),agents:BTreeMap::new(),contexts:BTreeMap::new(),operators:BTreeMap::new(),classes:BTreeMap::new(),artifacts:BTreeMap::new(),evidence:BTreeMap::new(),blobs:BTreeMap::new(),checkpoints:BTreeMap::new(),messages:BTreeMap::new(),capabilities:BTreeMap::new(),metrics:Metrics::default()}
+        Self{clock_ms:0,slots:4,sequence:0,goals:BTreeMap::new(),tasks:BTreeMap::new(),agents:BTreeMap::new(),contexts:BTreeMap::new(),operators:BTreeMap::new(),classes:BTreeMap::new(),artifacts:BTreeMap::new(),evidence:BTreeMap::new(),blobs:BTreeMap::new(),checkpoints:BTreeMap::new(),messages:BTreeMap::new(),capabilities:BTreeMap::new(),metrics:Metrics::default(),learning_plans:BTreeMap::new(),learning_attempts:BTreeMap::new(),knowledge:BTreeMap::new(),run_costs:BTreeMap::new(),policy:SchedulingPolicy::default(),goal_versions:BTreeMap::new(),task_versions:BTreeMap::new()}
     }
 }
 pub fn version_key(name:&str,version:u64)->Result<Id>{

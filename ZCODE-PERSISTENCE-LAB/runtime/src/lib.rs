@@ -114,6 +114,8 @@ pub enum Command {
     Seal {goal:String},
     Claim {task:String, agent:String, ttl:u64},
     Checkpoint {task:String, agent:String, generation:u64, data:Value},
+    Renew {task:String, agent:String, generation:u64, ttl:u64},
+    Fail {task:String, agent:String, generation:u64, reason:String},
     Submit {task:String, agent:String, generation:u64, value:Value},
     Verify {task:String},
     Execute {task:String, agent:String, generation:u64},
@@ -219,6 +221,17 @@ impl State {
                 self.checked_lease(&task,&agent,generation)?;
                 self.tasks.get_mut(&task).unwrap().checkpoint=Some(data);
             }
+            Renew{task,agent,generation,ttl}=>{
+                self.checked_lease(&task,&agent,generation)?;
+                require(ttl>0,"invalid ttl")?;
+                let expiry=self.clock.checked_add(ttl).ok_or("clock overflow")?;
+                self.tasks.get_mut(&task).unwrap().lease.as_mut().unwrap().expires=expiry;
+            }
+            Fail{task,agent,generation,reason}=>{
+                self.checked_lease(&task,&agent,generation)?;
+                require(!reason.trim().is_empty(),"failure reason required")?;
+                Self::release(self.tasks.get_mut(&task).unwrap());
+            }
             Submit{task,agent,generation,value}=>{
                 self.checked_lease(&task,&agent,generation)?;
                 let t=self.tasks.get_mut(&task).unwrap();
@@ -286,7 +299,7 @@ impl State {
 }
 
 #[derive(Serialize,Deserialize)]
-struct Record { schema:u32, revision:u64, previous:String, command:Command, state:State, result:Value }
+struct Record { schema:u32, revision:u64, previous:String, request_id:Option<String>, command:Command, state:State, result:Value }
 #[derive(Serialize,Deserialize)]
 struct Envelope { digest:String, record:Record }
 /// Immutable revision files. OS file lock serializes all cooperating writers/readers.
@@ -298,7 +311,7 @@ impl Store {
         let f=OpenOptions::new().create(true).truncate(false).read(true).write(true).open(self.root.join("writer.lock")).map_err(err)?;
         f.try_lock().map_err(|e|format!("store busy or lock failed: {e:?}"))?; Ok(f)
     }
-    fn load(&self)->Result<(State,u64,String)> {
+    fn load(&self)->Result<(State,u64,String,BTreeMap<String,(String,Value)>)> {
         let mut files=Vec::new();
         for e in fs::read_dir(&self.root).map_err(err)? {
             let e=e.map_err(err)?; let n=e.file_name().to_string_lossy().into_owned();
@@ -307,7 +320,7 @@ impl Store {
             }
         }
         files.sort_by_key(|x|x.0);
-        let mut state=State::default(); let mut rev=0u64; let mut previous="genesis".to_string();
+        let mut state=State::default(); let mut rev=0u64; let mut previous="genesis".to_string(); let mut requests=BTreeMap::new();
         for (n,path) in files {
             require(n==rev.checked_add(1).ok_or("revision overflow")?,"revision gap")?;
             let e:Envelope=serde_json::from_slice(&fs::read(path).map_err(err)?).map_err(err)?;
@@ -316,15 +329,26 @@ impl Store {
             // Replay, not merely trust a serialized snapshot.
             let result=state.transition(e.record.command.clone())?;
             require(result==e.record.result&&serde_json::to_value(&state).map_err(err)?==serde_json::to_value(&e.record.state).map_err(err)?,"journal replay mismatch")?;
+            if let Some(id)=e.record.request_id { valid_id(&id)?; require(requests.insert(id,(hash(&serde_json::to_vec(&e.record.command).map_err(err)?),result)).is_none(),"duplicate journal request")?; }
             rev=n; previous=e.digest;
         }
-        Ok((state,rev,previous))
+        Ok((state,rev,previous,requests))
     }
     pub fn inspect(&self)->Result<State> { let _guard=self.lock()?; Ok(self.load()?.0) }
     pub fn apply(&self,command:Command)->Result<Value> {
-        let _guard=self.lock()?; let (mut state,rev,previous)=self.load()?;
+        self.apply_request(None,command)
+    }
+    pub fn apply_request(&self,request_id:Option<String>,command:Command)->Result<Value> {
+        let _guard=self.lock()?; let (mut state,rev,previous,requests)=self.load()?;
+        if let Some(id)=&request_id {
+            valid_id(id)?;
+            if let Some((prior,result))=requests.get(id) {
+                require(*prior==hash(&serde_json::to_vec(&command).map_err(err)?),"request ID conflict")?;
+                return Ok(result.clone());
+            }
+        }
         let result=state.transition(command.clone())?;
-        let record=Record{schema:1,revision:rev.checked_add(1).ok_or("revision overflow")?,previous,command,state,result:result.clone()};
+        let record=Record{schema:1,revision:rev.checked_add(1).ok_or("revision overflow")?,previous,request_id,command,state,result:result.clone()};
         let envelope=Envelope{digest:hash(&serde_json::to_vec(&record).map_err(err)?),record};
         let bytes=serde_json::to_vec(&envelope).map_err(err)?;
         let suffix=SystemTime::now().duration_since(UNIX_EPOCH).map_err(err)?.as_nanos();

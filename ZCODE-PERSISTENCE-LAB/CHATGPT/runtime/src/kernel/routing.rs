@@ -200,6 +200,8 @@ impl Router{
     }
     pub fn tick(&mut self,now:u64)->Result<()>{
         ensure(now>=self.clock_ms,"routing clock reversed")?;self.clock_ms=now;
+        let expired:BTreeSet<_>=self.reservations.values().filter(|r|r.status==Status::Reserved&&!self.trial_allows(&r.demand)).map(|r|r.id.clone()).collect();
+        for key in expired{self.release_unsent(&key)?;}
         if let Some(c)=&self.config{for r in self.reservations.values_mut().filter(|r|r.status==Status::Reserved){if now.saturating_sub(r.created_ms)>=c.policy.reservation_ttl_ms{r.status=Status::Released;r.outcome=Some(Outcome::NotSent);r.ended_ms=Some(now);}}}Ok(())
     }
     pub fn observe(&mut self,o:Observation)->Result<()>{

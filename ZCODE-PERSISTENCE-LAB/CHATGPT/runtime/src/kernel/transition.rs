@@ -404,7 +404,7 @@ impl World {
             VerifyInference{reservation,evidence}=>{actor.host()?;self.verify_inference_feedback(&reservation,&evidence)?;}
             BeginRoutingTrial{spec}=>{actor.host()?;self.begin_routing_trial(spec)?;}
             CloseRoutingArm=>{actor.host()?;return self.router.close_trial_arm();}
-            StartRoutingCandidate=>{actor.host()?;self.router.start_candidate_arm()?;}
+            StartRoutingCandidate=>{actor.host()?;self.start_routing_candidate()?;}
             AbortRoutingTrial{reason}=>{actor.host()?;self.router.abort_trial(reason)?;}
             PromoteRoutingTrial{trial}=>{actor.host()?;self.router.promote_trial(&trial)?;}
             RollbackRoutingTrial{trial}=>{actor.host()?;self.router.rollback_trial(&trial)?;}

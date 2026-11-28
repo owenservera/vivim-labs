@@ -92,6 +92,7 @@ impl World{
         let Some(c)=&self.router.config else{return Ok(());};
         let mut pending=BTreeMap::<Id,u64>::new();
         for d in self.router.demands.values(){
+            if !self.router.trial_allows(&d.id){continue;}
             if !self.tasks.get(&d.task).is_some_and(|t|t.phase==TaskPhase::Pending)||!self.goals.get(&d.goal).is_some_and(|g|g.phase==GoalPhase::Open){continue;}
             if self.router.reservations.values().any(|r|r.demand==d.id&&matches!(r.status,Status::Reserved|Status::Dispatched|Status::Unknown)){continue;}
             if d.prefer_native&&!d.independent_review&&self.match_class(&self.tasks[&d.task].spec).is_some(){continue;}

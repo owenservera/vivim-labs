@@ -121,7 +121,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
         if workspace.join("STOP").exists(){stop_reason="operator_stop";break;}
         let state=store.inspect()?;
         let now=base_clock.saturating_add(u64::try_from(started.elapsed().as_millis()).unwrap_or(u64::MAX)).max(state.clock_ms);
-        if now>state.clock_ms&&(state.running()>0||!state.ready().is_empty()||!state.ready_learning().is_empty()){
+        if now>state.clock_ms&&(state.running()>0||!state.ready().is_empty()||!state.ready_learning().is_empty()||state.router.trial_active()){
             host(store,Action::Tick{now_ms:now})?;
         }
         let mut i=0;
@@ -162,6 +162,11 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             if host(store,Action::Verify{task:t.spec.id.clone()})?["accepted"]==true{completed+=1;}else{failures+=1;}
         }
         let mut progress=false;
+        if learning_runs.saturating_add(knowledge_runs)<config.max_learning_plans{
+            if let Some(action)=store.inspect()?.router.trial_auto_action(){
+                host(store,action)?;learning_runs+=1;progress=true;
+            }
+        }
         while learning_runs.saturating_add(knowledge_runs)<config.max_learning_plans{
             let w=store.inspect()?;
             let Some(plan)=w.ready_learning().into_iter().next() else{break;};
@@ -221,7 +226,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
         }
         if jobs.is_empty()&&!progress{
             let w=store.inspect()?;
-            if w.running()==0&&(config.stop_when_idle||launched>=config.max_jobs){stop_reason=if launched>=config.max_jobs{"job_limit"}else{"idle"};break;}
+            if w.running()==0&&(!w.router.trial_active()||launched>=config.max_jobs)&&(config.stop_when_idle||launched>=config.max_jobs){stop_reason=if launched>=config.max_jobs{"job_limit"}else{"idle"};break;}
         }
         thread::sleep(Duration::from_millis(config.poll_ms));
     }

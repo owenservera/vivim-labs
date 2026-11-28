@@ -158,8 +158,21 @@ impl World{
             let d=self.router.demands.get(key).ok_or("trial demand missing")?;
             let t=self.tasks.get(&d.task).ok_or("trial task missing")?;
             ensure(t.phase==TaskPhase::Pending&&t.generation==0&&self.goals.get(&d.goal).is_some_and(|g|g.phase==GoalPhase::Open),"trial task must be fresh and open")?;
-            ensure(!self.bound_profiles(d).is_empty(),"trial demand has no compatible adapter")?;
+            ensure(self.ready().contains(&d.task)&&!self.bound_profiles(d).is_empty(),"trial demand must be ready with compatible adapter")?;
         }
         self.router.begin_trial(s)
+    }
+}
+
+impl World{
+    pub fn start_routing_candidate(&mut self)->Result<()>{
+        let key=self.router.evolution.current.as_ref().ok_or("no active trial")?;
+        let trial=self.router.evolution.trials.get(key).ok_or("trial missing")?;
+        for key in &trial.spec.candidate_demands{
+            let d=self.router.demands.get(key).ok_or("candidate demand missing")?;
+            let t=self.tasks.get(&d.task).ok_or("candidate task missing")?;
+            ensure(t.phase==TaskPhase::Pending&&t.generation==0&&self.ready().contains(&d.task)&&!self.bound_profiles(d).is_empty(),"candidate cohort changed; abort or repair before advancing")?;
+        }
+        self.router.start_candidate_arm()
     }
 }

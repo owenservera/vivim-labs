@@ -11,6 +11,7 @@ pub struct TrialSpec{
     pub duration_ms:u64,pub caps:BTreeMap<Id,u64>,pub objective_pool:Id,
     pub min_samples:usize,pub min_success_bps:u16,pub min_savings_bps:u16,
     pub auto_promote:bool,
+    #[serde(default)] pub auto_advance:bool,
 }
 #[derive(Clone,Debug,Serialize,Deserialize,PartialEq,Eq)]
 #[serde(rename_all="snake_case")]
@@ -19,10 +20,12 @@ pub enum Phase{Baseline,Between,Candidate,Evaluated,Aborted}
 pub struct Arm{
     pub start_ms:u64,pub end_ms:u64,pub policy:BatchPolicy,
     pub demands:BTreeSet<Id>,pub reservation_ids:BTreeSet<Id>,
+    pub initial_available:BTreeMap<Id,u64>,
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct ArmReport{
-    pub enrolled:usize,pub successes:usize,pub attempted:usize,pub requests:usize,
+    pub enrolled:usize,pub successes:usize,pub attempted:usize,pub settled_attempts:usize,
+    pub arm:Arm,
     pub success_bps:u16,pub spent:BTreeMap<Id,u64>,pub overrun:bool,
     pub evidence:BTreeSet<Id>,
 }
@@ -67,7 +70,7 @@ impl Router{
         id(&s.id)?;ensure(!self.trial_active()&&!self.evolution.trials.contains_key(&s.id),"trial already active or ID reused")?;
         ensure(self.batch_policy.version>0,"enable a versioned batch policy before trials")?;
         ensure(!self.reservations.values().any(outstanding),"drain outstanding routing work first")?;
-        ensure((100..=7*DAY_MS).contains(&s.duration_ms)&&(2..=4096).contains(&s.min_samples)&&s.min_success_bps<=10_000&&(1..=10_000).contains(&s.min_savings_bps),"invalid trial bounds")?;
+        ensure((100..=7*DAY_MS).contains(&s.duration_ms)&&(2..=4096).contains(&s.min_samples)&&(1..=10_000).contains(&s.min_success_bps)&&(1..=10_000).contains(&s.min_savings_bps),"invalid trial bounds")?;
         let n=s.baseline_demands.len();
         ensure(n>=s.min_samples&&n<=4096&&n==s.candidate_demands.len()&&s.baseline_demands.is_disjoint(&s.candidate_demands),"cohort size or overlap")?;
         let c=self.config.as_ref().ok_or("router not configured")?;
@@ -88,9 +91,19 @@ impl Router{
         let mut shadow=self.clone();shadow.set_batch_policy(s.candidate.clone())?;
         let end=self.clock_ms.checked_add(s.duration_ms).ok_or("trial deadline overflow")?;
         let baseline=self.batch_policy.clone();let key=s.id.clone();
-        let arm=Arm{start_ms:self.clock_ms,end_ms:end,policy:baseline.clone(),demands:s.baseline_demands.clone(),reservation_ids:BTreeSet::new()};
+        let initial_available=self.trial_availability()?;
+        let arm=Arm{start_ms:self.clock_ms,end_ms:end,policy:baseline.clone(),demands:s.baseline_demands.clone(),reservation_ids:BTreeSet::new(),initial_available};
         let t=Trial{spec:s,config_digest:self.config_fingerprint()?,baseline,phase:Phase::Baseline,arm:Some(arm),baseline_report:None,candidate_report:None,recommendation:None,promoted:false,reason:None};
         self.evolution.trials.insert(key.clone(),t);self.evolution.current=Some(key);Ok(())
+    }
+    fn trial_availability(&self)->Result<BTreeMap<Id,u64>>{
+        self.config.as_ref().ok_or("router not configured")?.pools.keys().map(|k|Ok((k.clone(),self.available(k)?))).collect()
+    }
+    pub fn trial_auto_action(&self)->Option<super::transition::Action>{
+        let t=self.trial()?;if !t.spec.auto_advance{return None;}
+        if t.phase==Phase::Between{return Some(super::transition::Action::StartRoutingCandidate);}
+        let a=t.arm.as_ref()?;
+        if self.clock_ms>=a.end_ms&&a.reservation_ids.iter().all(|k|self.reservations.get(k).is_some_and(|r|!outstanding(r))){Some(super::transition::Action::CloseRoutingArm)}else{None}
     }
     pub fn trial_allows(&self,demand:&str)->bool{
         self.trial().is_none_or(|t|t.arm.as_ref().is_some_and(|a|a.demands.contains(demand)&&self.clock_ms<a.end_ms))
@@ -130,7 +143,7 @@ impl Router{
             }
         }
         let overrun=spent.iter().any(|(k,n)|t.spec.caps.get(k).is_none_or(|cap|n>cap));
-        Ok(ArmReport{enrolled:a.demands.len(),successes:successes.len(),attempted:attempted.len(),requests,success_bps:((successes.len()*10_000)/a.demands.len()) as u16,spent,overrun,evidence})
+        Ok(ArmReport{enrolled:a.demands.len(),successes:successes.len(),attempted:attempted.len(),settled_attempts:requests,arm:a.clone(),success_bps:((successes.len()*10_000)/a.demands.len()) as u16,spent,overrun,evidence})
     }
     pub fn close_trial_arm(&mut self)->Result<Value>{
         let key=self.evolution.current.clone().ok_or("no active trial")?;
@@ -148,9 +161,10 @@ impl Router{
                 // Do not combine unlike quota units. No increase in other pool use.
                 let savings=old>0&&u128::from(new)*10_000<=u128::from(old)*u128::from(10_000-t.spec.min_savings_bps);
                 let nonincrease=report.spent.iter().all(|(p,n)|*n<=*b.spent.get(p).unwrap_or(&0));
-                let good=!b.overrun&&!report.overrun&&b.success_bps>=t.spec.min_success_bps&&report.success_bps>=b.success_bps&&savings&&nonincrease;
+                let comparable_capacity=t.spec.caps.iter().all(|(k,cap)|b.arm.initial_available.get(k).copied().unwrap_or(0).min(*cap)==report.arm.initial_available.get(k).copied().unwrap_or(0).min(*cap));
+                let good=comparable_capacity&&!b.overrun&&!report.overrun&&b.success_bps>=t.spec.min_success_bps&&report.success_bps>=b.success_bps&&savings&&nonincrease;
                 t.recommendation=Some(good);t.candidate_report=Some(report.clone());t.phase=Phase::Evaluated;
-                t.reason=Some(if good{"matched observed yield and resource guard passed"}else{"promotion guard failed"}.into());
+                t.reason=Some(if good{"matched observed yield and resource guard passed"}else if !comparable_capacity{"initial available quota differed between arms"}else{"promotion guard failed"}.into());
                 self.batch_policy=t.baseline.clone();
                 if good&&t.spec.auto_promote{
                     self.batch_policy=t.spec.candidate.clone();t.promoted=true;
@@ -168,7 +182,7 @@ impl Router{
         ensure(t.phase==Phase::Between&&self.config_fingerprint()?==t.config_digest&&!self.reservations.values().any(outstanding),"candidate arm not ready")?;
         let end=self.clock_ms.checked_add(t.spec.duration_ms).ok_or("trial deadline overflow")?;
         self.batch_policy=t.spec.candidate.clone();t.phase=Phase::Candidate;
-        t.arm=Some(Arm{start_ms:self.clock_ms,end_ms:end,policy:self.batch_policy.clone(),demands:t.spec.candidate_demands.clone(),reservation_ids:BTreeSet::new()});
+        t.arm=Some(Arm{start_ms:self.clock_ms,end_ms:end,policy:self.batch_policy.clone(),demands:t.spec.candidate_demands.clone(),reservation_ids:BTreeSet::new(),initial_available:self.trial_availability()?});
         self.evolution.trials.insert(key,t);Ok(())
     }
     pub fn abort_trial(&mut self,reason:String)->Result<()>{

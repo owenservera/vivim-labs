@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-source-checkpoint-002",
+  "revision": "R004-source-checkpoint-003",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -34,7 +34,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/persistence.rs",
           "src/kernel/model.rs"
@@ -58,7 +58,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/transition.rs"
         ],
@@ -75,7 +75,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/transition.rs"
         ],
@@ -92,7 +92,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/model.rs",
           "src/kernel/transition.rs"
@@ -110,7 +110,7 @@
       "outstanding": "Dependency gating tested; cycle rejection needs explicit native negative test. Criterion unchanged.",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/composition.rs",
           "src/kernel/transition.rs"
@@ -128,7 +128,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/composition.rs",
           "src/kernel/transition.rs"
@@ -152,7 +152,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/model.rs",
           "src/kernel/evolution.rs"
@@ -170,7 +170,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/behavior.rs",
           "src/kernel/mod.rs"
@@ -188,7 +188,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/composition.rs"
         ],
@@ -205,7 +205,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/evolution.rs",
           "src/kernel/intelligence.rs",
@@ -230,7 +230,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/transition.rs",
           "src/kernel/model.rs"
@@ -248,7 +248,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/supervisor.rs",
           "src/kernel/transition.rs",
@@ -267,7 +267,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/supervisor.rs"
         ],
@@ -284,7 +284,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/model.rs",
           "src/kernel/transition.rs"
@@ -302,7 +302,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/projection.rs",
           "src/kernel/persistence.rs",
@@ -321,7 +321,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/model.rs",
           "src/kernel/composition.rs",
@@ -340,7 +340,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/composition.rs"
         ],
@@ -357,7 +357,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/model.rs",
           "src/kernel/transition.rs",
@@ -382,7 +382,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/transition.rs",
           "src/kernel/persistence.rs"
@@ -406,7 +406,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/model.rs",
           "src/kernel/transition.rs"
@@ -424,7 +424,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/authority.rs",
           "src/kernel/transition.rs",
@@ -449,7 +449,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/model.rs",
           "src/kernel/transition.rs"
@@ -467,7 +467,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/lifecycle.rs",
           "src/kernel/transition.rs",
@@ -492,7 +492,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/transition.rs"
         ],
@@ -509,7 +509,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/transition.rs",
           "src/kernel/supervisor.rs"
@@ -526,13 +526,15 @@
       "evidence": [],
       "outstanding": "No qualifying evidence",
       "r004": {
-        "status": "PARTIAL_SOURCE",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
+          "src/kernel/service.rs",
           "src/kernel/supervisor.rs",
-          "src/kernel/transition.rs"
+          "src/kernel/transition.rs",
+          "src/main.rs"
         ],
-        "remaining": "Exclusive controller ownership, monotonic host clock, parent-pipe worker lifetime, immediate native restart fencing. Independent service manager/restart policy and clock discontinuity qualification remain."
+        "remaining": "Bounded outer service owns controller subprocesses, durably reserves launch/job/learning budgets, records uncertain exits and restarts failed controllers. Native worker parent-pipe and generation fences retained. OS-level restart of the outer service and clock/power-loss qualification remain."
       }
     },
     {
@@ -545,7 +547,7 @@
       "outstanding": "Checkpoint retention and stale submission rejection tested; explicit stale checkpoint write rejection not tested.",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/transition.rs",
           "src/kernel/supervisor.rs"
@@ -563,7 +565,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/transition.rs",
           "src/kernel/composition.rs",
@@ -588,7 +590,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/transition.rs",
           "src/kernel/supervisor.rs"
@@ -612,7 +614,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/persistence.rs"
         ],
@@ -629,14 +631,15 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
+          "src/kernel/ingress.rs",
           "src/kernel/authority.rs",
-          "src/kernel/effects.rs",
-          "src/kernel/transition.rs",
-          "src/kernel/persistence.rs"
+          "src/kernel/local_effect.rs",
+          "src/kernel/persistence.rs",
+          "src/kernel/effects.rs"
         ],
-        "remaining": "HMAC signed request ingress, per-principal roles/goals/incarnation/expiry, atomic admission and reconciliation. Trusted local CLI and authority file require OS protection; external effect adapters and hardened transport remain."
+        "remaining": "Fixed-authority bounded framed broker, scope-checked signed replay, and host-only idempotent local JSON publication/reconciliation. OS boundary and protected launcher not provisioned; arbitrary external effects not supported; crypto/adapter qualification outstanding."
       }
     },
     {
@@ -655,7 +658,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/persistence.rs"
         ],
@@ -672,7 +675,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/index.rs",
           "src/kernel/persistence.rs",
@@ -691,12 +694,13 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/persistence.rs",
-          "src/kernel/index.rs"
+          "src/kernel/index.rs",
+          "src/kernel/qualification.rs"
         ],
-        "remaining": "Writer lock, commit-marker chain bound to index roots, retained checkpoint record, exported head anchor and GC. Actual concurrent writer/crash-during-write/tail-integrity runs remain deferred."
+        "remaining": "Test-only pre/post-head crash pause, subprocess kill/replay fixture, eight independent writers and deleted-tail anchor fixture authored. None executed; power-loss and Windows durability remain unqualified."
       }
     },
     {
@@ -715,7 +719,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/composition.rs",
           "src/kernel/evolution.rs",
@@ -734,7 +738,7 @@
       "outstanding": "native disable only; full gate open",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/lifecycle.rs",
           "src/kernel/evolution.rs",
@@ -753,7 +757,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/evolution.rs",
           "src/kernel/intelligence.rs"
@@ -770,14 +774,17 @@
       "evidence": [],
       "outstanding": "No qualifying evidence",
       "r004": {
-        "status": "PARTIAL_SOURCE",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
+          "src/kernel/custody.rs",
           "src/kernel/evolution.rs",
-          "src/kernel/intelligence.rs",
-          "src/kernel/authority.rs"
+          "src/kernel/authority.rs",
+          "src/kernel/transition.rs",
+          "src/kernel/composition.rs",
+          "src/kernel/persistence.rs"
         ],
-        "remaining": "Synthesis receives training only; one selected candidate evaluated on disjoint holdouts, consumed holdout tracking and typed applicability. Independently administered holdout vault/custody and admission-path enforcement remain."
+        "remaining": "Private committed cohorts, training-only frozen synthesis, separate signed verifier verdict, one-shot cohort consumption, mandatory admission for configured families, frozen-class lease fence and public regression. Trusted evaluator and host OS isolation needed; fingerprints may reveal low-entropy inputs; native qualification outstanding."
       }
     },
     {
@@ -790,7 +797,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/composition.rs",
           "src/kernel/supervisor.rs"
@@ -814,7 +821,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/persistence.rs",
           "src/kernel/supervisor.rs",
@@ -833,15 +840,13 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/knowledge.rs",
-          "src/kernel/intelligence.rs",
-          "src/kernel/evolution.rs",
-          "src/kernel/composition.rs",
-          "src/kernel/supervisor.rs"
+          "src/kernel/custody.rs",
+          "src/kernel/evolution.rs"
         ],
-        "remaining": "Host-defined typed recurring-artifact rules automatically publish independently verified knowledge, reject ambiguous reuse and feed future task inputs; learned computational classes retained. General autonomous semantic rule/repair/procedure discovery still incomplete."
+        "remaining": "Private-admitted programs now publish evidence-backed computational knowledge, complementing recurring typed artifact rules. General autonomous semantic rule/repair/procedure discovery still incomplete."
       }
     },
     {
@@ -854,14 +859,14 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
+          "src/kernel/custody.rs",
+          "src/kernel/service.rs",
           "src/kernel/lifecycle.rs",
-          "src/kernel/intelligence.rs",
-          "src/kernel/evolution.rs",
-          "src/kernel/supervisor.rs"
+          "src/kernel/intelligence.rs"
         ],
-        "remaining": "Attempt begin/end and measured durations including timeout/stopped jobs, successful and failed search candidate/evaluation counts, yield and observed cost feedback. Full resource and admission/regression evaluation accounting remain."
+        "remaining": "Durable reserved controller budgets and private training/holdout evaluation counts added to prior attempt and failed-search accounting. Complete CPU/memory/I/O and regression/admission accounting remain."
       }
     },
     {
@@ -874,7 +879,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/intelligence.rs",
           "src/kernel/transition.rs"
@@ -892,13 +897,13 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
-          "src/kernel/lifecycle.rs",
+          "src/kernel/qualification.rs",
           "src/kernel/supervisor.rs",
-          "src/kernel/transition.rs"
+          "src/kernel/lifecycle.rs"
         ],
-        "remaining": "Durable population audit, global lease slots and bounded native process ownership. Actual 60-agent/four-slot qualification not run."
+        "remaining": "60-agent/four-lease-slot unit fixture authored (not executed); full independent native process population qualification still required."
       }
     },
     {
@@ -911,7 +916,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "DEFERRED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [],
         "remaining": "Separate comparative persistence-policy implementation and experimental cohort; this turn did not alter experiment folders."
       }
@@ -926,7 +931,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "DEFERRED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [],
         "remaining": "Common fault protocol retained; actual four-arm execution remains deferred."
       }
@@ -941,13 +946,13 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
+          "src/kernel/service.rs",
           "src/kernel/supervisor.rs",
-          "src/kernel/persistence.rs",
-          "src/kernel/transition.rs"
+          "tests/r004_process.rs"
         ],
-        "remaining": "Parent-death EOF watchdog and replacement-controller fencing with durable graph/checkpoint recovery; actual simultaneous worker/controller death and restart not executed."
+        "remaining": "Outer controller restart service, parent EOF watchdog and real-controller-kill/restart fixture authored. Not executed; fixture observes a bound worker but does not independently prove simultaneous OS worker death."
       }
     },
     {
@@ -960,7 +965,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "DEFERRED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [],
         "remaining": "36 hours of actual elapsed qualification required."
       }
@@ -975,7 +980,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "DEFERRED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [],
         "remaining": "72 hours of actual elapsed repeated-fault qualification required."
       }
@@ -996,7 +1001,7 @@
       "outstanding": null,
       "r004": {
         "status": "SOURCE_IMPLEMENTED_UNVERIFIED",
-        "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
         "files": [
           "src/kernel/supervisor.rs",
           "src/kernel/composition.rs",
@@ -1007,14 +1012,14 @@
     }
   ],
   "candidate": {
-    "source_pin": "4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e",
+    "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
     "verification": "NOT_COMPILED_NOT_TESTED",
     "historical_verified_score": 28,
     "candidate_verified_score": 0,
     "scope": "CHATGPT/runtime only; R003 baseline preserved separately; no acceptance uplift for source changes",
     "counts": {
-      "SOURCE_IMPLEMENTED_UNVERIFIED": 38,
-      "PARTIAL_SOURCE": 8,
+      "SOURCE_IMPLEMENTED_UNVERIFIED": 40,
+      "PARTIAL_SOURCE": 6,
       "DEFERRED": 4
     }
   }

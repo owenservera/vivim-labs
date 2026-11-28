@@ -1,0 +1,58 @@
+{
+  "schema": "vivim.dogfood.transport-smoke/1",
+  "revision": "R017",
+  "date": "2026-11-28",
+  "scope": "One authorized Carbon High transport smoke in disposable empty workspace; not campaign admission or experiment start",
+  "model_requested": "gemini-4-carbon-high",
+  "model_reported_by_init": "gemini-4-carbon-high",
+  "cli_version": "1.5.19",
+  "credit_fallback": "useG1Credits=false explicitly passed as session-only settings; effective billing state not independently audited",
+  "test": {
+    "nonce_match": true,
+    "session_match": true,
+    "init_count": 1,
+    "result_count": 1,
+    "terminal_status": "SUCCESS",
+    "cli_exit_code": 0,
+    "observed_step_types": [
+      "agent_response",
+      "user_input"
+    ],
+    "unexpected_steps": [],
+    "workspace_entries": 0,
+    "stdout_sha256": "0D663E75E41ABAA0CFA25030988137916B87780DAF8A4D191D5B713C47F4F2FC"
+  },
+  "reported_usage": {
+    "input_tokens": 17678,
+    "output_tokens": 118,
+    "thinking_tokens": 100,
+    "cache_read_tokens": 0,
+    "total_tokens": 17796,
+    "note": "Provider reported counters; thinking may overlap output; retain as reported"
+  },
+  "quota_before": {
+    "five_hour_remaining": 99,
+    "weekly_remaining": 94
+  },
+  "quota_after": {
+    "five_hour_remaining": 99,
+    "weekly_remaining": 94
+  },
+  "quota_observation": "No change visible at displayed integer precision; actual quota consumption unknown, not zero-cost proof or calibration.",
+  "native_receipts": {
+    "preflight": "ctl-d4fa22466a56679c",
+    "smoke": "ctl-2ee21d0890681a0d",
+    "cleanup": "ctl-de2ed4f0e46537b8"
+  },
+  "cleanup": "Inference CLI returned exit 0 and expected result. Outer ASDF session lingered after post-quota output; explicitly cancelled owned Windows job; final state exited, cancellation true. Not an unqualified whole-process success.",
+  "local_receipt_dir": "%LOCALAPPDATA%/VIVIM/CarbonSmoke-54e8ed5b0baa43a4b0192891fa9304ab",
+  "limitations": [
+    "Shared authenticated Windows profile, disposable workspace not a proven filesystem boundary",
+    "Not integrated with durable campaign reservation; separate owner-requested smoke intent written before inference",
+    "No actual experiment seed delivered",
+    "No verified effective paid-overflow receipt, real model cost forecast or independent live evaluator",
+    "No resume, scoped write, cancellation during inference, recovery or concurrent campaign qualification"
+  ],
+  "campaign_started": false,
+  "other_lanes_launched": false
+}

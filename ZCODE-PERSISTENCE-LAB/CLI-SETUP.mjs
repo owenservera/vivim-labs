@@ -24,6 +24,8 @@ function checkOutside(p){const a=path.resolve(lab).toLowerCase(),b=path.resolve(
 function prepare(){
  const root=newRoot('seed'); checkOutside(root);
  const manifests=[];
+ const campaign=read(path.join(lab,'CAMPAIGN-R010.json'));
+ const goal=fs.readFileSync(path.join(lab,'COMPLETION-GOAL.md'));
  for(const [id,provider] of Object.entries(lanes)){
   const prefix='ZCODE-PERSISTENCE-LAB/EXPERIMENT-'+id+'/';
   const dest=path.join(root,crypto.randomUUID());mkdir(dest);
@@ -44,7 +46,9 @@ function prepare(){
   }
   const recipe=read(path.join(lab,provider==='codex'?'CODEX-CLI-RECIPE.json':'ANTIGRAVITY-CLI-RECIPE.json'));
   if(!recipe.assignments.includes('EXPERIMENT-'+id))fail('assignment mismatch');
-  const record={lane:id,provider,seed_commit:pin,workspace,controller,files,manifest_sha256:sha(JSON.stringify(files)),created_utc:utc(),status:'PREPARED_NOT_ISOLATED_NOT_LAUNCHED',recipe_revision:recipe.revision};
+  if(campaign.lanes[id]?.provider!==provider)fail('campaign assignment mismatch');
+  fs.writeFileSync(path.join(controller,'completion-goal.md'),goal,{flag:'wx'});
+  const record={lane:id,provider,selected:campaign.lanes[id].selected,completion_goal_sha256:sha(goal),completion_goal_delivery:'controller injects identical goal at first authorized turn; not a seed file',seed_commit:pin,workspace,controller,files,manifest_sha256:sha(JSON.stringify(files)),created_utc:utc(),status:'PREPARED_NOT_ISOLATED_NOT_LAUNCHED',recipe_revision:recipe.revision};
   json(path.join(controller,'seed-manifest.json'),record);manifests.push(record);
  }
  json(path.join(root,'setup-manifest.json'),{schema:'vivim.cli.setup/1',root,lanes:manifests,status:'PREPARED',campaign_started:false,warning:'Folders are not access-control boundaries. Dedicated authenticated isolated execution profiles and boundary tests required before dogfood.'});

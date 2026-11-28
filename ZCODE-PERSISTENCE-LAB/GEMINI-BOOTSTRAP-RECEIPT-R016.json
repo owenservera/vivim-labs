@@ -1,0 +1,40 @@
+{
+  "revision": "R016",
+  "status": "BOOTSTRAP_CONFIGURED_NOT_LAUNCHED",
+  "selected_lane": "04",
+  "first_task": "discover-contract",
+  "model": "gemini-4-carbon-high",
+  "reason": "Google positions Carbon for deepest long-horizon projects; selected for first architecture/contract turn. No universal benchmark superiority asserted.",
+  "sources": [
+    "https://antigravity.google/blog/gemini-4-neon-in-google-antigravity/",
+    "https://antigravity.google/docs/cli/credits/",
+    "https://antigravity.google/docs/cli/commands/effort/"
+  ],
+  "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
+  "native_receipts": [
+    "ctl-0e53d702785224a2",
+    "ctl-3f93485ea8700b66",
+    "ctl-e4746aec0981aa50",
+    "ctl-dda83196b0d28953"
+  ],
+  "observed": {
+    "agy_version": "1.5.19",
+    "carbon_high_listed": true,
+    "global_useG1Credits": "ABSENT",
+    "wsl_user_namespace_exit": 0,
+    "bwrap_and_native_agy_not_found": true,
+    "lane_settings_sha256": "5B62E54A3F38971A1DD4FD2A24D13561604C26977E4404A8014D6CDB4A34B60E",
+    "lane_settings_useG1Credits": false,
+    "settings_effective_in_launch_profile": false,
+    "goal_copy_match": true
+  },
+  "tests": "Integrated synthetic selector and controller tests passed; missing Carbon forecast cannot silently downgrade initial selection. No actual inference.",
+  "remaining": [
+    "Dedicated authenticated execution boundary and scoped write qualification",
+    "Verify effective subscription-only credits setting and live entitlement in launch profile",
+    "Set real local ceilings and conservative approved calibration forecasts",
+    "Actual provider adapter and independent evaluator qualification"
+  ],
+  "campaign_started": false,
+  "other_lanes_launched": false
+}

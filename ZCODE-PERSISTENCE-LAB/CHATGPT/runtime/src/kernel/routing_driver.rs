@@ -8,6 +8,15 @@ use std::{fs::{self,OpenOptions,File},io::Write,path::{Path,PathBuf},time::{Syst
 fn error(e:impl std::fmt::Display)->String{e.to_string()}
 fn apply(store:&KernelStore,key:Id,action:Action)->Result<Value>{store.apply(Request{id:key,actor:Actor::Host,action})}
 fn key(kind:&str,id:&str)->Id{format!("{kind}-{}",digest(&json!(id)))}
+fn advance_clock(store:&KernelStore)->Result<()>{
+    let state=store.inspect()?;
+    let now=u64::try_from(SystemTime::now().duration_since(UNIX_EPOCH).map_err(error)?.as_millis()).map_err(error)?.max(state.clock_ms);
+    if now>state.clock_ms{
+        if let Err(reason)=apply(store,key("adapter-tick",&now.to_string()),Action::Tick{now_ms:now}){
+            if store.inspect()?.clock_ms<now{return Err(reason);}
+        }
+    }Ok(())
+}
 pub trait Backend {
     fn supports(&self,envelope:&Envelope)->bool;
     /// Called only after a new committed claim. Err means uncertain outcome.
@@ -27,10 +36,7 @@ pub fn step<B:Backend>(store:&KernelStore,adapter:&str,backend:&mut B,limit:usiz
     queue.sort_by_key(|e|(e.phase==HandoffPhase::Prepared,e.deadline_ms,e.id.clone()));
     let mut sent=0;let mut reconciled=0;let mut unknown=0;let mut errors=vec![];
     for e in queue.into_iter().take(limit){
-        let current=store.inspect()?;
-        let wall=u64::try_from(SystemTime::now().duration_since(UNIX_EPOCH).map_err(error)?.as_millis()).map_err(error)?;
-        let now=wall.max(current.clock_ms);
-        if now>current.clock_ms{apply(store,key("adapter-tick",&format!("{adapter}-{now}")),Action::Tick{now_ms:now})?;}
+        advance_clock(store)?;
         let state=store.inspect()?;
         let Some(e)=state.router.adapters.handoffs.get(&e.id).cloned() else{continue;};
         if !backend.supports(&e){continue;}
@@ -47,6 +53,9 @@ pub fn step<B:Backend>(store:&KernelStore,adapter:&str,backend:&mut B,limit:usiz
             HandoffPhase::Claimed|HandoffPhase::Unknown=>backend.reconcile(&e),
             _=>continue,
         };
+        // A slow backend cannot use an old task clock to admit a late result.
+        // If the clock update fails, the receipt remains reconcilable.
+        advance_clock(store)?;
         match result{
             Ok(Some(receipt))=>{
                 if receipt.handoff!=e.id{unknown+=1;errors.push(json!({"handoff":e.id,"stage":"receipt","reason":"wrong handoff"}));continue;}
@@ -122,10 +131,7 @@ pub fn synthetic_cycle(store:&KernelStore,backend:&mut Synthetic,max_rounds:usiz
     let _controller=store.controller_lock()?;
     let mut records=vec![];
     for round in 0..max_rounds{
-        let s=store.inspect()?;
-        let wall=u64::try_from(SystemTime::now().duration_since(UNIX_EPOCH).map_err(error)?.as_millis()).map_err(error)?;
-        let now=wall.max(s.clock_ms);
-        if now>s.clock_ms{apply(store,key("synthetic-tick",&format!("{}-{now}",s.sequence)),Action::Tick{now_ms:now})?;}
+        advance_clock(store)?;
         let s=store.inspect()?;
         // Refuse mixed live/synthetic stores: the offline loop must not
         // prepare jobs for real providers or contaminate their performance data.

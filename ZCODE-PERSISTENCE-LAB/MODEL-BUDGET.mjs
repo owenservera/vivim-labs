@@ -39,7 +39,7 @@ function evaluate(input,now,simulation){
  const ledger=input.ledger,share=ledger?.allocations?.[lane];
  if(!simulation&&(!ledger||ledger.provider!==provider||ledger.account_key!==snapshot.account_key||ledger.day!==day||!share?.selected||ledger.pending||ledger.blocked))return stop('DAILY_SHARE_NOT_READY');
  const rejects=[],eligible=[];
- const priorities=provider==='codex'?policy.codex_tasks?.[task]:t.preferred;
+ const priorities=provider==='codex'?policy.codex_tasks?.[task]:(!simulation&&policy.live_gemini_tasks?.[task]||t.preferred);
  if(!Array.isArray(priorities)||!priorities.length)return stop('NO_TASK_MODEL_POLICY');
  const bootstrap=!simulation&&policy.bootstrap?.[lane]&&local.task_id===policy.bootstrap[lane].task_id&&task===policy.bootstrap[lane].task&&local.adaptive_decisions===0?policy.bootstrap[lane]:null;
  let preferred=bootstrap?[bootstrap.model]:priorities;

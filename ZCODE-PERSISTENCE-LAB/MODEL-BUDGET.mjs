@@ -41,7 +41,8 @@ function evaluate(input,now,simulation){
  const rejects=[],eligible=[];
  const priorities=provider==='codex'?policy.codex_tasks?.[task]:t.preferred;
  if(!Array.isArray(priorities)||!priorities.length)return stop('NO_TASK_MODEL_POLICY');
- let preferred=priorities;
+ const bootstrap=!simulation&&policy.bootstrap?.[lane]&&local.task_id===policy.bootstrap[lane].task_id&&task===policy.bootstrap[lane].task&&local.adaptive_decisions===0?policy.bootstrap[lane]:null;
+ let preferred=bootstrap?[bootstrap.model]:priorities;
  if(variant.id==='verification_cascade'){
   const previous=local.task_attempts??[];
   if(!Array.isArray(previous)||previous.length>=experiment.constants.max_attempts_per_task)return stop('CASCADE_ATTEMPTS_EXHAUSTED');
@@ -80,7 +81,8 @@ function evaluate(input,now,simulation){
  }
  if(!eligible.length)return stop(simulation||provider==='agy'?'NO_ELIGIBLE_GEMINI':'NO_ELIGIBLE_CODEX',{policy:variant.id,rejected_candidates:rejects});
  let chosen=eligible[0],selection_reason='STABLE_TASK_PRIORITY';
- if(variant.id==='paced_allocation'){
+ if(bootstrap){selection_reason='OWNER_PINNED_BOOTSTRAP';}
+ else if(variant.id==='paced_allocation'){
   chosen=[...eligible].sort((a,b)=>a.normalizedCost-b.normalizedCost||a.order-b.order)[0];
   selection_reason='MINIMUM_NORMALIZED_QUOTA_COST';
  }else if(variant.id==='verification_cascade'){

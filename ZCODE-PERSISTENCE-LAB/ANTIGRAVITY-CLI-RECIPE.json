@@ -1,6 +1,6 @@
 {
   "schema": "vivim.dogfood.cli-recipe/1",
-  "revision": "R015",
+  "revision": "R016",
   "scope": "EXPERIMENTS_ONLY",
   "seed_commit": "3b1d7e173071710e6795c09427162292f774030e",
   "status": "SELECTED_LANE_PENDING_LIVE_QUALIFICATION",
@@ -219,7 +219,8 @@
         "command(*)"
       ]
     },
-    "note": "Illustrative conservative rule fragment from documented syntax; do not pass note as config. Actual file must include validated explicit workspace-only write/read and command allowances as needed; no broad allow or permission bypass. Empty allow is not a security boundary."
+    "note": "Illustrative conservative rule fragment from documented syntax; do not pass note as config. Actual file must include validated explicit workspace-only write/read and command allowances as needed; no broad allow or permission bypass. Empty allow is not a security boundary. The documented useG1Credits=false prevents fallback billing; verify effective setting in the actual isolated launch profile before inference. Do not copy global credentials or settings.",
+    "useG1Credits": false
   },
   "commands": {
     "version": {
@@ -377,5 +378,18 @@
     "launch_enabled": false,
     "scope": "Exact commands retained from R010. Full live qualification required. Provider documentation is not permission to launch."
   },
-  "completion_charter": "SYSTEM-GOALS-R013.json"
+  "completion_charter": "SYSTEM-GOALS-R013.json",
+  "bootstrap": {
+    "lane": "04",
+    "first_task": "discover-contract",
+    "model": "gemini-4-carbon-high",
+    "turn_limit": 1,
+    "after": "Return to evidence-adaptive selection",
+    "required": "Durable admission plus Q07/Q08 boundary and provider qualification. No silent downgrade or non-Gemini fallback.",
+    "sources": [
+      "https://antigravity.google/blog/gemini-4-neon-in-google-antigravity/",
+      "https://antigravity.google/docs/cli/credits/",
+      "https://antigravity.google/docs/cli/commands/effort/"
+    ]
+  }
 }

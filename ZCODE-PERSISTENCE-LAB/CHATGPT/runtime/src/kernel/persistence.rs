@@ -55,7 +55,7 @@ impl Transaction{
     }
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
-struct Head {schema:u32,revision:u64,record:String,snapshot:u64}
+struct Head {schema:u32,revision:u64,record:String,snapshot:u64,snapshot_digest:Option<String>}
 /// The head is append-only; a transaction is committed only when its marker exists.
 /// A missing final marker cannot be distinguished from a crash before admission without
 /// an external anchor. An independent anchor can be exported by the caller.
@@ -70,6 +70,10 @@ impl KernelStore{
         Ok(Self{root:root.as_ref().to_path_buf()})
     }
     pub fn root(&self)->&Path{&self.root}
+    pub(crate) fn controller_lock(&self)->Result<File>{
+        let f=OpenOptions::new().create(true).truncate(false).read(true).write(true).open(self.root.join("controller.lock")).map_err(error)?;
+        f.try_lock().map_err(|e|format!("controller already active or lock failed: {e:?}"))?;Ok(f)
+    }
     fn lock(&self)->Result<File>{
         let f=OpenOptions::new().create(true).truncate(false).read(true).write(true).open(self.root.join("kernel.lock")).map_err(error)?;
         f.lock().map_err(error)?;Ok(f)
@@ -87,7 +91,7 @@ impl KernelStore{
     fn load(&self)->Result<Loaded>{
         let heads=self.heads()?;
         let Some(&latest)=heads.last() else{
-            return Ok(Loaded{world:World::default(),receipts:BTreeMap::new(),head:Head{schema:1,revision:0,record:"genesis".into(),snapshot:0}})
+            return Ok(Loaded{world:World::default(),receipts:BTreeMap::new(),head:Head{schema:1,revision:0,record:"genesis".into(),snapshot:0,snapshot_digest:None}})
         };
         let top:Envelope<Head>=read(&self.path("head",latest))?;top.check()?;
         ensure(top.body.schema==1&&top.body.revision==latest&&top.body.snapshot<=latest,"invalid head")?;
@@ -97,7 +101,7 @@ impl KernelStore{
             let snap:Envelope<Snapshot>=read(&self.path("snapshot",start))?;snap.check()?;
             ensure(snap.body.schema==1&&snap.body.revision==start,"snapshot revision mismatch")?;
             let marker:Envelope<Head>=read(&self.path("head",start))?;marker.check()?;
-            ensure(marker.body.revision==start&&marker.body.record==snap.body.previous,"snapshot anchor mismatch")?;
+            ensure(marker.body.revision==start&&marker.body.record==snap.body.previous&&marker.body.snapshot_digest.as_ref()==Some(&snap.checksum)&&top.body.snapshot_digest.as_ref()==Some(&snap.checksum),"snapshot anchor mismatch")?;
             previous=snap.body.previous;world=snap.body.world;receipts=snap.body.receipts;
         }
         for rev in (start+1)..=latest{
@@ -141,11 +145,11 @@ impl KernelStore{
         let rec=Envelope::new(Record{schema:1,revision:rev,previous:loaded.head.record.clone(),command,response:response.clone()})?;
         write_new(&self.root,&Self::name("record",rev),&rec)?;
         loaded.receipts.insert(request_id,Receipt{request_digest,response:response.clone(),revision:rev});
-        let snapshot=if rev%SNAP_INTERVAL==0{
+        let (snapshot,snapshot_digest)=if rev%SNAP_INTERVAL==0{
             let snap=Envelope::new(Snapshot{schema:1,revision:rev,previous:rec.checksum.clone(),world:loaded.world,receipts:loaded.receipts})?;
-            write_new(&self.root,&Self::name("snapshot",rev),&snap)?;rev
-        }else{loaded.head.snapshot};
-        let head=Envelope::new(Head{schema:1,revision:rev,record:rec.checksum,snapshot})?;
+            write_new(&self.root,&Self::name("snapshot",rev),&snap)?;(rev,Some(snap.checksum))
+        }else{(loaded.head.snapshot,loaded.head.snapshot_digest)};
+        let head=Envelope::new(Head{schema:1,revision:rev,record:rec.checksum,snapshot,snapshot_digest})?;
         write_new(&self.root,&Self::name("head",rev),&head)?;
         // Keep the current checkpoint and its committed tail; pruning is retryable and
         // cannot invalidate the just-committed transaction.

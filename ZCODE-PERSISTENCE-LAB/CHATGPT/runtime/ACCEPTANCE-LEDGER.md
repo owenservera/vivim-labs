@@ -138,3 +138,6 @@ Source pin 0e36d605c6297d53e0c79634b8ed73ff890cc881. [CLOSURE-002.md](CLOSURE-00
 
 ## Source closure 005 (unqualified)
 Native programmable qualification runner and matched four-arm planning source authored. E45/E46/E48/E49 remain PARTIAL_SOURCE. The historical PASS column is unchanged. 39/50 provisional source-complete, 11 partial, 0 deferred; no verified R004 acceptance credit. See SOURCE-CLOSURE-005.md.
+
+## Source closure 006 (unqualified)
+Host-only static declaration batches, bounded pinned index scans and a separate manifest-bound comparative persistence vault authored. E33/E45 remain partial. Original gate weights and verified scores unchanged. See STORAGE-BATCH-SCAN-001.md and EXPERIMENT-VAULT-001.md.

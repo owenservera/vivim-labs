@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-SOURCE-CLOSURE-005",
+  "revision": "R004-SOURCE-CLOSURE-006",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -678,14 +678,17 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
+        "source_pin": "ec3b4897c053d9374706a526c88de3d97b8c9e72",
         "files": [
           "src/kernel/index.rs",
           "src/kernel/persistence.rs",
+          "tests/closure_integrity.rs",
+          "src/kernel/transition.rs",
           "tests/closure_integrity.rs"
         ],
-        "remaining": "Nested router maps sharded; schema 3 adaptive pages and per-table directories, page reuse, root/record binding, readers for schema 1/2, GC traversal and collision fixture. Full-world load/clone, potentially large individual entities/directories/legacy archive and actual migration/scaling qualification remain.",
-        "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53"
+        "remaining": "Bounded revision-fenced indexed scans and atomic initialization batches authored; full-world mutation materialization, long-term receipt retention, legacy migration and scaling qualification remain.",
+        "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
+        "checkpoint": "STORAGE-BATCH-SCAN-001"
       }
     },
     {
@@ -921,12 +924,13 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "110b08448c6486d850b60c9034c815931f6693e3",
+        "source_pin": "ec3b4897c053d9374706a526c88de3d97b8c9e72",
         "files": [
-          "src/kernel/comparative.rs"
+          "src/kernel/comparative.rs",
+          "src/kernel/experiment_vault.rs"
         ],
-        "remaining": "Deterministic four-arm manifest and explicit persistence authorities authored; actual isolated adapter enforcement and fresh-root execution remain.",
-        "checkpoint": "SOURCE-CLOSURE-005"
+        "remaining": "Matched plan plus actual host-owned per-arm vault with category admission, isolated manifest, immutable journal, CAS and epoch fencing authored. Live adapter adoption, semantic leakage controls, actual OS isolation and real comparative execution remain.",
+        "checkpoint": "EXPERIMENT-VAULT-001"
       }
     },
     {
@@ -1093,7 +1097,7 @@
         "id": "R06",
         "criterion": "Native-first task selection and incarnation-bound dispatch contract",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Host-programmed explicit goal/family demand generator, native-first, bounded assembled input and frozen profile allowlist authored. Live adapter, wake behavior, profile lifecycle refresh and native qualification remain.",
+        "remaining": "Host-programmable bounded demand generation and negative scope/native-first fixture authored; live adapter wiring and qualification remain. Profile allowlist freezes per demand; registry changes need new policy/demand lifecycle handling.",
         "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
         "source_pin": "110b08448c6486d850b60c9034c815931f6693e3",
         "checkpoint": "DEMAND-GENERATION-001"
@@ -1145,7 +1149,7 @@
     }
   },
   "completion_dashboard": {
-    "revision": "R004-SOURCE-CLOSURE-005",
+    "revision": "R004-SOURCE-CLOSURE-006",
     "tracker_input_commit": "d05e332f884a11ef3bcbc69658a4de308adc812a",
     "reviewed_runtime_source": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
     "source_status_meaning": "Provisional source labels after targeted readback and integration; not a complete compiler or invariant audit, not verified operation.",
@@ -1321,5 +1325,14 @@
       "E48",
       "E49"
     ]
+  },
+  "source_closure_006": {
+    "baseline": "ec3b4897c053d9374706a526c88de3d97b8c9e72",
+    "documents": [
+      "STORAGE-BATCH-SCAN-001.md",
+      "EXPERIMENT-VAULT-001.md"
+    ],
+    "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
+    "verified_credit": 0
   }
 }

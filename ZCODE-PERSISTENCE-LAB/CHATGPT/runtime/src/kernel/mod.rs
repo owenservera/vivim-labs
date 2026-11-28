@@ -35,6 +35,7 @@ pub mod endurance;
 pub mod demand_policy;
 pub mod native_qualification;
 pub mod comparative;
+pub mod experiment_vault;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

@@ -174,6 +174,27 @@ fn run()->Result<(),String>{
         println!("{}",serde_json::to_string_pretty(&report).map_err(|e|e.to_string())?);
         return Ok(());
     }
+    if args.first().is_some_and(|x|x=="comparative-vault"){
+        use persistent_intelligence_runtime::kernel::{comparative::Spec,experiment_vault::{Vault,Limits,WriteRequest}};
+        let action=required(&args,1,"vault action")?;
+        let root=std::path::Path::new(required(&args,2,"isolated vault root")?);
+        let spec:Spec=read_json(required(&args,3,"comparison spec")?)?;
+        let run_id=required(&args,4,"planned run ID")?;
+        let report=if action=="create"{
+            let limits:Limits=read_json(required(&args,5,"vault limits")?)?;
+            Vault::create(root,&spec,run_id,limits)?.recover()?
+        }else{
+            let vault=Vault::open(root,&spec,run_id)?;
+            match action{
+                "recover"=>vault.recover()?,
+                "write"=>{let request:WriteRequest=read_json(required(&args,5,"vault write request")?)?;vault.write(request)?},
+                "advance"=>vault.advance(required(&args,5,"expected epoch")?.parse::<u64>().map_err(|e|e.to_string())?)?,
+                _=>return Err("vault action must be create, recover, write or advance".into()),
+            }
+        };
+        println!("{}",serde_json::to_string_pretty(&report).map_err(|e|e.to_string())?);
+        return Ok(());
+    }
     if args.first().is_some_and(|x|x=="comparative-plan"){
         let spec:persistent_intelligence_runtime::kernel::comparative::Spec=read_json(required(&args,1,"comparison specification")?)?;
         println!("{}",serde_json::to_string_pretty(&spec.plan()?).map_err(|e|e.to_string())?);

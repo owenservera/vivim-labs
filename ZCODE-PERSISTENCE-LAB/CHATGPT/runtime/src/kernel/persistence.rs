@@ -187,7 +187,7 @@ impl KernelStore{
         authority.authenticate(&signed,now_ms)?;
         let _guard=self.lock()?;let loaded=self.load()?;
         let command=Transaction::Command{request:signed.request.clone()};
-        if !loaded.receipts.contains_key(command.id()){authority.authorize(&signed,&loaded.world,now_ms)?;}
+        if loaded.receipts.contains_key(command.id()){authority.authorize_replay(&signed,&loaded.world,now_ms)?;}else{authority.authorize(&signed,&loaded.world,now_ms)?;}
         self.commit_loaded(command,loaded)
     }
     /// Explicit trusted-host action. Unknown effects can only be observed, not
@@ -204,6 +204,11 @@ impl KernelStore{
             ensure(e.phase==EffectPhase::Prepared&&t.phase==TaskPhase::Running&&t.generation==e.generation&&t.lease.as_ref().is_some_and(|l|loaded.world.clock_ms<l.deadline_ms)&&loaded.world.goals.get(&t.spec.goal).is_some_and(|g|g.phase==GoalPhase::Open),"publication no longer authorized")?;
         }
         let payload=loaded.world.payload(&e.payload)?;
+        if publish{
+            let proposed=super::local_effect::receipt(&e,payload,EffectPhase::Committed)?;
+            let input=json!({"effect":effect,"task":e.task,"generation":e.generation,"payload":payload,"outcome":EffectPhase::Committed});
+            ensure(e.oracle.evaluate(&input,&proposed)?,"publication oracle rejects intended receipt")?;
+        }
         let (outcome,receipt)=super::local_effect::observe(&self.root,&e,payload,publish)?;
         let request= Request{id:format!("local-{}",digest(&json!([effect,e.generation,&receipt]))),actor:Actor::Host,action:Action::ResolveEffect{effect:effect.into(),outcome,receipt}};
         self.commit_loaded(Transaction::Command{request},loaded)

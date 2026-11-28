@@ -89,7 +89,7 @@ impl Oracle {
 pub enum GoalPhase { Open, Complete, Exhausted, Blocked, Cancelled }
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all="snake_case")]
-pub enum TaskPhase { Pending, Running, Submitted, Verified, Exhausted, Blocked, Cancelled }
+pub enum TaskPhase { Pending, Running, Submitted, Reconciling, Verified, Exhausted, Blocked, Cancelled }
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all="snake_case")]
 pub enum AgentPhase { Dormant, WaitingDependency, WaitingMessage, Running, Recovering, Archived }
@@ -145,6 +145,7 @@ pub struct Evidence {
 pub struct Checkpoint {
     pub version:u64, pub generation:u64, pub worker:Id, pub incarnation:u64,
     pub payload:Digest, pub previous:Option<Digest>, pub input:Digest,
+    pub task_version:u64,pub class:Option<Id>,pub context:Option<Id>,
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Message {
@@ -170,6 +171,19 @@ pub struct Class {
 pub struct Capability {
     pub id:Id, pub version:u64, pub family:Id, pub class:Id,
     pub training:Vec<Id>, pub holdouts:Vec<Id>, pub enabled:bool,
+}
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all="snake_case")]
+pub enum EffectPhase { Proposed, Prepared, Unknown, Committed, Absent, Abandoned }
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct Effect {
+    pub id:Id,pub task:Id,pub generation:u64,pub key:Id,pub payload:Digest,
+    pub phase:EffectPhase,pub oracle:Oracle,pub receipt:Option<Digest>,
+    pub sequence:u64,pub history:Vec<EffectEvent>,
+}
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EffectEvent {
+    pub phase:EffectPhase,pub sequence:u64,pub reason:String,pub receipt:Option<Digest>,
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct LearningPlan {
@@ -222,10 +236,11 @@ pub struct World {
     pub learning_plans:BTreeMap<Id,LearningPlan>,pub learning_attempts:BTreeMap<Id,LearningAttempt>,
     pub knowledge:BTreeMap<Id,Knowledge>,pub run_costs:BTreeMap<Id,RunCost>,pub policy:SchedulingPolicy,
     pub goal_versions:BTreeMap<Id,Vec<Goal>>,pub task_versions:BTreeMap<Id,Vec<TaskSpec>>,
+    pub effects:BTreeMap<Id,Effect>,
 }
 impl Default for World {
     fn default()->Self {
-        Self{clock_ms:0,slots:4,sequence:0,goals:BTreeMap::new(),tasks:BTreeMap::new(),agents:BTreeMap::new(),contexts:BTreeMap::new(),operators:BTreeMap::new(),classes:BTreeMap::new(),artifacts:BTreeMap::new(),evidence:BTreeMap::new(),blobs:BTreeMap::new(),checkpoints:BTreeMap::new(),messages:BTreeMap::new(),capabilities:BTreeMap::new(),metrics:Metrics::default(),learning_plans:BTreeMap::new(),learning_attempts:BTreeMap::new(),knowledge:BTreeMap::new(),run_costs:BTreeMap::new(),policy:SchedulingPolicy::default(),goal_versions:BTreeMap::new(),task_versions:BTreeMap::new()}
+        Self{clock_ms:0,slots:4,sequence:0,goals:BTreeMap::new(),tasks:BTreeMap::new(),agents:BTreeMap::new(),contexts:BTreeMap::new(),operators:BTreeMap::new(),classes:BTreeMap::new(),artifacts:BTreeMap::new(),evidence:BTreeMap::new(),blobs:BTreeMap::new(),checkpoints:BTreeMap::new(),messages:BTreeMap::new(),capabilities:BTreeMap::new(),metrics:Metrics::default(),learning_plans:BTreeMap::new(),learning_attempts:BTreeMap::new(),knowledge:BTreeMap::new(),run_costs:BTreeMap::new(),policy:SchedulingPolicy::default(),goal_versions:BTreeMap::new(),task_versions:BTreeMap::new(),effects:BTreeMap::new()}
     }
 }
 pub fn version_key(name:&str,version:u64)->Result<Id>{

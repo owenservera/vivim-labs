@@ -19,6 +19,9 @@ pub mod service;
 pub mod custody;
 pub mod local_effect;
 pub mod ingress;
+pub mod routing;
+pub mod frontier;
+pub mod allocation;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

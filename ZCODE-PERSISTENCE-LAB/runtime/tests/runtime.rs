@@ -125,3 +125,36 @@ fn budget_exhaustion_and_explicit_failure(){
     for _ in 0..3 {let n=claim(&s,"t","a");put(&s,json!({"cmd":"fail","task":"t","agent":"a","generation":n,"reason":"simulated failure"}));}
     let st=s.inspect().unwrap();assert_eq!(st.tasks["t"].status,TaskStatus::Exhausted);assert!(st.ready().is_empty());assert_eq!(st.goals["g"].status,GoalStatus::Open);
 }
+
+#[test]
+fn autonomous_scheduler_reuses_capability_across_goals(){
+    let tmp=Temp::new();let s=tmp.store();setup(&s,"training");
+    for (id,input,out) in [("e1",2,4),("e2",5,10)] {
+        task(&s,"training",id,vec![],json!(input),json!(out),None);
+        let n=claim(&s,id,"a");assert_eq!(submit(&s,id,"a",n,json!(out))["accepted"],true);
+    }
+    put(&s,json!({"cmd":"seal","goal":"training"}));
+    put(&s,json!({"cmd":"promote","id":"double","version":1,"program":{"op":"multiply","left":{"op":"input"},"right":{"op":"const","value":2}},"examples":["e1","e2"]}));
+    put(&s,json!({"cmd":"class","id":"computed","version":1,"operators":["execute"],"capabilities":["double:1"]}));
+    goal(&s,"fresh",5);
+    put(&s,json!({"cmd":"agent","id":"fresh-worker","goal":"fresh","class":"computed:1","context":"ctx","parent":null}));
+    task(&s,"fresh","x",vec![],json!(13),json!(26),Some("double:1"));
+    task(&s,"fresh","y",vec!["x"],json!(21),json!(42),Some("double:1"));
+    put(&s,json!({"cmd":"seal","goal":"fresh"}));
+    drop(s);
+    let o=Process::new(env!("CARGO_BIN_EXE_persistent-intelligence-runtime")).arg(&tmp.0).args(["drain","fresh","5"]).output().unwrap();
+    assert!(o.status.success(),"{}",String::from_utf8_lossy(&o.stderr));
+    let v:Value=serde_json::from_slice(&o.stdout).unwrap();
+    assert_eq!(v[0]["action"],"computed");assert_eq!(v[1]["action"],"computed");assert_eq!(v[2]["action"],"idle");
+    let st=tmp.store().inspect().unwrap();assert_eq!(st.goals["fresh"].status,GoalStatus::Complete);
+    assert_eq!(st.agents["fresh-worker"].incarnation,1);assert_eq!(st.artifacts["y"].value,json!(42));
+}
+#[test]
+fn busy_agent_cannot_hold_multiple_running_leases(){
+    let tmp=Temp::new();let s=tmp.store();setup(&s,"g");
+    task(&s,"g","t",vec![],json!(1),json!(2),None);
+    task(&s,"g","u",vec![],json!(2),json!(4),None);
+    claim(&s,"t","a");
+    assert!(s.apply(cmd(json!({"cmd":"claim","task":"u","agent":"a","ttl":5}))).is_err());
+    claim(&s,"u","b");
+}

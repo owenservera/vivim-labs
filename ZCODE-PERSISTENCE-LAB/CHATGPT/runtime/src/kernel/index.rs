@@ -10,7 +10,7 @@ use std::{collections::{BTreeMap,BTreeSet},fs,path::{Path,PathBuf},io::Write,tim
 fn err(e:impl std::fmt::Display)->String{e.to_string()}
 const PAGE_LIMIT:usize=64*1024*1024;
 const NESTED:&[&str]=&["router.demands","router.reservations","router.observations","router.performance","router.cooldowns","router.provider_cooldowns","router.decisions","router.waits","router.adapters.bindings","router.adapters.handoffs","router.adapters.receipts","router.adapters.quota_receipts","router.planning.forecasts","router.planning.pending_critical","router.evolution.trials","router.evolution.promotions","router.config.pools","router.config.profiles"];
-const MAPS:&[&str]=&["goals","tasks","agents","contexts","operators","classes","artifacts","evidence","blobs","checkpoints","messages","capabilities","learning_plans","learning_attempts","knowledge","run_costs","goal_versions","task_versions","effects","receipts","delivery","rollback_history","attempt_history","learning_costs","knowledge_rules","knowledge_publications","cohorts","frozen_candidates","custody_receipts"];
+const MAPS:&[&str]=&["goals","tasks","agents","contexts","operators","classes","artifacts","evidence","blobs","checkpoints","messages","capabilities","learning_plans","learning_attempts","knowledge","run_costs","goal_versions","task_versions","effects","receipts","delivery","rollback_history","attempt_history","learning_costs","knowledge_rules","knowledge_publications","cohorts","frozen_candidates","custody_receipts","recipe_policies","recipes","recipe_scans","resource_receipts"];
 #[derive(Clone,Debug,Serialize,Deserialize)]
 pub struct IndexRoot{
     pub schema:u32,pub revision:u64,pub state_digest:String,
@@ -120,7 +120,10 @@ impl Index{
     pub fn lookup(&self,hash:&str,revision:u64,table:&str,key:&str)->Result<Option<Value>>{
         ensure(MAPS.contains(&table)||NESTED.contains(&table),"unknown entity table")?;
         let root=self.manifest(hash)?;ensure(root.revision==revision,"index revision mismatch")?;
-        let Some(page)=root.tables.get(table).and_then(|t|t.get(&Self::bucket(key,root.schema))) else{return Ok(None);};
+        let Some(page)=root.tables.get(table).and_then(|t|t.get(&Self::bucket(key,root.schema))) else{
+            if root.schema==1&&NESTED.contains(&table){let scalar=self.get(&root.scalar)?;let mut v=&scalar;for p in table.split('.'){let Some(next)=v.get(p) else{return Ok(None);};v=next;}return Ok(v.get(key).cloned());}
+            return Ok(None);
+        };
         let v=self.get(page)?;
         Ok(v.as_object().ok_or("invalid index page")?.get(key).cloned())
     }

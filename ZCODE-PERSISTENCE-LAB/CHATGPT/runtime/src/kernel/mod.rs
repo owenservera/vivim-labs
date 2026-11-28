@@ -29,6 +29,8 @@ pub mod routing_driver;
 pub mod routing_evolution;
 pub mod routing_wait;
 pub mod genesis;
+pub mod recipes;
+pub mod resource;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

@@ -58,6 +58,10 @@ pub fn compute_file(input:&Path,output:&Path)->Result<()>{
 }
 struct Job {child:Child,task:Id,worker:Id,incarnation:u64,generation:u64,output:PathBuf,started:Instant,last_checkpoint:u64}
 impl Job{
+    fn resources(&self,store:&KernelStore)->Result<()> {
+        let receipt=super::resource::Receipt{task:self.task.clone(),generation:self.generation,process_ref:format!("native-pid-{}",self.child.id()),elapsed_ms:self.started.elapsed().as_millis().min(3_600_000) as u64,counters:super::resource::observe(&self.child,&self.output)};
+        host(store,Action::RecordResources{receipt})?;Ok(())
+    }
     fn actor(&self)->Actor{Actor::Worker{id:self.worker.clone(),incarnation:self.incarnation}}
     fn checkpoint(&mut self,store:&KernelStore)->Result<()>{
         let Some(parent)=self.output.parent() else{return Ok(())};let path=parent.join("progress");
@@ -131,13 +135,16 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             let valid=w.tasks.get(&jobs[i].task).is_some_and(|t|t.phase==TaskPhase::Running&&t.lease.as_ref().is_some_and(|l|l.worker==jobs[i].worker&&l.generation==jobs[i].generation&&l.incarnation==jobs[i].incarnation));
             if valid{jobs[i].checkpoint(store)?;}
             if !valid||jobs[i].started.elapsed()>=Duration::from_millis(config.lease_ms){
-                let job=jobs.swap_remove(i);
+                let mut job=jobs.swap_remove(i);
+                if job.child.try_wait().map_err(error)?.is_none(){let _=job.child.kill();let _=job.child.wait();}
+                job.resources(store)?;
                 let _=host(store,Action::RecordCost{task:job.task.clone(),generation:job.generation,elapsed_ms:job.started.elapsed().as_millis().min(3_600_000) as u64});
                 if valid{let _=apply(store,job.actor(),Action::Fail{task:job.task.clone(),generation:job.generation,reason:"native worker timeout".into()});}
                 failures+=1;drop(job);continue;
             }
             let Some(status)=status else{i+=1;continue;};
             let job=jobs.swap_remove(i);
+            job.resources(store)?;
             host(store,Action::RecordCost{task:job.task.clone(),generation:job.generation,elapsed_ms:job.started.elapsed().as_millis().min(3_600_000) as u64})?;
             let output=if status.success(){
                 fs::read(&job.output).map_err(error).and_then(|bytes|{
@@ -178,6 +185,10 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             let Some((rule,payload))=w.ready_knowledge().into_iter().next() else{break;};
             host(store,Action::AssimilateRecurring{rule,payload})?;
             knowledge_runs+=1;progress=true;
+        }
+        while learning_runs.saturating_add(knowledge_runs)<config.max_learning_plans{
+            let w=store.inspect()?;let Some(family)=w.ready_recipe_scans().into_iter().next() else{break;};
+            host(store,Action::DiscoverRecipes{family})?;knowledge_runs+=1;progress=true;
         }
         if launched<config.max_jobs&&store.inspect()?.routing_cycle_needed(){
             let routing=host(store,Action::RoutingCycle{limit:(config.max_jobs-launched).min(4) as usize})?;
@@ -232,7 +243,9 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
     }
     // Cancellation of this invocation is not cancellation of durable goals.
     // Fence its jobs and release their leases before terminating owned child processes.
-    for job in jobs{
+    for mut job in jobs{
+        if job.child.try_wait().map_err(error)?.is_none(){let _=job.child.kill();let _=job.child.wait();}
+        job.resources(store)?;
         let _=host(store,Action::RecordCost{task:job.task.clone(),generation:job.generation,elapsed_ms:job.started.elapsed().as_millis().min(3_600_000) as u64});
         let _=apply(store,job.actor(),Action::Fail{task:job.task.clone(),generation:job.generation,reason:"supervisor stopped".into()});
         drop(job);

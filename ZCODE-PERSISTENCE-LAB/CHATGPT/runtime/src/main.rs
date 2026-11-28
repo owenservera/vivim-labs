@@ -20,6 +20,8 @@ fn kernel_cli(args:&[String])->Result<(),String>{
         "lookup"=>store.lookup(required(args,3,"table")?,required(args,4,"entity ID")?)?.unwrap_or(Value::Null),
         "collect"=>serde_json::json!({"objects_removed":store.collect_garbage()?}),
         "population"=>store.inspect()?.audit_population(),
+        "resources"=>store.inspect()?.resource_report(),
+        "recipes"=>serde_json::to_value(store.inspect()?.recipes).map_err(|e|e.to_string())?,
         "routing-policy-candidates"=>store.inspect()?.router.policy_candidates()?,
         "routing-trials"=>serde_json::to_value(store.inspect()?.router.evolution).map_err(|e|e.to_string())?,
         "routing-joint-plan"=>{

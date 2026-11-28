@@ -74,3 +74,7 @@ See [IMPLEMENTATION-R004.md](IMPLEMENTATION-R004.md) for mechanisms, limitations
 ## R004 source checkpoint 002 (unqualified)
 
 Source pin: 4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e. 38 source-implemented/unverified, 8 partial source, 4 deferred. Historical R003 28/100; R004 candidate verified 0/100. See [IMPLEMENTATION-R004-002.md](IMPLEMENTATION-R004-002.md). All original IDs, criteria, weights and evidence are preserved. No compilation, build, test, agent launch or endurance execution occurred.
+
+## R004 source checkpoint 003 (unqualified)
+
+Source pin: 3496f0b829b652488cdfdc2ed39da996c2c6e425. 40 source-implemented/unverified, 6 partial source, 4 deferred. Historical R003 28/100; R004 verified 0/100. See [IMPLEMENTATION-R004-003.md](IMPLEMENTATION-R004-003.md). Native qualification source was authored but never executed. Original criteria, weights, priorities and historical evidence unchanged.

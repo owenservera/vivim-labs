@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "min_elapsed_ms": null,
+  "min_verified_tasks": 10,
+  "min_fault_recoveries": 2,
+  "max_recovery_ms": 60000,
+  "max_lost_artifacts": 0,
+  "max_duplicate_effects": 0,
+  "max_human_interventions": 0
+}

@@ -3,7 +3,7 @@ Canonical machine-readable tracker: [acceptance-tracker.json](acceptance-tracker
 
 **Verified baseline: 28/100 (14/50 PASS, 3 PARTIAL, 33 OPEN).** R003 source pin f837042b76e2bd438f107a6b93360306da6d98ef; [native receipt](VALIDATION-R003.md). Prior ledger reported 30/100; E27 reduced to PARTIAL because explicit stale checkpoint write rejection was not tested. No new runtime test was run. E05 criterion unchanged; dependency gating alone is insufficient. Qualitative architecture estimates are not evidence scores.
 
-Each gate is worth 2 points; only PASS counts. Fixed criteria and IDs; each PASS requires exact source pin, actual native test/experiment receipt, and coverage of the entire criterion. PARTIAL, OPEN, FAIL, BLOCKED earn zero. Reopen affected gates after regression or material unverified changes. No AI wiring; 36h and 72h must be actual elapsed time.
+Each gate is worth 2 points; only PASS counts. Fixed criteria and IDs; each PASS requires exact source pin, actual native test/experiment receipt, and coverage of the entire criterion. PARTIAL, OPEN, FAIL, BLOCKED earn zero. Reopen affected gates after regression or material unverified changes. No AI wiring for native qualification. Endurance criteria are programmable; when elapsed time is requested it must be observed real time.
 
 | ID | Acceptance criterion | Status | Evidence / outstanding |
 |---|---|---|---|
@@ -54,15 +54,15 @@ Each gate is worth 2 points; only PASS counts. Fixed criteria and IDs; each PASS
 | E45 | Four isolated architecture policies enforce allowed persistence | OPEN | No qualifying evidence |
 | E46 | Common fault schedule and repeatable oracle across four arms | OPEN | No qualifying evidence |
 | E47 | Real simultaneous worker/controller death and autonomous recovery | OPEN | No qualifying evidence |
-| E48 | 36h continuous real lifecycle qualification | OPEN | No qualifying evidence |
-| E49 | 72h repeated fault endurance qualification | OPEN | No qualifying evidence |
+| E48 | Configurable continuous lifecycle qualification | OPEN | No qualifying evidence |
+| E49 | Configurable repeated-fault endurance qualification | OPEN | No qualifying evidence |
 | E50 | No AI/provider execution dependency in native lifecycle | PASS | native 8 integration tests; no AI adapter in source |
 ## Iteration plan
 1. P0 integrity and lifecycle terminal states; immutable history and validated checkpoints; indexed storage with migration and actor admission.
 2. P1 executable behavior: typed graph/dataflow, operator contracts, class composition and evidence; context binding.
 3. P2 runtime lifecycle: real native processes, leases/clock, durable activation, resource slots, replacement, mailbox and projections.
 4. P3 evolution: bounded synthesis, disjoint holdouts, typed matching, provenance, disable/regression, cost feedback.
-5. P4 experiment: policy-isolated session/agent/goal/intelligence arms, same workload and fault schedule, actual crash and fan-out, 36h then 72h.
+5. P4 experiment: policy-isolated session/agent/goal/intelligence arms, same workload and fault schedule, actual crash and fan-out, then policy-defined lifecycle and repeated-fault qualification.
 Record source pin, tests, execution receipts and remaining limitations for each revision. Never mark an unrun or simulated gate PASS. No external effects or provider calls until the native architecture is qualified.
 
 ## R004 source checkpoint (unqualified)
@@ -128,7 +128,7 @@ Original source coverage 76%; routing source coverage 40%; combined inventory 42
 3. **Remaining original source implementation** (E31, E41, E42): Protected host admission/effect boundary, generalized evidence-backed learning, complete resource/cost feedback. Do not expand scope until these original requirements are addressed.
 4. **Native build and qualification** (E34, E44, E47, R10): After explicit execution authorization, compile, repair defects, run pinned native and synthetic routing qualification including actual concurrency and process destruction; verify every other source-marked gate against its original criterion.
 5. **One live adapter and routing qualification** (R08, R09): Real model registry and authorized budgets, verified live quota/usage receipts, bounded dispatch and recovery, controlled repeated policy comparisons; no provider calls before authorization.
-6. **Comparative and endurance qualification** (E45, E46, E48, E49): Execute authorized isolated comparative fault schedule and actual 36/72-hour qualification. No simulated duration accepted.
+6. **Comparative and endurance qualification** (E45, E46, E48, E49): Execute authorized isolated comparative fault schedule and actual policy-defined endurance qualification. No simulated duration accepted.
 
 Genesis is not launch-ready. No new gates or weights added; no builds, tests, provider calls or source repairs in this update. See completion_dashboard in acceptance-tracker.json and STATIC-REVIEW-001.md.
 

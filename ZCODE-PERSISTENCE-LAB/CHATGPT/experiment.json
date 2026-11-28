@@ -108,16 +108,22 @@
     "matched_resource_ceiling": true
   },
   "qualification": {
-    "hours": [
-      36,
-      72
-    ],
     "max_goal_loss": 0,
     "max_committed_work_loss": 0,
     "max_duplicate_effects": 0,
     "max_human_recoveries": 0,
     "target_recovery_seconds": 60,
-    "target_fault_recognition": 1
+    "target_fault_recognition": 1,
+    "endurance_policy": {
+      "version": 1,
+      "min_elapsed_ms": null,
+      "min_verified_tasks": 10,
+      "min_fault_recoveries": 2,
+      "max_recovery_ms": 60000,
+      "max_lost_artifacts": 0,
+      "max_duplicate_effects": 0,
+      "max_human_interventions": 0
+    }
   },
   "metrics": [
     "verified_yield",

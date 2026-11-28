@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-TRUTH-TRACKER-CLOSURE-002",
+  "revision": "R004-ENDURANCE-POLICY-001",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -15,7 +15,7 @@
     ],
     "pass_requires": "Pinned source, explicit criterion coverage, actual native receipt and test names; no source-only runtime pass.",
     "regression": "Reopen affected gates after failure or material unverified implementation change.",
-    "scope": "No AI wiring; actual endurance only; fixed gate IDs and weights; no silent narrowing."
+    "scope": "No AI wiring for native qualification; real observed evidence only; fixed gate IDs and weights. E48/E49 duration thresholds are owner-programmable, not architectural constants."
   },
   "gates": [
     {
@@ -962,32 +962,40 @@
     },
     {
       "id": "E48",
-      "criterion": "36h continuous real lifecycle qualification",
+      "criterion": "Configurable continuous lifecycle qualification with observed verified work, integrity and optional elapsed-time threshold",
       "status": "OPEN",
       "weight": 2,
       "priority": "P4",
       "evidence": [],
-      "outstanding": "No qualifying evidence",
+      "outstanding": "Actual policy-pinned independent execution evidence required; no default minimum wall-clock duration.",
       "r004": {
-        "status": "DEFERRED",
+        "status": "PARTIAL_SOURCE",
         "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
-        "files": [],
-        "remaining": "36 hours of actual elapsed qualification required."
+        "files": [
+          "src/kernel/endurance.rs",
+          "src/main.rs",
+          "endurance.example.json"
+        ],
+        "remaining": "Policy validation and deterministic observation evaluation authored; actual independent observation collection, policy-bound run and evidence qualification remain."
       }
     },
     {
       "id": "E49",
-      "criterion": "72h repeated fault endurance qualification",
+      "criterion": "Configurable repeated-fault endurance qualification with observed recovery and integrity against a versioned policy",
       "status": "OPEN",
       "weight": 2,
       "priority": "P4",
       "evidence": [],
-      "outstanding": "No qualifying evidence",
+      "outstanding": "Actual policy-pinned independent execution evidence required; no default minimum wall-clock duration.",
       "r004": {
-        "status": "DEFERRED",
+        "status": "PARTIAL_SOURCE",
         "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
-        "files": [],
-        "remaining": "72 hours of actual elapsed repeated-fault qualification required."
+        "files": [
+          "src/kernel/endurance.rs",
+          "src/main.rs",
+          "endurance.example.json"
+        ],
+        "remaining": "Policy validation and deterministic observation evaluation authored; actual independent observation collection, policy-bound run and evidence qualification remain."
       }
     },
     {
@@ -1127,7 +1135,7 @@
     }
   },
   "completion_dashboard": {
-    "revision": "TRUTH-TRACKER-CLOSURE-002",
+    "revision": "R004-ENDURANCE-POLICY-001",
     "tracker_input_commit": "d05e332f884a11ef3bcbc69658a4de308adc812a",
     "reviewed_runtime_source": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
     "source_status_meaning": "Provisional source labels after targeted readback and integration; not a complete compiler or invariant audit, not verified operation.",
@@ -1135,8 +1143,8 @@
       "total": 50,
       "counts": {
         "SOURCE_IMPLEMENTED_UNVERIFIED": 39,
-        "PARTIAL_SOURCE": 7,
-        "DEFERRED": 4
+        "PARTIAL_SOURCE": 9,
+        "DEFERRED": 2
       },
       "phases": {
         "P0": {
@@ -1160,8 +1168,8 @@
         },
         "P4": {
           "total": 5,
-          "DEFERRED": 4,
-          "PARTIAL_SOURCE": 1
+          "DEFERRED": 2,
+          "PARTIAL_SOURCE": 3
         }
       },
       "source_coverage_percent": 78,
@@ -1180,8 +1188,8 @@
     "combined_inventory": {
       "total": 60,
       "source_implemented_unverified": 45,
-      "partial_source": 11,
-      "deferred": 4,
+      "partial_source": 13,
+      "deferred": 2,
       "verified_current": 0,
       "source_coverage_percent": 75,
       "meaning": "Unweighted inventory; not original weighted acceptance."
@@ -1268,15 +1276,27 @@
           "E48",
           "E49"
         ],
-        "acceptance": "Execute authorized isolated comparative fault schedule and actual 36/72-hour qualification. No simulated duration accepted."
+        "acceptance": "Execute authorized isolated comparative fault schedule and policy-pinned lifecycle/repeated-fault qualification with real observations. Time thresholds optional and explicitly programmed; no simulated duration credit."
       }
     ],
-    "rule": "Prioritize original acceptance closure and integration defects over new architectural expansion. Verified credit requires actual matching native evidence at a pinned source. Retain all original gate IDs, weights, criteria and historical evidence."
+    "rule": "Prioritize original acceptance closure; E48/E49 revised by explicit owner direction to programmable qualification. Preserve IDs, weights and historical evidence. Verified credit requires matching independent native evidence."
   },
   "closure_checkpoint": {
     "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
     "initial_readback": "6f64f967c76264c91b800ea15d4a79f3591662fe",
     "method": "Source-only coding and targeted readback; no runtime execution",
     "document": "CLOSURE-002.md"
+  },
+  "endurance_policy_revision": {
+    "revision": 1,
+    "owner_direction": "Replace initial 36/72 hour experiment targets with programmable qualification criteria.",
+    "previous_criteria": [
+      "36h continuous real lifecycle qualification",
+      "72h repeated fault endurance qualification"
+    ],
+    "implementation": "src/kernel/endurance.rs",
+    "example": "endurance.example.json",
+    "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
+    "acceptance_credit": 0
   }
 }

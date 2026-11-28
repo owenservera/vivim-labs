@@ -27,7 +27,7 @@ pub struct ServiceConfig{
 impl ServiceConfig{
     pub fn validate(&self)->Result<()>{
         self.controller.validate()?;
-        ensure((100..=259_200_000).contains(&self.duration_ms)&&(1..=1024).contains(&self.max_starts)&&self.max_reserved_jobs>0&&self.backoff_ms<=60_000&&(10..=1000).contains(&self.poll_ms),"invalid outer service budget")
+        ensure(self.duration_ms>=100&&(1..=1024).contains(&self.max_starts)&&self.max_reserved_jobs>0&&self.backoff_ms<=60_000&&(10..=1000).contains(&self.poll_ms),"invalid outer service budget")
     }
 }
 struct Owned(Child);

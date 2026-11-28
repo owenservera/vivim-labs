@@ -31,6 +31,7 @@ pub mod routing_wait;
 pub mod genesis;
 pub mod recipes;
 pub mod resource;
+pub mod endurance;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

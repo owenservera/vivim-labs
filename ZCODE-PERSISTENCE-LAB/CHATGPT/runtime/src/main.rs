@@ -21,6 +21,12 @@ fn kernel_cli(args:&[String])->Result<(),String>{
         "collect"=>serde_json::json!({"objects_removed":store.collect_garbage()?}),
         "population"=>store.inspect()?.audit_population(),
         "resources"=>store.inspect()?.resource_report(),
+        "endurance-evaluate"=>{
+            use persistent_intelligence_runtime::kernel::endurance::{Policy,Observation};
+            let policy:Policy=read_json(required(args,3,"endurance policy file")?)?;
+            let observed:Observation=read_json(required(args,4,"observation file")?)?;
+            serde_json::to_value(policy.evaluate(&observed)?).map_err(|e|e.to_string())?
+        },
         "recipes"=>serde_json::to_value(store.inspect()?.recipes).map_err(|e|e.to_string())?,
         "repairs"=>serde_json::to_value(store.inspect()?.recipe_repairs).map_err(|e|e.to_string())?,
         "routing-policy-candidates"=>store.inspect()?.router.policy_candidates()?,

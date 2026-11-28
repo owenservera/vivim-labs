@@ -88,7 +88,7 @@ pub struct HostCost{pub request:Id,pub operation:String,pub elapsed_ms:u64,pub r
 impl World{
     pub fn record_host_cost(&mut self,r:HostCost)->Result<()>{
         id(&r.request)?;ensure(matches!(r.operation.as_str(),"learning"|"knowledge"|"recipe"|"repair"|"verify"|"routing"|"trial"),"unsupported metered operation")?;
-        ensure(r.elapsed_ms<=259_200_000&&r.result_digest.as_ref().is_none_or(|h|hash_id(h))&&!self.host_costs.contains_key(&r.request),"invalid host cost receipt")?;
+        ensure(r.result_digest.as_ref().is_none_or(|h|hash_id(h))&&!self.host_costs.contains_key(&r.request),"invalid host cost receipt")?;
         self.host_costs.insert(r.request.clone(),r);Ok(())
     }
 }

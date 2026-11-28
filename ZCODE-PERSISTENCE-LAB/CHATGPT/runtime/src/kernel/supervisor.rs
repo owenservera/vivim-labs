@@ -15,7 +15,7 @@ fn host(store:&KernelStore,action:Action)->Result<Value>{apply(store,Actor::Host
 fn metered_host(store:&KernelStore,operation:&str,action:Action)->Result<Value>{
     let request=request_id()?;let start=Instant::now();
     let result=store.apply(Request{id:request.clone(),actor:Actor::Host,action});
-    let receipt=super::resource::HostCost{request,operation:operation.into(),elapsed_ms:start.elapsed().as_millis().min(259_200_000) as u64,result_digest:result.as_ref().ok().map(crate::digest)};
+    let receipt=super::resource::HostCost{request,operation:operation.into(),elapsed_ms:u64::try_from(start.elapsed().as_millis()).unwrap_or(u64::MAX),result_digest:result.as_ref().ok().map(crate::digest)};
     host(store,Action::RecordHostCost{receipt})?;result
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
@@ -89,7 +89,7 @@ fn default_learning_budget()->u64{16}
 fn default_idle_stop()->bool{true}
 impl RunConfig{
     pub fn validate(&self)->Result<()>{
-        ensure((1..=259_200_000).contains(&self.duration_ms)&&self.lease_ms>=100&&self.lease_ms<=3_600_000&&self.poll_ms>=10&&self.poll_ms<=self.lease_ms/2&&self.max_jobs>0&&self.max_learning_plans<=1024,"invalid supervisor limits")
+        ensure(self.duration_ms>0&&self.lease_ms>=100&&self.lease_ms<=3_600_000&&self.poll_ms>=10&&self.poll_ms<=self.lease_ms/2&&self.max_jobs>0&&self.max_learning_plans<=1024,"invalid supervisor limits")
     }
 }
 fn suitable(w:&World,task:&Task,class:&str)->Option<Id>{

@@ -70,3 +70,7 @@ Record source pin, tests, execution receipts and remaining limitations for each 
 Candidate source pin: 4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd. Historical R003 evidence remains 28/100; the new R004 kernel has no native qualification yet. The existing status column refers to that historical baseline, not a claim about R004. Per-gate candidate state is recorded in the canonical JSON tracker: 31 source-implemented/unverified, 15 partial source, 4 deferred. Builds, compilation and tests are deliberately deferred by owner instruction. No experimental folder changes.
 
 See [IMPLEMENTATION-R004.md](IMPLEMENTATION-R004.md) for mechanisms, limitations and next implementation gates.
+
+## R004 source checkpoint 002 (unqualified)
+
+Source pin: 4da8909bec4dea47f5863a6f7e2c8a6f4c28f93e. 38 source-implemented/unverified, 8 partial source, 4 deferred. Historical R003 28/100; R004 candidate verified 0/100. See [IMPLEMENTATION-R004-002.md](IMPLEMENTATION-R004-002.md). All original IDs, criteria, weights and evidence are preserved. No compilation, build, test, agent launch or endurance execution occurred.

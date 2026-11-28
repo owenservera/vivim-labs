@@ -20,6 +20,19 @@ fn kernel_cli(args:&[String])->Result<(),String>{
         "lookup"=>store.lookup(required(args,3,"table")?,required(args,4,"entity ID")?)?.unwrap_or(Value::Null),
         "collect"=>serde_json::json!({"objects_removed":store.collect_garbage()?}),
         "population"=>store.inspect()?.audit_population(),
+        "routing-joint-plan"=>{
+            let limit=required(args,3,"plan limit")?.parse::<usize>().map_err(|e|e.to_string())?;
+            serde_json::to_value(store.inspect()?.joint_routing_plan(limit)?).map_err(|e|e.to_string())?
+        },
+        "routing-synthetic-step"=>{
+            use persistent_intelligence_runtime::kernel::routing_driver::{Synthetic,SyntheticConfig,step};
+            let config:SyntheticConfig=read_json(required(args,3,"synthetic config")?)?;
+            let adapter=config.adapter.clone();
+            let ledger=Path::new(required(args,4,"synthetic ledger")?);
+            let limit=required(args,5,"operation limit")?.parse::<usize>().map_err(|e|e.to_string())?;
+            let mut backend=Synthetic::open(ledger,config)?;
+            step(&store,&adapter,&mut backend,limit)?
+        },
         "routing-adapter-queue"=>store.inspect()?.adapter_queue(required(args,3,"adapter ID")?)?,
         "routing-refresh-plan"=>store.inspect()?.router.quota_refresh_plan()?,
         "routing-cycle"=>{

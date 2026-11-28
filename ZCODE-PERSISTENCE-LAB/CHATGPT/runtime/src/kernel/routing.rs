@@ -132,6 +132,7 @@ pub struct Router{
     pub provider_cooldowns:BTreeMap<Id,u64>,pub decisions:BTreeMap<Id,Recommendation>,
     #[serde(default)] pub planning:super::routing_planning::Planning,
     #[serde(default)] pub adapters:super::routing_adapter::AdapterState,
+    #[serde(default)] pub batch_policy:super::routing_optimizer::BatchPolicy,
 }
 fn active(r:&Reservation)->bool{matches!(r.status,Status::Reserved|Status::Dispatched|Status::Unknown)}
 fn bps(v:u64,b:u16)->u64{(u128::from(v)*u128::from(b)/10_000) as u64}
@@ -325,9 +326,12 @@ impl Router{
         eligible.sort_by(|a,b|b.score.cmp(&a.score).then_with(||a.profile.cmp(&b.profile)));
         Ok(Recommendation{chosen:eligible.first().cloned(),reason:if eligible.is_empty(){"wait_or_require_policy_review"}else{"ranked_feasible_profiles"}.into(),eligible,excluded})
     }
-    pub fn reserve(&mut self,key:Id,demand:&str)->Result<Value>{
+    pub fn reserve(&mut self,key:Id,demand:&str)->Result<Value>{self.reserve_inner(key,demand,None)}
+    pub fn reserve_profile(&mut self,key:Id,demand:&str,profile:&str)->Result<Value>{self.reserve_inner(key,demand,Some(profile))}
+    fn reserve_inner(&mut self,key:Id,demand:&str,profile:Option<&str>)->Result<Value>{
         id(&key)?;ensure(!self.reservations.contains_key(&key)&&!self.decisions.contains_key(&key),"reservation or decision exists")?;
-        let rec=self.recommend(demand)?;
+        let mut rec=self.recommend(demand)?;
+        if let Some(profile)=profile{rec.chosen=Some(rec.eligible.iter().find(|x|x.profile==profile).ok_or("planned profile no longer feasible")?.clone());rec.reason="joint_batch_selection".into();}
         let Some(choice)=rec.chosen.clone() else{self.decisions.insert(key,rec.clone());return Ok(json!({"reserved":false,"decision":rec}));};
         let c=self.config()?;let p=c.profiles[&choice.profile].clone();let d=self.demands[demand].clone();
         let version=c.policy.version;

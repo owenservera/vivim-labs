@@ -37,9 +37,9 @@ impl World{
         for _ in 0..cap{
             let allowed:BTreeSet<_>=self.router.demands.values().filter(|d|ready.contains(&d.task)&&self.inference_needed(d)&&!selected.contains(&d.id)).map(|d|d.id.clone()).collect();
             let Some(next)=super::frontier::rank(&self.router,&allowed)?.into_iter().next() else{break;};
-            let key=format!("route-{}",digest(&json!([self.sequence+1,receipts.len(),next.demand])));
-            let response=self.router.reserve(key,&next.demand)?;
-            selected.insert(next.demand);receipts.push(response);
+            let key=format!("route-{}",digest(&json!([self.sequence+1,receipts.len(),demand])));
+            let response=self.router.reserve(key,&demand)?;
+            selected.insert(demand);receipts.push(response);
         }
         Ok(json!({"allocations":receipts,"native_slots_available":slots,"execution":"not_dispatched"}))
     }
@@ -94,8 +94,16 @@ impl World{
         }
         super::frontier::rank(&router,&allowed)
     }
+    pub fn joint_routing_plan(&self,limit:usize)->Result<super::routing_optimizer::BatchPlan>{
+        let mut router=self.router.clone();let ready:BTreeSet<_>=self.ready().into_iter().collect();let mut allowed=BTreeSet::new();
+        for d in self.router.demands.values().filter(|d|ready.contains(&d.task)&&self.inference_needed(d)){
+            let profiles=self.bound_profiles(d);
+            if !profiles.is_empty(){router.demands.get_mut(&d.id).unwrap().allowed_profiles=profiles;allowed.insert(d.id.clone());}
+        }
+        router.optimize_batch(&allowed,limit)
+    }
     pub fn routing_cycle_needed(&self)->bool{
-        self.router.config.is_some()&&self.running()<self.slots&&self.bound_plan().is_ok_and(|v|!v.is_empty())
+        self.router.config.is_some()&&self.running()<self.slots&&if self.router.batch_policy.version>0{self.joint_routing_plan(self.slots.saturating_sub(self.running()).min(128)).is_ok_and(|p|!p.assignments.is_empty())}else{self.bound_plan().is_ok_and(|v|!v.is_empty())}
     }
     /// Atomic autonomous preparation. An enabled adapter binding is mandatory.
     /// No provider is called; an outbox item is made available to the adapter.
@@ -103,13 +111,16 @@ impl World{
         ensure((1..=128).contains(&limit),"invalid routing cycle limit")?;
         let mut prepared=Vec::new();self.refresh_frontier_demand()?;
         for n in 0..limit.min(self.slots.saturating_sub(self.running())){
-            let Some(next)=self.bound_plan()?.into_iter().next() else{break;};
-            let original=self.router.demands[&next.demand].allowed_profiles.clone();
-            let profiles=self.bound_profiles(&self.router.demands[&next.demand]);
-            let key=format!("route-{}",digest(&json!([self.sequence+1,n,&next.demand,"auto"])));
-            self.router.demands.get_mut(&next.demand).unwrap().allowed_profiles=profiles;
-            let reserved=self.router.reserve(key.clone(),&next.demand)?;
-            self.router.demands.get_mut(&next.demand).unwrap().allowed_profiles=original;
+            let (demand,profile)=if self.router.batch_policy.version>0{
+                let plan=self.joint_routing_plan((limit-n).min(self.slots.saturating_sub(self.running())))?;
+                let Some(a)=plan.assignments.into_iter().next() else{break;};(a.demand,Some(a.profile))
+            }else{let Some(next)=self.bound_plan()?.into_iter().next() else{break;};(next.demand,None)};
+            let original=self.router.demands[&demand].allowed_profiles.clone();
+            let profiles=self.bound_profiles(&self.router.demands[&demand]);
+            let key=format!("route-{}",digest(&json!([self.sequence+1,n,&demand,"auto"])));
+            self.router.demands.get_mut(&demand).unwrap().allowed_profiles=profiles;
+            let reserved=match profile{Some(p)=>self.router.reserve_profile(key.clone(),&demand,&p)?,None=>self.router.reserve(key.clone(),&demand)?};
+            self.router.demands.get_mut(&demand).unwrap().allowed_profiles=original;
             if reserved["reserved"]!=true{break;}
             prepared.push(self.prepare_handoff(&key)?);
             self.refresh_frontier_demand()?;

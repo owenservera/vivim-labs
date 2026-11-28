@@ -28,6 +28,8 @@ pub enum Action {
     RegisterCohort{cohort:super::custody::Cohort},FreezeCandidate{id:Id,capability:Capability,cohort:Id},FreezeLearned{id:Id,name:Id,version:u64,cohort:Id,training:Vec<Id>,input:Shape,output:Shape,limit:u64},AttestCandidate{verdict:super::custody::Verdict},AdmitFrozen{candidate:Id},
     ConfigureRouter{config:super::routing::Config},ObserveQuota{observation:super::routing::Observation},QueueInference{demand:super::routing::Demand},AllocateInference{limit:usize},
     DispatchInference{reservation:Id},InferenceUnknown{reservation:Id},ReleaseInference{reservation:Id},SettleInference{reservation:Id,usage:super::routing::Usage,outcome:super::routing::Outcome,receipt:String,latency_ms:u64},VerifyInference{reservation:Id,evidence:Id},
+    SetFrontierGuard{guard:super::routing_planning::FrontierGuard},SetFrontierForecast{forecast:super::routing_planning::Forecast},
+    BindRoutingAdapter{binding:super::routing_adapter::AdapterBinding},PrepareHandoff{reservation:Id},ClaimHandoff{handoff:Id},FinishHandoff{receipt:super::routing_adapter::AdapterReceipt},RoutingCycle{limit:usize},
     RecordCost{task:Id,generation:u64,elapsed_ms:u64},SetPolicy{policy:SchedulingPolicy},
     PrepareEffect{task:Id,generation:u64,key:Id,payload:Value,oracle:Oracle},
     EffectUnknown{effect:Id,reason:String},ResolveEffect{effect:Id,outcome:EffectPhase,receipt:Value},
@@ -145,9 +147,10 @@ impl World {
     }
     pub fn transition(&mut self,actor:&Actor,action:Action)->Result<Value>{
         // Public transitions are atomic even for callers not using the durable store.
-        let mut next=self.clone();let output=next.apply_inner(actor,action)?;next.settle()?;next.reconcile_inference();
+        let mut next=self.clone();let output=next.apply_inner(actor,action)?;next.settle()?;next.reconcile_inference();next.refresh_handoffs();
         next.sequence=next.sequence.checked_add(1).ok_or("sequence overflow")?;*self=next;Ok(output)
     }
+    pub(crate) fn apply_adapter_action(&mut self,actor:&Actor,action:Action)->Result<Value>{self.apply_inner(actor,action)}
     fn apply_inner(&mut self,actor:&Actor,action:Action)->Result<Value>{
         use Action::*;
         match action{
@@ -285,7 +288,7 @@ impl World {
                 let payload=self.put_payload(output)?;let t=self.tasks.get_mut(&task).unwrap();t.proposal=Some(payload);t.phase=TaskPhase::Submitted;
                 let worker=t.lease.as_ref().unwrap().worker.clone();
                 let a=self.agents.get_mut(&worker).unwrap();
-                if let Some(i)=a.incarnations.last_mut(){if i.executor=="native-pure-process"{i.ended_ms=Some(self.clock_ms);i.reason=Some("submitted".into());}}
+                if let Some(i)=a.incarnations.last_mut(){if i.executor=="native-pure-process"||i.executor.starts_with("routed:"){i.ended_ms=Some(self.clock_ms);i.reason=Some("submitted".into());}}
                 a.phase=AgentPhase::Dormant;
             }
             Fail{task,generation,reason}=>{let t=self.check_lease(actor,&task,generation)?;let worker=t.lease.as_ref().unwrap().worker.clone();ensure(!reason.trim().is_empty(),"reason required")?;self.end_agent(&worker,&reason,false)?;}
@@ -392,6 +395,13 @@ impl World {
             ReleaseInference{reservation}=>{actor.host()?;self.router.release_unsent(&reservation)?;}
             SettleInference{reservation,usage,outcome,receipt,latency_ms}=>{actor.host()?;return self.router.settle(&reservation,usage,outcome,receipt,latency_ms);}
             VerifyInference{reservation,evidence}=>{actor.host()?;self.verify_inference_feedback(&reservation,&evidence)?;}
+            SetFrontierGuard{guard}=>{actor.host()?;self.router.set_frontier_guard(guard)?;}
+            SetFrontierForecast{forecast}=>{actor.host()?;self.router.set_forecast(forecast)?;}
+            BindRoutingAdapter{binding}=>{actor.host()?;self.bind_routing_adapter(binding)?;}
+            PrepareHandoff{reservation}=>{actor.host()?;return self.prepare_handoff(&reservation);}
+            ClaimHandoff{handoff}=>{actor.host()?;return self.claim_handoff(&handoff);}
+            FinishHandoff{receipt}=>{actor.host()?;return self.finish_handoff(receipt);}
+            RoutingCycle{limit}=>{actor.host()?;return self.routing_cycle(limit);}
             RecordCost{task,generation,elapsed_ms}=>{actor.host()?;self.record_cost(&task,generation,elapsed_ms)?;}
             PrepareEffect{task,generation,key,payload,oracle}=>{actor.host()?;return self.prepare_effect(&task,generation,key,payload,oracle);}
             EffectUnknown{effect,reason}=>{actor.host()?;self.effect_unknown(&effect,reason)?;}

@@ -122,7 +122,7 @@ fn synthesize(input:&Shape,output:&Shape,train:&[(Value,Value)],limit:u64,receip
         for (x,y) in train{
             receipt.training_evaluations+=1;
             let Ok(v)=p.eval(x) else{return Ok(None);};
-            exact &= output.accepts(&v)&&v==*y;values.push(v);
+            exact &= output.accepts(&v)&&v==*y;values.push(Value::String(digest(&v)));
         }
         if exact{return Ok(Some(p));}
         // A fingerprint is only a search pruning heuristic, not proof that two

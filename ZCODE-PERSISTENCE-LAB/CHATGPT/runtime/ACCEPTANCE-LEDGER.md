@@ -64,3 +64,9 @@ Each gate is worth 2 points; only PASS counts. Fixed criteria and IDs; each PASS
 4. P3 evolution: bounded synthesis, disjoint holdouts, typed matching, provenance, disable/regression, cost feedback.
 5. P4 experiment: policy-isolated session/agent/goal/intelligence arms, same workload and fault schedule, actual crash and fan-out, 36h then 72h.
 Record source pin, tests, execution receipts and remaining limitations for each revision. Never mark an unrun or simulated gate PASS. No external effects or provider calls until the native architecture is qualified.
+
+## R004 source checkpoint (unqualified)
+
+Candidate source pin: 4c7fb9dc73fe91c1f58f5c0f21ba85842063dacd. Historical R003 evidence remains 28/100; the new R004 kernel has no native qualification yet. The existing status column refers to that historical baseline, not a claim about R004. Per-gate candidate state is recorded in the canonical JSON tracker: 31 source-implemented/unverified, 15 partial source, 4 deferred. Builds, compilation and tests are deliberately deferred by owner instruction. No experimental folder changes.
+
+See [IMPLEMENTATION-R004.md](IMPLEMENTATION-R004.md) for mechanisms, limitations and next implementation gates.

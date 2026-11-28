@@ -178,7 +178,7 @@ pub struct OperatorContract {
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(tag="source",rename_all="snake_case")]
-pub enum Wire { Input, Node { id:Id }, Field { source:Box<Wire>, key:String }, Record { fields:BTreeMap<String,Wire> }, Array { items:Vec<Wire> }, Literal { value:Value, shape:Shape } }
+pub enum Wire { Input, Node { id:Id }, Field { #[serde(rename="wire")] source:Box<Wire>, key:String }, Record { fields:BTreeMap<String,Wire> }, Array { items:Vec<Wire> }, Literal { value:Value, shape:Shape } }
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Node { pub id:Id, pub operator:Id, pub input:Wire }
 #[derive(Clone, Debug, Serialize, Deserialize)]

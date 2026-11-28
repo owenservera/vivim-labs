@@ -218,7 +218,7 @@ impl World {
         let output=if let Actor::Adapter{id:adapter}=actor{
             self.authorize_adapter_action(adapter,&action)?;
             self.apply_inner(&Actor::Host,action)?
-        }else{self.apply_inner(actor,action)?;};self.reconcile_prepared()?;self.reconcile_inference();self.refresh_routing_waits()?;self.settle()?;self.reconcile_inference();self.refresh_routing_waits()?;self.refresh_handoffs();self.refresh_frontier_demand()?;
+        }else{self.apply_inner(actor,action)?};self.reconcile_prepared()?;self.reconcile_inference();self.refresh_routing_waits()?;self.settle()?;self.reconcile_inference();self.refresh_routing_waits()?;self.refresh_handoffs();self.refresh_frontier_demand()?;
         self.sequence=self.sequence.checked_add(1).ok_or("sequence overflow")?;Ok(output)
     }
     pub(crate) fn apply_adapter_action(&mut self,actor:&Actor,action:Action)->Result<Value>{self.apply_inner(actor,action)}

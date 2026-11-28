@@ -161,7 +161,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             match output{
                 Ok(value)=>{
                     match apply(store,job.actor(),Action::Submit{task:job.task.clone(),generation:job.generation,output:value}){
-                        Ok(_)=>{let response=host(store,Action::Verify{task:job.task.clone()})?;if response["accepted"]==true{completed+=1;}else{failures+=1;}}
+                        Ok(_)=>{let response=metered_host(store,"verify",Action::Verify{task:job.task.clone()})?;if response["accepted"]==true{completed+=1;}else{failures+=1;}}
                         Err(e)=>{let _=apply(store,job.actor(),Action::Fail{task:job.task.clone(),generation:job.generation,reason:e});failures+=1;}
                     }
                 }
@@ -172,7 +172,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
         // Recover durable submissions after controller replacement.
         let w=store.inspect()?;
         for t in w.tasks.values().filter(|t|t.phase==TaskPhase::Submitted){
-            if host(store,Action::Verify{task:t.spec.id.clone()})?["accepted"]==true{completed+=1;}else{failures+=1;}
+            if metered_host(store,"verify",Action::Verify{task:t.spec.id.clone()})?["accepted"]==true{completed+=1;}else{failures+=1;}
         }
         let mut progress=false;
         if learning_runs.saturating_add(knowledge_runs)<config.max_learning_plans{

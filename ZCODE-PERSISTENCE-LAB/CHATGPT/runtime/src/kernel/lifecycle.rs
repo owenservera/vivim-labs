@@ -55,7 +55,13 @@ impl World{
         let measured=self.attempt_history.values().filter(|a|a.measured_ms.is_some()).count();
         let elapsed:u64=self.attempt_history.values().filter_map(|a|a.ended_ms.map(|end|a.measured_ms.unwrap_or(end.saturating_sub(a.started_ms)))).fold(0,u64::saturating_add);
         let classes:BTreeSet<_>=self.agents.values().map(|a|&a.class).collect();
-        json!({"logical_agents":self.agents.len(),"active_leases":active,"slots":self.slots,"idle_or_archived_agents":self.agents.len().saturating_sub(active),"distinct_classes":classes.len(),"attempts":self.attempt_history.len(),"ended_attempts":ended,"measured_attempts":measured,"attempt_elapsed_ms":elapsed,"verified_yield":self.metrics.accepted,"inference_calls":0})
+        // Do not report zero inference merely because the native process
+        // scheduler did not perform the provider operation itself.
+        let routed_dispatches=self.router.reservations.values().filter(|r|r.started_ms.is_some()).count();
+        let confirmed_requests=self.router.adapters.receipts.values().filter(|r|!r.provider.starts_with("synthetic-")).fold(0u64,|sum,r|sum.saturating_add(r.usage.requests));
+        let synthetic_requests=self.router.adapters.receipts.values().filter(|r|r.provider.starts_with("synthetic-")).fold(0u64,|sum,r|sum.saturating_add(r.usage.requests));
+        let uncovered=self.router.reservations.values().filter(|r|r.started_ms.is_some()&&!self.router.adapters.receipts.contains_key(&r.id)).count();
+        json!({"logical_agents":self.agents.len(),"active_leases":active,"slots":self.slots,"idle_or_archived_agents":self.agents.len().saturating_sub(active),"distinct_classes":classes.len(),"attempts":self.attempt_history.len(),"ended_attempts":ended,"measured_attempts":measured,"attempt_elapsed_ms":elapsed,"verified_yield":self.metrics.accepted,"inference_calls":if uncovered==0{Some(confirmed_requests)}else{None},"confirmed_provider_requests":confirmed_requests,"synthetic_requests":synthetic_requests,"routed_dispatches":routed_dispatches,"uncovered_dispatches":uncovered})
     }
     /// Disable a proven-bad revision. Pending explicit users can be rebound only
     /// to an admitted compatible predecessor. Running work is fenced; submitted

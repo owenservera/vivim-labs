@@ -123,3 +123,28 @@ impl Authority{
         }
     }
 }
+
+
+#[cfg(test)]
+mod qualification {
+    use super::*;
+    #[test]
+    fn rfc4231_hmac_sha256_case_one(){
+        let mac=hmac(&[0x0b;20],b"Hi There");
+        let expected=decode("b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7").unwrap();
+        assert!(same(&mac,&expected));
+        assert!(!same(&mac,&[0u8;32]));
+    }
+    #[test]
+    fn signed_adapter_cannot_act_as_host(){
+        let secret="aa".repeat(32);
+        let mut a=Authority{audience:"lab".into(),principals:BTreeMap::new(),maximum_window_ms:1000};
+        a.principals.insert("transport".into(),Principal{role:Role::Adapter,subject:"adapter".into(),secret_hex:secret.clone(),incarnation:None,goals:BTreeSet::from(["goal".into()]),expires_ms:2000});
+        let mut r=SignedRequest{audience:"lab".into(),principal:"transport".into(),issued_ms:1,expires_ms:100,request:Request{id:"req".into(),actor:Actor::Host,action:Action::Slots{count:64}},signature:String::new()};
+        r.sign(&secret).unwrap();
+        assert!(a.authenticate(&r,2).is_err());
+        r.request.actor=Actor::Adapter{id:"adapter".into()};r.sign(&secret).unwrap();
+        assert!(a.authenticate(&r,2).is_ok());
+        assert!(a.authorize(&r,&World::default(),2).is_err());
+    }
+}

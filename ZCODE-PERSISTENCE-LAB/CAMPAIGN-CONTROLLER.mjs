@@ -8,6 +8,8 @@ import {route} from './MODEL-BUDGET.mjs';
 import {assess} from './COMPLETION-CHECK.mjs';
 const campaign=JSON.parse(fs.readFileSync(new URL('./CAMPAIGN-R010.json',import.meta.url),'utf8'));
 const goal=fs.readFileSync(new URL('./COMPLETION-GOAL.md',import.meta.url),'utf8');
+const charter=JSON.parse(fs.readFileSync(new URL('./SYSTEM-GOALS-R012.json',import.meta.url),'utf8'));
+const goalIds=new Set(charter.goals.map(g=>g.id));
 const hex=x=>typeof x==='string'&&/^[0-9a-f]{64}$/.test(x);
 const str=x=>typeof x==='string'&&x.length>0&&x.length<=65536;
 const fail=x=>{throw Error(x)};
@@ -19,23 +21,25 @@ function advance(x,c){x.controller=c;x.revision++;return x;}
 function checkedLane(lane,provider){
  const l=campaign.lanes[lane];if(!l?.selected||l.provider!==provider)fail('LANE_NOT_SELECTED');return l;
 }
-function normalizedContract(p){
+export function normalizedContract(p){
  if(!p||!str(p.id)||!str(p.release_boundary)||!str(p.out_of_scope)||!Array.isArray(p.mandatory)||p.mandatory.length<1||p.mandatory.length>128)fail('INVALID_CONTRACT');
  const rows=p.mandatory.map(r=>{
   if(!str(r.id)||!str(r.behavior)||!str(r.oracle)||!str(r.falsifier)||!tasks.has(r.task)||!Array.isArray(r.depends_on)||r.depends_on.some(x=>!str(x))||!Number.isInteger(r.priority)||r.priority<0||r.priority>100)fail('INVALID_OBLIGATION');
-  return {id:r.id,behavior:r.behavior,oracle:r.oracle,falsifier:r.falsifier,task:r.task,priority:r.priority,depends_on:[...new Set(r.depends_on)].sort()};
+  if(!Array.isArray(r.goal_ids)||!r.goal_ids.length||r.goal_ids.some(g=>!goalIds.has(g)))fail('INVALID_GOAL_COVERAGE');
+  return {id:r.id,behavior:r.behavior,oracle:r.oracle,falsifier:r.falsifier,task:r.task,priority:r.priority,depends_on:[...new Set(r.depends_on)].sort(),goal_ids:[...new Set(r.goal_ids)].sort()};
  }).sort((a,b)=>a.id.localeCompare(b.id));
+ const covered=new Set(rows.flatMap(r=>r.goal_ids));for(const g of goalIds)if(!covered.has(g))fail('MANDATORY_GOAL_OMITTED:'+g);
  const by=new Map(rows.map(r=>[r.id,r]));if(by.size!==rows.length)fail('DUPLICATE_OBLIGATION');
  const active=new Set(),done=new Set();
  function visit(id){if(done.has(id))return;if(active.has(id)||!by.has(id))fail('CONTRACT_CYCLE_OR_MISSING_DEPENDENCY');active.add(id);for(const d of by.get(id).depends_on)visit(d);active.delete(id);done.add(id);}
  for(const r of rows)visit(r.id);
- const body={id:p.id,version:1,release_boundary:p.release_boundary,out_of_scope:p.out_of_scope,mandatory:rows,frozen:true};
+ const body={id:p.id,version:1,goal_charter_digest:hash(charter),release_boundary:p.release_boundary,out_of_scope:p.out_of_scope,mandatory:rows,frozen:true};
  return {...body,digest:hash(body)};
 }
 export function createRun(ledger,{lane,run_id,seed_digest,workspace_digest}){
  checkedLane(lane,ledger.provider);
  if(ledger.controller||!str(run_id)||!hex(seed_digest)||!hex(workspace_digest))fail('INVALID_RUN_IDENTITY');
- const c={schema:'vivim.campaign.controller/1',lane,run_id,seed_digest,candidate_digest:workspace_digest,phase:'DISCOVER_COMPLETENESS',status:'READY',contract:null,obligations:{},discovery_attempts:0,session:null,incarnation:0,turns:0,stats:{},pending:null,last_checkpoint:null,last_result:null};
+ const c={schema:'vivim.campaign.controller/1',lane,run_id,seed_digest,goal_charter_digest:hash(charter),candidate_digest:workspace_digest,phase:'DISCOVER_COMPLETENESS',status:'READY',contract:null,obligations:{},discovery_attempts:0,session:null,incarnation:0,turns:0,stats:{},pending:null,last_checkpoint:null,last_result:null};
  return advance(ledger,c);
 }
 function ready(c){
@@ -58,7 +62,7 @@ export function next(c){
 }
 function promptFor(c,n){
  const shared='Work only inside your assigned workspace. Return a bounded proposal/checkpoint; no completion claim is authoritative. Do not access controller or external files.';
- if(n.task_id==='discover-contract')return goal+'\n'+shared+'\nPropose JSON contract: {id,release_boundary,out_of_scope,mandatory:[{id,behavior,oracle,falsifier,task,priority,depends_on}]}. Task values: extract, routine, implementation, debug, architecture, critical. Priority 0-100. Inspect supplied objective and source. Do not implement yet.';
+ if(n.task_id==='discover-contract')return goal+'\n'+shared+'\nPropose JSON contract: {id,release_boundary,out_of_scope,mandatory:[{id,behavior,oracle,falsifier,task,priority,depends_on,goal_ids}]}. Task values: extract, routine, implementation, debug, architecture, critical. Priority 0-100. Inspect supplied objective and source. Do not implement yet.';
  return shared+'\nFrozen contract digest: '+c.contract.digest+'\nCurrent obligation: '+JSON.stringify(n.obligation)+'\nPrior independent result: '+JSON.stringify(c.obligations[n.task_id].last_evidence??null)+'\nImplement only the bounded obligation and verify it locally. Report actual changes, test evidence and remaining work. A trusted evaluator will determine acceptance.';
 }
 function checkBoundary(b,c,snapshot){
@@ -112,6 +116,7 @@ export async function runOne({dir,lane,identity,adapter,forecast,caps,clock=Date
   result=transact(dir,prior=>{
    if(!prior){const l=openDay(snapshot,clock());const x=createRun(l,{lane,...identity});x.revision=0;return x;}
    if(prior.controller?.run_id!==identity.run_id||prior.controller?.lane!==lane)fail('RUN_IDENTITY_MISMATCH');
+   if(prior.controller.goal_charter_digest!==hash(charter))fail('GOAL_CHARTER_CHANGED_REVIEW_REQUIRED');
    if(prior.pending||prior.controller.pending||prior.blocked)fail('WAITING_RECONCILIATION');
    const day=new Intl.DateTimeFormat('en-CA',{timeZone:campaign.budget.local_day,year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(clock()));
    if(day!==prior.day){const x=rollDay(prior,snapshot,clock());x.controller=prior.controller;return x;}

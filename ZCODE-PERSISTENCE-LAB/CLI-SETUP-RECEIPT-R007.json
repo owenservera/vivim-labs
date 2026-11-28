@@ -1,0 +1,89 @@
+{
+  "schema": "vivim.cli.setup-receipt/1",
+  "revision": "R007",
+  "date": "2026-11-28",
+  "status": "STOPPED_AFTER_TRANSPORT_QUALIFICATION",
+  "seed_commit": "3b1d7e173071710e6795c09427162292f774030e",
+  "launcher_commit": "4dbfcea264d7a85448087bb935d969ce6a527889",
+  "local_seed_root_relative_to_localappdata": "VIVIM/CLI-Dogfood-Setup/seed-CoEFfK",
+  "seed_receipt": "ctl-8943026d9e6706fc",
+  "seeds": [
+    {
+      "lane": "01",
+      "provider": "codex",
+      "files": 7,
+      "manifest_sha256": "5844fa8706d6554c001fdc7f5d3a8399104a8137ef6822d8b6af5ddd7dd77257"
+    },
+    {
+      "lane": "02",
+      "provider": "agy",
+      "files": 8,
+      "manifest_sha256": "7b3f6decca340c7e96fac6e3555137b292ae04574b8491f950c077b21259d4b5"
+    },
+    {
+      "lane": "03",
+      "provider": "agy",
+      "files": 9,
+      "manifest_sha256": "fb19b0c085de9152c103eb2d273ad059f837af3fa2960af79577d30ac75e66de"
+    },
+    {
+      "lane": "04",
+      "provider": "codex",
+      "files": 13,
+      "manifest_sha256": "ef82d23b2dcc2fc2ae86fb688426923a683593fc27845a0e1b0e3c2510f13cf1"
+    }
+  ],
+  "transport": {
+    "scope": "Synthetic empty workspace; shared authenticated account profiles; not real experiment execution.",
+    "results": [
+      {
+        "lane": "01",
+        "create": "PASS",
+        "resume": "PASS",
+        "receipt": "ctl-edadffc282f04db5"
+      },
+      {
+        "lane": "02",
+        "create": "PASS",
+        "resume": "PASS_PROTOCOL_ONLY",
+        "original_harness_result": "FAIL",
+        "reason": "Original parser flagged a system_message DONE metadata event as a tool. Both turns returned expected nonce, same explicit ID, valid terminal event and exit 0. Event had only conversation_id, step_index, state, step_type, duration_seconds. Corrected parser subsequently qualified on lane 03; lane 02 was not rerun.",
+        "receipt": "ctl-e59955b29730e599"
+      },
+      {
+        "lane": "03",
+        "create": "PASS",
+        "resume": "PASS",
+        "receipt": "ctl-138823e130249ab7"
+      },
+      {
+        "lane": "04",
+        "create": "PASS",
+        "resume": "PASS",
+        "receipt": "ctl-edadffc282f04db5"
+      }
+    ],
+    "strict_harness_pass_lanes": 3,
+    "protocol_success_lanes": 4,
+    "full_cohort_parallel_test": false,
+    "observed_binary_hashes": {
+      "codex_entrypoint": [
+        "61b0194f3bb6534439c8d26a3ed57d0805f84b884588b761795323eeb92fcf70"
+      ],
+      "agy_executable": [
+        "a3c1da45993afff85849d15c0c0bdfef1eed8d048489f9c03f046ec3f8d3221d",
+        "32cae15a97355bdea2116f58a0b481d62c0dca5530e8bd048dacefcb311dfd5e"
+      ]
+    },
+    "binary_drift": "Antigravity binary hash differed across smoke runs; cause/version not reverified. Pin and requalify before controlled comparison.",
+    "campaign_started": false
+  },
+  "open": [
+    "Independent authenticated execution profiles and verified access boundaries; shared Windows profile is not isolation.",
+    "Scoped write tests, cancellation and fault-recovery qualification for both providers.",
+    "Host-owned campaign driver and four-way concurrent execution; setup launcher intentionally has no campaign entry point.",
+    "Pin provider binaries/models and budgets before launch. Do not reuse synthetic sessions for experiment.",
+    "No canonical acceptance score change."
+  ],
+  "stop": "All completed smoke invocations exited; no campaign, worker supervisor or scheduled task started. Initial stdin-blocked Codex probe cancelled using ASDF owned session ctl-8cbb4e0cdfcffbf9."
+}

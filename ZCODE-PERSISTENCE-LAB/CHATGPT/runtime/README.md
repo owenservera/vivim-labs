@@ -1,3 +1,9 @@
+# R004 source checkpoint
+
+The new provider-independent kernel is under [`src/kernel/`](src/kernel/). See [implementation checkpoint and CLI](IMPLEMENTATION-R004.md) and the [canonical acceptance tracker](acceptance-tracker.json). R004 has not been compiled, built or tested; the R003 documentation below remains historical and its commands are not an instruction to execute during the current coding-only phase.
+
+---
+
 # Persistent Intelligence Runtime — R003
 
 Standalone Rust library and CLI implementing the R002 persistent-intelligence design. No AI provider, ZCode, MCP, external effect adapter, or runtime network access. JSON commands are the boundary for an arbitrary future executor; a deterministic pure expression interpreter is the first native executor.

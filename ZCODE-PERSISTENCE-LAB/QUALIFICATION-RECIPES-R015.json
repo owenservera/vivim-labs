@@ -1,0 +1,457 @@
+{
+  "schema": "vivim.dogfood.qualification-recipes/1",
+  "revision": "R015",
+  "scope": "Controller only; no gold seed or primary changes",
+  "status": "DESIGNED_NOT_LIVE_QUALIFIED",
+  "selected": [
+    "01",
+    "04"
+  ],
+  "reserved": [
+    "02",
+    "03"
+  ],
+  "sources": [
+    {
+      "id": "C7-CODEX",
+      "library": "/openai/codex",
+      "date": "2026-11-28",
+      "urls": [
+        "https://github.com/openai/codex/blob/main/codex-rs/app-server-protocol/src/protocol/common.rs",
+        "https://github.com/openai/codex/blob/main/codex-rs/app-server-protocol/src/protocol/v2/thread.rs",
+        "https://github.com/openai/codex/blob/main/sdk/python/src/openai_codex/client.py",
+        "https://github.com/openai/codex/blob/main/codex-rs/app-server-protocol/schema/typescript/v2/TurnCompletedNotification.ts"
+      ],
+      "verified_docs": [
+        "initialize/initialized",
+        "account/read",
+        "account/rateLimits/read",
+        "thread/start",
+        "thread/resume",
+        "thread/read",
+        "turn/start",
+        "turn/completed",
+        "thread/unsubscribe"
+      ],
+      "limits": "Exact installed schema, effective model/effort evidence and interrupt request were not fully returned by this pull; generate or inspect local protocol schema before enabling alternate app-server execution."
+    },
+    {
+      "id": "C7-AGY",
+      "library": "/websites/antigravity_google_cli",
+      "date": "2026-11-28",
+      "urls": [
+        "https://antigravity.google/docs/cli/headless/"
+      ],
+      "verified_docs": [
+        "--conversation explicit resume",
+        "init conversation_id/cwd/tools/permission_mode",
+        "step_update",
+        "result status and usage",
+        "multi-turn stream-json has one init and cumulative result usage"
+      ],
+      "limits": "Effective model and billing/paid overflow fields not established in returned frames; no invented quota API."
+    },
+    {
+      "id": "C7-BWRAP",
+      "library": "/containers/bubblewrap",
+      "date": "2026-11-28",
+      "urls": [
+        "https://github.com/containers/bubblewrap/blob/main/README.md",
+        "https://github.com/containers/bubblewrap/blob/main/bubblewrap.c"
+      ],
+      "verified_docs": [
+        "mount/user/PID/IPC/network namespaces",
+        "--ro-bind",
+        "--proc",
+        "--dev",
+        "--unshare-pid",
+        "--new-session",
+        "--die-with-parent",
+        "--seccomp FD"
+      ],
+      "limits": "No WSL compatibility or local installation verified. Network namespace only loopback; no provider access by default."
+    }
+  ],
+  "recipes": [
+    {
+      "id": "Q07",
+      "gate": "P07",
+      "name": "Entitlement and billing identity",
+      "dependencies": [
+        "P02",
+        "P03"
+      ],
+      "existing": [
+        "CODEX-QUOTA.mjs",
+        "MODEL-QUOTA.mjs"
+      ],
+      "sources": [
+        "C7-CODEX",
+        "C7-AGY"
+      ],
+      "status": "METADATA_VERIFIED_BILLING_OPEN",
+      "steps": [
+        {
+          "op": "resolve_profile",
+          "require": "Dedicated authorized provider login; bind opaque account key to actual account identity, not profile folder name; do not copy credentials."
+        },
+        {
+          "op": "codex_metadata",
+          "method": "account/read",
+          "params": "validate installed schema; return sanitized account identity and type only"
+        },
+        {
+          "op": "codex_limits",
+          "method": "account/rateLimits/read",
+          "params": {},
+          "require": "ordinaryUsageAllowed true, native openai provider, applicable windows; inspect actual credit/spend settings via supported UI or documented interface."
+        },
+        {
+          "op": "agy_metadata",
+          "argv": [
+            "models"
+          ],
+          "require": "Gemini catalogue only for routing"
+        },
+        {
+          "op": "agy_quota",
+          "argv": [
+            "--print-timeout",
+            "10s",
+            "--print",
+            "/usage"
+          ],
+          "require": "Parse actual five-hour and weekly rows; quota metadata alone cannot prove ordinary entitlement or disable paid credits."
+        },
+        {
+          "op": "billing_verification",
+          "require": "Controller records independently observed subscription-only and paid-overflow-disabled state, or stops. No false flags or automatic purchases."
+        }
+      ],
+      "receipt": [
+        "account_key",
+        "provider",
+        "profile_binding_digest",
+        "billing_evidence_digest",
+        "ordinary_usage_allowed",
+        "subscription_only",
+        "paid_overflow_disabled",
+        "observed_at",
+        "model_catalogue_digest",
+        "applicable_quota_windows"
+      ],
+      "pass": "Identity and billing verified under actual launch profile; fresh metadata accepted by ledger.",
+      "fail": "WAITING_AUTHORIZATION"
+    },
+    {
+      "id": "Q08",
+      "gate": "P08",
+      "name": "Isolation and boundary qualification",
+      "dependencies": [
+        "P01"
+      ],
+      "sources": [
+        "C7-BWRAP"
+      ],
+      "status": "DESIGN_ONLY",
+      "strategies": [
+        {
+          "id": "linux_candidate",
+          "prerequisites": [
+            "Native Linux CLI builds installed inside dedicated environment",
+            "Working unprivileged user/mount/PID/IPC/network namespaces",
+            "No Windows interop or host drive mapping exposed",
+            "Private profile login and toolchain snapshot",
+            "Separate controller identity"
+          ],
+          "notes": "WSL availability is not proof. Do not install or change OS settings during recipe qualification without authorization.",
+          "offline_candidate_argv": [
+            "bwrap",
+            "--unshare-user",
+            "--unshare-pid",
+            "--unshare-ipc",
+            "--unshare-net",
+            "--unshare-uts",
+            "--new-session",
+            "--die-with-parent",
+            "--ro-bind",
+            "${trusted_runtime_root}",
+            "/runtime",
+            "--bind",
+            "${private_workspace}",
+            "/work",
+            "--proc",
+            "/proc",
+            "--dev",
+            "/dev",
+            "--chdir",
+            "/work",
+            "${runtime_executable}",
+            "${canary_test}"
+          ],
+          "validation": "Candidate template only: runtime dependencies, mount ordering, environment allowlist, seccomp and flags must be tested on installed version. No /mnt/c, home root, host sockets, controller, sibling, repository, or credentials beyond dedicated provider profile. Offline canary/evaluator mode only; no network."
+        },
+        {
+          "id": "provider_connected",
+          "notes": "Separate enforced egress policy allowing necessary official authentication/inference traffic only; no arbitrary Internet, GitHub, host services, proxy bypass or raw alternate provider. CLI and child tools must be constrained. Do not copy auth tokens or use unofficial proxy. Select VM/separate account plus externally enforced network policy if Linux candidate cannot provide verified containment. A Windows job controls process lifetime, not filesystem or network access."
+        }
+      ],
+      "canaries": [
+        "workspace read/write succeeds",
+        "synthetic parent/sibling/controller canaries inaccessible for read and write",
+        "host drive and junction/symlink escape denied",
+        "child process cannot escape boundary",
+        "unapproved endpoint and local service access denied",
+        "only authorized provider flow permitted",
+        "no inherited MCP, instructions or unrelated account data",
+        "owned process tree exits on cancellation"
+      ],
+      "receipt": [
+        "boundary_id",
+        "lane",
+        "run_id",
+        "provider",
+        "workspace_digest",
+        "profile_binding_digest",
+        "policy_digest",
+        "canary_results",
+        "process_containment_evidence",
+        "evidence_digest"
+      ],
+      "pass": "All canaries independently verified, including effective boundary on actual CLI subprocesses.",
+      "fail": "WAITING_AUTHORIZATION"
+    },
+    {
+      "id": "Q09",
+      "gate": "P09",
+      "name": "Single bounded live provider turn",
+      "dependencies": [
+        "Q07",
+        "Q08",
+        "Q11"
+      ],
+      "sources": [
+        "C7-CODEX",
+        "C7-AGY"
+      ],
+      "status": "CLI_CONTRACTS_EXIST_ADAPTER_OPEN",
+      "existing": [
+        "CODEX-CLI-RECIPE.json",
+        "ANTIGRAVITY-CLI-RECIPE.json",
+        "CAMPAIGN-CONTROLLER.mjs",
+        "CAMPAIGN-BUDGET.mjs"
+      ],
+      "selected_transport": {
+        "codex": "exec --json / exec resume --json as pinned in existing recipe",
+        "agy": "--print --output-format stream-json / --conversation exact ID"
+      },
+      "steps": [
+        "Read trusted boundary and entitlement receipts; recheck binary/package identity, exact workspace digest and goal charter.",
+        "Choose explicit model/effort via selector; persist reservation+intent in account journal under exclusive lock before spawn; fail if reservation missing or stale.",
+        "Render argument arrays without shell; verify allowed flags and no unresolved variables; launch under actual boundary, no inherited profile/environment or tools. Capture raw streams privately; EOF stdin; deadline and output cap.",
+        "Require one exact session ID and matching terminal, successful exit, independently verified effective model/effort and fenced process. Missing evidence -> UNKNOWN, not guessed from requested argv.",
+        "Run Q10 independent verification, refresh Q07 quota, settle both success and failure. Record checkpoint and artifact digest before allowing another turn."
+      ],
+      "alternate_codex": {
+        "enabled": false,
+        "protocol": [
+          {
+            "method": "initialize",
+            "params": {
+              "clientInfo": {
+                "name": "vivim-campaign",
+                "version": "1.0"
+              },
+              "capabilities": {
+                "experimentalApi": true
+              }
+            }
+          },
+          {
+            "notification": "initialized"
+          },
+          {
+            "method": "thread/start",
+            "params": "derive exact installed schema, explicit cwd/model/provider/permission settings"
+          },
+          {
+            "method": "thread/resume",
+            "params": "exact threadId; excludeTurns:true if installed schema supports it; never use latest"
+          },
+          {
+            "method": "turn/start",
+            "params": "threadId and validated input items, explicit model/effort where supported; reserve before call"
+          },
+          {
+            "notification": "turn/completed",
+            "verify": "threadId and turn.id/status from installed schema; preserve raw frames"
+          }
+        ],
+        "note": "No alternate execution until locally qualified. thread/read metadata alone cannot establish turn completion or workspace correctness."
+      },
+      "receipt": [
+        "request_id",
+        "run_id",
+        "lane",
+        "provider",
+        "model",
+        "reasoning_effort",
+        "effective_model_evidence",
+        "session_id",
+        "incarnation",
+        "raw_digest",
+        "exit_code",
+        "terminal",
+        "process_fenced",
+        "actual_tokens",
+        "checkpoint_digest",
+        "boundary_digest"
+      ],
+      "pass": "Fresh and explicit-resume nonce canaries, scoped write, actual model/effort evidence, independent artifact and valid quota settlement.",
+      "fail": "WAITING_RECONCILIATION"
+    },
+    {
+      "id": "Q10",
+      "gate": "P10",
+      "name": "Independent executable evaluator",
+      "dependencies": [
+        "Q08"
+      ],
+      "sources": [
+        "C7-BWRAP"
+      ],
+      "status": "DESIGN_ONLY",
+      "existing": [
+        "COMPLETION-CHECK.mjs",
+        "SUFFICIENCY.mjs",
+        "SYSTEM-GOALS-R013.json"
+      ],
+      "steps": [
+        "Controller approves scope coverage of all nine goals and the proposed frozen contract; reject vacuous or self-referential tests.",
+        "Snapshot candidate file manifest and digest, reject links/reparse points and unexpected external paths. Transfer a copy into separate offline evaluator boundary; no provider auth or worker controller access.",
+        "Run pinned controller-owned oracle commands as argv arrays, not model-provided shell strings; inspect build scripts, dependencies and requested effects; enforce time, memory, output and filesystem ceilings.",
+        "For Rust seed candidate use cargo test --offline --locked only if installed offline dependency/toolchain and manifest allow it; run separately authored behavioral tests, not only candidate tests. No network fetch or hidden side effects.",
+        "Record actual command, executable hash, exit, expected/actual observations, stdout/stderr digests and before/after candidate digest. Evaluate falsification, failure cases and regressions on same candidate. Detect candidate drift.",
+        "Bind all receipts to contract digest, context digest and candidate digest; publish under independent controller custody. Run contextual sufficiency judge only on trusted receipts; failed mandatory criterion reopens bounded repair, unknown effect blocks."
+      ],
+      "receipt": [
+        "authority",
+        "contract_digest",
+        "candidate_digest",
+        "context",
+        "context_digest",
+        "scope_review",
+        "regressions",
+        "failure_cases",
+        "unresolved_mandatory",
+        "unknown_effects",
+        "criteria",
+        "evidence_digest"
+      ],
+      "pass": "Independent oracle rejects deliberately broken candidate and accepts known correct bounded fixture; both real lane candidates evaluated with no worker control over oracle.",
+      "fail": "NOT_COMPLETE"
+    },
+    {
+      "id": "Q11",
+      "gate": "P11",
+      "name": "Quota calibration and dynamic selection",
+      "dependencies": [
+        "Q07"
+      ],
+      "sources": [
+        "C7-AGY",
+        "C7-CODEX"
+      ],
+      "status": "DESIGN_ONLY_CAPS_UNSET",
+      "existing": [
+        "MODEL-BUDGET.mjs",
+        "CAMPAIGN-BUDGET.mjs",
+        "MODEL-OPTIMIZATION-EXPERIMENTS.json"
+      ],
+      "steps": [
+        "Controller configures daily turns/tokens, maximum bounded turn duration, explicit cold-start positive forecast per model/effort/window. No claim of exact provider precharge.",
+        "Protect four equal normalized allocations: 01/03 share Codex, 02/04 share Gemini. Only 01/04 may spend; preserve reserve; no cross-provider unit conversion.",
+        "Run short authorized calibration turns on scratch only after Q08 boundary and Q09 preflight; cap one outstanding turn per account; charge calibration to lane share, not separate free pool.",
+        "Sample matched before/after quota window IDs, usage, elapsed time, independent outcome, effective model. If other account activity cannot be excluded or reset changes, mark ambiguous and block reconciliation; zero delta censored.",
+        "For continuous AGY streams, result.usage can be cumulative: record previous counter and subtract only for same conversation and monotonic cumulative sequence; reset on fresh process unless semantics proven. Do not sum step and result counters. Codex usage scope verified on installed schema.",
+        "Learn conservative cost intervals from attributable samples only; keep count/confidence per task/model/effort; stable prior until sufficient evidence. Evaluate fixed model and fixed effort baselines on held-out workload; no exploration outside authorized daily share."
+      ],
+      "receipt": [
+        "before_snapshot_digest",
+        "after_snapshot_digest",
+        "window_identity",
+        "observed_delta",
+        "rounding_censored",
+        "attribution",
+        "usage_semantics",
+        "usage_counters",
+        "forecast_before",
+        "forecast_after",
+        "verified_outcome",
+        "policy_version"
+      ],
+      "pass": "Actual bounded calibration observed under authorized account; no double counting, no inferred free quota, no reserve/held-share violations.",
+      "fail": "WAITING_BUDGET_OR_RECONCILIATION"
+    },
+    {
+      "id": "Q12",
+      "gate": "P12",
+      "name": "Recovery and paired campaign launch",
+      "dependencies": [
+        "Q07",
+        "Q08",
+        "Q09",
+        "Q10",
+        "Q11"
+      ],
+      "sources": [
+        "C7-CODEX",
+        "C7-AGY",
+        "C7-BWRAP"
+      ],
+      "status": "DESIGN_ONLY",
+      "steps": [
+        "Inject crash before reservation, after reservation before spawn, mid-turn, after terminal before settlement, and after settlement before next decision using synthetic workers first, then bounded authorized live scratch turns.",
+        "Persist owned job/process identity with birth time and generation; cancellation intent before signal. Fence only owned process tree; verify descendants stopped and drain durable stream. Never kill unrelated processes.",
+        "Read account journal hash chain and pending intent; correlate exact request/session/turn, process identity, raw logs and independent workspace diff. Codex thread/read {threadId,includeTurns:false} for metadata, thread/turns/list if installed and required. Antigravity explicit --conversation is a new inference process, NOT a read-only reconciliation probe; use prior receipts and supported local observation only.",
+        "If prior effect uncertain, hold reservation and stop. Trusted reconciliation evidence must account for consumed quota and file effects, and fence prior generation before retry. Never automatically delete writer lock or replay a request.",
+        "Prove checkpoint restoration under fresh model incarnation, preserving frozen contract and verified obligations. Recheck actual candidate digest and requalify affected evidence.",
+        "Start only lanes 01/04 with current charter and manifest; no campaign on reserved lanes. Limit each launch to one bounded turn before independent settlement. Expand only after all gates pass; no unlimited loop or automatic paid overflow."
+      ],
+      "receipt": [
+        "fault_point",
+        "request_id",
+        "generation",
+        "session_binding",
+        "process_fence_evidence",
+        "journal_revision",
+        "checkpoint_digest",
+        "artifact_diff_digest",
+        "quota_reconciliation_digest",
+        "retry_decision",
+        "next_state"
+      ],
+      "pass": "Actual interruption/restart and no duplicate effect, controlled paired execution with independent budgets and evidence.",
+      "fail": "WAITING_RECONCILIATION"
+    }
+  ],
+  "sequence": {
+    "preflight": [
+      "Q07",
+      "Q08"
+    ],
+    "implementation": [
+      "Q09",
+      "Q10",
+      "Q11"
+    ],
+    "qualification": "Resolve Q09/Q11 bootstrap dependency by qualifying transport without inference first, then one explicitly authorized cold-start calibration reservation using conservative forecast and configured caps. Q09 full pass requires Q11 evidence; do not demand impossible prior empirical calibration.",
+    "final": "Q12 only after all five prior full gates pass."
+  },
+  "invariants": [
+    "No new inference in recipe authoring",
+    "No paid overflow or unapproved installation",
+    "No changes to gold seeds or CHATGPT primary",
+    "A recipe is a design contract, not proof of implementation or a launch permission"
+  ]
+}

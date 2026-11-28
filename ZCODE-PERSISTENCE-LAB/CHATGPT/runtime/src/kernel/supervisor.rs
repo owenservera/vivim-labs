@@ -131,7 +131,8 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
         if workspace.join("STOP").exists(){stop_reason="operator_stop";break;}
         let state=store.inspect()?;
         let now=base_clock.saturating_add(u64::try_from(started.elapsed().as_millis()).unwrap_or(u64::MAX)).max(state.clock_ms);
-        if now>state.clock_ms&&(state.running()>0||!state.ready().is_empty()||!state.ready_learning().is_empty()||state.router.trial_active()){
+        let routing_wake=state.router.waits.values().any(|w|!w.terminal&&w.next_check_ms.is_some_and(|n|n<=now));
+        if now>state.clock_ms&&(state.running()>0||!state.ready().is_empty()||!state.ready_learning().is_empty()||state.router.trial_active()||routing_wake){
             host(store,Action::Tick{now_ms:now})?;
         }
         let mut i=0;

@@ -32,6 +32,9 @@ pub struct Plan{
     pub tasks:u32,
     pub steps:u32,
     pub slots:usize,
+    #[serde(default)] pub logical_agents:Option<u32>,
+    #[serde(default)] pub require_worker_exit_observation:bool,
+    #[serde(default)] pub worker_exit_wait_ms:Option<u64>,
     /// Interrupt the owned controller at these minimum verified-work counts.
     pub controller_faults_after:Vec<u32>,
     pub max_duration_ms:u64,
@@ -47,6 +50,10 @@ impl Plan{
         self.policy.validate()?;
         ensure(self.version>0&&self.source_pin.len()==40&&self.source_pin.bytes().all(|b|b.is_ascii_digit()||(b'a'..=b'f').contains(&b)),"valid declared git source pin required")?;
         ensure((1..=256).contains(&self.tasks)&&(1..=128).contains(&self.steps)&&(1..=4).contains(&self.slots),"invalid workload dimensions")?;
+        let population=self.logical_agents.unwrap_or(self.slots as u32);
+        ensure(population>=self.slots as u32&&population<=1024,"invalid logical agent population")?;
+        ensure(!self.require_worker_exit_observation||cfg!(windows),"required independent worker observation unsupported on this platform")?;
+        ensure(self.worker_exit_wait_ms.is_none_or(|n|n>0&&n<=self.max_duration_ms),"invalid worker exit observation budget")?;
         ensure(self.controller_faults_after.len()<self.max_starts as usize&&self.controller_faults_after.windows(2).all(|w|w[0]<w[1])
             &&self.controller_faults_after.iter().all(|n|*n<self.tasks),"invalid fault schedule")?;
         ensure(self.max_duration_ms>0&&self.max_starts>0&&self.max_starts<=1024&&self.jobs_per_start>0
@@ -85,7 +92,7 @@ fn seed(store:&KernelStore,p:&Plan,expected:&BTreeMap<Id,Value>)->Result<()>{
         let task=Plan::task(i);
         apply(Action::Task{spec:TaskSpec{id:task.clone(),goal:"qualification".into(),objective:"bounded integer increments".into(),dependencies:BTreeSet::new(),inputs:BTreeMap::from([("x".into(),Port{shape:Shape::Integer,binding:Binding::Literal{value:json!(p.input(i))}})]),output:Shape::Integer,oracle:Oracle::Digest{expected:digest(&expected[&task])},class:Some("qualification-class@1".into()),family:None,context:Some("qualification-context@1".into()),max_attempts:p.max_starts.saturating_add(1),priority:0,uncertainty:0,information_gain:0,expected_cost:1}})?;
     }
-    for i in 0..p.slots{
+    for i in 0..p.logical_agents.unwrap_or(p.slots as u32){
         apply(Action::Agent{id:format!("qualification-agent-{i}"),goal:"qualification".into(),parent:None,class:"qualification-class@1".into(),context:"qualification-context@1".into()})?;
     }
     apply(Action::Seal{goal:"qualification".into()})?;
@@ -102,6 +109,9 @@ pub struct Fault{
     pub ordinal:usize,pub trigger_verified:u32,pub controller_pid:u32,pub task:Id,
     pub generation:u64,pub injected_ms:u64,pub before:Anchor,
     pub controller_exit:Option<i32>,pub controller_exit_observed:bool,
+    pub expected_worker_pid:u32,pub observed_worker_pids:Option<Vec<u32>>,
+    pub worker_exits:Option<Vec<super::process_observation::ExitObservation>>,
+    pub worker_exit_confirmed:Option<bool>,
     pub recovered_ms:Option<u64>,pub recovered_generation:Option<u64>,pub after:Option<Anchor>,
 }
 #[derive(Default)]
@@ -154,12 +164,14 @@ pub fn run(root:&Path,plan:Plan)->Result<Value>{
     let start=Instant::now();let mut starts=0u32;let mut reserved=0u64;let mut peak=0usize;
     let mut faults:Vec<Fault>=vec![];let mut oracle=OracleState::default();let mut controller:Option<Owned>=None;
     let mut final_reason="budget";let mut valid=BTreeSet::new();let mut clean_exits=0u32;let mut abnormal_exits=0u32;
+    let mut sampled_os_peak:Option<usize>=None;let mut worker_observation_errors=Vec::<String>::new();
     loop{
         let (w,anchor)=store.inspect_with_anchor()?;
         valid=oracle.observe(&w,&expected)?;peak=peak.max(w.running());
         ensure(w.running()<=plan.slots,"observed lease concurrency exceeded configured slots")?;
         if let Some(f)=faults.last_mut().filter(|f|f.recovered_ms.is_none()){
-            if valid.contains(&f.task)&&w.tasks[&f.task].generation>f.generation&&f.controller_exit_observed{
+            if valid.contains(&f.task)&&w.tasks[&f.task].generation>f.generation&&f.controller_exit_observed
+                &&(!plan.require_worker_exit_observation||f.worker_exit_confirmed==Some(true)){
                 f.recovered_ms=Some(millis(start).saturating_sub(f.injected_ms));
                 f.recovered_generation=Some(w.tasks[&f.task].generation);f.after=Some(anchor.clone());
                 write_new(&root,&format!("fault-{:04}-recovered.json",f.ordinal),&value(f)?)?;
@@ -174,13 +186,41 @@ pub fn run(root:&Path,plan:Plan)->Result<Value>{
                 write_new(&root,&format!("controller-{starts:04}-exit.json"),&json!({"pid":c.0.id(),"success":status.success(),"exit_code":status.code(),"anchor":anchor,"elapsed_ms":millis(start)}))?;
                 controller=None;continue;
             }
+            let observed=match super::process_observation::Snapshot::capture(&c.0){
+                Ok(s)=>s,
+                Err(reason)=>{
+                    if worker_observation_errors.len()<128{worker_observation_errors.push(reason);}
+                    None
+                }
+            };
+            let pids=observed.as_ref().map(|s|s.pids());
+            if let Some(p)=&pids{sampled_os_peak=Some(sampled_os_peak.unwrap_or(0).max(p.len()));}
             if faults.last().is_none_or(|f|f.recovered_ms.is_some()){
                 if let Some(&trigger)=plan.controller_faults_after.get(faults.len()).filter(|n|valid.len()>=**n as usize){
-                    if let Some(t)=w.tasks.values().find(|t|t.phase==TaskPhase::Running&&t.lease.as_ref().is_some_and(|l|w.agents.get(&l.worker).and_then(|a|a.incarnations.last()).is_some_and(|i|i.process_ref.is_some()))){
-                        let mut f=Fault{ordinal:faults.len()+1,trigger_verified:trigger,controller_pid:c.0.id(),task:t.spec.id.clone(),generation:t.generation,injected_ms:millis(start),before:anchor.clone(),controller_exit:None,controller_exit_observed:false,recovered_ms:None,recovered_generation:None,after:None};
+                    let candidate=w.tasks.values().filter(|t|t.phase==TaskPhase::Running).filter_map(|t|{
+                        let l=t.lease.as_ref()?;
+                        let i=w.agents.get(&l.worker)?.incarnations.iter().find(|i|i.number==l.incarnation)?;
+                        let pid=i.process_ref.as_deref()?.strip_prefix("native-pid-")?.parse::<u32>().ok()?;
+                        if plan.require_worker_exit_observation&&!pids.as_ref().is_some_and(|p|p.contains(&pid)){return None;}
+                        Some((t,pid))
+                    }).next();
+                    if let Some((t,pid))=candidate{
+                        let mut f=Fault{ordinal:faults.len()+1,trigger_verified:trigger,controller_pid:c.0.id(),task:t.spec.id.clone(),generation:t.generation,injected_ms:millis(start),before:anchor.clone(),controller_exit:None,controller_exit_observed:false,expected_worker_pid:pid,observed_worker_pids:pids.clone(),worker_exits:None,worker_exit_confirmed:None,recovered_ms:None,recovered_generation:None,after:None};
                         write_new(&root,&format!("fault-{:04}-intent.json",f.ordinal),&value(&f)?)?;
                         c.0.kill().map_err(err)?;let status=c.0.wait().map_err(err)?;
                         f.controller_exit=status.code();f.controller_exit_observed=true;
+                        if let Some(s)=observed{
+                            let remaining=plan.max_duration_ms.saturating_sub(millis(start));
+                            let budget=plan.worker_exit_wait_ms.unwrap_or(plan.lease_ms).min(remaining);
+                            match s.wait(Duration::from_millis(budget)){
+                                Ok(exits)=>{
+                                    f.worker_exit_confirmed=Some(exits.iter().any(|e|e.pid==pid&&e.exited&&e.exit_code==Some(75))
+                                        &&exits.iter().all(|e|e.exited));
+                                    f.worker_exits=Some(exits);
+                                }
+                                Err(reason)=>{if worker_observation_errors.len()<128{worker_observation_errors.push(reason);}}
+                            }
+                        }
                         write_new(&root,&format!("fault-{:04}-exit.json",f.ordinal),&value(&f)?)?;
                         faults.push(f);controller=None;continue;
                     }
@@ -215,7 +255,9 @@ pub fn run(root:&Path,plan:Plan)->Result<Value>{
     let report=json!({"schema":1,"plan_digest":plan_digest,"executable_sha256":executable_sha256,"final_anchor":anchor,"stop_reason":final_reason,
         "workload_complete":complete,"policy_met":evaluation.status==Status::Met,"observation":observation,"evaluation":evaluation,
         "faults":faults,"reserved_jobs":reserved,"controller_starts":starts,"clean_exits":clean_exits,"abnormal_exits":abnormal_exits,
-        "sampled_peak_leases":peak,"bad_tasks":oracle.bad_tasks,"lost_tasks":oracle.lost,"duplicate_tasks":oracle.duplicate_tasks,
-        "provider_calls":0,"external_effects":"not_exercised","worker_os_death":"not_independently_observed_here","acceptance_credit":false});
+        "sampled_peak_leases":peak,"sampled_os_peak_children":sampled_os_peak,"logical_agents":w.agents.len(),"worker_observation_errors":worker_observation_errors,
+        "worker_observation_scope":"sampled_direct_child_handles_not_complete_process_containment",
+        "bad_tasks":oracle.bad_tasks,"lost_tasks":oracle.lost,"duplicate_tasks":oracle.duplicate_tasks,
+        "provider_calls":0,"external_effects":"not_exercised","acceptance_credit":false});
     write_new(&root,"report.json",&report)?;Ok(report)
 }

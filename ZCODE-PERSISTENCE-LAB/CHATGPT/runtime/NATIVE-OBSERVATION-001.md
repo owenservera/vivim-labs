@@ -1,0 +1,6 @@
+# Independent worker observation and logical population
+
+Baseline dc0c0cffde048f03494ff6b3af4a2a6c708b3ceb; source-only. Qualification runner optionally requires a real observed Windows direct child corresponding to the durable leased worker PID before fault injection. It retains process handles and creation times across the controller kill, waits within a shared programmable observation budget, records exit codes, and credits recovery only when requested worker observation is satisfied (expected worker exited via parent EOF watchdog code 75 and every sampled handle exited). Non-Windows observation is explicitly unavailable. Snapshot races and unobserved newly spawned workers are not eliminated; this is sampled direct-child evidence, not full process containment. Errors are preserved, no fake zero.
+- Logical agent population is now independent of lease slots. Example uses 60 logical identities; actual peak remains sampled rather than certified.
+- Routing waits now preserve earlier demand deadlines and controller wakes on due routing waits, including when no active lease exists.
+- No build, test, OS query execution or provider calls performed. E44/E47/E49 remain partial pending actual qualification, containment proof and comparative integration. Example configuration is illustrative, not mandatory.

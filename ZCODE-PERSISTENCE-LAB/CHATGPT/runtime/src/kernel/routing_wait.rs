@@ -28,6 +28,11 @@ impl World{
                     let next=c.pools.values().filter_map(|p|match p.window{Window::Fixed{..}=>p.window.bounds(self.clock_ms).ok().and_then(|x|x.1),_=>None}).chain(self.router.cooldowns.values().copied()).chain(self.router.provider_cooldowns.values().copied()).filter(|x|*x>self.clock_ms).min();
                     ("quota_health_or_policy_wait",next,false)
                 };
+            // A demand deadline is relevant even while waiting for a context,
+            // adapter or quota; the controller can wake at that exact boundary.
+            let next=match (next,d.deadline_ms.filter(|n|*n>self.clock_ms)){
+                (Some(a),Some(b))=>Some(a.min(b)),(Some(a),None)=>Some(a),(None,b)=>b,
+            };
             let since=self.router.waits.get(&d.id).filter(|w|w.reason==reason).map_or(self.clock_ms,|w|w.since_ms);
             records.insert(d.id.clone(),WaitRecord{reason:reason.into(),since_ms:since,next_check_ms:next,terminal:end});
             if end{terminal.push(d.task.clone());}

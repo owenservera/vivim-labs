@@ -37,6 +37,7 @@ pub mod native_qualification;
 pub mod comparative;
 pub mod experiment_vault;
 pub mod adapter_mailbox;
+pub mod process_observation;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

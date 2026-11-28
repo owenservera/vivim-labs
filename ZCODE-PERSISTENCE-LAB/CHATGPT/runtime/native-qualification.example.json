@@ -24,5 +24,8 @@
     "max_lost_artifacts": 0,
     "max_duplicate_effects": 0,
     "max_human_interventions": 0
-  }
+  },
+  "logical_agents": 60,
+  "require_worker_exit_observation": true,
+  "worker_exit_wait_ms": 10000
 }

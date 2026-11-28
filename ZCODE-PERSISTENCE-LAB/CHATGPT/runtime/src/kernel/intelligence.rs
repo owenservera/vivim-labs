@@ -37,10 +37,11 @@ impl World {
         }
         // A rejected cohort cannot be repeatedly tuned against the same holdout.
         let mut attempt=LearningAttempt{plan:key.into(),accepted:false,capability:None,reason:None,evaluated:None,holdout_inputs:fingerprints,clock_ms:self.clock_ms};
-        match self.discover(&p.family,p.training.clone(),p.holdouts.clone(),p.input,p.output,p.search_limit){
+        let (discovery,cost)=self.discover_measured(&p.family,p.training.clone(),p.holdouts.clone(),p.input,p.output,p.search_limit);
+        attempt.evaluated=Some(cost.candidates_evaluated);
+        self.metrics.candidate_evaluations=self.metrics.candidate_evaluations.saturating_add(cost.candidates_evaluated);
+        match discovery{
             Ok(d)=>{
-                attempt.evaluated=Some(d.candidates_evaluated);
-                self.metrics.candidate_evaluations=self.metrics.candidate_evaluations.saturating_add(d.candidates_evaluated);
                 match self.assimilate(&p.capability,p.capability_version,d){
                     Ok(cap)=>{attempt.accepted=true;attempt.capability=Some(cap);}
                     Err(reason)=>attempt.reason=Some(reason),
@@ -48,6 +49,7 @@ impl World {
             }
             Err(reason)=>attempt.reason=Some(reason),
         }
+        self.learning_costs.insert(key.into(),LearningCost{plan:key.into(),evaluated:cost.candidates_evaluated,training_evaluations:cost.training_evaluations,holdout_evaluations:cost.holdout_evaluations,accepted:attempt.accepted});
         self.learning_attempts.insert(key.into(),attempt.clone());
         Ok(json!(attempt))
     }
@@ -84,14 +86,15 @@ impl World {
     }
     pub fn record_cost(&mut self,task:&str,generation:u64,elapsed_ms:u64)->Result<()>{
         let t=self.tasks.get(task).ok_or("task missing")?;
-        ensure(generation>0&&generation==t.generation&&elapsed_ms<=3_600_000,"invalid cost receipt")?;
-        let l=t.lease.as_ref().ok_or("cost receipt requires existing lease")?;
-        ensure(l.generation==generation,"stale cost receipt")?;
-        let a=self.agents.get(&l.worker).ok_or("agent missing")?;
-        ensure(a.incarnations.iter().any(|i|i.number==l.incarnation&&i.executor=="native-pure-process"),"cost receipt requires native executor")?;
+        ensure(generation>0&&elapsed_ms<=3_600_000,"invalid cost receipt")?;
         let key=format!("{task}-{generation}");
+        let attempt=self.attempt_history.get(&key).ok_or("attempt receipt missing")?;
+        let a=self.agents.get(&attempt.agent).ok_or("agent missing")?;
+        ensure(a.incarnations.iter().any(|i|i.number==attempt.incarnation&&i.executor=="native-pure-process"),"cost receipt requires native executor")?;
+        let class=Some(attempt.class.clone());
         if let Some(old)=self.run_costs.get(&key){return ensure(old.elapsed_ms==elapsed_ms,"cost receipt conflict");}
-        self.run_costs.insert(key,RunCost{task:task.into(),generation,elapsed_ms,family:t.spec.family.clone(),class:t.assigned_class.clone()});
+        self.run_costs.insert(key.clone(),RunCost{task:task.into(),generation,elapsed_ms,family:t.spec.family.clone(),class});
+        self.attempt_history.get_mut(&key).unwrap().measured_ms=Some(elapsed_ms);
         self.metrics.worker_elapsed_ms=self.metrics.worker_elapsed_ms.saturating_add(elapsed_ms);Ok(())
     }
     fn observed_costs(&self)->BTreeMap<Id,(u128,u128)>{
@@ -117,12 +120,26 @@ impl World {
         while let Some(k)=queue.pop_first(){order.push(k.clone());for s in &successors[&k]{let n=degree.get_mut(s).unwrap();*n-=1;if *n==0{queue.insert(s.clone());}}}
         let mut path:BTreeMap<Id,u64>=BTreeMap::new();
         for k in order.into_iter().rev(){let tail=successors[&k].iter().filter_map(|s|path.get(s)).copied().max().unwrap_or(0);path.insert(k.clone(),costs[&k].saturating_add(tail));}
+        // Infer a bounded empirical uncertainty estimate from verified attempts.
+        let mut family_outcomes:BTreeMap<Id,(u64,u64)>=BTreeMap::new();
+        for a in self.attempt_history.values().filter(|a|a.ended_ms.is_some()){
+            if let Some(f)=self.tasks.get(&a.task).and_then(|t|t.spec.family.as_ref()){
+                let e=family_outcomes.entry(f.clone()).or_default();e.0=e.0.saturating_add(1);
+                if a.outcome.as_deref()==Some("verified"){e.1=e.1.saturating_add(1);}
+            }
+        }
         let p=&self.policy;
         self.tasks.values().filter(|t|live(t)).map(|t|{
+            let (attempts,successes)=t.spec.family.as_ref().and_then(|f|family_outcomes.get(f)).copied().unwrap_or((0,0));
+            // Laplace-smoothed failure probability and decreasing novelty bonus.
+            let failure=1000u128*(u128::from(attempts.saturating_sub(successes))+1)/(u128::from(attempts)+2);
+            let novelty=1000u64/(attempts.saturating_add(1));
+            let uncertainty=i128::from(t.spec.uncertainty)+failure as i128;
+            let gain=i128::from(t.spec.information_gain)+i128::from(novelty);
             let score=i128::from(t.spec.priority)*i128::from(p.priority_weight)
                 +i128::from(path.get(&t.spec.id).copied().unwrap_or(0))*i128::from(p.critical_weight)
-                +i128::from(t.spec.uncertainty)*i128::from(p.uncertainty_weight)
-                +i128::from(t.spec.information_gain)*i128::from(p.information_weight)
+                +uncertainty*i128::from(p.uncertainty_weight)
+                +gain*i128::from(p.information_weight)
                 -i128::from(costs[&t.spec.id])*i128::from(p.cost_weight);
             (t.spec.id.clone(),score)
         }).collect()

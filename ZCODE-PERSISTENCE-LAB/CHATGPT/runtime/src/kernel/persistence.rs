@@ -178,9 +178,18 @@ impl KernelStore{
         let old=crate::Store::open(source)?;let state=old.inspect()?;
         self.commit(Transaction::ImportLegacy{id:request_id,state})
     }
+    pub fn apply_signed(&self,authority:&super::authority::Authority,signed:super::authority::SignedRequest,now_ms:u64)->Result<Value>{
+        authority.authenticate(&signed,now_ms)?;
+        let _guard=self.lock()?;let loaded=self.load()?;
+        let command=Transaction::Command{request:signed.request.clone()};
+        if !loaded.receipts.contains_key(command.id()){authority.authorize(&signed,&loaded.world,now_ms)?;}
+        self.commit_loaded(command,loaded)
+    }
     fn commit(&self,command:Transaction)->Result<Value>{
+        let _guard=self.lock()?;let loaded=self.load()?;self.commit_loaded(command,loaded)
+    }
+    fn commit_loaded(&self,command:Transaction,mut loaded:Loaded)->Result<Value>{
         id(command.id())?;
-        let _guard=self.lock()?;let mut loaded=self.load()?;
         let request_digest=checksum(&command)?;
         if let Some(receipt)=loaded.receipts.get(command.id()){
             ensure(receipt.request_digest==request_digest,"request ID conflict")?;return Ok(receipt.response.clone())

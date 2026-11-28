@@ -188,7 +188,7 @@ impl Router{
             for k in &p.pools{amount(&c.pools[k],p,&Usage::default())?;}
             if let Some(old)=self.config.as_ref().and_then(|x|x.profiles.get(key)){
                 ensure(old.provider==p.provider&&old.account==p.account&&old.model==p.model&&old.thinking==p.thinking&&old.adapter==p.adapter,"profile identity immutable; use a new ID")?;
-                ensure(old.pools.is_subset(&p.pools),"existing profile quota pools cannot be removed")?;
+                ensure(old.pools==p.pools,"profile quota membership immutable; use new profile and reconcile pool usage")?;
                 ensure(!old.frontier||p.frontier,"frontier classification cannot be removed")?;
             }
         }
@@ -320,7 +320,7 @@ impl Router{
             // pool scarcity is the cross-currency signal; price weight is optional.
             let score=value*i128::from(c.policy.quality_weight)/1000-i128::from(l)*i128::from(c.policy.latency_weight)
                 -scarcity*i128::from(c.policy.scarcity_weight)-i128::from(price)*i128::from(c.policy.price_weight)+i128::from(diversity)-opportunity;
-            eligible.push(Decision{profile:key.clone(),expected_success_bps:q,expected_latency_ms:l,holds:h,score,uplift_bps:uplift});
+            eligible.push(Decision{profile:key.clone(),expected_success_bps:q,expected_latency_ms:l,holds:h,score:score.clamp(i128::from(i64::MIN),i128::from(i64::MAX)),uplift_bps:uplift});
         }
         eligible.sort_by(|a,b|b.score.cmp(&a.score).then_with(||a.profile.cmp(&b.profile)));
         Ok(Recommendation{chosen:eligible.first().cloned(),reason:if eligible.is_empty(){"wait_or_require_policy_review"}else{"ranked_feasible_profiles"}.into(),eligible,excluded})
@@ -354,8 +354,10 @@ impl Router{
                 let own=r.holds[pool];let remaining=self.available(pool)?.saturating_add(own);
                 ensure(own<=remaining.saturating_sub(self.forecast_protection(pool)?),"future demand protection changed")?;
             }}
-            if c.pools[pool].require_observation{
-                let p=&c.pools[pool];let o=self.observations.get(pool).ok_or("quota observation missing")?;
+            let p=&c.pools[pool];
+            let fresh=self.observations.get(pool).filter(|o|self.clock_ms.saturating_sub(o.at_ms)<=p.observation_ttl_ms&&(!matches!(p.window,Window::Fixed{..})||p.window.bounds(self.clock_ms).is_ok_and(|b|b.0==o.window_start_ms)));
+            if p.require_observation||fresh.is_some(){
+                let o=fresh.ok_or("fresh quota observation missing")?;
                 ensure(self.clock_ms.saturating_sub(o.at_ms)<=p.observation_ttl_ms,"quota observation expired")?;
                 ensure(!matches!(p.window,Window::Fixed{..})||o.window_start_ms==p.window.bounds(self.clock_ms)?.0,"quota reset requires new observation")?;
                 let after=self.reservations.values().filter(|x|x.status==Status::Settled&&x.ended_ms.is_some_and(|t|t>=o.at_ms)).try_fold(0u64,|n,x|sum(n,*x.actual.get(pool).unwrap_or(&0)))?;

@@ -169,6 +169,12 @@ impl KernelStore{
         let v=serde_json::to_value(loaded.world).map_err(error)?;let mut node=&v;for part in table.split('.'){let Some(next)=node.get(part) else{return Ok(None);};node=next;}Ok(node.get(key).cloned())
     }
     pub fn inspect(&self)->Result<World>{let _guard=self.lock()?;Ok(self.load()?.world)}
+    /// A consistent observation, rather than two separately acquired snapshots.
+    pub fn inspect_with_anchor(&self)->Result<(World,Anchor)>{
+        let _guard=self.lock()?;let s=self.load()?;
+        let anchor=Anchor{revision:s.head.revision,digest:checksum(&s.head)?};
+        Ok((s.world,anchor))
+    }
     pub fn anchor(&self)->Result<Anchor>{
         let _guard=self.lock()?;let s=self.load()?;Ok(Anchor{revision:s.head.revision,digest:checksum(&s.head)?})
     }

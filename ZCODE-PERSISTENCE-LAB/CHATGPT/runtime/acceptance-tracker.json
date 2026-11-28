@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-ENDURANCE-POLICY-001",
+  "revision": "R004-SOURCE-CLOSURE-005",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -920,10 +920,13 @@
       "evidence": [],
       "outstanding": "No qualifying evidence",
       "r004": {
-        "status": "DEFERRED",
-        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
-        "files": [],
-        "remaining": "Separate comparative persistence-policy implementation and experimental cohort; this turn did not alter experiment folders."
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "110b08448c6486d850b60c9034c815931f6693e3",
+        "files": [
+          "src/kernel/comparative.rs"
+        ],
+        "remaining": "Deterministic four-arm manifest and explicit persistence authorities authored; actual isolated adapter enforcement and fresh-root execution remain.",
+        "checkpoint": "SOURCE-CLOSURE-005"
       }
     },
     {
@@ -935,10 +938,14 @@
       "evidence": [],
       "outstanding": "No qualifying evidence",
       "r004": {
-        "status": "DEFERRED",
-        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
-        "files": [],
-        "remaining": "Common fault protocol retained; actual four-arm execution remains deferred."
+        "status": "PARTIAL_SOURCE",
+        "source_pin": "110b08448c6486d850b60c9034c815931f6693e3",
+        "files": [
+          "src/kernel/comparative.rs",
+          "src/kernel/native_qualification.rs"
+        ],
+        "remaining": "Matched repeat seed, workload digest, fault milestones and budget manifest authored; native controller interruption runner authored for one native runtime. Full 24-fault four-arm adapter coverage remains.",
+        "checkpoint": "SOURCE-CLOSURE-005"
       }
     },
     {
@@ -970,13 +977,14 @@
       "outstanding": "Actual policy-pinned independent execution evidence required; no default minimum wall-clock duration.",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
+        "source_pin": "110b08448c6486d850b60c9034c815931f6693e3",
         "files": [
           "src/kernel/endurance.rs",
-          "src/main.rs",
-          "endurance.example.json"
+          "src/kernel/native_qualification.rs",
+          "src/main.rs"
         ],
-        "remaining": "Policy validation and deterministic observation evaluation authored; actual independent observation collection, policy-bound run and evidence qualification remain."
+        "remaining": "Programmable policy plus native-only independent workload and evidence collection authored. Real execution, external observer custody and regression qualification remain.",
+        "checkpoint": "SOURCE-CLOSURE-005"
       }
     },
     {
@@ -989,13 +997,14 @@
       "outstanding": "Actual policy-pinned independent execution evidence required; no default minimum wall-clock duration.",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "3496f0b829b652488cdfdc2ed39da996c2c6e425",
+        "source_pin": "110b08448c6486d850b60c9034c815931f6693e3",
         "files": [
           "src/kernel/endurance.rs",
-          "src/main.rs",
-          "endurance.example.json"
+          "src/kernel/native_qualification.rs",
+          "src/main.rs"
         ],
-        "remaining": "Policy validation and deterministic observation evaluation authored; actual independent observation collection, policy-bound run and evidence qualification remain."
+        "remaining": "Native controller fault scheduling, durable intent/exit/recovery receipts and independent artifact oracle authored; real repeated fault run, independent worker death and four-arm qualification remain.",
+        "checkpoint": "SOURCE-CLOSURE-005"
       }
     },
     {
@@ -1084,9 +1093,10 @@
         "id": "R06",
         "criterion": "Native-first task selection and incarnation-bound dispatch contract",
         "status": "PARTIAL_SOURCE",
-        "remaining": "Durable routing wait reason/reset hint, attempt/deadline exhaustion and native-first matching. Missing automatically derived real-agent inference demand, real adapter and wake/qualification evidence.",
+        "remaining": "Host-programmed explicit goal/family demand generator, native-first, bounded assembled input and frozen profile allowlist authored. Live adapter, wake behavior, profile lifecycle refresh and native qualification remain.",
         "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
-        "source_pin": "0e36d605c6297d53e0c79634b8ed73ff890cc881"
+        "source_pin": "110b08448c6486d850b60c9034c815931f6693e3",
+        "checkpoint": "DEMAND-GENERATION-001"
       },
       {
         "id": "R07",
@@ -1135,7 +1145,7 @@
     }
   },
   "completion_dashboard": {
-    "revision": "R004-ENDURANCE-POLICY-001",
+    "revision": "R004-SOURCE-CLOSURE-005",
     "tracker_input_commit": "d05e332f884a11ef3bcbc69658a4de308adc812a",
     "reviewed_runtime_source": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
     "source_status_meaning": "Provisional source labels after targeted readback and integration; not a complete compiler or invariant audit, not verified operation.",
@@ -1143,8 +1153,8 @@
       "total": 50,
       "counts": {
         "SOURCE_IMPLEMENTED_UNVERIFIED": 39,
-        "PARTIAL_SOURCE": 9,
-        "DEFERRED": 2
+        "PARTIAL_SOURCE": 11,
+        "DEFERRED": 0
       },
       "phases": {
         "P0": {
@@ -1168,8 +1178,8 @@
         },
         "P4": {
           "total": 5,
-          "DEFERRED": 2,
-          "PARTIAL_SOURCE": 3
+          "DEFERRED": 0,
+          "PARTIAL_SOURCE": 5
         }
       },
       "source_coverage_percent": 78,
@@ -1188,8 +1198,8 @@
     "combined_inventory": {
       "total": 60,
       "source_implemented_unverified": 45,
-      "partial_source": 13,
-      "deferred": 2,
+      "partial_source": 15,
+      "deferred": 0,
       "verified_current": 0,
       "source_coverage_percent": 75,
       "meaning": "Unweighted inventory; not original weighted acceptance."
@@ -1298,5 +1308,18 @@
     "example": "endurance.example.json",
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "acceptance_credit": 0
+  },
+  "source_closure_005": {
+    "baseline": "110b08448c6486d850b60c9034c815931f6693e3",
+    "document": "SOURCE-CLOSURE-005.md",
+    "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
+    "verified_credit": 0,
+    "scope": [
+      "R06",
+      "E45",
+      "E46",
+      "E48",
+      "E49"
+    ]
   }
 }

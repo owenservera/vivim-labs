@@ -33,6 +33,8 @@ pub mod recipes;
 pub mod resource;
 pub mod endurance;
 pub mod demand_policy;
+pub mod native_qualification;
+pub mod comparative;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

@@ -159,6 +159,18 @@ fn kernel_cli(args:&[String])->Result<(),String>{
 }
 fn run()->Result<(),String>{
     let args:Vec<_>=env::args().skip(1).collect();
+    if args.first().is_some_and(|x|x=="qualify-native"){
+        let plan=read_json(required(&args,2,"qualification plan file")?)?;
+        let root=std::path::Path::new(required(&args,1,"fresh qualification root")?);
+        let report=persistent_intelligence_runtime::kernel::native_qualification::run(root,plan)?;
+        println!("{}",serde_json::to_string_pretty(&report).map_err(|e|e.to_string())?);
+        return Ok(());
+    }
+    if args.first().is_some_and(|x|x=="comparative-plan"){
+        let spec:persistent_intelligence_runtime::kernel::comparative::Spec=read_json(required(&args,1,"comparison specification")?)?;
+        println!("{}",serde_json::to_string_pretty(&spec.plan()?).map_err(|e|e.to_string())?);
+        return Ok(());
+    }
     if args.first().is_some_and(|x|x=="kernel-controller"){
         use persistent_intelligence_runtime::kernel::{persistence::KernelStore,supervisor::{watch_parent,supervise,RunConfig}};
         use std::path::Path;

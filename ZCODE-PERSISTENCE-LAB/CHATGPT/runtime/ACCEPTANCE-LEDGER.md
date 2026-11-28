@@ -135,3 +135,6 @@ Genesis is not launch-ready. No new gates or weights added; no builds, tests, pr
 ## Closure 002
 
 Source pin 0e36d605c6297d53e0c79634b8ed73ff890cc881. [CLOSURE-002.md](CLOSURE-002.md). Original 39/50 source-implemented/unverified, 7 partial, 4 deferred; routing 6/10 source-implemented/unverified, 4 partial. Combined 45/60 provisional source coverage. Genesis native initialization source present, not qualified. No runtime execution or new verified credit.
+
+## Source closure 005 (unqualified)
+Native programmable qualification runner and matched four-arm planning source authored. E45/E46/E48/E49 remain PARTIAL_SOURCE. The historical PASS column is unchanged. 39/50 provisional source-complete, 11 partial, 0 deferred; no verified R004 acceptance credit. See SOURCE-CLOSURE-005.md.

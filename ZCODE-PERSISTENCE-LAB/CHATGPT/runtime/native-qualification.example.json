@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "source_pin": "110b08448c6486d850b60c9034c815931f6693e3",
+  "seed": 42,
+  "tasks": 12,
+  "steps": 128,
+  "slots": 1,
+  "controller_faults_after": [
+    0,
+    4
+  ],
+  "max_duration_ms": 120000,
+  "max_starts": 8,
+  "total_job_budget": 48,
+  "jobs_per_start": 6,
+  "lease_ms": 30000,
+  "poll_ms": 10,
+  "policy": {
+    "version": 1,
+    "min_elapsed_ms": null,
+    "min_verified_tasks": 12,
+    "min_fault_recoveries": 2,
+    "max_recovery_ms": 30000,
+    "max_lost_artifacts": 0,
+    "max_duplicate_effects": 0,
+    "max_human_interventions": 0
+  }
+}

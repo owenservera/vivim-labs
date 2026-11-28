@@ -48,14 +48,16 @@ impl Drop for Job{
     fn drop(&mut self){if self.child.try_wait().ok().flatten().is_none(){let _=self.child.kill();let _=self.child.wait();}}
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
-pub struct RunConfig {pub duration_ms:u64,pub lease_ms:u64,pub poll_ms:u64,pub max_jobs:u64}
+pub struct RunConfig {pub duration_ms:u64,pub lease_ms:u64,pub poll_ms:u64,pub max_jobs:u64,#[serde(default="default_learning_budget")] pub max_learning_plans:u64,#[serde(default="default_idle_stop")] pub stop_when_idle:bool}
+fn default_learning_budget()->u64{16}
+fn default_idle_stop()->bool{true}
 impl RunConfig{
     pub fn validate(&self)->Result<()>{
-        ensure((1..=259_200_000).contains(&self.duration_ms)&&self.lease_ms>=100&&self.lease_ms<=3_600_000&&self.poll_ms>=10&&self.poll_ms<=self.lease_ms/2&&self.max_jobs>0,"invalid supervisor limits")
+        ensure((1..=259_200_000).contains(&self.duration_ms)&&self.lease_ms>=100&&self.lease_ms<=3_600_000&&self.poll_ms>=10&&self.poll_ms<=self.lease_ms/2&&self.max_jobs>0&&self.max_learning_plans<=1024,"invalid supervisor limits")
     }
 }
 fn suitable(w:&World,task:&Task,class:&str)->Option<Id>{
-    w.agents.values().filter(|a|a.goal==task.spec.goal&&a.class==class&&matches!(a.phase,AgentPhase::Dormant|AgentPhase::Recovering|AgentPhase::WaitingDependency))
+    w.agents.values().filter(|a|a.goal==task.spec.goal&&a.class==class&&matches!(a.phase,AgentPhase::Dormant|AgentPhase::Recovering))
         .filter(|a|task.spec.context.as_ref().is_none_or(|c|c==&a.context)&&w.contexts.get(&a.context).is_some_and(|c|w.assemble(&task.spec,c).is_ok()))
         .min_by_key(|a|(a.incarnations.len(),a.id.clone())).map(|a|a.id.clone())
 }
@@ -79,14 +81,17 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
     fs::create_dir_all(workspace).map_err(error)?;
     let workspace=workspace.canonicalize().map_err(error)?;
     let exe=std::env::current_exe().map_err(error)?;
-    let started=Instant::now();let mut jobs:Vec<Job>=vec![];let mut launched=0u64;let mut completed=0u64;let mut failures=0u64;
+    let started=Instant::now();let mut jobs:Vec<Job>=vec![];let mut launched=0u64;let mut completed=0u64;let mut failures=0u64;let mut learning_runs=0u64;
     let before=store.inspect()?;
     let base_clock=before.clock_ms.max(wall_ms()?);
     let mut stop_reason="duration_limit";
     while started.elapsed()<Duration::from_millis(config.duration_ms){
         if workspace.join("STOP").exists(){stop_reason="operator_stop";break;}
-        let now=base_clock.saturating_add(u64::try_from(started.elapsed().as_millis()).unwrap_or(u64::MAX)).max(store.inspect()?.clock_ms);
-        host(store,Action::Tick{now_ms:now})?;
+        let state=store.inspect()?;
+        let now=base_clock.saturating_add(u64::try_from(started.elapsed().as_millis()).unwrap_or(u64::MAX)).max(state.clock_ms);
+        if now>state.clock_ms&&(state.running()>0||!state.ready().is_empty()||!state.ready_learning().is_empty()){
+            host(store,Action::Tick{now_ms:now})?;
+        }
         let mut i=0;
         while i<jobs.len(){
             let status=jobs[i].child.try_wait().map_err(error)?;
@@ -99,6 +104,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             }
             let Some(status)=status else{i+=1;continue;};
             let job=jobs.swap_remove(i);
+            host(store,Action::RecordCost{task:job.task.clone(),generation:job.generation,elapsed_ms:job.started.elapsed().as_millis().min(3_600_000) as u64})?;
             let output=if status.success(){
                 fs::read(&job.output).map_err(error).and_then(|bytes|{
                     ensure(bytes.len()<=MAX_VALUE_BYTES,"result too large")?;
@@ -121,6 +127,12 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
             if host(store,Action::Verify{task:t.spec.id.clone()})?["accepted"]==true{completed+=1;}else{failures+=1;}
         }
         let mut progress=false;
+        while learning_runs<config.max_learning_plans{
+            let w=store.inspect()?;
+            let Some(plan)=w.ready_learning().into_iter().next() else{break;};
+            host(store,Action::LearnPlan{plan})?;
+            learning_runs+=1;progress=true;
+        }
         while launched<config.max_jobs{
             let w=store.inspect()?;
             if w.running()>=w.slots{break;}
@@ -158,7 +170,7 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
         }
         if jobs.is_empty()&&!progress{
             let w=store.inspect()?;
-            if w.running()==0 {stop_reason=if launched>=config.max_jobs{"job_limit"}else{"idle"};break;}
+            if w.running()==0&&(config.stop_when_idle||launched>=config.max_jobs){stop_reason=if launched>=config.max_jobs{"job_limit"}else{"idle"};break;}
         }
         thread::sleep(Duration::from_millis(config.poll_ms));
     }
@@ -169,5 +181,5 @@ pub fn supervise(store:&KernelStore,workspace:&Path,config:RunConfig)->Result<Va
         drop(job);
     }
     let after=store.inspect()?;
-    Ok(json!({"reason":stop_reason,"launched":launched,"completed":completed,"failures":failures,"elapsed_ms":started.elapsed().as_millis() as u64,"metrics_before":before.metrics,"metrics_after":after.metrics}))
+    Ok(json!({"reason":stop_reason,"launched":launched,"completed":completed,"failures":failures,"learning_runs":learning_runs,"elapsed_ms":started.elapsed().as_millis() as u64,"metrics_before":before.metrics,"metrics_after":after.metrics}))
 }

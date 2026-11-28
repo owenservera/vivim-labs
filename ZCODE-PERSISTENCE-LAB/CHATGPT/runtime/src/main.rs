@@ -71,6 +71,7 @@ fn kernel_cli(args:&[String])->Result<(),String>{
 fn run()->Result<(),String>{
     let args:Vec<_>=env::args().skip(1).collect();
     if args.first().is_some_and(|x|x=="kernel-compute"){
+        if args.get(3).is_some_and(|x|x=="--watch-parent"){persistent_intelligence_runtime::kernel::supervisor::watch_parent();}
         return persistent_intelligence_runtime::kernel::supervisor::compute_file(
             std::path::Path::new(required(&args,1,"work file")?),
             std::path::Path::new(required(&args,2,"result file")?)

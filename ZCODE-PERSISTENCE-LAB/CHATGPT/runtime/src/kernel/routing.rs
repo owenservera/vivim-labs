@@ -85,6 +85,8 @@ pub struct Config{
 pub struct Demand{
     pub id:Id,pub goal:Id,pub task:Id,pub family:Id,pub capabilities:BTreeSet<String>,
     pub input_tokens:u64,pub output_tokens:u64,pub reasoning_tokens:u64,
+    #[serde(default)] pub adaptive_thinking:bool,
+    #[serde(default)] pub minimum_reasoning_tokens:u64,
     pub priority:u16,pub uncertainty_bps:u16,pub information_gain_bps:u16,
     pub minimum_success_bps:u16,pub deadline_ms:Option<u64>,
     pub allowed_profiles:BTreeSet<Id>,pub allowed_providers:BTreeSet<Id>,
@@ -144,8 +146,13 @@ pub(crate) fn amount(pool:&Pool,p:&Profile,u:&Usage)->Result<u64>{
         }
     }
 }
+impl Demand{
+    pub(crate) fn usage_for(&self,p:&Profile)->Usage{
+        Usage{requests:1,input:self.input_tokens,output:self.output_tokens,reasoning:if self.adaptive_thinking{self.reasoning_tokens.min(p.max_reasoning)}else{self.reasoning_tokens},credits:p.credit_ceiling}
+    }
+}
 impl Router{
-    pub fn is_empty(&self)->bool{self.config.is_none()&&self.demands.is_empty()&&self.reservations.is_empty()}
+    pub fn is_empty(&self)->bool{self.config.is_none()&&self.demands.is_empty()&&self.reservations.is_empty()&&self.adapters.bindings.is_empty()&&self.planning.guard.is_none()}
     fn config(&self)->Result<&Config>{self.config.as_ref().ok_or("routing not configured".into())}
     pub fn configure(&mut self,c:Config)->Result<()>{
         ensure(c.policy.version>0&&c.policy.max_attempts>0&&c.policy.max_attempts<=64,"invalid routing policy")?;
@@ -200,7 +207,7 @@ impl Router{
     pub fn queue(&mut self,d:Demand)->Result<()>{
         let c=self.config()?;
         id(&d.id)?;id(&d.goal)?;id(&d.task)?;id(&d.family)?;
-        ensure(!self.demands.contains_key(&d.id)&&d.priority<=1000&&d.uncertainty_bps<=10_000&&d.information_gain_bps<=10_000&&d.minimum_success_bps<=10_000&&d.output_tokens>0,"invalid demand")?;
+        ensure(!self.demands.contains_key(&d.id)&&d.priority<=1000&&d.uncertainty_bps<=10_000&&d.information_gain_bps<=10_000&&d.minimum_success_bps<=10_000&&d.output_tokens>0&&d.minimum_reasoning_tokens<=d.reasoning_tokens,"invalid demand")?;
         ensure(d.extra_pools.iter().all(|k|c.pools.contains_key(k)),"unknown demand quota pool")?;
         ensure(d.extra_pools.iter().all(|k|c.pools[k].frontier.is_none()),"frontier pools must be attached to frontier profiles")?;
         ensure(d.allowed_profiles.iter().all(|k|c.profiles.contains_key(k)),"unknown allowed profile")?;
@@ -270,7 +277,7 @@ impl Router{
         if history.iter().filter(|r|r.status!=Status::Released).count()>=c.policy.max_attempts as usize||d.deadline_ms.is_some_and(|t|t<=self.clock_ms){
             return Ok(Recommendation{chosen:None,eligible:vec![],excluded:BTreeMap::new(),reason:"attempt budget or deadline exhausted".into()});
         }
-        let usage_for=|p:&Profile|Usage{requests:1,input:d.input_tokens,output:d.output_tokens,reasoning:d.reasoning_tokens,credits:p.credit_ceiling};
+        let usage_for=|p:&Profile|d.usage_for(p);
         let mut feasible=Vec::new();let mut excluded=BTreeMap::new();
         for (key,p) in &c.profiles{
             let result=(||->Result<(u16,u64,BTreeMap<Id,u64>)>{
@@ -278,7 +285,8 @@ impl Router{
                 ensure(d.allowed_profiles.is_empty()||d.allowed_profiles.contains(key),"profile not allowed")?;
                 ensure((d.allowed_providers.is_empty()||d.allowed_providers.contains(&p.provider))&&!d.excluded_providers.contains(&p.provider),"provider not allowed")?;
                 ensure(d.capabilities.is_subset(&p.capabilities),"missing capability")?;
-                ensure(sum(sum(d.input_tokens,d.output_tokens)?,d.reasoning_tokens)?<=p.max_context&&d.output_tokens<=p.max_output&&d.reasoning_tokens<=p.max_reasoning,"context or generation limit")?;
+                let usage=d.usage_for(p);
+                ensure(sum(sum(usage.input,usage.output)?,usage.reasoning)?<=p.max_context&&usage.output<=p.max_output&&usage.reasoning<=p.max_reasoning&&usage.reasoning>=d.minimum_reasoning_tokens,"context or generation limit")?;
                 ensure(self.cooldowns.get(key).copied().unwrap_or(0)<=self.clock_ms&&self.provider_cooldowns.get(&format!("{}:{}",p.provider,p.account)).copied().unwrap_or(0)<=self.clock_ms,"profile or account cooling down")?;
                 ensure(self.reservations.values().filter(|r|active(r)&&r.profile.id==*key).count()<p.max_parallel as usize,"profile concurrency limit")?;
                 ensure(!history.iter().any(|r|r.profile.id==*key&&(r.verified==Some(false)||r.outcome==Some(Outcome::Rejected))),"previous verified rejection; use different profile")?;
@@ -323,7 +331,7 @@ impl Router{
         let Some(choice)=rec.chosen.clone() else{self.decisions.insert(key,rec.clone());return Ok(json!({"reserved":false,"decision":rec}));};
         let c=self.config()?;let p=c.profiles[&choice.profile].clone();let d=self.demands[demand].clone();
         let version=c.policy.version;
-        let ceiling=Usage{requests:1,input:d.input_tokens,output:d.output_tokens,reasoning:d.reasoning_tokens,credits:p.credit_ceiling};
+        let ceiling=d.usage_for(&p);
         self.reservations.insert(key.clone(),Reservation{id:key.clone(),demand:demand.into(),goal:d.goal,task:d.task,family:d.family,profile:p,policy_version:version,created_ms:self.clock_ms,started_ms:None,ended_ms:None,status:Status::Reserved,ceiling,holds:choice.holds,actual:BTreeMap::new(),outcome:None,receipt:None,latency_ms:None,verified:None,evidence:None,estimated_success_bps:choice.expected_success_bps,task_generation:None,agent:None,incarnation:None});
         self.decisions.insert(key.clone(),rec.clone());
         Ok(json!({"reserved":true,"reservation":key,"decision":rec}))
@@ -341,6 +349,11 @@ impl Router{
             let (spent,held)=self.totals(&c.pools[pool],None)?;
             if matches!(c.pools[pool].window,Window::Fixed{..}){ensure(c.pools[pool].window.bounds(r.created_ms)?.0==c.pools[pool].window.bounds(self.clock_ms)?.0,"quota reset; release and reroute")?;}
             ensure(spent.saturating_add(held)<=c.pools[pool].limit,"budget reduced below reservations")?;
+            let frontier=&c.pools[pool].frontier;
+            if let Some(f)=frontier{if d.priority<f.critical_priority{
+                let own=r.holds[pool];let remaining=self.available(pool)?.saturating_add(own);
+                ensure(own<=remaining.saturating_sub(self.forecast_protection(pool)?),"future demand protection changed")?;
+            }}
             if c.pools[pool].require_observation{
                 let p=&c.pools[pool];let o=self.observations.get(pool).ok_or("quota observation missing")?;
                 ensure(self.clock_ms.saturating_sub(o.at_ms)<=p.observation_ttl_ms,"quota observation expired")?;

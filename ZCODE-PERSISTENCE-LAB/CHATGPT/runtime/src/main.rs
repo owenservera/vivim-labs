@@ -17,6 +17,7 @@ fn kernel_cli(args:&[String])->Result<(),String>{
     let output=match action{
         "inspect"=>serde_json::to_value(store.inspect()?).map_err(|e|e.to_string())?,
         "ready"=>serde_json::json!(store.inspect()?.ready()),
+        "derived-audit"=>store.inspect()?.derived_audit(),
         "dependency-impact"=>{
             let roots:Vec<Id>=read_json(required(args,3,"root tasks JSON")?)?;
             let limit=required(args,4,"impact limit")?.parse::<usize>().map_err(|e|e.to_string())?;

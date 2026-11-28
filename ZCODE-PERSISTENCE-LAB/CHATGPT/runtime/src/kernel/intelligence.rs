@@ -97,14 +97,8 @@ impl World {
         self.attempt_history.get_mut(&key).unwrap().measured_ms=Some(elapsed_ms);
         self.metrics.worker_elapsed_ms=self.metrics.worker_elapsed_ms.saturating_add(elapsed_ms);Ok(())
     }
-    fn observed_costs(&self)->BTreeMap<Id,(u128,u128)>{
-        let mut out:BTreeMap<Id,(u128,u128)>=BTreeMap::new();
-        for r in self.run_costs.values(){
-            if let Some(f)=&r.family{let e=out.entry(f.clone()).or_default();e.0=e.0.saturating_add(u128::from(r.elapsed_ms));e.1=e.1.saturating_add(1);}
-        }out
-    }
     pub fn schedule_scores(&self)->BTreeMap<Id,i128>{
-        let observations=self.observed_costs();
+        let derived=self.derived_snapshot();let observations=&derived.costs;
         let live=|t:&Task|matches!(t.phase,TaskPhase::Pending|TaskPhase::Running|TaskPhase::Submitted|TaskPhase::Reconciling);
         let costs:BTreeMap<_,u64>=self.tasks.values().filter(|t|live(t)).map(|t|{
             let cost=t.spec.family.as_ref().and_then(|f|observations.get(f)).map(|(sum,n)|u64::try_from((sum/n).max(1)).unwrap_or(u64::MAX)).unwrap_or(u64::from(t.spec.expected_cost));
@@ -121,13 +115,7 @@ impl World {
         let mut path:BTreeMap<Id,u64>=BTreeMap::new();
         for k in order.into_iter().rev(){let tail=successors[&k].iter().filter_map(|s|path.get(s)).copied().max().unwrap_or(0);path.insert(k.clone(),costs[&k].saturating_add(tail));}
         // Infer a bounded empirical uncertainty estimate from verified attempts.
-        let mut family_outcomes:BTreeMap<Id,(u64,u64)>=BTreeMap::new();
-        for a in self.attempt_history.values().filter(|a|a.ended_ms.is_some()){
-            if let Some(f)=self.tasks.get(&a.task).and_then(|t|t.spec.family.as_ref()){
-                let e=family_outcomes.entry(f.clone()).or_default();e.0=e.0.saturating_add(1);
-                if a.outcome.as_deref()==Some("verified"){e.1=e.1.saturating_add(1);}
-            }
-        }
+        let family_outcomes=&derived.outcomes;
         let p=&self.policy;
         self.tasks.values().filter(|t|live(t)).map(|t|{
             let (attempts,successes)=t.spec.family.as_ref().and_then(|f|family_outcomes.get(f)).copied().unwrap_or((0,0));

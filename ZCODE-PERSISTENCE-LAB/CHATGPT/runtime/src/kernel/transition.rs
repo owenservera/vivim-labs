@@ -118,8 +118,8 @@ impl World {
     /// Fail-fast hierarchy policy. An automatically failed parent fences all
     /// still-open descendants, preserving verified artifacts and effect receipts.
     fn terminate_subtree(&mut self,root:&str,phase:GoalPhase,reason:&str)->Result<()>{
-        let topology=super::topology::Topology::build(self);
-        self.terminate_subtree_indexed(root,phase,reason,&topology)
+        let derived=self.derived_snapshot();
+        self.terminate_subtree_indexed(root,phase,reason,&derived.topology)
     }
     fn terminate_subtree_indexed(&mut self,root:&str,phase:GoalPhase,reason:&str,topology:&super::topology::Topology)->Result<()>{
         let mut todo=vec![(root.to_owned(),phase)];
@@ -141,7 +141,7 @@ impl World {
     fn settle(&mut self)->Result<()>{
         // The graph's identities/edges do not change during settlement.
         // Reuse ownership and reverse dependencies while checking live phases.
-        let topology=super::topology::Topology::build(self);
+        let derived=self.derived_snapshot();let topology=&derived.topology;
         loop {
             let mut changed=false;
             let blocked=topology.terminal_dependents(self);
@@ -163,7 +163,7 @@ impl World {
             }
             for (key,phase) in outcomes{
                 if self.goals[&key].phase!=GoalPhase::Open{continue;}
-                if phase!=GoalPhase::Complete{self.terminate_subtree_indexed(&key,phase,"goal terminal",&topology)?;changed=true;continue;}
+                if phase!=GoalPhase::Complete{self.terminate_subtree_indexed(&key,phase,"goal terminal",topology)?;changed=true;continue;}
                 self.goals.get_mut(&key).unwrap().phase=phase.clone();
                 for task in topology.tasks(&key){
                     if self.tasks[task].phase==TaskPhase::Pending{

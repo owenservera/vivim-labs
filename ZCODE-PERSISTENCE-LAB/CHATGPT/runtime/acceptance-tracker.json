@@ -1,6 +1,6 @@
 {
   "schema": "vivim.acceptance/1",
-  "revision": "R004-SOURCE-CLOSURE-011",
+  "revision": "R004-SOURCE-CLOSURE-012",
   "architecture": "../OWNER-DESIGN-R002.md",
   "audit": "ARCHITECTURE-AUDIT-R003.md",
   "policy": {
@@ -678,7 +678,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "e81c70f531cef9875ab88a01edf00205389c7ed7",
+        "source_pin": "714c58e3488e4e63f9f1923b2088b5010ac40e19",
         "files": [
           "src/kernel/index.rs",
           "src/kernel/persistence.rs",
@@ -686,11 +686,13 @@
           "src/kernel/transition.rs",
           "src/kernel/shared_map.rs",
           "src/main.rs",
-          "src/kernel/topology.rs"
+          "src/kernel/topology.rs",
+          "src/kernel/derived.rs",
+          "src/kernel/intelligence.rs"
         ],
-        "remaining": "Ten tracked world tables, grouped leaf patches, bounded resident state, dependency-indexed settlement, archive-before-prune, historical pins, bounded chain/receipt audits and non-destructive programmable capacity reporting authored. Remaining world registries serialize fully, map mutations can copy shared maps, topology rebuilds and archive export/expiry policy and empirical qualification remain.",
+        "remaining": "Tracked pages, resident world, incremental branch-fenced topology and historical cost/attempt projections authored; scheduling still computes graph critical paths and current family outcomes, persistent projection checkpoint and empirical qualification remain.",
         "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
-        "checkpoint": "RETENTION-AUDIT-001"
+        "checkpoint": "DERIVED-STATE-001"
       }
     },
     {
@@ -1169,7 +1171,7 @@
     }
   },
   "completion_dashboard": {
-    "revision": "R004-SOURCE-CLOSURE-011",
+    "revision": "R004-SOURCE-CLOSURE-012",
     "tracker_input_commit": "d05e332f884a11ef3bcbc69658a4de308adc812a",
     "reviewed_runtime_source": "0e36d605c6297d53e0c79634b8ed73ff890cc881",
     "source_status_meaning": "Provisional source labels after targeted readback and integration; not a complete compiler or invariant audit, not verified operation.",
@@ -1396,6 +1398,14 @@
       "RESIDENT-WORLD-001.md",
       "DEPENDENCY-INDEX-001.md",
       "RETENTION-AUDIT-001.md"
+    ],
+    "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
+    "verified_credit": 0
+  },
+  "source_closure_012": {
+    "baseline": "714c58e3488e4e63f9f1923b2088b5010ac40e19",
+    "documents": [
+      "DERIVED-STATE-001.md"
     ],
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "verified_credit": 0

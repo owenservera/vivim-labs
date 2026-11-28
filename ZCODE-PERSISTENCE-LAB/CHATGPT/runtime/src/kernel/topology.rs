@@ -4,24 +4,61 @@
 use super::model::*;
 use crate::Result;
 use serde_json::{json,Value};
+use serde::{Serialize,Deserialize};
 use std::collections::{BTreeMap,BTreeSet,VecDeque};
-#[derive(Default,Debug)]
+#[derive(Clone,Default,Debug,Serialize,Deserialize,PartialEq,Eq)]
 pub(crate) struct Topology{
     tasks:BTreeMap<Id,Vec<Id>>,children:BTreeMap<Id,Vec<Id>>,
     agents:BTreeMap<Id,Vec<Id>>,leases:BTreeMap<Id,Vec<Id>>,
     successors:BTreeMap<Id,Vec<Id>>,
+    goal_rows:BTreeMap<Id,Id>,task_rows:BTreeMap<Id,TaskRow>,agent_rows:BTreeMap<Id,Id>,
+}
+#[derive(Clone,Debug,Serialize,Deserialize,PartialEq,Eq)]
+struct TaskRow{goal:Id,parents:BTreeSet<Id>,worker:Option<Id>}
+fn add(m:&mut BTreeMap<Id,Vec<Id>>,key:&str,id:&str){
+    let v=m.entry(key.into()).or_default();
+    if let Err(i)=v.binary_search_by(|x|x.as_str().cmp(id)){v.insert(i,id.into());}
+}
+fn remove(m:&mut BTreeMap<Id,Vec<Id>>,key:&str,id:&str){
+    if let Some(v)=m.get_mut(key){
+        if let Ok(i)=v.binary_search_by(|x|x.as_str().cmp(id)){v.remove(i);}
+        if v.is_empty(){m.remove(key);}
+    }
 }
 impl Topology{
     pub(crate) fn build(w:&World)->Self{
         let mut t=Self::default();
-        for (key,g) in &w.goals{if let Some(p)=&g.parent{t.children.entry(p.clone()).or_default().push(key.clone());}}
-        for (key,task) in &w.tasks{
-            t.tasks.entry(task.spec.goal.clone()).or_default().push(key.clone());
-            if let Some(l)=&task.lease{t.leases.entry(l.worker.clone()).or_default().push(key.clone());}
-            for p in &task.spec.dependencies{t.successors.entry(p.clone()).or_default().push(key.clone());}
-        }
-        for (key,a) in &w.agents{t.agents.entry(a.goal.clone()).or_default().push(key.clone());}
+        for key in w.goals.keys(){t.goal(w,key);}
+        for key in w.tasks.keys(){t.task(w,key);}
+        for key in w.agents.keys(){t.agent(w,key);}
         t
+    }
+    pub(crate) fn goal(&mut self,w:&World,key:&str){
+        let next=w.goals.get(key).and_then(|g|g.parent.clone());
+        if self.goal_rows.get(key)==next.as_ref(){return;}
+        if let Some(old)=self.goal_rows.remove(key){remove(&mut self.children,&old,key);}
+        if let Some(p)=next{add(&mut self.children,&p,key);self.goal_rows.insert(key.into(),p);}
+    }
+    pub(crate) fn task(&mut self,w:&World,key:&str){
+        let next=w.tasks.get(key).map(|t|TaskRow{goal:t.spec.goal.clone(),parents:t.spec.dependencies.clone(),worker:t.lease.as_ref().map(|l|l.worker.clone())});
+        if self.task_rows.get(key)==next.as_ref(){return;}
+        if let Some(old)=self.task_rows.remove(key){
+            remove(&mut self.tasks,&old.goal,key);
+            if let Some(worker)=old.worker{remove(&mut self.leases,&worker,key);}
+            for p in old.parents{remove(&mut self.successors,&p,key);}
+        }
+        if let Some(row)=next{
+            add(&mut self.tasks,&row.goal,key);
+            if let Some(worker)=&row.worker{add(&mut self.leases,worker,key);}
+            for p in &row.parents{add(&mut self.successors,p,key);}
+            self.task_rows.insert(key.into(),row);
+        }
+    }
+    pub(crate) fn agent(&mut self,w:&World,key:&str){
+        let next=w.agents.get(key).map(|a|a.goal.clone());
+        if self.agent_rows.get(key)==next.as_ref(){return;}
+        if let Some(old)=self.agent_rows.remove(key){remove(&mut self.agents,&old,key);}
+        if let Some(g)=next{add(&mut self.agents,&g,key);self.agent_rows.insert(key.into(),g);}
     }
     fn get<'a>(m:&'a BTreeMap<Id,Vec<Id>>,key:&str)->&'a [Id]{m.get(key).map(Vec::as_slice).unwrap_or(&[])}
     pub(crate) fn tasks(&self,key:&str)->&[Id]{Self::get(&self.tasks,key)}
@@ -46,13 +83,13 @@ impl World{
     /// an instruction to cancel/recompute verified work.
     pub fn dependency_impact(&self,roots:Vec<Id>,limit:usize)->Result<Value>{
         ensure((1..=1024).contains(&limit)&&!roots.is_empty()&&roots.len()<=limit,"invalid dependency impact budget")?;
-        let topology=Topology::build(self);let mut seen=BTreeSet::new();let mut queue=VecDeque::new();
+        let topology=self.derived_snapshot();let mut seen=BTreeSet::new();let mut queue=VecDeque::new();
         for k in roots{ensure(self.tasks.contains_key(&k),"impact root task missing")?;if seen.insert(k.clone()){queue.push_back((k,0usize));}}
         let mut items=vec![];let mut goals=BTreeSet::new();let mut truncated=false;
         while let Some((k,depth))=queue.pop_front(){
             let t=&self.tasks[&k];goals.insert(t.spec.goal.clone());
             items.push(json!({"task":k,"depth":depth,"phase":t.phase,"version":t.version,"generation":t.generation}));
-            for next in topology.successors(&k){
+            for next in topology.topology.successors(&k){
                 if seen.contains(next){continue;}
                 if seen.len()>=limit{truncated=true;continue;}
                 seen.insert(next.clone());queue.push_back((next.clone(),depth+1));

@@ -42,6 +42,7 @@ pub mod assimilation;
 pub mod reuse_economics;
 pub mod shared_map;
 pub mod topology;
+pub mod derived;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

@@ -82,3 +82,7 @@ Source pin: 3496f0b829b652488cdfdc2ed39da996c2c6e425. 40 source-implemented/unve
 ## Supplemental model routing R001
 
 See [MODEL-ROUTING-R001.md](MODEL-ROUTING-R001.md) and [routing.example.json](routing.example.json). Source pin f732d7648c729910a1dfe5ad412e409cb6cc3d58. Seven of ten supplemental routing gates have source implementation; three deferred for live provider adapters, automation and qualification. The original 50-gate source count (40 implemented, 6 partial, 4 deferred) and verification scores remain unchanged. No model calls, builds, tests or experimental folder changes.
+
+## Supplemental model routing R002
+
+Source pin 0f05cb749b5b42986988cbba32d1af1f3b97b740. See [MODEL-ROUTING-R002.md](MODEL-ROUTING-R002.md). Seven implemented/unverified and three partial source; five authored but unexecuted qualification fixtures. Original 50-gate tracker and verified scores unchanged. No real provider adapter, calls, builds or tests.

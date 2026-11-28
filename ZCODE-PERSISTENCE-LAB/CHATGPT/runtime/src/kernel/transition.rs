@@ -15,13 +15,14 @@ pub enum Action {
     ReviseGoal{goal:Id,objective:String,predicate:Option<Oracle>},
     Operator{contract:OperatorContract},Class{class:Class},Context{context:Context},
     Agent{id:Id,goal:Id,parent:Option<Id>,class:Id,context:Id},
-    Activate{agent:Id,executor:String},Retire{agent:Id,reason:String},
+    Activate{agent:Id,executor:String},BindExecutor{agent:Id,incarnation:u64,process_ref:String},
+    MigrateAgent{agent:Id,class:Id,context:Id},Retire{agent:Id,reason:String},
     Task{spec:TaskSpec},Refine{spec:TaskSpec},Seal{goal:Id},Slots{count:usize},
     Claim{task:Id,agent:Id,ttl_ms:u64},Renew{task:Id,generation:u64,ttl_ms:u64},
     Checkpoint{task:Id,generation:u64,data:Value},
     Submit{task:Id,generation:u64,output:Value},Fail{task:Id,generation:u64,reason:String},
     Verify{task:Id},Tick{now_ms:u64},Send{id:Id,recipient:Id,body:Value},Ack{id:Id},
-    WaitMessage{agent:Id},Cancel{goal:Id},
+    WaitMessage{agent:Id},WaitDependency{agent:Id,task:Id},Cancel{goal:Id},
     AdmitCapability{capability:Capability},DisableCapability{capability:Id},
 }
 #[derive(Clone,Debug,Serialize,Deserialize)]
@@ -110,7 +111,12 @@ impl World {
                 changed=true;
             }
             if !changed{break;}
-        }Ok(())
+        }
+        let ready:BTreeSet<_>=self.ready().into_iter().collect();
+        for a in self.agents.values_mut().filter(|a|a.phase==AgentPhase::WaitingDependency){
+            if a.wait_task.as_ref().is_some_and(|t|ready.contains(t)||self.tasks.get(t).is_some_and(|x|matches!(x.phase,TaskPhase::Verified|TaskPhase::Blocked|TaskPhase::Exhausted|TaskPhase::Cancelled))){a.phase=AgentPhase::Dormant;a.wait_task=None;}
+        }
+        Ok(())
     }
     pub fn checkpoint_value(&self,task:&str)->Option<&Value>{
         let t=self.tasks.get(task)?;
@@ -155,19 +161,33 @@ impl World {
                 actor.host()?;id(&key)?;self.open_goal(&goal)?;
                 ensure(!self.agents.contains_key(&key)&&self.classes.contains_key(&class)&&self.contexts.contains_key(&context),"invalid agent")?;
                 if let Some(p)=&parent{ensure(self.agents.get(p).is_some_and(|a|a.goal==goal),"parent missing or out of goal")?;}
-                self.agents.insert(key.clone(),super::model::Agent{id:key,goal,parent,class,context,phase:AgentPhase::Dormant,incarnations:vec![]});
+                self.agents.insert(key.clone(),super::model::Agent{id:key,goal,parent,class,context,phase:AgentPhase::Dormant,incarnations:vec![],wait_task:None});
             }
             Activate{agent,executor}=>{
                 actor.host()?;let a=self.agents.get(&agent).ok_or("agent missing")?;self.open_goal(&a.goal)?;
                 ensure(a.phase!=AgentPhase::Archived&&a.incarnations.last().is_none_or(|i|i.ended_ms.is_some())&&!executor.trim().is_empty(),"cannot activate")?;
                 let a=self.agents.get_mut(&agent).unwrap();let n=a.incarnations.last().map_or(Ok(1),|i|i.number.checked_add(1).ok_or("incarnation overflow"))?;
-                a.incarnations.push(Incarnation{number:n,executor,started_ms:self.clock_ms,ended_ms:None,reason:None});a.phase=AgentPhase::Dormant;
+                a.incarnations.push(Incarnation{number:n,executor,started_ms:self.clock_ms,ended_ms:None,reason:None,process_ref:None});a.phase=AgentPhase::Dormant;
                 return Ok(json!({"incarnation":n}));
+            }
+            BindExecutor{agent,incarnation,process_ref}=>{
+                actor.host()?;ensure(self.current_incarnation(&agent)?==incarnation&&!process_ref.trim().is_empty(),"invalid executor binding")?;
+                let i=self.agents.get_mut(&agent).unwrap().incarnations.last_mut().unwrap();
+                ensure(i.process_ref.is_none(),"executor already bound")?;i.process_ref=Some(process_ref);
+            }
+            MigrateAgent{agent,class,context}=>{
+                actor.host()?;let a=self.agents.get(&agent).ok_or("agent missing")?;self.open_goal(&a.goal)?;
+                ensure(!matches!(a.phase,AgentPhase::Running|AgentPhase::Archived),"cannot migrate agent")?;
+                let c=self.classes.get(&class).ok_or("class missing")?;
+                ensure(class==a.class||c.lineage.contains(&a.class),"migration requires declared class lineage")?;
+                ensure(self.contexts.contains_key(&context),"context missing")?;
+                self.end_agent(&agent,"class/context migration",false)?;
+                let a=self.agents.get_mut(&agent).unwrap();a.class=class;a.context=context;a.wait_task=None;
             }
             Retire{agent,reason}=>{actor.host()?;self.end_agent(&agent,&reason,true)?;}
             Task{spec}=>{
                 actor.host()?;ensure(!self.tasks.contains_key(&spec.id),"task exists")?;self.validate_task(&spec,false)?;
-                self.tasks.insert(spec.id.clone(),super::model::Task{spec,version:1,phase:TaskPhase::Pending,attempts:0,generation:0,lease:None,input:None,proposal:None,artifact:None,reason:None});
+                self.tasks.insert(spec.id.clone(),super::model::Task{spec,version:1,phase:TaskPhase::Pending,attempts:0,generation:0,lease:None,input:None,proposal:None,artifact:None,reason:None,assigned_class:None,assigned_context:None});
             }
             Refine{spec}=>{
                 actor.host()?;let t=self.tasks.get(&spec.id).ok_or("task missing")?;
@@ -187,12 +207,14 @@ impl World {
                 ensure(a.goal==t.spec.goal&&!matches!(a.phase,AgentPhase::Running|AgentPhase::WaitingMessage|AgentPhase::Archived),"agent not eligible")?;
                 let incarnation=self.current_incarnation(&agent)?;
                 if let Some(class)=self.match_class(&t.spec){ensure(class==a.class,"class not eligible")?;}
+                if let Some(context)=&t.spec.context{ensure(context==&a.context,"context not authorized for task")?;}
+                let assigned_class=a.class.clone();let assigned_context=a.context.clone();
                 let c=self.contexts.get(&a.context).ok_or("context missing")?;
                 let input=self.assemble(&t.spec,c)?;
                 let deadline_ms=self.clock_ms.checked_add(ttl_ms).ok_or("deadline overflow")?;
                 let t=self.tasks.get_mut(&task).unwrap();t.attempts+=1;t.generation=t.generation.checked_add(1).ok_or("generation overflow")?;
                 let l=Lease{worker:agent.clone(),incarnation,generation:t.generation,deadline_ms};
-                t.lease=Some(l.clone());t.input=Some(input.clone());t.phase=TaskPhase::Running;t.reason=None;
+                t.lease=Some(l.clone());t.input=Some(input.clone());t.phase=TaskPhase::Running;t.reason=None;t.assigned_class=Some(assigned_class);t.assigned_context=Some(assigned_context);
                 self.goals.get_mut(&t.spec.goal).unwrap().claims+=1;self.agents.get_mut(&agent).unwrap().phase=AgentPhase::Running;
                 self.metrics.claims=self.metrics.claims.saturating_add(1);
                 return Ok(json!({"lease":l,"input":input,"checkpoint":self.checkpoint_value(&task)}));
@@ -211,9 +233,12 @@ impl World {
             Submit{task,generation,output}=>{
                 let t=self.check_lease(actor,&task,generation)?;ensure(t.spec.output.accepts(&output),"output shape mismatch")?;
                 let payload=self.put_payload(output)?;let t=self.tasks.get_mut(&task).unwrap();t.proposal=Some(payload);t.phase=TaskPhase::Submitted;
-                let worker=t.lease.as_ref().unwrap().worker.clone();self.agents.get_mut(&worker).unwrap().phase=AgentPhase::Dormant;
+                let worker=t.lease.as_ref().unwrap().worker.clone();
+                let a=self.agents.get_mut(&worker).unwrap();
+                if let Some(i)=a.incarnations.last_mut(){if i.executor=="native-pure-process"{i.ended_ms=Some(self.clock_ms);i.reason=Some("submitted".into());}}
+                a.phase=AgentPhase::Dormant;
             }
-            Fail{task,generation,reason}=>{self.check_lease(actor,&task,generation)?;ensure(!reason.trim().is_empty(),"reason required")?;self.release(&task,&reason)?;}
+            Fail{task,generation,reason}=>{let t=self.check_lease(actor,&task,generation)?;let worker=t.lease.as_ref().unwrap().worker.clone();ensure(!reason.trim().is_empty(),"reason required")?;self.end_agent(&worker,&reason,false)?;}
             Verify{task}=>{
                 actor.host()?;let t=self.tasks.get(&task).ok_or("task missing")?.clone();
                 ensure(t.phase==TaskPhase::Submitted,"no submission")?;self.open_goal(&t.spec.goal)?;
@@ -223,12 +248,14 @@ impl World {
                 let parents:Vec<_>=t.spec.dependencies.iter().map(|d|self.tasks[d].artifact.clone().ok_or("dependency artifact missing")).collect::<std::result::Result<_,_>>()?;
                 let evidence_id=format!("{}-{}",task,t.generation);ensure(!self.evidence.contains_key(&evidence_id),"evidence already exists")?;
                 let parent_evidence=parents.iter().map(|p|self.artifacts[p].evidence.clone()).collect();
-                self.evidence.insert(evidence_id.clone(),super::model::Evidence{id:evidence_id.clone(),task:task.clone(),generation:t.generation,oracle:t.spec.oracle.clone(),input:input_digest,candidate:candidate.clone(),accepted,verifier:"host".into(),parents:parent_evidence,clock_ms:self.clock_ms});
+                self.evidence.insert(evidence_id.clone(),super::model::Evidence{id:evidence_id.clone(),task:task.clone(),generation:t.generation,oracle:t.spec.oracle.clone(),input:input_digest,candidate:candidate.clone(),accepted,verifier:"host".into(),parents:parent_evidence,clock_ms:self.clock_ms,class:t.assigned_class.clone(),context:t.assigned_context.clone()});
                 if accepted{
                     ensure(!self.artifacts.contains_key(&task),"duplicate admission")?;
                     self.artifacts.insert(task.clone(),Artifact{id:task.clone(),version:t.version,payload:candidate,task:task.clone(),generation:t.generation,inputs:parents,evidence:evidence_id});
                     let x=self.tasks.get_mut(&task).unwrap();x.artifact=Some(task.clone());x.phase=TaskPhase::Verified;x.lease=None;x.proposal=None;
                     self.metrics.accepted=self.metrics.accepted.saturating_add(1);
+                    if t.assigned_class.is_some(){self.metrics.deterministic_runs=self.metrics.deterministic_runs.saturating_add(1);}
+                    if t.spec.class.is_none()&&t.spec.family.is_some()&&t.assigned_class.is_some(){self.metrics.reused=self.metrics.reused.saturating_add(1);}
                 }else{self.metrics.rejected=self.metrics.rejected.saturating_add(1);self.release(&task,"oracle rejected")?;}
                 return Ok(json!({"accepted":accepted,"task":task}));
             }
@@ -250,6 +277,12 @@ impl World {
                 let (who,_)=self.worker_identity(actor)?;ensure(who==agent,"wrong worker")?;
                 let a=self.agents.get_mut(&agent).unwrap();ensure(a.phase!=AgentPhase::Running,"worker busy")?;
                 a.phase=if self.messages.values().any(|m|m.recipient==agent&&!m.acknowledged){AgentPhase::Dormant}else{AgentPhase::WaitingMessage};
+            }
+            WaitDependency{agent,task}=>{
+                let (who,_)=self.worker_identity(actor)?;ensure(who==agent,"wrong worker")?;
+                let t=self.tasks.get(&task).ok_or("task missing")?;
+                let a=self.agents.get_mut(&agent).unwrap();ensure(a.goal==t.spec.goal&&a.phase!=AgentPhase::Running,"worker/task mismatch")?;
+                a.wait_task=Some(task);a.phase=AgentPhase::WaitingDependency;
             }
             Cancel{goal}=>{
                 actor.host()?;self.open_goal(&goal)?;let mut todo=vec![goal];

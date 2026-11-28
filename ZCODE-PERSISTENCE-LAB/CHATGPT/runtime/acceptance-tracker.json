@@ -678,7 +678,7 @@
       "outstanding": "No qualifying evidence",
       "r004": {
         "status": "PARTIAL_SOURCE",
-        "source_pin": "714c58e3488e4e63f9f1923b2088b5010ac40e19",
+        "source_pin": "f2044901552a6797e6d948b7e71978d9b0321deb",
         "files": [
           "src/kernel/index.rs",
           "src/kernel/persistence.rs",
@@ -690,9 +690,9 @@
           "src/kernel/derived.rs",
           "src/kernel/intelligence.rs"
         ],
-        "remaining": "Tracked pages, resident world, incremental branch-fenced topology and historical cost/attempt projections authored; scheduling still computes graph critical paths and current family outcomes, persistent projection checkpoint and empirical qualification remain.",
+        "remaining": "Incremental topology, family cost/attempt aggregates and connected-component critical path recomputation authored; full rebuild on unknown lineage, other registries and empirical qualification remain. Durable derived checkpoint pending.",
         "reviewed_at": "02d3e8f737cfb750b164b1cd6a3ac10e44760b53",
-        "checkpoint": "DERIVED-STATE-001"
+        "checkpoint": "CRITICAL-PATH-001"
       }
     },
     {
@@ -1405,7 +1405,8 @@
   "source_closure_012": {
     "baseline": "714c58e3488e4e63f9f1923b2088b5010ac40e19",
     "documents": [
-      "DERIVED-STATE-001.md"
+      "DERIVED-STATE-001.md",
+      "CRITICAL-PATH-001.md"
     ],
     "verification": "SOURCE_ONLY_NOT_COMPILED_NOT_TESTED",
     "verified_credit": 0

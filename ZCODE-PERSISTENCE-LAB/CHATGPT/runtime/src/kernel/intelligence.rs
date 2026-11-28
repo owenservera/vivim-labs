@@ -98,24 +98,9 @@ impl World {
         self.metrics.worker_elapsed_ms=self.metrics.worker_elapsed_ms.saturating_add(elapsed_ms);Ok(())
     }
     pub fn schedule_scores(&self)->BTreeMap<Id,i128>{
-        let derived=self.derived_snapshot();let observations=&derived.costs;
+        let derived=self.derived_snapshot();
         let live=|t:&Task|matches!(t.phase,TaskPhase::Pending|TaskPhase::Running|TaskPhase::Submitted|TaskPhase::Reconciling);
-        let costs:BTreeMap<_,u64>=self.tasks.values().filter(|t|live(t)).map(|t|{
-            let cost=t.spec.family.as_ref().and_then(|f|observations.get(f)).map(|(sum,n)|u64::try_from((sum/n).max(1)).unwrap_or(u64::MAX)).unwrap_or(u64::from(t.spec.expected_cost));
-            (t.spec.id.clone(),cost)
-        }).collect();
-        let mut successors:BTreeMap<Id,Vec<Id>>=costs.keys().map(|k|(k.clone(),vec![])).collect();
-        let mut degree:BTreeMap<Id,usize>=costs.keys().map(|k|(k.clone(),0)).collect();
-        for t in self.tasks.values().filter(|t|live(t)){
-            for p in &t.spec.dependencies{if let Some(s)=successors.get_mut(p){s.push(t.spec.id.clone());*degree.get_mut(&t.spec.id).unwrap()+=1;}}
-        }
-        let mut queue:BTreeSet<_>=degree.iter().filter(|(_,d)|**d==0).map(|(k,_)|k.clone()).collect();
-        let mut order=vec![];
-        while let Some(k)=queue.pop_first(){order.push(k.clone());for s in &successors[&k]{let n=degree.get_mut(s).unwrap();*n-=1;if *n==0{queue.insert(s.clone());}}}
-        let mut path:BTreeMap<Id,u64>=BTreeMap::new();
-        for k in order.into_iter().rev(){let tail=successors[&k].iter().filter_map(|s|path.get(s)).copied().max().unwrap_or(0);path.insert(k.clone(),costs[&k].saturating_add(tail));}
-        // Infer a bounded empirical uncertainty estimate from verified attempts.
-        let family_outcomes=&derived.outcomes;
+        let costs=&derived.schedule_costs;let path=&derived.critical_paths;let family_outcomes=&derived.outcomes;
         let p=&self.policy;
         self.tasks.values().filter(|t|live(t)).map(|t|{
             let (attempts,successes)=t.spec.family.as_ref().and_then(|f|family_outcomes.get(f)).copied().unwrap_or((0,0));

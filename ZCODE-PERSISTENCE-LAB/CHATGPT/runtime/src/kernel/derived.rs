@@ -2,7 +2,7 @@
 //! rebuild; never trust a revision number shared by diverging World clones.
 use super::{model::*,shared_map::Stamp,topology::Topology};
 use serde_json::{json,Value};
-use std::{collections::BTreeMap,sync::{Arc,Mutex}};
+use std::{collections::{BTreeMap,BTreeSet},sync::{Arc,Mutex}};
 type Cost=(u128,u128);
 type Outcome=(u64,u64);
 #[derive(Clone,Debug)]
@@ -19,14 +19,15 @@ pub(crate) struct Derived{
     attempt_rows:BTreeMap<Id,(Id,bool)>,
     task_outcomes:BTreeMap<Id,Outcome>,
     pub(crate) outcomes:BTreeMap<Id,Outcome>,
+    pub(crate) schedule_costs:BTreeMap<Id,u64>,pub(crate) critical_paths:BTreeMap<Id,u64>,
 }
 impl Derived{
     pub(crate) fn build(w:&World)->Self{
         let mut d=Self{stamps:Stamps::of(w),topology:Topology::build(w),costs:BTreeMap::new(),cost_rows:BTreeMap::new(),
-            attempt_rows:BTreeMap::new(),task_outcomes:BTreeMap::new(),outcomes:BTreeMap::new()};
+            attempt_rows:BTreeMap::new(),task_outcomes:BTreeMap::new(),outcomes:BTreeMap::new(),schedule_costs:BTreeMap::new(),critical_paths:BTreeMap::new()};
         for key in w.run_costs.keys(){d.cost(w,key);}
         for key in w.attempt_history.keys(){d.attempt(w,key);}
-        d.family_outcomes(w);d
+        d.family_outcomes(w);d.recompute_paths(w,&w.tasks.keys().cloned().collect());d
     }
     fn cost(&mut self,w:&World,key:&str){
         let next=w.run_costs.get(key).and_then(|r|r.family.as_ref().map(|f|(f.clone(),r.elapsed_ms)));
@@ -65,29 +66,96 @@ impl Derived{
             }
         }
     }
+    fn adjust_family(&mut self,f:&str,n:Outcome,add:bool){
+        if n.0==0{return;}
+        if add{
+            let e=self.outcomes.entry(f.into()).or_default();e.0+=n.0;e.1+=n.1;
+        }else{
+            let e=self.outcomes.get_mut(f).expect("derived family contribution");
+            e.0-=n.0;e.1-=n.1;
+            if e.0==0{self.outcomes.remove(f);}
+        }
+    }
+    fn recompute_paths(&mut self,w:&World,affected:&BTreeSet<Id>){
+        for k in affected{self.schedule_costs.remove(k);self.critical_paths.remove(k);}
+        let live=|t:&Task|matches!(t.phase,TaskPhase::Pending|TaskPhase::Running|TaskPhase::Submitted|TaskPhase::Reconciling);
+        let costs:BTreeMap<_,u64>=affected.iter().filter_map(|k|w.tasks.get(k)).filter(|t|live(t)).map(|t|{
+            let n=t.spec.family.as_ref().and_then(|f|self.costs.get(f)).map(|(sum,n)|u64::try_from((sum/n).max(1)).unwrap_or(u64::MAX)).unwrap_or(u64::from(t.spec.expected_cost));
+            (t.spec.id.clone(),n)
+        }).collect();
+        let mut successors:BTreeMap<Id,Vec<Id>>=costs.keys().map(|k|(k.clone(),vec![])).collect();
+        let mut degree:BTreeMap<Id,usize>=costs.keys().map(|k|(k.clone(),0)).collect();
+        for key in costs.keys(){
+            let Some(t)=w.tasks.get(key) else{continue;};
+            for p in &t.spec.dependencies{
+                if let Some(s)=successors.get_mut(p){s.push(key.clone());*degree.get_mut(key).unwrap()+=1;}
+            }
+        }
+        let mut queue:BTreeSet<_>=degree.iter().filter(|(_,n)|**n==0).map(|(k,_)|k.clone()).collect();
+        let mut order=vec![];
+        while let Some(k)=queue.pop_first(){
+            order.push(k.clone());
+            for s in &successors[&k]{let n=degree.get_mut(s).unwrap();*n-=1;if *n==0{queue.insert(s.clone());}}
+        }
+        for k in order.into_iter().rev(){
+            let tail=successors[&k].iter().filter_map(|s|self.critical_paths.get(s)).copied().max().unwrap_or(0);
+            self.critical_paths.insert(k.clone(),costs[&k].saturating_add(tail));
+        }
+        self.schedule_costs.extend(costs);
+    }
     fn refresh(&mut self,w:&World,now:Stamps)->bool{
         let Some(goals)=w.goals.changes_since(&self.stamps.goals) else{return false;};
         let Some(tasks)=w.tasks.changes_since(&self.stamps.tasks) else{return false;};
         let Some(agents)=w.agents.changes_since(&self.stamps.agents) else{return false;};
         let Some(costs)=w.run_costs.changes_since(&self.stamps.costs) else{return false;};
         let Some(attempts)=w.attempt_history.changes_since(&self.stamps.attempts) else{return false;};
+        // A family cost can affect many independent components. Include its
+        // old and new task memberships and both versions of rewired edges.
+        let mut families=BTreeSet::new();
+        for k in &costs{
+            if let Some((f,_))=self.cost_rows.get(k){families.insert(f.clone());}
+            if let Some(f)=w.run_costs.get(k).and_then(|r|r.family.as_ref()){families.insert(f.clone());}
+        }
+        let mut roots=tasks.clone();
+        for f in &families{roots.extend(self.topology.family_tasks(f).iter().cloned());}
+        let mut affected=self.topology.component(&roots);
+        // Remove old family attribution for only the affected task/attempt
+        // rows; add current attribution after applying their changes.
+        let mut outcome_tasks=tasks.clone();
+        for k in &attempts{
+            if let Some((t,_))=self.attempt_rows.get(k){outcome_tasks.insert(t.clone());}
+            if let Some(a)=w.attempt_history.get(k){outcome_tasks.insert(a.task.clone());}
+        }
+        for k in &outcome_tasks{
+            let old=self.topology.task_family(k).map(str::to_owned);
+            let n=self.task_outcomes.get(k).copied().unwrap_or_default();
+            if let Some(f)=old{self.adjust_family(&f,n,false);}
+        }
         for k in goals{self.topology.goal(w,&k);}
         for k in &tasks{self.topology.task(w,k);}
         for k in agents{self.topology.agent(w,&k);}
         for k in costs{self.cost(w,&k);}
-        let changed=!attempts.is_empty()||!tasks.is_empty();
         for k in attempts{self.attempt(w,&k);}
-        if changed{self.family_outcomes(w);}
+        for k in &outcome_tasks{
+            let new=self.topology.task_family(k).map(str::to_owned);
+            let n=self.task_outcomes.get(k).copied().unwrap_or_default();
+            if let Some(f)=new{self.adjust_family(&f,n,true);}
+        }
+        for f in &families{roots.extend(self.topology.family_tasks(f).iter().cloned());}
+        // Former components remain dirty even after disconnect/deletion.
+        roots.extend(affected.iter().cloned());
+        affected.extend(self.topology.component(&roots));
+        if !affected.is_empty(){self.recompute_paths(w,&affected);}
         self.stamps=now;true
     }
     pub(crate) fn projection(&self)->Value{
         // Decimal strings preserve exact wide integer sums in JSON.
         let costs:BTreeMap<_,_>=self.costs.iter().map(|(f,(sum,n))|(f.clone(),[sum.to_string(),n.to_string()])).collect();
-        json!({"schema":1,"topology":self.topology,"costs":costs,"family_outcomes":self.outcomes})
+        json!({"schema":1,"topology":self.topology,"costs":costs,"family_outcomes":self.outcomes,"schedule_costs":self.schedule_costs,"critical_paths":self.critical_paths})
     }
 }
 #[derive(Default,Debug)]
-pub(crate) struct Cache{inner:Mutex<Option<Arc<Derived>>>}
+pub struct Cache{inner:Mutex<Option<Arc<Derived>>>}
 impl Clone for Cache{
     fn clone(&self)->Self{Self{inner:Mutex::new(self.inner.lock().unwrap_or_else(|e|e.into_inner()).clone())}}
 }

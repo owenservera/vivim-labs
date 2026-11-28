@@ -10,11 +10,11 @@ use std::collections::{BTreeMap,BTreeSet,VecDeque};
 pub(crate) struct Topology{
     tasks:BTreeMap<Id,Vec<Id>>,children:BTreeMap<Id,Vec<Id>>,
     agents:BTreeMap<Id,Vec<Id>>,leases:BTreeMap<Id,Vec<Id>>,
-    successors:BTreeMap<Id,Vec<Id>>,
+    successors:BTreeMap<Id,Vec<Id>>,families:BTreeMap<Id,Vec<Id>>,
     goal_rows:BTreeMap<Id,Id>,task_rows:BTreeMap<Id,TaskRow>,agent_rows:BTreeMap<Id,Id>,
 }
 #[derive(Clone,Debug,Serialize,Deserialize,PartialEq,Eq)]
-struct TaskRow{goal:Id,parents:BTreeSet<Id>,worker:Option<Id>}
+struct TaskRow{goal:Id,parents:BTreeSet<Id>,worker:Option<Id>,family:Option<Id>}
 fn add(m:&mut BTreeMap<Id,Vec<Id>>,key:&str,id:&str){
     let v=m.entry(key.into()).or_default();
     if let Err(i)=v.binary_search_by(|x|x.as_str().cmp(id)){v.insert(i,id.into());}
@@ -40,17 +40,19 @@ impl Topology{
         if let Some(p)=next{add(&mut self.children,&p,key);self.goal_rows.insert(key.into(),p);}
     }
     pub(crate) fn task(&mut self,w:&World,key:&str){
-        let next=w.tasks.get(key).map(|t|TaskRow{goal:t.spec.goal.clone(),parents:t.spec.dependencies.clone(),worker:t.lease.as_ref().map(|l|l.worker.clone())});
+        let next=w.tasks.get(key).map(|t|TaskRow{goal:t.spec.goal.clone(),parents:t.spec.dependencies.clone(),worker:t.lease.as_ref().map(|l|l.worker.clone()),family:t.spec.family.clone()});
         if self.task_rows.get(key)==next.as_ref(){return;}
         if let Some(old)=self.task_rows.remove(key){
             remove(&mut self.tasks,&old.goal,key);
             if let Some(worker)=old.worker{remove(&mut self.leases,&worker,key);}
             for p in old.parents{remove(&mut self.successors,&p,key);}
+            if let Some(f)=old.family{remove(&mut self.families,&f,key);}
         }
         if let Some(row)=next{
             add(&mut self.tasks,&row.goal,key);
             if let Some(worker)=&row.worker{add(&mut self.leases,worker,key);}
             for p in &row.parents{add(&mut self.successors,p,key);}
+            if let Some(f)=&row.family{add(&mut self.families,f,key);}
             self.task_rows.insert(key.into(),row);
         }
     }
@@ -66,6 +68,21 @@ impl Topology{
     pub(crate) fn agents(&self,key:&str)->&[Id]{Self::get(&self.agents,key)}
     pub(crate) fn leases(&self,key:&str)->&[Id]{Self::get(&self.leases,key)}
     pub(crate) fn successors(&self,key:&str)->&[Id]{Self::get(&self.successors,key)}
+    pub(crate) fn family_tasks(&self,key:&str)->&[Id]{Self::get(&self.families,key)}
+    pub(crate) fn task_family(&self,key:&str)->Option<&str>{self.task_rows.get(key).and_then(|r|r.family.as_deref())}
+    /// Include both predecessors and successors, even when an intermediate
+    /// task is terminal. Conservative weak components handle rewired edges,
+    /// removed nodes and cross-goal edges without relying on an old DAG.
+    pub(crate) fn component(&self,roots:&BTreeSet<Id>)->BTreeSet<Id>{
+        let mut seen=roots.clone();let mut queue:VecDeque<_>=roots.iter().cloned().collect();
+        while let Some(key)=queue.pop_front(){
+            if let Some(row)=self.task_rows.get(&key){
+                for p in &row.parents{if seen.insert(p.clone()){queue.push_back(p.clone());}}
+            }
+            for s in self.successors(&key){if seen.insert(s.clone()){queue.push_back(s.clone());}}
+        }
+        seen
+    }
     pub(crate) fn terminal_dependents(&self,w:&World)->BTreeSet<Id>{
         let mut out=BTreeSet::new();
         for (key,t) in &w.tasks{

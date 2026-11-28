@@ -167,3 +167,5 @@ Retention closure: anchor-fenced bounded history chain and receipt audit, explic
 
 ## Source closure 012 (unqualified)
 Branch-safe mutation lineage and resident incremental topology/cost/attempt projections. Scheduler retains original score formula. E33 remains partial; no build/test or score credit. See DERIVED-STATE-001.md.
+
+Critical path source addition: recalculate old/new affected dependency components and family cost memberships only; update family outcome counts by exact changed task/attempt contributions. See CRITICAL-PATH-001.md. No qualification credit.

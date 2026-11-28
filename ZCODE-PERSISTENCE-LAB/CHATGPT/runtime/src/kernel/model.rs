@@ -284,7 +284,7 @@ pub struct World {
     #[serde(default,skip_serializing_if="super::shared_map::SharedMap::is_empty")] pub host_costs:super::shared_map::SharedMap<super::resource::HostCost>,
     #[serde(default,skip_serializing_if="super::assimilation::Registry::is_empty")] pub assimilation:super::assimilation::Registry,
     #[serde(default,skip_serializing_if="super::reuse_economics::Registry::is_empty")] pub reuse_economics:super::reuse_economics::Registry,
-    #[serde(skip)] pub(crate) derived:super::derived::Cache,
+    #[serde(skip)] #[doc(hidden)] pub derived:super::derived::Cache,
     pub legacy_import:Option<super::migration::LegacyArchive>,
 }
 impl World{

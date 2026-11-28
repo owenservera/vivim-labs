@@ -28,7 +28,7 @@ pub struct Receipt {pub request_digest:String,pub response:Value,pub revision:u6
 #[derive(Clone,Debug,Serialize,Deserialize)]
 struct Snapshot {schema:u32,revision:u64,previous:String,world:World,receipts:BTreeMap<Id,Receipt>}
 #[derive(Clone,Debug,Serialize,Deserialize)]
-struct Record {schema:u32,revision:u64,previous:String,command:Transaction,response:Value}
+struct Record {schema:u32,revision:u64,previous:String,command:Transaction,response:Value,#[serde(default,skip_serializing_if="Option::is_none")] index:Option<String>}
 #[derive(Clone,Debug,Serialize,Deserialize)]
 struct Envelope<T>{checksum:String,body:T}
 impl<T:Serialize> Envelope<T>{
@@ -115,13 +115,15 @@ impl KernelStore{
             let start=top.body.snapshot;
             let mut previous=if start==0{"genesis".to_string()}else{
                 let marker:Envelope<Head>=read(&self.path("head",start))?;marker.check()?;
-                ensure(marker.body.revision==start,"checkpoint head mismatch")?;
+                ensure(marker.body.revision==start&&marker.body.index==marker.body.snapshot_digest&&marker.body.snapshot==start&&marker.body.index==top.body.snapshot_digest,"checkpoint head mismatch")?;
+                let rec:Envelope<Record>=read(&self.path("record",start))?;rec.check()?;
+                ensure(rec.body.revision==start&&rec.body.index==marker.body.index&&rec.checksum==marker.body.record,"checkpoint record mismatch")?;
                 marker.body.record
             };
             for rev in (start+1)..=latest{
                 let marker:Envelope<Head>=read(&self.path("head",rev))?;marker.check()?;
                 let rec:Envelope<Record>=read(&self.path("record",rev))?;rec.check()?;
-                ensure(marker.body.revision==rev&&marker.body.record==rec.checksum&&rec.body.revision==rev&&rec.body.previous==previous,"indexed journal chain mismatch")?;
+                ensure(marker.body.revision==rev&&marker.body.record==rec.checksum&&rec.body.revision==rev&&rec.body.previous==previous&&rec.body.index==marker.body.index,"indexed journal chain mismatch")?;
                 let receipt=receipts.get(rec.body.command.id()).ok_or("indexed receipt missing")?;
                 ensure(receipt.revision==rev&&receipt.request_digest==checksum(&rec.body.command)?&&receipt.response==rec.body.response,"indexed receipt mismatch")?;
                 previous=rec.checksum;
@@ -162,7 +164,7 @@ impl KernelStore{
     }
     pub fn inspect(&self)->Result<World>{let _guard=self.lock()?;Ok(self.load()?.world)}
     pub fn anchor(&self)->Result<Anchor>{
-        let _guard=self.lock()?;let s=self.load()?;Ok(Anchor{revision:s.head.revision,digest:s.head.record})
+        let _guard=self.lock()?;let s=self.load()?;Ok(Anchor{revision:s.head.revision,digest:checksum(&s.head)?})
     }
     pub fn verify_anchor(&self,anchor:&Anchor)->Result<()>{
         let current=self.anchor()?;
@@ -199,11 +201,11 @@ impl KernelStore{
         // Record/snapshot without head are orphan preparations from a prior interrupted commit.
         for kind in ["record","snapshot"]{let p=self.path(kind,rev);if p.exists(){fs::remove_file(p).map_err(error)?;}}
         let request_id=command.id().to_string();
-        let rec=Envelope::new(Record{schema:1,revision:rev,previous:loaded.head.record.clone(),command,response:response.clone()})?;
-        write_new(&self.root,&Self::name("record",rev),&rec)?;
         loaded.receipts.insert(request_id,Receipt{request_digest,response:response.clone(),revision:rev});
         let index=super::index::Index::open(&self.root)?;
         let index_root=index.write(rev,&loaded.world,&loaded.receipts,loaded.head.index.as_deref())?;
+        let rec=Envelope::new(Record{schema:1,revision:rev,previous:loaded.head.record.clone(),command,response:response.clone(),index:Some(index_root.clone())})?;
+        write_new(&self.root,&Self::name("record",rev),&rec)?;
         let (snapshot,snapshot_digest)=if rev%SNAP_INTERVAL==0||loaded.head.index.is_none(){
             (rev,Some(index_root.clone()))
         }else{(loaded.head.snapshot,loaded.head.snapshot_digest)};
@@ -227,7 +229,7 @@ impl KernelStore{
             let Some((n,kind))=name.split_once('.') else{continue};
             let Ok(rev)=n.parse::<u64>() else{continue};
             if rev<snapshot&&matches!(kind,"head.json"|"record.json"|"snapshot.json"){fs::remove_file(e.path()).map_err(error)?;}
-            if rev==snapshot&&kind=="record.json"{fs::remove_file(e.path()).map_err(error)?;}
+            // Retain the checkpoint record as its index-root anchor.
         }
         sync_directory(&self.root)
     }

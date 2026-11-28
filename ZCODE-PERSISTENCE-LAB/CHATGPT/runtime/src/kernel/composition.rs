@@ -107,6 +107,7 @@ impl World {
                     ensure(predecessor.phase==TaskPhase::Verified,"predecessor unverified")?;
                     self.artifact_value(predecessor.artifact.as_deref().ok_or("predecessor artifact missing")?)?
                 }
+                Binding::Knowledge{version}=>self.knowledge_value(version,task.family.as_deref())?,
                 Binding::Context{key}=>{
                     let v=if let Some(v)=context.entries.get(key){v}
                     else{self.artifact_value(context.artifacts.get(key).ok_or("context key missing")?)?};
@@ -152,6 +153,7 @@ impl World {
                     ensure(port.shape.admits(&self.tasks.get(task).ok_or("dependency missing")?.spec.output),"predecessor shape mismatch")?;
                 }
                 Binding::Context{key}=>id(key)?,
+                Binding::Knowledge{version}=>{let v=self.knowledge_value(version,spec.family.as_deref())?;ensure(port.shape.accepts(v),"knowledge shape mismatch")?;}
             }
         }
         if let Some(key)=&spec.class{
@@ -164,7 +166,10 @@ impl World {
         Ok(())
     }
     pub fn match_class(&self,spec:&TaskSpec)->Option<Id>{
-        if let Some(c)=&spec.class{return Some(c.clone());}
+        if let Some(c)=&spec.class{
+            let learned=self.capabilities.values().any(|k|&k.class==c);
+            return if !learned||self.capabilities.values().any(|k|&k.class==c&&k.enabled){Some(c.clone())}else{None};
+        }
         let family=spec.family.as_ref()?;
         self.capabilities.values().filter(|c|c.enabled&&&c.family==family)
             .filter(|c|self.classes.get(&c.class).is_some_and(|k|k.input.admits(&Self::input_shape(spec))&&spec.output.admits(&k.output)))

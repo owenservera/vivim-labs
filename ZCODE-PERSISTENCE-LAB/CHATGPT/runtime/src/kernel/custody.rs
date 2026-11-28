@@ -2,7 +2,7 @@
 //! A frozen class is evaluated once per registered cohort; only commitments
 //! and the scoped verifier's signed verdict enter the host journal.
 use super::{model::*,evolution::SearchReceipt};
-use crate::{digest,Result};
+use crate::{digest,Result,Operator};
 use serde::{Serialize,Deserialize};
 use serde_json::{Value,json};
 use std::collections::BTreeSet;
@@ -65,6 +65,30 @@ impl World{
         // Registering a cohort makes independent custody mandatory for that family.
         self.custody_families.insert(c.family.clone());self.cohorts.insert(c.id.clone(),c);Ok(())
     }
+    pub fn freeze_learned(&mut self,key:Id,name:Id,version:u64,cohort:Id,training:Vec<Id>,input:Shape,output:Shape,limit:u64)->Result<Value>{
+        let c=self.cohorts.get(&cohort).ok_or("cohort missing")?.clone();
+        ensure((2..=128).contains(&training.len())&&(1..=100_000).contains(&limit),"invalid training budget")?;
+        let mut seen=BTreeSet::new();let mut examples=Vec::new();
+        for sample in &training{
+            let pair=self.example(sample,&c.family,&input,&output)?;
+            ensure(seen.insert(digest(&pair.0)),"duplicate training input")?;examples.push(pair);
+        }
+        ensure(self.cohorts.values().all(|h|h.input_fingerprints.is_disjoint(&seen)),"training overlaps reserved cohort")?;
+        ensure(!self.learning_costs.contains_key(&key),"candidate search already recorded")?;
+        let mut cost=SearchReceipt::default();
+        let discovered=super::evolution::synthesize(&input,&output,&examples,limit,&mut cost);
+        self.metrics.candidate_evaluations=self.metrics.candidate_evaluations.saturating_add(cost.candidates_evaluated);
+        self.learning_costs.insert(key.clone(),LearningCost{plan:key.clone(),evaluated:cost.candidates_evaluated,training_evaluations:cost.training_evaluations,holdout_evaluations:0,accepted:discovered.is_ok()});
+        let program=match discovered{Ok(p)=>p,Err(reason)=>return Ok(json!({"candidate":key,"frozen":false,"reason":reason,"search":cost}))};
+        let class_key=version_key(&name,version)?;
+        ensure(!self.operators.contains_key(&class_key)&&!self.classes.contains_key(&class_key),"candidate version exists")?;
+        let parent=self.capabilities.values().filter(|p|p.id==name&&p.version<version).max_by_key(|p|p.version).map(|p|p.class.clone());
+        self.operators.insert(class_key.clone(),OperatorContract{id:name.clone(),version,behavior:Operator::Learn,input:input.clone(),output:output.clone(),program});
+        let class=Class{id:name.clone(),version,input,output,nodes:vec![Node{id:"learned".into(),operator:class_key.clone(),input:Wire::Input}],result:Wire::Node{id:"learned".into()},lineage:parent.into_iter().collect()};
+        self.validate_class(&class)?;self.classes.insert(class_key.clone(),class);
+        let mut result=self.freeze_candidate(key,Capability{id:name,version,family:c.family,class:class_key,training,holdouts:vec![],enabled:true},cohort)?;
+        result["frozen"]=json!(true);result["search"]=json!(cost);Ok(result)
+    }
     pub fn freeze_candidate(&mut self,key:Id,capability:Capability,cohort:Id)->Result<Value>{
         id(&key)?;let capkey=version_key(&capability.id,capability.version)?;
         let c=self.cohorts.get(&cohort).ok_or("cohort missing")?;
@@ -110,7 +134,11 @@ impl World{
                 }
             }
         }
-        self.capabilities.insert(capkey.clone(),c);self.metrics.learned=self.metrics.learned.saturating_add(1);
+        let artifacts:Vec<_>=c.training.iter().map(|t|self.tasks[t].artifact.clone().ok_or("training artifact missing")).collect::<std::result::Result<_,_>>()?;
+        let evidence=artifacts.iter().map(|a|self.artifacts[a].evidence.clone()).collect();
+        let supersedes=self.knowledge.values().filter(|x|x.id==c.id&&x.version<c.version&&x.kind==KnowledgeKind::ComputationalOperator).max_by_key(|x|x.version).map(|x|format!("{}@{}",x.id,x.version));
+        self.capabilities.insert(capkey.clone(),c.clone());self.metrics.learned=self.metrics.learned.saturating_add(1);
+        self.publish_knowledge(Knowledge{id:c.id,version:c.version,kind:KnowledgeKind::ComputationalOperator,family:Some(c.family),artifacts,class:Some(c.class),evidence,supersedes,enabled:true})?;
         Ok(json!({"capability":capkey,"private_cohort":f.cohort,"public_regression_evaluations":evaluated}))
     }
 }

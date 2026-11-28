@@ -1,0 +1,31 @@
+{
+  "revision": "R008",
+  "source_pin": "e67903efe0d59c14c51f995c8556ae3d3c56f777",
+  "native_receipts": [
+    "ctl-fe9da7a78d32600a",
+    "ctl-a340c1bb9f2a03e7"
+  ],
+  "observed_at": "2026-11-28T14:38:49.121Z",
+  "quota": {
+    "group": "Gemini Models",
+    "five_hour": {
+      "remaining_percent": 99,
+      "reset_utc": "2026-11-28T19:26:41Z"
+    },
+    "weekly": {
+      "remaining_percent": 94,
+      "reset_utc": "2026-12-03T17:18:45Z"
+    }
+  },
+  "catalogue_gemini_count": 17,
+  "validation": "16 synthetic selector/parser checks passed; native live quota read and model list parsed; zero inference calls in these checks",
+  "limitations": [
+    "Historical snapshot, refresh before admission",
+    "No billing entitlement or paid-overflow verification",
+    "Per-model quota cost forecasts and daily local limits unconfigured",
+    "Atomic reservation and launch integration pending; historical smoke disabled",
+    "Codex lanes held pending verified Gemini-only subscription route",
+    "Windows scratch cleanup EPERM deferred"
+  ],
+  "campaign_started": false
+}

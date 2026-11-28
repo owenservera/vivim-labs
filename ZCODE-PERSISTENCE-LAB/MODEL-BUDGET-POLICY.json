@@ -1,6 +1,6 @@
 {
   "schema": "vivim.dogfood.budget/1",
-  "revision": "R010",
+  "revision": "R016",
   "owner_policy": "NATIVE_CODEX_GPT_AND_ANTIGRAVITY_GEMINI_ONLY",
   "mode": "subscription_only_no_paid_overflow",
   "scope": "experiments only",
@@ -107,22 +107,26 @@
     },
     "architecture": {
       "preferred": [
-        "gemini-4-neon-high",
-        "gemini-4-hydrogen-high",
+        "gemini-4-carbon-high",
+        "gemini-4-argon-high",
         "gemini-4-neon-xhigh",
-        "gemini-4-hydrogen-xhigh"
+        "gemini-4-neon-high",
+        "gemini-4-hydrogen-xhigh",
+        "gemini-4-hydrogen-high"
       ],
       "description": "Novel system design and high-uncertainty work."
     },
     "critical": {
       "preferred": [
+        "gemini-4-carbon-high",
+        "gemini-4-argon-high",
         "gemini-4-neon-xhigh",
         "gemini-4-hydrogen-xhigh"
       ],
       "description": "Explicitly classified high-impact failure recovery or design; may use reserved headroom."
     }
   },
-  "routing_note": "Order is an initial heuristic, not proven ranking or token price. Candidate must appear in live authenticated model list, map to observed shared quota group, and satisfy every applicable window. No orchestrator aliases until underlying model family and billing are verified. Switch models at task boundaries; preserve verified context and explicit session bindings; verify effective model on resume or start new bounded incarnation. Log decision, predicted/actual consumption, success, retries, context overhead and model drift. Learn measured verified yield per quota delta; do not equate tokens with plan quota. Compare paired seeds with same scheduler and shared-account fairness, record route mix; later fixed-model control. R010: native Codex candidates use model@effort keys for forecasts; Gemini uses model slug. No fallback across CLI providers. Live selector requires daily ledger share. R009 simulate remains Gemini-only offline comparator.",
+  "routing_note": "Order is an initial heuristic, not proven ranking or token price. Candidate must appear in live authenticated model list, map to observed shared quota group, and satisfy every applicable window. No orchestrator aliases until underlying model family and billing are verified. Switch models at task boundaries; preserve verified context and explicit session bindings; verify effective model on resume or start new bounded incarnation. Log decision, predicted/actual consumption, success, retries, context overhead and model drift. Learn measured verified yield per quota delta; do not equate tokens with plan quota. Compare paired seeds with same scheduler and shared-account fairness, record route mix; later fixed-model control. R010: native Codex candidates use model@effort keys for forecasts; Gemini uses model slug. No fallback across CLI providers. Live selector requires daily ledger share. R009 simulate remains Gemini-only offline comparator. R016: Google capability positioning corrects family ordering; model performance and quota cost are not measured for this workload. Lane 04 first contract-discovery turn is pinned to Carbon High; no adaptive exploration before that turn.",
   "observer": {
     "module": "MODEL-QUOTA.mjs",
     "commands": [
@@ -160,5 +164,15 @@
       "gpt-6.2-astra@xhigh",
       "gpt-6.2-sol@xhigh"
     ]
+  },
+  "bootstrap": {
+    "04": {
+      "task": "architecture",
+      "task_id": "discover-contract",
+      "model": "gemini-4-carbon-high",
+      "max_turns": 1,
+      "reason": "Owner requested top tier first agent; Google positions Carbon for deepest long-horizon tasks. Explicit pin before adaptive routing; no silent downgrade.",
+      "source": "https://antigravity.google/blog/gemini-4-neon-in-google-antigravity/"
+    }
   }
 }

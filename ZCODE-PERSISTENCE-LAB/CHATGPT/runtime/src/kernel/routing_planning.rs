@@ -22,11 +22,13 @@ pub struct Planning {
 }
 impl Router {
     pub fn set_frontier_guard(&mut self,g:FrontierGuard)->Result<()>{
+        ensure(!self.trial_active(),"frontier guard frozen during trial")?;
         ensure(self.config.is_some(),"router not configured")?;
         ensure(g.version>self.planning.guard.as_ref().map_or(0,|x|x.version)&&g.max_forecast_bps<=10_000&&g.opportunity_weight<=100_000,"invalid frontier guard")?;
         self.planning.guard=Some(g);Ok(())
     }
     pub fn set_forecast(&mut self,f:Forecast)->Result<()>{
+        ensure(!self.trial_active(),"external forecast frozen during trial")?;
         id(&f.id)?;let c=self.config.as_ref().ok_or("router not configured")?;
         let p=c.pools.get(&f.pool).ok_or("forecast pool missing")?;
         ensure(p.frontier.is_some()&&matches!(p.window,Window::Fixed{..}),"forecast requires fixed frontier pool")?;

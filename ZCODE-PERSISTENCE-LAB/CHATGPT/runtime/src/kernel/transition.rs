@@ -29,6 +29,7 @@ pub enum Action {
     ConfigureRouter{config:super::routing::Config},ObserveQuota{observation:super::routing::Observation},QueueInference{demand:super::routing::Demand},AllocateInference{limit:usize},
     DispatchInference{reservation:Id},InferenceUnknown{reservation:Id},ReleaseInference{reservation:Id},SettleInference{reservation:Id,usage:super::routing::Usage,outcome:super::routing::Outcome,receipt:String,latency_ms:u64},VerifyInference{reservation:Id,evidence:Id},
     SetRoutingBatchPolicy{policy:super::routing_optimizer::BatchPolicy},
+    BeginRoutingTrial{spec:super::routing_evolution::TrialSpec},CloseRoutingArm,StartRoutingCandidate,AbortRoutingTrial{reason:String},PromoteRoutingTrial{trial:Id},RollbackRoutingTrial{trial:Id},
     SetFrontierGuard{guard:super::routing_planning::FrontierGuard},SetFrontierForecast{forecast:super::routing_planning::Forecast},
     BindRoutingAdapter{binding:super::routing_adapter::AdapterBinding},ObserveAdapterQuota{receipt:super::routing_adapter::QuotaReceipt},PrepareHandoff{reservation:Id},ClaimHandoff{handoff:Id},FinishHandoff{receipt:super::routing_adapter::AdapterReceipt},RoutingCycle{limit:usize},
     RecordCost{task:Id,generation:u64,elapsed_ms:u64},SetPolicy{policy:SchedulingPolicy},
@@ -401,6 +402,12 @@ impl World {
             ReleaseInference{reservation}=>{actor.host()?;self.router.release_unsent(&reservation)?;}
             SettleInference{reservation,usage,outcome,receipt,latency_ms}=>{actor.host()?;ensure(!self.router.adapters.handoffs.contains_key(&reservation),"managed handoff requires FinishHandoff")?;return self.router.settle(&reservation,usage,outcome,receipt,latency_ms);}
             VerifyInference{reservation,evidence}=>{actor.host()?;self.verify_inference_feedback(&reservation,&evidence)?;}
+            BeginRoutingTrial{spec}=>{actor.host()?;self.begin_routing_trial(spec)?;}
+            CloseRoutingArm=>{actor.host()?;return self.router.close_trial_arm();}
+            StartRoutingCandidate=>{actor.host()?;self.router.start_candidate_arm()?;}
+            AbortRoutingTrial{reason}=>{actor.host()?;self.router.abort_trial(reason)?;}
+            PromoteRoutingTrial{trial}=>{actor.host()?;self.router.promote_trial(&trial)?;}
+            RollbackRoutingTrial{trial}=>{actor.host()?;self.router.rollback_trial(&trial)?;}
             SetRoutingBatchPolicy{policy}=>{actor.host()?;self.router.set_batch_policy(policy)?;}
             SetFrontierGuard{guard}=>{actor.host()?;self.router.set_frontier_guard(guard)?;}
             SetFrontierForecast{forecast}=>{actor.host()?;self.router.set_forecast(forecast)?;}

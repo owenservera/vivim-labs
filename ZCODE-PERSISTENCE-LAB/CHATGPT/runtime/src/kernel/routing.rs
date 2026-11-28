@@ -114,6 +114,7 @@ pub struct Reservation{
     pub outcome:Option<Outcome>,pub receipt:Option<String>,pub latency_ms:Option<u64>,
     pub verified:Option<bool>,pub evidence:Option<Id>,pub estimated_success_bps:u16,
     pub task_generation:Option<u64>,pub agent:Option<Id>,pub incarnation:Option<u64>,
+    #[serde(default,skip_serializing_if="Option::is_none")] pub verified_ms:Option<u64>,
 }
 #[derive(Clone,Debug,Serialize,Deserialize,Default)]
 pub struct Performance{pub verified:u64,pub passed:u64,pub latency_sum_ms:u64,pub failures:u64}
@@ -133,6 +134,7 @@ pub struct Router{
     #[serde(default)] pub planning:super::routing_planning::Planning,
     #[serde(default)] pub adapters:super::routing_adapter::AdapterState,
     #[serde(default)] pub batch_policy:super::routing_optimizer::BatchPolicy,
+    #[serde(default)] pub evolution:super::routing_evolution::Evolution,
 }
 fn active(r:&Reservation)->bool{matches!(r.status,Status::Reserved|Status::Dispatched|Status::Unknown)}
 fn bps(v:u64,b:u16)->u64{(u128::from(v)*u128::from(b)/10_000) as u64}
@@ -156,6 +158,7 @@ impl Router{
     pub fn is_empty(&self)->bool{self.config.is_none()&&self.demands.is_empty()&&self.reservations.is_empty()&&self.adapters.bindings.is_empty()&&self.planning.guard.is_none()}
     fn config(&self)->Result<&Config>{self.config.as_ref().ok_or("routing not configured".into())}
     pub fn configure(&mut self,c:Config)->Result<()>{
+        ensure(!self.trial_active(),"configuration frozen during routing trial")?;
         ensure(c.policy.version>0&&c.policy.max_attempts>0&&c.policy.max_attempts<=64,"invalid routing policy")?;
         ensure(c.policy.failure_cooldown_ms<=DAY_MS&&c.policy.quota_cooldown_ms<=7*DAY_MS&&(1..=DAY_MS).contains(&c.policy.reservation_ttl_ms),"invalid cooldown or reservation expiry")?;
         ensure(!c.pools.is_empty()&&!c.profiles.is_empty()&&c.pools.len()<=4096&&c.profiles.len()<=4096,"invalid registry size")?;
@@ -271,6 +274,7 @@ impl Router{
     }
     pub fn recommend(&self,key:&str)->Result<Recommendation>{
         let c=self.config()?;let d=self.demands.get(key).ok_or("routing demand missing")?;
+        if !self.trial_allows(key){return Ok(Recommendation{chosen:None,eligible:vec![],excluded:BTreeMap::new(),reason:"outside active trial arm".into()});}
         let history:Vec<_>=self.reservations.values().filter(|r|r.demand==key).collect();
         if history.iter().any(|r|active(r)||r.verified==Some(true)||(r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none())){
             return Ok(Recommendation{chosen:None,eligible:vec![],excluded:BTreeMap::new(),reason:"active, uncertain or already verified demand".into()});
@@ -295,7 +299,7 @@ impl Router{
                 let (quality,latency)=self.estimate(p,d);
                 ensure(d.deadline_ms.is_none_or(|t|self.clock_ms.saturating_add(latency)<=t),"expected latency exceeds deadline")?;
                 let holds=self.holds(p,d,&usage_for(p))?;
-                for (pool,charge) in &holds{ensure(*charge<=self.available(pool)?,"quota exhausted or observation unavailable")?;}
+                for (pool,charge) in &holds{ensure(*charge<=self.available(pool)?,"quota exhausted or observation unavailable")?;self.trial_budget(pool,*charge,None)?;}
                 Ok((quality,latency,holds))
             })();
             match result{Ok((q,l,h))=>feasible.push((key,p,q,l,h)),Err(e)=>{excluded.insert(key.clone(),e);}}
@@ -336,13 +340,15 @@ impl Router{
         let c=self.config()?;let p=c.profiles[&choice.profile].clone();let d=self.demands[demand].clone();
         let version=c.policy.version;
         let ceiling=d.usage_for(&p);
-        self.reservations.insert(key.clone(),Reservation{id:key.clone(),demand:demand.into(),goal:d.goal,task:d.task,family:d.family,profile:p,policy_version:version,created_ms:self.clock_ms,started_ms:None,ended_ms:None,status:Status::Reserved,ceiling,holds:choice.holds,actual:BTreeMap::new(),outcome:None,receipt:None,latency_ms:None,verified:None,evidence:None,estimated_success_bps:choice.expected_success_bps,task_generation:None,agent:None,incarnation:None});
+        self.reservations.insert(key.clone(),Reservation{id:key.clone(),demand:demand.into(),goal:d.goal,task:d.task,family:d.family,profile:p,policy_version:version,created_ms:self.clock_ms,started_ms:None,ended_ms:None,status:Status::Reserved,ceiling,holds:choice.holds,actual:BTreeMap::new(),outcome:None,receipt:None,latency_ms:None,verified:None,evidence:None,estimated_success_bps:choice.expected_success_bps,task_generation:None,agent:None,incarnation:None,verified_ms:None});
+        self.enroll_reservation(&key,demand)?;
         self.decisions.insert(key.clone(),rec.clone());
         Ok(json!({"reserved":true,"reservation":key,"decision":rec}))
     }
     pub fn dispatch(&mut self,key:&str,generation:u64,agent:Id,incarnation:u64)->Result<()>{
         let r=self.reservations.get(key).ok_or("reservation missing")?;
         ensure(r.status==Status::Reserved,"reservation not dispatchable")?;
+        ensure(self.trial_allows(&r.demand),"trial dispatch outside observation window")?;
         let d=&self.demands[&r.demand];
         ensure(d.deadline_ms.is_none_or(|x|x>self.clock_ms),"deadline expired")?;
         let c=self.config()?;
@@ -350,6 +356,7 @@ impl Router{
         ensure(p.enabled&&c.policy.version==r.policy_version,"reservation policy changed; release and reroute")?;
         ensure(self.cooldowns.get(&p.id).copied().unwrap_or(0)<=self.clock_ms&&self.provider_cooldowns.get(&format!("{}:{}",p.provider,p.account)).copied().unwrap_or(0)<=self.clock_ms,"profile or account cooling down")?;
         for pool in r.holds.keys(){
+            self.trial_budget(pool,r.holds[pool],Some(key))?;
             let (spent,held)=self.totals(&c.pools[pool],None)?;
             if matches!(c.pools[pool].window,Window::Fixed{..}){ensure(c.pools[pool].window.bounds(r.created_ms)?.0==c.pools[pool].window.bounds(self.clock_ms)?.0,"quota reset; release and reroute")?;}
             ensure(spent.saturating_add(held)<=c.pools[pool].limit,"budget reduced below reservations")?;
@@ -409,7 +416,7 @@ impl Router{
     pub fn record_verified(&mut self,key:&str,accepted:bool,evidence:Id)->Result<()>{
         let r=self.reservations.get_mut(key).ok_or("reservation missing")?;
         ensure(r.status==Status::Settled&&r.outcome==Some(Outcome::Completed)&&r.verified.is_none(),"not eligible for verified feedback")?;
-        r.verified=Some(accepted);r.evidence=Some(evidence);
+        r.verified=Some(accepted);r.evidence=Some(evidence);r.verified_ms=Some(self.clock_ms);
         let p=self.performance.entry(r.profile.id.clone()).or_default().entry(r.family.clone()).or_default();
         p.verified=p.verified.saturating_add(1);if accepted{p.passed=p.passed.saturating_add(1);}
         p.latency_sum_ms=p.latency_sum_ms.saturating_add(r.latency_ms.unwrap_or(0));Ok(())

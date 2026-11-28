@@ -26,6 +26,7 @@ pub mod routing_planning;
 pub mod routing_adapter;
 pub mod routing_optimizer;
 pub mod routing_driver;
+pub mod routing_evolution;
 
 use crate::{Expr,Operator,Result};
 use model::{OperatorContract,Shape};

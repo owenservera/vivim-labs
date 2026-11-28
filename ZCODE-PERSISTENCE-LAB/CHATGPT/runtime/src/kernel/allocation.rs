@@ -151,3 +151,15 @@ impl World{
         Ok(())
     }
 }
+
+impl World{
+    pub fn begin_routing_trial(&mut self,s:super::routing_evolution::TrialSpec)->Result<()>{
+        for key in s.baseline_demands.iter().chain(s.candidate_demands.iter()){
+            let d=self.router.demands.get(key).ok_or("trial demand missing")?;
+            let t=self.tasks.get(&d.task).ok_or("trial task missing")?;
+            ensure(t.phase==TaskPhase::Pending&&t.generation==0&&self.goals.get(&d.goal).is_some_and(|g|g.phase==GoalPhase::Open),"trial task must be fresh and open")?;
+            ensure(!self.bound_profiles(d).is_empty(),"trial demand has no compatible adapter")?;
+        }
+        self.router.begin_trial(s)
+    }
+}

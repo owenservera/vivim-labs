@@ -19,6 +19,7 @@ pub struct BatchPlan{pub policy_version:u64,pub assignments:Vec<Assignment>,pub 
 struct Node{router:Router,assignments:Vec<Assignment>,utility:i128}
 impl Router{
     pub fn set_batch_policy(&mut self,p:BatchPolicy)->Result<()>{
+        ensure(!self.trial_active(),"batch policy frozen during routing trial")?;
         ensure(self.config.is_some()&&p.version>self.batch_policy.version&&(1..=16).contains(&p.beam_width)&&(1..=64).contains(&p.demand_limit)&&(1..=8).contains(&p.profiles_per_demand)&&(1..=512).contains(&p.node_budget)&&p.completion_weight<=100_000&&p.priority_weight<=100_000,"invalid batch policy")?;
         self.batch_policy=p;Ok(())
     }
